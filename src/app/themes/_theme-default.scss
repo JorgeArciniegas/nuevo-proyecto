@@ -5,14 +5,25 @@ body, html{
     width: 100%;
 }
 
+
 .app{
     &.develop {
         @import './skins/develop/styles';
     }
    
     .main-content { 
+
         height: 100vh;
         overflow: hidden;
         @extend %color-bg-default;
+
+        app-products{height: 100vh;}
+        .toolbar{
+            /*  height: 5vh; */
+             @extend %header;
+         }
+     
+         .product{
+         }     
     }
 }
