@@ -1,3 +1,6 @@
-export const environment = {
-  production: true
+import { Environment } from './environment.models';
+
+export const environment: Environment = {
+  production: true,
+  products: []
 };

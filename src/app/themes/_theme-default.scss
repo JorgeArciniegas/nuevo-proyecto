@@ -31,8 +31,7 @@ body, html{
                 padding: 0 4px;
             }
             .notification {
-                height: 100%;
-                width: 50px;
+                width: 45px;
                 padding: 0 10px;
 
                 .icon {
@@ -46,8 +45,8 @@ body, html{
                 .counter {
                     font-size: 0.8em;
                     position: relative;
-                    top: 8px;
-                    left: 8px;
+                    top: 6px;
+                    left: 7px;
                     padding: 0 3px;
                     @extend %notification-style;
                 }
@@ -64,8 +63,9 @@ body, html{
             }
 
             .clock {
+                font-size: 0.8em;
                 margin-left: 8px;
-                padding: 2px 5px;
+                padding: 1px 5px;
                 border: 1px solid;
                 border-radius: 5px;
                 @extend %clock-border-color;

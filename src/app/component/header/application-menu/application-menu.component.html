@@ -10,8 +10,8 @@
             <img class="icon" src="assets/image/hamburger.png">
         </button>
         <!-- BUTTONS -->
-        <button *ngFor="let btn of settings.toolbarButtons" class="btn-reset toolbar btn icon">
-            <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/{{btn.icon}}.png">
+        <button *ngFor="let prod of settings.products" class="btn-reset toolbar btn icon">
+            <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/{{prod.toolbarButton.icon}}.png">
         </button>
     </div>
     <div fxLayout="column" fxFlex="15">

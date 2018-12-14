@@ -5,7 +5,8 @@ import { Environment } from './environment.models';
 // The list of file replacements can be found in `angular.json`.
 
 export const environment: Environment = {
-  production: false
+  production: false,
+  products: []
 };
 
 /*

@@ -3,17 +3,18 @@ export interface Environment {
   staging?: boolean;
   pageTitle?: string;
   theme?: string;
-  toolbarButtons?: ToolbarButtons[];
   currency?: string;
   products: Products[];
 }
 
 export interface ToolbarButtons {
-  name: string;
+  name?: string;
   icon: string;
+  route: string;
 }
 export interface Products {
   name: string;
   label: string;
   defaultAmount: number[];
+  toolbarButton: ToolbarButtons;
 }
