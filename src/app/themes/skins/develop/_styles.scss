@@ -23,3 +23,5 @@ $color-text-warn: #ff0000;
 
 %text-color { color: $color-text-primary; }
 %clock-border-color { border-color: $color-text-primary; }
+
+%notification-style { background-color: #ff0000; color: #ffffff; border-radius: 4px; }

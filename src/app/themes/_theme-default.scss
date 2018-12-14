@@ -39,6 +39,19 @@ body, html{
                     height: 100%;
                     width: 100%;
                 }
+
+                .counter-container {
+                    position: absolute;                    
+                }
+                .counter {
+                    font-size: 0.8em;
+                    position: relative;
+                    top: 8px;
+                    left: 8px;
+                    padding: 0 3px;
+                    @extend %notification-style;
+                }
+
             }
         }    
         
