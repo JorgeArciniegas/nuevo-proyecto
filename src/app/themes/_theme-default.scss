@@ -17,20 +17,48 @@ body, html{
         app-products{height: 100vh;}
         .toolbar{
             /*  height: 5vh; */
-             @extend %header;
-         }
+            @extend %header;
+        }
          
-         .toolbar {
-             .icon {
-                 height: 100%;
-             }
-             .logo, .menu {
-                 padding: 0 10px;
-             }
-             .btn {
-                 padding: 0 4px;
-             }
-         }         
+        .toolbar {
+            .icon {
+                height: 100%;                 
+            }
+            .logo, .menu {
+                padding: 0 10px;
+            }
+            .btn {
+                padding: 0 4px;
+            }
+            .notification {
+                height: 100%;
+                width: 50px;
+                padding: 0 10px;
+
+                .icon {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+        }    
+        
+        .user-menu {
+            @extend %text-color;
+            padding: 0 6px;
+
+            .details {
+                font-size: 0.9em;
+            }
+
+            .clock {
+                margin-left: 8px;
+                padding: 2px 5px;
+                border: 1px solid;
+                border-radius: 5px;
+                @extend %clock-border-color;
+
+            }
+        }
    
         .product{
             .product-container{@extend %border-product ;}

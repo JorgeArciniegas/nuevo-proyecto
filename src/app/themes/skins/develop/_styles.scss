@@ -19,4 +19,7 @@ $color-text-warn: #ff0000;
 //temporary only for view
 %border-product { border: 3px solid $color-border-box ;}
 
-%header {background: $color-bg-header; }
+%header { background: $color-bg-header; }
+
+%text-color { color: $color-text-primary; }
+%clock-border-color { border-color: $color-text-primary; }

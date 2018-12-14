@@ -1,3 +1,19 @@
-<p>
-  user-menu works!
-</p>
+<div fxFlexFill fxLayout="row" fxLayoutAlign="end center" class="user-menu">
+  <div fxLayout="column">
+    <!-- NOTIFICATION -->
+    <button class="btn-reset toolbar icon notification">
+      <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/icon.png">
+    </button>
+  </div>
+  <div fxLayout="column" class="details">
+    <div fxLayout="row">
+      Balance: 1.000.000.000,00
+      <div fxLayout="column" class="clock">
+        {{ myTime | date:'HH:mm' }}
+      </div>
+    </div>
+    <div fxLayout="column">
+      Operator: Operator2
+    </div>
+  </div>
+</div>
