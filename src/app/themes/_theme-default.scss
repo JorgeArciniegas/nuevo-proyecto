@@ -31,22 +31,21 @@ body, html{
                 padding: 0 4px;
             }
             .notification {
-                width: 45px;
+                width: 6vh;
+                height: 6vh;
                 padding: 0 10px;
 
-                .icon {
-                    height: 100%;
-                    width: 100%;
-                }
-
-                .counter-container {
-                    position: absolute;                    
+                .counter-container {  
+                    line-height: 6vh;           
+                    text-align: center;        
+                    height: 100%;             
+                    @extend %notification-img; 
+                    background-repeat: no-repeat; 
+                    background-size: contain; 
+                    background-position: center;
                 }
                 .counter {
-                    font-size: 0.8em;
-                    position: relative;
-                    top: 6px;
-                    left: 7px;
+                    font-size: 1.6vh;
                     padding: 0 3px;
                     @extend %notification-style;
                 }
@@ -56,15 +55,15 @@ body, html{
         
         .user-menu {
             @extend %text-color;
-            padding: 0 6px;
+            padding: 0 1vw;
 
             .details {
-                font-size: 0.9em;
+                font-size: 1.9vh;
             }
 
             .clock {
-                font-size: 0.8em;
-                margin-left: 8px;
+                font-size: 1.8vh;
+                margin-left: 0.8vw;
                 padding: 1px 5px;
                 border: 1px solid;
                 border-radius: 5px;
