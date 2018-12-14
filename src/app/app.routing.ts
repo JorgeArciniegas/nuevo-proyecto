@@ -1,14 +1,28 @@
 import { ModuleWithProviders } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { DogracingComponent } from './products/dogracing/dogracing.component';
 import { ProductsComponent } from './products/products.component';
 export const routes: Routes = [
   {
     path: '',
-    component: ProductsComponent
+    redirectTo: 'products',
+    pathMatch: 'full'
+  },
+  {
+    path: 'products',
+    component: ProductsComponent,
+    children: [
+      {
+        path: 'dogracing',
+        component: DogracingComponent
+      }
+    ]
   }
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {
+export const routing: ModuleWithProviders = RouterModule.forRoot(
+  routes /* , {
   preloadingStrategy: PreloadAllModules // <- comment this line for activate lazy load
   // useHash: true
-});
+} */
+);

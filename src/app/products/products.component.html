@@ -3,6 +3,10 @@
   <div class="toolbar" fxFlex fxLayout="row"></div>
   <!--PRODUCT CONTAINER-->
   <div class="product" fxFlex="94" fxLayout="row">
-    <router-outlet></router-outlet>
+    <div class="product-container" fxLayout="column" fxFlex="50">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="product-calc" fxLayout="column" fxFlex="25"></div>
+    <div class="product-coupon" fxLayout="column" fxFlex="25"></div>
   </div>
 </div>

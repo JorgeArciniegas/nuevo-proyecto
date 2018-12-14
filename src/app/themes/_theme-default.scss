@@ -9,10 +9,8 @@ body, html{
 .app{
     &.develop {
         @import './skins/develop/styles';
-    }
-   
+    }   
     .main-content { 
-
         height: 100vh;
         overflow: hidden;
         @extend %color-bg-default;
@@ -21,9 +19,11 @@ body, html{
         .toolbar{
             /*  height: 5vh; */
              @extend %header;
-         }
-     
-         .product{
          }     
+        .product{
+            .product-container{@extend %border-product ;}
+            .product-calc,
+            .product-coupon { @extend %border-product ; }
+        }     
     }
 }
