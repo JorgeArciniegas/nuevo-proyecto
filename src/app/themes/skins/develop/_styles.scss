@@ -1,9 +1,22 @@
+/**
+* THEME DEFAULT
+**/
+//BACKGROUNDS
 $color-bg-primary: #000;
 $color-bg-accent: #c0c0c0;
 $color-bg-warn: #ff0000;
 $color-bg-header: green;
+//BORDERS
+$color-border-box: #8a8a8a;
+//TEXT
+$color-text-primary: #fff;
+$color-text-shadow: #8a8a8a;
+$color-text-warn: #ff0000;
 
+//EXTENDS
+%color-bg-default  { background: $color-bg-primary; color: #fff};
 
-%color-bg-default  { background: #000; color: #fff};
+//temporary only for view
+%border-product { border: 3px solid $color-border-box ;}
 
 %header {background: $color-bg-header; }

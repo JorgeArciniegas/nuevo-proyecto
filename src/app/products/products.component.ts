@@ -13,7 +13,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.observableMedia.asObservable().subscribe((change: MediaChange) => {
-      console.log(change);
+      //
     });
   }
 }

@@ -8,10 +8,8 @@ body, html{
 .app{
     &.develop {
         @import './skins/develop/styles';
-    }
-   
+    }   
     .main-content { 
-
         height: 100vh;
         overflow: hidden;
         @extend %color-bg-default;
@@ -21,9 +19,6 @@ body, html{
             /*  height: 5vh; */
              @extend %header;
          }
-     
-         .product{
-         }    
          
          .toolbar {
              .icon {
@@ -36,6 +31,12 @@ body, html{
                  padding: 0 4px;
              }
          }         
+   
+        .product{
+            .product-container{@extend %border-product ;}
+            .product-calc,
+            .product-coupon { @extend %border-product ; }
+        }     
     }
 }
 

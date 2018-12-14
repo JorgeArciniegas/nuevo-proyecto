@@ -7,14 +7,17 @@ import { AppSettings } from './app.settings';
 import { ApplicationMenuComponent } from './component/header/application-menu/application-menu.component';
 import { HeaderComponent } from './component/header/header.component';
 import { UserMenuComponent } from './component/header/user-menu/user-menu.component';
+import { DogracingComponent } from './products/dogracing/dogracing.component';
 import { ProductsComponent } from './products/products.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     ProductsComponent,
     HeaderComponent,
     UserMenuComponent,
-    ApplicationMenuComponent
+    ApplicationMenuComponent,
+    DogracingComponent
   ],
   imports: [BrowserModule, FlexLayoutModule, routing],
   providers: [AppSettings],
