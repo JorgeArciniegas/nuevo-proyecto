@@ -5,7 +5,7 @@ import { ProductsComponent } from './products/products.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'products',
+    redirectTo: 'products/dogracing',
     pathMatch: 'full'
   },
   {

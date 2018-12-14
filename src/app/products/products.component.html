@@ -3,10 +3,23 @@
   <div class="toolbar" fxFlex fxLayout="row"></div>
   <!--PRODUCT CONTAINER-->
   <div class="product" fxFlex="94" fxLayout="row">
-    <div class="product-container" fxLayout="column" fxFlex="50">
+    <div class="product-container" fxLayout="column" fxFlex="56">
       <router-outlet></router-outlet>
     </div>
-    <div class="product-calc" fxLayout="column" fxFlex="25"></div>
-    <div class="product-coupon" fxLayout="column" fxFlex="25"></div>
+    <div class="product-calc" fxLayout="column" fxFlex="22">
+      <!-- Area widget [Variabile] -->
+      <div class="widgets" fxLayout="row"></div>
+      <!-- Area polifunzionale [Fissa]  -->
+      <div class="advanced-smartcode" fxLayout="row"></div>
+      <!-- Area di gioco avanzata [VARIABILE] -->
+      <div class="advanced-game-area" fxLayout="row"></div>
+      <!-- Area inserimento [Fissa] -->
+      <div class="game-area" fxLayout="row"></div>
+      <!-- VINCITA POTENZIALE MASSIMA -->
+      <div class="advanced-coupon-area" fxLayout="row"></div>
+      <!-- Area polifunzionale [Fissa]  -->
+      <div class="advanced-coupon-buttons" fxLayout="row"></div>
+    </div>
+    <div class="product-coupon" fxLayout="column" fxFlex="22"></div>
   </div>
 </div>
