@@ -9,6 +9,7 @@ import { HeaderComponent } from './component/header/header.component';
 import { UserMenuComponent } from './component/header/user-menu/user-menu.component';
 import { DogracingComponent } from './products/dogracing/dogracing.component';
 import { ProductsComponent } from './products/products.component';
+import { WidgetComponent } from './component/widget/widget.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ProductsComponent } from './products/products.component';
     HeaderComponent,
     UserMenuComponent,
     ApplicationMenuComponent,
-    DogracingComponent
+    DogracingComponent,
+    WidgetComponent
   ],
   imports: [BrowserModule, FlexLayoutModule, routing],
   providers: [AppSettings],
