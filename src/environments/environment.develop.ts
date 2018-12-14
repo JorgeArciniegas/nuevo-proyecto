@@ -12,5 +12,12 @@ export const environment: Environment = {
     { name: 'pool', icon: 'icon' },
     { name: 'cock', icon: 'icon' },
     { name: 'roulette', icon: 'icon' }
+  ],
+  products: [
+    {
+      name: 'dogracing',
+      label: 'Dog Racing',
+      defaultAmount: [1, 2, 5, 10]
+    }
   ]
 };
