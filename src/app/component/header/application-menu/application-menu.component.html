@@ -1,0 +1,20 @@
+<div fxFlexFill fxLayout="column">
+    <div fxLayout="column" fxFlex="15">
+        <!-- Padding top -->
+    </div>
+    <div fxLayout="row" fxFlex="70">
+        <!-- LOGO -->
+        <img class="toolbar icon logo" src="app/themes/skins/{{settings.theme}}/image/logo.png">
+        <!-- MENU -->
+        <button class="btn-reset toolbar icon menu">
+            <img class="icon" src="assets/image/hamburger.png">
+        </button>
+        <!-- BUTTONS -->
+        <button *ngFor="let btn of settings.toolbarButtons" class="btn-reset toolbar btn icon">
+            <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/{{btn.icon}}.png">
+        </button>
+    </div>
+    <div fxLayout="column" fxFlex="15">
+        <!-- Padding bottom -->
+    </div>
+</div>
