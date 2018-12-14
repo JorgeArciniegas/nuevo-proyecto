@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppSettings } from 'src/app/app.settings';
 
 @Component({
   selector: 'app-widget',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./widget.component.scss']
 })
 export class WidgetComponent implements OnInit {
+  public settings: AppSettings;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(public readonly appSettings: AppSettings) {
+    this.settings = appSettings;
   }
 
+  ngOnInit() {}
 }

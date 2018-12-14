@@ -18,9 +18,7 @@ body, html{
         .toolbar{
             /*  height: 5vh; */
             @extend %header;
-        }
-         
-        .toolbar {
+            
             .icon {
                 height: 100%;                 
             }
@@ -29,54 +27,67 @@ body, html{
             }
             .btn {
                 padding: 0 4px;
-            }
-            .notification {
-                width: 6vh;
-                height: 6vh;
-                padding: 0 10px;
+            }            
 
-                .counter-container {  
-                    line-height: 6vh;           
-                    text-align: center;        
-                    height: 100%;             
-                    @extend %notification-img; 
-                    background-repeat: no-repeat; 
-                    background-size: contain; 
-                    background-position: center;
-                }
-                .counter {
-                    font-size: 1.6vh;
-                    padding: 0 3px;
-                    @extend %notification-style;
+            .user-menu {
+                @extend %text-color;
+                padding: 0 1vw;                
+
+                .notification {
+                    width: 6vh;
+                    height: 6vh;
+                    padding: 0 10px;
+    
+                    .counter-container {  
+                        line-height: 6vh;           
+                        text-align: center;        
+                        height: 100%;             
+                        @extend %notification-img; 
+                        background-repeat: no-repeat; 
+                        background-size: contain; 
+                        background-position: center;
+                    }
+
+                    .counter {
+                        font-size: 1.6vh;
+                        padding: 0 3px;
+                        @extend %notification-style;
+                    }
                 }
 
+                .details {
+                    font-size: 1.9vh;
+                }
+    
+                .clock {
+                    font-size: 1.8vh;
+                    margin-left: 0.8vw;
+                    padding: 1px 5px;
+                    border: 1px solid;
+                    border-radius: 5px;
+                    @extend %clock-border-color;
+                }
             }
-        }    
+        }        
         
-        .user-menu {
-            @extend %text-color;
-            padding: 0 1vw;
-
-            .details {
-                font-size: 1.9vh;
-            }
-
-            .clock {
-                font-size: 1.8vh;
-                margin-left: 0.8vw;
-                padding: 1px 5px;
-                border: 1px solid;
-                border-radius: 5px;
-                @extend %clock-border-color;
-
-            }
-        }
-   
         .product{
-            .product-container{@extend %border-product ;}
+            .product-container { @extend %border-product; }
             .product-calc,
-            .product-coupon { @extend %border-product ; }
+            .product-coupon { @extend %border-product; }
         }     
+
+        .widgets {
+            padding: 5px;
+
+            .widget-btn {
+                @extend %widget-button-style;
+
+                .icon {
+                    height: 100%;
+                    width: 100%;
+                }
+            }            
+        }
     }
 }
 

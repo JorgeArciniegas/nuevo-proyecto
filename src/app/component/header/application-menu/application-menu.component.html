@@ -4,13 +4,13 @@
     </div>
     <div fxLayout="row" fxFlex="70">
         <!-- LOGO -->
-        <img class="toolbar icon logo" src="app/themes/skins/{{settings.theme}}/image/logo.png">
+        <img class="icon logo" src="app/themes/skins/{{settings.theme}}/image/logo.png">
         <!-- MENU -->
-        <button class="btn-reset toolbar icon menu">
+        <button class="btn-reset icon menu">
             <img class="icon" src="assets/image/hamburger.png">
         </button>
         <!-- BUTTONS -->
-        <button *ngFor="let prod of settings.products" class="btn-reset toolbar btn icon">
+        <button *ngFor="let prod of settings.products" class="btn-reset btn icon">
             <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/{{prod.toolbarButton.icon}}.png">
         </button>
     </div>
