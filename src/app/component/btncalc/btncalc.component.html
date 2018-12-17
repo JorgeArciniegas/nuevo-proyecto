@@ -1,66 +1,57 @@
 <!-- Btn amount default -->
-<mat-grid-list cols="{{product.defaultAmount.length}}" class="grid-row-amount">
+<mat-grid-list cols="{{product.defaultAmount.length}}" class="grid-row-amount" rowHeight="{{rowHeight}}">
   <mat-grid-tile *ngFor="let amount of product.defaultAmount; let i = index">
-    <button class="btn-default btn-amount-{{i+1}} radius-50">{{amount}}</button>
+    <button [style.width.px]="rowHeight-10" [style.height.px]="rowHeight-10" class="btn-default elevation-z5 btn-amount-{{i+1}} radius-50">{{amount}}</button>
   </mat-grid-tile>
-  <!--  <mat-grid-tile colspan="1" rowspan="1">
-    <button class="btn-default btn-amount-2 radius-50">2</button>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
-    <button class="btn-default btn-amount-3 radius-50">3</button>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
-    <button class="btn-default btn-amount-4 radius-50">4</button>
-  </mat-grid-tile> -->
 </mat-grid-list>
 <!-- BTN calculator -->
-<mat-grid-list cols="4">
+<mat-grid-list cols="4" class="grid-keyboard-number" rowHeight="{{rowHeight}}">
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-10">1</button>
+    <button class="btn-default btn-keyboard radius-10 elevation-z5">1</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-10">2</button>
+    <button class="btn-default btn-keyboard radius-10 elevation-z5">2</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-10">3</button>
+    <button class="btn-default btn-keyboard radius-10 elevation-z5">3</button>
   </mat-grid-tile>
   <mat-grid-tile rowspan="3">
-    <button class="btn-default btn-keyboard btn-success radius-10">+</button>
+    <button class="btn-default btn-keyboard btn-success radius-10 elevation-z5">+</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-10">4</button>
+    <button class="btn-default btn-keyboard radius-10 elevation-z5">4</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-10">5</button>
+    <button class="btn-default btn-keyboard radius-10 elevation-z5">5</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-10">6</button>
+    <button class="btn-default btn-keyboard radius-10 elevation-z5">6</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-10">7</button>
+    <button class="btn-default btn-keyboard radius-10 elevation-z5">7</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-10">8</button>
+    <button class="btn-default btn-keyboard radius-10 elevation-z5">8</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-10">9</button>
+    <button class="btn-default btn-keyboard radius-10 elevation-z5">9</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-10">0</button>
+    <button class="btn-default btn-keyboard radius-10 elevation-z5">0</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-10">00</button>
+    <button class="btn-default btn-keyboard radius-10 elevation-z5">00</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-10">000</button>
+    <button class="btn-default btn-keyboard radius-10 elevation-z5">000</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard btn-warning radius-10">C</button>
+    <button class="btn-default btn-keyboard btn-warning radius-10 elevation-z5">C</button>
   </mat-grid-tile>
   <mat-grid-tile colspan="2">
-    <button class="btn-default btn-keyboard btn-grey radius-10">TOT</button>
+    <button class="btn-default btn-keyboard btn-grey radius-10 elevation-z5">TOT</button>
   </mat-grid-tile>
   <mat-grid-tile colspan="2">
-    <button class="btn-default btn-keyboard btn-black radius-10">COL</button>
+    <button class="btn-default btn-keyboard btn-black radius-10 elevation-z5">COL</button>
   </mat-grid-tile>
 </mat-grid-list>

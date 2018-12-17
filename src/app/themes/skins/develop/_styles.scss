@@ -2,7 +2,7 @@
 * THEME DEFAULT
 **/
 //BACKGROUNDS
-$color-bg-primary: #000000;
+$color-bg-primary: #21212b;
 $color-bg-accent: #c0c0c0;
 $color-bg-warn: #ff0000;
 $color-bg-success: #00cc00;
@@ -24,6 +24,7 @@ $color-text-warn: #ff0000;
 
 //EXTENDS
 %color-bg-default  { background: $color-bg-primary; color: #ffffff};
+%color-bg-white  { background: white; color: $color-text-dark};
 
 //temporary only for view
 %border-product { border: 3px solid $color-border-box ;}
@@ -40,7 +41,13 @@ $color-text-warn: #ff0000;
 %btn-keyboard { background: $btn-bg-keyboard; border-color: $btn-border-keyboard; }
 %btn-warning { background: $color-bg-warn; color: $color-text-primary; border-color: $border-warning }
 %btn-success { background: $color-bg-success; color: $color-text-primary; border-color:$btn-border-opacity }
-%btn-orange { background: $btn-bg-orange; color: $color-text-dark; border-color:  $btn-border-opacity }
+%btn-orange {
+    background: #e0ab5c; 
+    background: -moz-linear-gradient(top, #e0ab5c 0%, #d38c34 42%, #d67900 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #e0ab5c 0%,#d38c34 42%,#d67900 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #e0ab5c 0%,#d38c34 42%,#d67900 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    color: $color-text-dark;
+}
 %btn-gray { background: $color-bg-accent; color: $color-text-dark; border-color:  $btn-border-opacity }
 %btn-yellow { background: $btn-bg-yellow; color: $color-text-dark; border-color:  $btn-border-opacity; }
 %btn-white { background: white ; color: $color-text-dark; border-color:  $btn-border-opacity; }

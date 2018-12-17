@@ -23,17 +23,26 @@
           <span>Area di gioco avanzata</span>
         </mat-grid-tile>
         <!-- Area inserimento [Fissa] -->
-        <mat-grid-tile rowspan="7">
-          <app-btncalc></app-btncalc>
+        <mat-grid-tile rowspan="6">
+          <app-btncalc [rowHeight]="rowHeight"></app-btncalc>
         </mat-grid-tile>
         <!-- VINCITA POTENZIALE MASSIMA -->
         <mat-grid-tile rowspan="1">
-          <span>VINCITA POTENZIALE MASSIMA</span>
+          <div class="potential-winner radius-5">
+            <label>
+              VINCITA POTENZIALE MASSIMA
+              <input type="text" name="winner" value="10.000.000 COP" readonly />
+            </label>
+          </div>
+
         </mat-grid-tile>
         <!-- Area polifunzionale [Fissa]  -->
         <mat-grid-tile rowspan="1">
-          <span>Area polifunzionale</span>
+          <button class="btn-default btn-success radius-10">PAGA</button>
+          <button class="btn-default btn-black radius-10">ANNULLA</button>
+
         </mat-grid-tile>
+
       </mat-grid-list>
     </div>
     <div class="product-coupon" fxLayout="column" fxFlex="22">
