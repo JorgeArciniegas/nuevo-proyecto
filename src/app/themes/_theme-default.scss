@@ -60,12 +60,6 @@ body, html{
                 }
             }
         }        
-        
-        .product{
-            .product-container { @extend %border-product; }
-            .product-calc,
-            .product-coupon { @extend %border-product; }
-        }     
 
         #widgets {
 
