@@ -9,10 +9,14 @@
       <router-outlet></router-outlet>
     </div>
     <div class="product-calc" fxLayout="column" fxFlex="22">
-      <mat-grid-list cols="1" rowHeight="{{service.windowSize.columnHeight / 11}}">
+      <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
         <!-- Area widget [Variabile] -->
         <mat-grid-tile rowspan="1">
-          <app-widget fxFlexFill [rowHeight]="service.windowSize.columnHeight / 11"></app-widget>
+          <app-widget fxFlexFill [rowHeight]="rowHeight"></app-widget>
+        </mat-grid-tile>
+        <!-- Area polifunzionale / Smartcode -->
+        <mat-grid-tile rowspan="1">
+          <span>Area polifunzionale / Smartcode</span>
         </mat-grid-tile>
         <!-- Area di gioco avanzata [VARIABILE] -->
         <mat-grid-tile rowspan="1">

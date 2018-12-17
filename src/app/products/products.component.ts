@@ -8,6 +8,8 @@ import { ProductsService } from './products.service';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
+  public rowHeight: number;
+
   constructor(
     private observableMedia: ObservableMedia,
     public service: ProductsService
@@ -18,6 +20,8 @@ export class ProductsComponent implements OnInit {
       this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
       this.service.breakpointSubscribe.next(this.service.breakpoint);
       console.log(this.service.fnWindowsSize());
+
+      this.rowHeight = (this.service.windowSize.columnHeight - 11) / 12;
     });
   }
 }
