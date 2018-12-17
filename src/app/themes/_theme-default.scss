@@ -29,39 +29,42 @@ body, html{
             .btn {
                 margin: 0 4px;
             }
-            .notification {
-                margin: 0 10px;
+            .user-menu{
 
-                .counter-container {        
-                    text-align: center;        
-                    height: 100%;             
-                    @extend %notification-img; 
-                    background-repeat: no-repeat; 
-                    background-size: contain; 
-                    background-position: center;
-                }
-                .counter {
-                    font-size: 1.6vh;
-                    padding: 0 3px;
-                    @extend %notification-style;
-                }
-
-                .details {
-                    font-size: 1.9vh;
-                }
+                .notification {
+                    margin: 0 10px;
     
-                .clock {
-                    font-size: 1.8vh;
-                    margin-left: 0.8vw;
-                    padding: 1px 5px;
-                    border: 1px solid;
-                    border-radius: 5px;
-                    @extend %clock-border-color;
                 }
+            .counter-container {        
+                text-align: center;        
+                height: 100%;             
+                @extend %notification-img; 
+                background-repeat: no-repeat; 
+                background-size: contain; 
+                background-position: center;
+            }
+            .counter {
+                font-size: 1.6vh;
+                padding: 0 3px;
+                @extend %notification-style;
+            }
+
+            .details {
+                font-size: 1.9vh;
+            }
+
+            .clock {
+                font-size: 1.8vh;
+                margin-left: 0.8vw;
+                padding: 1px 5px;
+                border: 1px solid;
+                border-radius: 5px;
+                @extend %clock-border-color;
+            }
             }
         }        
 
-        #widgets {
+        .widgets {
 
             padding: 0 5px;
 
@@ -73,6 +76,19 @@ body, html{
                     width: 100%;
                 }
             }            
+        }
+
+        .display {
+            @extend %display-style;
+            padding: 3px;
+            word-wrap: normal;
+
+            .first-row {
+                font-size: 1.6vw;                
+            }
+            .second-row {
+                font-size: 1vw;                
+            }
         }
    
         .product{
