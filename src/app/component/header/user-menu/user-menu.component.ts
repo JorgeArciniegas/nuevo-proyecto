@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable as ObservableIdle } from 'rxjs/Rx';
 import { AppSettings } from 'src/app/app.settings';
+import { ProductsService } from 'src/app/products/products.service';
+import { IconSize } from '../../model/iconSize.model';
 
 @Component({
   selector: 'app-user-menu',
@@ -10,13 +12,21 @@ import { AppSettings } from 'src/app/app.settings';
 export class UserMenuComponent implements OnInit {
   public settings: AppSettings;
   public myTime: Date = new Date();
+  public notifyIcon: IconSize;
 
-  constructor(public readonly appSettings: AppSettings) {
+  constructor(
+    public readonly appSettings: AppSettings,
+    public productService: ProductsService
+  ) {
     this.settings = appSettings;
   }
 
   ngOnInit() {
     ObservableIdle.interval(1000).subscribe(() => this.getTime());
+    const barHeight =
+      this.productService.windowSize.height -
+      this.productService.windowSize.columnHeight;
+    this.notifyIcon = new IconSize(barHeight * 0.7, barHeight * 0.7);
   }
 
   getTime(): void {

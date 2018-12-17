@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AppSettings } from 'src/app/app.settings';
+import { IconSize } from '../model/iconSize.model';
 
 @Component({
   selector: 'app-widget',
@@ -9,9 +10,16 @@ import { AppSettings } from 'src/app/app.settings';
 export class WidgetComponent implements OnInit {
   public settings: AppSettings;
 
+  @Input()
+  private rowHeight: number;
+
+  public widgetIcon: IconSize;
+
   constructor(public readonly appSettings: AppSettings) {
     this.settings = appSettings;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.widgetIcon = new IconSize(this.rowHeight * 0.8, this.rowHeight * 0.8);
+  }
 }

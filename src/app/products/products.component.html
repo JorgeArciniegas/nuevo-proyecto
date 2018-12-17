@@ -1,28 +1,39 @@
-<div fxFlexFill fxLayout="column">
+<div fxFlex fxLayout="column">
   <!-- TOOLBAR-->
   <div class="toolbar" fxFlex fxLayout="row">
     <app-header fxFlexFill></app-header>
   </div>
   <!--PRODUCT CONTAINER-->
   <div class="product" fxFlex="94" fxLayout="row">
-    <div class="product-container" fxLayout="column" fxFlex="56">
+    <div class="product-container" fxLayout="column" fxFlex="100">
       <router-outlet></router-outlet>
     </div>
     <div class="product-calc" fxLayout="column" fxFlex="22">
-      <!-- Area widget [Variabile] -->
-      <div class="widgets" fxLayout="row">
-        <app-widget fxFlexFill></app-widget>
-      </div>
-      <!-- Area polifunzionale [Fissa]  -->
-      <div class="advanced-smartcode" fxLayout="row"></div>
-      <!-- Area di gioco avanzata [VARIABILE] -->
-      <div class="advanced-game-area" fxLayout="row"></div>
-      <!-- Area inserimento [Fissa] -->
-      <div class="game-area" fxLayout="row"></div>
-      <!-- VINCITA POTENZIALE MASSIMA -->
-      <div class="advanced-coupon-area" fxLayout="row"></div>
-      <!-- Area polifunzionale [Fissa]  -->
-      <div class="advanced-coupon-buttons" fxLayout="row"></div>
+      <mat-grid-list cols="1" rowHeight="{{service.windowSize.columnHeight / 11}}">
+        <!-- Area widget [Variabile] -->
+        <mat-grid-tile rowspan="1">
+          <app-widget fxFlexFill [rowHeight]="service.windowSize.columnHeight / 11"></app-widget>
+        </mat-grid-tile>
+        <!-- Area di gioco avanzata [VARIABILE] -->
+        <mat-grid-tile rowspan="1">
+          <span>Area di gioco avanzata</span>
+        </mat-grid-tile>
+        <!-- Area inserimento [Fissa] -->
+        <mat-grid-tile rowspan="7">
+          <app-btncalc></app-btncalc>
+        </mat-grid-tile>
+        <!-- VINCITA POTENZIALE MASSIMA -->
+        <mat-grid-tile rowspan="1">
+          <span>VINCITA POTENZIALE MASSIMA</span>
+        </mat-grid-tile>
+        <!-- Area polifunzionale [Fissa]  -->
+        <mat-grid-tile rowspan="1">
+          <span>Area polifunzionale</span>
+        </mat-grid-tile>
+      </mat-grid-list>
     </div>
-    <div class="product-coupon" fxLayout="column" fxFlex="22"></div>
+    <div class="product-coupon" fxLayout="column" fxFlex="22">
+      this is coupon area
+    </div>
   </div>
+</div>
