@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { WindowSize } from './products.model';
 @Injectable({
   providedIn: 'root'
@@ -7,6 +7,9 @@ import { WindowSize } from './products.model';
 export class ProductsService {
   breakpoint = 1;
   breakpointSubscribe: Subject<number>;
+
+  productNameSelectedSubscribe: Subject<string>;
+  productNameSelectedObserve: Observable<string>;
   // tslint:disable-next-line:typedef
   gridByBreakpoint = {
     xl: 12,
@@ -18,6 +21,8 @@ export class ProductsService {
   windowSize: WindowSize;
   constructor() {
     this.breakpointSubscribe = new Subject<number>();
+    this.productNameSelectedSubscribe = new Subject<string>();
+    this.productNameSelectedObserve = this.productNameSelectedSubscribe.asObservable();
   }
 
   fnWindowsSize(): WindowSize {

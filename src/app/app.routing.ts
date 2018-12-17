@@ -14,7 +14,8 @@ export const routes: Routes = [
     children: [
       {
         path: 'dogracing',
-        component: DogracingComponent
+        component: DogracingComponent,
+        data: { productName: 'dogracing' }
       }
     ]
   }

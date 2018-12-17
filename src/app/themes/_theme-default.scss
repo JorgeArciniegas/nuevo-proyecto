@@ -84,27 +84,51 @@ body, html{
                 @extend %border-product ; 
             }
         }  
+        // GRID AMOUNT
+        .grid-row-amount{
+
+            .mat-grid-tile{
+                .mat-figure {
+                    padding: 5px;
+                }
+            }
+            .btn-amount-1{
+                border: 3px solid;
+                @extend %btn-orange;
+            }
+            .btn-amount-2{
+                border: 3px solid;
+                @extend %btn-gray;
+            }
+            .btn-amount-3{
+                border: 3px solid;
+                @extend %btn-yellow ;
+            }
+            .btn-amount-4{
+                border: 3px solid;
+                @extend %btn-white ;
+            }
+        }
+
         .btn-keyboard{
             @extend %btn-keyboard;
+            &.btn-grey{
+                border: 3px solid;
+                @extend %btn-gray;
+            }
+            &.btn-black{
+                border:3px solid;
+                @extend %btn-dark;
+            }
         }
         .btn-warning{
             @extend %btn-warning;
         }
         .btn-success{
             @extend %btn-success;
-        }
-        .btn-amount-1{
-            @extend %btn-orange;
-        }
-        .btn-amount-2{
-            @extend %btn-gray;
-        }
-        .btn-amount-3{
-            @extend %btn-success;
-        }
-        .btn-amount-4{
-            @extend %btn-success;
-        }
+        }  
+        
+       
     }
 }
 
@@ -126,15 +150,8 @@ body, html{
     -webkit-border-radius: 25px;
 }
 
-
 .radius-50 { 
     border-radius: 50px;
     -moz-border-radius: 50px;
     -webkit-border-radius: 50px;
-}
-
-div[height-50],
-button[height-50],
-span[height-50] { 
-    height: 50px;
 }

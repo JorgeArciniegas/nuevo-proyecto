@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MediaChange, ObservableMedia } from '@angular/flex-layout';
+import { Subscription } from 'rxjs';
 import { ProductsService } from './products.service';
 
 @Component({
@@ -7,7 +8,8 @@ import { ProductsService } from './products.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
+  observableMediaSubscribe: Subscription;
   public rowHeight: number;
 
   constructor(
@@ -16,12 +18,17 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.observableMedia.asObservable().subscribe((change: MediaChange) => {
-      this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
-      this.service.breakpointSubscribe.next(this.service.breakpoint);
-      console.log(this.service.fnWindowsSize());
+    this.observableMediaSubscribe = this.observableMedia
+      .asObservable()
+      .subscribe((change: MediaChange) => {
+        this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
+        this.service.breakpointSubscribe.next(this.service.breakpoint);
+        this.service.fnWindowsSize();
 
-      this.rowHeight = (this.service.windowSize.columnHeight - 11) / 12;
-    });
+        this.rowHeight = (this.service.windowSize.columnHeight - 11) / 12;
+      });
+  }
+  ngOnDestroy(): void {
+    this.observableMediaSubscribe.unsubscribe();
   }
 }
