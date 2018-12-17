@@ -2,21 +2,35 @@
 * THEME DEFAULT
 **/
 //BACKGROUNDS
-$color-bg-primary: #000;
+$color-bg-primary: #000000;
 $color-bg-accent: #c0c0c0;
 $color-bg-warn: #ff0000;
-$color-bg-header: green;
+$color-bg-success: #00cc00;
+$color-bg-header: #00cc00;
+$btn-bg-keyboard: #202020;
+$btn-bg-orange: #d67900;
+$btn-bg-yellow: #ffca18;
 //BORDERS
+$border-warning: #ffffff;
+$border-success: #02a502;
 $color-border-box: #8a8a8a;
+$btn-border-keyboard: #363636;
 //TEXT
-$color-text-primary: #fff;
+$color-text-dark: #000;
+$color-text-primary: #ffffff;
 $color-text-shadow: #8a8a8a;
 $color-text-warn: #ff0000;
 
 //EXTENDS
-%color-bg-default  { background: $color-bg-primary; color: #fff};
+%color-bg-default  { background: $color-bg-primary; color: #ffffff};
 
 //temporary only for view
 %border-product { border: 3px solid $color-border-box ;}
 
 %header {background: $color-bg-header; }
+// BUTTONS DEFINITION
+%btn-keyboard { background: $btn-bg-keyboard; border-color: $btn-border-keyboard; }
+%btn-warning { background: $color-bg-warn; color: $color-text-primary; border-color: $border-warning }
+%btn-success { background: $color-bg-success; color: $color-text-primary; border-color: $border-success }
+%btn-orange { background: $btn-bg-orange; color: $color-text-dark; border-color:  $btn-bg-orange }
+%btn-gray { background: $color-bg-accent; color: $color-text-dark; border-color:  $color-bg-accent }
