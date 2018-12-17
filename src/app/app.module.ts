@@ -21,6 +21,7 @@ import { WidgetComponent } from './component/widget/widget.component';
 import { DogracingComponent } from './products/dogracing/dogracing.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
+import { DispayComponent } from './component/dispay/dispay.component';
 
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -35,7 +36,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ApplicationMenuComponent,
     DogracingComponent,
     WidgetComponent,
-    BtncalcComponent
+    BtncalcComponent,
+    DispayComponent
   ],
   imports: [
     HttpClientModule,

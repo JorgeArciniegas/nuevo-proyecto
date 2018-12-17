@@ -8,7 +8,7 @@
     <div class="product-container" fxLayout="column" fxFlex="100">
       <router-outlet></router-outlet>
     </div>
-    <div class="product-calc" fxLayout="column" fxFlex="22">
+    <div class="product-calc" fxLayout="column" fxFlex="20">
       <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
         <!-- Area widget [Variabile] -->
         <mat-grid-tile rowspan="1">
@@ -16,7 +16,7 @@
         </mat-grid-tile>
         <!-- Area polifunzionale / Smartcode -->
         <mat-grid-tile rowspan="1">
-          <span>Area polifunzionale / Smartcode</span>
+          <app-dispay fxFlexFill [rowHeight]="rowHeight"></app-dispay>
         </mat-grid-tile>
         <!-- Area di gioco avanzata [VARIABILE] -->
         <mat-grid-tile rowspan="1">
@@ -45,7 +45,7 @@
 
       </mat-grid-list>
     </div>
-    <div class="product-coupon" fxLayout="column" fxFlex="22">
+    <div class="product-coupon" fxLayout="column" fxFlex="20">
       this is coupon area
     </div>
   </div>

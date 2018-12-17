@@ -3,6 +3,7 @@
 **/
 //BACKGROUNDS
 $color-bg-primary: #21212b;
+$color-bg-secodary: #ffffff;
 $color-bg-accent: #c0c0c0;
 $color-bg-warn: #ff0000;
 $color-bg-success: #00cc00;
@@ -37,6 +38,8 @@ $color-text-warn: #ff0000;
 %notification-img { background-image: url("app/themes/skins/develop/icon/icon.png"); }
 // WidgetArea
 %widget-button-style { border: 2px solid $color-border-box; border-radius: 10px;}
+// Display
+%display-style { background-color: $color-bg-secodary; color: $color-text-dark; border-radius: 4px; }
 // BUTTONS DEFINITION
 %btn-keyboard { background: $btn-bg-keyboard; border-color: $btn-border-keyboard; }
 %btn-warning { background: $color-bg-warn; color: $color-text-primary; border-color: $border-warning }
