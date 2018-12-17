@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-dogracing',
@@ -6,10 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dogracing.component.scss']
 })
 export class DogracingComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  constructor(route: ActivatedRoute, service: ProductsService) {
+    service.productNameSelectedSubscribe.next(route.snapshot.data.productName);
   }
 
+  ngOnInit() {}
 }
