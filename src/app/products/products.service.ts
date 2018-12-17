@@ -20,7 +20,7 @@ export class ProductsService {
     this.breakpointSubscribe = new Subject<number>();
   }
 
-  aspectRatio(): WindowSize {
+  fnWindowsSize(): WindowSize {
     const doc: HTMLElement = document.querySelector('html');
     const h: number = doc.offsetHeight;
     const w: number = doc.offsetWidth;

@@ -17,7 +17,7 @@ export class ProductsComponent implements OnInit {
     this.observableMedia.asObservable().subscribe((change: MediaChange) => {
       this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
       this.service.breakpointSubscribe.next(this.service.breakpoint);
-      console.log(this.service.aspectRatio());
+      console.log(this.service.fnWindowsSize());
     });
   }
 }
