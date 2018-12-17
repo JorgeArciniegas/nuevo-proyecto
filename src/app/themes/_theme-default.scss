@@ -16,29 +16,25 @@ body, html{
         overflow: hidden;
         @extend %color-bg-default;
 
-        app-products{height: 100vh;}
+        app-products{ height: 100vh; }
         .toolbar{
-            /*  height: 5vh; */
             @extend %header;
         }
          
         .toolbar {
             .icon {
-                height: 100%;                 
+                width: 100%;
             }
             .logo, .menu {
-                padding: 0 10px;
+                margin: 0 10px;
             }
             .btn {
-                padding: 0 4px;
+                margin: 0 4px;
             }
             .notification {
-                width: 6vh;
-                height: 6vh;
-                padding: 0 10px;
+                margin: 0 10px;
 
-                .counter-container {  
-                    line-height: 6vh;           
+                .counter-container {        
                     text-align: center;        
                     height: 100%;             
                     @extend %notification-img; 

@@ -2,8 +2,8 @@
   <div fxLayout="column">
     <!-- NOTIFICATION -->
     <button class="btn-reset toolbar icon notification counter-btn">
-      <div class="counter-container">
-        <span class="counter">2</span>
+      <div [style.width.px]="notifyIcon.width" [style.height.px]="notifyIcon.height" class="counter-container">
+        <span [style.line-height.px]="notifyIcon.height" class="counter">2</span>
       </div>
     </button>
   </div>
