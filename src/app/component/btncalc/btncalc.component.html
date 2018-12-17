@@ -1,9 +1,9 @@
 <!-- Btn amount default -->
-<mat-grid-list cols="4" class="grid-row-amount">
-  <mat-grid-tile>
-    <button class="btn-default btn-amount-1 radius-50">1</button>
+<mat-grid-list cols="{{product.defaultAmount.length}}" class="grid-row-amount">
+  <mat-grid-tile *ngFor="let amount of product.defaultAmount; let i = index">
+    <button class="btn-default btn-amount-{{i+1}} radius-50">{{amount}}</button>
   </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
+  <!--  <mat-grid-tile colspan="1" rowspan="1">
     <button class="btn-default btn-amount-2 radius-50">2</button>
   </mat-grid-tile>
   <mat-grid-tile colspan="1" rowspan="1">
@@ -11,7 +11,7 @@
   </mat-grid-tile>
   <mat-grid-tile colspan="1" rowspan="1">
     <button class="btn-default btn-amount-4 radius-50">4</button>
-  </mat-grid-tile>
+  </mat-grid-tile> -->
 </mat-grid-list>
 <!-- BTN calculator -->
 <mat-grid-list cols="4">
@@ -56,5 +56,11 @@
   </mat-grid-tile>
   <mat-grid-tile>
     <button class="btn-default btn-keyboard btn-warning radius-10">C</button>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="2">
+    <button class="btn-default btn-keyboard btn-grey radius-10">TOT</button>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="2">
+    <button class="btn-default btn-keyboard btn-black radius-10">COL</button>
   </mat-grid-tile>
 </mat-grid-list>
