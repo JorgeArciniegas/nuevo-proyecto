@@ -3,7 +3,7 @@
 **/
 //BACKGROUNDS
 $color-bg-primary: #21212b;
-$color-bg-secodary: #ffffff;
+$color-bg-secodary: #273142;
 $color-bg-accent: #c0c0c0;
 $color-bg-warn: #ff0000;
 $color-bg-success: #00cc00;
@@ -11,6 +11,7 @@ $color-bg-header: #191E25;
 $btn-bg-keyboard: #26262f;
 $btn-bg-orange: #d67900;
 $btn-bg-yellow: #ffca18;
+
 //BORDERS
 $border-warning: #ffffff;
 $border-success: #02a502;
@@ -39,7 +40,7 @@ $color-text-warn: #ff0000;
 %notification-img { background-image: url("app/themes/skins/develop/icon/icon.png"); }
 %btn-menu-selected { border-bottom: 3px solid $btn-border-selected; }
 // Display
-%display-style { background-color: $color-bg-secodary; color: $color-text-dark; border-radius: 4px; }
+%display-style { background-color: $color-bg-secodary; color: $color-text-primary; border-radius: 4px; }
 // BUTTONS DEFINITION
 %btn-keyboard { background: $btn-bg-keyboard; border-color: $btn-border-keyboard; }
 %btn-warning { background: $color-bg-warn; color: $color-text-primary; border-color: $border-warning }

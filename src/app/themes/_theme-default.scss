@@ -89,13 +89,14 @@ body, html{
         .display {
             @extend %display-style;
             padding: 3px;
+            margin: 3px;
             word-wrap: normal;
 
             .first-row {
-                font-size: 1.6vw;                
+                font-size: 1.4vw;                
             }
             .second-row {
-                font-size: 1vw;                
+                font-size: 1.4vw;                
             }
         }
    
