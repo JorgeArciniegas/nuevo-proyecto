@@ -22,6 +22,7 @@ import { DogracingComponent } from './products/dogracing/dogracing.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
 import { DispayComponent } from './component/dispay/dispay.component';
+import { AdvanceGameComponent } from './products/advance-game/advance-game.component';
 
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -37,7 +38,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     DogracingComponent,
     WidgetComponent,
     BtncalcComponent,
-    DispayComponent
+    DispayComponent,
+    AdvanceGameComponent
   ],
   imports: [
     HttpClientModule,

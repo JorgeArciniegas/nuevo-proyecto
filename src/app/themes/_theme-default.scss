@@ -135,7 +135,7 @@ body, html{
                     }
                 }
             }
-        }  
+        }          
         // GRID AMOUNT
         .grid-row-amount{
 
@@ -183,7 +183,19 @@ body, html{
             @extend %btn-gray-gradient;
         }
         
-       
+
+        .advance-game {
+            padding: 1.8vh 0 0.2vh;
+            
+            .btn-advance-game {
+                @extend %btn-advance-game;  
+
+                .label {
+                    font-weight: bold;
+                    font-size: 1.6vw;
+                }git
+            } 
+        }
     }
 }
 
