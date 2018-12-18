@@ -63,12 +63,10 @@ body, html{
             }
 
             .clock {
-                font-size: 1.8vh;
-                margin-left: 0.8vw;
-                padding: 1px 5px;
-                border: 1px solid;
-                border-radius: 5px;
-                @extend %clock-border-color;
+                font-size: 2vh;
+                padding: 4px 10px;
+                @extend %card-title;
+                margin: 3px 0.8vw;
             }
             }
         }        
@@ -88,7 +86,8 @@ body, html{
 
         .display {
             @extend %card-title;
-            padding: 3px;            
+            padding: 3px;        
+            margin: 3px;    
             word-wrap: normal;
 
             .first-row {
