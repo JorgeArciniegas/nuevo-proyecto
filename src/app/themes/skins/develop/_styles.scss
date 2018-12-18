@@ -7,7 +7,7 @@ $color-bg-secodary: #ffffff;
 $color-bg-accent: #c0c0c0;
 $color-bg-warn: #ff0000;
 $color-bg-success: #00cc00;
-$color-bg-header: #00cc00;
+$color-bg-header: #191E25;
 $btn-bg-keyboard: #26262f;
 $btn-bg-orange: #d67900;
 $btn-bg-yellow: #ffca18;
@@ -17,6 +17,7 @@ $border-success: #02a502;
 $color-border-box: #8a8a8a;
 $btn-border-keyboard: #03030a;
 $btn-border-opacity: rgba(0,0,0, 0.12);
+$btn-border-selected: #538939;
 //TEXT
 $color-text-dark: #000;
 $color-text-primary: #ffffff;
@@ -36,6 +37,7 @@ $color-text-warn: #ff0000;
 %clock-border-color { border-color: $color-text-primary; }
 %notification-style { background-color: $color-text-warn; color: $color-text-primary; border-radius: 4px; }
 %notification-img { background-image: url("app/themes/skins/develop/icon/icon.png"); }
+%btn-menu-selected { border-bottom: 3px solid $btn-border-selected; }
 // WidgetArea
 %widget-button-style { border: 2px solid $color-border-box; border-radius: 10px;}
 // Display

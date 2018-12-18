@@ -31,9 +31,10 @@ body, html{
             }
             .btn {
                 margin: 0 4px;
+                border-bottom: 3px solid transparent;
 
-                .selected {
-                    border-bottom: 3px solid green;
+                &.selected {
+                    @extend %btn-menu-selected;
                 }
             }
 
