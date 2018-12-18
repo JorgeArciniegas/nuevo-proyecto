@@ -106,7 +106,13 @@ body, html{
             }
             .product-calc,
             .product-coupon {
-                @extend %border-product ; 
+                .card{
+                    padding: 5px;
+                    .card-title{
+                        height:40px;
+                    }
+                }
+                
             }
 
             .product-calc{
@@ -173,7 +179,7 @@ body, html{
             @extend %btn-warning;
         }
         .btn-success{
-            @extend %btn-success;
+            @extend %btn-success-gradient;
         }  
 
         .btn-grey-gradient { 
