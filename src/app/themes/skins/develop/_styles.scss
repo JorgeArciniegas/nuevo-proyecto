@@ -2,7 +2,7 @@
 * THEME DEFAULT
 **/
 //BACKGROUNDS
-$color-bg-primary: #21212b;
+$color-bg-primary: #1C2432;
 $color-bg-secodary: #273142;
 $color-bg-accent: #c0c0c0;
 $color-bg-warn: #ff0000;
@@ -15,6 +15,7 @@ $btn-bg-yellow: #ffca18;
 //BORDERS
 $border-warning: #ffffff;
 $border-success: #02a502;
+$border-cartd-title: #2C3648;
 $color-border-box: #8a8a8a;
 $btn-border-keyboard: #03030a;
 $btn-border-opacity: rgba(0,0,0, 0.12);
@@ -24,22 +25,23 @@ $color-text-dark: #000;
 $color-text-primary: #ffffff;
 $color-text-shadow: #8a8a8a;
 $color-text-warn: #ff0000;
+$color-text-operator: #3DAB14;
 
 //EXTENDS
 %color-bg-default  { background: $color-bg-primary; color: #ffffff};
 %color-bg-white  { background: white; color: $color-text-dark};
 
-//temporary only for view
-%border-product { border: 3px solid $color-border-box ;}
+// //temporary only for view
+// %border-product { border: 3px solid $color-border-box ;}
 
 // Header Area
 %header { background: $color-bg-header; }
-%text-color { color: $color-text-primary; }
-%notification-style { background-color: $color-text-warn; color: $color-text-primary; border-radius: 4px; }
-%notification-img { background-image: url("app/themes/skins/develop/icon/icon.png"); }
-%btn-menu-selected { border-bottom: 3px solid $btn-border-selected; }
+%header-notification-style { background-color: $color-text-warn; color: $color-text-primary; border-radius: 4px; }
+%header-notification-img { background-image: url("app/themes/skins/develop/icon/icon.png"); }
+%header-btn-menu-selected { border-bottom: 3px solid $btn-border-selected; }
+%header-text-operator { color: $color-text-operator; }
 // CArd tiitle
-%card-title { background-color: $color-bg-secodary; color: $color-text-primary; border-radius: 4px; }
+%card-title { background-color: $color-bg-secodary; color: $color-text-primary; border: 1px solid $border-cartd-title; border-radius: 4px; }
 // BUTTONS DEFINITION
 %btn-keyboard { background: $btn-bg-keyboard; border-color: $btn-border-keyboard; }
 %btn-warning { background: $color-bg-warn; color: $color-text-primary; border-color: $border-warning }

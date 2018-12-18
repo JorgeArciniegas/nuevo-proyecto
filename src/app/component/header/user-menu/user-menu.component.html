@@ -8,14 +8,14 @@
     </button>
   </div>
   <div fxLayout="column" class="details">
-    <div fxLayout="row">
-      Balance: 1.000.000.000,00
-    </div>
     <div fxLayout="column">
-      Operator: Operator2
+      {{'Balance' | translate }}: 1.000.000.000,00
+    </div>
+    <div fxLayout="row">
+      {{'Operator' | translate }}:<span class="operator">Operator2</span>
     </div>
   </div>
-  <div fxLayout="column" class="clock elevation-z5">
+  <div fxLayout="column" class="clock elevation-z5" fxFlexAlign="start">
     {{ myTime | date:'HH:mm' }}
   </div>
 </div>
