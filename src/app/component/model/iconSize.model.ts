@@ -1,7 +1,11 @@
 export class IconSize {
   constructor(width: number, height?: number) {
     this.width = width;
-    this.height = height;
+    if (height) {
+      this.height = height;
+    } else {
+      this.height = width;
+    }
   }
   width: number;
   height: number;
