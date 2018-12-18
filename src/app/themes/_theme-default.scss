@@ -49,30 +49,30 @@ body, html{
                     margin-left: 0.5vh;
                     @extend %header-text-operator;
                 }
-            .counter-container {        
-                text-align: center;        
-                height: 100%;             
-                @extend %header-notification-img; 
-                background-repeat: no-repeat; 
-                background-size: contain; 
-                background-position: center;
-            }
-            .counter {
-                font-size: 1.6vh;
-                padding: 0 3px;
-                @extend %header-notification-style;
-            }
+                .counter-container {        
+                    text-align: center;        
+                    height: 100%;             
+                    @extend %header-notification-img; 
+                    background-repeat: no-repeat; 
+                    background-size: contain; 
+                    background-position: center;
+                }
+                .counter {
+                    font-size: 1.6vh;
+                    padding: 0 3px;
+                    @extend %header-notification-style;
+                }
 
-            .details {
-                font-size: 1.9vh;
-            }
+                .details {
+                    font-size: 1.9vh;
+                }
 
-            .clock {
-                font-size: 2vh;
-                padding: 2px 10px;
-                @extend %card-title;
-                margin: 3px 0.8vw;
-            }
+                .clock {
+                    font-size: 2vh;
+                    padding: 2px 10px;
+                    @extend %card-title;
+                    margin: 3px 0.8vw;
+                }
             }
         }        
 
@@ -104,13 +104,16 @@ body, html{
         }
    
         .product{
-            // .product-container{
-            //     @extend %border-product ;
-            // }
-            // .product-calc,
-            // .product-coupon {
-            //     @extend %border-product ; 
-            // }
+            padding: 10px;
+            .product-calc,
+            .product-coupon {
+                .card{
+                    padding: 5px;
+                    .card-title{
+                        height:40px;
+                    }
+                }
+            }
 
             .product-calc{
                 .potential-winner{
@@ -151,7 +154,7 @@ body, html{
             }
             .btn-amount-4{
                
-                @extend %btn-white ;
+                @extend %btn-white-gradient ;
             }
         }
         .grid-keyboard-number{
@@ -176,13 +179,12 @@ body, html{
             @extend %btn-warning;
         }
         .btn-success{
-            @extend %btn-success;
+            @extend %btn-success-gradient;
         }  
 
         .btn-grey-gradient { 
             @extend %btn-gray-gradient;
         }
-        
 
         .advance-game {
             padding: 1.8vh 0 0.2vh;
@@ -193,7 +195,7 @@ body, html{
                 .label {
                     font-weight: bold;
                     font-size: 1.6vw;
-                }git
+                }
             } 
         }
     }

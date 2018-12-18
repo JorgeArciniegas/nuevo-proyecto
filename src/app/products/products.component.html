@@ -38,15 +38,18 @@
         </mat-grid-tile>
         <!-- Area polifunzionale [Fissa]  -->
         <mat-grid-tile rowspan="1">
-          <button class="btn-default btn-success radius-10">PAGA</button>
-          <button class="btn-default btn-black radius-10">ANNULLA</button>
+          <button class="btn-default btn-success radius-10 padding-10">PAGA</button>
+          <button class="btn-default btn-warning radius-10 padding-10">ANNULLA</button>
 
         </mat-grid-tile>
 
       </mat-grid-list>
     </div>
     <div class="product-coupon" fxLayout="column" fxFlex="20">
-      this is coupon area
+      <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
+        <app-coupon [rowHeight]="rowHeight"></app-coupon>
+      </mat-grid-list>
+
     </div>
   </div>
 </div>

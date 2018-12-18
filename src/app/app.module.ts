@@ -14,15 +14,16 @@ import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { AppSettings } from './app.settings';
 import { BtncalcComponent } from './component/btncalc/btncalc.component';
+import { CouponComponent } from './component/coupon/coupon.component';
+import { DispayComponent } from './component/dispay/dispay.component';
 import { ApplicationMenuComponent } from './component/header/application-menu/application-menu.component';
 import { HeaderComponent } from './component/header/header.component';
 import { UserMenuComponent } from './component/header/user-menu/user-menu.component';
 import { WidgetComponent } from './component/widget/widget.component';
+import { AdvanceGameComponent } from './products/advance-game/advance-game.component';
 import { DogracingComponent } from './products/dogracing/dogracing.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
-import { DispayComponent } from './component/dispay/dispay.component';
-import { AdvanceGameComponent } from './products/advance-game/advance-game.component';
 
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -39,7 +40,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     WidgetComponent,
     BtncalcComponent,
     DispayComponent,
-    AdvanceGameComponent
+    AdvanceGameComponent,
+    CouponComponent
   ],
   imports: [
     HttpClientModule,
