@@ -28,10 +28,12 @@ export class ApplicationMenuComponent implements OnInit {
       this.productService.windowSize.columnHeight;
     this.logoIcon = new IconSize(barHeight * 0.9);
     this.menuIcon = new IconSize(barHeight * 0.7);
-    this.buttonIcon = new IconSize(barHeight * 0.8);
+    this.buttonIcon = new IconSize(barHeight * 0.8 - 4, barHeight * 0.8);
 
     this.btnSelected = this.settings.products[0].name;
   }
 
-  productSelecting() {}
+  productSelecting(productSelected: string) {
+    this.btnSelected = productSelected;
+  }
 }
