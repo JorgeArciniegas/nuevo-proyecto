@@ -77,9 +77,8 @@ body, html{
 
             padding: 0 5px;
 
-            .widget-btn {
-                @extend %widget-button-style;
-
+            .widget-btn {  
+                          
                 .icon {
                     height: 100%;
                     width: 100%;

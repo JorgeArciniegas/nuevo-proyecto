@@ -38,8 +38,6 @@ $color-text-warn: #ff0000;
 %notification-style { background-color: $color-text-warn; color: $color-text-primary; border-radius: 4px; }
 %notification-img { background-image: url("app/themes/skins/develop/icon/icon.png"); }
 %btn-menu-selected { border-bottom: 3px solid $btn-border-selected; }
-// WidgetArea
-%widget-button-style { border: 2px solid $color-border-box; border-radius: 10px;}
 // Display
 %display-style { background-color: $color-bg-secodary; color: $color-text-dark; border-radius: 4px; }
 // BUTTONS DEFINITION
