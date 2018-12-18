@@ -13,6 +13,7 @@ export class ApplicationMenuComponent implements OnInit {
   public logoIcon: IconSize;
   public menuIcon: IconSize;
   public buttonIcon: IconSize;
+  public btnSelected: string;
 
   constructor(
     public readonly appSettings: AppSettings,
@@ -25,8 +26,12 @@ export class ApplicationMenuComponent implements OnInit {
     const barHeight =
       this.productService.windowSize.height -
       this.productService.windowSize.columnHeight;
-    this.logoIcon = new IconSize(barHeight * 0.9, barHeight * 0.9);
-    this.menuIcon = new IconSize(barHeight * 0.9, barHeight * 0.9);
-    this.buttonIcon = new IconSize(barHeight * 0.7, barHeight * 0.7);
+    this.logoIcon = new IconSize(barHeight * 0.9);
+    this.menuIcon = new IconSize(barHeight * 0.7);
+    this.buttonIcon = new IconSize(barHeight * 0.8);
+
+    this.btnSelected = this.settings.products[0].name;
   }
+
+  productSelecting() {}
 }
