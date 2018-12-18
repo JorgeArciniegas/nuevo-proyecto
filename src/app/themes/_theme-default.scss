@@ -87,9 +87,8 @@ body, html{
         }
 
         .display {
-            @extend %display-style;
-            padding: 3px;
-            margin: 3px;
+            @extend %card-title;
+            padding: 3px;            
             word-wrap: normal;
 
             .first-row {

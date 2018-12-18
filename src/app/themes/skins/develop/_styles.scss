@@ -39,8 +39,8 @@ $color-text-warn: #ff0000;
 %notification-style { background-color: $color-text-warn; color: $color-text-primary; border-radius: 4px; }
 %notification-img { background-image: url("app/themes/skins/develop/icon/icon.png"); }
 %btn-menu-selected { border-bottom: 3px solid $btn-border-selected; }
-// Display
-%display-style { background-color: $color-bg-secodary; color: $color-text-primary; border-radius: 4px; }
+// CArd tiitle
+%card-title { background-color: $color-bg-secodary; color: $color-text-primary; border-radius: 4px; margin: 3px; }
 // BUTTONS DEFINITION
 %btn-keyboard { background: $btn-bg-keyboard; border-color: $btn-border-keyboard; }
 %btn-warning { background: $color-bg-warn; color: $color-text-primary; border-color: $border-warning }
