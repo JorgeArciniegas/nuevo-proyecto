@@ -128,19 +128,17 @@ body, html{
         .grid-row-amount{
 
             .btn-amount-1{
-                
                 @extend %btn-orange;
             }
             .btn-amount-2{
-                border: 3px solid;
-                @extend %btn-gray;
+                @extend %btn-gray-gradient-2;
             }
             .btn-amount-3{
-                border: 3px solid;
-                @extend %btn-yellow ;
+                
+                @extend %btn-yellow-gradient ;
             }
             .btn-amount-4{
-                border: 3px solid;
+               
                 @extend %btn-white ;
             }
         }
@@ -154,11 +152,11 @@ body, html{
         .btn-keyboard{
             @extend %btn-keyboard;
             &.btn-grey{
-                border: 3px solid;
+                
                 @extend %btn-gray;
             }
             &.btn-black{
-                border:3px solid;
+                
                 @extend %btn-dark;
             }
         }
@@ -168,6 +166,10 @@ body, html{
         .btn-success{
             @extend %btn-success;
         }  
+
+        .btn-grey-gradient { 
+            @extend %btn-gray-gradient;
+        }
         
        
     }
@@ -198,5 +200,5 @@ body, html{
 }
 
 .elevation-z5{
-    box-shadow:1px 2px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow:0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
