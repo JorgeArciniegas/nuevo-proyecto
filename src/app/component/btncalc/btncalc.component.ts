@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/products/models/product.model';
 import { ProductsService } from 'src/app/products/products.service';
@@ -12,6 +12,8 @@ import { environment } from 'src/environments/environment.develop';
 export class BtncalcComponent implements OnInit, OnDestroy {
   productNameSelectedSubscribe: Subscription;
   product: Product;
+  @Input()
+  rowHeight: number;
   constructor(public productService: ProductsService) {
     this.productNameSelectedSubscribe = this.productService.productNameSelectedObserve.subscribe(
       v => {

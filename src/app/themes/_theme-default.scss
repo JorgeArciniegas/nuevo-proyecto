@@ -107,17 +107,36 @@ body, html{
             .product-coupon {
                 @extend %border-product ; 
             }
+
+            .product-calc{
+                .potential-winner{
+                    @extend %color-bg-white;
+                    min-height: 100%;
+                    width: 100%;
+                    padding: 2px;
+                    label{
+                        font-weight: 500;
+                        font-size: 0.7em;
+                        text-transform: uppercase;
+                        
+                        input{
+                            margin-top: 10px;
+                            border: 0;
+                            width: 100%;
+                            font-size: 1.8em;
+                            font-weight: 700;
+                            text-align: right;
+                            padding-right: 10px;
+                        }
+                    }
+                }
+            }
         }  
         // GRID AMOUNT
         .grid-row-amount{
 
-            .mat-grid-tile{
-                .mat-figure {
-                    padding: 5px;
-                }
-            }
             .btn-amount-1{
-                border: 3px solid;
+                
                 @extend %btn-orange;
             }
             .btn-amount-2{
@@ -133,7 +152,13 @@ body, html{
                 @extend %btn-white ;
             }
         }
-
+        .grid-keyboard-number{
+            .mat-grid-tile{
+                .mat-figure {
+                    padding: 5px;
+                }
+            }
+        }
         .btn-keyboard{
             @extend %btn-keyboard;
             &.btn-grey{
@@ -178,4 +203,8 @@ body, html{
     border-radius: 50px;
     -moz-border-radius: 50px;
     -webkit-border-radius: 50px;
+}
+
+.elevation-z5{
+    box-shadow:1px 2px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
