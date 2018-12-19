@@ -26,7 +26,7 @@ export class UserMenuComponent implements OnInit {
     const barHeight =
       this.productService.windowSize.height -
       this.productService.windowSize.columnHeight;
-    this.notifyIcon = new IconSize(barHeight * 0.7, barHeight * 0.7);
+    this.notifyIcon = new IconSize(barHeight, barHeight * 0.7);
   }
 
   getTime(): void {

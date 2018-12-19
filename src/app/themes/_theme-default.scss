@@ -24,7 +24,7 @@ body, html{
                 width: 100%;
             }
             .logo {
-                margin: 0 10px 0 16px;
+                margin: 0 20px 0 0;
             }
             .menu {
                 margin: 0 5px;
@@ -51,19 +51,21 @@ body, html{
                 .operator {
                     display: inline;
                     margin-left: 0.5vh;
+                    font-size: 1.1em;
                     @extend %header-text-operator;
                 }
                 .counter-container {        
-                    text-align: center;        
-                    height: 100%;             
+                    text-align: right;            
                     @extend %header-notification-img; 
-                    background-repeat: no-repeat; 
-                    background-size: contain; 
-                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: 60%;
+                    background-position: bottom center;             
                 }
                 .counter {
+                    text-align: center;
                     font-size: 1.6vh;
-                    padding: 0 3px;
+                    font-weight: bold;
+                    display: inline-block;
                     @extend %header-notification-style;
                 }
 

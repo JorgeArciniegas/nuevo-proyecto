@@ -20,6 +20,6 @@ export class WidgetComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.widgetIcon = new IconSize(this.rowHeight * 0.8, this.rowHeight * 0.8);
+    this.widgetIcon = new IconSize(this.rowHeight * 0.7, this.rowHeight * 0.7);
   }
 }
