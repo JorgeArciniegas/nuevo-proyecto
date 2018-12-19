@@ -1,28 +1,32 @@
-.sub-display{
-    padding: 3px;        
-}
-
 .display{
     width: 100%;
     justify-content: center;
     text-align: center;
+    display: flex;
+    align-items: center;
     .card-title{
         .title{
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 32px;
+            font-size: 2.8vh;
             margin: 0;
+           
+            .icon{
+               width: 2.2vh;
+            }
         }
     }
+    
 }
 .sub-display{
+    padding: 3px;   
     width: 100%;
     justify-content: center;
     text-align: center;
     .card-title{
         .title{
             font-weight: 600;
-            font-size: 18px;
+            font-size: 1.8vh;
             margin: 0;
         }
     }
@@ -35,6 +39,8 @@
         display: inline;
         margin: 0;
         padding:5px;
+        font-size: 0.9em;
+        text-transform: uppercase;
         &.btn:nth-child(1){
             border-radius: 4px 0px 0px 4px;
         }

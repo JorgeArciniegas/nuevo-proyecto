@@ -2,7 +2,10 @@
   <mat-grid-tile rowspan="2">
     <div class="display" fxFlexFill>
       <div class="card-title">
-        <h3 class="title">{{ 'coupon' | translate }} <span class="icon icon-baseline-remove_shopping_cart-24px"></span></h3>
+        <h3 class="title">
+          <span class="text">{{ 'coupon' | translate }} </span>
+          <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
+        </h3>
       </div>
     </div>
   </mat-grid-tile>
@@ -16,7 +19,7 @@
   <mat-grid-tile rowspan="1">
     <div class="btn-coupon-board" fxLayout="row">
       <button class="display btn btn-default">{{'single' | translate}}</button>
-      <button class="display  btn-default actived">{{'multiple' | translate}}</button>
+      <button class="display btn btn-default actived">{{'multiple' | translate}}</button>
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="14">
