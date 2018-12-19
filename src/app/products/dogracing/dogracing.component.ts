@@ -15,6 +15,6 @@ export class DogracingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.rowHeight = (this.service.windowSize.columnHeight - 30) / 18;
+    this.rowHeight = (this.service.windowSize.columnHeight - 20 - 17) / 18;
   }
 }
