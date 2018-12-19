@@ -18,7 +18,7 @@ $btn-bg-yellow: #ffca18;
 //BORDERS
 $border-warning: #ffffff;
 $border-success: #02a502;
-$border-cartd-title: #2C3648;
+$border-cartd-title: #313d4f;
 $color-border-box: #8a8a8a;
 $btn-border-keyboard: #03030a;
 $btn-border-opacity: rgba(0,0,0, 0.12);
@@ -132,4 +132,6 @@ $color-text-operator: #3DAB14;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#393939', endColorstr='#000000',GradientType=0 );
     color: $color-text-primary;
 }
-
+// GAME AREA
+// Dog racing
+%header-notification-img { background: transparet url("app/themes/skins/develop/image/Dog-Racing.png") left top no-repeat; }
