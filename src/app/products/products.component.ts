@@ -25,7 +25,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.service.breakpointSubscribe.next(this.service.breakpoint);
         this.service.fnWindowsSize();
 
-        this.rowHeight = (this.service.windowSize.columnHeight - 11) / 11;
+        this.rowHeight = (this.service.windowSize.columnHeight - 30) / 11;
       });
   }
   ngOnDestroy(): void {
