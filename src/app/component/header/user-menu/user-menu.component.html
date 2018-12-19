@@ -3,8 +3,8 @@
     <!-- NOTIFICATION -->
     <button class="btn-reset toolbar icon notification counter-btn">
       <div [style.width.px]="notifyIcon.width" [style.height.px]="notifyIcon.height" class="counter-container">
-        <span [style.line-height.px]="notifyIcon.height * 0.7" [style.width.px]="notifyIcon.height * 0.7"
-          [style.height.px]="notifyIcon.height * 0.7" class="counter elevation-z5">2</span>
+        <span [style.line-height.px]="notifyIcon.height * 0.65" [style.width.px]="notifyIcon.height * 0.65"
+          [style.height.px]="notifyIcon.height * 0.65" class="counter elevation-z5">2</span>
       </div>
     </button>
   </div>
@@ -16,7 +16,8 @@
       {{'Operator' | translate }}:<span class="operator">Operator2</span>
     </div>
   </div>
-  <div fxLayout="column" class="clock elevation-z5" fxFlexAlign="start">
+  <div fxLayout="row" class="clock elevation-z5" fxFlexAlign="start">
+    <div [style.width.px]="notifyIcon.height * 0.55" [style.height.px]="notifyIcon.height * 0.55" class="clock-icon icon-baseline-access_time"></div>
     {{ myTime | date:'HH:mm' }}
   </div>
 </div>

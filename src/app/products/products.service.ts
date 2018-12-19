@@ -30,7 +30,7 @@ export class ProductsService {
     const h: number = doc.offsetHeight;
     const w: number = doc.offsetWidth;
     const aspectRatio: number = w / h;
-    const hgeneral = h - (h * 6) / 100;
+    const hgeneral = h - (h * 7) / 100;
     // tslint:disable-next-line:typedef
     const dataAtt: WindowSize = {
       height: h,
