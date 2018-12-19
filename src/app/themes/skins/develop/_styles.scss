@@ -2,9 +2,10 @@
 /**
 * THEME DEFAULT
 **/
-//BACKGROUNDS
+//BACKGROUNDS COLOR
 $color-bg-primary: #1b2432;
 $color-bg-secodary: #273142;
+$color-bg-event: #274442;
 $color-bg-accent: #c0c0c0;
 $color-bg-warn: #ff0000;
 $color-bg-success: #00cc00;
@@ -13,15 +14,16 @@ $btn-bg-keyboard: #1b2432;
 $btn-bg-orange: #d67900;
 $btn-bg-yellow: #ffca18;
 
-//BORDERS
+//BORDERS COLOR
 $border-warning: #ffffff;
 $border-success: #02a502;
 $border-cartd-title: #2C3648;
-$color-border-box: #8a8a8a;
+$border-event: #1fb537;
+$color-border-box: #6b7279;
 $btn-border-keyboard: #03030a;
 $btn-border-opacity: rgba(0,0,0, 0.12);
 $btn-border-selected: #538939;
-//TEXT
+//TEXT COLOR
 $color-text-dark: #000;
 $color-text-primary: #ffffff;
 $color-text-shadow: #8a8a8a;
@@ -31,7 +33,6 @@ $color-text-operator: #3DAB14;
 //EXTENDS
 %color-bg-default  { background: $color-bg-primary; color: #ffffff};
 %color-bg-white  { background: white; color: $color-text-dark};
-
 // Header Area
 %header { background: $color-bg-header; }
 %header-notification-style { background-color: $color-text-warn; color: $color-text-primary; border-radius: 4px; }
@@ -40,15 +41,17 @@ $color-text-operator: #3DAB14;
 %header-text-operator { color: $color-text-operator; }
 // Card tiitle
 %card-title { background-color: $color-bg-secodary; color: $color-text-primary; border: 1px solid $border-cartd-title; border-radius: 4px; }
+%sub-card-title { background-color: $color-bg-event ; color: $color-text-primary; border: 1px solid $border-event; border-radius: 4px; }
 // BUTTONS DEFINITION
 %btn-keyboard { background: $btn-bg-keyboard; border-color: $btn-border-keyboard; }
-//FLAT
+// BUTTONS FLAT
 %btn-dark { background: black ; color: $color-text-primary; border-color:  $border-warning; }
 %btn-gray { background: $color-bg-accent; color: $color-text-dark; border-color:  $btn-border-opacity }
 %btn-yellow { background: $btn-bg-yellow; color: $color-text-dark; border-color:  $btn-border-opacity; }
 %btn-white { background: white ; color: $color-text-dark; border-color:  $btn-border-opacity; }
+
 %btn-advance-game { background-color: #fefefe; color: $color-text-dark; border-color: #ffffff; }
-//GRADIENT
+// BUTTONS GRADIENT
 %btn-warning { 
     background: #ff7f7f;
     background: -moz-linear-gradient(top, #ff7f7f 0%,  #cb1e1e 100%);
@@ -126,3 +129,6 @@ $color-text-operator: #3DAB14;
     color: $color-text-primary;
 }
 
+
+// BORDER BOX DEFINITION
+%border-gray { border-color: $color-border-box; }

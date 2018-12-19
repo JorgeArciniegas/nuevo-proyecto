@@ -28,10 +28,10 @@
         </mat-grid-tile>
         <!-- VINCITA POTENZIALE MASSIMA -->
         <mat-grid-tile rowspan="1">
-          <div class="potential-winner radius-5">
+          <div class="display-amount radius-5">
             <label>
-              VINCITA POTENZIALE MASSIMA
-              <input type="text" name="winner" value="10.000.000 COP" readonly />
+              <span>{{'amountPlace' | translate}}</span>
+              <input type="text" name="amount" value="10.000.000 COP" readonly />
             </label>
           </div>
 
@@ -45,11 +45,8 @@
 
       </mat-grid-list>
     </div>
-    <div class="product-coupon" fxLayout="column" fxFlex="20">
-      <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
-        <app-coupon [rowHeight]="rowHeight"></app-coupon>
-      </mat-grid-list>
-
+    <div class="product-coupon" fxFlexFill fxLayout="column" fxFlex="20">
+      <app-coupon [rowHeight]="rowHeight"></app-coupon>
     </div>
   </div>
 </div>
