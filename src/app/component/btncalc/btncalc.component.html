@@ -2,7 +2,7 @@
 <mat-grid-list cols="{{product.defaultAmount.length}}" class="grid-row-amount" rowHeight="{{rowHeight}}">
   <mat-grid-tile *ngFor="let amount of product.defaultAmount; let i = index">
 
-    <button [style.width.px]="rowHeight-15" [style.height.px]="rowHeight-15" class="btn-default elevation-z5 btn-amount-{{i+1}} radius-50">{{amount}}</button>
+    <button [style.width.px]="rowHeight-12" [style.height.px]="rowHeight-12" class="btn-default elevation-z5 btn-amount-{{i+1}} radius-50">{{amount}}</button>
 
   </mat-grid-tile>
 </mat-grid-list>
