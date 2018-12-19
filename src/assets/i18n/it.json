@@ -1,4 +1,9 @@
 {
   "Balance": "Balance",
-  "Operator": "Operator"
+  "Operator": "Operator",
+  "tabCoupon": "Scheda scommesse",
+  "amountPlace": "Importo scommesso",
+  "potentialMaxWinner": "Vincita potenziale massima",
+  "multiple": "Multipla",
+  "single": "Singola"
 }

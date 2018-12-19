@@ -15,7 +15,7 @@ import { routing } from './app.routing';
 import { AppSettings } from './app.settings';
 import { BtncalcComponent } from './component/btncalc/btncalc.component';
 import { CouponComponent } from './component/coupon/coupon.component';
-import { DispayComponent } from './component/dispay/dispay.component';
+import { DisplayComponent } from './component/display/display.component';
 import { ApplicationMenuComponent } from './component/header/application-menu/application-menu.component';
 import { HeaderComponent } from './component/header/header.component';
 import { UserMenuComponent } from './component/header/user-menu/user-menu.component';
@@ -39,7 +39,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     DogracingComponent,
     WidgetComponent,
     BtncalcComponent,
-    DispayComponent,
+    DisplayComponent,
     AdvanceGameComponent,
     CouponComponent
   ],

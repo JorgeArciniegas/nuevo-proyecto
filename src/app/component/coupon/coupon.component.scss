@@ -1,0 +1,47 @@
+.sub-display{
+    padding: 3px;        
+}
+
+.display{
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    .card-title{
+        .title{
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 32px;
+            margin: 0;
+        }
+    }
+}
+.sub-display{
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    .card-title{
+        .title{
+            font-weight: 600;
+            font-size: 18px;
+            margin: 0;
+        }
+    }
+}
+
+.btn-coupon-board {
+    width: 100%;
+    
+    button{
+        display: inline;
+        margin: 0;
+        padding:5px;
+        &.btn:nth-child(1){
+            border-radius: 4px 0px 0px 4px;
+        }
+        &.btn:nth-child(2){
+            border-radius:0px  4px  4px  0px;
+        }
+    }
+    
+    
+}

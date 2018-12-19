@@ -16,11 +16,9 @@ body, html{
         height: 100vh;
         overflow: hidden;
         @extend %color-bg-default;
-
         app-products{ height: 100vh; }
         .toolbar{
             @extend %header;
-            
             .icon {
                 width: 100%;
             }
@@ -42,11 +40,9 @@ body, html{
                     @extend %header-btn-menu-selected;
                 }
             }
-
             .user-menu{
                 .notification {
-                    margin: 0 10px;
-    
+                    margin: 0 10px;    
                 }
                 .counter-container {        
                     text-align: right;            
@@ -62,7 +58,6 @@ body, html{
                     display: inline-block;
                     @extend %header-notification-style;
                 }
-
                 .details {
                     font-size: 1.8vh;
 
@@ -72,7 +67,6 @@ body, html{
                         @extend %header-text-operator;
                     }
                 }
-
                 .clock {
                     font-size: 1.9vh;
                     padding: 3px 10px;
@@ -87,11 +81,8 @@ body, html{
         }        
 
         .widgets {
-
             padding: 0 5px;
-
             .widget-btn {  
-                          
                 .icon {
                     height: 100%;
                     width: 100%;
@@ -101,20 +92,13 @@ body, html{
 
         .display {
             @extend %card-title;
-            padding: 0.5vw;        
-            margin: 3px;    
-            word-wrap: normal;
-
-            .first-row {
-                font-size: 1.4vw;                
-            }
-            .second-row {
-                font-size: 1.3vw;                
-            }
         }
-   
+        .sub-display{
+            @extend %sub-card-title;
+        }
+        
         .product{
-            padding: 10px;
+            padding: 10px 0px;
             .product-calc,
             .product-coupon {
                 .card{
@@ -124,40 +108,46 @@ body, html{
                     }
                 }
             }
-
             .product-calc{
-                .potential-winner{
-                    @extend %color-bg-white;
-                    min-height: 100%;
-                    width: 100%;
-                    padding: 2px;
-                    margin: 0 6px;                    
-                    label{
-                        font-weight: 500;
-                        font-size: 0.7em;
-                        text-transform: uppercase;
-                        
-                        input{
-                            margin-top: 10px;
-                            border: 0;
-                            width: 100%;
-                            font-size: 1.8em;
-                            font-weight: 700;
-                            text-align: right;
-                            padding-right: 10px;
-                        }
+                @extend %border-gray ;
+                border-right: 2px solid;
+                border-left: 2px solid;
+              
+            }
+            .display-amount{
+                @extend %color-bg-white;
+                min-height: 100%;
+                width: 100%;
+                margin: 0 6px;  
+                label{
+                    font-weight: 500;
+                    font-size: 0.7em;
+                    text-transform: uppercase;
+                    span {
+                        padding: 5px;
+                        display: block;
+                        text-align: right;
+                    }
+                    input{
+                        margin-top: 10px;
+                        border: 0;
+                        width: 100%;
+                        font-size: 1.8em;
+                        font-weight: 700;
+                        text-align: right;
+                        padding-right: 10px;
                     }
                 }
             }
-
             .product-coupon{
+                // padding: 0px 5px;
                 app-coupon{
-                    .card-title{
-                        .title{
-                            font-weight: 600;
-                            text-transform: uppercase;
-                            font-size: 32px;
-                            margin: 0;
+                    width: 100%;
+                    .btn-coupon-board{
+                        button{
+                            &.actived{
+                                @extend %btn-success-gradient;
+                            }
                         }
                     }
                 }
@@ -256,6 +246,15 @@ body, html{
     -webkit-border-radius: 50px;
 }
 
+.padding-top-5{
+    padding-top: 5px;
+}
+.padding-top-10{
+    padding-top: 10px;
+}
+.padding-horizontal-6{
+    padding: 0px 6px;
+}
 .elevation-z5{
     box-shadow:0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
