@@ -4,7 +4,7 @@
     <button class="btn-reset toolbar icon notification counter-btn">
       <div [style.width.px]="notifyIcon.width" [style.height.px]="notifyIcon.height" class="counter-container">
         <span [style.line-height.px]="notifyIcon.height * 0.65" [style.width.px]="notifyIcon.height * 0.65"
-          [style.height.px]="notifyIcon.height * 0.65" class="counter elevation-z5">2</span>
+          [style.height.px]="notifyIcon.height * 0.63" class="counter elevation-z5">2</span>
       </div>
     </button>
   </div>
@@ -17,7 +17,7 @@
     </div>
   </div>
   <div fxLayout="row" class="clock elevation-z5" fxFlexAlign="start">
-    <div [style.width.px]="notifyIcon.height * 0.55" [style.height.px]="notifyIcon.height * 0.55" class="clock-icon icon-baseline-access_time"></div>
+    <div [style.width.px]="notifyIcon.height * 0.53" [style.height.px]="notifyIcon.height * 0.53" class="clock-icon icon-baseline-access_time"></div>
     {{ myTime | date:'HH:mm' }}
   </div>
 </div>
