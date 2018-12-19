@@ -144,6 +144,19 @@ body, html{
                     }
                 }
             }
+
+            .product-coupon{
+                app-coupon{
+                    .card-title{
+                        .title{
+                            font-weight: 600;
+                            text-transform: uppercase;
+                            font-size: 32px;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
         }          
         // GRID AMOUNT
         .grid-row-amount{
