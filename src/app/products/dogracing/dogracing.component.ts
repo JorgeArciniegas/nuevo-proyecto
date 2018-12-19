@@ -8,9 +8,13 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./dogracing.component.scss']
 })
 export class DogracingComponent implements OnInit {
-  constructor(route: ActivatedRoute, service: ProductsService) {
+  public rowHeight: number;
+
+  constructor(private route: ActivatedRoute, private service: ProductsService) {
     service.productNameSelectedSubscribe.next(route.snapshot.data.productName);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.rowHeight = (this.service.windowSize.columnHeight - 30) / 18;
+  }
 }
