@@ -48,13 +48,6 @@ body, html{
                     margin: 0 10px;
     
                 }
-                .operator {
-                    display: inline;
-                    margin-left: 0.5vh;
-                    font-size: 1.1em;
-                    font-weight: 600;
-                    @extend %header-text-operator;
-                }
                 .counter-container {        
                     text-align: right;            
                     @extend %header-notification-img; 
@@ -71,7 +64,13 @@ body, html{
                 }
 
                 .details {
-                    font-size: 1.9vh;
+                    font-size: 1.8vh;
+
+                    .operator{
+                        margin-left: 0.5vh;
+                        font-weight: 600;
+                        @extend %header-text-operator;
+                    }
                 }
 
                 .clock {
