@@ -137,7 +137,7 @@ $color-text-operator: #3DAB14;
 }
 // GAME AREA
 // Dog racing
-%header-notification-img { background: transparet url("app/themes/skins/develop/image/Dog-Racing.png") left top no-repeat; }
+%dog-racing-bg { background: url("app/themes/skins/develop/image/Dog-Racing.png") left top no-repeat; background-size: 25%; }
 
 // BORDER BOX DEFINITION
 %border-gray { border-color: $color-border-box; }
