@@ -24,7 +24,7 @@ body, html{
                 width: 100%;
             }
             .logo {
-                margin: 0 14px;
+                margin: 0 10px 0 16px;
             }
             .menu {
                 margin: 0 5px;
@@ -32,6 +32,10 @@ body, html{
             .btn {
                 margin: 0 4px;
                 border-bottom: 3px solid transparent;
+
+                img {
+                   @extend %header-btn-menu;
+                }
 
                 &.selected {
                     @extend %header-btn-menu-selected;
@@ -91,7 +95,7 @@ body, html{
 
         .display {
             @extend %card-title;
-            padding: 3px;        
+            padding: 0.5vw;        
             margin: 3px;    
             word-wrap: normal;
 
@@ -99,7 +103,7 @@ body, html{
                 font-size: 1.4vw;                
             }
             .second-row {
-                font-size: 1.4vw;                
+                font-size: 1.3vw;                
             }
         }
    

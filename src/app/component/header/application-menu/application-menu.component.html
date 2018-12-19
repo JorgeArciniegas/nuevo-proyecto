@@ -4,10 +4,10 @@
         <img class="icon" src="assets/image/hamburger.png">
     </button>
     <!-- LOGO -->
-    <img class="toolbar logo" [style.height.px]="logoIcon.height" src="app/themes/skins/{{settings.theme}}/image/logo.png">
+    <img class="toolbar logo" [style.height.px]="logoIcon.height" src="app/themes/skins/{{settings.theme}}/image/Logo-header.png">
     <!-- BUTTONS -->
     <button *ngFor="let prod of settings.products" [style.width.px]="buttonIcon.width" [style.height.px]="buttonIcon.height"
-        class="btn-reset toolbar btn icon" [ngClass]="{'selected': prod.name == btnSelected}" (click)="productSelecting(prod.name)">
-        <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/{{prod.toolbarButton.icon}}.png">
+        class="btn-reset toolbar btn icon elevation-z5" [ngClass]="{'selected': prod.name == btnSelected}" (click)="productSelecting(prod.name)">
+        <img class="icon radius-5" src="app/themes/skins/{{settings.theme}}/icon/{{prod.toolbarButton.icon}}.png">
     </button>
 </div>
