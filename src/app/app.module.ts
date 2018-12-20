@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -22,9 +23,9 @@ import { UserMenuComponent } from './component/header/user-menu/user-menu.compon
 import { WidgetComponent } from './component/widget/widget.component';
 import { AdvanceGameComponent } from './products/advance-game/advance-game.component';
 import { DogracingComponent } from './products/dogracing/dogracing.component';
+import { RaceControlComponent } from './products/dogracing/race-control/race-control.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
-import { RaceControlComponent } from './products/dogracing/race-control/race-control.component';
 
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -58,7 +59,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    CommonModule
   ],
   providers: [AppSettings, ProductsService, TranslateService],
   bootstrap: [AppComponent]

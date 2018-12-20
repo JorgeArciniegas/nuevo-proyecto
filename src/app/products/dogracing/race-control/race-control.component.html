@@ -1,9 +1,13 @@
-<div fxFill fxlayout="row" fxLayoutAlign="start center">
+<div fxFill fxLayout="row" class="race-control" fxLayoutAlign="start center">
   <div fxFlex="30"></div>
   <div fxFlex="30">
-    <span class="game-name">DOG RACING</span>
+    <span class="game-name">{{ 'dogRacingLabel' | translate }}</span>
   </div>
-  <div fxFlex>
-    3
+  <div fxFlex="35" fxLayout="column" fxFlexAlign="stretch" fxLayoutAlign="space-around end">
+    <div class="current-race">{{ 'race' | translate }} #{{ currentRace }}</div>
+    <div class="time" fxLayout="row" fxLayoutAlign="center center">
+      <div class="icon-baseline-timer-24px"></div>
+      {{ raceTime.minute | number: '2.0-0' }}:{{ raceTime.second | number: '2.0-0' }}
+    </div>
   </div>
 </div>

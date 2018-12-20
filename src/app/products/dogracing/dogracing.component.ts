@@ -12,6 +12,7 @@ export class DogracingComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private service: ProductsService) {
     service.productNameSelectedSubscribe.next(route.snapshot.data.productName);
+    
   }
 
   ngOnInit() {

@@ -5,5 +5,7 @@
   "amountPlace": "Importo scommesso",
   "potentialMaxWinner": "Vincita potenziale massima",
   "multiple": "Multipla",
-  "single": "Singola"
+  "single": "Singola",
+  "dogRacingLabel": "DOG RACING",
+  "race": "Race"
 }
