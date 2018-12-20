@@ -150,7 +150,7 @@ body, html{
                         }
                     }
                 }
-            }
+            }            
         }          
         // GRID AMOUNT
         .grid-row-amount{
@@ -223,6 +223,20 @@ body, html{
             .race-control {
                 .time {
                     @extend %time-card-title;
+                }
+            }
+            .list-race {
+                .number {
+                    @extend %btn-success-gradient;                              
+                    &.selected {
+                        @extend %btn-blue-gradient;
+                    }    
+                }
+                .date {
+                    @extend %btn-gray-gradient; 
+                    &.selected {
+                        @extend %btn-dark-gradient;
+                    }  
                 }
             }
         }

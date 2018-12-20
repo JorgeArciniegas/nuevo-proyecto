@@ -20,7 +20,9 @@ export class PlaybleBoardComponent implements OnInit {
 
   dogplaced(dog: number, pos: number): void {
     if (!this.placingRace.raceNumber) {
-      // this.placingRace
+      this.placingRace.raceNumber = this.service.raceDetails.races[
+        this.service.raceDetails.currentRace
+      ].number;
     }
   }
 }
