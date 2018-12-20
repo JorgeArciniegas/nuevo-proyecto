@@ -6,7 +6,7 @@
   <div fxFlex="35" fxLayout="column" fxFlexAlign="stretch" fxLayoutAlign="space-around end">
     <div class="current-race">{{ 'race' | translate }} #{{
       dogracingService.raceDetails.races[dogracingService.raceDetails.currentRace].number }}</div>
-    <div class="time" fxLayout="row" fxLayoutAlign="center center">
+    <div class="time elevation-z5" fxLayout="row" fxLayoutAlign="center center">
       <div class="icon-baseline-timer-24px"></div>
       {{ dogracingService.raceDetails.raceTime.minute | number: '2.0-0' }}:{{
       dogracingService.raceDetails.raceTime.second | number: '2.0-0' }}
