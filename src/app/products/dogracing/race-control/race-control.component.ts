@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RaceTime } from '../../models/product.model';
+import { RaceTime } from '../dogracing.models';
 import { DogracingService } from '../dogracing.service';
 
 @Component({

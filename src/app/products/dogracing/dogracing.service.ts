@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observable as ObservableIdle, Subject } from 'rxjs/Rx';
-import { Race, RaceDetail, RaceTime } from '../models/product.model';
+import { Race, RaceDetail, RaceTime } from './dogracing.models';
 
 @Injectable({
   providedIn: 'root'
