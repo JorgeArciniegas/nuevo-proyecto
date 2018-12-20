@@ -1,0 +1,23 @@
+::ng-deep {
+    .playble-grid-buttons{
+        .mat-grid-tile{
+            .mat-figure{
+                padding: 5px;
+                .playble-row-tile{        
+                    padding: 5px;
+                    display: flex; 
+                    min-width: 50px;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100%;
+                    font-size: 2.8vh;
+                    font-weight: 700;
+                }
+                .btn-default-dog-play{
+                    font-weight: 700;
+                    font-size: 4.8vh;
+                }
+            }            
+        }
+    }
+}

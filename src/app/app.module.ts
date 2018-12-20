@@ -26,6 +26,7 @@ import { DogracingComponent } from './products/dogracing/dogracing.component';
 import { RaceControlComponent } from './products/dogracing/race-control/race-control.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
+import { PlaybleBoardComponent } from './products/dogracing/playble-board/playble-board.component';
 
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -44,7 +45,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     DisplayComponent,
     AdvanceGameComponent,
     CouponComponent,
-    RaceControlComponent
+    RaceControlComponent,
+    PlaybleBoardComponent
   ],
   imports: [
     HttpClientModule,
