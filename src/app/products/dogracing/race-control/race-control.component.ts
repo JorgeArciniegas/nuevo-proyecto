@@ -1,6 +1,6 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { Observable as ObservableIdle } from 'rxjs/Rx';
+import { Component, OnInit } from '@angular/core';
 import { RaceTime } from '../../models/product.model';
+import { DogracingService } from '../dogracing.service';
 
 @Component({
   selector: 'app-race-control',
@@ -9,29 +9,9 @@ import { RaceTime } from '../../models/product.model';
 })
 export class RaceControlComponent implements OnInit {
   public raceTime: RaceTime;
+  public race: number;
 
-  @Output()
-  public currentRace: number;
+  constructor(public dogracingService: DogracingService) {}
 
-  constructor() {}
-
-  ngOnInit() {
-    this.raceTime = new RaceTime();
-    this.currentRace = 377660;
-    ObservableIdle.interval(1000).subscribe(() => this.getTime());
-  }
-
-  getTime(): void {
-    if (this.raceTime.second == 0 && this.raceTime.minute == 0) {
-      this.raceTime = new RaceTime();
-      this.currentRace = this.currentRace + 1;
-    } else {
-      if (this.raceTime.second == 0) {
-        this.raceTime.second = 59;
-        this.raceTime.minute = this.raceTime.minute - 1;
-      } else {
-        this.raceTime.second = this.raceTime.second - 1;
-      }
-    }
-  }
+  ngOnInit() {}
 }
