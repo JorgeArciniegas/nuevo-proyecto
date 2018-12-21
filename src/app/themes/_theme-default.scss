@@ -198,7 +198,9 @@ body, html{
         .btn-grey-gradient { 
             @extend %btn-gray-gradient;
         }
-
+        .btn-dark-gradient{
+            @extend %btn-dark-gradient;
+        }
         .advance-game {
             padding: 1.8vh 0 0.2vh;
             .btn-advance-game {
