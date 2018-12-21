@@ -291,3 +291,14 @@ body, html{
 .elevation-z5{
     box-shadow:0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
+
+.overlay {
+    position: fixed; /* Sit on top of the page content */
+    background-color: rgba(0,0,0,0.6); /* Black background with opacity */
+    z-index: 100; /* Specify a stack order in case you're using a different order for other elements */
+    margin: 1px;
+    // width: calc(59% - 12px);
+    // height: 80%; 
+    // top: 20%; 
+    // left: 6px;
+}

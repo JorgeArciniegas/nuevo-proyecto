@@ -32,3 +32,10 @@
         </mat-grid-tile>
     </mat-grid-list>
 </div>
+<!-- *ngIf="service.timeBlocked" -->
+<div id="overlayArea1" [style.top.px]="(service.windowSize.height - service.windowSize.columnHeight) + 12 + (rowHeight * 5)"
+    [style.left.px]="0" [style.width]="'calc(59% - 2px)'" [style.height.px]="rowHeight * 11" class="overlay radius-5"></div>
+<div id="overlayArea2" [style.top.px]="service.windowSize.height - service.windowSize.columnHeight + 4" [style.left.%]="59"
+    [style.width]="'calc(21% - 2px)'" [style.height.px]="service.windowSize.columnHeight - 10" class="overlay radius-5"></div>
+<div id="overlayArea3" [style.top.px]="service.windowSize.height - service.windowSize.columnHeight + 4 " [style.left.%]="80"
+    [style.width]="'calc(20% - 2px)'" [style.height.px]="service.windowSize.columnHeight - 10" class="overlay radius-5"></div>

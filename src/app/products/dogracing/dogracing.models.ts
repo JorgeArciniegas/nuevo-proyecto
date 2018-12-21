@@ -17,6 +17,7 @@ export class PlacingRace {
   repeat: number;
   isSpecialBets: boolean;
   specialBetValue: SpecialBet;
+  timeBlocked: boolean;
 
   constructor() {
     this.raceNumber = 0;

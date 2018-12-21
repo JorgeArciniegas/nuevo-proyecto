@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../products.service';
 
@@ -10,7 +11,11 @@ import { ProductsService } from '../products.service';
 export class DogracingComponent implements OnInit {
   public rowHeight: number;
 
-  constructor(private route: ActivatedRoute, private service: ProductsService) {
+  constructor(
+    private route: ActivatedRoute,
+    private service: ProductsService,
+    public sanitizer: DomSanitizer
+  ) {
     service.productNameSelectedSubscribe.next(route.snapshot.data.productName);
   }
 
