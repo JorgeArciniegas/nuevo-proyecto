@@ -202,7 +202,7 @@ body, html{
             @extend %btn-dark-gradient;
         }
         .advance-game {
-            padding: 1.8vh 0 0.2vh;
+            padding: 0.8vh 0 0.8vh;
             .btn-advance-game {
                 @extend %btn-advance-game;  
                 .label {

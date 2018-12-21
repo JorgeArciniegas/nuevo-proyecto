@@ -1,7 +1,7 @@
 export enum TypePlacingRace {
-  ST = 0,
-  ACCG = 1,
-  R = 2
+  'ST' = 0,
+  'ACCG' = 1,
+  'R' = 2
 }
 export enum SpecialBet {
   'EVEN' = 0,
