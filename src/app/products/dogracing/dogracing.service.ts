@@ -113,34 +113,15 @@ export class DogracingService {
 
   initListResult(raceNumber: number): void {
     this.listResult = [];
-    this.listResult.push({
-      raceNumber: raceNumber - 4,
-      firstPlace: 2,
-      secondPlace: 4,
-      thirdPlace: 1
-    });
-    this.listResult.push({
-      raceNumber: raceNumber - 3,
-      firstPlace: 1,
-      secondPlace: 3,
-      thirdPlace: 6
-    });
-    this.listResult.push({
-      raceNumber: raceNumber - 2,
-      firstPlace: 6,
-      secondPlace: 2,
-      thirdPlace: 3
-    });
-    this.listResult.push({
-      raceNumber: raceNumber - 1,
-      firstPlace: 5,
-      secondPlace: 4,
-      thirdPlace: 2
-    });
+    for (const i of [4, 3, 2, 1]) {
+      this.addNewResult(raceNumber - i, true);
+    }
   }
 
-  addNewResult(raceNumber: number): void {
-    this.listResult.shift();
+  addNewResult(raceNumber: number, unshift: boolean = false): void {
+    if (!unshift) {
+      this.listResult.shift();
+    }
 
     const arrResult: number[] = [];
     while (arrResult.length < 3) {
