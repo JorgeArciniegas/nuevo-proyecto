@@ -50,6 +50,7 @@ $color-text-operator: #3DAB14;
 %card-title { background-color: $color-bg-secodary; color: $color-text-primary; border: 1px solid $border-cartd-title; border-radius: 4px; }
 %sub-card-title { background-color: $color-bg-event ; color: $color-text-primary; border-radius: 4px; }
 %time-card-title { background-color: $color-bg-event ; color: $color-text-primary; border: 1px solid $border-event; border-radius: 4px; }
+%card-title-noborder { background-color: $color-bg-secodary; color: $color-text-primary; }
 // BUTTONS DEFINITION
 %btn-keyboard { background: $btn-bg-keyboard; border-color: $btn-border-keyboard; }
 // BUTTONS FLAT

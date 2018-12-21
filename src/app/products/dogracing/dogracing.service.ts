@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observable as ObservableIdle, Subject } from 'rxjs/Rx';
-import { Race, RaceDetail, RaceTime } from './dogracing.models';
+import { Race, RaceDetail, RaceResult, RaceTime } from './dogracing.models';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,7 @@ import { Race, RaceDetail, RaceTime } from './dogracing.models';
 export class DogracingService {
   public raceDetails: RaceDetail;
   private remmaningTime: RaceTime = new RaceTime();
+  public listResult: RaceResult[];
 
   public currentRaceSubscribe: Subject<number>;
   public currentRaceObserve: Observable<number>;
@@ -16,6 +17,7 @@ export class DogracingService {
     this.raceDetails = new RaceDetail();
     this.raceDetails.currentRace = 0;
     this.defineRaces(377660);
+    this.initListResult(377660);
 
     ObservableIdle.interval(1000).subscribe(() => this.getTime());
 
@@ -31,10 +33,11 @@ export class DogracingService {
   }
 
   getTime(): void {
-    if (this.remmaningTime.second == 0 && this.remmaningTime.minute == 0) {
+    if (this.remmaningTime.second === 0 && this.remmaningTime.minute === 0) {
+      this.addNewResult(this.raceDetails.races[0].number);
       this.defineRaces(this.raceDetails.races[0].number + 1);
     } else {
-      if (this.remmaningTime.second == 0) {
+      if (this.remmaningTime.second === 0) {
         // remaing time
         this.remmaningTime.second = 59;
         this.remmaningTime.minute = this.remmaningTime.minute - 1;
@@ -49,7 +52,7 @@ export class DogracingService {
     }
   }
 
-  defineRaces(raceNumber: number) {
+  defineRaces(raceNumber: number): void {
     let myDate: Date = new Date();
 
     myDate.setSeconds(0);
@@ -84,5 +87,44 @@ export class DogracingService {
   remaningRaceTime(endDate: Date): Date {
     const diff = endDate.getTime() - new Date().getTime();
     return new Date(diff);
+  }
+
+  initListResult(raceNumber: number): void {
+    this.listResult = [];
+    this.listResult.push({
+      raceNumber: raceNumber - 4,
+      firstPlace: 2,
+      secondPlace: 4,
+      thirdPlace: 1
+    });
+    this.listResult.push({
+      raceNumber: raceNumber - 3,
+      firstPlace: 1,
+      secondPlace: 3,
+      thirdPlace: 6
+    });
+    this.listResult.push({
+      raceNumber: raceNumber - 2,
+      firstPlace: 6,
+      secondPlace: 2,
+      thirdPlace: 3
+    });
+    this.listResult.push({
+      raceNumber: raceNumber - 1,
+      firstPlace: 5,
+      secondPlace: 4,
+      thirdPlace: 2
+    });
+  }
+
+  addNewResult(raceNumber: number): void {
+    this.listResult.shift();
+
+    this.listResult.push({
+      raceNumber: raceNumber,
+      firstPlace: Math.floor(Math.random() * 5) + 1,
+      secondPlace: Math.floor(Math.random() * 5) + 1,
+      thirdPlace: Math.floor(Math.random() * 5) + 1
+    });
   }
 }

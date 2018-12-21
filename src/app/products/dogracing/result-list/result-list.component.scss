@@ -1,0 +1,22 @@
+
+::ng-deep {
+    .card-box-result {
+        padding: 0.3vh 0.8vw;
+    }
+    .card-box-result {
+        
+        .header .mat-figure, .position .mat-figure {
+            padding: 0.4vh;
+
+        }
+
+        .position .mat-figure {
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .btn-default-dog-play {
+            border-width: 2px;
+        }
+    }
+}

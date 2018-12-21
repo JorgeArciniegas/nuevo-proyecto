@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DogracingService } from '../dogracing.service';
 
 @Component({
   selector: 'app-result-list',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./result-list.component.scss']
 })
 export class ResultListComponent implements OnInit {
+  @Input()
+  public rowHeight: number;
 
-  constructor() { }
+  constructor(public dogracingService: DogracingService) {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
