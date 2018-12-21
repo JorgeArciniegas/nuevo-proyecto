@@ -108,12 +108,6 @@ body, html{
                     }
                 }
             }
-            .product-calc{
-                @extend %border-gray ;
-                border-right: 1px solid;
-                border-left: 1px solid;
-              
-            }
             .display-amount{
                 @extend %color-bg-white;
                 min-height: 100%;
