@@ -29,8 +29,6 @@ export class AdvanceGameComponent implements OnInit {
 
   setTypePlacing(type: TypePlacingRace): void {
     this.service.placingRace.typePlace = type;
-
-    console.log(this.service.placingRace);
   }
 }
 
