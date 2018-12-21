@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../products.service';
+import { DogracingService } from './dogracing.service';
 
 @Component({
   selector: 'app-dogracing',
@@ -13,7 +14,8 @@ export class DogracingComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private service: ProductsService,
+    public service: ProductsService,
+    public dogracingService: DogracingService,
     public sanitizer: DomSanitizer
   ) {
     service.productNameSelectedSubscribe.next(route.snapshot.data.productName);

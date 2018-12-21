@@ -78,8 +78,10 @@ export class DogracingService {
           this.remmaningTime.minute === 0
         ) {
           this.placingRace.timeBlocked = true;
+          console.log('timeBlocked');
         } else {
           this.placingRace.timeBlocked = false;
+          console.log('timeBlocked off');
         }
       }
       // showed second
