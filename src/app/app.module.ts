@@ -5,7 +5,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { BrowserModule } from '@angular/platform-browser';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService
+} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -20,7 +24,8 @@ import { WidgetComponent } from './component/widget/widget.component';
 import { AdvanceGameComponent } from './products/advance-game/advance-game.component';
 import { DogracingComponent } from './products/dogracing/dogracing.component';
 import { ListRaceComponent } from './products/dogracing/list-race/list-race.component';
-import { PlaybleBoardComponent } from './products/dogracing/playble-board/playble-board.component';
+import { FilterByPositionPipe } from './products/dogracing/playable-board/filter-by-position.pipe';
+import { PlayableBoardComponent } from './products/dogracing/playable-board/playable-board.component';
 import { RaceControlComponent } from './products/dogracing/race-control/race-control.component';
 import { ResultListComponent } from './products/dogracing/result-list/result-list.component';
 import { ProductsComponent } from './products/products.component';
@@ -46,7 +51,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     RaceControlComponent,
     ListRaceComponent,
     ResultListComponent,
-    PlaybleBoardComponent
+    PlayableBoardComponent,
+    ListRaceComponent,
+    FilterByPositionPipe
   ],
   imports: [
     HttpClientModule,

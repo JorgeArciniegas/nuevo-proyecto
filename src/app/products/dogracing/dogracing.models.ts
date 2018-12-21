@@ -3,21 +3,42 @@ export enum TypePlacingRace {
   ACCG = 1,
   R = 2
 }
-
+export enum SpecialBet {
+  'EVEN' = 0,
+  'ODD' = 1,
+  'OVER' = 2,
+  'UNDER' = 3
+}
 export class PlacingRace {
   raceNumber: number;
   typePlace: TypePlacingRace;
-  columns: ColumnRace[];
+  dogs: Dog[];
   amount: number;
   repeat: number;
-}
-export class ColumnRace {
-  firstSelected: number[];
-  secondSelected: number[];
-  thirdSeelcted: number[];
   isSpecialBets: boolean;
-  ou: string;
-  eo: string;
+  specialBetValue: SpecialBet;
+
+  constructor() {
+    this.raceNumber = 0;
+    this.repeat = 0;
+    this.amount = 0;
+    this.isSpecialBets = false;
+    this.dogs = [];
+    // this.dogs = new Dog();
+  }
+}
+
+export class Dog {
+  number: number;
+  selectable: boolean;
+  actived: boolean;
+  position: number;
+  constructor() {
+    this.number = 0;
+    this.selectable = true;
+    this.actived = false;
+    this.position = 0;
+  }
 }
 export class RaceTime {
   minute: number;
