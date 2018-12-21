@@ -61,7 +61,6 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
         this.checkedIsSelected(dog);
       }
     }
-    console.log(this.placingRace);
   }
 
   checkedIsSelected(dog: Dog, reset: boolean = false): void {
@@ -88,7 +87,9 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
 
     this.placingRace.isSpecialBets = true;
     this.placingRace.specialBetValue = this.specialBet[type];
+  }
 
-    console.log(this.placingRace, this.specialBet[type]);
+  setRepeat(repeat: number): void {
+    this.placingRace.repeat = repeat;
   }
 }

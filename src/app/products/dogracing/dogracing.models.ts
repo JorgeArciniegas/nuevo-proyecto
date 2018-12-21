@@ -20,7 +20,7 @@ export class PlacingRace {
 
   constructor() {
     this.raceNumber = 0;
-    this.repeat = 0;
+    this.repeat = 1;
     this.amount = 0;
     this.isSpecialBets = false;
     this.dogs = [];
