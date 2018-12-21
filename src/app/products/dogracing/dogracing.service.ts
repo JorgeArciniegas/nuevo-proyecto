@@ -74,8 +74,8 @@ export class DogracingService {
         this.remmaningTime.second = this.remmaningTime.second - 1;
         // check time blocked
         if (
-          this.remmaningTime.second <= 10 &&
-          this.remmaningTime.minute === 0
+          this.raceDetails.raceTime.second <= 10 &&
+          this.raceDetails.raceTime.minute === 0
         ) {
           this.placingRace.timeBlocked = true;
           console.log('timeBlocked');
