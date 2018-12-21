@@ -17,6 +17,7 @@ export class DogracingService {
   private remmaningTime: RaceTime = new RaceTime();
   public listResult: RaceResult[];
   placingRace: PlacingRace; // place the global race
+  placingRaceSubject: Subject<PlacingRace>;
   public currentRaceSubscribe: Subject<number>;
   public currentRaceObserve: Observable<number>;
 
@@ -39,6 +40,8 @@ export class DogracingService {
       this.raceDetails.raceTime.minute = myDate.getMinutes();
       this.raceDetails.raceTime.second = myDate.getSeconds();
     });
+
+    this.placingRaceSubject = new Subject<PlacingRace>();
 
     this.createDogList();
   }

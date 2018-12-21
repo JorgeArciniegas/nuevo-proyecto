@@ -104,7 +104,8 @@ button:active:not([disabled]){
         }
     }
 }
-.playable-grid-repeat{
+.playable-grid-repeat,
+.advance-game{
     button{
         font-size: 2.8vh;
         &.actived{

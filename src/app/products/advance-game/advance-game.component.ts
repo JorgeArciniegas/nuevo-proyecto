@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TypePlacingRace } from '../dogracing/dogracing.models';
+import { DogracingService } from '../dogracing/dogracing.service';
 
 @Component({
   selector: 'app-advance-game',
@@ -7,17 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdvanceGameComponent implements OnInit {
   public buttons: AdvButton[] = [];
-
-  constructor() {}
+  typePlacingRace: typeof TypePlacingRace = TypePlacingRace;
+  constructor(public service: DogracingService) {}
 
   ngOnInit() {
-    this.buttons.push({ label: 'ST', code: 'ST' });
-    this.buttons.push({ label: 'ACC G', code: 'ACC G' });
-    this.buttons.push({ label: 'R', code: 'R' });
+    this.buttons.push({
+      label: this.typePlacingRace[0],
+      code: this.typePlacingRace['ST']
+    });
+    this.buttons.push({
+      label: this.typePlacingRace[1],
+      code: this.typePlacingRace['ACCG']
+    });
+    this.buttons.push({
+      label: this.typePlacingRace[2],
+      code: this.typePlacingRace['R']
+    });
+  }
+
+  setTypePlacing(type: TypePlacingRace): void {
+    this.service.placingRace.typePlace = type;
   }
 }
 
 export class AdvButton {
   public label: string;
-  public code: string;
+  public code: TypePlacingRace;
 }
