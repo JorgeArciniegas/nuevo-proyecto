@@ -120,11 +120,19 @@ export class DogracingService {
   addNewResult(raceNumber: number): void {
     this.listResult.shift();
 
+    const arrResult: number[] = [];
+    while (arrResult.length < 3) {
+      const r = Math.floor(Math.random() * 5) + 1;
+      if (arrResult.indexOf(r) === -1) {
+        arrResult.push(r);
+      }
+    }
+
     this.listResult.push({
       raceNumber: raceNumber,
-      firstPlace: Math.floor(Math.random() * 5) + 1,
-      secondPlace: Math.floor(Math.random() * 5) + 1,
-      thirdPlace: Math.floor(Math.random() * 5) + 1
+      firstPlace: arrResult[0],
+      secondPlace: arrResult[1],
+      thirdPlace: arrResult[2]
     });
   }
 }
