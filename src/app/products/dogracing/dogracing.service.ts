@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observable as ObservableIdle, Subject } from 'rxjs/Rx';
-import { Race, RaceDetail, RaceTime } from './dogracing.models';
+import { Dog, Race, RaceDetail, RaceTime } from './dogracing.models';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,8 @@ export class DogracingService {
 
   public currentRaceSubscribe: Subject<number>;
   public currentRaceObserve: Observable<number>;
+
+  dogList: Dog[];
 
   constructor() {
     this.raceDetails = new RaceDetail();
@@ -28,13 +30,27 @@ export class DogracingService {
       this.raceDetails.raceTime.minute = myDate.getMinutes();
       this.raceDetails.raceTime.second = myDate.getSeconds();
     });
+
+    this.createDogList();
+  }
+
+  createDogList(): void {
+    this.dogList = [];
+    for (const i of [1, 2, 3]) {
+      for (const d of [1, 2, 3, 4, 5, 6]) {
+        const dog: Dog = new Dog();
+        dog.number = d;
+        dog.position = i;
+        this.dogList.push(dog);
+      }
+    }
   }
 
   getTime(): void {
-    if (this.remmaningTime.second == 0 && this.remmaningTime.minute == 0) {
+    if (this.remmaningTime.second === 0 && this.remmaningTime.minute === 0) {
       this.defineRaces(this.raceDetails.races[0].number + 1);
     } else {
-      if (this.remmaningTime.second == 0) {
+      if (this.remmaningTime.second === 0) {
         // remaing time
         this.remmaningTime.second = 59;
         this.remmaningTime.minute = this.remmaningTime.minute - 1;

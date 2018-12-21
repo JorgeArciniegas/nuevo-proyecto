@@ -1,9 +1,9 @@
 ::ng-deep {
-    .playble-grid-buttons{
+    .playable-grid-buttons{
         .mat-grid-tile{
             .mat-figure{
                 padding: 5px;
-                .playble-row-tile{        
+                .playable-row-tile{        
                     padding: 5px;
                     display: flex; 
                     min-width: 50px;
@@ -18,6 +18,13 @@
                     font-size: 4.8vh;
                 }
             }            
+        }
+    }
+    .playable-special-bets{
+        .mat-grid-tile{
+            .mat-figure{
+                padding: 10px 25px;
+            }
         }
     }
 }

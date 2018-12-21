@@ -24,7 +24,8 @@ import { WidgetComponent } from './component/widget/widget.component';
 import { AdvanceGameComponent } from './products/advance-game/advance-game.component';
 import { DogracingComponent } from './products/dogracing/dogracing.component';
 import { ListRaceComponent } from './products/dogracing/list-race/list-race.component';
-import { PlaybleBoardComponent } from './products/dogracing/playble-board/playble-board.component';
+import { FilterByPositionPipe } from './products/dogracing/playable-board/filter-by-position.pipe';
+import { PlayableBoardComponent } from './products/dogracing/playable-board/playable-board.component';
 import { RaceControlComponent } from './products/dogracing/race-control/race-control.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
@@ -47,8 +48,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AdvanceGameComponent,
     CouponComponent,
     RaceControlComponent,
-    PlaybleBoardComponent,
-    ListRaceComponent
+    PlayableBoardComponent,
+    ListRaceComponent,
+    FilterByPositionPipe
   ],
   imports: [
     HttpClientModule,

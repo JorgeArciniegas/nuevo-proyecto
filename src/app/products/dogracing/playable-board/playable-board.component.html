@@ -1,0 +1,35 @@
+<mat-grid-list class="playable-grid-buttons" cols="13" rowHeight="{{rowHeight *2}}">
+  <ng-container *ngFor="let row of ['I','II','III']; let i = index">
+    <mat-grid-tile>
+      <span class="playable-row-tile display radius-5">{{row}}</span>
+    </mat-grid-tile>
+    <mat-grid-tile *ngFor="let dog of service.dogList | filterByPosition: i+1" colspan="2">
+      <button (click)="dogplaced(dog)" [ngClass]="{'btn-dog-play-actived': dog.actived}" [disabled]="!dog.selectable || placingRace.isSpecialBets"
+        class="btn btn-default btn-default-dog-play radius-5 btn-dog-{{dog.number}}">
+        <span>{{dog.number}}</span>
+      </button>
+    </mat-grid-tile>
+  </ng-container>
+</mat-grid-list>
+<mat-grid-list class="playable-grid-buttons playable-special-bets" cols="4" rowHeight="{{rowHeight *2}}">
+  <mat-grid-tile>
+    <button (click)="specialBets('ODD')" [ngClass]="{'actived' : (placingRace.isSpecialBets && placingRace.specialBetValue === specialBet['ODD']) }"
+      [disabled]="placingRace.dogs.length>0" class="btn-reset btn-default btn-success radius-5 padding-10 elevation-z5">{{'ODD'
+      | translate}}</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button (click)="specialBets('EVEN')" [ngClass]="{'actived' : (placingRace.isSpecialBets && placingRace.specialBetValue === specialBet['EVEN']) }"
+      [disabled]="placingRace.dogs.length> 0" class="btn-reset btn-default btn-success radius-5 elevation-z5">{{'EVEN'
+      | translate}}</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button (click)="specialBets('UNDER')" [ngClass]="{'actived' : (placingRace.isSpecialBets && placingRace.specialBetValue === specialBet['UNDER']) }"
+      [disabled]="placingRace.dogs.length>0" class="btn-reset btn-default  btn-success radius-5 elevation-z5">{{'UNDER'
+      | translate}}</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button (click)="specialBets('OVER')" [ngClass]="{'actived' : (placingRace.isSpecialBets && placingRace.specialBetValue === specialBet['OVER']) }"
+      [disabled]="placingRace.dogs.length>0" class="btn-reset btn-default btn-success radius-5 elevation-z5">{{'OVER'
+      | translate}}</button>
+  </mat-grid-tile>
+</mat-grid-list>
