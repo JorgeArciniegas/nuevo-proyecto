@@ -12,8 +12,6 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
   @Input()
   rowHeight: number;
 
-  placingRace: PlacingRace; // place the global race
-
   specialBet: typeof SpecialBet = SpecialBet;
 
   currentRaceSubscription: Subscription;
@@ -21,11 +19,11 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
   constructor(public service: DogracingService) {}
 
   ngOnInit() {
-    this.placingRace = new PlacingRace();
-    this.placingRace.raceNumber = this.service.raceDetails.races[0].number;
+    this.service.placingRace = new PlacingRace();
+    this.service.placingRace.raceNumber = this.service.raceDetails.races[0].number;
     this.currentRaceSubscription = this.service.currentRaceObserve.subscribe(
       raceIndex =>
-        (this.placingRace.raceNumber = this.service.raceDetails.races[
+        (this.service.placingRace.raceNumber = this.service.raceDetails.races[
           raceIndex
         ].number)
     );
@@ -38,26 +36,26 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
   dogplaced(dog: Dog): void {
     let removed: boolean;
 
-    if (!this.placingRace) {
-      this.placingRace.raceNumber = this.service.raceDetails.races[
+    if (!this.service.placingRace) {
+      this.service.placingRace.raceNumber = this.service.raceDetails.races[
         this.service.raceDetails.currentRace
       ].number;
     }
     dog.actived = true;
 
-    if (this.placingRace.dogs.length === 0) {
-      this.placingRace.dogs.push(dog);
+    if (this.service.placingRace.dogs.length === 0) {
+      this.service.placingRace.dogs.push(dog);
       this.checkedIsSelected(dog);
     } else {
-      this.placingRace.dogs.filter((item, idx) => {
+      this.service.placingRace.dogs.filter((item, idx) => {
         if (item.number === dog.number && item.position === item.position) {
-          this.placingRace.dogs.splice(idx, 1);
+          this.service.placingRace.dogs.splice(idx, 1);
           this.checkedIsSelected(dog, true);
           removed = true;
         }
       });
       if (!removed) {
-        this.placingRace.dogs.push(dog);
+        this.service.placingRace.dogs.push(dog);
         this.checkedIsSelected(dog);
       }
     }
@@ -76,20 +74,20 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
 
   specialBets(type: string): void {
     if (
-      this.placingRace.isSpecialBets &&
-      this.specialBet[type] === this.placingRace.specialBetValue
+      this.service.placingRace.isSpecialBets &&
+      this.specialBet[type] === this.service.placingRace.specialBetValue
     ) {
-      this.placingRace.isSpecialBets = false;
-      this.placingRace.specialBetValue = null;
+      this.service.placingRace.isSpecialBets = false;
+      this.service.placingRace.specialBetValue = null;
 
       return;
     }
 
-    this.placingRace.isSpecialBets = true;
-    this.placingRace.specialBetValue = this.specialBet[type];
+    this.service.placingRace.isSpecialBets = true;
+    this.service.placingRace.specialBetValue = this.specialBet[type];
   }
 
   setRepeat(repeat: number): void {
-    this.placingRace.repeat = repeat;
+    this.service.placingRace.repeat = repeat;
   }
 }

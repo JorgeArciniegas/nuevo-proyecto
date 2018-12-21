@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Observable as ObservableIdle, Subject } from 'rxjs/Rx';
 import {
   Dog,
+  PlacingRace,
   Race,
   RaceDetail,
   RaceResult,
@@ -15,7 +16,7 @@ export class DogracingService {
   public raceDetails: RaceDetail;
   private remmaningTime: RaceTime = new RaceTime();
   public listResult: RaceResult[];
-
+  placingRace: PlacingRace; // place the global race
   public currentRaceSubscribe: Subject<number>;
   public currentRaceObserve: Observable<number>;
 
