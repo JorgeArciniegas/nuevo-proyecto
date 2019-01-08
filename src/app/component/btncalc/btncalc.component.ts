@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/products/models/product.model';
 import { ProductsService } from 'src/app/products/products.service';
-import { environment } from 'src/environments/environment.develop';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-btncalc',

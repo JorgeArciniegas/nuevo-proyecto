@@ -39,12 +39,12 @@
               "vendorChunk": false,
               "buildOptimizer": true
             },
-            "develop": {
-              "outputPath": "dist-develop",
+            "vgen": {
+              "outputPath": "dist-vgen",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.develop.ts"
+                  "with": "src/environments/environment.vgen.ts"
                 }
               ]
             }
@@ -59,8 +59,8 @@
             "production": {
               "browserTarget": "vdesk:build:production"
             },
-            "develop": {
-              "browserTarget": "vdesk:build:develop"
+            "vgen": {
+              "browserTarget": "vdesk:build:vgen"
             }
           }
         },

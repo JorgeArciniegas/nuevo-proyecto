@@ -1,5 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS
+} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,6 +16,7 @@ import {
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent } from './app.component';
+import { AppHttpInterceptor } from './app.httpinterceptor';
 import { routing } from './app.routing';
 import { AppSettings } from './app.settings';
 import { BtncalcComponent } from './component/btncalc/btncalc.component';
@@ -71,7 +76,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
     CommonModule
   ],
-  providers: [AppSettings, ProductsService, TranslateService],
+  providers: [
+    AppSettings,
+    ProductsService,
+    TranslateService,
+    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
