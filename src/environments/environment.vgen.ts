@@ -2,6 +2,7 @@ import { Environment } from './environment.models';
 
 export const environment: Environment = {
   production: false,
+  baseApiUrl: 'https://apidemo.vg-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
   products: [

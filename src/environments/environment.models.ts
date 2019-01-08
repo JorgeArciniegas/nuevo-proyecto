@@ -1,5 +1,6 @@
 export interface Environment {
   production: boolean;
+  baseApiUrl?: string;
   staging?: boolean;
   pageTitle?: string;
   theme?: string;
