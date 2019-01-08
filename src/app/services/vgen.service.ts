@@ -1,7 +1,13 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppSettings } from '../app.settings';
-import { AccountDetails, Login, TreeSports } from './vgen.model';
+import {
+  AccountDetails,
+  CountDown,
+  EventResults,
+  Login,
+  TreeSports
+} from './vgen.model';
 
 interface HttpOptions {
   headers: HttpHeaders;
@@ -67,5 +73,38 @@ export class VgenService {
       .set('CategoryTypes', categoryType);
 
     return this.http.get<TreeSports>(url, { params: params }).toPromise();
+  }
+
+  latesResult(sportId: number, categoryType: string): Promise<EventResults> {
+    const url: string =
+      this.baseApiUrl +
+      'api/virtual/lastresults/' +
+      encodeURIComponent(sportId.toString()) +
+      '/' +
+      encodeURIComponent(categoryType);
+
+    return this.http.get<EventResults>(url).toPromise();
+  }
+
+  raceDetails(sportId: number, matchId: number): Promise<EventResults> {
+    const url: string =
+      this.baseApiUrl +
+      'api/virtual/detail/' +
+      encodeURIComponent(sportId.toString()) +
+      '/' +
+      encodeURIComponent(matchId.toString());
+
+    return this.http.get<EventResults>(url).toPromise();
+  }
+
+  countdown(sportId: number, matchId: number): Promise<CountDown> {
+    const url: string =
+      this.baseApiUrl +
+      'api/virtual/countdown/' +
+      encodeURIComponent(sportId.toString()) +
+      '/' +
+      encodeURIComponent(matchId.toString());
+
+    return this.http.get<CountDown>(url).toPromise();
   }
 }

@@ -95,13 +95,62 @@ export interface Tournament {
 export interface Race {
   id: number;
   nm: string;
+  mk: Market[];
   sdt: Date;
   edt: Date;
   sdtoffset: Date;
   cdt: number;
+  tm: TimeMatchDetail[];
   smc: number;
   st: number;
   ehv: boolean;
+}
+
+export interface Market {
+  id: number;
+  nm: string;
+  tp: number;
+  sls: PlayerOdds[];
+  spv: string;
+  otm: boolean;
+}
+
+export interface PlayerOdds {
+  id: number;
+  n: string;
+  tp: number;
+  ods: Odd[];
+}
+
+export interface Odd {
+  vt: number;
+  st: number;
+}
+
+export interface TimeMatchDetail {
+  id: number;
+  nm: string;
+  ito: number;
+  ff: number;
+  lrrs: string;
+  ac: string;
+  smc: number;
+}
+
+export interface EventResults {
+  EventResults: EventResult[];
+}
+
+export interface EventResult {
+  EventId: number;
+  EventName: string;
+  TournamentId: number;
+  TournamentName: string;
+  Result: string;
+}
+
+export interface CountDown {
+  CountDown: number;
 }
 
 // ENUM List
