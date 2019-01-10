@@ -100,7 +100,7 @@ export interface Race {
   edt: Date;
   sdtoffset: Date;
   cdt: number;
-  tm: TimeMatchDetail[];
+  tm: Statistic[];
   smc: number;
   st: number;
   ehv: boolean;
@@ -127,7 +127,7 @@ export interface Odd {
   st: number;
 }
 
-export interface TimeMatchDetail {
+export interface Statistic {
   id: number;
   nm: string;
   ito: number;

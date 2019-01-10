@@ -78,7 +78,7 @@ export class VgenService {
   latesResult(sportId: number, categoryType: string): Promise<EventResults> {
     const url: string =
       this.baseApiUrl +
-      'api/virtual/lastresults/' +
+      '/api/virtual/lastresults/' +
       encodeURIComponent(sportId.toString()) +
       '/' +
       encodeURIComponent(categoryType);
@@ -89,7 +89,7 @@ export class VgenService {
   raceDetails(sportId: number, matchId: number): Promise<EventResults> {
     const url: string =
       this.baseApiUrl +
-      'api/virtual/detail/' +
+      '/api/virtual/detail/' +
       encodeURIComponent(sportId.toString()) +
       '/' +
       encodeURIComponent(matchId.toString());
@@ -100,7 +100,7 @@ export class VgenService {
   countdown(sportId: number, matchId: number): Promise<CountDown> {
     const url: string =
       this.baseApiUrl +
-      'api/virtual/countdown/' +
+      '/api/virtual/countdown/' +
       encodeURIComponent(sportId.toString()) +
       '/' +
       encodeURIComponent(matchId.toString());

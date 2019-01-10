@@ -20,7 +20,6 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.service.placingRace = new PlacingRace();
-    this.service.placingRace.raceNumber = this.service.raceDetails.races[0].number;
     this.currentRaceSubscription = this.service.currentRaceObserve.subscribe(
       raceIndex =>
         (this.service.placingRace.raceNumber = this.service.raceDetails.races[

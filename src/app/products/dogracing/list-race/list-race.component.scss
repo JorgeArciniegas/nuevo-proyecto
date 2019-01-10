@@ -1,10 +1,15 @@
-::ng-deep {    
-    .card-box .mat-figure {
-        padding: 0.4vh 0.4vw;
+::ng-deep {
+  .card-box .mat-figure {
+    padding: 0.4vh 0.4vw;
 
-        button {
-            font-size: 2.6vh;
-            font-weight: 600;
-        }
+    button {
+      &.number {
+        font-size: 2.4vh;
+      }
+      &.date {
+        font-size: 2.8vh;
+      }
+      font-weight: 600;
     }
+  }
 }

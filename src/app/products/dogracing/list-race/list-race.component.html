@@ -1,11 +1,11 @@
 <mat-grid-list class="list-race" fxFill cols="5" rowHeight="{{rowHeight * 2 + 1}}">
   <mat-grid-tile *ngFor="let race of dogracingService.raceDetails.races; let i = index">
 
-    <mat-grid-list fxFill cols="1" rowHeight="{{rowHeight}}" (click)="raceSelecting(i)">
+    <mat-grid-list fxFill cols="1" rowHeight="{{rowHeight}}" (click)="raceSelecting(i)" *ngIf="race != null">
       <mat-grid-tile class="card-box">
         <!-- header -->
         <button fxFill fxLayoutAlign="center center" class="btn-reset number radius-5" [ngClass]="{ 'selected' : dogracingService.raceDetails.currentRace == i }">
-          #{{race.number}}
+          {{race.label}}
         </button>
       </mat-grid-tile>
       <mat-grid-tile class="card-box">

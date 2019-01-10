@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable, Observable as ObservableIdle, Subject } from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs/Rx';
+import {
+  CountDown,
+  Race as RaceApi,
+  Tournament,
+  TreeSports
+} from 'src/app/services/vgen.model';
+import { VgenService } from 'src/app/services/vgen.service';
 import {
   Dog,
   PlacingRace,
@@ -13,9 +20,14 @@ import {
   providedIn: 'root'
 })
 export class DogracingService {
+  // screen binding
   public raceDetails: RaceDetail;
-  private remmaningTime: RaceTime = new RaceTime();
   public listResult: RaceResult[];
+  // api binding
+  private reload: number;
+  private cacheRaces: RaceApi[] = [];
+  // working variable
+  private remmaningTime: RaceTime = new RaceTime();
   placingRace: PlacingRace; // place the global race
   placingRaceSubject: Subject<PlacingRace>;
   public currentRaceSubscribe: Subject<number>;
@@ -23,22 +35,25 @@ export class DogracingService {
 
   dogList: Dog[];
 
-  constructor() {
+  constructor(private vgenService: VgenService) {
     this.raceDetails = new RaceDetail();
     this.raceDetails.currentRace = 0;
-    this.defineRaces(377660);
-    this.initListResult(377660);
+    this.loadRaces();
+    this.initListResult();
 
-    ObservableIdle.interval(1000).subscribe(() => this.getTime());
+    Observable.interval(1000).subscribe(() => this.getTime());
 
     this.currentRaceSubscribe = new Subject<number>();
     this.currentRaceObserve = this.currentRaceSubscribe.asObservable();
 
-    this.currentRaceObserve.subscribe((race: number) => {
-      this.raceDetails.currentRace = race;
-      const myDate = this.remaningRaceTime(this.raceDetails.races[race].date);
-      this.raceDetails.raceTime.minute = myDate.getMinutes();
-      this.raceDetails.raceTime.second = myDate.getSeconds();
+    this.currentRaceObserve.subscribe((raceIndex: number) => {
+      console.log('selected', raceIndex);
+      this.raceDetails.currentRace = raceIndex;
+      this.remaningRaceTime(this.raceDetails.races[raceIndex].number).then(
+        (raceTime: RaceTime) => {
+          this.raceDetails.raceTime = raceTime;
+        }
+      );
     });
 
     this.placingRaceSubject = new Subject<PlacingRace>();
@@ -61,7 +76,7 @@ export class DogracingService {
   getTime(): void {
     if (this.remmaningTime.second === 0 && this.remmaningTime.minute === 0) {
       this.addNewResult(this.raceDetails.races[0].number);
-      this.defineRaces(this.raceDetails.races[0].number + 1);
+      this.loadRaces();
     } else {
       if (this.remmaningTime.second === 0) {
         // remaing time
@@ -78,10 +93,8 @@ export class DogracingService {
           this.raceDetails.raceTime.minute === 0
         ) {
           this.placingRace.timeBlocked = true;
-          console.log('timeBlocked');
         } else {
           this.placingRace.timeBlocked = false;
-          console.log('timeBlocked off');
         }
       }
       // showed second
@@ -89,44 +102,103 @@ export class DogracingService {
     }
   }
 
-  defineRaces(raceNumber: number): void {
-    let myDate: Date = new Date();
+  loadRaces(): void {
+    if (this.cacheRaces == null || this.cacheRaces.length === 0) {
+      this.loadRacesFromApi(true);
+    } else {
+      // delete the first element
+      this.cacheRaces.shift();
+      this.raceDetails.races.shift();
 
-    myDate.setSeconds(0);
-    myDate.setMinutes(myDate.getMinutes() + (5 - (myDate.getMinutes() % 5)));
-
-    for (let index = 0; index < 5; index++) {
+      // add the new race
       const race: Race = new Race();
-      race.number = raceNumber + index;
-      race.date = new Date(myDate.getTime() + 5 * index * 60 * 1000);
+      race.number = this.cacheRaces[4].id;
+      race.label = this.cacheRaces[4].nm;
+      race.date = new Date(this.cacheRaces[4].sdtoffset);
 
-      this.raceDetails.races[index] = race;
+      this.raceDetails.races[4] = race;
+
+      this.currentAndSelectedRaceTime();
+      this.reload--;
+
+      if (this.reload <= 0) {
+        // if remain only 1 new race reload other race
+        this.loadRacesFromApi();
+      }
     }
+  }
 
-    // check current race
+  loadRacesFromApi(all: boolean = false) {
+    this.vgenService.programmetree(8, 'DOG').then((sports: TreeSports) => {
+      const tournament: Tournament = sports.Sports[0].ts[0];
+
+      if (all) {
+        // load all race
+        this.cacheRaces = tournament.evs;
+        for (let index = 0; index < 5; index++) {
+          const race: Race = new Race();
+          race.number = this.cacheRaces[index].id;
+          race.label = this.cacheRaces[index].nm;
+          race.date = new Date(this.cacheRaces[index].sdtoffset);
+
+          this.raceDetails.races[index] = race;
+        }
+        this.currentAndSelectedRaceTime();
+        this.currentRaceSubscribe.next(0);
+      } else {
+        // add only new race
+        tournament.evs.forEach((race: RaceApi) => {
+          if (
+            this.cacheRaces.filter(
+              (cacheRace: RaceApi) => cacheRace.id === race.id
+            ).length === 0
+          ) {
+            this.cacheRaces.push(race);
+          }
+        });
+      }
+      this.reload = 4;
+    });
+  }
+
+  currentAndSelectedRaceTime() {
+    // check current race index, if is selected a reace decrease the index because the first race is completed and removed
     if (this.raceDetails.currentRace > 0) {
       this.raceDetails.currentRace = this.raceDetails.currentRace - 1;
     }
 
     // calculate remaning time for selected race
-    myDate = this.remaningRaceTime(
-      this.raceDetails.races[this.raceDetails.currentRace].date
-    );
-    this.raceDetails.raceTime.minute = myDate.getMinutes();
-    this.raceDetails.raceTime.second = myDate.getSeconds();
+    this.remaningRaceTime(
+      this.raceDetails.races[this.raceDetails.currentRace].number
+    ).then((raceTime: RaceTime) => {
+      this.raceDetails.raceTime = raceTime;
+      if (this.raceDetails.currentRace === 0) {
+        this.remmaningTime = raceTime;
+      }
+    });
 
     // calculate remaning time
-    myDate = this.remaningRaceTime(this.raceDetails.races[0].date);
-    this.remmaningTime.minute = myDate.getMinutes();
-    this.remmaningTime.second = myDate.getSeconds();
+    if (this.raceDetails.currentRace > 0) {
+      this.remaningRaceTime(this.raceDetails.races[0].number).then(
+        (raceTime: RaceTime) => (this.remmaningTime = raceTime)
+      );
+    }
   }
 
-  remaningRaceTime(endDate: Date): Date {
-    const diff = endDate.getTime() - new Date().getTime();
-    return new Date(diff);
+  remaningRaceTime(idRace: number): Promise<RaceTime> {
+    return this.vgenService.countdown(8, idRace).then((value: CountDown) => {
+      const sec: number = value.CountDown / 10000000;
+      console.log('sec', sec);
+      const raceTime: RaceTime = new RaceTime();
+      raceTime.minute = Math.floor(sec / 60);
+      raceTime.second = Math.floor(sec % 60);
+      console.log('raceTime', raceTime);
+      return raceTime;
+    });
   }
 
-  initListResult(raceNumber: number): void {
+  initListResult(): void {
+    const raceNumber = 123456;
     this.listResult = [];
     for (const i of [4, 3, 2, 1]) {
       this.addNewResult(raceNumber - i, true);

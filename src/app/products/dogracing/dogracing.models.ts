@@ -48,6 +48,7 @@ export class RaceTime {
 
 export class Race {
   number: number;
+  label: string;
   date: Date;
 }
 
