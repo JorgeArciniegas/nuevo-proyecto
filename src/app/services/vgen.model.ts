@@ -71,6 +71,9 @@ export interface UserPolicies {
 export interface TreeSports {
   Sports: Sport[];
 }
+export interface SportDetail {
+  Sport: Sport;
+}
 
 export interface Sport {
   id: number;
