@@ -64,6 +64,7 @@ export class RaceDetail {
 }
 
 export class RaceResult {
+  raceLabel: string;
   raceNumber: number;
   firstPlace: number;
   secondPlace: number;

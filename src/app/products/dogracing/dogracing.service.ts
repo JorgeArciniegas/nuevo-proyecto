@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import {
   CountDown,
+  EventResults,
   Race as RaceApi,
   SportDetail,
   Tournament,
@@ -40,7 +41,7 @@ export class DogracingService {
     this.raceDetails = new RaceDetail();
     this.raceDetails.currentRace = 0;
     this.loadRaces();
-    this.initListResult();
+    this.loadLastResult(false);
 
     Observable.interval(1000).subscribe(() => this.getTime());
 
@@ -78,8 +79,8 @@ export class DogracingService {
 
   getTime(): void {
     if (this.remmaningTime.second === 0 && this.remmaningTime.minute === 0) {
-      this.addNewResult(this.raceDetails.races[0].number);
       this.loadRaces();
+      this.loadLastResult();
     } else {
       if (this.remmaningTime.second === 0) {
         // remaing time
@@ -202,33 +203,29 @@ export class DogracingService {
     });
   }
 
-  initListResult(): void {
-    const raceNumber = 123456;
+  loadLastResult(delay: boolean = true): void {
     this.listResult = [];
-    for (const i of [4, 3, 2, 1]) {
-      this.addNewResult(raceNumber - i, true);
-    }
+    this.getLastResult();
   }
 
-  addNewResult(raceNumber: number, unshift: boolean = false): void {
-    if (!unshift) {
-      this.listResult.shift();
-    }
+  getLastResult() {
+    this.vgenService
+      .latesResult(8, 'DOG')
+      .then((eventResults: EventResults) => {
+        for (const i of [3, 2, 1, 0]) {
+          const results: string[] = eventResults.EventResults[i].Result.split(
+            '-'
+          );
 
-    const arrResult: number[] = [];
-    while (arrResult.length < 3) {
-      const r = Math.floor(Math.random() * 5) + 1;
-      if (arrResult.indexOf(r) === -1) {
-        arrResult.push(r);
-      }
-    }
-
-    this.listResult.push({
-      raceNumber: raceNumber,
-      firstPlace: arrResult[0],
-      secondPlace: arrResult[1],
-      thirdPlace: arrResult[2]
-    });
+          this.listResult.push({
+            raceLabel: eventResults.EventResults[i].EventName,
+            raceNumber: eventResults.EventResults[i].EventId,
+            firstPlace: Number.parseInt(results[0]),
+            secondPlace: Number.parseInt(results[1]),
+            thirdPlace: Number.parseInt(results[2])
+          });
+        }
+      });
   }
 
   resetPlayRacing(): void {
