@@ -6,6 +6,7 @@ import {
   CountDown,
   EventResults,
   Login,
+  SportDetail,
   TreeSports
 } from './vgen.model';
 
@@ -86,7 +87,7 @@ export class VgenService {
     return this.http.get<EventResults>(url).toPromise();
   }
 
-  raceDetails(sportId: number, matchId: number): Promise<EventResults> {
+  raceDetails(sportId: number, matchId: number): Promise<SportDetail> {
     const url: string =
       this.baseApiUrl +
       '/api/virtual/detail/' +
@@ -94,7 +95,7 @@ export class VgenService {
       '/' +
       encodeURIComponent(matchId.toString());
 
-    return this.http.get<EventResults>(url).toPromise();
+    return this.http.get<SportDetail>(url).toPromise();
   }
 
   countdown(sportId: number, matchId: number): Promise<CountDown> {

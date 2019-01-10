@@ -1,8 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs/Rx';
-import { CountDown, Race as RaceApi, Tournament, TreeSports } from 'src/app/services/vgen.model';
+import { Observable, Subject } from 'rxjs';
+import {
+  CountDown,
+  Race as RaceApi,
+  SportDetail,
+  Tournament,
+  TreeSports
+} from 'src/app/services/vgen.model';
 import { VgenService } from 'src/app/services/vgen.service';
-import { Dog, PlacingRace, Race, RaceDetail, RaceResult, RaceTime } from './dogracing.models';
+import {
+  Dog,
+  PlacingRace,
+  Race,
+  RaceDetail,
+  RaceResult,
+  RaceTime
+} from './dogracing.models';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +56,8 @@ export class DogracingService {
       );
 
       this.resetPlayRacing();
+      // get race odds
+      this.raceDetailOdds(this.raceDetails.races[raceIndex].number);
     });
 
     this.placingRaceSubject = new Subject<PlacingRace>();
@@ -62,7 +77,6 @@ export class DogracingService {
   }
 
   getTime(): void {
-    console.log('remmaningTime', this.remmaningTime);
     if (this.remmaningTime.second === 0 && this.remmaningTime.minute === 0) {
       this.addNewResult(this.raceDetails.races[0].number);
       this.loadRaces();
@@ -114,7 +128,9 @@ export class DogracingService {
         // if remain only 1 new race reload other race
         this.loadRacesFromApi();
       }
-      console.log('Races', JSON.stringify(this.cacheRaces));
+
+      // get race odds
+      this.raceDetailOdds(this.raceDetails.races[0].number);
     }
   }
 
@@ -148,7 +164,6 @@ export class DogracingService {
         });
       }
       this.reload = 4;
-      console.log('Load Races', JSON.stringify(this.cacheRaces));
     });
   }
 
@@ -183,7 +198,6 @@ export class DogracingService {
       const raceTime: RaceTime = new RaceTime();
       raceTime.minute = Math.floor(sec / 60);
       raceTime.second = Math.floor(sec % 60);
-      console.log('countdown', raceTime);
       return raceTime;
     });
   }
@@ -222,4 +236,18 @@ export class DogracingService {
     this.createDogList();
   }
 
+  raceDetailOdds(raceNumber: number): void {
+    const race: RaceApi = this.cacheRaces.filter(
+      (cacheRace: RaceApi) => cacheRace.id === raceNumber
+    )[0];
+
+    // check, if is empty load from api
+    if (race.mk == null || race.mk.length === 0) {
+      this.vgenService
+        .raceDetails(8, raceNumber)
+        .then((sportDetail: SportDetail) => {
+          race.mk = sportDetail.Sport.ts[0].evs[0].mk;
+        });
+    }
+  }
 }
