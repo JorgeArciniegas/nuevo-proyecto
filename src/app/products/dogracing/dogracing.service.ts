@@ -32,6 +32,7 @@ export class DogracingService {
   private remmaningTime: RaceTime = new RaceTime();
   placingRace: PlacingRace; // place the global race
   placingRaceSubject: Subject<PlacingRace>;
+
   public currentRaceSubscribe: Subject<number>;
   public currentRaceObserve: Observable<number>;
 
@@ -40,13 +41,14 @@ export class DogracingService {
   constructor(private vgenService: VgenService) {
     this.raceDetails = new RaceDetail();
     this.raceDetails.currentRace = 0;
-    this.loadRaces();
-    this.loadLastResult(false);
 
     Observable.interval(1000).subscribe(() => this.getTime());
 
     this.currentRaceSubscribe = new Subject<number>();
     this.currentRaceObserve = this.currentRaceSubscribe.asObservable();
+
+    this.loadRaces();
+    this.loadLastResult(false);
 
     this.currentRaceObserve.subscribe((raceIndex: number) => {
       this.raceDetails.currentRace = raceIndex;
@@ -204,28 +206,34 @@ export class DogracingService {
   }
 
   loadLastResult(delay: boolean = true): void {
-    this.listResult = [];
-    this.getLastResult();
+    if (delay) {
+      Observable.timer(10000).subscribe(() => this.getLastResult());
+    } else {
+      this.getLastResult();
+    }
   }
 
   getLastResult() {
-    this.vgenService
-      .latesResult(8, 'DOG')
-      .then((eventResults: EventResults) => {
-        for (const i of [3, 2, 1, 0]) {
-          const results: string[] = eventResults.EventResults[i].Result.split(
-            '-'
-          );
+    this.listResult = [];
+    Observable.timer(300).subscribe(() => {
+      this.vgenService
+        .latesResult(8, 'DOG')
+        .then((eventResults: EventResults) => {
+          for (const i of [3, 2, 1, 0]) {
+            const results: string[] = eventResults.EventResults[i].Result.split(
+              '-'
+            );
 
-          this.listResult.push({
-            raceLabel: eventResults.EventResults[i].EventName,
-            raceNumber: eventResults.EventResults[i].EventId,
-            firstPlace: Number.parseInt(results[0]),
-            secondPlace: Number.parseInt(results[1]),
-            thirdPlace: Number.parseInt(results[2])
-          });
-        }
-      });
+            this.listResult.push({
+              raceLabel: eventResults.EventResults[i].EventName,
+              raceNumber: eventResults.EventResults[i].EventId,
+              firstPlace: Number.parseInt(results[0]),
+              secondPlace: Number.parseInt(results[1]),
+              thirdPlace: Number.parseInt(results[2])
+            });
+          }
+        });
+    });
   }
 
   resetPlayRacing(): void {
