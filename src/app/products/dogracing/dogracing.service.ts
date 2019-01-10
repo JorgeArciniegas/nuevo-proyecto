@@ -1,20 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs/Rx';
-import {
-  CountDown,
-  Race as RaceApi,
-  Tournament,
-  TreeSports
-} from 'src/app/services/vgen.model';
+import { CountDown, Race as RaceApi, Tournament, TreeSports } from 'src/app/services/vgen.model';
 import { VgenService } from 'src/app/services/vgen.service';
-import {
-  Dog,
-  PlacingRace,
-  Race,
-  RaceDetail,
-  RaceResult,
-  RaceTime
-} from './dogracing.models';
+import { Dog, PlacingRace, Race, RaceDetail, RaceResult, RaceTime } from './dogracing.models';
 
 @Injectable({
   providedIn: 'root'
@@ -47,17 +35,17 @@ export class DogracingService {
     this.currentRaceObserve = this.currentRaceSubscribe.asObservable();
 
     this.currentRaceObserve.subscribe((raceIndex: number) => {
-      console.log('selected', raceIndex);
       this.raceDetails.currentRace = raceIndex;
       this.remaningRaceTime(this.raceDetails.races[raceIndex].number).then(
         (raceTime: RaceTime) => {
           this.raceDetails.raceTime = raceTime;
         }
       );
+
+      this.resetPlayRacing();
     });
 
     this.placingRaceSubject = new Subject<PlacingRace>();
-
     this.createDogList();
   }
 
@@ -228,4 +216,10 @@ export class DogracingService {
       thirdPlace: arrResult[2]
     });
   }
+
+  resetPlayRacing(): void {
+    this.placingRace = new PlacingRace();
+    this.createDogList();
+  }
+
 }

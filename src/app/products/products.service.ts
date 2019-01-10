@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { WindowSize } from './products.model';
+import { PolyfunctionalArea, WindowSize } from './products.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,6 +10,10 @@ export class ProductsService {
 
   productNameSelectedSubscribe: Subject<string>;
   productNameSelectedObserve: Observable<string>;
+
+  // polifunctional area object declare
+  polyfunctionalAreaSubject: Subject<PolyfunctionalArea>;
+  polyfunctionalAreaObservable: Observable<PolyfunctionalArea>;
   // tslint:disable-next-line:typedef
   gridByBreakpoint = {
     xl: 12,
@@ -23,6 +27,9 @@ export class ProductsService {
     this.breakpointSubscribe = new Subject<number>();
     this.productNameSelectedSubscribe = new Subject<string>();
     this.productNameSelectedObserve = this.productNameSelectedSubscribe.asObservable();
+    // Element for management the display
+    this.polyfunctionalAreaSubject = new Subject<PolyfunctionalArea>();
+    this.polyfunctionalAreaObservable = this.polyfunctionalAreaSubject.asObservable();
   }
 
   fnWindowsSize(): WindowSize {

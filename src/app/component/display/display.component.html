@@ -1,4 +1,9 @@
 <div class="display elevation-z5">
-  <div class="first-row" [style.height.px]="(rowHeight - 20) / 2">AOX12/3456+25.000.0000</div>
+
+  <div class="first-row" [style.height.px]="(rowHeight - 20) / 2">
+    <span *ngIf="polyfunctionalValue">{{polyfunctionalValue.selection}}</span>
+  </div>
   <div class="second-row" [style.height.px]="(rowHeight - 20) / 2">(1450,15)</div>
+
+
 </div>
