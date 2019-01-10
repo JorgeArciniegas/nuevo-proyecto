@@ -3,6 +3,7 @@ import { Observable, Subject } from 'rxjs/Rx';
 import {
   CountDown,
   Race as RaceApi,
+  SportDetail,
   Tournament,
   TreeSports
 } from 'src/app/services/vgen.model';
@@ -47,13 +48,14 @@ export class DogracingService {
     this.currentRaceObserve = this.currentRaceSubscribe.asObservable();
 
     this.currentRaceObserve.subscribe((raceIndex: number) => {
-      console.log('selected', raceIndex);
       this.raceDetails.currentRace = raceIndex;
       this.remaningRaceTime(this.raceDetails.races[raceIndex].number).then(
         (raceTime: RaceTime) => {
           this.raceDetails.raceTime = raceTime;
         }
       );
+      // get race odds
+      this.raceDetailOdds(this.raceDetails.races[raceIndex].number);
     });
 
     this.placingRaceSubject = new Subject<PlacingRace>();
@@ -74,7 +76,6 @@ export class DogracingService {
   }
 
   getTime(): void {
-    console.log('remmaningTime', this.remmaningTime);
     if (this.remmaningTime.second === 0 && this.remmaningTime.minute === 0) {
       this.addNewResult(this.raceDetails.races[0].number);
       this.loadRaces();
@@ -126,7 +127,9 @@ export class DogracingService {
         // if remain only 1 new race reload other race
         this.loadRacesFromApi();
       }
-      console.log('Races', JSON.stringify(this.cacheRaces));
+
+      // get race odds
+      this.raceDetailOdds(this.raceDetails.races[0].number);
     }
   }
 
@@ -160,7 +163,6 @@ export class DogracingService {
         });
       }
       this.reload = 4;
-      console.log('Load Races', JSON.stringify(this.cacheRaces));
     });
   }
 
@@ -195,7 +197,6 @@ export class DogracingService {
       const raceTime: RaceTime = new RaceTime();
       raceTime.minute = Math.floor(sec / 60);
       raceTime.second = Math.floor(sec % 60);
-      console.log('countdown', raceTime);
       return raceTime;
     });
   }
@@ -227,5 +228,20 @@ export class DogracingService {
       secondPlace: arrResult[1],
       thirdPlace: arrResult[2]
     });
+  }
+
+  raceDetailOdds(raceNumber: number): void {
+    const race: RaceApi = this.cacheRaces.filter(
+      (cacheRace: RaceApi) => cacheRace.id === raceNumber
+    )[0];
+
+    // check, if is empty load from api
+    if (race.mk == null || race.mk.length === 0) {
+      this.vgenService
+        .raceDetails(8, raceNumber)
+        .then((sportDetail: SportDetail) => {
+          race.mk = sportDetail.Sport.ts[0].evs[0].mk;
+        });
+    }
   }
 }
