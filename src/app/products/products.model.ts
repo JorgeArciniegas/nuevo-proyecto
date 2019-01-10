@@ -4,3 +4,10 @@ export interface WindowSize {
   aspectRatio: number;
   columnHeight?: number;
 }
+
+export class PolyfunctionalArea {
+  selection?: string;
+  value?: string | number;
+  odd?: number;
+  amount?: number;
+}
