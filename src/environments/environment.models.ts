@@ -6,6 +6,7 @@ export interface Environment {
   theme?: string;
   currency?: string;
   products: Products[];
+  showRaceId: boolean;
 }
 
 export interface ToolbarButtons {

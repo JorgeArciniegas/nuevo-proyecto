@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppSettings } from 'src/app/app.settings';
 import { RaceTime } from '../dogracing.models';
 import { DogracingService } from '../dogracing.service';
 
@@ -10,8 +11,14 @@ import { DogracingService } from '../dogracing.service';
 export class RaceControlComponent implements OnInit {
   public raceTime: RaceTime;
   public race: number;
+  public settings: AppSettings;
 
-  constructor(public dogracingService: DogracingService) {}
+  constructor(
+    public dogracingService: DogracingService,
+    public readonly appSettings: AppSettings
+  ) {
+    this.settings = appSettings;
+  }
 
   ngOnInit() {}
 }

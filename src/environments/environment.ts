@@ -6,7 +6,8 @@ import { Environment } from './environment.models';
 
 export const environment: Environment = {
   production: false,
-  products: []
+  products: [],
+  showRaceId: false
 };
 
 /*

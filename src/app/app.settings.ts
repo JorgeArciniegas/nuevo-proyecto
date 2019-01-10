@@ -9,4 +9,5 @@ export class AppSettings {
   pageTitle: string = environment.pageTitle;
   theme: string = environment.theme;
   products: Products[] = environment.products;
+  showRaceId: boolean = environment.showRaceId;
 }

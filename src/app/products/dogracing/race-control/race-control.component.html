@@ -6,7 +6,8 @@
   <div fxFlex="42" *ngIf="dogracingService.raceDetails.races[dogracingService.raceDetails.currentRace] != null"
     fxLayout="column" fxFlexAlign="stretch" fxLayoutAlign="space-around end">
     <div class="current-race">{{ dogracingService.raceDetails.races[dogracingService.raceDetails.currentRace].label }}
-      <span class="number">#{{ dogracingService.raceDetails.races[dogracingService.raceDetails.currentRace].number }}</span>
+      <span *ngIf="settings.showRaceId" class="number">#{{
+        dogracingService.raceDetails.races[dogracingService.raceDetails.currentRace].number }}</span>
     </div>
     <div class="time elevation-z5" fxLayout="row" fxLayoutAlign="center center">
       <div class="icon-baseline-timer-24px"></div>

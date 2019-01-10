@@ -76,5 +76,6 @@ export const environment: Environment = {
         route: 'products/keno'
       }
     }
-  ]
+  ],
+  showRaceId: true
 };

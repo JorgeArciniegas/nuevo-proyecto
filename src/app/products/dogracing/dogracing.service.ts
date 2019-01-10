@@ -74,6 +74,7 @@ export class DogracingService {
   }
 
   getTime(): void {
+    console.log('remmaningTime', this.remmaningTime);
     if (this.remmaningTime.second === 0 && this.remmaningTime.minute === 0) {
       this.addNewResult(this.raceDetails.races[0].number);
       this.loadRaces();
@@ -125,6 +126,7 @@ export class DogracingService {
         // if remain only 1 new race reload other race
         this.loadRacesFromApi();
       }
+      console.log('Races', JSON.stringify(this.cacheRaces));
     }
   }
 
@@ -158,6 +160,7 @@ export class DogracingService {
         });
       }
       this.reload = 4;
+      console.log('Load Races', JSON.stringify(this.cacheRaces));
     });
   }
 
@@ -173,7 +176,8 @@ export class DogracingService {
     ).then((raceTime: RaceTime) => {
       this.raceDetails.raceTime = raceTime;
       if (this.raceDetails.currentRace === 0) {
-        this.remmaningTime = raceTime;
+        this.remmaningTime.minute = raceTime.minute;
+        this.remmaningTime.second = raceTime.second;
       }
     });
 
@@ -188,11 +192,10 @@ export class DogracingService {
   remaningRaceTime(idRace: number): Promise<RaceTime> {
     return this.vgenService.countdown(8, idRace).then((value: CountDown) => {
       const sec: number = value.CountDown / 10000000;
-      console.log('sec', sec);
       const raceTime: RaceTime = new RaceTime();
       raceTime.minute = Math.floor(sec / 60);
       raceTime.second = Math.floor(sec % 60);
-      console.log('raceTime', raceTime);
+      console.log('countdown', raceTime);
       return raceTime;
     });
   }
