@@ -3,19 +3,24 @@ import { Observable, Subject } from 'rxjs';
 import {
   CountDown,
   EventResults,
+  Market,
   Race as RaceApi,
   SportDetail,
   Tournament,
   TreeSports
 } from 'src/app/services/vgen.model';
 import { VgenService } from 'src/app/services/vgen.service';
+import { PolyfunctionalArea } from '../products.model';
+import { ProductsService } from '../products.service';
 import {
   Dog,
   PlacingRace,
+  Podium,
   Race,
   RaceDetail,
   RaceResult,
-  RaceTime
+  RaceTime,
+  SpecialBet
 } from './dogracing.models';
 
 @Injectable({
@@ -38,7 +43,10 @@ export class DogracingService {
 
   dogList: Dog[];
 
-  constructor(private vgenService: VgenService) {
+  constructor(
+    private vgenService: VgenService,
+    private productService: ProductsService
+  ) {
     this.raceDetails = new RaceDetail();
     this.raceDetails.currentRace = 0;
 
@@ -64,6 +72,7 @@ export class DogracingService {
     });
 
     this.placingRaceSubject = new Subject<PlacingRace>();
+
     this.createDogList();
   }
 
@@ -238,7 +247,11 @@ export class DogracingService {
 
   resetPlayRacing(): void {
     this.placingRace = new PlacingRace();
+    this.placingRace.raceNumber = this.raceDetails.races[
+      this.raceDetails.currentRace
+    ].number;
     this.createDogList();
+    this.productService.polyfunctionalAreaSubject.next(null);
   }
 
   raceDetailOdds(raceNumber: number): void {
@@ -252,7 +265,95 @@ export class DogracingService {
         .raceDetails(8, raceNumber)
         .then((sportDetail: SportDetail) => {
           race.mk = sportDetail.Sport.ts[0].evs[0].mk;
+          race.tm = sportDetail.Sport.ts[0].evs[0].tm;
         });
+    }
+  }
+
+  placeOdd() {
+    // extract the raceOdd from cache
+    const odds: RaceApi = this.cacheRaces.filter(
+      (cacheRace: RaceApi) => cacheRace.id === this.placingRace.raceNumber
+    )[0];
+
+    this.populatingPolyfunctionArea(odds);
+  }
+  /**
+   * Create a polyfunctional object for showing and insert the odds to coupon
+   * @param odd
+   */
+  populatingPolyfunctionArea(odd: RaceApi): void {
+    let areaFuncData: PolyfunctionalArea = {};
+    try {
+      // check if is first insert
+      // else if specialbets OVER / UNDER / EVEN / ODD
+      let dogName: string;
+      if (
+        this.placingRace.dogs.length === 1 &&
+        !this.placingRace.isSpecialBets
+      ) {
+        areaFuncData.selection = Podium[this.placingRace.dogs[0].position];
+        areaFuncData.value = this.placingRace.dogs[0].number;
+        // match dog from object tm with mk
+        dogName = odd.tm.filter(t => t.ito === areaFuncData.value)[0].nm;
+      } else if (this.placingRace.isSpecialBets) {
+        // setting label selection
+        areaFuncData.selection = SpecialBet[this.placingRace.specialBetValue];
+      }
+
+      //extract odds
+      for (const m of odd.mk.filter(
+        (market: Market) =>
+          market.tp === this.typeSelection(areaFuncData.selection)
+      )) {
+        // if the selection is PODIUM, WINNER or SHOW
+        if (dogName) {
+          for (const checkOdd of m.sls.filter(o => o.nm === dogName)) {
+            areaFuncData.odd = checkOdd.ods[0].vl;
+          }
+        } else if (this.placingRace.isSpecialBets) {
+          // if the selection is EVEN, ODD, UNDER or OVER
+          for (const checkOdd of m.sls.filter(
+            o => o.nm.toUpperCase() === areaFuncData.selection.toUpperCase()
+          )) {
+            areaFuncData.odd = checkOdd.ods[0].vl;
+          }
+        }
+      }
+    } catch (err) {
+      areaFuncData = {};
+    } finally {
+      this.productService.polyfunctionalAreaSubject.next(areaFuncData);
+    }
+  }
+  /**
+   * this function return a tp correspondence value for map it on feed
+   * example:
+   * for feed search a winner odds and the parameter selection is Winner return 40
+   *
+   * @param selection is equals a Podium or SpecialBet enum key
+   */
+  typeSelection(selection: string): number {
+    switch (selection) {
+      case 'WINNER':
+        return 40;
+        break;
+      case 'PLACED':
+        return 5;
+        break;
+      case 'SHOW':
+        return 6;
+        break;
+      case 'OVER':
+        return 7;
+      case 'UNDER':
+        return 7;
+      case 'EVEN':
+        return 8;
+      case 'ODD':
+        return 8;
+      default:
+        return -1;
     }
   }
 }

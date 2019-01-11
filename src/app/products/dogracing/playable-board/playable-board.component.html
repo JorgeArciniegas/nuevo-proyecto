@@ -4,7 +4,7 @@
       <span class="playable-row-tile display radius-5">{{row}}</span>
     </mat-grid-tile>
     <mat-grid-tile *ngFor="let dog of service.dogList | filterByPosition: i+1" colspan="2">
-      <button (click)="dogplaced(dog)" [ngClass]="{'btn-dog-play-actived': dog.actived}" [disabled]="!dog.selectable || service.placingRace.isSpecialBets"
+      <button (click)="dogplaced(dog)" [ngClass]="{'btn-dog-play-actived': dog.actived}" [disabled]="!dog.selectable"
         class="btn btn-default btn-default-dog-play radius-5 btn-dog-{{dog.number}}">
         <span>{{dog.number}}</span>
       </button>
@@ -14,23 +14,19 @@
 <mat-grid-list class="playable-grid-buttons playable-special-bets" cols="4" rowHeight="{{rowHeight *2}}">
   <mat-grid-tile>
     <button (click)="specialBets('ODD')" [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['ODD']) }"
-      [disabled]="service.placingRace.dogs.length>0" class="btn-reset btn-default btn-success radius-5 elevation-z5">{{'ODD'
-      | translate}}</button>
+      class="btn-reset btn-default btn-success radius-5 elevation-z5">{{'ODD' | translate}}</button>
   </mat-grid-tile>
   <mat-grid-tile>
     <button (click)="specialBets('EVEN')" [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['EVEN']) }"
-      [disabled]="service.placingRace.dogs.length> 0" class="btn-reset btn-default btn-success radius-5 elevation-z5">{{'EVEN'
-      | translate}}</button>
+      class="btn-reset btn-default btn-success radius-5 elevation-z5">{{'EVEN' | translate}}</button>
   </mat-grid-tile>
   <mat-grid-tile>
     <button (click)="specialBets('UNDER')" [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['UNDER']) }"
-      [disabled]="service.placingRace.dogs.length>0" class="btn-reset btn-default  btn-success radius-5 elevation-z5">{{'UNDER'
-      | translate}}</button>
+      class="btn-reset btn-default  btn-success radius-5 elevation-z5">{{'UNDER' | translate}}</button>
   </mat-grid-tile>
   <mat-grid-tile>
     <button (click)="specialBets('OVER')" [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['OVER']) }"
-      [disabled]="service.placingRace.dogs.length>0" class="btn-reset btn-default btn-success radius-5 elevation-z5">{{'OVER'
-      | translate}}</button>
+      class="btn-reset btn-default btn-success radius-5 elevation-z5">{{'OVER' | translate}}</button>
   </mat-grid-tile>
 </mat-grid-list>
 

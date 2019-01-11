@@ -87,7 +87,7 @@ export class VgenService {
     return this.http.get<EventResults>(url).toPromise();
   }
 
-  raceDetails(sportId: number, matchId: number): Promise<SportDetail> {
+  async raceDetails(sportId: number, matchId: number): Promise<SportDetail> {
     const url: string =
       this.baseApiUrl +
       '/api/virtual/detail/' +

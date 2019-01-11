@@ -120,13 +120,13 @@ export interface Market {
 
 export interface PlayerOdds {
   id: number;
-  n: string;
+  nm: string;
   tp: number;
   ods: Odd[];
 }
 
 export interface Odd {
-  vt: number;
+  vl: number;
   st: number;
 }
 
