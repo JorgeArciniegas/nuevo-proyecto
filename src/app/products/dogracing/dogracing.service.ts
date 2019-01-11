@@ -184,6 +184,8 @@ export class DogracingService {
     // check current race index, if is selected a reace decrease the index because the first race is completed and removed
     if (this.raceDetails.currentRace > 0) {
       this.raceDetails.currentRace = this.raceDetails.currentRace - 1;
+    } else if (this.raceDetails.currentRace === 0) {
+      this.resetPlayRacing();
     }
 
     // calculate remaning time for selected race

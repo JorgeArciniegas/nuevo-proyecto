@@ -6,6 +6,6 @@
   </div>
   <div class="second-row" [style.height.px]="(rowHeight - 20) / 2">
     <div *ngIf="polyfunctionalValue && polyfunctionalValue.odd > 0" fxLayout="column" fxFlex="100" fxLayoutAlign="center flex-start">(
-      {{polyfunctionalValue.odd}} )</div>
+      {{polyfunctionalValue.odd | number:'1.2-2'}} )</div>
   </div>
 </div>
