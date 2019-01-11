@@ -308,6 +308,7 @@ export class DogracingService {
       }
       console.log(areaFuncData, dogName, odd.mk);
     } catch (err) {
+      console.log(err);
       areaFuncData = {};
     } finally {
       this.productService.polyfunctionalAreaSubject.next(areaFuncData);

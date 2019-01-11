@@ -33,6 +33,9 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
   }
 
   dogplaced(dog: Dog): void {
+    if (this.service.placingRace.isSpecialBets) {
+      this.service.resetPlayRacing();
+    }
     let removed: boolean;
 
     if (!this.service.placingRace) {
@@ -73,6 +76,9 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
   }
 
   specialBets(type: string): void {
+    if (this.service.placingRace.dogs.length > 0) {
+      this.service.resetPlayRacing();
+    }
     if (
       this.service.placingRace.isSpecialBets &&
       this.specialBet[type] === this.service.placingRace.specialBetValue
@@ -85,7 +91,6 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
     }
 
     this.service.placeOdd();
-    //placeOdd();
   }
 
   setRepeat(repeat: number): void {
