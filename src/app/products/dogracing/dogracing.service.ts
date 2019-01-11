@@ -242,7 +242,9 @@ export class DogracingService {
 
   resetPlayRacing(): void {
     this.placingRace = new PlacingRace();
-    this.placingRace.raceNumber = this.raceDetails.currentRace;
+    this.placingRace.raceNumber = this.raceDetails.races[
+      this.raceDetails.currentRace
+    ].number;
     this.createDogList();
     this.productService.polyfunctionalAreaSubject.next(null);
   }
@@ -313,9 +315,7 @@ export class DogracingService {
           }
         }
       }
-      console.log(areaFuncData, dogName, odd.mk);
     } catch (err) {
-      console.log(err);
       areaFuncData = {};
     } finally {
       this.productService.polyfunctionalAreaSubject.next(areaFuncData);
