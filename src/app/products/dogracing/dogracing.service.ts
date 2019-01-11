@@ -296,7 +296,7 @@ export class DogracingService {
         areaFuncData.value = SpecialBetValue[this.placingRace.specialBetValue];
       }
 
-      //extract odds
+      // extract odds
       for (const m of odd.mk.filter(
         (market: Market) =>
           market.tp === this.typeSelection(areaFuncData.selection)
