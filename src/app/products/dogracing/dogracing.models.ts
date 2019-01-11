@@ -9,6 +9,13 @@ export enum SpecialBet {
   'OVER' = 2,
   'UNDER' = 3
 }
+
+export enum Podium {
+  'WINNER' = 1,
+  'PLACED' = 2,
+  'SHOW' = 3
+}
+
 export class PlacingRace {
   raceNumber: number;
   typePlace: TypePlacingRace;

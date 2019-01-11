@@ -58,6 +58,7 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
         this.checkedIsSelected(dog);
       }
     }
+    this.service.placeOdd();
   }
 
   checkedIsSelected(dog: Dog, reset: boolean = false): void {
@@ -78,12 +79,13 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
     ) {
       this.service.placingRace.isSpecialBets = false;
       this.service.placingRace.specialBetValue = null;
-
-      return;
+    } else {
+      this.service.placingRace.isSpecialBets = true;
+      this.service.placingRace.specialBetValue = this.specialBet[type];
     }
 
-    this.service.placingRace.isSpecialBets = true;
-    this.service.placingRace.specialBetValue = this.specialBet[type];
+    this.service.placeOdd();
+    //placeOdd();
   }
 
   setRepeat(repeat: number): void {

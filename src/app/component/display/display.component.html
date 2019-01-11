@@ -2,8 +2,11 @@
 
   <div class="first-row" [style.height.px]="(rowHeight - 20) / 2">
     <span *ngIf="polyfunctionalValue">{{polyfunctionalValue.selection}}</span>
+    <span *ngIf="polyfunctionalValue" ltr="right">{{polyfunctionalValue.value}}</span>
   </div>
-  <div class="second-row" [style.height.px]="(rowHeight - 20) / 2">(1450,15)</div>
+  <div class="second-row" [style.height.px]="(rowHeight - 20) / 2">
+    <span *ngIf="polyfunctionalValue">{{polyfunctionalValue.odd}}</span>
+  </div>
 
 
 </div>
