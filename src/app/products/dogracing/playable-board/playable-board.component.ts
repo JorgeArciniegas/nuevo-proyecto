@@ -89,7 +89,6 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
       this.service.placingRace.isSpecialBets = true;
       this.service.placingRace.specialBetValue = this.specialBet[type];
     }
-
     this.service.placeOdd();
   }
 

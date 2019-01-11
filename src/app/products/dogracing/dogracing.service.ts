@@ -242,6 +242,7 @@ export class DogracingService {
 
   resetPlayRacing(): void {
     this.placingRace = new PlacingRace();
+    this.placingRace.raceNumber = this.raceDetails.currentRace;
     this.createDogList();
     this.productService.polyfunctionalAreaSubject.next(null);
   }
@@ -263,13 +264,17 @@ export class DogracingService {
   }
 
   placeOdd() {
+    // extract the raceOdd from cache
     const odds: RaceApi = this.cacheRaces.filter(
       (cacheRace: RaceApi) => cacheRace.id === this.placingRace.raceNumber
     )[0];
 
     this.populatingPolyfunctionArea(odds);
   }
-
+  /**
+   * Create a polyfunctional object for showing and insert the odds to coupon
+   * @param odd
+   */
   populatingPolyfunctionArea(odd: RaceApi): void {
     let areaFuncData: PolyfunctionalArea = {};
     try {
@@ -294,11 +299,13 @@ export class DogracingService {
         (market: Market) =>
           market.tp === this.typeSelection(areaFuncData.selection)
       )) {
+        // if the selection is PODIUM, WINNER or SHOW
         if (dogName) {
           for (const checkOdd of m.sls.filter(o => o.nm === dogName)) {
             areaFuncData.odd = checkOdd.ods[0].vl;
           }
         } else if (this.placingRace.isSpecialBets) {
+          // if the selection is EVEN, ODD, UNDER or OVER
           for (const checkOdd of m.sls.filter(
             o => o.nm.toUpperCase() === areaFuncData.selection.toUpperCase()
           )) {
@@ -314,7 +321,13 @@ export class DogracingService {
       this.productService.polyfunctionalAreaSubject.next(areaFuncData);
     }
   }
-
+  /**
+   * this function return a tp correspondence value for map it on feed
+   * example:
+   * for feed search a winner odds and the parameter selection is Winner return 40
+   *
+   * @param selection is equals a Podium or SpecialBet enum key
+   */
   typeSelection(selection: string): number {
     switch (selection) {
       case 'WINNER':
