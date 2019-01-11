@@ -10,6 +10,13 @@ export enum SpecialBet {
   'UNDER' = 3
 }
 
+export enum SpecialBetValue {
+  '2-4-6' = 0,
+  '1-3-5' = 1,
+  '4-5-6' = 2,
+  '1-2-3' = 3
+}
+
 export enum Podium {
   'WINNER' = 1,
   'PLACED' = 2,

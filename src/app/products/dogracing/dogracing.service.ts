@@ -19,7 +19,8 @@ import {
   RaceDetail,
   RaceResult,
   RaceTime,
-  SpecialBet
+  SpecialBet,
+  SpecialBetValue
 } from './dogracing.models';
 
 @Injectable({
@@ -292,6 +293,7 @@ export class DogracingService {
       } else if (this.placingRace.isSpecialBets) {
         // setting label selection
         areaFuncData.selection = SpecialBet[this.placingRace.specialBetValue];
+        areaFuncData.value = SpecialBetValue[this.placingRace.specialBetValue];
       }
 
       //extract odds
