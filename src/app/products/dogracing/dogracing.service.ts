@@ -242,6 +242,7 @@ export class DogracingService {
 
   resetPlayRacing(): void {
     this.placingRace = new PlacingRace();
+    this.placingRace.raceNumber = this.raceDetails.currentRace;
     this.createDogList();
     this.productService.polyfunctionalAreaSubject.next(null);
   }
