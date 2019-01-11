@@ -1,12 +1,10 @@
 <div class="display elevation-z5">
 
   <div class="first-row" [style.height.px]="(rowHeight - 20) / 2">
-    <span *ngIf="polyfunctionalValue">{{polyfunctionalValue.selection}}</span>
-    <span *ngIf="polyfunctionalValue" ltr="right">{{polyfunctionalValue.value}}</span>
+    <div fxLayout="column" fxFlex="60" *ngIf="polyfunctionalValue" fxLayoutAlign="center flex-start">{{polyfunctionalValue.selection}}</div>
+    <div fxLayout="column" fxFlex="40" *ngIf="polyfunctionalValue" fxLayoutAlign="center flex-end">{{polyfunctionalValue.value}}</div>
   </div>
   <div class="second-row" [style.height.px]="(rowHeight - 20) / 2">
-    <span *ngIf="polyfunctionalValue">{{polyfunctionalValue.odd}}</span>
+    <div *ngIf="polyfunctionalValue" fxLayout="column" fxFlex="100" fxLayoutAlign="center flex-start">{{polyfunctionalValue.odd}}</div>
   </div>
-
-
 </div>
