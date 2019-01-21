@@ -1,92 +1,109 @@
-:focus{
-    outline: none;
+:focus {
+  outline: none;
 }
-button{
-    width: 100%;
-    height: 100%;
-    background: none;
-    cursor: pointer;
-    color: currentColor;
-    -webkit-transition: all 0.4s ease; /* Safari */
-    transition: all 0.4s ease;
+button {
+  width: 100%;
+  height: 100%;
+  background: none;
+  cursor: pointer;
+  color: currentColor;
+  -webkit-transition: all 0.4s ease; /* Safari */
+  transition: all 0.4s ease;
 }
 
 .btn-reset {
-    padding: 0;
-    margin: 0;
-    background: transparent;
-    border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
 }
 
-.btn-default{
-    font-weight: 700;
-    font-size: 1.25em ;  
-    border:0;
-    /* border: 2px solid currentColor; */
+.btn-default {
+  font-weight: 700;
+  font-size: 1.25em;
+  border: 0;
+  /* border: 2px solid currentColor; */
 }
 
-button:active:not([disabled]){
-    box-shadow: inset 0px 1px 4px 3px rgba(0,0,0, 0.5);
+button:active:not([disabled]) {
+  box-shadow: inset 0px 1px 4px 3px rgba(0, 0, 0, 0.5);
 }
-.btn-default-dog-play{
-    border: 4px solid;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    &:focus{
-        border: transparent;
-    }
-    &.actived{
-        background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-        background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
-        background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 );
-    }
-    &.btn-dog-play-actived{
-        box-shadow: 0px 0px 5px 3px #ffca18;
-    }
-    &[disabled]{
-        opacity: .4;
-    }
+.btn-default-dog-play {
+  border: 4px solid;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  &:focus {
+    border: transparent;
+  }
+  &.btn-dog-4:focus,
+  &.btn-dog-6:focus {
+    border: 4px solid white;
+  }
+  &.actived {
+    background: -moz-radial-gradient(
+      center,
+      ellipse cover,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background: -webkit-radial-gradient(
+      center,
+      ellipse cover,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background: radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 );
+  }
+  &.btn-dog-play-actived {
+    box-shadow: 0px 0px 5px 3px #ffca18;
+  }
+  &[disabled] {
+    opacity: 0.4;
+  }
 }
 
-.btn-dog-1{
-    background: #ff0000;
-    border-color: #ff0000;
+.btn-dog-1 {
+  background: #ff0000;
+  border-color: #ff0000;
 }
-.btn-dog-2{
-    background: #4472c4;
-    border-color: #4472c4;
+.btn-dog-2 {
+  background: #4472c4;
+  border-color: #4472c4;
 }
-.btn-dog-3{
-    background: #fff;
-    color: #000;
-    border-color: #fff;
+.btn-dog-3 {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
 }
-.btn-dog-4{
-    background: #000;
-    border-color: #fff;
+.btn-dog-4 {
+  background: #000;
+  border-color: #fff;
 }
-.btn-dog-5{
-    background: #f25900;
-    border-color: #f25900
+.btn-dog-5 {
+  background: #f25900;
+  border-color: #f25900;
 }
-.btn-dog-6{
-    background: repeating-linear-gradient(
+.btn-dog-6 {
+  background: repeating-linear-gradient(
     0deg,
     #000,
     #000 20%,
     #fff 10%,
     #fff 35%
-    
   );
   color: #ff0000;
   border-color: #fff;
-  span{
+  span {
     background: #fff;
     border-radius: 50%;
     width: 50%;
-    
+
     display: flex;
     align-content: center;
     justify-content: center;
@@ -94,22 +111,22 @@ button:active:not([disabled]){
   }
 }
 
-.playable-special-bets{
-    button{
-        &[disabled] { 
-            opacity: 0.4;
-        }
-        &.actived{
-            box-shadow: 0px 0px 5px 3px #ffca18;
-        }
+.playable-special-bets {
+  button {
+    &[disabled] {
+      opacity: 0.4;
     }
+    &.actived {
+      box-shadow: 0px 0px 5px 3px #ffca18;
+    }
+  }
 }
 .playable-grid-repeat,
-.advance-game{
-    button{
-        font-size: 2.8vh;
-        &.actived{
-            box-shadow: 0px 0px 5px 3px #ffca18;
-        }
+.advance-game {
+  button {
+    font-size: 2.8vh;
+    &.actived {
+      box-shadow: 0px 0px 5px 3px #ffca18;
     }
+  }
 }
