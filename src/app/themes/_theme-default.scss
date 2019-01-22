@@ -258,6 +258,12 @@ body, html{
     -webkit-border-radius: 10px;
 }
 
+.radius-15 { 
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
+
 .radius-25 { 
     border-radius: 25px;
     -moz-border-radius: 25px;
@@ -325,6 +331,13 @@ body, html{
 
     .btn-close {
         @extend %btn-transparent;
+
     }
+
+    .scroll {
+        &[disabled] {
+            opacity: 0.4;
+        }
+    }    
 }
 
