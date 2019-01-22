@@ -103,3 +103,19 @@ export class RaceResult {
   secondPlace: number;
   thirdPlace: number;
 }
+
+export class Smartcode {
+  code: string;
+  selWinner: number[];
+  selPlaced: number[];
+  selPodium: number[];
+  constructor(
+    win: number[] = [],
+    placed: number[] = [],
+    podium: number[] = []
+  ) {
+    this.selPlaced = placed;
+    this.selPodium = podium;
+    this.selWinner = win;
+  }
+}

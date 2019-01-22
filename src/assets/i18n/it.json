@@ -13,6 +13,13 @@
     "PLACED": "P. SECONDO",
     "SHOW": "P. TERZO",
     "AO": "ACC. IN ORDINE",
-    "1VA": "V. ACCOPPIATA"
+    "AOX": "ACC.Ord.CC",
+    "1VA": "V. ACCOPPIATA",
+    "T": "TRIS IN ORDINE",
+    "TOX": "TOX",
+    "ODD": "DISPARI",
+    "EVEN": "PARI",
+    "OVER": "OVER",
+    "UNDER": "UNDER"
   }
 }
