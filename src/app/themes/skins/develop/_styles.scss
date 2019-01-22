@@ -54,10 +54,11 @@ $color-text-operator: #3DAB14;
 // BUTTONS DEFINITION
 %btn-keyboard { background: $btn-bg-keyboard; border-color: $btn-border-keyboard; }
 // BUTTONS FLAT
-%btn-dark { background: black ; color: $color-text-primary; border-color:  $border-warning; }
-%btn-gray { background: $color-bg-accent; color: $color-text-dark; border-color:  $btn-border-opacity }
-%btn-yellow { background: $btn-bg-yellow; color: $color-text-dark; border-color:  $btn-border-opacity; }
-%btn-white { background: white ; color: $color-text-dark; border-color:  $btn-border-opacity; }
+%btn-dark { background: black ; color: $color-text-primary; border-color: $border-warning; }
+%btn-gray { background: $color-bg-accent; color: $color-text-dark; border-color: $btn-border-opacity }
+%btn-yellow { background: $btn-bg-yellow; color: $color-text-dark; border-color: $btn-border-opacity; }
+%btn-white { background: white ; color: $color-text-dark; border-color: $btn-border-opacity; }
+%btn-transparent { background: transparent; color: $color-bg-accent; }
 
 %btn-advance-game { background-color: #fefefe; color: $color-text-dark; border-color: #ffffff; }
 // BUTTONS GRADIENT
@@ -143,3 +144,8 @@ $color-text-operator: #3DAB14;
 
 // BORDER BOX DEFINITION
 %border-gray { border-color: $color-border-box; }
+
+// PRODUCT DIALOG
+%dialog { background-color: $color-bg-primary; color: $color-text-primary; border: 1px solid $border-cartd-title; border-radius: 5px; }
+%dialog-card { background-color: $color-bg-secodary; border: 1px solid $border-cartd-title; }
+%dialog-card-header { background-color: $border-cartd-title; }

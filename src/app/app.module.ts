@@ -7,8 +7,10 @@ import {
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { BrowserModule } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {
   TranslateLoader,
   TranslateModule,
@@ -33,6 +35,7 @@ import { FilterByPositionPipe } from './products/dogracing/playable-board/filter
 import { PlayableBoardComponent } from './products/dogracing/playable-board/playable-board.component';
 import { RaceControlComponent } from './products/dogracing/race-control/race-control.component';
 import { ResultListComponent } from './products/dogracing/result-list/result-list.component';
+import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
 
@@ -58,15 +61,18 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ResultListComponent,
     PlayableBoardComponent,
     ListRaceComponent,
-    FilterByPositionPipe
+    FilterByPositionPipe,
+    ProductDialogComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     FlexLayoutModule,
     routing,
+    NoopAnimationsModule,
     MatGridListModule,
     MatButtonModule,
+    MatDialogModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -76,6 +82,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
     CommonModule
   ],
+  entryComponents: [ProductDialogComponent],
   providers: [
     AppSettings,
     ProductsService,

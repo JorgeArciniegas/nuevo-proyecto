@@ -12,3 +12,22 @@ export class PolyfunctionalArea {
   amount?: number;
   constructor() {}
 }
+
+export class BetOdd {
+  label: string;
+  odd: number;
+  amount: number;
+  constructor(label: string, odd: number, amount: number) {
+    this.label = label;
+    this.odd = odd;
+    this.amount = amount;
+  }
+}
+
+export class BetOdds {
+  title: string;
+  odds: BetOdd[];
+  constructor() {
+    this.odds = [];
+  }
+}

@@ -30,4 +30,8 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.productNameSelectedSubscribe.unsubscribe();
   }
+
+  plus() {
+    this.productService.closeProductDialog();
+  }
 }

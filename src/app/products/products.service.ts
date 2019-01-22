@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Observable, Subject } from 'rxjs';
-import { PolyfunctionalArea, WindowSize } from './products.model';
+import { ProductDialogComponent } from './product-dialog/product-dialog.component';
+import { BetOdds, PolyfunctionalArea, WindowSize } from './products.model';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-  breakpoint = 1;
-  breakpointSubscribe: Subject<number>;
+  public breakpoint = 1;
+  public breakpointSubscribe: Subject<number>;
 
-  productNameSelectedSubscribe: Subject<string>;
-  productNameSelectedObserve: Observable<string>;
+  public productNameSelectedSubscribe: Subject<string>;
+  public productNameSelectedObserve: Observable<string>;
+
+  private dialogProductDataSubject: Subject<BetOdds>;
+  private dialogProductRef = null;
 
   // polifunctional area object declare
   polyfunctionalAreaSubject: Subject<PolyfunctionalArea>;
@@ -23,13 +28,23 @@ export class ProductsService {
     xs: 1
   };
   windowSize: WindowSize;
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.breakpointSubscribe = new Subject<number>();
     this.productNameSelectedSubscribe = new Subject<string>();
     this.productNameSelectedObserve = this.productNameSelectedSubscribe.asObservable();
     // Element for management the display
     this.polyfunctionalAreaSubject = new Subject<PolyfunctionalArea>();
     this.polyfunctionalAreaObservable = this.polyfunctionalAreaSubject.asObservable();
+    // Dialog management
+    this.dialogProductDataSubject = new Subject<BetOdds>();
+    this.dialogProductDataSubject
+      .asObservable()
+      .subscribe((data: BetOdds) => {
+        console.log('open dialog');
+        this.dialogProductRef = this.dialog.open(ProductDialogComponent, {
+          data: data
+        });
+      });
   }
 
   fnWindowsSize(): WindowSize {
@@ -50,5 +65,15 @@ export class ProductsService {
 
     this.windowSize = dataAtt;
     return dataAtt;
+  }
+
+  openProductDialog(data: BetOdds): void {
+    this.dialogProductDataSubject.next(data);
+  }
+
+  closeProductDialog(): void {
+    if (this.dialogProductRef != null) {
+      this.dialogProductRef.close();
+    }
   }
 }

@@ -1,11 +1,18 @@
-<div class="display elevation-z5">
+<div fxLayout="row" class="display elevation-z5">
 
-  <div class="first-row" [style.height.px]="(rowHeight - 20) / 2">
-    <div fxLayout="column" fxFlex="60" *ngIf="polyfunctionalValue" fxLayoutAlign="center flex-start">{{polyfunctionalValue.selection}}</div>
-    <div fxLayout="column" fxFlex="40" *ngIf="polyfunctionalValue" fxLayoutAlign="center flex-end">{{polyfunctionalValue.value}}</div>
+  <div fxLayout="column" fxFlex="85" fxLayoutAlign="center flex-start" [style.height.px]="(rowHeight - 20)">
+    <div fxLayout="row" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2" [style.min-height.px]="(rowHeight - 20) / 2">
+      <div fxLayout="column" fxFlex="60" *ngIf="polyfunctionalValue" fxLayoutAlign="center flex-start">{{polyfunctionalValue.selection}}</div>
+      <div fxLayout="column" fxFlex="35" *ngIf="polyfunctionalValue" fxLayoutAlign="center flex-end">{{polyfunctionalValue.value}}</div>
+    </div>
+    <div class="second-row" [style.height.px]="(rowHeight - 20) / 2">
+      <div *ngIf="polyfunctionalValue && polyfunctionalValue.odd > 0" fxLayout="column" fxFlex="100" fxLayoutAlign="center flex-start">(
+        {{polyfunctionalValue.odd | number:'1.2-2'}} )</div>
+    </div>
   </div>
-  <div class="second-row" [style.height.px]="(rowHeight - 20) / 2">
-    <div *ngIf="polyfunctionalValue && polyfunctionalValue.odd > 0" fxLayout="column" fxFlex="100" fxLayoutAlign="center flex-start">(
-      {{polyfunctionalValue.odd | number:'1.2-2'}} )</div>
+  <div fxLayout="column" fxFlex="15" *ngIf="polyfunctionalValue" fxLayoutAlign="center center" [style.height.px]="(rowHeight - 20)">
+    <button class="btn-reset btn-display" (click)="detailOdds()">
+      <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/baseline-assignment-24px.svg">
+    </button>
   </div>
 </div>
