@@ -42,10 +42,10 @@ export class ProductDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.rowNumber = Math.floor(
-      (this.elementView.nativeElement.offsetHeight - 60) / 105
+      (this.elementView.nativeElement.offsetHeight - 85) / 105
     );
     this.containerPaddingTop = Math.floor(
-      ((this.elementView.nativeElement.offsetHeight - 60) % 105) / 2
+      ((this.elementView.nativeElement.offsetHeight - 85) % 105) / 2
     );
     this.maxItems = this.rowNumber * this.column;
     this.maxPage = Math.ceil(this.data.betOdds.odds.length / this.maxItems);
@@ -61,7 +61,6 @@ export class ProductDialogComponent implements OnInit {
     this.betOdds = this.data.betOdds.odds.slice(start, end);
 
     if (this.page === this.maxPage - 1) {
-      console.log('last page');
       for (
         let index = 0;
         index < this.maxItems - this.betOdds.length;
