@@ -37,14 +37,12 @@ export class ProductsService {
     this.polyfunctionalAreaObservable = this.polyfunctionalAreaSubject.asObservable();
     // Dialog management
     this.dialogProductDataSubject = new Subject<BetOdds>();
-    this.dialogProductDataSubject
-      .asObservable()
-      .subscribe((data: BetOdds) => {
-        console.log('open dialog');
-        this.dialogProductRef = this.dialog.open(ProductDialogComponent, {
-          data: data
-        });
+    this.dialogProductDataSubject.asObservable().subscribe((odds: BetOdds) => {
+      console.log('open dialog');
+      this.dialogProductRef = this.dialog.open(ProductDialogComponent, {
+        data: { data: odds, breakpoint: this.breakpoint }
       });
+    });
   }
 
   fnWindowsSize(): WindowSize {

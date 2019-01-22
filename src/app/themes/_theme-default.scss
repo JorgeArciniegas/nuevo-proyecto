@@ -312,28 +312,19 @@ body, html{
 
     .card-odd {
         @extend %dialog-card;
-        height: 85px;
-        margin: 5px;
-        padding: 5px;
 
         .top-window {
             @extend %dialog-card-header;
             height: 20px;
-            margin: -5px -5px 5px -5px;
         }
 
         .odd {
             @extend %btn-success-gradient;
-            padding: 2px;
-            width: 40%;
-            margin-top: 5px;
-            text-align: center;
         }
     }
 
     .btn-close {
         @extend %btn-transparent;
-        padding: 5px;
     }
 }
 

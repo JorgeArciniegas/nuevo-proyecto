@@ -31,3 +31,8 @@ export class BetOdds {
     this.odds = [];
   }
 }
+
+export class DialogData {
+  data: BetOdds;
+  breakpoint: number;
+}

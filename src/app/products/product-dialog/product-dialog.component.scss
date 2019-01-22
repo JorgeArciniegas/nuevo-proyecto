@@ -1,7 +1,28 @@
-button {
-    width: 100px;
-}
-
 .mat-dialog-content {
     height: 50vh;
+}
+
+.card-odd {
+    margin: 5px;
+    padding: 5px;
+
+    .top-window {
+        height: 20px;
+    }
+
+    .first-row {
+        padding: 5px;
+    }
+
+    .odd {
+        padding: 2px;
+        width: 40%;
+        margin: 5px;
+        text-align: center;
+    }
+}
+
+.btn-close {
+    width: 100px;
+    padding: 5px;
 }

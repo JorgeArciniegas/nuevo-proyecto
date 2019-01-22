@@ -109,6 +109,7 @@ export class DogracingService {
           this.raceDetails.raceTime.minute === 0
         ) {
           this.placingRace.timeBlocked = true;
+          this.productService.closeProductDialog();
         } else {
           this.placingRace.timeBlocked = false;
         }
