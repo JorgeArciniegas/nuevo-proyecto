@@ -1,7 +1,11 @@
-<h2 mat-dialog-title>{{betOdds.title}}</h2>
-<div mat-dialog-content>
-  <mat-grid-list cols="{{column}}" rowHeight="90px" [gutterSize]="'10px'">
-    <mat-grid-tile class="card-odd radius-5" *ngFor="let odd of betOdds.odds">
+<h2 mat-dialog-title>{{title}}</h2>
+<div mat-dialog-content #content [style.padding-top.px]="containerPaddingTop">
+  <mat-grid-list cols="{{column}}" class="odds-grid" rowHeight="25px" [gutterSize]="'10px'">
+    <mat-grid-tile colspan="{{column}}">
+      <button class="btn-reset card-odd radius-5 scroll" (click)="previusOdds()" [disabled]="page <= 0">
+      </button>
+    </mat-grid-tile>
+    <mat-grid-tile rowspan="3" class="card-odd radius-5" *ngFor="let odd of betOdds">
       <div fxFill>
         <div class="top-window"></div>
         <div class="first-row" fxLayout="row">
@@ -16,6 +20,11 @@
           {{odd.odd | number: '1.3-3'}}
         </div>
       </div>
+    </mat-grid-tile>
+    <mat-grid-tile rowspan="3" *ngFor="let odd of emptyOdds"></mat-grid-tile>
+    <mat-grid-tile colspan="{{column}}">
+      <button class="btn-reset card-odd radius-5 scroll" (click)="nextOdds()" [disabled]="page >= maxPage - 1">
+      </button>
     </mat-grid-tile>
   </mat-grid-list>
 </div>

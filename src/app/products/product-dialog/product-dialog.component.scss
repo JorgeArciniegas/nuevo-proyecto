@@ -2,23 +2,25 @@
     height: 50vh;
 }
 
-.card-odd {
-    margin: 5px;
-    padding: 5px;
+.odds-grid {
 
-    .top-window {
-        height: 20px;
-    }
-
-    .first-row {
+    .card-odd {
         padding: 5px;
-    }
-
-    .odd {
-        padding: 2px;
-        width: 40%;
-        margin: 5px;
-        text-align: center;
+    
+        .top-window {
+            height: 20px;
+        }
+    
+        .first-row {
+            padding: 5px;
+        }
+    
+        .odd {
+            padding: 2px;
+            width: 40%;
+            margin: 5px;
+            text-align: center;
+        }
     }
 }
 

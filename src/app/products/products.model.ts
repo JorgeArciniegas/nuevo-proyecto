@@ -33,6 +33,11 @@ export class BetOdds {
 }
 
 export class DialogData {
-  data: BetOdds;
+  betOdds: BetOdds;
   breakpoint: number;
+
+  constructor(betOdds: BetOdds, breakpoint: number) {
+    this.betOdds = betOdds;
+    this.breakpoint = breakpoint;
+  }
 }

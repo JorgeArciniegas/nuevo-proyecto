@@ -12,7 +12,8 @@
         {{polyfunctionalValue.odd | number:'1.2-2'}} )</div>
     </div>
   </div>
-  <div fxLayout="column" fxFlex="15" *ngIf="polyfunctionalValue" fxLayoutAlign="center center" [style.height.px]="(rowHeight - 20)">
+  <div fxLayout="column" fxFlex="15" *ngIf="polyfunctionalValue  && polyfunctionalValue.selection" fxLayoutAlign="center center"
+    [style.height.px]="(rowHeight - 20)">
     <button class="btn-reset btn-display" (click)="detailOdds()">
       <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/baseline-assignment-24px.svg">
     </button>
