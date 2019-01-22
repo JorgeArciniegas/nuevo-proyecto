@@ -372,9 +372,10 @@ export class DogracingService {
           areaFuncData.odd = checkOdd.ods[0].vl;
         }
       } else {
-        for (const checkOdd of m.sls.filter(
-          o => o.nm === areaFuncData.value.toString().replace('/', '-')
-        )) {
+        const matchName: string = areaFuncData.value
+          .toString()
+          .replace(/\//g, '-');
+        for (const checkOdd of m.sls.filter(o => o.nm === matchName)) {
           areaFuncData.odd = checkOdd.ods[0].vl;
         }
       }
