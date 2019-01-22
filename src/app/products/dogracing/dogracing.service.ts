@@ -20,6 +20,7 @@ import {
   RaceDetail,
   RaceResult,
   RaceTime,
+  SmartCodeType,
   SpecialBet,
   SpecialBetValue
 } from './dogracing.models';
@@ -43,6 +44,12 @@ export class DogracingService {
   public currentRaceObserve: Observable<number>;
 
   dogList: Dog[];
+  // temp array
+  WinSelected: number[] = []; // the dogs number selected as winner
+  PlacedSelected: number[] = []; // the dogs number selected as second place
+  PodiumSelected: number[] = []; // the dogs number selected as third place
+
+  smartCode: string;
 
   constructor(
     private vgenService: VgenService,
@@ -250,6 +257,9 @@ export class DogracingService {
 
   resetPlayRacing(): void {
     this.placingRace = new PlacingRace();
+    this.WinSelected = [];
+    this.PlacedSelected = [];
+    this.PodiumSelected = [];
     this.placingRace.raceNumber = this.raceDetails.races[
       this.raceDetails.currentRace
     ].number;
@@ -278,6 +288,9 @@ export class DogracingService {
     const odds: RaceApi = this.cacheRaces.filter(
       (cacheRace: RaceApi) => cacheRace.id === this.placingRace.raceNumber
     )[0];
+    this.WinSelected = [];
+    this.PlacedSelected = [];
+    this.PodiumSelected = [];
 
     this.populatingPolyfunctionArea(odds);
   }
@@ -299,30 +312,33 @@ export class DogracingService {
         areaFuncData.value = this.placingRace.dogs[0].number;
         // match dog from object tm with mk
         dogName = odd.tm.filter(t => t.ito === areaFuncData.value)[0].nm;
+      } else if (
+        this.placingRace.dogs.length > 1 &&
+        !this.placingRace.isSpecialBets
+      ) {
+        this.placingRace.dogs.forEach(item => {
+          if (item.position === 1) {
+            this.WinSelected.push(item.number);
+          } else if (item.position === 2) {
+            this.PlacedSelected.push(item.number);
+          } else if (item.position === 3) {
+            this.PodiumSelected.push(item.number);
+          }
+        });
       } else if (this.placingRace.isSpecialBets) {
         // setting label selection
         areaFuncData.selection = SpecialBet[this.placingRace.specialBetValue];
         areaFuncData.value = SpecialBetValue[this.placingRace.specialBetValue];
       }
-
-      // extract odds
-      for (const m of odd.mk.filter(
-        (market: Market) =>
-          market.tp === this.typeSelection(areaFuncData.selection)
-      )) {
-        // if the selection is PODIUM, WINNER or SHOW
-        if (dogName) {
-          for (const checkOdd of m.sls.filter(o => o.nm === dogName)) {
-            areaFuncData.odd = checkOdd.ods[0].vl;
-          }
-        } else if (this.placingRace.isSpecialBets) {
-          // if the selection is EVEN, ODD, UNDER or OVER
-          for (const checkOdd of m.sls.filter(
-            o => o.nm.toUpperCase() === areaFuncData.selection.toUpperCase()
-          )) {
-            areaFuncData.odd = checkOdd.ods[0].vl;
-          }
-        }
+      //check smartcode
+      areaFuncData = this.checkSmartCode(areaFuncData);
+      if (this.smartCode) {
+        areaFuncData.selection = this.smartCode;
+        areaFuncData.amount = 1;
+        areaFuncData = this.extractOdd(odd, areaFuncData);
+      } else {
+        // extract odds
+        areaFuncData = this.extractOdd(odd, areaFuncData, dogName);
       }
     } catch (err) {
       areaFuncData = {};
@@ -330,6 +346,45 @@ export class DogracingService {
       this.productService.polyfunctionalAreaSubject.next(areaFuncData);
     }
   }
+
+  /**
+   *
+   * @param odd
+   * @param areaFuncData
+   * @param dogName
+   */
+  private extractOdd(
+    odd: RaceApi,
+    areaFuncData: PolyfunctionalArea,
+    dogName?: string
+  ): PolyfunctionalArea {
+    for (const m of odd.mk.filter(
+      (market: Market) =>
+        market.tp === this.typeSelection(areaFuncData.selection)
+    )) {
+      // if the selection is PODIUM, WINNER or SHOW
+      if (dogName) {
+        for (const checkOdd of m.sls.filter(o => o.nm === dogName)) {
+          areaFuncData.odd = checkOdd.ods[0].vl;
+        }
+      } else if (!this.smartCode) {
+        // if the selection is EVEN, ODD, UNDER or OVER
+
+        for (const checkOdd of m.sls.filter(
+          o => o.nm.toUpperCase() === areaFuncData.selection.toUpperCase()
+        )) {
+          areaFuncData.odd = checkOdd.ods[0].vl;
+        }
+      } else {
+        for (const checkOdd of m.sls.filter(o => o.nm === areaFuncData.value)) {
+          areaFuncData.odd = checkOdd.ods[0].vl;
+        }
+      }
+    }
+
+    return areaFuncData;
+  }
+
   /**
    * this function return a tp correspondence value for map it on feed
    * example:
@@ -356,8 +411,35 @@ export class DogracingService {
         return 8;
       case 'ODD':
         return 8;
+      case 'AO': // return the EXACTA odd
+        return 9;
+      case '1VA': // reutrn Quinella
+        return 9;
       default:
         return -1;
     }
+  }
+
+  private checkSmartCode(areaFuncData: PolyfunctionalArea): PolyfunctionalArea {
+    this.smartCode = null;
+    if (this.WinSelected.length === 1) {
+      if (
+        this.PlacedSelected.length === 1 &&
+        this.PodiumSelected.length === 0
+      ) {
+        this.smartCode = SmartCodeType[SmartCodeType.AO];
+        areaFuncData.selection = this.smartCode;
+        areaFuncData.value = this.WinSelected[0] + '-' + this.PlacedSelected[0];
+      } else if (
+        this.PlacedSelected.length > 1 &&
+        this.PodiumSelected.length === 0
+      ) {
+        this.smartCode = SmartCodeType[SmartCodeType['1VA']];
+        areaFuncData.selection = this.smartCode;
+        areaFuncData.value =
+          this.WinSelected[0] + '/' + this.PlacedSelected.join('');
+      }
+    }
+    return areaFuncData;
   }
 }
