@@ -42,8 +42,8 @@ export class DisplayComponent implements OnInit, OnDestroy {
   detailOdds(): void {
     const data: BetOdds = new BetOdds();
     data.title = 'Accoppiata vincente';
-    for (let index = 0; index < 10; index++) {
-      const item: BetOdd = new BetOdd('1-2-3', 5 + 2.15 * index, 2);
+    for (let index = 0; index < 30; index++) {
+      const item: BetOdd = new BetOdd('1-2-3', index + 1, 2);
       data.odds.push(item);
     }
     this.productService.openProductDialog(data);

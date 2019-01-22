@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Observable, Subject } from 'rxjs';
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
-import { BetOdds, PolyfunctionalArea, WindowSize } from './products.model';
+import {
+  BetOdds,
+  DialogData,
+  PolyfunctionalArea,
+  WindowSize
+} from './products.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -38,9 +43,8 @@ export class ProductsService {
     // Dialog management
     this.dialogProductDataSubject = new Subject<BetOdds>();
     this.dialogProductDataSubject.asObservable().subscribe((odds: BetOdds) => {
-      console.log('open dialog');
       this.dialogProductRef = this.dialog.open(ProductDialogComponent, {
-        data: { data: odds, breakpoint: this.breakpoint }
+        data: new DialogData(odds, this.breakpoint)
       });
     });
   }
