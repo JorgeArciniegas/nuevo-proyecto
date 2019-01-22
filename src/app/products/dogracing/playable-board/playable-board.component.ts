@@ -50,7 +50,7 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
       this.checkedIsSelected(dog);
     } else {
       this.service.placingRace.dogs.filter((item, idx) => {
-        if (item.number === dog.number && item.position === item.position) {
+        if (item.number === dog.number && item.position === dog.position) {
           this.service.placingRace.dogs.splice(idx, 1);
           this.checkedIsSelected(dog, true);
           removed = true;

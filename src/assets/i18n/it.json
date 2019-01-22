@@ -7,5 +7,12 @@
   "multiple": "Multipla",
   "single": "Singola",
   "dogRacingLabel": "DOG RACING",
-  "race": "Race"
+  "race": "Race",
+  "SMARTCODE": {
+    "WINNER": "VINCENTE",
+    "PLACED": "P. SECONDO",
+    "SHOW": "P. TERZO",
+    "AO": "ACC. IN ORDINE",
+    "1VA": "V. ACCOPPIATA"
+  }
 }

@@ -3,13 +3,13 @@ export enum TypePlacingRace {
   'ACCG' = 1,
   'R' = 2
 }
+
 export enum SpecialBet {
   'EVEN' = 0,
   'ODD' = 1,
   'OVER' = 2,
   'UNDER' = 3
 }
-
 export enum SpecialBetValue {
   '2-4-6' = 0,
   '1-3-5' = 1,
@@ -23,6 +23,25 @@ export enum Podium {
   'SHOW' = 3
 }
 
+export enum SmartCodeType {
+  'V',
+  '2P',
+  '3P',
+  'AO',
+  'AS',
+  'UP',
+  'OP',
+  'DP',
+  'PP',
+  'T',
+  'TOX',
+  'TNX',
+  'VX',
+  'ASX',
+  'AOX',
+  '1PX',
+  '1VA'
+}
 export class PlacingRace {
   raceNumber: number;
   typePlace: TypePlacingRace;
@@ -32,7 +51,7 @@ export class PlacingRace {
   isSpecialBets: boolean;
   specialBetValue: SpecialBet;
   timeBlocked: boolean;
-
+  smartcode?: SmartCodeType;
   constructor() {
     this.raceNumber = 0;
     this.repeat = 1;

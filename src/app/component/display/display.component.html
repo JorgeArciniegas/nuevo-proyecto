@@ -2,7 +2,9 @@
 
   <div fxLayout="column" fxFlex="85" fxLayoutAlign="center flex-start" [style.height.px]="(rowHeight - 20)">
     <div fxLayout="row" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2" [style.min-height.px]="(rowHeight - 20) / 2">
-      <div fxLayout="column" fxFlex="60" *ngIf="polyfunctionalValue" fxLayoutAlign="center flex-start">{{polyfunctionalValue.selection}}</div>
+      <div fxLayout="column" fxFlex="60" *ngIf="polyfunctionalValue" fxLayoutAlign="center flex-start">
+        {{"SMARTCODE."+polyfunctionalValue.selection | translate}}
+      </div>
       <div fxLayout="column" fxFlex="35" *ngIf="polyfunctionalValue" fxLayoutAlign="center flex-end">{{polyfunctionalValue.value}}</div>
     </div>
     <div class="second-row" [style.height.px]="(rowHeight - 20) / 2">
