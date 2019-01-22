@@ -339,5 +339,9 @@ body, html{
             opacity: 0.4;
         }
     }    
+
+    .indicator {
+        @extend %indicator;
+    }
 }
 

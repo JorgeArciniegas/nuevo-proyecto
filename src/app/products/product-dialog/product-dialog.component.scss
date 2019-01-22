@@ -28,3 +28,19 @@
     width: 100px;
     padding: 5px;
 }
+
+.scroll {
+    position: relative;
+
+    .indicator {
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        padding: 2px;
+    }
+}
+
+.indicator {
+    height: 25px;
+    text-align: center;
+}
