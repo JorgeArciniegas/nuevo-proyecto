@@ -1,5 +1,21 @@
+.mat-dialog-title {
+    margin: 0 0 10px;
+    position: relative;
+    
+    .title {
+        font-size: 1.6em;
+    }
+
+    .indicator {
+        width: 50px;
+        position: absolute;
+        right: 0px;
+        bottom: -10px;
+    }
+}
+
 .mat-dialog-content {
-    height: 50vh;
+    height: 51vh;
 }
 
 .odds-grid {
@@ -38,9 +54,8 @@
         top: 2px;
         padding: 2px;
     }
-}
 
-.indicator {
-    height: 25px;
-    text-align: center;
+    .icon {
+        width: 20px;
+    }
 }

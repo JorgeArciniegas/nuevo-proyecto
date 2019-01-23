@@ -326,7 +326,7 @@ export class DogracingService {
         areaFuncData.value = SpecialBetValue[this.placingRace.specialBetValue];
       }
 
-      //check smartcode
+      // check smartcode
       areaFuncData = this.checkSmartCode(areaFuncData);
       if (this.smartCode.code) {
         areaFuncData.selection = this.smartCode.code;
@@ -354,6 +354,13 @@ export class DogracingService {
     areaFuncData: PolyfunctionalArea,
     dogName?: string
   ): PolyfunctionalArea {
+    console.log('areaFuncData.selection', areaFuncData.selection);
+    console.log(
+      odd.mk.filter(
+        (market: Market) =>
+          market.tp === this.typeSelection(areaFuncData.selection)
+      )
+    );
     for (const m of odd.mk.filter(
       (market: Market) =>
         market.tp === this.typeSelection(areaFuncData.selection)
@@ -365,7 +372,6 @@ export class DogracingService {
         }
       } else if (!this.smartCode.code) {
         // if the selection is EVEN, ODD, UNDER or OVER
-
         for (const checkOdd of m.sls.filter(
           o => o.nm.toUpperCase() === areaFuncData.selection.toUpperCase()
         )) {
