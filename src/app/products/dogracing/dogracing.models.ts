@@ -121,7 +121,7 @@ export class Smartcode {
 }
 
 export enum Lucky {
-  'Lucky1',
+  'Lucky1' = 1,
   'Lucky2',
   'Lucky3'
 }
