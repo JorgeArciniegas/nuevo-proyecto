@@ -3,7 +3,7 @@
     position: relative;
     
     .title {
-        font-size: 1.6em;
+        font-size: 3vh;
     }
 
     .indicator {
@@ -22,7 +22,7 @@
 
     .card-odd {
         padding: 5px;
-    
+            
         .top-window {
             height: 20px;
         }
@@ -37,12 +37,17 @@
             margin: 5px;
             text-align: center;
         }
+        
+        &.notSelected {
+            opacity: 0.2;
+        }
     }
 }
 
 .btn-close {
     width: 100px;
     padding: 5px;
+    font-size: 2vh;
 }
 
 .scroll {

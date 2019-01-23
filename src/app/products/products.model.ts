@@ -18,10 +18,12 @@ export class BetOdd {
   label: string;
   odd: number;
   amount: number;
+  selected: boolean;
   constructor(label: string, odd: number, amount: number) {
     this.label = label;
     this.odd = odd;
     this.amount = amount;
+    this.selected = true;
   }
 }
 

@@ -21,6 +21,9 @@ export class ProductsService {
   private dialogProductDataSubject: Subject<BetOdds>;
   private dialogProductRef = null;
 
+  private playableBoardResetSubject: Subject<boolean>;
+  public playableBoardResetObserve: Observable<boolean>;
+
   // polifunctional area object declare
   polyfunctionalAreaSubject: Subject<PolyfunctionalArea>;
   polyfunctionalAreaObservable: Observable<PolyfunctionalArea>;
@@ -47,6 +50,9 @@ export class ProductsService {
         data: new DialogData(odds, this.breakpoint)
       });
     });
+
+    this.playableBoardResetSubject = new Subject<boolean>();
+    this.playableBoardResetObserve = this.playableBoardResetSubject.asObservable();
   }
 
   fnWindowsSize(): WindowSize {
@@ -77,5 +83,10 @@ export class ProductsService {
     if (this.dialogProductRef != null) {
       this.dialogProductRef.close();
     }
+  }
+
+  resetBoard(): void {
+    this.playableBoardResetSubject.next(true);
+    this.playableBoardResetSubject.next(false);
   }
 }
