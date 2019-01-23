@@ -14,6 +14,7 @@ import { PolyfunctionalArea } from '../products.model';
 import { ProductsService } from '../products.service';
 import {
   Dog,
+  Lucky,
   PlacingRace,
   Podium,
   Race,
@@ -48,6 +49,9 @@ export class DogracingService {
   // temp array
 
   smartCode: Smartcode;
+
+  //Lucky last random extract
+  oldLucky: number;
 
   constructor(
     private vgenService: VgenService,
@@ -280,6 +284,42 @@ export class DogracingService {
     }
   }
 
+  /**
+   * PLACING THE DOG SELECTED INSIDE TO POLYFUNCTIONAL AREA AND SMARTBET
+   * @param dog
+   */
+  placingOdd(dog: Dog): void {
+    if (this.placingRace.isSpecialBets) {
+      this.resetPlayRacing();
+    }
+    let removed: boolean;
+
+    if (!this.placingRace) {
+      this.placingRace.raceNumber = this.raceDetails.races[
+        this.raceDetails.currentRace
+      ].number;
+    }
+    dog.actived = true;
+
+    if (this.placingRace.dogs.length === 0) {
+      this.placingRace.dogs.push(dog);
+      this.checkedIsSelected(dog);
+    } else {
+      this.placingRace.dogs.filter((item, idx) => {
+        if (item.number === dog.number && item.position === dog.position) {
+          this.placingRace.dogs.splice(idx, 1);
+          this.checkedIsSelected(dog, true);
+          removed = true;
+        }
+      });
+      if (!removed) {
+        this.placingRace.dogs.push(dog);
+        this.checkedIsSelected(dog);
+      }
+    }
+    this.placeOdd();
+  }
+
   placeOdd() {
     // extract the raceOdd from cache
     const odds: RaceApi = this.cacheRaces.filter(
@@ -289,6 +329,44 @@ export class DogracingService {
 
     this.populatingPolyfunctionArea(odds);
   }
+
+  private checkedIsSelected(dog: Dog, reset: boolean = false): void {
+    this.dogList.forEach((d: Dog) => {
+      if (d.number === dog.number && d.position !== dog.position && !reset) {
+        d.selectable = false;
+      } else if (d.number === dog.number && reset) {
+        d.selectable = true;
+        d.actived = false;
+      }
+    });
+  }
+
+  /**
+   * RNG FOR LUCKY
+   */
+
+  RNGLucky(lucky: Lucky): void {
+    this.resetPlayRacing();
+    if (Lucky.Lucky1 === lucky) {
+      // RNG TO FIRST DOG
+      const extractNumber: number =
+        Math.floor(
+          Math.random() * this.dogList.filter(dog => dog.position === 1).length
+        ) + 1;
+      //check if the extractNumber like as the last extract
+      if (this.oldLucky === extractNumber) {
+        this.RNGLucky(lucky);
+        return;
+      }
+      this.oldLucky = extractNumber;
+      //extract the dog
+      const dogExtract: Dog = this.dogList.filter(
+        dog => dog.position === 1 && dog.number === extractNumber
+      )[0];
+      this.placingOdd(dogExtract);
+    }
+  }
+
   /**
    * Create a polyfunctional object for showing and insert the odds to coupon
    * @param odd

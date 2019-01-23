@@ -33,46 +33,7 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
   }
 
   dogplaced(dog: Dog): void {
-    if (this.service.placingRace.isSpecialBets) {
-      this.service.resetPlayRacing();
-    }
-    let removed: boolean;
-
-    if (!this.service.placingRace) {
-      this.service.placingRace.raceNumber = this.service.raceDetails.races[
-        this.service.raceDetails.currentRace
-      ].number;
-    }
-    dog.actived = true;
-
-    if (this.service.placingRace.dogs.length === 0) {
-      this.service.placingRace.dogs.push(dog);
-      this.checkedIsSelected(dog);
-    } else {
-      this.service.placingRace.dogs.filter((item, idx) => {
-        if (item.number === dog.number && item.position === dog.position) {
-          this.service.placingRace.dogs.splice(idx, 1);
-          this.checkedIsSelected(dog, true);
-          removed = true;
-        }
-      });
-      if (!removed) {
-        this.service.placingRace.dogs.push(dog);
-        this.checkedIsSelected(dog);
-      }
-    }
-    this.service.placeOdd();
-  }
-
-  checkedIsSelected(dog: Dog, reset: boolean = false): void {
-    this.service.dogList.forEach((d: Dog) => {
-      if (d.number === dog.number && d.position !== dog.position && !reset) {
-        d.selectable = false;
-      } else if (d.number === dog.number && reset) {
-        d.selectable = true;
-        d.actived = false;
-      }
-    });
+    this.service.placingOdd(dog);
   }
 
   specialBets(type: string): void {

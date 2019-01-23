@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../products.service';
+import { Lucky } from './dogracing.models';
 import { DogracingService } from './dogracing.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { DogracingService } from './dogracing.service';
 })
 export class DogracingComponent implements OnInit {
   public rowHeight: number;
-
+  lucky: typeof Lucky = Lucky;
   constructor(
     private route: ActivatedRoute,
     public service: ProductsService,
@@ -23,5 +24,9 @@ export class DogracingComponent implements OnInit {
 
   ngOnInit() {
     this.rowHeight = (this.service.windowSize.columnHeight - 20 - 17) / 18;
+  }
+
+  placingLucky(lucky: Lucky): void {
+    this.dogracingService.RNGLucky(lucky);
   }
 }
