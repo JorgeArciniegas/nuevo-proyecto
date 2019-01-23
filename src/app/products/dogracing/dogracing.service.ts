@@ -50,9 +50,6 @@ export class DogracingService {
 
   smartCode: Smartcode;
 
-  //Lucky last random extract
-  oldLucky: number[] = [];
-
   constructor(
     private vgenService: VgenService,
     private productService: ProductsService
@@ -271,7 +268,7 @@ export class DogracingService {
       this.raceDetails.currentRace
     ].number;
     this.createDogList();
-    this.oldLucky = [];
+
     this.productService.polyfunctionalAreaSubject.next(null);
   }
 
@@ -352,24 +349,19 @@ export class DogracingService {
    * RNG FOR TO PLACE THE LUCKY
    */
 
-  RNGLucky(lucky: Lucky): void {
-    // RNG TO EXTRACT THE DOG FROM DOGLIST
+  RNGLucky2(lucky: Lucky): number {
     const extractNumber: number =
       Math.floor(
         Math.random() *
-          this.dogList.filter(dog => dog.position === lucky && dog.selectable)
-            .length
+          this.dogList.filter(dog => dog.position === lucky).length
       ) + 1;
-    // check if extractNumber has been already extracted
-    if (this.oldLucky.includes(extractNumber)) {
-      this.RNGLucky(lucky);
-      return;
-    }
-    // append extractNumber value to oldLucky array
-    this.oldLucky.push(extractNumber);
-    //extract the dog
+    return extractNumber;
+  }
+
+  RNGLuckyPlacing(dogNumber: number, dogPosition: number): void {
+    // extract the dog
     const dogExtract: Dog = this.dogList.filter(
-      dog => dog.position === lucky && dog.number === extractNumber
+      dog => dog.position === dogPosition && dog.number === dogNumber
     )[0];
     // place the dog
     this.placingOdd(dogExtract);
