@@ -21,5 +21,19 @@
     "EVEN": "PARI",
     "OVER": "OVER",
     "UNDER": "UNDER"
+  },
+  "TITLE": {
+    "WINNER": "Vincente",
+    "PLACED": "Oiazzato Secondo",
+    "SHOW": "Piazzato Terzo",
+    "AO": "Accoppiata in ordine",
+    "AOX": "Accoppiata in ordine con Campo",
+    "1VA": "Vincente Accoppiata",
+    "T": "Tris in ordine",
+    "TOX": "Tris in ordine con Campo",
+    "ODD": "Dispari",
+    "EVEN": "Pari",
+    "OVER": "Over",
+    "UNDER": "Under"
   }
 }

@@ -10,7 +10,7 @@ import {
   TreeSports
 } from 'src/app/services/vgen.model';
 import { VgenService } from 'src/app/services/vgen.service';
-import { PolyfunctionalArea } from '../products.model';
+import { BetOdd, PolyfunctionalArea } from '../products.model';
 import { ProductsService } from '../products.service';
 import {
   Dog,
@@ -328,9 +328,9 @@ export class DogracingService {
 
       // check smartcode
       areaFuncData = this.checkSmartCode(areaFuncData);
+      areaFuncData.amount = 1;
       if (this.smartCode.code) {
         areaFuncData.selection = this.smartCode.code;
-        areaFuncData.amount = 1;
         areaFuncData = this.extractOdd(odd, areaFuncData);
       } else {
         // extract odds
@@ -354,13 +354,15 @@ export class DogracingService {
     areaFuncData: PolyfunctionalArea,
     dogName?: string
   ): PolyfunctionalArea {
-    console.log('areaFuncData.selection', areaFuncData.selection);
-    console.log(
-      odd.mk.filter(
-        (market: Market) =>
-          market.tp === this.typeSelection(areaFuncData.selection)
-      )
-    );
+    let oddsToSearch: string[] = [];
+    if (
+      areaFuncData.selection === '1VA' ||
+      areaFuncData.selection === 'AOX' ||
+      areaFuncData.selection === 'TOX'
+    ) {
+      oddsToSearch = this.generateOdds(areaFuncData.value.toString());
+    }
+
     for (const m of odd.mk.filter(
       (market: Market) =>
         market.tp === this.typeSelection(areaFuncData.selection)
@@ -378,15 +380,31 @@ export class DogracingService {
           areaFuncData.odd = checkOdd.ods[0].vl;
         }
       } else {
-        const matchName: string = areaFuncData.value
-          .toString()
-          .replace(/\//g, '-');
-        for (const checkOdd of m.sls.filter(o => o.nm === matchName)) {
-          areaFuncData.odd = checkOdd.ods[0].vl;
+        if (oddsToSearch.length > 0) {
+          areaFuncData.odds = [];
+          // search for multiple odds
+          for (const checkOdd of m.sls) {
+            if (oddsToSearch.includes(checkOdd.nm)) {
+              areaFuncData.odds.push(
+                new BetOdd(
+                  checkOdd.nm,
+                  checkOdd.ods[0].vl,
+                  areaFuncData.amount / oddsToSearch.length
+                )
+              );
+            }
+          }
+        } else {
+          // search for matchName
+          const matchName: string = areaFuncData.value
+            .toString()
+            .replace(/\//g, '-');
+          for (const checkOdd of m.sls.filter(o => o.nm === matchName)) {
+            areaFuncData.odd = checkOdd.ods[0].vl;
+          }
         }
       }
     }
-
     return areaFuncData;
   }
 
@@ -409,18 +427,17 @@ export class DogracingService {
         return 6;
         break;
       case 'OVER':
-        return 7;
       case 'UNDER':
         return 7;
       case 'EVEN':
-        return 8;
       case 'ODD':
         return 8;
       case 'AO': // return the EXACTA odd
-        return 9;
       case '1VA': // reutrn Quinella
+      case 'AOX':
         return 9;
       case 'T':
+      case 'TOX':
         return 12;
       default:
         return -1;
@@ -495,5 +512,45 @@ export class DogracingService {
       }
     }
     return areaFuncData;
+  }
+
+  generateOdds(value: string): string[] {
+    const selections: string[] = value.split('/');
+    const returnValues: string[] = [];
+
+    if (selections.length > 0) {
+      const values1: string[] = this.extractOddFromString(selections[0]);
+      for (let i1 = 0; i1 < selections[0].length; i1++) {
+        if (selections.length > 1) {
+          const values2: string[] = this.extractOddFromString(selections[1]);
+          for (let i2 = 0; i2 < selections[1].length; i2++) {
+            if (selections.length > 2) {
+              const values3: string[] = this.extractOddFromString(
+                selections[2]
+              );
+              for (let i3 = 0; i3 < selections[2].length; i3++) {
+                returnValues.push(
+                  values1[i1] + '-' + values2[i2] + '-' + values3[i3]
+                );
+              }
+            } else {
+              returnValues.push(values1[i1] + '-' + values2[i2]);
+            }
+          }
+        } else {
+          returnValues.push(values1[i1]);
+        }
+      }
+    }
+
+    return returnValues;
+  }
+
+  extractOddFromString(value: string): string[] {
+    const returnValues: string[] = [];
+    for (let index = 0; index < value.length; index++) {
+      returnValues.push(value.charAt(index));
+    }
+    return returnValues;
   }
 }
