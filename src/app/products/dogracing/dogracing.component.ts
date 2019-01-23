@@ -13,6 +13,10 @@ import { DogracingService } from './dogracing.service';
 export class DogracingComponent implements OnInit {
   public rowHeight: number;
   lucky: typeof Lucky = Lucky;
+
+  // Lucky last random extract
+  oldLucky: string;
+
   constructor(
     private route: ActivatedRoute,
     public service: ProductsService,
@@ -28,9 +32,28 @@ export class DogracingComponent implements OnInit {
 
   placingLucky(lucky: Lucky): void {
     this.dogracingService.resetPlayRacing();
-
+    let n = '';
+    // extract  lucky
     for (let i = 1; i <= lucky; i++) {
-      this.dogracingService.RNGLucky(i);
+      while (true) {
+        // check if extract exist
+        const extTemp: number = this.dogracingService.RNGLucky2(i);
+        if (n.indexOf(extTemp.toString()) === -1) {
+          n += extTemp;
+          break;
+        }
+      }
+    }
+    // if the selection is not equals to oldLucky selected place bet
+    if (n !== this.oldLucky || this.oldLucky === undefined) {
+      // save the temporary selection
+      this.oldLucky = n;
+      for (let i = 0; i < n.length; i++) {
+        const element = n.charAt(i);
+        this.dogracingService.RNGLuckyPlacing(parseInt(element, 10), i + 1);
+      }
+    } else {
+      this.placingLucky(lucky);
     }
   }
 }
