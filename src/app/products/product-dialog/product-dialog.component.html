@@ -10,7 +10,8 @@
         <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/Up.svg">
       </button>
     </mat-grid-tile>
-    <mat-grid-tile rowspan="3" class="card-odd radius-5" *ngFor="let odd of betOdds">
+    <mat-grid-tile rowspan="3" class="card-odd radius-5" [ngClass]="{'notSelected': !odd.selected}" (click)="toggleOdd(odd)"
+      *ngFor="let odd of betOdds">
       <div fxFill>
         <div class="top-window"></div>
         <div class="first-row" fxLayout="row">

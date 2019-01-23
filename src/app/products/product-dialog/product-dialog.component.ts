@@ -1,4 +1,10 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AppSettings } from 'src/app/app.settings';
 import { BetOdd, DialogData } from '../products.model';
@@ -26,8 +32,8 @@ export class ProductDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<ProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: DialogData,
     public readonly appSettings: AppSettings
-    ) {
-      this.settings = appSettings;
+  ) {
+    this.settings = appSettings;
     this.title = data.betOdds.title;
     if (data.breakpoint < 6) {
       this.column = 2;
@@ -85,6 +91,10 @@ export class ProductDialogComponent implements OnInit {
     }
     this.page++;
     this.filterOdds();
+  }
+
+  toggleOdd(odd: BetOdd) {
+    odd.selected = !odd.selected;
   }
 
   close(): void {

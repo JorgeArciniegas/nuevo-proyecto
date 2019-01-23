@@ -42,7 +42,6 @@ export class DisplayComponent implements OnInit, OnDestroy {
   detailOdds(): void {
     const data: BetOdds = new BetOdds();
     data.title = this.polyfunctionalValue.selection;
-    console.log(this.polyfunctionalValue);
     if (this.polyfunctionalValue.odd) {
       data.odds.push(
         new BetOdd(

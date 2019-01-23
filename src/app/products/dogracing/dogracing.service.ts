@@ -83,6 +83,12 @@ export class DogracingService {
 
     this.placingRaceSubject = new Subject<PlacingRace>();
 
+    this.productService.playableBoardResetObserve.subscribe(reset => {
+      if (reset) {
+        this.resetPlayRacing();
+      }
+    });
+
     this.createDogList();
   }
 
