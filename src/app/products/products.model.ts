@@ -10,6 +10,7 @@ export class PolyfunctionalArea {
   value?: string | number;
   odd?: number;
   amount?: number;
+  odds?: BetOdd[];
   constructor() {}
 }
 

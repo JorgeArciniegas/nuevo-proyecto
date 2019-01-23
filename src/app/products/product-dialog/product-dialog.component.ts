@@ -1,11 +1,6 @@
-import {
-  Component,
-  ElementRef,
-  Inject,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { AppSettings } from 'src/app/app.settings';
 import { BetOdd, DialogData } from '../products.model';
 
 @Component({
@@ -14,6 +9,7 @@ import { BetOdd, DialogData } from '../products.model';
   styleUrls: ['./product-dialog.component.scss']
 })
 export class ProductDialogComponent implements OnInit {
+  public settings: AppSettings;
   private rowNumber = 0;
   private maxItems = 0;
   public page = 0;
@@ -28,8 +24,10 @@ export class ProductDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ProductDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: DialogData
-  ) {
+    @Inject(MAT_DIALOG_DATA) private data: DialogData,
+    public readonly appSettings: AppSettings
+    ) {
+      this.settings = appSettings;
     this.title = data.betOdds.title;
     if (data.breakpoint < 6) {
       this.column = 2;
@@ -42,10 +40,10 @@ export class ProductDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.rowNumber = Math.floor(
-      (this.elementView.nativeElement.offsetHeight - 85) / 105
+      (this.elementView.nativeElement.offsetHeight - 60) / 105
     );
     this.containerPaddingTop = Math.floor(
-      ((this.elementView.nativeElement.offsetHeight - 85) % 105) / 2
+      ((this.elementView.nativeElement.offsetHeight - 60) % 105) / 2
     );
     this.maxItems = this.rowNumber * this.column;
     this.maxPage = Math.ceil(this.data.betOdds.odds.length / this.maxItems);
