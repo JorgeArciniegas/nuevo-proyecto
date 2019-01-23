@@ -420,7 +420,7 @@ export class DogracingService {
         return 9;
       case '1VA': // reutrn Quinella
         return 9;
-      case 'AOX':
+      case 'T':
         return 12;
       default:
         return -1;
@@ -449,7 +449,9 @@ export class DogracingService {
         this.smartCode.code = SmartCodeType[SmartCodeType['T']];
         areaFuncData.value =
           this.smartCode.selWinner.join('') +
+          '/' +
           this.smartCode.selPlaced.join('') +
+          '/' +
           this.smartCode.selPodium.join('');
       } else if (
         this.smartCode.selPlaced.length > 0 &&
