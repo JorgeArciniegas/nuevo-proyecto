@@ -27,6 +27,10 @@ export class DogracingComponent implements OnInit {
   }
 
   placingLucky(lucky: Lucky): void {
-    this.dogracingService.RNGLucky(lucky);
+    this.dogracingService.resetPlayRacing();
+
+    for (let i = 1; i <= lucky; i++) {
+      this.dogracingService.RNGLucky(i);
+    }
   }
 }
