@@ -37,6 +37,7 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   }
 
   clearAll(): void {
+    this.productService.closeProductDialog();
     this.productService.resetBoard();
   }
 }

@@ -45,6 +45,8 @@ export class DogracingService {
   public currentRaceSubscribe: Subject<number>;
   public currentRaceObserve: Observable<number>;
 
+  private attempts = 0;
+
   dogList: Dog[];
   // temp array
 
@@ -102,36 +104,52 @@ export class DogracingService {
   }
 
   getTime(): void {
-    if (this.remmaningTime.second === 0 && this.remmaningTime.minute === 0) {
-      this.loadRaces();
-      this.loadLastResult();
-    } else {
-      if (this.remmaningTime.second === 0) {
-        // remaing time
-        this.remmaningTime.second = 59;
-        this.remmaningTime.minute = this.remmaningTime.minute - 1;
-        // remaing showed time
-        this.raceDetails.raceTime.minute = this.raceDetails.raceTime.minute - 1;
+    try {
+      if (this.remmaningTime.second === 0 && this.remmaningTime.minute === 0) {
+        this.loadRaces();
+        this.loadLastResult();
       } else {
-        // remaing time
-        this.remmaningTime.second = this.remmaningTime.second - 1;
-        // check time blocked
-        if (
-          this.raceDetails.raceTime.second <= 10 &&
-          this.raceDetails.raceTime.minute === 0
-        ) {
-          this.placingRace.timeBlocked = true;
-          this.productService.closeProductDialog();
-        } else {
-          this.placingRace.timeBlocked = false;
+        if (this.remmaningTime.second < 0 || this.remmaningTime.minute < 0) {
+          // if remaining time is negative there is an error, reload all
+          // console.log('::::reset');
+          this.cacheRaces = null;
+          this.loadRaces();
+          this.loadLastResult(false);
         }
+        if (this.remmaningTime.second === 0) {
+          // remaing time
+          this.remmaningTime.second = 59;
+          this.remmaningTime.minute = this.remmaningTime.minute - 1;
+          // remaing showed time
+          this.raceDetails.raceTime.minute =
+            this.raceDetails.raceTime.minute - 1;
+        } else {
+          // remaing time
+          this.remmaningTime.second = this.remmaningTime.second - 1;
+          // check time blocked
+          if (
+            this.raceDetails.raceTime.second <= 10 &&
+            this.raceDetails.raceTime.minute === 0
+          ) {
+            this.placingRace.timeBlocked = true;
+            this.productService.closeProductDialog();
+          } else {
+            this.placingRace.timeBlocked = false;
+          }
+        }
+        // showed second
+        this.raceDetails.raceTime.second = this.remmaningTime.second;
       }
-      // showed second
-      this.raceDetails.raceTime.second = this.remmaningTime.second;
+    } catch (err) {
+      // console.log('catch', err);
+      this.cacheRaces = null;
+      this.loadRaces();
+      this.loadLastResult(false);
     }
   }
 
   loadRaces(): void {
+    // console.log('load new race');
     if (this.cacheRaces == null || this.cacheRaces.length === 0) {
       this.loadRacesFromApi(true);
     } else {
@@ -161,6 +179,7 @@ export class DogracingService {
   }
 
   loadRacesFromApi(all: boolean = false) {
+    // console.log('Reload from api');
     this.vgenService.programmetree(8, 'DOG').then((sports: TreeSports) => {
       const tournament: Tournament = sports.Sports[0].ts[0];
 
@@ -273,6 +292,7 @@ export class DogracingService {
   }
 
   raceDetailOdds(raceNumber: number): void {
+    // console.log('get detail', raceNumber);
     const race: RaceApi = this.cacheRaces.filter(
       (cacheRace: RaceApi) => cacheRace.id === raceNumber
     )[0];
@@ -282,8 +302,21 @@ export class DogracingService {
       this.vgenService
         .raceDetails(8, raceNumber)
         .then((sportDetail: SportDetail) => {
-          race.mk = sportDetail.Sport.ts[0].evs[0].mk;
-          race.tm = sportDetail.Sport.ts[0].evs[0].tm;
+          try {
+            race.mk = sportDetail.Sport.ts[0].evs[0].mk;
+            race.tm = sportDetail.Sport.ts[0].evs[0].tm;
+            this.attempts = 0;
+          } catch (err) {
+            if (this.attempts < 5) {
+              this.attempts++;
+              // console.log('attempts', this.attempts);
+              setTimeout(() => {
+                this.raceDetailOdds(raceNumber);
+              }, 1000);
+            } else {
+              this.attempts = 0;
+            }
+          }
         });
     }
   }
