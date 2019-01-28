@@ -8,8 +8,8 @@ import {
   SportDetail,
   Tournament,
   TreeSports
-} from 'src/app/services/vgen.model';
-import { VgenService } from 'src/app/services/vgen.service';
+} from '../../services/vgen.model';
+import { VgenService } from '../../services/vgen.service';
 import { BetOdd, PolyfunctionalArea } from '../products.model';
 import { ProductsService } from '../products.service';
 import {

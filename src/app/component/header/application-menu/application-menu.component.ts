@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppSettings } from 'src/app/app.settings';
-import { ProductsService } from 'src/app/products/products.service';
+import { AppSettings } from '../../../app.settings';
+import { ProductsService } from '../../../products/products.service';
 import { IconSize } from '../../model/iconSize.model';
 
 @Component({
