@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { interval, Observable, Subject, timer } from 'rxjs';
 import {
   CountDown,
   EventResults,
@@ -59,7 +59,7 @@ export class DogracingService {
     this.raceDetails = new RaceDetail();
     this.raceDetails.currentRace = 0;
 
-    Observable.interval(1000).subscribe(() => this.getTime());
+    interval(1000).subscribe(() => this.getTime());
 
     this.currentRaceSubscribe = new Subject<number>();
     this.currentRaceObserve = this.currentRaceSubscribe.asObservable();
@@ -251,7 +251,7 @@ export class DogracingService {
 
   loadLastResult(delay: boolean = true): void {
     if (delay) {
-      Observable.timer(10000).subscribe(() => this.getLastResult());
+      timer(10000).subscribe(() => this.getLastResult());
     } else {
       this.getLastResult();
     }
@@ -259,7 +259,7 @@ export class DogracingService {
 
   getLastResult() {
     this.listResult = [];
-    Observable.timer(300).subscribe(() => {
+    timer(300).subscribe(() => {
       this.vgenService
         .latesResult(8, 'DOG')
         .then((eventResults: EventResults) => {

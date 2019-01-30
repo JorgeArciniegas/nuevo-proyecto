@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material';
 import { Observable, Subject } from 'rxjs';
-import { ProductDialogComponent } from './product-dialog/product-dialog.component';
+import { DialogService } from './dialog.service';
 import {
   BetOdds,
   DialogData,
@@ -19,7 +18,6 @@ export class ProductsService {
   public productNameSelectedObserve: Observable<string>;
 
   private dialogProductDataSubject: Subject<BetOdds>;
-  private dialogProductRef = null;
 
   private playableBoardResetSubject: Subject<boolean>;
   public playableBoardResetObserve: Observable<boolean>;
@@ -36,7 +34,7 @@ export class ProductsService {
     xs: 1
   };
   windowSize: WindowSize;
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: DialogService) {
     this.breakpointSubscribe = new Subject<number>();
     this.productNameSelectedSubscribe = new Subject<string>();
     this.productNameSelectedObserve = this.productNameSelectedSubscribe.asObservable();
@@ -46,9 +44,7 @@ export class ProductsService {
     // Dialog management
     this.dialogProductDataSubject = new Subject<BetOdds>();
     this.dialogProductDataSubject.asObservable().subscribe((odds: BetOdds) => {
-      this.dialogProductRef = this.dialog.open(ProductDialogComponent, {
-        data: new DialogData(odds, this.breakpoint)
-      });
+      this.dialog.openDialog(new DialogData(odds, this.breakpoint));
     });
 
     this.playableBoardResetSubject = new Subject<boolean>();
@@ -80,9 +76,7 @@ export class ProductsService {
   }
 
   closeProductDialog(): void {
-    if (this.dialogProductRef != null) {
-      this.dialogProductRef.close();
-    }
+    this.dialog.closeDialog();
   }
 
   resetBoard(): void {

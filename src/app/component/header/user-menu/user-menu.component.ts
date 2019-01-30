@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable as ObservableIdle } from 'rxjs/Rx';
+import { interval } from 'rxjs';
 import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../../products/products.service';
 import { IconSize } from '../../model/iconSize.model';
@@ -22,7 +22,7 @@ export class UserMenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    ObservableIdle.interval(1000).subscribe(() => this.getTime());
+    interval(1000).subscribe(() => this.getTime());
     const barHeight =
       this.productService.windowSize.height -
       this.productService.windowSize.columnHeight;
