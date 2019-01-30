@@ -1,0 +1,286 @@
+@import './buttons';
+
+.app{
+    &.develop {
+        @import './skins/develop/styles';
+    }   
+    .main-content { 
+        @extend %font-family;
+        @extend %color-bg-default;
+        
+        .toolbar{
+            @extend %header;
+            // .icon {
+            //     width: 100%;
+            // }
+            // .logo {
+            //     margin: 0 20px 0 0;
+            // }
+            // .menu {
+            //     margin: 0 5px;
+            // }
+            // .btn {
+            //     margin: 0 4px;
+            //     border-bottom: 3px solid transparent;
+
+            //     img {
+            //        @extend %header-btn-menu;
+            //     }
+
+            //     &.selected {
+            //         @extend %header-btn-menu-selected;
+            //     }
+            // }
+            // .user-menu{
+            //     .notification {
+            //         margin: 0 10px;    
+            //     }
+            //     .counter-container {        
+            //         text-align: right;            
+            //         @extend %header-notification-img; 
+            //         background-repeat: no-repeat;
+            //         background-size: 70%;
+            //         background-position: bottom center;             
+            //     }
+            //     .counter {
+            //         text-align: center;
+            //         font-size: 1.8vh;
+            //         font-weight: bold;
+            //         display: inline-block;
+            //         @extend %header-notification-style;
+            //     }
+            //     .details {
+            //         font-size: 1.8vh;
+
+            //         .operator{
+            //             margin-left: 0.5vh;
+            //             font-weight: 600;
+            //             @extend %header-text-operator;
+            //         }
+            //     }
+            //     .clock {
+            //         font-size: 1.9vh;
+            //         padding: 3px 10px;
+            //         @extend %card-title;
+            //         margin: 3px 0.8vw;
+
+            //         .clock-icon {
+            //             margin-right: 10px;
+            //         }
+            //     }
+            // }
+        }        
+
+        // .widgets {
+        //     padding: 0 5px;
+        //     .widget-btn {  
+        //         .icon {
+        //             height: 100%;
+        //             width: 100%;
+        //         }
+        //     }            
+        // }
+
+        // .display {
+        //     @extend %card-title;
+        // }
+        // .sub-display{
+        //     @extend %sub-card-title;
+        // }
+        
+        // .product{
+        //     padding: 10px 0px;
+        //     .product-calc,
+        //     .product-coupon {
+        //         .card{
+        //             padding: 5px;
+        //             .card-title{
+        //                 height:40px;
+        //             }
+        //         }
+        //     }
+        //     .display-amount{
+        //         @extend %color-bg-white;
+        //         min-height: 100%;
+        //         width: 100%;
+        //         label{
+        //             font-weight: 500;
+        //             font-size: 0.7em;
+        //             text-transform: uppercase;
+        //             span {
+        //                 padding: 5px;
+        //                 display: block;
+        //                 text-align: right;
+        //             }
+        //             input{
+        //                 margin-top: 10px;
+        //                 border: 0;
+        //                 width: 100%;
+        //                 font-size: 1.8em;
+        //                 font-weight: 700;
+        //                 text-align: right;
+        //                 padding-right: 10px;
+        //             }
+        //         }
+        //     }
+        //     .product-coupon{
+        //         // padding: 0px 5px;
+        //         app-coupon{
+        //             width: 100%;
+        //             .btn-coupon-board{
+        //                 button{
+        //                     &.actived{
+        //                         @extend %btn-success-gradient;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }            
+        // }          
+        // // GRID AMOUNT
+        // .grid-row-amount{
+
+        //     .btn-amount-1{
+        //         @extend %btn-orange;
+        //     }
+        //     .btn-amount-2{
+        //         @extend %btn-gray-gradient-2;
+        //     }
+        //     .btn-amount-3{
+                
+        //         @extend %btn-yellow-gradient ;
+        //     }
+        //     .btn-amount-4{
+               
+        //         @extend %btn-white-gradient ;
+        //     }
+        // }
+        // .grid-keyboard-number{
+        //     .mat-grid-tile{
+        //         .mat-figure {
+        //             padding: 5px;
+        //         }
+        //     }
+        // }
+        // .btn-keyboard{
+        //     @extend %btn-keyboard;
+        //     &.btn-grey{
+                
+        //         @extend %btn-gray;
+        //     }
+        //     &.btn-black{
+                
+        //         @extend %btn-dark;
+        //     }
+        // }
+        // .btn-warning{
+        //     @extend %btn-warning;
+        // }
+        // .btn-success{
+        //     @extend %btn-success-gradient;
+        // }  
+
+        // .btn-grey-gradient { 
+        //     @extend %btn-gray-gradient;
+        // }
+        // .btn-dark-gradient{
+        //     @extend %btn-dark-gradient;
+        // }
+        // .advance-game {
+        //     padding: 0.8vh 0 0.8vh;
+        //     .btn-advance-game {
+        //         @extend %btn-advance-game;  
+        //         .label {
+        //             font-weight: 700;
+        //             font-size: 1.6vw;
+        //         }
+        //     } 
+        // }
+
+        // .polifuctional-area {
+        //     .mat-figure {
+        //         padding-top: 10px;
+        //         margin: 0 6px;
+        //     }
+        // }
+
+        // .dog-racing {
+        //     @extend %dog-racing-bg;
+
+        //     .race-control {
+        //         .time {
+        //             @extend %time-card-title;
+        //         }
+        //     }
+        //     .list-race {
+        //         .number {
+        //             @extend %btn-success-gradient;                              
+        //             &.selected {
+        //                 @extend %btn-blue-gradient;
+        //             }    
+        //         }
+        //         .date {
+        //             @extend %btn-gray-gradient; 
+        //             &.selected {
+        //                 @extend %btn-dark-gradient;
+        //             }  
+        //         }
+        //     }
+        //     .card-box-result {
+        //         .header {
+        //             .raceNumber {
+        //                 @extend %card-title-noborder;
+        //             }
+        //         }
+        //     }
+        // }
+    }
+}
+
+.radius-5 { 
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.radius-10 { 
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.radius-15 { 
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
+
+.radius-25 { 
+    border-radius: 25px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+}
+
+.radius-50 { 
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+}
+
+.padding-top-5{
+    padding-top: 5px;
+}
+.padding-top-10{
+    padding-top: 10px;
+}
+.padding-top-25{
+    padding-top: 25px;
+}
+.padding-horizontal-6{
+    padding: 0px 6px;
+}
+.elevation-z5{
+    box-shadow:0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 1px 5px 2px rgba(0, 0, 0, 0.3);
+}
+
+

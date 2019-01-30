@@ -1,8 +1,6 @@
 <!-- https://docs.nativescript.org/angular/core-concepts/angular-navigation.html#page-router-outlet -->
-<StackLayout id="app" class="app" [ngClass]="settings.theme">
+<GridLayout rows="*" id="app" class="app" [ngClass]="settings.theme">
     <StackLayout class="main-content">
-        <Label text="Test"></Label>
-
-        <!-- <router-outlet></router-outlet> -->
+        <router-outlet></router-outlet>
     </StackLayout>
-</StackLayout>
+</GridLayout>
