@@ -13,24 +13,24 @@
             // .icon {
             //     width: 100%;
             // }
-            // .logo {
-            //     margin: 0 20px 0 0;
-            // }
-            // .menu {
-            //     margin: 0 5px;
-            // }
-            // .btn {
-            //     margin: 0 4px;
-            //     border-bottom: 3px solid transparent;
+            .logo {
+                margin: 0 20px 0 0;
+            }
+            .menu {
+                margin: 0 5px;
+            }
+            .btn {
+                margin: 0 4px;
+                border-bottom: 3px solid transparent;
 
-            //     img {
-            //        @extend %header-btn-menu;
-            //     }
+                Image {
+                   @extend %header-btn-menu;
+                }
 
-            //     &.selected {
-            //         @extend %header-btn-menu-selected;
-            //     }
-            // }
+                &.selected {
+                    @extend %header-btn-menu-selected;
+                }
+            }
             // .user-menu{
             //     .notification {
             //         margin: 0 10px;    

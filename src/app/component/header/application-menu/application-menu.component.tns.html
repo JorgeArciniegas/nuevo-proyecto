@@ -1,0 +1,11 @@
+<StackLayout orientation="horizontal" horizontalAlignment="left">
+    <!-- MENU
+        <Image class="menu" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-menu-24px.svg" stretch="aspectFill"></Image> -->
+    <!-- LOGO -->
+    <Image class="logo" horizontalAlignment="left" [width]="logoIcon.width" [height]="logoIcon.height" stretch="aspectFill"
+        src="~/app/themes/skins/{{settings.theme}}/image/Logo-header.png" stretch="aspectFill"></Image>
+    <!-- BUTTONS -->
+    <Image *ngFor="let prod of settings.products" horizontalAlignment="left" [width]="buttonIcon.width" [height]="buttonIcon.height"
+        class="btn radius-5" src="~/app/themes/skins/{{settings.theme}}/icon/{{prod.toolbarButton.icon}}.png" [ngClass]="{'selected': prod.name == btnSelected}"
+        (click)="productSelecting(prod.name)"></Image>
+</StackLayout>
