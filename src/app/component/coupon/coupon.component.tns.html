@@ -1,0 +1,53 @@
+<GridLayout columns="*" rows="2*,*,*,14*,2*,2*">
+  <CardView row="0" col="0" elevation="5" radius="10" class="display">
+    <StackLayout class="card-title" verticalAlignment="center">
+      <StackLayout orientation="horizontal" class="title" verticalAlignment="center" horizontalAlignment="center">
+        <Label text="{{ 'coupon' | translate }}" textTransform="uppercase"></Label>
+      </StackLayout>
+    </StackLayout>
+  </CardView>
+</GridLayout>
+
+<!-- <mat-grid-list cols="1" rowHeight="{{(rowHeight-1) / 2}}">
+  <mat-grid-tile rowspan="2">
+    <div class="display" fxFlexFill>
+      <div class="card-title">
+        <h3 class="title">
+          <span class="text">{{ 'coupon' | translate }} </span>
+          <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
+        </h3>
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="1">
+    <div class="sub-display">
+      <div class="card-title">
+        <h5 class="title">{{ 'tabCoupon' | translate }}</h5>
+      </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="1">
+    <div class="btn-coupon-board" fxLayout="row">
+      <button class="display btn btn-default">{{'single' | translate}}</button>
+      <button class="display btn btn-default actived">{{'multiple' | translate}}</button>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="14">
+    <div class="content-row-coupon">
+      CONTENT COUPONS
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="2">
+    <div class="display-amount radius-5">
+      <label>
+        <span>{{'potentialMaxWinner' | translate}}</span>
+        <input type="text" name="winner" value="10.000.000 COP" readonly />
+      </label>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="2">
+    <div fxFill class="padding-top-10">
+      <button class="btn-default btn-success radius-10 padding-10">PIAZZA</button>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list> -->

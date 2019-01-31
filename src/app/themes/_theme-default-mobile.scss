@@ -1,3 +1,7 @@
+CardView {
+    background-color: transparent;
+}
+
 .app{
     &.develop {
         @import './skins/develop/styles';
@@ -10,20 +14,20 @@
             @extend %header;
 
             .logo {
-                margin: 0px 20px 0px 0;
+                margin: 0 10 0 0;
             }
             .menu {
-                margin: 10px;
+                margin: 6;
             }
             .prod {
-                margin: 9px 6px 5px;
+                margin: 6 3 3;
                 border-color: transparent;
-                border-bottom-width: 4px;
+                border-bottom-width: 3;
 
                 Image {
                     @extend %header-btn-menu-color;
-                    border-width: 2px;
-                    margin: 1px;
+                    border-width: 1;
+                    margin: 1;
                 }
 
                 &.selected {
@@ -32,37 +36,38 @@
             }
             .user-menu{
                 .notification {
-                    margin: 0 10px;    
+                    margin: 0 10;    
                 }
             
                 .counter {
                     text-align: center;
                     font-weight: bold;
-                    @extend %header-notification-style;
+                    @extend %header-notification-style-mobile;
                 }
                 .details {
-                    margin-right: 10px;
+                    margin-right: 10;
 
                     .operator{
-                        margin-left: 10px;
+                        margin-left: 10;
                         font-weight: 600;
                         @extend %header-text-operator;
                     }
                 }
                 .clock {
-                    padding: 3px 10px;
+                    padding: 2 10;
+                    border-radius: 5; 
+                    margin: 2 5;
                     @extend %card-title-mobile;
-                    margin: 5px 10px;
 
                     .clock-icon {
-                        margin-right: 10px;
+                        margin-right: 10;
                     }
                 }
             }
         }        
 
         // .widgets {
-        //     padding: 0 5px;
+        //     padding: 0 5;
         //     .widget-btn {  
         //         .icon {
         //             height: 100%;
@@ -71,24 +76,22 @@
         //     }            
         // }
 
-        // .display {
-        //     @extend %card-title;
-        // }
-        // .sub-display{
-        //     @extend %sub-card-title;
-        // }
+        .display {
+            @extend %card-title-mobile;
+        }
+        .sub-display{
+            @extend %sub-card-title;
+        }
         
-        // .product{
-        //     padding: 10px 0px;
-        //     .product-calc,
-        //     .product-coupon {
-        //         .card{
-        //             padding: 5px;
-        //             .card-title{
-        //                 height:40px;
-        //             }
-        //         }
-        //     }
+        .product{
+            padding: 10 0;
+            .product-calc,
+            .product-coupon {
+                .card{
+                    padding: 5;
+                   
+                }
+            }
         //     .display-amount{
         //         @extend %color-bg-white;
         //         min-height: 100%;
@@ -98,23 +101,23 @@
         //             font-size: 0.7em;
         //             text-transform: uppercase;
         //             span {
-        //                 padding: 5px;
+        //                 padding: 5;
         //                 display: block;
         //                 text-align: right;
         //             }
         //             input{
-        //                 margin-top: 10px;
+        //                 margin-top: 10;
         //                 border: 0;
         //                 width: 100%;
         //                 font-size: 1.8em;
         //                 font-weight: 700;
         //                 text-align: right;
-        //                 padding-right: 10px;
+        //                 padding-right: 10;
         //             }
         //         }
         //     }
         //     .product-coupon{
-        //         // padding: 0px 5px;
+        //         // padding: 0 5;
         //         app-coupon{
         //             width: 100%;
         //             .btn-coupon-board{
@@ -148,7 +151,7 @@
         // .grid-keyboard-number{
         //     .mat-grid-tile{
         //         .mat-figure {
-        //             padding: 5px;
+        //             padding: 5;
         //         }
         //     }
         // }
@@ -189,8 +192,8 @@
 
         // .polifuctional-area {
         //     .mat-figure {
-        //         padding-top: 10px;
-        //         margin: 0 6px;
+        //         padding-top: 10;
+        //         margin: 0 6;
         //     }
         // }
 
@@ -223,54 +226,41 @@
         //             }
         //         }
         //     }
-        // }
+        }
     }
 }
 
 .radius-5 { 
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
+    border-radius: 5;
 }
 
 .radius-10 { 
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
+    border-radius: 10;
 }
 
 .radius-15 { 
-    border-radius: 15px;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
+    border-radius: 15;
 }
 
 .radius-25 { 
-    border-radius: 25px;
-    -moz-border-radius: 25px;
-    -webkit-border-radius: 25px;
+    border-radius: 25;
 }
 
 .radius-50 { 
-    border-radius: 50px;
-    -moz-border-radius: 50px;
-    -webkit-border-radius: 50px;
+    border-radius: 50;
 }
 
 .padding-top-5{
-    padding-top: 5px;
+    padding-top: 5;
 }
 .padding-top-10{
-    padding-top: 10px;
+    padding-top: 10;
 }
 .padding-top-25{
-    padding-top: 25px;
+    padding-top: 25;
 }
 .padding-horizontal-6{
-    padding: 0px 6px;
-}
-.elevation-z5{
-    box-shadow:0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 1px 5px 2px rgba(0, 0, 0, 0.3);
+    padding: 0 6;
 }
 
 

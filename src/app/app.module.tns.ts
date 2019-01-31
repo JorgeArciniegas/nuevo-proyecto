@@ -7,8 +7,10 @@ import {
   TranslateService
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { registerElement } from 'nativescript-angular/element-registry';
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
+import { CardView } from 'nativescript-cardview';
 import { AppComponent } from './app.component';
 import { AppHttpInterceptor } from './app.httpinterceptor';
 import { AppRoutingModule } from './app.routing.tns';
@@ -30,16 +32,11 @@ import { ResultListComponent } from './products/dogracing/result-list/result-lis
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
 
-// Uncomment and add to NgModule imports if you need to use two-way binding
-// import { NativeScriptFormsModule } from 'nativescript-angular/forms';
-
-// Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
-// import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
+registerElement('CardView', () => CardView);
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
-
 @NgModule({
   declarations: [
     AppComponent,
