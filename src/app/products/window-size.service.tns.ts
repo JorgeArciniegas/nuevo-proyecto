@@ -9,10 +9,10 @@ export class WindowSizeService {
   constructor() {}
 
   getWindowSize(): WindowSize {
-    const h: number = screen.mainScreen.heightPixels;
-    const w: number = screen.mainScreen.widthPixels;
+    const h: number = screen.mainScreen.heightDIPs;
+    const w: number = screen.mainScreen.widthDIPs;
     const aspectRatio: number = w / h;
-    const hgeneral = h - (h * 7) / 100;
+    const hgeneral = h - h / 13;
     const dataAtt: WindowSize = {
       height: h,
       width: w,

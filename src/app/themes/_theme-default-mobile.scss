@@ -31,36 +31,28 @@
                 }
             }
             .user-menu{
-            //     .notification {
-            //         margin: 0 10px;    
-            //     }
-            //     .counter-container {        
-            //         text-align: right;            
-            //         @extend %header-notification-img; 
-            //         background-repeat: no-repeat;
-            //         background-size: 70%;
-            //         background-position: bottom center;             
-            //     }
-            //     .counter {
-            //         text-align: center;
-            //         font-size: 1.8vh;
-            //         font-weight: bold;
-            //         display: inline-block;
-            //         @extend %header-notification-style;
-            //     }
-            //     .details {
-            //         font-size: 1.8vh;
+                .notification {
+                    margin: 0 10px;    
+                }
+            
+                .counter {
+                    text-align: center;
+                    font-weight: bold;
+                    @extend %header-notification-style;
+                }
+                .details {
+                    margin-right: 10px;
 
-            //         .operator{
-            //             margin-left: 0.5vh;
-            //             font-weight: 600;
-            //             @extend %header-text-operator;
-            //         }
-            //     }
+                    .operator{
+                        margin-left: 10px;
+                        font-weight: 600;
+                        @extend %header-text-operator;
+                    }
+                }
                 .clock {
                     padding: 3px 10px;
                     @extend %card-title-mobile;
-                    margin: 3px;
+                    margin: 5px 10px;
 
                     .clock-icon {
                         margin-right: 10px;
