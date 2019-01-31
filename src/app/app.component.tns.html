@@ -1,6 +1,7 @@
-<!-- https://docs.nativescript.org/angular/core-concepts/angular-navigation.html#page-router-outlet -->
-<GridLayout rows="*" id="app" class="app" [ngClass]="settings.theme">
-    <StackLayout class="main-content">
-        <router-outlet></router-outlet>
-    </StackLayout>
-</GridLayout>
+<Page xmlns="http://www.nativescript.org/tns.xsd" actionBarHidden="true">
+    <GridLayout rows="*" id="app" class="app" [ngClass]="settings.theme">
+        <StackLayout class="main-content">
+            <router-outlet></router-outlet>
+        </StackLayout>
+    </GridLayout>
+</Page>

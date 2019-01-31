@@ -1,5 +1,3 @@
-@import './buttons';
-
 .app{
     &.develop {
         @import './skins/develop/styles';
@@ -10,28 +8,29 @@
         
         .toolbar{
             @extend %header;
-            // .icon {
-            //     width: 100%;
-            // }
+
             .logo {
-                margin: 0 20px 0 0;
+                margin: 0px 20px 0px 0;
             }
             .menu {
-                margin: 0 5px;
+                margin: 10px;
             }
-            .btn {
-                margin: 0 4px;
-                border-bottom: 3px solid transparent;
+            .prod {
+                margin: 9px 6px 5px;
+                border-color: transparent;
+                border-bottom-width: 4px;
 
                 Image {
-                   @extend %header-btn-menu;
+                    @extend %header-btn-menu-color;
+                    border-width: 2px;
+                    margin: 1px;
                 }
 
                 &.selected {
-                    @extend %header-btn-menu-selected;
+                    @extend %header-btn-menu-color-selected;
                 }
             }
-            // .user-menu{
+            .user-menu{
             //     .notification {
             //         margin: 0 10px;    
             //     }
@@ -58,17 +57,16 @@
             //             @extend %header-text-operator;
             //         }
             //     }
-            //     .clock {
-            //         font-size: 1.9vh;
-            //         padding: 3px 10px;
-            //         @extend %card-title;
-            //         margin: 3px 0.8vw;
+                .clock {
+                    padding: 3px 10px;
+                    @extend %card-title-mobile;
+                    margin: 3px;
 
-            //         .clock-icon {
-            //             margin-right: 10px;
-            //         }
-            //     }
-            // }
+                    .clock-icon {
+                        margin-right: 10px;
+                    }
+                }
+            }
         }        
 
         // .widgets {
