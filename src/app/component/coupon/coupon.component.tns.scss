@@ -1,12 +1,32 @@
+.card {
+    margin: 2 0;
+}
+
 .display{
-    
-    .card-title{
+        
+    .title{
+        width: 100%;
+        text-align: center;         
+    }
+}
+
+.sub-display{
+
+    .title{
         width: 100%;
         text-align: center;
-        .title{
-            font-weight: 600;
-            font-size: 20;                       
-        }
     }
-    
+}
+
+.btn-coupon-board {
+    border-radius: 5;
+
+    .left {
+        width: 100%;
+        border-radius: 5 0 0 5;
+    }
+    .right {
+        width: 100%;
+        border-radius: 0 5 5 0;
+    }
 }
