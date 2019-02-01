@@ -1,12 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AppSettings } from 'src/app/app.settings';
+import { AppSettings } from '../../app.settings';
 import {
   BetOdd,
   BetOdds,
   PolyfunctionalArea
-} from 'src/app/products/products.model';
-import { ProductsService } from 'src/app/products/products.service';
+} from '../../products/products.model';
+import { ProductsService } from '../../products/products.service';
 
 @Component({
   selector: 'app-display',
@@ -31,6 +31,11 @@ export class DisplayComponent implements OnInit, OnDestroy {
         this.polyfunctionalValue = element;
       }
     );
+    const value: PolyfunctionalArea = new PolyfunctionalArea();
+    value.odd = 1;
+    value.selection = 'ffff';
+    value.value = '445';
+    this.polyfunctionalValue = value;
   }
 
   ngOnInit() {}

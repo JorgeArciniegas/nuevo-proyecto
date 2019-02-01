@@ -8,10 +8,54 @@
     <StackLayout col="0" class="product-container">
       <Label text="dog"></Label>
     </StackLayout>
-    <StackLayout col="1" class="product-calc">
+    <GridLayout col="1" class="product-calc padding-horizontal-6">
+      <GridLayout rows="*,*,*,6*,*,*" columns="*">
+        <StackLayout row="0">
+          <!-- Area widget [Variabile] -->
+          <app-widget [rowHeight]="rowHeight"></app-widget>
+        </StackLayout>
+        <StackLayout row="1">
+          <!-- Area polifunzionale / Smartcode -->
+          <app-display></app-display>
+        </StackLayout>
 
+      </GridLayout>
 
-    </StackLayout>
+      <!-- <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
+        <mat-grid-tile rowspan="1"> -->
+
+      <!-- <mat-grid-tile rowspan="1">
+        </mat-grid-tile> -->
+      <!-- Area di gioco avanzata [VARIABILE] -->
+      <!-- <mat-grid-tile rowspan="1">
+          <app-advance-game fxFlexFill class="padding-horizontal-6"></app-advance-game>
+        </mat-grid-tile> -->
+      <!-- Area inserimento [Fissa] -->
+      <!-- <mat-grid-tile rowspan="6">
+          <app-btncalc [rowHeight]="rowHeight"></app-btncalc>
+        </mat-grid-tile> -->
+      <!-- VINCITA POTENZIALE MASSIMA -->
+      <!-- <mat-grid-tile rowspan="1">
+          <div fxFlexFill class="padding-horizontal-6">
+            <div class="display-amount radius-5">
+              <label>
+                <span>{{'amountPlace' | translate}}</span>
+                <input type="text" name="amount" value="10.000.000 COP" readonly />
+              </label>
+            </div>
+          </div>
+        </mat-grid-tile> -->
+      <!-- Area polifunzionale [Fissa]  -->
+      <!-- <mat-grid-tile rowspan="1" class="polifuctional-area">
+          <div fxFlexFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+            <button class="btn-default btn-success radius-10 padding-10">PAGA</button>
+            <button class="btn-default btn-warning radius-10 padding-10">ANNULLA</button>
+          </div>
+        </mat-grid-tile>
+
+      </mat-grid-list> -->
+
+    </GridLayout>
     <StackLayout col="2" class="product-coupon padding-horizontal-6">
       <app-coupon></app-coupon>
     </StackLayout>

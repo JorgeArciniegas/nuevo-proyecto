@@ -97,28 +97,36 @@ CardView {
         
         .product{
             padding: 5 0;
-            .product-calc,
+            .product-calc {            
+                .display {
+                    @extend %card-title-mobile;
+        
+                    .title{
+                        font-size: 16;               
+                    }
+                }
+            }
             .product-coupon {
                 .btn-coupon-board {
                     .actived{
                         @extend %btn-success-gradient;
                     }
                 }
-            }
-            .display {
-                @extend %card-title-mobile;
-    
-                .title{
-                    font-weight: 600;
-                    font-size: 20;               
+                .display {
+                    @extend %card-title-mobile;
+        
+                    .title{
+                        font-weight: 600;
+                        font-size: 20;               
+                    }
                 }
-            }
-            .sub-display{
-                @extend %sub-card-title-mobile;
-    
-                .title{                
-                    font-weight: 600;
-                    font-size: 16;
+                .sub-display{
+                    @extend %sub-card-title-mobile;
+        
+                    .title{                
+                        font-weight: 600;
+                        font-size: 16;
+                    }
                 }
             }
             .display-amount{
