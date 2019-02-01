@@ -16,8 +16,10 @@
     </GridLayout>
   </CardView>
   <GridLayout row="2" rows="*" columns="*,*" class="card display btn-coupon-board">
-    <Label col="0" text="{{'single' | translate}}" class="left" textAlignment="center" textTransform="uppercase"></Label>
-    <Label col="1" text="{{'multiple' | translate}}" class="right actived" textAlignment="center" textTransform="uppercase"></Label>
+    <Label col="0" text="{{'single' | translate}}" class="left {{active == 'single' ? 'actived' : ''}}" textAlignment="center"
+      textTransform="uppercase" (tap)="couponTab('single')"></Label>
+    <Label col="1" text="{{'multiple' | translate}}" class="right {{active == 'multi' ? 'actived' : ''}}" textAlignment="center"
+      textTransform="uppercase" (tap)="couponTab('multi')"></Label>
   </GridLayout>
   <StackLayout row="3" verticalAlignment="center" horizontalAlignment="center">
     <Label text="CONTENT COUPONS"></Label>
@@ -28,5 +30,7 @@
       <Label row="1" text="10.000.000 COP" class="amount"></Label>
     </GridLayout>
   </CardView>
-  <Button row="5" text="{{'piazza' | translate}}" class="card btn-success button" textTransform="uppercase"></Button>
+  <GridLayout row="5" rows="*" columns="*" class="card button btn-success">
+    <Button text="{{'piazza' | translate}}" class="button-internal" textTransform="uppercase"></Button>
+  </GridLayout>
 </GridLayout>

@@ -79,6 +79,10 @@ $color-text-operator: #3DAB14;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52e566', endColorstr='#1fb537',GradientType=0 );
     color: $color-text-primary;
 }
+%btn-success-gradient-mobile{
+    background: linear-gradient(to bottom, #52e566, #1fb537);
+    color: $color-text-primary;
+}
 %btn-blue-gradient{
     background: #91c8fa;
     background: -moz-linear-gradient(top, #91c8fa 34%, #5b9bd5 100%);

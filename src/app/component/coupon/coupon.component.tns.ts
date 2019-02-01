@@ -8,11 +8,16 @@ import { AppSettings } from '../../app.settings';
 })
 export class CouponComponent implements OnInit {
   public settings: AppSettings;
-  public tapped = false;
+  public active: string;
 
   constructor(public readonly appSettings: AppSettings) {
     this.settings = appSettings;
+    this.active = 'multi';
   }
 
   ngOnInit() {}
+
+  couponTab(tab: string) {
+    this.active = tab;
+  }
 }

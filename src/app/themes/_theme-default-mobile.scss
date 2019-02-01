@@ -68,11 +68,17 @@ CardView {
 
         .button {
             font-weight: 700;
-            font-size: 20;
-            border-radius: 5;
-            &.active {
-                background-color: darkblue;
-            }
+            font-size: 20;  
+            border-radius: 5;          
+        }
+        .button-internal {
+            margin: -5;
+            background-color: transparent;
+            border-color: transparent;
+            border-width: 1;
+        }
+        .button-internal:active {            
+            background-color: rgba(0, 0, 0, 0.4);
         }
 
         // .widgets {
@@ -131,10 +137,6 @@ CardView {
                     vertical-align: bottom;
                 }
             }
-
-            .confirm-button {
-
-            }
        
         // // GRID AMOUNT
         // .grid-row-amount{
@@ -175,10 +177,9 @@ CardView {
         // .btn-warning{
         //     @extend %btn-warning;
         // }
-        .btn-success{
-            @extend %btn-success-gradient;
-        }  
-
+        .btn-success {
+            @extend %btn-success-gradient-mobile;
+        }
         // .btn-grey-gradient { 
         //     @extend %btn-gray-gradient;
         // }
