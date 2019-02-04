@@ -1,0 +1,18 @@
+<GridLayout rows="*" columns="*,*,*,*" class="result-list-race">
+  <GridLayout col="{{i}}" class="card-box-result" rows="*,*" columns="*" *ngFor="let race of dogracingService.listResult; let i = index;">
+    <GridLayout row="0" class="header radius-5">
+      <Label text="{{race.raceLabel}}" class="raceNumber" horizontalAlignment="center" verticalAlignment="center"></Label>
+    </GridLayout>
+    <GridLayout row="1" rows="*" columns="*,*,*">
+      <GridLayout row="0" col="0" class="position btn-default-dog-play btn-dog-{{race.firstPlace}} radius-10">
+        <Label text="{{race.firstPlace}}" class="label" horizontalAlignment="center" verticalAlignment="center"></Label>
+      </GridLayout>
+      <GridLayout row="0" col="1" class="position btn-default-dog-play btn-dog-{{race.secondPlace}} radius-10">
+        <Label text="{{race.secondPlace}}" class="label" horizontalAlignment="center" verticalAlignment="center"></Label>
+      </GridLayout>
+      <GridLayout row="0" col="2" class="position btn-default-dog-play btn-dog-{{race.thirdPlace}} radius-10">
+        <Label text="{{race.thirdPlace}}" class="label" horizontalAlignment="center" verticalAlignment="center"></Label>
+      </GridLayout>
+    </GridLayout>
+  </GridLayout>
+</GridLayout>

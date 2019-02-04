@@ -1,276 +1,268 @@
+@import './buttons-mobile';
 CardView {
-    background-color: transparent;
+	background-color: transparent;
 }
 
-.app{
-    &.develop {
-        @import './skins/develop/styles';
-    }   
-    .main-content { 
-        @extend %font-family;
-        @extend %color-bg-default;
-        
-        .toolbar{
-            @extend %header;
+.app {
+	&.develop {
+		@import './skins/develop/styles';
+	}
+	.main-content {
+		@extend %font-family;
+		@extend %color-bg-default;
 
-            .logo {
-                margin: 0 10 0 0;
-            }
-            .menu {
-                margin: 6;
-            }
-            .prod {
-                margin: 6 3 3;
-                border-color: transparent;
-                border-bottom-width: 3;
+		.toolbar {
+			@extend %header;
 
-                Image {
-                    @extend %header-btn-menu-color;
-                    border-width: 1;
-                    margin: 1;
-                }
+			.logo {
+				margin: 0 10 0 0;
+			}
+			.menu {
+				margin: 6;
+			}
+			.prod {
+				margin: 6 3 3;
+				border-color: transparent;
+				border-bottom-width: 3;
 
-                &.selected {
-                    @extend %header-btn-menu-color-selected;
-                }
-            }
-            .user-menu{
-                .notification {
-                    margin: 0 10;    
-                }
-            
-                .counter {
-                    text-align: center;
-                    font-weight: bold;
-                    @extend %header-notification-style-mobile;
-                }
-                .details {
-                    margin-right: 10;
+				image {
+					@extend %header-btn-menu-color;
+					border-width: 1;
+					margin: 1;
+				}
 
-                    .operator{
-                        margin-left: 10;
-                        font-weight: 600;
-                        @extend %header-text-operator;
-                    }
-                }
-                .clock {
-                    padding: 2 10;
-                    border-radius: 5; 
-                    margin: 2 5;
-                    @extend %card-title-mobile;
+				&.selected {
+					@extend %header-btn-menu-color-selected;
+				}
+			}
+			.user-menu {
+				.notification {
+					margin: 0 10;
+				}
 
-                    .clock-icon {
-                        margin-right: 10;
-                    }
-                }
-            }
-        }        
+				.counter {
+					text-align: center;
+					font-weight: bold;
+					@extend %header-notification-style-mobile;
+				}
+				.details {
+					margin-right: 10;
 
-        .button {
-            font-weight: 700;
-            font-size: 18;  
-            border-radius: 5; 
-            
-            &.small {
-                font-size: 16;
-            }         
-        }
-        .button-internal {
-            margin: -5;
-            background-color: transparent;
-            border-color: transparent;
-            border-width: 1;
-        }
-        .button-internal:active {            
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-        .display {
-            @extend %card-title-mobile;
-        }        
-        
-        .product{
-            padding: 5 0;
-            .product-calc {            
-                .display {
-                    @extend %card-title-mobile;
-        
-                    .title{
-                        font-size: 16;               
-                    }
-                }
-            }
-            .product-coupon {
-                .btn-coupon-board {
-                    .actived{
-                        @extend %btn-success-gradient;
-                    }
-                }
-                .display {
-                    @extend %card-title-mobile;
-        
-                    .title{
-                        font-weight: 600;
-                        font-size: 20;               
-                    }
-                }
-                .sub-display{
-                    @extend %sub-card-title-mobile;
-        
-                    .title{                
-                        font-weight: 600;
-                        font-size: 16;
-                    }
-                }
-            }
-            .display-amount{
-                @extend %color-bg-white;
+					.operator {
+						margin-left: 10;
+						font-weight: 600;
+						@extend %header-text-operator;
+					}
+				}
+				.clock {
+					padding: 2 10;
+					border-radius: 5;
+					margin: 2 5;
+					@extend %card-title-mobile;
 
-                padding: 2 5;
-                
-                .title {
-                    font-size: 10;
-                    text-align: right;
-                }
-                .amount {
-                    font-size: 20;
-                    text-align: right;
-                    font-weight: 700;
-                    vertical-align: bottom;
-                }
-            }
-       
-        // GRID BTN CALC
-        .grid-btn-calc{
-            margin: 2 -3;
+					.clock-icon {
+						margin-right: 10;
+					}
+				}
+			}
+		}
 
-            .card {
-                margin: 3;
+		.button {
+			font-weight: 700;
+			font-size: 18;
+			border-radius: 5;
 
-                .btn-amount-1{
-                    @extend %btn-orange-mobile;
-                }
-                .btn-amount-2{
-                    @extend %btn-gray-gradient-2-mobile;
-                }
-                .btn-amount-3{
-                    @extend %btn-yellow-gradient-mobile;
-                }
-                .btn-amount-4{
-                    @extend %btn-white-gradient-mobile;
-                }
+			&.small {
+				font-size: 16;
+			}
+		}
+		.button-internal {
+			margin: -5;
+			background-color: transparent;
+			border-color: transparent;
+			border-width: 1;
+		}
+		.button-internal:active {
+			background-color: rgba(0, 0, 0, 0.4);
+		}
+		.display {
+			@extend %card-title-mobile;
+		}
 
-            }
+		.product {
+			padding: 5 0;
+			.product-calc {
+				.display {
+					@extend %card-title-mobile;
 
-        }
+					.title {
+						font-size: 16;
+					}
+				}
+			}
+			.product-coupon {
+				.btn-coupon-board {
+					.actived {
+						@extend %btn-success-gradient;
+					}
+				}
+				.display {
+					@extend %card-title-mobile;
 
-        .btn-keyboard{
-            @extend %btn-keyboard;
-            &.btn-grey{
-                
-                @extend %btn-gray;
-            }
-            &.btn-black{
-                
-                @extend %btn-dark;
-            }
-        }
-        .btn-warning{
-            @extend %btn-warning-mobile;
-        }
-        .btn-success {
-            @extend %btn-success-gradient-mobile;
-        }
-        .btn-grey-gradient { 
-            @extend %btn-gray-gradient-mobile;
-        }
-        .btn-dark-gradient{
-            @extend %btn-dark-gradient-mobile;
-        }
-        .advance-game {
-            margin: 0 -2;
+					.title {
+						font-weight: 600;
+						font-size: 20;
+					}
+				}
+				.sub-display {
+					@extend %sub-card-title-mobile;
 
-            .btn-advance-game {
+					.title {
+						font-weight: 600;
+						font-size: 16;
+					}
+				}
+			}
+			.display-amount {
+				@extend %color-bg-white;
 
-                @extend %btn-advance-game;  
-                margin: 10 2 5;
+				padding: 2 5;
 
-                .button-internal {
-                    font-weight: 700;
-                    font-size: 16;
-                }
-            } 
-        }
+				.title {
+					font-size: 10;
+					text-align: right;
+				}
+				.amount {
+					font-size: 20;
+					text-align: right;
+					font-weight: 700;
+					vertical-align: bottom;
+				}
+			}
+		}
 
-        .dog-racing {
-            
-            .race-control {
-                @extend %dog-racing-bg-mobile;
-                
-                .time {
-                    .time-panel {
-                        @extend %time-card-title-mobile;
-                    }
-                }
-            }
-        //     .list-race {
-        //         .number {
-        //             @extend %btn-success-gradient;                              
-        //             &.selected {
-        //                 @extend %btn-blue-gradient;
-        //             }    
-        //         }
-        //         .date {
-        //             @extend %btn-gray-gradient; 
-        //             &.selected {
-        //                 @extend %btn-dark-gradient;
-        //             }  
-        //         }
-            }
-        //     .card-box-result {
-        //         .header {
-        //             .raceNumber {
-        //                 @extend %card-title-noborder;
-        //             }
-        //         }
-        //     }
-        }
-    }
+		// GRID BTN CALC
+		.grid-btn-calc {
+			margin: 2 -3;
+
+			.card {
+				margin: 3;
+
+				.btn-amount-1 {
+					@extend %btn-orange-mobile;
+				}
+				.btn-amount-2 {
+					@extend %btn-gray-gradient-2-mobile;
+				}
+				.btn-amount-3 {
+					@extend %btn-yellow-gradient-mobile;
+				}
+				.btn-amount-4 {
+					@extend %btn-white-gradient-mobile;
+				}
+			}
+		}
+
+		.btn-keyboard {
+			@extend %btn-keyboard;
+			&.btn-grey {
+				@extend %btn-gray;
+			}
+			&.btn-black {
+				@extend %btn-dark;
+			}
+		}
+		.btn-warning {
+			@extend %btn-warning-mobile;
+		}
+		.btn-success {
+			@extend %btn-success-gradient-mobile;
+		}
+		.btn-grey-gradient {
+			@extend %btn-gray-gradient-mobile;
+		}
+		.btn-dark-gradient {
+			@extend %btn-dark-gradient-mobile;
+		}
+		.advance-game {
+			margin: 0 -2;
+
+			.btn-advance-game {
+				@extend %btn-advance-game;
+				margin: 10 2 5;
+
+				.button-internal {
+					font-weight: 700;
+					font-size: 16;
+				}
+			}
+		}
+
+		.dog-racing {
+			.race-control {
+				@extend %dog-racing-bg-mobile;
+
+				.time {
+					.time-panel {
+						@extend %time-card-title-mobile;
+					}
+				}
+			}
+			.list-race {
+				.number {
+					@extend %btn-success-gradient-mobile;
+					&.selected {
+						@extend %btn-blue-gradient-mobile;
+					}
+				}
+				.date {
+					@extend %btn-gray-gradient-mobile;
+					&.selected {
+						@extend %btn-dark-gradient-mobile;
+					}
+				}
+			}
+			.card-box-result {
+				.header {
+					@extend %card-title-noborder;
+				}
+			}
+		}
+	}
 }
 
-.radius-5 { 
-    border-radius: 5;
+.radius-5 {
+	border-radius: 5;
 }
 
-.radius-10 { 
-    border-radius: 10;
+.radius-10 {
+	border-radius: 10;
 }
 
-.radius-15 { 
-    border-radius: 15;
+.radius-15 {
+	border-radius: 15;
 }
 
-.radius-25 { 
-    border-radius: 25;
+.radius-25 {
+	border-radius: 25;
 }
 
-.radius-50 { 
-    border-radius: 50;
+.radius-50 {
+	border-radius: 50;
 }
 
-.padding-top-5{
-    padding-top: 5;
+.padding-top-5 {
+	padding-top: 5;
 }
-.padding-top-10{
-    padding-top: 10;
+.padding-top-10 {
+	padding-top: 10;
 }
-.padding-top-25{
-    padding-top: 25;
+.padding-top-25 {
+	padding-top: 25;
 }
 .padding-horizontal-6 {
-    padding: 0 6;
+	padding: 0 6;
 }
 .padding-right-6 {
-    padding-right: 6;
+	padding-right: 6;
 }
-
-

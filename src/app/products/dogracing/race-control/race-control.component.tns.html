@@ -9,7 +9,7 @@
     </StackLayout>
     <CardView row="1" elevation="10" radius="10" class="time" horizontalAlignment="right" verticalAlignment="center">
       <StackLayout orientation="horizontal" class="time-panel" verticalAlignment="center">
-        <Image stretch="aspectFit" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-timer-24px.png"
+        <Image height="26" stretch="aspectFit" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-timer-24px.png"
           verticalAlignment="center"></Image>
         <Label text="{{ dogracingService.raceDetails.raceTime.minute | number: '2.0-0' }}:{{ dogracingService.raceDetails.raceTime.second | number: '2.0-0' }}"
           verticalAlignment="center"></Label>

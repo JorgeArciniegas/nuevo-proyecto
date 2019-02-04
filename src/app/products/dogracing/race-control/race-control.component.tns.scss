@@ -1,24 +1,24 @@
 .game-name {
-  font-size: 36;
-  font-weight: 900;
+	font-size: 36;
+	font-weight: 900;
 }
 
 .current-race {
-  font-size: 26;
-  font-weight: 900;
+	font-size: 26;
+	font-weight: 900;
 }
 .number {
-  margin-left: 8;
-  font-size: 20;
-  font-weight: 600;
+	margin-left: 8;
+	font-size: 20;
+	font-weight: 600;
 }
 
 .time {
-  margin: 3;
-  
-  .time-panel {
-    padding: 3 10;
-    font-size: 28;
-    font-weight: 900;
-  }
+	margin: 6;
+
+	.time-panel {
+		padding: 3 10;
+		font-size: 26;
+		font-weight: 900;
+	}
 }

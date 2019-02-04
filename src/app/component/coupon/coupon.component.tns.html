@@ -17,9 +17,9 @@
   </CardView>
   <GridLayout row="2" rows="*" columns="*,*" class="card display btn-coupon-board">
     <Label col="0" text="{{'single' | translate}}" class="left {{active == 'single' ? 'actived' : ''}}" textAlignment="center"
-      textTransform="uppercase" (tap)="couponTab('single')"></Label>
+      verticalAlignment="center" textTransform="uppercase" (tap)="couponTab('single')"></Label>
     <Label col="1" text="{{'multiple' | translate}}" class="right {{active == 'multi' ? 'actived' : ''}}" textAlignment="center"
-      textTransform="uppercase" (tap)="couponTab('multi')"></Label>
+      verticalAlignment="center" textTransform="uppercase" (tap)="couponTab('multi')"></Label>
   </GridLayout>
   <StackLayout row="3" verticalAlignment="center" horizontalAlignment="center">
     <Label text="CONTENT COUPONS"></Label>
