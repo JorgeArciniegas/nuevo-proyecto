@@ -4,11 +4,11 @@
     <app-header></app-header>
   </StackLayout>
   <!--PRODUCT CONTAINER-->
-  <GridLayout row="1" columns="59*,21*,20*" rows="*" class="product">
-    <StackLayout col="0" class="product-container">
+  <GridLayout row="1" columns="60*,20*,20*" rows="*" class="product">
+    <StackLayout col="0" class="product-container padding-horizontal-6">
       <router-outlet></router-outlet>
     </StackLayout>
-    <GridLayout col="1" class="product-calc padding-horizontal-6">
+    <GridLayout col="1" class="product-calc padding-right-6">
       <GridLayout rows="*,*,*,6*,*,*" columns="*">
         <StackLayout row="0">
           <!-- Area widget [Variabile] -->
@@ -24,7 +24,7 @@
         </StackLayout>
         <StackLayout row="3">
           <!-- Area inserimento [Fissa] -->
-          <app-btncalc></app-btncalc>
+          <app-btncalc [rowHeight]="rowHeight"></app-btncalc>
         </StackLayout>
         <CardView row="4" elevation="0" radius="10" class="card">
           <!-- VINCITA POTENZIALE MASSIMA -->
@@ -44,7 +44,7 @@
         </GridLayout>
       </GridLayout>
     </GridLayout>
-    <StackLayout col="2" class="product-coupon padding-horizontal-6">
+    <StackLayout col="2" class="product-coupon padding-right-6">
       <app-coupon></app-coupon>
     </StackLayout>
   </GridLayout>

@@ -201,14 +201,17 @@ CardView {
             } 
         }
 
-        // .dog-racing {
-        //     @extend %dog-racing-bg;
-
-        //     .race-control {
-        //         .time {
-        //             @extend %time-card-title;
-        //         }
-        //     }
+        .dog-racing {
+            
+            .race-control {
+                @extend %dog-racing-bg-mobile;
+                
+                .time {
+                    .time-panel {
+                        @extend %time-card-title-mobile;
+                    }
+                }
+            }
         //     .list-race {
         //         .number {
         //             @extend %btn-success-gradient;                              
@@ -222,7 +225,7 @@ CardView {
         //                 @extend %btn-dark-gradient;
         //             }  
         //         }
-        //     }
+            }
         //     .card-box-result {
         //         .header {
         //             .raceNumber {
@@ -263,8 +266,11 @@ CardView {
 .padding-top-25{
     padding-top: 25;
 }
-.padding-horizontal-6{
+.padding-horizontal-6 {
     padding: 0 6;
+}
+.padding-right-6 {
+    padding-right: 6;
 }
 
 

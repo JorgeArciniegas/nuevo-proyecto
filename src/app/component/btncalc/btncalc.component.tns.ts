@@ -1,20 +1,21 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
 import { AppSettings } from '../../app.settings';
 import { Product } from '../../products/models/product.model';
 import { ProductsService } from '../../products/products.service';
+import { IconSize } from '../model/iconSize.model';
 
 @Component({
   selector: 'app-btncalc',
   templateUrl: './btncalc.component.html',
   styleUrls: ['./btncalc.component.scss']
 })
-export class BtncalcComponent implements OnInit, OnDestroy, AfterViewInit {
-  productNameSelectedSubscribe: Subscription;
-  product: Product = { label: '', name: '', defaultAmount: [0, 0, 0, 0] };
-
-  @ViewChild('gridbtn') gridview: ElementRef;
+export class BtncalcComponent implements OnInit, OnDestroy {
+  private productNameSelectedSubscribe: Subscription;
+  public product: Product;
+  public amountIcon: IconSize;
+  @Input()
+  private rowHeight: number;
 
   constructor(
     public productService: ProductsService,
@@ -31,18 +32,10 @@ export class BtncalcComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    const grid: GridLayout = this.gridview.nativeElement;
-    console.log(grid.getMeasuredHeight(), grid.effectiveHeight, grid.height);
+    this.amountIcon = new IconSize(Math.floor(this.rowHeight - 16));
   }
-
   ngOnDestroy(): void {
     this.productNameSelectedSubscribe.unsubscribe();
-  }
-
-  ngAfterViewInit() {
-    const grid: GridLayout = this.gridview.nativeElement;
-    console.log(grid.getMeasuredHeight(), grid.effectiveHeight, grid.height);
-
   }
 
   plus(): void {
