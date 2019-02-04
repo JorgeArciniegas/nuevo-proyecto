@@ -4,13 +4,13 @@
 	.card-box {
 		margin: 3;
 
-		&.button {
+		.button {
 			.button-internal {
 				padding: 0;
 			}
 
 			&.number {
-				font-size: 16;
+				font-size: 15;
 			}
 			&.date {
 				font-size: 18;

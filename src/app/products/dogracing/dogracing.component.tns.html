@@ -13,7 +13,23 @@
     </GridLayout>
     <!-- Special race -->
     <GridLayout row="3">
-
+        <GridLayout rows="*" columns="*,*,*" class="special-box">
+            <CardView row="0" col="0" elevation="10" radius="10" class="card">
+                <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
+                    <Button text="Lucky" class="button-internal" (tap)="placingLucky(lucky.Lucky1)" textTransform="none"></Button>
+                </GridLayout>
+            </CardView>
+            <CardView row="0" col="1" elevation="10" radius="10" class="card">
+                <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
+                    <Button text="Lucky" class="button-internal" (tap)="placingLucky(lucky.Lucky2)" textTransform="none"></Button>
+                </GridLayout>
+            </CardView>
+            <CardView row="0" col="2" elevation="10" radius="10" class="card">
+                <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
+                    <Button text="Lucky" class="button-internal" (tap)="placingLucky(lucky.Lucky3)" textTransform="none"></Button>
+                </GridLayout>
+            </CardView>
+        </GridLayout>
     </GridLayout>
     <!-- List of result -->
     <GridLayout row="4">

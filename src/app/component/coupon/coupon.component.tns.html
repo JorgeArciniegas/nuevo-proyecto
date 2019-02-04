@@ -16,10 +16,12 @@
     </GridLayout>
   </CardView>
   <GridLayout row="2" rows="*" columns="*,*" class="card display btn-coupon-board">
-    <Label col="0" text="{{'single' | translate}}" class="left {{active == 'single' ? 'actived' : ''}}" textAlignment="center"
-      verticalAlignment="center" textTransform="uppercase" (tap)="couponTab('single')"></Label>
-    <Label col="1" text="{{'multiple' | translate}}" class="right {{active == 'multi' ? 'actived' : ''}}" textAlignment="center"
-      verticalAlignment="center" textTransform="uppercase" (tap)="couponTab('multi')"></Label>
+    <GridLayout col="0" class="left {{active == 'single' ? 'actived' : ''}}" (tap)="couponTab('single')">
+      <Label text="{{'single' | translate}}" horizontalAlignment="center" verticalAlignment="center" textTransform="uppercase"></Label>
+    </GridLayout>
+    <GridLayout col="1" class="right {{active == 'multi' ? 'actived' : ''}}" (tap)="couponTab('multi')">
+      <Label text="{{'multi' | translate}}" horizontalAlignment="center" verticalAlignment="center" textTransform="uppercase"></Label>
+    </GridLayout>
   </GridLayout>
   <StackLayout row="3" verticalAlignment="center" horizontalAlignment="center">
     <Label text="CONTENT COUPONS"></Label>
