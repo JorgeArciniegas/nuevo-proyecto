@@ -1,0 +1,88 @@
+<GridLayout #gridbtn rows="*,*,*,*,*,*" columns="*,*,*,*" class="grid-btn-calc">
+  <CardView row="0" col="{{i}}" elevation="6" radius="50" class="card" *ngFor="let amount of product.defaultAmount; let i = index">
+    <GridLayout rows="*" columns="*" class="button btn-amount-{{i+1}}">
+      <Button text="{{amount}}" class="button-internal"></Button>
+    </GridLayout>
+  </CardView>
+  <!-- BTN calculator -->
+  <CardView row="1" col="0" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="1" class="button-internal"></Button>
+    </GridLayout>
+  </CardView>
+  <CardView row="1" col="1" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="2" class="button-internal"></Button>
+    </GridLayout>
+  </CardView>
+  <CardView row="1" col="2" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="3" class="button-internal"></Button>
+    </GridLayout>
+  </CardView>
+  <CardView row="2" col="0" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="4" class="button-internal"></Button>
+    </GridLayout>
+  </CardView>
+  <CardView row="2" col="1" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="5" class="button-internal"></Button>
+    </GridLayout>
+  </CardView>
+  <CardView row="2" col="2" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="6" class="button-internal"></Button>
+    </GridLayout>
+  </CardView>
+  <CardView row="3" col="0" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="7" class="button-internal"></Button>
+    </GridLayout>
+  </CardView>
+  <CardView row="3" col="1" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="8" class="button-internal"></Button>
+    </GridLayout>
+  </CardView>
+  <CardView row="3" col="2" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="9" class="button-internal"></Button>
+    </GridLayout>
+  </CardView>
+  <CardView row="4" col="0" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="0" class="button-internal"></Button>
+    </GridLayout>
+  </CardView>
+  <CardView row="4" col="1" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="00" class="button-internal"></Button>
+    </GridLayout>
+  </CardView>
+  <CardView row="4" col="2" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="000" class="button-internal small"></Button>
+    </GridLayout>
+  </CardView>
+  <CardView row="1" col="3" rowSpan="3" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-success" (tap)="plus()">
+      <Button text="+" class="button-internal"></Button>
+    </GridLayout>
+  </CardView>
+  <CardView row="4" col="3" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-warning" (tap)="clearAll()">
+      <Button text="C" class="button-internal"></Button>
+    </GridLayout>
+  </CardView>
+  <CardView row="5" col="0" colSpan="2" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
+      <Button text="TOT" class="button-internal" textTransform="uppercase"></Button>
+    </GridLayout>
+  </CardView>
+  <CardView row="5" col="2" colSpan="2" elevation="6" radius="10" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
+      <Button text="COL" class="button-internal" textTransform="uppercase"></Button>
+    </GridLayout>
+  </CardView>
+</GridLayout>

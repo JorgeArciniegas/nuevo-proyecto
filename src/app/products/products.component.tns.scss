@@ -1,0 +1,12 @@
+.card {
+    margin: 2 0;
+}
+
+.button {
+    &.left {
+        margin-right: 2;
+    }
+    &.right {
+        margin-left: 2;
+    }
+}

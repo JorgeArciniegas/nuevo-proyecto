@@ -68,8 +68,12 @@ CardView {
 
         .button {
             font-weight: 700;
-            font-size: 20;  
-            border-radius: 5;          
+            font-size: 18;  
+            border-radius: 5; 
+            
+            &.small {
+                font-size: 16;
+            }         
         }
         .button-internal {
             margin: -5;
@@ -80,17 +84,6 @@ CardView {
         .button-internal:active {            
             background-color: rgba(0, 0, 0, 0.4);
         }
-
-        // .widgets {
-        //     padding: 0 5;
-        //     .widget-btn {  
-        //         .icon {
-        //             height: 100%;
-        //             width: 100%;
-        //         }
-        //     }            
-        // }
-
         .display {
             @extend %card-title-mobile;
         }        
@@ -146,71 +139,67 @@ CardView {
                 }
             }
        
-        // // GRID AMOUNT
-        // .grid-row-amount{
+        // GRID BTN CALC
+        .grid-btn-calc{
+            margin: 2 -3;
 
-        //     .btn-amount-1{
-        //         @extend %btn-orange;
-        //     }
-        //     .btn-amount-2{
-        //         @extend %btn-gray-gradient-2;
-        //     }
-        //     .btn-amount-3{
+            .card {
+                margin: 3;
+
+                .btn-amount-1{
+                    @extend %btn-orange-mobile;
+                }
+                .btn-amount-2{
+                    @extend %btn-gray-gradient-2-mobile;
+                }
+                .btn-amount-3{
+                    @extend %btn-yellow-gradient-mobile;
+                }
+                .btn-amount-4{
+                    @extend %btn-white-gradient-mobile;
+                }
+
+            }
+
+        }
+
+        .btn-keyboard{
+            @extend %btn-keyboard;
+            &.btn-grey{
                 
-        //         @extend %btn-yellow-gradient ;
-        //     }
-        //     .btn-amount-4{
-               
-        //         @extend %btn-white-gradient ;
-        //     }
-        // }
-        // .grid-keyboard-number{
-        //     .mat-grid-tile{
-        //         .mat-figure {
-        //             padding: 5;
-        //         }
-        //     }
-        // }
-        // .btn-keyboard{
-        //     @extend %btn-keyboard;
-        //     &.btn-grey{
+                @extend %btn-gray;
+            }
+            &.btn-black{
                 
-        //         @extend %btn-gray;
-        //     }
-        //     &.btn-black{
-                
-        //         @extend %btn-dark;
-        //     }
-        // }
-        // .btn-warning{
-        //     @extend %btn-warning;
-        // }
+                @extend %btn-dark;
+            }
+        }
+        .btn-warning{
+            @extend %btn-warning-mobile;
+        }
         .btn-success {
             @extend %btn-success-gradient-mobile;
         }
-        // .btn-grey-gradient { 
-        //     @extend %btn-gray-gradient;
-        // }
-        // .btn-dark-gradient{
-        //     @extend %btn-dark-gradient;
-        // }
-        // .advance-game {
-        //     padding: 0.8vh 0 0.8vh;
-        //     .btn-advance-game {
-        //         @extend %btn-advance-game;  
-        //         .label {
-        //             font-weight: 700;
-        //             font-size: 1.6vw;
-        //         }
-        //     } 
-        // }
+        .btn-grey-gradient { 
+            @extend %btn-gray-gradient-mobile;
+        }
+        .btn-dark-gradient{
+            @extend %btn-dark-gradient-mobile;
+        }
+        .advance-game {
+            margin: 0 -2;
 
-        // .polifuctional-area {
-        //     .mat-figure {
-        //         padding-top: 10;
-        //         margin: 0 6;
-        //     }
-        // }
+            .btn-advance-game {
+
+                @extend %btn-advance-game;  
+                margin: 10 2 5;
+
+                .button-internal {
+                    font-weight: 700;
+                    font-size: 16;
+                }
+            } 
+        }
 
         // .dog-racing {
         //     @extend %dog-racing-bg;

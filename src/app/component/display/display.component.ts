@@ -31,11 +31,6 @@ export class DisplayComponent implements OnInit, OnDestroy {
         this.polyfunctionalValue = element;
       }
     );
-    const value: PolyfunctionalArea = new PolyfunctionalArea();
-    value.odd = 1;
-    value.selection = 'ffff';
-    value.value = '445';
-    this.polyfunctionalValue = value;
   }
 
   ngOnInit() {}

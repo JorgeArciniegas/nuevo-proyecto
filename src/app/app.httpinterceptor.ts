@@ -48,9 +48,10 @@ export class AppHttpInterceptor implements HttpInterceptor {
    * @returns string
    */
   private getCurrentToken(): string {
-    return sessionStorage.getItem('tokenData')
-      ? 'Bearer ' + sessionStorage.getItem('tokenData')
-      : '';
+    // return sessionStorage.getItem('tokenData')
+    //   ? 'Bearer ' + sessionStorage.getItem('tokenData')
+    //   : '';
+    return '';
   }
 
   /**
