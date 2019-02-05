@@ -8,6 +8,7 @@
 }
 //BACKGROUNDS COLOR
 $color-bg-primary: #1b2432;
+$color-bg-primary-op: rgba(27, 36, 50, 0.4);
 $color-bg-secodary: #273142;
 $color-bg-event: #274442;
 $color-bg-accent: #c0c0c0;
@@ -38,6 +39,13 @@ $color-text-operator: #3dab14;
 %color-bg-default {
 	background: $color-bg-primary;
 	color: #ffffff;
+}
+%bg-default {
+	background: $color-bg-primary;
+}
+%bg-opacity {
+	background: $color-bg-primary-op;
+	color: $color-bg-accent;
 }
 %color-bg-white {
 	background: white;
@@ -86,6 +94,7 @@ $color-text-operator: #3dab14;
 	color: $color-text-primary;
 	border-color: $border-cartd-title;
 	border-width: 1;
+	border-radius: 5;
 }
 %sub-card-title {
 	background-color: $color-bg-event;
@@ -95,6 +104,7 @@ $color-text-operator: #3dab14;
 %sub-card-title-mobile {
 	background-color: $color-bg-event;
 	color: $color-text-primary;
+	border-radius: 5;
 }
 %time-card-title {
 	background-color: $color-bg-event;

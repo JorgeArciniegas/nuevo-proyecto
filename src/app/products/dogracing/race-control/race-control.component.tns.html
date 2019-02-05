@@ -2,18 +2,18 @@
   <StackLayout col="1" verticalAlignment="center">
     <Label class="game-name" text="{{ 'dogRacingLabel' | translate }}" textWrap="true" verticalAlignment="center"></Label>
   </StackLayout>
-  <GridLayout col="2" rows="*,*" columns="*" *ngIf="dogracingService.raceDetails.races[dogracingService.raceDetails.currentRace] != null">
+  <GridLayout col="2" rows="2*,3*" columns="*" *ngIf="dogracingService.raceDetails.races[dogracingService.raceDetails.currentRace] != null">
     <StackLayout row="0" orientation="horizontal" horizontalAlignment="right">
-      <Label class="current-race" verticalAlignment="bottom" text="{{ dogracingService.raceDetails.races[dogracingService.raceDetails.currentRace].label }}"></Label>
-      <Label *ngIf="settings.showRaceId" class="number" verticalAlignment="bottom" text="#{{ dogracingService.raceDetails.races[dogracingService.raceDetails.currentRace].number }}"></Label>
+      <Label class="current-race" verticalAlignment="center" text="{{ dogracingService.raceDetails.races[dogracingService.raceDetails.currentRace].label }}"></Label>
+      <Label *ngIf="settings.showRaceId" class="number" verticalAlignment="center" text="#{{ dogracingService.raceDetails.races[dogracingService.raceDetails.currentRace].number }}"></Label>
     </StackLayout>
-    <CardView row="1" elevation="10" radius="10" class="time" horizontalAlignment="right" verticalAlignment="center">
+    <StackLayout row="1" shadow="5" [cornerRadius]="5" class="time" horizontalAlignment="right" verticalAlignment="center">
       <StackLayout orientation="horizontal" class="time-panel" verticalAlignment="center">
         <Image height="26" stretch="aspectFit" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-timer-24px.png"
           verticalAlignment="center"></Image>
         <Label text="{{ dogracingService.raceDetails.raceTime.minute | number: '2.0-0' }}:{{ dogracingService.raceDetails.raceTime.second | number: '2.0-0' }}"
           verticalAlignment="center"></Label>
       </StackLayout>
-    </CardView>
+    </StackLayout>
   </GridLayout>
 </GridLayout>

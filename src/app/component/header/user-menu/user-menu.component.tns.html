@@ -3,12 +3,12 @@
   <AbsoluteLayout [width]="barHeight" [height]="barHeight" class="notification">
     <Image stretch="aspectFit" [top]="barHeight * 0.25" [left]="barHeight * 0.15" [width]="notifyIcon.width" [height]="notifyIcon.height"
       class="clock-icon" src="~/app/themes/skins/{{settings.theme}}/icon/account.png"></Image>
-    <CardView class="counter" elevation="10" [radius]="barHeight / 2" top="6" [left]="barHeight * 0.4" [width]="barHeight / 2"
-      [height]="barHeight / 2">
-      <StackLayout verticalAlignment="center">
+    <StackLayout top="6" [left]="barHeight * 0.4" shadow="3" [cornerRadius]="barHeight / 4">
+      <StackLayout verticalAlignment="center" class="counter" [width]="barHeight / 2" [height]="barHeight / 2"
+        [borderRadius]="barHeight / 4">
         <Label text="2"></Label>
       </StackLayout>
-    </CardView>
+    </StackLayout>
   </AbsoluteLayout>
   <FlexboxLayout flexDirection="column" class="details" justifyContent="center">
     <Label text="{{'Balance' | translate }}: 1.000.000.000,00"></Label>

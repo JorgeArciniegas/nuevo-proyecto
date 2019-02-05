@@ -1,7 +1,4 @@
 @import './buttons-mobile';
-CardView {
-	background-color: transparent;
-}
 
 .app {
 	&.develop {
@@ -69,7 +66,7 @@ CardView {
 
 		.button {
 			font-weight: 700;
-			font-size: 18;
+			font-size: 17;
 			border-radius: 5;
 			text-transform: none;
 
@@ -84,8 +81,9 @@ CardView {
 			border-width: 1;
 		}
 		.button-internal:active {
-			background-color: rgba(0, 0, 0, 0.4);
+			@extend %bg-opacity;
 		}
+
 		.display {
 			@extend %card-title-mobile;
 		}
@@ -95,10 +93,6 @@ CardView {
 			.product-calc {
 				.display {
 					@extend %card-title-mobile;
-
-					.title {
-						font-size: 16;
-					}
 				}
 			}
 			.product-coupon {
@@ -126,7 +120,7 @@ CardView {
 			}
 			.display-amount {
 				@extend %color-bg-white;
-
+				border-radius: 5;
 				padding: 2 5;
 
 				.title {
@@ -144,7 +138,7 @@ CardView {
 
 		// GRID BTN CALC
 		.grid-btn-calc {
-			margin: 2 -3;
+			margin: 2 -1;
 
 			.card {
 				margin: 3;
@@ -229,6 +223,10 @@ CardView {
 				}
 			}
 		}
+
+		.bg-playable {
+			@extend %bg-default;
+		}
 	}
 }
 
@@ -261,8 +259,11 @@ CardView {
 .padding-top-25 {
 	padding-top: 25;
 }
-.padding-horizontal-6 {
-	padding: 0 6;
+.padding-left-6 {
+	padding-left: 6;
+}
+.padding-right-3 {
+	padding-right: 3;
 }
 .padding-right-6 {
 	padding-right: 6;

@@ -1,5 +1,5 @@
 .playable-grid-buttons {
-	margin: 2 -3;
+	margin: 2 0;
 
 	.card {
 		margin: 3;
@@ -11,34 +11,27 @@
 			font-size: 36;
 			&.button {
 				border-radius: 15;
+				padding: -2;
 			}
 		}
 	}
 
-	// 	.mat-grid-tile {
-	// 		.mat-figure {
-	// 			padding: 5px;
-	// 			.playable-row-tile {
-	// 				padding: 5px;
-	// 				display: flex;
-	// 				min-width: 50px;
-	// 				align-items: center;
-	// 				justify-content: center;
-	// 				height: 100%;
-	// 				font-size: 2.8vh;
-	// 				font-weight: 700;
-	// 			}
-	// 			.btn-default-dog-play {
-	// 				font-weight: 700;
-	// 				font-size: 4.8vh;
-	// 			}
-	// 		}
-	// 	}
-	// }
-	// .playable-special-bets {
-	// 	.mat-grid-tile {
-	// 		.mat-figure {
-	// 			padding: 10px 25px;
-	// 		}
-	// 	}
+	&.playable-special-bets {
+		.special-bet {
+			margin: 4 15;
+			.button {
+				border-radius: 10;
+				padding: -2;
+			}
+		}
+	}
+
+	&.playable-grid-repeat {
+		.card-x {
+			margin: 2 3 0;
+			.button-internal {
+				padding: 0;
+			}
+		}
+	}
 }

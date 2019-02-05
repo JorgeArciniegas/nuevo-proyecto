@@ -7,10 +7,9 @@ import {
   TranslateService
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { registerElement } from 'nativescript-angular/element-registry';
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
-import { CardView } from 'nativescript-cardview';
+import { NgShadowModule } from 'nativescript-ng-shadow';
 import { AppComponent } from './app.component';
 import { AppHttpInterceptor } from './app.httpinterceptor';
 import { AppRoutingModule } from './app.routing.tns';
@@ -31,8 +30,6 @@ import { RaceControlComponent } from './products/dogracing/race-control/race-con
 import { ResultListComponent } from './products/dogracing/result-list/result-list.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
-
-registerElement('CardView', () => CardView);
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -62,6 +59,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     NativeScriptModule,
     AppRoutingModule,
     FlexLayoutModule,
+    NgShadowModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

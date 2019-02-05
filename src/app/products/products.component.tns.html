@@ -5,10 +5,10 @@
   </StackLayout>
   <!--PRODUCT CONTAINER-->
   <GridLayout row="1" columns="60*,20*,20*" rows="*" class="product">
-    <StackLayout col="0" class="product-container padding-horizontal-6">
+    <StackLayout col="0" class="product-container padding-left-6 padding-right-3">
       <router-outlet></router-outlet>
     </StackLayout>
-    <GridLayout col="1" class="product-calc padding-right-6">
+    <GridLayout col="1" class="product-calc padding-right-3">
       <GridLayout rows="*,*,*,6*,*,*" columns="*">
         <StackLayout row="0">
           <!-- Area widget [Variabile] -->
@@ -20,19 +20,19 @@
         </StackLayout>
         <StackLayout row="2">
           <!-- Area di gioco avanzata [VARIABILE] -->
-          <app-advance-game></app-advance-game>
+          <GridLayout rows="*" columns="*" class="card">
+            <app-advance-game></app-advance-game>
+          </GridLayout>
         </StackLayout>
         <StackLayout row="3">
           <!-- Area inserimento [Fissa] -->
           <app-btncalc [rowHeight]="rowHeight"></app-btncalc>
         </StackLayout>
-        <CardView row="4" elevation="0" radius="10" class="card">
-          <!-- VINCITA POTENZIALE MASSIMA -->
-          <GridLayout rows="*,3*" columns="*" class="display-amount">
-            <Label row="0" text="{{'amountPlace' | translate}}" class="title" textTransform="uppercase"></Label>
-            <Label row="1" text="10.000.000 COP" class="amount"></Label>
-          </GridLayout>
-        </CardView>
+        <!-- VINCITA POTENZIALE MASSIMA -->
+        <GridLayout row="4" rows="*,3*" columns="*" class="card display-amount">
+          <Label row="0" text="{{'amountPlace' | translate}}" class="title" textTransform="uppercase"></Label>
+          <Label row="1" text="10.000.000 COP" class="amount"></Label>
+        </GridLayout>
         <GridLayout row="5" rows="*" columns="*,*" class="card">
           <!-- Area polifunzionale [Fissa]  -->
           <GridLayout col="0" rows="*" columns="*" class="button left btn-success">

@@ -1,7 +1,14 @@
 .card {
-    margin: 2 0;
+	margin: 3 2;
 
-    .display {
-        padding: 0 5;
-    }
+	.display {
+		padding: 0 5;
+
+		.title {
+			font-size: 14;
+		}
+		.odd {
+			font-size: 14;
+		}
+	}
 }
