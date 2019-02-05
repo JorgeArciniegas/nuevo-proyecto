@@ -230,6 +230,11 @@
 	}
 }
 
+.overlay {
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 100;
+}
+
 .radius-5 {
 	border-radius: 5;
 }

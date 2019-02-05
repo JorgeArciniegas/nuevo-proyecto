@@ -16,6 +16,8 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   public amountIcon: IconSize;
   @Input()
   private rowHeight: number;
+  @Input()
+  public timeBlocked: boolean;
 
   constructor(
     public productService: ProductsService,

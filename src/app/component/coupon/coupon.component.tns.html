@@ -3,7 +3,7 @@
     <GridLayout rows="*" columns="*" class="display">
       <StackLayout orientation="horizontal" class="title" verticalAlignment="center" horizontalAlignment="center">
         <Label text="{{ 'coupon' | translate }}" textTransform="uppercase" verticalAlignment="center"></Label>
-        <Image stretch="aspectFit" width="30" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-remove_shopping_cart-24px.png"
+        <Image stretch="aspectFit" width="26" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-remove_shopping_cart-24px.png"
           verticalAlignment="center"></Image>
       </StackLayout>
     </GridLayout>
@@ -33,6 +33,6 @@
     </GridLayout>
   </GridLayout>
   <GridLayout row="5" rows="*" columns="*" class="card button btn-success">
-    <Button text="{{'piazza' | translate}}" class="button-internal" textTransform="uppercase"></Button>
+    <Button text="{{'piazza' | translate}}" class="button-internal" textTransform="uppercase" [isEnabled]="!timeBlocked"></Button>
   </GridLayout>
 </GridLayout>

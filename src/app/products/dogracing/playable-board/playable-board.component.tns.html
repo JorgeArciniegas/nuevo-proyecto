@@ -12,8 +12,7 @@
       <GridLayout rows="*" columns="*" class="bg-playable">
         <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-dog-{{dog.number}}" [ngClass]="{'btn-dog-play-actived': dog.actived, 'disabled': !dog.selectable}">
           <StackLayout class="label"></StackLayout>
-          <Button text="{{dog.number}}" class="button-internal" [ngClass]="{'light' : i == 3}" (tap)="dogplaced(dog)"
-            [isEnabled]="dog.selectable"></Button>
+          <Button text="{{dog.number}}" class="button-internal" (tap)="dogplaced(dog)" [isEnabled]="dog.selectable && !service.placingRace.timeBlocked"></Button>
         </GridLayout>
       </GridLayout>
     </GridLayout>
@@ -21,7 +20,7 @@
       <GridLayout rows="*" columns="*" class="bg-playable">
         <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-dog-{{dog.number}}" [ngClass]="{'btn-dog-play-actived': dog.actived, 'disabled': !dog.selectable}">
           <StackLayout class="label"></StackLayout>
-          <Button text="{{dog.number}}" class="button-internal" (tap)="dogplaced(dog)" [isEnabled]="dog.selectable"></Button>
+          <Button text="{{dog.number}}" class="button-internal" (tap)="dogplaced(dog)" [isEnabled]="dog.selectable && !service.placingRace.timeBlocked"></Button>
         </GridLayout>
       </GridLayout>
     </GridLayout>
@@ -29,7 +28,7 @@
       <GridLayout rows="*" columns="*" class="bg-playable">
         <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-dog-{{dog.number}}" [ngClass]="{'btn-dog-play-actived': dog.actived, 'disabled': !dog.selectable}">
           <StackLayout class="label"></StackLayout>
-          <Button text="{{dog.number}}" class="button-internal" (tap)="dogplaced(dog)" [isEnabled]="dog.selectable"></Button>
+          <Button text="{{dog.number}}" class="button-internal" (tap)="dogplaced(dog)" [isEnabled]="dog.selectable && !service.placingRace.timeBlocked"></Button>
         </GridLayout>
       </GridLayout>
     </GridLayout>
@@ -38,22 +37,22 @@
   <GridLayout row="1" class="playable-grid-buttons playable-special-bets" rows="*" columns="*,*,*,*">
     <GridLayout col="0" rows="*" columns="*" shadow="3" cornerRadius="11" class="special-bet">
       <GridLayout rows="*" columns="*" class="button btn-success" [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['ODD']) }">
-        <Button text="{{'ODD' | translate}}" class="button-internal" (tap)="specialBets('ODD')"></Button>
+        <Button text="{{'ODD' | translate}}" class="button-internal" (tap)="specialBets('ODD')" [isEnabled]="!service.placingRace.timeBlocked"></Button>
       </GridLayout>
     </GridLayout>
     <GridLayout col="1" rows="*" columns="*" shadow="3" cornerRadius="11" class="special-bet">
       <GridLayout rows="*" columns="*" class="button btn-success" [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['EVEN']) }">
-        <Button text="{{'EVEN' | translate}}" class="button-internal" (tap)="specialBets('EVEN')"></Button>
+        <Button text="{{'EVEN' | translate}}" class="button-internal" (tap)="specialBets('EVEN')" [isEnabled]="!service.placingRace.timeBlocked"></Button>
       </GridLayout>
     </GridLayout>
     <GridLayout col="2" rows="*" columns="*" shadow="3" cornerRadius="11" class="special-bet">
       <GridLayout rows="*" columns="*" class="button btn-success" [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['UNDER']) }">
-        <Button text="{{'UNDER' | translate}}" class="button-internal" (tap)="specialBets('UNDER')"></Button>
+        <Button text="{{'UNDER' | translate}}" class="button-internal" (tap)="specialBets('UNDER')" [isEnabled]="!service.placingRace.timeBlocked"></Button>
       </GridLayout>
     </GridLayout>
     <GridLayout col="3" rows="*" columns="*" shadow="3" cornerRadius="11" class="special-bet">
       <GridLayout rows="*" columns="*" class="button btn-success" [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['OVER']) }">
-        <Button text="{{'OVER' | translate}}" class="button-internal" (tap)="specialBets('OVER')"></Button>
+        <Button text="{{'OVER' | translate}}" class="button-internal" (tap)="specialBets('OVER')" [isEnabled]="!service.placingRace.timeBlocked"></Button>
       </GridLayout>
     </GridLayout>
   </GridLayout>
@@ -62,16 +61,9 @@
     <GridLayout col="{{i}}" shadow="3" cornerRadius="6" class="card-x" *ngFor="let n of [1,2,3,4,5,6,7,8]; let i = index;">
 
       <GridLayout rows="*" columns="*" class="button btn-grey-gradient" [ngClass]="{'btn-dark-gradient' : service.placingRace.repeat === n}">x{{n}}>
-        <Button text="x{{n}}" class="button-internal" (tap)="setRepeat(n)"></Button>
+        <Button text="x{{n}}" class="button-internal" (tap)="setRepeat(n)" [isEnabled]="!service.placingRace.timeBlocked"></Button>
       </GridLayout>
     </GridLayout>
   </GridLayout>
 
 </GridLayout>
-
-
-<!-- <mat-grid-list class="playable-grid-buttons playable-grid-repeat" cols="8" rowHeight="{{rowHeight}}">
-  <mat-grid-tile *ngFor="let n of [1,2,3,4,5,6,7,8]">
-    <button (click)="setRepeat(n)" class="btn-reset btn-default btn-grey-gradient radius-5 elevation-z5" [ngClass]="{'btn-dark-gradient' : service.placingRace.repeat === n}">x{{n}}</button>
-  </mat-grid-tile>
-</mat-grid-list>  -->

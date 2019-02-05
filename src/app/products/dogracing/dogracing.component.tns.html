@@ -16,20 +16,29 @@
         <GridLayout rows="*" columns="*,*,*" class="special-box">
             <GridLayout row="0" col="0" shadow="3" cornerRadius="6" class="card">
                 <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
-                    <Button text="Lucky" class="button-internal" (tap)="placingLucky(lucky.Lucky1)" textTransform="none"></Button>
+                    <Button text="Lucky" class="button-internal" (tap)="placingLucky(lucky.Lucky1)" textTransform="none"
+                        [isEnabled]="!dogracingService.placingRace.timeBlocked"></Button>
                 </GridLayout>
             </GridLayout>
             <GridLayout row="0" col="1" shadow="3" cornerRadius="6" class="card">
                 <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
-                    <Button text="Lucky" class="button-internal" (tap)="placingLucky(lucky.Lucky2)" textTransform="none"></Button>
+                    <Button text="Lucky" class="button-internal" (tap)="placingLucky(lucky.Lucky2)" textTransform="none"
+                        [isEnabled]="!dogracingService.placingRace.timeBlocked"></Button>
                 </GridLayout>
             </GridLayout>
             <GridLayout row="0" col="2" shadow="3" cornerRadius="6" class="card">
                 <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
-                    <Button text="Lucky" class="button-internal" (tap)="placingLucky(lucky.Lucky3)" textTransform="none"></Button>
+                    <Button text="Lucky" class="button-internal" (tap)="placingLucky(lucky.Lucky3)" textTransform="none"
+                        [isEnabled]="!dogracingService.placingRace.timeBlocked"></Button>
                 </GridLayout>
             </GridLayout>
         </GridLayout>
+    </GridLayout>
+    <GridLayout row="2" rowSpan="2" class="overlay radius-5" *ngIf="dogracingService.placingRace.timeBlocked">
+        <StackLayout verticalAlignment="center">
+            <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png"
+                horizontalAlignment="center" verticalAlignment="center"></Image>
+        </StackLayout>
     </GridLayout>
     <!-- List of result -->
     <GridLayout row="4">
