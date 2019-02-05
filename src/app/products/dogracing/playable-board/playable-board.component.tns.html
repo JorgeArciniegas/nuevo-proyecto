@@ -1,0 +1,72 @@
+<GridLayout rows="6*,2*,*" columns="*">
+  <GridLayout class="playable-grid-buttons" rows="*,*,*" columns="*,2*,2*,2*,2*,2*,2*">
+    <CardView row="{{i}}" col="0" elevation="10" radius="10" class="card" *ngFor="let row of ['I','II','III']; let i = index;">
+      <GridLayout rows="*" columns="*" class="" class="playable-row-tile display">
+        <StackLayout verticalAlignment="center" horizontalAlignment="center">
+          <Label text="{{row}}" verticalAlignment="center"></Label>
+        </StackLayout>
+      </GridLayout>
+    </CardView>
+    <CardView row="0" col="{{i + 1}}" elevation="0" radius="30" class="card" *ngFor="let dog of service.dogList | filterByPosition: 1; let i = index;">
+      <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-dog-{{dog.number}}" [ngClass]="{'btn-dog-play-actived': dog.actived}"
+        [disabled]="!dog.selectable">
+        <StackLayout class="label"></StackLayout>
+        <Button text="{{dog.number}}" class="button-internal" (tap)="dogplaced(dog)"></Button>
+      </GridLayout>
+    </CardView>
+    <CardView row="1" col="{{i + 1}}" elevation="10" radius="30" class="card" *ngFor="let dog of service.dogList | filterByPosition: 2; let i = index;">
+      <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-dog-{{dog.number}}" [ngClass]="{'btn-dog-play-actived': dog.actived}"
+        [disabled]="!dog.selectable">
+        <StackLayout class="label"></StackLayout>
+        <Button text="{{dog.number}}" class="button-internal" (tap)="dogplaced(dog)"></Button>
+      </GridLayout>
+    </CardView>
+    <CardView row="2" col="{{i + 1}}" elevation="10" radius="30" class="card" *ngFor="let dog of service.dogList | filterByPosition: 3; let i = index;">
+      <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-dog-{{dog.number}}" [ngClass]="{'btn-dog-play-actived': dog.actived}"
+        [disabled]="!dog.selectable">
+        <StackLayout class="label"></StackLayout>
+        <Button text="{{dog.number}}" class="button-internal" (tap)="dogplaced(dog)"></Button>
+      </GridLayout>
+    </CardView>
+
+
+  </GridLayout>
+</GridLayout>
+
+<!-- <mat-grid-list class="playable-grid-buttons" cols="13" rowHeight="{{rowHeight *2}}">
+  <ng-container *ngFor="let row of ['I','II','III']; let i = index">
+    <mat-grid-tile>
+      <span class="playable-row-tile display radius-5">{{row}}</span>
+    </mat-grid-tile>
+    <mat-grid-tile *ngFor="let dog of service.dogList | filterByPosition: i+1" colspan="2">
+      <button (click)="dogplaced(dog)" [ngClass]="{'btn-dog-play-actived': dog.actived}" [disabled]="!dog.selectable"
+        class="btn btn-default btn-default-dog-play radius-15 btn-dog-{{dog.number}}">
+        <span>{{dog.number}}</span>
+      </button>
+    </mat-grid-tile>
+  </ng-container>
+</mat-grid-list>
+<mat-grid-list class="playable-grid-buttons playable-special-bets" cols="4" rowHeight="{{rowHeight *2}}">
+  <mat-grid-tile>
+    <button (click)="specialBets('ODD')" [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['ODD']) }"
+      class="btn-reset btn-default btn-success radius-10 elevation-z5">{{'ODD' | translate}}</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button (click)="specialBets('EVEN')" [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['EVEN']) }"
+      class="btn-reset btn-default btn-success radius-10 elevation-z5">{{'EVEN' | translate}}</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button (click)="specialBets('UNDER')" [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['UNDER']) }"
+      class="btn-reset btn-default  btn-success radius-10 elevation-z5">{{'UNDER' | translate}}</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button (click)="specialBets('OVER')" [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['OVER']) }"
+      class="btn-reset btn-default btn-success radius-10 elevation-z5">{{'OVER' | translate}}</button>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list class="playable-grid-buttons playable-grid-repeat" cols="8" rowHeight="{{rowHeight}}">
+  <mat-grid-tile *ngFor="let n of [1,2,3,4,5,6,7,8]">
+    <button (click)="setRepeat(n)" class="btn-reset btn-default btn-grey-gradient radius-5 elevation-z5" [ngClass]="{'btn-dark-gradient' : service.placingRace.repeat === n}">x{{n}}</button>
+  </mat-grid-tile>
+</mat-grid-list> -->
