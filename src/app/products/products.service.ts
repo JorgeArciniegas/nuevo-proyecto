@@ -18,6 +18,9 @@ export class ProductsService {
   public productNameSelectedSubscribe: Subject<string>;
   public productNameSelectedObserve: Observable<string>;
 
+  public timeBlocked = false;
+  public timeBlockedSubscribe: Subject<boolean>;
+
   private dialogProductDataSubject: Subject<BetOdds>;
 
   private playableBoardResetSubject: Subject<boolean>;
@@ -45,6 +48,13 @@ export class ProductsService {
     // Element for management the display
     this.polyfunctionalAreaSubject = new Subject<PolyfunctionalArea>();
     this.polyfunctionalAreaObservable = this.polyfunctionalAreaSubject.asObservable();
+    // time block
+    this.timeBlockedSubscribe = new Subject<boolean>();
+    this.timeBlockedSubscribe
+      .asObservable()
+      .subscribe((timeBlocked: boolean) => {
+        this.timeBlocked = timeBlocked;
+      });
     // Dialog management
     this.dialogProductDataSubject = new Subject<BetOdds>();
     this.dialogProductDataSubject.asObservable().subscribe((odds: BetOdds) => {
