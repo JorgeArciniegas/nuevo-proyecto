@@ -12,16 +12,16 @@
       <GridLayout rows="*,*,*,6*,*,*" columns="*">
         <StackLayout row="0">
           <!-- Area widget [Variabile] -->
-          <app-widget [rowHeight]="rowHeight"></app-widget>
+          <app-widget [rowHeight]="rowHeight" [timeBlocked]="service.timeBlocked"></app-widget>
         </StackLayout>
         <StackLayout row="1">
           <!-- Area polifunzionale / Smartcode -->
-          <app-display></app-display>
+          <app-display [timeBlocked]="service.timeBlocked"></app-display>
         </StackLayout>
         <StackLayout row="2">
           <!-- Area di gioco avanzata [VARIABILE] -->
           <GridLayout rows="*" columns="*" class="card">
-            <app-advance-game></app-advance-game>
+            <app-advance-game [timeBlocked]="service.timeBlocked"></app-advance-game>
           </GridLayout>
         </StackLayout>
         <StackLayout row="3">
@@ -44,7 +44,7 @@
         </GridLayout>
       </GridLayout>
     </GridLayout>
-    <GridLayout col="1" class="overlay radius-5" *ngIf="service.timeBlocked">
+    <GridLayout col="1" class="overlay radius-5" marginRight="3" *ngIf="service.timeBlocked">
       <StackLayout verticalAlignment="center">
         <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png"
           horizontalAlignment="center" verticalAlignment="center"></Image>
@@ -53,7 +53,7 @@
     <StackLayout col="2" class="product-coupon padding-right-6">
       <app-coupon [timeBlocked]="service.timeBlocked"></app-coupon>
     </StackLayout>
-    <GridLayout col="2" class="overlay radius-5" *ngIf="service.timeBlocked">
+    <GridLayout col="2" class="overlay radius-5" marginRight="6" *ngIf="service.timeBlocked">
       <StackLayout verticalAlignment="center">
         <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png"
           horizontalAlignment="center" verticalAlignment="center"></Image>

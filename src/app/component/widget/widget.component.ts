@@ -12,6 +12,8 @@ export class WidgetComponent implements OnInit {
 
   @Input()
   private rowHeight: number;
+  @Input()
+  public timeBlocked?: boolean = false;
 
   public widgetIcon: IconSize;
 

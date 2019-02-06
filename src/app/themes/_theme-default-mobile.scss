@@ -97,6 +97,7 @@
 			}
 			.product-coupon {
 				.btn-coupon-board {
+					font-weight: 600;
 					.actived {
 						@extend %btn-success-gradient;
 					}

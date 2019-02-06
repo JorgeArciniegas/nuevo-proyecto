@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TypePlacingRace } from '../dogracing/dogracing.models';
 import { DogracingService } from '../dogracing/dogracing.service';
 
@@ -8,6 +8,8 @@ import { DogracingService } from '../dogracing/dogracing.service';
   styleUrls: ['./advance-game.component.scss']
 })
 export class AdvanceGameComponent implements OnInit {
+  @Input()
+  public timeBlocked = false;
   public buttons: AdvButton[] = [];
   typePlacingRace: typeof TypePlacingRace = TypePlacingRace;
   constructor(public service: DogracingService) {}
