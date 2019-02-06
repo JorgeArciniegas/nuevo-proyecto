@@ -56,8 +56,9 @@
 					border-radius: 5;
 					margin: 2 5;
 					@extend %card-title-mobile;
-					&.small {
+					.small {
 						font-size: 12;
+						margin: -2 0;
 					}
 
 					.clock-icon {

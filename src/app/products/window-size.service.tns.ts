@@ -21,7 +21,7 @@ export class WindowSizeService {
       small: aspectRatio > 1.45
     };
 
-    console.log('aspectRatio', aspectRatio);
+    console.log('aspectRatio', aspectRatio, aspectRatio > 1.45);
 
     return dataAtt;
   }
