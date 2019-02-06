@@ -10,9 +10,12 @@
 		font-size: 14;
 		font-weight: 700;
 		padding: 0;
-	}
 
-	.btn-default-dog-play {
-		border-width: 2;
+		border-radius: 10;
+
+		&.small {
+			border-radius: 5;
+			font-size: 12;
+		}
 	}
 }

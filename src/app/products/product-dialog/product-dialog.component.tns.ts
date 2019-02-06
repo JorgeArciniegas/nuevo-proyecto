@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AppSettings } from '../../app.settings';
 import { DialogService } from '../dialog.service';
 import { BetOdd, DialogData } from '../products.model';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-product-dialog',
@@ -19,28 +20,29 @@ export class ProductDialogComponent implements OnInit {
   public page = 0;
   public maxPage = 0;
   public columns = '';
+  public rows = '';
   public title: string;
   public betOdds: BetOdd[];
   public emptyOdds: string[] = [];
 
   constructor(
     private dialog: DialogService,
+    private productService: ProductsService,
     public readonly appSettings: AppSettings
   ) {
     this.settings = appSettings;
+    if (productService.windowSize.small) {
+      this.rowNumber = 2;
+    }
   }
 
   ngOnInit(): void {
     this.title = this.data.betOdds.title;
-    // if (this.data.breakpoint < 6) {
-    //   this.columnNumber = 2;
-    // } else if (this.data.breakpoint === 6) {
-    //   this.columnNumber = 3;
-    // } else {
-    //   this.columnNumber = 4;
-    // }
     for (let index = 0; index < this.columnNumber - 1; index++) {
       this.columns += ',*';
+    }
+    for (let index = 0; index < this.rowNumber; index++) {
+      this.rows += ',5*';
     }
     this.maxItems = this.rowNumber * this.columnNumber;
     this.maxPage = Math.ceil(this.data.betOdds.odds.length / this.maxItems);

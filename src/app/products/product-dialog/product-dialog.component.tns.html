@@ -7,13 +7,13 @@
         <Label col="1" text="{{page + 1}}/{{maxPage}}" *ngIf="maxPage > 1" class="indicator" verticalAlignment="bottom"
           horizontalAlignment="right" verticalAlignment="bottom"></Label>
       </GridLayout>
-      <GridLayout row="1" rows="2*,5*,5*,5*,2*" columns="*{{columns}}">
+      <GridLayout row="1" rows="2*{{rows}},2*" columns="*{{columns}}">
         <!-- Scroll -->
         <GridLayout row="0" colSpan="{{columnNumber}}" class="card-odd scroll" (tap)="previusOdds()" *ngIf="maxPage > 1"
           [ngClass]="{'disabled': page <= 0}" [isEnabled]="page > 0">
           <Image width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Up.png" verticalAlignment="center"></Image>
         </GridLayout>
-        <GridLayout row="4" colSpan="{{columnNumber}}" class="card-odd scroll" (tap)="nextOdds()" *ngIf="maxPage > 1"
+        <GridLayout row="{{rowNumber + 1}}" colSpan="{{columnNumber}}" class="card-odd scroll" (tap)="nextOdds()" *ngIf="maxPage > 1"
           [ngClass]="{'disabled': page >= maxPage - 1}" [isEnabled]="page < maxPage - 1">
           <Image width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Down.png" verticalAlignment="center"></Image>
         </GridLayout>
