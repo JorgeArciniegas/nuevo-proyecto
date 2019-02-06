@@ -58,6 +58,7 @@ export class PlacingRace {
     this.amount = 0;
     this.isSpecialBets = false;
     this.dogs = [];
+    this.timeBlocked = true;
     // this.dogs = new Dog();
   }
 }

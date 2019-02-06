@@ -7,6 +7,8 @@ import { DialogData } from './products.model';
   providedIn: 'root'
 })
 export class DialogService {
+  public showDialog = false;
+  public dialogData: DialogData;
   private dialogProductRef = null;
 
   constructor(private dialog: MatDialog) {}

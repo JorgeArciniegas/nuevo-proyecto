@@ -18,7 +18,7 @@ export class DogracingService {
   private cacheRaces: RaceApi[] = [];
   // working variable
   private remmaningTime: RaceTime = new RaceTime();
-  placingRace: PlacingRace; // place the global race
+  placingRace: PlacingRace = new PlacingRace(); // place the global race
   placingRaceSubject: Subject<PlacingRace>;
 
   public currentRaceSubscribe: Subject<number>;

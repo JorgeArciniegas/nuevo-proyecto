@@ -228,6 +228,38 @@
 		.bg-playable {
 			@extend %bg-default;
 		}
+
+		.dialog {
+			@extend %dialog-mobile;
+
+			.odds-grid {
+				.card-odd {
+					@extend %dialog-card-mobile;
+
+					.top-window {
+						@extend %dialog-card-header;
+					}
+
+					.odd {
+						@extend %btn-success-gradient;
+					}
+				}
+
+				.btn-close {
+					@extend %btn-transparent;
+				}
+
+				.scroll {
+					&.disabled {
+						opacity: 0.1;
+					}
+				}
+
+				.indicator {
+					@extend %indicator;
+				}
+			}
+		}
 	}
 }
 

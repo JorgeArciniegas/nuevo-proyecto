@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppSettings } from '../../app.settings';
+import { DialogService } from '../dialog.service';
 import { ProductsService } from '../products.service';
 import { Lucky } from './dogracing.models';
 import { DogracingService } from './dogracing.service';
@@ -22,6 +23,7 @@ export class DogracingComponent implements OnInit {
     private route: ActivatedRoute,
     public service: ProductsService,
     public dogracingService: DogracingService,
+    public dialog: DialogService,
     public readonly appSettings: AppSettings
   ) {
     this.settings = appSettings;

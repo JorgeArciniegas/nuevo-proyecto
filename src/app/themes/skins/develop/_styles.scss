@@ -332,9 +332,21 @@ $gradient-dark2: #000000;
 	border: 1px solid $border-cartd-title;
 	border-radius: 5px;
 }
+%dialog-mobile {
+	background-color: $color-bg-primary;
+	color: $color-text-primary;
+	border-width: 1;
+	border-color: $border-cartd-title;
+	border-radius: 5;
+}
 %dialog-card {
 	background-color: $color-bg-secodary;
 	border: 1px solid $border-cartd-title;
+}
+%dialog-card-mobile {
+	background-color: $color-bg-secodary;
+	border-width: 1;
+	border-color: $border-cartd-title;
 }
 %dialog-card-header {
 	background-color: $border-cartd-title;

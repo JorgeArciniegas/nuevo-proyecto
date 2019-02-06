@@ -20,6 +20,7 @@ import { DisplayComponent } from './component/display/display.component';
 import { ApplicationMenuComponent } from './component/header/application-menu/application-menu.component';
 import { HeaderComponent } from './component/header/header.component';
 import { UserMenuComponent } from './component/header/user-menu/user-menu.component';
+import { FloorPipe } from './component/pipe/floor.pipe';
 import { WidgetComponent } from './component/widget/widget.component';
 import { AdvanceGameComponent } from './products/advance-game/advance-game.component';
 import { DogracingComponent } from './products/dogracing/dogracing.component';
@@ -28,6 +29,7 @@ import { FilterByPositionPipe } from './products/dogracing/playable-board/filter
 import { PlayableBoardComponent } from './products/dogracing/playable-board/playable-board.component';
 import { RaceControlComponent } from './products/dogracing/race-control/race-control.component';
 import { ResultListComponent } from './products/dogracing/result-list/result-list.component';
+import { ProductDialogComponent } from './products/product-dialog/product-dialog.component.tns';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
 
@@ -52,7 +54,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ResultListComponent,
     PlayableBoardComponent,
     ListRaceComponent,
-    FilterByPositionPipe
+    FilterByPositionPipe,
+    ProductDialogComponent,
+    FloorPipe
   ],
   imports: [
     NativeScriptHttpClientModule,

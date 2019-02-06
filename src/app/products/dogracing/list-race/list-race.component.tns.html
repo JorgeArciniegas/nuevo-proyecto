@@ -1,4 +1,4 @@
-<GridLayout rows="*" columns="*,*,*,*,*" class="list-race">
+<GridLayout rows="*" columns="*,*,*,*,*" class="list-race" *ngIf="show">
   <GridLayout col="{{i}}" rows="*,*" columns="*" *ngFor="let race of dogracingService.raceDetails.races; let i = index;"
     (tap)="raceSelecting(i)">
     <GridLayout row="0" shadow="3" cornerRadius="6" class="card-box">

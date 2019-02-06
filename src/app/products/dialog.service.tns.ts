@@ -5,9 +5,16 @@ import { DialogData } from './products.model';
   providedIn: 'root'
 })
 export class DialogService {
+  public showDialog = false;
+  public dialogData: DialogData;
+
   constructor() {}
 
-  openDialog(dialogData: DialogData) {}
-
-  closeDialog(): void {}
+  openDialog(dialogData: DialogData) {
+    this.dialogData = dialogData;
+    this.showDialog = true;
+  }
+  closeDialog(): void {
+    this.showDialog = false;
+  }
 }
