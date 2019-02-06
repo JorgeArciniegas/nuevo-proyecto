@@ -1,11 +1,17 @@
 .game-name {
 	font-size: 38;
 	font-weight: 900;
+	&.small {
+		font-size: 28;
+	}
 }
 
 .current-race {
 	font-size: 26;
 	font-weight: 900;
+	&.small {
+		font-size: 24;
+	}
 }
 .number {
 	margin-left: 8;
@@ -20,5 +26,8 @@
 		padding: 3 10;
 		font-size: 26;
 		font-weight: 900;
+		.small {
+			font-size: 22;
+		}
 	}
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppSettings } from '../../app.settings';
+import { ProductsService } from '../../products/products.service';
 
 @Component({
   selector: 'app-coupon',
@@ -12,7 +13,10 @@ export class CouponComponent implements OnInit {
   @Input()
   public timeBlocked: boolean;
 
-  constructor(public readonly appSettings: AppSettings) {
+  constructor(
+    public readonly appSettings: AppSettings,
+    public productService: ProductsService
+  ) {
     this.settings = appSettings;
     this.active = 'multi';
   }

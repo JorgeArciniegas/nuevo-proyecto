@@ -10,12 +10,13 @@
   </GridLayout>
   <GridLayout row="1" shadow="3" cornerRadius="6" class="card">
     <GridLayout rows="*" columns="*" class="sub-display">
-      <StackLayout class="title" verticalAlignment="center" horizontalAlignment="center">
+      <StackLayout class="title" [ngClass]="{'small': productService.windowSize.small}" verticalAlignment="center"
+        horizontalAlignment="center">
         <Label text="{{ 'tabCoupon' | translate }}"></Label>
       </StackLayout>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="2" rows="*" columns="*,*" class="card display btn-coupon-board">
+  <GridLayout row="2" rows="*" columns="*,*" class="card display btn-coupon-board" [ngClass]="{'small': productService.windowSize.small}">
     <GridLayout col="0" class="left {{active == 'single' ? 'actived' : ''}}" (tap)="couponTab('single')">
       <Label text="{{'single' | translate}}" horizontalAlignment="center" verticalAlignment="center" textTransform="uppercase"></Label>
     </GridLayout>
@@ -28,8 +29,9 @@
   </StackLayout>
   <GridLayout row="4">
     <GridLayout rows="*,3*" columns="*" class="card display-amount">
-      <Label row="0" text="{{'potentialMaxWinner' | translate}}" class="title" textTransform="uppercase"></Label>
-      <Label row="1" text="10.000.000 COP" class="amount"></Label>
+      <Label row="0" text="{{'potentialMaxWinner' | translate}}" class="title" [ngClass]="{'small': productService.windowSize.small}"
+        textTransform="uppercase"></Label>
+      <Label row="1" text="10.000.000 COP" class="amount" [ngClass]="{'small': productService.windowSize.small}"></Label>
     </GridLayout>
   </GridLayout>
   <GridLayout row="5" rows="*" columns="*" class="card button btn-success">
