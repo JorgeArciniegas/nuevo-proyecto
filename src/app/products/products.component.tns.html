@@ -30,8 +30,9 @@
         </StackLayout>
         <!-- VINCITA POTENZIALE MASSIMA -->
         <GridLayout row="4" rows="*,3*" columns="*" class="card display-amount">
-          <Label row="0" text="{{'amountPlace' | translate}}" class="title" textTransform="uppercase"></Label>
-          <Label row="1" text="10.000.000 COP" class="amount"></Label>
+          <Label row="0" text="{{'amountPlace' | translate}}" class="title" [ngClass]="{'small': service.windowSize.small}"
+            textTransform="uppercase"></Label>
+          <Label row="1" text="10.000.000 COP" class="amount" [ngClass]="{'small': service.windowSize.small}"></Label>
         </GridLayout>
         <GridLayout row="5" rows="*" columns="*,*" class="card">
           <!-- Area polifunzionale [Fissa]  -->

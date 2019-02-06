@@ -13,7 +13,7 @@ export class ProductDialogComponent implements OnInit {
   private data: DialogData;
 
   public settings: AppSettings;
-  private rowNumber = 2;
+  private rowNumber = 3;
   public columnNumber = 3;
   private maxItems = 0;
   public page = 0;

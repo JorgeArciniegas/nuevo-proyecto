@@ -17,8 +17,11 @@ export class WindowSizeService {
       height: h,
       width: w,
       aspectRatio: aspectRatio,
-      columnHeight: hgeneral
+      columnHeight: hgeneral,
+      small: aspectRatio > 1.45
     };
+
+    console.log('aspectRatio', aspectRatio);
 
     return dataAtt;
   }
