@@ -1,7 +1,12 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" actionBarHidden="true">
     <GridLayout rows="*" id="app" class="app" [ngClass]="settings.theme">
-        <StackLayout class="main-content">
+        <StackLayout class="main-content" *ngIf="connectionAviable">
             <router-outlet></router-outlet>
         </StackLayout>
+        <GridLayout class="main-content" *ngIf="!connectionAviable">
+            <StackLayout verticalAlignment="center" horizontalAlignment="center">
+                <Label text="No connection available"></Label>
+            </StackLayout>
+        </GridLayout>
     </GridLayout>
 </Page>
