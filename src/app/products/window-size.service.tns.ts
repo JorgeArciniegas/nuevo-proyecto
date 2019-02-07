@@ -18,10 +18,10 @@ export class WindowSizeService {
       width: w,
       aspectRatio: aspectRatio,
       columnHeight: hgeneral,
-      small: aspectRatio > 1.45
+      small: aspectRatio > 1.45 && screen.mainScreen.heightPixels < 1500
     };
 
-    console.log('aspectRatio', aspectRatio, aspectRatio > 1.45);
+    console.log('aspectRatio', aspectRatio, dataAtt);
 
     return dataAtt;
   }
