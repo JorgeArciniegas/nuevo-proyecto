@@ -1,0 +1,52 @@
+<GridLayout rows="3*,2*,9*,2*,2*" columns="*" class="dog-racing">
+    <!-- Race control -->
+    <GridLayout row="0">
+        <app-race-control></app-race-control>
+    </GridLayout>
+    <!-- List races -->
+    <GridLayout row="1">
+        <app-list-race [show]="!dialog.showDialog"></app-list-race>
+    </GridLayout>
+    <!-- Playable board -->
+    <GridLayout row="2">
+        <app-playable-board [show]="!dialog.showDialog"></app-playable-board>
+    </GridLayout>
+    <!-- Special race -->
+    <GridLayout row="3">
+        <GridLayout rows="*" columns="*,*,*" class="special-box" *ngIf="!dialog.showDialog">
+            <GridLayout row="0" col="0" shadow="3" cornerRadius="6" class="card">
+                <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
+                    <Button text="Lucky" class="button-internal" (tap)="placingLucky(lucky.Lucky1)" textTransform="none"
+                        [isEnabled]="!dogracingService.placingRace.timeBlocked"></Button>
+                </GridLayout>
+            </GridLayout>
+            <GridLayout row="0" col="1" shadow="3" cornerRadius="6" class="card">
+                <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
+                    <Button text="Lucky" class="button-internal" (tap)="placingLucky(lucky.Lucky2)" textTransform="none"
+                        [isEnabled]="!dogracingService.placingRace.timeBlocked"></Button>
+                </GridLayout>
+            </GridLayout>
+            <GridLayout row="0" col="2" shadow="3" cornerRadius="6" class="card">
+                <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
+                    <Button text="Lucky" class="button-internal" (tap)="placingLucky(lucky.Lucky3)" textTransform="none"
+                        [isEnabled]="!dogracingService.placingRace.timeBlocked"></Button>
+                </GridLayout>
+            </GridLayout>
+        </GridLayout>
+    </GridLayout>
+    <GridLayout row="2" rowSpan="2" class="overlay radius-5" *ngIf="dogracingService.placingRace && dogracingService.placingRace.timeBlocked == true">
+        <StackLayout verticalAlignment="center">
+            <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png"
+                horizontalAlignment="center" verticalAlignment="center"></Image>
+        </StackLayout>
+    </GridLayout>
+    <!-- List of result -->
+    <GridLayout row="4">
+        <app-result-list></app-result-list>
+    </GridLayout>
+
+    <!-- Dialog -->
+    <GridLayout row="1" rowSpan="3" *ngIf="dialog.showDialog">
+        <app-product-dialog [data]="dialog.dialogData"></app-product-dialog>
+    </GridLayout>
+</GridLayout>

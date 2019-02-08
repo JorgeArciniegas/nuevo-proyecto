@@ -10,7 +10,9 @@ import { DogracingService } from '../dogracing.service';
 })
 export class PlayableBoardComponent implements OnInit, OnDestroy {
   @Input()
-  rowHeight: number;
+  public rowHeight: number;
+  @Input()
+  public show?: boolean;
 
   specialBet: typeof SpecialBet = SpecialBet;
 

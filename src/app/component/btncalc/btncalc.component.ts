@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Product } from 'src/app/products/models/product.model';
-import { ProductsService } from 'src/app/products/products.service';
-import { environment } from 'src/environments/environment';
+import { AppSettings } from '../../app.settings';
+import { Product } from '../../products/models/product.model';
+import { ProductsService } from '../../products/products.service';
 
 @Component({
   selector: 'app-btncalc',
@@ -14,19 +14,22 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   product: Product;
   @Input()
   rowHeight: number;
-  constructor(public productService: ProductsService) {
+  constructor(
+    public productService: ProductsService,
+    private readonly appSetting: AppSettings
+  ) {
     this.productNameSelectedSubscribe = this.productService.productNameSelectedObserve.subscribe(
       v => {
-        const product: Product[] = environment.products.filter(
+        const product: Product[] = appSetting.products.filter(
           item => item.name === v
         );
-
         this.product = product[0];
       }
     );
   }
 
   ngOnInit(): void {}
+
   ngOnDestroy(): void {
     this.productNameSelectedSubscribe.unsubscribe();
   }

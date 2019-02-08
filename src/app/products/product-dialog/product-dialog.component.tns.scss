@@ -1,0 +1,33 @@
+.odds-grid {
+	margin: 2 15;
+
+	.title {
+		font-size: 26;
+	}
+
+	.indicator {
+		margin: 5;
+	}
+
+	.card-odd {
+		border-radius: 5;
+		margin: 3;
+
+		.first-row {
+			padding: 5;
+		}
+
+		.odd {
+			margin: 2 5 5;
+		}
+
+		&.notSelected {
+			opacity: 0.2;
+		}
+	}
+
+	.btn-close {
+		background-color: transparent;
+		font-size: 16;
+	}
+}

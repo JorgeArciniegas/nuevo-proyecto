@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ProductsService } from '../../products.service';
 import { DogracingService } from '../dogracing.service';
 
 @Component({
@@ -10,7 +11,10 @@ export class ResultListComponent implements OnInit {
   @Input()
   public rowHeight: number;
 
-  constructor(public dogracingService: DogracingService) {}
+  constructor(
+    public dogracingService: DogracingService,
+    public productService: ProductsService
+  ) {}
 
   ngOnInit() {}
 }

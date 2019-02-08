@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppSettings } from 'src/app/app.settings';
+import { AppSettings } from '../../../app.settings';
 import { RaceTime } from '../dogracing.models';
 import { DogracingService } from '../dogracing.service';
 

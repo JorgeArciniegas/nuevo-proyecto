@@ -3,6 +3,7 @@ export interface WindowSize {
   width: number;
   aspectRatio: number;
   columnHeight?: number;
+  small?: boolean;
 }
 
 export class PolyfunctionalArea {

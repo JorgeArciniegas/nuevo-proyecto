@@ -1,0 +1,16 @@
+<GridLayout shadow="3" cornerRadius="6" class="card">
+  <GridLayout rows="*,*" columns="14*,2*" class="display">
+    <GridLayout row="0" col="0" rows="*" columns="5*,3*" orientation="horizontal" class="title" verticalAlignment="center">
+      <Label col="0" *ngIf="polyfunctionalValue && polyfunctionalValue.selection" text="{{'SMARTCODE.'+polyfunctionalValue.selection | translate}}"
+        verticalAlignment="center" horizontalAlignment="left"></Label>
+      <Label col="1" *ngIf="polyfunctionalValue" text="{{polyfunctionalValue.value}}" verticalAlignment="center"
+        horizontalAlignment="right"></Label>
+    </GridLayout>
+    <Label row="1" *ngIf="polyfunctionalValue && polyfunctionalValue.odd > 0" class="odd" verticalAlignment="center"
+      text="( {{polyfunctionalValue.odd | number:'1.2-2'}} )"></Label>
+    <GridLayout rowSpan="2" col="1" rows="*" columns="*" (tap)="detailOdds()">
+      <Image *ngIf="polyfunctionalValue  && polyfunctionalValue.selection" stretch="aspectFit" margin="4" src="~/app/themes/skins/{{settings.theme}}/icon/Down.png"
+        verticalAlignment="center" [isEnabled]="!timeBlocked"></Image>
+    </GridLayout>
+  </GridLayout>
+</GridLayout>

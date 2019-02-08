@@ -1,0 +1,21 @@
+<GridLayout rows="*" columns="28*,28*,42*" class="race-control">
+  <StackLayout col="1" verticalAlignment="center">
+    <Label class="game-name" [ngClass]="{'small': productService.windowSize.small}" text="{{ 'dogRacingLabel' | translate }}"
+      textWrap="true" verticalAlignment="center"></Label>
+  </StackLayout>
+  <GridLayout col="2" rows="2*,3*" columns="*" *ngIf="dogracingService.raceDetails.races[dogracingService.raceDetails.currentRace] != null">
+    <StackLayout row="0" orientation="horizontal" horizontalAlignment="right">
+      <Label class="current-race" [ngClass]="{'small': productService.windowSize.small}" verticalAlignment="center"
+        text="{{ dogracingService.raceDetails.races[dogracingService.raceDetails.currentRace].label }}"></Label>
+      <Label *ngIf="settings.showRaceId" class="number" verticalAlignment="center" text="#{{ dogracingService.raceDetails.races[dogracingService.raceDetails.currentRace].number }}"></Label>
+    </StackLayout>
+    <StackLayout row="1" shadow="5" [cornerRadius]="5" class="time" horizontalAlignment="right" verticalAlignment="center">
+      <StackLayout orientation="horizontal" class="time-panel" verticalAlignment="center">
+        <Image height="26" stretch="aspectFit" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-timer-24px.png"
+          verticalAlignment="center"></Image>
+        <Label [ngClass]="{'small': productService.windowSize.small}" text="{{ dogracingService.raceDetails.raceTime.minute | number: '2.0-0' }}:{{ dogracingService.raceDetails.raceTime.second | number: '2.0-0' }}"
+          verticalAlignment="center"></Label>
+      </StackLayout>
+    </StackLayout>
+  </GridLayout>
+</GridLayout>

@@ -6,7 +6,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { AppSettings } from 'src/app/app.settings';
+import { AppSettings } from '../../app.settings';
 import { BetOdd, DialogData } from '../products.model';
 
 @Component({

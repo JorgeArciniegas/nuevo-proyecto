@@ -8,7 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CouponComponent implements OnInit {
   @Input()
   rowHeight: number;
-  constructor() {}
+
+  constructor() {
+  }
 
   ngOnInit() {}
 }

@@ -9,6 +9,8 @@ import { DogracingService } from '../dogracing.service';
 export class ListRaceComponent implements OnInit {
   @Input()
   public rowHeight: number;
+  @Input()
+  public show?: boolean;
 
   constructor(public dogracingService: DogracingService) {}
 

@@ -1,0 +1,6 @@
+<FlexboxLayout class="advance-game" flexDirection="row">
+  <GridLayout *ngFor="let btn of buttons" flexGrow="1" rows="*" columns="*" class="card button btn-advance-game">
+    <Button text="{{btn.label}}" class="button-internal" (tap)="setTypePlacing(btn.code)" [isEnabled]="!timeBlocked"></Button>
+    <!-- [ngClass]="{'actived' : service.placingRace.typePlace === btn.code}" -->
+  </GridLayout>
+</FlexboxLayout>

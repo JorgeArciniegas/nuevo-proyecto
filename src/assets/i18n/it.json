@@ -8,6 +8,9 @@
   "single": "Singola",
   "dogRacingLabel": "DOG RACING",
   "race": "Race",
+  "piazza": "Piazza",
+  "paga": "Paga",
+  "annulla": "Annulla",
   "SMARTCODE": {
     "WINNER": "VINCENTE",
     "PLACED": "P. SECONDO",
@@ -24,7 +27,7 @@
   },
   "TITLE": {
     "WINNER": "Vincente",
-    "PLACED": "Oiazzato Secondo",
+    "PLACED": "Piazzato Secondo",
     "SHOW": "Piazzato Terzo",
     "AO": "Accoppiata in ordine",
     "AOX": "Accoppiata in ordine con Campo",

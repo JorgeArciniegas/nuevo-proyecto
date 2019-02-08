@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AppSettings } from 'src/app/app.settings';
+import { AppSettings } from '../../app.settings';
 import { IconSize } from '../model/iconSize.model';
 
 @Component({
@@ -12,6 +12,8 @@ export class WidgetComponent implements OnInit {
 
   @Input()
   private rowHeight: number;
+  @Input()
+  public timeBlocked?: boolean = false;
 
   public widgetIcon: IconSize;
 

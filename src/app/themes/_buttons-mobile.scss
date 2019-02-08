@@ -1,0 +1,81 @@
+.btn-default-dog-play {
+	border-width: 2;
+	&.actived {
+		background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+	}
+	&.btn-dog-play-actived {
+		border-color: #ffca18;
+	}
+	&.disabled {
+		opacity: 0.1;
+	}
+}
+
+.btn-dog-1 {
+	background: #ff0000;
+	border-color: #ff0000;
+}
+.btn-dog-2 {
+	background: #4472c4;
+	border-color: #4472c4;
+}
+.btn-dog-3 {
+	background: #fff;
+	color: #000;
+	border-color: #fff;
+}
+.btn-dog-4 {
+	background: #000;
+	border-color: #fff;
+}
+.btn-dog-5 {
+	background: #f25900;
+	border-color: #f25900;
+}
+.btn-dog-6 {
+	background: linear-gradient(
+		to bottom,
+		#000,
+		#000 15%,
+		#fff 15%,
+		#fff 30%,
+		#000 30%,
+		#000 45%,
+		#fff 45%,
+		#fff 60%,
+		#000 60%,
+		#000 75%,
+		#fff 75%,
+		#fff 90%,
+		#000 90%,
+		#000 100%
+	);
+	color: #ff0000;
+	border-color: #fff;
+	.label {
+		background: #fff;
+		border-radius: 50%;
+		width: 50%;
+		height: 70%;
+		text-align: center;
+	}
+}
+
+.playable-special-bets {
+	.button {
+		border-width: 2;
+		border-color: transparent;
+		&.actived {
+			border-color: #ffca18;
+		}
+	}
+}
+// .playable-grid-repeat,
+// .advance-game {
+//   button {
+//     font-size: 2.8vh;
+//     &.actived {
+//       box-shadow: 0px 0px 5px 3px #ffca18;
+//     }
+//   }
+// }

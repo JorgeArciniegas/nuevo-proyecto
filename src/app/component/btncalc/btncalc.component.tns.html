@@ -1,0 +1,90 @@
+<GridLayout #gridbtn rows="*,*,*,*,*,*" columns="*,*,*,*" class="grid-btn-calc">
+  <GridLayout row="0" col="{{i}}" height="{{amountIcon.height - 1}}" width="{{amountIcon.width - 1}}" shadow="3"
+    cornerRadius="{{amountIcon.height/2}}" class="card" *ngFor="let amount of product.defaultAmount; let i = index">
+    <GridLayout rows="*" columns="*" class="button btn-amount-{{i+1}}" height="{{amountIcon.height}}" width="{{amountIcon.width}}"
+      borderRadius="{{amountIcon.height/2}}">
+      <Button text="{{amount}}" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <!-- BTN calculator -->
+  <GridLayout row="1" col="0" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="1" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="1" col="1" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="2" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="1" col="2" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="3" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="2" col="0" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="4" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="2" col="1" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="5" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="2" col="2" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="6" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="3" col="0" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="7" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="3" col="1" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="8" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="3" col="2" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="9" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="4" col="0" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard">
+      <Button text="0" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="4" col="1" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard small">
+      <Button text="00" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="4" col="2" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard small">
+      <Button text="000" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="1" col="3" rowSpan="3" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-success" (tap)="plus()">
+      <Button text="+" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="4" col="3" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-warning" (doubleTap)="clearAll()">
+      <Button text="C" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="5" col="0" colSpan="2" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
+      <Button text="TOT" class="button-internal" textTransform="uppercase" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="5" col="2" colSpan="2" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
+      <Button text="COL" class="button-internal" textTransform="uppercase" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+</GridLayout>

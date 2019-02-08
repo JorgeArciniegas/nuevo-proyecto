@@ -1,0 +1,11 @@
+<FlexboxLayout flexDirection="row" alignItems="flex-start">
+    <!-- MENU -->
+    <Image class="menu" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-menu-24px.png" stretch="aspectFit"></Image>
+    <!-- LOGO -->
+    <Image class="logo" src="~/app/themes/skins/{{settings.theme}}/image/Logo-header.png" stretch="aspectFit"></Image>
+    <!-- BUTTONS -->
+    <StackLayout *ngFor="let prod of settings.products" class="prod" (tap)="productSelecting(prod.name)" [ngClass]="{'selected': prod.name == btnSelected}">
+        <Image src="~/app/themes/skins/{{settings.theme}}/icon/{{prod.toolbarButton.icon}}.png" stretch="aspectFit"
+            class="radius-5"></Image>
+    </StackLayout>
+</FlexboxLayout>

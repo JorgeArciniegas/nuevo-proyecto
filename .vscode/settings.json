@@ -1,3 +1,4 @@
 {
-  "prettier.disableLanguages": ["vue", "html", "css", "scss"]
+  "prettier.disableLanguages": ["vue", "html", "css", "scss"],
+  "scssFormatter.useTabs": true
 }

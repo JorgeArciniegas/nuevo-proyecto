@@ -1,31 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import {
-  CountDown,
-  EventResults,
-  Market,
-  Race as RaceApi,
-  SportDetail,
-  Tournament,
-  TreeSports
-} from 'src/app/services/vgen.model';
-import { VgenService } from 'src/app/services/vgen.service';
+import { interval, Observable, Subject, timer } from 'rxjs';
+import { CountDown, EventResults, Market, Race as RaceApi, SportDetail, Tournament, TreeSports } from '../../services/vgen.model';
+import { VgenService } from '../../services/vgen.service';
 import { BetOdd, PolyfunctionalArea } from '../products.model';
 import { ProductsService } from '../products.service';
-import {
-  Dog,
-  Lucky,
-  PlacingRace,
-  Podium,
-  Race,
-  RaceDetail,
-  RaceResult,
-  RaceTime,
-  Smartcode,
-  SmartCodeType,
-  SpecialBet,
-  SpecialBetValue
-} from './dogracing.models';
+import { Dog, Lucky, PlacingRace, Podium, Race, RaceDetail, RaceResult, RaceTime, Smartcode, SmartCodeType, SpecialBet, SpecialBetValue } from './dogracing.models';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +18,7 @@ export class DogracingService {
   private cacheRaces: RaceApi[] = [];
   // working variable
   private remmaningTime: RaceTime = new RaceTime();
-  placingRace: PlacingRace; // place the global race
+  placingRace: PlacingRace = new PlacingRace(); // place the global race
   placingRaceSubject: Subject<PlacingRace>;
 
   public currentRaceSubscribe: Subject<number>;
@@ -59,7 +38,7 @@ export class DogracingService {
     this.raceDetails = new RaceDetail();
     this.raceDetails.currentRace = 0;
 
-    Observable.interval(1000).subscribe(() => this.getTime());
+    interval(1000).subscribe(() => this.getTime());
 
     this.currentRaceSubscribe = new Subject<number>();
     this.currentRaceObserve = this.currentRaceSubscribe.asObservable();
@@ -136,6 +115,7 @@ export class DogracingService {
           } else {
             this.placingRace.timeBlocked = false;
           }
+          this.productService.timeBlockedSubscribe.next(this.placingRace.timeBlocked);
         }
         // showed second
         this.raceDetails.raceTime.second = this.remmaningTime.second;
@@ -251,7 +231,7 @@ export class DogracingService {
 
   loadLastResult(delay: boolean = true): void {
     if (delay) {
-      Observable.timer(10000).subscribe(() => this.getLastResult());
+      timer(10000).subscribe(() => this.getLastResult());
     } else {
       this.getLastResult();
     }
@@ -259,7 +239,7 @@ export class DogracingService {
 
   getLastResult() {
     this.listResult = [];
-    Observable.timer(300).subscribe(() => {
+    timer(300).subscribe(() => {
       this.vgenService
         .latesResult(8, 'DOG')
         .then((eventResults: EventResults) => {

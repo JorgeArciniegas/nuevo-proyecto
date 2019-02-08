@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { AppSettings } from '../../app.settings';
+import { DialogService } from '../dialog.service';
 import { ProductsService } from '../products.service';
 import { Lucky } from './dogracing.models';
 import { DogracingService } from './dogracing.service';
@@ -13,6 +14,7 @@ import { DogracingService } from './dogracing.service';
 export class DogracingComponent implements OnInit {
   public rowHeight: number;
   lucky: typeof Lucky = Lucky;
+  public settings: AppSettings;
 
   // Lucky last random extract
   oldLucky: string;
@@ -21,8 +23,10 @@ export class DogracingComponent implements OnInit {
     private route: ActivatedRoute,
     public service: ProductsService,
     public dogracingService: DogracingService,
-    public sanitizer: DomSanitizer
+    public dialog: DialogService,
+    public readonly appSettings: AppSettings
   ) {
+    this.settings = appSettings;
     service.productNameSelectedSubscribe.next(route.snapshot.data.productName);
   }
 

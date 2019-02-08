@@ -1,0 +1,26 @@
+<FlexboxLayout flexDirection="row" justifyContent="flex-end" class="user-menu">
+  <!-- NOTIFICATION -->
+  <AbsoluteLayout [width]="barHeight" [height]="barHeight" class="notification">
+    <Image stretch="aspectFit" [top]="barHeight * 0.25" [left]="barHeight * 0.15" [width]="notifyIcon.width" [height]="notifyIcon.height"
+      class="clock-icon" src="~/app/themes/skins/{{settings.theme}}/icon/account.png"></Image>
+    <StackLayout top="6" [left]="barHeight * 0.4" shadow="3" [cornerRadius]="barHeight / 4">
+      <StackLayout verticalAlignment="center" class="counter" [width]="barHeight / 2" [height]="barHeight / 2"
+        [borderRadius]="barHeight / 4">
+        <Label text="2"></Label>
+      </StackLayout>
+    </StackLayout>
+  </AbsoluteLayout>
+  <FlexboxLayout flexDirection="column" class="details" justifyContent="center">
+    <Label text="{{'Balance' | translate }}: 1.000.000.000,00"></Label>
+    <StackLayout orientation="horizontal">
+      <Label text="{{'Operator' | translate }}:"></Label>
+      <Label class="operator" text="Operator2"></Label>
+    </StackLayout>
+  </FlexboxLayout>
+  <GridLayout rows="*,*" columns="auto">
+    <StackLayout row="0" orientation="horizontal" class="clock" verticalAlignment="center">
+      <Image stretch="aspectFit" class="clock-icon" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-access_time-24px.png"></Image>
+      <Label [ngClass]="{'small': productService.windowSize.small}" text="{{ myTime | date:'HH:mm' }}"></Label>
+    </StackLayout>
+  </GridLayout>
+</FlexboxLayout>

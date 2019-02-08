@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material';
 import { Observable, Subject } from 'rxjs';
-import { ProductDialogComponent } from './product-dialog/product-dialog.component';
+import { DialogService } from './dialog.service';
 import {
   BetOdds,
   DialogData,
   PolyfunctionalArea,
   WindowSize
 } from './products.model';
+import { WindowSizeService } from './window-size.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,8 +18,10 @@ export class ProductsService {
   public productNameSelectedSubscribe: Subject<string>;
   public productNameSelectedObserve: Observable<string>;
 
+  public timeBlocked = false;
+  public timeBlockedSubscribe: Subject<boolean>;
+
   private dialogProductDataSubject: Subject<BetOdds>;
-  private dialogProductRef = null;
 
   private playableBoardResetSubject: Subject<boolean>;
   public playableBoardResetObserve: Observable<boolean>;
@@ -36,43 +38,35 @@ export class ProductsService {
     xs: 1
   };
   windowSize: WindowSize;
-  constructor(public dialog: MatDialog) {
+  constructor(
+    public dialog: DialogService,
+    private windowSizeService: WindowSizeService
+  ) {
     this.breakpointSubscribe = new Subject<number>();
     this.productNameSelectedSubscribe = new Subject<string>();
     this.productNameSelectedObserve = this.productNameSelectedSubscribe.asObservable();
     // Element for management the display
     this.polyfunctionalAreaSubject = new Subject<PolyfunctionalArea>();
     this.polyfunctionalAreaObservable = this.polyfunctionalAreaSubject.asObservable();
+    // time block
+    this.timeBlockedSubscribe = new Subject<boolean>();
+    this.timeBlockedSubscribe
+      .asObservable()
+      .subscribe((timeBlocked: boolean) => {
+        this.timeBlocked = timeBlocked;
+      });
     // Dialog management
     this.dialogProductDataSubject = new Subject<BetOdds>();
     this.dialogProductDataSubject.asObservable().subscribe((odds: BetOdds) => {
-      this.dialogProductRef = this.dialog.open(ProductDialogComponent, {
-        data: new DialogData(odds, this.breakpoint)
-      });
+      this.dialog.openDialog(new DialogData(odds, this.breakpoint));
     });
 
     this.playableBoardResetSubject = new Subject<boolean>();
     this.playableBoardResetObserve = this.playableBoardResetSubject.asObservable();
   }
 
-  fnWindowsSize(): WindowSize {
-    const doc: HTMLElement = document.querySelector('html');
-    const h: number = doc.offsetHeight;
-    const w: number = doc.offsetWidth;
-    const aspectRatio: number = w / h;
-    const hgeneral = h - (h * 7) / 100;
-    // tslint:disable-next-line:typedef
-    const dataAtt: WindowSize = {
-      height: h,
-      width: w,
-      aspectRatio: aspectRatio,
-      columnHeight: hgeneral
-    };
-
-    dataAtt.height = dataAtt.width / aspectRatio;
-
-    this.windowSize = dataAtt;
-    return dataAtt;
+  fnWindowsSize(): void {
+    this.windowSize = this.windowSizeService.getWindowSize();
   }
 
   openProductDialog(data: BetOdds): void {
@@ -80,9 +74,7 @@ export class ProductsService {
   }
 
   closeProductDialog(): void {
-    if (this.dialogProductRef != null) {
-      this.dialogProductRef.close();
-    }
+    this.dialog.closeDialog();
   }
 
   resetBoard(): void {
