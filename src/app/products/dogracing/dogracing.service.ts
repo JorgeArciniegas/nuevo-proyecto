@@ -438,8 +438,14 @@ export class DogracingService {
    */
   private extractOdd(odd: RaceApi, areaFuncData: PolyfunctionalArea, dogName?: string): PolyfunctionalArea {
     let oddsToSearch: string[] = [];
-    if (areaFuncData.selection === '1VA' || areaFuncData.selection === 'AOX' || areaFuncData.selection === 'TOX') {
+    if (
+      areaFuncData.selection === SmartCodeType[SmartCodeType['1VA']] ||
+      areaFuncData.selection === SmartCodeType[SmartCodeType.AOX] ||
+      areaFuncData.selection === SmartCodeType[SmartCodeType.TOX]
+    ) {
       oddsToSearch = this.generateOdds(areaFuncData.value.toString());
+    } else if (areaFuncData.selection === SmartCodeType[SmartCodeType.AX]) {
+      oddsToSearch = this.generateOddsACCG(areaFuncData.value.toString());
     }
 
     for (const m of odd.mk.filter((market: Market) => market.tp === this.typeSelection(areaFuncData.selection))) {
@@ -506,6 +512,7 @@ export class DogracingService {
       case 'TOX':
         return 12; // Trifecta
       case 'AS':
+      case 'AX':
         return 11; // Quinella
       default:
         return -1;
@@ -574,12 +581,20 @@ export class DogracingService {
       if (this.smartCode.selPlaced.length === 0 && this.smartCode.selPodium.length === 0) {
         // only items in the first row
         if (this.smartCode.selWinner.length === 2) {
+          // Single
           // sort the displayed values
           this.smartCode.selWinner.sort(function(a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('-');
           return SmartCodeType[SmartCodeType.AS];
+        } else if (this.smartCode.selWinner.length > 2) {
+          // Multiple
+          this.smartCode.selWinner.sort(function(a, b) {
+            return a - b;
+          });
+          areaFuncData.value = this.smartCode.selWinner.join('');
+          return SmartCodeType[SmartCodeType.AX];
         }
       } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
         // items in the first and second row
@@ -614,6 +629,27 @@ export class DogracingService {
           }
         } else {
           returnValues.push(values1[i1]);
+        }
+      }
+    }
+
+    return returnValues;
+  }
+
+  /**
+   * Generates all combinations of bets
+   * @param value string representations, ex. 12/34/56
+   * @returns the array of combinations, ex. 1-3-5, 1-3-6, 1-4-5, ...
+   */
+  generateOddsACCG(value: string): string[] {
+    // const selections: string[] = value.split('/');
+    const returnValues: string[] = [];
+
+    if (value.length > 0) {
+      const values: string[] = this.extractOddFromString(value);
+      for (let i = 0; i < value.length; i++) {
+        for (let j = i + 1; j < value.length; j++) {
+          returnValues.push(values[i] + '-' + values[j]);
         }
       }
     }

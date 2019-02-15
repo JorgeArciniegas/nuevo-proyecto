@@ -21,7 +21,8 @@
     "TOX": "TOX",
     "UNDER": "UNDER",
     "WINNER": "VINCENTE",
-    "AS": "ACCOPPIATA"
+    "AS": "ACCOPPIATA",
+    "AX": "AX"
   },
   "ST": "ST",
   "TITLE": {
@@ -37,7 +38,8 @@
     "TOX": "Tris in ordine con Campo",
     "UNDER": "Under",
     "WINNER": "Vincente",
-    "AS": "Accoppiata"
+    "AS": "Accoppiata",
+    "AX": "Multipla Accoppiata"
   },
   "TOT": "TOT",
   "amountPlace": "Importo scommesso",
