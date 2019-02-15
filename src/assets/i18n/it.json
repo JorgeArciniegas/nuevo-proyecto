@@ -20,7 +20,8 @@
     "T": "TRIS IN ORDINE",
     "TOX": "TOX",
     "UNDER": "UNDER",
-    "WINNER": "VINCENTE"
+    "WINNER": "VINCENTE",
+    "AS": "ACCOPPIATA"
   },
   "ST": "ST",
   "TITLE": {
@@ -35,7 +36,8 @@
     "T": "Tris in ordine",
     "TOX": "Tris in ordine con Campo",
     "UNDER": "Under",
-    "WINNER": "Vincente"
+    "WINNER": "Vincente",
+    "AS": "Accoppiata"
   },
   "TOT": "TOT",
   "amountPlace": "Importo scommesso",
