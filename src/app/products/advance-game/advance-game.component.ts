@@ -12,7 +12,9 @@ export class AdvanceGameComponent implements OnInit {
   public timeBlocked = false;
   public buttons: AdvButton[] = [];
   typePlacingRace: typeof TypePlacingRace = TypePlacingRace;
-  constructor(public service: DogracingService) {}
+  constructor(public service: DogracingService) {
+    console.log('type:', this.service.placingRace.typePlace);
+  }
 
   ngOnInit() {
     this.buttons.push({
@@ -30,7 +32,11 @@ export class AdvanceGameComponent implements OnInit {
   }
 
   setTypePlacing(type: TypePlacingRace): void {
-    this.service.placingRace.typePlace = type;
+    if (this.service.placingRace.typePlace === type) {
+      this.service.placingRace.typePlace = undefined;
+    } else {
+      this.service.placingRace.typePlace = type;
+    }
   }
 }
 

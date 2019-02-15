@@ -1,6 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Dog, PlacingRace, SpecialBet } from '../dogracing.models';
+import {
+  Dog,
+  PlacingRace,
+  SpecialBet,
+  TypePlacingRace
+} from '../dogracing.models';
 import { DogracingService } from '../dogracing.service';
 
 @Component({
@@ -14,9 +19,11 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
   @Input()
   public show?: boolean;
 
-  specialBet: typeof SpecialBet = SpecialBet;
+  public specialBet: typeof SpecialBet = SpecialBet;
+  private currentRaceSubscription: Subscription;
 
-  currentRaceSubscription: Subscription;
+  public TypePlacingRace = TypePlacingRace;
+  public playableTitle: string[];
 
   constructor(public service: DogracingService) {}
 

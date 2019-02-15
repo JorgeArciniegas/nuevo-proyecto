@@ -47,5 +47,7 @@
   "potentialMaxWinner": "Vincita potenziale massima",
   "race": "Race",
   "single": "Singola",
-  "tabCoupon": "Scheda scommesse"
+  "tabCoupon": "Scheda scommesse",
+  "BASE": "B",
+  "CODA": "C"
 }
