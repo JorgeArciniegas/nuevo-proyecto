@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
 import { interval, Observable, Subject, timer } from 'rxjs';
-import {
-  CountDown,
-  EventResults,
-  Market,
-  Race as RaceApi,
-  SportDetail,
-  Tournament,
-  TreeSports
-} from '../../services/vgen.model';
+import { CountDown, EventResults, Market, Race as RaceApi, SportDetail, Tournament, TreeSports } from '../../services/vgen.model';
 import { VgenService } from '../../services/vgen.service';
 import { BetOdd, PolyfunctionalArea } from '../products.model';
 import { ProductsService } from '../products.service';
@@ -24,7 +16,8 @@ import {
   Smartcode,
   SmartCodeType,
   SpecialBet,
-  SpecialBetValue
+  SpecialBetValue,
+  TypePlacingRace
 } from './dogracing.models';
 
 @Injectable({
@@ -52,10 +45,7 @@ export class DogracingService {
 
   smartCode: Smartcode;
 
-  constructor(
-    private vgenService: VgenService,
-    private productService: ProductsService
-  ) {
+  constructor(private vgenService: VgenService, private productService: ProductsService) {
     this.raceDetails = new RaceDetail();
     this.raceDetails.currentRace = 0;
 
@@ -69,11 +59,9 @@ export class DogracingService {
 
     this.currentRaceObserve.subscribe((raceIndex: number) => {
       this.raceDetails.currentRace = raceIndex;
-      this.remaningRaceTime(this.raceDetails.races[raceIndex].number).then(
-        (raceTime: RaceTime) => {
-          this.raceDetails.raceTime = raceTime;
-        }
-      );
+      this.remaningRaceTime(this.raceDetails.races[raceIndex].number).then((raceTime: RaceTime) => {
+        this.raceDetails.raceTime = raceTime;
+      });
 
       this.resetPlayRacing();
       // get race odds
@@ -121,24 +109,18 @@ export class DogracingService {
           this.remmaningTime.second = 59;
           this.remmaningTime.minute = this.remmaningTime.minute - 1;
           // remaing showed time
-          this.raceDetails.raceTime.minute =
-            this.raceDetails.raceTime.minute - 1;
+          this.raceDetails.raceTime.minute = this.raceDetails.raceTime.minute - 1;
         } else {
           // remaing time
           this.remmaningTime.second = this.remmaningTime.second - 1;
           // check time blocked
-          if (
-            this.raceDetails.raceTime.second <= 10 &&
-            this.raceDetails.raceTime.minute === 0
-          ) {
+          if (this.raceDetails.raceTime.second <= 10 && this.raceDetails.raceTime.minute === 0) {
             this.placingRace.timeBlocked = true;
             this.productService.closeProductDialog();
           } else {
             this.placingRace.timeBlocked = false;
           }
-          this.productService.timeBlockedSubscribe.next(
-            this.placingRace.timeBlocked
-          );
+          this.productService.timeBlockedSubscribe.next(this.placingRace.timeBlocked);
         }
         // showed second
         this.raceDetails.raceTime.second = this.remmaningTime.second;
@@ -202,11 +184,7 @@ export class DogracingService {
       } else {
         // add only new race
         tournament.evs.forEach((race: RaceApi) => {
-          if (
-            this.cacheRaces.filter(
-              (cacheRace: RaceApi) => cacheRace.id === race.id
-            ).length === 0
-          ) {
+          if (this.cacheRaces.filter((cacheRace: RaceApi) => cacheRace.id === race.id).length === 0) {
             this.cacheRaces.push(race);
           }
         });
@@ -224,9 +202,7 @@ export class DogracingService {
     }
 
     // calculate remaning time for selected race
-    this.remaningRaceTime(
-      this.raceDetails.races[this.raceDetails.currentRace].number
-    ).then((raceTime: RaceTime) => {
+    this.remaningRaceTime(this.raceDetails.races[this.raceDetails.currentRace].number).then((raceTime: RaceTime) => {
       this.raceDetails.raceTime = raceTime;
       if (this.raceDetails.currentRace === 0) {
         this.remmaningTime.minute = raceTime.minute;
@@ -236,9 +212,7 @@ export class DogracingService {
 
     // calculate remaning time
     if (this.raceDetails.currentRace > 0) {
-      this.remaningRaceTime(this.raceDetails.races[0].number).then(
-        (raceTime: RaceTime) => (this.remmaningTime = raceTime)
-      );
+      this.remaningRaceTime(this.raceDetails.races[0].number).then((raceTime: RaceTime) => (this.remmaningTime = raceTime));
     }
   }
 
@@ -263,32 +237,26 @@ export class DogracingService {
   getLastResult() {
     this.listResult = [];
     timer(300).subscribe(() => {
-      this.vgenService
-        .latesResult(8, 'DOG')
-        .then((eventResults: EventResults) => {
-          for (const i of [3, 2, 1, 0]) {
-            const results: string[] = eventResults.EventResults[i].Result.split(
-              '-'
-            );
+      this.vgenService.latesResult(8, 'DOG').then((eventResults: EventResults) => {
+        for (const i of [3, 2, 1, 0]) {
+          const results: string[] = eventResults.EventResults[i].Result.split('-');
 
-            this.listResult.push({
-              raceLabel: eventResults.EventResults[i].EventName,
-              raceNumber: eventResults.EventResults[i].EventId,
-              firstPlace: Number.parseInt(results[0]),
-              secondPlace: Number.parseInt(results[1]),
-              thirdPlace: Number.parseInt(results[2])
-            });
-          }
-        });
+          this.listResult.push({
+            raceLabel: eventResults.EventResults[i].EventName,
+            raceNumber: eventResults.EventResults[i].EventId,
+            firstPlace: Number.parseInt(results[0]),
+            secondPlace: Number.parseInt(results[1]),
+            thirdPlace: Number.parseInt(results[2])
+          });
+        }
+      });
     });
   }
 
   resetPlayRacing(): void {
     this.placingRace = new PlacingRace();
     this.smartCode = new Smartcode();
-    this.placingRace.raceNumber = this.raceDetails.races[
-      this.raceDetails.currentRace
-    ].number;
+    this.placingRace.raceNumber = this.raceDetails.races[this.raceDetails.currentRace].number;
     this.createDogList();
 
     this.productService.polyfunctionalAreaSubject.next(null);
@@ -296,31 +264,27 @@ export class DogracingService {
 
   raceDetailOdds(raceNumber: number): void {
     // console.log('get detail', raceNumber);
-    const race: RaceApi = this.cacheRaces.filter(
-      (cacheRace: RaceApi) => cacheRace.id === raceNumber
-    )[0];
+    const race: RaceApi = this.cacheRaces.filter((cacheRace: RaceApi) => cacheRace.id === raceNumber)[0];
 
     // check, if is empty load from api
     if (race.mk == null || race.mk.length === 0) {
-      this.vgenService
-        .raceDetails(8, raceNumber)
-        .then((sportDetail: SportDetail) => {
-          try {
-            race.mk = sportDetail.Sport.ts[0].evs[0].mk;
-            race.tm = sportDetail.Sport.ts[0].evs[0].tm;
+      this.vgenService.raceDetails(8, raceNumber).then((sportDetail: SportDetail) => {
+        try {
+          race.mk = sportDetail.Sport.ts[0].evs[0].mk;
+          race.tm = sportDetail.Sport.ts[0].evs[0].tm;
+          this.attempts = 0;
+        } catch (err) {
+          if (this.attempts < 5) {
+            this.attempts++;
+            // console.log('attempts', this.attempts);
+            setTimeout(() => {
+              this.raceDetailOdds(raceNumber);
+            }, 1000);
+          } else {
             this.attempts = 0;
-          } catch (err) {
-            if (this.attempts < 5) {
-              this.attempts++;
-              // console.log('attempts', this.attempts);
-              setTimeout(() => {
-                this.raceDetailOdds(raceNumber);
-              }, 1000);
-            } else {
-              this.attempts = 0;
-            }
           }
-        });
+        }
+      });
     }
   }
 
@@ -335,9 +299,7 @@ export class DogracingService {
     let removed: boolean;
 
     if (!this.placingRace) {
-      this.placingRace.raceNumber = this.raceDetails.races[
-        this.raceDetails.currentRace
-      ].number;
+      this.placingRace.raceNumber = this.raceDetails.races[this.raceDetails.currentRace].number;
     }
     dog.actived = true;
 
@@ -345,13 +307,14 @@ export class DogracingService {
       this.placingRace.dogs.push(dog);
       this.checkedIsSelected(dog);
     } else {
-      this.placingRace.dogs.filter((item, idx) => {
+      for (let idx = 0; idx < this.placingRace.dogs.length; idx++) {
+        const item = this.placingRace.dogs[idx];
         if (item.number === dog.number && item.position === dog.position) {
           this.placingRace.dogs.splice(idx, 1);
           this.checkedIsSelected(dog, true);
           removed = true;
         }
-      });
+      }
       if (!removed) {
         this.placingRace.dogs.push(dog);
         this.checkedIsSelected(dog);
@@ -362,12 +325,23 @@ export class DogracingService {
 
   placeOdd() {
     // extract the raceOdd from cache
-    const odds: RaceApi = this.cacheRaces.filter(
-      (cacheRace: RaceApi) => cacheRace.id === this.placingRace.raceNumber
-    )[0];
+    const odds: RaceApi = this.cacheRaces.filter((cacheRace: RaceApi) => cacheRace.id === this.placingRace.raceNumber)[0];
     this.smartCode = new Smartcode();
 
     this.populatingPolyfunctionArea(odds);
+  }
+
+  typePlacing(type: TypePlacingRace) {
+    if (this.placingRace.typePlace === type) {
+      this.placingRace.typePlace = undefined;
+    } else {
+      this.placingRace.typePlace = type;
+      if (type === TypePlacingRace.ACCG) {
+        for (const dog of this.placingRace.dogs.filter(item => item.position === 3)) {
+          this.placingOdd(dog);
+        }
+      }
+    }
   }
 
   private checkedIsSelected(dog: Dog, reset: boolean = false): void {
@@ -386,19 +360,13 @@ export class DogracingService {
    */
 
   RNGLucky2(lucky: Lucky): number {
-    const extractNumber: number =
-      Math.floor(
-        Math.random() *
-          this.dogList.filter(dog => dog.position === lucky).length
-      ) + 1;
+    const extractNumber: number = Math.floor(Math.random() * this.dogList.filter(dog => dog.position === lucky).length) + 1;
     return extractNumber;
   }
 
   RNGLuckyPlacing(dogNumber: number, dogPosition: number): void {
     // extract the dog
-    const dogExtract: Dog = this.dogList.filter(
-      dog => dog.position === dogPosition && dog.number === dogNumber
-    )[0];
+    const dogExtract: Dog = this.dogList.filter(dog => dog.position === dogPosition && dog.number === dogNumber)[0];
     // place the dog
     this.placingOdd(dogExtract);
   }
@@ -413,18 +381,12 @@ export class DogracingService {
       // check if is first insert
       // else if specialbets OVER / UNDER / EVEN / ODD
       let dogName: string;
-      if (
-        this.placingRace.dogs.length === 1 &&
-        !this.placingRace.isSpecialBets
-      ) {
+      if (this.placingRace.dogs.length === 1 && !this.placingRace.isSpecialBets) {
         areaFuncData.selection = Podium[this.placingRace.dogs[0].position];
         areaFuncData.value = this.placingRace.dogs[0].number;
         // match dog from object tm with mk
         dogName = odd.tm.filter(t => t.ito === areaFuncData.value)[0].nm;
-      } else if (
-        this.placingRace.dogs.length > 1 &&
-        !this.placingRace.isSpecialBets
-      ) {
+      } else if (this.placingRace.dogs.length > 1 && !this.placingRace.isSpecialBets) {
         this.placingRace.dogs.forEach(item => {
           if (item.position === 1) {
             this.smartCode.selWinner.push(item.number);
@@ -463,24 +425,13 @@ export class DogracingService {
    * @param areaFuncData
    * @param dogName
    */
-  private extractOdd(
-    odd: RaceApi,
-    areaFuncData: PolyfunctionalArea,
-    dogName?: string
-  ): PolyfunctionalArea {
+  private extractOdd(odd: RaceApi, areaFuncData: PolyfunctionalArea, dogName?: string): PolyfunctionalArea {
     let oddsToSearch: string[] = [];
-    if (
-      areaFuncData.selection === '1VA' ||
-      areaFuncData.selection === 'AOX' ||
-      areaFuncData.selection === 'TOX'
-    ) {
+    if (areaFuncData.selection === '1VA' || areaFuncData.selection === 'AOX' || areaFuncData.selection === 'TOX') {
       oddsToSearch = this.generateOdds(areaFuncData.value.toString());
     }
 
-    for (const m of odd.mk.filter(
-      (market: Market) =>
-        market.tp === this.typeSelection(areaFuncData.selection)
-    )) {
+    for (const m of odd.mk.filter((market: Market) => market.tp === this.typeSelection(areaFuncData.selection))) {
       // if the selection is PODIUM, WINNER or SHOW
       if (dogName) {
         for (const checkOdd of m.sls.filter(o => o.nm === dogName)) {
@@ -488,9 +439,7 @@ export class DogracingService {
         }
       } else if (!this.smartCode.code) {
         // if the selection is EVEN, ODD, UNDER or OVER
-        for (const checkOdd of m.sls.filter(
-          o => o.nm.toUpperCase() === areaFuncData.selection.toUpperCase()
-        )) {
+        for (const checkOdd of m.sls.filter(o => o.nm.toUpperCase() === areaFuncData.selection.toUpperCase())) {
           areaFuncData.odd = checkOdd.ods[0].vl;
         }
       } else {
@@ -499,20 +448,12 @@ export class DogracingService {
           // search for multiple odds
           for (const checkOdd of m.sls) {
             if (oddsToSearch.includes(checkOdd.nm)) {
-              areaFuncData.odds.push(
-                new BetOdd(
-                  checkOdd.nm,
-                  checkOdd.ods[0].vl,
-                  areaFuncData.amount / oddsToSearch.length
-                )
-              );
+              areaFuncData.odds.push(new BetOdd(checkOdd.nm, checkOdd.ods[0].vl, areaFuncData.amount / oddsToSearch.length));
             }
           }
         } else {
           // search for matchName
-          const matchName: string = areaFuncData.value
-            .toString()
-            .replace(/\//g, '-');
+          const matchName: string = areaFuncData.value.toString().replace(/\//g, '-');
           for (const checkOdd of m.sls.filter(o => o.nm === matchName)) {
             areaFuncData.odd = checkOdd.ods[0].vl;
           }
@@ -562,10 +503,7 @@ export class DogracingService {
     this.smartCode.code = null;
     // setting the PolyfunctionalArea with only an winning selection
     if (this.smartCode.selWinner.length === 1) {
-      if (
-        this.smartCode.selPlaced.length === 1 &&
-        this.smartCode.selPodium.length === 0
-      ) {
+      if (this.smartCode.selPlaced.length === 1 && this.smartCode.selPodium.length === 0) {
         this.smartCode.code = SmartCodeType[SmartCodeType.AO];
       } else if (
         // if the second selectione is multiple of 1
@@ -573,56 +511,29 @@ export class DogracingService {
         this.smartCode.selPodium.length === 0
       ) {
         this.smartCode.code = SmartCodeType[SmartCodeType['1VA']];
-      } else if (
-        this.smartCode.selPlaced.length === 1 &&
-        this.smartCode.selPodium.length === 1
-      ) {
+      } else if (this.smartCode.selPlaced.length === 1 && this.smartCode.selPodium.length === 1) {
         this.smartCode.code = SmartCodeType[SmartCodeType['T']];
         areaFuncData.value =
-          this.smartCode.selWinner.join('') +
-          '/' +
-          this.smartCode.selPlaced.join('') +
-          '/' +
-          this.smartCode.selPodium.join('');
-      } else if (
-        this.smartCode.selPlaced.length > 0 &&
-        this.smartCode.selPodium.length > 0
-      ) {
+          this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
+      } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length > 0) {
         this.smartCode.code = SmartCodeType[SmartCodeType.TOX];
         areaFuncData.value =
-          this.smartCode.selWinner.join('') +
-          '/' +
-          this.smartCode.selPlaced.join('') +
-          '/' +
-          this.smartCode.selPodium.join('');
+          this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
       }
     } else if (this.smartCode.selWinner.length > 1) {
-      if (
-        this.smartCode.selPlaced.length > 0 &&
-        this.smartCode.selPodium.length === 0
-      ) {
+      if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
         this.smartCode.code = SmartCodeType[SmartCodeType.AOX];
-      } else if (
-        this.smartCode.selPlaced.length > 0 &&
-        this.smartCode.selPodium.length > 0
-      ) {
+      } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length > 0) {
         this.smartCode.code = SmartCodeType[SmartCodeType.TOX];
         areaFuncData.value =
-          this.smartCode.selWinner.join('') +
-          '/' +
-          this.smartCode.selPlaced.join('') +
-          '/' +
-          this.smartCode.selPodium.join('');
+          this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
       }
     }
 
     if (this.smartCode.code) {
       areaFuncData.selection = this.smartCode.code;
       if (this.smartCode.selPodium.length === 0) {
-        areaFuncData.value =
-          this.smartCode.selWinner.join('') +
-          '/' +
-          this.smartCode.selPlaced.join('');
+        areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
       }
     }
     return areaFuncData;
@@ -644,13 +555,9 @@ export class DogracingService {
           const values2: string[] = this.extractOddFromString(selections[1]);
           for (let i2 = 0; i2 < selections[1].length; i2++) {
             if (selections.length > 2) {
-              const values3: string[] = this.extractOddFromString(
-                selections[2]
-              );
+              const values3: string[] = this.extractOddFromString(selections[2]);
               for (let i3 = 0; i3 < selections[2].length; i3++) {
-                returnValues.push(
-                  values1[i1] + '-' + values2[i2] + '-' + values3[i3]
-                );
+                returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values3[i3]);
               }
             } else {
               returnValues.push(values1[i1] + '-' + values2[i2]);
