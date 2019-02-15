@@ -20,6 +20,11 @@
 		opacity: 0.8;
 	}
 }
+.playable-row-tile {
+	&.disabled {
+		opacity: 0.1;
+	}
+}
 
 .btn-dog-1 {
 	background: #ff0000;
