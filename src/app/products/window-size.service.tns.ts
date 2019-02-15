@@ -21,8 +21,6 @@ export class WindowSizeService {
       small: aspectRatio > 1.45 && screen.mainScreen.heightPixels < 1500
     };
 
-    console.log('aspectRatio', aspectRatio, dataAtt);
-
     return dataAtt;
   }
 }
