@@ -15,14 +15,17 @@
         <!-- Special race -->
         <mat-grid-tile rowspan="2" fxLayout="column">
             <div fxFill fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="3vw" class="special-box">
-                <button (click)="placingLucky(lucky.Lucky1)" class="btn-default btn-lucky btn-grey-gradient radius-5 elevation-z5">
-                    Lucky
+                <button (click)="placingLucky(lucky.Lucky1)"
+                    class="btn-default btn-lucky btn-grey-gradient radius-5 elevation-z5">
+                    {{ 'LUCKY' | translate }}
                 </button>
-                <button (click)="placingLucky(lucky.Lucky2)" class="btn-default btn-lucky btn-grey-gradient radius-5 elevation-z5">
-                    Lucky
+                <button (click)="placingLucky(lucky.Lucky2)"
+                    class="btn-default btn-lucky btn-grey-gradient radius-5 elevation-z5">
+                    {{ 'LUCKY' | translate }}
                 </button>
-                <button (click)="placingLucky(lucky.Lucky3)" class="btn-default btn-lucky btn-grey-gradient radius-5 elevation-z5">
-                    Lucky
+                <button (click)="placingLucky(lucky.Lucky3)"
+                    class="btn-default btn-lucky btn-grey-gradient radius-5 elevation-z5">
+                    {{ 'LUCKY' | translate }}
                 </button>
             </div>
         </mat-grid-tile>
@@ -32,5 +35,7 @@
         </mat-grid-tile>
     </mat-grid-list>
 </div>
-<div *ngIf="dogracingService.placingRace.timeBlocked" id="overlayArea1" [style.top.px]="(service.windowSize.height - service.windowSize.columnHeight) + 12 + (rowHeight * 5)"
-    [style.left.px]="0" [style.width]="'calc(59% - 2px)'" [style.height.px]="rowHeight * 11" class="overlay radius-5"></div>
+<div *ngIf="dogracingService.placingRace.timeBlocked" id="overlayArea1"
+    [style.top.px]="(service.windowSize.height - service.windowSize.columnHeight) + 12 + (rowHeight * 5)"
+    [style.left.px]="0" [style.width]="'calc(59% - 2px)'" [style.height.px]="rowHeight * 11" class="overlay radius-5">
+</div>

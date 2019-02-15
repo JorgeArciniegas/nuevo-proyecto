@@ -2,7 +2,8 @@
 <mat-grid-list cols="{{product.defaultAmount.length}}" class="grid-row-amount" rowHeight="{{rowHeight}}">
   <mat-grid-tile *ngFor="let amount of product.defaultAmount; let i = index">
 
-    <button [style.width.px]="rowHeight-12" [style.height.px]="rowHeight-12" class="btn-default elevation-z5 btn-amount-{{i+1}} radius-50">{{amount}}</button>
+    <button [style.width.px]="rowHeight-12" [style.height.px]="rowHeight-12"
+      class="btn-default elevation-z5 btn-amount-{{i+1}} radius-50">{{amount}}</button>
 
   </mat-grid-tile>
 </mat-grid-list>
@@ -48,12 +49,13 @@
     <button class="btn-default btn-keyboard radius-5 elevation-z5">000</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard btn-warning radius-5 elevation-z5" (dblclick)="clearAll()">C</button>
+    <button class="btn-default btn-keyboard btn-warning radius-5 elevation-z5"
+      (dblclick)="clearAll()">{{ 'C' | translate }}</button>
   </mat-grid-tile>
   <mat-grid-tile colspan="2">
-    <button class="btn-default btn-keyboard btn-grey-gradient radius-5 elevation-z5">TOT</button>
+    <button class="btn-default btn-keyboard btn-grey-gradient radius-5 elevation-z5">{{ 'TOT' | translate }}</button>
   </mat-grid-tile>
   <mat-grid-tile colspan="2">
-    <button class="btn-default btn-keyboard btn-grey-gradient radius-5 elevation-z5">COL</button>
+    <button class="btn-default btn-keyboard btn-grey-gradient radius-5 elevation-z5">{{ 'COL' | translate }}</button>
   </mat-grid-tile>
 </mat-grid-list>

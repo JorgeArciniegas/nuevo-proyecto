@@ -1,10 +1,31 @@
 import { Injectable } from '@angular/core';
 import { interval, Observable, Subject, timer } from 'rxjs';
-import { CountDown, EventResults, Market, Race as RaceApi, SportDetail, Tournament, TreeSports } from '../../services/vgen.model';
+import {
+  CountDown,
+  EventResults,
+  Market,
+  Race as RaceApi,
+  SportDetail,
+  Tournament,
+  TreeSports
+} from '../../services/vgen.model';
 import { VgenService } from '../../services/vgen.service';
 import { BetOdd, PolyfunctionalArea } from '../products.model';
 import { ProductsService } from '../products.service';
-import { Dog, Lucky, PlacingRace, Podium, Race, RaceDetail, RaceResult, RaceTime, Smartcode, SmartCodeType, SpecialBet, SpecialBetValue } from './dogracing.models';
+import {
+  Dog,
+  Lucky,
+  PlacingRace,
+  Podium,
+  Race,
+  RaceDetail,
+  RaceResult,
+  RaceTime,
+  Smartcode,
+  SmartCodeType,
+  SpecialBet,
+  SpecialBetValue
+} from './dogracing.models';
 
 @Injectable({
   providedIn: 'root'
@@ -115,7 +136,9 @@ export class DogracingService {
           } else {
             this.placingRace.timeBlocked = false;
           }
-          this.productService.timeBlockedSubscribe.next(this.placingRace.timeBlocked);
+          this.productService.timeBlockedSubscribe.next(
+            this.placingRace.timeBlocked
+          );
         }
         // showed second
         this.raceDetails.raceTime.second = this.remmaningTime.second;
@@ -605,6 +628,11 @@ export class DogracingService {
     return areaFuncData;
   }
 
+  /**
+   * Generates all combinations of bets
+   * @param value string representations, ex. 12/34/56
+   * @returns the array of combinations, ex. 1-3-5, 1-3-6, 1-4-5, ...
+   */
   generateOdds(value: string): string[] {
     const selections: string[] = value.split('/');
     const returnValues: string[] = [];

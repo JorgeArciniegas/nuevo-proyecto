@@ -5,7 +5,7 @@
         </StackLayout>
         <GridLayout class="main-content" *ngIf="!connectionAviable">
             <StackLayout verticalAlignment="center" horizontalAlignment="center">
-                <Label text="No connection available"></Label>
+                <Label text="{{ 'NO_CONNECTION' | translate }}"></Label>
             </StackLayout>
         </GridLayout>
     </GridLayout>

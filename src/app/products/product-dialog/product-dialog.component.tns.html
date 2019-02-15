@@ -13,13 +13,15 @@
           [ngClass]="{'disabled': page <= 0}" [isEnabled]="page > 0">
           <Image width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Up.png" verticalAlignment="center"></Image>
         </GridLayout>
-        <GridLayout row="{{rowNumber + 1}}" colSpan="{{columnNumber}}" class="card-odd scroll" (tap)="nextOdds()" *ngIf="maxPage > 1"
-          [ngClass]="{'disabled': page >= maxPage - 1}" [isEnabled]="page < maxPage - 1">
-          <Image width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Down.png" verticalAlignment="center"></Image>
+        <GridLayout row="{{rowNumber + 1}}" colSpan="{{columnNumber}}" class="card-odd scroll" (tap)="nextOdds()"
+          *ngIf="maxPage > 1" [ngClass]="{'disabled': page >= maxPage - 1}" [isEnabled]="page < maxPage - 1">
+          <Image width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Down.png" verticalAlignment="center">
+          </Image>
         </GridLayout>
         <!-- Cards -->
         <GridLayout row="{{ 1 + (i / columnNumber) | floor}}" col="{{i % columnNumber}}" rows="*,2*,2*" columns="*,*"
-          class="card-odd" [ngClass]="{'notSelected': !odd.selected}" (tap)="toggleOdd(odd)" *ngFor="let odd of betOdds; let i = index;">
+          class="card-odd" [ngClass]="{'notSelected': !odd.selected}" (tap)="toggleOdd(odd)"
+          *ngFor="let odd of betOdds; let i = index;">
           <StackLayout row="0" colSpan="2" class="top-window"></StackLayout>
           <GridLayout row="1" colSpan="2" rows="*" columns="*,*" class="first-row">
             <Label col="0" text="{{odd.label}}" horizontalAlignment="left"></Label>
@@ -33,7 +35,8 @@
       </GridLayout>
       <StackLayout row="3" horizontalAlignment="center">
         <GridLayout rows="*" columns="*" class="button btn-close">
-          <Button text="Close" class="button-internal" (tap)="close()" textTransform="none"></Button>
+          <Button text="{{ 'CLOSE' | translate }}" class="button-internal" (tap)="close()"
+            textTransform="none"></Button>
         </GridLayout>
       </StackLayout>
     </GridLayout>
