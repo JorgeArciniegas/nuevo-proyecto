@@ -53,6 +53,11 @@ button:active:not([disabled]) {
 		opacity: 0.1;
 	}
 }
+.btn-advance-game {
+	&.inactive {
+		opacity: 0.8;
+	}
+}
 .playable-row-tile {
 	&.disabled {
 		opacity: 0.1;
