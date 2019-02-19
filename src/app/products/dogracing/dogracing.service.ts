@@ -443,9 +443,11 @@ export class DogracingService {
       areaFuncData.selection === SmartCodeType[SmartCodeType.AOX] ||
       areaFuncData.selection === SmartCodeType[SmartCodeType.TOX]
     ) {
+      // generate combination by the selections in the rows
       oddsToSearch = this.generateOdds(areaFuncData.value.toString());
     } else if (areaFuncData.selection === SmartCodeType[SmartCodeType.AX]) {
-      oddsToSearch = this.generateOddsACCG(areaFuncData.value.toString());
+      // generate combimation from the first row selections
+      oddsToSearch = this.generateOddsRow(areaFuncData.value.toString());
     }
 
     for (const m of odd.mk.filter((market: Market) => market.tp === this.typeSelection(areaFuncData.selection))) {
@@ -637,12 +639,11 @@ export class DogracingService {
   }
 
   /**
-   * Generates all combinations of bets
-   * @param value string representations, ex. 12/34/56
-   * @returns the array of combinations, ex. 1-3-5, 1-3-6, 1-4-5, ...
+   * Generates all combinations of bets from a single row selections
+   * @param value string representations, ex. 1234
+   * @returns the array of combinations, ex. 1-2, 1-3, 1-4, 2-3, 2-4, 3-4
    */
-  generateOddsACCG(value: string): string[] {
-    // const selections: string[] = value.split('/');
+  generateOddsRow(value: string): string[] {
     const returnValues: string[] = [];
 
     if (value.length > 0) {
