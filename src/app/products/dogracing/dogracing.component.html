@@ -1,41 +1,37 @@
 <div fxFlexFill fxLayout="column" class="dog-racing padding-horizontal-6">
-    <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
-        <!-- Race control -->
-        <mat-grid-tile rowspan="3">
-            <app-race-control fxFill></app-race-control>
-        </mat-grid-tile>
-        <!-- List races -->
-        <mat-grid-tile rowspan="2">
-            <app-list-race fxFill [rowHeight]="rowHeight"></app-list-race>
-        </mat-grid-tile>
-        <!-- Playable board -->
-        <mat-grid-tile rowspan="9">
-            <app-playable-board fxFill rowHeight="{{rowHeight}}"></app-playable-board>
-        </mat-grid-tile>
-        <!-- Special race -->
-        <mat-grid-tile rowspan="2" fxLayout="column">
-            <div fxFill fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="3vw" class="special-box">
-                <button (click)="placingLucky(lucky.Lucky1)"
-                    class="btn-default btn-lucky btn-grey-gradient radius-5 elevation-z5">
-                    {{ 'LUCKY' | translate }}
-                </button>
-                <button (click)="placingLucky(lucky.Lucky2)"
-                    class="btn-default btn-lucky btn-grey-gradient radius-5 elevation-z5">
-                    {{ 'LUCKY' | translate }}
-                </button>
-                <button (click)="placingLucky(lucky.Lucky3)"
-                    class="btn-default btn-lucky btn-grey-gradient radius-5 elevation-z5">
-                    {{ 'LUCKY' | translate }}
-                </button>
-            </div>
-        </mat-grid-tile>
-        <!-- List of result -->
-        <mat-grid-tile rowspan="2">
-            <app-result-list fxFill [rowHeight]="rowHeight"></app-result-list>
-        </mat-grid-tile>
-    </mat-grid-list>
+  <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
+    <!-- Race control -->
+    <mat-grid-tile rowspan="3">
+      <app-race-control fxFill></app-race-control>
+    </mat-grid-tile>
+    <!-- List races -->
+    <mat-grid-tile rowspan="2">
+      <app-list-race fxFill [rowHeight]="rowHeight"></app-list-race>
+    </mat-grid-tile>
+    <!-- Playable board -->
+    <mat-grid-tile rowspan="9">
+      <app-playable-board fxFill rowHeight="{{rowHeight}}"></app-playable-board>
+    </mat-grid-tile>
+    <!-- Special race -->
+    <mat-grid-tile rowspan="2" fxLayout="column">
+      <div fxFill fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="3vw" class="special-box">
+        <button (click)="placingLucky(lucky.Lucky1)" class="btn-default btn-lucky btn-grey-gradient radius-5 elevation-z5">
+          {{ 'LUCKY' | translate }} 1
+        </button>
+        <button (click)="placingLucky(lucky.Lucky2)" class="btn-default btn-lucky btn-grey-gradient radius-5 elevation-z5">
+          {{ 'LUCKY' | translate }} 2
+        </button>
+        <button (click)="placingLucky(lucky.Lucky3)" class="btn-default btn-lucky btn-grey-gradient radius-5 elevation-z5">
+          {{ 'LUCKY' | translate }} 3
+        </button>
+      </div>
+    </mat-grid-tile>
+    <!-- List of result -->
+    <mat-grid-tile rowspan="2">
+      <app-result-list fxFill [rowHeight]="rowHeight"></app-result-list>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
-<div *ngIf="dogracingService.placingRace.timeBlocked" id="overlayArea1"
-    [style.top.px]="(service.windowSize.height - service.windowSize.columnHeight) + 12 + (rowHeight * 5)"
-    [style.left.px]="0" [style.width]="'calc(59% - 2px)'" [style.height.px]="rowHeight * 11" class="overlay radius-5">
+<div *ngIf="dogracingService.placingRace.timeBlocked" id="overlayArea1" [style.top.px]="(service.windowSize.height - service.windowSize.columnHeight) + 12 + (rowHeight * 5)"
+  [style.left.px]="0" [style.width]="'calc(59% - 2px)'" [style.height.px]="rowHeight * 11" class="overlay radius-5">
 </div>
