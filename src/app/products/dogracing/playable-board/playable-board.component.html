@@ -2,18 +2,18 @@
   <ng-container *ngFor="let row of ['I','II','III']; let i = index">
     <mat-grid-tile>
       <span *ngIf="i === 0" class="playable-row-tile display radius-5">
-        {{ service.placingRace.typePlace === TypePlacingRace.ACCG ? ('BASE' | translate) : row}}
+        {{ service.placingRace.typePlace === TypePlacingRace.ACCG || service.placingRace.typePlace === TypePlacingRace.ST ? ('BASE' | translate) : row}}
       </span>
-      <span *ngIf="i === 1" class="playable-row-tile display radius-5">
-        {{ service.placingRace.typePlace === TypePlacingRace.ACCG ? ('CODA' | translate) : row}}
+      <span *ngIf="i === 1" class="playable-row-tile display radius-5" [ngClass]="{'disabled': service.placingRace.secondRowDisabled }">
+        {{ service.placingRace.typePlace === TypePlacingRace.ACCG || service.placingRace.typePlace === TypePlacingRace.ST ? ('CODA' | translate) : row}}
       </span>
-      <span *ngIf="i === 2" class="playable-row-tile display radius-5" [ngClass]="{'disabled': service.placingRace.typePlace === TypePlacingRace.ACCG}">
+      <span *ngIf="i === 2" class="playable-row-tile display radius-5" [ngClass]="{'disabled': service.placingRace.thirdRowDisabled }">
         {{row}}
       </span>
     </mat-grid-tile>
     <mat-grid-tile *ngFor="let dog of service.dogList | filterByPosition: i+1" colspan="2">
       <button (click)="dogplaced(dog)" [ngClass]="{'btn-dog-play-actived': dog.actived}" class="btn btn-default btn-default-dog-play radius-15 btn-dog-{{dog.number}}"
-        [disabled]="!dog.selectable || (i === 2 && service.placingRace.typePlace === TypePlacingRace.ACCG)">
+        [disabled]="!dog.selectable || ((i === 1 && service.placingRace.secondRowDisabled) || (i === 2 && service.placingRace.thirdRowDisabled))">
         <span>{{dog.number}}</span>
       </button>
     </mat-grid-tile>

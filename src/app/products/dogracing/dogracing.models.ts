@@ -46,6 +46,8 @@ export enum SmartCodeType {
 export class PlacingRace {
   raceNumber: number;
   typePlace: TypePlacingRace;
+  secondRowDisabled: boolean;
+  thirdRowDisabled: boolean;
   dogs: Dog[];
   amount: number;
   repeat: number;
@@ -59,6 +61,8 @@ export class PlacingRace {
     this.amount = 0;
     this.isSpecialBets = false;
     this.dogs = [];
+    this.secondRowDisabled = false;
+    this.thirdRowDisabled = false;
     // this.dogs = new Dog();
   }
 }

@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { interval, Observable, Subject, timer } from 'rxjs';
-import { CountDown, EventResults, Market, Race as RaceApi, SportDetail, Tournament, TreeSports } from '../../services/vgen.model';
-import { VgenService } from '../../services/vgen.service';
-import { BetOdd, PolyfunctionalArea } from '../products.model';
-import { ProductsService } from '../products.service';
+import {Injectable} from '@angular/core';
+import {interval, Observable, Subject, timer} from 'rxjs';
+import {CountDown, EventResults, Market, Race as RaceApi, SportDetail, Tournament, TreeSports} from '../../services/vgen.model';
+import {VgenService} from '../../services/vgen.service';
+import {BetOdd, PolyfunctionalArea} from '../products.model';
+import {ProductsService} from '../products.service';
 import {
   Dog,
   Lucky,
@@ -334,21 +334,24 @@ export class DogracingService {
   typePlacing(type: TypePlacingRace) {
     if (this.placingRace.typePlace === type) {
       this.placingRace.typePlace = undefined;
+      this.placingRace.thirdRowDisabled = false;
     } else {
       this.placingRace.typePlace = type;
-      switch (type) {
-        case TypePlacingRace.ACCG:
-          for (const dog of this.placingRace.dogs.filter(item => item.position === 3)) {
-            this.placingOdd(dog);
-          }
-          break;
-        case TypePlacingRace.R:
-          break;
-        default:
-          break;
+      if (this.placingRace.typePlace === TypePlacingRace.ACCG || this.placingRace.typePlace === TypePlacingRace.ST) {
+        // deselect all dogs in the row #3
+        this.deselectRowDogs(3);
+        this.placingRace.thirdRowDisabled = true;
+      } else {
+        this.placingRace.thirdRowDisabled = false;
       }
     }
     this.placeOdd();
+  }
+
+  private deselectRowDogs(position: number): void {
+    for (const dog of this.placingRace.dogs.filter(item => item.position === position)) {
+      this.placingOdd(dog);
+    }
   }
 
   private checkedIsSelected(dog: Dog, reset: boolean = false): void {
@@ -404,6 +407,13 @@ export class DogracingService {
             this.smartCode.selPodium.push(item.number);
           }
         });
+        // type Place particular iterations
+        if (this.placingRace.typePlace === TypePlacingRace.ST && this.smartCode.selWinner.length > 2) {
+          this.placingRace.secondRowDisabled = true;
+          this.deselectRowDogs(2);
+        } else {
+          this.placingRace.secondRowDisabled = false;
+        }
       } else if (this.placingRace.isSpecialBets) {
         // specialbets OVER / UNDER / EVEN / ODD
         // setting label selection
