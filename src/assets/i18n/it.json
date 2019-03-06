@@ -22,7 +22,8 @@
     "UNDER": "UNDER",
     "WINNER": "VINCENTE",
     "AS": "ACCOPPIATA",
-    "AX": "AX"
+    "AX": "AX",
+    "AB": "AB"
   },
   "ST": "ST",
   "TITLE": {
@@ -39,7 +40,8 @@
     "UNDER": "Under",
     "WINNER": "Vincente",
     "AS": "Accoppiata",
-    "AX": "Multipla Accoppiata"
+    "AX": "Multipla Accoppiata",
+    "AB": "Accoppiata con Base e Coda"
   },
   "TOT": "TOT",
   "amountPlace": "Importo scommesso",

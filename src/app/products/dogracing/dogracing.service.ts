@@ -448,6 +448,9 @@ export class DogracingService {
     } else if (areaFuncData.selection === SmartCodeType[SmartCodeType.AX]) {
       // generate combimation from the first row selections
       oddsToSearch = this.generateOddsRow(areaFuncData.value.toString());
+    } else if (areaFuncData.selection === SmartCodeType[SmartCodeType.AB]) {
+      // generate sorted combination by the selections in the rows.
+      oddsToSearch = this.generateOddsForAB(areaFuncData.value.toString());
     }
 
     for (const m of odd.mk.filter((market: Market) => market.tp === this.typeSelection(areaFuncData.selection))) {
@@ -515,6 +518,7 @@ export class DogracingService {
         return 12; // Trifecta
       case 'AS':
       case 'AX':
+      case 'AB':
         return 11; // Quinella
       default:
         return -1;
@@ -563,14 +567,11 @@ export class DogracingService {
             this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
         }
       }
-    }
-
-    if (this.smartCode.code) {
-      areaFuncData.selection = this.smartCode.code;
       if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
         areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
       }
     }
+
     return areaFuncData;
   }
 
@@ -579,7 +580,7 @@ export class DogracingService {
    * @param areaFuncData PolyfunctionalArea object
    */
   private placeTypeACCG(areaFuncData: PolyfunctionalArea): string {
-    if (this.smartCode.selWinner.length > 1) {
+    if (this.smartCode.selWinner.length >= 1) {
       if (this.smartCode.selPlaced.length === 0 && this.smartCode.selPodium.length === 0) {
         // only items in the first row
         if (this.smartCode.selWinner.length === 2) {
@@ -600,6 +601,27 @@ export class DogracingService {
         }
       } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
         // items in the first and second row
+        if (this.smartCode.selWinner.length === 1 && this.smartCode.selPlaced.length === 1) {
+          // Only a dog is selected on the first and second row the result is a single "Combination".
+          // Sort the selections
+          if (this.smartCode.selWinner[0] > this.smartCode.selPlaced[0]) {
+            areaFuncData.value = this.smartCode.selPlaced[0] + '-' + this.smartCode.selWinner[0];
+          } else {
+            areaFuncData.value = this.smartCode.selWinner[0] + '-' + this.smartCode.selPlaced[0];
+          }
+          return SmartCodeType[SmartCodeType.AS];
+        } else {
+          // Combination with base and tail
+          // Sort the displayed values
+          this.smartCode.selWinner.sort(function(a, b) {
+            return a - b;
+          });
+          this.smartCode.selPlaced.sort(function(a, b) {
+            return a - b;
+          });
+          areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
+          return SmartCodeType[SmartCodeType.AB];
+        }
       }
       return null;
     }
@@ -627,6 +649,47 @@ export class DogracingService {
               }
             } else {
               returnValues.push(values1[i1] + '-' + values2[i2]);
+            }
+          }
+        } else {
+          returnValues.push(values1[i1]);
+        }
+      }
+    }
+
+    return returnValues;
+  }
+
+  /**
+   * Odds generator for the "AB" market, where the selections to combine have to be sorted.
+   * @param value String representations. Ex. 34/12.
+   * @returns Array of combinations with sort of the value. Ex. 1-3, 2-3, 1-4, 2-4.
+   */
+  generateOddsForAB(value: string): string[] {
+    const selections: string[] = value.split('/');
+    const returnValues: string[] = [];
+
+    if (selections.length > 0) {
+      const values1: string[] = this.extractOddFromString(selections[0]);
+      for (let i1 = 0; i1 < selections[0].length; i1++) {
+        if (selections.length > 1) {
+          const values2: string[] = this.extractOddFromString(selections[1]);
+          for (let i2 = 0; i2 < selections[1].length; i2++) {
+            if (selections.length > 2) {
+              const values3: string[] = this.extractOddFromString(selections[2]);
+              // Sort the combination
+              if (parseInt(values1[i1], 10) > parseInt(values2[i2], 10)) {
+                returnValues.push(values2[i2] + '-' + values1[i1]);
+              } else {
+                returnValues.push(values1[i1] + '-' + values2[i2]);
+              }
+            } else {
+              // Sort the combination
+              if (parseInt(values1[i1], 10) > parseInt(values2[i2], 10)) {
+                returnValues.push(values2[i2] + '-' + values1[i1]);
+              } else {
+                returnValues.push(values1[i1] + '-' + values2[i2]);
+              }
             }
           }
         } else {
