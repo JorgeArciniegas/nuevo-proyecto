@@ -41,7 +41,8 @@ export enum SmartCodeType {
   'ASX',
   'AOX',
   '1PX',
-  '1VA'
+  '1VA',
+  'AB' // Combination with base and tail
 }
 export class PlacingRace {
   raceNumber: number;
