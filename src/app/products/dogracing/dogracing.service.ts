@@ -459,11 +459,11 @@ export class DogracingService {
         oddsToSearch = this.generateOdds(areaFuncData.value.toString());
         break;
       case SmartCodeType[SmartCodeType.AX]:
-        // Generate combination by 2 from the first row selections
+        // Generate combination by 2 from the first row selections in order
         oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.Quinella, true);
         break;
       case SmartCodeType[SmartCodeType.TNX]:
-        // Generate combination by 3 from the first row selections
+        // Generate combination by 3 from the first row selections not in order
         oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.Trifecta, false);
         break;
       case SmartCodeType[SmartCodeType.AB]:
