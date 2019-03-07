@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {interval, Observable, Subject, timer} from 'rxjs';
-import {CountDown, EventResults, Market, Race as RaceApi, SportDetail, Tournament, TreeSports} from '../../services/vgen.model';
-import {VgenService} from '../../services/vgen.service';
-import {BetOdd, PolyfunctionalArea} from '../products.model';
-import {ProductsService} from '../products.service';
+import { Injectable } from '@angular/core';
+import { interval, Observable, Subject, timer } from 'rxjs';
+import { CountDown, EventResults, Market, Race as RaceApi, SportDetail, Tournament, TreeSports } from '../../services/vgen.model';
+import { VgenService } from '../../services/vgen.service';
+import { BetOdd, PolyfunctionalArea } from '../products.model';
+import { ProductsService } from '../products.service';
 import {
   Dog,
   Lucky,
@@ -448,19 +448,23 @@ export class DogracingService {
    */
   private extractOdd(odd: RaceApi, areaFuncData: PolyfunctionalArea, dogName?: string): PolyfunctionalArea {
     let oddsToSearch: string[] = [];
-    if (
-      areaFuncData.selection === SmartCodeType[SmartCodeType['1VA']] ||
-      areaFuncData.selection === SmartCodeType[SmartCodeType.AOX] ||
-      areaFuncData.selection === SmartCodeType[SmartCodeType.TOX]
-    ) {
-      // generate combination by the selections in the rows
-      oddsToSearch = this.generateOdds(areaFuncData.value.toString());
-    } else if (areaFuncData.selection === SmartCodeType[SmartCodeType.AX]) {
-      // generate combimation from the first row selections
-      oddsToSearch = this.generateOddsRow(areaFuncData.value.toString());
-    } else if (areaFuncData.selection === SmartCodeType[SmartCodeType.AB]) {
-      // generate sorted combination by the selections in the rows.
-      oddsToSearch = this.generateOddsForAB(areaFuncData.value.toString());
+
+    switch (areaFuncData.selection) {
+      case SmartCodeType[SmartCodeType['1VA']]:
+      case SmartCodeType[SmartCodeType.AOX]:
+      case SmartCodeType[SmartCodeType.TOX]:
+        // generate combination by the selections in the rows
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString());
+        break;
+      case SmartCodeType[SmartCodeType.AX]:
+      case SmartCodeType[SmartCodeType.TNX]:
+        // generate combimation from the first row selections
+        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString());
+        break;
+      case SmartCodeType[SmartCodeType.AB]:
+        // generate sorted combination by the selections in the rows.
+        oddsToSearch = this.generateOddsForAB(areaFuncData.value.toString());
+        break;
     }
 
     for (const m of odd.mk.filter((market: Market) => market.tp === this.typeSelection(areaFuncData.selection))) {
@@ -525,6 +529,7 @@ export class DogracingService {
         return 9; // Exacta
       case 'T':
       case 'TOX':
+      case 'TNX':
         return 12; // Trifecta
       case 'AS':
       case 'AX':
@@ -542,44 +547,48 @@ export class DogracingService {
   private checkSmartCode(areaFuncData: PolyfunctionalArea): PolyfunctionalArea {
     this.smartCode.code = null;
 
-    if (this.placingRace.typePlace === TypePlacingRace.ACCG) {
-      // place bet ACCG
-      this.smartCode.code = this.placeTypeACCG(areaFuncData);
-    } else {
-      // normal bet
-      // setting the PolyfunctionalArea with only an winning selection
-      if (this.smartCode.selWinner.length === 1) {
-        if (this.smartCode.selPlaced.length === 1 && this.smartCode.selPodium.length === 0) {
-          this.smartCode.code = SmartCodeType[SmartCodeType.AO];
-        } else if (
-          // if the second selectione is multiple of 1
-          this.smartCode.selPlaced.length > 1 &&
-          this.smartCode.selPodium.length === 0
-        ) {
-          this.smartCode.code = SmartCodeType[SmartCodeType['1VA']];
-        } else if (this.smartCode.selPlaced.length === 1 && this.smartCode.selPodium.length === 1) {
-          this.smartCode.code = SmartCodeType[SmartCodeType['T']];
-          areaFuncData.value =
-            this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
-        } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length > 0) {
-          this.smartCode.code = SmartCodeType[SmartCodeType.TOX];
-          areaFuncData.value =
-            this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
+    switch (this.placingRace.typePlace) {
+      case TypePlacingRace.ACCG: // Place ACCG bet
+        this.smartCode.code = this.placeTypeACCG(areaFuncData);
+        break;
+      case TypePlacingRace.ST: // Place ST bet
+        this.smartCode.code = this.placeTypeST(areaFuncData);
+        break;
+      default:
+        // Normal bet
+        // Setting the PolyfunctionalArea with only a winning selection
+        if (this.smartCode.selWinner.length === 1) {
+          if (this.smartCode.selPlaced.length === 1 && this.smartCode.selPodium.length === 0) {
+            this.smartCode.code = SmartCodeType[SmartCodeType.AO];
+          } else if (
+            // The second selection is multiple of 1
+            this.smartCode.selPlaced.length > 1 &&
+            this.smartCode.selPodium.length === 0
+          ) {
+            this.smartCode.code = SmartCodeType[SmartCodeType['1VA']];
+          } else if (this.smartCode.selPlaced.length === 1 && this.smartCode.selPodium.length === 1) {
+            this.smartCode.code = SmartCodeType[SmartCodeType['T']];
+            areaFuncData.value =
+              this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
+          } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length > 0) {
+            this.smartCode.code = SmartCodeType[SmartCodeType.TOX];
+            areaFuncData.value =
+              this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
+          }
+        } else if (this.smartCode.selWinner.length > 1) {
+          if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
+            // Items in the first and second row
+            this.smartCode.code = SmartCodeType[SmartCodeType.AOX];
+          } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length > 0) {
+            // Items in all the rows
+            this.smartCode.code = SmartCodeType[SmartCodeType.TOX];
+            areaFuncData.value =
+              this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
+          }
         }
-      } else if (this.smartCode.selWinner.length > 1) {
         if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
-          // items in the first and second row
-          this.smartCode.code = SmartCodeType[SmartCodeType.AOX];
-        } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length > 0) {
-          // items in the all the row
-          this.smartCode.code = SmartCodeType[SmartCodeType.TOX];
-          areaFuncData.value =
-            this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
+          areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
         }
-      }
-      if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
-        areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
-      }
     }
 
     return areaFuncData;
@@ -595,7 +604,7 @@ export class DogracingService {
         // only items in the first row
         if (this.smartCode.selWinner.length === 2) {
           // Single
-          // sort the displayed values
+          // Sort the displayed values
           this.smartCode.selWinner.sort(function(a, b) {
             return a - b;
           });
@@ -610,7 +619,7 @@ export class DogracingService {
           return SmartCodeType[SmartCodeType.AX];
         }
       } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
-        // items in the first and second row
+        // Items in the first and second row
         if (this.smartCode.selWinner.length === 1 && this.smartCode.selPlaced.length === 1) {
           // Only a dog is selected on the first and second row the result is a single "Combination".
           // Sort the selections
@@ -635,6 +644,30 @@ export class DogracingService {
       }
       return null;
     }
+  }
+
+  /**
+   * Smarcode generator for ST form PolyfunctionalArea object
+   * @param areaFuncData PolyfunctionalArea object.
+   * @returns Generated smartcode.
+   */
+  private placeTypeST(areaFuncData: PolyfunctionalArea): string {
+    if (this.smartCode.selWinner.length >= 1) {
+      if (this.smartCode.selPlaced.length === 0 && this.smartCode.selPodium.length === 0) {
+        // Requirements "Trio a girare"
+        // Only items in the first row
+        if (this.smartCode.selWinner.length >= 3) {
+          this.smartCode.selWinner.sort(function(a, b) {
+            return a - b;
+          });
+          areaFuncData.value = this.smartCode.selWinner.join('');
+          return SmartCodeType[SmartCodeType.TNX];
+        }
+      } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
+        // Items in the first and second row
+      }
+    }
+    return null;
   }
 
   /**
