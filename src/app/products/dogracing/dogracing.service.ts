@@ -17,8 +17,10 @@ import {
   SmartCodeType,
   SpecialBet,
   SpecialBetValue,
-  TypePlacingRace
+  TypePlacingRace,
+  CombinationType
 } from './dogracing.models';
+import { normalizeKeyframes } from '@angular/animations/browser/src/render/shared';
 
 @Injectable({
   providedIn: 'root'
@@ -457,12 +459,17 @@ export class DogracingService {
         oddsToSearch = this.generateOdds(areaFuncData.value.toString());
         break;
       case SmartCodeType[SmartCodeType.AX]:
+        // Generate combination by 2 from the first row selections
+        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.Quinella);
+        console.log(oddsToSearch);
+        break;
       case SmartCodeType[SmartCodeType.TNX]:
-        // generate combimation from the first row selections
-        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString());
+        // Generate combination by 3 from the first row selections
+        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.Trifecta);
+        console.log(oddsToSearch);
         break;
       case SmartCodeType[SmartCodeType.AB]:
-        // generate sorted combination by the selections in the rows.
+        // Generate sorted combination by the selections in the rows.
         oddsToSearch = this.generateOddsForAB(areaFuncData.value.toString());
         break;
     }
@@ -746,17 +753,29 @@ export class DogracingService {
 
   /**
    * Generates all combinations of bets from a single row selections
-   * @param value string representations, ex. 1234
-   * @returns the array of combinations, ex. 1-2, 1-3, 1-4, 2-3, 2-4, 3-4
+   * @param value String representations, ex. 1234
+   * @param combinationType Enum (CombinationType) of the type of combination desired. Values: Quinella (combination by 2), Trifecta (combination by 3).
+   * @returns Array of combinations. Ex: For type "Quinella": 1-2, 1-3, 1-4, 2-3, 2-4, 3-4. For type "Trifecta": 1-2-3, 1-3-4, 1-2-4, 2-1-3, 2-3-4, ecc.
    */
-  generateOddsRow(value: string): string[] {
+  generateOddsRow(value: string, combinationType: CombinationType): string[] {
     const returnValues: string[] = [];
 
     if (value.length > 0) {
       const values: string[] = this.extractOddFromString(value);
       for (let i = 0; i < value.length; i++) {
         for (let j = i + 1; j < value.length; j++) {
-          returnValues.push(values[i] + '-' + values[j]);
+          switch (combinationType) {
+            case CombinationType.Quinella:
+              returnValues.push(values[i] + '-' + values[j]);
+              break;
+            case CombinationType.Trifecta:
+              for (let k = i + 1; k < value.length; k++) {
+                if (i !== j && i !== k && j !== k) {
+                  returnValues.push(values[i] + '-' + values[j] + '-' + values[k]);
+                }
+              }
+              break;
+          }
         }
       }
     }
