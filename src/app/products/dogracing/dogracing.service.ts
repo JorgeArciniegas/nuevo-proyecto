@@ -460,12 +460,11 @@ export class DogracingService {
         break;
       case SmartCodeType[SmartCodeType.AX]:
         // Generate combination by 2 from the first row selections
-        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.Quinella);
-        console.log(oddsToSearch);
+        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.Quinella, true);
         break;
       case SmartCodeType[SmartCodeType.TNX]:
         // Generate combination by 3 from the first row selections
-        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.Trifecta);
+        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.Trifecta, false);
         console.log(oddsToSearch);
         break;
       case SmartCodeType[SmartCodeType.AB]:
@@ -751,13 +750,17 @@ export class DogracingService {
     return returnValues;
   }
 
+  // tslint:disable:max-line-length
   /**
    * Generates all combinations of bets from a single row selections
    * @param value String representations, ex. 1234
    * @param combinationType Enum (CombinationType) of the type of combination desired. Values: Quinella (combination by 2), Trifecta (combination by 3).
+   * @param ordered Boolean to determin if the combinations have to be in order or not. Ex: false (combination 1-2 and 2-1 are both valid), true (only combination 1-2 is valid).
    * @returns Array of combinations. Ex: For type "Quinella": 1-2, 1-3, 1-4, 2-3, 2-4, 3-4. For type "Trifecta": 1-2-3, 1-3-4, 1-2-4, 2-1-3, 2-3-4, ecc.
    */
-  generateOddsRow(value: string, combinationType: CombinationType): string[] {
+  // tslint:enable:max-line-length
+
+  generateOddsRow(value: string, combinationType: CombinationType, ordered: boolean): string[] {
     const returnValues: string[] = [];
 
     if (value.length > 0) {
@@ -766,12 +769,24 @@ export class DogracingService {
         for (let j = i + 1; j < value.length; j++) {
           switch (combinationType) {
             case CombinationType.Quinella:
-              returnValues.push(values[i] + '-' + values[j]);
+              if (ordered) {
+                returnValues.push(values[i] + '-' + values[j]);
+              } else {
+                returnValues.push(values[i] + '-' + values[j]);
+                returnValues.push(values[j] + '-' + values[i]);
+              }
               break;
             case CombinationType.Trifecta:
-              for (let k = i + 1; k < value.length; k++) {
-                if (i !== j && i !== k && j !== k) {
+              for (let k = j + 1; k < value.length; k++) {
+                if (ordered) {
                   returnValues.push(values[i] + '-' + values[j] + '-' + values[k]);
+                } else {
+                  returnValues.push(values[i] + '-' + values[j] + '-' + values[k]);
+                  returnValues.push(values[i] + '-' + values[k] + '-' + values[j]);
+                  returnValues.push(values[j] + '-' + values[i] + '-' + values[k]);
+                  returnValues.push(values[j] + '-' + values[k] + '-' + values[i]);
+                  returnValues.push(values[k] + '-' + values[i] + '-' + values[j]);
+                  returnValues.push(values[k] + '-' + values[j] + '-' + values[i]);
                 }
               }
               break;
