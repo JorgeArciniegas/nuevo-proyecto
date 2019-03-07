@@ -465,7 +465,6 @@ export class DogracingService {
       case SmartCodeType[SmartCodeType.TNX]:
         // Generate combination by 3 from the first row selections
         oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.Trifecta, false);
-        console.log(oddsToSearch);
         break;
       case SmartCodeType[SmartCodeType.AB]:
         // Generate sorted combination by the selections in the rows.
