@@ -1,8 +1,10 @@
 {
   "ACCG": "ACCG",
+  "BASE": "B",
   "Balance": "Balance",
   "C": "C",
   "CLOSE": "Close",
+  "CODA": "C",
   "COL": "COL",
   "LUCKY": "Lucky",
   "NO_CONNECTION": "Nessuna connessione disponibile",
@@ -10,8 +12,12 @@
   "R": "R",
   "SMARTCODE": {
     "1VA": "V. ACCOPPIATA",
+    "AB": "AB",
     "AO": "ACC. IN ORDINE",
     "AOX": "ACC.Ord.CC",
+    "AR": "AR",
+    "AS": "ACCOPPIATA",
+    "AX": "AX",
     "EVEN": "PARI",
     "ODD": "DISPARI",
     "OVER": "OVER",
@@ -21,17 +27,18 @@
     "TNX": "TNX",
     "TOX": "TOX",
     "UNDER": "UNDER",
-    "WINNER": "VINCENTE",
-    "AS": "ACCOPPIATA",
-    "AX": "AX",
-    "AB": "AB",
-    "VT": "VT"
+    "VT": "VT",
+    "WINNER": "VINCENTE"
   },
   "ST": "ST",
   "TITLE": {
     "1VA": "Vincente Accoppiata",
+    "AB": "Accoppiata con Base e Coda",
     "AO": "Accoppiata in ordine",
     "AOX": "Accoppiata in ordine con Campo",
+    "AR": "Accoppiata in ordine con ritorno",
+    "AS": "Accoppiata",
+    "AX": "Multipla Accoppiata",
     "EVEN": "Pari",
     "ODD": "Dispari",
     "OVER": "Over",
@@ -41,11 +48,8 @@
     "TNX": "Trio a girare",
     "TOX": "Trio in ordine con Campo",
     "UNDER": "Under",
-    "WINNER": "Vincente",
-    "AS": "Accoppiata",
-    "AX": "Multipla Accoppiata",
-    "AB": "Accoppiata con Base e Coda",
-    "VT": "Vincente trio"
+    "VT": "Vincente trio",
+    "WINNER": "Vincente"
   },
   "TOT": "TOT",
   "amountPlace": "Importo scommesso",
@@ -57,7 +61,5 @@
   "potentialMaxWinner": "Vincita potenziale massima",
   "race": "Race",
   "single": "Singola",
-  "tabCoupon": "Scheda scommesse",
-  "BASE": "B",
-  "CODA": "C"
+  "tabCoupon": "Scheda scommesse"
 }
