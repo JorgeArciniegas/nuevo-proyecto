@@ -564,6 +564,9 @@ export class DogracingService {
       case TypePlacingRace.ST: // Place ST bet
         this.smartCode.code = this.placeTypeST(areaFuncData);
         break;
+      case TypePlacingRace.R: // Place R bet
+        this.smartCode.code = this.placeTypeR(areaFuncData);
+        break;
       default:
         // Normal bet
         // Setting the PolyfunctionalArea with only a winning selection
@@ -609,6 +612,7 @@ export class DogracingService {
    * @param areaFuncData PolyfunctionalArea object
    */
   private placeTypeACCG(areaFuncData: PolyfunctionalArea): string {
+    // One or more selections on the first row
     if (this.smartCode.selWinner.length >= 1) {
       if (this.smartCode.selPlaced.length === 0 && this.smartCode.selPodium.length === 0) {
         // only items in the first row
@@ -662,11 +666,53 @@ export class DogracingService {
    * @returns Generated smartcode.
    */
   private placeTypeST(areaFuncData: PolyfunctionalArea): string {
+    // One or more selections on the first row
     if (this.smartCode.selWinner.length >= 1) {
+      // Only items in the first row
       if (this.smartCode.selPlaced.length === 0 && this.smartCode.selPodium.length === 0) {
         // Requirements "Trio a girare"
-        // Only items in the first row
         if (this.smartCode.selWinner.length >= 3) {
+          // Sort the displayed values
+          this.smartCode.selWinner.sort(function(a, b) {
+            return a - b;
+          });
+          areaFuncData.value = this.smartCode.selWinner.join('');
+          return SmartCodeType[SmartCodeType.TNX];
+        }
+      } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
+        // Requirements "Vincente Trio"
+        // Items in the first and second row and with enough selections on the second row to be able to create a tris
+        if (this.smartCode.selWinner.length < 3 && this.smartCode.selPlaced.length >= 2) {
+          if (this.smartCode.selWinner.length > 1) {
+            // Sort the displayed values
+            this.smartCode.selWinner.sort(function(a, b) {
+              return a - b;
+            });
+          }
+          // Sort the displayed values
+          this.smartCode.selPlaced.sort(function(a, b) {
+            return a - b;
+          });
+          areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
+          return SmartCodeType[SmartCodeType.VT];
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Smarcode generator for R form PolyfunctionalArea object
+   * @param areaFuncData PolyfunctionalArea object.
+   * @returns Generated smartcode.
+   */
+  private placeTypeR(areaFuncData: PolyfunctionalArea): string {
+    // One or more selections on the first row
+    if (this.smartCode.selWinner.length >= 1) {
+      // Only items in the first row
+      if (this.smartCode.selPlaced.length === 0 && this.smartCode.selPodium.length === 0) {
+        // Requirements "Accoppiata in ordine con ritorno"
+        if (this.smartCode.selWinner.length === 2) {
           // Sort the displayed values
           this.smartCode.selWinner.sort(function(a, b) {
             return a - b;
