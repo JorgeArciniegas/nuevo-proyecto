@@ -681,20 +681,16 @@ export class DogracingService {
         }
       } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
         // Requirements "Vincente Trio"
-        // Items in the first and second row and with enough selections on the second row to be able to create a tris
-        if (this.smartCode.selWinner.length < 3 && this.smartCode.selPlaced.length >= 2) {
-          if (this.smartCode.selWinner.length > 1) {
+        if (this.smartCode.selWinner.length === 1) {
+          // Items in the first and second row and with enough selections on the second row to be able to create a tris
+          if (this.smartCode.selPlaced.length >= 2) {
             // Sort the displayed values
-            this.smartCode.selWinner.sort(function(a, b) {
+            this.smartCode.selPlaced.sort(function(a, b) {
               return a - b;
             });
+            areaFuncData.value = this.smartCode.selWinner[0] + '/' + this.smartCode.selPlaced.join('');
+            return SmartCodeType[SmartCodeType.VT];
           }
-          // Sort the displayed values
-          this.smartCode.selPlaced.sort(function(a, b) {
-            return a - b;
-          });
-          areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
-          return SmartCodeType[SmartCodeType.VT];
         }
       }
     }
