@@ -472,7 +472,8 @@ export class DogracingService {
         // Generate combination by 3 of the first row selections not in order.
         oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By3, false);
         break;
-      case SmartCodeType[SmartCodeType.VT]: // Winning tris
+      case SmartCodeType[SmartCodeType.VT]: // Winning trio
+      case SmartCodeType[SmartCodeType.AT]: // Combined trio
         // Generate combination by 3 of the selections in the rows not in order.
         oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, false);
         break;
@@ -543,6 +544,7 @@ export class DogracingService {
       case 'TOX':
       case 'TNX':
       case 'VT':
+      case 'AT':
         return 12; // Trifecta
       case 'AS':
       case 'AX':
@@ -683,9 +685,10 @@ export class DogracingService {
           return SmartCodeType[SmartCodeType.TNX];
         }
       } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
-        // Requirements "Vincente Trio"
+        // Sections in the first and second row.
         if (this.smartCode.selWinner.length === 1) {
-          // Selections in the first and second row and with enough selections on the second row to be able to create a tris
+          // Requirements "Vincente Trio"
+          // Enough selections on the second row to be able to create a trio
           if (this.smartCode.selPlaced.length >= 2) {
             // Sort the displayed values
             this.smartCode.selPlaced.sort(function(a, b) {
@@ -693,6 +696,23 @@ export class DogracingService {
             });
             areaFuncData.value = this.smartCode.selWinner[0] + '/' + this.smartCode.selPlaced.join('');
             return SmartCodeType[SmartCodeType.VT];
+          }
+        } else if (this.smartCode.selWinner.length === 2) {
+          // Requirements "Accoppiata Trio"
+          // Enough selections on the second row to be able to create a trio
+          if (this.smartCode.selPlaced.length >= 1) {
+            // Sort the displayed values
+            this.smartCode.selWinner.sort(function(a, b) {
+              return a - b;
+            });
+            if (this.smartCode.selPlaced.length > 1) {
+              // Sort the displayed values
+              this.smartCode.selPlaced.sort(function(a, b) {
+                return a - b;
+              });
+            }
+            areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
+            return SmartCodeType[SmartCodeType.AT];
           }
         }
       }
@@ -732,10 +752,14 @@ export class DogracingService {
    * @param value String representations. Ex. 12/34/56, 12/345
    * @param combinationType Enum (CombinationType) of the type of combination desired. Values: By2, By3.
    * @param ordered Boolean to determin if the combinations have to be in order or not. Ex: false (combination 1-3-5, 3-1-5, 5-1-3, 5-3-1 are all valid), true (only combination 1-3-5 is valid).
+   * @param fixedRow Row which selections have to be always present on the combinations. Value: Enum Podium (WINNER = first row, PLACED = second row, SHOW = third row).
+   *  Ex:
+   *    - value = 12/34, combinationType = By3, ordered = false, fixedRow = 1 -> result = 1-2-3, 1-2-4, 2-1-3, 2-1-4
+   *    - value = 12/34, combinationType = By3, ordered = false, fixedRow = 2 -> result = 1-3-4, 1-4-3, 2-3-4, 2-4-3
    * @returns Array of combinations. Ex: For type "By2" in order: 1-3-5, 1-3-6, 1-4-6, 2-3-5, 2-3-6, 2-4-5, 2-4-6. For type "By3" not in order: 1-3-4, 3-1-4, 3-4-1, 4-1-3, 4-3-1, 1-4-5 ecc.
    */
   // tslint:enable:max-line-length
-  generateOdds(value: string, combinationType: CombinationType, ordered: boolean): string[] {
+  generateOdds(value: string, combinationType: CombinationType, ordered: boolean, fixedRow?: Podium): string[] {
     const selections: string[] = value.split('/');
     const returnValues: string[] = [];
 
@@ -764,7 +788,7 @@ export class DogracingService {
               case CombinationType.By3: // Combination of the selections By 3
                 // Selections on the first and second row.
                 if (selections.length === 2) {
-                  // There are enough selections on the second row to for a tris.
+                  // There are enough selections on the second row to make a trio.
                   if (selections[1].length >= 2) {
                     for (let i3 = i2 + 1; i3 < selections[1].length; i3++) {
                       if (ordered) {
@@ -848,6 +872,10 @@ export class DogracingService {
     return returnValues;
   }
 
+  /**
+   * Method to extract the selection form the smarcode
+   * @param value Smartcode section from where extract the selections.
+   */
   extractOddFromString(value: string): string[] {
     const returnValues: string[] = [];
     for (let index = 0; index < value.length; index++) {

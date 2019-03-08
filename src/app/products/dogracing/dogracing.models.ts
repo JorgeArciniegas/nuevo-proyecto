@@ -43,8 +43,9 @@ export enum SmartCodeType {
   '1PX',
   '1VA',
   'AB', // Quinella with base and tail
-  'VT', // Winning tris
-  'AR' // Quinella in order with return
+  'VT', // Winning trio
+  'AR', // Quinella in order with return
+  'AT' // Combined trio
 }
 
 // Enum of the type of combinations available.
