@@ -24,7 +24,8 @@
     "WINNER": "VINCENTE",
     "AS": "ACCOPPIATA",
     "AX": "AX",
-    "AB": "AB"
+    "AB": "AB",
+    "VT": "VT"
   },
   "ST": "ST",
   "TITLE": {
@@ -43,7 +44,8 @@
     "WINNER": "Vincente",
     "AS": "Accoppiata",
     "AX": "Multipla Accoppiata",
-    "AB": "Accoppiata con Base e Coda"
+    "AB": "Accoppiata con Base e Coda",
+    "VT": "Vincente trio"
   },
   "TOT": "TOT",
   "amountPlace": "Importo scommesso",

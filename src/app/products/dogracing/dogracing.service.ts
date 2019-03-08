@@ -455,25 +455,29 @@ export class DogracingService {
       case SmartCodeType[SmartCodeType['1VA']]:
       case SmartCodeType[SmartCodeType.AOX]:
       case SmartCodeType[SmartCodeType.TOX]:
-        // generate combination by the selections in the rows
-        oddsToSearch = this.generateOdds(areaFuncData.value.toString());
+        // Generate sorted combination by the selections in the rows.
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By2, true);
         break;
       case SmartCodeType[SmartCodeType.AX]:
-        // Generate combination by 2 from the first row selections in order
-        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.Quinella, true);
+        // Generate sorted combination by 2 from the first row selections.
+        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By2, true);
         break;
-      case SmartCodeType[SmartCodeType.TNX]:
-        // Generate combination by 3 from the first row selections not in order
-        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.Trifecta, false);
+      case SmartCodeType[SmartCodeType.TNX]: // Trifecta
+        // Generate combination by 3 from the first row selections not in order.
+        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By3, false);
         break;
-      case SmartCodeType[SmartCodeType.AB]:
+      case SmartCodeType[SmartCodeType.VT]: // Winning tris
+        // Generate combination by 3 from the selections in the rows not in order.
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, false);
+        break;
+      case SmartCodeType[SmartCodeType.AB]: // Combination with base and tail
         // Generate sorted combination by the selections in the rows.
-        oddsToSearch = this.generateOddsForAB(areaFuncData.value.toString());
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By2, true);
         break;
     }
 
     for (const m of odd.mk.filter((market: Market) => market.tp === this.typeSelection(areaFuncData.selection))) {
-      // if the selection is PODIUM, WINNER or SHOW
+      // If the selection is PODIUM, WINNER or SHOW
       if (dogName) {
         for (const checkOdd of m.sls.filter(o => o.nm === dogName)) {
           areaFuncData.odd = checkOdd.ods[0].vl;
@@ -535,6 +539,7 @@ export class DogracingService {
       case 'T':
       case 'TOX':
       case 'TNX':
+      case 'VT':
         return 12; // Trifecta
       case 'AS':
       case 'AX':
@@ -662,6 +667,7 @@ export class DogracingService {
         // Requirements "Trio a girare"
         // Only items in the first row
         if (this.smartCode.selWinner.length >= 3) {
+          // Sort the displayed values
           this.smartCode.selWinner.sort(function(a, b) {
             return a - b;
           });
@@ -669,75 +675,90 @@ export class DogracingService {
           return SmartCodeType[SmartCodeType.TNX];
         }
       } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
-        // Items in the first and second row
+        // Requirements "Vincente Trio"
+        // Items in the first and second row and with enough selections on the second row to be able to create a tris
+        if (this.smartCode.selWinner.length < 3 && this.smartCode.selPlaced.length >= 2) {
+          if (this.smartCode.selWinner.length > 1) {
+            // Sort the displayed values
+            this.smartCode.selWinner.sort(function(a, b) {
+              return a - b;
+            });
+          }
+          // Sort the displayed values
+          this.smartCode.selPlaced.sort(function(a, b) {
+            return a - b;
+          });
+          areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
+          return SmartCodeType[SmartCodeType.VT];
+        }
       }
     }
     return null;
   }
 
+  // tslint:disable:max-line-length
   /**
-   * Generates all combinations of bets
-   * @param value string representations, ex. 12/34/56
-   * @returns the array of combinations, ex. 1-3-5, 1-3-6, 1-4-5, ...
+   * Generate all combinations of bets from all the rows selections
+   * @param value String representations. Ex. 12/34/56, 12/345
+   * @param combinationType Enum (CombinationType) of the type of combination desired. Values: By2, By3.
+   * @param ordered Boolean to determin if the combinations have to be in order or not. Ex: false (combination 1-3-5, 3-1-5, 5-1-3, 5-3-1 are all valid), true (only combination 1-3-5 is valid).
+   * @returns Array of combinations. Ex: For type "By2" in order: 1-3-5, 1-3-6, 1-4-6, 2-3-5, 2-3-6, 2-4-5, 2-4-6. For type "By3" not in order: 1-3-4, 3-1-4, 3-4-1, 4-1-3, 4-3-1, 1-4-5 ecc.
    */
-  generateOdds(value: string): string[] {
+  // tslint:enable:max-line-length
+  generateOdds(value: string, combinationType: CombinationType, ordered: boolean): string[] {
     const selections: string[] = value.split('/');
     const returnValues: string[] = [];
 
     if (selections.length > 0) {
+      // Extraction of the selections in the first row.
       const values1: string[] = this.extractOddFromString(selections[0]);
       for (let i1 = 0; i1 < selections[0].length; i1++) {
         if (selections.length > 1) {
+          // Extraction of the selections in the second row.
           const values2: string[] = this.extractOddFromString(selections[1]);
           for (let i2 = 0; i2 < selections[1].length; i2++) {
-            if (selections.length > 2) {
-              const values3: string[] = this.extractOddFromString(selections[2]);
-              for (let i3 = 0; i3 < selections[2].length; i3++) {
-                returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values3[i3]);
-              }
-            } else {
-              returnValues.push(values1[i1] + '-' + values2[i2]);
-            }
-          }
-        } else {
-          returnValues.push(values1[i1]);
-        }
-      }
-    }
-
-    return returnValues;
-  }
-
-  /**
-   * Odds generator for the "AB" market, where the selections to combine have to be sorted.
-   * @param value String representations. Ex. 34/12.
-   * @returns Array of combinations with sort of the value. Ex. 1-3, 2-3, 1-4, 2-4.
-   */
-  generateOddsForAB(value: string): string[] {
-    const selections: string[] = value.split('/');
-    const returnValues: string[] = [];
-
-    if (selections.length > 0) {
-      const values1: string[] = this.extractOddFromString(selections[0]);
-      for (let i1 = 0; i1 < selections[0].length; i1++) {
-        if (selections.length > 1) {
-          const values2: string[] = this.extractOddFromString(selections[1]);
-          for (let i2 = 0; i2 < selections[1].length; i2++) {
-            if (selections.length > 2) {
-              const values3: string[] = this.extractOddFromString(selections[2]);
-              // Sort the combination
-              if (parseInt(values1[i1], 10) > parseInt(values2[i2], 10)) {
-                returnValues.push(values2[i2] + '-' + values1[i1]);
-              } else {
-                returnValues.push(values1[i1] + '-' + values2[i2]);
-              }
-            } else {
-              // Sort the combination
-              if (parseInt(values1[i1], 10) > parseInt(values2[i2], 10)) {
-                returnValues.push(values2[i2] + '-' + values1[i1]);
-              } else {
-                returnValues.push(values1[i1] + '-' + values2[i2]);
-              }
+            switch (combinationType) {
+              case CombinationType.By2: // Combination of the selections By 2
+                if (ordered) {
+                  // Sort the combination
+                  if (parseInt(values1[i1], 10) > parseInt(values2[i2], 10)) {
+                    returnValues.push(values2[i2] + '-' + values1[i1]);
+                  } else {
+                    returnValues.push(values1[i1] + '-' + values2[i2]);
+                  }
+                } else {
+                  returnValues.push(values1[i1] + '-' + values2[i2]);
+                  returnValues.push(values2[i2] + '-' + values1[i1]);
+                }
+                break;
+              case CombinationType.By3: // Combination of the selections By 3
+                // Selections on the first and second row.
+                if (selections.length === 2) {
+                  // There are enough selections on the second row to for a tris.
+                  if (selections[1].length >= 2) {
+                    for (let i3 = i2 + 1; i3 < selections[1].length; i3++) {
+                      if (ordered) {
+                        // Sort the combination
+                        if (parseInt(values2[i2], 10) >= parseInt(values2[i3], 10)) {
+                          returnValues.push(values1[i1] + '-' + values2[i3] + '-' + values2[i2]);
+                        } else {
+                          returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values2[i3]);
+                        }
+                      } else {
+                        returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values2[i3]);
+                        returnValues.push(values1[i1] + '-' + values2[i3] + '-' + values2[i2]);
+                      }
+                    }
+                  }
+                } else if (selections.length > 2) {
+                  // Selections on all three rows.
+                  // Extraction of the selections in the third row.
+                  const values3: string[] = this.extractOddFromString(selections[2]);
+                  for (let i3 = 0; i3 < selections[2].length; i3++) {
+                    returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values3[i3]);
+                  }
+                }
+                break;
             }
           }
         } else {
@@ -751,23 +772,23 @@ export class DogracingService {
 
   // tslint:disable:max-line-length
   /**
-   * Generates all combinations of bets from a single row selections
+   * Generate all combinations of bets from a single row selections
    * @param value String representations, ex. 1234
-   * @param combinationType Enum (CombinationType) of the type of combination desired. Values: Quinella (combination by 2), Trifecta (combination by 3).
+   * @param combinationType Enum (CombinationType) of the type of combination desired. Values: By2 (combination by 2), By3 (combination by 3).
    * @param ordered Boolean to determin if the combinations have to be in order or not. Ex: false (combination 1-2 and 2-1 are both valid), true (only combination 1-2 is valid).
-   * @returns Array of combinations. Ex: For type "Quinella": 1-2, 1-3, 1-4, 2-3, 2-4, 3-4. For type "Trifecta": 1-2-3, 1-3-4, 1-2-4, 2-1-3, 2-3-4, ecc.
+   * @returns Array of combinations. Ex: For type "By2": 1-2, 1-3, 1-4, 2-3, 2-4, 3-4. For type "By3": 1-2-3, 1-3-4, 1-2-4, 2-1-3, 2-3-4, ecc.
    */
   // tslint:enable:max-line-length
-
   generateOddsRow(value: string, combinationType: CombinationType, ordered: boolean): string[] {
     const returnValues: string[] = [];
 
     if (value.length > 0) {
+      // Extraction of the selections in the row.
       const values: string[] = this.extractOddFromString(value);
       for (let i = 0; i < value.length; i++) {
         for (let j = i + 1; j < value.length; j++) {
           switch (combinationType) {
-            case CombinationType.Quinella:
+            case CombinationType.By2: // Combination of the selections By 2
               if (ordered) {
                 returnValues.push(values[i] + '-' + values[j]);
               } else {
@@ -775,7 +796,7 @@ export class DogracingService {
                 returnValues.push(values[j] + '-' + values[i]);
               }
               break;
-            case CombinationType.Trifecta:
+            case CombinationType.By3: // Combination of the selections By 3
               for (let k = j + 1; k < value.length; k++) {
                 if (ordered) {
                   returnValues.push(values[i] + '-' + values[j] + '-' + values[k]);

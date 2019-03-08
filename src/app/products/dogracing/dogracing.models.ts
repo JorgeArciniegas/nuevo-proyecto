@@ -35,20 +35,21 @@ export enum SmartCodeType {
   'PP',
   'T',
   'TOX',
-  'TNX',
+  'TNX', // Trifecta
   'VX',
   'AX',
   'ASX',
   'AOX',
   '1PX',
   '1VA',
-  'AB' // Combination with base and tail
+  'AB', // Combination with base and tail
+  'VT' // Winning tris
 }
 
 // Enum of the type of combinations available.
 export enum CombinationType {
-  Quinella, // Combination by 2. Ex: 1234 -> 1-2, 1-3, 1-4, 2-1, 2-3, 2-4 ecc.
-  Trifecta // Combination by 3. Ex: 1234 -> 1-2-3, 1-3-4, 1-2-4, 2-1-3, 2-3-4, 3-1-2 ecc.
+  By2, // Combination by 2. Ex: 1234 -> 1-2, 1-3, 1-4, 2-1, 2-3, 2-4 ecc.
+  By3 // Combination by 3. Ex: 1234 -> 1-2-3, 1-3-4, 1-2-4, 2-1-3, 2-3-4, 3-1-2 ecc.
 }
 
 export class PlacingRace {
