@@ -455,24 +455,26 @@ export class DogracingService {
       case SmartCodeType[SmartCodeType['1VA']]:
       case SmartCodeType[SmartCodeType.AOX]:
       case SmartCodeType[SmartCodeType.TOX]:
-        // Generate sorted combination by the selections in the rows.
+      case SmartCodeType[SmartCodeType.AB]:
+        // Generate sorted combination by 2 of the selections in the rows.
         oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By2, true);
         break;
+      case SmartCodeType[SmartCodeType.AR]:
+        // Generate combination by 2 of the first row selections not in order.
+        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By2, false);
+        console.log(oddsToSearch);
+        break;
       case SmartCodeType[SmartCodeType.AX]:
-        // Generate sorted combination by 2 from the first row selections.
+        // Generate sorted combination by 2 of the first row selections.
         oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By2, true);
         break;
       case SmartCodeType[SmartCodeType.TNX]: // Trifecta
-        // Generate combination by 3 from the first row selections not in order.
+        // Generate combination by 3 of the first row selections not in order.
         oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By3, false);
         break;
       case SmartCodeType[SmartCodeType.VT]: // Winning tris
-        // Generate combination by 3 from the selections in the rows not in order.
+        // Generate combination by 3 of the selections in the rows not in order.
         oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, false);
-        break;
-      case SmartCodeType[SmartCodeType.AB]: // Combination with base and tail
-        // Generate sorted combination by the selections in the rows.
-        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By2, true);
         break;
     }
 
@@ -535,6 +537,7 @@ export class DogracingService {
       case 'AO':
       case '1VA':
       case 'AOX':
+      case 'AR':
         return 9; // Exacta
       case 'T':
       case 'TOX':
@@ -615,7 +618,7 @@ export class DogracingService {
     // One or more selections on the first row
     if (this.smartCode.selWinner.length >= 1) {
       if (this.smartCode.selPlaced.length === 0 && this.smartCode.selPodium.length === 0) {
-        // only items in the first row
+        // only selections in the first row
         if (this.smartCode.selWinner.length === 2) {
           // Single
           // Sort the displayed values
@@ -633,7 +636,7 @@ export class DogracingService {
           return SmartCodeType[SmartCodeType.AX];
         }
       } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
-        // Items in the first and second row
+        // Selections in the first and second row
         if (this.smartCode.selWinner.length === 1 && this.smartCode.selPlaced.length === 1) {
           // Only a dog is selected on the first and second row the result is a single "Combination".
           // Sort the selections
@@ -668,7 +671,7 @@ export class DogracingService {
   private placeTypeST(areaFuncData: PolyfunctionalArea): string {
     // One or more selections on the first row
     if (this.smartCode.selWinner.length >= 1) {
-      // Only items in the first row
+      // Only selections in the first row
       if (this.smartCode.selPlaced.length === 0 && this.smartCode.selPodium.length === 0) {
         // Requirements "Trio a girare"
         if (this.smartCode.selWinner.length >= 3) {
@@ -682,7 +685,7 @@ export class DogracingService {
       } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
         // Requirements "Vincente Trio"
         if (this.smartCode.selWinner.length === 1) {
-          // Items in the first and second row and with enough selections on the second row to be able to create a tris
+          // Selections in the first and second row and with enough selections on the second row to be able to create a tris
           if (this.smartCode.selPlaced.length >= 2) {
             // Sort the displayed values
             this.smartCode.selPlaced.sort(function(a, b) {
@@ -705,7 +708,7 @@ export class DogracingService {
   private placeTypeR(areaFuncData: PolyfunctionalArea): string {
     // One or more selections on the first row
     if (this.smartCode.selWinner.length >= 1) {
-      // Only items in the first row
+      // Only selections in the first row
       if (this.smartCode.selPlaced.length === 0 && this.smartCode.selPodium.length === 0) {
         // Requirements "Accoppiata in ordine con ritorno"
         if (this.smartCode.selWinner.length === 2) {
@@ -717,6 +720,7 @@ export class DogracingService {
           return SmartCodeType[SmartCodeType.AR];
         }
       } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
+        // Selections in the first and second row
       }
     }
     return null;
