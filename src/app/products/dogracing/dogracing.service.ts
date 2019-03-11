@@ -473,9 +473,12 @@ export class DogracingService {
         oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By3, false);
         break;
       case SmartCodeType[SmartCodeType.VT]: // Winning trio
-      case SmartCodeType[SmartCodeType.AT]: // Combined trio
         // Generate combination by 3 of the selections in the rows not in order.
         oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, false);
+        break;
+      case SmartCodeType[SmartCodeType.AT]: // Combined trio
+        // Generate combination by 3 of the selections in the rows not in order and with the first row fixed.
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, false, true);
         break;
     }
 
@@ -752,14 +755,14 @@ export class DogracingService {
    * @param value String representations. Ex. 12/34/56, 12/345
    * @param combinationType Enum (CombinationType) of the type of combination desired. Values: By2, By3.
    * @param ordered Boolean to determin if the combinations have to be in order or not. Ex: false (combination 1-3-5, 3-1-5, 5-1-3, 5-3-1 are all valid), true (only combination 1-3-5 is valid).
-   * @param fixedRow Row which selections have to be always present on the combinations. Value: Enum Podium (WINNER = first row, PLACED = second row, SHOW = third row).
+   * @param isFirstRowFixed When "true" the selections from the first row have to be always present on the combinations. Valid only in combination by 3. Value: true (the first row is fixed), false or not indicated (The second row is the fixed one).
    *  Ex:
-   *    - value = 12/34, combinationType = By3, ordered = false, fixedRow = 1 -> result = 1-2-3, 1-2-4, 2-1-3, 2-1-4
-   *    - value = 12/34, combinationType = By3, ordered = false, fixedRow = 2 -> result = 1-3-4, 1-4-3, 2-3-4, 2-4-3
+   *    - value = 12/34, combinationType = By3, ordered = false, isFirstRowFixed = true -> result = 1-2-3, 1-2-4, 2-1-3, 2-1-4
+   *    - value = 12/34, combinationType = By3, ordered = false, isFirstRowFixed = false or not indicated -> result = 1-3-4, 1-4-3, 2-3-4, 2-4-3
    * @returns Array of combinations. Ex: For type "By2" in order: 1-3-5, 1-3-6, 1-4-6, 2-3-5, 2-3-6, 2-4-5, 2-4-6. For type "By3" not in order: 1-3-4, 3-1-4, 3-4-1, 4-1-3, 4-3-1, 1-4-5 ecc.
    */
   // tslint:enable:max-line-length
-  generateOdds(value: string, combinationType: CombinationType, ordered: boolean, fixedRow?: Podium): string[] {
+  generateOdds(value: string, combinationType: CombinationType, ordered: boolean, isFirstRowFixed?: boolean): string[] {
     const selections: string[] = value.split('/');
     const returnValues: string[] = [];
 
@@ -770,9 +773,9 @@ export class DogracingService {
         if (selections.length > 1) {
           // Extraction of the selections in the second row.
           const values2: string[] = this.extractOddFromString(selections[1]);
-          for (let i2 = 0; i2 < selections[1].length; i2++) {
-            switch (combinationType) {
-              case CombinationType.By2: // Combination of the selections By 2
+          switch (combinationType) {
+            case CombinationType.By2: // Combination of the selections By 2
+              for (let i2 = 0; i2 < selections[1].length; i2++) {
                 if (ordered) {
                   // Sort the combination
                   if (parseInt(values1[i1], 10) > parseInt(values2[i2], 10)) {
@@ -784,37 +787,97 @@ export class DogracingService {
                   returnValues.push(values1[i1] + '-' + values2[i2]);
                   returnValues.push(values2[i2] + '-' + values1[i1]);
                 }
-                break;
-              case CombinationType.By3: // Combination of the selections By 3
-                // Selections on the first and second row.
-                if (selections.length === 2) {
-                  // There are enough selections on the second row to make a trio.
-                  if (selections[1].length >= 2) {
-                    for (let i3 = i2 + 1; i3 < selections[1].length; i3++) {
-                      if (ordered) {
-                        // Sort the combination
-                        if (parseInt(values2[i2], 10) >= parseInt(values2[i3], 10)) {
-                          returnValues.push(values1[i1] + '-' + values2[i3] + '-' + values2[i2]);
-                        } else {
-                          returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values2[i3]);
-                        }
-                      } else {
-                        returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values2[i3]);
-                        returnValues.push(values1[i1] + '-' + values2[i3] + '-' + values2[i2]);
-                      }
+              }
+              break;
+            case CombinationType.By3: // Combination of the selections By 3
+              // The first row is the fixed one and there are enough selections to create a trio
+              if (isFirstRowFixed && selections.length === 2) {
+                for (let i1b = i1 + 1; i1b < selections[0].length; i1b++) {
+                  for (let i2 = 0; i2 < selections[1].length; i2++) {
+                    returnValues.push(values1[i1] + '-' + values1[i1b] + '-' + values2[i2]);
+                    if (!ordered) {
+                      returnValues.push(values1[i1b] + '-' + values1[i1] + '-' + values2[i2]);
                     }
                   }
-                } else if (selections.length > 2) {
-                  // Selections on all three rows.
-                  // Extraction of the selections in the third row.
-                  const values3: string[] = this.extractOddFromString(selections[2]);
-                  for (let i3 = 0; i3 < selections[2].length; i3++) {
-                    returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values3[i3]);
+                }
+              } else {
+                for (let i2 = 0; i2 < selections[1].length; i2++) {
+                  // Selections on the first and second row.
+                  if (selections.length === 2) {
+                    // There are enough selections on the second row to make a trio.
+                    if (selections[1].length >= 2) {
+                      for (let i2b = i2 + 1; i2b < selections[1].length; i2b++) {
+                        if (ordered) {
+                          // Sort the combination
+                          if (parseInt(values2[i2], 10) >= parseInt(values2[i2b], 10)) {
+                            returnValues.push(values1[i1] + '-' + values2[i2b] + '-' + values2[i2]);
+                          } else {
+                            returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values2[i2b]);
+                          }
+                        } else {
+                          returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values2[i2b]);
+                          returnValues.push(values1[i1] + '-' + values2[i2b] + '-' + values2[i2]);
+                        }
+                      }
+                    }
+                  } else if (selections.length > 2) {
+                    // Selections on all three rows.
+                    // Extraction of the selections in the third row.
+                    const values3: string[] = this.extractOddFromString(selections[2]);
+                    for (let i3 = 0; i3 < selections[2].length; i3++) {
+                      returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values3[i3]);
+                    }
                   }
                 }
-                break;
-            }
+              }
+              break;
           }
+
+          // for (let i2 = 0; i2 < selections[1].length; i2++) {
+          //   switch (combinationType) {
+          //     case CombinationType.By2: // Combination of the selections By 2
+          //       if (ordered) {
+          //         // Sort the combination
+          //         if (parseInt(values1[i1], 10) > parseInt(values2[i2], 10)) {
+          //           returnValues.push(values2[i2] + '-' + values1[i1]);
+          //         } else {
+          //           returnValues.push(values1[i1] + '-' + values2[i2]);
+          //         }
+          //       } else {
+          //         returnValues.push(values1[i1] + '-' + values2[i2]);
+          //         returnValues.push(values2[i2] + '-' + values1[i1]);
+          //       }
+          //       break;
+          //     case CombinationType.By3: // Combination of the selections By 3
+          //       // Selections on the first and second row.
+          //       if (selections.length === 2) {
+          //         // There are enough selections on the second row to make a trio.
+          //         if (selections[1].length >= 2) {
+          //           for (let i3 = i2 + 1; i3 < selections[1].length; i3++) {
+          //             if (ordered) {
+          //               // Sort the combination
+          //               if (parseInt(values2[i2], 10) >= parseInt(values2[i3], 10)) {
+          //                 returnValues.push(values1[i1] + '-' + values2[i3] + '-' + values2[i2]);
+          //               } else {
+          //                 returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values2[i3]);
+          //               }
+          //             } else {
+          //               returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values2[i3]);
+          //               returnValues.push(values1[i1] + '-' + values2[i3] + '-' + values2[i2]);
+          //             }
+          //           }
+          //         }
+          //       } else if (selections.length > 2) {
+          //         // Selections on all three rows.
+          //         // Extraction of the selections in the third row.
+          //         const values3: string[] = this.extractOddFromString(selections[2]);
+          //         for (let i3 = 0; i3 < selections[2].length; i3++) {
+          //           returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values3[i3]);
+          //         }
+          //       }
+          //       break;
+          //   }
+          // }
         } else {
           returnValues.push(values1[i1]);
         }
