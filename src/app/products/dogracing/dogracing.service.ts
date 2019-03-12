@@ -832,52 +832,6 @@ export class DogracingService {
               }
               break;
           }
-
-          // for (let i2 = 0; i2 < selections[1].length; i2++) {
-          //   switch (combinationType) {
-          //     case CombinationType.By2: // Combination of the selections By 2
-          //       if (ordered) {
-          //         // Sort the combination
-          //         if (parseInt(values1[i1], 10) > parseInt(values2[i2], 10)) {
-          //           returnValues.push(values2[i2] + '-' + values1[i1]);
-          //         } else {
-          //           returnValues.push(values1[i1] + '-' + values2[i2]);
-          //         }
-          //       } else {
-          //         returnValues.push(values1[i1] + '-' + values2[i2]);
-          //         returnValues.push(values2[i2] + '-' + values1[i1]);
-          //       }
-          //       break;
-          //     case CombinationType.By3: // Combination of the selections By 3
-          //       // Selections on the first and second row.
-          //       if (selections.length === 2) {
-          //         // There are enough selections on the second row to make a trio.
-          //         if (selections[1].length >= 2) {
-          //           for (let i3 = i2 + 1; i3 < selections[1].length; i3++) {
-          //             if (ordered) {
-          //               // Sort the combination
-          //               if (parseInt(values2[i2], 10) >= parseInt(values2[i3], 10)) {
-          //                 returnValues.push(values1[i1] + '-' + values2[i3] + '-' + values2[i2]);
-          //               } else {
-          //                 returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values2[i3]);
-          //               }
-          //             } else {
-          //               returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values2[i3]);
-          //               returnValues.push(values1[i1] + '-' + values2[i3] + '-' + values2[i2]);
-          //             }
-          //           }
-          //         }
-          //       } else if (selections.length > 2) {
-          //         // Selections on all three rows.
-          //         // Extraction of the selections in the third row.
-          //         const values3: string[] = this.extractOddFromString(selections[2]);
-          //         for (let i3 = 0; i3 < selections[2].length; i3++) {
-          //           returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values3[i3]);
-          //         }
-          //       }
-          //       break;
-          //   }
-          // }
         } else {
           returnValues.push(values1[i1]);
         }
