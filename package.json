@@ -8,14 +8,10 @@
     }
   },
   "scripts": {
-    "android": "tns run android --bundle",
-    "ios": "tns run ios --bundle",
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "vgen": "ng serve -c vgen",
+    "android-vgen": "tns run android --bundle --env.c=\"vgen\""
   },
   "private": true,
   "dependencies": {
