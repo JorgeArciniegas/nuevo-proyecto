@@ -339,7 +339,7 @@ export class DogracingService {
       this.placingRace.thirdRowDisabled = false;
     } else {
       this.placingRace.typePlace = type;
-      if (this.placingRace.typePlace === TypePlacingRace.ACCG || this.placingRace.typePlace === TypePlacingRace.ST) {
+      if (this.placingRace.typePlace !== undefined) {
         // deselect all dogs in the row #3
         this.deselectRowDogs(3);
         this.placingRace.thirdRowDisabled = true;
