@@ -392,7 +392,7 @@ export class DogracingService {
     try {
       // check if is first insert
       let dogName: string;
-      if (this.placingRace.dogs.length === 1 && !this.placingRace.isSpecialBets && !this.placingRace.typePlace) {
+      if (this.placingRace.dogs.length === 1 && !this.placingRace.isSpecialBets && this.placingRace.typePlace === undefined) {
         // single selection
         areaFuncData.selection = Podium[this.placingRace.dogs[0].position];
         areaFuncData.value = this.placingRace.dogs[0].number;
@@ -627,14 +627,14 @@ export class DogracingService {
         if (this.smartCode.selWinner.length === 2) {
           // Single
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('-');
           return SmartCodeType[SmartCodeType.AS];
         } else if (this.smartCode.selWinner.length > 2) {
           // Multiple
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('');
@@ -654,10 +654,10 @@ export class DogracingService {
         } else {
           // Combination with base and tail
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
-          this.smartCode.selPlaced.sort(function(a, b) {
+          this.smartCode.selPlaced.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
@@ -681,7 +681,7 @@ export class DogracingService {
         // Requirements "Trio a girare"
         if (this.smartCode.selWinner.length >= 3) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('');
@@ -694,7 +694,7 @@ export class DogracingService {
           // Enough selections on the second row to be able to create a trio
           if (this.smartCode.selPlaced.length >= 2) {
             // Sort the displayed values
-            this.smartCode.selPlaced.sort(function(a, b) {
+            this.smartCode.selPlaced.sort(function (a, b) {
               return a - b;
             });
             areaFuncData.value = this.smartCode.selWinner[0] + '/' + this.smartCode.selPlaced.join('');
@@ -705,12 +705,12 @@ export class DogracingService {
           // Enough selections on the second row to be able to create a trio
           if (this.smartCode.selPlaced.length >= 1) {
             // Sort the displayed values
-            this.smartCode.selWinner.sort(function(a, b) {
+            this.smartCode.selWinner.sort(function (a, b) {
               return a - b;
             });
             if (this.smartCode.selPlaced.length > 1) {
               // Sort the displayed values
-              this.smartCode.selPlaced.sort(function(a, b) {
+              this.smartCode.selPlaced.sort(function (a, b) {
                 return a - b;
               });
             }
@@ -736,7 +736,7 @@ export class DogracingService {
         // Requirements "Accoppiata in ordine con ritorno"
         if (this.smartCode.selWinner.length === 2) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('');
