@@ -462,7 +462,6 @@ export class DogracingService {
       case SmartCodeType[SmartCodeType.AR]:
         // Generate combination by 2 of the first row selections not in order.
         oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By2, false);
-        console.log(oddsToSearch);
         break;
       case SmartCodeType[SmartCodeType.AX]:
         // Generate sorted combination by 2 of the first row selections.
