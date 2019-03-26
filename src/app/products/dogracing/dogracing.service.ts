@@ -454,10 +454,16 @@ export class DogracingService {
     switch (areaFuncData.selection) {
       case SmartCodeType[SmartCodeType['1VA']]:
       case SmartCodeType[SmartCodeType.AOX]:
-      case SmartCodeType[SmartCodeType.TOX]:
+        // Generate sorted combination by 2 of the selections in the rows.
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By2, true);
+        break;
       case SmartCodeType[SmartCodeType.AB]:
         // Generate sorted combination by 2 of the selections in the rows.
         oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By2, true);
+        break;
+      case SmartCodeType[SmartCodeType.TOX]:
+        // Generate sorted combination by 2 of the selections in the rows.
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, true);
         break;
       case SmartCodeType[SmartCodeType.AR]:
         // Generate combination by 2 of the first row selections not in order.
