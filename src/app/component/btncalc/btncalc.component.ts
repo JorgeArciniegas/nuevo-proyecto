@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { AppSettings } from '../../app.settings';
 import { Product } from '../../products/models/product.model';
 import { ProductsService } from '../../products/products.service';
+import { PolyfunctionalArea } from '../../products/products.model';
 
 @Component({
   selector: 'app-btncalc',
@@ -14,6 +15,11 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   product: Product;
   @Input()
   rowHeight: number;
+  // Element for management the display
+  polyfunctionalValue: PolyfunctionalArea;
+  polyfunctionalValueSubscribe: Subscription;
+  iniPresetAmount = false;
+
   constructor(
     public productService: ProductsService,
     private readonly appSetting: AppSettings
@@ -26,12 +32,20 @@ export class BtncalcComponent implements OnInit, OnDestroy {
         this.product = product[0];
       }
     );
+
+    // manages display data updating
+    this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
+      element => {
+        this.polyfunctionalValue = element;
+      }
+    );
   }
 
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.productNameSelectedSubscribe.unsubscribe();
+    this.polyfunctionalValueSubscribe.unsubscribe();
   }
 
   plus(): void {
@@ -42,5 +56,18 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   clearAll(): void {
     this.productService.closeProductDialog();
     this.productService.resetBoard();
+  }
+
+  // increments display amount by product default amount multiples
+  btnAmountDefaultAddition(amount: number): void {
+    if (this.polyfunctionalValue) {
+      if (this.iniPresetAmount === false) {
+        this.iniPresetAmount = true;
+        this.polyfunctionalValue.amount = 0;
+        console.log(this.iniPresetAmount);
+      }
+      this.polyfunctionalValue.amount =
+        this.polyfunctionalValue.amount + amount;
+    }
   }
 }
