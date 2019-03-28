@@ -19,6 +19,7 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   polyfunctionalValue: PolyfunctionalArea;
   polyfunctionalValueSubscribe: Subscription;
   iniPresetAmount = false;
+  iniPresetAmountProduct: number;
 
   constructor(
     public productService: ProductsService,
@@ -37,6 +38,9 @@ export class BtncalcComponent implements OnInit, OnDestroy {
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
         this.polyfunctionalValue = element;
+        if (this.polyfunctionalValue) {
+          this.iniPresetAmountProduct = this.polyfunctionalValue.amount;
+        }
       }
     );
   }
@@ -58,14 +62,23 @@ export class BtncalcComponent implements OnInit, OnDestroy {
     this.productService.resetBoard();
   }
 
-  // increments display amount by product default amount multiples
+  // increments amount in display by preset default btncalc amounts values
   btnAmountDefaultAddition(amount: number): void {
     if (this.polyfunctionalValue) {
+      // resets amount when new bet
+      // this.iniPresetAmountProduct = this.polyfunctionalValue.amount;
+      if (this.iniPresetAmountProduct === this.polyfunctionalValue.amount) {
+        console.log(this.iniPresetAmountProduct);
+        this.polyfunctionalValue.amount = 0;
+      }
+
+      // ini amount before preset keys increment
       if (this.iniPresetAmount === false) {
         this.iniPresetAmount = true;
         this.polyfunctionalValue.amount = 0;
-        console.log(this.iniPresetAmount);
       }
+
+      // increments by preset key values
       this.polyfunctionalValue.amount =
         this.polyfunctionalValue.amount + amount;
     }
