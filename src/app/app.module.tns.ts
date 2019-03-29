@@ -1,11 +1,7 @@
 import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {
-  TranslateLoader,
-  TranslateModule,
-  TranslateService
-} from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
@@ -72,12 +68,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       }
     })
   ],
-  providers: [
-    AppSettings,
-    ProductsService,
-    TranslateService,
-    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
-  ],
+  providers: [AppSettings, ProductsService, TranslateService, { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })

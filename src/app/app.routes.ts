@@ -5,9 +5,13 @@ import { ProductsComponent } from './products/products.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'products/dogracing',
-    pathMatch: 'full'
+    loadChildren: 'app/login/login.module#LoginModule'
   },
+  // {
+  //   path: '',
+  //   redirectTo: 'products/dogracing',
+  //   pathMatch: 'full'
+  // },
   {
     path: 'products',
     component: ProductsComponent,
