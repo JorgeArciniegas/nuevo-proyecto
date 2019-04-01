@@ -10,7 +10,9 @@
     <div fxLayout="row" class="second-row" fxFill [style.height.px]="(rowHeight - 20) / 2" [style.min-height.px]="(rowHeight - 20) / 2">
       <div fxLayout="column" fxFlex="70" fxLayoutAlign="center flex-start" *ngIf="polyfunctionalValue && polyfunctionalValue.odd > 0">( {{polyfunctionalValue.odd | number:'1.2-2'}} )
       </div>
-      <div fxLayout="column" fxFlex="25" fxLayoutAlign="center flex-end" *ngIf="polyfunctionalValue">{{polyfunctionalValue.amount}}</div>
+      <div fxLayout="column" fxFlex="25" fxLayoutAlign="center flex-end" *ngIf="polyfunctionalValue">
+        {{polyfunctionalValue.amount | number: '1.2-2' }}
+      </div>
     </div>
   </div>
   <div fxLayout="column" fxFlex="10" fxLayoutAlign="center center" *ngIf="polyfunctionalValue  && polyfunctionalValue.selection"

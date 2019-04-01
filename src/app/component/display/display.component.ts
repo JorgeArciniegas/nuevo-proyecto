@@ -1,7 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AppSettings } from '../../app.settings';
-import { BetOdd, BetOdds, PolyfunctionalArea } from '../../products/products.model';
+import {
+  BetOdd,
+  BetOdds,
+  PolyfunctionalArea
+} from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 
 @Component({
@@ -14,10 +18,18 @@ export class DisplayComponent implements OnInit, OnDestroy {
   @Input()
   public rowHeight: number;
   @Input()
-  public timeBlocked?: boolean = false;
+  public timeBlocked = false;
   // Element for management the display
   polyfunctionalValue: PolyfunctionalArea;
   polyfunctionalValueSubscribe: Subscription;
+
+  currencyMask = {
+    align: 'left',
+    prefix: '',
+    thousands: '.',
+    decimal: ',',
+    precision: 2
+  };
 
   constructor(
     private productService: ProductsService,

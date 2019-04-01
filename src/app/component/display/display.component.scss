@@ -1,15 +1,23 @@
 .display {
-    padding: 5px;  
-    margin-bottom: 13px;    
+    padding: 5px;
+    margin-bottom: 13px;
     word-wrap: normal;
 
     .first-row {
-        font-size: 1.4vw;                
+        font-size: 1.4vw;
     }
     .second-row {
-        font-size: 1.3vw;                
+        font-size: 1.3vw;
     }
     .btn-display:active {
         box-shadow: none;
+    }
+
+    .input-amount {
+      background-color: transparent;
+      border: none;
+      text-align: right;
+      font-size: 1.4vw;
+      color: #ffffff;
     }
 }

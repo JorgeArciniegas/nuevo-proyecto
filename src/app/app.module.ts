@@ -38,6 +38,7 @@ import { ResultListComponent } from './products/dogracing/result-list/result-lis
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
+import { BtncalcService } from './component/btncalc/btncalc.service';
 
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -86,6 +87,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   providers: [
     AppSettings,
     ProductsService,
+    BtncalcService,
     TranslateService,
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
   ],

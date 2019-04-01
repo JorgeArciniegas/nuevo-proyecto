@@ -4,6 +4,7 @@ import { AppSettings } from '../../app.settings';
 import { Product } from '../../products/models/product.model';
 import { ProductsService } from '../../products/products.service';
 import { PolyfunctionalArea } from '../../products/products.model';
+import { BtncalcService } from './btncalc.service';
 
 @Component({
   selector: 'app-btncalc',
@@ -23,6 +24,7 @@ export class BtncalcComponent implements OnInit, OnDestroy {
 
   constructor(
     public productService: ProductsService,
+    public btncalcService: BtncalcService,
     private readonly appSetting: AppSettings
   ) {
     this.productNameSelectedSubscribe = this.productService.productNameSelectedObserve.subscribe(
@@ -33,23 +35,13 @@ export class BtncalcComponent implements OnInit, OnDestroy {
         this.product = product[0];
       }
     );
-
-    // manages display data updating
-    this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
-      element => {
-        this.polyfunctionalValue = element;
-        if (this.polyfunctionalValue) {
-          this.iniPresetAmountProduct = this.polyfunctionalValue.amount;
-        }
-      }
-    );
   }
 
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.productNameSelectedSubscribe.unsubscribe();
-    this.polyfunctionalValueSubscribe.unsubscribe();
+    // this.polyfunctionalValueSubscribe.unsubscribe();
   }
 
   plus(): void {
@@ -62,25 +54,13 @@ export class BtncalcComponent implements OnInit, OnDestroy {
     this.productService.resetBoard();
   }
 
-  // increments amount in display by preset default btncalc amounts values
-  btnAmountDefaultAddition(amount: number): void {
-    if (this.polyfunctionalValue) {
-      // resets amount when new bet
-      // this.iniPresetAmountProduct = this.polyfunctionalValue.amount;
-      if (this.iniPresetAmountProduct === this.polyfunctionalValue.amount) {
-        console.log(this.iniPresetAmountProduct);
-        this.polyfunctionalValue.amount = 0;
-      }
+  // increments amount in display by preset default values
+  btnDefaultAmountsPreset(amount: number): void {
+    this.btncalcService.btnDefaultAmountAddition(amount);
+  }
 
-      // ini amount before preset keys increment
-      if (this.iniPresetAmount === false) {
-        this.iniPresetAmount = true;
-        this.polyfunctionalValue.amount = 0;
-      }
-
-      // increments by preset key values
-      this.polyfunctionalValue.amount =
-        this.polyfunctionalValue.amount + amount;
-    }
+  // increments amount in display by preset default values
+  btnAmountSet(amount: number): void {
+    this.btncalcService.btnAmountDecimals(amount);
   }
 }
