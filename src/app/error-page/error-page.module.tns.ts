@@ -1,12 +1,12 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NativeScriptCommonModule } from 'nativescript-angular/common';
-import { LoginComponent } from './login.component';
+import { ErrorPageComponent } from './error-page.component';
+import { routes } from './error-page.common';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
-import { routes } from './login.common';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [ErrorPageComponent],
   imports: [NativeScriptCommonModule, NativeScriptRouterModule.forChild(routes)],
   schemas: [NO_ERRORS_SCHEMA]
 })
-export class LoginModule {}
+export class ErrorPageModule {}

@@ -19,15 +19,10 @@ import { UserMenuComponent } from './component/header/user-menu/user-menu.compon
 import { FloorPipe } from './component/pipe/floor.pipe';
 import { WidgetComponent } from './component/widget/widget.component';
 import { AdvanceGameComponent } from './products/advance-game/advance-game.component';
-import { DogracingComponent } from './products/dogracing/dogracing.component';
-import { ListRaceComponent } from './products/dogracing/list-race/list-race.component';
-import { FilterByPositionPipe } from './products/dogracing/playable-board/filter-by-position.pipe';
-import { PlayableBoardComponent } from './products/dogracing/playable-board/playable-board.component';
-import { RaceControlComponent } from './products/dogracing/race-control/race-control.component';
-import { ResultListComponent } from './products/dogracing/result-list/result-list.component';
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component.tns';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
+import { SharedModule } from './shared/shared.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -39,18 +34,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     HeaderComponent,
     UserMenuComponent,
     ApplicationMenuComponent,
-    DogracingComponent,
     WidgetComponent,
     BtncalcComponent,
     DisplayComponent,
     AdvanceGameComponent,
     CouponComponent,
-    RaceControlComponent,
-    ListRaceComponent,
-    ResultListComponent,
-    PlayableBoardComponent,
-    ListRaceComponent,
-    FilterByPositionPipe,
     ProductDialogComponent,
     FloorPipe
   ],
@@ -66,7 +54,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    SharedModule
   ],
   providers: [AppSettings, ProductsService, TranslateService, { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }],
   bootstrap: [AppComponent],

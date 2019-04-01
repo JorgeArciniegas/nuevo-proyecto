@@ -1,21 +1,9 @@
-import { CommonModule } from '@angular/common';
-import {
-  HttpClient,
-  HttpClientModule,
-  HTTP_INTERCEPTORS
-} from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  TranslateLoader,
-  TranslateModule,
-  TranslateService
-} from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent } from './app.component';
 import { AppHttpInterceptor } from './app.httpinterceptor';
@@ -29,15 +17,10 @@ import { HeaderComponent } from './component/header/header.component';
 import { UserMenuComponent } from './component/header/user-menu/user-menu.component';
 import { WidgetComponent } from './component/widget/widget.component';
 import { AdvanceGameComponent } from './products/advance-game/advance-game.component';
-import { DogracingComponent } from './products/dogracing/dogracing.component';
-import { ListRaceComponent } from './products/dogracing/list-race/list-race.component';
-import { FilterByPositionPipe } from './products/dogracing/playable-board/filter-by-position.pipe';
-import { PlayableBoardComponent } from './products/dogracing/playable-board/playable-board.component';
-import { RaceControlComponent } from './products/dogracing/race-control/race-control.component';
-import { ResultListComponent } from './products/dogracing/result-list/result-list.component';
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
+import { SharedModule } from './shared/shared.module';
 
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -50,28 +33,17 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     HeaderComponent,
     UserMenuComponent,
     ApplicationMenuComponent,
-    DogracingComponent,
     WidgetComponent,
     BtncalcComponent,
     DisplayComponent,
     AdvanceGameComponent,
     CouponComponent,
-    RaceControlComponent,
-    ListRaceComponent,
-    ResultListComponent,
-    PlayableBoardComponent,
-    ListRaceComponent,
-    FilterByPositionPipe,
     ProductDialogComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
-    FlexLayoutModule,
-    routing,
     NoopAnimationsModule,
-    MatGridListModule,
-    MatButtonModule,
     MatDialogModule,
     TranslateModule.forRoot({
       loader: {
@@ -80,15 +52,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient]
       }
     }),
-    CommonModule
+    SharedModule,
+    routing
   ],
   entryComponents: [ProductDialogComponent],
-  providers: [
-    AppSettings,
-    ProductsService,
-    TranslateService,
-    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
-  ],
+  providers: [AppSettings, ProductsService, TranslateService, { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

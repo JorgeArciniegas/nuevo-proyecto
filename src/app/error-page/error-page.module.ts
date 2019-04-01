@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login.component';
+import { ErrorPageComponent } from './error-page.component';
 import { RouterModule } from '@angular/router';
-import { routes } from './login.common';
+import { routes } from './error-page.common';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [ErrorPageComponent],
   imports: [CommonModule, RouterModule.forChild(routes)]
 })
-export class LoginModule {}
+export class ErrorPageModule {}

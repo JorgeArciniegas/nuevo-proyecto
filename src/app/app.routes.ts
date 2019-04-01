@@ -1,26 +1,30 @@
 import { Routes } from '@angular/router';
-import { DogracingComponent } from './products/dogracing/dogracing.component';
 import { ProductsComponent } from './products/products.component';
 
 export const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: 'products/dogracing',
-  //   pathMatch: 'full'
-  // },
+  {
+    path: 'login',
+    loadChildren: './login/login.module#LoginModule'
+  },
   {
     path: 'products',
     component: ProductsComponent,
     children: [
       {
         path: 'dogracing',
-        component: DogracingComponent,
+        loadChildren: './products/dogracing/dogracing.module#DogracingModule',
+        // component: DogracingComponent,
         data: { productName: 'dogracing' }
+      },
+      {
+        path: '',
+        redirectTo: 'dogracing',
+        pathMatch: 'full'
       }
     ]
   },
   {
-    path: '',
-    loadChildren: './login/login.module#LoginModule'
+    path: '**',
+    loadChildren: './error-page/error-page.module#ErrorPageModule'
   }
 ];
