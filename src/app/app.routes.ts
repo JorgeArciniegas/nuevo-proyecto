@@ -3,10 +3,6 @@ import { DogracingComponent } from './products/dogracing/dogracing.component';
 import { ProductsComponent } from './products/products.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    loadChildren: 'app/login/login.module#LoginModule'
-  },
   // {
   //   path: '',
   //   redirectTo: 'products/dogracing',
@@ -22,5 +18,9 @@ export const routes: Routes = [
         data: { productName: 'dogracing' }
       }
     ]
+  },
+  {
+    path: '',
+    loadChildren: './login/login.module#LoginModule'
   }
 ];
