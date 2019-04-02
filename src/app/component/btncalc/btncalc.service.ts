@@ -2,12 +2,12 @@ import { Product } from '../../products/models/product.model';
 import { ProductsService } from '../../products/products.service';
 import { Subscription } from 'rxjs';
 import { PolyfunctionalArea } from '../../products/products.model';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BtncalcService {
+export class BtncalcService implements OnDestroy {
   polyfunctionalValueSubscribe: Subscription;
   polyfunctionalValue: PolyfunctionalArea;
   iniPresetAmountProduct: number;
@@ -18,17 +18,23 @@ export class BtncalcService {
   conversionDecimals: string;
 
   constructor(public productService: ProductsService) {
-    // manages display data updating
+    // manages data display: amount addition/decimals and amount distribution
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
         this.polyfunctionalValue = element;
         if (this.polyfunctionalValue) {
+          this.polyfunctionalValue.betColTot = 'COL';
           this.iniPresetAmountProduct = this.polyfunctionalValue.amount;
-          this.polyfunctionalAdditionFlag = true;
-          this.polyfunctionalDecimalsFlag = true;
+          this.polyfunctionalAdditionFlag = true; // amount addition to 0
+          this.polyfunctionalDecimalsFlag = true; // amount-decimals to 0
+          console.log(this.polyfunctionalValue);
         }
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.polyfunctionalValueSubscribe.unsubscribe();
   }
 
   // increments amount in display by preset default bottons values
@@ -40,7 +46,11 @@ export class BtncalcService {
       if (this.polyfunctionalAdditionFlag === true) {
         this.polyfunctionalValue.amount = 0; // resets amount to 0
         // if preset button value 1 and amount 0, pre-add 1 to increment sum
-        if (this.polyfunctionalAdditionFlag === true && amount === 1) {
+        if (
+          this.polyfunctionalAdditionFlag === true &&
+          amount === 1 &&
+          this.polyfunctionalAdditionFlag !== true
+        ) {
           this.polyfunctionalValue.amount =
             this.polyfunctionalValue.amount + amount;
         }

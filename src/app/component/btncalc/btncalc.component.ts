@@ -16,11 +16,10 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   product: Product;
   @Input()
   rowHeight: number;
-  // Element for management the display
-  polyfunctionalValue: PolyfunctionalArea;
   polyfunctionalValueSubscribe: Subscription;
-  iniPresetAmount = false;
-  iniPresetAmountProduct: number;
+  polyfunctionalValue: PolyfunctionalArea;
+  isActiveTot = false;
+  isActiveCol = false;
 
   constructor(
     public productService: ProductsService,
@@ -33,6 +32,22 @@ export class BtncalcComponent implements OnInit, OnDestroy {
           item => item.name === v
         );
         this.product = product[0];
+      }
+    );
+    // manages data display: buttons amount distribution
+    this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
+      element => {
+        this.polyfunctionalValue = element;
+        if (this.polyfunctionalValue) {
+          this.isActiveCol = this.polyfunctionalValue.amount ? true : false;
+          if (this.polyfunctionalValue.odds) {
+            this.isActiveTot = this.polyfunctionalValue.amount ? true : false;
+            console.log(this.polyfunctionalValue.odds.length);
+          } else {
+            this.isActiveTot = false;
+          }
+        }
+        console.log(this.polyfunctionalValue);
       }
     );
   }
@@ -52,15 +67,23 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   clearAll(): void {
     this.productService.closeProductDialog();
     this.productService.resetBoard();
+    this.isActiveTot = false;
+    this.isActiveCol = false;
   }
 
   // increments amount in display by preset default values
   btnDefaultAmountsPreset(amount: number): void {
     this.btncalcService.btnDefaultAmountAddition(amount);
+    console.log(this.product);
   }
 
   // increments amount in display by preset default values
   btnAmountSet(amount: number): void {
     this.btncalcService.btnAmountDecimals(amount);
+  }
+
+  // TOT & COL buttons on/off
+  btnTotCol(betTotCol: string): void {
+    this.polyfunctionalValue.betColTot = betTotCol;
   }
 }
