@@ -34,17 +34,13 @@ export class BtncalcComponent implements OnInit, OnDestroy {
         this.product = product[0];
       }
     );
-    // manages data display: buttons amount distribution
+    // manages buttons, data display, amount association/distribution
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
         this.polyfunctionalValue = element;
         if (this.polyfunctionalValue) {
-          this.isActiveCol = this.polyfunctionalValue.activeAssociationCol
-            ? true
-            : false;
-          this.isActiveTot = this.polyfunctionalValue.activeDistributionTot
-            ? true
-            : false;
+          this.isActiveCol = this.polyfunctionalValue.activeAssociationCol;
+          this.isActiveTot = this.polyfunctionalValue.activeDistributionTot;
         }
       }
     );
@@ -72,15 +68,14 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   // increments amount in display by preset default values
   btnDefaultAmountsPreset(amount: number): void {
     this.btncalcService.btnDefaultAmountAddition(amount);
-    console.log(this.product);
   }
 
-  // increments amount in display by preset default values
+  // increments digits in display amount
   btnAmountSet(amount: number): void {
     this.btncalcService.btnAmountDecimals(amount);
   }
 
-  // TOT & COL buttons on/off
+  // TOT/distribution & COL/association buttons enabling
   btnTotColSet(betTotColSelected: string): void {
     this.btncalcService.btnTotColSelection(betTotColSelected);
   }

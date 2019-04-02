@@ -1,70 +1,70 @@
 <GridLayout #gridbtn rows="*,*,*,*,*,*" columns="*,*,*,*" class="grid-btn-calc">
-  <GridLayout row="0" col="{{i}}" height="{{amountIcon.height - 1}}" width="{{amountIcon.width - 1}}" shadow="3"
-    cornerRadius="{{amountIcon.height/2}}" class="card" *ngFor="let amount of product.defaultAmount; let i = index">
-    <GridLayout rows="*" columns="*" class="button btn-amount-{{i+1}}" height="{{amountIcon.height}}"
-      width="{{amountIcon.width}}" borderRadius="{{amountIcon.height/2}}">
-      <Button text="{{amount}}" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+  <GridLayout row="0" col="{{i}}" height="{{amountIcon.height - 1}}" width="{{amountIcon.width - 1}}" shadow="3" cornerRadius="{{amountIcon.height/2}}"
+    class="card" *ngFor="let amount of product.defaultAmount; let i = index">
+    <GridLayout rows="*" columns="*" class="button btn-amount-{{i+1}}" height="{{amountIcon.height}}" width="{{amountIcon.width}}"
+      borderRadius="{{amountIcon.height/2}}">
+      <Button text="{{amount}}" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnDefaultAmountsPreset(amount)"></Button>
     </GridLayout>
   </GridLayout>
   <!-- BTN calculator -->
   <GridLayout row="1" col="0" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="1" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+      <Button text="1" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnAmountSet(1)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="1" col="1" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="2" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+      <Button text="2" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnAmountSet(2)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="1" col="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="3" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+      <Button text="3" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnAmountSet(3)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="2" col="0" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="4" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+      <Button text="4" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnAmountSet(4)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="2" col="1" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="5" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+      <Button text="5" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnAmountSet(5)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="2" col="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="6" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+      <Button text="6" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnAmountSet(6)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="3" col="0" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="7" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+      <Button text="7" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnAmountSet(7)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="3" col="1" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="8" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+      <Button text="8" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnAmountSet(8)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="3" col="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="9" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+      <Button text="9" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnAmountSet(9)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="4" col="0" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="0" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+      <Button text="0" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnAmountSet(0)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="4" col="1" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard small">
-      <Button text="00" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+      <Button text="00" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnAmountSet('00')"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="4" col="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard small">
-      <Button text="000" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+      <Button text="000" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnAmountSet('000')"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="1" col="3" rowSpan="3" shadow="3" cornerRadius="7" class="card">
@@ -79,14 +79,14 @@
   </GridLayout>
   <GridLayout row="5" col="0" colSpan="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
-      <Button text="{{ 'TOT' | translate }}" class="button-internal" textTransform="uppercase"
-        [isEnabled]="!timeBlocked"></Button>
+      <Button text="{{ 'TOT' | translate }}" class="button-internal" textTransform="uppercase" [isEnabled]="!timeBlocked && isActiveTot"
+        [class.not-active]="!isActiveTot" (tap)="btnTotColSet('TOT')"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="5" col="2" colSpan="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
-      <Button text="{{ 'COL' | translate }}" class="button-internal" textTransform="uppercase"
-        [isEnabled]="!timeBlocked"></Button>
+      <Button text="{{ 'COL' | translate }}" class="button-internal" textTransform="uppercase" [isEnabled]="!timeBlocked && isActiveCol"
+        [class.not-active]="!isActiveCol" (tap)="btnTotColSet('COL')"></Button>
     </GridLayout>
   </GridLayout>
 </GridLayout>

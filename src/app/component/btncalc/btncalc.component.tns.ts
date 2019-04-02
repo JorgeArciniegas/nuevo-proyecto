@@ -4,6 +4,8 @@ import { AppSettings } from '../../app.settings';
 import { Product } from '../../products/models/product.model';
 import { ProductsService } from '../../products/products.service';
 import { IconSize } from '../model/iconSize.model';
+import { BtncalcService } from './btncalc.service';
+import { PolyfunctionalArea } from '../../products/products.model';
 
 @Component({
   selector: 'app-btncalc',
@@ -18,9 +20,14 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   private rowHeight: number;
   @Input()
   public timeBlocked: boolean;
+  polyfunctionalValueSubscribe: Subscription;
+  polyfunctionalValue: PolyfunctionalArea;
+  isActiveTot = false;
+  isActiveCol = false;
 
   constructor(
     public productService: ProductsService,
+    public btncalcService: BtncalcService,
     private readonly appSetting: AppSettings
   ) {
     this.productNameSelectedSubscribe = this.productService.productNameSelectedObserve.subscribe(
@@ -31,6 +38,16 @@ export class BtncalcComponent implements OnInit, OnDestroy {
         this.product = product[0];
       }
     );
+    // manages buttons, data display, amount association/distribution
+    this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
+      element => {
+        this.polyfunctionalValue = element;
+        if (this.polyfunctionalValue) {
+          this.isActiveCol = this.polyfunctionalValue.activeAssociationCol;
+          this.isActiveTot = this.polyfunctionalValue.activeDistributionTot;
+        }
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -38,6 +55,7 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.productNameSelectedSubscribe.unsubscribe();
+    this.polyfunctionalValueSubscribe.unsubscribe();
   }
 
   plus(): void {
@@ -48,5 +66,22 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   clearAll(): void {
     this.productService.closeProductDialog();
     this.productService.resetBoard();
+    this.isActiveTot = false;
+    this.isActiveCol = false;
+  }
+
+  // increments amount in display by preset default values
+  btnDefaultAmountsPreset(amount: number): void {
+    this.btncalcService.btnDefaultAmountAddition(amount);
+  }
+
+  // increments digits in display amount
+  btnAmountSet(amount: number): void {
+    this.btncalcService.btnAmountDecimals(amount);
+  }
+
+  // TOT/distribution & COL/association buttons enabling
+  btnTotColSet(betTotColSelected: string): void {
+    this.btncalcService.btnTotColSelection(betTotColSelected);
   }
 }
