@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { ProductsComponent } from './products/products.component';
+import { AuthorizationGuard } from './app.authorization.guard';
 
 export const routes: Routes = [
   {
@@ -9,6 +10,7 @@ export const routes: Routes = [
   {
     path: 'products',
     component: ProductsComponent,
+    canActivate: [AuthorizationGuard],
     children: [
       {
         path: 'dogracing',

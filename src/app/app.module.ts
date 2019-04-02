@@ -21,6 +21,8 @@ import { ProductDialogComponent } from './products/product-dialog/product-dialog
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
 import { SharedModule } from './shared/shared.module';
+import { ElysStorageLibModule } from '@elys/elys-storage-lib';
+import { VERSION } from '../environments/version';
 
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -53,6 +55,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       }
     }),
     SharedModule,
+    ElysStorageLibModule.forRoot({
+      isCrypto: true,
+      cryptoString: 'VgenStorage',
+      KeyUnencodedList: ['versionApp'],
+      versionStorage: VERSION.version
+    }),
     routing
   ],
   entryComponents: [ProductDialogComponent],
