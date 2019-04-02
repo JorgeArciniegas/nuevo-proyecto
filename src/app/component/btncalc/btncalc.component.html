@@ -53,10 +53,10 @@
   </mat-grid-tile>
   <mat-grid-tile colspan="2">
     <button class="btn-default btn-keyboard btn-grey-gradient radius-5 elevation-z5" [disabled]="!isActiveTot" [class.not-active]="!isActiveTot"
-      (click)="btnTotCol('TOT')">{{ 'TOT' | translate }}</button>
+      (click)="btnTotColSet('TOT')">{{ 'TOT' | translate }}</button>
   </mat-grid-tile>
   <mat-grid-tile colspan="2">
     <button class="btn-default btn-keyboard btn-grey-gradient radius-5 elevation-z5" [disabled]="!isActiveCol" [class.not-active]="!isActiveCol"
-      (click)="btnTotCol('COL')">{{ 'COL' | translate }}</button>
+      (click)="btnTotColSet('COL')">{{ 'COL' | translate }}</button>
   </mat-grid-tile>
 </mat-grid-list>

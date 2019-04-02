@@ -12,7 +12,9 @@ export class PolyfunctionalArea {
   odd?: number;
   amount?: number;
   odds?: BetOdd[];
-  betColTot?: string;
+  labelColTot?: string;
+  activeAssociationCol?: boolean;
+  activeDistributionTot?: boolean;
   constructor() {}
 }
 

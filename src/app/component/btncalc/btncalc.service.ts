@@ -23,11 +23,26 @@ export class BtncalcService implements OnDestroy {
       element => {
         this.polyfunctionalValue = element;
         if (this.polyfunctionalValue) {
-          this.polyfunctionalValue.betColTot = 'COL';
+          this.polyfunctionalValue.labelColTot = 'COL';
           this.iniPresetAmountProduct = this.polyfunctionalValue.amount;
           this.polyfunctionalAdditionFlag = true; // amount addition to 0
           this.polyfunctionalDecimalsFlag = true; // amount-decimals to 0
-          console.log(this.polyfunctionalValue);
+          // console.log(this.polyfunctionalValue);
+        }
+
+        if (this.polyfunctionalValue) {
+          this.polyfunctionalValue.activeAssociationCol = this
+            .polyfunctionalValue.amount
+            ? true
+            : false;
+          if (this.polyfunctionalValue.odds) {
+            this.polyfunctionalValue.activeDistributionTot = true;
+            this.polyfunctionalValue.activeAssociationCol = true;
+            // console.log(this.polyfunctionalValue.odds.length);
+          } else {
+            this.polyfunctionalValue.activeDistributionTot = false;
+            this.polyfunctionalValue.activeAssociationCol = true;
+          }
         }
       }
     );
@@ -86,5 +101,11 @@ export class BtncalcService implements OnDestroy {
       this.numberWholeDecimals = Number(this.conversionDecimals) / 100;
       this.polyfunctionalValue.amount = this.numberWholeDecimals;
     }
+  }
+
+  // TOT & COL buttons on/off
+  btnTotColSelection(betTotColSelected: string): void {
+    this.polyfunctionalValue.labelColTot = betTotColSelected;
+    // this.btncalcService.btnAmountDecimals(betTotCol);
   }
 }

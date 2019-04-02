@@ -39,15 +39,13 @@ export class BtncalcComponent implements OnInit, OnDestroy {
       element => {
         this.polyfunctionalValue = element;
         if (this.polyfunctionalValue) {
-          this.isActiveCol = this.polyfunctionalValue.amount ? true : false;
-          if (this.polyfunctionalValue.odds) {
-            this.isActiveTot = this.polyfunctionalValue.amount ? true : false;
-            console.log(this.polyfunctionalValue.odds.length);
-          } else {
-            this.isActiveTot = false;
-          }
+          this.isActiveCol = this.polyfunctionalValue.activeAssociationCol
+            ? true
+            : false;
+          this.isActiveTot = this.polyfunctionalValue.activeDistributionTot
+            ? true
+            : false;
         }
-        console.log(this.polyfunctionalValue);
       }
     );
   }
@@ -56,7 +54,7 @@ export class BtncalcComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.productNameSelectedSubscribe.unsubscribe();
-    // this.polyfunctionalValueSubscribe.unsubscribe();
+    this.polyfunctionalValueSubscribe.unsubscribe();
   }
 
   plus(): void {
@@ -83,7 +81,7 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   }
 
   // TOT & COL buttons on/off
-  btnTotCol(betTotCol: string): void {
-    this.polyfunctionalValue.betColTot = betTotCol;
+  btnTotColSet(betTotColSelected: string): void {
+    this.btncalcService.btnTotColSelection(betTotColSelected);
   }
 }
