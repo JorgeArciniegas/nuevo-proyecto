@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DialogService } from './dialog.service';
-import {
-  BetOdds,
-  DialogData,
-  PolyfunctionalArea,
-  WindowSize
-} from './products.model';
-import { WindowSizeService } from './window-size.service';
+import { BetOdds, DialogData, PolyfunctionalArea } from './products.model';
+import { WindowSize } from '../services/utility/window-size/window-size.model';
+import { WindowSizeService } from '../services/utility/window-size/window-size.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -38,10 +34,7 @@ export class ProductsService {
     xs: 1
   };
   windowSize: WindowSize;
-  constructor(
-    public dialog: DialogService,
-    private windowSizeService: WindowSizeService
-  ) {
+  constructor(public dialog: DialogService, private windowSizeService: WindowSizeService) {
     this.breakpointSubscribe = new Subject<number>();
     this.productNameSelectedSubscribe = new Subject<string>();
     this.productNameSelectedObserve = this.productNameSelectedSubscribe.asObservable();
@@ -50,11 +43,9 @@ export class ProductsService {
     this.polyfunctionalAreaObservable = this.polyfunctionalAreaSubject.asObservable();
     // time block
     this.timeBlockedSubscribe = new Subject<boolean>();
-    this.timeBlockedSubscribe
-      .asObservable()
-      .subscribe((timeBlocked: boolean) => {
-        this.timeBlocked = timeBlocked;
-      });
+    this.timeBlockedSubscribe.asObservable().subscribe((timeBlocked: boolean) => {
+      this.timeBlocked = timeBlocked;
+    });
     // Dialog management
     this.dialogProductDataSubject = new Subject<BetOdds>();
     this.dialogProductDataSubject.asObservable().subscribe((odds: BetOdds) => {

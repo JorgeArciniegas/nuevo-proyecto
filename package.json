@@ -11,7 +11,8 @@
     "ng": "ng",
     "build": "ng build",
     "vgen": "ng serve -c vgen",
-    "android-vgen": "tns run android --bundle --env.c=\"vgen\""
+    "android-vgen": "tns run android --bundle --env.c=\"vgen\"",
+    "postinstall": "node ./version.js"
   },
   "private": true,
   "dependencies": {

@@ -8,44 +8,19 @@ import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NgShadowModule } from 'nativescript-ng-shadow';
 import { AppComponent } from './app.component';
 import { AppHttpInterceptor } from './app.httpinterceptor';
-import { AppRoutingModule } from './app.routing.tns';
-import { AppSettings } from './app.settings';
-import { BtncalcComponent } from './component/btncalc/btncalc.component';
-import { CouponComponent } from './component/coupon/coupon.component';
-import { DisplayComponent } from './component/display/display.component';
-import { ApplicationMenuComponent } from './component/header/application-menu/application-menu.component';
-import { HeaderComponent } from './component/header/header.component';
-import { UserMenuComponent } from './component/header/user-menu/user-menu.component';
 import { FloorPipe } from './component/pipe/floor.pipe';
-import { WidgetComponent } from './component/widget/widget.component';
-import { AdvanceGameComponent } from './products/advance-game/advance-game.component';
-import { ProductDialogComponent } from './products/product-dialog/product-dialog.component.tns';
-import { ProductsComponent } from './products/products.component';
-import { ProductsService } from './products/products.service';
 import { SharedModule } from './shared/shared.module';
+import { NativeScriptRouterModule } from 'nativescript-angular/router';
+import { routes, componentDeclarations, providerDeclarations } from './app.common';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [
-    AppComponent,
-    ProductsComponent,
-    HeaderComponent,
-    UserMenuComponent,
-    ApplicationMenuComponent,
-    WidgetComponent,
-    BtncalcComponent,
-    DisplayComponent,
-    AdvanceGameComponent,
-    CouponComponent,
-    ProductDialogComponent,
-    FloorPipe
-  ],
+  declarations: [componentDeclarations, FloorPipe],
   imports: [
     NativeScriptHttpClientModule,
     NativeScriptModule,
-    AppRoutingModule,
     FlexLayoutModule,
     NgShadowModule,
     TranslateModule.forRoot({
@@ -55,9 +30,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient]
       }
     }),
-    SharedModule
+    SharedModule,
+    NativeScriptRouterModule.forRoot(routes)
   ],
-  providers: [AppSettings, ProductsService, TranslateService, { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }],
+  providers: [providerDeclarations, { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })

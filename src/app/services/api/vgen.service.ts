@@ -23,32 +23,20 @@ export class VgenService {
    * @param username username
    * @param password password
    */
-  async login(username: string, password: string): Promise<string> {
+  login(username: string, password: string): Promise<Login> {
     const httpOptions: HttpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded'
       })
     };
-    let result: string;
     const url: string = this.baseApiUrl + '/token';
-    await this.http
+    return this.http
       .post<Login>(
         url,
         'username=' + encodeURIComponent(username) + '&password=' + encodeURIComponent(password) + '&grant_type=password',
         httpOptions
       )
-      .toPromise()
-      .then(
-        (response: Login): void => {
-          localStorage.setItem('tokenData', response.access_token);
-          result = 'Login success';
-        }
-      )
-      .catch(e => {
-        result = e.error.error_description;
-      });
-
-    return result;
+      .toPromise();
   }
 
   me(): Promise<AccountDetails> {
