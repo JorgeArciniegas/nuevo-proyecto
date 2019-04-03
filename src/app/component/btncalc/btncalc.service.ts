@@ -1,6 +1,6 @@
 import { Product } from '../../products/models/product.model';
 import { ProductsService } from '../../products/products.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject, Observable } from 'rxjs';
 import { PolyfunctionalArea } from '../../products/products.model';
 import { Injectable, OnDestroy } from '@angular/core';
 
@@ -61,11 +61,7 @@ export class BtncalcService implements OnDestroy {
       if (this.polyfunctionalAdditionFlag === true) {
         this.polyfunctionalValue.amount = 0; // resets amount to 0
         // if preset button value 1 and amount 0, pre-add 1 to increment sum
-        if (
-          this.polyfunctionalAdditionFlag === true &&
-          amount === 1 &&
-          this.polyfunctionalAdditionFlag !== true
-        ) {
+        if (amount === 1) {
           this.polyfunctionalValue.amount =
             this.polyfunctionalValue.amount + amount;
         }

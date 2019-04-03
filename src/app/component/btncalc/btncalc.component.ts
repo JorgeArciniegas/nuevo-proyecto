@@ -18,6 +18,7 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   rowHeight: number;
   polyfunctionalValueSubscribe: Subscription;
   polyfunctionalValue: PolyfunctionalArea;
+  displayDefaultAmount: number;
   isActiveTot = false;
   isActiveCol = false;
 
@@ -32,15 +33,18 @@ export class BtncalcComponent implements OnInit, OnDestroy {
           item => item.name === v
         );
         this.product = product[0];
+        this.displayDefaultAmount = product[0].defaultAmount[0];
+        // this.displayDefaultAmount = 5;
       }
     );
-    // manages buttons, data display, amount association/distribution
+    // manages buttons COL/TOT, label amount in display, amount association/distribution
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
         this.polyfunctionalValue = element;
         if (this.polyfunctionalValue) {
           this.isActiveCol = this.polyfunctionalValue.activeAssociationCol;
           this.isActiveTot = this.polyfunctionalValue.activeDistributionTot;
+          this.polyfunctionalValue.amount = this.displayDefaultAmount;
         }
       }
     );
@@ -63,6 +67,10 @@ export class BtncalcComponent implements OnInit, OnDestroy {
     this.productService.resetBoard();
     this.isActiveTot = false;
     this.isActiveCol = false;
+  }
+
+  defaultAmount(): void {
+    this.polyfunctionalValue.amount = 1;
   }
 
   // increments amount in display by preset default values
