@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-
-import { Subject, Observable } from 'rxjs';
 import { VgenService } from './api/vgen.service';
 import { AccountDetails, Login } from './api/vgen.model';
 import { StorageService } from './utility/storage/storage.service';
@@ -24,17 +22,18 @@ export class UserService {
   async login(username: string, password: string): Promise<void> {
     try {
       const response: Login = await this.api.login(username, password);
+      this.storageService.setData('tokenData', response.access_token);
       await this.loadUserData();
 
       // Check that we have gotten the user data.
       if (this.userDetail) {
-        this.storageService.setData('tokenData', response.access_token);
         if (this.targetedUrlBeforeLogin) {
           this.router.getRouter().navigateByUrl(this.targetedUrlBeforeLogin);
         } else {
           this.router.getRouter().navigateByUrl('/products');
         }
       } else {
+        this.storageService.removeItems('tokenData');
         // SHOW AN ERROR MESSAGE
       }
     } catch (err) {
@@ -80,10 +79,5 @@ export class UserService {
     } else {
       return false;
     }
-  }
-
-  // Retrieve the current token.
-  public getCurrentToken(): string {
-    return this.storageService.getData('tokenData');
   }
 }

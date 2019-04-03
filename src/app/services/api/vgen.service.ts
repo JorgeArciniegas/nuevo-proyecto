@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppSettings } from '../../app.settings';
 import { AccountDetails, CountDown, EventResults, Login, SportDetail, TreeSports } from './vgen.model';
+import { StorageService } from '../utility/storage/storage.service';
 
 interface HttpOptions {
   headers: HttpHeaders;
@@ -13,8 +14,24 @@ interface HttpOptions {
 export class VgenService {
   private baseApiUrl: string;
 
-  constructor(private appSettings: AppSettings, private http: HttpClient) {
+  constructor(private appSettings: AppSettings, private http: HttpClient, private storageService: StorageService) {
     this.baseApiUrl = this.appSettings.baseApiUrl;
+  }
+
+  /**
+   * Ritorna l'header HTTP configurato per una chiamata API JSON e autorizzazione
+   * @returns HttpHeaders
+   */
+  public getHttpJsonHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8',
+      Authorization: 'Bearer ' + this.getCurrentToken()
+    });
+  }
+
+  // Retrieve the current token.
+  public getCurrentToken(): string {
+    return this.storageService.getData('tokenData');
   }
 
   /**
@@ -40,8 +57,11 @@ export class VgenService {
   }
 
   me(): Promise<AccountDetails> {
+    const httpOptions: HttpOptions = {
+      headers: this.getHttpJsonHeaders()
+    };
     const url: string = this.baseApiUrl + '/api/account/me';
-    return this.http.get<AccountDetails>(url).toPromise();
+    return this.http.get<AccountDetails>(url, httpOptions).toPromise();
   }
 
   programmetree(sportId: number, categoryType: string): Promise<TreeSports> {

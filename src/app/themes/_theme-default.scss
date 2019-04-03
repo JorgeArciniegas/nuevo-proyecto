@@ -29,6 +29,10 @@ html {
 		#login {
 			@extend %login;
 			height: 100%;
+
+			button {
+				@extend %btn-success-gradient;
+			}
 		}
 		.toolbar {
 			@extend %header;

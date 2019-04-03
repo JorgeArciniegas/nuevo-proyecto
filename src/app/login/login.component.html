@@ -1,27 +1,31 @@
-<section id='login'>
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" fxFlex="80" fxFlex.gt-sm="30" fxFlex.sm="60">
-      <div fxLayout="column" fxLayoutAlign="center center" class="box-header">
-        <img class="logo" src="/app/themes/skins/develop/image/vgen.png" />
+<section id='login' fxLayout="row" fxLayoutAlign="center center">
+  <div class="login-panel" fxLayout="column" fxLayoutAlign="center center">
+    <img class="logo" src="/app/themes/skins/develop/image/vgen.png" />
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div class="input-area">
+        <div class="input-item">
+          <input placeholder="{{'USERNAME'|translate}}" formControlName="username" />
+          <div class="error" *ngIf="form.controls.username.errors?.required">
+            {{ 'USERNAME' | translate }} {{ 'ERROR_REQUIRED' | translate }}
+          </div>
+          <div class="error" *ngIf="form.controls.username.hasError('minlength')">
+            {{ 'ERROR_USERNAME_TOO_SHORT' | translate }}
+          </div>
+        </div>
+        <div class="input-item">
+          <input placeholder="{{ 'PASSWORD' | translate }}" formControlName="password" type="password"
+            autocomplete="new-password" />
+          <div class="error" *ngIf="form.controls.password.errors?.required">
+            {{ 'PASSWORD' | translate }} {{ 'ERROR_REQUIRED' | translate }}
+          </div>
+          <div class="error" *ngIf="form.controls.password.hasError('minlength')">
+            {{ 'ERROR_PASSWORD_TOO_SHORT' | translate }}</div>
+        </div>
       </div>
-      <mat-form-field>
-        <input matInput placeholder="{{'USERNAME'|translate}}" formControlName="username" />
-        <mat-error *ngIf="form.controls.username.errors?.required">{{ 'USERNAME' | translate }}
-          {{ 'ERROR_REQUIRED' | translate }}</mat-error>
-        <mat-error *ngIf="form.controls.username.hasError('minlength')">{{ 'ERROR_USERNAME_TOO_SHORT' |
-          translate }}</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="{{ 'PASSWORD' | translate }}" formControlName="password" type="password"
-          autocomplete="new-password" />
-        <mat-error *ngIf="form.controls.password.errors?.required">{{ 'PASSWORD' | translate }} {{
-          'ERROR_REQUIRED' | translate }}</mat-error>
-        <mat-error *ngIf="form.controls.password.hasError('minlength')">{{ 'ERROR_PASSWORD_TOO_SHORT' |
-          translate }}</mat-error>
-      </mat-form-field>
-      <button mat-raised-button color="primary" type="submit">
+      <button class="btn-default" color="primary" type="submit">
         {{ 'LOGIN' | translate }}
       </button>
     </form>
+    <div class="error-message"></div>
   </div>
 </section>
