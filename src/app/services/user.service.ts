@@ -24,13 +24,18 @@ export class UserService {
   async login(username: string, password: string): Promise<void> {
     try {
       const response: Login = await this.api.login(username, password);
-      this.storageService.setData('tokenData', response.access_token);
       await this.loadUserData();
 
-      if (this.targetedUrlBeforeLogin) {
-        this.router.getRouter().navigateByUrl(this.targetedUrlBeforeLogin);
+      // Check that we have gotten the user data.
+      if (this.userDetail) {
+        this.storageService.setData('tokenData', response.access_token);
+        if (this.targetedUrlBeforeLogin) {
+          this.router.getRouter().navigateByUrl(this.targetedUrlBeforeLogin);
+        } else {
+          this.router.getRouter().navigateByUrl('/products');
+        }
       } else {
-        this.router.getRouter().navigateByUrl('/products');
+        // SHOW AN ERROR MESSAGE
       }
     } catch (err) {
       // IMPLEMENTARE RITORNO ERRORE
@@ -48,14 +53,33 @@ export class UserService {
   // Method to retrieve the user data
   async loadUserData(): Promise<void> {
     try {
-      this.userDetail = await this.api.me();
-      this.storageService.setData('UserData', this.userDetail);
+      const tmpUserDetail = await this.api.me();
+      // Save the data only if the user is a valid user.
+      if (this.isAValidUser()) {
+        this.userDetail = tmpUserDetail;
+        this.storageService.setData('UserData', tmpUserDetail);
+      }
     } catch (err) {}
   }
 
   // Method to check if a user is currently logged.
   get isUserLogged(): boolean {
     return this.storageService.checkIfExist('tokenData');
+  }
+
+  // Method to check if the user can log into the system. Only CTD user are allowed.
+  private isAValidUser(): boolean {
+    if (
+      this.userDetail.UserPolicies.CanCreateEndUserChildren === false &&
+      this.userDetail.UserPolicies.CanHaveChildren === false &&
+      this.userDetail.UserPolicies.CanHaveCommissions === true &&
+      this.userDetail.UserPolicies.CanPlaySportbookLiveByItself === true &&
+      this.userDetail.UserPolicies.CanPlaySportbookPrematchByItself === true
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // Retrieve the current token.
