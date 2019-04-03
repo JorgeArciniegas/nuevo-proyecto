@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 
 interface LoginForm {
@@ -17,12 +17,19 @@ export class LoginComponent {
 
   constructor(public fb: FormBuilder, private userService: UserService) {
     this.form = this.fb.group({
-      username: [null, Validators.compose([Validators.required, Validators.minLength(2)])],
-      password: [null, Validators.compose([Validators.required, Validators.minLength(6)])]
+      username: [
+        null,
+        Validators.compose([Validators.required, Validators.minLength(2)])
+      ],
+      password: [
+        null,
+        Validators.compose([Validators.required, Validators.minLength(6)])
+      ]
     });
   }
 
   public onSubmit(form: LoginForm): void {
+    console.log(this.form);
     if (this.form.valid) {
       this.userService.login(form.username, form.password);
     }

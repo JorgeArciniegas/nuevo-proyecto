@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { VgenService } from './api/vgen.service';
 import { AccountDetails, Login } from './api/vgen.model';
-import { StorageService } from './utility/storage/storage.service';
+import { VgenService } from './api/vgen.service';
 import { RouterService } from './utility/router/router.service';
+import { StorageService } from './utility/storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
