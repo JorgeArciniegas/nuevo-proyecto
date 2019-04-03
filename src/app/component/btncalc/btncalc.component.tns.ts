@@ -19,18 +19,11 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   @Input()
   public timeBlocked: boolean;
 
-  constructor(
-    public productService: ProductsService,
-    private readonly appSetting: AppSettings
-  ) {
-    this.productNameSelectedSubscribe = this.productService.productNameSelectedObserve.subscribe(
-      v => {
-        const product: Product[] = appSetting.products.filter(
-          item => item.name === v
-        );
-        this.product = product[0];
-      }
-    );
+  constructor(public productService: ProductsService, private readonly appSetting: AppSettings) {
+    this.productNameSelectedSubscribe = this.productService.productNameSelectedObserve.subscribe(v => {
+      const product: Product[] = appSetting.products.filter(item => item.name === v);
+      this.product = product[0];
+    });
   }
 
   ngOnInit(): void {

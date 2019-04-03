@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');
-@import 'icons';
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i");
+@import "icons";
 /**
 * THEME DEFAULT
 **/
 %font-family {
-	font-family: 'Open Sans', sans-serif;
+	font-family: "Open Sans", sans-serif;
 }
 //BACKGROUNDS COLOR
 $color-bg-primary: #1b2432;
@@ -65,7 +65,7 @@ $color-text-operator: #3dab14;
 	color: $color-text-primary;
 }
 %header-notification-img {
-	background-image: url('app/themes/skins/develop/icon/account.svg');
+	background-image: url("app/themes/skins/develop/icon/account.svg");
 }
 %header-btn-menu-selected {
 	border-bottom: 3px solid $btn-border-selected;
@@ -316,11 +316,11 @@ $gradient-dark2: #000000;
 // GAME AREA
 // Dog racing
 %dog-racing-bg {
-	background: url('app/themes/skins/develop/image/Dog-Racing.png') left top no-repeat;
+	background: url("app/themes/skins/develop/image/Dog-Racing.png") left top no-repeat;
 	background-size: 25%;
 }
 %dog-racing-bg-mobile {
-	background: url('~/app/themes/skins/develop/image/Dog-Racing.png') left top no-repeat;
+	background: url("~/app/themes/skins/develop/image/Dog-Racing.png") left top no-repeat;
 	background-size: contain;
 }
 
@@ -357,4 +357,9 @@ $gradient-dark2: #000000;
 }
 %indicator {
 	color: $color-text-shadow;
+}
+
+// LOGIN
+%login {
+	background-image: url("app/themes/skins/develop/image/Bg-login-vdesk.jpg") no-repeat;
 }

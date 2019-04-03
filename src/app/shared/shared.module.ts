@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatGridListModule, MatButtonModule } from '@angular/material';
+import { MatGridListModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, FlexLayoutModule, MatGridListModule, MatButtonModule, TranslateModule],
-  exports: [FlexLayoutModule, MatGridListModule, MatButtonModule, TranslateModule]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, FlexLayoutModule, MatGridListModule, TranslateModule],
+  exports: [FormsModule, ReactiveFormsModule, FlexLayoutModule, MatGridListModule, TranslateModule]
 })
 export class SharedModule {}

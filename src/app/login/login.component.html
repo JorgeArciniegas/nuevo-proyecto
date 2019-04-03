@@ -1,3 +1,27 @@
-<p>
-  login works!
-</p>
+<section id='login'>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" fxFlex="80" fxFlex.gt-sm="30" fxFlex.sm="60">
+      <div fxLayout="column" fxLayoutAlign="center center" class="box-header">
+        <img class="logo" src="/app/themes/skins/develop/image/vgen.png" />
+      </div>
+      <mat-form-field>
+        <input matInput placeholder="{{'USERNAME'|translate}}" formControlName="username" />
+        <mat-error *ngIf="form.controls.username.errors?.required">{{ 'USERNAME' | translate }}
+          {{ 'ERROR_REQUIRED' | translate }}</mat-error>
+        <mat-error *ngIf="form.controls.username.hasError('minlength')">{{ 'ERROR_USERNAME_TOO_SHORT' |
+          translate }}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="{{ 'PASSWORD' | translate }}" formControlName="password" type="password"
+          autocomplete="new-password" />
+        <mat-error *ngIf="form.controls.password.errors?.required">{{ 'PASSWORD' | translate }} {{
+          'ERROR_REQUIRED' | translate }}</mat-error>
+        <mat-error *ngIf="form.controls.password.hasError('minlength')">{{ 'ERROR_PASSWORD_TOO_SHORT' |
+          translate }}</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">
+        {{ 'LOGIN' | translate }}
+      </button>
+    </form>
+  </div>
+</section>
