@@ -13,6 +13,7 @@ interface HttpOptions {
 })
 export class VgenService {
   private baseApiUrl: string;
+  private token: string;
 
   constructor(private appSettings: AppSettings, private http: HttpClient, private storageService: StorageService) {
     this.baseApiUrl = this.appSettings.baseApiUrl;
@@ -29,9 +30,23 @@ export class VgenService {
     });
   }
 
+  // Set the token.
+  public setToken(token: string): void {
+    this.token = token;
+  }
+
+  // Remove the token.
+  public removeToken(): void {
+    this.token = undefined;
+  }
+
   // Retrieve the current token.
   public getCurrentToken(): string {
-    return this.storageService.getData('tokenData');
+    if (this.token) {
+      return this.token;
+    } else {
+      return this.storageService.getData('tokenData');
+    }
   }
 
   /**

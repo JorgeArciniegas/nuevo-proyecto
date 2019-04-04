@@ -7,8 +7,10 @@
 	font-family: "Open Sans", sans-serif;
 }
 //BACKGROUNDS COLOR
+$color-bg-transparent: transparent;
 $color-bg-primary: #1b2432;
 $color-bg-primary-op: rgba(27, 36, 50, 0.4);
+$color-bg-primary-op-dark: rgba(27, 36, 50, 0.7);
 $color-bg-secodary: #273142;
 $color-bg-event: #274442;
 $color-bg-accent: #c0c0c0;
@@ -45,6 +47,10 @@ $color-text-operator: #3dab14;
 }
 %bg-opacity {
 	background: $color-bg-primary-op;
+	color: $color-bg-accent;
+}
+%bg-opacity-dark {
+	background: $color-bg-primary-op-dark;
 	color: $color-bg-accent;
 }
 %color-bg-white {
@@ -362,4 +368,30 @@ $gradient-dark2: #000000;
 // LOGIN
 %login {
 	background: url("app/themes/skins/develop/image/Bg-login-vdesk.jpg") center center no-repeat;
+}
+%logo-login {
+	background: url("app/themes/skins/develop/image/vgen.png") center center no-repeat;
+	background-size: contain;
+}
+%user-icon {
+	background: url("app/themes/skins/develop/icon/icona-user.svg") center center no-repeat;
+}
+%pwd-icon {
+	background: url("app/themes/skins/develop/icon/icona-pwd.svg") center center no-repeat;
+}
+%error-icon {
+	background: url("app/themes/skins/develop/icon/alert.svg") center center no-repeat;
+}
+%border-input-area {
+	border: 1px solid $border-cartd-title;
+}
+%border-input-area-error {
+	border: 1px solid $color-bg-warn;
+}
+%error-area {
+	color: $color-text-warn;
+}
+%login-input {
+	background-color: $color-bg-transparent;
+	color: $color-text-primary;
 }

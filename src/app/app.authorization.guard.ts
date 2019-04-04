@@ -16,7 +16,7 @@ export class AuthorizationGuard implements CanActivate {
       if (this.userService.isUserLogged) {
         // If the AccountDetails for any reason is not available.
         if (!this.storageService.checkIfExist('UserData')) {
-          await this.userService.loadUserData();
+          await this.userService.loadUserData(this.storageService.getData('tokenData'));
         }
         return true;
       } else {
