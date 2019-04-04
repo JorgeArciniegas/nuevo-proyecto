@@ -3,7 +3,6 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
@@ -22,7 +21,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   imports: [
     NativeScriptHttpClientModule,
     NativeScriptModule,
-    NativeScriptFormsModule,
     FlexLayoutModule,
     NgShadowModule,
     TranslateModule.forRoot({

@@ -39,6 +39,14 @@
           }
 				}
       }
+
+      .error-message {
+        @extend %error-area;
+
+        .error-icon {
+          @extend %error-icon-mobile;
+        }
+      }
     }
 
 		.toolbar {

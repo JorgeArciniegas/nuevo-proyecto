@@ -14,8 +14,13 @@
     <Button row="5" col="1" text="{{ 'LOGIN' | translate }}" class="button btn-default btn-success radius-2" (tap)="onSubmit(username.text, password.text)"></Button>
 
     <!-- error -->
-    <StackLayout row="6" col="1" orientation="vertical">
-      <Label [text]="errorMessage"></Label>
+    <StackLayout row="6" col="1" orientation="vertical" class="error-message" horizontalAlignment="center">
+      <GridLayout *ngIf="errorMessage" rows="*" columns="5,30,10,auto">
+        <StackLayout col="1" class="error-icon"></StackLayout>
+        <StackLayout col="3" verticalAlignment="center">
+          <Label [text]="errorMessage"></Label>
+        </StackLayout>
+      </GridLayout>
     </StackLayout>
   </GridLayout>
 </GridLayout>
