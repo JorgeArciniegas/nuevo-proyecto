@@ -31,6 +31,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       }
     }),
     SharedModule,
+    NativeScriptRouterModule,
     NativeScriptRouterModule.forRoot(routes)
   ],
   providers: [providerDeclarations, { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }],
