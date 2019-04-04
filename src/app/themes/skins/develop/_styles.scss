@@ -369,18 +369,38 @@ $gradient-dark2: #000000;
 %login {
 	background: url("app/themes/skins/develop/image/Bg-login-vdesk.jpg") center center no-repeat;
 }
+%login-mobile {
+  background: url("~/app/themes/skins/develop/image/Bg-login-vdesk.jpg") center center no-repeat;
+  background-size: cover;
+}
 %logo-login {
 	background: url("app/themes/skins/develop/image/vgen.png") center center no-repeat;
 	background-size: contain;
 }
+%logo-login-mobile {
+	background: url("~/app/themes/skins/develop/image/vgen.png") center center no-repeat;
+	background-size: contain;
+}
 %user-icon {
-	background: url("app/themes/skins/develop/icon/icona-user.svg") center center no-repeat;
+  background: url("app/themes/skins/develop/icon/icona-user.svg") center center no-repeat;
+}
+%user-icon-mobile {
+  background: url("~/app/themes/skins/develop/icon/icona-user.png") center center no-repeat;
+  background-size: contain;
 }
 %pwd-icon {
 	background: url("app/themes/skins/develop/icon/icona-pwd.svg") center center no-repeat;
 }
+%pwd-icon-mobile {
+  background: url("~/app/themes/skins/develop/icon/icona-pwd.png") center center no-repeat;
+  background-size: contain;
+}
 %error-icon {
 	background: url("app/themes/skins/develop/icon/alert.svg") center center no-repeat;
+}
+%error-icon-mobile {
+  background: url("~/app/themes/skins/develop/icon/alert.png") center center no-repeat;
+  background-size: contain;
 }
 %border-input-area {
 	border: 1px solid $border-cartd-title;
@@ -388,10 +408,23 @@ $gradient-dark2: #000000;
 %border-input-area-error {
 	border: 1px solid $color-bg-warn;
 }
+%border-input-area-mobile {
+  border-width: 1;
+	border-color: $border-cartd-title;
+}
+%border-input-area-error-mobile {
+  border-width: 1;
+	border-color: $color-bg-warn;
+}
 %error-area {
 	color: $color-text-warn;
 }
 %login-input {
 	background-color: $color-bg-transparent;
 	color: $color-text-primary;
+}
+%login-input-mobile {
+	background-color: $color-bg-transparent;
+  color: $color-text-primary;
+  placeholder-color: $color-text-shadow;
 }

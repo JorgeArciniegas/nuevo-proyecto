@@ -3,15 +3,16 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
+import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { NgShadowModule } from 'nativescript-ng-shadow';
+import { componentDeclarations, providerDeclarations, routes } from './app.common';
 import { AppComponent } from './app.component';
 import { AppHttpInterceptor } from './app.httpinterceptor';
 import { FloorPipe } from './component/pipe/floor.pipe';
 import { SharedModule } from './shared/shared.module';
-import { NativeScriptRouterModule } from 'nativescript-angular/router';
-import { routes, componentDeclarations, providerDeclarations } from './app.common';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -21,6 +22,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   imports: [
     NativeScriptHttpClientModule,
     NativeScriptModule,
+    NativeScriptFormsModule,
     FlexLayoutModule,
     NgShadowModule,
     TranslateModule.forRoot({

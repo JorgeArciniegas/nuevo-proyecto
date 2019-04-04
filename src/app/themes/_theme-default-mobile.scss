@@ -8,6 +8,39 @@
 		@extend %font-family;
 		@extend %color-bg-default;
 
+    #login {
+			@extend %login-mobile;
+
+			.login-panel {
+				@extend %bg-opacity-dark;
+
+				.logo {
+					@extend %logo-login-mobile;
+        }
+
+        .input {
+          @extend %border-input-area-mobile;
+
+          TextField {
+            @extend %login-input-mobile;
+          }
+          &.error {
+            @extend %border-input-area-error-mobile;
+          }
+
+          .icon-area {
+            margin: 5;
+            &.user-icon {
+              @extend %user-icon-mobile;
+            }
+            &.pwd-icon {
+              @extend %pwd-icon-mobile;
+            }
+          }
+				}
+      }
+    }
+
 		.toolbar {
 			@extend %header;
 
@@ -288,6 +321,10 @@
 	z-index: 100;
 }
 
+.radius-2 {
+	border-radius: 2;
+}
+
 .radius-5 {
 	border-radius: 5;
 }
@@ -308,6 +345,9 @@
 	border-radius: 50;
 }
 
+.padding-25 {
+	padding: 25;
+}
 .padding-top-5 {
 	padding-top: 5;
 }
