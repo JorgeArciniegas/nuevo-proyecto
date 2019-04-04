@@ -1,8 +1,8 @@
-import { ProductsService } from '../../products/products.service';
-import { Subscription, Subject, Observable } from 'rxjs';
-import { PolyfunctionalArea } from '../../products/products.model';
 import { Injectable, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { TypeBetSlipColTot } from 'src/app/products/dogracing/dogracing.models';
+import { PolyfunctionalArea } from '../../products/products.model';
+import { ProductsService } from '../../products/products.service';
 
 @Injectable({
   providedIn: 'root'

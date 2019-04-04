@@ -1,11 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { TypeBetSlipColTot } from 'src/app/products/dogracing/dogracing.models';
 import { AppSettings } from '../../app.settings';
 import { Product } from '../../products/models/product.model';
+import { PolyfunctionalArea } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { IconSize } from '../model/iconSize.model';
 import { BtncalcService } from './btncalc.service';
-import { PolyfunctionalArea } from '../../products/products.model';
 
 @Component({
   selector: 'app-btncalc',
@@ -81,7 +82,7 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   }
 
   // TOT/distribution & COL/association buttons enabling
-  btnTotColSet(betTotColSelected: string): void {
+  btnTotColSet(betTotColSelected: TypeBetSlipColTot): void {
     this.btncalcService.btnTotColSelection(betTotColSelected);
   }
 }
