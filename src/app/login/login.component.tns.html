@@ -2,19 +2,43 @@
   <GridLayout rows="*,3*,*,2*,2*,2*,3*" columns="*,10*,*" row="1" col="1" class="login-panel radius-15 padding-25">
     <StackLayout class="logo" row="1" col="1"></StackLayout>
     <!-- username -->
-    <GridLayout row="3" col="1" rows="*" columns="5,30,10,auto" class="input radius-2">
+    <GridLayout row="3" col="1" rows="*" columns="5,30,10,auto" class="input radius-2" [ngClass]="{{'error': !username.valid && username.touched}">
       <StackLayout col="1" class="icon-area user-icon"></StackLayout>
-      <TextField col="3" #username hint="{{'USERNAME'|translate}}" returnKeyType="next"></TextField>
+      <TextField col="3" hint="{{'USERNAME'|translate}}" returnKeyType="next" required minLength="2" ngModel #username="ngModel"></TextField>
     </GridLayout>
     <!-- password -->
-    <GridLayout row="4" col="1" rows="*" columns="5,30,10,auto" class="input radius-2">
+    <GridLayout row="4" col="1" rows="*" columns="5,30,10,auto" class="input radius-2" [ngClass]="{{'error': !password.valid && password.touched}">
       <StackLayout col="1" class="icon-area pwd-icon"></StackLayout>
-      <TextField col="3" secure="true" #password hint="{{'PASSWORD'|translate}}" returnKeyType="done" (returnPress)="onSubmit(username.text, password.text)"></TextField>
+      <TextField col="3" secure="true" hint="{{'PASSWORD'|translate}}" returnKeyType="done" (returnPress)="onSubmit(username.text, password.text)" required minLength="6" ngModel #password="ngModel"></TextField>
     </GridLayout>
-    <Button row="5" col="1" text="{{ 'LOGIN' | translate }}" class="button btn-default btn-success radius-2" (tap)="onSubmit(username.text, password.text)"></Button>
+    <Button row="5" col="1" text="{{ 'LOGIN' | translate }}" class="button btn-default btn-success radius-2" (tap)="onSubmit(username.value, password.value)" [isEnabled]="username.valid && password.valid"></Button>
 
     <!-- error -->
     <StackLayout row="6" col="1" orientation="vertical" class="error-message" horizontalAlignment="center">
+      <GridLayout *ngIf="!username.valid && username.touched && username.hasError('required')" rows="*" columns="5,30,10,auto">
+        <StackLayout col="1" class="error-icon"></StackLayout>
+        <StackLayout col="3" verticalAlignment="center">
+          <Label [text]="{{ 'USERNAME' | translate }} {{ 'ERROR_REQUIRED' | translate | lowercase  }}"></Label>
+        </StackLayout>
+      </GridLayout>
+      <GridLayout *ngIf="!username.valid && username.touched && username.hasError('minlength')" rows="*" columns="5,30,10,auto">
+        <StackLayout col="1" class="error-icon"></StackLayout>
+        <StackLayout col="3" verticalAlignment="center">
+          <Label [text]="{{ 'ERROR_USERNAME_TOO_SHORT' | translate }}"></Label>
+        </StackLayout>
+      </GridLayout>
+      <GridLayout *ngIf="!password.valid && password.touched && password.hasError('required')" rows="*" columns="5,30,10,auto">
+        <StackLayout col="1" class="error-icon"></StackLayout>
+        <StackLayout col="3" verticalAlignment="center">
+          <Label [text]="{{ 'PASSWORD' | translate }} {{ 'ERROR_REQUIRED' | translate | lowercase  }}"></Label>
+        </StackLayout>
+      </GridLayout>
+      <GridLayout *ngIf="!password.valid && password.touched && password.hasError('minlength')" rows="*" columns="5,30,10,auto">
+        <StackLayout col="1" class="error-icon"></StackLayout>
+        <StackLayout col="3" verticalAlignment="center">
+          <Label [text]="{{ 'ERROR_PASSWORD_TOO_SHORT' | translate }}"></Label>
+        </StackLayout>
+      </GridLayout>
       <GridLayout *ngIf="errorMessage" rows="*" columns="5,30,10,auto">
         <StackLayout col="1" class="error-icon"></StackLayout>
         <StackLayout col="3" verticalAlignment="center">
@@ -24,60 +48,3 @@
     </StackLayout>
   </GridLayout>
 </GridLayout>
-
-<!-- <section> id='login' fxLayout="row" fxLayoutAlign="center center">
-  <div class="login-panel radius-15 padding-25" fxLayout="column" fxLayoutAlign="center center" fxFlex.xs="100"
-    fxFlex.sm="80" fxFlex.lg="35" fxFlex.xl="20" fxFlex="50">
-    <div class="logo"></div>
-    <div fxLayout="column" fxLayoutAlign="center center" fxFill>
-      <div fxLayout="row" fxLayoutAlign="center center" fxFill>
-        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" fxLayout="column" fxFlex.xs="90" fxFlex.sm="50"
-          fxFlex="60">
-          <div class="input-area">
-            <div class="input-item">
-              <div class="input radius-2" fxLayout="row"
-                [ngClass]="{'error': form.controls.username.invalid && (form.controls.username.dirty || form.controls.username.touched)}">
-                <i class="icon-area user-icon"></i>
-                <input placeholder="{{'USERNAME'|translate}}" formControlName="username" class="padding-right-10" />
-              </div>
-            </div>
-            <div class="input-item">
-              <div class="input radius-2" fxLayout="row"
-                [ngClass]="{'error': form.controls.password.invalid && (form.controls.password.dirty || form.controls.password.touched)}">
-                <i class="icon-area pwd-icon"></i>
-                <input placeholder="{{ 'PASSWORD' | translate }}" formControlName="password" type="password"
-                  class="padding-right-10" autocomplete="new-password" />
-              </div>
-            </div>
-          </div>
-          <button class="btn-default btn-success radius-2" color="primary" type="submit">
-            {{ 'LOGIN' | translate }}
-          </button>
-        </form>
-      </div>
-      <div class="error-message" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
-        <div fxLayout="row" fxLayoutAlign="center center"
-          *ngIf="form.controls.username.invalid && (form.controls.username.dirty || form.controls.username.touched)">
-          <ng-container *ngIf="form.controls.username.hasError('required')">
-            <i class="error-icon"></i> {{ 'USERNAME' | translate }} {{ 'ERROR_REQUIRED' | translate | lowercase }}
-          </ng-container>
-          <ng-container *ngIf="form.controls.username.hasError('minlength')">
-            <i class="error-icon"></i> {{ 'ERROR_USERNAME_TOO_SHORT' | translate }}
-          </ng-container>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="center center"
-          *ngIf="form.controls.password.invalid && (form.controls.password.dirty || form.controls.password.touched)">
-          <ng-container *ngIf="form.controls.password.hasError('required')">
-            <i class="error-icon"></i> {{ 'PASSWORD' | translate }} {{ 'ERROR_REQUIRED' | translate | lowercase  }}
-          </ng-container>
-          <ng-container *ngIf="form.controls.password.hasError('minlength')">
-            <i class="error-icon"></i> {{ 'ERROR_PASSWORD_TOO_SHORT' | translate }}
-          </ng-container>
-        </div>
-        <ng-container *ngIf="errorMessage">
-          <i class="error-icon"></i> {{ errorMessage }}
-        </ng-container>
-      </div>
-    </div>
-  </div>
-</section> -->
