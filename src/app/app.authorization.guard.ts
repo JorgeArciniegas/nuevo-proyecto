@@ -25,9 +25,10 @@ export class AuthorizationGuard implements CanActivate {
       }
     } catch (err) {
       this.router.getRouter().navigateByUrl(
-        this.router.getRouter().createUrlTree(['/error-page'], {
-          queryParams: { typeError: '500' }
-        })
+        '/error-page'
+        // this.router.getRouter().createUrlTree(['/error-page'], {
+        //   queryParams: { typeError: '500' }
+        // })
       );
       return false;
     }
