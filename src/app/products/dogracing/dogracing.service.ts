@@ -469,7 +469,12 @@ export class DogracingService {
       areaFuncData = this.checkSmartCode(areaFuncData);
       // set amount
       areaFuncData.amount = (!this.btnService.polyfunctionalArea) ? this.amount : this.btnService.polyfunctionalArea.amount;
-
+      // verify if the type of betslip is set
+      if (this.btnService.polyfunctionalArea !== null ) {
+        areaFuncData.typeSlipCol = this.btnService.polyfunctionalArea.typeSlipCol;
+      } else {
+        areaFuncData.typeSlipCol = TypeBetSlipColTot.COL;
+      }
       // extract odds
       if (this.smartCode.code) {
         areaFuncData.selection = this.smartCode.code;
@@ -477,12 +482,7 @@ export class DogracingService {
       } else {
         areaFuncData = this.extractOdd(odd, areaFuncData, dogName);
       }
-      // verify if the type of betslip is set
-      if (this.btnService.polyfunctionalArea !== null ) {
-        areaFuncData.typeSlipCol = this.btnService.polyfunctionalArea.typeSlipCol;
-      } else {
-        areaFuncData.typeSlipCol = TypeBetSlipColTot.COL;
-      }
+
     } catch (err) {
       areaFuncData = {};
     } finally {
@@ -584,7 +584,8 @@ export class DogracingService {
                 new BetOdd(
                   checkOdd.nm,
                   checkOdd.ods[0].vl,
-                  areaFuncData.amount / oddsToSearch.length
+                  (areaFuncData.typeSlipCol === TypeBetSlipColTot.TOT) ?
+                    areaFuncData.amount / oddsToSearch.length : areaFuncData.amount
                 )
               );
             }

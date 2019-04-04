@@ -32,7 +32,19 @@ export class BtncalcService implements OnDestroy {
             this.polyfunctionalArea.activeDistributionTot = false;
             this.polyfunctionalArea.activeAssociationCol = true;
           }
+           // update type Betslip on change distribution amount for COL or TOT
+          if (this.polyfunctionalArea.typeSlipCol === TypeBetSlipColTot.TOT && this.polyfunctionalArea.odds !== undefined ) {
+            this.polyfunctionalArea.odds.map( item => {
+              item.amount = this.polyfunctionalArea.amount / this.polyfunctionalArea.odds.length;
+            });
+          } else if (this.polyfunctionalArea.odds !== undefined) {
+            this.polyfunctionalArea.odds.map( item => {
+              item.amount = this.polyfunctionalArea.amount;
+            });
+          }
         }
+
+
       }
     );
   }
@@ -93,7 +105,13 @@ export class BtncalcService implements OnDestroy {
   btnTotColSelection(betTotColSelected: TypeBetSlipColTot): void {
    //  this.polyfunctionalArea.labelColTot = betTotColSelected;
     this.polyfunctionalArea.typeSlipCol = betTotColSelected;
-    // this.btncalcService.btnAmountDecimals(betTotCol);
+    this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
+/*     if(betTotColSelected === TypeBetSlipColTot.TOT) {
+      this.polyfunctionalArea.odds.map( item => {
+        item.amount = this.polyfunctionalArea.amount / this.polyfunctionalArea.odds.length;
+      });
+    }
+ */    // this.btncalcService.btnAmountDecimals(betTotCol);
   }
 
   private returnNumber(amount: number): number {
