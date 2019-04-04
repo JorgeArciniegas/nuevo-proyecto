@@ -1,4 +1,3 @@
-import { Product } from '../../products/models/product.model';
 import { ProductsService } from '../../products/products.service';
 import { Subscription, Subject, Observable } from 'rxjs';
 import { PolyfunctionalArea } from '../../products/products.model';
@@ -17,7 +16,13 @@ export class BtncalcService implements OnDestroy {
   numberWholeDecimals: number;
   conversionDecimals: string;
 
+  private selectedAmountSubject: Subject<number>;
+  public selectedAmount: Observable<number>;
+
   constructor(public productService: ProductsService) {
+    this.selectedAmountSubject = new Subject<number>();
+    this.selectedAmount = this.selectedAmountSubject.asObservable();
+
     // manages data display: amount addition/decimals and amount distribution
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
@@ -27,7 +32,6 @@ export class BtncalcService implements OnDestroy {
           this.iniPresetAmountProduct = this.polyfunctionalValue.amount;
           this.polyfunctionalAdditionFlag = true; // amount addition to 0
           this.polyfunctionalDecimalsFlag = true; // amount-decimals to 0
-          // console.log(this.polyfunctionalValue);
         }
 
         if (this.polyfunctionalValue) {
@@ -38,7 +42,6 @@ export class BtncalcService implements OnDestroy {
           if (this.polyfunctionalValue.odds) {
             this.polyfunctionalValue.activeDistributionTot = true;
             this.polyfunctionalValue.activeAssociationCol = true;
-            // console.log(this.polyfunctionalValue.odds.length);
           } else {
             this.polyfunctionalValue.activeDistributionTot = false;
             this.polyfunctionalValue.activeAssociationCol = true;
@@ -72,6 +75,8 @@ export class BtncalcService implements OnDestroy {
       // increments amount by preset key values
       this.polyfunctionalValue.amount =
         this.polyfunctionalValue.amount + amount;
+
+      this.selectedAmountSubject.next(this.polyfunctionalValue.amount);
     }
   }
 
@@ -96,6 +101,8 @@ export class BtncalcService implements OnDestroy {
       this.conversionDecimals = this.stringWholeDecimals;
       this.numberWholeDecimals = Number(this.conversionDecimals) / 100;
       this.polyfunctionalValue.amount = this.numberWholeDecimals;
+
+      this.selectedAmountSubject.next(this.polyfunctionalValue.amount);
     }
   }
 

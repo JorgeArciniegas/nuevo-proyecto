@@ -23,14 +23,6 @@ export class DisplayComponent implements OnInit, OnDestroy {
   polyfunctionalValue: PolyfunctionalArea;
   polyfunctionalValueSubscribe: Subscription;
 
-  currencyMask = {
-    align: 'left',
-    prefix: '',
-    thousands: '.',
-    decimal: ',',
-    precision: 2
-  };
-
   constructor(
     private productService: ProductsService,
     public readonly appSettings: AppSettings
@@ -39,6 +31,9 @@ export class DisplayComponent implements OnInit, OnDestroy {
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
         this.polyfunctionalValue = element;
+        if (this.polyfunctionalValue) {
+          console.log(this.polyfunctionalValue.amount);
+        }
       }
     );
   }
