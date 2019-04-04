@@ -1,35 +1,11 @@
 import { Injectable } from '@angular/core';
 import { interval, Observable, Subject, timer } from 'rxjs';
-import {
-  CountDown,
-  EventResults,
-  Market,
-  Race as RaceApi,
-  SportDetail,
-  Tournament,
-  TreeSports
-} from '../../services/vgen.model';
+import { CountDown, EventResults, Market, Race as RaceApi, SportDetail, Tournament, TreeSports } from '../../services/vgen.model';
 import { VgenService } from '../../services/vgen.service';
 import { BetOdd, PolyfunctionalArea } from '../products.model';
 import { ProductsService } from '../products.service';
-import {
-  Dog,
-  Lucky,
-  PlacingRace,
-  Podium,
-  Race,
-  RaceDetail,
-  RaceResult,
-  RaceTime,
-  Smartcode,
-  SmartCodeType,
-  SpecialBet,
-  SpecialBetValue,
-  TypePlacingRace,
-  CombinationType
-} from './dogracing.models';
-import { normalizeKeyframes } from '@angular/animations/browser/src/render/shared';
-import { BtncalcService } from '../../component/btncalc/btncalc.service';
+import { CombinationType, Dog, Lucky, PlacingRace, Podium, Race, RaceDetail, RaceResult, RaceTime, Smartcode, SmartCodeType, SpecialBet, SpecialBetValue, TypePlacingRace, TypeBetSlipColTot } from './dogracing.models';
+import { BtncalcService } from 'src/app/component/btncalc/btncalc.service';
 
 @Injectable({
   providedIn: 'root'
@@ -99,7 +75,7 @@ export class DogracingService {
 
     this.createDogList();
 
-    this.btnService.selectedAmount.subscribe(amount => (this.amount = amount));
+    // this.btnService.selectedAmount.subscribe(amount => (this.amount = amount));
   }
 
   createDogList(): void {
@@ -193,7 +169,6 @@ export class DogracingService {
   }
 
   loadRacesFromApi(all: boolean = false) {
-    // console.log('Reload from api');
     this.vgenService.programmetree(8, 'DOG').then((sports: TreeSports) => {
       const tournament: Tournament = sports.Sports[0].ts[0];
 
@@ -323,7 +298,6 @@ export class DogracingService {
           } catch (err) {
             if (this.attempts < 5) {
               this.attempts++;
-              // console.log('attempts', this.attempts);
               setTimeout(() => {
                 this.raceDetailOdds(raceNumber);
               }, 1000);
@@ -378,7 +352,6 @@ export class DogracingService {
       (cacheRace: RaceApi) => cacheRace.id === this.placingRace.raceNumber
     )[0];
     this.smartCode = new Smartcode();
-
     this.populatingPolyfunctionArea(odds);
   }
 
@@ -446,6 +419,8 @@ export class DogracingService {
    */
   populatingPolyfunctionArea(odd: RaceApi): void {
     let areaFuncData: PolyfunctionalArea = {};
+   /*  areaFuncData.activeAssociationCol = false;
+    areaFuncData.activeDistributionTot = false; */
     try {
       // check if is first insert
       let dogName: string;
@@ -493,7 +468,7 @@ export class DogracingService {
       // check smartcode and extract composit bets
       areaFuncData = this.checkSmartCode(areaFuncData);
       // set amount
-      areaFuncData.amount = this.amount;
+      areaFuncData.amount = (!this.btnService.polyfunctionalArea) ? this.amount : this.btnService.polyfunctionalArea.amount;
 
       // extract odds
       if (this.smartCode.code) {
@@ -501,6 +476,12 @@ export class DogracingService {
         areaFuncData = this.extractOdd(odd, areaFuncData);
       } else {
         areaFuncData = this.extractOdd(odd, areaFuncData, dogName);
+      }
+      // verify if the type of betslip is set
+      if (this.btnService.polyfunctionalArea !== null ) {
+        areaFuncData.typeSlipCol = this.btnService.polyfunctionalArea.typeSlipCol;
+      } else {
+        areaFuncData.typeSlipCol = TypeBetSlipColTot.COL;
       }
     } catch (err) {
       areaFuncData = {};
@@ -594,9 +575,6 @@ export class DogracingService {
           areaFuncData.odd = checkOdd.ods[0].vl;
         }
       } else {
-        // console.log(areaFuncData);
-        // console.log(areaFuncData.amount + '/' + oddsToSearch.length);
-        // console.log(areaFuncData.amount / oddsToSearch.length);
         if (oddsToSearch.length > 0) {
           areaFuncData.odds = [];
           // search for multiple odds

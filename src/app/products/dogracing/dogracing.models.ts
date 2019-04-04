@@ -54,6 +54,11 @@ export enum CombinationType {
   By3 // Combination by 3. Ex: 1234 -> 1-2-3, 1-3-4, 1-2-4, 2-1-3, 2-3-4, 3-1-2 ecc.
 }
 
+export enum TypeBetSlipColTot {
+  COL,
+  TOT
+}
+
 export class PlacingRace {
   raceNumber: number;
   typePlace: TypePlacingRace;

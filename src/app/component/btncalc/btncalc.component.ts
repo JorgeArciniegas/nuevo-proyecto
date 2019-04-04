@@ -2,9 +2,10 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AppSettings } from '../../app.settings';
 import { Product } from '../../products/models/product.model';
-import { ProductsService } from '../../products/products.service';
 import { PolyfunctionalArea } from '../../products/products.model';
+import { ProductsService } from '../../products/products.service';
 import { BtncalcService } from './btncalc.service';
+import { TypeBetSlipColTot } from 'src/app/products/dogracing/dogracing.models';
 
 @Component({
   selector: 'app-btncalc',
@@ -17,10 +18,12 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   @Input()
   rowHeight: number;
   polyfunctionalValueSubscribe: Subscription;
-  polyfunctionalValue: PolyfunctionalArea;
+  polyfunctionalArea: PolyfunctionalArea;
   displayDefaultAmount: number;
   isActiveTot = false;
   isActiveCol = false;
+
+  typeBetSlipColTot: typeof TypeBetSlipColTot = TypeBetSlipColTot;
 
   constructor(
     public productService: ProductsService,
@@ -34,17 +37,18 @@ export class BtncalcComponent implements OnInit, OnDestroy {
         );
         this.product = product[0];
         this.displayDefaultAmount = product[0].defaultAmount[0];
-        // this.displayDefaultAmount = 5;
       }
     );
     // manages buttons COL/TOT, label amount in display, amount association/distribution
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
-        this.polyfunctionalValue = element;
-        if (this.polyfunctionalValue) {
-          this.isActiveCol = this.polyfunctionalValue.activeAssociationCol;
-          this.isActiveTot = this.polyfunctionalValue.activeDistributionTot;
-          this.polyfunctionalValue.amount = this.displayDefaultAmount;
+        this.polyfunctionalArea = element;
+        if (this.polyfunctionalArea && (this.polyfunctionalArea.odd || this.polyfunctionalArea.odds) ) {
+          this.isActiveCol = this.polyfunctionalArea.activeAssociationCol;
+          this.isActiveTot = this.polyfunctionalArea.activeDistributionTot;
+        } else {
+          this.isActiveCol = false;
+          this.isActiveTot = false;
         }
       }
     );
@@ -58,8 +62,10 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   }
 
   plus(): void {
+    this.btncalcService.polyfunctionalArea.amount = 1;
     this.productService.closeProductDialog();
     this.productService.resetBoard();
+    this.defaultAmount();
   }
 
   clearAll(): void {
@@ -67,10 +73,15 @@ export class BtncalcComponent implements OnInit, OnDestroy {
     this.productService.resetBoard();
     this.isActiveTot = false;
     this.isActiveCol = false;
+    this.btncalcService.polyfunctionalArea.amount = 1;
+    this.btncalcService.polyfunctionalAdditionFlag = true;
+    this.btncalcService.polyfunctionalDecimalsFlag = true;
   }
 
   defaultAmount(): void {
-    this.polyfunctionalValue.amount = 1;
+    this.btncalcService.polyfunctionalArea.amount = 1;
+    this.btncalcService.polyfunctionalAdditionFlag = true;
+    this.btncalcService.polyfunctionalDecimalsFlag = true;
   }
 
   // increments amount in display by preset default values
@@ -84,7 +95,7 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   }
 
   // TOT/distribution & COL/association buttons enabling
-  btnTotColSet(betTotColSelected: string): void {
+  btnTotColSet(betTotColSelected: TypeBetSlipColTot): void {
     this.btncalcService.btnTotColSelection(betTotColSelected);
   }
 }

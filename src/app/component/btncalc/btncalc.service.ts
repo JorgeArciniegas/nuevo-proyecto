@@ -2,13 +2,14 @@ import { ProductsService } from '../../products/products.service';
 import { Subscription, Subject, Observable } from 'rxjs';
 import { PolyfunctionalArea } from '../../products/products.model';
 import { Injectable, OnDestroy } from '@angular/core';
+import { TypeBetSlipColTot } from 'src/app/products/dogracing/dogracing.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BtncalcService implements OnDestroy {
   polyfunctionalValueSubscribe: Subscription;
-  polyfunctionalValue: PolyfunctionalArea;
+  polyfunctionalArea: PolyfunctionalArea;
   iniPresetAmountProduct: number;
   polyfunctionalAdditionFlag: boolean;
   polyfunctionalDecimalsFlag: boolean;
@@ -16,35 +17,20 @@ export class BtncalcService implements OnDestroy {
   numberWholeDecimals: number;
   conversionDecimals: string;
 
-  private selectedAmountSubject: Subject<number>;
-  public selectedAmount: Observable<number>;
-
   constructor(public productService: ProductsService) {
-    this.selectedAmountSubject = new Subject<number>();
-    this.selectedAmount = this.selectedAmountSubject.asObservable();
-
+    this.polyfunctionalDecimalsFlag = true;
+    this.polyfunctionalAdditionFlag = true;
     // manages data display: amount addition/decimals and amount distribution
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
-        this.polyfunctionalValue = element;
-        if (this.polyfunctionalValue) {
-          this.polyfunctionalValue.labelColTot = 'COL';
-          this.iniPresetAmountProduct = this.polyfunctionalValue.amount;
-          this.polyfunctionalAdditionFlag = true; // amount addition to 0
-          this.polyfunctionalDecimalsFlag = true; // amount-decimals to 0
-        }
-
-        if (this.polyfunctionalValue) {
-          this.polyfunctionalValue.activeAssociationCol = this
-            .polyfunctionalValue.amount
-            ? true
-            : false;
-          if (this.polyfunctionalValue.odds) {
-            this.polyfunctionalValue.activeDistributionTot = true;
-            this.polyfunctionalValue.activeAssociationCol = true;
+        this.polyfunctionalArea = element;
+        if (this.polyfunctionalArea) {
+          if (this.polyfunctionalArea.odds !== undefined ) {
+            this.polyfunctionalArea.activeDistributionTot = true;
+            this.polyfunctionalArea.activeAssociationCol = true;
           } else {
-            this.polyfunctionalValue.activeDistributionTot = false;
-            this.polyfunctionalValue.activeAssociationCol = true;
+            this.polyfunctionalArea.activeDistributionTot = false;
+            this.polyfunctionalArea.activeAssociationCol = true;
           }
         }
       }
@@ -59,34 +45,34 @@ export class BtncalcService implements OnDestroy {
   btnDefaultAmountAddition(amount: number): void {
     this.polyfunctionalDecimalsFlag = true; // resets decimals to 0
     // if bet present in display...
-    if (this.polyfunctionalValue) {
+    if (this.polyfunctionalArea) {
       // if bet displayed for the first time.....
-      if (this.polyfunctionalAdditionFlag === true) {
-        this.polyfunctionalValue.amount = 0; // resets amount to 0
+      if (this.polyfunctionalAdditionFlag) {
+        this.polyfunctionalArea.amount = 0; // resets amount to 0
         // if preset button value 1 and amount 0, pre-add 1 to increment sum
         if (amount === 1) {
-          this.polyfunctionalValue.amount =
-            this.polyfunctionalValue.amount + amount;
+          this.polyfunctionalArea.amount =
+            this.polyfunctionalArea.amount + amount;
         }
         // resets flag to stop reseting amount to 0
         this.polyfunctionalAdditionFlag = false;
       }
 
       // increments amount by preset key values
-      this.polyfunctionalValue.amount =
-        this.polyfunctionalValue.amount + amount;
-
-      this.selectedAmountSubject.next(this.polyfunctionalValue.amount);
+      this.polyfunctionalArea.amount = this.polyfunctionalArea.amount + amount;
+        this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
+      // this.selectedAmountSubject.next(this.polyfunctionalValue.amount);
     }
   }
 
   btnAmountDecimals(amount: number): void {
+
     this.polyfunctionalAdditionFlag = true; // resets addition to 0
     // if bet present in display...
-    if (this.polyfunctionalValue) {
+    if (this.polyfunctionalArea) {
       // if bet displayed for the first time.....
-      if (this.polyfunctionalDecimalsFlag === true) {
-        this.polyfunctionalValue.amount = 0; // resets amount to 0
+      if (this.polyfunctionalDecimalsFlag) {
+        this.polyfunctionalArea.amount = 0; // resets amount to 0
         this.stringWholeDecimals = ''; // sets decimals string
         this.polyfunctionalDecimalsFlag = false; // resets flag
       }
@@ -97,18 +83,25 @@ export class BtncalcService implements OnDestroy {
        * algorithm to covert last two digits of number to decimals
        * assigns it back to amount
        */
-      this.stringWholeDecimals = this.stringWholeDecimals + String(amount);
-      this.conversionDecimals = this.stringWholeDecimals;
-      this.numberWholeDecimals = Number(this.conversionDecimals) / 100;
-      this.polyfunctionalValue.amount = this.numberWholeDecimals;
+      this.polyfunctionalArea.amount = this.returnNumber(amount);
+      this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
 
-      this.selectedAmountSubject.next(this.polyfunctionalValue.amount);
     }
   }
 
   // TOT & COL buttons on/off
-  btnTotColSelection(betTotColSelected: string): void {
-    this.polyfunctionalValue.labelColTot = betTotColSelected;
+  btnTotColSelection(betTotColSelected: TypeBetSlipColTot): void {
+   //  this.polyfunctionalArea.labelColTot = betTotColSelected;
+    this.polyfunctionalArea.typeSlipCol = betTotColSelected;
     // this.btncalcService.btnAmountDecimals(betTotCol);
+  }
+
+  private returnNumber(amount: number): number {
+    const tmpNumberLength = this.polyfunctionalArea.amount.toString().replace('.', '');
+    let stringTmpNumber = tmpNumberLength + amount.toString();
+    while (stringTmpNumber.length - 1 < 2 ) {
+      stringTmpNumber = '0' + stringTmpNumber;
+    }
+    return  Number(stringTmpNumber) / 100;
   }
 }

@@ -1,3 +1,5 @@
+import { TypeBetSlipColTot } from "./dogracing/dogracing.models";
+
 export interface WindowSize {
   height: number;
   width: number;
@@ -13,9 +15,14 @@ export class PolyfunctionalArea {
   amount?: number;
   odds?: BetOdd[];
   labelColTot?: string;
+  typeSlipCol?: TypeBetSlipColTot;
   activeAssociationCol?: boolean;
   activeDistributionTot?: boolean;
-  constructor() {}
+  constructor() {
+ /*    this.activeAssociationCol = false;
+    this.activeDistributionTot = false;*/
+    this.typeSlipCol = TypeBetSlipColTot.COL;
+  }
 }
 
 export class BetOdd {

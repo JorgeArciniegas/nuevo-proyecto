@@ -7,6 +7,7 @@ import {
   PolyfunctionalArea
 } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
+import { TypeBetSlipColTot } from 'src/app/products/dogracing/dogracing.models';
 
 @Component({
   selector: 'app-display',
@@ -23,6 +24,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
   polyfunctionalValue: PolyfunctionalArea;
   polyfunctionalValueSubscribe: Subscription;
 
+  typeBetSlipColTot: typeof TypeBetSlipColTot = TypeBetSlipColTot;
   constructor(
     private productService: ProductsService,
     public readonly appSettings: AppSettings
@@ -31,9 +33,6 @@ export class DisplayComponent implements OnInit, OnDestroy {
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
         this.polyfunctionalValue = element;
-        if (this.polyfunctionalValue) {
-          console.log(this.polyfunctionalValue.amount);
-        }
       }
     );
   }
