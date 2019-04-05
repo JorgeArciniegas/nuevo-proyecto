@@ -20,6 +20,11 @@
 		opacity: 0.8;
 	}
 }
+.btn-default {
+	&.disabled {
+		opacity: 0.4;
+	}
+}
 .playable-row-tile {
 	&.disabled {
 		opacity: 0.1;

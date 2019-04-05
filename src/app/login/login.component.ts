@@ -28,4 +28,8 @@ export class LoginComponent {
       this.userService.login(form.username, form.password).then(message => (this.errorMessage = message));
     }
   }
+
+  public valueChange(): void {
+    this.errorMessage = undefined;
+  }
 }
