@@ -9,11 +9,13 @@
   "ERROR_PASSWORD_TOO_SHORT": "Questa password è troppo corta, minimo 6 caratteri",
   "ERROR_REQUIRED": "É obbligatorio",
   "ERROR_USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
+  "GO_TO_HOME": "Vai alla home",
   "LUCKY": "Lucky",
   "NO_CONNECTION": "Nessuna connessione disponibile",
   "Operator": "Operator",
   "PASSWORD": "Password",
   "R": "R",
+  "SECTION_NOT_AVAILABLE": "Sezione non presente",
   "SMARTCODE": {
     "1VA": "V. ACCOPPIATA",
     "AB": "AB",

@@ -31,6 +31,36 @@ html {
 			@extend %logo-with-text;
 		}
 
+		.error-message {
+			@extend %error-area;
+
+			.error-icon {
+				@extend %error-icon;
+				display: inline-block;
+			}
+		}
+
+		.primary-link {
+			@extend %primary-link;
+		}
+
+		#error-page {
+			@extend %login;
+			height: 100%;
+
+			.error-page-panel {
+				@extend %bg-opacity-dark;
+			}
+
+			.error-message {
+				.error-icon {
+					width: 30px;
+					height: 30px;
+					margin: 0 10px;
+				}
+			}
+		}
+
 		#login {
 			@extend %login;
 			height: 100%;
@@ -61,14 +91,10 @@ html {
 				}
 
 				.error-message {
-					@extend %error-area;
-
 					.error-icon {
-						@extend %error-icon;
 						width: 18px;
 						height: 18px;
 						margin: 0 5px;
-						display: inline-block;
 					}
 				}
 			}

@@ -137,6 +137,10 @@ $color-text-operator: #3dab14;
 	background-color: $color-bg-secodary;
 	color: $color-text-primary;
 }
+// LINK
+%primary-link {
+	color: $color-text-primary;
+}
 // BUTTONS DEFINITION
 %btn-keyboard {
 	background: $btn-bg-keyboard;
