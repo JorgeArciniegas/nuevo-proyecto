@@ -26,6 +26,11 @@ html {
 		app-products {
 			height: 100vh;
 		}
+
+		.logo-with-text {
+			@extend %logo-with-text;
+		}
+
 		#login {
 			@extend %login;
 			height: 100%;
@@ -33,9 +38,6 @@ html {
 			.login-panel {
 				@extend %bg-opacity-dark;
 
-				.logo {
-					@extend %logo-login;
-				}
 				.input-item {
 					.input {
 						@extend %border-input-area;
