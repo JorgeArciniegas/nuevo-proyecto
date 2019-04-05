@@ -8,7 +8,7 @@
           fxFlex="60">
           <div class="input-area">
             <div class="input-item">
-              <div class="input radius-2" fxLayout="row"
+              <div class="input radius-2"
                 [ngClass]="{'error': form.controls.username.invalid && (form.controls.username.dirty || form.controls.username.touched)}">
                 <i class="icon-area user-icon"></i>
                 <input placeholder="{{'USERNAME'|translate}}" formControlName="username" class="padding-right-10"
@@ -16,7 +16,7 @@
               </div>
             </div>
             <div class="input-item">
-              <div class="input radius-2" fxLayout="row"
+              <div class="input radius-2"
                 [ngClass]="{'error': form.controls.password.invalid && (form.controls.password.dirty || form.controls.password.touched)}">
                 <i class="icon-area pwd-icon"></i>
                 <input placeholder="{{ 'PASSWORD' | translate }}" formControlName="password" type="password"

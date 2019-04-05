@@ -13,16 +13,21 @@
 				margin: 15px 0;
 
 				.input {
+					display: block;
 					.icon-area {
-						width: 20px;
+						width: 24px;
 						height: 20px;
 						margin: 10px 10px;
+						display: inline-block;
+						vertical-align: middle;
 					}
 
 					input {
 						border: none;
 						font-size: 14px;
 						font-weight: bold;
+						display: inline-block;
+						width: calc(100% - 44px);
 					}
 				}
 			}
