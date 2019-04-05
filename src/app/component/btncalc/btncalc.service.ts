@@ -103,23 +103,13 @@ export class BtncalcService implements OnDestroy {
 
   // TOT & COL buttons on/off
   btnTotColSelection(betTotColSelected: TypeBetSlipColTot): void {
-   //  this.polyfunctionalArea.labelColTot = betTotColSelected;
     this.polyfunctionalArea.typeSlipCol = betTotColSelected;
     this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
-/*     if(betTotColSelected === TypeBetSlipColTot.TOT) {
-      this.polyfunctionalArea.odds.map( item => {
-        item.amount = this.polyfunctionalArea.amount / this.polyfunctionalArea.odds.length;
-      });
-    }
- */    // this.btncalcService.btnAmountDecimals(betTotCol);
   }
 
   private returnNumber(amount: number): number {
-    const tmpNumberLength = this.polyfunctionalArea.amount.toString().replace('.', '');
-    let stringTmpNumber = tmpNumberLength + amount.toString();
-    while (stringTmpNumber.length - 1 < 2 ) {
-      stringTmpNumber = '0' + stringTmpNumber;
-    }
-    return  Number(stringTmpNumber) / 100;
+    const tmpNumberLength = (this.polyfunctionalArea.amount * 100).toFixed(2).toString().replace('.', '');
+    const stringTmpNumber = tmpNumberLength.toString() + amount.toString();
+    return Number(stringTmpNumber) / 100;
   }
 }
