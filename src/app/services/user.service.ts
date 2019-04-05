@@ -41,7 +41,6 @@ export class UserService {
         return userDataResponse;
       }
     } catch (err) {
-      console.log(err);
       return err.error.error_description;
     }
   }
