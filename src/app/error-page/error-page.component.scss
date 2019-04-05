@@ -1,0 +1,19 @@
+#error-page {
+	.panel {
+		.logo {
+			height: 60px;
+			width: 100%;
+			margin: 15px;
+		}
+
+		button {
+			font-size: 14px;
+			padding: 10px;
+			margin-bottom: 15px;
+		}
+		.error-message {
+			text-align: center;
+			font-size: 14px;
+		}
+	}
+}

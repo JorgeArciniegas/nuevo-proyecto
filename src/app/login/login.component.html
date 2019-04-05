@@ -23,7 +23,7 @@
               </div>
             </div>
           </div>
-          <button class="btn-default btn-success radius-2" color="primary" type="submit">
+          <button class="btn-default btn-success radius-2" color="primary" type="submit" [disabled]="form.invalid">
             {{ 'LOGIN' | translate }}
           </button>
         </form>
@@ -47,9 +47,10 @@
             <i class="error-icon"></i> {{ 'ERROR_PASSWORD_TOO_SHORT' | translate }}
           </ng-container>
         </div>
-        <ng-container *ngIf="errorMessage">
+        <div fxLayout="row" fxLayoutAlign="center center"
+          *ngIf="errorMessage && form.controls.username.valid && form.controls.password.valid">
           <i class="error-icon"></i> {{ errorMessage }}
-        </ng-container>
+        </div>
       </div>
     </div>
   </div>

@@ -23,6 +23,9 @@ button {
 	font-size: 1.25em;
 	border: 0;
 	/* border: 2px solid currentColor; */
+	&[disabled] {
+		opacity: 0.1;
+	}
 }
 
 button:active:not([disabled]) {

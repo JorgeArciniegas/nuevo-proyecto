@@ -5,6 +5,7 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
+import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { NgShadowModule } from 'nativescript-ng-shadow';
 import { componentDeclarations, providerDeclarations, routes } from './app.common';
@@ -21,6 +22,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   imports: [
     NativeScriptHttpClientModule,
     NativeScriptModule,
+    NativeScriptFormsModule,
     FlexLayoutModule,
     NgShadowModule,
     TranslateModule.forRoot({
