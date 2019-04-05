@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { interval, Observable, Subject, timer } from 'rxjs';
-import { CountDown, EventResults, Market, Race as RaceApi, SportDetail, Tournament, TreeSports } from '../../services/vgen.model';
-import { VgenService } from '../../services/vgen.service';
+import { CountDown, EventResults, Market, Race as RaceApi, SportDetail, Tournament, TreeSports } from '../../services/api/vgen.model';
+import { VgenService } from '../../services/api/vgen.service';
 import { BetOdd, PolyfunctionalArea } from '../products.model';
 import { ProductsService } from '../products.service';
 import { CombinationType, Dog, Lucky, PlacingRace, Podium, Race, RaceDetail, RaceResult, RaceTime, Smartcode, SmartCodeType, SpecialBet, SpecialBetValue, TypePlacingRace, TypeBetSlipColTot } from './dogracing.models';

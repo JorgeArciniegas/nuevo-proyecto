@@ -124,8 +124,5 @@
       "prefix": "app",
       "styleext": "scss"
     }
-  },
-  "cli": {
-    "defaultCollection": "@nativescript/schematics"
   }
 }

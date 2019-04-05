@@ -5,7 +5,7 @@ import { ProductsService } from '../../products/products.service';
 @Component({
   selector: 'app-coupon',
   templateUrl: './coupon.component.html',
-  styleUrls: ['./coupon.component.scss']
+  styleUrls: ['./coupon.component.tns.scss']
 })
 export class CouponComponent implements OnInit {
   public settings: AppSettings;
@@ -13,10 +13,7 @@ export class CouponComponent implements OnInit {
   @Input()
   public timeBlocked: boolean;
 
-  constructor(
-    public readonly appSettings: AppSettings,
-    public productService: ProductsService
-  ) {
+  constructor(public readonly appSettings: AppSettings, public productService: ProductsService) {
     this.settings = appSettings;
     this.active = 'multi';
   }

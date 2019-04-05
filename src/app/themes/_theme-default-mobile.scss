@@ -1,12 +1,53 @@
-@import './buttons-mobile';
+@import "./buttons-mobile";
 
 .app {
 	&.develop {
-		@import './skins/develop/styles';
+		@import "./skins/develop/styles";
 	}
 	.main-content {
 		@extend %font-family;
 		@extend %color-bg-default;
+
+		.logo-with-text {
+			@extend %logo-with-text-mobile;
+		}
+
+		#login {
+			@extend %login-mobile;
+
+			.login-panel {
+				@extend %bg-opacity-dark;
+
+				.input {
+					@extend %border-input-area-mobile;
+
+					TextField {
+						@extend %login-input-mobile;
+					}
+					&.error {
+						@extend %border-input-area-error-mobile;
+					}
+
+					.icon-area {
+						margin: 5;
+						&.user-icon {
+							@extend %user-icon-mobile;
+						}
+						&.pwd-icon {
+							@extend %pwd-icon-mobile;
+						}
+					}
+				}
+			}
+
+			.error-message {
+				@extend %error-area;
+
+				.error-icon {
+					@extend %error-icon-mobile;
+				}
+			}
+		}
 
 		.toolbar {
 			@extend %header;
@@ -288,6 +329,10 @@
 	z-index: 100;
 }
 
+.radius-2 {
+	border-radius: 2;
+}
+
 .radius-5 {
 	border-radius: 5;
 }
@@ -308,6 +353,9 @@
 	border-radius: 50;
 }
 
+.padding-25 {
+	padding: 25;
+}
 .padding-top-5 {
 	padding-top: 5;
 }

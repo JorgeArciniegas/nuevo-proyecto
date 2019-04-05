@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { screen } from 'tns-core-modules/platform';
-import { WindowSize } from './products.model';
+import { WindowSize } from './window-size.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,16 +8,17 @@ export class WindowSizeService {
   constructor() {}
 
   getWindowSize(): WindowSize {
-    const h: number = screen.mainScreen.heightDIPs;
-    const w: number = screen.mainScreen.widthDIPs;
+    const doc: HTMLElement = document.querySelector('html');
+    const h: number = doc.offsetHeight;
+    const w: number = doc.offsetWidth;
     const aspectRatio: number = w / h;
-    const hgeneral = h - h / 13;
+    const hgeneral = h - (h * 7) / 100;
+    // tslint:disable-next-line:typedef
     const dataAtt: WindowSize = {
       height: h,
       width: w,
       aspectRatio: aspectRatio,
-      columnHeight: hgeneral,
-      small: aspectRatio > 1.45 && screen.mainScreen.heightPixels < 1500
+      columnHeight: hgeneral
     };
 
     return dataAtt;

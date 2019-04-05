@@ -1,4 +1,4 @@
-import { TypeBetSlipColTot } from "./dogracing/dogracing.models";
+import { TypeBetSlipColTot } from './dogracing/dogracing.models';
 
 export interface WindowSize {
   height: number;
@@ -19,7 +19,7 @@ export class PolyfunctionalArea {
   activeAssociationCol?: boolean;
   activeDistributionTot?: boolean;
   constructor() {
- /*    this.activeAssociationCol = false;
+    /*    this.activeAssociationCol = false;
     this.activeDistributionTot = false;*/
     this.typeSlipCol = TypeBetSlipColTot.COL;
   }

@@ -1,14 +1,10 @@
-import { CommonModule } from '@angular/common';
 import {
   HttpClient,
   HttpClientModule,
   HTTP_INTERCEPTORS
 } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -19,60 +15,27 @@ import {
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent } from './app.component';
 import { AppHttpInterceptor } from './app.httpinterceptor';
-import { routing } from './app.routing';
-import { AppSettings } from './app.settings';
-import { BtncalcComponent } from './component/btncalc/btncalc.component';
-import { CouponComponent } from './component/coupon/coupon.component';
-import { DisplayComponent } from './component/display/display.component';
-import { ApplicationMenuComponent } from './component/header/application-menu/application-menu.component';
-import { HeaderComponent } from './component/header/header.component';
-import { UserMenuComponent } from './component/header/user-menu/user-menu.component';
-import { WidgetComponent } from './component/widget/widget.component';
-import { AdvanceGameComponent } from './products/advance-game/advance-game.component';
-import { DogracingComponent } from './products/dogracing/dogracing.component';
-import { ListRaceComponent } from './products/dogracing/list-race/list-race.component';
-import { FilterByPositionPipe } from './products/dogracing/playable-board/filter-by-position.pipe';
-import { PlayableBoardComponent } from './products/dogracing/playable-board/playable-board.component';
-import { RaceControlComponent } from './products/dogracing/race-control/race-control.component';
-import { ResultListComponent } from './products/dogracing/result-list/result-list.component';
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
-import { ProductsComponent } from './products/products.component';
-import { ProductsService } from './products/products.service';
-import { BtncalcService } from './component/btncalc/btncalc.service';
+import { SharedModule } from './shared/shared.module';
+import { ElysStorageLibModule } from '@elys/elys-storage-lib';
+import { VERSION } from '../environments/version';
+import { RouterModule } from '@angular/router';
+import {
+  routes,
+  componentDeclarations,
+  providerDeclarations
+} from './app.common';
 
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [
-    AppComponent,
-    ProductsComponent,
-    HeaderComponent,
-    UserMenuComponent,
-    ApplicationMenuComponent,
-    DogracingComponent,
-    WidgetComponent,
-    BtncalcComponent,
-    DisplayComponent,
-    AdvanceGameComponent,
-    CouponComponent,
-    RaceControlComponent,
-    ListRaceComponent,
-    ResultListComponent,
-    PlayableBoardComponent,
-    ListRaceComponent,
-    FilterByPositionPipe,
-    ProductDialogComponent
-  ],
+  declarations: [componentDeclarations],
   imports: [
     HttpClientModule,
     BrowserModule,
-    FlexLayoutModule,
-    routing,
     NoopAnimationsModule,
-    MatGridListModule,
-    MatButtonModule,
     MatDialogModule,
     TranslateModule.forRoot({
       loader: {
@@ -81,14 +44,18 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient]
       }
     }),
-    CommonModule
+    SharedModule,
+    ElysStorageLibModule.forRoot({
+      isCrypto: true,
+      cryptoString: 'VgenStorage',
+      KeyUnencodedList: ['versionApp'],
+      versionStorage: VERSION.version
+    }),
+    RouterModule.forRoot(routes)
   ],
   entryComponents: [ProductDialogComponent],
   providers: [
-    AppSettings,
-    ProductsService,
-    BtncalcService,
-    TranslateService,
+    providerDeclarations,
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
