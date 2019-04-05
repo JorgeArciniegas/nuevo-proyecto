@@ -1,10 +1,28 @@
+import { TypeBetSlipColTot } from './dogracing/dogracing.models';
+
+export interface WindowSize {
+  height: number;
+  width: number;
+  aspectRatio: number;
+  columnHeight?: number;
+  small?: boolean;
+}
+
 export class PolyfunctionalArea {
   selection?: string;
   value?: string | number;
   odd?: number;
   amount?: number;
   odds?: BetOdd[];
-  constructor() {}
+  labelColTot?: string;
+  typeSlipCol?: TypeBetSlipColTot;
+  activeAssociationCol?: boolean;
+  activeDistributionTot?: boolean;
+  constructor() {
+    /*    this.activeAssociationCol = false;
+    this.activeDistributionTot = false;*/
+    this.typeSlipCol = TypeBetSlipColTot.COL;
+  }
 }
 
 export class BetOdd {
@@ -31,9 +49,10 @@ export class BetOdds {
 export class DialogData {
   betOdds: BetOdds;
   breakpoint: number;
-
+  opened: boolean;
   constructor(betOdds: BetOdds, breakpoint: number) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;
+    this.opened = false;
   }
 }

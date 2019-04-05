@@ -2,60 +2,61 @@
 <mat-grid-list cols="{{product.defaultAmount.length}}" class="grid-row-amount" rowHeight="{{rowHeight}}">
   <mat-grid-tile *ngFor="let amount of product.defaultAmount; let i = index">
 
-    <button [style.width.px]="rowHeight-12" [style.height.px]="rowHeight-12"
-      class="btn-default elevation-z5 btn-amount-{{i+1}} radius-50">{{amount}}</button>
+    <button [style.width.px]="rowHeight-12" [style.height.px]="rowHeight-12" class="btn-default elevation-z5 btn-amount-{{i+1}} radius-50"
+      (click)="btnDefaultAmountsPreset(amount)">{{amount}}</button>
 
   </mat-grid-tile>
 </mat-grid-list>
 <!-- BTN calculator -->
 <mat-grid-list cols="4" class="grid-keyboard-number" rowHeight="{{rowHeight}}">
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-5 elevation-z5">1</button>
+    <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet(1)">1</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-5 elevation-z5">2</button>
+    <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet(2)">2</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-5 elevation-z5">3</button>
+    <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet(3)">3</button>
   </mat-grid-tile>
   <mat-grid-tile rowspan="3">
     <button class="btn-default btn-keyboard btn-success radius-5 elevation-z5" (click)="plus()">+</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-5 elevation-z5">4</button>
+    <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet(4)">4</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-5 elevation-z5">5</button>
+    <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet(5)">5</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-5 elevation-z5">6</button>
+    <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet(6)">6</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-5 elevation-z5">7</button>
+    <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet(7)">7</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-5 elevation-z5">8</button>
+    <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet(8)">8</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-5 elevation-z5">9</button>
+    <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet(9)">9</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-5 elevation-z5">0</button>
+    <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet(0)">0</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-5 elevation-z5">00</button>
+    <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet('00')">00</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard radius-5 elevation-z5">000</button>
+    <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet('000')">000</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard btn-warning radius-5 elevation-z5"
-      (dblclick)="clearAll()">{{ 'C' | translate }}</button>
+    <button class="btn-default btn-keyboard btn-warning radius-5 elevation-z5" (dblclick)="clearAll()" (click)='defaultAmount()'>{{ 'C' | translate }}</button>
   </mat-grid-tile>
   <mat-grid-tile colspan="2">
-    <button class="btn-default btn-keyboard btn-grey-gradient radius-5 elevation-z5">{{ 'TOT' | translate }}</button>
+    <button class="btn-default btn-keyboard btn-grey-gradient radius-5 elevation-z5" [disabled]="!isActiveTot" [class.not-active]="!isActiveTot"
+      (click)="btnTotColSet(typeBetSlipColTot.TOT)">{{ 'TOT' | translate }}</button>
   </mat-grid-tile>
   <mat-grid-tile colspan="2">
-    <button class="btn-default btn-keyboard btn-grey-gradient radius-5 elevation-z5">{{ 'COL' | translate }}</button>
+    <button class="btn-default btn-keyboard btn-grey-gradient radius-5 elevation-z5" [disabled]="!isActiveCol" [class.not-active]="!isActiveCol"
+      (click)="btnTotColSet(typeBetSlipColTot.COL)">{{ 'COL' | translate }}</button>
   </mat-grid-tile>
 </mat-grid-list>

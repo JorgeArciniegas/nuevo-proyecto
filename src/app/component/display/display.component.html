@@ -2,17 +2,21 @@
 
   <div fxLayout="column" fxFlex="88" fxLayoutAlign="center flex-start" [style.height.px]="(rowHeight - 20)">
     <div fxLayout="row" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2" [style.min-height.px]="(rowHeight - 20) / 2">
-      <div fxLayout="column" fxFlex="70" *ngIf="polyfunctionalValue && polyfunctionalValue.selection" fxLayoutAlign="center flex-start">
+      <div fxLayout="column" fxFlex="70" fxLayoutAlign="center flex-start" *ngIf="polyfunctionalValue && polyfunctionalValue.selection">
         {{"SMARTCODE."+polyfunctionalValue.selection | translate}}
       </div>
-      <div fxLayout="column" fxFlex="25" *ngIf="polyfunctionalValue" fxLayoutAlign="center flex-end">{{polyfunctionalValue.value}}</div>
+      <div fxLayout="column" fxFlex="25" fxLayoutAlign="center flex-end" *ngIf="polyfunctionalValue">{{polyfunctionalValue.value}}</div>
     </div>
-    <div class="second-row" [style.height.px]="(rowHeight - 20) / 2">
-      <div *ngIf="polyfunctionalValue && polyfunctionalValue.odd > 0" fxLayout="column" fxFlex="100" fxLayoutAlign="center flex-start">(
-        {{polyfunctionalValue.odd | number:'1.2-2'}} )</div>
+    <div fxLayout="row" class="second-row" fxFill [style.height.px]="(rowHeight - 20) / 2" [style.min-height.px]="(rowHeight - 20) / 2">
+      <div fxLayout="column" fxFlex="45" fxLayoutAlign="center flex-start">
+        <span *ngIf="polyfunctionalValue && polyfunctionalValue.odd > 0">( {{polyfunctionalValue.odd | number:'1.2-2'}} )</span>
+      </div>
+      <div fxLayout="column" fxFlex="50" fxLayoutAlign="center flex-end" *ngIf="polyfunctionalValue">
+        {{ typeBetSlipColTot[polyfunctionalValue.typeSlipCol] }} {{ polyfunctionalValue.amount | number: '1.2-2' }}
+      </div>
     </div>
   </div>
-  <div fxLayout="column" fxFlex="10" *ngIf="polyfunctionalValue  && polyfunctionalValue.selection" fxLayoutAlign="center center"
+  <div fxLayout="column" fxFlex="10" fxLayoutAlign="center center" *ngIf="polyfunctionalValue  && polyfunctionalValue.selection"
     [style.height.px]="(rowHeight - 20)">
     <button class="btn-reset btn-display" (click)="detailOdds()">
       <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/Down.svg">

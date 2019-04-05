@@ -3,14 +3,16 @@
     <GridLayout row="0" col="0" rows="*" columns="5*,3*" orientation="horizontal" class="title" verticalAlignment="center">
       <Label col="0" *ngIf="polyfunctionalValue && polyfunctionalValue.selection" text="{{'SMARTCODE.'+polyfunctionalValue.selection | translate}}"
         verticalAlignment="center" horizontalAlignment="left"></Label>
-      <Label col="1" *ngIf="polyfunctionalValue" text="{{polyfunctionalValue.value}}" verticalAlignment="center"
-        horizontalAlignment="right"></Label>
+      <Label col="1" *ngIf="polyfunctionalValue" text="{{polyfunctionalValue.value}}" verticalAlignment="center" horizontalAlignment="right"></Label>
     </GridLayout>
-    <Label row="1" *ngIf="polyfunctionalValue && polyfunctionalValue.odd > 0" class="odd" verticalAlignment="center"
-      text="( {{polyfunctionalValue.odd | number:'1.2-2'}} )"></Label>
-    <GridLayout rowSpan="2" col="1" rows="*" columns="*" (tap)="detailOdds()">
-      <Image *ngIf="polyfunctionalValue  && polyfunctionalValue.selection" stretch="aspectFit" margin="4" src="~/app/themes/skins/{{settings.theme}}/icon/Down.png"
-        verticalAlignment="center" [isEnabled]="!timeBlocked"></Image>
-    </GridLayout>
+    <GridLayout row="1" col="0" rows="*" columns="5*,3*" orientation="horizontal" class="title" verticalAlignment="center"></GridLayout>
+    <Label col="0" *ngIf="polyfunctionalValue && polyfunctionalValue.odd > 0" class="odd" verticalAlignment="center" text="( {{polyfunctionalValue.odd | number:'1.2-2'}} )"
+      verticalAlignment="center" horizontalAlignment="left"></Label>
+    <Label col="1" *ngIf="polyfunctionalValue" text="{{ typeBetSlipColTot[polyfunctionalValue.typeSlipCol]  }} {{polyfunctionalValue.amount  | number: '1.2-2'}}"
+      verticalAlignment="center" horizontalAlignment="right"></Label>
+  </GridLayout>
+  <GridLayout rowSpan="2" col="1" rows="*" columns="*" (tap)="detailOdds()">
+    <Image *ngIf="polyfunctionalValue  && polyfunctionalValue.selection" stretch="aspectFit" margin="4" src="~/app/themes/skins/{{settings.theme}}/icon/Down.png"
+      verticalAlignment="center" [isEnabled]="!timeBlocked"></Image>
   </GridLayout>
 </GridLayout>

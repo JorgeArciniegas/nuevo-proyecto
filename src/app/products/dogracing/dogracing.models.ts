@@ -1,14 +1,14 @@
 export enum TypePlacingRace {
-  'ST' = 0,
-  'ACCG' = 1,
-  'R' = 2
+  ST = 0,
+  ACCG = 1,
+  R = 2
 }
 
 export enum SpecialBet {
-  'EVEN' = 0,
-  'ODD' = 1,
-  'OVER' = 2,
-  'UNDER' = 3
+  EVEN = 0,
+  ODD = 1,
+  OVER = 2,
+  UNDER  = 3
 }
 export enum SpecialBetValue {
   '2-4-6' = 0,
@@ -18,40 +18,45 @@ export enum SpecialBetValue {
 }
 
 export enum Podium {
-  'WINNER' = 1,
-  'PLACED' = 2,
-  'SHOW' = 3
+  WINNER = 1,
+  PLACED = 2,
+  SHOW = 3
 }
 
 export enum SmartCodeType {
-  'V',
+  V,
   '2P',
   '3P',
-  'AO',
-  'AS',
-  'UP',
-  'OP',
-  'DP',
-  'PP',
-  'T',
-  'TOX',
-  'TNX', // Trifecta
-  'VX',
-  'AX',
-  'ASX',
-  'AOX',
+  AO,
+  AS,
+  UP,
+  OP,
+  DP,
+  PP,
+  T,
+  TOX,
+  TNX, // Trifecta
+  VX,
+  AX,
+  ASX,
+  AOX,
   '1PX',
   '1VA',
-  'AB', // Quinella with base and tail
-  'VT', // Winning trio
-  'AR', // Quinella in order with return
-  'AT' // Combined trio
+  AB, // Quinella with base and tail
+  VT, // Winning trio
+  AR, // Quinella in order with return
+  AT // Combined trio
 }
 
 // Enum of the type of combinations available.
 export enum CombinationType {
   By2, // Combination by 2. Ex: 1234 -> 1-2, 1-3, 1-4, 2-1, 2-3, 2-4 ecc.
   By3 // Combination by 3. Ex: 1234 -> 1-2-3, 1-3-4, 1-2-4, 2-1-3, 2-3-4, 3-1-2 ecc.
+}
+
+export enum TypeBetSlipColTot {
+  COL,
+  TOT
 }
 
 export class PlacingRace {
@@ -133,7 +138,7 @@ export class Smartcode {
 }
 
 export enum Lucky {
-  'Lucky1' = 1,
-  'Lucky2',
-  'Lucky3'
+  Lucky1 = 1,
+  Lucky2,
+  Lucky3
 }

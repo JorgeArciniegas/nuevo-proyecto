@@ -1,9 +1,17 @@
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS
+} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService
+} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent } from './app.component';
 import { AppHttpInterceptor } from './app.httpinterceptor';
@@ -12,7 +20,11 @@ import { SharedModule } from './shared/shared.module';
 import { ElysStorageLibModule } from '@elys/elys-storage-lib';
 import { VERSION } from '../environments/version';
 import { RouterModule } from '@angular/router';
-import { routes, componentDeclarations, providerDeclarations } from './app.common';
+import {
+  routes,
+  componentDeclarations,
+  providerDeclarations
+} from './app.common';
 
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -42,7 +54,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     RouterModule.forRoot(routes)
   ],
   entryComponents: [ProductDialogComponent],
-  providers: [providerDeclarations, { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }],
+  providers: [
+    providerDeclarations,
+    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

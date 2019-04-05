@@ -25,6 +25,7 @@ export class ProductsService {
   // polifunctional area object declare
   polyfunctionalAreaSubject: Subject<PolyfunctionalArea>;
   polyfunctionalAreaObservable: Observable<PolyfunctionalArea>;
+
   // tslint:disable-next-line:typedef
   gridByBreakpoint = {
     xl: 12,

@@ -14,6 +14,7 @@ import { CouponComponent } from './component/coupon/coupon.component';
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
 import { AppSettings } from './app.settings';
 import { ProductsService } from './products/products.service';
+import { BtncalcService } from './component/btncalc/btncalc.service';
 
 export const componentDeclarations: any[] = [
   AppComponent,
@@ -29,7 +30,12 @@ export const componentDeclarations: any[] = [
   ProductDialogComponent
 ];
 
-export const providerDeclarations: any[] = [AppSettings, ProductsService, TranslateService];
+export const providerDeclarations: any[] = [
+  AppSettings,
+  ProductsService,
+  TranslateService,
+  BtncalcService
+];
 
 export const routes: Routes = [
   {
