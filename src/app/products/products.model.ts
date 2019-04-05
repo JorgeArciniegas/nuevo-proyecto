@@ -49,9 +49,10 @@ export class BetOdds {
 export class DialogData {
   betOdds: BetOdds;
   breakpoint: number;
-
+  opened: boolean;
   constructor(betOdds: BetOdds, breakpoint: number) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;
+    this.opened = false;
   }
 }

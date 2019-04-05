@@ -1,20 +1,22 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
+  HostListener,
   Inject,
   OnInit,
   ViewChild
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Observable as ObservableIdle } from 'rxjs/Rx';
 import { AppSettings } from '../../app.settings';
 import { BetOdd, DialogData } from '../products.model';
-
 @Component({
   selector: 'app-product-dialog',
   templateUrl: './product-dialog.component.html',
   styleUrls: ['./product-dialog.component.scss']
 })
-export class ProductDialogComponent implements OnInit {
+export class ProductDialogComponent implements OnInit, AfterViewInit {
   public settings: AppSettings;
   private rowNumber = 0;
   private maxItems = 0;
@@ -54,6 +56,14 @@ export class ProductDialogComponent implements OnInit {
     this.maxItems = this.rowNumber * this.column;
     this.maxPage = Math.ceil(this.data.betOdds.odds.length / this.maxItems);
     this.filterOdds();
+  }
+
+  ngAfterViewInit(): void {
+    ObservableIdle.timer(150)
+      .take(1)
+      .subscribe(() => {
+        this.data.opened = true;
+      });
   }
 
   filterOdds() {
@@ -99,5 +109,15 @@ export class ProductDialogComponent implements OnInit {
 
   close(): void {
     this.dialogRef.close();
+    this.data.opened = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (this.data.opened) {
+      if (!this.elementView.nativeElement.contains(event.target)) {
+        this.close();
+      }
+    }
   }
 }
