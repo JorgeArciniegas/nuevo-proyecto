@@ -25,26 +25,29 @@ export class BtncalcService implements OnDestroy {
       element => {
         this.polyfunctionalArea = element;
         if (this.polyfunctionalArea) {
-          if (this.polyfunctionalArea.odds !== undefined ) {
+          if (this.polyfunctionalArea.odds !== undefined) {
             this.polyfunctionalArea.activeDistributionTot = true;
             this.polyfunctionalArea.activeAssociationCol = true;
           } else {
             this.polyfunctionalArea.activeDistributionTot = false;
             this.polyfunctionalArea.activeAssociationCol = true;
           }
-           // update type Betslip on change distribution amount for COL or TOT
-          if (this.polyfunctionalArea.typeSlipCol === TypeBetSlipColTot.TOT && this.polyfunctionalArea.odds !== undefined ) {
-            this.polyfunctionalArea.odds.map( item => {
-              item.amount = this.polyfunctionalArea.amount / this.polyfunctionalArea.odds.length;
+          // update type Betslip on change distribution amount for COL or TOT
+          if (
+            this.polyfunctionalArea.typeSlipCol === TypeBetSlipColTot.TOT &&
+            this.polyfunctionalArea.odds !== undefined
+          ) {
+            this.polyfunctionalArea.odds.map(item => {
+              item.amount =
+                this.polyfunctionalArea.amount /
+                this.polyfunctionalArea.odds.length;
             });
           } else if (this.polyfunctionalArea.odds !== undefined) {
-            this.polyfunctionalArea.odds.map( item => {
+            this.polyfunctionalArea.odds.map(item => {
               item.amount = this.polyfunctionalArea.amount;
             });
           }
         }
-
-
       }
     );
   }
@@ -72,13 +75,14 @@ export class BtncalcService implements OnDestroy {
 
       // increments amount by preset key values
       this.polyfunctionalArea.amount = this.polyfunctionalArea.amount + amount;
-        this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
+      this.productService.polyfunctionalAreaSubject.next(
+        this.polyfunctionalArea
+      );
       // this.selectedAmountSubject.next(this.polyfunctionalValue.amount);
     }
   }
 
   btnAmountDecimals(amount: number): void {
-
     this.polyfunctionalAdditionFlag = true; // resets addition to 0
     // if bet present in display...
     if (this.polyfunctionalArea) {
@@ -96,8 +100,9 @@ export class BtncalcService implements OnDestroy {
        * assigns it back to amount
        */
       this.polyfunctionalArea.amount = this.returnNumber(amount);
-      this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
-
+      this.productService.polyfunctionalAreaSubject.next(
+        this.polyfunctionalArea
+      );
     }
   }
 
@@ -108,7 +113,10 @@ export class BtncalcService implements OnDestroy {
   }
 
   private returnNumber(amount: number): number {
-    const tmpNumberLength = (this.polyfunctionalArea.amount * 100).toFixed(2).toString().replace('.', '');
+    const tmpNumberLength = (this.polyfunctionalArea.amount * 100)
+      .toFixed()
+      .toString()
+      .replace('.', '');
     const stringTmpNumber = tmpNumberLength.toString() + amount.toString();
     return Number(stringTmpNumber) / 100;
   }
