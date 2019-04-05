@@ -4,42 +4,52 @@
     <!-- username -->
     <GridLayout row="3" col="1" rows="*" columns="5,30,10,auto" class="input radius-2" [ngClass]="{{'error': !username.valid && username.touched}">
       <StackLayout col="1" class="icon-area user-icon"></StackLayout>
-      <TextField col="3" hint="{{'USERNAME'|translate}}" returnKeyType="next" required minLength="2" ngModel #username="ngModel"></TextField>
+      <TextField col="3" hint="{{'USERNAME'|translate}}" returnKeyType="next" autocapitalizationType="none" required
+      minLength="2" ngModel #username="ngModel">
+      </TextField>
     </GridLayout>
     <!-- password -->
     <GridLayout row="4" col="1" rows="*" columns="5,30,10,auto" class="input radius-2" [ngClass]="{{'error': !password.valid && password.touched}">
       <StackLayout col="1" class="icon-area pwd-icon"></StackLayout>
-      <TextField col="3" secure="true" hint="{{'PASSWORD'|translate}}" returnKeyType="done" (returnPress)="onSubmit(username.text, password.text)" required minLength="6" ngModel #password="ngModel"></TextField>
+      <TextField col="3" secure="true" hint="{{'PASSWORD'|translate}}" returnKeyType="done"
+      autocapitalizationType="none" (returnPress)="onSubmit(username.text, password.text)" required minLength="6"
+      ngModel #password="ngModel">
+      </TextField>
     </GridLayout>
-    <Button row="5" col="1" text="{{ 'LOGIN' | translate }}" class="button btn-default btn-success radius-2" (tap)="onSubmit(username.value, password.value)" [isEnabled]="username.valid && password.valid"></Button>
+    <Button row="5" col="1" text="{{ 'LOGIN' | translate }}" class="button btn-default btn-success radius-2"
+      (tap)="onSubmit(username.value, password.value)" [isEnabled]="username.valid && password.valid"></Button>
 
     <!-- error -->
     <StackLayout row="6" col="1" orientation="vertical" class="error-message" horizontalAlignment="center">
-      <GridLayout *ngIf="!username.valid && username.touched && username.hasError('required')" rows="*" columns="5,30,10,auto">
+      <GridLayout *ngIf="!username.valid && username.touched && username.hasError('required')" rows="*"
+        columns="5,30,10,auto">
         <StackLayout col="1" class="error-icon"></StackLayout>
         <StackLayout col="3" verticalAlignment="center">
           <Label [text]="{{ 'USERNAME' | translate }} {{ 'ERROR_REQUIRED' | translate | lowercase  }}"></Label>
         </StackLayout>
       </GridLayout>
-      <GridLayout *ngIf="!username.valid && username.touched && username.hasError('minlength')" rows="*" columns="5,30,10,auto">
+      <GridLayout *ngIf="!username.valid && username.touched && username.hasError('minlength')" rows="*"
+        columns="5,30,10,auto">
         <StackLayout col="1" class="error-icon"></StackLayout>
         <StackLayout col="3" verticalAlignment="center">
           <Label [text]="{{ 'ERROR_USERNAME_TOO_SHORT' | translate }}"></Label>
         </StackLayout>
       </GridLayout>
-      <GridLayout *ngIf="!password.valid && password.touched && password.hasError('required')" rows="*" columns="5,30,10,auto">
+      <GridLayout *ngIf="!password.valid && password.touched && password.hasError('required')" rows="*"
+        columns="5,30,10,auto">
         <StackLayout col="1" class="error-icon"></StackLayout>
         <StackLayout col="3" verticalAlignment="center">
           <Label [text]="{{ 'PASSWORD' | translate }} {{ 'ERROR_REQUIRED' | translate | lowercase  }}"></Label>
         </StackLayout>
       </GridLayout>
-      <GridLayout *ngIf="!password.valid && password.touched && password.hasError('minlength')" rows="*" columns="5,30,10,auto">
+      <GridLayout *ngIf="!password.valid && password.touched && password.hasError('minlength')" rows="*"
+        columns="5,30,10,auto">
         <StackLayout col="1" class="error-icon"></StackLayout>
         <StackLayout col="3" verticalAlignment="center">
           <Label [text]="{{ 'ERROR_PASSWORD_TOO_SHORT' | translate }}"></Label>
         </StackLayout>
       </GridLayout>
-      <GridLayout *ngIf="errorMessage" rows="*" columns="5,30,10,auto">
+      <GridLayout *ngIf="errorMessage && username.valid && password.valid" rows="*" columns="5,30,10,auto">
         <StackLayout col="1" class="error-icon"></StackLayout>
         <StackLayout col="3" verticalAlignment="center">
           <Label [text]="errorMessage"></Label>
