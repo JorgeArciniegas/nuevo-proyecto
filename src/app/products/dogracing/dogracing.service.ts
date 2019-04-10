@@ -535,11 +535,11 @@ export class DogracingService {
         oddsToSearch = this.generateOdds(
           areaFuncData.value.toString(),
           CombinationType.By2,
-          true
+          false
         );
         break;
       case SmartCodeType[SmartCodeType.AB]:
-        // Generate sorted combination by 2 of the selections in the rows.
+        // Generate sorted combination by 2 of the selections in the rows in order.
         oddsToSearch = this.generateOdds(
           areaFuncData.value.toString(),
           CombinationType.By2,
@@ -555,11 +555,12 @@ export class DogracingService {
         );
         break;
       case SmartCodeType[SmartCodeType.AR]:
-        // Generate combination by 2 of the first row selections not in order.
+        // Generate combination by 2 of the first row selections not in order with return.
         oddsToSearch = this.generateOddsRow(
           areaFuncData.value.toString(),
           CombinationType.By2,
-          false
+          false,
+          true
         );
         break;
       case SmartCodeType[SmartCodeType.AX]:
@@ -591,6 +592,7 @@ export class DogracingService {
         oddsToSearch = this.generateOdds(
           areaFuncData.value.toString(),
           CombinationType.By3,
+          false,
           false,
           true
         );
@@ -956,7 +958,8 @@ export class DogracingService {
    * Generate all combinations of bets from all the rows selections
    * @param value String representations. Ex. 12/34/56, 12/345
    * @param combinationType Enum (CombinationType) of the type of combination desired. Values: By2, By3.
-   * @param ordered Boolean to determin if the combinations have to be in order or not. Ex: false (combination 1-3-5, 3-1-5, 5-1-3, 5-3-1 are all valid), true (only combination 1-3-5 is valid).
+   * @param ordered Boolean to determine if the combinations have to be in order or not. Ex: false (combinations 1-3-5, 3-1-5, 5-1-3, 5-3-1 are all valid), true (only combination 1-3-5 is valid).
+   * @param withReturn Boolean to determine if the combinations have to contain the return. Default value: false. Ex: 1/345 = false (combinations: 1-3, 1-4, 1-5), true (combinations: 1-3, 1-4, 1-5, 3-1, 4-1, 5-1).
    * @param isFirstRowFixed When "true" the selections from the first row have to be always present on the combinations. Valid only in combination by 3. Value: true (the first row is fixed), false or not indicated (The second row is the fixed one).
    *  Ex:
    *    - value = 12/34, combinationType = By3, ordered = false, isFirstRowFixed = true -> result = 1-2-3, 1-2-4, 2-1-3, 2-1-4
@@ -968,6 +971,7 @@ export class DogracingService {
     value: string,
     combinationType: CombinationType,
     ordered: boolean,
+    withReturn: boolean = false,
     isFirstRowFixed?: boolean
   ): string[] {
     const selections: string[] = value.split('/');
@@ -992,7 +996,9 @@ export class DogracingService {
                   }
                 } else {
                   returnValues.push(values1[i1] + '-' + values2[i2]);
-                  returnValues.push(values2[i2] + '-' + values1[i1]);
+                  if (withReturn) {
+                    returnValues.push(values2[i2] + '-' + values1[i1]);
+                  }
                 }
               }
               break;
@@ -1084,14 +1090,16 @@ export class DogracingService {
    * Generate all combinations of bets from a single row selections
    * @param value String representations, ex. 1234
    * @param combinationType Enum (CombinationType) of the type of combination desired. Values: By2 (combination by 2), By3 (combination by 3).
-   * @param ordered Boolean to determin if the combinations have to be in order or not. Ex: false (combination 1-2 and 2-1 are both valid), true (only combination 1-2 is valid).
+   * @param ordered Boolean to determine if the combinations have to be in order or not. Ex: false (combination 1-2 and 2-1 are both valid), true (only combination 1-2 is valid).
+   * @param withReturn Boolean to determine if the combinations have to contain the return. Default value: false. Ex: 13 = false (combinations: 1-3), true (combinations: 1-3, 3-1).
    * @returns Array of combinations. Ex: For type "By2": 1-2, 1-3, 1-4, 2-3, 2-4, 3-4. For type "By3": 1-2-3, 1-3-4, 1-2-4, 2-1-3, 2-3-4, ecc.
    */
   // tslint:enable:max-line-length
   generateOddsRow(
     value: string,
     combinationType: CombinationType,
-    ordered: boolean
+    ordered: boolean,
+    withReturn: boolean = false
   ): string[] {
     const returnValues: string[] = [];
 
@@ -1106,7 +1114,9 @@ export class DogracingService {
                 returnValues.push(values[i] + '-' + values[j]);
               } else {
                 returnValues.push(values[i] + '-' + values[j]);
-                returnValues.push(values[j] + '-' + values[i]);
+                if (withReturn) {
+                  returnValues.push(values[j] + '-' + values[i]);
+                }
               }
               break;
             case CombinationType.By3: // Combination of the selections By 3
