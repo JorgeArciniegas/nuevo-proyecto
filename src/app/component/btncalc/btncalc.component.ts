@@ -43,7 +43,10 @@ export class BtncalcComponent implements OnInit, OnDestroy {
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
         this.polyfunctionalArea = element;
-        if (this.polyfunctionalArea && (this.polyfunctionalArea.odd || this.polyfunctionalArea.odds) ) {
+        if (
+          this.polyfunctionalArea &&
+          (this.polyfunctionalArea.odd || this.polyfunctionalArea.odds)
+        ) {
           this.isActiveCol = this.polyfunctionalArea.activeAssociationCol;
           this.isActiveTot = this.polyfunctionalArea.activeDistributionTot;
         } else {
@@ -73,7 +76,9 @@ export class BtncalcComponent implements OnInit, OnDestroy {
     this.productService.resetBoard();
     this.isActiveTot = false;
     this.isActiveCol = false;
-    this.btncalcService.polyfunctionalArea.amount = 1;
+    if (this.btncalcService.polyfunctionalArea) {
+      this.btncalcService.polyfunctionalArea.amount = 1;
+    }
     this.btncalcService.polyfunctionalAdditionFlag = true;
     this.btncalcService.polyfunctionalDecimalsFlag = true;
   }
@@ -82,7 +87,9 @@ export class BtncalcComponent implements OnInit, OnDestroy {
     this.btncalcService.polyfunctionalArea.amount = 1;
     this.btncalcService.polyfunctionalAdditionFlag = true;
     this.btncalcService.polyfunctionalDecimalsFlag = true;
-    this.productService.polyfunctionalAreaSubject.next( this.btncalcService.polyfunctionalArea );
+    this.productService.polyfunctionalAreaSubject.next(
+      this.btncalcService.polyfunctionalArea
+    );
   }
 
   // increments amount in display by preset default values

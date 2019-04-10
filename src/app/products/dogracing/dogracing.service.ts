@@ -1,10 +1,34 @@
 import { Injectable } from '@angular/core';
 import { interval, Observable, Subject, timer } from 'rxjs';
-import { CountDown, EventResults, Market, Race as RaceApi, SportDetail, Tournament, TreeSports } from '../../services/api/vgen.model';
+import {
+  CountDown,
+  EventResults,
+  Market,
+  Race as RaceApi,
+  SportDetail,
+  Tournament,
+  TreeSports
+} from '../../services/api/vgen.model';
 import { VgenService } from '../../services/api/vgen.service';
 import { BetOdd, PolyfunctionalArea } from '../products.model';
 import { ProductsService } from '../products.service';
-import { CombinationType, Dog, Lucky, PlacingRace, Podium, Race, RaceDetail, RaceResult, RaceTime, Smartcode, SmartCodeType, SpecialBet, SpecialBetValue, TypePlacingRace, TypeBetSlipColTot } from './dogracing.models';
+import {
+  CombinationType,
+  Dog,
+  Lucky,
+  PlacingRace,
+  Podium,
+  Race,
+  RaceDetail,
+  RaceResult,
+  RaceTime,
+  Smartcode,
+  SmartCodeType,
+  SpecialBet,
+  SpecialBetValue,
+  TypePlacingRace,
+  TypeBetSlipColTot
+} from './dogracing.models';
 import { BtncalcService } from 'src/app/component/btncalc/btncalc.service';
 
 @Injectable({
@@ -419,7 +443,7 @@ export class DogracingService {
    */
   populatingPolyfunctionArea(odd: RaceApi): void {
     let areaFuncData: PolyfunctionalArea = {};
-   /*  areaFuncData.activeAssociationCol = false;
+    /*  areaFuncData.activeAssociationCol = false;
     areaFuncData.activeDistributionTot = false; */
     try {
       // check if is first insert
@@ -468,9 +492,11 @@ export class DogracingService {
       // check smartcode and extract composit bets
       areaFuncData = this.checkSmartCode(areaFuncData);
       // set amount
-      areaFuncData.amount = (!this.btnService.polyfunctionalArea) ? this.amount : this.btnService.polyfunctionalArea.amount;
+      areaFuncData.amount = !this.btnService.polyfunctionalArea
+        ? this.amount
+        : this.btnService.polyfunctionalArea.amount;
       // verify if the type of betslip is set
-      if (this.btnService.polyfunctionalArea !== null ) {
+      if (this.btnService.polyfunctionalArea !== null) {
         areaFuncData.typeSlipCol = this.btnService.polyfunctionalArea.typeSlipCol;
       } else {
         areaFuncData.typeSlipCol = TypeBetSlipColTot.COL;
@@ -482,7 +508,6 @@ export class DogracingService {
       } else {
         areaFuncData = this.extractOdd(odd, areaFuncData, dogName);
       }
-
     } catch (err) {
       areaFuncData = {};
     } finally {
@@ -507,7 +532,11 @@ export class DogracingService {
       case SmartCodeType[SmartCodeType['1VA']]:
       case SmartCodeType[SmartCodeType.AOX]:
         // Generate sorted combination by 2 of the selections in the rows.
-        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By2, true);
+        oddsToSearch = this.generateOdds(
+          areaFuncData.value.toString(),
+          CombinationType.By2,
+          true
+        );
         break;
       case SmartCodeType[SmartCodeType.AB]:
         // Generate sorted combination by 2 of the selections in the rows.
@@ -519,7 +548,11 @@ export class DogracingService {
         break;
       case SmartCodeType[SmartCodeType.TOX]:
         // Generate sorted combination by 2 of the selections in the rows.
-        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, true);
+        oddsToSearch = this.generateOdds(
+          areaFuncData.value.toString(),
+          CombinationType.By3,
+          true
+        );
         break;
       case SmartCodeType[SmartCodeType.AR]:
         // Generate combination by 2 of the first row selections not in order.
@@ -590,8 +623,9 @@ export class DogracingService {
                 new BetOdd(
                   checkOdd.nm,
                   checkOdd.ods[0].vl,
-                  (areaFuncData.typeSlipCol === TypeBetSlipColTot.TOT) ?
-                    areaFuncData.amount / oddsToSearch.length : areaFuncData.amount
+                  areaFuncData.typeSlipCol === TypeBetSlipColTot.TOT
+                    ? areaFuncData.amount / oddsToSearch.length
+                    : areaFuncData.amount
                 )
               );
             }
@@ -734,10 +768,17 @@ export class DogracingService {
           this.smartCode.selPlaced.length > 0 &&
           this.smartCode.selPodium.length === 0
         ) {
-          areaFuncData.value =
-            this.smartCode.selWinner.join('') +
-            '/' +
-            this.smartCode.selPlaced.join('');
+          if (this.smartCode.code === 'AO') {
+            areaFuncData.value =
+              this.smartCode.selWinner.join('') +
+              '-' +
+              this.smartCode.selPlaced.join('');
+          } else {
+            areaFuncData.value =
+              this.smartCode.selWinner.join('') +
+              '/' +
+              this.smartCode.selPlaced.join('');
+          }
         }
     }
 
