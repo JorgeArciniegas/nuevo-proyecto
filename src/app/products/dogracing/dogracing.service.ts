@@ -4,7 +4,23 @@ import { CountDown, EventResults, Market, Race as RaceApi, SportDetail, Tourname
 import { VgenService } from '../../services/api/vgen.service';
 import { BetOdd, PolyfunctionalArea } from '../products.model';
 import { ProductsService } from '../products.service';
-import { CombinationType, Dog, Lucky, PlacingRace, Podium, Race, RaceDetail, RaceResult, RaceTime, Smartcode, SmartCodeType, SpecialBet, SpecialBetValue, TypePlacingRace, TypeBetSlipColTot } from './dogracing.models';
+import {
+  CombinationType,
+  Dog,
+  Lucky,
+  PlacingRace,
+  Podium,
+  Race,
+  RaceDetail,
+  RaceResult,
+  RaceTime,
+  Smartcode,
+  SmartCodeType,
+  SpecialBet,
+  SpecialBetValue,
+  TypePlacingRace,
+  TypeBetSlipColTot
+} from './dogracing.models';
 import { BtncalcService } from 'src/app/component/btncalc/btncalc.service';
 
 @Injectable({
@@ -34,11 +50,7 @@ export class DogracingService {
 
   amount: number;
 
-  constructor(
-    private vgenService: VgenService,
-    private productService: ProductsService,
-    private btnService: BtncalcService
-  ) {
+  constructor(private vgenService: VgenService, private productService: ProductsService, private btnService: BtncalcService) {
     this.raceDetails = new RaceDetail();
     this.raceDetails.currentRace = 0;
     // ...da api
@@ -54,11 +66,9 @@ export class DogracingService {
 
     this.currentRaceObserve.subscribe((raceIndex: number) => {
       this.raceDetails.currentRace = raceIndex;
-      this.remaningRaceTime(this.raceDetails.races[raceIndex].number).then(
-        (raceTime: RaceTime) => {
-          this.raceDetails.raceTime = raceTime;
-        }
-      );
+      this.remaningRaceTime(this.raceDetails.races[raceIndex].number).then((raceTime: RaceTime) => {
+        this.raceDetails.raceTime = raceTime;
+      });
 
       this.resetPlayRacing();
       // get race odds
@@ -108,24 +118,18 @@ export class DogracingService {
           this.remmaningTime.second = 59;
           this.remmaningTime.minute = this.remmaningTime.minute - 1;
           // remaing showed time
-          this.raceDetails.raceTime.minute =
-            this.raceDetails.raceTime.minute - 1;
+          this.raceDetails.raceTime.minute = this.raceDetails.raceTime.minute - 1;
         } else {
           // remaing time
           this.remmaningTime.second = this.remmaningTime.second - 1;
           // check time blocked
-          if (
-            this.raceDetails.raceTime.second <= 10 &&
-            this.raceDetails.raceTime.minute === 0
-          ) {
+          if (this.raceDetails.raceTime.second <= 10 && this.raceDetails.raceTime.minute === 0) {
             this.placingRace.timeBlocked = true;
             this.productService.closeProductDialog();
           } else {
             this.placingRace.timeBlocked = false;
           }
-          this.productService.timeBlockedSubscribe.next(
-            this.placingRace.timeBlocked
-          );
+          this.productService.timeBlockedSubscribe.next(this.placingRace.timeBlocked);
         }
         // showed second
         this.raceDetails.raceTime.second = this.remmaningTime.second;
@@ -188,11 +192,7 @@ export class DogracingService {
       } else {
         // add only new race
         tournament.evs.forEach((race: RaceApi) => {
-          if (
-            this.cacheRaces.filter(
-              (cacheRace: RaceApi) => cacheRace.id === race.id
-            ).length === 0
-          ) {
+          if (this.cacheRaces.filter((cacheRace: RaceApi) => cacheRace.id === race.id).length === 0) {
             this.cacheRaces.push(race);
           }
         });
@@ -210,9 +210,7 @@ export class DogracingService {
     }
 
     // calculate remaning time for selected race
-    this.remaningRaceTime(
-      this.raceDetails.races[this.raceDetails.currentRace].number
-    ).then((raceTime: RaceTime) => {
+    this.remaningRaceTime(this.raceDetails.races[this.raceDetails.currentRace].number).then((raceTime: RaceTime) => {
       this.raceDetails.raceTime = raceTime;
       if (this.raceDetails.currentRace === 0) {
         this.remmaningTime.minute = raceTime.minute;
@@ -222,9 +220,7 @@ export class DogracingService {
 
     // calculate remaning time
     if (this.raceDetails.currentRace > 0) {
-      this.remaningRaceTime(this.raceDetails.races[0].number).then(
-        (raceTime: RaceTime) => (this.remmaningTime = raceTime)
-      );
+      this.remaningRaceTime(this.raceDetails.races[0].number).then((raceTime: RaceTime) => (this.remmaningTime = raceTime));
     }
   }
 
@@ -249,32 +245,26 @@ export class DogracingService {
   getLastResult() {
     this.listResult = [];
     timer(300).subscribe(() => {
-      this.vgenService
-        .latesResult(8, 'DOG')
-        .then((eventResults: EventResults) => {
-          for (const i of [3, 2, 1, 0]) {
-            const results: string[] = eventResults.EventResults[i].Result.split(
-              '-'
-            );
+      this.vgenService.latesResult(8, 'DOG').then((eventResults: EventResults) => {
+        for (const i of [3, 2, 1, 0]) {
+          const results: string[] = eventResults.EventResults[i].Result.split('-');
 
-            this.listResult.push({
-              raceLabel: eventResults.EventResults[i].EventName,
-              raceNumber: eventResults.EventResults[i].EventId,
-              firstPlace: Number.parseInt(results[0]),
-              secondPlace: Number.parseInt(results[1]),
-              thirdPlace: Number.parseInt(results[2])
-            });
-          }
-        });
+          this.listResult.push({
+            raceLabel: eventResults.EventResults[i].EventName,
+            raceNumber: eventResults.EventResults[i].EventId,
+            firstPlace: Number.parseInt(results[0]),
+            secondPlace: Number.parseInt(results[1]),
+            thirdPlace: Number.parseInt(results[2])
+          });
+        }
+      });
     });
   }
 
   resetPlayRacing(): void {
     this.placingRace = new PlacingRace();
     this.smartCode = new Smartcode();
-    this.placingRace.raceNumber = this.raceDetails.races[
-      this.raceDetails.currentRace
-    ].number;
+    this.placingRace.raceNumber = this.raceDetails.races[this.raceDetails.currentRace].number;
     this.createDogList();
 
     this.productService.polyfunctionalAreaSubject.next(null);
@@ -282,30 +272,26 @@ export class DogracingService {
 
   raceDetailOdds(raceNumber: number): void {
     // console.log('get detail', raceNumber);
-    const race: RaceApi = this.cacheRaces.filter(
-      (cacheRace: RaceApi) => cacheRace.id === raceNumber
-    )[0];
+    const race: RaceApi = this.cacheRaces.filter((cacheRace: RaceApi) => cacheRace.id === raceNumber)[0];
 
     // check, if is empty load from api
     if (race.mk == null || race.mk.length === 0) {
-      this.vgenService
-        .raceDetails(8, raceNumber)
-        .then((sportDetail: SportDetail) => {
-          try {
-            race.mk = sportDetail.Sport.ts[0].evs[0].mk;
-            race.tm = sportDetail.Sport.ts[0].evs[0].tm;
+      this.vgenService.raceDetails(8, raceNumber).then((sportDetail: SportDetail) => {
+        try {
+          race.mk = sportDetail.Sport.ts[0].evs[0].mk;
+          race.tm = sportDetail.Sport.ts[0].evs[0].tm;
+          this.attempts = 0;
+        } catch (err) {
+          if (this.attempts < 5) {
+            this.attempts++;
+            setTimeout(() => {
+              this.raceDetailOdds(raceNumber);
+            }, 1000);
+          } else {
             this.attempts = 0;
-          } catch (err) {
-            if (this.attempts < 5) {
-              this.attempts++;
-              setTimeout(() => {
-                this.raceDetailOdds(raceNumber);
-              }, 1000);
-            } else {
-              this.attempts = 0;
-            }
           }
-        });
+        }
+      });
     }
   }
 
@@ -320,9 +306,7 @@ export class DogracingService {
     let removed: boolean;
 
     if (!this.placingRace) {
-      this.placingRace.raceNumber = this.raceDetails.races[
-        this.raceDetails.currentRace
-      ].number;
+      this.placingRace.raceNumber = this.raceDetails.races[this.raceDetails.currentRace].number;
     }
     dog.actived = true;
 
@@ -348,9 +332,7 @@ export class DogracingService {
 
   placeOdd() {
     // extract the raceOdd from cache
-    const odds: RaceApi = this.cacheRaces.filter(
-      (cacheRace: RaceApi) => cacheRace.id === this.placingRace.raceNumber
-    )[0];
+    const odds: RaceApi = this.cacheRaces.filter((cacheRace: RaceApi) => cacheRace.id === this.placingRace.raceNumber)[0];
     this.smartCode = new Smartcode();
     this.populatingPolyfunctionArea(odds);
   }
@@ -373,9 +355,7 @@ export class DogracingService {
   }
 
   private deselectRowDogs(position: number): void {
-    for (const dog of this.placingRace.dogs.filter(
-      item => item.position === position
-    )) {
+    for (const dog of this.placingRace.dogs.filter(item => item.position === position)) {
       this.placingOdd(dog);
     }
   }
@@ -396,19 +376,13 @@ export class DogracingService {
    */
 
   RNGLucky2(lucky: Lucky): number {
-    const extractNumber: number =
-      Math.floor(
-        Math.random() *
-          this.dogList.filter(dog => dog.position === lucky).length
-      ) + 1;
+    const extractNumber: number = Math.floor(Math.random() * this.dogList.filter(dog => dog.position === lucky).length) + 1;
     return extractNumber;
   }
 
   RNGLuckyPlacing(dogNumber: number, dogPosition: number): void {
     // extract the dog
-    const dogExtract: Dog = this.dogList.filter(
-      dog => dog.position === dogPosition && dog.number === dogNumber
-    )[0];
+    const dogExtract: Dog = this.dogList.filter(dog => dog.position === dogPosition && dog.number === dogNumber)[0];
     // place the dog
     this.placingOdd(dogExtract);
   }
@@ -419,25 +393,18 @@ export class DogracingService {
    */
   populatingPolyfunctionArea(odd: RaceApi): void {
     let areaFuncData: PolyfunctionalArea = {};
-   /*  areaFuncData.activeAssociationCol = false;
+    /*  areaFuncData.activeAssociationCol = false;
     areaFuncData.activeDistributionTot = false; */
     try {
       // check if is first insert
       let dogName: string;
-      if (
-        this.placingRace.dogs.length === 1 &&
-        !this.placingRace.isSpecialBets &&
-        this.placingRace.typePlace === undefined
-      ) {
+      if (this.placingRace.dogs.length === 1 && !this.placingRace.isSpecialBets && this.placingRace.typePlace === undefined) {
         // single selection
         areaFuncData.selection = Podium[this.placingRace.dogs[0].position];
         areaFuncData.value = this.placingRace.dogs[0].number;
         // match dog from object tm with mk
         dogName = odd.tm.filter(t => t.ito === areaFuncData.value)[0].nm;
-      } else if (
-        (this.placingRace.dogs.length > 1 && !this.placingRace.isSpecialBets) ||
-        this.placingRace.typePlace
-      ) {
+      } else if ((this.placingRace.dogs.length > 1 && !this.placingRace.isSpecialBets) || this.placingRace.typePlace) {
         // composit selection
         this.placingRace.dogs.forEach(item => {
           if (item.position === 1) {
@@ -449,10 +416,7 @@ export class DogracingService {
           }
         });
         // type Place particular iterations
-        if (
-          this.placingRace.typePlace === TypePlacingRace.ST &&
-          this.smartCode.selWinner.length > 2
-        ) {
+        if (this.placingRace.typePlace === TypePlacingRace.ST && this.smartCode.selWinner.length > 2) {
           this.placingRace.secondRowDisabled = true;
           this.deselectRowDogs(2);
         } else {
@@ -468,9 +432,9 @@ export class DogracingService {
       // check smartcode and extract composit bets
       areaFuncData = this.checkSmartCode(areaFuncData);
       // set amount
-      areaFuncData.amount = (!this.btnService.polyfunctionalArea) ? this.amount : this.btnService.polyfunctionalArea.amount;
+      areaFuncData.amount = !this.btnService.polyfunctionalArea ? this.amount : this.btnService.polyfunctionalArea.amount;
       // verify if the type of betslip is set
-      if (this.btnService.polyfunctionalArea !== null ) {
+      if (this.btnService.polyfunctionalArea !== null) {
         areaFuncData.typeSlipCol = this.btnService.polyfunctionalArea.typeSlipCol;
       } else {
         areaFuncData.typeSlipCol = TypeBetSlipColTot.COL;
@@ -482,7 +446,6 @@ export class DogracingService {
       } else {
         areaFuncData = this.extractOdd(odd, areaFuncData, dogName);
       }
-
     } catch (err) {
       areaFuncData = {};
     } finally {
@@ -496,78 +459,46 @@ export class DogracingService {
    * @param areaFuncData
    * @param dogName
    */
-  public extractOdd(
-    odd: RaceApi,
-    areaFuncData: PolyfunctionalArea,
-    dogName?: string
-  ): PolyfunctionalArea {
+  public extractOdd(odd: RaceApi, areaFuncData: PolyfunctionalArea, dogName?: string): PolyfunctionalArea {
     let oddsToSearch: string[] = [];
 
     switch (areaFuncData.selection) {
       case SmartCodeType[SmartCodeType['1VA']]:
       case SmartCodeType[SmartCodeType.AOX]:
         // Generate sorted combination by 2 of the selections in the rows.
-        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By2, true);
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By2, false);
         break;
       case SmartCodeType[SmartCodeType.AB]:
-        // Generate sorted combination by 2 of the selections in the rows.
-        oddsToSearch = this.generateOdds(
-          areaFuncData.value.toString(),
-          CombinationType.By2,
-          true
-        );
+        // Generate sorted combination by 2 of the selections in the rows in order.
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By2, true);
         break;
       case SmartCodeType[SmartCodeType.TOX]:
         // Generate sorted combination by 2 of the selections in the rows.
         oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, true);
         break;
       case SmartCodeType[SmartCodeType.AR]:
-        // Generate combination by 2 of the first row selections not in order.
-        oddsToSearch = this.generateOddsRow(
-          areaFuncData.value.toString(),
-          CombinationType.By2,
-          false
-        );
+        // Generate combination by 2 of the first row selections not in order with return.
+        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By2, false, true);
         break;
       case SmartCodeType[SmartCodeType.AX]:
         // Generate sorted combination by 2 of the first row selections.
-        oddsToSearch = this.generateOddsRow(
-          areaFuncData.value.toString(),
-          CombinationType.By2,
-          true
-        );
+        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By2, true);
         break;
       case SmartCodeType[SmartCodeType.TNX]: // Trifecta
         // Generate combination by 3 of the first row selections not in order.
-        oddsToSearch = this.generateOddsRow(
-          areaFuncData.value.toString(),
-          CombinationType.By3,
-          false
-        );
+        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By3, false);
         break;
       case SmartCodeType[SmartCodeType.VT]: // Winning trio
         // Generate combination by 3 of the selections in the rows not in order.
-        oddsToSearch = this.generateOdds(
-          areaFuncData.value.toString(),
-          CombinationType.By3,
-          false
-        );
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, false);
         break;
       case SmartCodeType[SmartCodeType.AT]: // Combined trio
         // Generate combination by 3 of the selections in the rows not in order and with the first row fixed.
-        oddsToSearch = this.generateOdds(
-          areaFuncData.value.toString(),
-          CombinationType.By3,
-          false,
-          true
-        );
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, false, false, true);
         break;
     }
 
-    for (const m of odd.mk.filter(
-      (market: Market) =>
-        market.tp === this.typeSelection(areaFuncData.selection)
-    )) {
+    for (const m of odd.mk.filter((market: Market) => market.tp === this.typeSelection(areaFuncData.selection))) {
       // If the selection is PODIUM, WINNER or SHOW
       if (dogName) {
         for (const checkOdd of m.sls.filter(o => o.nm === dogName)) {
@@ -575,9 +506,7 @@ export class DogracingService {
         }
       } else if (!this.smartCode.code) {
         // if the selection is EVEN, ODD, UNDER or OVER
-        for (const checkOdd of m.sls.filter(
-          o => o.nm.toUpperCase() === areaFuncData.selection.toUpperCase()
-        )) {
+        for (const checkOdd of m.sls.filter(o => o.nm.toUpperCase() === areaFuncData.selection.toUpperCase())) {
           areaFuncData.odd = checkOdd.ods[0].vl;
         }
       } else {
@@ -590,17 +519,14 @@ export class DogracingService {
                 new BetOdd(
                   checkOdd.nm,
                   checkOdd.ods[0].vl,
-                  (areaFuncData.typeSlipCol === TypeBetSlipColTot.TOT) ?
-                    areaFuncData.amount / oddsToSearch.length : areaFuncData.amount
+                  areaFuncData.typeSlipCol === TypeBetSlipColTot.TOT ? areaFuncData.amount / oddsToSearch.length : areaFuncData.amount
                 )
               );
             }
           }
         } else {
           // search for matchName
-          const matchName: string = areaFuncData.value
-            .toString()
-            .replace(/\//g, '-');
+          const matchName: string = areaFuncData.value.toString().replace(/\//g, '-');
           for (const checkOdd of m.sls.filter(o => o.nm === matchName)) {
             areaFuncData.odd = checkOdd.ods[0].vl;
           }
@@ -675,10 +601,7 @@ export class DogracingService {
         // Normal bet
         // Setting the PolyfunctionalArea with only a winning selection
         if (this.smartCode.selWinner.length === 1) {
-          if (
-            this.smartCode.selPlaced.length === 1 &&
-            this.smartCode.selPodium.length === 0
-          ) {
+          if (this.smartCode.selPlaced.length === 1 && this.smartCode.selPodium.length === 0) {
             this.smartCode.code = SmartCodeType[SmartCodeType.AO];
           } else if (
             // The second selection is multiple of 1
@@ -686,58 +609,28 @@ export class DogracingService {
             this.smartCode.selPodium.length === 0
           ) {
             this.smartCode.code = SmartCodeType[SmartCodeType['1VA']];
-          } else if (
-            this.smartCode.selPlaced.length === 1 &&
-            this.smartCode.selPodium.length === 1
-          ) {
+          } else if (this.smartCode.selPlaced.length === 1 && this.smartCode.selPodium.length === 1) {
             this.smartCode.code = SmartCodeType[SmartCodeType['T']];
             areaFuncData.value =
-              this.smartCode.selWinner.join('') +
-              '/' +
-              this.smartCode.selPlaced.join('') +
-              '/' +
-              this.smartCode.selPodium.join('');
-          } else if (
-            this.smartCode.selPlaced.length > 0 &&
-            this.smartCode.selPodium.length > 0
-          ) {
+              this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
+          } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length > 0) {
             this.smartCode.code = SmartCodeType[SmartCodeType.TOX];
             areaFuncData.value =
-              this.smartCode.selWinner.join('') +
-              '/' +
-              this.smartCode.selPlaced.join('') +
-              '/' +
-              this.smartCode.selPodium.join('');
+              this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
           }
         } else if (this.smartCode.selWinner.length > 1) {
-          if (
-            this.smartCode.selPlaced.length > 0 &&
-            this.smartCode.selPodium.length === 0
-          ) {
+          if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
             // Items in the first and second row
             this.smartCode.code = SmartCodeType[SmartCodeType.AOX];
-          } else if (
-            this.smartCode.selPlaced.length > 0 &&
-            this.smartCode.selPodium.length > 0
-          ) {
+          } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length > 0) {
             // Items in all the rows
             this.smartCode.code = SmartCodeType[SmartCodeType.TOX];
             areaFuncData.value =
-              this.smartCode.selWinner.join('') +
-              '/' +
-              this.smartCode.selPlaced.join('') +
-              '/' +
-              this.smartCode.selPodium.join('');
+              this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
           }
         }
-        if (
-          this.smartCode.selPlaced.length > 0 &&
-          this.smartCode.selPodium.length === 0
-        ) {
-          areaFuncData.value =
-            this.smartCode.selWinner.join('') +
-            '/' +
-            this.smartCode.selPlaced.join('');
+        if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
+          areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
         }
     }
 
@@ -751,10 +644,7 @@ export class DogracingService {
   private placeTypeACCG(areaFuncData: PolyfunctionalArea): string {
     // One or more selections on the first row
     if (this.smartCode.selWinner.length >= 1) {
-      if (
-        this.smartCode.selPlaced.length === 0 &&
-        this.smartCode.selPodium.length === 0
-      ) {
+      if (this.smartCode.selPlaced.length === 0 && this.smartCode.selPodium.length === 0) {
         // only selections in the first row
         if (this.smartCode.selWinner.length === 2) {
           // Single
@@ -772,23 +662,15 @@ export class DogracingService {
           areaFuncData.value = this.smartCode.selWinner.join('');
           return SmartCodeType[SmartCodeType.AX];
         }
-      } else if (
-        this.smartCode.selPlaced.length > 0 &&
-        this.smartCode.selPodium.length === 0
-      ) {
+      } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
         // Selections in the first and second row
-        if (
-          this.smartCode.selWinner.length === 1 &&
-          this.smartCode.selPlaced.length === 1
-        ) {
+        if (this.smartCode.selWinner.length === 1 && this.smartCode.selPlaced.length === 1) {
           // Only a dog is selected on the first and second row the result is a single "Combination".
           // Sort the selections
           if (this.smartCode.selWinner[0] > this.smartCode.selPlaced[0]) {
-            areaFuncData.value =
-              this.smartCode.selPlaced[0] + '-' + this.smartCode.selWinner[0];
+            areaFuncData.value = this.smartCode.selPlaced[0] + '-' + this.smartCode.selWinner[0];
           } else {
-            areaFuncData.value =
-              this.smartCode.selWinner[0] + '-' + this.smartCode.selPlaced[0];
+            areaFuncData.value = this.smartCode.selWinner[0] + '-' + this.smartCode.selPlaced[0];
           }
           return SmartCodeType[SmartCodeType.AS];
         } else {
@@ -800,10 +682,7 @@ export class DogracingService {
           this.smartCode.selPlaced.sort(function(a, b) {
             return a - b;
           });
-          areaFuncData.value =
-            this.smartCode.selWinner.join('') +
-            '/' +
-            this.smartCode.selPlaced.join('');
+          areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
           return SmartCodeType[SmartCodeType.AB];
         }
       }
@@ -820,10 +699,7 @@ export class DogracingService {
     // One or more selections on the first row
     if (this.smartCode.selWinner.length >= 1) {
       // Only selections in the first row
-      if (
-        this.smartCode.selPlaced.length === 0 &&
-        this.smartCode.selPodium.length === 0
-      ) {
+      if (this.smartCode.selPlaced.length === 0 && this.smartCode.selPodium.length === 0) {
         // Requirements "Trio a girare"
         if (this.smartCode.selWinner.length >= 3) {
           // Sort the displayed values
@@ -833,10 +709,7 @@ export class DogracingService {
           areaFuncData.value = this.smartCode.selWinner.join('');
           return SmartCodeType[SmartCodeType.TNX];
         }
-      } else if (
-        this.smartCode.selPlaced.length > 0 &&
-        this.smartCode.selPodium.length === 0
-      ) {
+      } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
         // Sections in the first and second row.
         if (this.smartCode.selWinner.length === 1) {
           // Requirements "Vincente Trio"
@@ -846,10 +719,7 @@ export class DogracingService {
             this.smartCode.selPlaced.sort(function(a, b) {
               return a - b;
             });
-            areaFuncData.value =
-              this.smartCode.selWinner[0] +
-              '/' +
-              this.smartCode.selPlaced.join('');
+            areaFuncData.value = this.smartCode.selWinner[0] + '/' + this.smartCode.selPlaced.join('');
             return SmartCodeType[SmartCodeType.VT];
           }
         } else if (this.smartCode.selWinner.length === 2) {
@@ -866,10 +736,7 @@ export class DogracingService {
                 return a - b;
               });
             }
-            areaFuncData.value =
-              this.smartCode.selWinner.join('') +
-              '/' +
-              this.smartCode.selPlaced.join('');
+            areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
             return SmartCodeType[SmartCodeType.AT];
           }
         }
@@ -887,10 +754,7 @@ export class DogracingService {
     // One or more selections on the first row
     if (this.smartCode.selWinner.length >= 1) {
       // Only selections in the first row
-      if (
-        this.smartCode.selPlaced.length === 0 &&
-        this.smartCode.selPodium.length === 0
-      ) {
+      if (this.smartCode.selPlaced.length === 0 && this.smartCode.selPodium.length === 0) {
         // Requirements "Accoppiata in ordine con ritorno"
         if (this.smartCode.selWinner.length === 2) {
           // Sort the displayed values
@@ -900,10 +764,7 @@ export class DogracingService {
           areaFuncData.value = this.smartCode.selWinner.join('');
           return SmartCodeType[SmartCodeType.AR];
         }
-      } else if (
-        this.smartCode.selPlaced.length > 0 &&
-        this.smartCode.selPodium.length === 0
-      ) {
+      } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
         // Selections in the first and second row
       }
     }
@@ -915,7 +776,8 @@ export class DogracingService {
    * Generate all combinations of bets from all the rows selections
    * @param value String representations. Ex. 12/34/56, 12/345
    * @param combinationType Enum (CombinationType) of the type of combination desired. Values: By2, By3.
-   * @param ordered Boolean to determin if the combinations have to be in order or not. Ex: false (combination 1-3-5, 3-1-5, 5-1-3, 5-3-1 are all valid), true (only combination 1-3-5 is valid).
+   * @param ordered Boolean to determine if the combinations have to be in order or not. Ex: false (combinations 1-3-5, 3-1-5, 5-1-3, 5-3-1 are all valid), true (only combination 1-3-5 is valid).
+   * @param withReturn Boolean to determine if the combinations have to contain the return. Default value: false. Ex: 1/345 = false (combinations: 1-3, 1-4, 1-5), true (combinations: 1-3, 1-4, 1-5, 3-1, 4-1, 5-1).
    * @param isFirstRowFixed When "true" the selections from the first row have to be always present on the combinations. Valid only in combination by 3. Value: true (the first row is fixed), false or not indicated (The second row is the fixed one).
    *  Ex:
    *    - value = 12/34, combinationType = By3, ordered = false, isFirstRowFixed = true -> result = 1-2-3, 1-2-4, 2-1-3, 2-1-4
@@ -927,6 +789,7 @@ export class DogracingService {
     value: string,
     combinationType: CombinationType,
     ordered: boolean,
+    withReturn: boolean = false,
     isFirstRowFixed?: boolean
   ): string[] {
     const selections: string[] = value.split('/');
@@ -951,7 +814,9 @@ export class DogracingService {
                   }
                 } else {
                   returnValues.push(values1[i1] + '-' + values2[i2]);
-                  returnValues.push(values2[i2] + '-' + values1[i1]);
+                  if (withReturn) {
+                    returnValues.push(values2[i2] + '-' + values1[i1]);
+                  }
                 }
               }
               break;
@@ -960,13 +825,9 @@ export class DogracingService {
               if (isFirstRowFixed && selections.length === 2) {
                 for (let i1b = i1 + 1; i1b < selections[0].length; i1b++) {
                   for (let i2 = 0; i2 < selections[1].length; i2++) {
-                    returnValues.push(
-                      values1[i1] + '-' + values1[i1b] + '-' + values2[i2]
-                    );
+                    returnValues.push(values1[i1] + '-' + values1[i1b] + '-' + values2[i2]);
                     if (!ordered) {
-                      returnValues.push(
-                        values1[i1b] + '-' + values1[i1] + '-' + values2[i2]
-                      );
+                      returnValues.push(values1[i1b] + '-' + values1[i1] + '-' + values2[i2]);
                     }
                   }
                 }
@@ -976,53 +837,26 @@ export class DogracingService {
                   if (selections.length === 2) {
                     // There are enough selections on the second row to make a trio.
                     if (selections[1].length >= 2) {
-                      for (
-                        let i2b = i2 + 1;
-                        i2b < selections[1].length;
-                        i2b++
-                      ) {
+                      for (let i2b = i2 + 1; i2b < selections[1].length; i2b++) {
                         if (ordered) {
                           // Sort the combination
-                          if (
-                            parseInt(values2[i2], 10) >=
-                            parseInt(values2[i2b], 10)
-                          ) {
-                            returnValues.push(
-                              values1[i1] +
-                                '-' +
-                                values2[i2b] +
-                                '-' +
-                                values2[i2]
-                            );
+                          if (parseInt(values2[i2], 10) >= parseInt(values2[i2b], 10)) {
+                            returnValues.push(values1[i1] + '-' + values2[i2b] + '-' + values2[i2]);
                           } else {
-                            returnValues.push(
-                              values1[i1] +
-                                '-' +
-                                values2[i2] +
-                                '-' +
-                                values2[i2b]
-                            );
+                            returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values2[i2b]);
                           }
                         } else {
-                          returnValues.push(
-                            values1[i1] + '-' + values2[i2] + '-' + values2[i2b]
-                          );
-                          returnValues.push(
-                            values1[i1] + '-' + values2[i2b] + '-' + values2[i2]
-                          );
+                          returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values2[i2b]);
+                          returnValues.push(values1[i1] + '-' + values2[i2b] + '-' + values2[i2]);
                         }
                       }
                     }
                   } else if (selections.length > 2) {
                     // Selections on all three rows.
                     // Extraction of the selections in the third row.
-                    const values3: string[] = this.extractOddFromString(
-                      selections[2]
-                    );
+                    const values3: string[] = this.extractOddFromString(selections[2]);
                     for (let i3 = 0; i3 < selections[2].length; i3++) {
-                      returnValues.push(
-                        values1[i1] + '-' + values2[i2] + '-' + values3[i3]
-                      );
+                      returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values3[i3]);
                     }
                   }
                 }
@@ -1043,15 +877,12 @@ export class DogracingService {
    * Generate all combinations of bets from a single row selections
    * @param value String representations, ex. 1234
    * @param combinationType Enum (CombinationType) of the type of combination desired. Values: By2 (combination by 2), By3 (combination by 3).
-   * @param ordered Boolean to determin if the combinations have to be in order or not. Ex: false (combination 1-2 and 2-1 are both valid), true (only combination 1-2 is valid).
+   * @param ordered Boolean to determine if the combinations have to be in order or not. Ex: false (combination 1-2 and 2-1 are both valid), true (only combination 1-2 is valid).
+   * @param withReturn Boolean to determine if the combinations have to contain the return. Default value: false. Ex: 13 = false (combinations: 1-3), true (combinations: 1-3, 3-1).
    * @returns Array of combinations. Ex: For type "By2": 1-2, 1-3, 1-4, 2-3, 2-4, 3-4. For type "By3": 1-2-3, 1-3-4, 1-2-4, 2-1-3, 2-3-4, ecc.
    */
   // tslint:enable:max-line-length
-  generateOddsRow(
-    value: string,
-    combinationType: CombinationType,
-    ordered: boolean
-  ): string[] {
+  generateOddsRow(value: string, combinationType: CombinationType, ordered: boolean, withReturn: boolean = false): string[] {
     const returnValues: string[] = [];
 
     if (value.length > 0) {
@@ -1065,34 +896,22 @@ export class DogracingService {
                 returnValues.push(values[i] + '-' + values[j]);
               } else {
                 returnValues.push(values[i] + '-' + values[j]);
-                returnValues.push(values[j] + '-' + values[i]);
+                if (withReturn) {
+                  returnValues.push(values[j] + '-' + values[i]);
+                }
               }
               break;
             case CombinationType.By3: // Combination of the selections By 3
               for (let k = j + 1; k < value.length; k++) {
                 if (ordered) {
-                  returnValues.push(
-                    values[i] + '-' + values[j] + '-' + values[k]
-                  );
+                  returnValues.push(values[i] + '-' + values[j] + '-' + values[k]);
                 } else {
-                  returnValues.push(
-                    values[i] + '-' + values[j] + '-' + values[k]
-                  );
-                  returnValues.push(
-                    values[i] + '-' + values[k] + '-' + values[j]
-                  );
-                  returnValues.push(
-                    values[j] + '-' + values[i] + '-' + values[k]
-                  );
-                  returnValues.push(
-                    values[j] + '-' + values[k] + '-' + values[i]
-                  );
-                  returnValues.push(
-                    values[k] + '-' + values[i] + '-' + values[j]
-                  );
-                  returnValues.push(
-                    values[k] + '-' + values[j] + '-' + values[i]
-                  );
+                  returnValues.push(values[i] + '-' + values[j] + '-' + values[k]);
+                  returnValues.push(values[i] + '-' + values[k] + '-' + values[j]);
+                  returnValues.push(values[j] + '-' + values[i] + '-' + values[k]);
+                  returnValues.push(values[j] + '-' + values[k] + '-' + values[i]);
+                  returnValues.push(values[k] + '-' + values[i] + '-' + values[j]);
+                  returnValues.push(values[k] + '-' + values[j] + '-' + values[i]);
                 }
               }
               break;
