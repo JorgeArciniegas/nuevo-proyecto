@@ -556,12 +556,22 @@ export class DogracingService {
         break;
       case SmartCodeType[SmartCodeType.AR]:
         // Generate combination by 2 of the first row selections not in order with return.
-        oddsToSearch = this.generateOddsRow(
-          areaFuncData.value.toString(),
-          CombinationType.By2,
-          false,
-          true
-        );
+        if (areaFuncData.value.toString().indexOf('/') === -1) {
+          oddsToSearch = this.generateOddsRow(
+            areaFuncData.value.toString(),
+            CombinationType.By2,
+            false,
+            true
+          );
+        } else {
+          // of the first and second row selections in order with return
+          oddsToSearch = this.generateOdds(
+            areaFuncData.value.toString(),
+            CombinationType.By2,
+            false,
+            true
+          );
+        }
         break;
       case SmartCodeType[SmartCodeType.AX]:
         // Generate sorted combination by 2 of the first row selections.
@@ -947,7 +957,25 @@ export class DogracingService {
         this.smartCode.selPlaced.length > 0 &&
         this.smartCode.selPodium.length === 0
       ) {
-        // Selections in the first and second row
+        // Selections in the first row
+        if (this.smartCode.selWinner.length > 1) {
+          // Sort the displayed values
+          this.smartCode.selWinner.sort(function(a, b) {
+            return a - b;
+          });
+        }
+        // Selections in the second row
+        if (this.smartCode.selPlaced.length > 1) {
+          // Sort the displayed values
+          this.smartCode.selPlaced.sort(function(a, b) {
+            return a - b;
+          });
+        }
+        areaFuncData.value =
+          this.smartCode.selWinner.join('') +
+          '/' +
+          this.smartCode.selPlaced.join('');
+        return SmartCodeType[SmartCodeType.AR];
       }
     }
     return null;
