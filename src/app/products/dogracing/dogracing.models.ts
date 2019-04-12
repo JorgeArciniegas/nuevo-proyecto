@@ -8,7 +8,7 @@ export enum SpecialBet {
   EVEN = 0,
   ODD = 1,
   OVER = 2,
-  UNDER  = 3
+  UNDER = 3
 }
 export enum SpecialBetValue {
   '2-4-6' = 0,
@@ -36,6 +36,7 @@ export enum SmartCodeType {
   T,
   TOX,
   TNX, // Trifecta
+  TR, // multiple selezione Trio in ordine con ritorno
   VX,
   AX,
   ASX,
@@ -130,7 +131,11 @@ export class Smartcode {
   selWinner: number[];
   selPlaced: number[];
   selPodium: number[];
-  constructor(win: number[] = [], placed: number[] = [], podium: number[] = []) {
+  constructor(
+    win: number[] = [],
+    placed: number[] = [],
+    podium: number[] = []
+  ) {
     this.selPlaced = placed;
     this.selPodium = podium;
     this.selWinner = win;

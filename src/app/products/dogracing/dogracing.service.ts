@@ -385,7 +385,10 @@ export class DogracingService {
       this.placingRace.thirdRowDisabled = false;
     } else {
       this.placingRace.typePlace = type;
-      if (this.placingRace.typePlace !== undefined) {
+      if (
+        this.placingRace.typePlace !== undefined &&
+        this.placingRace.typePlace !== 2
+      ) {
         // deselect all dogs in the row #3
         this.deselectRowDogs(3);
         this.placingRace.thirdRowDisabled = true;
@@ -547,7 +550,7 @@ export class DogracingService {
         );
         break;
       case SmartCodeType[SmartCodeType.TOX]:
-        // Generate sorted combination by 2 of the selections in the rows.
+        // Generate sorted combination by 3 of the selections in the rows.
         oddsToSearch = this.generateOdds(
           areaFuncData.value.toString(),
           CombinationType.By3,
@@ -604,6 +607,15 @@ export class DogracingService {
           CombinationType.By3,
           false,
           false,
+          true
+        );
+        break;
+      case SmartCodeType[SmartCodeType.TR]: // multiple selection Trio in order with return
+        // Generate combination by 3 of the first, second and third row selections in order with return.
+        oddsToSearch = this.generateOdds(
+          areaFuncData.value.toString(),
+          CombinationType.By3,
+          true,
           true
         );
         break;
@@ -690,6 +702,7 @@ export class DogracingService {
       case 'TNX':
       case 'VT':
       case 'AT':
+      case 'TR':
         return 12; // Trifecta
       case 'AS':
       case 'AX':
@@ -953,6 +966,7 @@ export class DogracingService {
           areaFuncData.value = this.smartCode.selWinner.join('');
           return SmartCodeType[SmartCodeType.AR];
         }
+        // Only selections in the first and second row
       } else if (
         this.smartCode.selPlaced.length > 0 &&
         this.smartCode.selPodium.length === 0
@@ -976,6 +990,39 @@ export class DogracingService {
           '/' +
           this.smartCode.selPlaced.join('');
         return SmartCodeType[SmartCodeType.AR];
+        // Only selections in the first, second and third row
+      } else if (
+        this.smartCode.selPlaced.length > 0 &&
+        this.smartCode.selPodium.length > 0
+      ) {
+        // Selections in the first row
+        if (this.smartCode.selWinner.length > 1) {
+          // Sort the displayed values
+          this.smartCode.selWinner.sort(function(a, b) {
+            return a - b;
+          });
+        }
+        // Selections in the second row
+        if (this.smartCode.selPlaced.length > 1) {
+          // Sort the displayed values
+          this.smartCode.selPlaced.sort(function(a, b) {
+            return a - b;
+          });
+        }
+        // Selections in the third row
+        if (this.smartCode.selPodium.length > 1) {
+          // Sort the displayed values
+          this.smartCode.selPodium.sort(function(a, b) {
+            return a - b;
+          });
+        }
+        areaFuncData.value =
+          this.smartCode.selWinner.join('') +
+          '/' +
+          this.smartCode.selPlaced.join('') +
+          '/' +
+          this.smartCode.selPodium.join('');
+        return SmartCodeType[SmartCodeType.TR];
       }
     }
     return null;
@@ -1095,9 +1142,35 @@ export class DogracingService {
                       selections[2]
                     );
                     for (let i3 = 0; i3 < selections[2].length; i3++) {
-                      returnValues.push(
-                        values1[i1] + '-' + values2[i2] + '-' + values3[i3]
-                      );
+                      if (ordered) {
+                        returnValues.push(
+                          values1[i1] + '-' + values2[i2] + '-' + values3[i3]
+                        );
+                        if (withReturn) {
+                          returnValues.push(
+                            values3[i3] + '-' + values2[i2] + '-' + values1[i1]
+                          );
+                        }
+                      } else {
+                        returnValues.push(
+                          values1[i1] + '-' + values2[i2] + '-' + values3[i3]
+                        );
+                        returnValues.push(
+                          values1[i1] + '-' + values3[i3] + '-' + values2[i2]
+                        );
+                        returnValues.push(
+                          values2[i2] + '-' + values1[i1] + '-' + values3[i3]
+                        );
+                        returnValues.push(
+                          values2[i2] + '-' + values3[i3] + '-' + values1[i1]
+                        );
+                        returnValues.push(
+                          values3[i3] + '-' + values1[i1] + '-' + values2[i2]
+                        );
+                        returnValues.push(
+                          values3[i3] + '-' + values2[i2] + '-' + values1[i1]
+                        );
+                      }
                     }
                   }
                 }
