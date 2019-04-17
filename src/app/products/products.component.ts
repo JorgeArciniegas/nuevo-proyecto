@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MediaChange, ObservableMedia } from '@angular/flex-layout';
+import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Subscription } from 'rxjs';
 import { AppSettings } from '../app.settings';
 import { ProductsService } from './products.service';
@@ -15,23 +15,21 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public settings: AppSettings;
 
   constructor(
-    private observableMedia: ObservableMedia,
+    private observableMedia: MediaObserver,
     public service: ProductsService,
     public readonly appSettings: AppSettings
   ) {
     this.settings = appSettings;
+    this.observableMediaSubscribe = this.observableMedia.media$.subscribe((change: MediaChange) => {
+      this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
+      this.service.breakpointSubscribe.next(this.service.breakpoint);
+      this.service.fnWindowsSize();
+      this.rowHeight = (this.service.windowSize.columnHeight - 30) / 11;
+    });
   }
 
   ngOnInit() {
-    this.observableMediaSubscribe = this.observableMedia
-      .asObservable()
-      .subscribe((change: MediaChange) => {
-        this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
-        this.service.breakpointSubscribe.next(this.service.breakpoint);
-        this.service.fnWindowsSize();
 
-        this.rowHeight = (this.service.windowSize.columnHeight - 30) / 11;
-      });
   }
   ngOnDestroy(): void {
     this.observableMediaSubscribe.unsubscribe();
