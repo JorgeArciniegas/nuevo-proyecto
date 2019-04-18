@@ -25,7 +25,7 @@ export class CouponService {
    }
 
    addRemoveToCoupon(smart: BetOdd[]): void {
-    console.log(smart);
+    // console.log(smart);
     try {
       if (smart) {
         for ( const bet of smart.filter(item => item.selected) ) {
