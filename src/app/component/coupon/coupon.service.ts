@@ -17,17 +17,18 @@ export class CouponService {
   subscriptionCoupon: Subscription;
   constructor(public elyscoupon: ElysCouponService, userService: UserService) {
     this.elyscoupon.couponConfig.userId = userService.userDetail ? userService.userDetail.UserId : undefined;
-    this.subscriptionCoupon = elyscoupon.couponHasChanged.subscribe( coupon =>
-      {
+    this.subscriptionCoupon = elyscoupon.couponHasChanged.subscribe( coupon => {
         this.coupon = coupon;
-        // console.log(coupon);
       } );
+
+      elyscoupon.couponConfig.betCoupon = this.coupon;
    }
 
-  addCoupon(smart: BetOdd[]): void {
+   addRemoveToCoupon(smart: BetOdd[]): void {
+    console.log(smart);
     try {
       if (smart) {
-        for ( const bet of smart ) {
+        for ( const bet of smart.filter(item => item.selected) ) {
           let addBoolean = true;
           this.couponIdAdded.filter( (item, idx) => {
             if (item === bet.id) {
@@ -41,17 +42,22 @@ export class CouponService {
     } catch (e) {
       console.log('err', e);
     }
-    console.log('coupon', smart, this.coupon );
   }
 
-
   private requestObj(bet: BetOdd, isAdd: boolean = true): AddOddRequest {
-
     return {
       cCat: CouponCategory.Virtual,
       oddId: bet.id,
-      add: isAdd
+      add: isAdd,
+      colAmount: bet.amount,
+      isMultipleStake: true
     };
+  }
+
+
+  resetCoupon(): void {
+    this.coupon = null;
+    this.couponIdAdded = [];
   }
 
 }
