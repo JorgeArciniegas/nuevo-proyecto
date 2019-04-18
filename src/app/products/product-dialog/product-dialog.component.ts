@@ -112,12 +112,12 @@ export class ProductDialogComponent implements OnInit, AfterViewInit {
     this.data.opened = false;
   }
 
-  @HostListener('document:click', ['$event'])
+  /* @HostListener('document:click', ['$event'])
   clickout(event) {
     if (this.data.opened) {
       if (!this.elementView.nativeElement.contains(event.target)) {
         this.close();
       }
     }
-  }
+  } */
 }
