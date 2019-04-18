@@ -1,36 +1,45 @@
 import { Injectable } from '@angular/core';
-import { BetCoupon, ElysApiService, CouponCategory } from '@elys/elys-api';
-import { BetOdd } from 'src/app/products/products.model';
+import { CouponCategory } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { AddOddRequest, BetCouponExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
-import { Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { BetOdd } from 'src/app/products/products.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CouponService {
-
   // coupon cache
   coupon: BetCouponExtended = null;
   couponIdAdded: number[] = [];
-  subscriptionCoupon: Subscription;
-  constructor(public elyscoupon: ElysCouponService, userService: UserService) {
+
+  private couponResponseSubject: Subject<BetCouponExtended>;
+  public couponResponse: Observable<BetCouponExtended>;
+
+  constructor(
+    public elyscoupon: ElysCouponService,
+    userService: UserService
+  ) {
+    this.couponResponseSubject = new Subject<BetCouponExtended>();
+    this.couponResponse = this.couponResponseSubject.asObservable();
+
     this.elyscoupon.couponConfig.userId = userService.userDetail ? userService.userDetail.UserId : undefined;
-    this.subscriptionCoupon = elyscoupon.couponHasChanged.subscribe( coupon => {
-        this.coupon = coupon;
-      } );
+    elyscoupon.couponHasChanged.subscribe(coupon => {
+      this.coupon = coupon;
+      this.couponResponseSubject.next(coupon);
+    });
 
-      elyscoupon.couponConfig.betCoupon = this.coupon;
-   }
+    //elyscoupon.couponConfig.betCoupon = this.coupon;
+  }
 
-   addRemoveToCoupon(smart: BetOdd[]): void {
+  addRemoveToCoupon(smart: BetOdd[]): void {
     console.log(smart);
     try {
       if (smart) {
-        for ( const bet of smart.filter(item => item.selected) ) {
+        for (const bet of smart.filter(item => item.selected)) {
           let addBoolean = true;
-          this.couponIdAdded.filter( (item, idx) => {
+          this.couponIdAdded.filter((item, idx) => {
             if (item === bet.id) {
               addBoolean = false;
               this.couponIdAdded.slice(idx);

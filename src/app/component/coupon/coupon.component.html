@@ -22,8 +22,10 @@
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="14">
-    <div class="content-row-coupon">
-      CONTENT COUPONS
+    <div class="content-row-coupon" fxFill fxLayout="column" fxLayoutAlign="start start">
+      <div *ngFor="let odd of lastCouponOdds">
+        {{odd.internal_Sequence}} - {{odd.EventName}} {{odd.MarketName}}
+      </div>
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="2">
