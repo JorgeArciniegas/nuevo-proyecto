@@ -9,7 +9,7 @@
     </div>
     <div fxLayout="row" class="second-row" fxFill [style.height.px]="(rowHeight - 20) / 2" [style.min-height.px]="(rowHeight - 20) / 2">
       <div fxLayout="column" fxFlex="45" fxLayoutAlign="center flex-start">
-        <span *ngIf="polyfunctionalValue && polyfunctionalValue.odd > 0">( {{polyfunctionalValue.odd | number:'1.2-2'}} )</span>
+        <span *ngIf="polyfunctionalValue && polyfunctionalValue.odds.length === 1 ">( {{ polyfunctionalValue.odds[0].odd | number:'1.2-2'}} )</span>
       </div>
       <div fxLayout="column" fxFlex="50" fxLayoutAlign="center flex-end" *ngIf="polyfunctionalValue">
         {{ typeBetSlipColTot[polyfunctionalValue.typeSlipCol] }} {{ polyfunctionalValue.amount | number: '1.2-2' }}

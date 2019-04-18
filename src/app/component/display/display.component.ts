@@ -46,20 +46,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
   detailOdds(): void {
     const data: BetOdds = new BetOdds();
     data.title = this.polyfunctionalValue.selection;
-    if (this.polyfunctionalValue.odd) {
-      data.odds.push(
-        new BetOdd(
-          this.polyfunctionalValue.value.toString(),
-          this.polyfunctionalValue.odd,
-          this.polyfunctionalValue.amount
-        )
-      );
-    } else if (
-      this.polyfunctionalValue.odds &&
-      this.polyfunctionalValue.odds.length > 0
-    ) {
-      data.odds = this.polyfunctionalValue.odds;
-    }
+    data.odds = this.polyfunctionalValue.odds;
     this.productService.openProductDialog(data);
   }
 }

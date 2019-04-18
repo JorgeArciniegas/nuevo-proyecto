@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AccountDetails, Login } from './api/vgen.model';
-import { VgenService } from './api/vgen.service';
+import { ElysApiService, TokenDataSuccess } from '@elys/elys-api';
+import { AccountDetails } from './api/vgen.model';
 import { RouterService } from './utility/router/router.service';
 import { StorageService } from './utility/storage/storage.service';
 import { TranslateUtilityService } from './utility/translate-utility.service';
@@ -14,11 +14,16 @@ export class UserService {
   public targetedUrlBeforeLogin: string;
 
   constructor(
-    private api: VgenService,
     private router: RouterService,
     private storageService: StorageService,
-    private translateService: TranslateUtilityService
-  ) {}
+    private translateService: TranslateUtilityService,
+    private api: ElysApiService
+  ) {
+    // Check if the user is logged
+    if ( this.isUserLogged ) {
+      this.loadUserData(this.storageService.getData('tokenData'));
+    }
+  }
 
   /**
    * Method to login and store auth token.
@@ -27,7 +32,7 @@ export class UserService {
    */
   async login(username: string, password: string): Promise<string | undefined> {
     try {
-      const response: Login = await this.api.login(username, password);
+      const response: TokenDataSuccess = await this.api.account.postAccessToken( {username, password});
       const userDataResponse = await this.loadUserData(response.access_token);
 
       // Check that we have gotten the user data.
@@ -48,7 +53,7 @@ export class UserService {
   logout(): void {
     this.userDetail = undefined;
     // Clear the storage's data and the token from vgen.service
-    this.api.removeToken();
+    // this.api.removeToken();
     this.storageService.removeItems('tokenData', 'UserData');
     this.router.getRouter().navigateByUrl('/login');
   }
@@ -57,7 +62,7 @@ export class UserService {
   async loadUserData(token: string): Promise<string | undefined> {
     try {
       this.setToken(token);
-      this.userDetail = await this.api.me();
+      this.userDetail = await this.api.account.getMe();
       // Save the data only if the user is a valid user.
       if (this.isAValidUser()) {
         this.storageService.setData('UserData', this.userDetail);
@@ -78,13 +83,14 @@ export class UserService {
 
   // Method to set the token on the vgen.service and to save it on the storage as well.
   private setToken(token: string): void {
-    this.api.setToken(token);
+    // Put on API LIB the token bearer
+    this.api.tokenBearer = token;
     this.storageService.setData('tokenData', token);
   }
 
   // Method to remove the token from the vgen.service and the storage as well.
   private removeToken(): void {
-    this.api.removeToken();
+    this.api.tokenBearer = null;
     this.storageService.removeItems('tokenData');
   }
 

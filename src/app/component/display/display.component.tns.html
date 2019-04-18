@@ -6,7 +6,7 @@
       <Label col="1" *ngIf="polyfunctionalValue" text="{{polyfunctionalValue.value}}" verticalAlignment="center" horizontalAlignment="right"></Label>
     </GridLayout>
     <GridLayout row="1" col="0" rows="*" columns="5*,3*" orientation="horizontal" class="title" verticalAlignment="center"></GridLayout>
-    <Label col="0" *ngIf="polyfunctionalValue && polyfunctionalValue.odd > 0" class="odd" verticalAlignment="center" text="( {{polyfunctionalValue.odd | number:'1.2-2'}} )"
+    <Label col="0" *ngIf="polyfunctionalValue &&  polyfunctionalValue.odds.length === 1" class="odd" verticalAlignment="center" text="( {{ polyfunctionalValue.odds[0].odd | number:'1.2-2'}} )"
       verticalAlignment="center" horizontalAlignment="left"></Label>
     <Label col="1" *ngIf="polyfunctionalValue" text="{{ typeBetSlipColTot[polyfunctionalValue.typeSlipCol]  }} {{polyfunctionalValue.amount  | number: '1.2-2'}}"
       verticalAlignment="center" horizontalAlignment="right"></Label>

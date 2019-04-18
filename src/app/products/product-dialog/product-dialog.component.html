@@ -17,14 +17,14 @@
         <div class="top-window"></div>
         <div class="first-row" fxLayout="row">
           <div fxFlex="50" fxLayoutAlign="start center">
-            {{odd.label}}
+            {{odd.label}} <small> [{{odd.id}}]</small>
           </div>
           <div fxFlex="50" fxLayoutAlign="end center">
             {{odd.amount | number: '1.2-2'}}
           </div>
         </div>
         <div class="odd radius-5">
-          {{odd.odd | number: '1.3-3'}}
+          {{odd.odd | number: '1.2-2'}}
         </div>
       </div>
     </mat-grid-tile>

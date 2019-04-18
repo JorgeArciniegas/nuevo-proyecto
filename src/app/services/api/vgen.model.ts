@@ -1,3 +1,5 @@
+import { VirtualBetSport } from "@elys/elys-api/lib/virtual/virtual.models";
+
 export interface Login {
   access_token: string;
   token_type: string;
@@ -43,8 +45,8 @@ export interface AccountDetails {
   Overdraft: number;
   BlockedOverdraft: number;
   NewPrivacyPolicyStatementAdded: boolean;
-  CanCreateAgentChildren: boolean;
-  CanCreateCtdChildren: boolean;
+  CanCreateAgentChildren?: boolean;
+  CanCreateCtdChildren?: boolean;
 }
 
 export interface UserPolicies {
@@ -68,6 +70,12 @@ export interface UserPolicies {
   CanPlayTPVirtual: boolean;
 }
 
+export interface SportDetail {
+  Sport: VirtualBetSport;
+}
+
+/******* DEPRECATED  ************/
+/*
 export interface TreeSports {
   Sports: Sport[];
 }
@@ -94,7 +102,7 @@ export interface Tournament {
   ec: number;
   evs: Race[];
 }
-
+ */
 export interface Race {
   id: number;
   nm: string;

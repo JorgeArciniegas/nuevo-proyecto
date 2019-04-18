@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+/* import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppSettings } from '../../app.settings';
-import { AccountDetails, CountDown, EventResults, Login, SportDetail, TreeSports } from './vgen.model';
+import { AccountDetails, CountDown, EventResults, Login } from './vgen.model';
 import { StorageService } from '../utility/storage/storage.service';
 
 interface HttpOptions {
@@ -23,7 +23,7 @@ export class VgenService {
    * Ritorna l'header HTTP configurato per una chiamata API JSON e autorizzazione
    * @returns HttpHeaders
    */
-  public getHttpJsonHeaders(): HttpHeaders {
+  /* public getHttpJsonHeaders(): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8',
       Authorization: 'Bearer ' + this.getCurrentToken()
@@ -48,14 +48,14 @@ export class VgenService {
       return this.storageService.getData('tokenData');
     }
   }
-
+ */
   /**
    * Make login and store auth token
    *
    * @param username username
    * @param password password
    */
-  login(username: string, password: string): Promise<Login> {
+  /* login(username: string, password: string): Promise<Login> {
     const httpOptions: HttpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -106,4 +106,4 @@ export class VgenService {
 
     return this.http.get<CountDown>(url).toPromise();
   }
-}
+} */

@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
+import { ElysApiService } from '@elys/elys-api';
+import {
+  VirtualBetEvent,
+  VirtualBetTournament,
+  VirtualProgramTreeBySportRequest,
+  VirtualProgramTreeBySportResponse,
+  VirtualVirtualDetailOddsOfEventRequest,
+  VirtualVirtualEventCountDownRequest,
+  VirtualVirtualSportLastResultsRequest
+} from '@elys/elys-api/lib/virtual/virtual.models';
 import { interval, Observable, Subject, timer } from 'rxjs';
+import { BtncalcService } from 'src/app/component/btncalc/btncalc.service';
 import {
   CountDown,
   EventResults,
   Market,
-  Race as RaceApi,
-  SportDetail,
-  Tournament,
-  TreeSports
+  SportDetail
 } from '../../services/api/vgen.model';
-import { VgenService } from '../../services/api/vgen.service';
 import { BetOdd, PolyfunctionalArea } from '../products.model';
 import { ProductsService } from '../products.service';
 import {
@@ -26,10 +33,9 @@ import {
   SmartCodeType,
   SpecialBet,
   SpecialBetValue,
-  TypePlacingRace,
-  TypeBetSlipColTot
+  TypeBetSlipColTot,
+  TypePlacingRace
 } from './dogracing.models';
-import { BtncalcService } from 'src/app/component/btncalc/btncalc.service';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +46,7 @@ export class DogracingService {
   public listResult: RaceResult[];
   // api binding
   private reload: number;
-  private cacheRaces: RaceApi[] = [];
+  private cacheRaces: VirtualBetEvent[] = [];
   // working variable
   private remmaningTime: RaceTime = new RaceTime();
   placingRace: PlacingRace = new PlacingRace(); // place the global race
@@ -59,7 +65,7 @@ export class DogracingService {
   amount: number;
 
   constructor(
-    private vgenService: VgenService,
+    private elysApi: ElysApiService,
     private productService: ProductsService,
     private btnService: BtncalcService
   ) {
@@ -193,8 +199,9 @@ export class DogracingService {
   }
 
   loadRacesFromApi(all: boolean = false) {
-    this.vgenService.programmetree(8, 'DOG').then((sports: TreeSports) => {
-      const tournament: Tournament = sports.Sports[0].ts[0];
+    const request: VirtualProgramTreeBySportRequest = { SportIds: '8', CategoryTypes: 'DOG' };
+    this.elysApi.virtual.getVirtualTree(request).then((sports: VirtualProgramTreeBySportResponse) => {
+      const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
 
       if (all) {
         // load all race
@@ -211,10 +218,10 @@ export class DogracingService {
         this.currentRaceSubscribe.next(0);
       } else {
         // add only new race
-        tournament.evs.forEach((race: RaceApi) => {
+        tournament.evs.forEach((race: VirtualBetEvent) => {
           if (
             this.cacheRaces.filter(
-              (cacheRace: RaceApi) => cacheRace.id === race.id
+              (cacheRace: VirtualBetEvent) => cacheRace.id === race.id
             ).length === 0
           ) {
             this.cacheRaces.push(race);
@@ -253,7 +260,8 @@ export class DogracingService {
   }
 
   remaningRaceTime(idRace: number): Promise<RaceTime> {
-    return this.vgenService.countdown(8, idRace).then((value: CountDown) => {
+    const request: VirtualVirtualEventCountDownRequest = { SportId: '8', MatchId: idRace };
+    return this.elysApi.virtual.getCountdown(request).then((value: CountDown) => {
       const sec: number = value.CountDown / 10000000;
       const raceTime: RaceTime = new RaceTime();
       raceTime.minute = Math.floor(sec / 60);
@@ -271,10 +279,10 @@ export class DogracingService {
   }
 
   getLastResult() {
+    const request: VirtualVirtualSportLastResultsRequest = { SportId: 8, CategoryType: 'DOG' };
     this.listResult = [];
     timer(300).subscribe(() => {
-      this.vgenService
-        .latesResult(8, 'DOG')
+      this.elysApi.virtual.getLastResult(request)
         .then((eventResults: EventResults) => {
           for (const i of [3, 2, 1, 0]) {
             const results: string[] = eventResults.EventResults[i].Result.split(
@@ -306,14 +314,13 @@ export class DogracingService {
 
   raceDetailOdds(raceNumber: number): void {
     // console.log('get detail', raceNumber);
-    const race: RaceApi = this.cacheRaces.filter(
-      (cacheRace: RaceApi) => cacheRace.id === raceNumber
+    const race: VirtualBetEvent = this.cacheRaces.filter(
+      (cacheRace: VirtualBetEvent) => cacheRace.id === raceNumber
     )[0];
-
+    const request: VirtualVirtualDetailOddsOfEventRequest = { sportId: 8, matchId: raceNumber };
     // check, if is empty load from api
     if (race.mk == null || race.mk.length === 0) {
-      this.vgenService
-        .raceDetails(8, raceNumber)
+      this.elysApi.virtual.getVirtualEventDetail(request)
         .then((sportDetail: SportDetail) => {
           try {
             race.mk = sportDetail.Sport.ts[0].evs[0].mk;
@@ -372,8 +379,8 @@ export class DogracingService {
 
   placeOdd() {
     // extract the raceOdd from cache
-    const odds: RaceApi = this.cacheRaces.filter(
-      (cacheRace: RaceApi) => cacheRace.id === this.placingRace.raceNumber
+    const odds: VirtualBetEvent = this.cacheRaces.filter(
+      (cacheRace: VirtualBetEvent) => cacheRace.id === this.placingRace.raceNumber
     )[0];
     this.smartCode = new Smartcode();
     this.populatingPolyfunctionArea(odds);
@@ -426,7 +433,7 @@ export class DogracingService {
     const extractNumber: number =
       Math.floor(
         Math.random() *
-          this.dogList.filter(dog => dog.position === lucky).length
+        this.dogList.filter(dog => dog.position === lucky).length
       ) + 1;
     return extractNumber;
   }
@@ -444,7 +451,7 @@ export class DogracingService {
    * Create a polyfunctional object for showing and insert the odds to coupon
    * @param odd
    */
-  populatingPolyfunctionArea(odd: RaceApi): void {
+  populatingPolyfunctionArea(odd: VirtualBetEvent): void {
     let areaFuncData: PolyfunctionalArea = {};
     /*  areaFuncData.activeAssociationCol = false;
     areaFuncData.activeDistributionTot = false; */
@@ -525,7 +532,7 @@ export class DogracingService {
    * @param dogName
    */
   public extractOdd(
-    odd: RaceApi,
+    odd: VirtualBetEvent,
     areaFuncData: PolyfunctionalArea,
     dogName?: string
   ): PolyfunctionalArea {
@@ -620,7 +627,7 @@ export class DogracingService {
         );
         break;
     }
-
+    areaFuncData.odds = [];
     for (const m of odd.mk.filter(
       (market: Market) =>
         market.tp === this.typeSelection(areaFuncData.selection)
@@ -628,18 +635,24 @@ export class DogracingService {
       // If the selection is PODIUM, WINNER or SHOW
       if (dogName) {
         for (const checkOdd of m.sls.filter(o => o.nm === dogName)) {
-          areaFuncData.odd = checkOdd.ods[0].vl;
+          const betOdd: BetOdd = new BetOdd(dogName, checkOdd.ods[0].vl, areaFuncData.amount, checkOdd.id);
+          areaFuncData.odds.push(betOdd);
+          /*   areaFuncData.odd = checkOdd.ods[0].vl;
+            areaFuncData.id = checkOdd.id; */
         }
       } else if (!this.smartCode.code) {
         // if the selection is EVEN, ODD, UNDER or OVER
         for (const checkOdd of m.sls.filter(
           o => o.nm.toUpperCase() === areaFuncData.selection.toUpperCase()
         )) {
-          areaFuncData.odd = checkOdd.ods[0].vl;
+          const betOdd: BetOdd = new BetOdd(checkOdd.nm.toUpperCase(), checkOdd.ods[0].vl, areaFuncData.amount, checkOdd.id);
+          areaFuncData.odds.push(betOdd);
+          /*  areaFuncData.odd = checkOdd.ods[0].vl;
+           areaFuncData.id = checkOdd.id; */
         }
       } else {
         if (oddsToSearch.length > 0) {
-          areaFuncData.odds = [];
+
           // search for multiple odds
           for (const checkOdd of m.sls) {
             if (oddsToSearch.includes(checkOdd.nm)) {
@@ -649,7 +662,8 @@ export class DogracingService {
                   checkOdd.ods[0].vl,
                   areaFuncData.typeSlipCol === TypeBetSlipColTot.TOT
                     ? areaFuncData.amount / oddsToSearch.length
-                    : areaFuncData.amount
+                    : areaFuncData.amount,
+                  checkOdd.id
                 )
               );
             }
@@ -660,7 +674,10 @@ export class DogracingService {
             .toString()
             .replace(/\//g, '-');
           for (const checkOdd of m.sls.filter(o => o.nm === matchName)) {
-            areaFuncData.odd = checkOdd.ods[0].vl;
+            const betOdd: BetOdd = new BetOdd(checkOdd.nm.toUpperCase(), checkOdd.ods[0].vl, areaFuncData.amount, checkOdd.id);
+            areaFuncData.odds.push(betOdd);
+            /*  areaFuncData.odd = checkOdd.ods[0].vl;
+             areaFuncData.id = checkOdd.id; */
           }
         }
       }
@@ -825,14 +842,14 @@ export class DogracingService {
         if (this.smartCode.selWinner.length === 2) {
           // Single
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('-');
           return SmartCodeType[SmartCodeType.AS];
         } else if (this.smartCode.selWinner.length > 2) {
           // Multiple
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('');
@@ -860,10 +877,10 @@ export class DogracingService {
         } else {
           // Combination with base and tail
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
-          this.smartCode.selPlaced.sort(function(a, b) {
+          this.smartCode.selPlaced.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value =
@@ -893,7 +910,7 @@ export class DogracingService {
         // Requirements "Trio a girare"
         if (this.smartCode.selWinner.length >= 3) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('');
@@ -909,7 +926,7 @@ export class DogracingService {
           // Enough selections on the second row to be able to create a trio
           if (this.smartCode.selPlaced.length >= 2) {
             // Sort the displayed values
-            this.smartCode.selPlaced.sort(function(a, b) {
+            this.smartCode.selPlaced.sort(function (a, b) {
               return a - b;
             });
             areaFuncData.value =
@@ -923,12 +940,12 @@ export class DogracingService {
           // Enough selections on the second row to be able to create a trio
           if (this.smartCode.selPlaced.length >= 1) {
             // Sort the displayed values
-            this.smartCode.selWinner.sort(function(a, b) {
+            this.smartCode.selWinner.sort(function (a, b) {
               return a - b;
             });
             if (this.smartCode.selPlaced.length > 1) {
               // Sort the displayed values
-              this.smartCode.selPlaced.sort(function(a, b) {
+              this.smartCode.selPlaced.sort(function (a, b) {
                 return a - b;
               });
             }
@@ -960,7 +977,7 @@ export class DogracingService {
         // Requirements "Accoppiata in ordine con ritorno"
         if (this.smartCode.selWinner.length === 2) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('');
@@ -974,14 +991,14 @@ export class DogracingService {
         // Selections in the first row
         if (this.smartCode.selWinner.length > 1) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
         }
         // Selections in the second row
         if (this.smartCode.selPlaced.length > 1) {
           // Sort the displayed values
-          this.smartCode.selPlaced.sort(function(a, b) {
+          this.smartCode.selPlaced.sort(function (a, b) {
             return a - b;
           });
         }
@@ -998,21 +1015,21 @@ export class DogracingService {
         // Selections in the first row
         if (this.smartCode.selWinner.length > 1) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
         }
         // Selections in the second row
         if (this.smartCode.selPlaced.length > 1) {
           // Sort the displayed values
-          this.smartCode.selPlaced.sort(function(a, b) {
+          this.smartCode.selPlaced.sort(function (a, b) {
             return a - b;
           });
         }
         // Selections in the third row
         if (this.smartCode.selPodium.length > 1) {
           // Sort the displayed values
-          this.smartCode.selPodium.sort(function(a, b) {
+          this.smartCode.selPodium.sort(function (a, b) {
             return a - b;
           });
         }
@@ -1111,18 +1128,18 @@ export class DogracingService {
                           ) {
                             returnValues.push(
                               values1[i1] +
-                                '-' +
-                                values2[i2b] +
-                                '-' +
-                                values2[i2]
+                              '-' +
+                              values2[i2b] +
+                              '-' +
+                              values2[i2]
                             );
                           } else {
                             returnValues.push(
                               values1[i1] +
-                                '-' +
-                                values2[i2] +
-                                '-' +
-                                values2[i2b]
+                              '-' +
+                              values2[i2] +
+                              '-' +
+                              values2[i2b]
                             );
                           }
                         } else {

@@ -6,6 +6,7 @@ import { PolyfunctionalArea } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { BtncalcService } from './btncalc.service';
 import { TypeBetSlipColTot } from 'src/app/products/dogracing/dogracing.models';
+import { CouponService } from '../coupon/coupon.service';
 
 @Component({
   selector: 'app-btncalc',
@@ -28,7 +29,8 @@ export class BtncalcComponent implements OnInit, OnDestroy {
   constructor(
     public productService: ProductsService,
     public btncalcService: BtncalcService,
-    private readonly appSetting: AppSettings
+    private readonly appSetting: AppSettings,
+    private couponService: CouponService
   ) {
     this.productNameSelectedSubscribe = this.productService.productNameSelectedObserve.subscribe(
       v => {
@@ -43,10 +45,7 @@ export class BtncalcComponent implements OnInit, OnDestroy {
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
         this.polyfunctionalArea = element;
-        if (
-          this.polyfunctionalArea &&
-          (this.polyfunctionalArea.odd || this.polyfunctionalArea.odds)
-        ) {
+        if (this.polyfunctionalArea && this.polyfunctionalArea.odds) {
           this.isActiveCol = this.polyfunctionalArea.activeAssociationCol;
           this.isActiveTot = this.polyfunctionalArea.activeDistributionTot;
         } else {
@@ -64,7 +63,10 @@ export class BtncalcComponent implements OnInit, OnDestroy {
     this.polyfunctionalValueSubscribe.unsubscribe();
   }
 
-  plus(): void {
+  async plus(): Promise<void> {
+
+    await this.couponService.addCoupon(this.polyfunctionalArea.odds);
+
     this.btncalcService.polyfunctionalArea.amount = 1;
     this.productService.closeProductDialog();
     this.productService.resetBoard();

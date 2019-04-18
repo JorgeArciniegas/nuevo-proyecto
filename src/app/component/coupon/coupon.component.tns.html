@@ -16,13 +16,13 @@
       </StackLayout>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="2" rows="*" columns="*,*" class="card display btn-coupon-board" [ngClass]="{'small': productService.windowSize.small}">
+  <GridLayout row="1" rows="*" columns="*,*" class="card display btn-coupon-board" [ngClass]="{'small': productService.windowSize.small}">
     <GridLayout col="0" class="left {{active == 'single' ? 'actived' : ''}}" (tap)="couponTab('single')">
       <Label text="{{'single' | translate}}" horizontalAlignment="center" verticalAlignment="center" textTransform="uppercase"></Label>
     </GridLayout>
-    <GridLayout col="1" class="right {{active == 'multi' ? 'actived' : ''}}" (tap)="couponTab('multi')">
+    <!-- <GridLayout col="1" class="right {{active == 'multi' ? 'actived' : ''}}" (tap)="couponTab('multi')">
       <Label text="{{'multi' | translate}}" horizontalAlignment="center" verticalAlignment="center" textTransform="uppercase"></Label>
-    </GridLayout>
+    </GridLayout> -->
   </GridLayout>
   <StackLayout row="3" verticalAlignment="center" horizontalAlignment="center">
     <Label text="CONTENT COUPONS"></Label>
