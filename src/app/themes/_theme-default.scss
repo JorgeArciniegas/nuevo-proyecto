@@ -193,7 +193,7 @@ html {
 				@extend %color-bg-white;
 				min-height: 100%;
 				width: 100%;
-				label {
+				label, .label {
 					font-weight: 500;
 					font-size: 0.7em;
 					text-transform: uppercase;
@@ -203,7 +203,7 @@ html {
 						text-align: right;
 					}
 					input, .input {
-						margin-top: 10px;
+						margin-top: 5px;
 						border: 0;
 						width: 100%;
 						font-size: 1.8em;

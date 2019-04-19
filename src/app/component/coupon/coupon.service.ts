@@ -18,9 +18,9 @@ export class CouponService {
   private couponResponseSubject: Subject<BetCouponExtended>;
   couponResponse: Observable<BetCouponExtended>;
   // calculate stake and winning max
+  stakeDisplay: StakesDisplay = { TotalStake: 0, MaxWinning: 0 };
   stakeDisplaySubject: Subject<StakesDisplay>;
   stakeDisplayObs: Observable<StakesDisplay>;
-
   constructor(
     public elyscoupon: ElysCouponService,
     userService: UserService
@@ -33,10 +33,12 @@ export class CouponService {
       this.coupon = coupon;
       this.couponResponseSubject.next(coupon);
       this.calculateAmounts();
+
     });
 
     this.stakeDisplaySubject = new Subject<StakesDisplay>();
     this.stakeDisplayObs = this.stakeDisplaySubject.asObservable();
+    this.stakeDisplayObs.subscribe( elem => this.stakeDisplay = elem );
   }
 
   addRemoveToCoupon(smart: BetOdd[]): void {
@@ -51,6 +53,10 @@ export class CouponService {
               this.couponIdAdded.slice(idx);
             }
           });
+          // add the id to couponIdAdded
+          if (addBoolean) {
+            this.couponIdAdded.push(bet.id);
+          }
           this.elyscoupon.manageOdd(this.requestObj(bet, addBoolean));
         }
       }
@@ -87,17 +93,16 @@ export class CouponService {
     * this sum does not consider groupings other than singles
     */
   calculateAmounts(): void {
-    let stake = 0, winningUnit = 0, bonusUnit = 0;
-    this.coupon.Odds.forEach( odd => stake += odd.OddStake );
-    this.coupon.Groupings.forEach(grouping => { winningUnit += grouping.MaxWinUnit; bonusUnit += grouping.MaxBonusUnit; });
+    let stake = 0, Totalwin = 0;
+    this.coupon.Odds.forEach( odd => { stake += odd.OddStake; Totalwin += odd.OddStake * odd.OddValue; } );
     //
     const stakesDisplayTemp: StakesDisplay = {
       TotalStake: stake,
-      MaxWinning: (stake *  winningUnit) + (stake * bonusUnit )
+      MaxWinning: Totalwin
     };
 
     this.stakeDisplaySubject.next(stakesDisplayTemp);
-
+    console.log( this.coupon);
   }
 
 
