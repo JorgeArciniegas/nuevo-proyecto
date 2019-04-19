@@ -242,6 +242,7 @@ export class DogracingService {
       this.raceDetails.currentRace = this.raceDetails.currentRace - 1;
     } else if (this.raceDetails.currentRace === 0) {
       this.resetPlayRacing();
+      this.currentRaceSubscribe.next(0);
     }
 
     // calculate remaning time for selected race
