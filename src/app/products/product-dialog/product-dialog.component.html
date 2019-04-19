@@ -18,11 +18,13 @@
             {{odd.label}}
           </div>
           <div fxFlex="50" fxLayoutAlign="end center">
-            {{odd.amount | number: '1.2-2'}}
+            <div class="odd radius-5">
+              {{odd.odd | number: '1.2-2'}}
+            </div>
           </div>
         </div>
-        <div class="odd radius-5">
-          {{odd.odd | number: '1.2-2'}}
+        <div class="stake radius-5">
+          {{odd.amount | number: '1.2-2'}}
         </div>
       </div>
     </mat-grid-tile>
