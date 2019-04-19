@@ -36,6 +36,7 @@ import {
   TypeBetSlipColTot,
   TypePlacingRace
 } from './dogracing.models';
+import { CouponService } from 'src/app/component/coupon/coupon.service';
 
 @Injectable({
   providedIn: 'root'
@@ -67,7 +68,8 @@ export class DogracingService {
   constructor(
     private elysApi: ElysApiService,
     private productService: ProductsService,
-    private btnService: BtncalcService
+    private btnService: BtncalcService,
+    private coupon: CouponService
   ) {
     this.raceDetails = new RaceDetail();
     this.raceDetails.currentRace = 0;
@@ -89,7 +91,9 @@ export class DogracingService {
           this.raceDetails.raceTime = raceTime;
         }
       );
-
+      // reset coupon
+      this.coupon.resetCoupon();
+      // reset playload
       this.resetPlayRacing();
       // get race odds
       this.raceDetailOdds(this.raceDetails.races[raceIndex].number);

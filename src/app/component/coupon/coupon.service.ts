@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CouponCategory } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
-import { AddOddRequest, BetCouponExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
+import { AddOddRequest, BetCouponExtended, BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Observable, Subject } from 'rxjs';
 import { BetOdd } from 'src/app/products/products.model';
 import { UserService } from 'src/app/services/user.service';
@@ -13,6 +13,7 @@ export class CouponService {
   // coupon cache
   coupon: BetCouponExtended = null;
   couponIdAdded: number[] = [];
+
 
   private couponResponseSubject: Subject<BetCouponExtended>;
   public couponResponse: Observable<BetCouponExtended>;
@@ -67,6 +68,7 @@ export class CouponService {
   resetCoupon(): void {
     this.coupon = null;
     this.couponIdAdded = [];
+    this.elyscoupon.betCoupon = null;
   }
 
 }

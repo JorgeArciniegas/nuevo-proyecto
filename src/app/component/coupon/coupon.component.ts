@@ -19,10 +19,19 @@ export class CouponComponent implements OnInit, OnDestroy {
   private couponServiceSubscription: Subscription;
 
   constructor(public couponService: CouponService) {
+<<<<<<< HEAD
     this.couponServiceSubscription = this.couponService.couponResponse.subscribe(coupon => {
       this.maxPage = Math.ceil(coupon.Odds.length / this.maxItems);
       this.page = 0;
       this.filterOdds();
+=======
+    this.couponService.couponResponse.subscribe(coupon => {
+    /*   this.lastCouponOdds = coupon.Odds.slice(-5);
+      const couponLength = coupon.Odds.length;
+      for (let index = this.lastCouponOdds.length - 1; index >= 0; index--) {
+        this.lastCouponOdds[index].internal_Sequence = couponLength - index;
+      } */
+>>>>>>> 17254c8c58f6898dea34679fb25cd0817c81a017
     });
   }
 
