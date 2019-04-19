@@ -346,6 +346,9 @@ $gradient-dark2: #000000;
 %border-gray {
 	border-color: $color-border-box;
 }
+%border-primary {
+	border-color: $color-text-primary;
+}
 
 // PRODUCT DIALOG
 %dialog {

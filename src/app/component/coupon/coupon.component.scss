@@ -10,16 +10,16 @@
             text-transform: uppercase;
             font-size: 2.8vh;
             margin: 0;
-           
+
             .icon{
                width: 2.2vh;
             }
         }
     }
-    
+
 }
 .sub-display{
-    padding: 3px;   
+    padding: 3px;
     width: 100%;
     justify-content: center;
     text-align: center;
@@ -34,7 +34,7 @@
 
 .btn-coupon-board {
     width: 100%;
-    
+
     button{
         display: inline;
         margin: 0;
@@ -48,6 +48,36 @@
             border-radius:0px  4px  4px  0px;
         }
     }
-    
-    
+}
+
+.content-row-coupon {
+
+  .card-odd {
+    padding: 5px;
+
+    .top-window {
+        height: 20px;
+        font-size: 12px;
+        padding: 2px 6px;
+    }
+
+    .first-row {
+        padding: 5px;
+    }
+
+    .stake {
+        padding: 2px;
+        width: 40%;
+        margin: 5px;
+        text-align: center;
+    }
+    .odd {
+      padding: 2px 6px;
+      margin: 2px;
+  }
+
+    &.notSelected {
+        opacity: 0.2;
+    }
+  }
 }

@@ -22,10 +22,25 @@
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="14">
-    <div class="content-row-coupon" fxFill fxLayout="column" fxLayoutAlign="start start">
-      <div *ngFor="let odd of lastCouponOdds">
-        {{odd.internal_Sequence}} - {{odd.EventName}} {{odd.MarketName}}
-      </div>
+    <div class="content-row-coupon" fxFill fxLayout="column" fxLayoutAlign="start stretch">
+      <ng-container *ngIf="couponService.coupon">
+        <div *ngFor="let odd of listOdds" class="card-odd radius-5" fxFlex="18">
+          <div fxFill>
+            <div class="top-window">{{odd.EventName}}</div>
+            <div class="first-row" fxLayout="row">
+              <div fxFlex="50" fxLayoutAlign="start center">
+                {{odd.MarketName}}
+              </div>
+              <div fxFlex="50" class="odd radius-5" fxLayoutAlign="end center">
+                {{odd.OddStake | number: '1.2-2'}}
+              </div>
+            </div>
+            <div class="stake radius-5">
+              {{odd.odd | number: '1.2-2'}}
+            </div>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="2">

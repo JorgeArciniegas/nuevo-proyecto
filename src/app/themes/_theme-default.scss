@@ -323,6 +323,34 @@ html {
 	}
 }
 
+.card-odd {
+  @extend %dialog-card;
+
+  .top-window {
+    @extend %dialog-card-header;
+    height: 20px;
+  }
+
+  .odd {
+    border-width: 1px;
+    border-style: solid;
+    @extend %border-primary;
+  }
+  .stake {
+    @extend %btn-success-gradient;
+  }
+}
+
+.scroll {
+  &[disabled] {
+    opacity: 0.1;
+  }
+}
+
+.indicator {
+  @extend %indicator;
+}
+
 .radius-2 {
 	border-radius: 2px;
 	-moz-border-radius: 2px;
@@ -405,30 +433,7 @@ html {
 		padding: 10px;
 	}
 
-	.card-odd {
-		@extend %dialog-card;
-
-		.top-window {
-			@extend %dialog-card-header;
-			height: 20px;
-		}
-
-		.odd {
-			@extend %btn-success-gradient;
-		}
-	}
-
 	.btn-close {
 		@extend %btn-transparent;
-	}
-
-	.scroll {
-		&[disabled] {
-			opacity: 0.1;
-		}
-	}
-
-	.indicator {
-		@extend %indicator;
 	}
 }
