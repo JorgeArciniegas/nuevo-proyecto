@@ -38,7 +38,7 @@ export class CouponService {
 
     this.stakeDisplaySubject = new Subject<StakesDisplay>();
     this.stakeDisplayObs = this.stakeDisplaySubject.asObservable();
-    this.stakeDisplayObs.subscribe( elem => this.stakeDisplay = elem );
+    this.stakeDisplayObs.subscribe(elem => this.stakeDisplay = elem);
   }
 
   addRemoveToCoupon(smart: BetOdd[]): void {
@@ -69,6 +69,7 @@ export class CouponService {
     return {
       cCat: CouponCategory.Virtual,
       oddId: bet.id,
+      selid: bet.id,
       add: isAdd,
       colAmount: bet.amount,
       isMultipleStake: true
@@ -94,7 +95,7 @@ export class CouponService {
     */
   calculateAmounts(): void {
     let stake = 0, Totalwin = 0;
-    this.coupon.Odds.forEach( odd => { stake += odd.OddStake; Totalwin += odd.OddStake * odd.OddValue; } );
+    this.coupon.Odds.forEach(odd => { stake += odd.OddStake; Totalwin += odd.OddStake * odd.OddValue; });
     //
     const stakesDisplayTemp: StakesDisplay = {
       TotalStake: stake,
@@ -102,7 +103,7 @@ export class CouponService {
     };
 
     this.stakeDisplaySubject.next(stakesDisplayTemp);
-    console.log( this.coupon);
+    console.log(this.coupon);
   }
 
 
