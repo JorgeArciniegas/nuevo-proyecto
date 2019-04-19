@@ -52,27 +52,24 @@
 
 .content-row-coupon {
   padding: 5px 0;
+  font-size: 1.5vh;
 
   .card-odd-container {
     padding: 2px 0;
 
     .card-odd {
-      font-size: 0.9em;
 
       .top-window {
-          height: 20px;
-          font-size: 0.8em;
+          font-size: 1.1vh;
           padding: 2px 6px;
       }
 
       .row {
-          padding: 6px;
+          padding: 0.4vh
       }
 
       .stake {
-        font-size: 1.2em;
-        padding: 2px;
-        text-align: center;
+        font-size: 1.8vh;
       }
 
       &.notSelected {

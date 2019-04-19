@@ -338,11 +338,13 @@ html {
     border-style: solid;
     @extend %border-primary;
   }
-  .stake {
-    @extend %btn-success-gradient;
-  }
+
   .remove {
-    @extend %btn-warning;
+    .icon{
+      width: 100%;
+      height: 100%;
+      @extend %remove-image;
+    }
   }
 }
 

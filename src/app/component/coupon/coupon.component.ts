@@ -3,13 +3,14 @@ import { CouponService } from './coupon.service';
 import { Subscription } from 'rxjs';
 import { BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 import { AppSettings } from 'src/app/app.settings';
+import { BetOdd } from 'src/app/products/products.model';
 
 @Component({
   selector: 'app-coupon',
   templateUrl: './coupon.component.html',
   styleUrls: ['./coupon.component.scss']
 })
-export class CouponComponent implements OnInit, OnDestroy {
+export class CouponComponent implements OnDestroy {
   @Input()
   public rowHeight: number;
   private settings: AppSettings;
@@ -32,7 +33,7 @@ export class CouponComponent implements OnInit, OnDestroy {
     });
   }
 
-  filterOdds() {
+  filterOdds(): void {
     let index = 0;
     const end: number = this.couponService.coupon.Odds.length - (this.page * this.maxItems);
     const start: number = this.couponService.coupon.Odds.length - ((this.page + 1) * this.maxItems);
@@ -41,10 +42,9 @@ export class CouponComponent implements OnInit, OnDestroy {
       index++;
       return (index > start && index <= end);
     }).reverse();
-    console.log("listOdds", this.listOdds);
   }
 
-  previusOdds() {
+  previusOdds(): void {
     if (this.page <= 0) {
       return;
     }
@@ -52,7 +52,7 @@ export class CouponComponent implements OnInit, OnDestroy {
     this.filterOdds();
   }
 
-  nextOdds() {
+  nextOdds(): void {
     if (this.page >= this.maxPage - 1) {
       return;
     }
@@ -60,7 +60,9 @@ export class CouponComponent implements OnInit, OnDestroy {
     this.filterOdds();
   }
 
-  ngOnInit() { }
+  removeOdd(odd: BetCouponOddExtended): void {
+    this.couponService.addRemoveToCoupon([new BetOdd(odd.SelectionName, odd.OddValue, odd.OddStake, odd.SelectionId)]);
+  }
 
   ngOnDestroy(): void {
     this.couponServiceSubscription.unsubscribe();

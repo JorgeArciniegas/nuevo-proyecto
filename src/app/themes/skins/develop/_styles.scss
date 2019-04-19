@@ -96,6 +96,10 @@ $color-text-operator: #3dab14;
 	background: url("~/app/themes/skins/develop/image/vgen.png") center center no-repeat;
 	background-size: contain;
 }
+%remove-image {
+  background: url("app/themes/skins/develop/icon/baseline-delete_outline-white-24px.png") center center no-repeat;
+	background-size: contain;
+}
 // Card tiitle
 %card-title {
 	background-color: $color-bg-secodary;

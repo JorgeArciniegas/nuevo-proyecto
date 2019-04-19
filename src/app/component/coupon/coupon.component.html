@@ -44,24 +44,26 @@
         <div fxFlex="90" fxLayout="column" fxLayoutAlign="start stretch">
           <div *ngFor="let odd of listOdds" class="card-odd-container" fxFlex="20">
             <div fxFill class="card-odd radius-5" fxLayout="column" fxLayoutAlign="space-between stretch">
-              <div class="top-window" fxLayoutAlign="space-between center">
+              <div fxFlex="24" class="top-window" fxLayoutAlign="space-between center">
                 <div>{{odd.EventName}}</div>
                 <div>#{{odd.MatchId}}</div>
               </div>
-              <div class="row" fxLayout="row">
-                <div fxFlex="80" fxLayoutAlign="start center">
+              <div fxFlex="38" class="row" fxLayout="row">
+                <div fxFlex="78" fxLayoutAlign="start center">
                   {{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})
                 </div>
-                <div fxFlex="20" class="odd radius-5" fxLayoutAlign="center center">
+                <div fxFlex="22" class="odd radius-5" fxLayoutAlign="center center">
                   {{odd.OddValue | number: '1.2-2'}}
                 </div>
               </div>
-              <div class="row" fxLayout="row" fxLayoutAlign="space-between center">
-                <div fxFlex="40" class="stake radius-5">
+              <div fxFlex="38" class="row" fxLayout="row" fxLayoutAlign="space-between stretch">
+                <button fxFlex="40" class="btn-default btn-success stake radius-5" fxLayoutAlign="center center">
                   {{odd.OddStake | number: '1.2-2'}}
-                </div>
-                <div fxFlex="15" class="remove radius-5" fxLayoutAlign="center center">
-                  <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
+                </button>
+                <div fxFlex="16" fxLayoutAlign="end center">
+                  <button class="btn-default btn-warning radius-5 remove" (click)="removeOdd(odd)">
+                    <div class="icon"></div>
+                  </button>
                 </div>
               </div>
             </div>
