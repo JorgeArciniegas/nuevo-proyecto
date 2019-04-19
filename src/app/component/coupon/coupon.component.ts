@@ -16,11 +16,11 @@ export class CouponComponent implements OnInit, OnDestroy {
 
   constructor(public couponService: CouponService) {
     this.couponService.couponResponse.subscribe(coupon => {
-      this.lastCouponOdds = coupon.Odds.slice(-5);
+    /*   this.lastCouponOdds = coupon.Odds.slice(-5);
       const couponLength = coupon.Odds.length;
       for (let index = this.lastCouponOdds.length - 1; index >= 0; index--) {
         this.lastCouponOdds[index].internal_Sequence = couponLength - index;
-      }
+      } */
     });
   }
 

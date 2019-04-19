@@ -4,7 +4,7 @@
       <div class="card-title">
         <h3 class="title">
           <span class="text">{{ 'coupon' | translate }} </span>
-          <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
+          <span class="icon icon-baseline-remove_shopping_cart-24px" (click)="couponService.resetCoupon()"></span>
         </h3>
       </div>
     </div>
@@ -23,9 +23,11 @@
   </mat-grid-tile>
   <mat-grid-tile rowspan="14">
     <div class="content-row-coupon" fxFill fxLayout="column" fxLayoutAlign="start start">
-      <div *ngFor="let odd of lastCouponOdds">
+      <ng-container *ngIf="couponService.coupon">
+      <div *ngFor="let odd of couponService.coupon.Odds">
         {{odd.internal_Sequence}} - {{odd.EventName}} {{odd.MarketName}}
       </div>
+    </ng-container>
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="2">
