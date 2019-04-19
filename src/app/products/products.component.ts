@@ -14,15 +14,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
   observableMediaSubscribe: Subscription;
   public rowHeight: number;
   public settings: AppSettings;
-  // amount subscription
-  totalStake = 0.00;
-  totalStakeSubscribe: Subscription;
+
 
   constructor(
     private observableMedia: MediaObserver,
     public service: ProductsService,
     public readonly appSettings: AppSettings,
-    private couponService: CouponService
+    public readonly couponService: CouponService
   ) {
     this.settings = appSettings;
     this.observableMediaSubscribe = this.observableMedia.media$.subscribe((change: MediaChange) => {
@@ -32,8 +30,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.rowHeight = (this.service.windowSize.columnHeight - 30) / 11;
     });
 
-    // amount change
-    this.totalStakeSubscribe = couponService.stakeDisplayObs.subscribe( elem => this.totalStake = elem.TotalStake );
   }
 
   ngOnInit() {
@@ -41,6 +37,5 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.observableMediaSubscribe.unsubscribe();
-    this.totalStakeSubscribe.unsubscribe();
   }
 }

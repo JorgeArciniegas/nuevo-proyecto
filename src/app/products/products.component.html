@@ -29,10 +29,22 @@
         <!-- VINCITA POTENZIALE MASSIMA -->
         <mat-grid-tile rowspan="1">
           <div fxFlexFill class="padding-horizontal-6">
-            <div class="display-amount radius-5">
+            <div class="display-amount radius-5" fxLayout="column" fxLayoutAlign="right" fxLayoutAlignGap="10px">
+              <!-- <div fxFlex fxLayoutAlign="center right">
+                  <span>{{'amountPlace' | translate}}</span>
+              </div>
+              <div fxFlex>
+                <ng-container *ngIf="couponService.stakeDisplay.TotalStake">
+                  <input type="text" name="amount"  [ngModel]="couponService.stakeDisplay.TotalStake | number: '1.2-2'" readonly />
+                </ng-container>
+                <ng-container *ngIf="!couponService.stakeDisplay.TotalStake">
+                    <span>0.00</span>
+                </ng-container>
+
+              </div> -->
               <label>
-                <span>{{'amountPlace' | translate}}</span>
-                <input type="text" name="amount" [ngModel]="totalStake |number: '1.2-2'" readonly />
+                  <span>{{'amountPlace' | translate}}</span>
+                  <input type="text" name="amount" [ngModel]="couponService.stakeDisplay.TotalStake |number: '1.2-2'" readonly />
               </label>
             </div>
           </div>
