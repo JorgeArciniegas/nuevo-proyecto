@@ -17,7 +17,7 @@
     }
 
   }
-  
+
 
 .icon-baseline-assessment-24px:before {
     /*content: "\e900";
@@ -41,19 +41,16 @@
   }
   .icon-baseline-access_time:before {
     content: url("app/themes/skins/develop/icon/baseline-access_time-24px.svg"); // "\e904";
-    
+
   }
   .icon-baseline-lock:before {
     content: url("app/themes/skins/develop/icon/baseline-lock-24px.svg"); // "\e904";
-    
+    color: #fff;
+
   }
   .icon-baseline-remove_shopping_cart-24px:before {
-    /* content: "\e905";
-    color: #9a9dab; */
-    content: url("app/themes/skins/develop/icon/baseline-remove_shopping_cart-24px.svg");
+    content: url("app/themes/skins/develop/icon/baseline-delete_outline-white-24px.png");
   }
   .icon-baseline-timer-24px:before {
-    /* content: "\e906";
-    color: #9a9dab; */
     content: url("app/themes/skins/develop/icon/baseline-timer-24px.svg");
   }

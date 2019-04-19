@@ -14,9 +14,10 @@ export class CouponService {
   coupon: BetCouponExtended = null;
   couponIdAdded: number[] = [];
 
-
   private couponResponseSubject: Subject<BetCouponExtended>;
   public couponResponse: Observable<BetCouponExtended>;
+
+
 
   constructor(
     public elyscoupon: ElysCouponService,
