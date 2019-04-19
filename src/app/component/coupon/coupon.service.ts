@@ -103,7 +103,6 @@ export class CouponService {
     };
 
     this.stakeDisplaySubject.next(stakesDisplayTemp);
-    console.log(this.coupon);
   }
 
 
