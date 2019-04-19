@@ -1,10 +1,16 @@
 <mat-grid-list cols="1" rowHeight="{{(rowHeight-1) / 2}}">
   <mat-grid-tile rowspan="2">
     <div class="display" fxFlexFill>
-      <div class="card-title">
+      <div class="card-title" fxLayout="row" fxLayoutAlign="center center">
         <h3 class="title">
-          <span class="text">{{ 'coupon' | translate }} </span>
-          <span class="icon icon-baseline-remove_shopping_cart-24px" (click)="couponService.resetCoupon()"></span>
+          <div fxFlex>
+              <span class="text">{{ 'coupon' | translate }} </span>
+          </div>
+          <div>
+            <button class="btn-reset btn-display" (click)="couponService.resetCoupon()">
+                <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
+            </button>
+          </div>
         </h3>
       </div>
     </div>
