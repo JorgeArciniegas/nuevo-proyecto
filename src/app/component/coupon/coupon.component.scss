@@ -51,33 +51,33 @@
 }
 
 .content-row-coupon {
+  padding: 5px 0;
 
-  .card-odd {
-    padding: 5px;
+  .card-odd-container {
+    padding: 2px 0;
 
-    .top-window {
-        height: 20px;
-        font-size: 12px;
-        padding: 2px 6px;
-    }
+    .card-odd {
+      font-size: 0.9em;
 
-    .first-row {
-        padding: 5px;
-    }
+      .top-window {
+          height: 20px;
+          font-size: 0.8em;
+          padding: 2px 6px;
+      }
 
-    .stake {
+      .row {
+          padding: 6px;
+      }
+
+      .stake {
+        font-size: 1.2em;
         padding: 2px;
-        width: 40%;
-        margin: 5px;
         text-align: center;
-    }
-    .odd {
-      padding: 2px 6px;
-      margin: 2px;
-  }
+      }
 
-    &.notSelected {
-        opacity: 0.2;
+      &.notSelected {
+          opacity: 0.2;
+      }
     }
   }
 }

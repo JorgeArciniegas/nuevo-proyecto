@@ -24,19 +24,27 @@
   <mat-grid-tile rowspan="14">
     <div class="content-row-coupon" fxFill fxLayout="column" fxLayoutAlign="start stretch">
       <ng-container *ngIf="couponService.coupon">
-        <div *ngFor="let odd of listOdds" class="card-odd radius-5" fxFlex="18">
-          <div fxFill>
-            <div class="top-window">{{odd.EventName}}</div>
-            <div class="first-row" fxLayout="row">
-              <div fxFlex="50" fxLayoutAlign="start center">
-                {{odd.MarketName}}
+        <div *ngFor="let odd of listOdds" class="card-odd-container" fxFlex="20">
+          <div fxFill class="card-odd radius-5" fxLayout="column" fxLayoutAlign="space-between stretch">
+            <div class="top-window" fxLayoutAlign="space-between center">
+              <div>{{odd.EventName}}</div>
+              <div>#{{odd.MatchId}}</div>
+            </div>
+            <div class="row" fxLayout="row">
+              <div fxFlex="80" fxLayoutAlign="start center">
+                {{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})
               </div>
-              <div fxFlex="50" class="odd radius-5" fxLayoutAlign="end center">
-                {{odd.OddStake | number: '1.2-2'}}
+              <div fxFlex="20" class="odd radius-5" fxLayoutAlign="center center">
+                {{odd.OddValue | number: '1.2-2'}}
               </div>
             </div>
-            <div class="stake radius-5">
-              {{odd.odd | number: '1.2-2'}}
+            <div class="row" fxLayout="row" fxLayoutAlign="space-between center">
+              <div fxFlex="40" class="stake radius-5">
+                {{odd.OddStake | number: '1.2-2'}}
+              </div>
+              <div fxFlex="10" class="remove radius-5" fxLayoutAlign="center center">
+                R
+              </div>
             </div>
           </div>
         </div>

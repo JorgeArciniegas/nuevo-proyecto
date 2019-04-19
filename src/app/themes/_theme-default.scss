@@ -339,6 +339,9 @@ html {
   .stake {
     @extend %btn-success-gradient;
   }
+  .remove {
+    @extend %btn-warning;
+  }
 }
 
 .scroll {
