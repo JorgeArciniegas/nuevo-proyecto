@@ -4,11 +4,11 @@
       <div class="card-title" fxLayout="row" fxLayoutAlign="center center">
         <h3 class="title">
           <div fxFlex>
-              <span class="text">{{ 'coupon' | translate }} </span>
+            <span class="text">{{ 'coupon' | translate }} </span>
           </div>
           <div>
             <button class="btn-reset btn-display" (click)="couponService.resetCoupon()">
-                <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
+              <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
             </button>
           </div>
         </h3>
@@ -28,32 +28,56 @@
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="14">
-    <div class="content-row-coupon" fxFill fxLayout="column" fxLayoutAlign="start stretch">
+    <div class="content-row-coupon" fxFill fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="2px">
       <ng-container *ngIf="couponService.coupon">
-        <div *ngFor="let odd of listOdds" class="card-odd-container" fxFlex="20">
-          <div fxFill class="card-odd radius-5" fxLayout="column" fxLayoutAlign="space-between stretch">
-            <div class="top-window" fxLayoutAlign="space-between center">
-              <div>{{odd.EventName}}</div>
-              <div>#{{odd.MatchId}}</div>
+        <button fxFlex="5" class="btn-reset card-odd radius-5 scroll" (click)="previusOdds()" [disabled]="page <= 0">
+          <div fxFlex="30"></div>
+          <div fxFlex="40">
+            <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/Up.svg">
+          </div>
+          <div fxFlex="30">
+            <div *ngIf="(page * maxItems) > 0" class="indicator-scroll counter">
+              {{page * maxItems}}
             </div>
-            <div class="row" fxLayout="row">
-              <div fxFlex="80" fxLayoutAlign="start center">
-                {{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})
+          </div>
+        </button>
+        <div fxFlex="90" fxLayout="column" fxLayoutAlign="start stretch">
+          <div *ngFor="let odd of listOdds" class="card-odd-container" fxFlex="20">
+            <div fxFill class="card-odd radius-5" fxLayout="column" fxLayoutAlign="space-between stretch">
+              <div class="top-window" fxLayoutAlign="space-between center">
+                <div>{{odd.EventName}}</div>
+                <div>#{{odd.MatchId}}</div>
               </div>
-              <div fxFlex="20" class="odd radius-5" fxLayoutAlign="center center">
-                {{odd.OddValue | number: '1.2-2'}}
+              <div class="row" fxLayout="row">
+                <div fxFlex="80" fxLayoutAlign="start center">
+                  {{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})
+                </div>
+                <div fxFlex="20" class="odd radius-5" fxLayoutAlign="center center">
+                  {{odd.OddValue | number: '1.2-2'}}
+                </div>
               </div>
-            </div>
-            <div class="row" fxLayout="row" fxLayoutAlign="space-between center">
-              <div fxFlex="40" class="stake radius-5">
-                {{odd.OddStake | number: '1.2-2'}}
-              </div>
-              <div fxFlex="10" class="remove radius-5" fxLayoutAlign="center center">
-                R
+              <div class="row" fxLayout="row" fxLayoutAlign="space-between center">
+                <div fxFlex="40" class="stake radius-5">
+                  {{odd.OddStake | number: '1.2-2'}}
+                </div>
+                <div fxFlex="15" class="remove radius-5" fxLayoutAlign="center center">
+                  <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <button fxFlex="5" class="btn-reset card-odd radius-5 scroll" (click)="nextOdds()" [disabled]="page >= maxPage - 1" fxLayout="row">
+          <div fxFlex="30"></div>
+          <div fxFlex="40">
+            <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/Down.svg">
+          </div>
+          <div fxFlex="30">
+            <div *ngIf="(couponService.coupon.Odds.length - ((page + 1) * maxItems)) > 0" class="indicator-scroll counter">
+              {{couponService.coupon.Odds.length - ((page + 1) * maxItems)}}
+            </div>
+          </div>
+        </button>
       </ng-container>
     </div>
   </mat-grid-tile>

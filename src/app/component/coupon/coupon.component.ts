@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { CouponService } from './coupon.service';
 import { Subscription } from 'rxjs';
 import { BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
+import { AppSettings } from 'src/app/app.settings';
 
 @Component({
   selector: 'app-coupon',
@@ -10,15 +11,20 @@ import { BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 })
 export class CouponComponent implements OnInit, OnDestroy {
   @Input()
-  rowHeight: number;
-  private maxItems = 5;
+  public rowHeight: number;
+  private settings: AppSettings;
+  public maxItems = 5;
   public page = 0;
   public maxPage = 0;
   public listOdds: BetCouponOddExtended[] = [];
 
   private couponServiceSubscription: Subscription;
 
-  constructor(public couponService: CouponService) {
+  constructor(
+    public couponService: CouponService,
+    private readonly appSettings: AppSettings
+  ) {
+    this.settings = this.appSettings;
     this.couponServiceSubscription = this.couponService.couponResponse.subscribe(coupon => {
       this.maxPage = Math.ceil(coupon.Odds.length / this.maxItems);
       this.page = 0;
