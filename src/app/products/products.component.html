@@ -32,7 +32,7 @@
             <div class="display-amount radius-5">
               <label>
                 <span>{{'amountPlace' | translate}}</span>
-                <input type="text" name="amount" value="10.000.000 COP" readonly />
+                <input type="text" name="amount" [ngModel]="totalStake |number: '1.2-2'" readonly />
               </label>
             </div>
           </div>

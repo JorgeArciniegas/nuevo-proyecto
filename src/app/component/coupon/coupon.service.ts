@@ -5,6 +5,7 @@ import { AddOddRequest, BetCouponExtended, BetCouponOddExtended } from '@elys/el
 import { Observable, Subject } from 'rxjs';
 import { BetOdd } from 'src/app/products/products.model';
 import { UserService } from 'src/app/services/user.service';
+import { StakesDisplay } from './coupon.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,10 @@ export class CouponService {
   couponIdAdded: number[] = [];
 
   private couponResponseSubject: Subject<BetCouponExtended>;
-  public couponResponse: Observable<BetCouponExtended>;
-
-
+  couponResponse: Observable<BetCouponExtended>;
+  // calculate stake and winning max
+  stakeDisplaySubject: Subject<StakesDisplay>;
+  stakeDisplayObs: Observable<StakesDisplay>;
 
   constructor(
     public elyscoupon: ElysCouponService,
@@ -30,9 +32,11 @@ export class CouponService {
     elyscoupon.couponHasChanged.subscribe(coupon => {
       this.coupon = coupon;
       this.couponResponseSubject.next(coupon);
+      this.calculateAmounts();
     });
 
-    //elyscoupon.couponConfig.betCoupon = this.coupon;
+    this.stakeDisplaySubject = new Subject<StakesDisplay>();
+    this.stakeDisplayObs = this.stakeDisplaySubject.asObservable();
   }
 
   addRemoveToCoupon(smart: BetOdd[]): void {
@@ -65,11 +69,36 @@ export class CouponService {
     };
   }
 
-
+  // clear all odds to coupon
   resetCoupon(): void {
     this.coupon = null;
     this.couponIdAdded = [];
     this.elyscoupon.betCoupon = null;
+    // reset amount
+    const stakesDisplayTemp: StakesDisplay = {
+      TotalStake: 0,
+      MaxWinning: 0
+    };
+    this.stakeDisplaySubject.next(stakesDisplayTemp);
   }
+
+  /**
+    * calculate stake and winning max
+    * this sum does not consider groupings other than singles
+    */
+  calculateAmounts(): void {
+    let stake = 0, winningUnit = 0, bonusUnit = 0;
+    this.coupon.Odds.forEach( odd => stake += odd.OddStake );
+    this.coupon.Groupings.forEach(grouping => { winningUnit += grouping.MaxWinUnit; bonusUnit += grouping.MaxBonusUnit; });
+    //
+    const stakesDisplayTemp: StakesDisplay = {
+      TotalStake: stake,
+      MaxWinning: (stake *  winningUnit) + (stake * bonusUnit )
+    };
+
+    this.stakeDisplaySubject.next(stakesDisplayTemp);
+
+  }
+
 
 }
