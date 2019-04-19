@@ -80,4 +80,16 @@
       }
     }
   }
+  .scroll {
+
+    .icon {
+        width: 20px;
+    }
+    .indicator-scroll {
+      margin-right: 5px;
+      float: right;
+      padding: 1px 3px;
+      border-radius: 20%;
+    }
+  }
 }

@@ -138,7 +138,6 @@ html {
 					font-size: 1.8vh;
 					font-weight: bold;
 					display: inline-block;
-					@extend %header-notification-style;
 				}
 				.details {
 					font-size: 1.8vh;
@@ -320,7 +319,10 @@ html {
 				}
 			}
 		}
-	}
+  }
+  .counter {
+    @extend %header-notification-style;
+  }
 }
 
 .card-odd {
