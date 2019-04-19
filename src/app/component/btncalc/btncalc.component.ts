@@ -84,6 +84,15 @@ export class BtncalcComponent implements OnInit, OnDestroy {
     this.btncalcService.polyfunctionalDecimalsFlag = true;
   }
 
+  defaultAmount(): void {
+    this.btncalcService.polyfunctionalArea.amount = 1;
+    this.btncalcService.polyfunctionalAdditionFlag = true;
+    this.btncalcService.polyfunctionalDecimalsFlag = true;
+    this.productService.polyfunctionalAreaSubject.next(
+      this.btncalcService.polyfunctionalArea
+    );
+  }
+
   // increments amount in display by preset default values
   btnDefaultAmountsPreset(amount: number): void {
     this.btncalcService.btnDefaultAmountAddition(amount);
