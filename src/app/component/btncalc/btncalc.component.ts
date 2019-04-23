@@ -1,13 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { AppSettings } from '../../app.settings';
-import { Product } from '../../products/models/product.model';
-import { PolyfunctionalArea } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
-import { BtncalcService } from './btncalc.service';
-import { TypeBetSlipColTot } from '../../products/dogracing/dogracing.models';
 import { CouponService } from '../coupon/coupon.service';
 import { BtncalcComponentCommon } from './btncalc.component.common';
+import { BtncalcService } from './btncalc.service';
 
 @Component({
   selector: 'app-btncalc',

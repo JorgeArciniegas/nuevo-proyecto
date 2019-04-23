@@ -52,7 +52,10 @@ export class BtncalcComponentCommon {
   }
 
   async plus(): Promise<void> {
-
+    if (this.couponService.oddStakeEdit) {
+      this.couponService.updateCoupon();
+      return;
+    }
     await this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds);
 
     // this.btncalcService.polyfunctionalArea.amount = 1;
@@ -75,6 +78,10 @@ export class BtncalcComponentCommon {
 
   polyfuncionalAmountReset(): void {
     // this.btncalcService.polyfunctionalArea.amount = 1;
+    if (this.couponService.oddStakeEdit) {
+      this.couponService.oddStakeEdit.tempStake = 0.00;
+      this.couponService.oddStakeEditSubject.next(this.couponService.oddStakeEdit);
+    }
     this.btncalcService.polyfunctionalAdditionFlag = true;
     this.btncalcService.polyfunctionalDecimalsFlag = true;
     this.productService.polyfunctionalAreaSubject.next(
@@ -84,12 +91,30 @@ export class BtncalcComponentCommon {
 
   // increments amount in display by preset default values
   btnDefaultAmountsPreset(amount: number): void {
-    this.btncalcService.btnDefaultAmountAddition(amount);
+
+    if (this.couponService.oddStakeEdit) {
+      if (!this.couponService.oddStakeEdit.isDefaultInput) {
+        this.couponService.oddStakeEdit.tempStake = 0;
+        this.couponService.oddStakeEdit.isDefaultInput = true;
+      }
+      this.couponService.oddStakeEdit.tempStake += amount;
+    } else {
+      this.btncalcService.btnDefaultAmountAddition(amount);
+    }
   }
 
   // increments digits in display amount
   btnAmountSet(amount: number): void {
-    this.btncalcService.btnAmountDecimals(amount);
+    if (this.couponService.oddStakeEdit) {
+      if (this.couponService.oddStakeEdit.isDefaultInput) {
+        this.couponService.oddStakeEdit.tempStake = 0;
+        this.couponService.oddStakeEdit.isDefaultInput = false;
+      }
+      this.couponService.oddStakeEdit.tempStake =
+        this.btncalcService.btnAmountDecimalsChangeOdd(amount, this.couponService.oddStakeEdit.tempStake);
+    } else {
+      this.btncalcService.btnAmountDecimals(amount);
+    }
   }
 
   // TOT/distribution & COL/association buttons enabling

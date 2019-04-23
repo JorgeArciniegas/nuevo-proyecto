@@ -264,7 +264,9 @@ html {
 		.btn-success {
 			@extend %btn-success-gradient;
 		}
-
+    .btn-selected {
+      @extend %btn-blue-gradient;
+    }
 		.btn-grey-gradient {
 			@extend %btn-gray-gradient;
 		}
