@@ -18,7 +18,8 @@ export class CouponComponent implements OnDestroy {
   public page = 0;
   public maxPage = 0;
   public listOdds: BetCouponOddExtended[] = [];
-
+  // number of odds inserted to coupon
+  oddsNumber = 0;
   private couponServiceSubscription: Subscription;
 
   constructor(
@@ -30,6 +31,9 @@ export class CouponComponent implements OnDestroy {
       this.maxPage = Math.ceil(coupon.Odds.length / this.maxItems);
       this.page = 0;
       this.filterOdds();
+
+      // updating the number of odds
+      this.oddsNumber = coupon.Odds.length;
     });
   }
 

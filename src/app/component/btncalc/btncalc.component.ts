@@ -67,9 +67,10 @@ export class BtncalcComponent implements OnInit, OnDestroy {
 
     await this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds);
 
-    this.btncalcService.polyfunctionalArea.amount = 1;
+    // this.btncalcService.polyfunctionalArea.amount = 1;
     this.productService.closeProductDialog();
     this.productService.resetBoard();
+    this.polyfuncionalAmountReset();
   }
 
   clearAll(): void {
@@ -84,8 +85,8 @@ export class BtncalcComponent implements OnInit, OnDestroy {
     this.btncalcService.polyfunctionalDecimalsFlag = true;
   }
 
-  defaultAmount(): void {
-    this.btncalcService.polyfunctionalArea.amount = 1;
+  polyfuncionalAmountReset(): void {
+    // this.btncalcService.polyfunctionalArea.amount = 1;
     this.btncalcService.polyfunctionalAdditionFlag = true;
     this.btncalcService.polyfunctionalDecimalsFlag = true;
     this.productService.polyfunctionalAreaSubject.next(
