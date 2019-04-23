@@ -358,6 +358,10 @@ html {
   @extend %indicator;
 }
 
+.indicator-odds-number{
+  @extend %header-btn-menu-color;
+}
+
 .radius-2 {
 	border-radius: 2px;
 	-moz-border-radius: 2px;

@@ -10,13 +10,27 @@
             text-transform: uppercase;
             font-size: 2.8vh;
             margin: 0;
-
-            .icon{
-              width: 3vh;
+            margin-right: 20px;
+            button{
+              margin-left: 10px;
+              min-width: 48px;
             }
         }
     }
+  .indicator-odds-number {
+    /* padding: 0px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    font-weight: 400;
+    min-width: 60px; */
+    margin-left: 15px;
+    border: 1px solid;
+    width: 38px;
+    line-height: 24px;
+    font-size: 0.8em;
+    font-weight: 600;
 
+  }
 }
 .sub-display{
     padding: 3px;
