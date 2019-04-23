@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { Products } from 'src/environments/environment.models';
+import { environment } from '../environments/environment';
+import { Products } from '../environments/environment.models';
 @Injectable()
 export class AppSettings {
   baseApiUrl: string = environment.baseApiUrl;

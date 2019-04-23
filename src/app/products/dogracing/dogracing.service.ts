@@ -10,7 +10,7 @@ import {
   VirtualVirtualSportLastResultsRequest
 } from '@elys/elys-api/lib/virtual/virtual.models';
 import { interval, Observable, Subject, timer } from 'rxjs';
-import { BtncalcService } from 'src/app/component/btncalc/btncalc.service';
+import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import {
   CountDown,
   EventResults,
@@ -36,7 +36,7 @@ import {
   TypeBetSlipColTot,
   TypePlacingRace
 } from './dogracing.models';
-import { CouponService } from 'src/app/component/coupon/coupon.service';
+import { CouponService } from '../../component/coupon/coupon.service';
 
 @Injectable({
   providedIn: 'root'

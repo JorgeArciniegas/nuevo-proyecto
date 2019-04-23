@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { TypeBetSlipColTot } from 'src/app/products/dogracing/dogracing.models';
+import { TypeBetSlipColTot } from '../../products/dogracing/dogracing.models';
 import { AppSettings } from '../../app.settings';
 import { Product } from '../../products/models/product.model';
 import { PolyfunctionalArea } from '../../products/products.model';

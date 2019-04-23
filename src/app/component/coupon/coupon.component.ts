@@ -80,7 +80,7 @@ export class CouponComponent implements OnDestroy {
   // change stake from odd's coupon
   checkOddToChangeStake(odd: BetCouponOdd): void {
 
-    const tempOdd: OddsStakeEdit =  {indexOdd: -1, tempStake: 0.00, odd: null};
+    const tempOdd: OddsStakeEdit =  {indexOdd: -1, tempStake: 0.00, odd: null, isDefaultInput: false};
     // search if the odd is selected and it reset
     if (this.couponService.oddStakeEdit && this.couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId){
       this.couponService.oddStakeEditSubject.next(null);

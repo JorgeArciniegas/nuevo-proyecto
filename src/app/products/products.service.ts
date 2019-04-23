@@ -9,7 +9,6 @@ import { WindowSizeService } from '../services/utility/window-size/window-size.s
 })
 export class ProductsService {
   public breakpoint = 1;
-  public breakpointSubscribe: Subject<number>;
 
   public productNameSelectedSubscribe: Subject<string>;
   public productNameSelectedObserve: Observable<string>;
@@ -36,7 +35,6 @@ export class ProductsService {
   };
   windowSize: WindowSize;
   constructor(public dialog: DialogService, private windowSizeService: WindowSizeService) {
-    this.breakpointSubscribe = new Subject<number>();
     this.productNameSelectedSubscribe = new Subject<string>();
     this.productNameSelectedObserve = this.productNameSelectedSubscribe.asObservable();
     // Element for management the display
