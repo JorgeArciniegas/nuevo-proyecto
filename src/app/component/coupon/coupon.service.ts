@@ -3,8 +3,8 @@ import { CouponCategory } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { AddOddRequest, BetCouponExtended, BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Observable, Subject } from 'rxjs';
-import { BetOdd } from 'src/app/products/products.model';
-import { UserService } from 'src/app/services/user.service';
+import { BetOdd } from '../../products/products.model';
+import { UserService } from '../../services/user.service';
 import { StakesDisplay } from './coupon.model';
 
 @Injectable({

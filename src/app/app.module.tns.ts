@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 import { FloorPipe } from './component/pipe/floor.pipe';
 import { SharedModule } from './shared/shared.module';
 import { ElysApiModule } from '@elys/elys-api';
-import { environment } from 'src/environments/environment.vgen';
+import { environment } from '../environments/environment';
 import { ElysCouponModule } from '@elys/elys-coupon';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {

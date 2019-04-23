@@ -30,13 +30,15 @@ export class ProductDialogComponent implements OnInit {
     private productService: ProductsService,
     public readonly appSettings: AppSettings
   ) {
+    console.log('open dialog');
     this.settings = appSettings;
-    if (productService.windowSize.small) {
+    if (productService.windowSize && productService.windowSize.small) {
       this.rowNumber = 2;
     }
   }
 
   ngOnInit(): void {
+    console.log('init dialog');
     this.title = this.data.betOdds.title;
     for (let index = 0; index < this.columnNumber - 1; index++) {
       this.columns += ',*';

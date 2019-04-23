@@ -7,7 +7,7 @@ import {
   PolyfunctionalArea
 } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
-import { TypeBetSlipColTot } from 'src/app/products/dogracing/dogracing.models';
+import { TypeBetSlipColTot } from '../../products/dogracing/dogracing.models';
 
 @Component({
   selector: 'app-display',
@@ -37,7 +37,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnDestroy() {
     this.polyfunctionalValueSubscribe.unsubscribe();

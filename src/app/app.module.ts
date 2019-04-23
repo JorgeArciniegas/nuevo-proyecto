@@ -4,19 +4,17 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { ElysApiModule } from '@elys/elys-api';
+import { ElysCouponModule } from '@elys/elys-coupon';
 import { ElysStorageLibModule } from '@elys/elys-storage-lib';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { environment } from '../environments/environment';
 import { VERSION } from '../environments/version';
 import { componentDeclarations, providerDeclarations, routes } from './app.common';
 import { AppComponent } from './app.component';
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
 import { SharedModule } from './shared/shared.module';
-import { environment } from 'src/environments/environment';
-import { ElysApiModule } from '@elys/elys-api';
-import { ElysCouponModule, ElysCouponService } from '@elys/elys-coupon';
-import { UserService } from './services/user.service';
-import { CouponDataConfig } from '@elys/elys-coupon/lib/elys-coupon.models';
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -43,7 +41,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       versionStorage: VERSION.version
     }),
 
-    ElysApiModule.forRoot( {
+    ElysApiModule.forRoot({
       language: 'en',
       urlApi: environment.baseApiUrl
     }),

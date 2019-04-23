@@ -8,7 +8,7 @@ export class DialogService {
   public showDialog = false;
   public dialogData: DialogData;
 
-  constructor() {}
+  constructor() { }
 
   openDialog(dialogData: DialogData) {
     this.dialogData = dialogData;

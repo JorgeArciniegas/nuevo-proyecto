@@ -2,8 +2,8 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { CouponService } from './coupon.service';
 import { Subscription } from 'rxjs';
 import { BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
-import { AppSettings } from 'src/app/app.settings';
-import { BetOdd } from 'src/app/products/products.model';
+import { AppSettings } from '../../app.settings';
+import { BetOdd } from '../../products/products.model';
 
 @Component({
   selector: 'app-coupon',
