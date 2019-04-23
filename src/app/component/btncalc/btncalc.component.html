@@ -49,7 +49,7 @@
     <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet('000')">000</button>
   </mat-grid-tile>
   <mat-grid-tile>
-    <button class="btn-default btn-keyboard btn-warning radius-5 elevation-z5" (dblclick)="clearAll()" (click)='defaultAmount()'>{{ 'C' | translate }}</button>
+    <button class="btn-default btn-keyboard btn-warning radius-5 elevation-z5" (dblclick)="clearAll()" (click)='polyfuncionalAmountReset()'>{{ 'C' | translate }}</button>
   </mat-grid-tile>
   <mat-grid-tile colspan="2">
     <button class="btn-default btn-keyboard btn-grey-gradient radius-5 elevation-z5" [disabled]="!isActiveTot" [class.not-active]="!isActiveTot"

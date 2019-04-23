@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { CouponCategory } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
-import { AddOddRequest, BetCouponExtended, BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
+import { AddOddRequest, BetCouponExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Observable, Subject } from 'rxjs';
 import { BetOdd } from 'src/app/products/products.model';
 import { UserService } from 'src/app/services/user.service';
-import { StakesDisplay } from './coupon.model';
+import { OddsStakeEdit, StakesDisplay } from './coupon.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,12 @@ export class CouponService {
   stakeDisplay: StakesDisplay = { TotalStake: 0, MaxWinning: 0 };
   stakeDisplaySubject: Subject<StakesDisplay>;
   stakeDisplayObs: Observable<StakesDisplay>;
+
+  // edit Odds Stake
+  oddStakeEdit: OddsStakeEdit;
+  oddStakeEditSubject: Subject<OddsStakeEdit>;
+  oddStakeEditObs: Observable<OddsStakeEdit>;
+
   constructor(
     public elyscoupon: ElysCouponService,
     userService: UserService
@@ -33,12 +39,18 @@ export class CouponService {
       this.coupon = coupon;
       this.couponResponseSubject.next(coupon);
       this.calculateAmounts();
-
     });
 
     this.stakeDisplaySubject = new Subject<StakesDisplay>();
     this.stakeDisplayObs = this.stakeDisplaySubject.asObservable();
     this.stakeDisplayObs.subscribe(elem => this.stakeDisplay = elem);
+    // oddstakeEdit
+    this.oddStakeEditSubject = new Subject<OddsStakeEdit>();
+    this.oddStakeEditObs = this.oddStakeEditSubject.asObservable();
+    this.oddStakeEditObs.subscribe( item => {
+      this.oddStakeEdit = item;
+      console.log(item);
+    });
   }
 
   addRemoveToCoupon(smart: BetOdd[]): void {
@@ -105,5 +117,13 @@ export class CouponService {
     this.stakeDisplaySubject.next(stakesDisplayTemp);
   }
 
+
+  updateCoupon(): void {
+    if (this.oddStakeEdit.tempStake > 0) {
+      this.coupon.Odds[this.oddStakeEdit.indexOdd].OddStake = this.oddStakeEdit.tempStake;
+      this.elyscoupon.updateCoupon(this.coupon);
+    }
+    this.oddStakeEditSubject.next(null);
+  }
 
 }

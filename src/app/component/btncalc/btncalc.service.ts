@@ -99,11 +99,19 @@ export class BtncalcService implements OnDestroy {
        * algorithm to covert last two digits of number to decimals
        * assigns it back to amount
        */
-      this.polyfunctionalArea.amount = this.returnNumber(amount);
+      this.polyfunctionalArea.amount = this.returnNumberToPolyfuncArea(amount);
       this.productService.polyfunctionalAreaSubject.next(
         this.polyfunctionalArea
       );
     }
+  }
+
+  btnAmountDecimalsChangeOdd(amount: number, oddStake: number): number {
+    const tmpNumberLength = (oddStake * 100).toFixed()
+    .toString()
+    .replace('.', '');
+    const stringTmpNumber = tmpNumberLength.toString() + amount.toString();
+    return Number(stringTmpNumber) / 100;
   }
 
   // TOT & COL buttons on/off
@@ -112,7 +120,7 @@ export class BtncalcService implements OnDestroy {
     this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
   }
 
-  private returnNumber(amount: number): number {
+  private returnNumberToPolyfuncArea(amount: number): number {
     const tmpNumberLength = (this.polyfunctionalArea.amount * 100)
       .toFixed()
       .toString()
