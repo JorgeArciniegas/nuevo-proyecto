@@ -48,7 +48,6 @@ export class ProductsService {
     // Dialog management
     this.dialogProductDataSubject = new Subject<BetOdds>();
     this.dialogProductDataSubject.asObservable().subscribe((odds: BetOdds) => {
-      console.log('next dialog', odds);
       this.dialog.openDialog(new DialogData(odds, this.breakpoint));
     });
 

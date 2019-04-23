@@ -32,7 +32,7 @@ export class ProductDialogComponent implements OnInit {
   ) {
     console.log('open dialog');
     this.settings = appSettings;
-    if (productService.windowSize && productService.windowSize.small) {
+    if (this.productService.windowSize && this.productService.windowSize.small) {
       this.rowNumber = 2;
     }
   }
