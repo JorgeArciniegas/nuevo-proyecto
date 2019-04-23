@@ -81,7 +81,6 @@
 				.counter {
 					text-align: center;
 					font-weight: bold;
-					@extend %header-notification-style-mobile;
 				}
 				.details {
 					margin-right: 10;
@@ -294,35 +293,53 @@
 			@extend %dialog-mobile;
 
 			.odds-grid {
-				.card-odd {
-					@extend %dialog-card-mobile;
-
-					.top-window {
-						@extend %dialog-card-header;
-					}
-
-					.odd {
-						@extend %btn-success-gradient;
-					}
-				}
 
 				.btn-close {
 					@extend %btn-transparent;
 				}
-
-				.scroll {
-					&.disabled {
-						opacity: 0.1;
-					}
-				}
-
-				.indicator {
-					@extend %indicator;
-				}
 			}
 		}
-	}
+  }
+
+  .counter {
+    text-align: center;
+    font-weight: bold;
+    @extend %header-notification-style-mobile;
+  }
+
+  .card-odd {
+    @extend %dialog-card-mobile;
+
+    .top-window {
+      @extend %dialog-card-header;
+    }
+
+    .odd {
+      border-width: 1;
+      @extend %border-primary;
+    }
+
+    .stake {
+      @extend %btn-success-gradient;
+    }
+  }
+
+  .scroll {
+    &.disabled {
+      opacity: 0.1;
+    }
+  }
+
+  .indicator {
+    @extend %indicator;
+  }
+
+  .indicator-odds-number{
+    @extend %header-btn-menu-color;
+  }
 }
+
+
 
 .overlay {
 	background: rgba(0, 0, 0, 0.6);

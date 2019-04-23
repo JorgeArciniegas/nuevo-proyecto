@@ -19,12 +19,49 @@
 .btn-coupon-board {
 	border-radius: 5;
 
-	.left {
-		width: 100%;
-		border-radius: 5 0 0 5;
-	}
-	.right {
-		width: 100%;
-		border-radius: 0 5 5 0;
-	}
+	.indicator-odds-number {
+    margin-left: 5;
+    border-width: 1;
+    width: 30;
+    font-size: 11;
+    font-weight: 600;
+  }
+}
+
+.remove-all {
+  margin-left: 5;
+}
+
+.card-odd {
+  border-radius: 5;
+  margin: 3;
+
+  .top-window {
+    font-size: 9;
+    padding: 0 5;
+  }
+
+  .row {
+    padding: 5;
+    font-size: 10;
+  }
+
+  .odd {
+    border-radius: 3;
+    padding: 0 4;
+    font-size: 9;
+  }
+
+  .stake {
+    width: 100%;
+    text-align: center;
+    border-radius: 3;
+  }
+
+  .counter {
+    font-size: 9;
+    padding: 0 2;
+    border-radius: 2;
+    margin-right: 3;
+  }
 }
