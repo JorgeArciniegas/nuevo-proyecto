@@ -3,21 +3,19 @@
     <GridLayout rows="*" columns="*" class="display">
       <StackLayout orientation="horizontal" class="title" verticalAlignment="center" horizontalAlignment="center">
         <Label text="{{ 'coupon' | translate }}" textTransform="uppercase" verticalAlignment="center"></Label>
-        <Image stretch="aspectFit" width="26" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-remove_shopping_cart-24px.png"
-          verticalAlignment="center"></Image>
+        <Image stretch="aspectFit" width="26" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-remove_shopping_cart-24px.png" verticalAlignment="center"></Image>
       </StackLayout>
     </GridLayout>
   </GridLayout>
   <GridLayout row="1" shadow="3" cornerRadius="6" class="card">
     <GridLayout rows="*" columns="*" class="sub-display">
-      <StackLayout class="title" [ngClass]="{'small': productService.windowSize.small}" verticalAlignment="center"
-        horizontalAlignment="center">
+      <StackLayout class="title" [ngClass]="{'small': productService.windowSize.small}" verticalAlignment="center" horizontalAlignment="center">
         <Label text="{{ 'tabCoupon' | translate }}"></Label>
       </StackLayout>
     </GridLayout>
   </GridLayout>
   <GridLayout row="1" rows="*" columns="*,*" class="card display btn-coupon-board" [ngClass]="{'small': productService.windowSize.small}">
-    <GridLayout col="0" class="left {{active == 'single' ? 'actived' : ''}}" (tap)="couponTab('single')">
+    <GridLayout col="0" (tap)="couponTab('single')">
       <Label text="{{'single' | translate}}" horizontalAlignment="center" verticalAlignment="center" textTransform="uppercase"></Label>
     </GridLayout>
     <!-- <GridLayout col="1" class="right {{active == 'multi' ? 'actived' : ''}}" (tap)="couponTab('multi')">
@@ -29,8 +27,7 @@
   </StackLayout>
   <GridLayout row="4">
     <GridLayout rows="*,3*" columns="*" class="card display-amount">
-      <Label row="0" text="{{'potentialMaxWinner' | translate}}" class="title" [ngClass]="{'small': productService.windowSize.small}"
-        textTransform="uppercase"></Label>
+      <Label row="0" text="{{'potentialMaxWinner' | translate}}" class="title" [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
       <Label row="1" text="10.000.000 COP" class="amount" [ngClass]="{'small': productService.windowSize.small}"></Label>
     </GridLayout>
   </GridLayout>

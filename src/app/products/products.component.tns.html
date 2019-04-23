@@ -5,9 +5,15 @@
   </StackLayout>
   <!--PRODUCT CONTAINER-->
   <GridLayout row="1" columns="60*,20*,20*" rows="*" class="product">
-    <StackLayout col="0" class="product-container padding-left-6 padding-right-3">
-      <router-outlet></router-outlet>
-    </StackLayout>
+    <GridLayout col="0" rows="3*,13*,2*" columns="*" class="product-container padding-left-6 padding-right-3">
+      <StackLayout row="0" rowSpan="3">
+        <router-outlet></router-outlet>
+      </StackLayout>
+      <!-- Dialog -->
+      <GridLayout row="1" *ngIf="dialog.showDialog">
+        <app-product-dialog [data]="dialog.dialogData"></app-product-dialog>
+      </GridLayout>
+    </GridLayout>
     <GridLayout col="1" class="product-calc padding-right-3">
       <GridLayout rows="*,*,*,6*,*,*" columns="*">
         <StackLayout row="0">
@@ -30,9 +36,8 @@
         </StackLayout>
         <!-- VINCITA POTENZIALE MASSIMA -->
         <GridLayout row="4" rows="*,3*" columns="*" class="card display-amount">
-          <Label row="0" text="{{'amountPlace' | translate}}" class="title" [ngClass]="{'small': service.windowSize.small}"
-            textTransform="uppercase"></Label>
-          <Label row="1" text="10.000.000 COP" class="amount" [ngClass]="{'small': service.windowSize.small}"></Label>
+          <Label row="0" text="{{'amountPlace' | translate}}" class="title" [ngClass]="{'small': service.windowSize.small}" textTransform="uppercase"></Label>
+          <Label row="1" [text]="couponService.stakeDisplay.TotalStake |number: '1.2-2'" class="amount" [ngClass]="{'small': service.windowSize.small}"></Label>
         </GridLayout>
         <GridLayout row="5" rows="*" columns="*,*" class="card">
           <!-- Area polifunzionale [Fissa]  -->
@@ -47,8 +52,8 @@
     </GridLayout>
     <GridLayout col="1" class="overlay radius-5" marginRight="3" *ngIf="service.timeBlocked">
       <StackLayout verticalAlignment="center">
-        <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png"
-          horizontalAlignment="center" verticalAlignment="center"></Image>
+        <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png" horizontalAlignment="center" verticalAlignment="center">
+        </Image>
       </StackLayout>
     </GridLayout>
     <StackLayout col="2" class="product-coupon padding-right-6">
@@ -56,8 +61,8 @@
     </StackLayout>
     <GridLayout col="2" class="overlay radius-5" marginRight="6" *ngIf="service.timeBlocked">
       <StackLayout verticalAlignment="center">
-        <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png"
-          horizontalAlignment="center" verticalAlignment="center"></Image>
+        <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png" horizontalAlignment="center" verticalAlignment="center">
+        </Image>
       </StackLayout>
     </GridLayout>
   </GridLayout>

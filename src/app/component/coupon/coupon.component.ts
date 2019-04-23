@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { CouponService } from './coupon.service';
-import { Subscription } from 'rxjs';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
+import { Subscription } from 'rxjs';
+import { ProductsService } from '../../products/products.service';
 import { AppSettings } from '../../app.settings';
 import { BetOdd } from '../../products/products.model';
+import { CouponService } from './coupon.service';
 
 @Component({
   selector: 'app-coupon',
@@ -13,6 +14,8 @@ import { BetOdd } from '../../products/products.model';
 export class CouponComponent implements OnDestroy {
   @Input()
   public rowHeight: number;
+  @Input()
+  public timeBlocked: boolean;
   private settings: AppSettings;
   public maxItems = 5;
   public page = 0;
@@ -24,7 +27,8 @@ export class CouponComponent implements OnDestroy {
 
   constructor(
     public couponService: CouponService,
-    private readonly appSettings: AppSettings
+    private readonly appSettings: AppSettings,
+    public productService: ProductsService
   ) {
     this.settings = this.appSettings;
     this.couponServiceSubscription = this.couponService.couponResponse.subscribe(coupon => {
