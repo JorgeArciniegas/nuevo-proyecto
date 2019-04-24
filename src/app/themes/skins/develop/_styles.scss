@@ -1,11 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i");
+
 @import "icons";
+
 /**
 * THEME DEFAULT
 **/
 %font-family {
-	font-family: "Open Sans", sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
+
 //BACKGROUNDS COLOR
 $color-bg-transparent: transparent;
 $color-bg-primary: #1b2432;
@@ -30,6 +33,7 @@ $color-border-box: #6b7279;
 $btn-border-keyboard: #03030a;
 $btn-border-opacity: rgba(0, 0, 0, 0.12);
 $btn-border-selected: #538939;
+
 //TEXT COLOR
 $color-text-dark: #000;
 $color-text-primary: #ffffff;
@@ -39,152 +43,189 @@ $color-text-operator: #3dab14;
 
 //EXTENDS
 %color-bg-default {
-	background: $color-bg-primary;
-	color: #ffffff;
+    background: $color-bg-primary;
+    color: #ffffff;
 }
+
 %bg-default {
-	background: $color-bg-primary;
+    background: $color-bg-primary;
 }
+
 %bg-opacity {
-	background: $color-bg-primary-op;
-	color: $color-bg-accent;
+    background: $color-bg-primary-op;
+    color: $color-bg-accent;
 }
+
 %bg-opacity-dark {
-	background: $color-bg-primary-op-dark;
-	color: $color-bg-accent;
+    background: $color-bg-primary-op-dark;
+    color: $color-bg-accent;
 }
+
 %color-bg-white {
-	background: white;
-	color: $color-text-dark;
+    background: white;
+    color: $color-text-dark;
 }
+
+%color-bg-warn {
+    background: $color-bg-warn;
+    color: $color-text-primary;
+}
+
 // Header Area
 %header {
-	background: $color-bg-header;
+    background: $color-bg-header;
 }
+
 %header-notification-style {
-	background-color: #f88739;
-	color: $color-text-primary;
-	border-radius: 50%;
+    background-color: #f88739;
+    color: $color-text-primary;
+    border-radius: 50%;
 }
+
 %header-notification-style-mobile {
-	background-color: #f88739;
-	color: $color-text-primary;
+    background-color: #f88739;
+    color: $color-text-primary;
 }
+
 %header-notification-img {
-	background-image: url("app/themes/skins/develop/icon/account.svg");
+    background-image: url("app/themes/skins/develop/icon/account.svg");
 }
+
 %header-btn-menu-selected {
-	border-bottom: 3px solid $btn-border-selected;
+    border-bottom: 3px solid $btn-border-selected;
 }
+
 %header-btn-menu-color-selected {
-	border-color: $btn-border-selected;
+    border-color: $btn-border-selected;
 }
+
 %header-btn-menu {
-	border: 1px solid #86878a;
+    border: 1px solid #86878a;
 }
+
 %header-btn-menu-color {
-	border-color: #86878a;
+    border-color: #86878a;
 }
+
 %header-text-operator {
-	color: $color-text-operator;
+    color: $color-text-operator;
 }
+
 %logo-with-text {
-	background: url("app/themes/skins/develop/image/vgen.png") center center no-repeat;
-	background-size: contain;
+    background: url("app/themes/skins/develop/image/vgen.png") center center no-repeat;
+    background-size: contain;
 }
+
 %logo-with-text-mobile {
-	background: url("~/app/themes/skins/develop/image/vgen.png") center center no-repeat;
-	background-size: contain;
+    background: url("~/app/themes/skins/develop/image/vgen.png") center center no-repeat;
+    background-size: contain;
 }
+
 %remove-image {
-  background: url("app/themes/skins/develop/icon/baseline-delete_outline-white-24px.png") center center no-repeat;
-	background-size: contain;
+    background: url("app/themes/skins/develop/icon/baseline-delete_outline-white-24px.png") center center no-repeat;
+    background-size: contain;
 }
+
 // Card tiitle
 %card-title {
-	background-color: $color-bg-secodary;
-	color: $color-text-primary;
-	border: 1px solid $border-cartd-title;
-	border-radius: 4px;
+    background-color: $color-bg-secodary;
+    color: $color-text-primary;
+    border: 1px solid $border-cartd-title;
+    border-radius: 4px;
 }
+
 %card-title-mobile {
-	background-color: $color-bg-secodary;
-	color: $color-text-primary;
-	border-color: $border-cartd-title;
-	border-width: 1;
-	border-radius: 5;
+    background-color: $color-bg-secodary;
+    color: $color-text-primary;
+    border-color: $border-cartd-title;
+    border-width: 1;
+    border-radius: 5;
 }
+
 %sub-card-title {
-	background-color: $color-bg-event;
-	color: $color-text-primary;
-	border-radius: 4px;
+    background-color: $color-bg-event;
+    color: $color-text-primary;
+    border-radius: 4px;
 }
+
 %sub-card-title-mobile {
-	background-color: $color-bg-event;
-	color: $color-text-primary;
-	border-radius: 5;
+    background-color: $color-bg-event;
+    color: $color-text-primary;
+    border-radius: 5;
 }
+
 %time-card-title {
-	background-color: $color-bg-event;
-	color: $color-text-primary;
-	border: 1px solid $border-event;
-	border-radius: 4px;
+    background-color: $color-bg-event;
+    color: $color-text-primary;
+    border: 1px solid $border-event;
+    border-radius: 4px;
 }
+
 %time-card-title-mobile {
-	background-color: $color-bg-event;
-	color: $color-text-primary;
-	border-color: $border-event;
-	border-width: 1;
-	border-radius: 5;
+    background-color: $color-bg-event;
+    color: $color-text-primary;
+    border-color: $border-event;
+    border-width: 1;
+    border-radius: 5;
 }
+
 %card-title-noborder {
-	background-color: $color-bg-secodary;
-	color: $color-text-primary;
+    background-color: $color-bg-secodary;
+    color: $color-text-primary;
 }
+
 // LINK
 %primary-link {
-	color: $color-text-primary;
+    color: $color-text-primary;
 }
+
 // BUTTONS DEFINITION
 %btn-keyboard {
-	background: $btn-bg-keyboard;
-	border-color: $btn-border-keyboard;
+    background: $btn-bg-keyboard;
+    border-color: $btn-border-keyboard;
 }
+
 // BUTTONS FLAT
 %btn-dark {
-	background: black;
-	color: $color-text-primary;
-	border-color: $border-warning;
+    background: black;
+    color: $color-text-primary;
+    border-color: $border-warning;
 }
+
 %btn-gray {
-	background: $color-bg-accent;
-	color: $color-text-dark;
-	border-color: $btn-border-opacity;
+    background: $color-bg-accent;
+    color: $color-text-dark;
+    border-color: $btn-border-opacity;
 }
+
 %btn-yellow {
-	background: $btn-bg-yellow;
-	color: $color-text-dark;
-	border-color: $btn-border-opacity;
+    background: $btn-bg-yellow;
+    color: $color-text-dark;
+    border-color: $btn-border-opacity;
 }
+
 %btn-white {
-	background: white;
-	color: $color-text-dark;
-	border-color: $btn-border-opacity;
+    background: white;
+    color: $color-text-dark;
+    border-color: $btn-border-opacity;
 }
+
 %btn-transparent {
-	background: transparent;
-	color: $color-bg-accent;
+    background: transparent;
+    color: $color-bg-accent;
 }
 
 %btn-advance-game {
-	background-color: #fefefe;
-	color: $color-text-dark;
-	border-color: #ffffff;
+    background-color: #fefefe;
+    color: $color-text-dark;
+    border-color: #ffffff;
 }
+
 %btn-advance-game-mobile {
-	background-color: #fefefe;
-	color: $color-text-dark;
+    background-color: #fefefe;
+    color: $color-text-dark;
 }
+
 // BUTTONS GRADIENT
 $gradient-red1: #ff7f7f;
 $gradient-red2: #cb1e1e;
@@ -206,236 +247,252 @@ $gradient-dark1: #393939;
 $gradient-dark2: #000000;
 
 %btn-warning {
-	background: $gradient-red1;
-	background: -moz-linear-gradient(top, $gradient-red1 0%, $gradient-red2 100%);
-	background: -webkit-linear-gradient(top, $gradient-red1 0%, $gradient-red2 100%);
-	background: linear-gradient(to bottom, $gradient-red1 0%, $gradient-red2 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-red1', endColorstr='$gradient-red2',GradientType=0 );
-	color: $color-text-primary;
+    background: $gradient-red1;
+    background: -moz-linear-gradient(top, $gradient-red1 0%, $gradient-red2 100%);
+    background: -webkit-linear-gradient(top, $gradient-red1 0%, $gradient-red2 100%);
+    background: linear-gradient(to bottom, $gradient-red1 0%, $gradient-red2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-red1', endColorstr='$gradient-red2',GradientType=0 );
+    color: $color-text-primary;
 }
+
 %btn-warning-mobile {
-	background: linear-gradient(to bottom, $gradient-red1 0%, $gradient-red2 100%);
-	color: $color-text-primary;
+    background: linear-gradient(to bottom, $gradient-red1 0%, $gradient-red2 100%);
+    color: $color-text-primary;
 }
 
 %btn-success-gradient {
-	background: $gradient-green1;
-	background: -moz-linear-gradient(top, $gradient-green1 0%, $gradient-green2 100%);
-	background: -webkit-linear-gradient(top, $gradient-green1 0%, $gradient-green2 100%);
-	background: linear-gradient(to bottom, $gradient-green1 0%, $gradient-green2 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-green1', endColorstr='$gradient-green2',GradientType=0 );
-	color: $color-text-primary;
+    background: $gradient-green1;
+    background: -moz-linear-gradient(top, $gradient-green1 0%, $gradient-green2 100%);
+    background: -webkit-linear-gradient(top, $gradient-green1 0%, $gradient-green2 100%);
+    background: linear-gradient(to bottom, $gradient-green1 0%, $gradient-green2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-green1', endColorstr='$gradient-green2',GradientType=0 );
+    color: $color-text-primary;
 }
+
 %btn-success-gradient-mobile {
-	background: linear-gradient(to bottom, $gradient-green1 0%, $gradient-green2 100%);
-	color: $color-text-primary;
+    background: linear-gradient(to bottom, $gradient-green1 0%, $gradient-green2 100%);
+    color: $color-text-primary;
 }
 
 %btn-blue-gradient {
-	background: $gradient-blue1;
-	background: -moz-linear-gradient(top, $gradient-blue1 34%, $gradient-blue2 100%);
-	background: -webkit-linear-gradient(top, $gradient-blue1 34%, $gradient-blue2 100%);
-	background: linear-gradient(to bottom, $gradient-blue1 34%, $gradient-blue2 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-blue1', endColorstr='$gradient-blue2',GradientType=0 );
-	color: $color-text-primary;
+    background: $gradient-blue1;
+    background: -moz-linear-gradient(top, $gradient-blue1 34%, $gradient-blue2 100%);
+    background: -webkit-linear-gradient(top, $gradient-blue1 34%, $gradient-blue2 100%);
+    background: linear-gradient(to bottom, $gradient-blue1 34%, $gradient-blue2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-blue1', endColorstr='$gradient-blue2',GradientType=0 );
+    color: $color-text-primary;
 }
+
 %btn-blue-gradient-mobile {
-	background: linear-gradient(to bottom, $gradient-blue1 34%, $gradient-blue2 100%);
-	color: $color-text-primary;
+    background: linear-gradient(to bottom, $gradient-blue1 34%, $gradient-blue2 100%);
+    color: $color-text-primary;
 }
 
 %btn-orange {
-	background: $gradient-orange1;
-	background: -moz-linear-gradient(
-		top,
-		$gradient-orange1 0%,
-		$gradient-orange1 51%,
-		$gradient-orange2 100%
-	); /* FF3.6-15 */
-	background: -webkit-linear-gradient(
-		top,
-		$gradient-orange1 0%,
-		$gradient-orange1 51%,
-		$gradient-orange2 100%
-	); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(
-		to bottom,
-		$gradient-orange1 0%,
-		$gradient-orange1 51%,
-		$gradient-orange2 100%
-	); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	color: $color-text-dark;
+    background: $gradient-orange1;
+    background: -moz-linear-gradient(top, $gradient-orange1 0%, $gradient-orange1 51%, $gradient-orange2 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, $gradient-orange1 0%, $gradient-orange1 51%, $gradient-orange2 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, $gradient-orange1 0%, $gradient-orange1 51%, $gradient-orange2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    color: $color-text-dark;
 }
+
 %btn-orange-mobile {
-	background: linear-gradient(to bottom, $gradient-orange1 0%, $gradient-orange1 51%, $gradient-orange2 100%);
-	color: $color-text-dark;
+    background: linear-gradient(to bottom, $gradient-orange1 0%, $gradient-orange1 51%, $gradient-orange2 100%);
+    color: $color-text-dark;
 }
 
 %btn-gray-gradient-2 {
-	background: $gradient-grey1;
-	background: -moz-linear-gradient(top, $gradient-grey1 0%, $gradient-grey2 100%);
-	background: -webkit-linear-gradient(top, $gradient-grey1 0%, $gradient-grey2 100%);
-	background: linear-gradient(to bottom, $gradient-grey1 0%, $gradient-grey2 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-grey1', endColorstr='$gradient-grey2',GradientType=0 );
-	color: $color-text-dark;
+    background: $gradient-grey1;
+    background: -moz-linear-gradient(top, $gradient-grey1 0%, $gradient-grey2 100%);
+    background: -webkit-linear-gradient(top, $gradient-grey1 0%, $gradient-grey2 100%);
+    background: linear-gradient(to bottom, $gradient-grey1 0%, $gradient-grey2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-grey1', endColorstr='$gradient-grey2',GradientType=0 );
+    color: $color-text-dark;
 }
+
 %btn-gray-gradient-2-mobile {
-	background: linear-gradient(to bottom, $gradient-grey1 0%, $gradient-grey2 100%);
-	color: $color-text-dark;
+    background: linear-gradient(to bottom, $gradient-grey1 0%, $gradient-grey2 100%);
+    color: $color-text-dark;
 }
 
 %btn-gray-gradient {
-	background: $gradient-light-grey1;
-	background: -moz-linear-gradient(top, $gradient-light-grey1 0%, $gradient-light-grey2 100%);
-	background: -webkit-linear-gradient(top, $gradient-light-grey1 0%, $gradient-light-grey2 100%);
-	background: linear-gradient(to bottom, $gradient-light-grey1 0%, $gradient-light-grey2 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-light-grey1', endColorstr='$gradient-light-grey2',GradientType=0 );
-	color: $color-text-dark;
+    background: $gradient-light-grey1;
+    background: -moz-linear-gradient(top, $gradient-light-grey1 0%, $gradient-light-grey2 100%);
+    background: -webkit-linear-gradient(top, $gradient-light-grey1 0%, $gradient-light-grey2 100%);
+    background: linear-gradient(to bottom, $gradient-light-grey1 0%, $gradient-light-grey2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-light-grey1', endColorstr='$gradient-light-grey2',GradientType=0 );
+    color: $color-text-dark;
 }
+
 %btn-gray-gradient-mobile {
-	background: linear-gradient(to bottom, $gradient-light-grey1 0%, $gradient-light-grey2 100%);
-	color: $color-text-dark;
+    background: linear-gradient(to bottom, $gradient-light-grey1 0%, $gradient-light-grey2 100%);
+    color: $color-text-dark;
 }
 
 %btn-yellow-gradient {
-	background: $gradient-yellow1;
-	background: -moz-linear-gradient(top, $gradient-yellow1 0%, $gradient-yellow2 100%);
-	background: -webkit-linear-gradient(top, $gradient-yellow1 0%$gradient-yellow2 100%);
-	background: linear-gradient(to bottom, $gradient-yellow1 0%, $gradient-yellow2 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-yellow1', endColorstr='$gradient-yellow2',GradientType=0 );
-	color: $color-text-dark;
+    background: $gradient-yellow1;
+    background: -moz-linear-gradient(top, $gradient-yellow1 0%, $gradient-yellow2 100%);
+    background: -webkit-linear-gradient(top, $gradient-yellow1 0% $gradient-yellow2 100%);
+    background: linear-gradient(to bottom, $gradient-yellow1 0%, $gradient-yellow2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-yellow1', endColorstr='$gradient-yellow2',GradientType=0 );
+    color: $color-text-dark;
 }
+
 %btn-yellow-gradient-mobile {
-	background: linear-gradient(to bottom, $gradient-yellow1 0%, $gradient-yellow2 100%);
-	color: $color-text-dark;
+    background: linear-gradient(to bottom, $gradient-yellow1 0%, $gradient-yellow2 100%);
+    color: $color-text-dark;
 }
 
 %btn-white-gradient {
-	background: $gradient-white1;
-	background: -moz-linear-gradient(top, $gradient-white1 0%, $gradient-white2 100%);
-	background: -webkit-linear-gradient(top, $gradient-white1 0%$gradient-white2 100%);
-	background: linear-gradient(to bottom, $gradient-white1 0%, $gradient-white2 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-white1', endColorstr='$gradient-white2',GradientType=0 );
-	color: $color-text-dark;
+    background: $gradient-white1;
+    background: -moz-linear-gradient(top, $gradient-white1 0%, $gradient-white2 100%);
+    background: -webkit-linear-gradient(top, $gradient-white1 0% $gradient-white2 100%);
+    background: linear-gradient(to bottom, $gradient-white1 0%, $gradient-white2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-white1', endColorstr='$gradient-white2',GradientType=0 );
+    color: $color-text-dark;
 }
+
 %btn-white-gradient-mobile {
-	background: linear-gradient(to bottom, $gradient-white1 0%, $gradient-white2 100%);
-	color: $color-text-dark;
+    background: linear-gradient(to bottom, $gradient-white1 0%, $gradient-white2 100%);
+    color: $color-text-dark;
 }
 
 %btn-dark-gradient {
-	background: $gradient-dark1;
-	background: -moz-linear-gradient(top, $gradient-dark1 0%, $gradient-dark1 50%, $gradient-dark2 100%);
-	background: -webkit-linear-gradient(top, $gradient-dark1 0%, $gradient-dark1 50%, $gradient-dark2 100%);
-	background: linear-gradient(to bottom, $gradient-dark1 0%, $gradient-dark1 50%, $gradient-dark2 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-dark1', endColorstr='$gradient-dark2',GradientType=0 );
-	color: $color-text-primary;
+    background: $gradient-dark1;
+    background: -moz-linear-gradient(top, $gradient-dark1 0%, $gradient-dark1 50%, $gradient-dark2 100%);
+    background: -webkit-linear-gradient(top, $gradient-dark1 0%, $gradient-dark1 50%, $gradient-dark2 100%);
+    background: linear-gradient(to bottom, $gradient-dark1 0%, $gradient-dark1 50%, $gradient-dark2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-dark1', endColorstr='$gradient-dark2',GradientType=0 );
+    color: $color-text-primary;
 }
+
 %btn-dark-gradient-mobile {
-	background: linear-gradient(to bottom, $gradient-dark1 0%, $gradient-dark1 50%, $gradient-dark2 100%);
-	color: $color-text-primary;
+    background: linear-gradient(to bottom, $gradient-dark1 0%, $gradient-dark1 50%, $gradient-dark2 100%);
+    color: $color-text-primary;
 }
+
 // GAME AREA
 // Dog racing
 %dog-racing-bg {
-	background: url("app/themes/skins/develop/image/Dog-Racing.png") left top no-repeat;
-	background-size: 25%;
+    background: url("app/themes/skins/develop/image/Dog-Racing.png") left top no-repeat;
+    background-size: 25%;
 }
+
 %dog-racing-bg-mobile {
-	background: url("~/app/themes/skins/develop/image/Dog-Racing.png") left top no-repeat;
-	background-size: contain;
+    background: url("~/app/themes/skins/develop/image/Dog-Racing.png") left top no-repeat;
+    background-size: contain;
 }
 
 // BORDER BOX DEFINITION
 %border-gray {
-	border-color: $color-border-box;
+    border-color: $color-border-box;
 }
+
 %border-primary {
-	border-color: $color-text-primary;
+    border-color: $color-text-primary;
 }
 
 // PRODUCT DIALOG
 %dialog {
-	background-color: $color-bg-primary;
-	color: $color-text-primary;
-	border: 1px solid $border-cartd-title;
-	border-radius: 5px;
+    background-color: $color-bg-primary;
+    color: $color-text-primary;
+    border: 1px solid $border-cartd-title;
+    border-radius: 5px;
 }
+
 %dialog-mobile {
-	background-color: $color-bg-primary;
-	color: $color-text-primary;
-	border-width: 1;
-	border-color: $border-cartd-title;
-	border-radius: 5;
+    background-color: $color-bg-primary;
+    color: $color-text-primary;
+    border-width: 1;
+    border-color: $border-cartd-title;
+    border-radius: 5;
 }
+
 %dialog-card {
-	background-color: $color-bg-secodary;
-	border: 1px solid $border-cartd-title;
+    background-color: $color-bg-secodary;
+    border: 1px solid $border-cartd-title;
 }
+
 %dialog-card-mobile {
-	background-color: $color-bg-secodary;
-	border-width: 1;
-	border-color: $border-cartd-title;
+    background-color: $color-bg-secodary;
+    border-width: 1;
+    border-color: $border-cartd-title;
 }
+
 %dialog-card-header {
-	background-color: $border-cartd-title;
+    background-color: $border-cartd-title;
 }
+
 %indicator {
-	color: $color-text-shadow;
+    color: $color-text-shadow;
 }
 
 // LOGIN
 %login {
-	background: url("app/themes/skins/develop/image/Bg-login-vdesk.jpg") center center no-repeat;
+    background: url("app/themes/skins/develop/image/Bg-login-vdesk.jpg") center center no-repeat;
 }
+
 %login-mobile {
-	background: url("~/app/themes/skins/develop/image/Bg-login-vdesk.jpg") center center no-repeat;
-	background-size: cover;
+    background: url("~/app/themes/skins/develop/image/Bg-login-vdesk.jpg") center center no-repeat;
+    background-size: cover;
 }
+
 %user-icon {
-	background: url("app/themes/skins/develop/icon/icona-user.svg") center center no-repeat;
+    background: url("app/themes/skins/develop/icon/icona-user.svg") center center no-repeat;
 }
+
 %user-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/icona-user.png") center center no-repeat;
-	background-size: contain;
+    background: url("~/app/themes/skins/develop/icon/icona-user.png") center center no-repeat;
+    background-size: contain;
 }
+
 %pwd-icon {
-	background: url("app/themes/skins/develop/icon/icona-pwd.svg") center center no-repeat;
+    background: url("app/themes/skins/develop/icon/icona-pwd.svg") center center no-repeat;
 }
+
 %pwd-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/icona-pwd.png") center center no-repeat;
-	background-size: contain;
+    background: url("~/app/themes/skins/develop/icon/icona-pwd.png") center center no-repeat;
+    background-size: contain;
 }
+
 %error-icon {
-	background: url("app/themes/skins/develop/icon/alert.svg") center center no-repeat;
+    background: url("app/themes/skins/develop/icon/alert.svg") center center no-repeat;
 }
+
 %error-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/alert.png") center center no-repeat;
-	background-size: contain;
+    background: url("~/app/themes/skins/develop/icon/alert.png") center center no-repeat;
+    background-size: contain;
 }
+
 %border-input-area {
-	border: 1px solid $border-cartd-title;
+    border: 1px solid $border-cartd-title;
 }
+
 %border-input-area-error {
-	border: 1px solid $color-bg-warn;
+    border: 1px solid $color-bg-warn;
 }
+
 %border-input-area-mobile {
-	border-width: 1;
-	border-color: $border-cartd-title;
+    border-width: 1;
+    border-color: $border-cartd-title;
 }
+
 %border-input-area-error-mobile {
-	border-width: 1;
-	border-color: $color-bg-warn;
+    border-width: 1;
+    border-color: $color-bg-warn;
 }
+
 %error-area {
-	color: $color-text-warn;
+    color: $color-text-warn;
 }
+
 %login-input {
-	background-color: $color-bg-transparent;
-	color: $color-text-primary;
+    background-color: $color-bg-transparent;
+    color: $color-text-primary;
 }
+
 %login-input-mobile {
-	background-color: $color-bg-transparent;
-	color: $color-text-primary;
-	placeholder-color: $color-text-shadow;
+    background-color: $color-bg-transparent;
+    color: $color-text-primary;
+    placeholder-color: $color-text-shadow;
 }
