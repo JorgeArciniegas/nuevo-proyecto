@@ -30,7 +30,7 @@ export class CouponComponent implements OnDestroy {
     public readonly settings: AppSettings,
     public productService: ProductsService
   ) {
-    if (this.productService.windowSize.small) {
+    if (this.productService.windowSize && this.productService.windowSize.small) {
       this.maxItems = 4;
     }
     this.couponServiceSubscription = this.couponService.couponResponse.subscribe(coupon => {

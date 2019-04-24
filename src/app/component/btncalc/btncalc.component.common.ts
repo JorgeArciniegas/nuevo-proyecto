@@ -51,17 +51,17 @@ export class BtncalcComponentCommon {
       }
     );
     // management coupon stake changed
-    this.CouponoddStakeEditObs = this.couponService.oddStakeEditObs.subscribe( oddStakeEdit => {
-        this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
+    this.CouponoddStakeEditObs = this.couponService.oddStakeEditObs.subscribe(oddStakeEdit => {
+      this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
     });
 
-    this.couponResponseSubs = this.couponService.couponResponse.subscribe( coupon => {
+    this.couponResponseSubs = this.couponService.couponResponse.subscribe(coupon => {
       if (coupon === null) {
         this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
       }
     });
   }
- async plus(): Promise<void> {
+  async plus(): Promise<void> {
     this.displayDefaultAmount = 0;
     if (this.couponService.oddStakeEdit) {
       this.couponService.updateCoupon();
@@ -69,6 +69,9 @@ export class BtncalcComponentCommon {
     }
     if (this.btncalcService.polyfunctionalStakeCoupon.isEnabled) {
       this.updateCouponStake();
+      return;
+    }
+    if (!this.polyfunctionalArea || !this.polyfunctionalArea.odds) {
       return;
     }
     await this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds);
@@ -99,7 +102,7 @@ export class BtncalcComponentCommon {
     if (this.couponService.oddStakeEdit) {
       this.couponService.oddStakeEdit.tempStake = 0.00;
       this.couponService.oddStakeEditSubject.next(this.couponService.oddStakeEdit);
-     }
+    }
     this.btncalcService.polyfunctionalAdditionFlag = true;
     this.btncalcService.polyfunctionalDecimalsFlag = true;
     this.productService.polyfunctionalAreaSubject.next(
@@ -131,16 +134,16 @@ export class BtncalcComponentCommon {
       }
 
       this.couponService.oddStakeEdit.tempStake =
-      this.btncalcService.btnAmountDecimalsChangeOdd(amount, this.couponService.oddStakeEdit.tempStake);
+        this.btncalcService.btnAmountDecimalsChangeOdd(amount, this.couponService.oddStakeEdit.tempStake);
     } else if (this.couponService.coupon && !this.couponService.oddStakeEdit) {
-      this.displayDefaultAmount =  this.btncalcService.btnAmountDecimalsChangeOdd(amount, this.displayDefaultAmount);
+      this.displayDefaultAmount = this.btncalcService.btnAmountDecimalsChangeOdd(amount, this.displayDefaultAmount);
       const amountTemp: PolyfunctionalStakeCoupon = new PolyfunctionalStakeCoupon();
       if (this.btncalcService.polyfunctionalStakeCoupon.typeSlipCol === TypeBetSlipColTot.COL) {
-        amountTemp.totalAmount = this.displayDefaultAmount * this.couponService.coupon.Odds.length ;
+        amountTemp.totalAmount = this.displayDefaultAmount * this.couponService.coupon.Odds.length;
         amountTemp.columnAmount = this.displayDefaultAmount;
         amountTemp.typeSlipCol = TypeBetSlipColTot.COL;
       } else if (this.btncalcService.polyfunctionalStakeCoupon.typeSlipCol === TypeBetSlipColTot.TOT) {
-        amountTemp.columnAmount =  this.displayDefaultAmount / this.couponService.coupon.Odds.length;
+        amountTemp.columnAmount = this.displayDefaultAmount / this.couponService.coupon.Odds.length;
         amountTemp.totalAmount = this.displayDefaultAmount;
         amountTemp.typeSlipCol = TypeBetSlipColTot.TOT;
       }
@@ -155,13 +158,13 @@ export class BtncalcComponentCommon {
 
   // TOT/distribution & COL/association buttons enabling
   btnTotColSet(betTotColSelected: TypeBetSlipColTot): void {
-   if (betTotColSelected === TypeBetSlipColTot.COL) {
-     this.isActiveCol = true;
-     this.isActiveTot = false;
-   } else if (betTotColSelected === TypeBetSlipColTot.TOT) {
-    this.isActiveCol = false;
-    this.isActiveTot = true;
-  }
+    if (betTotColSelected === TypeBetSlipColTot.COL) {
+      this.isActiveCol = true;
+      this.isActiveTot = false;
+    } else if (betTotColSelected === TypeBetSlipColTot.TOT) {
+      this.isActiveCol = false;
+      this.isActiveTot = true;
+    }
     this.amountSetToPolyfunctionalStakeCoupon();
     this.btncalcService.btnTotColSelection(betTotColSelected);
   }
@@ -173,11 +176,11 @@ export class BtncalcComponentCommon {
     }
     const amountTemp: PolyfunctionalStakeCoupon = new PolyfunctionalStakeCoupon();
     if (this.isActiveCol) {
-      amountTemp.totalAmount = this.displayDefaultAmount * this.couponService.coupon.Odds.length ;
+      amountTemp.totalAmount = this.displayDefaultAmount * this.couponService.coupon.Odds.length;
       amountTemp.columnAmount = this.displayDefaultAmount;
       amountTemp.typeSlipCol = TypeBetSlipColTot.COL;
     } else if (this.isActiveTot) {
-      amountTemp.columnAmount =  this.displayDefaultAmount / this.couponService.coupon.Odds.length;
+      amountTemp.columnAmount = this.displayDefaultAmount / this.couponService.coupon.Odds.length;
       amountTemp.totalAmount = this.displayDefaultAmount;
       amountTemp.typeSlipCol = TypeBetSlipColTot.TOT;
     }
@@ -191,7 +194,7 @@ export class BtncalcComponentCommon {
   // updated global amount to coupon
   private updateCouponStake(): void {
     if (this.couponService.coupon && this.btncalcService.polyfunctionalStakeCoupon.isEnabled) {
-      this.couponService.coupon.Odds.forEach( item => {
+      this.couponService.coupon.Odds.forEach(item => {
         item.OddStake = this.btncalcService.polyfunctionalStakeCoupon.columnAmount;
       });
       this.couponService.updateCoupon();
