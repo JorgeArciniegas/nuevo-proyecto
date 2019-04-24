@@ -341,7 +341,7 @@ html {
     @extend %border-primary;
   }
 
-  .stake {
+  .stake.color {
     @extend %btn-success-gradient;
   }
 

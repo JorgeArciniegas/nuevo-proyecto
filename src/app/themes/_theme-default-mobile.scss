@@ -233,7 +233,10 @@
 		}
 		.btn-success {
 			@extend %btn-success-gradient-mobile;
-		}
+    }
+    .btn-selected {
+      @extend %btn-blue-gradient-mobile;
+    }
 		.btn-grey-gradient {
 			@extend %btn-gray-gradient-mobile;
 		}
@@ -319,7 +322,7 @@
       @extend %border-primary;
     }
 
-    .stake {
+    .stake.color {
       @extend %btn-success-gradient;
     }
   }
@@ -349,11 +352,9 @@
 .radius-2 {
 	border-radius: 2;
 }
-
 .radius-5 {
 	border-radius: 5;
 }
-
 .radius-10 {
 	border-radius: 10;
 }
