@@ -1,7 +1,7 @@
 <GridLayout shadow="3" cornerRadius="6" class="card">
   <GridLayout rows="*" columns="*" class="display">
-    <GridLayout rows="*,*" columns="6*,*" *ngIf="polyfunctionalValue">
 
+    <GridLayout rows="*,*" columns="6*,*" *ngIf="polyfunctionalValue">
       <GridLayout row="0" col="0" rows="*" columns="5*,3*" orientation="horizontal" class="title" verticalAlignment="center">
         <Label col="0" *ngIf="polyfunctionalValue && polyfunctionalValue.selection" text="{{'SMARTCODE.'+polyfunctionalValue.selection | translate}}" verticalAlignment="center"
           horizontalAlignment="left"></Label>
@@ -18,7 +18,18 @@
         <Image *ngIf="polyfunctionalValue  && polyfunctionalValue.selection" stretch="aspectFit" margin="4"
           src="~/app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png" verticalAlignment="center" [isEnabled]="!timeBlocked"></Image>
       </GridLayout>
+    </GridLayout>
 
+    <GridLayout rows="*" columns="2*,3*" *ngIf="!polyfunctionalValue && polyfunctionalStakeCoupon.isEnabled">
+      <Label col="0" text="{{ typeBetSlipColTot[polyfunctionalStakeCoupon.typeSlipCol] }}" verticalAlignment="center"></Label>
+      <GridLayout col="1" rows="3*,2*" columns="*">
+        <GridLayout row="0" class="indicator-amount radius-5">
+          <Label text="{{ polyfunctionalStakeCoupon.digitAmount | number: '1.2-2'}}" verticalAlignment="center" horizontalAlignment="right"></Label>
+        </GridLayout>
+        <Label row="1" class="summary"
+          text="{{ polyfunctionalStakeCoupon.columns }} x {{polyfunctionalStakeCoupon.columnAmount | number: '1.2-4'}} = {{polyfunctionalStakeCoupon.totalAmount | number : '1.2-2'}}"
+          horizontalAlignment="right"></Label>
+      </GridLayout>
     </GridLayout>
   </GridLayout>
 </GridLayout>
