@@ -6,7 +6,7 @@
           <div fxFlex>
             <span class="text">{{ 'coupon' | translate }} </span>
           </div>
-          <button class="btn-reset btn-display" (click)="couponService.resetCoupon()" fxLayoutAlign="center center">
+          <button class="btn-reset btn-display btn-warning radius-5" (click)="clearCoupon()" fxLayoutAlign="center center">
             <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
           </button>
         </h3>
@@ -21,8 +21,13 @@
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="1">
-    <div class="btn-coupon-board" fxLayout="row">
-      <button class="display btn btn-default">{{'single' | translate}}</button>
+    <div class="btn-coupon-board">
+      <div class="display" fxLayout="row layout-wrap" fxLayoutGap="20px">
+        <div fxFlex fxLayoutAlign="center center">
+          <span class="btn btn-default">{{'single' | translate}}</span>
+          <span class="indicator-odds-number radius-50">{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}</span>
+        </div>
+      </div>
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="14">
@@ -55,8 +60,12 @@
                 </div>
               </div>
               <div fxFlex="38" class="row" fxLayout="row" fxLayoutAlign="space-between stretch">
-                <button fxFlex="40" class="btn-default btn-success stake radius-5" fxLayoutAlign="center center">
-                  {{odd.OddStake | number: '1.2-2'}}
+                <button fxFlex="40" class="btn-default stake radius-5" fxLayoutAlign="center center"
+                  [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
+                  'btn-selected ' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }"
+                  (click)="checkOddToChangeStake(odd)">
+                  <span *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId">{{odd.OddStake | number: '1.2-3'}}</span>
+                  <span *ngIf="couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId">{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}</span>
                 </button>
                 <div fxFlex="16" fxLayoutAlign="end center">
                   <button class="btn-default btn-warning radius-5 remove" (click)="removeOdd(odd)">

@@ -1,8 +1,7 @@
 <GridLayout #gridbtn rows="*,*,*,*,*,*" columns="*,*,*,*" class="grid-btn-calc">
-  <GridLayout row="0" col="{{i}}" height="{{amountIcon.height - 1}}" width="{{amountIcon.width - 1}}" shadow="3" cornerRadius="{{amountIcon.height/2}}"
-    class="card" *ngFor="let amount of product.defaultAmount; let i = index">
-    <GridLayout rows="*" columns="*" class="button btn-amount-{{i+1}}" height="{{amountIcon.height}}" width="{{amountIcon.width}}"
-      borderRadius="{{amountIcon.height/2}}">
+  <GridLayout row="0" col="{{i}}" height="{{amountIcon.height - 1}}" width="{{amountIcon.width - 1}}" shadow="3" cornerRadius="{{amountIcon.height/2}}" class="card"
+    *ngFor="let amount of product.defaultAmount; let i = index">
+    <GridLayout rows="*" columns="*" class="button btn-amount-{{i+1}}" height="{{amountIcon.height}}" width="{{amountIcon.width}}" borderRadius="{{amountIcon.height/2}}">
       <Button text="{{amount}}" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnDefaultAmountsPreset(amount)"></Button>
     </GridLayout>
   </GridLayout>
@@ -79,14 +78,12 @@
   </GridLayout>
   <GridLayout row="5" col="0" colSpan="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
-      <Button text="{{ 'TOT' | translate }}" class="button-internal" textTransform="uppercase" [isEnabled]="!timeBlocked && isActiveTot"
-        [class.not-active]="!isActiveTot" (tap)="btnTotColSet(typeBetSlipColTot.TOT)"></Button>
+      <Button text="{{ 'TOT' | translate }}" class="button-internal" textTransform="uppercase" (tap)="btnTotColSet(typeBetSlipColTot.TOT)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="5" col="2" colSpan="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
-      <Button text="{{ 'COL' | translate }}" class="button-internal" textTransform="uppercase" [isEnabled]="!timeBlocked && isActiveCol"
-        [class.not-active]="!isActiveCol" (tap)="btnTotColSet(typeBetSlipColTot.COL)"></Button>
+      <Button text="{{ 'COL' | translate }}" class="button-internal" textTransform="uppercase" (tap)="btnTotColSet(typeBetSlipColTot.COL)"></Button>
     </GridLayout>
   </GridLayout>
 </GridLayout>

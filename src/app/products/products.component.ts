@@ -10,7 +10,7 @@ import { CouponService } from '../component/coupon/coupon.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit, OnDestroy {
+export class ProductsComponent implements OnDestroy {
   observableMediaSubscribe: Subscription;
   public rowHeight: number;
   public settings: AppSettings;
@@ -25,16 +25,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.settings = appSettings;
     this.observableMediaSubscribe = this.observableMedia.media$.subscribe((change: MediaChange) => {
       this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
-      this.service.breakpointSubscribe.next(this.service.breakpoint);
       this.service.fnWindowsSize();
       this.rowHeight = (this.service.windowSize.columnHeight - 30) / 11;
     });
-
   }
 
-  ngOnInit() {
-
-  }
   ngOnDestroy(): void {
     this.observableMediaSubscribe.unsubscribe();
   }

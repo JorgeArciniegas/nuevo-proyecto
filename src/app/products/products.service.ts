@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DialogService } from './dialog.service';
-import { BetOdds, DialogData, PolyfunctionalArea } from './products.model';
+import { BetOdds, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupon } from './products.model';
 import { WindowSize } from '../services/utility/window-size/window-size.model';
 import { WindowSizeService } from '../services/utility/window-size/window-size.service';
 @Injectable({
@@ -9,7 +9,6 @@ import { WindowSizeService } from '../services/utility/window-size/window-size.s
 })
 export class ProductsService {
   public breakpoint = 1;
-  public breakpointSubscribe: Subject<number>;
 
   public productNameSelectedSubscribe: Subject<string>;
   public productNameSelectedObserve: Observable<string>;
@@ -26,6 +25,9 @@ export class ProductsService {
   polyfunctionalAreaSubject: Subject<PolyfunctionalArea>;
   polyfunctionalAreaObservable: Observable<PolyfunctionalArea>;
 
+  // polifunctional stake coupon
+  polyfunctionalStakeCouponSubject: Subject<PolyfunctionalStakeCoupon>;
+  polyfunctionalStakeCouponObs: Observable<PolyfunctionalStakeCoupon>;
   // tslint:disable-next-line:typedef
   gridByBreakpoint = {
     xl: 12,
@@ -36,12 +38,16 @@ export class ProductsService {
   };
   windowSize: WindowSize;
   constructor(public dialog: DialogService, private windowSizeService: WindowSizeService) {
-    this.breakpointSubscribe = new Subject<number>();
     this.productNameSelectedSubscribe = new Subject<string>();
     this.productNameSelectedObserve = this.productNameSelectedSubscribe.asObservable();
     // Element for management the display
     this.polyfunctionalAreaSubject = new Subject<PolyfunctionalArea>();
     this.polyfunctionalAreaObservable = this.polyfunctionalAreaSubject.asObservable();
+
+    // stake coupon
+    this.polyfunctionalStakeCouponSubject = new Subject<PolyfunctionalStakeCoupon>();
+    this.polyfunctionalStakeCouponObs = this.polyfunctionalStakeCouponSubject.asObservable();
+
     // time block
     this.timeBlockedSubscribe = new Subject<boolean>();
     this.timeBlockedSubscribe.asObservable().subscribe((timeBlocked: boolean) => {
@@ -72,5 +78,6 @@ export class ProductsService {
   resetBoard(): void {
     this.playableBoardResetSubject.next(true);
     this.playableBoardResetSubject.next(false);
+    this.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
 }

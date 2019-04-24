@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { TypeBetSlipColTot } from 'src/app/products/dogracing/dogracing.models';
-import { PolyfunctionalArea } from '../../products/products.model';
+import { TypeBetSlipColTot } from '../../products/dogracing/dogracing.models';
+import { PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 
 @Injectable({
@@ -16,6 +16,8 @@ export class BtncalcService implements OnDestroy {
   stringWholeDecimals: string;
   numberWholeDecimals: number;
   conversionDecimals: string;
+
+  polyfunctionalStakeCoupon: PolyfunctionalStakeCoupon = new PolyfunctionalStakeCoupon();
 
   constructor(public productService: ProductsService) {
     this.polyfunctionalDecimalsFlag = true;
@@ -48,6 +50,11 @@ export class BtncalcService implements OnDestroy {
             });
           }
         }
+      }
+    );
+    this.productService.polyfunctionalStakeCouponObs.subscribe(
+      elem => {
+        this.polyfunctionalStakeCoupon = elem;
       }
     );
   }
@@ -99,20 +106,31 @@ export class BtncalcService implements OnDestroy {
        * algorithm to covert last two digits of number to decimals
        * assigns it back to amount
        */
-      this.polyfunctionalArea.amount = this.returnNumber(amount);
+      this.polyfunctionalArea.amount = this.returnNumberToPolyfuncArea(amount);
       this.productService.polyfunctionalAreaSubject.next(
         this.polyfunctionalArea
       );
     }
   }
 
-  // TOT & COL buttons on/off
-  btnTotColSelection(betTotColSelected: TypeBetSlipColTot): void {
-    this.polyfunctionalArea.typeSlipCol = betTotColSelected;
-    this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
+  btnAmountDecimalsChangeOdd(amount: number, oddStake: number): number {
+    const tmpNumberLength = (oddStake * 100).toFixed()
+    .toString()
+    .replace('.', '');
+    const stringTmpNumber = tmpNumberLength.toString() + amount.toString();
+    return Number(stringTmpNumber) / 100;
   }
 
-  private returnNumber(amount: number): number {
+  // TOT & COL buttons on/off
+  btnTotColSelection(betTotColSelected: TypeBetSlipColTot): void {
+    if (this.polyfunctionalArea) {
+      this.polyfunctionalArea.typeSlipCol = betTotColSelected;
+      this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
+    }
+
+  }
+
+  private returnNumberToPolyfuncArea(amount: number): number {
     const tmpNumberLength = (this.polyfunctionalArea.amount * 100)
       .toFixed()
       .toString()
@@ -120,4 +138,6 @@ export class BtncalcService implements OnDestroy {
     const stringTmpNumber = tmpNumberLength.toString() + amount.toString();
     return Number(stringTmpNumber) / 100;
   }
+
+
 }
