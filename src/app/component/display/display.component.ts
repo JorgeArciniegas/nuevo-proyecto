@@ -4,7 +4,8 @@ import { AppSettings } from '../../app.settings';
 import {
   BetOdd,
   BetOdds,
-  PolyfunctionalArea
+  PolyfunctionalArea,
+  PolyfunctionalStakeCoupon
 } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { TypeBetSlipColTot } from '../../products/dogracing/dogracing.models';
@@ -23,7 +24,8 @@ export class DisplayComponent implements OnInit, OnDestroy {
   // Element for management the display
   polyfunctionalValue: PolyfunctionalArea;
   polyfunctionalValueSubscribe: Subscription;
-
+  polyfunctionalStakeCoupon: PolyfunctionalStakeCoupon = new PolyfunctionalStakeCoupon();
+  polyfunctionalStakeCouponSubscribe: Subscription;
   typeBetSlipColTot: typeof TypeBetSlipColTot = TypeBetSlipColTot;
   constructor(
     private productService: ProductsService,
@@ -35,12 +37,20 @@ export class DisplayComponent implements OnInit, OnDestroy {
         this.polyfunctionalValue = element;
       }
     );
+      // stake coupon change and show to display area
+    this.polyfunctionalStakeCouponSubscribe = this.productService.polyfunctionalStakeCouponObs.subscribe(
+      elem => {
+        this.polyfunctionalStakeCoupon = elem;
+        // console.log(this.polyfunctionalStakeCoupon);
+      }
+    );
   }
 
   ngOnInit() { }
 
   ngOnDestroy() {
     this.polyfunctionalValueSubscribe.unsubscribe();
+    this.polyfunctionalStakeCouponSubscribe.unsubscribe();
   }
 
   detailOdds(): void {

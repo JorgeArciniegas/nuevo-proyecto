@@ -89,7 +89,6 @@ export class CouponComponent implements OnDestroy {
     // filter the odd to coupon and extract the index and value
     this.couponService.coupon.Odds.filter( (item: BetCouponOddExtended, idx) => {
       if (item.SelectionId === odd.SelectionId) {
-        console.log(idx, item);
         tempOdd.indexOdd = idx;
         tempOdd.odd = item;
       }

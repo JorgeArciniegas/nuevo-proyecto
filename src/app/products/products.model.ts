@@ -26,6 +26,25 @@ export class PolyfunctionalArea {
   }
 }
 
+export class PolyfunctionalStakeCoupon {
+  digitAmount: number;
+  totalAmount: number;
+  columnAmount: number;
+  columns: number;
+  typeSlipCol: TypeBetSlipColTot;
+  isEnabled: boolean;
+  constructor(digitAmount?: number, totalAmount?: number, columnAmount?: number, columns?: number,
+    typeSlipCol?: TypeBetSlipColTot, isEnabled?: boolean ) {
+    this.digitAmount = digitAmount || 0.00;
+    this.totalAmount = totalAmount || 0.00;
+    this.columnAmount = columnAmount || 0.00;
+    this.columns = columns || 0;
+    this.typeSlipCol = (typeSlipCol) ? typeSlipCol : TypeBetSlipColTot.COL;
+    this.isEnabled = isEnabled || false;
+  }
+
+}
+
 export class BetOdd {
   id: number;
   label: string;

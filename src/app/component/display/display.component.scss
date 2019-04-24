@@ -12,4 +12,11 @@
     .btn-display:active {
         box-shadow: none;
     }
+    .indicator-amount{
+      border: 1px solid;
+      font-weight: 600;
+      width: 100%;
+      text-align: right;
+      padding: 5px;
+    }
 }
