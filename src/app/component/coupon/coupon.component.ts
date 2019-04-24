@@ -18,7 +18,6 @@ export class CouponComponent implements OnDestroy {
   public rowHeight: number;
   @Input()
   public timeBlocked: boolean;
-  private settings: AppSettings;
   public maxItems = 5;
   public page = 0;
   public maxPage = 0;
@@ -28,10 +27,9 @@ export class CouponComponent implements OnDestroy {
 
   constructor(
     public couponService: CouponService,
-    private readonly appSettings: AppSettings,
+    public readonly settings: AppSettings,
     public productService: ProductsService
   ) {
-    this.settings = this.appSettings;
     if (this.productService.windowSize.small) {
       this.maxItems = 4;
     }
@@ -91,7 +89,6 @@ export class CouponComponent implements OnDestroy {
     // filter the odd to coupon and extract the index and value
     this.couponService.coupon.Odds.filter((item: BetCouponOddExtended, idx) => {
       if (item.SelectionId === odd.SelectionId) {
-        console.log(idx, item);
         tempOdd.indexOdd = idx;
         tempOdd.odd = item;
       }

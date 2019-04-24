@@ -49,7 +49,6 @@ export class CouponService {
     this.oddStakeEditObs = this.oddStakeEditSubject.asObservable();
     this.oddStakeEditObs.subscribe(item => {
       this.oddStakeEdit = item;
-      console.log(item);
     });
   }
 
@@ -119,11 +118,15 @@ export class CouponService {
 
 
   updateCoupon(): void {
-    if (this.oddStakeEdit.tempStake > 0) {
-      this.coupon.Odds[this.oddStakeEdit.indexOdd].OddStake = this.oddStakeEdit.tempStake;
+    if (this.oddStakeEdit) {
+      if (this.oddStakeEdit.tempStake > 0) {
+        this.coupon.Odds[this.oddStakeEdit.indexOdd].OddStake = this.oddStakeEdit.tempStake;
+        this.elyscoupon.updateCoupon(this.coupon);
+      }
+      this.oddStakeEditSubject.next(null);
+    } else {
       this.elyscoupon.updateCoupon(this.coupon);
     }
-    this.oddStakeEditSubject.next(null);
   }
 
 }

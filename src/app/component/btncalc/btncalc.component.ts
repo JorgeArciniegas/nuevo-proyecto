@@ -14,7 +14,6 @@ export class BtncalcComponent extends BtncalcComponentCommon implements OnInit, 
 
   @Input()
   rowHeight: number;
-
   constructor(
     productService: ProductsService,
     btncalcService: BtncalcService,
@@ -29,5 +28,7 @@ export class BtncalcComponent extends BtncalcComponentCommon implements OnInit, 
   ngOnDestroy(): void {
     this.productNameSelectedSubscribe.unsubscribe();
     this.polyfunctionalValueSubscribe.unsubscribe();
+    this.CouponoddStakeEditObs.unsubscribe();
+    this.couponResponseSubs.unsubscribe();
   }
 }

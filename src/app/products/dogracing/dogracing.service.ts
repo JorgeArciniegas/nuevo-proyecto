@@ -17,7 +17,7 @@ import {
   Market,
   SportDetail
 } from '../../services/api/vgen.model';
-import { BetOdd, PolyfunctionalArea } from '../products.model';
+import { BetOdd, PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../products.model';
 import { ProductsService } from '../products.service';
 import {
   CombinationType,
@@ -132,7 +132,7 @@ export class DogracingService {
       } else {
         if (this.remmaningTime.second < 0 || this.remmaningTime.minute < 0) {
           // if remaining time is negative there is an error, reload all
-          // console.log('::::reset');
+          // '::::reset');
           this.cacheRaces = null;
           this.loadRaces();
           this.loadLastResult(false);
@@ -315,6 +315,7 @@ export class DogracingService {
     this.createDogList();
 
     this.productService.polyfunctionalAreaSubject.next(null);
+    this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
 
   raceDetailOdds(raceNumber: number): void {
