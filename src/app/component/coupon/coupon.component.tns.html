@@ -16,11 +16,14 @@
       </StackLayout>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="2" rows="*" columns="*" class="card display btn-coupon-board" [ngClass]="{'small': productService.windowSize.small}">
-    <StackLayout orientation="horizontal" horizontalAlignment="center">
+  <GridLayout row="2" rows="*" columns="*,4*,*" class="card display btn-coupon-board" [ngClass]="{'small': productService.windowSize.small}">
+    <StackLayout col="1" orientation="horizontal" horizontalAlignment="center">
       <Label text="{{'single' | translate}}" verticalAlignment="center"></Label>
       <Label class="indicator-odds-number radius-50" [ngClass]="{'small': productService.windowSize.small}" text="{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}"
         verticalAlignment="center" textAlignment="center"></Label>
+    </StackLayout>
+    <StackLayout col="2" class="button btn-dark-gradient" (tap)="openDialog()">
+      <Image stretch="aspectFit" width="26" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png" verticalAlignment="center"></Image>
     </StackLayout>
   </GridLayout>
   <GridLayout row="3">
@@ -50,7 +53,7 @@
           <Label col="0" text="{{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})" horizontalAlignment="left"
             textWrap="true"></Label>
           <StackLayout col="1" horizontalAlignment="right">
-            <Label col="1" class="odd" text="{{odd.OddValue | number: '1.2-2'}}" horizontalAlignment="center" verticalAlignment="center"></Label>
+            <Label class="odd" text="{{odd.OddValue | number: '1.2-2'}}" horizontalAlignment="center" verticalAlignment="center"></Label>
           </StackLayout>
         </GridLayout>
         <GridLayout row="2" col="0" columns="*,*" class="row" verticalAlignment="center">
