@@ -91,16 +91,20 @@
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="2">
-    <div class="display-amount radius-5">
-      <label>
+    <div class="display-amount radius-5" [ngClass]="{'display-error': errorMessage}">
+      <label *ngIf="!errorMessage">
         <span>{{'potentialMaxWinner' | translate}}</span>
         <input type="text" name="winner" [ngModel]="couponService.stakeDisplay.MaxWinning |number: '1.2-2'" readonly />
+      </label>
+      <label *ngIf="errorMessage">
+        <span>{{'ERROR' | translate}}</span>
+        <input type="text" name="error" [ngModel]="errorMessage" readonly />
       </label>
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="2">
     <div fxFill class="padding-top-10">
-      <button class="btn-default btn-success radius-10 padding-10">{{'piazza' | translate}}</button>
+      <button class="btn-default btn-success radius-10 padding-10"  [disabled]="errorMessage">{{'piazza' | translate}}</button>
     </div>
   </mat-grid-tile>
 </mat-grid-list>

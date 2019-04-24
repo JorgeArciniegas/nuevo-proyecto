@@ -1,17 +1,19 @@
 @import "./buttons";
+
 *,
 *:after,
 *:before {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
+
 body,
 html {
-	margin: 0;
-	padding: 0;
-	height: 100vh;
-	width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
 }
 
 .app {
@@ -212,6 +214,16 @@ html {
 						padding-right: 10px;
 					}
 				}
+				
+				&.display-error {
+                    @extend %color-bg-warn;
+
+                    label {
+                        input {
+                            @extend %color-bg-warn;
+                        }
+                    }
+                }
 			}
 			.product-coupon {
 				// padding: 0px 5px;
@@ -351,17 +363,16 @@ html {
       height: 100%;
       @extend %remove-image;
     }
-  }
 }
 
 .scroll {
-  &[disabled] {
-    opacity: 0.1;
-  }
+    &[disabled] {
+        opacity: 0.1;
+    }
 }
 
 .indicator {
-  @extend %indicator;
+    @extend %indicator;
 }
 
 .indicator-odds-number{
@@ -369,88 +380,96 @@ html {
 }
 
 .radius-2 {
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
 }
 
 .radius-5 {
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
 }
 
 .radius-10 {
-	border-radius: 10px;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
 }
 
 .radius-15 {
-	border-radius: 15px;
-	-moz-border-radius: 15px;
-	-webkit-border-radius: 15px;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
 }
 
 .radius-25 {
-	border-radius: 25px;
-	-moz-border-radius: 25px;
-	-webkit-border-radius: 25px;
+    border-radius: 25px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
 }
 
 .radius-50 {
-	border-radius: 50px;
-	-moz-border-radius: 50px;
-	-webkit-border-radius: 50px;
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
 }
 
 .padding-25 {
-	padding: 25px;
+    padding: 25px;
 }
+
 .padding-right-10 {
-	padding-right: 10px;
+    padding-right: 10px;
 }
+
 .padding-top-5 {
-	padding-top: 5px;
+    padding-top: 5px;
 }
+
 .padding-top-10 {
-	padding-top: 10px;
+    padding-top: 10px;
 }
+
 .padding-top-25 {
-	padding-top: 25px;
+    padding-top: 25px;
 }
+
 .padding-horizontal-6 {
-	padding: 0px 6px;
+    padding: 0px 6px;
 }
+
 .elevation-z5 {
-	box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 1px 5px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
 
 .overlay {
-	position: fixed; /* Sit on top of the page content */
-	z-index: 100; /* Specify a stack order in case you're using a different order for other elements */
-	margin: 1px;
-	background: rgba(0, 0, 0, 0.6) url("app/themes/skins/develop/icon/baseline-lock-24px.svg") center center no-repeat;
-	background-size: 100px;
+    position: fixed; /* Sit on top of the page content */
+    z-index: 100; /* Specify a stack order in case you're using a different order for other elements */
+    margin: 1px;
+    background: rgba(0, 0, 0, 0.6) url("app/themes/skins/develop/icon/baseline-lock-24px.svg") center center no-repeat;
+    background-size: 100px;
 }
 
 .cdk-overlay-container {
-	@import "./skins/develop/styles";
+    @import "./skins/develop/styles";
 
-	.cdk-global-overlay-wrapper {
-		@extend %font-family;
-		@extend %dialog;
-		position: absolute;
-		top: 23vh;
-		left: 1vw;
-		width: 57vw;
-		height: 65vh;
-		z-index: 99;
-		box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.1), 0px 1px 5px 5px rgba(0, 0, 0, 0.3);
-		padding: 10px;
-	}
+    .cdk-global-overlay-wrapper {
+        @extend %font-family;
 
-	.btn-close {
-		@extend %btn-transparent;
-	}
+        @extend %dialog;
+
+        position: absolute;
+        top: 23vh;
+        left: 1vw;
+        width: 57vw;
+        height: 65vh;
+        z-index: 99;
+        box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.1), 0px 1px 5px 5px rgba(0, 0, 0, 0.3);
+        padding: 10px;
+    }
+
+    .btn-close {
+        @extend %btn-transparent;
+    }
 }
