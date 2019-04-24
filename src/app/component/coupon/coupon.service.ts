@@ -3,8 +3,8 @@ import { CouponCategory } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { AddOddRequest, BetCouponExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Observable, Subject } from 'rxjs';
-import { BetOdd } from 'src/app/products/products.model';
-import { UserService } from 'src/app/services/user.service';
+import { BetOdd } from '../../products/products.model';
+import { UserService } from '../../services/user.service';
 import { OddsStakeEdit, StakesDisplay } from './coupon.model';
 
 @Injectable({
@@ -47,7 +47,7 @@ export class CouponService {
     // oddstakeEdit
     this.oddStakeEditSubject = new Subject<OddsStakeEdit>();
     this.oddStakeEditObs = this.oddStakeEditSubject.asObservable();
-    this.oddStakeEditObs.subscribe( item => {
+    this.oddStakeEditObs.subscribe(item => {
       this.oddStakeEdit = item;
     });
   }

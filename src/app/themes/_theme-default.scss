@@ -341,6 +341,10 @@ html {
     @extend %border-primary;
   }
 
+  .stake.color {
+    @extend %btn-success-gradient;
+  }
+
   .remove {
     .icon{
       width: 100%;

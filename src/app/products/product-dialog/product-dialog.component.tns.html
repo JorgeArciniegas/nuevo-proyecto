@@ -2,41 +2,37 @@
   <GridLayout rows="*" columns="*" class="dialog">
     <GridLayout rows="4*,16*,3*" columns="*" class="odds-grid">
       <GridLayout row="0" rows="*" columns="6*,*">
-        <Label col="0" text="{{ 'TITLE.' + title | translate }}" class="title" verticalAlignment="center"
-          horizontalAlignment="left"></Label>
-        <Label col="1" text="{{page + 1}}/{{maxPage}}" *ngIf="maxPage > 1" class="indicator" verticalAlignment="bottom"
-          horizontalAlignment="right" verticalAlignment="bottom"></Label>
+        <Label col="0" text="{{ 'TITLE.' + title | translate }}" class="title" verticalAlignment="center" horizontalAlignment="left"></Label>
+        <Label col="1" text="{{page + 1}}/{{maxPage}}" *ngIf="maxPage > 1" class="indicator" verticalAlignment="bottom" horizontalAlignment="right"
+          verticalAlignment="bottom"></Label>
       </GridLayout>
       <GridLayout row="1" rows="2*{{rows}},2*" columns="*{{columns}}">
         <!-- Scroll -->
-        <GridLayout row="0" colSpan="{{columnNumber}}" class="card-odd scroll" (tap)="previusOdds()" *ngIf="maxPage > 1"
-          [ngClass]="{'disabled': page <= 0}" [isEnabled]="page > 0">
+        <GridLayout row="0" colSpan="{{columnNumber}}" class="card-odd scroll" (tap)="previusOdds()" *ngIf="maxPage > 1" [ngClass]="{'disabled': page <= 0}" [isEnabled]="page > 0">
           <Image width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Up.png" verticalAlignment="center"></Image>
         </GridLayout>
-        <GridLayout row="{{rowNumber + 1}}" colSpan="{{columnNumber}}" class="card-odd scroll" (tap)="nextOdds()"
-          *ngIf="maxPage > 1" [ngClass]="{'disabled': page >= maxPage - 1}" [isEnabled]="page < maxPage - 1">
+        <GridLayout row="{{rowNumber + 1}}" colSpan="{{columnNumber}}" class="card-odd scroll" (tap)="nextOdds()" *ngIf="maxPage > 1" [ngClass]="{'disabled': page >= maxPage - 1}"
+          [isEnabled]="page < maxPage - 1">
           <Image width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Down.png" verticalAlignment="center">
           </Image>
         </GridLayout>
         <!-- Cards -->
-        <GridLayout row="{{ 1 + (i / columnNumber) | floor}}" col="{{i % columnNumber}}" rows="*,2*,2*" columns="*,*"
-          class="card-odd" [ngClass]="{'notSelected': !odd.selected}" (tap)="toggleOdd(odd)"
-          *ngFor="let odd of betOdds; let i = index;">
+        <GridLayout row="{{ 1 + (i / columnNumber) | floor}}" col="{{i % columnNumber}}" rows="*,2*,2*" columns="*,*" class="card-odd" [ngClass]="{'notSelected': !odd.selected}"
+          (tap)="toggleOdd(odd)" *ngFor="let odd of betOdds; let i = index;">
           <StackLayout row="0" colSpan="2" class="top-window"></StackLayout>
           <GridLayout row="1" colSpan="2" rows="*" columns="*,*" class="first-row">
             <Label col="0" text="{{odd.label}}" horizontalAlignment="left"></Label>
-            <Label col="1" text="{{odd.amount | number: '1.2-2'}}" horizontalAlignment="right"></Label>
+            <Label col="1" class="odd" text="{{odd.odd | number: '1.2-2'}}" horizontalAlignment="right"></Label>
           </GridLayout>
-          <GridLayout row="2" col="0" class="odd radius-5">
-            <Label text="{{odd.odd | number: '1.3-3'}}" horizontalAlignment="center" verticalAlignment="center"></Label>
+          <GridLayout row="2" col="0" class="stake color radius-5">
+            <Label text="{{odd.amount | number: '1.2-2'}}" horizontalAlignment="center" verticalAlignment="center"></Label>
           </GridLayout>
         </GridLayout>
 
       </GridLayout>
       <StackLayout row="3" horizontalAlignment="center">
         <GridLayout rows="*" columns="*" class="button btn-close">
-          <Button text="{{ 'CLOSE' | translate }}" class="button-internal" (tap)="close()"
-            textTransform="none"></Button>
+          <Button text="{{ 'CLOSE' | translate }}" class="button-internal" (tap)="close()" textTransform="none"></Button>
         </GridLayout>
       </StackLayout>
     </GridLayout>

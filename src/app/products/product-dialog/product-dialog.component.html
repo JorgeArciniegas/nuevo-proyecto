@@ -11,19 +11,17 @@
       </button>
     </mat-grid-tile>
     <mat-grid-tile rowspan="3" class="card-odd radius-5" [ngClass]="{'notSelected': !odd.selected}" (click)="toggleOdd(odd)" *ngFor="let odd of betOdds">
-      <div fxFill>
-        <div class="top-window"></div>
-        <div class="first-row" fxLayout="row">
-          <div fxFlex="50" fxLayoutAlign="start center">
+      <div fxFill fxLayout="column" fxLayoutAlign="space-between stretch">
+        <div fxFlex="24" class="top-window"></div>
+        <div fxFlex="38" class="first-row" fxLayout="row">
+          <div fxFlex="70" fxLayoutAlign="start center">
             {{odd.label}}
           </div>
-          <div fxFlex="50" fxLayoutAlign="end center">
-            <div class="odd radius-5">
-              {{odd.odd | number: '1.2-2'}}
-            </div>
+          <div fxFlex="30" fxLayoutAlign="center center" class="odd radius-5">
+            {{odd.odd | number: '1.2-2'}}
           </div>
         </div>
-        <div class="stake radius-5">
+        <div fxFlex="38" class="stake color radius-5">
           {{odd.amount | number: '1.2-2'}}
         </div>
       </div>

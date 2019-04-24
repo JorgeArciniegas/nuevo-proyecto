@@ -1,11 +1,12 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { CouponService } from './coupon.service';
-import { Subscription } from 'rxjs';
-import { BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
-import { AppSettings } from 'src/app/app.settings';
-import { BetOdd } from 'src/app/products/products.model';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { BetCouponOdd } from '@elys/elys-api';
+import { BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
+import { Subscription } from 'rxjs';
+import { AppSettings } from '../../app.settings';
+import { BetOdd } from '../../products/products.model';
+import { ProductsService } from '../../products/products.service';
 import { OddsStakeEdit } from './coupon.model';
+import { CouponService } from './coupon.service';
 
 @Component({
   selector: 'app-coupon',
@@ -15,7 +16,8 @@ import { OddsStakeEdit } from './coupon.model';
 export class CouponComponent implements OnDestroy {
   @Input()
   public rowHeight: number;
-  private settings: AppSettings;
+  @Input()
+  public timeBlocked: boolean;
   public maxItems = 5;
   public page = 0;
   public maxPage = 0;
@@ -26,9 +28,9 @@ export class CouponComponent implements OnDestroy {
 
   constructor(
     public couponService: CouponService,
-    private readonly appSettings: AppSettings
+    public readonly settings: AppSettings,
+    public productService: ProductsService
   ) {
-    this.settings = this.appSettings;
     this.couponServiceSubscription = this.couponService.couponResponse.subscribe(coupon => {
       this.maxPage = Math.ceil(coupon.Odds.length / this.maxItems);
       this.page = 0;
@@ -80,14 +82,14 @@ export class CouponComponent implements OnDestroy {
   // change stake from odd's coupon
   checkOddToChangeStake(odd: BetCouponOdd): void {
 
-    const tempOdd: OddsStakeEdit =  {indexOdd: -1, tempStake: 0.00, odd: null, isDefaultInput: false};
+    const tempOdd: OddsStakeEdit = { indexOdd: -1, tempStake: 0.00, odd: null, isDefaultInput: false };
     // search if the odd is selected and it reset
-    if (this.couponService.oddStakeEdit && this.couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId){
+    if (this.couponService.oddStakeEdit && this.couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId) {
       this.couponService.oddStakeEditSubject.next(null);
       return;
     }
     // filter the odd to coupon and extract the index and value
-    this.couponService.coupon.Odds.filter( (item: BetCouponOddExtended, idx) => {
+    this.couponService.coupon.Odds.filter((item: BetCouponOddExtended, idx) => {
       if (item.SelectionId === odd.SelectionId) {
         tempOdd.indexOdd = idx;
         tempOdd.odd = item;

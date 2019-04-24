@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppSettings } from '../app.settings';
 import { CouponService } from '../component/coupon/coupon.service';
 import { ProductsService } from './products.service';
+import { DialogService } from './dialog.service';
 
 @Component({
   selector: 'app-products',
@@ -16,7 +17,8 @@ export class ProductsComponent {
   constructor(
     public service: ProductsService,
     public readonly appSettings: AppSettings,
-    public readonly couponService: CouponService
+    public readonly couponService: CouponService,
+    public dialog: DialogService,
   ) {
     this.settings = appSettings;
 
