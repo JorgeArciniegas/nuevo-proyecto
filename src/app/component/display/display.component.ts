@@ -16,7 +16,7 @@ import { TypeBetSlipColTot } from '../../products/dogracing/dogracing.models';
   styleUrls: ['./display.component.scss']
 })
 export class DisplayComponent implements OnInit, OnDestroy {
-  public settings: AppSettings;
+  // public settings: AppSettings;
   @Input()
   public rowHeight: number;
   @Input()
@@ -29,9 +29,9 @@ export class DisplayComponent implements OnInit, OnDestroy {
   typeBetSlipColTot: typeof TypeBetSlipColTot = TypeBetSlipColTot;
   constructor(
     private productService: ProductsService,
-    public readonly appSettings: AppSettings
+    public readonly settings: AppSettings
   ) {
-    this.settings = appSettings;
+
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
         this.polyfunctionalValue = element;

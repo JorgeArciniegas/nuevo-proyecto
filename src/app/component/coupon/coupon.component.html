@@ -6,6 +6,7 @@
           <div fxFlex>
             <span class="text">{{ 'coupon' | translate }} </span>
           </div>
+
           <button class="btn-reset btn-display btn-warning radius-5" (click)="clearCoupon()" fxLayoutAlign="center center">
             <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
           </button>
@@ -22,10 +23,15 @@
   </mat-grid-tile>
   <mat-grid-tile rowspan="1">
     <div class="btn-coupon-board">
-      <div class="display" fxLayout="row layout-wrap" fxLayoutGap="20px">
+      <div class="display" fxLayoutAlign="space-around center" fxLayout="row layout-wrap">
         <div fxFlex fxLayoutAlign="center center">
           <span class="btn btn-default">{{'single' | translate}}</span>
           <span class="indicator-odds-number radius-50">{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}</span>
+        </div>
+        <div fxFlex="15">
+          <button class="btn-reset btn-display btn-dark-gradient radius-5">
+            <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png">
+          </button>
         </div>
       </div>
     </div>
