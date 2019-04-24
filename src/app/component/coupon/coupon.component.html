@@ -25,7 +25,7 @@
       <div class="display" fxLayout="row layout-wrap" fxLayoutGap="20px">
         <div fxFlex fxLayoutAlign="center center">
           <span class="btn btn-default">{{'single' | translate}}</span>
-          <span class="indicator-odds-number radius-50">{{oddsNumber}}</span>
+          <span class="indicator-odds-number radius-50">{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}</span>
         </div>
       </div>
     </div>

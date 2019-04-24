@@ -19,11 +19,13 @@
   <GridLayout row="2" rows="*" columns="*" class="card display btn-coupon-board" [ngClass]="{'small': productService.windowSize.small}">
     <StackLayout orientation="horizontal" horizontalAlignment="center">
       <Label text="{{'single' | translate}}" verticalAlignment="center"></Label>
-      <Label class="indicator-odds-number radius-50" text="{{ oddsNumber }}" verticalAlignment="center" textAlignment="center"></Label>
+      <Label class="indicator-odds-number radius-50" [ngClass]="{'small': productService.windowSize.small}" text="{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}"
+        verticalAlignment="center" textAlignment="center"></Label>
     </StackLayout>
   </GridLayout>
   <GridLayout row="3">
-    <GridLayout rows="2*,6*,6*,6*,6*,6*,2*" columns="*" *ngIf="couponService.coupon">
+    <GridLayout rows="2*,6*,6*,6*,6*,{{ productService.windowSize.small ? '' : '6*,' }}2*" columns="*" *ngIf="couponService.coupon"
+      [ngClass]="{'small': productService.windowSize.small}">
       <!-- paginator -->
       <GridLayout row="0" columns="*,2*,*" class="card-odd scroll" (tap)="previusOdds()" [ngClass]="{'disabled': page <= 0}" [isEnabled]="page > 0">
         <Image col="1" width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Up.png" verticalAlignment="center"></Image>
@@ -39,7 +41,7 @@
         </StackLayout>
       </GridLayout>
       <!-- coupon items -->
-      <GridLayout row="{{ 1 + i }}" rows="3*,7*,5*" columns="*" class="card-odd" *ngFor="let odd of listOdds; let i = index;">
+      <GridLayout row="{{ 1 + i }}" rows="3*,8*,6*" columns="*" class="card-odd" *ngFor="let odd of listOdds; let i = index;">
         <GridLayout row="0" col="*,*" class="top-window">
           <Label col="0" text="{{odd.EventName}}" horizontalAlignment="left"></Label>
           <Label col="1" text="#{{odd.MatchId}}" horizontalAlignment="right"></Label>
@@ -55,10 +57,10 @@
           <StackLayout col="0" class="button" width="100%" [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
           'btn-selected' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }" (tap)="checkOddToChangeStake(odd)"
             horizontalAlignment="center" verticalAlignment="center">
-            <Label class="stake" *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId" text="{{odd.OddStake | number: '1.2-2'}}"
+            <Label class="stake" *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId" text="{{odd.OddStake | number: '1.2-3'}}"
               horizontalAlignment="center" verticalAlignment="center"></Label>
             <Label class="stake" *ngIf="couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId"
-              text="{{couponService.oddStakeEdit.tempStake | number: '1.2-2'}}" horizontalAlignment="center" verticalAlignment="center"></Label>
+              text="{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}" horizontalAlignment="center" verticalAlignment="center"></Label>
           </StackLayout>
           <StackLayout col="1" class="btn-warning button" (tap)="removeOdd(odd)" horizontalAlignment="right">
             <Image stretch="aspectFit" width="26" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-delete_outline-white-24px.png" verticalAlignment="center"

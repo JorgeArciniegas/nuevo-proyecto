@@ -24,7 +24,6 @@ export class CouponComponent implements OnDestroy {
   public maxPage = 0;
   public listOdds: BetCouponOddExtended[] = [];
   // number of odds inserted to coupon
-  oddsNumber = 0;
   private couponServiceSubscription: Subscription;
 
   constructor(
@@ -33,13 +32,13 @@ export class CouponComponent implements OnDestroy {
     public productService: ProductsService
   ) {
     this.settings = this.appSettings;
+    if (this.productService.windowSize.small) {
+      this.maxItems = 4;
+    }
     this.couponServiceSubscription = this.couponService.couponResponse.subscribe(coupon => {
       this.maxPage = Math.ceil(coupon.Odds.length / this.maxItems);
       this.page = 0;
       this.filterOdds();
-      this.oddsNumber = coupon.Odds.length;
-      // updating the number of odds
-      this.oddsNumber = coupon.Odds.length;
     });
   }
 
@@ -74,7 +73,6 @@ export class CouponComponent implements OnDestroy {
     this.couponService.addRemoveToCoupon([new BetOdd(odd.SelectionName, odd.OddValue, odd.OddStake, odd.SelectionId)]);
   }
   clearCoupon(): void {
-    this.oddsNumber = 0;
     this.couponService.resetCoupon();
   }
   ngOnDestroy(): void {
