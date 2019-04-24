@@ -125,7 +125,6 @@ export class BtncalcComponentCommon {
   // increments digits in display amount
   btnAmountSet(amount: number): void {
     if (this.couponService.oddStakeEdit) {
-
       if (this.couponService.oddStakeEdit.isDefaultInput) {
         this.couponService.oddStakeEdit.tempStake = 0;
         this.couponService.oddStakeEdit.isDefaultInput = false;
