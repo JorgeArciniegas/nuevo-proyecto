@@ -29,7 +29,7 @@
           <span class="indicator-odds-number radius-50">{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}</span>
         </div>
         <div fxFlex="15">
-          <button class="btn-reset btn-display btn-dark-gradient radius-5">
+          <button class="btn-reset btn-display btn-dark-gradient radius-5" (click)="openDialog()">
             <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png">
           </button>
         </div>

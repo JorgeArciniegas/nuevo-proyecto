@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { CouponCategory } from '@elys/elys-api';
+import { CouponCategory, BetCouponOdd } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
-import { AddOddRequest, BetCouponExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
+import { AddOddRequest, BetCouponExtended, BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Observable, Subject } from 'rxjs';
 import { BetOdd } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
@@ -116,7 +116,6 @@ export class CouponService {
     this.stakeDisplaySubject.next(stakesDisplayTemp);
   }
 
-
   updateCoupon(): void {
     if (this.oddStakeEdit) {
       if (this.oddStakeEdit.tempStake > 0) {
@@ -129,4 +128,29 @@ export class CouponService {
     }
   }
 
+  checkOddToChangeStake(odd: BetCouponOdd): void {
+    const tempOdd: OddsStakeEdit = {
+      indexOdd: -1,
+      tempStake: 0.0,
+      odd: null,
+      isDefaultInput: false
+    };
+    // search if the odd is selected and it reset
+    if (
+      this.oddStakeEdit &&
+      this.oddStakeEdit.odd.SelectionId === odd.SelectionId
+    ) {
+      this.oddStakeEditSubject.next(null);
+      return;
+    }
+    // filter the odd to coupon and extract the index and value
+    this.coupon.Odds.filter((item: BetCouponOddExtended, idx) => {
+      if (item.SelectionId === odd.SelectionId) {
+        tempOdd.indexOdd = idx;
+        tempOdd.odd = item;
+      }
+    });
+
+    this.oddStakeEditSubject.next(tempOdd);
+  }
 }

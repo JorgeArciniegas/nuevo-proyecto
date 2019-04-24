@@ -5,7 +5,8 @@ import {
   BetOdd,
   BetOdds,
   PolyfunctionalArea,
-  PolyfunctionalStakeCoupon
+  PolyfunctionalStakeCoupon,
+  BetDataDialog
 } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { TypeBetSlipColTot } from '../../products/dogracing/dogracing.models';
@@ -54,9 +55,11 @@ export class DisplayComponent implements OnInit, OnDestroy {
   }
 
   detailOdds(): void {
-    const data: BetOdds = new BetOdds();
-    data.title = this.polyfunctionalValue.selection;
-    data.odds = this.polyfunctionalValue.odds;
+    const data: BetDataDialog = {
+      title:  this.polyfunctionalValue.selection,
+      betOdds: { odds: this.polyfunctionalValue.odds},
+
+    };
     this.productService.openProductDialog(data);
   }
 }

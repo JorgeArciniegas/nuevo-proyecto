@@ -533,4 +533,23 @@ html {
     .btn-close {
         @extend %btn-transparent;
     }
+    .btn-warning {
+      @extend %btn-warning;
+    }
+    .btn-success {
+      @extend %btn-success-gradient;
+    }
+
+    .btn-selected {
+        @extend %btn-blue-gradient;
+    }
+
+    .btn-grey-gradient {
+        @extend %btn-gray-gradient;
+    }
+
+    .btn-dark-gradient {
+        @extend %btn-dark-gradient;
+    }
+
 }

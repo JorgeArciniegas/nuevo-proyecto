@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DialogService } from './dialog.service';
-import { BetOdds, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupon } from './products.model';
+import { BetOdds, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupon, BetDataDialog } from './products.model';
 import { WindowSize } from '../services/utility/window-size/window-size.model';
 import { WindowSizeService } from '../services/utility/window-size/window-size.service';
+import { BetCouponExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +17,7 @@ export class ProductsService {
   public timeBlocked = false;
   public timeBlockedSubscribe: Subject<boolean>;
 
-  private dialogProductDataSubject: Subject<BetOdds>;
+  private dialogProductDataSubject: Subject<BetDataDialog>;
 
   private playableBoardResetSubject: Subject<boolean>;
   public playableBoardResetObserve: Observable<boolean>;
@@ -54,9 +55,14 @@ export class ProductsService {
       this.timeBlocked = timeBlocked;
     });
     // Dialog management
-    this.dialogProductDataSubject = new Subject<BetOdds>();
-    this.dialogProductDataSubject.asObservable().subscribe((odds: BetOdds) => {
-      this.dialog.openDialog(new DialogData(odds, this.breakpoint));
+    this.dialogProductDataSubject = new Subject<BetDataDialog>();
+    this.dialogProductDataSubject.asObservable().subscribe((data: BetDataDialog) => {
+      const dialogData: DialogData = new DialogData();
+      dialogData.betOdds = data.betOdds;
+      dialogData.betCoupon = data.betCoupon;
+      dialogData.breakpoint = this.breakpoint;
+      dialogData.title = data.title;
+      this.dialog.openDialog(dialogData);
     });
 
     this.playableBoardResetSubject = new Subject<boolean>();
@@ -67,7 +73,7 @@ export class ProductsService {
     this.windowSize = this.windowSizeService.getWindowSize();
   }
 
-  openProductDialog(data: BetOdds): void {
+  openProductDialog(data: BetDataDialog): void {
     this.dialogProductDataSubject.next(data);
   }
 
