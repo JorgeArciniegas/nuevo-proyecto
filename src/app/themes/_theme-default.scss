@@ -17,205 +17,238 @@ html {
 }
 
 .app {
-	&.develop {
-		@import "./skins/develop/styles";
-	}
-	.main-content {
-		@extend %font-family;
-		height: 100vh;
-		overflow: hidden;
-		@extend %color-bg-default;
-		app-products {
-			height: 100vh;
-		}
+    &.develop {
+        @import "./skins/develop/styles";
+    }
 
-		.logo-with-text {
-			@extend %logo-with-text;
-		}
+    .main-content {
+        @extend %font-family;
 
-		.error-message {
-			@extend %error-area;
+        height: 100vh;
+        overflow: hidden;
 
-			.error-icon {
-				@extend %error-icon;
-				display: inline-block;
-			}
-		}
+        @extend %color-bg-default;
 
-		.primary-link {
-			@extend %primary-link;
-		}
+        app-products {
+            height: 100vh;
+        }
 
-		#error-page {
-			@extend %login;
-			height: 100%;
+        .logo-with-text {
+            @extend %logo-with-text;
+        }
 
-			.error-page-panel {
-				@extend %bg-opacity-dark;
-			}
+        .error-message {
+            @extend %error-area;
 
-			.error-message {
-				.error-icon {
-					width: 30px;
-					height: 30px;
-					margin: 0 10px;
-				}
-			}
-		}
+            .error-icon {
+                @extend %error-icon;
 
-		#login {
-			@extend %login;
-			height: 100%;
+                display: inline-block;
+            }
+        }
 
-			.login-panel {
-				@extend %bg-opacity-dark;
+        .primary-link {
+            @extend %primary-link;
+        }
 
-				.input-item {
-					.input {
-						@extend %border-input-area;
+        #error-page {
+            @extend %login;
 
-						input {
-							@extend %login-input;
-						}
-						&.error {
-							@extend %border-input-area-error;
-						}
+            height: 100%;
 
-						.icon-area {
-							&.user-icon {
-								@extend %user-icon;
-							}
-							&.pwd-icon {
-								@extend %pwd-icon;
-							}
-						}
-					}
-				}
+            .error-page-panel {
+                @extend %bg-opacity-dark;
+            }
 
-				.error-message {
-					.error-icon {
-						width: 18px;
-						height: 18px;
-						margin: 0 5px;
-					}
-				}
-			}
-		}
-		.toolbar {
-			@extend %header;
-			.icon {
-				width: 100%;
-			}
-			.logo {
-				margin: 0 20px 0 0;
-			}
-			.menu {
-				margin: 0 5px;
-			}
-			.btn {
-				margin: 0 4px;
-				border-bottom: 3px solid transparent;
+            .error-message {
+                .error-icon {
+                    width: 30px;
+                    height: 30px;
+                    margin: 0 10px;
+                }
+            }
+        }
 
-				img {
-					@extend %header-btn-menu;
-				}
+        #login {
+            @extend %login;
 
-				&.selected {
-					@extend %header-btn-menu-selected;
-				}
-			}
-			.user-menu {
-				.notification {
-					margin: 0 10px;
-				}
-				.counter-container {
-					text-align: right;
-					@extend %header-notification-img;
-					background-repeat: no-repeat;
-					background-size: 70%;
-					background-position: bottom center;
-				}
-				.counter {
-					text-align: center;
-					font-size: 1.8vh;
-					font-weight: bold;
-					display: inline-block;
-				}
-				.details {
-					font-size: 1.8vh;
+            height: 100%;
 
-					.operator {
-						margin-left: 0.5vh;
-						font-weight: 600;
-						@extend %header-text-operator;
-					}
-				}
-				.clock {
-					font-size: 1.9vh;
-					padding: 3px 10px;
-					@extend %card-title;
-					margin: 3px 0.8vw;
+            .login-panel {
+                @extend %bg-opacity-dark;
 
-					.clock-icon {
-						margin-right: 10px;
-					}
-				}
-			}
-		}
+                .input-item {
+                    .input {
+                        @extend %border-input-area;
 
-		.widgets {
-			padding: 0 5px;
-			.widget-btn {
-				.icon {
-					height: 100%;
-					width: 100%;
-				}
-			}
-		}
+                        input {
+                            @extend %login-input;
+                        }
 
-		.display {
-			@extend %card-title;
-		}
-		.sub-display {
-			@extend %sub-card-title;
-		}
+                        &.error {
+                            @extend %border-input-area-error;
+                        }
 
-		.product {
-			padding: 10px 0px;
-			.product-calc,
-			.product-coupon {
-				.card {
-					padding: 5px;
-					.card-title {
-						height: 40px;
-					}
-				}
-			}
-			.display-amount {
-				@extend %color-bg-white;
-				min-height: 100%;
-				width: 100%;
-				label, .label {
-					font-weight: 500;
-					font-size: 0.7em;
-					text-transform: uppercase;
-					span {
-						padding: 5px;
-						display: block;
-						text-align: right;
-					}
-					input, .input {
-						margin-top: 5px;
-						border: 0;
-						width: 100%;
-						font-size: 1.8em;
-						font-weight: 700;
-						text-align: right;
-						padding-right: 10px;
-					}
-				}
-				
-				&.display-error {
+                        .icon-area {
+                            &.user-icon {
+                                @extend %user-icon;
+                            }
+
+                            &.pwd-icon {
+                                @extend %pwd-icon;
+                            }
+                        }
+                    }
+                }
+
+                .error-message {
+                    .error-icon {
+                        width: 18px;
+                        height: 18px;
+                        margin: 0 5px;
+                    }
+                }
+            }
+        }
+
+        .toolbar {
+            @extend %header;
+
+            .icon {
+                width: 100%;
+            }
+
+            .logo {
+                margin: 0 20px 0 0;
+            }
+
+            .menu {
+                margin: 0 5px;
+            }
+
+            .btn {
+                margin: 0 4px;
+                border-bottom: 3px solid transparent;
+
+                img {
+                    @extend %header-btn-menu;
+                }
+
+                &.selected {
+                    @extend %header-btn-menu-selected;
+                }
+            }
+
+            .user-menu {
+                .notification {
+                    margin: 0 10px;
+                }
+
+                .counter-container {
+                    text-align: right;
+
+                    @extend %header-notification-img;
+
+                    background-repeat: no-repeat;
+                    background-size: 70%;
+                    background-position: bottom center;
+                }
+
+                .counter {
+                    text-align: center;
+                    font-size: 1.8vh;
+                    font-weight: bold;
+                    display: inline-block;
+                }
+
+                .details {
+                    font-size: 1.8vh;
+
+                    .operator {
+                        margin-left: 0.5vh;
+                        font-weight: 600;
+
+                        @extend %header-text-operator;
+                    }
+                }
+
+                .clock {
+                    font-size: 1.9vh;
+                    padding: 3px 10px;
+
+                    @extend %card-title;
+
+                    margin: 3px 0.8vw;
+
+                    .clock-icon {
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+
+        .widgets {
+            padding: 0 5px;
+
+            .widget-btn {
+                .icon {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+        }
+
+        .display {
+            @extend %card-title;
+        }
+
+        .sub-display {
+            @extend %sub-card-title;
+        }
+
+        .product {
+            padding: 10px 0px;
+
+            .product-calc,
+            .product-coupon {
+                .card {
+                    padding: 5px;
+
+                    .card-title {
+                        height: 40px;
+                    }
+                }
+            }
+
+            .display-amount {
+                @extend %color-bg-white;
+
+                min-height: 100%;
+                width: 100%;
+
+                label, .label {
+                    font-weight: 500;
+                    font-size: 0.7em;
+                    text-transform: uppercase;
+
+                    span {
+                        padding: 5px;
+                        display: block;
+                        text-align: right;
+                    }
+
+                    input, .input {
+                        margin-top: 5px;
+                        border: 0;
+                        width: 100%;
+                        font-size: 1.8em;
+                        font-weight: 700;
+                        text-align: right;
+                        padding-right: 10px;
+                    }
+                }
+
+                &.display-error {
                     @extend %color-bg-warn;
 
                     label {
@@ -224,144 +257,172 @@ html {
                         }
                     }
                 }
-			}
-			.product-coupon {
-				// padding: 0px 5px;
-				app-coupon {
-					width: 100%;
-					.btn-coupon-board {
-						button {
-							&.actived {
-								@extend %btn-success-gradient;
-							}
-						}
-					}
-				}
-			}
-		}
-		// GRID AMOUNT
-		.grid-row-amount {
-			.btn-amount-1 {
-				@extend %btn-orange;
-			}
-			.btn-amount-2 {
-				@extend %btn-gray-gradient-2;
-			}
-			.btn-amount-3 {
-				@extend %btn-yellow-gradient;
-			}
-			.btn-amount-4 {
-				@extend %btn-white-gradient;
-			}
-		}
-		.grid-keyboard-number {
-			.mat-grid-tile {
-				.mat-figure {
-					padding: 5px;
-				}
-			}
-		}
-		.btn-keyboard {
-			@extend %btn-keyboard;
-			&.btn-grey {
-				@extend %btn-gray;
-			}
-			&.btn-black {
-				@extend %btn-dark;
-			}
-		}
-		.btn-warning {
-			@extend %btn-warning;
-		}
-		.btn-success {
-			@extend %btn-success-gradient;
-		}
-    .btn-selected {
-      @extend %btn-blue-gradient;
+            }
+
+            .product-coupon {
+                // padding: 0px 5px;
+                app-coupon {
+                    width: 100%;
+
+                    .btn-coupon-board {
+                        button {
+                            &.actived {
+                                @extend %btn-success-gradient;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // GRID AMOUNT
+        .grid-row-amount {
+            .btn-amount-1 {
+                @extend %btn-orange;
+            }
+
+            .btn-amount-2 {
+                @extend %btn-gray-gradient-2;
+            }
+
+            .btn-amount-3 {
+                @extend %btn-yellow-gradient;
+            }
+
+            .btn-amount-4 {
+                @extend %btn-white-gradient;
+            }
+        }
+
+        .grid-keyboard-number {
+            .mat-grid-tile {
+                .mat-figure {
+                    padding: 5px;
+                }
+            }
+        }
+
+        .btn-keyboard {
+            @extend %btn-keyboard;
+
+            &.btn-grey {
+                @extend %btn-gray;
+            }
+
+            &.btn-black {
+                @extend %btn-dark;
+            }
+        }
+
+        .btn-warning {
+            @extend %btn-warning;
+        }
+
+        .btn-success {
+            @extend %btn-success-gradient;
+        }
+
+        .btn-selected {
+            @extend %btn-blue-gradient;
+        }
+
+        .btn-grey-gradient {
+            @extend %btn-gray-gradient;
+        }
+
+        .btn-dark-gradient {
+            @extend %btn-dark-gradient;
+        }
+
+        .advance-game {
+            padding: 0.8vh 0 0.8vh;
+
+            .btn-advance-game {
+                @extend %btn-advance-game;
+
+                .label {
+                    font-weight: 700;
+                    font-size: 1.6vw;
+                }
+            }
+        }
+
+        .polifuctional-area {
+            .mat-figure {
+                padding-top: 10px;
+                margin: 0 6px;
+            }
+        }
+
+        .dog-racing {
+            @extend %dog-racing-bg;
+
+            .race-control {
+                .time {
+                    @extend %time-card-title;
+                }
+            }
+
+            .list-race {
+                .number {
+                    @extend %btn-success-gradient;
+
+                    &.selected {
+                        @extend %btn-blue-gradient;
+                    }
+                }
+
+                .date {
+                    @extend %btn-gray-gradient;
+
+                    &.selected {
+                        @extend %btn-dark-gradient;
+                    }
+                }
+            }
+
+            .card-box-result {
+                .header {
+                    .raceNumber {
+                        @extend %card-title-noborder;
+                    }
+                }
+            }
+        }
     }
-		.btn-grey-gradient {
-			@extend %btn-gray-gradient;
-		}
-		.btn-dark-gradient {
-			@extend %btn-dark-gradient;
-		}
-		.advance-game {
-			padding: 0.8vh 0 0.8vh;
-			.btn-advance-game {
-				@extend %btn-advance-game;
-				.label {
-					font-weight: 700;
-					font-size: 1.6vw;
-				}
-			}
-		}
 
-		.polifuctional-area {
-			.mat-figure {
-				padding-top: 10px;
-				margin: 0 6px;
-			}
-		}
-
-		.dog-racing {
-			@extend %dog-racing-bg;
-
-			.race-control {
-				.time {
-					@extend %time-card-title;
-				}
-			}
-			.list-race {
-				.number {
-					@extend %btn-success-gradient;
-					&.selected {
-						@extend %btn-blue-gradient;
-					}
-				}
-				.date {
-					@extend %btn-gray-gradient;
-					&.selected {
-						@extend %btn-dark-gradient;
-					}
-				}
-			}
-			.card-box-result {
-				.header {
-					.raceNumber {
-						@extend %card-title-noborder;
-					}
-				}
-			}
-		}
-  }
-  .counter {
-    @extend %header-notification-style;
-  }
+    .counter {
+        @extend %header-notification-style;
+    }
 }
 
 .card-odd {
-  @extend %dialog-card;
+    @extend %dialog-card;
 
-  .top-window {
-    @extend %dialog-card-header;
-    height: 20px;
-  }
+    .top-window {
+        @extend %dialog-card-header;
 
-  .odd {
-    border-width: 1px;
-    border-style: solid;
-    @extend %border-primary;
-  }
+        height: 20px;
+    }
 
-  .stake.color {
-    @extend %btn-success-gradient;
-  }
+    .odd {
+        border-width: 1px;
+        border-style: solid;
 
-  .remove {
-    .icon{
-      width: 100%;
-      height: 100%;
-      @extend %remove-image;
+        @extend %border-primary;
+    }
+
+    .stake.color {
+        @extend %btn-success-gradient;
+    }
+
+    .remove {
+        .icon {
+            width: 100%;
+            height: 100%;
+
+            @extend %remove-image;
+        }
     }
 }
 
@@ -375,8 +436,8 @@ html {
     @extend %indicator;
 }
 
-.indicator-odds-number{
-  @extend %header-btn-menu-color;
+.indicator-odds-number {
+    @extend %header-btn-menu-color;
 }
 
 .radius-2 {
