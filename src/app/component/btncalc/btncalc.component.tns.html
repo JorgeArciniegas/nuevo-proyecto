@@ -72,7 +72,7 @@
     </GridLayout>
   </GridLayout>
   <GridLayout row="4" col="3" shadow="3" cornerRadius="7" class="card">
-    <GridLayout rows="*" columns="*" class="button btn-warning" (doubleTap)="clearAll()">
+    <GridLayout rows="*" columns="*" class="button btn-warning" (doubleTap)="clearAll()" (tap)='polyfuncionalAmountReset()'>
       <Button text="{{ 'C' | translate }}" class="button-internal" [isEnabled]="!timeBlocked"></Button>
     </GridLayout>
   </GridLayout>
