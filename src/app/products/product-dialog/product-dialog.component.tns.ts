@@ -3,6 +3,9 @@ import { AppSettings } from '../../app.settings';
 import { DialogService } from '../dialog.service';
 import { BetOdd, DialogData } from '../products.model';
 import { ProductsService } from '../products.service';
+import { CouponService } from '../../component/coupon/coupon.service';
+import { BetCouponOddExtended } from '@elys/elys-coupon';
+import { BetCouponOdd } from '@elys/elys-api';
 
 @Component({
   selector: 'app-product-dialog',
@@ -23,21 +26,25 @@ export class ProductDialogComponent implements OnInit {
   public rows = '';
   public title: string;
   public betOdds: BetOdd[];
+  public betCouponOdd: BetCouponOddExtended[];
   public emptyOdds: string[] = [];
 
   constructor(
     private dialog: DialogService,
     private productService: ProductsService,
-    public readonly appSettings: AppSettings
+    public readonly appSettings: AppSettings,
+    public readonly couponService: CouponService
   ) {
     this.settings = appSettings;
     if (this.productService.windowSize && this.productService.windowSize.small) {
       this.rowNumber = 2;
     }
+
+    this.couponService.couponResponse.subscribe(coupon => { this.data.betCoupon = coupon; this.filterOddsToCoupon(); });
   }
 
   ngOnInit(): void {
-    this.title = this.data.betOdds.title;
+    this.title = this.data.title;
     for (let index = 0; index < this.columnNumber - 1; index++) {
       this.columns += ',*';
     }
@@ -45,8 +52,13 @@ export class ProductDialogComponent implements OnInit {
       this.rows += ',5*';
     }
     this.maxItems = this.rowNumber * this.columnNumber;
-    this.maxPage = Math.ceil(this.data.betOdds.odds.length / this.maxItems);
-    this.filterOdds();
+    if (this.data.betOdds) {
+      this.maxPage = Math.ceil(this.data.betOdds.odds.length / this.maxItems);
+      this.filterOdds();
+    } else if (this.data.betCoupon) {
+      this.maxPage = Math.ceil(this.data.betCoupon.Odds.length / this.maxItems);
+      this.filterOddsToCoupon();
+    }
   }
 
   filterOdds() {
@@ -70,12 +82,35 @@ export class ProductDialogComponent implements OnInit {
     }
   }
 
+  filterOddsToCoupon() {
+    const start = this.page * this.maxItems;
+    let end = (this.page + 1) * this.maxItems;
+    if (end > this.data.betCoupon.Odds.length) {
+      end = this.data.betCoupon.Odds.length;
+    }
+    this.betCouponOdd = this.data.betCoupon.Odds.slice(start, end);
+    this.emptyOdds = [];
+    if (this.page === this.maxPage - 1) {
+      for (
+        let index = 0;
+        index < this.maxItems - this.betCouponOdd.length;
+        index++
+      ) {
+        this.emptyOdds.push('');
+      }
+    }
+  }
+
   previusOdds() {
     if (this.page <= 0) {
       return;
     }
     this.page--;
-    this.filterOdds();
+    if (this.betOdds) {
+      this.filterOdds();
+    } else {
+      this.filterOddsToCoupon();
+    }
   }
 
   nextOdds() {
@@ -83,7 +118,11 @@ export class ProductDialogComponent implements OnInit {
       return;
     }
     this.page++;
-    this.filterOdds();
+    if (this.betOdds) {
+      this.filterOdds();
+    } else {
+      this.filterOddsToCoupon();
+    }
   }
 
   toggleOdd(odd: BetOdd) {
@@ -91,6 +130,17 @@ export class ProductDialogComponent implements OnInit {
   }
 
   close(): void {
+    this.couponService.oddStakeEditSubject.next(null);
     this.dialog.showDialog = false;
+  }
+
+  removeOdd(odd: BetCouponOddExtended): void {
+    const betOdd: BetOdd = new BetOdd(odd.SelectionName, odd.OddValue, odd.OddStake, odd.SelectionId);
+    this.couponService.addRemoveToCoupon([betOdd]);
+  }
+
+  // change stake from odd's coupon
+  checkOddToChangeStake(odd: BetCouponOdd): void {
+    this.couponService.checkOddToChangeStake(odd);
   }
 }

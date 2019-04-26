@@ -1,4 +1,5 @@
 import { TypeBetSlipColTot } from './dogracing/dogracing.models';
+import { BetCouponExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 
 export interface WindowSize {
   height: number;
@@ -61,20 +62,28 @@ export class BetOdd {
 }
 
 export class BetOdds {
-  title: string;
+
   odds: BetOdd[];
   constructor() {
     this.odds = [];
   }
 }
 
+export interface BetDataDialog {
+  title: string;
+  betOdds?: BetOdds;
+  betCoupon?: BetCouponExtended;
+}
 export class DialogData {
-  betOdds: BetOdds;
-  breakpoint: number;
+  title: string;
+  betOdds?: BetOdds;
+  breakpoint?: number;
   opened: boolean;
-  constructor(betOdds: BetOdds, breakpoint: number) {
+  betCoupon?: BetCouponExtended;
+  constructor(betOdds?: BetOdds, breakpoint?: number, betCoupon?: BetCouponExtended, title?: string) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;
     this.opened = false;
+    this.betCoupon = betCoupon || null;
   }
 }

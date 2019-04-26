@@ -24,6 +24,7 @@ export class CouponComponent implements OnDestroy {
   public maxPage = 0;
   public listOdds: BetCouponOddExtended[] = [];
   public errorMessage: string;
+  private remove = false;
 
   // number of odds inserted to coupon
   private couponServiceSubscription: Subscription;
@@ -45,7 +46,11 @@ export class CouponComponent implements OnDestroy {
     this.couponServiceSubscription = this.couponService.couponResponse.subscribe(
       coupon => {
         this.maxPage = Math.ceil(coupon.Odds.length / this.maxItems);
-        this.page = 0;
+        if (!this.remove) {
+          this.page = 0;
+        } else {
+          this.remove = false;
+        }
         this.filterOdds();
       }
     );
@@ -90,6 +95,7 @@ export class CouponComponent implements OnDestroy {
   }
 
   removeOdd(odd: BetCouponOddExtended): void {
+    this.remove = true;
     this.couponService.addRemoveToCoupon([
       new BetOdd(odd.SelectionName, odd.OddValue, odd.OddStake, odd.SelectionId)
     ]);
@@ -104,28 +110,12 @@ export class CouponComponent implements OnDestroy {
 
   // change stake from odd's coupon
   checkOddToChangeStake(odd: BetCouponOdd): void {
-    const tempOdd: OddsStakeEdit = {
-      indexOdd: -1,
-      tempStake: 0.0,
-      odd: null,
-      isDefaultInput: false
-    };
-    // search if the odd is selected and it reset
-    if (
-      this.couponService.oddStakeEdit &&
-      this.couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId
-    ) {
-      this.couponService.oddStakeEditSubject.next(null);
-      return;
-    }
-    // filter the odd to coupon and extract the index and value
-    this.couponService.coupon.Odds.filter((item: BetCouponOddExtended, idx) => {
-      if (item.SelectionId === odd.SelectionId) {
-        tempOdd.indexOdd = idx;
-        tempOdd.odd = item;
-      }
-    });
+    this.couponService.checkOddToChangeStake(odd);
+  }
 
-    this.couponService.oddStakeEditSubject.next(tempOdd);
+
+  //open dialog
+  openDialog(): void {
+    this.productService.openProductDialog({title: 'COUPON', betCoupon: this.couponService.coupon});
   }
 }
