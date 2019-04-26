@@ -96,9 +96,9 @@
         <span>{{'potentialMaxWinner' | translate}}</span>
         <input type="text" name="winner" [ngModel]="couponService.stakeDisplay.MaxWinning |number: '1.2-2'" readonly />
       </label>
-      <label *ngIf="errorMessage">
+      <label *ngIf="errorMessage" fxLayout="column"  fxFlex>
         <span>{{'ERROR' | translate}}</span>
-        <input type="text" name="error" [ngModel]="errorMessage" readonly />
+        <div class="display-error-message" fxLayout="row" fxLayoutAlign="center start" fxFlex> {{errorMessage}} </div>
       </label>
     </div>
   </mat-grid-tile>

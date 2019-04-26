@@ -251,10 +251,18 @@ html {
                 &.display-error {
                     @extend %color-bg-warn;
 
-                    label {
-                        input {
-                            @extend %color-bg-warn;
-                        }
+                    span {
+                        text-align: center;
+                        padding: 5px 10px 0px 10px;
+                    }
+
+                    .display-error-message {
+                        text-transform: none;
+                        margin: 5px 10px 10px 10px;
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 12px;
+                        overflow: auto;
                     }
                 }
             }

@@ -6,6 +6,7 @@
   "CLOSE": "Close",
   "CODA": "C",
   "COL": "COL",
+  "ERROR": "Errore",
   "ERROR_PASSWORD_TOO_SHORT": "Questa password è troppo corta, minimo 6 caratteri",
   "ERROR_REQUIRED": "É obbligatorio",
   "ERROR_USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",

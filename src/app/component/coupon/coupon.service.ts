@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CouponCategory } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
-import { AddOddRequest, BetCouponExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
+import {
+  AddOddRequest,
+  BetCouponExtended
+} from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Observable, Subject } from 'rxjs';
 import { BetOdd } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
@@ -27,14 +30,13 @@ export class CouponService {
   oddStakeEditSubject: Subject<OddsStakeEdit>;
   oddStakeEditObs: Observable<OddsStakeEdit>;
 
-  constructor(
-    public elyscoupon: ElysCouponService,
-    userService: UserService
-  ) {
+  constructor(public elyscoupon: ElysCouponService, userService: UserService) {
     this.couponResponseSubject = new Subject<BetCouponExtended>();
     this.couponResponse = this.couponResponseSubject.asObservable();
 
-    this.elyscoupon.couponConfig.userId = userService.userDetail ? userService.userDetail.UserId : undefined;
+    this.elyscoupon.couponConfig.userId = userService.userDetail
+      ? userService.userDetail.UserId
+      : undefined;
     elyscoupon.couponHasChanged.subscribe(coupon => {
       this.coupon = coupon;
       this.couponResponseSubject.next(coupon);
@@ -43,7 +45,7 @@ export class CouponService {
 
     this.stakeDisplaySubject = new Subject<StakesDisplay>();
     this.stakeDisplayObs = this.stakeDisplaySubject.asObservable();
-    this.stakeDisplayObs.subscribe(elem => this.stakeDisplay = elem);
+    this.stakeDisplayObs.subscribe(elem => (this.stakeDisplay = elem));
     // oddstakeEdit
     this.oddStakeEditSubject = new Subject<OddsStakeEdit>();
     this.oddStakeEditObs = this.oddStakeEditSubject.asObservable();
@@ -101,12 +103,16 @@ export class CouponService {
   }
 
   /**
-    * calculate stake and winning max
-    * this sum does not consider groupings other than singles
-    */
+   * calculate stake and winning max
+   * this sum does not consider groupings other than singles
+   */
   calculateAmounts(): void {
-    let stake = 0, Totalwin = 0;
-    this.coupon.Odds.forEach(odd => { stake += odd.OddStake; Totalwin += odd.OddStake * odd.OddValue; });
+    let stake = 0,
+      Totalwin = 0;
+    this.coupon.Odds.forEach(odd => {
+      stake += odd.OddStake;
+      Totalwin += odd.OddStake * odd.OddValue;
+    });
     //
     const stakesDisplayTemp: StakesDisplay = {
       TotalStake: stake,
@@ -116,11 +122,12 @@ export class CouponService {
     this.stakeDisplaySubject.next(stakesDisplayTemp);
   }
 
-
   updateCoupon(): void {
     if (this.oddStakeEdit) {
       if (this.oddStakeEdit.tempStake > 0) {
-        this.coupon.Odds[this.oddStakeEdit.indexOdd].OddStake = this.oddStakeEdit.tempStake;
+        this.coupon.Odds[
+          this.oddStakeEdit.indexOdd
+        ].OddStake = this.oddStakeEdit.tempStake;
         this.elyscoupon.updateCoupon(this.coupon);
       }
       this.oddStakeEditSubject.next(null);
@@ -128,5 +135,4 @@ export class CouponService {
       this.elyscoupon.updateCoupon(this.coupon);
     }
   }
-
 }
