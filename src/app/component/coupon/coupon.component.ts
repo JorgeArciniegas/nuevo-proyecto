@@ -37,40 +37,32 @@ export class CouponComponent implements OnDestroy {
     public readonly settings: AppSettings,
     public productService: ProductsService
   ) {
-    if (
-      this.productService.windowSize &&
-      this.productService.windowSize.small
-    ) {
+    if (this.productService.windowSize && this.productService.windowSize.small) {
       this.maxItems = 4;
     }
-    this.couponServiceSubscription = this.couponService.couponResponse.subscribe(
-      coupon => {
-        this.maxPage = Math.ceil(coupon.Odds.length / this.maxItems);
-        if (!this.remove) {
-          this.page = 0;
-        } else {
-          this.remove = false;
-        }
-        this.filterOdds();
+    this.couponServiceSubscription = this.couponService.couponResponse.subscribe(coupon => {
+      this.maxPage = Math.ceil(coupon.Odds.length / this.maxItems);
+      if (!this.remove) {
+        this.page = 0;
+      } else {
+        this.remove = false;
       }
-    );
-    this.couponMessageServiceSubscription = this.elysCoupon.couponeServiceMessage.subscribe(
-      message => {
-        console.log(message);
-        // Get the error's message
-        if (message.messageType === 4) {
-          this.errorMessage = message.message;
-        }
+      this.filterOdds();
+    });
+    this.couponMessageServiceSubscription = this.elysCoupon.couponServiceMessage.subscribe(message => {
+      // Get the error's message
+      if (message.messageType === 4) {
+        this.errorMessage = message.message;
+      } else {
+        this.errorMessage = undefined;
       }
-    );
+    });
   }
 
   filterOdds(): void {
     let index = 0;
-    const end: number =
-      this.couponService.coupon.Odds.length - this.page * this.maxItems;
-    const start: number =
-      this.couponService.coupon.Odds.length - (this.page + 1) * this.maxItems;
+    const end: number = this.couponService.coupon.Odds.length - this.page * this.maxItems;
+    const start: number = this.couponService.coupon.Odds.length - (this.page + 1) * this.maxItems;
 
     this.listOdds = this.couponService.coupon.Odds.filter(() => {
       index++;
@@ -96,9 +88,7 @@ export class CouponComponent implements OnDestroy {
 
   removeOdd(odd: BetCouponOddExtended): void {
     this.remove = true;
-    this.couponService.addRemoveToCoupon([
-      new BetOdd(odd.SelectionName, odd.OddValue, odd.OddStake, odd.SelectionId)
-    ]);
+    this.couponService.addRemoveToCoupon([new BetOdd(odd.SelectionName, odd.OddValue, odd.OddStake, odd.SelectionId)]);
   }
   clearCoupon(): void {
     this.couponService.resetCoupon();
@@ -113,9 +103,8 @@ export class CouponComponent implements OnDestroy {
     this.couponService.checkOddToChangeStake(odd);
   }
 
-
   //open dialog
   openDialog(): void {
-    this.productService.openProductDialog({title: 'COUPON', betCoupon: this.couponService.coupon});
+    this.productService.openProductDialog({ title: 'COUPON', betCoupon: this.couponService.coupon });
   }
 }
