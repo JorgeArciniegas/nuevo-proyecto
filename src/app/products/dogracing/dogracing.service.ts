@@ -7,16 +7,14 @@ import {
   VirtualProgramTreeBySportResponse,
   VirtualVirtualDetailOddsOfEventRequest,
   VirtualVirtualEventCountDownRequest,
-  VirtualVirtualSportLastResultsRequest
+  VirtualVirtualSportLastResultsRequest,
+  VirtualVirtualDetailOddsOfEventResponse,
+  VirtualBetMarket,
+  VirtualVirtualEventCountDownResponse,
+  VirtualVirtualSportLastResultsResponse
 } from '@elys/elys-api/lib/virtual/virtual.models';
 import { interval, Observable, Subject, timer } from 'rxjs';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
-import {
-  CountDown,
-  EventResults,
-  Market,
-  SportDetail
-} from '../../services/api/vgen.model';
 import { BetOdd, PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../products.model';
 import { ProductsService } from '../products.service';
 import {
@@ -266,7 +264,7 @@ export class DogracingService {
 
   remaningRaceTime(idRace: number): Promise<RaceTime> {
     const request: VirtualVirtualEventCountDownRequest = { SportId: '8', MatchId: idRace };
-    return this.elysApi.virtual.getCountdown(request).then((value: CountDown) => {
+    return this.elysApi.virtual.getCountdown(request).then((value: VirtualVirtualEventCountDownResponse) => {
       const sec: number = value.CountDown / 10000000;
       const raceTime: RaceTime = new RaceTime();
       raceTime.minute = Math.floor(sec / 60);
@@ -288,7 +286,7 @@ export class DogracingService {
     this.listResult = [];
     timer(300).subscribe(() => {
       this.elysApi.virtual.getLastResult(request)
-        .then((eventResults: EventResults) => {
+        .then((eventResults: VirtualVirtualSportLastResultsResponse) => {
           for (const i of [3, 2, 1, 0]) {
             const results: string[] = eventResults.EventResults[i].Result.split(
               '-'
@@ -327,7 +325,7 @@ export class DogracingService {
     // check, if is empty load from api
     if (race.mk == null || race.mk.length === 0) {
       this.elysApi.virtual.getVirtualEventDetail(request)
-        .then((sportDetail: SportDetail) => {
+        .then((sportDetail: VirtualVirtualDetailOddsOfEventResponse) => {
           try {
             race.mk = sportDetail.Sport.ts[0].evs[0].mk;
             race.tm = sportDetail.Sport.ts[0].evs[0].tm;
@@ -635,7 +633,7 @@ export class DogracingService {
     }
     areaFuncData.odds = [];
     for (const m of odd.mk.filter(
-      (market: Market) =>
+      (market: VirtualBetMarket) =>
         market.tp === this.typeSelection(areaFuncData.selection)
     )) {
       // If the selection is PODIUM, WINNER or SHOW

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ElysApiService, TokenDataSuccess } from '@elys/elys-api';
-import { AccountDetails } from './api/vgen.model';
+import { ElysApiService, TokenDataSuccess, AccountDetails } from '@elys/elys-api';
 import { RouterService } from './utility/router/router.service';
 import { StorageService } from './utility/storage/storage.service';
 import { TranslateUtilityService } from './utility/translate-utility.service';
