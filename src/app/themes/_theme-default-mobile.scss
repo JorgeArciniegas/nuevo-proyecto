@@ -213,6 +213,12 @@
                     }
                 }
 
+                &.display-error {
+                  .amount {
+                    font-size: 12;
+                    text-align: center;
+                  }
+                }
                 .amount {
                     font-size: 20;
                     text-align: right;
