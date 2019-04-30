@@ -3,7 +3,7 @@
   <mat-grid-tile *ngFor="let amount of productService.product.defaultAmount; let i = index">
 
     <button [style.width.px]="rowHeight-12" [style.height.px]="rowHeight-12" class="btn-default elevation-z5 btn-amount-{{i+1}} radius-50"
-      (click)="btnDefaultAmountsPreset(amount)">{{amount}}</button>
+      (click)="btnDefaultAmountsPreset(amount)">{{ amount | digitslimit }}</button>
 
   </mat-grid-tile>
 </mat-grid-list>
