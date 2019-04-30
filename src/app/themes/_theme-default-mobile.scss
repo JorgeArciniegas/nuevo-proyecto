@@ -213,12 +213,6 @@
                     }
                 }
 
-                &.display-error {
-                  .amount {
-                    font-size: 12;
-                    text-align: center;
-                  }
-                }
                 .amount {
                     font-size: 20;
                     text-align: right;
@@ -230,21 +224,28 @@
                     }
                 }
 
-                &.display-error {
-                    @extend %color-bg-warn;
-
+                &.display-message{
+                  &.display-message {
                     .title {
-                        text-align: center;
+                      text-align: center;
                     }
 
-                    .display-error-message {
-                        text-transform: none;
-                        margin: 10px;
-                        text-align: center;
-                        font-weight: bold;
-                        font-size: 12px;
-                        overflow: auto;
+                    .amount {
+                      text-transform: none;
+                      margin: 10px;
+                      text-align: center;
+                      font-weight: bold;
+                      font-size: 12px;
+                      overflow: auto;
                     }
+                }
+
+                &.display-error {
+                  @extend %color-bg-allert;
+                }
+
+                &.display-warning {
+                  @extend %color-bg-warn;
                 }
             }
         }
