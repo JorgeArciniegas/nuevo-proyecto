@@ -18,7 +18,7 @@ $color-bg-secodary: #273142;
 $color-bg-event: #274442;
 $color-bg-accent: #c0c0c0;
 $color-bg-allert: #ff0000;
-$color-bg-warn: #d67900;
+$color-bg-warn: #ffca18;
 $color-bg-success: #00cc00;
 $color-bg-header: #171d24;
 $btn-bg-keyboard: #273142;
@@ -74,7 +74,7 @@ $color-text-operator: #3dab14;
 
 %color-bg-warn {
 	background: $color-bg-warn;
-	color: $color-text-primary;
+	color: $color-text-dark;
 }
 
 // Header Area
