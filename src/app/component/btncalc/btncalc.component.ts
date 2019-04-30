@@ -26,7 +26,6 @@ export class BtncalcComponent extends BtncalcComponentCommon implements OnInit, 
   ngOnInit(): void { }
 
   ngOnDestroy(): void {
-    this.productNameSelectedSubscribe.unsubscribe();
     this.polyfunctionalValueSubscribe.unsubscribe();
     this.CouponoddStakeEditObs.unsubscribe();
     this.couponResponseSubs.unsubscribe();

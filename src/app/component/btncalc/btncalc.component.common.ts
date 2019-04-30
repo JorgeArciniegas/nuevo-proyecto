@@ -10,8 +10,6 @@ import { CouponService } from '../coupon/coupon.service';
 
 
 export class BtncalcComponentCommon {
-  productNameSelectedSubscribe: Subscription;
-  product: Product;
 
   polyfunctionalValueSubscribe: Subscription;
   polyfunctionalArea: PolyfunctionalArea;
@@ -29,14 +27,6 @@ export class BtncalcComponentCommon {
     private appSetting: AppSettings,
     private couponService: CouponService
   ) {
-    this.productNameSelectedSubscribe = this.productService.productNameSelectedObserve.subscribe(
-      v => {
-        const product: Product[] = appSetting.products.filter(
-          item => item.name === v
-        );
-        this.product = product[0];
-      }
-    );
     // manages buttons COL/TOT, label amount in display, amount association/distribution
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
