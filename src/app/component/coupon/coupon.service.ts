@@ -59,6 +59,7 @@ export class CouponService {
           break;
         default:
           this.errorMessage = undefined;
+          this.warningMessage = undefined;
       }
       if (message.messageType === this.messageType.error) {
         this.errorMessage = message.message;
