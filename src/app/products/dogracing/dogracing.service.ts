@@ -5,13 +5,13 @@ import {
   VirtualBetTournament,
   VirtualProgramTreeBySportRequest,
   VirtualProgramTreeBySportResponse,
-  VirtualVirtualDetailOddsOfEventRequest,
-  VirtualVirtualEventCountDownRequest,
-  VirtualVirtualSportLastResultsRequest,
-  VirtualVirtualDetailOddsOfEventResponse,
+  VirtualDetailOddsOfEventRequest,
+  VirtualEventCountDownRequest,
+  VirtualSportLastResultsRequest,
+  VirtualDetailOddsOfEventResponse,
   VirtualBetMarket,
-  VirtualVirtualEventCountDownResponse,
-  VirtualVirtualSportLastResultsResponse
+  VirtualEventCountDownResponse,
+  VirtualSportLastResultsResponse
 } from '@elys/elys-api/lib/virtual/virtual.models';
 import { interval, Observable, Subject, timer } from 'rxjs';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
@@ -263,8 +263,8 @@ export class DogracingService {
   }
 
   remaningRaceTime(idRace: number): Promise<RaceTime> {
-    const request: VirtualVirtualEventCountDownRequest = { SportId: '8', MatchId: idRace };
-    return this.elysApi.virtual.getCountdown(request).then((value: VirtualVirtualEventCountDownResponse) => {
+    const request: VirtualEventCountDownRequest = { SportId: '8', MatchId: idRace };
+    return this.elysApi.virtual.getCountdown(request).then((value: VirtualEventCountDownResponse) => {
       const sec: number = value.CountDown / 10000000;
       const raceTime: RaceTime = new RaceTime();
       raceTime.minute = Math.floor(sec / 60);
@@ -282,11 +282,11 @@ export class DogracingService {
   }
 
   getLastResult() {
-    const request: VirtualVirtualSportLastResultsRequest = { SportId: 8, CategoryType: 'DOG' };
+    const request: VirtualSportLastResultsRequest = { SportId: 8, CategoryType: 'DOG' };
     this.listResult = [];
     timer(300).subscribe(() => {
       this.elysApi.virtual.getLastResult(request)
-        .then((eventResults: VirtualVirtualSportLastResultsResponse) => {
+        .then((eventResults: VirtualSportLastResultsResponse) => {
           for (const i of [3, 2, 1, 0]) {
             const results: string[] = eventResults.EventResults[i].Result.split(
               '-'
@@ -321,11 +321,11 @@ export class DogracingService {
     const race: VirtualBetEvent = this.cacheRaces.filter(
       (cacheRace: VirtualBetEvent) => cacheRace.id === raceNumber
     )[0];
-    const request: VirtualVirtualDetailOddsOfEventRequest = { sportId: 8, matchId: raceNumber };
+    const request: VirtualDetailOddsOfEventRequest = { sportId: 8, matchId: raceNumber };
     // check, if is empty load from api
     if (race.mk == null || race.mk.length === 0) {
       this.elysApi.virtual.getVirtualEventDetail(request)
-        .then((sportDetail: VirtualVirtualDetailOddsOfEventResponse) => {
+        .then((sportDetail: VirtualDetailOddsOfEventResponse) => {
           try {
             race.mk = sportDetail.Sport.ts[0].evs[0].mk;
             race.tm = sportDetail.Sport.ts[0].evs[0].tm;
