@@ -9,14 +9,14 @@ import {
 import { Observable, Subject } from 'rxjs';
 import { BetOdd } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
-import { OddsStakeEdit, StakesDisplay } from './coupon.model';
+import { OddsStakeEdit, StakesDisplay, InternalCoupon } from './coupon.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CouponService {
   // coupon cache
-  coupon: BetCouponExtended = null;
+  coupon: InternalCoupon = null;
   couponIdAdded: number[] = [];
 
   private couponResponseSubject: Subject<BetCouponExtended>;
@@ -41,7 +41,12 @@ export class CouponService {
     elyscoupon.couponHasChanged.subscribe(coupon => {
       this.coupon = coupon;
       this.couponResponseSubject.next(coupon);
-      this.calculateAmounts();
+      if (coupon) {
+        this.coupon.internal_isReadyToPlace = false;
+        this.calculateAmounts();
+      } else {
+        this.resetCoupon();
+      }
     });
 
     this.stakeDisplaySubject = new Subject<StakesDisplay>();
@@ -51,13 +56,19 @@ export class CouponService {
     this.oddStakeEditSubject = new Subject<OddsStakeEdit>();
     this.oddStakeEditObs = this.oddStakeEditSubject.asObservable();
     this.oddStakeEditObs.subscribe(item => {
-      this.oddStakeEdit = item;
+      if (!this.coupon.internal_isReadyToPlace) {
+        this.oddStakeEdit = item;
+      }
+
     });
   }
 
   addRemoveToCoupon(smart: BetOdd[]): void {
     // console.log(smart);
     try {
+      if (this.coupon && this.coupon.internal_isReadyToPlace) {
+        return;
+      }
       if (smart) {
         for (const bet of smart.filter(item => item.selected)) {
           let addBoolean = true;
@@ -162,4 +173,36 @@ export class CouponService {
 
     this.oddStakeEditSubject.next(tempOdd);
   }
+  /**
+   *
+   */
+  async preStagedCoupon(): Promise<void> {
+    if (!this.coupon && this.coupon.Odds.length > 0) { return; }
+    // call api
+    await this.elyscoupon.updateCoupon(this.coupon);
+    // enabled process to staging coupon
+    this.coupon.internal_isReadyToPlace = true;
+
+  }
+
+
+  checkIfCouponIsReadyToPlace(): boolean {
+    return (this.coupon && this.coupon.internal_isReadyToPlace) ? this.coupon.internal_isReadyToPlace : false;
+  }
+
+  /**
+   *
+   */
+  cancelStagingCoupon(): void {
+    this.coupon.internal_isReadyToPlace = false;
+  }
+
+  stagedCoupon(): void {
+    this.elyscoupon.placeCoupon(this.coupon);
+  }
+
+/*
+  stagedCoupon(): void {
+    this.elyscoupon.c
+  } */
 }

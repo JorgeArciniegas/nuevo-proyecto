@@ -41,6 +41,9 @@ export class CouponComponent implements OnDestroy {
       this.maxItems = 4;
     }
     this.couponServiceSubscription = this.couponService.couponResponse.subscribe(coupon => {
+      if(coupon === null){
+        return;
+      }
       this.maxPage = Math.ceil(coupon.Odds.length / this.maxItems);
       if (!this.remove) {
         this.page = 0;

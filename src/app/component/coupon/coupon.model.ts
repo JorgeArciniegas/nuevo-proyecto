@@ -1,4 +1,5 @@
 import { BetCouponOdd } from "@elys/elys-api";
+import { BetCouponExtended } from "@elys/elys-coupon";
 
 export interface StakesDisplay {
   TotalStake: number;
@@ -11,4 +12,8 @@ export interface OddsStakeEdit {
   tempStake: number;
   odd: BetCouponOdd;
   isDefaultInput: boolean;
+}
+
+export interface InternalCoupon extends BetCouponExtended {
+  internal_isReadyToPlace?: boolean;
 }

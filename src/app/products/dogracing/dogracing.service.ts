@@ -40,6 +40,7 @@ import { CouponService } from '../../component/coupon/coupon.service';
   providedIn: 'root'
 })
 export class DogracingService {
+
   // screen binding
   public raceDetails: RaceDetail;
   public listResult: RaceResult[];
@@ -344,11 +345,18 @@ export class DogracingService {
     }
   }
 
+  checkIfCouponIsReadyToPlace(): boolean {
+    return this.coupon.checkIfCouponIsReadyToPlace();
+  }
+
   /**
    * PLACING THE DOG SELECTED INSIDE TO POLYFUNCTIONAL AREA AND SMARTBET
    * @param dog
    */
   placingOdd(dog: Dog): void {
+    if (this.coupon.checkIfCouponIsReadyToPlace()) {
+       return;
+    }
     if (this.placingRace.isSpecialBets) {
       this.resetPlayRacing();
     }
@@ -382,6 +390,9 @@ export class DogracingService {
   }
 
   placeOdd() {
+    if (this.coupon.checkIfCouponIsReadyToPlace()) {
+      return;
+    }
     // extract the raceOdd from cache
     const odds: VirtualBetEvent = this.cacheRaces.filter(
       (cacheRace: VirtualBetEvent) => cacheRace.id === this.placingRace.raceNumber
