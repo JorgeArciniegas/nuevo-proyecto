@@ -40,9 +40,9 @@ export class CouponService {
     this.elysCoupon.couponConfig.userId = userService.userDetail ? userService.userDetail.UserId : undefined;
     elysCoupon.couponHasChanged.subscribe(coupon => {
       this.coupon = coupon;
-      this.checkLimits();
       this.couponResponseSubject.next(coupon);
       if (coupon) {
+        this.checkLimits();
         this.coupon.internal_isReadyToPlace = false;
         this.calculateAmounts();
       } else {
@@ -130,6 +130,8 @@ export class CouponService {
       TotalStake: 0,
       MaxWinning: 0
     };
+    this.errorMessage = undefined;
+    this.warningMessage = undefined;
     this.stakeDisplaySubject.next(stakesDisplayTemp);
   }
 

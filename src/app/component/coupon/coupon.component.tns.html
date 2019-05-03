@@ -117,8 +117,18 @@
         [ngClass]="{'small': productService.windowSize.small}" textWrap="true" verticalAlignment="center"></Label>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="5" rows="*" columns="*" class="card button btn-success">
+  <GridLayout row="5" rows="*" columns="*" class="card button btn-success"  *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
     <Button text="{{'piazza' | translate}}" class="button-internal" textTransform="uppercase"
-      [isEnabled]="!timeBlocked && !couponService.errorMessage"></Button>
+      [isEnabled]="!timeBlocked && !couponService.errorMessage"  (tap)="couponService.preStagedCoupon()"></Button>
+  </GridLayout>
+  <GridLayout row="5" rows="*" columns="*,*" class="card"  *ngIf="couponService.coupon && couponService.coupon.internal_isReadyToPlace">
+        <GridLayout col="0" rows="*" columns="*" class="button left btn-warning">
+            <Button text="{{'back' | translate}}" class="button-internal" textTransform="uppercase"
+              [isEnabled]="!timeBlocked && !couponService.errorMessage"  (tap)="couponService.cancelStagingCoupon()"></Button>
+        </GridLayout>
+        <GridLayout col="1" rows="*" columns="*" class="button right btn-success">
+          <Button text="{{'conferma' | translate}}" class="button-internal" textTransform="uppercase"
+           [isEnabled]="!timeBlocked && !couponService.errorMessage" (tap)="couponService.stagedCoupon()"></Button>
+        </GridLayout>
   </GridLayout>
 </GridLayout>
