@@ -179,7 +179,6 @@ export class CouponService {
   }
 
   checkLimits() {
-    console.log(this.coupon);
     // Check if the API call has been successfull
     if (this.coupon.internal_ResponseStatus === 1 || this.coupon.internal_ResponseStatus === 2) {
     }
