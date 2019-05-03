@@ -23,13 +23,11 @@ export class CouponComponent implements OnDestroy {
   public page = 0;
   public maxPage = 0;
   public listOdds: BetCouponOddExtended[] = [];
-  public errorMessage: string;
   private remove = false;
 
   // number of odds inserted to coupon
   private couponServiceSubscription: Subscription;
   private couponMessageServiceSubscription: Subscription;
-  // private messageType: typeof CouponServiceMessageType = CouponServiceMessageType;
 
   constructor(
     private elysCoupon: ElysCouponService,
@@ -41,6 +39,9 @@ export class CouponComponent implements OnDestroy {
       this.maxItems = 4;
     }
     this.couponServiceSubscription = this.couponService.couponResponse.subscribe(coupon => {
+      if (coupon === null) {
+        return;
+      }
       this.maxPage = Math.ceil(coupon.Odds.length / this.maxItems);
       if (!this.remove) {
         this.page = 0;
@@ -48,14 +49,6 @@ export class CouponComponent implements OnDestroy {
         this.remove = false;
       }
       this.filterOdds();
-    });
-    this.couponMessageServiceSubscription = this.elysCoupon.couponServiceMessage.subscribe(message => {
-      // Get the error's message
-      if (message.messageType === 4) {
-        this.errorMessage = message.message;
-      } else {
-        this.errorMessage = undefined;
-      }
     });
   }
 
@@ -103,7 +96,7 @@ export class CouponComponent implements OnDestroy {
     this.couponService.checkOddToChangeStake(odd);
   }
 
-  //open dialog
+  // open dialog
   openDialog(): void {
     this.productService.openProductDialog({ title: 'COUPON', betCoupon: this.couponService.coupon });
   }

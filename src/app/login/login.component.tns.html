@@ -20,7 +20,7 @@
     </GridLayout>
     <Button row="5" col="1" text="{{ 'LOGIN' | translate }}" class="button btn-default btn-success radius-2"
       [ngClass]="{'disabled': !(username.valid && password.valid && !usernameLengthInvalid && !passwordLengthInvalid)}"
-      (tap)="onSubmit(username, password.value)"
+      (tap)="onSubmit(username.value, password.value)"
       [isEnabled]="username.valid && password.valid && !usernameLengthInvalid && !passwordLengthInvalid">
     </Button>
 

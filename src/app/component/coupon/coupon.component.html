@@ -7,7 +7,8 @@
             <span class="text">{{ 'coupon' | translate }} </span>
           </div>
 
-          <button class="btn-reset btn-display btn-warning radius-5" (click)="clearCoupon()" fxLayoutAlign="center center">
+          <button class="btn-reset btn-display btn-warning radius-5" (click)="clearCoupon()"
+            fxLayoutAlign="center center">
             <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
           </button>
         </h3>
@@ -26,7 +27,8 @@
       <div class="display" fxLayoutAlign="space-around center" fxLayout="row layout-wrap">
         <div fxFlex fxLayoutAlign="center center">
           <span class="btn btn-default">{{'single' | translate}}</span>
-          <span class="indicator-odds-number radius-50">{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}</span>
+          <span
+            class="indicator-odds-number radius-50">{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}</span>
         </div>
         <div fxFlex="15">
           <button class="btn-reset btn-display btn-dark-gradient radius-5" (click)="openDialog()">
@@ -59,7 +61,8 @@
               </div>
               <div fxFlex="38" class="row" fxLayout="row">
                 <div fxFlex="78" fxLayoutAlign="start center">
-                  {{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})
+                  {{odd.MarketName}} -
+                  ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})
                 </div>
                 <div fxFlex="22" class="odd radius-5" fxLayoutAlign="center center">
                   {{odd.OddValue | number: '1.2-2'}}
@@ -68,10 +71,11 @@
               <div fxFlex="38" class="row" fxLayout="row" fxLayoutAlign="space-between stretch">
                 <button fxFlex="40" class="btn-default stake radius-5" fxLayoutAlign="center center"
                   [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
-                  'btn-selected ' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }"
-                  (click)="checkOddToChangeStake(odd)">
-                  <span *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId">{{odd.OddStake | number: '1.2-3'}}</span>
-                  <span *ngIf="couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId">{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}</span>
+                  'btn-selected ' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }" (click)="checkOddToChangeStake(odd)">
+                  <span
+                    *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId">{{odd.OddStake | number: '1.2-3'}}</span>
+                  <span
+                    *ngIf="couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId">{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}</span>
                 </button>
                 <div fxFlex="16" fxLayoutAlign="end center">
                   <button class="btn-default btn-warning radius-5 remove" (click)="removeOdd(odd)">
@@ -82,13 +86,15 @@
             </div>
           </div>
         </div>
-        <button fxFlex="5" class="btn-reset card-odd radius-5 scroll" (click)="nextOdds()" [disabled]="page >= maxPage - 1" fxLayout="row">
+        <button fxFlex="5" class="btn-reset card-odd radius-5 scroll" (click)="nextOdds()"
+          [disabled]="page >= maxPage - 1" fxLayout="row">
           <div fxFlex="30"></div>
           <div fxFlex="40">
             <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/Down.svg">
           </div>
           <div fxFlex="30">
-            <div *ngIf="(couponService.coupon.Odds.length - ((page + 1) * maxItems)) > 0" class="indicator-scroll counter">
+            <div *ngIf="(couponService.coupon.Odds.length - ((page + 1) * maxItems)) > 0"
+              class="indicator-scroll counter">
               {{couponService.coupon.Odds.length - ((page + 1) * maxItems)}}
             </div>
           </div>
@@ -97,20 +103,37 @@
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="2">
-    <div class="display-amount radius-5" [ngClass]="{'display-error': errorMessage}">
-      <label *ngIf="!errorMessage">
+    <div class="display-amount radius-5"
+      [ngClass]="{'display-error': couponService.errorMessage, 'display-warning': couponService.warningMessage}">
+      <label *ngIf="!couponService.errorMessage && !couponService.warningMessage">
         <span>{{'potentialMaxWinner' | translate}}</span>
         <input type="text" name="winner" [ngModel]="couponService.stakeDisplay.MaxWinning |number: '1.2-2'" readonly />
       </label>
-      <label *ngIf="errorMessage" fxLayout="column"  fxFlex>
+      <label class="display-message" *ngIf="couponService.errorMessage" fxLayout="column" fxFlex>
         <span>{{'ERROR' | translate}}</span>
-        <div class="display-error-message" fxLayout="row" fxLayoutAlign="center start" fxFlex> {{errorMessage}} </div>
+        <div class="display-message-description" fxLayout="row" fxLayoutAlign="center start" fxFlex>
+          {{couponService.errorMessage}} </div>
+      </label>
+      <label class="display-message" *ngIf="couponService.warningMessage" fxLayout="column" fxFlex>
+        <span>{{'WARNING' | translate}}</span>
+        <div class="display-message-description" fxLayout="row" fxLayoutAlign="center start" fxFlex>
+          {{couponService.warningMessage}} </div>
       </label>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile rowspan="2">
+  <mat-grid-tile rowspan="2" *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
     <div fxFill class="padding-top-10">
-      <button class="btn-default btn-success radius-10 padding-10"  [disabled]="errorMessage">{{'piazza' | translate}}</button>
+      <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.errorMessage" (click)="couponService.preStagedCoupon()">{{'piazza' | translate}}</button>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="2" *ngIf="couponService.coupon && couponService.coupon.internal_isReadyToPlace">
+    <div fxFill fxLayoutGap="10px">
+      <div fxFill fxFlex="50" class="padding-top-10">
+        <button class="btn-default btn-warning radius-10 padding-10" [disabled]="couponService.errorMessage" (click)="couponService.cancelStagingCoupon()">{{'back' | translate}}</button>
+      </div>
+      <div fxFill fxFlex="50" class="padding-top-10">
+        <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.errorMessage" (click)="couponService.stagedCoupon()">{{'conferma' | translate}}</button>
+      </div>
     </div>
   </mat-grid-tile>
 </mat-grid-list>

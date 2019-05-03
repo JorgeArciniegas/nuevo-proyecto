@@ -2,6 +2,19 @@
 	margin: 3 2;
 }
 
+.button {
+
+  .button-internal{
+    font-size: 14;
+  }
+
+	&.left {
+		margin-right: 3;
+	}
+	&.right {
+		margin-left: 3;
+	}
+}
 .display {
 	.title {
 		width: 100%;
