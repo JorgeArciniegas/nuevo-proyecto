@@ -4,8 +4,6 @@ import { ProductsService } from '../../products/products.service';
 import { CouponService } from '../coupon/coupon.service';
 import { BtncalcComponentCommon } from './btncalc.component.common';
 import { BtncalcService } from './btncalc.service';
-import { Subscription } from 'rxjs';
-import { MediaChange, MediaObserver } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-btncalc',
@@ -14,26 +12,15 @@ import { MediaChange, MediaObserver } from '@angular/flex-layout';
 })
 export class BtncalcComponent extends BtncalcComponentCommon
   implements OnInit, OnDestroy {
-  observableMediaSubscribe: Subscription;
   @Input()
   rowHeight: number;
   constructor(
-    private observableMedia: MediaObserver,
     productService: ProductsService,
     btncalcService: BtncalcService,
     appSetting: AppSettings,
-    couponService: CouponService,
-    public service: ProductsService
+    couponService: CouponService
   ) {
     super(productService, btncalcService, appSetting, couponService);
-
-    this.observableMediaSubscribe = this.observableMedia.media$.subscribe(
-      (change: MediaChange) => {
-        this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
-        this.service.fnWindowsSize();
-        this.rowHeight = (this.service.windowSize.columnHeight - 30) / 11;
-      }
-    );
   }
 
   ngOnInit(): void {}
