@@ -1,12 +1,13 @@
 <!-- Btn amount default -->
 <mat-grid-list cols="{{productService.product.defaultAmount.length}}" class="grid-row-amount" rowHeight="{{rowHeight}}">
   <mat-grid-tile *ngFor="let amount of productService.product.defaultAmount; let i = index">
-
     <button [style.width.px]="rowHeight-12" [style.height.px]="rowHeight-12" class="btn-default elevation-z5 btn-amount-{{i+1}} radius-50"
       (click)="btnDefaultAmountsPreset(amount)">{{ amount | digitslimit }}</button>
-
   </mat-grid-tile>
 </mat-grid-list>
+
+<div *ngIf="!productService.product.defaultAmount" id="overlayArea3" [style.top]="'calc(32% - 2px)'" [style.left.%]="59"
+  [style.width]="'calc(21% - 2px)'" [style.height]="'calc(10% - 2px)'" class="overlay radius-5"></div>
 <!-- BTN calculator -->
 <mat-grid-list cols="4" class="grid-keyboard-number" rowHeight="{{rowHeight}}">
   <mat-grid-tile>
