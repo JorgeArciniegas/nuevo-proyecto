@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
 import { BetCouponOdd, CouponCategory } from '@elys/elys-api';
-import { ElysCouponService } from '@elys/elys-coupon';
-import {
-  AddOddRequest,
-  BetCouponExtended,
-  BetCouponOddExtended
-} from '@elys/elys-coupon/lib/elys-coupon.models';
+import { ElysCouponService, CouponServiceMessageType } from '@elys/elys-coupon';
+import { AddOddRequest, BetCouponExtended, BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Observable, Subject } from 'rxjs';
 import { BetOdd } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
-import { OddsStakeEdit, StakesDisplay, InternalCoupon } from './coupon.model';
+import { OddsStakeEdit, StakesDisplay, CouponLimitExceded, InternalCoupon } from './coupon.model';
+import { DEFAULT_BREAKPOINTS } from '@angular/flex-layout';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CouponService {
+  private messageType: typeof CouponServiceMessageType = CouponServiceMessageType;
   // coupon cache
   coupon: InternalCoupon = null;
   couponIdAdded: number[] = [];
@@ -31,14 +29,20 @@ export class CouponService {
   oddStakeEditSubject: Subject<OddsStakeEdit>;
   oddStakeEditObs: Observable<OddsStakeEdit>;
 
-  constructor(public elyscoupon: ElysCouponService, userService: UserService) {
+  // Coupon messages variables
+  warningMessage: string;
+  errorMessage: string;
+
+  // Coupon limit error
+  alertGrids: boolean[];
+  couponLimitsExceded?: CouponLimitExceded[] = [];
+
+  constructor(public elysCoupon: ElysCouponService, userService: UserService) {
     this.couponResponseSubject = new Subject<BetCouponExtended>();
     this.couponResponse = this.couponResponseSubject.asObservable();
 
-    this.elyscoupon.couponConfig.userId = userService.userDetail
-      ? userService.userDetail.UserId
-      : undefined;
-    elyscoupon.couponHasChanged.subscribe(coupon => {
+    this.elysCoupon.couponConfig.userId = userService.userDetail ? userService.userDetail.UserId : undefined;
+    elysCoupon.couponHasChanged.subscribe(coupon => {
       this.coupon = coupon;
       this.couponResponseSubject.next(coupon);
       if (coupon) {
@@ -48,7 +52,26 @@ export class CouponService {
         this.resetCoupon();
       }
     });
-
+    // Get the message from the coupon
+    elysCoupon.couponServiceMessage.subscribe(message => {
+      // Get coupon's message
+      switch (message.messageType) {
+        case this.messageType.error:
+          this.errorMessage = message.message;
+          break;
+        case this.messageType.warning:
+          this.warningMessage = message.message;
+          break;
+        default:
+          this.errorMessage = undefined;
+          this.warningMessage = undefined;
+      }
+      if (message.messageType === this.messageType.error) {
+        this.errorMessage = message.message;
+      } else {
+        this.errorMessage = undefined;
+      }
+    });
     this.stakeDisplaySubject = new Subject<StakesDisplay>();
     this.stakeDisplayObs = this.stakeDisplaySubject.asObservable();
     this.stakeDisplayObs.subscribe(elem => (this.stakeDisplay = elem));
@@ -82,7 +105,7 @@ export class CouponService {
           if (addBoolean) {
             this.couponIdAdded.push(bet.id);
           }
-          this.elyscoupon.manageOdd(this.requestObj(bet, addBoolean));
+          this.elysCoupon.manageOdd(this.requestObj(bet, addBoolean));
         }
       }
     } catch (e) {
@@ -105,7 +128,7 @@ export class CouponService {
   resetCoupon(): void {
     this.coupon = null;
     this.couponIdAdded = [];
-    this.elyscoupon.betCoupon = null;
+    this.elysCoupon.betCoupon = null;
     // reset amount
     const stakesDisplayTemp: StakesDisplay = {
       TotalStake: 0,
@@ -137,14 +160,12 @@ export class CouponService {
   updateCoupon(): void {
     if (this.oddStakeEdit) {
       if (this.oddStakeEdit.tempStake > 0) {
-        this.coupon.Odds[
-          this.oddStakeEdit.indexOdd
-        ].OddStake = this.oddStakeEdit.tempStake;
-        this.elyscoupon.updateCoupon(this.coupon);
+        this.coupon.Odds[this.oddStakeEdit.indexOdd].OddStake = this.oddStakeEdit.tempStake;
+        this.elysCoupon.updateCoupon(this.coupon);
       }
       this.oddStakeEditSubject.next(null);
     } else {
-      this.elyscoupon.updateCoupon(this.coupon);
+      this.elysCoupon.updateCoupon(this.coupon);
     }
   }
 
@@ -156,10 +177,7 @@ export class CouponService {
       isDefaultInput: false
     };
     // search if the odd is selected and it reset
-    if (
-      this.oddStakeEdit &&
-      this.oddStakeEdit.odd.SelectionId === odd.SelectionId
-    ) {
+    if (this.oddStakeEdit && this.oddStakeEdit.odd.SelectionId === odd.SelectionId) {
       this.oddStakeEditSubject.next(null);
       return;
     }
