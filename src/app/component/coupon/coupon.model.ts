@@ -11,9 +11,3 @@ export interface OddsStakeEdit {
   odd: BetCouponOdd;
   isDefaultInput: boolean;
 }
-
-export interface CouponLimitExceded {
-  limit?: string;
-  msg?: string;
-  filed?: string;
-}

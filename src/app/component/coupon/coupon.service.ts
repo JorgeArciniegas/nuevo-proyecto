@@ -5,7 +5,7 @@ import { AddOddRequest, BetCouponExtended, BetCouponOddExtended } from '@elys/el
 import { Observable, Subject } from 'rxjs';
 import { BetOdd } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
-import { OddsStakeEdit, StakesDisplay, CouponLimitExceded } from './coupon.model';
+import { OddsStakeEdit, StakesDisplay } from './coupon.model';
 import { DEFAULT_BREAKPOINTS } from '@angular/flex-layout';
 
 @Injectable({
@@ -33,10 +33,6 @@ export class CouponService {
   warningMessage: string;
   errorMessage: string;
 
-  // Coupon limit error
-  alertGrids: boolean[];
-  couponLimitsExceded?: CouponLimitExceded[] = [];
-
   constructor(public elysCoupon: ElysCouponService, userService: UserService) {
     this.couponResponseSubject = new Subject<BetCouponExtended>();
     this.couponResponse = this.couponResponseSubject.asObservable();
@@ -44,6 +40,7 @@ export class CouponService {
     this.elysCoupon.couponConfig.userId = userService.userDetail ? userService.userDetail.UserId : undefined;
     elysCoupon.couponHasChanged.subscribe(coupon => {
       this.coupon = coupon;
+      this.checkLimits();
       this.couponResponseSubject.next(coupon);
       this.calculateAmounts();
     });
@@ -179,5 +176,12 @@ export class CouponService {
     });
 
     this.oddStakeEditSubject.next(tempOdd);
+  }
+
+  checkLimits() {
+    console.log(this.coupon);
+    // Check if the API call has been successfull
+    if (this.coupon.internal_ResponseStatus === 1 || this.coupon.internal_ResponseStatus === 2) {
+    }
   }
 }
