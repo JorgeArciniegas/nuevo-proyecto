@@ -5,6 +5,11 @@ import { BetOdds, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupon, Bet
 import { WindowSize } from '../services/utility/window-size/window-size.model';
 import { WindowSizeService } from '../services/utility/window-size/window-size.service';
 import { BetCouponExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
+import { Product } from './models/product.model';
+import { AppSettings } from '../app.settings';
+import { ElysApiService, CurrencyCodeRequest } from '@elys/elys-api';
+import { UtilityService } from '@elys/elys-coupon/lib/elys-coupon.utility';
+import { StorageService } from '../services/utility/storage/storage.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -38,7 +43,11 @@ export class ProductsService {
     xs: 1
   };
   windowSize: WindowSize;
-  constructor(public dialog: DialogService, private windowSizeService: WindowSizeService) {
+  // product selected
+  product: Product;
+
+  constructor(public dialog: DialogService, private windowSizeService: WindowSizeService,
+    private appSetting: AppSettings, private elysApi: ElysApiService, private storage: StorageService) {
     this.productNameSelectedSubscribe = new Subject<string>();
     this.productNameSelectedObserve = this.productNameSelectedSubscribe.asObservable();
     // Element for management the display
@@ -67,6 +76,26 @@ export class ProductsService {
 
     this.playableBoardResetSubject = new Subject<boolean>();
     this.playableBoardResetObserve = this.playableBoardResetSubject.asObservable();
+
+    const currency: CurrencyCodeRequest = {currencyCode: this.storage.getData('UserData').Currency } ;
+    // updated product selected
+    this.productNameSelectedObserve.subscribe(
+      v => {
+        const product: Product[] = appSetting.products.filter(
+          item => item.name === v
+        );
+
+        if (!this.product) {
+          this.product = product[0];
+          this.elysApi.coupon.getCouponRelatedCurrency(currency).then( preset => {
+            this.product.defaultAmount.push(preset.CouponPreset.CouponPresetValues.PresetOne);
+            this.product.defaultAmount.push(preset.CouponPreset.CouponPresetValues.PresetTwo);
+            this.product.defaultAmount.push(preset.CouponPreset.CouponPresetValues.PresetThree);
+            this.product.defaultAmount.push(preset.CouponPreset.CouponPresetValues.PresetFour);
+          });
+        }
+      }
+    );
   }
 
   fnWindowsSize(): void {

@@ -9,7 +9,7 @@ export const environment: Environment = {
     {
       name: 'dogracing',
       label: 'Dog Racing',
-      defaultAmount: [1, 2, 5, 10],
+      defaultAmount: [],
       toolbarButton: {
         name: 'dogracing',
         icon: 'Dog',
@@ -19,7 +19,7 @@ export const environment: Environment = {
     {
       name: 'footballita',
       label: 'Football Ita',
-      defaultAmount: [1, 2, 5, 10],
+      defaultAmount: [],
       toolbarButton: {
         name: 'footballita',
         icon: 'Soccer-ita',
@@ -29,7 +29,7 @@ export const environment: Environment = {
     {
       name: 'footballeng',
       label: 'Football Eng',
-      defaultAmount: [1, 2, 5, 10],
+      defaultAmount: [],
       toolbarButton: {
         name: 'footballeng',
         icon: 'Soccer-eng',
@@ -39,7 +39,7 @@ export const environment: Environment = {
     {
       name: 'roulette',
       label: 'American Roulette',
-      defaultAmount: [1, 2, 5, 10],
+      defaultAmount: [],
       toolbarButton: {
         name: 'roulette',
         icon: 'Roulette',
@@ -49,7 +49,7 @@ export const environment: Environment = {
     {
       name: 'horseracing',
       label: 'Horse Racing',
-      defaultAmount: [1, 2, 5, 10],
+      defaultAmount: [],
       toolbarButton: {
         name: 'horseracing',
         icon: 'Horse',
@@ -59,7 +59,7 @@ export const environment: Environment = {
     {
       name: 'cockfight',
       label: 'Cock Fight',
-      defaultAmount: [1, 2, 5, 10],
+      defaultAmount: [],
       toolbarButton: {
         name: 'cockfight',
         icon: 'Galli',
@@ -69,7 +69,7 @@ export const environment: Environment = {
     {
       name: 'keno',
       label: 'keno',
-      defaultAmount: [1, 2, 5, 10],
+      defaultAmount: [],
       toolbarButton: {
         name: 'keno',
         icon: 'Bingo',

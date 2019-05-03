@@ -72,8 +72,6 @@ export class DogracingService {
   ) {
     this.raceDetails = new RaceDetail();
     this.raceDetails.currentRace = 0;
-    // ...da api
-    this.amount = 1;
 
     interval(1000).subscribe(() => this.getTime());
 
@@ -108,7 +106,6 @@ export class DogracingService {
 
     this.createDogList();
 
-    // this.btnService.selectedAmount.subscribe(amount => (this.amount = amount));
   }
 
   createDogList(): void {
@@ -518,7 +515,7 @@ export class DogracingService {
       areaFuncData = this.checkSmartCode(areaFuncData);
       // set amount
       areaFuncData.amount = !this.btnService.polyfunctionalArea
-        ? this.amount
+        ? this.productService.product.defaultAmount[0]
         : this.btnService.polyfunctionalArea.amount;
       // verify if the type of betslip is set
       if (this.btnService.polyfunctionalArea !== null) {

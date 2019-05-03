@@ -15,12 +15,13 @@ import { componentDeclarations, providerDeclarations, routes } from './app.commo
 import { AppComponent } from './app.component';
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
 import { SharedModule } from './shared/shared.module';
+import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [componentDeclarations],
+  declarations: [componentDeclarations, DigitslimitPipe],
   imports: [
     HttpClientModule,
     BrowserModule,
