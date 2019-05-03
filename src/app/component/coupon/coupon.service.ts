@@ -5,7 +5,7 @@ import { AddOddRequest, BetCouponExtended, BetCouponOddExtended } from '@elys/el
 import { Observable, Subject } from 'rxjs';
 import { BetOdd } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
-import { OddsStakeEdit, StakesDisplay } from './coupon.model';
+import { OddsStakeEdit, StakesDisplay, InternalCoupon } from './coupon.model';
 import { DEFAULT_BREAKPOINTS } from '@angular/flex-layout';
 
 @Injectable({
@@ -14,7 +14,7 @@ import { DEFAULT_BREAKPOINTS } from '@angular/flex-layout';
 export class CouponService {
   private messageType: typeof CouponServiceMessageType = CouponServiceMessageType;
   // coupon cache
-  coupon: BetCouponExtended = null;
+  coupon: InternalCoupon = null;
   couponIdAdded: number[] = [];
 
   private couponResponseSubject: Subject<BetCouponExtended>;
@@ -42,7 +42,12 @@ export class CouponService {
       this.coupon = coupon;
       this.checkLimits();
       this.couponResponseSubject.next(coupon);
-      this.calculateAmounts();
+      if (coupon) {
+        this.coupon.internal_isReadyToPlace = false;
+        this.calculateAmounts();
+      } else {
+        this.resetCoupon();
+      }
     });
     // Get the message from the coupon
     elysCoupon.couponServiceMessage.subscribe(message => {
@@ -71,13 +76,18 @@ export class CouponService {
     this.oddStakeEditSubject = new Subject<OddsStakeEdit>();
     this.oddStakeEditObs = this.oddStakeEditSubject.asObservable();
     this.oddStakeEditObs.subscribe(item => {
-      this.oddStakeEdit = item;
+      if (!this.coupon.internal_isReadyToPlace) {
+        this.oddStakeEdit = item;
+      }
     });
   }
 
   addRemoveToCoupon(smart: BetOdd[]): void {
     // console.log(smart);
     try {
+      if (this.coupon && this.coupon.internal_isReadyToPlace) {
+        return;
+      }
       if (smart) {
         for (const bet of smart.filter(item => item.selected)) {
           let addBoolean = true;
@@ -183,4 +193,36 @@ export class CouponService {
     if (this.coupon.internal_ResponseStatus === 1 || this.coupon.internal_ResponseStatus === 2) {
     }
   }
+  /**
+   *
+   */
+  async preStagedCoupon(): Promise<void> {
+    if (!this.coupon && this.coupon.Odds.length > 0) {
+      return;
+    }
+    // call api
+    await this.elysCoupon.updateCoupon(this.coupon);
+    // enabled process to staging coupon
+    this.coupon.internal_isReadyToPlace = true;
+  }
+
+  checkIfCouponIsReadyToPlace(): boolean {
+    return this.coupon && this.coupon.internal_isReadyToPlace ? this.coupon.internal_isReadyToPlace : false;
+  }
+
+  /**
+   *
+   */
+  cancelStagingCoupon(): void {
+    this.coupon.internal_isReadyToPlace = false;
+  }
+
+  stagedCoupon(): void {
+    this.elysCoupon.placeCoupon(this.coupon);
+  }
+
+  /*
+  stagedCoupon(): void {
+    this.elyscoupon.c
+  } */
 }
