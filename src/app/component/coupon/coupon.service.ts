@@ -197,7 +197,7 @@ export class CouponService {
   async preStagedCoupon(): Promise<void> {
     if (!this.coupon && this.coupon.Odds.length > 0) { return; }
     // call api
-    await this.elyscoupon.updateCoupon(this.coupon);
+    await this.elysCoupon.updateCoupon(this.coupon);
     // enabled process to staging coupon
     this.coupon.internal_isReadyToPlace = true;
 
@@ -216,7 +216,7 @@ export class CouponService {
   }
 
   stagedCoupon(): void {
-    this.elyscoupon.placeCoupon(this.coupon);
+    this.elysCoupon.placeCoupon(this.coupon);
   }
 
 /*
