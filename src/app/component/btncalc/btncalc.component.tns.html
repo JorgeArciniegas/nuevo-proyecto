@@ -3,9 +3,15 @@
     class="card" *ngFor="let amount of productService.product.defaultAmount; let i = index">
     <GridLayout rows="*" columns="*" class="button btn-amount-{{i+1}}" height="{{amountIcon.height}}" width="{{amountIcon.width}}"
       borderRadius="{{amountIcon.height/2}}">
-      <Button text="{{ amount | digitslimit }}" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnDefaultAmountsPreset(amount)"></Button>
+      <GridLayout *ngIf="productService.product.defaultAmount">
+        <Button text="{{ amount | digitslimit }}" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnDefaultAmountsPreset(amount)"></Button>
+      </GridLayout>
+      <GridLayout *ngIf="!productService.product.defaultAmount">
+        <Button class="button-internal" [isEnabled]="!timeBlocked"></Button>
+      </GridLayout>
     </GridLayout>
   </GridLayout>
+
   <!-- BTN calculator -->
   <GridLayout row="1" col="0" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
