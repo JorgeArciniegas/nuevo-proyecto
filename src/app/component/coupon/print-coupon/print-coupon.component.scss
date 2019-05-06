@@ -1,0 +1,65 @@
+/* @page {
+  margin: 2mm
+}
+ */
+@media screen {
+  :host {
+    display: none;
+  }
+}
+
+@media print {
+  .printCoupon{
+    width: 100%;
+    .col {
+      display: inline-block;
+    }
+
+    .font-size-normal{
+      font-size: 2.5mm;
+    }
+    .text-right{
+      text-align: right;
+    }
+    .header{
+      border-bottom: 1px solid;
+    }
+    .content{
+      .betslip-info{
+        border-bottom: 1px solid;
+      }
+      .betslip-odds{
+        padding-top: 0.5mm;
+        padding-bottom: 0.5mm;
+        .event-container{
+          width: 100%;
+
+          .match-selection,
+          .match-win,
+          .match-label
+          {
+            display: inline;
+          }
+
+          .match-win{
+            border: 1px solid;
+            border-radius: 5px;
+            float: right;
+            margin-right: 0.2mm;
+          }
+          .match-selection {
+            float: right;
+          }
+        }
+      }
+    }
+    .footer {
+      position: fixed;
+      bottom:0;
+      page-break-after: avoid;
+      .barcode {
+        text-align: center;
+      }
+    }
+  }
+}

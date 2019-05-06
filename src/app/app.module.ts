@@ -9,19 +9,21 @@ import { ElysCouponModule } from '@elys/elys-coupon';
 import { ElysStorageLibModule } from '@elys/elys-storage-lib';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NgxBarcodeModule } from 'ngx-barcode';
 import { environment } from '../environments/environment';
 import { VERSION } from '../environments/version';
 import { componentDeclarations, providerDeclarations, routes } from './app.common';
 import { AppComponent } from './app.component';
+import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
 import { SharedModule } from './shared/shared.module';
-import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
+import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [componentDeclarations, DigitslimitPipe],
+  declarations: [componentDeclarations, DigitslimitPipe, GroupByCategoryPipe],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -35,6 +37,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       }
     }),
     SharedModule,
+    NgxBarcodeModule,
     ElysStorageLibModule.forRoot({
       isCrypto: true,
       cryptoString: 'VgenStorage',

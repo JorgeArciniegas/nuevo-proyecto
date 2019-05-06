@@ -517,3 +517,8 @@ $gradient-dark2: #000000;
 	color: $color-text-primary;
 	placeholder-color: $color-text-shadow;
 }
+
+// PRINT TEMPLATE
+%logo-header {
+  content:url('app/themes/skins/develop/image/vgen.png');
+}

@@ -38,6 +38,7 @@
     "nativescript-angular": "~7.2.3",
     "nativescript-ng-shadow": "^2.1.0",
     "nativescript-theme-core": "~1.0.4",
+    "ngx-barcode": "^0.2.4",
     "node-sass": "^4.11.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.4.0",

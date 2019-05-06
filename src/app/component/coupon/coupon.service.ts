@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BetCouponOdd, CouponCategory } from '@elys/elys-api';
-import { ElysCouponService, CouponServiceMessageType } from '@elys/elys-coupon';
+import { CouponServiceMessageType, ElysCouponService } from '@elys/elys-coupon';
 import { AddOddRequest, BetCouponExtended, BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Observable, Subject } from 'rxjs';
 import { BetOdd } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
-import { OddsStakeEdit, StakesDisplay, InternalCoupon } from './coupon.model';
-import { DEFAULT_BREAKPOINTS } from '@angular/flex-layout';
+import { InternalCoupon, OddsStakeEdit, StakesDisplay } from './coupon.model';
+import { PrintCouponService } from './print-coupon/print-coupon.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,10 @@ export class CouponService {
   warningMessage: string;
   errorMessage: string;
 
-  constructor(public elysCoupon: ElysCouponService, userService: UserService) {
+  fnPrintCoupon(): void {
+    this.printCoupon.printWindow();
+  }
+  constructor(public elysCoupon: ElysCouponService, userService: UserService, private printCoupon: PrintCouponService) {
     this.couponResponseSubject = new Subject<BetCouponExtended>();
     this.couponResponse = this.couponResponseSubject.asObservable();
 

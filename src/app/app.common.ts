@@ -15,6 +15,7 @@ import { ProductDialogComponent } from './products/product-dialog/product-dialog
 import { AppSettings } from './app.settings';
 import { ProductsService } from './products/products.service';
 import { BtncalcService } from './component/btncalc/btncalc.service';
+import { PrintCouponComponent } from './component/coupon/print-coupon/print-coupon.component';
 
 export const componentDeclarations: any[] = [
   AppComponent,
@@ -27,7 +28,8 @@ export const componentDeclarations: any[] = [
   DisplayComponent,
   AdvanceGameComponent,
   CouponComponent,
-  ProductDialogComponent
+  ProductDialogComponent,
+  PrintCouponComponent
 ];
 
 export const providerDeclarations: any[] = [
@@ -42,6 +44,13 @@ export const routes: Routes = [
     path: 'login',
     loadChildren: './login/login.module#LoginModule'
   },
+
+  {
+    path: 'print',
+    component: PrintCouponComponent,
+    outlet: 'print'
+  },
+
   {
     path: 'products',
     component: ProductsComponent,

@@ -1,0 +1,46 @@
+<div class="printCoupon" *ngIf="printCouponService.couponPrint">
+  <div class="header">
+    <img class="logo-print padding-10">
+    <div class="col padding-5 font-size-normal" [style.width.%]="75">Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad</div>
+    <div class="col qr-code" [style.width.%]="25"></div>
+  </div>
+  <div class="content">
+    <div class="betslip-info">
+      <!-- betslip date placed -->
+        <div class="col font-size-normal" [style.width.%]="40">{{ 'COUPON_DATE' | translate }}</div>
+        <div class="col font-size-normal text-right" [style.width.%]="60">{{ printCouponService.couponPrint.CouponDateOffset | date:'yyyy-MM-dd HH.mm.ss'}}</div>
+        <div class="col font-size-normal" [style.width.%]="40">{{ 'COUPON_CODE' | translate }}</div>
+        <div class="col font-size-normal text-right" [style.width.%]="60">{{ printCouponService.couponPrint.CouponCode }}</div>
+        <div class="col font-size-normal" [style.width.%]="40">{{ 'COUPON_TYPE' | translate }}</div>
+        <div class="col font-size-normal text-right" [style.width.%]="60">{{ 'ENUM.CouponType.' + couponType[printCouponService.couponPrint.CouponTypeId] | translate }}</div>
+
+    </div>
+    <div class="betslip-odds">
+      <div *ngFor="let groupCat of printCouponService.couponPrint.Odds | groupByCategory:'Championship'">
+          <div class="category-label font-size-normal" *ngIf="groupCat.key">
+            <strong>{{ groupCat.key }}</strong>
+          </div>
+          <div class="event-container font-size-normal" *ngFor="let match of groupCat.value">
+              <div class="match-label" *ngIf="match.MarketName">
+                [q {{ match.OddValue }}] {{ match.MarketName }}
+              </div>
+              <div class="match-win" *ngIf="match.OddStake">
+                <span class="padding-5">{{match.OddStake * match.OddValue}}</span>
+              </div>
+              <div class="match-selection font-size-normal text-right">
+                {{ match.SelectionName }}
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="betslip-payment"></div>
+    <div class="betslip-other-info"></div>
+  </div>
+  <div class="footer">
+      <div class="font-size-normal">i am footer</div>
+      <div class="barcode">
+          <ngx-barcode [bc-value]="printCouponService.couponPrint.CouponCode"
+           [bc-width]="1" [bc-height]="80" [bc-display-value]="false"></ngx-barcode>
+      </div>
+  </div>
+</div>

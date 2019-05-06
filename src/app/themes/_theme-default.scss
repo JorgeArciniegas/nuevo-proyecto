@@ -409,7 +409,20 @@ html {
 
 	.counter {
 		@extend %header-notification-style;
-	}
+  }
+
+  // MEDIA PRINT ONLY
+  .printCoupon {
+      .header {
+        .logo-print {
+          width: 100% ;
+          min-height: 15px;
+          @extend %logo-header;
+        }
+      }
+
+  }
+
 }
 
 .card-odd {
@@ -567,4 +580,15 @@ html {
 	.btn-dark-gradient {
 		@extend %btn-dark-gradient;
 	}
+}
+
+@media print {
+  .isPrinting {
+    > * {
+      display: none;
+    }
+    app-print-coupon {
+      display: block;
+    }
+  }
 }
