@@ -114,25 +114,30 @@
         <div class="display-message-description" fxLayout="row" fxLayoutAlign="center start" fxFlex>
           {{couponService.errorMessage}} </div>
       </label>
-      <label class="display-message" *ngIf="couponService.warningMessage" fxLayout="column" fxFlex>
+      <label class="display-message" *ngIf="!couponService.errorMessage && couponService.warningMessage"
+        fxLayout="column" fxFlex>
         <span>{{'WARNING' | translate}}</span>
         <div class="display-message-description" fxLayout="row" fxLayoutAlign="center start" fxFlex>
           {{couponService.warningMessage}} </div>
       </label>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile rowspan="2" *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
+  <mat-grid-tile rowspan="2"
+    *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
     <div fxFill class="padding-top-10">
-      <button class="btn-default btn-success radius-10 padding-10" [disabled]="errorMessage" (click)="couponService.preStagedCoupon()">{{'piazza' | translate}}</button>
+      <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.errorMessage"
+        (click)="couponService.preStagedCoupon()">{{'piazza' | translate}}</button>
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="2" *ngIf="couponService.coupon && couponService.coupon.internal_isReadyToPlace">
     <div fxFill fxLayoutGap="10px">
       <div fxFill fxFlex="50" class="padding-top-10">
-        <button class="btn-default btn-warning radius-10 padding-10" [disabled]="errorMessage" (click)="couponService.cancelStagingCoupon()">{{'back' | translate}}</button>
+        <button class="btn-default btn-warning radius-10 padding-10"
+          (click)="couponService.cancelStagingCoupon()">{{'back' | translate}}</button>
       </div>
       <div fxFill fxFlex="50" class="padding-top-10">
-        <button class="btn-default btn-success radius-10 padding-10" [disabled]="errorMessage" (click)="couponService.stagedCoupon()">{{'conferma' | translate}}</button>
+        <button class="btn-default btn-success radius-10 padding-10"
+          (click)="couponService.stagedCoupon()">{{'conferma' | translate}}</button>
       </div>
     </div>
   </mat-grid-tile>

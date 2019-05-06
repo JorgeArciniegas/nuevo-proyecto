@@ -16,3 +16,22 @@ export interface OddsStakeEdit {
 export interface InternalCoupon extends BetCouponExtended {
   internal_isReadyToPlace?: boolean;
 }
+
+// Enum of the coupon's limites errors
+export enum CouponLimit {
+  MinBetStake,
+  MaxBetStake,
+  MaxSingleBetWin,
+  MaxMultipleBetWin,
+  MaxCombinationBetWin,
+  MaxCouponOdds,
+  MaxCouponEvents,
+  MinBonusOdd,
+  MaxCouponCombinations,
+  MinGroupingsBetStake,
+  MaxGroupingsBetStake,
+  MaxCombinationsByGrouping,
+  MaxCombinationsByCoupon,
+  MinCombinationBetRate,
+  UserMaxStake
+}

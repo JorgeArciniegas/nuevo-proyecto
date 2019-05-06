@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BetCouponOdd, CouponCategory } from '@elys/elys-api';
+import { BetCouponOdd, CouponCategory, CouponType } from '@elys/elys-api';
 import { ElysCouponService, CouponServiceMessageType } from '@elys/elys-coupon';
 import { AddOddRequest, BetCouponExtended, BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Observable, Subject } from 'rxjs';
 import { BetOdd } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
-import { OddsStakeEdit, StakesDisplay, InternalCoupon } from './coupon.model';
+import { OddsStakeEdit, StakesDisplay, InternalCoupon, CouponLimit } from './coupon.model';
 import { DEFAULT_BREAKPOINTS } from '@angular/flex-layout';
 
 @Injectable({
@@ -40,7 +40,6 @@ export class CouponService {
     this.elysCoupon.couponConfig.userId = userService.userDetail ? userService.userDetail.UserId : undefined;
     elysCoupon.couponHasChanged.subscribe(coupon => {
       this.coupon = coupon;
-      this.checkLimits();
       this.couponResponseSubject.next(coupon);
       if (coupon) {
         this.coupon.internal_isReadyToPlace = false;
@@ -60,13 +59,9 @@ export class CouponService {
           this.warningMessage = message.message;
           break;
         default:
-          this.errorMessage = undefined;
-          this.warningMessage = undefined;
-      }
-      if (message.messageType === this.messageType.error) {
-        this.errorMessage = message.message;
-      } else {
-        this.errorMessage = undefined;
+          // this.errorMessage = undefined;
+          // this.warningMessage = undefined;
+          this.checkLimits();
       }
     });
     this.stakeDisplaySubject = new Subject<StakesDisplay>();
@@ -190,9 +185,54 @@ export class CouponService {
 
   checkLimits() {
     // Check if the API call has been successfull
-    if (this.coupon.internal_ResponseStatus === 1 || this.coupon.internal_ResponseStatus === 2) {
+    // if (this.coupon.internal_ResponseStatus === 1 || this.coupon.internal_ResponseStatus === 2) {
+    // Check if the limite to consider is the coupon one or the user one.
+    const isMaxCouponLimitStake = this.coupon.CouponLimit.MaxBetStake < this.coupon.UserCouponLimit.MaxStake;
+    // Check the coupon type
+    switch (this.coupon.CouponTypeId) {
+      case CouponType.SingleBet:
+        // Check the MinBetStake
+        if (this.coupon.Odds[0].OddStake < this.coupon.CouponLimit.MinBetStake) {
+          this.errorMessage = CouponLimit[CouponLimit.MinBetStake];
+        }
+        // Check the MaxBetStake
+        if (isMaxCouponLimitStake) {
+          if (this.coupon.Odds[0].OddStake > this.coupon.CouponLimit.MaxBetStake) {
+            this.errorMessage = CouponLimit[CouponLimit.MaxBetStake];
+          }
+        } else {
+          if (this.coupon.Odds[0].OddStake > this.coupon.UserCouponLimit.MaxStake) {
+            this.errorMessage = CouponLimit[CouponLimit.UserMaxStake];
+          }
+        }
+        // Check the maxSingleBetWin
+        if (this.stakeDisplay.MaxWinning > this.coupon.CouponLimit.MaxSingleBetWin) {
+          this.errorMessage = CouponLimit[CouponLimit.MaxSingleBetWin];
+        }
+        break;
+      case CouponType.MultipleBet:
+        break;
+      case CouponType.CombinationsBet:
+        for (const odd of this.coupon.Odds) {
+          // Check the MinBetStake
+          if (odd.OddStake < this.coupon.CouponLimit.MinBetStake) {
+            this.errorMessage = CouponLimit[CouponLimit.MinBetStake];
+          }
+          // Check the MaxBetStake
+          if (odd.OddStake > this.coupon.CouponLimit.MaxBetStake) {
+            this.errorMessage = CouponLimit[CouponLimit.MaxBetStake];
+          }
+        }
+        // Check the maxCombinationBetWin
+        if (this.stakeDisplay.MaxWinning > this.coupon.CouponLimit.MaxCombinationBetWin) {
+          this.errorMessage = CouponLimit[CouponLimit.MaxCombinationBetWin];
+        }
+        break;
+      default:
     }
+    // }
   }
+
   /**
    *
    */
