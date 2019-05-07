@@ -383,6 +383,10 @@
     .card-odd {
         @extend %dialog-card-mobile;
 
+        &.card-odd-error {
+          @extend %border-input-area-error;
+        }
+
         .top-window {
             @extend %dialog-card-header;
         }
@@ -424,6 +428,10 @@
 
 .radius-5 {
     border-radius: 5;
+}
+
+.radius-5-tl-tr {
+  border-radius: 5 5 0 0;
 }
 
 .radius-10 {
