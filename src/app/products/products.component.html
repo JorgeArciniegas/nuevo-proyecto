@@ -43,8 +43,8 @@
 
               </div> -->
               <label>
-                  <span>{{'amountPlace' | translate}}</span>
-                  <input type="text" name="amount" [ngModel]="couponService.stakeDisplay.TotalStake |number: '1.2-2'" readonly />
+                <span>{{'amountPlace' | translate}}</span>
+                <input type="text" name="amount" [ngModel]="couponService.stakeDisplay.TotalStake |number: '1.2-2'" readonly />
               </label>
             </div>
           </div>
@@ -52,8 +52,8 @@
         <!-- Area polifunzionale [Fissa]  -->
         <mat-grid-tile rowspan="1" class="polifuctional-area">
           <div fxFlexFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
-            <button class="btn-default btn-success radius-10 padding-10">PAGA</button>
-            <button class="btn-default btn-warning radius-10 padding-10">ANNULLA</button>
+            <button class="btn-default btn-success radius-10 padding-10" (click)="payCancelCoupon('PAY')">{{'PAY' | translate}}</button>
+            <button class="btn-default btn-warning radius-10 padding-10" (click)="payCancelCoupon('CANCEL')">{{'CANCEL' | translate}}</button>
           </div>
         </mat-grid-tile>
 

@@ -15,6 +15,7 @@ import { ProductDialogComponent } from './products/product-dialog/product-dialog
 import { AppSettings } from './app.settings';
 import { ProductsService } from './products/products.service';
 import { BtncalcService } from './component/btncalc/btncalc.service';
+import { PayCancelDialogComponent } from './component/coupon/pay-cancel-dialog/pay-cancel-dialog.component';
 
 export const componentDeclarations: any[] = [
   AppComponent,
@@ -27,7 +28,8 @@ export const componentDeclarations: any[] = [
   DisplayComponent,
   AdvanceGameComponent,
   CouponComponent,
-  ProductDialogComponent
+  ProductDialogComponent,
+  PayCancelDialogComponent
 ];
 
 export const providerDeclarations: any[] = [

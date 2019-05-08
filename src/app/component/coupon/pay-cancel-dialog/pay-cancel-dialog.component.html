@@ -1,0 +1,35 @@
+<div mat-dialog-title fxLayoutAlign="center center">
+  <div class="title">{{ data | translate }} {{ 'COUPON' | translate }}</div>
+</div>
+
+
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+
+  <mat-dialog-content>
+    <mat-grid-list cols="1" rowHeight="100px">
+      <mat-grid-tile rowspan="1" class="polifuctional-area">
+        <div fxLayoutAlign="center center" fxFlex="40" class="pay-cancel-input input-container">
+          <i class="icon-baseline-shopping_cart-24px icon"></i>
+          <input matInput class="input-field" [(ngModel)]="couponId" formControlName="couponId" pattern="^[a-zA-Z0-9]+\-[a-zA-Z0-9]+\-[a-zA-Z0-9]+$"
+            placeholder="{{ 'Coupon Code' | translate}}" autocomplete="on" />
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+
+    <mat-grid-list cols="1" rowHeight="50px">
+      <mat-grid-tile rowspan="1" class="polifuctional-area">
+        <div fxFlexFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="80px">
+          <button fxFlex="24" class="btn-default btn-success radius-10 padding-10" (click)="close()">{{'CLOSE' | translate | uppercase}}</button>
+          <button fxFlex="24" class="btn-default btn-warning radius-10 padding-10" type="submit" [disabled]="form.invalid">{{'CONFIRM' | translate}}</button>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-dialog-content>
+
+</form>
+
+
+<div mat-dialog-actions fxLayoutAlign="center center">
+
+</div>

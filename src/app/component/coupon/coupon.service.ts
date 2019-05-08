@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BetCouponOdd, CouponCategory } from '@elys/elys-api';
 import { ElysCouponService, CouponServiceMessageType } from '@elys/elys-coupon';
-import { AddOddRequest, BetCouponExtended, BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
+import {
+  AddOddRequest,
+  BetCouponExtended,
+  BetCouponOddExtended
+} from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Observable, Subject } from 'rxjs';
 import { BetOdd } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
@@ -37,7 +41,9 @@ export class CouponService {
     this.couponResponseSubject = new Subject<BetCouponExtended>();
     this.couponResponse = this.couponResponseSubject.asObservable();
 
-    this.elysCoupon.couponConfig.userId = userService.userDetail ? userService.userDetail.UserId : undefined;
+    this.elysCoupon.couponConfig.userId = userService.userDetail
+      ? userService.userDetail.UserId
+      : undefined;
     elysCoupon.couponHasChanged.subscribe(coupon => {
       this.coupon = coupon;
       this.couponResponseSubject.next(coupon);
@@ -158,7 +164,9 @@ export class CouponService {
   updateCoupon(): void {
     if (this.oddStakeEdit) {
       if (this.oddStakeEdit.tempStake > 0) {
-        this.coupon.Odds[this.oddStakeEdit.indexOdd].OddStake = this.oddStakeEdit.tempStake;
+        this.coupon.Odds[
+          this.oddStakeEdit.indexOdd
+        ].OddStake = this.oddStakeEdit.tempStake;
         this.elysCoupon.updateCoupon(this.coupon);
       }
       this.oddStakeEditSubject.next(null);
@@ -175,7 +183,10 @@ export class CouponService {
       isDefaultInput: false
     };
     // search if the odd is selected and it reset
-    if (this.oddStakeEdit && this.oddStakeEdit.odd.SelectionId === odd.SelectionId) {
+    if (
+      this.oddStakeEdit &&
+      this.oddStakeEdit.odd.SelectionId === odd.SelectionId
+    ) {
       this.oddStakeEditSubject.next(null);
       return;
     }
@@ -192,7 +203,10 @@ export class CouponService {
 
   checkLimits() {
     // Check if the API call has been successfull
-    if (this.coupon.internal_ResponseStatus === 1 || this.coupon.internal_ResponseStatus === 2) {
+    if (
+      this.coupon.internal_ResponseStatus === 1 ||
+      this.coupon.internal_ResponseStatus === 2
+    ) {
     }
   }
   /**
@@ -209,7 +223,9 @@ export class CouponService {
   }
 
   checkIfCouponIsReadyToPlace(): boolean {
-    return this.coupon && this.coupon.internal_isReadyToPlace ? this.coupon.internal_isReadyToPlace : false;
+    return this.coupon && this.coupon.internal_isReadyToPlace
+      ? this.coupon.internal_isReadyToPlace
+      : false;
   }
 
   /**
@@ -227,4 +243,18 @@ export class CouponService {
   stagedCoupon(): void {
     this.elyscoupon.c
   } */
+
+  cancelCoupon(couponId: string): void {
+    try {
+      console.log(couponId);
+      // this.elysCoupon.cancelCoupon(couponId);
+    } catch (e) {
+      console.log('err', e);
+    }
+  }
+
+  flagAsPaidCoupon(couponId: string): void {
+    console.log(couponId);
+    // this.elysCoupon.flagAsPaidCoupon(couponId);
+  }
 }
