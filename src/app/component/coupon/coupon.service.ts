@@ -187,72 +187,100 @@ export class CouponService {
     this.oddStakeEditSubject.next(tempOdd);
   }
 
+  // Method to execute the coupon limits check.
   checkLimits() {
-    // Check if the limite to consider is the coupon one or the user one.
-    const isMaxCouponLimitStake = this.coupon.CouponLimit.MaxBetStake < this.coupon.UserCouponLimit.MaxStake;
-    let hasError;
-    // Check the coupon type
+    // Get the MaxBetStake to verify
+    const maxBetStake =
+      this.coupon.CouponLimit.MaxBetStake < this.coupon.UserCouponLimit.MaxStake
+        ? this.coupon.CouponLimit.MaxBetStake
+        : this.coupon.UserCouponLimit.MaxStake;
+    let maxBetWin: number;
+    let hasError: boolean;
+    // Check the limitation by coupon type
     switch (this.coupon.CouponTypeId) {
       case CouponType.SingleBet:
         hasError = false;
+        // Get the MaxBetWin to verify
+        maxBetWin =
+          this.coupon.CouponLimit.MaxSingleBetWin < this.coupon.UserCouponLimit.MaxLoss
+            ? this.coupon.CouponLimit.MaxSingleBetWin
+            : this.coupon.UserCouponLimit.MaxLoss;
         // Check the MinBetStake
         if (this.coupon.Odds[0].OddStake < this.coupon.CouponLimit.MinBetStake) {
           this.errorMessage.push(CouponLimit[CouponLimit.MinBetStake]);
           hasError = true;
         }
         // Check the MaxBetStake
-        if (isMaxCouponLimitStake) {
-          if (this.coupon.Odds[0].OddStake > this.coupon.CouponLimit.MaxBetStake) {
-            this.errorMessage.push(CouponLimit[CouponLimit.MaxBetStake]);
-            hasError = true;
-          }
-        } else {
-          if (this.coupon.Odds[0].OddStake > this.coupon.UserCouponLimit.MaxStake) {
-            this.errorMessage.push(CouponLimit[CouponLimit.UserMaxStake]);
-            hasError = true;
-          }
+        if (this.coupon.Odds[0].OddStake > maxBetStake) {
+          this.errorMessage.push(CouponLimit[CouponLimit.MaxBetStake]);
+          hasError = true;
         }
         if (hasError) {
           this.listOfErrors.push(this.coupon.Odds[0].SelectionId);
         }
-        // Check the maxSingleBetWin
-        if (this.stakeDisplay.MaxWinning > this.coupon.CouponLimit.MaxSingleBetWin) {
+        // Check the MaxBetWin
+        if (this.stakeDisplay.MaxWinning > maxBetWin) {
           this.errorMessage.push(CouponLimit[CouponLimit.MaxSingleBetWin]);
         }
         break;
       case CouponType.MultipleBet:
         break;
       case CouponType.CombinationsBet:
-        for (const odd of this.coupon.Odds) {
-          hasError = false;
-          // Check the MinGroupingsBetStake
-          if (odd.OddStake < this.coupon.CouponLimit.MinGroupingsBetStake) {
-            this.errorMessage.push(CouponLimit[CouponLimit.MinGroupingsBetStake]);
-            hasError = true;
-          }
-          // Check the MaxGroupingsBetStake
-          if (odd.OddStake > this.coupon.CouponLimit.MaxGroupingsBetStake) {
-            this.errorMessage.push(CouponLimit[CouponLimit.MaxGroupingsBetStake]);
-            hasError = true;
-          }
-          if (hasError) {
-            this.listOfErrors.push(odd.SelectionId);
+        // Get the MaxBetWin to verify
+        maxBetWin =
+          this.coupon.CouponLimit.MaxCombinationBetWin < this.coupon.UserCouponLimit.MaxLoss
+            ? this.coupon.CouponLimit.MaxCombinationBetWin
+            : this.coupon.UserCouponLimit.MaxLoss;
+        for (const grouping of this.coupon.Groupings) {
+          // Check the active groupings
+          if (grouping.Selected) {
+            // Check if it a system of singles
+            const isASystemOfSingle = grouping.Grouping === 1;
+            const isMultiStake = grouping.IsMultiStake;
+            for (const odd of this.coupon.Odds) {
+              let oddStake: number;
+              // Get the oddStake
+              if (isMultiStake) {
+                oddStake = odd.OddStake;
+              } else {
+                oddStake = grouping.Stake;
+              }
+              hasError = false;
+              // Check the MinGroupingsBetStake
+              if (oddStake < this.coupon.CouponLimit.MinGroupingsBetStake) {
+                this.errorMessage.push(CouponLimit[CouponLimit.MinGroupingsBetStake]);
+                hasError = true;
+              }
+              // Check the MaxGroupingsBetStake
+              if (oddStake > this.coupon.CouponLimit.MaxGroupingsBetStake) {
+                this.errorMessage.push(CouponLimit[CouponLimit.MaxGroupingsBetStake]);
+                hasError = true;
+              }
+              if (hasError) {
+                this.listOfErrors.push(odd.SelectionId);
+              }
+              // For a system of singles
+              if (isASystemOfSingle) {
+                // Check if the win of the single with the highest odd rispect the limit
+                if (grouping.MaxWinCombination > this.coupon.CouponLimit.MaxSingleBetWin) {
+                  const singleWin = oddStake * odd.OddValue;
+                  // Check the "MaxSingleBetWin"
+                  if (singleWin > this.coupon.CouponLimit.MaxSingleBetWin) {
+                    this.errorMessage.push(CouponLimit[CouponLimit.MaxSingleBetWin]);
+                    hasError = true;
+                  }
+                }
+              }
+            }
           }
         }
         // Check the MaxBetStake
-        if (isMaxCouponLimitStake) {
-          if (this.stakeDisplay.TotalStake > this.coupon.CouponLimit.MaxBetStake) {
-            this.errorMessage.push(CouponLimit[CouponLimit.MaxBetStake]);
-            hasError = true;
-          }
-        } else {
-          if (this.stakeDisplay.TotalStake > this.coupon.UserCouponLimit.MaxStake) {
-            this.errorMessage.push(CouponLimit[CouponLimit.UserMaxStake]);
-            hasError = true;
-          }
+        if (this.stakeDisplay.TotalStake > maxBetStake) {
+          this.errorMessage.push(CouponLimit[CouponLimit.MaxBetStake]);
+          hasError = true;
         }
-        // Check the maxCombinationBetWin
-        if (this.stakeDisplay.MaxWinning > this.coupon.CouponLimit.MaxCombinationBetWin) {
+        // Check the MaxBetWin
+        if (this.stakeDisplay.MaxWinning > maxBetWin) {
           this.errorMessage.push(CouponLimit[CouponLimit.MaxCombinationBetWin]);
         }
         break;

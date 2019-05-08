@@ -32,6 +32,5 @@ export enum CouponLimit {
   MaxGroupingsBetStake,
   MaxCombinationsByGrouping,
   MaxCombinationsByCoupon,
-  MinCombinationBetRate,
-  UserMaxStake
+  MinCombinationBetRate
 }
