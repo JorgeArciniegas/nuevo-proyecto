@@ -530,12 +530,9 @@ html {
 
 .cdk-overlay-container {
 	@import "./skins/develop/styles";
-
 	.cdk-global-overlay-wrapper {
 		@extend %font-family;
-
 		@extend %dialog;
-
 		position: absolute;
 		top: 23vh;
 		left: 1vw;
@@ -548,10 +545,12 @@ html {
 
 	.btn-close {
 		@extend %btn-transparent;
-	}
+  }
+
 	.btn-warning {
 		@extend %btn-warning;
-	}
+  }
+
 	.btn-success {
 		@extend %btn-success-gradient;
 	}
@@ -566,5 +565,21 @@ html {
 
 	.btn-dark-gradient {
 		@extend %btn-dark-gradient;
-	}
+  }
+
+}
+
+
+.modal-center {
+  .cdk-overlay-container {
+    .cdk-global-overlay-wrapper {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      /* bring your own prefixes */
+      transform: translate(-50%, -50%);
+      box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.1), 0px 1px 5px 5px rgba(0, 0, 0, 0.3);
+      padding: 10px;
+    }
+  }
 }
