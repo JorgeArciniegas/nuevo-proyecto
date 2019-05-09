@@ -412,18 +412,15 @@ html {
   }
 
   // MEDIA PRINT ONLY
-  .printCoupon {
-      .header {
-        .logo-print {
-          width: 100% ;
-          min-height: 15px;
-          @extend %logo-header;
-        }
-      }
 
+  .logo-print-coupon {
+    width: 100% ;
+    min-height: 15px;
+    @extend %logo-header;
   }
-
+  .noshow{ display: none; }
 }
+
 
 .card-odd {
 	@extend %dialog-card;

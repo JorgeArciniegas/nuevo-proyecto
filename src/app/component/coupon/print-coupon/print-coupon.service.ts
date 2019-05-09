@@ -25,16 +25,13 @@ export class PrintCouponService {
 
   printWindow(): void {
     this.printingEnabled = true;
+    this.router.navigate(['/', { outlets: { 'print': 'print' }}]);
     document.getElementById('app').classList.add('isPrinting');
-    this.router.navigate(['/',
-      { outlets: { 'print': 'print' }}]);
-    console.log('PrintCouponService', this.couponPrint );
-    timer(1000)
+    timer(250)
       .take(1)
       .takeWhile( () => this.printingEnabled )
       .subscribe( valTimer => {
         window.print();
-        console.log('PrintCouponService - TIMER: ', valTimer);
         document.getElementById('app').classList.remove('isPrinting');
         this.printingEnabled = false;
         this.couponPrint  = null;

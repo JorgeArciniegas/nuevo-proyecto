@@ -18,6 +18,7 @@ import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
 import { SharedModule } from './shared/shared.module';
 import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
+import { QRCodeModule } from 'angular2-qrcode';
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -38,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
     SharedModule,
     NgxBarcodeModule,
+    QRCodeModule,
     ElysStorageLibModule.forRoot({
       isCrypto: true,
       cryptoString: 'VgenStorage',

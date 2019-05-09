@@ -8,10 +8,8 @@ export class GroupByCategoryPipe implements PipeTransform {
         if (!collection) {
             return null;
         }
-        console.log('groupByCategory', collection);
         const groupedCollection = collection.reduce((previous, current) => {
             let keyTmp: string = current[property] + ' - ' + current['EventName'];
-            console.log('-------------', previous, current);
             if (!previous[keyTmp]) {
                 previous[keyTmp] = [current];
             } else {
