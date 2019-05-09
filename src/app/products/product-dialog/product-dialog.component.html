@@ -32,7 +32,7 @@
     </ng-container>
     <ng-container *ngIf="betCouponOdd">
       <mat-grid-tile rowspan="3" class="card-odd radius-5"
-        [ngClass]="{'card-odd-error': couponService.listOfErrors.indexOf(odd.SelectionId) !== -1}"
+        [ngClass]="{'card-odd-error': couponService.warningMessages.length === 0 && couponService.errorsList.length > 0 && couponService.errorsList[0].location.length > 0 && couponService.errorsList[0].location.indexOf(odd.SelectionId) !== -1}"
         *ngFor="let odd of betCouponOdd">
         <div fxFill fxLayout="column" fxLayoutAlign="space-between stretch">
           <div fxFlex="24" class="top-window">

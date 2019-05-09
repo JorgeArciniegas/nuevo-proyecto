@@ -55,7 +55,7 @@
         <div fxFlex="90" fxLayout="column" fxLayoutAlign="start stretch">
           <div *ngFor="let odd of listOdds" class="card-odd-container" fxFlex="20">
             <div fxFill class="card-odd radius-5"
-              [ngClass]="{'card-odd-error': couponService.listOfErrors.indexOf(odd.SelectionId) !== -1}"
+              [ngClass]="{'card-odd-error': couponService.warningMessages.length === 0 && couponService.errorsList.length > 0 && couponService.errorsList[0].location.length > 0 && couponService.errorsList[0].location.indexOf(odd.SelectionId) !== -1}"
               fxLayout="column" fxLayoutAlign="space-between stretch">
               <div fxFlex="24" class="top-window radius-5-tl-tr" fxLayoutAlign="space-between center">
                 <div>{{odd.EventName}}</div>
@@ -106,29 +106,29 @@
   </mat-grid-tile>
   <mat-grid-tile rowspan="2">
     <div class="display-amount radius-5"
-      [ngClass]="{'display-error': couponService.errorMessage.length > 0 && couponService.warningMessage.length === 0, 'display-warning': couponService.warningMessage.length > 0}">
-      <label *ngIf="couponService.errorMessage.length === 0 && couponService.warningMessage.length === 0">
+      [ngClass]="{'display-error': couponService.errorsList.length > 0 && couponService.warningMessages.length === 0, 'display-warning': couponService.warningMessages.length > 0}">
+      <label *ngIf="couponService.errorsList.length === 0 && couponService.warningMessages.length === 0">
         <span>{{'potentialMaxWinner' | translate}}</span>
         <input type="text" name="winner" [ngModel]="couponService.stakeDisplay.MaxWinning |number: '1.2-2'" readonly />
       </label>
       <label class="display-message"
-        *ngIf="couponService.errorMessage.length > 0 && couponService.warningMessage.length === 0" fxLayout="column"
+        *ngIf="couponService.errorsList.length > 0 && couponService.warningMessages.length === 0" fxLayout="column"
         fxFlex>
         <span>{{'ERROR' | translate}}</span>
         <div class="display-message-description" fxLayout="row" fxLayoutAlign="center start" fxFlex>
-          {{couponService.errorMessage[0]}} </div>
+          {{couponService.errorsList[0].message}} </div>
       </label>
-      <label class="display-message" *ngIf="couponService.warningMessage.length > 0" fxLayout="column" fxFlex>
+      <label class="display-message" *ngIf="couponService.warningMessages.length > 0" fxLayout="column" fxFlex>
         <span>{{'WARNING' | translate}}</span>
         <div class="display-message-description" fxLayout="row" fxLayoutAlign="center start" fxFlex>
-          {{couponService.warningMessage[0]}} </div>
+          {{couponService.warningMessages[0]}} </div>
       </label>
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="2"
     *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
     <div fxFill class="padding-top-10">
-      <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.errorMessage.length > 0"
+      <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.errorsList.length > 0"
         (click)="couponService.preStagedCoupon()">{{'piazza' | translate}}</button>
     </div>
   </mat-grid-tile>

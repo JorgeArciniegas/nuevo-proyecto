@@ -17,6 +17,40 @@ export interface InternalCoupon extends BetCouponExtended {
   internal_isReadyToPlace?: boolean;
 }
 
+/**
+ * Object of the coupon's error.
+ * @attribute message. Error message.
+ * @attribute location. Location of the errors if they are generated from specific selections of the coupon. It contains the "oddId" of the selections in error.
+ */
+export class Error {
+  message: string;
+  location: number[] = [];
+
+  constructor(message?: string, location?: number) {
+    this.message = message || undefined;
+    if (location) {
+      this.location.push(location);
+    }
+  }
+
+  /**
+   * Method to set the error object
+   * @param message message. Error message.
+   * @param location location. Option parameter to indicate the location of the error if available.
+   */
+  setError(message: string, location?: number) {
+    this.message = message;
+    this.location = [];
+    if (location) {
+      this.location.push(location);
+    }
+  }
+
+  addLocation(location: number) {
+    this.location.push(location);
+  }
+}
+
 // Enum of the coupon's limites errors
 export enum CouponLimit {
   MinBetStake,
