@@ -15,6 +15,7 @@ interface PayCancelForm {
 export class PayCancelDialogComponent implements OnInit {
   public titleType: string;
   public form: FormGroup;
+  public errorMessage: string | undefined;
 
   constructor(
     public dialogRef: MatDialogRef<PayCancelDialogComponent>,
@@ -48,6 +49,7 @@ export class PayCancelDialogComponent implements OnInit {
       if (this.form.valid) {
         // this.couponService.cancelCoupon(form.couponId).then(message => (this.errorMessage = message));
         this.couponService.cancelCoupon(form.couponId);
+        this.form.get('couponId').setValue('');
       }
       // this.dialogRef.close();
     }

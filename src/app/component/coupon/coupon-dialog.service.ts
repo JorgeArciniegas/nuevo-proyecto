@@ -11,13 +11,6 @@ export class CouponDialogService {
 
   constructor(private dialog: MatDialog) {}
 
-  /*   openDialog(type: string) {
-    this.dialogRef = this.dialog.open(PayCancelDialogComponent, {
-      data: type,
-      position: { top: '5px' }
-    });
-  } */
-
   openPayCancelDialog(type: string): void {
     console.log(type);
     this.dialogRef = this.dialog.open(PayCancelDialogComponent, {
