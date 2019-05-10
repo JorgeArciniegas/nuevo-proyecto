@@ -4,11 +4,11 @@
     <StackLayout class="title-text" row="1" col="1">{{ data | translate }} {{ 'COUPON' | translate }}</StackLayout>
 
 
-    <!-- couponId -->
-    <GridLayout row="4" col="1" class="input radius-2" [ngClass]="{'error': (couponId.invalid || couponIdInvalid)  && couponId.touched}">
+    <!-- couponCode -->
+    <GridLayout row="4" col="1" class="input radius-2" [ngClass]="{'error': (couponCode.invalid || couponCodeInvalid)  && couponCode.touched}">
       <StackLayout col="1" class="icon-area icon-baseline-shopping_cart-24px"></StackLayout>
-      <TextField col="1" secure="true" hint="{{ 'Coupon Code' | translate}}" (textChange)="validatePattern($event, 'couponId')"
-        returnKeyType="done" autocapitalizationType="none" (returnPress)="onSubmit(couponId.value" required ngModel #couponId="ngModel">
+      <TextField col="1" secure="true" hint="{{ 'Coupon Code' | translate}}" (textChange)="validatePattern($event, 'couponCode')"
+        returnKeyType="done" autocapitalizationType="none" (returnPress)="onSubmit(couponCode.value" required ngModel #couponCode="ngModel">
       </TextField>
     </GridLayout>
 
@@ -21,7 +21,7 @@
 
     <!-- error -->
     <StackLayout row="6" col="1" orientation="vertical" class="error-message" horizontalAlignment="center" verticalAlignment="center">
-      <GridLayout *ngIf="couponId.invalid && couponId.touched && couponId.hasError('required')" rows="auto" columns="5,30,10,auto">
+      <GridLayout *ngIf="couponCode.invalid && couponCode.touched && couponCode.hasError('required')" rows="auto" columns="5,30,10,auto">
         <StackLayout col="1" class="error-icon"></StackLayout>
         <StackLayout col="3" verticalAlignment="center">
           <Label text="{{ 'Coupon Code' | translate}} {{ 'ERROR_REQUIRED' | translate | lowercase  }}"></Label>

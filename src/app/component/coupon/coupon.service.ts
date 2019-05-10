@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BetCouponOdd, CouponCategory } from '@elys/elys-api';
+import {
+  CancelCouponRequest,
+  CancelCouponResponse,
+  FlagAsPaidRequest,
+  FlagAsPaidResponse
+} from '@elys/elys-api/lib/coupon/coupon.models';
+import { ElysApiService, BetCouponOdd, CouponCategory } from '@elys/elys-api';
 import { ElysCouponService, CouponServiceMessageType } from '@elys/elys-coupon';
 import {
   AddOddRequest,
@@ -37,7 +43,11 @@ export class CouponService {
   warningMessage: string;
   errorMessage: string;
 
-  constructor(public elysCoupon: ElysCouponService, userService: UserService) {
+  constructor(
+    public elysCoupon: ElysCouponService,
+    userService: UserService,
+    public elysApi: ElysApiService
+  ) {
     this.couponResponseSubject = new Subject<BetCouponExtended>();
     this.couponResponse = this.couponResponseSubject.asObservable();
 
@@ -239,22 +249,34 @@ export class CouponService {
     this.elysCoupon.placeCoupon(this.coupon);
   }
 
-  /*
-  stagedCoupon(): void {
-    this.elyscoupon.c
-  } */
-
-  cancelCoupon(couponId: string): void {
+  async flagAsPaidCoupon(request: FlagAsPaidRequest) {
+    console.log(request);
+    // this.elysCoupon.flagAsPaidCoupon(couponId);
     try {
-      console.log(couponId);
-      // this.elysCoupon.cancelCoupon(couponId);
-    } catch (e) {
-      console.log('err', e);
+      const response: FlagAsPaidResponse = await this.elysApi.coupon.flagAsPaidCoupon(
+        request
+      );
+      return response;
+    } catch (err) {
+      return err.error.error_description;
     }
   }
 
-  flagAsPaidCoupon(couponId: string): void {
-    console.log(couponId);
-    // this.elysCoupon.flagAsPaidCoupon(couponId);
+  async cancelCoupon(request: CancelCouponRequest) {
+    /* return this.elysApi.coupon
+      .cancelCoupon(request)
+      .then((response: CancelCouponResponse) => {
+        // this.errorMessage = response;
+        console.log(response);
+      }); */
+
+    try {
+      const response: CancelCouponResponse = await this.elysApi.coupon.cancelCoupon(
+        request
+      );
+      return response;
+    } catch (err) {
+      return err.error.error_description;
+    }
   }
 }
