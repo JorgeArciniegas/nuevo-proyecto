@@ -90,7 +90,7 @@ export class CouponComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.couponServiceSubscription.unsubscribe();
-    this.couponMessageServiceSubscription.unsubscribe();
+    // this.couponMessageServiceSubscription.unsubscribe();
   }
 
   // change stake from odd's coupon

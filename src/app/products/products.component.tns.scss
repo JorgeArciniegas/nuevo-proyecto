@@ -1,8 +1,14 @@
+
 .card {
 	margin: 3 2;
 }
 
 .button {
+
+  .button-internal{
+    font-size: 14;
+  }
+
 	&.left {
 		margin-right: 3;
 	}

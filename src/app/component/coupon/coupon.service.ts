@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { BetOdd } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
 import { OddsStakeEdit, StakesDisplay, InternalCoupon, CouponLimit, Error } from './coupon.model';
+import { PrintCouponService } from './print-coupon/print-coupon.service';
 import { DEFAULT_BREAKPOINTS } from '@angular/flex-layout';
 
 @Injectable({
@@ -34,7 +35,10 @@ export class CouponService {
   errorsList: Error[] = [];
   listOfErrors: number[] = [];
 
-  constructor(public elysCoupon: ElysCouponService, userService: UserService) {
+  fnPrintCoupon(): void {
+    this.printCoupon.printWindow();
+  }
+  constructor(public elysCoupon: ElysCouponService, userService: UserService, private printCoupon: PrintCouponService) {
     this.couponResponseSubject = new Subject<BetCouponExtended>();
     this.couponResponse = this.couponResponseSubject.asObservable();
 
@@ -43,6 +47,7 @@ export class CouponService {
       this.coupon = coupon;
       this.couponResponseSubject.next(coupon);
       if (coupon) {
+        this.checkLimits();
         this.coupon.internal_isReadyToPlace = false;
         this.calculateAmounts();
       } else {

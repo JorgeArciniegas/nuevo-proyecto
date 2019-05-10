@@ -420,8 +420,18 @@ html {
 
 	.counter {
 		@extend %header-notification-style;
-	}
+  }
+
+  // MEDIA PRINT ONLY
+
+  .logo-print-coupon {
+    width: 100% ;
+    min-height: 15px;
+    @extend %logo-header;
+  }
+  .noshow{ display: none; }
 }
+
 
 .card-odd {
 	@extend %dialog-card;
@@ -588,4 +598,15 @@ html {
 	.btn-dark-gradient {
 		@extend %btn-dark-gradient;
 	}
+}
+
+@media print {
+  .isPrinting {
+    > * {
+      display: none;
+    }
+    app-print-coupon {
+      display: block;
+    }
+  }
 }

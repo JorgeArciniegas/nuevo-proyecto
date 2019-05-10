@@ -1,0 +1,98 @@
+<div class="printCoupon" *ngIf="printCouponService.couponPrint">
+  <div class="header">
+    <img class="logo-print-coupon padding-10">
+    <div class="header-content">
+      <div class="padding-5 font-size-normal">
+        {{ 'PRINT.COUPON.HEADER_MSG' | translate }}
+      </div>
+      <div class="qr-code">
+          <qr-code [value]="printCouponService.couponPrint.CouponCode" [size]="50"></qr-code>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="betslip-info">
+      <!-- betslip date placed -->
+        <div class="col font-size-normal" [style.width.%]="40">{{ 'PRINT.COUPON.DATE' | translate }}</div>
+        <div class="col font-size-normal text-right" [style.width.%]="60">{{ printCouponService.couponPrint.CouponDateOffset | date:'yyyy-MM-dd HH.mm.ss'}}</div>
+        <div class="col font-size-normal" [style.width.%]="40">{{ 'PRINT.COUPON.CODE' | translate }}</div>
+        <div class="col font-size-normal text-right" [style.width.%]="60">{{ printCouponService.couponPrint.CouponCode }}</div>
+        <div class="col font-size-normal" [style.width.%]="40">{{ 'PRINT.COUPON.TYPE' | translate }}</div>
+        <div class="col font-size-normal text-right" [style.width.%]="60">{{ 'CouponType.' + couponType[printCouponService.couponPrint.CouponTypeId] | translate }}</div>
+
+    </div>
+    <div class="betslip-odds">
+      <div class="row-group-odd" *ngFor="let groupCat of printCouponService.couponPrint.Odds | groupByCategory:'Championship'">
+          <div class="category-label font-size-normal" *ngIf="groupCat.key">
+            <strong>{{ groupCat.key }}</strong>
+          </div>
+          <div class="row-event font-size-normal" *ngFor="let match of groupCat.value">
+              <div class="match-label" *ngIf="match.MarketName">
+                <div class="content">
+                  [q {{ match.OddValue }}] {{ match.MarketName }}
+                </div>
+                <div class="separator"></div>
+              </div>
+
+              <div class="match-selection font-size-normal" [ngClass]="{ 'match-selection-large': match.OddStake === 0 }">
+                {{ match.SelectionName }}
+              </div>
+              <div class="match-win" *ngIf="match.OddStake">
+                  <span class="padding-5">{{ match.OddStake }}</span>
+                </div>
+          </div>
+      </div>
+    </div>
+    <div class="betslip-payment">
+      <div class="betslip-stake">
+        <div class="label" [style.font-size.mm]="4.5" [style.font-weight]="700">{{'PRINT.COUPON.STAKE' | translate }}</div>
+        <div class="value" [style.font-size.mm]="4.5" [style.font-weight]="700">{{printCouponService.couponPrint.Stake }}</div>
+      </div>
+      <div class="groupings">
+        <div class="row-grouping" *ngFor="let grouping of printCouponService.couponPrint.Groupings">
+          <ng-container *ngIf="!grouping.IsMultiStake">
+            <div class="container-grouping"  [style.font-size.mm]="3.5">
+              <div class="label">{{'PRINT.COUPON.GROUPS' | translate }} : {{ grouping.Grouping}}</div>
+              <div class="comb">
+                  <span>{{'PRINT.COUPON.COMB' | translate }}: </span>
+                  <strong>{{ grouping.Combinations + ' x ' + grouping.Stake +' = ' + (grouping.Combinations * grouping.Stake | number: '1.2-2') }}</strong>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="betslip-payout">
+        <div class="min-row">
+          <div class="min">
+            <div class="decoration-title"></div>
+            <div class="title">{{'PRINT.COUPON.PAYOUTMIN' | translate }} </div>
+            <div class="decoration-title"></div>
+          </div>
+          <div class="amount">
+            <span>{{ printCouponService.couponPrint.MinWin }}</span>
+          </div>
+        </div>
+        <div class="max-row">
+            <div class="max">
+              <div class="decoration-title"></div>
+              <div class="title">{{'PRINT.COUPON.PAYOUTMAX' | translate }} </div>
+              <div class="decoration-title"></div>
+            </div>
+            <div class="amount">
+              <span>{{ printCouponService.couponPrint.MaxWin }}</span>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="betslip-other-info">
+      <div class="message-company-trasmitted font-size-normal">{{appSetting.couponMessageTrasmitted}} {{ printCouponService.couponPrint.CouponDateOffset | date : 'dd/MM/yyyy HH:mm:ss' }} </div>
+      <div class="message-company-legal font-size-normal">{{appSetting.couponMessageLegal}}</div>
+    </div>
+  </div>
+  <div class="footer">
+      <div class="barcode">
+          <ngx-barcode [bc-value]="printCouponService.couponPrint.CouponCode"
+           [bc-width]="1" [bc-height]="80" [bc-display-value]="false"></ngx-barcode>
+      </div>
+  </div>
+</div>

@@ -133,13 +133,16 @@
   <mat-grid-tile rowspan="2" *ngIf="couponService.coupon && couponService.coupon.internal_isReadyToPlace">
     <div fxFill fxLayoutGap="10px">
       <div fxFill fxFlex="50" class="padding-top-10">
-        <button class="btn-default btn-warning radius-10 padding-10"
+        <button class="btn-default btn-warning radius-10 padding-10" [disabled]="couponService.errorMessage"
           (click)="couponService.cancelStagingCoupon()">{{'back' | translate}}</button>
       </div>
       <div fxFill fxFlex="50" class="padding-top-10">
-        <button class="btn-default btn-success radius-10 padding-10"
+        <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.errorMessage"
           (click)="couponService.stagedCoupon()">{{'conferma' | translate}}</button>
       </div>
     </div>
   </mat-grid-tile>
+  <!-- IMAGES FOR PRINTING DO NOT SHOWING ON DOM -->
+  <img class="logo-print-coupon noshow" id="logo-no-print" />
+  <img src="/assets/images/separator-coupon.jpg" class="noshow" />
 </mat-grid-list>

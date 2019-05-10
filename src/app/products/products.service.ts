@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
+import { CurrencyCodeRequest, ElysApiService } from '@elys/elys-api';
 import { Observable, Subject } from 'rxjs';
-import { DialogService } from './dialog.service';
-import { BetOdds, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupon, BetDataDialog } from './products.model';
+import { AppSettings } from '../app.settings';
+import { StorageService } from '../services/utility/storage/storage.service';
 import { WindowSize } from '../services/utility/window-size/window-size.model';
 import { WindowSizeService } from '../services/utility/window-size/window-size.service';
-import { BetCouponExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
+import { DialogService } from './dialog.service';
 import { Product } from './models/product.model';
-import { AppSettings } from '../app.settings';
-import { ElysApiService, CurrencyCodeRequest } from '@elys/elys-api';
-import { UtilityService } from '@elys/elys-coupon/lib/elys-coupon.utility';
-import { StorageService } from '../services/utility/storage/storage.service';
+import { BetDataDialog, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupon } from './products.model';
 @Injectable({
   providedIn: 'root'
 })

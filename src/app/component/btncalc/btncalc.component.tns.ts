@@ -1,14 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { TypeBetSlipColTot } from '../../products/dogracing/dogracing.models';
 import { AppSettings } from '../../app.settings';
-import { Product } from '../../products/models/product.model';
-import { PolyfunctionalArea } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
-import { IconSize } from '../model/iconSize.model';
-import { BtncalcService } from './btncalc.service';
-import { BtncalcComponentCommon } from './btncalc.component.common';
 import { CouponService } from '../coupon/coupon.service';
+import { IconSize } from '../model/iconSize.model';
+import { BtncalcComponentCommon } from './btncalc.component.common';
+import { BtncalcService } from './btncalc.service';
 
 @Component({
   selector: 'app-btncalc',

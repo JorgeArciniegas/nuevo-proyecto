@@ -7,6 +7,8 @@ export interface Environment {
   currency?: string;
   products: Products[];
   showRaceId: boolean;
+  couponMessageTrasmitted?: string;
+  couponMessageLegal?: string;
 }
 
 export interface ToolbarButtons {
