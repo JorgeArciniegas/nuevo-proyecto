@@ -145,11 +145,12 @@ export class CouponService {
       stake += odd.OddStake;
     });
     //
-    // the coupon has multipleStake
-    // TO CHECK WHEN OTHER GAMES WILL BE INTRODUCE
+    // The coupon has multipleStake
+    // TO CHECK AGAIN WHEN OTHER GAMES WILL BE INTRODUCE
     this.coupon.Groupings.map(item => {
       if (!item.IsMultiStake && item.Selected) {
         item.Stake = stake / item.Combinations;
+        item.MaxWinCombination = item.Stake * item.MaxWinCombinationUnit;
       }
       if (item.Selected) {
         Totalwin += item.Stake * item.MaxWinCombinationUnit;
