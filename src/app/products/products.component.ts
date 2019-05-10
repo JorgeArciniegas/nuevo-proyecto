@@ -30,7 +30,6 @@ export class ProductsComponent implements OnDestroy {
         this.rowHeight = (this.service.windowSize.columnHeight - 30) / 11;
       }
     );
-
   }
 
   ngOnDestroy(): void {
@@ -38,10 +37,9 @@ export class ProductsComponent implements OnDestroy {
   }
 
   payCancelCoupon(type): void {
-
     this.changeClassApp('modal-center');
     this.couponDialogService.openPayCancelDialog(type);
-    this.couponDialogService.dialogRef.afterClosed().subscribe( evt => {
+    this.couponDialogService.dialogRef.afterClosed().subscribe(evt => {
       this.changeClassApp('modal-center');
     });
   }
@@ -49,7 +47,7 @@ export class ProductsComponent implements OnDestroy {
   private changeClassApp(newClass: string): void {
     const elem: HTMLElement = document.querySelector('body');
 
-    if (elem.classList.contains(newClass) ) {
+    if (elem.classList.contains(newClass)) {
       elem.classList.remove(newClass);
     } else {
       elem.classList.add(newClass);

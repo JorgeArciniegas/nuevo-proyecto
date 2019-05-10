@@ -42,17 +42,20 @@
         <GridLayout row="5" rows="*" columns="*,*" class="card">
           <!-- Area polifunzionale [Fissa]  -->
           <GridLayout col="0" rows="*" columns="*" class="button left btn-success">
-            <Button text="{{'paga' | translate}}" class="button-internal" textTransform="uppercase" [isEnabled]="!service.timeBlocked"></Button>
+            <Button text="{{'paga' | translate}}" class="button-internal" textTransform="uppercase" [isEnabled]="!service.timeBlocked"
+              (tap)="payCancelCoupon('PAY')"></Button>
           </GridLayout>
           <GridLayout col="1" rows="*" columns="*" class="button right btn-warning">
-            <Button text="{{'annulla' | translate}}" class="button-internal" textTransform="uppercase" [isEnabled]="!service.timeBlocked"></Button>
+            <Button text="{{'annulla' | translate}}" class="button-internal" textTransform="uppercase" [isEnabled]="!service.timeBlocked"
+              (tap)="payCancelCoupon('CANCEL')"></Button>
           </GridLayout>
         </GridLayout>
       </GridLayout>
     </GridLayout>
     <GridLayout col="1" class="overlay radius-5" marginRight="3" *ngIf="service.timeBlocked">
       <StackLayout verticalAlignment="center">
-        <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png" horizontalAlignment="center" verticalAlignment="center">
+        <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png" horizontalAlignment="center"
+          verticalAlignment="center">
         </Image>
       </StackLayout>
     </GridLayout>
@@ -61,7 +64,8 @@
     </StackLayout>
     <GridLayout col="2" class="overlay radius-5" marginRight="6" *ngIf="service.timeBlocked">
       <StackLayout verticalAlignment="center">
-        <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png" horizontalAlignment="center" verticalAlignment="center">
+        <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png" horizontalAlignment="center"
+          verticalAlignment="center">
         </Image>
       </StackLayout>
     </GridLayout>

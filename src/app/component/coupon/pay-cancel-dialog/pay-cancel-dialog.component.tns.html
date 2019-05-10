@@ -1,11 +1,17 @@
+<GridLayout row="*,*" col="*,*" height="80">
+  <Button row="0" col="0" text="{{'CLOSE' | translate | uppercase}}" class="button btn-default btn-close radius-2" (tap)="close()">
+  </Button>
+  <Button row="0" col="1" text="{{'CONFIRM' | translate}}" class="button btn-default btn-comfirm radius-2" (tap)="onSubmit(username.value, password.value)"></Button>
+</GridLayout>
+
 <!-- title -->
-<GridLayout id='pay-cancel-coupon' rows="*,4*,*" columns="*,3*,*">
+<!-- <GridLayout id='pay-cancel-coupon' rows="*,4*,*" columns="*,3*,*">
   <GridLayout rows="*,3*,*,2*,2*,2*,3*" columns="*,10*,*" row="1" col="1" class="login-panel radius-15 padding-25">
-    <StackLayout class="title-text" row="1" col="1">{{ data | translate }} {{ 'COUPON' | translate }}</StackLayout>
+    <StackLayout class="title-text" row="1" col="1">{{ data | translate }} {{ 'COUPON' | translate }}</StackLayout> -->
 
 
-    <!-- couponCode -->
-    <GridLayout row="4" col="1" class="input radius-2" [ngClass]="{'error': (couponCode.invalid || couponCodeInvalid)  && couponCode.touched}">
+<!-- couponCode -->
+<!-- <GridLayout row="4" col="1" class="input radius-2" [ngClass]="{'error': (couponCode.invalid || couponCodeInvalid)  && couponCode.touched}">
       <StackLayout col="1" class="icon-area icon-baseline-shopping_cart-24px"></StackLayout>
       <TextField col="1" secure="true" hint="{{ 'Coupon Code' | translate}}" (textChange)="validatePattern($event, 'couponCode')"
         returnKeyType="done" autocapitalizationType="none" (returnPress)="onSubmit(couponCode.value" required ngModel #couponCode="ngModel">
@@ -16,11 +22,11 @@
       <Button row="0" col="0" text="{{'CLOSE' | translate | uppercase}}" class="button btn-default btn-close radius-2" (tap)="close()">
       </Button>
       <Button row="0" col="1" text="{{'CONFIRM' | translate}}" class="button btn-default btn-comfirm radius-2" (tap)="onSubmit(username.value, password.value)"></Button>
-    </GridLayout>
+    </GridLayout> -->
 
 
-    <!-- error -->
-    <StackLayout row="6" col="1" orientation="vertical" class="error-message" horizontalAlignment="center" verticalAlignment="center">
+<!-- error -->
+<!-- <StackLayout row="6" col="1" orientation="vertical" class="error-message" horizontalAlignment="center" verticalAlignment="center">
       <GridLayout *ngIf="couponCode.invalid && couponCode.touched && couponCode.hasError('required')" rows="auto" columns="5,30,10,auto">
         <StackLayout col="1" class="error-icon"></StackLayout>
         <StackLayout col="3" verticalAlignment="center">
@@ -33,9 +39,9 @@
           <Label [text]="errorMessage"></Label>
         </StackLayout>
       </GridLayout>
-    </StackLayout>
+    </StackLayout> -->
 
 
-    </StackLayout>
+<!-- </StackLayout>
   </GridLayout>
-</GridLayout>
+</GridLayout> -->
