@@ -36,7 +36,7 @@ export class CouponService {
   fnPrintCoupon(): void {
     this.printCoupon.printWindow();
   }
-  constructor(public elysCoupon: ElysCouponService, userService: UserService, private printCoupon: PrintCouponService) {
+  constructor(public elysCoupon: ElysCouponService, userService: UserService, public printCoupon: PrintCouponService) {
     this.couponResponseSubject = new Subject<BetCouponExtended>();
     this.couponResponse = this.couponResponseSubject.asObservable();
 
