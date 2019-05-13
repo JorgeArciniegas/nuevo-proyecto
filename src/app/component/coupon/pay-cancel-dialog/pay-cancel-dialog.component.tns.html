@@ -1,7 +1,9 @@
-<GridLayout row="*,*" col="*,*" height="80">
-  <Button row="0" col="0" text="{{'CLOSE' | translate | uppercase}}" class="button btn-default btn-close radius-2" (tap)="close()">
+<GridLayout rows="*,*,*" columns="*,*" height="120">
+  <Button row="0" colSpan="2" text="close" class="btn btn-outline">PAYMENT COUPON
   </Button>
-  <Button row="0" col="1" text="{{'CONFIRM' | translate}}" class="button btn-default btn-comfirm radius-2" (tap)="onSubmit(username.value, password.value)"></Button>
+  <Button row="1" col="0" text="close" (tap)="close()" class="btn btn-outline"></Button>
+  <Button row="1" col="1" text="condfirm" (tap)="onSubmit(username.value, password.value)" class="btn btn-outline"></Button>
+  <Button row="2" colSpan="2" text="close" (tap)="close()" class="btn btn-outline"></Button>
 </GridLayout>
 
 <!-- title -->
