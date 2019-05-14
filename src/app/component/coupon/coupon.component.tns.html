@@ -1,4 +1,4 @@
-<GridLayout columns="*" rows="2*,*,*,14*,2*,2*">
+<GridLayout columns="*" rows="*,*,14*,2*,2*,2*">
   <GridLayout row="0" shadow="3" cornerRadius="6" class="card">
     <GridLayout rows="*" columns="*" class="display">
       <StackLayout orientation="horizontal" class="title" verticalAlignment="center" horizontalAlignment="center">
@@ -11,15 +11,7 @@
       </StackLayout>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="1" shadow="3" cornerRadius="6" class="card">
-    <GridLayout rows="*" columns="*" class="sub-display">
-      <StackLayout class="title" [ngClass]="{'small': productService.windowSize.small}" verticalAlignment="center"
-        horizontalAlignment="center">
-        <Label text="{{ 'tabCoupon' | translate }}"></Label>
-      </StackLayout>
-    </GridLayout>
-  </GridLayout>
-  <GridLayout row="2" rows="*" columns="*,4*,*" class="card display btn-coupon-board"
+  <GridLayout row="1" rows="*" columns="*,4*,*" class="card display btn-coupon-board"
     [ngClass]="{'small': productService.windowSize.small}">
     <StackLayout col="1" orientation="horizontal" horizontalAlignment="center">
       <Label text="{{'single' | translate}}" verticalAlignment="center"></Label>
@@ -33,7 +25,7 @@
       </Image>
     </StackLayout>
   </GridLayout>
-  <GridLayout row="3">
+  <GridLayout row="2">
     <GridLayout rows="2*,6*,6*,6*,6*,{{ productService.windowSize.small ? '' : '6*,' }}2*" columns="*"
       *ngIf="couponService.coupon" [ngClass]="{'small': productService.windowSize.small}">
       <!-- paginator -->
@@ -57,7 +49,8 @@
       </GridLayout>
       <!-- coupon items -->
       <GridLayout row="{{ 1 + i }}" rows="3*,8*,6*" columns="*" class="card-odd"
-        *ngFor="let odd of listOdds; let i = index;">
+        *ngFor="let odd of listOdds; let i = index;"
+        [ngClass]="{'card-odd-error': couponService.warningMessages.length === 0 && couponService.errorsList.length > 0 && couponService.errorsList[0].location.length > 0 && couponService.errorsList[0].location.indexOf(odd.SelectionId) !== -1}">
         <GridLayout row="0" col="*,*" class="top-window">
           <Label col="0" text="{{odd.EventName}}" horizontalAlignment="left"></Label>
           <Label col="1" text="#{{odd.MatchId}}" horizontalAlignment="right"></Label>
@@ -94,41 +87,55 @@
 
     </GridLayout>
   </GridLayout>
-  <GridLayout row="4">
-    <GridLayout rows="*,3*" columns="*" class="card display-amount"
-      *ngIf='!couponService.errorMessage && !couponService.warningMessage'>
-      <Label row="0" text="{{'potentialMaxWinner' | translate}}" class="title"
-        [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
-      <Label row="1" [text]="couponService.stakeDisplay.MaxWinning |number: '1.2-2'" class="amount"
-        [ngClass]="{'small': productService.windowSize.small}"></Label>
-    </GridLayout>
-    <GridLayout rows="*,3*" columns="*" class="card display-amount display-message display-error"
-      *ngIf='couponService.errorMessage'>
+  <GridLayout row="3" shadow="3" cornerRadius="6" class="card">
+    <GridLayout rows="*,3*" columns="*" class=" display display-message"
+      [ngClass]="{'display-error': couponService.errorsList.length > 0 && couponService.warningMessages.length === 0, 'display-warning': couponService.warningMessages.length > 0}"
+      *ngIf="couponService.errorsList.length > 0 && couponService.warningMessages.length === 0">
       <Label row="0" text="{{'ERROR' | translate}}" class="title" [ngClass]="{'small': productService.windowSize.small}"
         textTransform="uppercase"></Label>
-      <Label row="1" [text]="couponService.errorMessage" class="amount"
-        [ngClass]="{'small': productService.windowSize.small}" textWrap="true" verticalAlignment="center"></Label>
+      <StackLayout row="1" orientation="vertical">
+        <Label [text]="couponService.errorsList[0].message" class="amount"
+          [ngClass]="{'small': productService.windowSize.small}" textWrap="true" verticalAlignment="center"></Label>
+        <Label [text]="couponService.errorsList[0].detail" class="amount"
+          [ngClass]="{'small': productService.windowSize.small}" textWrap="true" verticalAlignment="center"></Label>
+      </StackLayout>
     </GridLayout>
     <GridLayout rows="*,3*" columns="*" class="card display-amount display-message display-warning"
-      *ngIf='couponService.warningMessage'>
+      *ngIf="couponService.warningMessages.length > 0">
       <Label row="0" text="{{'WARNING' | translate}}" class="title"
         [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
       <Label row="1" [text]="couponService.warningMessage" class="amount"
         [ngClass]="{'small': productService.windowSize.small}" textWrap="true" verticalAlignment="center"></Label>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="5" rows="*" columns="*" class="card button btn-success"  *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
-    <Button text="{{'piazza' | translate}}" class="button-internal" textTransform="uppercase"
-      [isEnabled]="!timeBlocked && !couponService.errorMessage"  (tap)="couponService.preStagedCoupon()"></Button>
+  <GridLayout row="4">
+    <GridLayout rows="*,3*" columns="*" class="card display-amount">
+      <Label row="0" text="{{'potentialMaxWinner' | translate}}" class="title"
+        [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
+      <Label row="1" [text]="couponService.stakeDisplay.MaxWinning |number: '1.2-2'" class="amount"
+        [ngClass]="{'small': productService.windowSize.small}"></Label>
+    </GridLayout>
   </GridLayout>
-  <GridLayout row="5" rows="*" columns="*,*" class="card"  *ngIf="couponService.coupon && couponService.coupon.internal_isReadyToPlace">
-        <GridLayout col="0" rows="*" columns="*" class="button left btn-warning">
-            <Button text="{{'back' | translate}}" class="button-internal" textTransform="uppercase"
-              [isEnabled]="!timeBlocked && !couponService.errorMessage"  (tap)="couponService.cancelStagingCoupon()"></Button>
-        </GridLayout>
-        <GridLayout col="1" rows="*" columns="*" class="button right btn-success">
-          <Button text="{{'conferma' | translate}}" class="button-internal" textTransform="uppercase"
-           [isEnabled]="!timeBlocked && !couponService.errorMessage" (tap)="couponService.stagedCoupon()"></Button>
-        </GridLayout>
+  <GridLayout row="5" rows="*" columns="*" class="card button btn-default btn-success"
+    [ngClass]="{'disabled': couponService.errorsList.length > 0}"
+    *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
+    <Button text="{{'piazza' | translate}}" class="button-internal" textTransform="uppercase"
+      [isEnabled]="!timeBlocked && couponService.errorsList.length === 0"
+      (tap)="couponService.preStagedCoupon()"></Button>
+  </GridLayout>
+  <GridLayout row="5" rows="*" columns="*,*" class="card"
+    *ngIf="couponService.coupon && couponService.coupon.internal_isReadyToPlace">
+    <GridLayout col="0" rows="*" columns="*" class="button left btn-default btn-warning"
+      [ngClass]="{'disabled': couponService.errorsList.length > 0}">
+      <Button text="{{'back' | translate}}" class="button-internal" textTransform="uppercase"
+        [isEnabled]="!timeBlocked && couponService.errorsList.length === 0"
+        (tap)="couponService.cancelStagingCoupon()"></Button>
+    </GridLayout>
+    <GridLayout col="1" rows="*" columns="*" class="button right btn-default btn-success"
+      [ngClass]="{'disabled': couponService.errorsList.length > 0}">
+      <Button text="{{'conferma' | translate}}" class="button-internal" textTransform="uppercase"
+        [isEnabled]="!timeBlocked && couponService.errorsList.length === 0"
+        (tap)="couponService.stagedCoupon()"></Button>
+    </GridLayout>
   </GridLayout>
 </GridLayout>

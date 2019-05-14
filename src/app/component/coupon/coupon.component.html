@@ -131,11 +131,11 @@
   <mat-grid-tile rowspan="2" *ngIf="couponService.coupon && couponService.coupon.internal_isReadyToPlace">
     <div fxFill fxLayoutGap="10px">
       <div fxFill fxFlex="50" class="padding-top-10">
-        <button class="btn-default btn-warning radius-10 padding-10" [disabled]="couponService.errorMessage"
+        <button class="btn-default btn-warning radius-10 padding-10" [disabled]="couponService.errorsList.length > 0"
           (click)="couponService.cancelStagingCoupon()">{{'back' | translate}}</button>
       </div>
       <div fxFill fxFlex="50" class="padding-top-10">
-        <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.errorMessage"
+        <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.errorsList.length > 0"
           (click)="couponService.stagedCoupon()">{{'conferma' | translate}}</button>
       </div>
     </div>

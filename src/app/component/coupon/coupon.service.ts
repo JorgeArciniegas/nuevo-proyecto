@@ -47,9 +47,9 @@ export class CouponService {
       this.coupon = coupon;
       this.couponResponseSubject.next(coupon);
       if (coupon) {
-        this.checkLimits();
         this.coupon.internal_isReadyToPlace = false;
         this.calculateAmounts();
+        this.checkLimits();
       } else {
         this.resetCoupon();
       }
