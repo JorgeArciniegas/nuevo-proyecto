@@ -414,6 +414,12 @@
     .indicator-odds-number {
         @extend %header-btn-menu-color;
     }
+
+
+    .logo-print-coupon {
+      @extend %logo-header-mobile;
+    }
+
 }
 
 .overlay {
