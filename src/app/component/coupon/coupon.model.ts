@@ -20,14 +20,19 @@ export interface InternalCoupon extends BetCouponExtended {
 /**
  * Object of the coupon's error.
  * @attribute message. Error message.
+ * @attribute detail. Additional information about the error. Example: The amount of a limit that was overcome.
  * @attribute location. Location of the errors if they are generated from specific selections of the coupon. It contains the "oddId" of the selections in error.
  */
 export class Error {
   message: string;
   location: number[] = [];
+  detail?: string | number;
 
-  constructor(message?: string, location?: number) {
+  constructor(message?: string, detail?: string | number, location?: number) {
     this.message = message || undefined;
+    if (detail) {
+      this.detail = detail;
+    }
     if (location) {
       this.location.push(location);
     }
@@ -35,19 +40,26 @@ export class Error {
 
   /**
    * Method to set the error object
-   * @param message message. Error message.
-   * @param location location. Option parameter to indicate the location of the error if available.
+   * @param message Error message.
+   * @param detail Additional information about the error. Example: The amount of a limit that was overcome.
+   * @param location Option parameter to indicate the location of the error if available.
    */
-  setError(message: string, location?: number) {
+  setError(message: string, detail?: string | number, location?: number) {
     this.message = message;
-    this.location = [];
+    if (detail) {
+      this.detail = detail;
+    }
     if (location) {
-      this.location.push(location);
+      this.location = [location];
     }
   }
 
   addLocation(location: number) {
-    this.location.push(location);
+    if (this.location) {
+      this.location.push(location);
+    } else {
+      this.location = [location];
+    }
   }
 }
 

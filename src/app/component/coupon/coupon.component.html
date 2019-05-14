@@ -1,24 +1,21 @@
 <mat-grid-list cols="1" rowHeight="{{(rowHeight-1) / 2}}">
   <mat-grid-tile rowspan="1">
     <div class="display" fxFlexFill>
-      <div class="card-title">
-        <h3 class="title" fxLayout="row" fxLayoutAlign="center center">
-          <div fxFlex>
-            <span class="text">{{ 'coupon' | translate }} </span>
-          </div>
-
-          <button class="btn-reset btn-display btn-warning radius-5" (click)="clearCoupon()"
-            fxLayoutAlign="center center">
-            <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
-          </button>
+      <div class="card-title" fxLayout="row" fxLayoutAlign="space-between center">
+        <h3 class="title" fxFlex>
+          <span class="text">{{ 'coupon' | translate }}</span>
         </h3>
+        <button class="btn-reset btn-display btn-warning radius-5" (click)="clearCoupon()"
+          fxLayoutAlign="center center">
+          <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
+        </button>
       </div>
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="1">
     <div class="btn-coupon-board">
       <div class="display" fxLayoutAlign="space-around center" fxLayout="row layout-wrap">
-        <div fxFlex fxLayoutAlign="center center">
+        <div fxFlex fxLayoutAlign="start center" class="coupon-type-indicator">
           <span class="btn btn-default">{{'single' | translate}}</span>
           <span
             class="indicator-odds-number radius-50">{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}</span>
@@ -104,7 +101,8 @@
         fxFlex>
         <span>{{'ERROR' | translate}}</span>
         <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
-          {{couponService.errorsList[0].message}}
+          {{couponService.errorsList[0].message}} <ng-container *ngIf="couponService.errorsList[0].detail">Limit:
+            {{couponService.errorsList[0].detail}}</ng-container>
         </div>
       </label>
       <label *ngIf="couponService.warningMessages.length > 0" fxLayout="column" fxFlex>
