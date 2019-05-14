@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CouponType } from '@elys/elys-api';
 import { PrintCouponService } from './print-coupon.service';
-import { AppSettings } from 'src/app/app.settings';
+import { AppSettings } from '../../../app.settings';
 
 @Component({
   selector: 'app-print-coupon',

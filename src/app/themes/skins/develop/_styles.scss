@@ -522,3 +522,8 @@ $gradient-dark2: #000000;
 %logo-header {
   content:url('app/themes/skins/develop/image/vgen.png');
 }
+
+%logo-header-mobile {
+  background:url('~/app/themes/skins/develop/image/vgen.png') center center no-repeat;
+  background-size: contain;
+}

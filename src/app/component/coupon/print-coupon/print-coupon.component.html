@@ -62,7 +62,7 @@
         </div>
       </div>
       <div class="betslip-payout">
-        <div class="min-row">
+        <div class="min-row" *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.SingleBet">
           <div class="min">
             <div class="decoration-title"></div>
             <div class="title">{{'PRINT.COUPON.PAYOUTMIN' | translate }} </div>
@@ -72,10 +72,11 @@
             <span>{{ printCouponService.couponPrint.MinWin }}</span>
           </div>
         </div>
-        <div class="max-row">
+        <div class="max-row" >
             <div class="max">
               <div class="decoration-title"></div>
-              <div class="title">{{'PRINT.COUPON.PAYOUTMAX' | translate }} </div>
+              <div class="title" *ngIf="printCouponService.couponPrint.CouponTypeId !== couponType.SingleBet">{{'PRINT.COUPON.PAYOUTMAX' | translate }} </div>
+              <div class="title" *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.SingleBet">{{'PRINT.COUPON.TOTALPAYOUT' | translate }} </div>
               <div class="decoration-title"></div>
             </div>
             <div class="amount">
