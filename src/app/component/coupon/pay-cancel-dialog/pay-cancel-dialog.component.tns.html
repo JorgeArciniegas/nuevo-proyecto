@@ -1,14 +1,13 @@
-<GridLayout rows="*,*,*,*" columns="*,*" height="250" class="dialog" id='pay-cancel'>
-  <Label row="0" colSpan="2" text="TITLE" class="title title-tns" verticalAlignment="center" horizontalAlignment="center"></Label>
+<GridLayout rows="*,*,*,*" columns="*,*" height="300" class="dialog" id='pay-cancel'>
+  <Label row="0" colSpan="2" text="{{ 'TITLE.' + title | translate }}" class="title title-tns" verticalAlignment="center" horizontalAlignment="center"></Label>
 
-  <GridLayout row="1" colSpan="2" rows="*" columns="5,30,10,auto" class="input radius-2" verticalAlignment="center" horizontalAlignment="center">
-    <StackLayout col="1" class="icon-area pwd-icon"></StackLayout>
-    <TextField #couponCode col="3" hint="coupon code" returnKeyType="next" required verticalAlignment="center" horizontalAlignment="center"
-      class="input input-border"></TextField>
+  <GridLayout row="1" colSpan="2" rows="*" columns="5,30,10,200" class="input-vdesk radius-2" verticalAlignment="center" horizontalAlignment="center">
+    <StackLayout col="1" class="icon-area shopping-cart-icon"></StackLayout>
+    <TextField #couponCode col="3" hint="coupon code" returnKeyType="next" required verticalAlignment="center" horizontalAlignment="left"></TextField>
   </GridLayout>
 
-  <Button row="2" col="0" text="CLOSE" (tap)="close()" class="btn btn-outline" class="button btn-default btn-warning radius-2"></Button>
-  <Button row="2" col="1" text="CONFIRM" (tap)="onSubmit(couponCode.text)" class="button btn-default btn-success radius-2"></Button>
+  <Button row="2" col="0" text="{{'CLOSE' | translate | uppercase}}" (tap)="close()" class="btn btn-outline" class="button btn-default btn-warning radius-2"></Button>
+  <Button row="2" col="1" text="{{'CONFIRM' | translate}}" (tap)="onSubmit(couponCode.text)" class="button btn-default btn-success radius-2"></Button>
 
 
   <Label row="3" colSpan="2" text="response messagge" class="title" verticalAlignment="center" horizontalAlignment="center"></Label>

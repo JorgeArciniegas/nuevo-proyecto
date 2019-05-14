@@ -1,6 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CouponService } from '../coupon.service';
 import { TextField } from 'tns-core-modules/ui/text-field';
+import { ErrorStatus } from './pay-cancel-dialog.enums';
+
+interface CancelRequest {
+  CancellationRequestUserId: number;
+  ShopClientId: number;
+  CouponId: number;
+  TicketCode: string;
+  UserWalletTypeId: number;
+  Product: string;
+}
+
+interface PayRequest {
+  CouponId: number;
+  TicketCode: string;
+  IsPaid: boolean;
+  SettlingClientId: number;
+  Product: string;
+}
 
 @Component({
   selector: 'app-pay-cancel-dialog',
@@ -8,13 +26,42 @@ import { TextField } from 'tns-core-modules/ui/text-field';
   styleUrls: ['./pay-cancel-dialog.component.scss']
 })
 export class PayCancelDialogComponent {
-  public errorMessage: string | undefined;
+  @Input()
+  private type: string;
+  public titleType: string;
+  public errorMessage: string;
+  public errorMessage2: typeof ErrorStatus = ErrorStatus;
   public couponIdPatternInvalid = true;
 
-  constructor(public readonly couponService: CouponService) {}
+  cancelRequest: CancelRequest;
+  payRequest: PayRequest;
+
+  constructor(public readonly couponService: CouponService) {
+    this.titleType = this.type;
+  }
 
   public onSubmit(result): void {
     alert('Text: ' + result);
+    if (this.titleType === 'PAY') {
+      console.log(this.titleType);
+      if (result) {
+        this.payRequest = {
+          CouponId: null,
+          TicketCode: result,
+          IsPaid: true,
+          SettlingClientId: null,
+          Product: 'V'
+        };
+        this.couponService
+          .flagAsPaidCoupon(this.payRequest)
+          .then(
+            message =>
+              (this.errorMessage = message.Error
+                ? this.errorMessage2[message.Error]
+                : 'Server Error')
+          );
+      }
+    }
   }
 
   public validatePattern(args, couponId: string): void {

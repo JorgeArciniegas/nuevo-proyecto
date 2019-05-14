@@ -20,27 +20,13 @@
             .login-panel {
                 @extend %bg-opacity-dark;
 
-                .input {
-                    @extend %border-input-area-mobile;
-
-                    TextField {
-                        @extend %login-input-mobile;
+                .icon-area {
+                    &.user-icon {
+                      @extend %user-icon-mobile;
                     }
 
-                    &.error {
-                        @extend %border-input-area-error-mobile;
-                    }
-
-                    .icon-area {
-                        margin: 5;
-
-                        &.user-icon {
-                            @extend %user-icon-mobile;
-                        }
-
-                        &.pwd-icon {
-                            @extend %pwd-icon-mobile;
-                        }
+                    &.pwd-icon {
+                        @extend %pwd-icon-mobile;
                     }
                 }
             }
@@ -247,6 +233,21 @@
                   @extend %color-bg-warn;
                 }
             }
+
+            #pay-cancel {
+                .input-vdesk {
+                    .icon-area {
+
+                      margin: 0;
+
+                      &.shopping-cart-icon {
+                        @extend %shopping-cart-icon-mobile;
+                      }
+
+                    }
+                }
+            }
+
         }
 
         // GRID BTN CALC
@@ -467,4 +468,21 @@
 
 .padding-right-6 {
     padding-right: 6;
+}
+
+
+.input-vdesk {
+  @extend %border-input-area-mobile;
+
+  TextField {
+      @extend %login-input-mobile;
+  }
+
+  &.error {
+      @extend %border-input-area-error-mobile;
+  }
+
+  .icon-area {
+      margin: 5;
+  }
 }

@@ -10,6 +10,7 @@ export class CouponDialogService {
   constructor() {}
 
   openPayCancelDialog(type: string) {
+    this.type = type;
     this.showDialog = true;
   }
 
