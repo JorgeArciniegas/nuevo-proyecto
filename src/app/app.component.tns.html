@@ -1,7 +1,16 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" actionBarHidden="true">
     <GridLayout rows="*" id="app" class="app" [ngClass]="settings.theme">
         <StackLayout class="main-content" *ngIf="connectionAviable">
-            <router-outlet></router-outlet>
+            <!-- TOOLBAR-->
+            <GridLayout columns="*" rows="*,12*">
+              <StackLayout row="0" class="toolbar">
+                <app-header></app-header>
+              </StackLayout>
+              <StackLayout row="1">
+                  <router-outlet></router-outlet>
+              </StackLayout>
+
+            </GridLayout>
         </StackLayout>
         <GridLayout class="main-content" *ngIf="!connectionAviable">
             <StackLayout verticalAlignment="center" horizontalAlignment="center">

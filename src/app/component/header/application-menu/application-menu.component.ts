@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../../products/products.service';
 import { IconSize } from '../../model/iconSize.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-application-menu',
@@ -17,23 +18,27 @@ export class ApplicationMenuComponent implements OnInit {
 
   constructor(
     public readonly appSettings: AppSettings,
-    public productService: ProductsService
+    public productService: ProductsService,
+    private router: Router
   ) {
     this.settings = appSettings;
   }
 
   ngOnInit() {
-    const barHeight =
-      this.productService.windowSize.height -
-      this.productService.windowSize.columnHeight;
-    this.logoIcon = new IconSize(barHeight * 0.9);
-    this.menuIcon = new IconSize(barHeight * 0.7);
-    this.buttonIcon = new IconSize(barHeight * 0.8 - 4, barHeight * 0.8);
+   const barHeight =
+        this.productService.windowSize.height -
+        this.productService.windowSize.columnHeight;
+      this.logoIcon = new IconSize(barHeight * 0.9);
+      this.menuIcon = new IconSize(barHeight * 0.7);
+      this.buttonIcon = new IconSize(barHeight * 0.8 - 4, barHeight * 0.8);
 
-    this.btnSelected = this.settings.products[0].name;
+      this.btnSelected = this.settings.products[0].name;
+
   }
 
   productSelecting(productSelected: string) {
     this.btnSelected = productSelected;
+    this.productService.resetBoard();
+    this.router.navigateByUrl('/products/' + productSelected);
   }
 }

@@ -74,6 +74,10 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'admin',
+    loadChildren: './admin/admin.module#AdminModule'
+  },
+  {
     path: '**',
     loadChildren: './error-page/error-page.module#ErrorPageModule'
   }
