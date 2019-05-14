@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { CouponType, StagedCoupon } from '@elys/elys-api';
 import { Printer } from 'nativescript-printer';
 import { PrintCouponService } from './print-coupon.service';
+import { AppSettings } from '../../../app.settings';
 
 @Component({
   selector: 'app-print-coupon',
@@ -13,24 +14,12 @@ export class PrintCouponComponent implements OnInit, AfterViewInit {
   printer: Printer = new Printer();
   couponType: typeof CouponType = CouponType;
   @ViewChild('printing') view: ElementRef;
-  constructor(public printCouponService: PrintCouponService) {}
+  constructor(public printCouponService: PrintCouponService, public appSetting: AppSettings) {}
 
   ngOnInit() { }
 
   ngAfterViewInit() {
-    // console.log('startPrint', this.view.);
-    /* dialogs.confirm({
-      title: 'PRINT?',
-      message: 'Do you wnat to print receipt?',
-      okButtonText: 'PRINT',
-      cancelButtonText: 'NO',
-    }).then( res => {
-      if (res) {
-        this.printer.printScreen({
-          view: this.view.nativeElement
-        });
-      }
-    }); */
+
   }
 
   print(args) {

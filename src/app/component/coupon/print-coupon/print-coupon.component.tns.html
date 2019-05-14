@@ -37,8 +37,8 @@
                 <Label class="separator"></Label>
               </FlexboxLayout>
               <FlexboxLayout flexDirection="row" justifyContent="flex-end" class="p-5" flexWrap="wrap">
-                  <Label class="p-5 text-center font-weight-bold border-5" width="100" *ngIf="match.OddStake > 0" text="{{ match.OddStake }}"></Label>
                   <Label class="p-10 text-right" text="{{ match.SelectionName }}"></Label>
+                  <Label class="p-5 text-center font-weight-bold border-5" width="100" *ngIf="match.OddStake > 0" text="{{ match.OddStake }}"></Label>
               </FlexboxLayout>
 
             </FlexboxLayout>
@@ -66,11 +66,10 @@
             <StackLayout class="hr-dark m-10"></StackLayout>
         </FlexboxLayout>
         <!-- FOOTER INFO -->
-        <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-15" flexWrap="wrap">
-          <!-- <Label class="p-10 text-right" text="{{appSetting.couponMessageTrasmitted}} {{ printCouponService.couponPrint.CouponDateOffset | date : 'dd/MM/yyyy HH:mm:ss' }}"></Label> -->
+        <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-15">
+          <Label class="p-10 text-left" text="{{ appSetting.couponMessageTrasmitted }} {{ printCouponService.couponPrint.CouponDateOffset | date : 'dd/MM/yyyy HH:mm:ss' }}"></Label>
           <StackLayout class="hr-dark m-10"></StackLayout>
-
-          <!-- <Label class="p-10 text-right" text="{{appSetting.couponMessageLegal}}"></Label> -->
+          <Label class="p-10 text-left" text="{{appSetting.couponMessageLegal}}"></Label>
         </FlexboxLayout>
       </FlexboxLayout>
   </StackLayout>
