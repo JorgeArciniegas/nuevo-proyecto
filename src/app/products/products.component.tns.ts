@@ -29,6 +29,7 @@ export class ProductsComponent {
 
   payCancelCoupon(type): void {
     this.changeClassApp('modal-center');
+    // this.couponDialogService.showDialog = true;
     this.couponDialogService.openPayCancelDialog(type);
     this.couponDialogService.dialogRef.afterClosed().subscribe(evt => {
       this.changeClassApp('modal-center');

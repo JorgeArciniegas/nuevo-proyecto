@@ -9,10 +9,15 @@
       <StackLayout row="0" rowSpan="3">
         <router-outlet></router-outlet>
       </StackLayout>
-      <!-- Dialog -->
+      <!-- Dialog polifunctional area-->
       <GridLayout row="1" *ngIf="dialog.showDialog">
         <app-product-dialog [data]="dialog.dialogData"></app-product-dialog>
       </GridLayout>
+      <!-- Dialog pay cancel-->
+      <GridLayout row="1" *ngIf="couponDialogService.showDialog">
+        <app-pay-cancel-dialog></app-pay-cancel-dialog>
+      </GridLayout>
+
     </GridLayout>
     <GridLayout col="1" class="product-calc padding-right-3">
       <GridLayout rows="*,*,*,6*,*,*" columns="*">

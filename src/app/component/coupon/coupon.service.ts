@@ -249,9 +249,11 @@ export class CouponService {
     this.elysCoupon.placeCoupon(this.coupon);
   }
 
+  /*
+   * flagAsPaidCoupon
+   * @argument = Mark a Coupon as paid.
+   */
   async flagAsPaidCoupon(request: FlagAsPaidRequest) {
-    console.log(request);
-    // this.elysCoupon.flagAsPaidCoupon(couponId);
     try {
       const response: FlagAsPaidResponse = await this.elysApi.coupon.flagAsPaidCoupon(
         request
@@ -262,21 +264,18 @@ export class CouponService {
     }
   }
 
+  /*
+   * cancelCoupon
+   * @argument = Cancel a coupon.
+   */
   async cancelCoupon(request: CancelCouponRequest) {
-    /* return this.elysApi.coupon
-      .cancelCoupon(request)
-      .then((response: CancelCouponResponse) => {
-        // this.errorMessage = response;
-        console.log(response);
-      }); */
-
     try {
       const response: CancelCouponResponse = await this.elysApi.coupon.cancelCoupon(
         request
       );
       return response;
     } catch (err) {
-      return err.error.error_description;
+      return err.statusText;
     }
   }
 }

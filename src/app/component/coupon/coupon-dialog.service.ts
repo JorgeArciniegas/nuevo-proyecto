@@ -9,14 +9,15 @@ import { PayCancelDialogComponent } from './pay-cancel-dialog/pay-cancel-dialog.
 })
 export class CouponDialogService {
   public dialogRef: MatDialogRef<PayCancelDialogComponent> = null;
+  public showDialog = false;
+
   constructor(private dialog: MatDialog) {}
 
   openPayCancelDialog(type: string): void {
     this.close();
-    console.log(type);
     this.dialogRef = this.dialog.open(PayCancelDialogComponent, {
       data: type
-      // position: { top: '5px' }
+      // , { hasBackdrop: true }
     });
   }
 

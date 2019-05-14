@@ -30,9 +30,9 @@
 
 <div mat-dialog-actions fxLayoutAlign="center center">
   <div class="error-message" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
-    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="errorMessage">
-      <i class="alert icon"></i>
-      <i class="baseline-check_circle-24px icon"></i> error{{ errorMessage }}
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <i *ngIf="errorMessage && errorMessage !== 1" class="alert icon"></i>
+      <i *ngIf="errorMessage === 1" class="baseline-check_circle-24px icon"></i>{{ errorMessage }}
     </div>
   </div>
 </div>

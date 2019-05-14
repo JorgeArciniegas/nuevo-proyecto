@@ -12,4 +12,8 @@ export class CouponDialogService {
   openPayCancelDialog(type: string) {
     this.showDialog = true;
   }
+
+  openDialog() {
+    this.showDialog = true;
+  }
 }

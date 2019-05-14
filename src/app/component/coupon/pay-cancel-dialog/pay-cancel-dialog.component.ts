@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CouponService } from '../coupon.service';
 import { UserService } from '../../../services/user.service';
+import { ErrorStatus } from './pay-cancel-dialog.enums';
+// import { ErrorStatus } from '@elys/elys-api/lib/shared/shared.enums';
 
 interface CancelRequest {
   CancellationRequestUserId: number;
@@ -29,7 +31,8 @@ interface PayRequest {
 export class PayCancelDialogComponent implements OnInit {
   public titleType: string;
   public form: FormGroup;
-  public errorMessage: string | undefined;
+  public errorMessage: string;
+  public errorMessage2: typeof ErrorStatus = ErrorStatus;
 
   cancelRequest: CancelRequest;
   payRequest: PayRequest;
@@ -58,39 +61,45 @@ export class PayCancelDialogComponent implements OnInit {
       if (this.form.valid) {
         couponCode = this.form.get('couponCode').value;
         if (couponCode) {
-          const splittedcouponCode: string[] = couponCode.split('-', 3);
           this.payRequest = {
-            CouponId: Number(splittedcouponCode[0]),
+            CouponId: null,
             TicketCode: couponCode,
             IsPaid: true,
-            SettlingClientId: Number(splittedcouponCode[2]),
-            Product: null
+            SettlingClientId: null,
+            Product: 'V'
           };
         }
         this.couponService
           .flagAsPaidCoupon(this.payRequest)
-          .then(message => (this.errorMessage = message));
-        console.log(this.errorMessage);
+          .then(
+            message =>
+              (this.errorMessage = message.Error
+                ? this.errorMessage2[message.Error]
+                : 'Server Error')
+          );
       }
       this.form.get('couponCode').setValue('');
     } else if (this.data === 'CANCEL') {
       if (this.form.valid) {
         couponCode = this.form.get('couponCode').value;
         if (couponCode) {
-          const splittedcouponCode: string[] = couponCode.split('-', 3);
           this.cancelRequest = {
             CancellationRequestUserId: this.userService.userDetail.UserId,
-            ShopClientId: Number(splittedcouponCode[1]),
-            CouponId: Number(splittedcouponCode[2]),
+            ShopClientId: null,
+            CouponId: null,
             TicketCode: couponCode,
             UserWalletTypeId: null,
-            Product: splittedcouponCode[2]
+            Product: 'V'
           };
         }
-        console.log(this.cancelRequest);
         this.couponService
           .cancelCoupon(this.cancelRequest)
-          .then(message => (this.errorMessage = message));
+          .then(
+            message =>
+              (this.errorMessage = message.ErrorStatus
+                ? this.errorMessage2[message.ErrorStatus]
+                : 'Server Error')
+          );
         this.form.get('couponCode').setValue('');
       }
     }
