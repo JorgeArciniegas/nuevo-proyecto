@@ -13,8 +13,8 @@ export class PayCancelDialogComponent {
 
   constructor(public readonly couponService: CouponService) {}
 
-  public onSubmit(couponId: string): void {
-    //
+  public onSubmit(result): void {
+    alert('Text: ' + result);
   }
 
   public validatePattern(args, couponId: string): void {
@@ -26,6 +26,6 @@ export class PayCancelDialogComponent {
   }
 
   close(): void {
-    //
+    alert('Close ');
   }
 }

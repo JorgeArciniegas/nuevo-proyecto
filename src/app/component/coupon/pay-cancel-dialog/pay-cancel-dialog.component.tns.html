@@ -1,49 +1,15 @@
-<GridLayout rows="*,*,*" columns="*,*" height="120">
-  <Button row="0" colSpan="2" text="close" class="btn btn-outline">PAYMENT COUPON
-  </Button>
-  <Button row="1" col="0" text="close" (tap)="close()" class="btn btn-outline"></Button>
-  <Button row="1" col="1" text="condfirm" (tap)="onSubmit(username.value, password.value)" class="btn btn-outline"></Button>
-  <Button row="2" colSpan="2" text="close" (tap)="close()" class="btn btn-outline"></Button>
-</GridLayout>
+<GridLayout rows="*,*,*,*" columns="*,*" height="250" class="dialog" id='pay-cancel'>
+  <Label row="0" colSpan="2" text="TITLE" class="title title-tns" verticalAlignment="center" horizontalAlignment="center"></Label>
 
-<!-- title -->
-<!-- <GridLayout id='pay-cancel-coupon' rows="*,4*,*" columns="*,3*,*">
-  <GridLayout rows="*,3*,*,2*,2*,2*,3*" columns="*,10*,*" row="1" col="1" class="login-panel radius-15 padding-25">
-    <StackLayout class="title-text" row="1" col="1">{{ data | translate }} {{ 'COUPON' | translate }}</StackLayout> -->
-
-
-<!-- couponCode -->
-<!-- <GridLayout row="4" col="1" class="input radius-2" [ngClass]="{'error': (couponCode.invalid || couponCodeInvalid)  && couponCode.touched}">
-      <StackLayout col="1" class="icon-area icon-baseline-shopping_cart-24px"></StackLayout>
-      <TextField col="1" secure="true" hint="{{ 'Coupon Code' | translate}}" (textChange)="validatePattern($event, 'couponCode')"
-        returnKeyType="done" autocapitalizationType="none" (returnPress)="onSubmit(couponCode.value" required ngModel #couponCode="ngModel">
-      </TextField>
-    </GridLayout>
-
-    <GridLayout row="*,*" col="*,*" height="80">
-      <Button row="0" col="0" text="{{'CLOSE' | translate | uppercase}}" class="button btn-default btn-close radius-2" (tap)="close()">
-      </Button>
-      <Button row="0" col="1" text="{{'CONFIRM' | translate}}" class="button btn-default btn-comfirm radius-2" (tap)="onSubmit(username.value, password.value)"></Button>
-    </GridLayout> -->
-
-
-<!-- error -->
-<!-- <StackLayout row="6" col="1" orientation="vertical" class="error-message" horizontalAlignment="center" verticalAlignment="center">
-      <GridLayout *ngIf="couponCode.invalid && couponCode.touched && couponCode.hasError('required')" rows="auto" columns="5,30,10,auto">
-        <StackLayout col="1" class="error-icon"></StackLayout>
-        <StackLayout col="3" verticalAlignment="center">
-          <Label text="{{ 'Coupon Code' | translate}} {{ 'ERROR_REQUIRED' | translate | lowercase  }}"></Label>
-        </StackLayout>
-      </GridLayout>
-      <GridLayout *ngIf="errorMessage" rows="auto" columns="5,30,10,auto">
-        <StackLayout col="1" class="error-icon"></StackLayout>
-        <StackLayout col="3" verticalAlignment="center">
-          <Label [text]="errorMessage"></Label>
-        </StackLayout>
-      </GridLayout>
-    </StackLayout> -->
-
-
-<!-- </StackLayout>
+  <GridLayout row="1" colSpan="2" rows="*" columns="5,30,10,auto" class="input radius-2" verticalAlignment="center" horizontalAlignment="center">
+    <StackLayout col="1" class="icon-area pwd-icon"></StackLayout>
+    <TextField #couponCode col="3" hint="coupon code" returnKeyType="next" required verticalAlignment="center" horizontalAlignment="center"
+      class="input input-border"></TextField>
   </GridLayout>
-</GridLayout> -->
+
+  <Button row="2" col="0" text="CLOSE" (tap)="close()" class="btn btn-outline" class="button btn-default btn-warning radius-2"></Button>
+  <Button row="2" col="1" text="CONFIRM" (tap)="onSubmit(couponCode.text)" class="button btn-default btn-success radius-2"></Button>
+
+
+  <Label row="3" colSpan="2" text="response messagge" class="title" verticalAlignment="center" horizontalAlignment="center"></Label>
+</GridLayout>

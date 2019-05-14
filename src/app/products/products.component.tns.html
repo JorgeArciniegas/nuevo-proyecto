@@ -14,7 +14,7 @@
         <app-product-dialog [data]="dialog.dialogData"></app-product-dialog>
       </GridLayout>
       <!-- Dialog pay cancel-->
-      <GridLayout row="1" *ngIf="couponDialogService.showDialog">
+      <GridLayout row="1" *ngIf="!couponDialogService.showDialog">
         <app-pay-cancel-dialog></app-pay-cancel-dialog>
       </GridLayout>
 
