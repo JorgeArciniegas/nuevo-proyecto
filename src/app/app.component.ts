@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AppSettings } from './app.settings';
 import { Settings } from './app.settings.model';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,10 @@ import { Settings } from './app.settings.model';
 export class AppComponent {
   settings: Settings;
 
-  constructor(public readonly appSettings: AppSettings) {
+  constructor(
+    public readonly appSettings: AppSettings,
+    public userService: UserService
+  ) {
     this.settings = appSettings;
   }
 }

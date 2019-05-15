@@ -17,6 +17,9 @@ html {
 }
 
 .app {
+  app-login {
+    height: 100%;
+  }
 	&.develop {
 		@import "./skins/develop/styles";
 	}
