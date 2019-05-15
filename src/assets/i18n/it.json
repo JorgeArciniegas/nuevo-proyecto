@@ -102,5 +102,18 @@
     },
     "SingleBet": "Singola",
     "Unknown": "Sconosciuta"
+  },
+  "BETSLIST": {
+    "LIST_TITLE": "LISTA SCOMMESSE",
+    "LABEL_DATE_FORM": "Data",
+    "BTN_DATE_PLACED": "Piazzamento",
+    "BTN_DATE_CLOSED": "Pagamento",
+    "LABEL_DATE_FROM": "Da data",
+    "LABEL_DATE_TO": "A data",
+    "LABEL_COUPONCODE_FORM": "Codice coupon",
+    "LABEL_PRODUCTS_FORM": "Filtro prodotto",
+    "LABEL_TYPECOUPON_FORM": "Tipo di scommessa",
+    "LABEL_STATUSCOUPON_FORM": "Stato scommessa",
+    "BTN_SEARCH": "Cerca"
   }
 }

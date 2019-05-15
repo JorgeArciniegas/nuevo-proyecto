@@ -1,0 +1,90 @@
+<div fxFlex fxLayout="column" fxLayoutGap="20px" [style.padding.px]="10">
+  <div class="title">
+    <h1>{{'BETSLIST.LIST_TITLE' | translate}} </h1>
+  </div>
+  <div class="form" fxFlexFill fxLayout="column" fxLayoutGap="20px">
+    <!-- ROW 0 -->
+    <div fxFlex fxLayout="row" fxLayoutGap="20px">
+      <!-- DATA SELECTED -->
+      <div fxFlex="70" fxLayout="row"  fxLayoutGap="20px" class="display padding-20">
+        <h3 class="label">{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}</h3>
+        <div fxFlex="20" class="row" fxLayoutGap="20px">
+            <div fxFlex fxLayout="column" fxLayoutGap="5px">
+                <button class="btn-filter btn-default radius-5" (click)="changeDateTypeCoupon(false)" [class.btn-filter-success]="!betsListService.typeDataSelected">
+                  {{'BETSLIST.BTN_DATE_PLACED' | translate}}
+                </button>
+                <button class="btn-filter btn-default radius-5" (click)="changeDateTypeCoupon(true)" [class.btn-filter-success]="betsListService.typeDataSelected">
+                  {{'BETSLIST.BTN_DATE_CLOSED' | translate}}
+                </button>
+            </div>
+        </div>
+        <div fxFlex="40" class="row" fxLayoutGap="20px">
+          <div fxFlex="50" class="row" fxLayoutGap="20px">
+              <div fxFlex fxLayout="column" fxLayoutGap="5px">
+                <h4>{{ 'BETSLIST.LABEL_DATE_FROM' | translate }}</h4>
+                <mat-form-field class="btn-filter btn-default padding-5 radius-5" (click)="pickerDateFrom.open()">
+                    <input matInput [matDatepicker]="pickerDateFrom" disabled [(ngModel)]="betsListService.dateFrom">
+                    <mat-datepicker-toggle matSuffix [for]="pickerDateFrom"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #pickerDateFrom disabled="false"></mat-datepicker>
+                </mat-form-field>
+              </div>
+          </div>
+        </div>
+        <div fxFlex="40" class="row" fxLayoutGap="20px">
+            <div fxFlex="50" class="row" fxLayoutGap="20px">
+                <div fxFlex fxLayout="column" fxLayoutGap="5px">
+                  <h4>{{ 'BETSLIST.LABEL_DATE_TO' | translate }}</h4>
+                  <mat-form-field class="btn-filter btn-default padding-5 radius-5" (click)="pickerDateTo.open()">
+                      <input matInput [matDatepicker]="pickerDateTo" disabled [(ngModel)]="betsListService.dateTo">
+                      <mat-datepicker-toggle matSuffix [for]="pickerDateTo"></mat-datepicker-toggle>
+                      <mat-datepicker touchUi #pickerDateTo disabled="false"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+            </div>
+        </div>
+      </div>
+      <!-- BETSLIP CODE -->
+      <div fxFlex="30" fxLayout="row" fxLayoutGap="20px" class="display padding-20">
+          <h3 class="label">{{ 'BETSLIST.LABEL_COUPONCODE_FORM' | translate }}</h3>
+      </div>
+    </div>
+    <!-- ROW 1 -->
+    <div fxFlex fxLayout="row" fxLayoutGap="20px">
+      <div fxFlex="40" fxLayout="row" fxLayoutGap="20px" class="display padding-20">
+        <h3 class="label">{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}</h3>
+        <div fxFlex="50" class="row" fxLayoutGap="20px">
+            <div fxFlex fxLayout="column" fxLayoutGap="5px">
+                <ng-container *ngFor="let type of productList.values(); let i = index;">
+                  <button class="btn-filter btn-default radius-5" [class.btn-filter-success]="betsListService.sportId === productList[type]"
+                  (click)="changeValue('sportId', productList[type])" *ngIf="i < 4">{{ type }} </button>
+                </ng-container>
+            </div>
+        </div>
+        <div fxFlex="50" class="row"  fxLayoutGap="5px">
+            <div fxFlex fxLayout="column" fxLayoutGap="5px">
+              <ng-container *ngFor="let type of productList.values(); let i = index;">
+                <button class="btn-filter btn-default radius-5" [class.btn-filter-success]="betsListService.sportId === productList[type]"
+                (click)="changeValue('sportId', productList[type])" *ngIf="i > 3">{{ type }} </button>
+              </ng-container>
+            </div>
+        </div>
+
+
+      </div>
+      <div fxFlex="30" fxLayout="row" fxLayoutGap="20px" class="display">
+        <h3 class="label">{{ 'BETSLIST.LABEL_TYPECOUPON_FORM' | translate }}</h3>
+      </div>
+      <div fxFlex="30" fxLayout="row" fxLayoutGap="20px" class="display">
+        <h3 class="label">{{ 'BETSLIST.LABEL_STATUSCOUPON_FORM' | translate }}</h3>
+      </div>
+    </div>
+    <!-- ROW 2 -->
+    <div fxFlex fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+      <div fxFlex="33"></div>
+      <div fxFlex>
+        <button class="btn-default btn-grey-gradient radius-5 elevation-z5">{{ 'BETSLIST.BTN_SEARCH' | translate }} </button>
+      </div>
+      <div fxFlex="33"></div>
+    </div>
+  </div>
+</div>

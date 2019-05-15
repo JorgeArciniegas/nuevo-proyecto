@@ -232,6 +232,16 @@ $color-text-operator: #3dab14;
 	color: $color-text-dark;
 }
 
+%btn-filter-form {
+  background-color:  $color-bg-primary-op-dark;
+  border: 1px solid $border-cartd-title;
+}
+
+%btn-filter-success {
+  background-color: $btn-border-selected;
+  border: 1px solid $border-event;
+}
+
 // BUTTONS GRADIENT
 $gradient-red1: #ff7f7f;
 $gradient-red2: #cb1e1e;

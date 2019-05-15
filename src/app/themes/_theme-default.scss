@@ -349,6 +349,14 @@ html {
 		.btn-dark-gradient {
 			@extend %btn-dark-gradient;
 		}
+    // BUTTON FILTER ADMIN
+    .btn-filter {
+      @extend %btn-filter-form;
+    }
+
+    .btn-filter-success{
+      @extend %btn-filter-success;
+    }
 
 		.advance-game {
 			padding: 0.8vh 0 0.8vh;
@@ -537,7 +545,9 @@ html {
 	background: rgba(0, 0, 0, 0.6) url("app/themes/skins/develop/icon/baseline-lock-24px.svg") center center no-repeat;
 	background-size: 100px;
 }
-
+.cdk-visually-hidden, .cdk-overlay-backdrop, .cdk-overlay-dark-backdrop{
+  display: none;
+}
 .cdk-overlay-container {
 	@import "./skins/develop/styles";
 
@@ -576,7 +586,9 @@ html {
 
 	.btn-dark-gradient {
 		@extend %btn-dark-gradient;
-	}
+  }
+
+
 }
 
 @media print {
