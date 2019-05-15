@@ -33,7 +33,8 @@ export class CouponService {
   // Coupon messages variables
   warningMessages: string[] = [];
   errorsList: Error[] = [];
-  listOfErrors: number[] = [];
+  // Duration of the notification of warning's messages
+  notificationInterval = 15000;
 
   fnPrintCoupon(): void {
     this.printCoupon.printWindow();
@@ -49,7 +50,7 @@ export class CouponService {
       if (coupon) {
         this.coupon.internal_isReadyToPlace = false;
         this.calculateAmounts();
-        this.checkLimits();
+        // this.checkLimits();
       } else {
         this.resetCoupon();
       }
@@ -59,7 +60,6 @@ export class CouponService {
       let error: Error;
       this.errorsList = [];
       this.warningMessages = [];
-      this.listOfErrors = [];
       // Get coupon's message
       switch (message.messageType) {
         case this.messageType.error:
@@ -68,6 +68,8 @@ export class CouponService {
           break;
         case this.messageType.warning:
           this.warningMessages.push(message.message);
+          // Set the visualization time of the warning
+          setTimeout(() => this.warningMessages.shift(), this.notificationInterval);
           break;
       }
       this.checkLimits();
@@ -79,7 +81,7 @@ export class CouponService {
     this.oddStakeEditSubject = new Subject<OddsStakeEdit>();
     this.oddStakeEditObs = this.oddStakeEditSubject.asObservable();
     this.oddStakeEditObs.subscribe(item => {
-      if (!this.coupon.internal_isReadyToPlace) {
+      if (this.coupon.internal_isReadyToPlace !== null && !this.coupon.internal_isReadyToPlace) {
         this.oddStakeEdit = item;
       }
     });
@@ -122,7 +124,7 @@ export class CouponService {
     };
   }
 
-  // Clear all odds to coupon
+  // Clear all odds to notificationInterval
   resetCoupon(): void {
     this.coupon = null;
     this.couponIdAdded = [];
@@ -130,7 +132,6 @@ export class CouponService {
     // Reset message's variable
     this.errorsList = [];
     this.warningMessages = [];
-    this.listOfErrors = [];
     // Reset amount
     const stakesDisplayTemp: StakesDisplay = {
       TotalStake: 0,
@@ -262,12 +263,15 @@ export class CouponService {
               }
               // Check the MinGroupingsBetStake
               if (oddStake < this.coupon.CouponLimit.MinGroupingsBetStake) {
+                // Check if this kind of error has already an istance created
                 const errorIndex = this.errorsList.findIndex(
                   listItem => listItem.message === CouponLimit[CouponLimit.MinGroupingsBetStake]
                 );
+                // Error already into the list. Add a new location to its array.
                 if (errorIndex !== -1) {
                   this.errorsList[errorIndex].location.push(odd.SelectionId);
                 } else {
+                  // Create the error's istance
                   error.setError(
                     CouponLimit[CouponLimit.MinGroupingsBetStake],
                     this.coupon.CouponLimit.MinGroupingsBetStake,
@@ -314,13 +318,19 @@ export class CouponService {
         }
         // Check the MaxBetStake
         if (this.stakeDisplay.TotalStake > maxBetStake) {
-          error.setError(CouponLimit[CouponLimit.MaxBetStake], maxBetStake);
-          this.errorsList.push(error);
+          const errorIndex = this.errorsList.findIndex(listItem => listItem.message === CouponLimit[CouponLimit.MaxBetStake]);
+          if (errorIndex === -1) {
+            error.setError(CouponLimit[CouponLimit.MaxBetStake], maxBetStake);
+            this.errorsList.push(error);
+          }
         }
         // Check the MaxBetWin
         if (this.stakeDisplay.MaxWinning > maxBetWin) {
-          error.setError(CouponLimit[CouponLimit.MaxCombinationBetWin], maxBetWin);
-          this.errorsList.push(error);
+          const errorIndex = this.errorsList.findIndex(listItem => listItem.message === CouponLimit[CouponLimit.MaxCombinationBetWin]);
+          if (errorIndex === -1) {
+            error.setError(CouponLimit[CouponLimit.MaxCombinationBetWin], maxBetWin);
+            this.errorsList.push(error);
+          }
         }
         break;
     }

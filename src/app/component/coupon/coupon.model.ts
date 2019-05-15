@@ -46,12 +46,8 @@ export class Error {
    */
   setError(message: string, detail?: string | number, location?: number) {
     this.message = message;
-    if (detail) {
-      this.detail = detail;
-    }
-    if (location) {
-      this.location = [location];
-    }
+    this.detail = detail || null;
+    this.location = [location] || null;
   }
 
   addLocation(location: number) {
