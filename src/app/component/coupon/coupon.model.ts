@@ -57,6 +57,10 @@ export class Error {
       this.location = [location];
     }
   }
+
+  isEmpty(): boolean {
+    return this.message === undefined;
+  }
 }
 
 // Enum of the coupon's limites errors
