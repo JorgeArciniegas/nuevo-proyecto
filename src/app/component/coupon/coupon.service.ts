@@ -318,19 +318,13 @@ export class CouponService {
         }
         // Check the MaxBetStake
         if (this.stakeDisplay.TotalStake > maxBetStake) {
-          const errorIndex = this.errorsList.findIndex(listItem => listItem.message === CouponLimit[CouponLimit.MaxBetStake]);
-          if (errorIndex === -1) {
-            error.setError(CouponLimit[CouponLimit.MaxBetStake], maxBetStake);
-            this.errorsList.push(error);
-          }
+          error.setError(CouponLimit[CouponLimit.MaxBetStake], maxBetStake);
+          this.errorsList.push(error);
         }
         // Check the MaxBetWin
         if (this.stakeDisplay.MaxWinning > maxBetWin) {
-          const errorIndex = this.errorsList.findIndex(listItem => listItem.message === CouponLimit[CouponLimit.MaxCombinationBetWin]);
-          if (errorIndex === -1) {
-            error.setError(CouponLimit[CouponLimit.MaxCombinationBetWin], maxBetWin);
-            this.errorsList.push(error);
-          }
+          error.setError(CouponLimit[CouponLimit.MaxCombinationBetWin], maxBetWin);
+          this.errorsList.push(error);
         }
         break;
     }
