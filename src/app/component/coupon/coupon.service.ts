@@ -50,7 +50,6 @@ export class CouponService {
       if (coupon) {
         this.coupon.internal_isReadyToPlace = false;
         this.calculateAmounts();
-        // this.checkLimits();
       } else {
         this.resetCoupon();
       }
@@ -66,11 +65,13 @@ export class CouponService {
           break;
         case this.messageType.warning:
           this.warningMessages = message.message;
+          // Check the coupon's limits
           this.checkLimits();
           // Set the visualization time of the warning
           setTimeout(() => (this.warningMessages = undefined), this.notificationInterval);
           break;
         default:
+          // Check the coupon's limits
           this.checkLimits();
       }
     });
@@ -328,7 +329,6 @@ export class CouponService {
     if (!error.isEmpty()) {
       this.error = error;
     }
-    console.log(this.error);
   }
 
   /**
