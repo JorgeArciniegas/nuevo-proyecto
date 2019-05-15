@@ -377,29 +377,27 @@ export class CouponService {
     this.elysCoupon.placeCoupon(this.coupon);
   }
 
-  /*
-   * flagAsPaidCoupon
-   * @argument = Mark a Coupon as paid.
+  /**
+   * Method to make the payment of a coupon
+   * @param request Request object
    */
-  async flagAsPaidCoupon(request: FlagAsPaidRequest) {
+  flagAsPaidCoupon(request: FlagAsPaidRequest): Promise<FlagAsPaidResponse> {
     try {
-      const response: FlagAsPaidResponse = await this.elysApi.coupon.flagAsPaidCoupon(request);
-      return response;
+      return this.elysApi.coupon.flagAsPaidCoupon(request);
     } catch (err) {
-      return err.error.error_description;
+      throw err.error.error_description;
     }
   }
 
-  /*
-   * cancelCoupon
-   * @argument = Cancel a coupon.
+  /**
+   * Method to cancel a coupon
+   * @param request Request object
    */
-  async cancelCoupon(request: CancelCouponRequest) {
+  cancelCoupon(request: CancelCouponRequest): Promise<CancelCouponResponse> {
     try {
-      const response: CancelCouponResponse = await this.elysApi.coupon.cancelCoupon(request);
-      return response;
+      return this.elysApi.coupon.cancelCoupon(request);
     } catch (err) {
-      return err.statusText;
+      throw err.statusText;
     }
   }
 }
