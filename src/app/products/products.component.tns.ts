@@ -3,7 +3,7 @@ import { AppSettings } from '../app.settings';
 import { CouponService } from '../component/coupon/coupon.service';
 import { ProductsService } from './products.service';
 import { DialogService } from './dialog.service';
-import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
+import { CouponDialogService } from '../component/coupon/coupon-dialog.service.tns';
 import { DialogTypeCoupon } from './products.model';
 
 @Component({
@@ -14,6 +14,8 @@ import { DialogTypeCoupon } from './products.model';
 export class ProductsComponent {
   public rowHeight: number;
   public settings: AppSettings;
+
+  dialogTypeCoupon: typeof DialogTypeCoupon = DialogTypeCoupon;
 
   constructor(
     public service: ProductsService,

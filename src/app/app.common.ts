@@ -16,6 +16,7 @@ import { AppSettings } from './app.settings';
 import { ProductsService } from './products/products.service';
 import { BtncalcService } from './component/btncalc/btncalc.service';
 import { PayCancelDialogComponent } from './component/coupon/pay-cancel-dialog/pay-cancel-dialog.component';
+import { CouponDialogService } from './component/coupon/coupon-dialog.service.tns';
 
 export const componentDeclarations: any[] = [
   AppComponent,
@@ -36,7 +37,8 @@ export const providerDeclarations: any[] = [
   AppSettings,
   ProductsService,
   TranslateService,
-  BtncalcService
+  BtncalcService,
+  CouponDialogService
 ];
 
 export const routes: Routes = [

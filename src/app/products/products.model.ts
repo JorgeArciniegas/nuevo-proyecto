@@ -1,5 +1,5 @@
 import { TypeBetSlipColTot } from './dogracing/dogracing.models';
-import { BetCouponExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
+import { BetCouponExtended } from '@elys/elys-coupon';
 
 export interface WindowSize {
   height: number;
@@ -93,3 +93,4 @@ export enum DialogTypeCoupon {
   CANCEL,
   PAY
 }
+

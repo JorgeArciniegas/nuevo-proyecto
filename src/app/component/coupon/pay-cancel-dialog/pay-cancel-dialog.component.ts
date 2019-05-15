@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CouponService } from '../coupon.service';
+import { CancelCouponRequest, ErrorStatus, FlagAsPaidRequest } from '@elys/elys-api';
 import { UserService } from '../../../services/user.service';
-import { ErrorStatus, CancelCouponRequest, FlagAsPaidRequest } from '@elys/elys-api';
+import { CouponService } from '../coupon.service';
 
 @Component({
   selector: 'app-pay-cancel-dialog',

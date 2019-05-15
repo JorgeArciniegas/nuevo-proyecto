@@ -1,17 +1,20 @@
 import { Component, Input } from '@angular/core';
-import { CouponService } from '../coupon.service';
+import { CancelCouponRequest, ErrorStatus, FlagAsPaidRequest } from '@elys/elys-api';
 import { TextField } from 'tns-core-modules/ui/text-field';
-import { CancelCouponRequest, FlagAsPaidRequest, ErrorStatus } from '@elys/elys-api';
-import { DialogTypeCoupon } from 'src/app/products/products.model';
+import { DialogTypeCoupon } from '../../../../../src/app/products/products.model';
+import { CouponService } from '../coupon.service';
+import { CouponDialogService } from '../coupon-dialog.service.tns';
 
 @Component({
   selector: 'app-pay-cancel-dialog',
-  templateUrl: './pay-cancel-dialog.component.html',
+  templateUrl: './pay-cancel-dialog.component.tns.html',
   styleUrls: ['./pay-cancel-dialog.component.scss']
 })
 export class PayCancelDialogComponent {
+
   @Input()
-  private type: DialogTypeCoupon;
+  private type: string;
+
   public titleType: string;
   public errorMessage: string;
   public errorMessage2: typeof ErrorStatus = ErrorStatus;
@@ -19,13 +22,12 @@ export class PayCancelDialogComponent {
 
   cancelRequest: CancelCouponRequest;
   payRequest: FlagAsPaidRequest;
-
-  constructor(public readonly couponService: CouponService) {
-    this.titleType = DialogTypeCoupon[this.type];
+  constructor(public readonly couponService: CouponService, public couponDialogService: CouponDialogService) {
+    this.titleType = DialogTypeCoupon[this.couponDialogService.type];
   }
 
   public onSubmit(result): void {
-    if (this.titleType === DialogTypeCoupon[DialogTypeCoupon.PAY] ) {
+    if (this.type === DialogTypeCoupon[DialogTypeCoupon.PAY] ) {
       console.log(this.titleType);
       if (result) {
         this.payRequest = {
@@ -56,6 +58,8 @@ export class PayCancelDialogComponent {
   }
 
   close(): void {
-    alert('Close ');
+    // alert('Close ');
+    this.couponDialogService.closeDialog();
+
   }
 }

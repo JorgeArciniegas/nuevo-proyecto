@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { DialogTypeCoupon } from 'src/app/products/products.model';
+import { DialogTypeCoupon } from '../../../../src/app/products/products.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CouponDialogService {
   public showDialog = false;
-  public type: DialogTypeCoupon;
+  public type: DialogTypeCoupon ;
 
   constructor() {}
 
@@ -17,5 +17,10 @@ export class CouponDialogService {
 
   openDialog() {
     this.showDialog = true;
+  }
+
+  closeDialog() {
+    this.type = null;
+    this.showDialog = false;
   }
 }

@@ -2,8 +2,8 @@ import { Environment } from './environment.models';
 
 export const environment: Environment = {
   production: false,
-  /// baseApiUrl: 'https://apidemo.vg-services.net',
-  baseApiUrl: 'https://qacom-apidemo.ody-services.net',
+  baseApiUrl: 'https://apidemo.vg-services.net',
+  // baseApiUrl: 'https://qacom-apidemo.ody-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
   products: [

@@ -49,11 +49,11 @@
           <!-- Area polifunzionale [Fissa]  -->
           <GridLayout col="0" rows="*" columns="*" class="button left btn-success">
             <Button text="{{'paga' | translate}}" class="button-internal" textTransform="uppercase" [isEnabled]="!service.timeBlocked"
-              (tap)="payCancelCoupon('PAY')"></Button>
+              (tap)="payCancelCoupon(dialogTypeCoupon.PAY)"></Button>
           </GridLayout>
           <GridLayout col="1" rows="*" columns="*" class="button right btn-warning">
             <Button text="{{'annulla' | translate}}" class="button-internal" textTransform="uppercase" [isEnabled]="!service.timeBlocked"
-              (tap)="payCancelCoupon('CANCEL')"></Button>
+              (tap)="payCancelCoupon(dialogTypeCoupon.CANCEL)"></Button>
           </GridLayout>
         </GridLayout>
       </GridLayout>
