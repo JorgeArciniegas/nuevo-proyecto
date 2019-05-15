@@ -180,7 +180,7 @@
 
 					.title {
 						font-weight: 600;
-						font-size: 20;
+						font-size: 16;
 					}
 				}
 
@@ -226,8 +226,16 @@
 			}
 
 			.display-message {
-				.title {
-					text-align: center;
+
+        border-radius: 5;
+
+        .title {
+					font-size: 10;
+          text-align: center;
+
+					&.small {
+						font-size: 7;
+					}
 				}
 
 				.amount {
@@ -383,7 +391,7 @@
 		@extend %dialog-card-mobile;
 
 		&.card-odd-error {
-			@extend %border-input-area-error;
+			@extend %border-input-area-error-mobile;
 		}
 
 		.top-window {
