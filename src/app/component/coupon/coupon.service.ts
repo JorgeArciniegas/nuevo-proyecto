@@ -34,7 +34,7 @@ export class CouponService {
   warningMessages: string;
   error: Error;
   // Duration of the notification of warning's messages
-  notificationInterval = 15000;
+  notificationInterval = 10000;
 
   fnPrintCoupon(): void {
     this.printCoupon.printWindow();
