@@ -10,4 +10,6 @@ export class AppSettings {
   theme: string = environment.theme;
   products: Products[] = environment.products;
   showRaceId: boolean = environment.showRaceId;
+  couponMessageTrasmitted: string = environment.couponMessageTrasmitted;
+  couponMessageLegal: string = environment.couponMessageLegal;
 }

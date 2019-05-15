@@ -17,6 +17,7 @@ import { ProductsService } from './products/products.service';
 import { BtncalcService } from './component/btncalc/btncalc.service';
 import { PayCancelDialogComponent } from './component/coupon/pay-cancel-dialog/pay-cancel-dialog.component';
 import { CouponDialogService } from './component/coupon/coupon-dialog.service.tns';
+import { PrintCouponComponent } from './component/coupon/print-coupon/print-coupon.component';
 
 export const componentDeclarations: any[] = [
   AppComponent,
@@ -30,22 +31,24 @@ export const componentDeclarations: any[] = [
   AdvanceGameComponent,
   CouponComponent,
   ProductDialogComponent,
-  PayCancelDialogComponent
+  PayCancelDialogComponent,
+  PrintCouponComponent
 ];
 
-export const providerDeclarations: any[] = [
-  AppSettings,
-  ProductsService,
-  TranslateService,
-  BtncalcService,
-  CouponDialogService
-];
+export const providerDeclarations: any[] = [AppSettings, ProductsService, TranslateService, BtncalcService, CouponDialogService];
 
 export const routes: Routes = [
   {
     path: 'login',
     loadChildren: './login/login.module#LoginModule'
   },
+
+  {
+    path: 'print',
+    component: PrintCouponComponent,
+    outlet: 'print'
+  },
+
   {
     path: 'products',
     component: ProductsComponent,

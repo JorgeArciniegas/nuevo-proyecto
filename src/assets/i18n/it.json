@@ -78,5 +78,31 @@
   "potentialMaxWinner": "Vincita potenziale massima",
   "race": "Race",
   "single": "Singola",
-  "tabCoupon": "Scheda scommesse"
+  "tabCoupon": "Scheda scommesse",
+  "PRINT" :{
+    "COUPON": {
+      "DATE": "Data Coupon",
+      "CODE": "Codice",
+      "TYPE": "Tipo giocata",
+      "STAKE": "Imp. Giocato",
+      "GROUPS": "Gruppi",
+      "COMB": " Comb.",
+      "PAYOUTMIN": "MIN. PAYOUT",
+      "PAYOUTMAX": "MAX. PAYOUT",
+      "TOTALPAYOUT":"TOTAL PAYOUT",
+      "HEADER_MSG": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad"
+    }
+  },
+  "CouponType": {
+    "CombinationsBet": "Sistema",
+    "MultipleBet": "Multipla",
+    "PrintCoupon": {
+      "CombinationsBet": "Sistema",
+      "MultipleBet": "Multipla",
+      "SingleBet": "Singola",
+      "Unknown": ""
+    },
+    "SingleBet": "Singola",
+    "Unknown": "Sconosciuta"
+  }
 }

@@ -1,488 +1,516 @@
 @import "./buttons-mobile";
 
 .app {
-    &.develop {
-        @import "./skins/develop/styles";
-    }
-
-    .main-content {
-        @extend %font-family;
-
-        @extend %color-bg-default;
-
-        .logo-with-text {
-            @extend %logo-with-text-mobile;
-        }
-
-        #login {
-            @extend %login-mobile;
-
-            .login-panel {
-                @extend %bg-opacity-dark;
-
-                .icon-area {
-                    &.user-icon {
-                      @extend %user-icon-mobile;
-                    }
-
-                    &.pwd-icon {
-                        @extend %pwd-icon-mobile;
-                    }
-                }
-            }
-
-            .error-message {
-                @extend %error-area;
-
-                .error-icon {
-                    @extend %error-icon-mobile;
-                }
-            }
-        }
-
-        .toolbar {
-            @extend %header;
-
-            .logo {
-                margin: 0 10 0 0;
-            }
-
-            .menu {
-                margin: 6;
-            }
-
-            .prod {
-                margin: 6 3 3;
-                border-color: transparent;
-                border-bottom-width: 3;
-
-                image {
-                    @extend %header-btn-menu-color;
-
-                    border-width: 1;
-                    margin: 1;
-                }
-
-                &.selected {
-                    @extend %header-btn-menu-color-selected;
-                }
-            }
-
-            .user-menu {
-                .notification {
-                    margin: 0 10;
-                }
-
-                .counter {
-                    text-align: center;
-                    font-weight: bold;
-                }
-
-                .details {
-                    margin-right: 10;
-
-                    .operator {
-                        margin-left: 10;
-                        font-weight: 600;
-
-                        @extend %header-text-operator;
-                    }
-                }
-
-                .clock {
-                    padding: 2 10;
-                    border-radius: 5;
-                    margin: 2 5;
-
-                    @extend %card-title-mobile;
-
-                    .small {
-                        font-size: 12;
-                        margin: -2 0;
-                    }
-
-                    .clock-icon {
-                        margin-right: 10;
-                    }
-                }
-            }
-        }
-
-        .button {
-            font-weight: 700;
-            font-size: 17;
-            border-radius: 5;
-            text-transform: none;
-
-            &.small {
-                font-size: 16;
-            }
-        }
-
-        .button-internal {
-            margin: -5;
-            background-color: transparent;
-            border-color: transparent;
-            border-width: 1;
-            padding: 0;
-        }
-
-        .button-internal:active {
-            @extend %bg-opacity;
-        }
-
-        .display {
-            @extend %card-title-mobile;
-
-            .indicator-amount {
-                @extend %border-primary;
-            }
-        }
-
-        .product {
-            padding: 5 0;
-
-            .product-calc {
-                .display {
-                    @extend %card-title-mobile;
-                }
-            }
-
-            .product-coupon {
-                .btn-coupon-board {
-                    font-weight: 600;
-
-                    &.small {
-                        font-size: 11;
-                    }
-
-                    .actived {
-                        @extend %btn-success-gradient;
-                    }
-                }
-
-                .display {
-                    @extend %card-title-mobile;
-
-                    .title {
-                        font-weight: 600;
-                        font-size: 20;
-                    }
-                }
-
-                .sub-display {
-                    @extend %sub-card-title-mobile;
-
-                    .title {
-                        font-weight: 600;
-                        font-size: 16;
-
-                        &.small {
-                            font-size: 11;
-                        }
-                    }
-                }
-            }
-
-            .display-amount {
-                @extend %color-bg-white;
-
-                border-radius: 5;
-                padding: 2 5;
-
-                .title {
-                    font-size: 10;
-                    text-align: right;
-
-                    &.small {
-                        font-size: 7;
-                    }
-                }
-
-                .amount {
-                    font-size: 20;
-                    text-align: right;
-                    font-weight: 700;
-                    vertical-align: bottom;
-
-                    &.small {
-                        font-size: 16;
-                    }
-                }
-
-                &.display-message{
-                    .title {
-                      text-align: center;
-                    }
-
-                    .amount {
-                      text-transform: none;
-                      margin: 2;
-                      text-align: center;
-                      font-weight: bold;
-                      font-size: 12;
-                      overflow: auto;
-                    }
-                }
-
-                &.display-error {
-                  @extend %color-bg-allert;
-                }
-
-                &.display-warning {
-                  @extend %color-bg-warn;
-                }
-            }
-
-            #pay-cancel {
-                .input-vdesk {
-                    .icon-area {
-
-                      margin: 0;
-
-                      &.shopping-cart-icon {
-                        @extend %shopping-cart-icon-mobile;
-                      }
-
-                    }
-                }
-            }
-
-        }
-
-        // GRID BTN CALC
-        .grid-btn-calc {
-            margin: 2 -1;
-
-            .card {
-                margin: 3;
-
-                .btn-amount-1 {
-                    @extend %btn-orange-mobile;
-                }
-
-                .btn-amount-2 {
-                    @extend %btn-gray-gradient-2-mobile;
-                }
-
-                .btn-amount-3 {
-                    @extend %btn-yellow-gradient-mobile;
-                }
-
-                .btn-amount-4 {
-                    @extend %btn-white-gradient-mobile;
-                }
-            }
-        }
-
-        .btn-keyboard {
-            @extend %btn-keyboard;
-
-            &.btn-grey {
-                @extend %btn-gray;
-            }
-
-            &.btn-black {
-                @extend %btn-dark;
-            }
-        }
-
-        .btn-warning {
-            @extend %btn-warning-mobile;
-        }
-
-        .btn-success {
-            @extend %btn-success-gradient-mobile;
-        }
-
-        .btn-selected {
-            @extend %btn-blue-gradient-mobile;
-        }
-
-        .btn-grey-gradient {
-            @extend %btn-gray-gradient-mobile;
-        }
-
-        .btn-dark-gradient {
-            @extend %btn-dark-gradient-mobile;
-        }
-
-        .advance-game {
-            margin: 0 -2;
-
-            .btn-advance-game {
-                @extend %btn-advance-game-mobile;
-
-                margin: 10 2 5;
-
-                .button-internal {
-                    font-weight: 700;
-                    font-size: 16;
-                }
-            }
-        }
-
-        .dog-racing {
-            .race-control {
-                @extend %dog-racing-bg-mobile;
-
-                .time {
-                    .time-panel {
-                        @extend %time-card-title-mobile;
-                    }
-                }
-            }
-
-            .list-race {
-                .number {
-                    @extend %btn-success-gradient-mobile;
-
-                    &.selected {
-                        @extend %btn-blue-gradient-mobile;
-                    }
-                }
-
-                .date {
-                    @extend %btn-gray-gradient-mobile;
-
-                    &.selected {
-                        @extend %btn-dark-gradient-mobile;
-                    }
-                }
-            }
-
-            .card-box-result {
-                .header {
-                    @extend %card-title-noborder;
-                }
-            }
-        }
-
-        .bg-playable {
-            @extend %bg-default;
-        }
-
-        .dialog {
-            @extend %dialog-mobile;
-
-            .odds-grid {
-                .btn-close {
-                    @extend %btn-transparent;
-                }
-            }
-        }
-    }
-
-    .counter {
-        text-align: center;
-        font-weight: bold;
-
-        @extend %header-notification-style-mobile;
-    }
-
-    .card-odd {
-        @extend %dialog-card-mobile;
-
-        .top-window {
-            @extend %dialog-card-header;
-        }
-
-        .odd {
-            border-width: 1;
-
-            @extend %border-primary;
-        }
-
-        .stake.color {
-            @extend %btn-success-gradient;
-        }
-    }
-
-    .scroll {
-        &.disabled {
-            opacity: 0.1;
-        }
-    }
-
-    .indicator {
-        @extend %indicator;
-    }
-
-    .indicator-odds-number {
-        @extend %header-btn-menu-color;
-    }
+	&.develop {
+		@import "./skins/develop/styles";
+	}
+
+	.main-content {
+		@extend %font-family;
+
+		@extend %color-bg-default;
+
+		.logo-with-text {
+			@extend %logo-with-text-mobile;
+		}
+
+		#login {
+			@extend %login-mobile;
+
+			.login-panel {
+				@extend %bg-opacity-dark;
+
+				.input {
+					@extend %border-input-area-mobile;
+
+					TextField {
+						@extend %login-input-mobile;
+					}
+
+					&.error {
+						@extend %border-input-area-error-mobile;
+					}
+					.icon-area {
+						margin: 5;
+
+						&.user-icon {
+							@extend %user-icon-mobile;
+						}
+
+						&.pwd-icon {
+							@extend %pwd-icon-mobile;
+						}
+					}
+				}
+			}
+
+			.error-message {
+				@extend %error-area;
+
+				.error-icon {
+					@extend %error-icon-mobile;
+				}
+			}
+		}
+
+		.toolbar {
+			@extend %header;
+
+			.logo {
+				margin: 0 10 0 0;
+			}
+
+			.menu {
+				margin: 6;
+			}
+
+			.prod {
+				margin: 6 3 3;
+				border-color: transparent;
+				border-bottom-width: 3;
+
+				image {
+					@extend %header-btn-menu-color;
+
+					border-width: 1;
+					margin: 1;
+				}
+
+				&.selected {
+					@extend %header-btn-menu-color-selected;
+				}
+			}
+
+			.user-menu {
+				.notification {
+					margin: 0 10;
+				}
+
+				.counter {
+					text-align: center;
+					font-weight: bold;
+				}
+
+				.details {
+					margin-right: 10;
+
+					.operator {
+						margin-left: 10;
+						font-weight: 600;
+
+						@extend %header-text-operator;
+					}
+				}
+
+				.clock {
+					padding: 2 10;
+					border-radius: 5;
+					margin: 2 5;
+
+					@extend %card-title-mobile;
+
+					.small {
+						font-size: 12;
+						margin: -2 0;
+					}
+
+					.clock-icon {
+						margin-right: 10;
+					}
+				}
+			}
+		}
+
+		.button {
+			font-weight: 700;
+			font-size: 17;
+			border-radius: 5;
+			text-transform: none;
+
+			&.small {
+				font-size: 16;
+			}
+		}
+
+		.button-internal {
+			margin: -5;
+			background-color: transparent;
+			border-color: transparent;
+			border-width: 1;
+			padding: 0;
+		}
+
+		.button-internal:active {
+			@extend %bg-opacity;
+		}
+
+		.display {
+			@extend %card-title-mobile;
+
+			.indicator-amount {
+				@extend %border-primary;
+			}
+		}
+
+		.product {
+			padding: 5 0;
+
+			.product-calc {
+				.display {
+					@extend %card-title-mobile;
+				}
+			}
+
+			.product-coupon {
+				.btn-coupon-board {
+					font-weight: 600;
+
+					&.small {
+						font-size: 11;
+					}
+
+					.actived {
+						@extend %btn-success-gradient;
+					}
+				}
+
+				.display {
+					@extend %card-title-mobile;
+
+					.title {
+						font-weight: 600;
+						font-size: 16;
+					}
+				}
+
+				.sub-display {
+					@extend %sub-card-title-mobile;
+
+					.title {
+						font-weight: 600;
+						font-size: 16;
+
+						&.small {
+							font-size: 11;
+						}
+					}
+				}
+			}
+
+			.display-amount {
+				@extend %color-bg-white;
+
+				border-radius: 5;
+				padding: 2 5;
+
+				.title {
+					font-size: 10;
+					text-align: right;
+
+					&.small {
+						font-size: 7;
+					}
+				}
+
+				.amount {
+					font-size: 20;
+					text-align: right;
+					font-weight: 700;
+					vertical-align: bottom;
+
+					&.small {
+						font-size: 16;
+					}
+				}
+			}
+
+			&.display-message {
+				border-radius: 5;
+
+				.title {
+					font-size: 10;
+					text-align: center;
+
+					&.small {
+						font-size: 7;
+					}
+				}
+
+				.amount {
+					text-transform: none;
+					margin: 2;
+					text-align: center;
+					font-weight: bold;
+					font-size: 12;
+					overflow: auto;
+				}
+
+				&.display-error {
+					@extend %color-bg-allert;
+				}
+
+				&.display-warning {
+					@extend %color-bg-warn;
+				}
+			}
+
+			#pay-cancel {
+				.input-vdesk {
+					.icon-area {
+						margin: 0;
+
+						&.shopping-cart-icon {
+							@extend %shopping-cart-icon-mobile;
+						}
+					}
+				}
+			}
+		}
+
+		// GRID BTN CALC
+		.grid-btn-calc {
+			margin: 2 -1;
+
+			.card {
+				margin: 3;
+
+				.btn-amount-1 {
+					@extend %btn-orange-mobile;
+				}
+
+				.btn-amount-2 {
+					@extend %btn-gray-gradient-2-mobile;
+				}
+
+				.btn-amount-3 {
+					@extend %btn-yellow-gradient-mobile;
+				}
+
+				.btn-amount-4 {
+					@extend %btn-white-gradient-mobile;
+				}
+			}
+		}
+
+		.btn-keyboard {
+			@extend %btn-keyboard;
+
+			&.btn-grey {
+				@extend %btn-gray;
+			}
+
+			&.btn-black {
+				@extend %btn-dark;
+			}
+		}
+
+		.btn-warning {
+			@extend %btn-warning-mobile;
+		}
+
+		.btn-success {
+			@extend %btn-success-gradient-mobile;
+		}
+
+		.btn-selected {
+			@extend %btn-blue-gradient-mobile;
+		}
+
+		.btn-grey-gradient {
+			@extend %btn-gray-gradient-mobile;
+		}
+
+		.btn-dark-gradient {
+			@extend %btn-dark-gradient-mobile;
+		}
+
+		.advance-game {
+			margin: 0 -2;
+
+			.btn-advance-game {
+				@extend %btn-advance-game-mobile;
+
+				margin: 10 2 5;
+
+				.button-internal {
+					font-weight: 700;
+					font-size: 16;
+				}
+			}
+		}
+
+		.dog-racing {
+			.race-control {
+				@extend %dog-racing-bg-mobile;
+
+				.time {
+					.time-panel {
+						@extend %time-card-title-mobile;
+					}
+				}
+			}
+
+			.list-race {
+				.number {
+					@extend %btn-success-gradient-mobile;
+
+					&.selected {
+						@extend %btn-blue-gradient-mobile;
+					}
+				}
+
+				.date {
+					@extend %btn-gray-gradient-mobile;
+
+					&.selected {
+						@extend %btn-dark-gradient-mobile;
+					}
+				}
+			}
+
+			.card-box-result {
+				.header {
+					@extend %card-title-noborder;
+				}
+			}
+		}
+
+		.bg-playable {
+			@extend %bg-default;
+		}
+
+		.dialog {
+			@extend %dialog-mobile;
+
+			.odds-grid {
+				.btn-close {
+					@extend %btn-transparent;
+				}
+			}
+		}
+	}
+
+	.counter {
+		text-align: center;
+		font-weight: bold;
+
+		@extend %header-notification-style-mobile;
+	}
+
+	.card-odd {
+		@extend %dialog-card-mobile;
+
+		&.card-odd-error {
+			@extend %border-input-area-error-mobile;
+		}
+
+		.top-window {
+			@extend %dialog-card-header;
+		}
+
+		.odd {
+			border-width: 1;
+
+			@extend %border-primary;
+		}
+
+		.stake.color {
+			@extend %btn-success-gradient;
+		}
+	}
+
+	.scroll {
+		&.disabled {
+			opacity: 0.1;
+		}
+	}
+
+	.indicator {
+		@extend %indicator;
+	}
+
+	.indicator-odds-number {
+		@extend %header-btn-menu-color;
+	}
+
+	.logo-print-coupon {
+		@extend %logo-header-mobile;
+	}
 }
 
 .overlay {
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 100;
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 100;
 }
 
 .radius-2 {
-    border-radius: 2;
+	border-radius: 2;
 }
 
 .radius-5 {
-    border-radius: 5;
+	border-radius: 5;
+}
+
+.radius-5-tl-tr {
+	border-radius: 5 5 0 0;
 }
 
 .radius-10 {
-    border-radius: 10;
+	border-radius: 10;
 }
 
 .radius-15 {
-    border-radius: 15;
+	border-radius: 15;
 }
 
 .radius-25 {
-    border-radius: 25;
+	border-radius: 25;
 }
 
 .radius-50 {
-    border-radius: 50;
+	border-radius: 50;
 }
 
 .padding-25 {
-    padding: 25;
+	padding: 25;
 }
 
 .padding-top-5 {
-    padding-top: 5;
+	padding-top: 5;
 }
 
 .padding-top-10 {
-    padding-top: 10;
+	padding-top: 10;
 }
 
 .padding-top-25 {
-    padding-top: 25;
+	padding-top: 25;
 }
 
 .padding-left-6 {
-    padding-left: 6;
+	padding-left: 6;
 }
 
 .padding-right-3 {
-    padding-right: 3;
+	padding-right: 3;
 }
 
 .padding-right-6 {
-    padding-right: 6;
+	padding-right: 6;
 }
 
-
 .input-vdesk {
-  @extend %border-input-area-mobile;
+	@extend %border-input-area-mobile;
 
-  TextField {
-      @extend %login-input-mobile;
-  }
+	TextField {
+		@extend %login-input-mobile;
+	}
 
-  &.error {
-      @extend %border-input-area-error-mobile;
-  }
+	&.error {
+		@extend %border-input-area-error-mobile;
+	}
 
-  .icon-area {
-      margin: 5;
-  }
+	.icon-area {
+		margin: 5;
+	}
 }

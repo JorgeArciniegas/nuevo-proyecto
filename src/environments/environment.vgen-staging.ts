@@ -2,7 +2,7 @@ import { Environment } from './environment.models';
 
 export const environment: Environment = {
   production: false,
-  baseApiUrl: 'https://apidemo.vg-services.net',
+  baseApiUrl: 'https://qacom-apidemo.ody-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
   products: [
@@ -80,6 +80,5 @@ export const environment: Environment = {
   showRaceId: true,
   couponMessageTrasmitted: 'Mandate transmitted via the Internet andaccepted on the',
   // tslint:disable-next-line:max-line-length
-  couponMessageLegal:
-    'Lorem ipsum dolor sit amet, consecteturadipisicing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Utenim ad minim veniam'
+  couponMessageLegal: 'Lorem ipsum dolor sit amet, consecteturadipisicing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Utenim ad minim veniam'
 };

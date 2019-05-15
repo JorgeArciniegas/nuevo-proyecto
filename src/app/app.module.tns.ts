@@ -24,12 +24,13 @@ import { ElysApiModule } from '@elys/elys-api';
 import { environment } from '../environments/environment';
 import { ElysCouponModule } from '@elys/elys-coupon';
 import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
+import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [componentDeclarations, FloorPipe, DigitslimitPipe],
+  declarations: [componentDeclarations, FloorPipe, DigitslimitPipe, GroupByCategoryPipe],
   imports: [
     NativeScriptHttpClientModule,
     NativeScriptModule,

@@ -1,5 +1,6 @@
 import { environment as prodEnvironment } from './environment.prod';
 import { environment as vgenEnvironment } from './environment.vgen';
+import { environment as vgenStagingEnvironment } from './environment.vgen-staging';
 import { environment as devEnvironment } from './environment';
 import { Environment } from './environment.models';
 
@@ -17,6 +18,9 @@ export const environment: Environment = (() => {
         break;
       case 'vgen':
         envVars = vgenEnvironment;
+        break;
+      case 'vgen-staging':
+        envVars = vgenStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;
