@@ -3,25 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CouponService } from '../coupon.service';
 import { UserService } from '../../../services/user.service';
-import { ErrorStatus } from './pay-cancel-dialog.enums';
-// import { ErrorStatus } from '@elys/elys-api/lib/shared/shared.enums';
-
-interface CancelRequest {
-  CancellationRequestUserId: number;
-  ShopClientId: number;
-  CouponId: number;
-  TicketCode: string;
-  UserWalletTypeId: number;
-  Product: string;
-}
-
-interface PayRequest {
-  CouponId: number;
-  TicketCode: string;
-  IsPaid: boolean;
-  SettlingClientId: number;
-  Product: string;
-}
+import { ErrorStatus, CancelCouponRequest, FlagAsPaidRequest } from '@elys/elys-api';
 
 @Component({
   selector: 'app-pay-cancel-dialog',
@@ -34,8 +16,8 @@ export class PayCancelDialogComponent implements OnInit {
   public errorMessage: string;
   public errorMessage2: typeof ErrorStatus = ErrorStatus;
 
-  cancelRequest: CancelRequest;
-  payRequest: PayRequest;
+  cancelRequest: CancelCouponRequest;
+  payRequest: FlagAsPaidRequest;
 
   constructor(
     public dialogRef: MatDialogRef<PayCancelDialogComponent>,

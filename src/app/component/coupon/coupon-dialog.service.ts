@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { PayCancelDialogComponent } from './pay-cancel-dialog/pay-cancel-dialog.component';
+import { DialogTypeCoupon } from 'src/app/products/products.model';
 // import { DialogData } from 'src/app/products/products.model';
 // import { PayCancelDialogComponent } from './pay-cancel-dialog/pay-cancel-dialog.component';
 
@@ -13,7 +14,7 @@ export class CouponDialogService {
 
   constructor(private dialog: MatDialog) {}
 
-  openPayCancelDialog(type: string): void {
+  openPayCancelDialog(type: DialogTypeCoupon): void {
     this.close();
     this.dialogRef = this.dialog.open(PayCancelDialogComponent, {
       data: type

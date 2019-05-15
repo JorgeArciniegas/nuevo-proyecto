@@ -1,24 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { CouponService } from '../coupon.service';
 import { TextField } from 'tns-core-modules/ui/text-field';
-import { ErrorStatus } from './pay-cancel-dialog.enums';
-
-interface CancelRequest {
-  CancellationRequestUserId: number;
-  ShopClientId: number;
-  CouponId: number;
-  TicketCode: string;
-  UserWalletTypeId: number;
-  Product: string;
-}
-
-interface PayRequest {
-  CouponId: number;
-  TicketCode: string;
-  IsPaid: boolean;
-  SettlingClientId: number;
-  Product: string;
-}
+import { CancelCouponRequest, FlagAsPaidRequest, ErrorStatus } from '@elys/elys-api';
+import { DialogTypeCoupon } from 'src/app/products/products.model';
 
 @Component({
   selector: 'app-pay-cancel-dialog',
@@ -27,22 +11,21 @@ interface PayRequest {
 })
 export class PayCancelDialogComponent {
   @Input()
-  private type: string;
+  private type: DialogTypeCoupon;
   public titleType: string;
   public errorMessage: string;
   public errorMessage2: typeof ErrorStatus = ErrorStatus;
   public couponIdPatternInvalid = true;
 
-  cancelRequest: CancelRequest;
-  payRequest: PayRequest;
+  cancelRequest: CancelCouponRequest;
+  payRequest: FlagAsPaidRequest;
 
   constructor(public readonly couponService: CouponService) {
-    this.titleType = this.type;
+    this.titleType = DialogTypeCoupon[this.type];
   }
 
   public onSubmit(result): void {
-    alert('Text: ' + result);
-    if (this.titleType === 'PAY') {
+    if (this.titleType === DialogTypeCoupon[DialogTypeCoupon.PAY] ) {
       console.log(this.titleType);
       if (result) {
         this.payRequest = {

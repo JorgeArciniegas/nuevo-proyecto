@@ -87,3 +87,9 @@ export class DialogData {
     this.betCoupon = betCoupon || null;
   }
 }
+
+
+export enum DialogTypeCoupon {
+  CANCEL,
+  PAY
+}

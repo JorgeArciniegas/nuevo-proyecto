@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
 import {
+  BetCouponOdd,
   CancelCouponRequest,
   CancelCouponResponse,
+  CouponCategory,
+  ElysApiService,
   FlagAsPaidRequest,
   FlagAsPaidResponse
-} from '@elys/elys-api/lib/coupon/coupon.models';
-import { ElysApiService, BetCouponOdd, CouponCategory } from '@elys/elys-api';
-import { ElysCouponService, CouponServiceMessageType } from '@elys/elys-coupon';
+} from '@elys/elys-api';
+import { CouponServiceMessageType, ElysCouponService } from '@elys/elys-coupon';
 import {
   AddOddRequest,
   BetCouponExtended,
   BetCouponOddExtended
-} from '@elys/elys-coupon/lib/elys-coupon.models';
+} from '@elys/elys-coupon';
 import { Observable, Subject } from 'rxjs';
 import { BetOdd } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
-import { OddsStakeEdit, StakesDisplay, InternalCoupon } from './coupon.model';
-import { DEFAULT_BREAKPOINTS } from '@angular/flex-layout';
+import { InternalCoupon, OddsStakeEdit, StakesDisplay } from './coupon.model';
 
 @Injectable({
   providedIn: 'root'
