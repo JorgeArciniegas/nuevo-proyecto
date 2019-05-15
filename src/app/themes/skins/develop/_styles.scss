@@ -485,6 +485,15 @@ $gradient-dark2: #000000;
 	background-size: contain;
 }
 
+%check-circle-icon {
+	background: url("app/themes/skins/develop/icon/baseline-check_circle-24px.svg") center center no-repeat;
+}
+
+%check-circle-icon-mobile {
+	background: url("~/app/themes/skins/develop/icon/baseline-check_circle-24px.png") center center no-repeat;
+	background-size: contain;
+}
+
 %shopping-cart-icon {
 	background: url("app/themes/skins/develop/icon/baseline-shopping_cart-24px.svg") center center no-repeat;
 }

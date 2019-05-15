@@ -1,7 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { CancelCouponRequest, ErrorStatus, FlagAsPaidRequest } from '@elys/elys-api';
+import {
+  CancelCouponRequest,
+  ErrorStatus,
+  FlagAsPaidRequest
+} from '@elys/elys-api';
 import { UserService } from '../../../services/user.service';
 import { CouponService } from '../coupon.service';
 
@@ -15,6 +19,7 @@ export class PayCancelDialogComponent implements OnInit {
   public form: FormGroup;
   public errorMessage: string;
   public errorMessage2: typeof ErrorStatus = ErrorStatus;
+  public errorNumberIcon: number;
 
   cancelRequest: CancelCouponRequest;
   payRequest: FlagAsPaidRequest;
@@ -54,10 +59,12 @@ export class PayCancelDialogComponent implements OnInit {
         this.couponService
           .flagAsPaidCoupon(this.payRequest)
           .then(
-            message =>
+            message => (
               (this.errorMessage = message.Error
                 ? this.errorMessage2[message.Error]
-                : 'Server Error')
+                : 'Server Error'),
+              (this.errorNumberIcon = message.Error)
+            )
           );
       }
       this.form.get('couponCode').setValue('');
@@ -77,10 +84,12 @@ export class PayCancelDialogComponent implements OnInit {
         this.couponService
           .cancelCoupon(this.cancelRequest)
           .then(
-            message =>
+            message => (
               (this.errorMessage = message.ErrorStatus
                 ? this.errorMessage2[message.ErrorStatus]
-                : 'Server Error')
+                : 'Server Error'),
+              (this.errorNumberIcon = message.ErrorStatus)
+            )
           );
         this.form.get('couponCode').setValue('');
       }
