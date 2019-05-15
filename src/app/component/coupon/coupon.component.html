@@ -100,14 +100,14 @@
       <label *ngIf="couponService.error && !couponService.warningMessages" fxLayout="column" fxFlex>
         <span>{{'ERROR' | translate}}</span>
         <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
-          {{couponService.error.message}} <ng-container *ngIf="couponService.error.detail">Limit:
-            {{couponService.error.detail}}</ng-container>
+          {{couponService.error.message | translate}} <ng-container *ngIf="couponService.error.detail">(Limit:
+            {{couponService.error.detail}})</ng-container>
         </div>
       </label>
       <label *ngIf="couponService.warningMessages" fxLayout="column" fxFlex>
         <span>{{'WARNING' | translate}}</span>
         <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
-          {{couponService.warningMessages}}
+          {{couponService.warningMessages | translate}}
         </div>
       </label>
     </div>

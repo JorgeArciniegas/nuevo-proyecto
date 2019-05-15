@@ -2,7 +2,10 @@ import { Environment } from './environment.models';
 
 export const environment: Environment = {
   production: false,
+  // Staging environment
   baseApiUrl: 'https://qacom-apidemo.ody-services.net',
+  // Production environment
+  // baseApiUrl: 'https://apidemo.vg-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
   products: [
