@@ -4,6 +4,7 @@ import { TextField } from 'tns-core-modules/ui/text-field';
 import { DialogTypeCoupon } from '../../../../../src/app/products/products.model';
 import { CouponService } from '../coupon.service';
 import { CouponDialogService } from '../coupon-dialog.service.tns';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-pay-cancel-dialog',
@@ -11,24 +12,28 @@ import { CouponDialogService } from '../coupon-dialog.service.tns';
   styleUrls: ['./pay-cancel-dialog.component.scss']
 })
 export class PayCancelDialogComponent {
-
   @Input()
   private type: string;
 
   public titleType: string;
   public errorMessage: string;
   public errorMessage2: typeof ErrorStatus = ErrorStatus;
+  public errorNumberIcon: number;
   public couponIdPatternInvalid = true;
 
   cancelRequest: CancelCouponRequest;
   payRequest: FlagAsPaidRequest;
-  constructor(public readonly couponService: CouponService, public couponDialogService: CouponDialogService) {
+  constructor(
+    public readonly couponService: CouponService,
+    public couponDialogService: CouponDialogService,
+    private userService: UserService
+  ) {
     this.titleType = DialogTypeCoupon[this.couponDialogService.type];
   }
 
   public onSubmit(result): void {
-    if (this.type === DialogTypeCoupon[DialogTypeCoupon.PAY] ) {
-      console.log(this.titleType);
+    // console.log(DialogTypeCoupon[DialogTypeCoupon.PAY]);
+    if (this.titleType === 'PAY') {
       if (result) {
         this.payRequest = {
           CouponId: null,
@@ -39,12 +44,29 @@ export class PayCancelDialogComponent {
         };
         this.couponService
           .flagAsPaidCoupon(this.payRequest)
-          .then(
-            message =>
-              (this.errorMessage = message.Error
-                ? this.errorMessage2[message.Error]
-                : 'Server Error')
-          );
+          .then(message => {
+            this.errorMessage = this.errorMessage2[message.Error];
+            this.errorNumberIcon = message.Error;
+          })
+          .catch(error => (this.errorMessage = 'operation not possible (' + error.status + ')'));
+      }
+    } else if (this.titleType === 'CANCEL') {
+      if (result) {
+        this.cancelRequest = {
+          CancellationRequestUserId: this.userService.userDetail.UserId,
+          ShopClientId: null,
+          CouponId: null,
+          TicketCode: result,
+          UserWalletTypeId: null,
+          Product: 'V'
+        };
+        this.couponService
+          .cancelCoupon(this.cancelRequest)
+          .then(message => {
+            this.errorMessage = this.errorMessage2[message.ErrorStatus];
+            this.errorNumberIcon = message.ErrorStatus;
+          })
+          .catch(error => (this.errorMessage = 'operation not possible (' + error.status + ')'));
       }
     }
   }
@@ -60,6 +82,5 @@ export class PayCancelDialogComponent {
   close(): void {
     // alert('Close ');
     this.couponDialogService.closeDialog();
-
   }
 }

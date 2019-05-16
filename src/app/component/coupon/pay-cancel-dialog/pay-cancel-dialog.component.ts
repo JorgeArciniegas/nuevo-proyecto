@@ -16,6 +16,7 @@ export class PayCancelDialogComponent implements OnInit {
   public form: FormGroup;
   public errorMessage: string;
   public errorMessage2: typeof ErrorStatus = ErrorStatus;
+  public errorNumberIcon: number;
 
   cancelRequest: CancelCouponRequest;
   payRequest: FlagAsPaidRequest;
@@ -50,10 +51,15 @@ export class PayCancelDialogComponent implements OnInit {
             Product: 'V'
           };
         }
-        this.couponService.flagAsPaidCoupon(this.payRequest).then(message => {
-          this.errorMessage = message.Error ? this.errorMessage2[message.Error] : 'Server Error';
-          this.printReceiptService.printWindow();
-        });
+        this.couponService
+          .flagAsPaidCoupon(this.payRequest)
+          .then(message => {
+            this.errorMessage = this.errorMessage2[message.Error];
+            this.errorNumberIcon = message.Error;
+            this.printReceiptService.printWindow();
+          })
+          .catch(error => (this.errorMessage = 'operation not possible (' + error.status + ')'));
+        this.form.get('couponCode').setValue('');
       }
       this.form.get('couponCode').setValue('');
     } else if (this.data === 'CANCEL') {
@@ -69,10 +75,14 @@ export class PayCancelDialogComponent implements OnInit {
             Product: 'V'
           };
         }
-        this.couponService.cancelCoupon(this.cancelRequest).then(message => {
-          this.errorMessage = message.ErrorStatus ? this.errorMessage2[message.ErrorStatus] : 'Server Error';
-          this.printReceiptService.printWindow();
-        });
+        this.couponService
+          .cancelCoupon(this.cancelRequest)
+          .then(message => {
+            this.errorMessage = this.errorMessage2[message.ErrorStatus];
+            this.errorNumberIcon = message.ErrorStatus;
+            this.printReceiptService.printWindow();
+          })
+          .catch(error => (this.errorMessage = 'operation not possible (' + error.status + ')'));
         this.form.get('couponCode').setValue('');
       }
     }

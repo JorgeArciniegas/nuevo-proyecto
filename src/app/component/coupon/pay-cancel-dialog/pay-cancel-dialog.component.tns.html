@@ -9,6 +9,11 @@
   <Button row="2" col="0" text="{{'CLOSE' | translate | uppercase}}" (tap)="close()" class="btn btn-outline" class="button btn-default btn-warning radius-2"></Button>
   <Button row="2" col="1" text="{{'CONFIRM' | translate}}" (tap)="onSubmit(couponCode.text)" class="button btn-default btn-success radius-2"></Button>
 
+  <GridLayout row="3" col="0" rows="*" columns="5,30,200,10" class="radius-2" verticalAlignment="center" horizontalAlignment="center">
+    <StackLayout *ngIf="errorNumberIcon && errorNumberIcon !== 1" col="1" class="icon-area error-icon"></StackLayout>
+    <StackLayout *ngIf="errorNumberIcon && errorNumberIcon === 1" col="1" class="icon-area check-circle-icon"></StackLayout>
+    <StackLayout *ngIf="errorMessage && !errorNumberIcon" col="1" class="icon-area error-icon"></StackLayout>
+    <Label col="2" text="{{ errorMessage }}" class="title" verticalAlignment="center" horizontalAlignment="left"></Label>
+  </GridLayout>
 
-  <Label row="3" colSpan="2" text="response messagge" class="title" verticalAlignment="center" horizontalAlignment="center"></Label>
 </GridLayout>

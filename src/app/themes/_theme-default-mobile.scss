@@ -263,7 +263,17 @@
 							@extend %shopping-cart-icon-mobile;
 						}
 					}
-				}
+        }
+        .icon-area {
+          margin: 0;
+
+          &.error-icon {
+            @extend %error-icon-mobile;
+          }
+          &.check-circle-icon {
+            @extend %check-circle-icon-mobile;
+          }
+        }
 			}
 		}
 
