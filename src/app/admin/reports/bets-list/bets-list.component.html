@@ -10,17 +10,17 @@
         <h3 class="label-overlap">{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}</h3>
         <div fxFlex="20" class="row" fxLayoutGap="20px">
           <div fxFlex fxLayout="column" fxLayoutGap="5px">
-            <button class="btn-filter btn-default radius-5" (click)="changeDateTypeCoupon(false)" [class.btn-filter-success]="!betsListService.typeDataSelected">
+            <button class="btn-filter btn-default radius-5" (click)="changeValue('dateHasPlaced', false)" [class.btn-filter-success]="!betsListService.dateHasPlaced">
               {{'BETSLIST.BTN_DATE_PLACED' | translate}}
             </button>
-            <button class="btn-filter btn-default radius-5" (click)="changeDateTypeCoupon(true)" [class.btn-filter-success]="betsListService.typeDataSelected">
+            <button class="btn-filter btn-default radius-5" (click)="changeValue('dateHasPlaced', true)" [class.btn-filter-success]="betsListService.dateHasPlaced">
               {{'BETSLIST.BTN_DATE_CLOSED' | translate}}
             </button>
           </div>
         </div>
         <div fxFlex="40" class="row" fxLayoutGap="20px">
-          <div fxFlex="50" class="row" fxLayoutGap="20px">
-            <div fxFlex fxLayout="column" fxLayoutGap="5px">
+          <div fxFlex class="row" fxLayoutGap="20px">
+            <div fxLayout="column" fxLayoutGap="5px">
               <h4>{{ 'BETSLIST.LABEL_DATE_FROM' | translate }}</h4>
               <mat-form-field class="btn-filter btn-default padding-5 radius-5" (click)="pickerDateFrom.open()">
                 <input matInput [matDatepicker]="pickerDateFrom" disabled [(ngModel)]="betsListService.dateFrom">
@@ -31,8 +31,8 @@
           </div>
         </div>
         <div fxFlex="40" class="row" fxLayoutGap="20px">
-          <div fxFlex="50" class="row" fxLayoutGap="20px">
-            <div fxFlex fxLayout="column" fxLayoutGap="5px">
+          <div fxFlex class="row" fxLayoutGap="20px">
+            <div fxLayout="column" fxLayoutGap="5px">
               <h4>{{ 'BETSLIST.LABEL_DATE_TO' | translate }}</h4>
               <mat-form-field class="btn-filter btn-default padding-5 radius-5" (click)="pickerDateTo.open()">
                 <input matInput [matDatepicker]="pickerDateTo" disabled [(ngModel)]="betsListService.dateTo">
@@ -43,48 +43,47 @@
           </div>
         </div>
       </div>
-      <!-- BETSLIP CODE -->
-      <div fxFlex="30" fxLayout="row" fxLayoutGap="20px" class="display padding-20">
-        <h3 class="label-overlap">{{ 'BETSLIST.LABEL_COUPONCODE_FORM' | translate }}</h3>
-      </div>
     </div>
-    <!-- ROW 1 -->
-    <div fxFlex fxLayout="row" fxLayoutGap="20px">
-      <div fxFlex="40" fxLayout="row" fxLayoutGap="20px" class="display padding-20">
-        <h3 class="label-overlap">{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}</h3>
-        <div fxFlex="50" class="row" fxLayoutGap="20px">
-          <div fxFlex fxLayout="column" fxLayoutGap="5px">
-            <ng-container *ngFor="let type of productList.values(); let i = index;">
-              <button class="btn-filter btn-default radius-5" [class.btn-filter-success]="betsListService.sportId === productList[type]"
-                (click)="changeValue('sportId', productList[type])" *ngIf="i < 4">{{ type }} </button>
-            </ng-container>
-          </div>
+    <!-- BETSLIP CODE -->
+    <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center" class="display padding-20">
+      <h3 class="label-overlap">{{ 'BETSLIST.LABEL_COUPONCODE_FORM' | translate }}</h3>
+      <mat-form-field fxFlex class="btn-filter btn-default padding-5 radius-5">
+        <input matInput type="text" class="padding-5" [(ngModel)]="betsListService.ticketCode">
+      </mat-form-field>
+    </div>
+  </div>
+  <!-- ROW 1 -->
+  <div fxFlex fxLayout="row" fxLayoutGap="20px">
+    <div fxFlex="40" fxLayout="row" fxLayoutGap="20px" class="display padding-20">
+      <h3 class="label-overlap">{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}</h3>
+      <div fxFlex fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px grid">
+        <div fxFlex="50" fxLayout="column" *ngFor="let type of betsListService.availableSport">
+          <button class="btn-filter btn-default radius-5" [class.btn-filter-success]="betsListService.sportId === type.SportId"
+            (click)="changeValue('sportId', type.SportId)">{{ 'SPORT.'+ type.SportName | translate }} </button>
         </div>
-        <div fxFlex="50" class="row" fxLayoutGap="5px">
-          <div fxFlex fxLayout="column" fxLayoutGap="5px">
-            <ng-container *ngFor="let type of productList.values(); let i = index;">
-              <button class="btn-filter btn-default radius-5" [class.btn-filter-success]="betsListService.sportId === productList[type]"
-                (click)="changeValue('sportId', productList[type])" *ngIf="i > 3">{{ type }} </button>
-            </ng-container>
-          </div>
-        </div>
-
-
-      </div>
-      <div fxFlex="30" fxLayout="row" fxLayoutGap="20px" class="display">
-        <h3 class="label-overlap">{{ 'BETSLIST.LABEL_TYPECOUPON_FORM' | translate }}</h3>
-      </div>
-      <div fxFlex="30" fxLayout="row" fxLayoutGap="20px" class="display">
-        <h3 class="label-overlap">{{ 'BETSLIST.LABEL_STATUSCOUPON_FORM' | translate }}</h3>
       </div>
     </div>
-    <!-- ROW 2 -->
-    <div fxFlex fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
-      <div fxFlex="33"></div>
-      <div fxFlex>
-        <button class="btn-default btn-grey-gradient radius-5 elevation-z5">{{ 'BETSLIST.BTN_SEARCH' | translate }} </button>
+    <div fxFlex="30" fxLayout="row" fxLayoutGap="20px" class="display padding-20">
+      <h3 class="label-overlap">{{ 'BETSLIST.LABEL_TYPECOUPON_FORM' | translate }}</h3>
+      <div fxFlex fxLayout="column" fxLayoutGap="5px">
+        <button *ngFor="let type of couponType.values()" class="btn-filter btn-default radius-5" [class.btn-filter-success]="betsListService.couponType === couponType[type]"
+          (click)="changeValue('couponType', couponType[type])">{{ 'CouponType.' +type | translate}}</button>
       </div>
-      <div fxFlex="33"></div>
     </div>
+    <div fxFlex="30" fxLayout="row" fxLayoutGap="20px" class="display padding-20">
+      <h3 class="label-overlap">{{ 'BETSLIST.LABEL_STATUSCOUPON_FORM' | translate }}</h3>
+      <div fxFlex fxLayout="column" fxLayoutGap="5px">
+        <button *ngFor="let type of couponStatus.values()" class="btn-filter btn-default radius-5" [class.btn-filter-success]="betsListService.couponStatus === couponStatus[type]"
+          (click)="changeValue('couponStatus', couponStatus[type])">{{ 'BETSLIST.COUPON_STATUS.' +type | translate}}</button>
+      </div>
+    </div>
+  </div>
+  <!-- ROW 2 -->
+  <div fxFlex fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+    <div fxFlex="33"></div>
+    <div fxFlex>
+      <button class="btn-default btn-grey-gradient radius-5 elevation-z5" (click)="betsListService.getList()">{{ 'BETSLIST.BTN_SEARCH' | translate }} </button>
+    </div>
+    <div fxFlex="33"></div>
   </div>
 </div>

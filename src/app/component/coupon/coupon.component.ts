@@ -83,9 +83,11 @@ export class CouponComponent implements OnDestroy {
     this.remove = true;
     this.couponService.addRemoveToCoupon([new BetOdd(odd.SelectionName, odd.OddValue, odd.OddStake, odd.SelectionId)]);
   }
+
   clearCoupon(): void {
     this.couponService.resetCoupon();
   }
+
   ngOnDestroy(): void {
     this.couponServiceSubscription.unsubscribe();
     // this.couponMessageServiceSubscription.unsubscribe();

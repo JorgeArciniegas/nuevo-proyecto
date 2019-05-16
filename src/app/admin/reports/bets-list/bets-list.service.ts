@@ -1,49 +1,57 @@
 import { Injectable } from '@angular/core';
-import { CouponStatus, CouponType, ElysApiService } from '@elys/elys-api';
+import { CouponType, ElysApiService } from '@elys/elys-api';
+import { VirtualCouponListRequest } from '@elys/elys-api/lib/reports/reports.models';
 import { TranslateService } from '@ngx-translate/core';
-import { RequestBetsList, ProductEnum } from './bets-list.model';
+import { CouponStatusInternal, CouponTypeInternal, VirtualSportId } from './bets-list.model';
+import { AccountVirtualSport } from '@elys/elys-api/lib/virtual/virtual.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BetsListService {
 
-  request: RequestBetsList;
+  request: VirtualCouponListRequest = null;
+  availableSport: AccountVirtualSport = null;
   pageSizeList: number[] = [10, 25, 50, 100];
-  private _typeDataSelected: boolean;
+  /* productEnum: typeof VirtualSportId = VirtualSportId; */
+  constructor(translate: TranslateService, public elysApi: ElysApiService) {
 
-  constructor(translate: TranslateService, elysApi: ElysApiService) {
+    this.getAvailableSport();
     /**
      * Request default object
      */
     this.request = {
-      couponStatus: CouponStatus.Unknown,
+      couponStatus: CouponStatusInternal.ALL,
       dateFrom: new Date(),
       dateTo: new Date(),
       pageSize: this.pageSizeList[1],
       requestedPage: 0,
-      couponType: CouponType.Unknown,
-      language: translate.currentLang,
-      sportId: ProductEnum.ALL
+      couponType: CouponTypeInternal.ALL,
+      sportId: VirtualSportId.ALL,
+      product: null,
+      complianceCode: '',
+      ticketCode: '',
+      dateHasPlaced: false
     };
   }
+
 
   /**
    * GETTER AND SETTER OBJECT PROPERTY
    */
 
-  get typeDataSelected(): boolean {
-    return this._typeDataSelected;
+  get dateHasPlaced(): boolean {
+    return this.request.dateHasPlaced;
   }
-  set typeDataSelected(value: boolean) {
-    this._typeDataSelected = value;
+  set dateHasPlaced(value: boolean) {
+    this.request.dateHasPlaced = value;
   }
 
   get couponStatus() {
     return this.request.couponStatus;
   }
 
-  set couponStatus(status: CouponStatus) {
+  set couponStatus(status: CouponStatusInternal) {
     this.request.couponStatus = status;
   }
 
@@ -110,5 +118,20 @@ export class BetsListService {
 
   set complianceCode(complianceCode: string) {
     this.request.complianceCode = complianceCode;
+  }
+
+  async getAvailableSport(): Promise<void> {
+   await this.elysApi.virtual.getAvailablevirtualsports().then( items => {
+    this.availableSport = items;
+   });
+
+   this.sportId = this.availableSport[0].SportId;
+
+  }
+
+  getList(): void {
+    const req: VirtualCouponListRequest = this.request;
+    if (req.sportId === VirtualSportId.ALL ) { req.sportId = 0; }
+    this.elysApi.reports.getVirtualListOfCoupon(req);
   }
 }

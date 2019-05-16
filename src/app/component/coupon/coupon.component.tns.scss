@@ -16,9 +16,9 @@
 	}
 }
 .display {
+  padding-left: 3;
 	.title {
 		width: 100%;
-		text-align: center;
 	}
 }
 
@@ -52,6 +52,7 @@
   border-radius: 5;
   margin: 2;
   .top-window {
+    border-radius: 5;
     font-size: 9;
     padding: 0 5;
   }

@@ -92,6 +92,7 @@
     }
   },
   "CouponType": {
+    "ALL": "Tutte",
     "CombinationsBet": "Sistema",
     "MultipleBet": "Multipla",
     "PrintCoupon": {
@@ -114,6 +115,21 @@
     "LABEL_PRODUCTS_FORM": "Filtro prodotto",
     "LABEL_TYPECOUPON_FORM": "Tipo di scommessa",
     "LABEL_STATUSCOUPON_FORM": "Stato scommessa",
-    "BTN_SEARCH": "Cerca"
+    "BTN_SEARCH": "Cerca",
+    "COUPON_STATUS":{
+      "ALL": "Tutti",
+      "Placed": "Piazzato",
+      "Lost":"Perdente",
+      "Win": "Vincente"
+    }
+  },
+  "SPORT": {
+    "DogRacing": "Corsa dei cani",
+    "HorseRacing": "Corsa dei cavalli",
+    "Soccer": "Calcio",
+    "Keno": "Keno",
+    "Roulette": "Roulette",
+    "CockRacing": "Combattimento di galli"
   }
+
 }
