@@ -1,13 +1,10 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { BetsListComponent } from './reports/bets-list/bets-list.component';
 import { SummaryCouponsComponent } from './reports/bets-list/summary-coupons/summary-coupons.component';
 
-export const componentDeclarations: any[] = [AdminComponent, BetsListComponent];
-
-export const providerDeclarations: any[] = [];
-
-export const routes: Routes = [
+const routes: Routes = [
   {
     path: '',
     component: AdminComponent
@@ -22,4 +19,8 @@ export const routes: Routes = [
   }
 ];
 
-
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class AdminRoutingModule { }
