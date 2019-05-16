@@ -6,6 +6,15 @@
     margin-left: 15;
     vertical-align: center;
   }
+  .header {
+    //font-weight: bold;
+    .header-title {
+      opacity: 0.4;
+    }
+    .paginator {
+      font-size: 25;
+    }
+  }
   .card {
     margin: 15;
   }

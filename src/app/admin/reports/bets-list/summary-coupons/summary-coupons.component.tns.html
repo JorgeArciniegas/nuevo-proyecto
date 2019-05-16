@@ -1,21 +1,43 @@
 <GridLayout rows="*,2*,10*,2*" columns="*" class="summary">
   <Label row="0" class="title" colSpan="2" text="{{'BETSLIST.LIST_TITLE' | translate}}" textWrap="true" verticalAlignment="center"></Label>
 
-  <GridLayout row="1" columns="*,2*,2*,2*,3*,3*,3*,4*" class="card">
+  <GridLayout row="1" columns="*,2*,2*,2*,3*,3*,3*,4*" class="card header">
     <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-arrow_back-24px.png" verticalAlignment="center"
       horizontalAlignment="left"></Image>
-    <StackLayout col="1">
-      <Label class="disabled" text="{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}"></Label>
-      <Label text="{{ ((!betsListService.request.dateHasPlaced) ? 'BETSLIST.BTN_DATE_PLACED' : 'BETSLIST.BTN_DATE_CLOSED') | translate }}"></Label>
+    <StackLayout col="1" verticalAlignment="center">
+      <Label class="header-title" text="{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}"></Label>
+      <Label text="{{ ((!betsListService.request.dateHasPlaced) ? 'BETSLIST.BTN_DATE_PLACED' : 'BETSLIST.BTN_DATE_CLOSED') | translate }}" textWrap="true"></Label>
     </StackLayout>
-    <StackLayout col="2">
-      <Label class="disabled" text="{{ 'BETSLIST.LABEL_DATE_FROM' | translate }}"></Label>
-      <Label text="{{betsListService.request.dateFrom | date:'mediumDate'}}"></Label>
+    <StackLayout col="2" verticalAlignment="center">
+      <Label class="header-title" text="{{ 'BETSLIST.LABEL_DATE_FROM' | translate }}"></Label>
+      <Label text="{{betsListService.request.dateFrom | date:'mediumDate'}}" textWrap="true"></Label>
     </StackLayout>
-    <StackLayout col="3">
-      <Label class="disabled" text="{{ 'BETSLIST.LABEL_DATE_TO' | translate }}"></Label>
-      <Label text="{{betsListService.request.dateTo | date:'mediumDate'}}"></Label>
+    <StackLayout col="3" verticalAlignment="center">
+      <Label class="header-title" text="{{ 'BETSLIST.LABEL_DATE_TO' | translate }}"></Label>
+      <Label text="{{betsListService.request.dateTo | date:'mediumDate'}}" textWrap="true"></Label>
     </StackLayout>
+    <StackLayout col="4" verticalAlignment="center">
+      <Label class="header-title" text="{{ 'BETSLIST.LABEL_TYPECOUPON_FORM' | translate }}"></Label>
+      <Label text="{{ 'CouponType.' + couponType[betsListService.request.couponType] | translate}}" textWrap="true"></Label>
+    </StackLayout>
+    <StackLayout col="5" verticalAlignment="center">
+      <Label class="header-title" text="{{ 'BETSLIST.LABEL_STATUSCOUPON_FORM' | translate }}"></Label>
+      <Label text="{{ 'BETSLIST.COUPON_STATUS.' + couponStatus[betsListService.request.couponStatus] | translate}}" textWrap="true"></Label>
+    </StackLayout>
+    <StackLayout col="6" verticalAlignment="center">
+      <Label class="header-title" text="{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}"></Label>
+      <Label text="{{ 'SPORT.'+ betsListService.labelAvailableSportSelected | translate }}" textWrap="true"></Label>
+    </StackLayout>
+    <GridLayout col="7" rows="*" columns="*,3*,*">
+      <GridLayout col="0" class="button btn-default btn-filter" verticalAlignment="center">
+        <Button text="‹" class="button-internal paginator"></Button>
+      </GridLayout>
+      <Label col="1" horizontalAlignment="center" verticalAlignment="center"
+        text="{{'BETSLIST.PAGE' | translate }}  {{page+1}} {{'BETSLIST.PAGE_SEPARATOR' | translate }} {{maxPage}}"></Label>
+      <GridLayout col="2" class="button btn-default btn-filter" verticalAlignment="center">
+        <Button text="›" class="button-internal paginator"></Button>
+      </GridLayout>
+    </GridLayout>
 
   </GridLayout>
 
