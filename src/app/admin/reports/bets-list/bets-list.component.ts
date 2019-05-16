@@ -13,13 +13,14 @@ export class BetsListComponent implements OnInit {
   productList: typeof ProductEnum = ProductEnum;
 
   constructor(public betsListService: BetsListService) {
+    console.log('BetsListComponent');
     this.betsListService.couponStatus = CouponStatus.Lost;
     console.log(this.betsListService.sportId);
   }
 
   ngOnInit() { }
 
-  changeValue(key: string, value:  any) {
+  changeValue(key: string, value: any) {
     this.betsListService[key] = value;
   }
   changeDateTypeCoupon(typeDataSelected: boolean): void {

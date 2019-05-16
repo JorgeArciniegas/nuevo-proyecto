@@ -146,11 +146,14 @@
         }
 
         .display {
-            @extend %card-title-mobile;
+          @extend %card-title-mobile;
 
-            .indicator-amount {
-                @extend %border-primary;
-            }
+          .indicator-amount {
+              @extend %border-primary;
+          }
+        }
+        .label-overlap {
+          @extend %card-title-label;
         }
 
         .product {

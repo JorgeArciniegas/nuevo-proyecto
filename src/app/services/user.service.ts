@@ -19,7 +19,7 @@ export class UserService {
     private api: ElysApiService
   ) {
     // Check if the user is logged
-    if ( this.isUserLogged ) {
+    if (this.isUserLogged) {
       this.loadUserData(this.storageService.getData('tokenData'));
     }
   }
@@ -31,7 +31,7 @@ export class UserService {
    */
   async login(username: string, password: string): Promise<string | undefined> {
     try {
-      const response: TokenDataSuccess = await this.api.account.postAccessToken( {username, password});
+      const response: TokenDataSuccess = await this.api.account.postAccessToken({ username, password });
       const userDataResponse = await this.loadUserData(response.access_token);
 
       // Check that we have gotten the user data.
@@ -71,6 +71,10 @@ export class UserService {
         return this.translateService.getTranslatedString('USER_NOT_ENABLE_TO_THE_OPERATION');
       }
     } catch (err) {
+      if (err.status === 401) {
+        // if unauthorized call logout
+        this.logout();
+      }
       return err.error.Message;
     }
   }
