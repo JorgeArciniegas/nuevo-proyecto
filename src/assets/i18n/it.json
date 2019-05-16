@@ -110,11 +110,14 @@
     "BTN_DATE_PLACED": "Piazzamento",
     "BTN_DATE_CLOSED": "Pagamento",
     "LABEL_DATE_FROM": "Da data",
+    "LABEL_DATE_PLACE": "Data piazzamento",
     "LABEL_DATE_TO": "A data",
     "LABEL_COUPONCODE_FORM": "Codice coupon",
     "LABEL_PRODUCTS_FORM": "Filtro prodotto",
     "LABEL_TYPECOUPON_FORM": "Tipo di scommessa",
+    "LABEL_TYPECOUPON": "Tipo",
     "LABEL_STATUSCOUPON_FORM": "Stato scommessa",
+    "LABEL_STATUSCOUPON": "Stato",
     "BTN_SEARCH": "Cerca",
     "COUPON_STATUS":{
       "ALL": "Tutti",
@@ -127,11 +130,12 @@
     "LABEL_TOTAL_PLAYED": "TOT giocato",
     "LABEL_PLACED_BETS": "In corso",
     "LABEL_AMOUNT_PLACED_BETS": "TOT In corso",
-    "LABEL_WON_BETS": "In corso",
-    "LABEL_AMOUNT_WON_BETS": "TOT In corso",
-    "LABEL_LOST_BETS": "In corso",
-    "LABEL_AMOUNT_LOST_BETS": "TOT perso"
-
+    "LABEL_WON_BETS": "Vincenti",
+    "LABEL_AMOUNT_WON_BETS": "TOT Vinto",
+    "LABEL_LOST_BETS": "Perdenti",
+    "LABEL_AMOUNT_LOST_BETS": "TOT perso",
+    "LABEL_USERNAME": "Nome utente",
+    "LABEL_STAKE": "Giocato"
   },
   "SPORT": {
     "ALL": "Tutti",

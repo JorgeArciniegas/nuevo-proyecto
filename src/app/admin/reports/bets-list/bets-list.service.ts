@@ -130,7 +130,7 @@ export class BetsListService {
 
   async getAvailableSport(): Promise<void> {
     // first element of ALL Sport
-    this.availableSport[0] = {SportId: -1, SportName: 'ALL', VirtualCategories: [] };
+    this.availableSport[0] = {SportId: 0, SportName: 'ALL', VirtualCategories: [] };
 
     await this.elysApi.virtual.getAvailablevirtualsports().then(items => {
       items.forEach( item => this.availableSport.push(item) );
@@ -141,7 +141,7 @@ export class BetsListService {
 
   getList(): void {
     const req: VirtualCouponListRequest = this.request;
-    if (req.sportId === -1) { req.sportId = null; }
+    if (req.sportId === 0) { req.sportId = null; }
     this.elysApi.reports.getVirtualListOfCoupon(req).then( items => this.betsCouponList = items);
 
     this.router.navigateByUrl('admin/reports/betsList/summaryCoupons');
