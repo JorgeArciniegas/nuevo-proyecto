@@ -323,6 +323,10 @@
     // BUTTON FILTER ADMIN
     .btn-filter {
       @extend %btn-filter-mobile;
+      .button-internal {
+        padding: 0 10;
+        text-transform: none;
+      }
     }
 
     .btn-filter-success{
