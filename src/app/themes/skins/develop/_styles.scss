@@ -41,7 +41,7 @@ $color-text-primary: #ffffff;
 $color-text-shadow: #8a8a8a;
 $color-text-warn: #ff0000;
 $color-text-operator: #3dab14;
-
+$color-text-gray: #6b7279;
 
 //EXTENDS
 %color-bg-default {
@@ -52,7 +52,9 @@ $color-text-operator: #3dab14;
 %color-placeholder {
   placeholder-color: $color-bg-accent;
 }
-
+%color-disabled{
+  color: $color-text-gray;
+}
 %bg-default {
 	background: $color-bg-primary;
 }
@@ -556,3 +558,5 @@ $gradient-dark2: #000000;
   background:url('~/app/themes/skins/develop/image/vgen.png') center center no-repeat;
   background-size: contain;
 }
+
+

@@ -1,5 +1,5 @@
 <div fxFlex fxLayout="column" fxLayoutAlign="center space-between">
-  <div fxFlex="90" fxLayout="column" [style.padding.px]="20">
+  <div fxFlex="93" fxLayout="column" [style.padding.px]="20">
     <div class="title">
       <h3>{{'BETSLIST.LIST_TITLE' | translate}} </h3>
     </div>
@@ -12,27 +12,27 @@
             </button>
           </div>
           <div fxFlex="10">
-              <div class="disabled"><small>{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}</small></div>
+              <div><small data='disabled'>{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}</small></div>
               <div class="value"><strong>{{ ((!betsListService.request.dateHasPlaced) ? 'BETSLIST.BTN_DATE_PLACED' : 'BETSLIST.BTN_DATE_CLOSED') | translate }}</strong></div>
             </div>
           <div fxFlex="10">
-            <div class="disabled"><small>{{ 'BETSLIST.LABEL_DATE_FROM' | translate }}</small></div>
+            <div><small data='disabled'>{{ 'BETSLIST.LABEL_DATE_FROM' | translate }}</small></div>
             <div class="value"><strong>{{betsListService.request.dateFrom | date:'mediumDate'}}</strong></div>
           </div>
           <div fxFlex="10">
-              <div class="disabled"><small>{{ 'BETSLIST.LABEL_DATE_TO' | translate }}</small></div>
+              <div><small data='disabled'>{{ 'BETSLIST.LABEL_DATE_TO' | translate }}</small></div>
               <div class="value"><strong>{{betsListService.request.dateTo | date:'mediumDate'}}</strong></div>
           </div>
           <div fxFlex="10">
-              <div class="disabled"><small>{{ 'BETSLIST.LABEL_TYPECOUPON_FORM' | translate }}</small></div>
+              <div><small data='disabled'>{{ 'BETSLIST.LABEL_TYPECOUPON_FORM' | translate }}</small></div>
               <div class="value"><strong>{{ 'CouponType.' + couponType[betsListService.request.couponType] | translate}}</strong></div>
           </div>
           <div fxFlex="10">
-              <div class="disabled"><small>{{ 'BETSLIST.LABEL_STATUSCOUPON_FORM' | translate }}</small></div>
+              <div><small data='disabled'>{{ 'BETSLIST.LABEL_STATUSCOUPON_FORM' | translate }}</small></div>
               <div class="value"><strong>{{ 'BETSLIST.COUPON_STATUS.' + couponStatus[betsListService.request.couponStatus] | translate}}</strong></div>
           </div>
           <div fxFlex="18">
-              <div class="disabled"><small>{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}</small></div>
+              <div><small data='disabled'>{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}</small></div>
               <div class="value"><strong>{{ 'SPORT.'+ betsListService.labelAvailableSportSelected | translate }} </strong></div>
           </div>
           <!-- PAGINATOR -->
@@ -54,12 +54,44 @@
 
     </div>
   </div>
-  <div fxFlex="10" fxLayout="column wrap">
+  <div fxFlex="7" fxLayout="column wrap">
     <div fxFlex class="btn-filter" fxLayout="column wrap" fxLayoutAlign="stretch">
-        <div fxFlexFill fxLayout="row" fxLayoutAlign="flex-start center">
-            <div fxFlex fxLayout="row" fxLayoutGap="10px">
-                <div class="value"><strong>{{ 'SPORT.'+ betsListService.labelAvailableSportSelected | translate }} </strong></div>
-                <div class="disabled"><small>{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}</small></div>
+        <div fxFlexFill fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="20px">
+            <div fxFlex fxLayout="row wrap" fxLayoutGap="grid">
+                <div fxFlex="5"></div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.NumberOfBets | number }} </h2></div>
+                  <div><small data='disabled'>{{ 'TITLE.COUPON' | translate }}</small></div>
+                </div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.TotalStake | number: '1.2-2' }}  </h2></div>
+                  <div><small data='disabled'>{{ 'BETSLIST.LABEL_TOTAL_PLAYED' | translate }}</small></div>
+                </div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.NumberOfPlacedBets | number }}  </h2></div>
+                  <div><small data='disabled'>{{ 'BETSLIST.LABEL_PLACED_BETS' | translate }}</small></div>
+                </div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.TotalPlacedBets | number }}  </h2></div>
+                  <div ><small data='disabled'>{{ 'BETSLIST.LABEL_AMOUNT_PLACED_BETS' | translate }}</small></div>
+                </div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.NumberOfWonBets | number }}  </h2></div>
+                  <div><small data='disabled'>{{ 'BETSLIST.LABEL_WON_BETS' | translate }}</small></div>
+                </div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.TotalWon | number }}  </h2></div>
+                  <div><small data='disabled'>{{ 'BETSLIST.LABEL_AMOUNT_WON_BETS' | translate }}</small></div>
+                </div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.TotalLost | number }}  </h2></div>
+                  <div><small data='disabled'>{{ 'BETSLIST.LABEL_LOST_BETS' | translate }}</small></div>
+                </div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.TotalWon | number }}  </h2></div>
+                  <div><small data='disabled'>{{ 'BETSLIST.LABEL_AMOUNT_LOST_BETS' | translate }}</small></div>
+                </div>
+                <div fxFlex="5"></div>
             </div>
     </div>
   </div>

@@ -123,7 +123,15 @@
       "Win": "Vincente"
     },
     "PAGE_SEPARATOR" : " di ",
-    "PAGE":"Pagina"
+    "PAGE":"Pagina",
+    "LABEL_TOTAL_PLAYED": "TOT giocato",
+    "LABEL_PLACED_BETS": "In corso",
+    "LABEL_AMOUNT_PLACED_BETS": "TOT In corso",
+    "LABEL_WON_BETS": "In corso",
+    "LABEL_AMOUNT_WON_BETS": "TOT In corso",
+    "LABEL_LOST_BETS": "In corso",
+    "LABEL_AMOUNT_LOST_BETS": "TOT perso"
+
   },
   "SPORT": {
     "ALL": "Tutti",
