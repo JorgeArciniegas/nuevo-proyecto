@@ -420,18 +420,19 @@ html {
 
 	.counter {
 		@extend %header-notification-style;
-  }
+	}
 
-  // MEDIA PRINT ONLY
+	// MEDIA PRINT ONLY
 
-  .logo-print-coupon {
-    width: 100% ;
-    min-height: 15px;
-    @extend %logo-header;
-  }
-  .noshow{ display: none; }
+	.logo-print-coupon {
+		width: 100%;
+		min-height: 15px;
+		@extend %logo-header;
+	}
+	.noshow {
+		display: none;
+	}
 }
-
 
 .card-odd {
 	@extend %dialog-card;
@@ -576,11 +577,11 @@ html {
 
 	.btn-close {
 		@extend %btn-transparent;
-  }
+	}
 
 	.btn-warning {
 		@extend %btn-warning;
-  }
+	}
 
 	.btn-success {
 		@extend %btn-success-gradient;
@@ -596,34 +597,33 @@ html {
 
 	.btn-dark-gradient {
 		@extend %btn-dark-gradient;
-  }
-
+	}
 }
 
-
 .modal-center {
-  .cdk-overlay-container {
-    .cdk-global-overlay-wrapper {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      height: 35vh;
-      width: 70vh;
-      /* bring your own prefixes */
-      transform: translate(-50%, -50%);
-      box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.1), 0px 1px 5px 5px rgba(0, 0, 0, 0.3);
-      padding: 10px;
-    }
-  }
+	.cdk-overlay-container {
+		.cdk-global-overlay-wrapper {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			height: 35vh;
+			width: 70vh;
+			/* bring your own prefixes */
+			transform: translate(-50%, -50%);
+			box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.1), 0px 1px 5px 5px rgba(0, 0, 0, 0.3);
+			padding: 10px;
+		}
+	}
 }
 
 @media print {
-  .isPrinting {
-    > * {
-      display: none;
-    }
-    app-print-coupon {
-      display: block;
-    }
-  }
+	.isPrinting {
+		> * {
+			display: none;
+		}
+		app-print-coupon,
+		app-print-receipt {
+			display: block;
+		}
+	}
 }

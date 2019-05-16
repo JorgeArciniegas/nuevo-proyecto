@@ -221,7 +221,7 @@ export class CouponService {
   // Method to execute the coupon limits check.
   checkLimits() {
     // Check if it is a valid coupon
-    if (this.coupon.CouponTypeId !== CouponType.Unknown) {
+    if (this.coupon && this.coupon.CouponTypeId !== CouponType.Unknown) {
       // Get the MaxBetStake to verify
       const maxBetStake =
         this.coupon.CouponLimit.MaxBetStake < this.coupon.UserCouponLimit.MaxStake

@@ -5,6 +5,7 @@ import { CancelCouponRequest, ErrorStatus, FlagAsPaidRequest } from '@elys/elys-
 import { UserService } from '../../../services/user.service';
 import { CouponService } from '../coupon.service';
 import { PrintReceiptService } from './print-receipt/print-receipt.service';
+import { Receipt } from './print-receipt/print-receipt.model';
 
 @Component({
   selector: 'app-pay-cancel-dialog',
@@ -56,7 +57,11 @@ export class PayCancelDialogComponent implements OnInit {
           .then(message => {
             this.errorMessage = this.errorMessage2[message.Error];
             this.errorNumberIcon = message.Error;
-            this.printReceiptService.printWindow();
+            // In case of successful operation start the print of the receipt
+            if (message.Error === ErrorStatus.Success) {
+              this.printReceiptService.printWindow(new Receipt(couponCode, true, message.Stake));
+              this.close();
+            }
           })
           .catch(error => (this.errorMessage = 'operation not possible (' + error.status + ')'));
         this.form.get('couponCode').setValue('');
@@ -80,7 +85,11 @@ export class PayCancelDialogComponent implements OnInit {
           .then(message => {
             this.errorMessage = this.errorMessage2[message.ErrorStatus];
             this.errorNumberIcon = message.ErrorStatus;
-            this.printReceiptService.printWindow();
+            // In case of successful operation start the print of the receipt
+            if (message.ErrorStatus === ErrorStatus.Success) {
+              this.printReceiptService.printWindow(new Receipt(couponCode, false, message.StakeGross));
+              this.close();
+            }
           })
           .catch(error => (this.errorMessage = 'operation not possible (' + error.status + ')'));
         this.form.get('couponCode').setValue('');

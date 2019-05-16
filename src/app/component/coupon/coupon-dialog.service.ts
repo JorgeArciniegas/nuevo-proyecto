@@ -17,7 +17,8 @@ export class CouponDialogService {
   openPayCancelDialog(type: DialogTypeCoupon): void {
     this.close();
     this.dialogRef = this.dialog.open(PayCancelDialogComponent, {
-      data: type
+      data: type,
+      id: 'pay-cancel-dialog'
       // , { hasBackdrop: true }
     });
   }

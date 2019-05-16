@@ -1,14 +1,28 @@
 {
   "ACCG": "ACCG",
   "BASE": "B",
+  "BET": "Scommessa",
   "Balance": "Balance",
   "C": "C",
   "CANCEL": "ANNULLA",
+  "CANCELED_ON": "Annullata il",
   "CLOSE": "Close",
   "CODA": "C",
   "COL": "COL",
   "CONFIRM": "CONFIRM",
   "COUPON CODE": "Coupon Code",
+  "CouponType": {
+    "CombinationsBet": "Sistema",
+    "MultipleBet": "Multipla",
+    "PrintCoupon": {
+      "CombinationsBet": "Sistema",
+      "MultipleBet": "Multipla",
+      "SingleBet": "Singola",
+      "Unknown": ""
+    },
+    "SingleBet": "Singola",
+    "Unknown": "Sconosciuta"
+  },
   "ERROR": "Errore",
   "ERROR_PASSWORD_TOO_SHORT": "Questa password è troppo corta, minimo 6 caratteri",
   "ERROR_REQUIRED": "É obbligatorio",
@@ -18,6 +32,23 @@
   "NO_CONNECTION": "Nessuna connessione disponibile",
   "Operator": "Operator",
   "PASSWORD": "Password",
+  "PAY": "PAYMENT",
+  "PAYED_AMOUNT": "Importo pagato",
+  "PAYED_ON": "Pagata il",
+  "PRINT": {
+    "COUPON": {
+      "CODE": "Codice",
+      "COMB": " Comb.",
+      "DATE": "Data Coupon",
+      "GROUPS": "Gruppi",
+      "HEADER_MSG": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad",
+      "PAYOUTMAX": "MAX. PAYOUT",
+      "PAYOUTMIN": "MIN. PAYOUT",
+      "STAKE": "Imp. Giocato",
+      "TOTALPAYOUT": "TOTAL PAYOUT",
+      "TYPE": "Tipo giocata"
+    }
+  },
   "R": "R",
   "SECTION_NOT_AVAILABLE": "Sezione non presente",
   "SMARTCODE": {
@@ -73,36 +104,9 @@
   "amountPlace": "Importo scommesso",
   "dogRacingLabel": "DOG RACING",
   "multiple": "Multipla",
-  "PAY": "PAYMENT",
   "piazza": "Piazza",
   "potentialMaxWinner": "Vincita potenziale massima",
   "race": "Race",
   "single": "Singola",
-  "tabCoupon": "Scheda scommesse",
-  "PRINT" :{
-    "COUPON": {
-      "DATE": "Data Coupon",
-      "CODE": "Codice",
-      "TYPE": "Tipo giocata",
-      "STAKE": "Imp. Giocato",
-      "GROUPS": "Gruppi",
-      "COMB": " Comb.",
-      "PAYOUTMIN": "MIN. PAYOUT",
-      "PAYOUTMAX": "MAX. PAYOUT",
-      "TOTALPAYOUT":"TOTAL PAYOUT",
-      "HEADER_MSG": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad"
-    }
-  },
-  "CouponType": {
-    "CombinationsBet": "Sistema",
-    "MultipleBet": "Multipla",
-    "PrintCoupon": {
-      "CombinationsBet": "Sistema",
-      "MultipleBet": "Multipla",
-      "SingleBet": "Singola",
-      "Unknown": ""
-    },
-    "SingleBet": "Singola",
-    "Unknown": "Sconosciuta"
-  }
+  "tabCoupon": "Scheda scommesse"
 }
