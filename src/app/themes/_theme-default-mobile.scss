@@ -315,7 +315,16 @@
 
 		.btn-dark-gradient {
 			@extend %btn-dark-gradient-mobile;
-		}
+    }
+
+    // BUTTON FILTER ADMIN
+    .btn-filter {
+      @extend %btn-filter-mobile;
+    }
+
+    .btn-filter-success{
+      @extend %btn-filter-success-mobile;
+    }
 
 		.advance-game {
 			margin: 0 -2;
