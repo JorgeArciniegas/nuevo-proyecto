@@ -6,76 +6,75 @@
     <!-- ROW 0 -->
     <div fxFlex fxLayout="row" fxLayoutGap="20px">
       <!-- DATA SELECTED -->
-      <div fxFlex="70" fxLayout="row"  fxLayoutGap="20px" class="display padding-20">
-        <h3 class="label">{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}</h3>
+      <div fxFlex="70" fxLayout="row" fxLayoutGap="20px" class="display padding-20">
+        <h3 class="label-overlap">{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}</h3>
         <div fxFlex="20" class="row" fxLayoutGap="20px">
-            <div fxFlex fxLayout="column" fxLayoutGap="5px">
-                <button class="btn-filter btn-default radius-5" (click)="changeValue('dateHasPlaced', false)" [class.btn-filter-success]="!betsListService.dateHasPlaced">
-                  {{'BETSLIST.BTN_DATE_PLACED' | translate}}
-                </button>
-                <button class="btn-filter btn-default radius-5" (click)="changeValue('dateHasPlaced', true)" [class.btn-filter-success]="betsListService.dateHasPlaced">
-                  {{'BETSLIST.BTN_DATE_CLOSED' | translate}}
-                </button>
-            </div>
-        </div>
-        <div fxFlex="40" class="row" fxLayoutGap="20px">
-          <div fxFlex class="row" fxLayoutGap="20px">
-              <div fxLayout="column" fxLayoutGap="5px">
-                <h4>{{ 'BETSLIST.LABEL_DATE_FROM' | translate }}</h4>
-                <mat-form-field class="btn-filter btn-default padding-5 radius-5" (click)="pickerDateFrom.open()">
-                    <input matInput [matDatepicker]="pickerDateFrom" disabled [(ngModel)]="betsListService.dateFrom">
-                    <mat-datepicker-toggle matSuffix [for]="pickerDateFrom"></mat-datepicker-toggle>
-                    <mat-datepicker touchUi #pickerDateFrom disabled="false"></mat-datepicker>
-                </mat-form-field>
-              </div>
+          <div fxFlex fxLayout="column" fxLayoutGap="5px">
+            <button class="btn-filter btn-default radius-5" (click)="changeValue('dateHasPlaced', false)" [class.btn-filter-success]="!betsListService.dateHasPlaced">
+              {{'BETSLIST.BTN_DATE_PLACED' | translate}}
+            </button>
+            <button class="btn-filter btn-default radius-5" (click)="changeValue('dateHasPlaced', true)" [class.btn-filter-success]="betsListService.dateHasPlaced">
+              {{'BETSLIST.BTN_DATE_CLOSED' | translate}}
+            </button>
           </div>
         </div>
         <div fxFlex="40" class="row" fxLayoutGap="20px">
-            <div fxFlex class="row" fxLayoutGap="20px">
-                <div fxLayout="column" fxLayoutGap="5px">
-                  <h4>{{ 'BETSLIST.LABEL_DATE_TO' | translate }}</h4>
-                  <mat-form-field class="btn-filter btn-default padding-5 radius-5" (click)="pickerDateTo.open()">
-                      <input matInput [matDatepicker]="pickerDateTo" disabled [(ngModel)]="betsListService.dateTo">
-                      <mat-datepicker-toggle matSuffix [for]="pickerDateTo"></mat-datepicker-toggle>
-                      <mat-datepicker touchUi #pickerDateTo disabled="false"></mat-datepicker>
-                  </mat-form-field>
-                </div>
+          <div fxFlex class="row" fxLayoutGap="20px">
+            <div fxLayout="column" fxLayoutGap="5px">
+              <h4>{{ 'BETSLIST.LABEL_DATE_FROM' | translate }}</h4>
+              <mat-form-field class="btn-filter btn-default padding-5 radius-5" (click)="pickerDateFrom.open()">
+                <input matInput [matDatepicker]="pickerDateFrom" disabled [(ngModel)]="betsListService.dateFrom">
+                <mat-datepicker-toggle matSuffix [for]="pickerDateFrom"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #pickerDateFrom disabled="false"></mat-datepicker>
+              </mat-form-field>
             </div>
+          </div>
+        </div>
+        <div fxFlex="40" class="row" fxLayoutGap="20px">
+          <div fxFlex class="row" fxLayoutGap="20px">
+            <div fxLayout="column" fxLayoutGap="5px">
+              <h4>{{ 'BETSLIST.LABEL_DATE_TO' | translate }}</h4>
+              <mat-form-field class="btn-filter btn-default padding-5 radius-5" (click)="pickerDateTo.open()">
+                <input matInput [matDatepicker]="pickerDateTo" disabled [(ngModel)]="betsListService.dateTo">
+                <mat-datepicker-toggle matSuffix [for]="pickerDateTo"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #pickerDateTo disabled="false"></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
         </div>
       </div>
       <!-- BETSLIP CODE -->
       <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center" class="display padding-20">
-          <h3 class="label">{{ 'BETSLIST.LABEL_COUPONCODE_FORM' | translate }}</h3>
-          <mat-form-field fxFlex  class="btn-filter btn-default padding-5 radius-5" >
-            <input matInput type="text" class="padding-5" [(ngModel)]="betsListService.ticketCode">
-          </mat-form-field>
+        <h3 class="label-overlap">{{ 'BETSLIST.LABEL_COUPONCODE_FORM' | translate }}</h3>
+        <mat-form-field fxFlex class="btn-filter btn-default padding-5 radius-5">
+          <input matInput type="text" class="padding-5" [(ngModel)]="betsListService.ticketCode">
+        </mat-form-field>
       </div>
     </div>
     <!-- ROW 1 -->
     <div fxFlex fxLayout="row" fxLayoutGap="20px">
       <div fxFlex="40" fxLayout="row" fxLayoutGap="20px" class="display padding-20">
-        <h3 class="label">{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}</h3>
+        <h3 class="label-overlap">{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}</h3>
         <div fxFlex fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px grid">
-            <div fxFlex="50" fxLayout="column" *ngFor="let type of betsListService.availableSport">
-              <button class="btn-filter btn-default radius-5" [class.btn-filter-success]="betsListService.sportId === type.SportId"
+          <div fxFlex="50" fxLayout="column" *ngFor="let type of betsListService.availableSport">
+            <button class="btn-filter btn-default radius-5" [class.btn-filter-success]="betsListService.sportId === type.SportId"
               (click)="changeValue('sportId', type.SportId)">{{ 'SPORT.'+ type.SportName | translate }} </button>
-            </div>
+          </div>
         </div>
       </div>
       <div fxFlex="30" fxLayout="row" fxLayoutGap="20px" class="display padding-20">
-        <h3 class="label">{{ 'BETSLIST.LABEL_TYPECOUPON_FORM' | translate }}</h3>
+        <h3 class="label-overlap">{{ 'BETSLIST.LABEL_TYPECOUPON_FORM' | translate }}</h3>
         <div fxFlex fxLayout="column" fxLayoutGap="5px">
-          <button *ngFor="let type of couponType.values()" class="btn-filter btn-default radius-5"
-            [class.btn-filter-success]="betsListService.couponType === couponType[type]"
-                (click)="changeValue('couponType', couponType[type])">{{ 'CouponType.' +type | translate}}</button>
+          <button *ngFor="let type of couponType.values()" class="btn-filter btn-default radius-5" [class.btn-filter-success]="betsListService.couponType === couponType[type]"
+            (click)="changeValue('couponType', couponType[type])">{{ 'CouponType.' +type | translate}}</button>
         </div>
       </div>
       <div fxFlex="30" fxLayout="row" fxLayoutGap="20px" class="display padding-20">
-        <h3 class="label">{{ 'BETSLIST.LABEL_STATUSCOUPON_FORM' | translate }}</h3>
+        <h3 class="label-overlap">{{ 'BETSLIST.LABEL_STATUSCOUPON_FORM' | translate }}</h3>
         <div fxFlex fxLayout="column" fxLayoutGap="5px">
           <button *ngFor="let type of couponStatus.values()" class="btn-filter btn-default radius-5"
             [class.btn-filter-success]="betsListService.couponStatus === couponStatus[type]"
-                (click)="changeValue('couponStatus', couponStatus[type])">{{ 'BETSLIST.COUPON_STATUS.' +type | translate}}</button>
+            (click)="changeValue('couponStatus', couponStatus[type])">{{ 'BETSLIST.COUPON_STATUS.' +type | translate}}</button>
         </div>
       </div>
     </div>

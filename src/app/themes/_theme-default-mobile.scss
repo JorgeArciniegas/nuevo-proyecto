@@ -151,7 +151,10 @@
 			.indicator-amount {
 				@extend %border-primary;
 			}
-		}
+    }
+    .label-overlap {
+      @extend %card-title-label;
+    }
 
 		.product {
 			padding: 5 0;

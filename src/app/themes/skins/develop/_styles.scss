@@ -148,6 +148,10 @@ $color-text-operator: #3dab14;
 	border-radius: 5;
 }
 
+%card-title-label {
+  background-color: $color-bg-primary;
+}
+
 %sub-card-title {
 	background-color: $color-bg-event;
 	color: $color-text-primary;

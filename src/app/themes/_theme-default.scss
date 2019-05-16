@@ -202,7 +202,11 @@ html {
 		}
 
 		.display {
-			@extend %card-title;
+      @extend %card-title;
+
+      .label-overlap {
+        @extend %card-title-label;
+      }
 		}
 
 		.sub-display {

@@ -19,7 +19,7 @@ export class BetsListComponent implements OnInit {
 
   ngOnInit() { }
 
-  changeValue(key: string, value:  any) {
+  changeValue(key: string, value: any) {
     this.betsListService[key] = value;
   }
 
