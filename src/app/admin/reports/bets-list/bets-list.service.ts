@@ -4,6 +4,7 @@ import { VirtualCouponListRequest } from '@elys/elys-api/lib/reports/reports.mod
 import { TranslateService } from '@ngx-translate/core';
 import { CouponStatusInternal, CouponTypeInternal, VirtualSportId } from './bets-list.model';
 import { AccountVirtualSport } from '@elys/elys-api/lib/virtual/virtual.models';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,9 @@ export class BetsListService {
   request: VirtualCouponListRequest = null;
   availableSport: AccountVirtualSport = null;
   pageSizeList: number[] = [10, 25, 50, 100];
+
   /* productEnum: typeof VirtualSportId = VirtualSportId; */
-  constructor(translate: TranslateService, public elysApi: ElysApiService) {
+  constructor(translate: TranslateService, public elysApi: ElysApiService, private router: Router) {
 
     this.getAvailableSport();
     /**
@@ -133,5 +135,7 @@ export class BetsListService {
     const req: VirtualCouponListRequest = this.request;
     if (req.sportId === VirtualSportId.ALL ) { req.sportId = 0; }
     this.elysApi.reports.getVirtualListOfCoupon(req);
+
+    this.router.navigateByUrl('admin/reports/betsList/summaryCoupons');
   }
 }

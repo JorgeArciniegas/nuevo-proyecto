@@ -6,10 +6,11 @@ import { AdminComponent } from './admin.component';
 import { BetsListComponent } from './reports/bets-list/bets-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatDatepickerModule, MatInputModule, MatNativeDateModule } from '@angular/material';
+import { SummaryCouponsComponent } from './reports/bets-list/summary-coupons/summary-coupons.component';
 
 
 @NgModule({
-  declarations: [AdminComponent, BetsListComponent],
+  declarations: [AdminComponent, BetsListComponent, SummaryCouponsComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
