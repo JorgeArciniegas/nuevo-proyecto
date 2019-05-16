@@ -1,37 +1,27 @@
-<mat-grid-list cols="1" *ngIf="rowHeight" rowHeight="{{(rowHeight-1) / 2}}">
-  <mat-grid-tile rowspan="2">
-    <div class="display" fxFlexFill>
-      <div class="card-title">
-        <h3 class="title" fxLayout="row" fxLayoutAlign="center center">
-          <div fxFlex>
-            <span class="text">{{ 'coupon' | translate }} </span>
-          </div>
-
-          <button class="btn-reset btn-display btn-warning radius-5" (click)="clearCoupon()"
-            fxLayoutAlign="center center">
-            <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
-          </button>
-        </h3>
-      </div>
-    </div>
-  </mat-grid-tile>
+<mat-grid-list cols="1" rowHeight="{{(rowHeight-1) / 2}}">
   <mat-grid-tile rowspan="1">
-    <div class="sub-display">
-      <div class="card-title">
-        <h5 class="title">{{ 'tabCoupon' | translate }}</h5>
+    <div class="display" fxFlexFill>
+      <div class="card-title" fxLayout="row" fxLayoutAlign="space-between center">
+        <h3 class="title" fxFlex>
+          <span class="text">{{ 'coupon' | translate }}</span>
+        </h3>
+        <button class="btn-reset btn-display btn-warning radius-5" (click)="clearCoupon()"
+          fxLayoutAlign="center center">
+          <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
+        </button>
       </div>
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="1">
     <div class="btn-coupon-board">
       <div class="display" fxLayoutAlign="space-around center" fxLayout="row layout-wrap">
-        <div fxFlex fxLayoutAlign="center center">
+        <div fxFlex fxLayoutAlign="start center" class="coupon-type-indicator">
           <span class="btn btn-default">{{'single' | translate}}</span>
           <span
             class="indicator-odds-number radius-50">{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}</span>
         </div>
         <div fxFlex="15">
-          <button class="btn-reset btn-display btn-dark-gradient radius-5"  (click)="openDialog()">
+          <button class="btn-reset btn-display btn-dark-gradient radius-5" (click)="openDialog()">
             <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png">
           </button>
         </div>
@@ -54,8 +44,10 @@
         </button>
         <div fxFlex="90" fxLayout="column" fxLayoutAlign="start stretch">
           <div *ngFor="let odd of listOdds" class="card-odd-container" fxFlex="20">
-            <div fxFill class="card-odd radius-5" fxLayout="column" fxLayoutAlign="space-between stretch">
-              <div fxFlex="24" class="top-window" fxLayoutAlign="space-between center">
+            <div fxFill class="card-odd radius-5"
+              [ngClass]="{'card-odd-error': !couponService.warningMessages && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}"
+              fxLayout="column" fxLayoutAlign="space-between stretch">
+              <div fxFlex="24" class="top-window radius-5-tl-tr" fxLayoutAlign="space-between center">
                 <div>{{odd.EventName}}</div>
                 <div>#{{odd.MatchId}}</div>
               </div>
@@ -103,36 +95,47 @@
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="2">
-    <div class="display-amount radius-5"
-      [ngClass]="{'display-error': couponService.errorMessage, 'display-warning': couponService.warningMessage}">
-      <label *ngIf="!couponService.errorMessage && !couponService.warningMessage">
-        <span>{{'potentialMaxWinner' | translate}}</span>
-        <input type="text" name="winner" [ngModel]="couponService.stakeDisplay.MaxWinning |number: '1.2-2'" readonly />
-      </label>
-      <label class="display-message" *ngIf="couponService.errorMessage" fxLayout="column" fxFlex>
+    <div class="display display-message radius-5"
+      [ngClass]="{'display-error': couponService.error && !couponService.warningMessages, 'display-warning': couponService.warningMessages}">
+      <label *ngIf="couponService.error && !couponService.warningMessages" fxLayout="column" fxFlex>
         <span>{{'ERROR' | translate}}</span>
-        <div class="display-message-description" fxLayout="row" fxLayoutAlign="center start" fxFlex>
-          {{couponService.errorMessage}} </div>
+        <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
+          {{couponService.error.message | translate}} <ng-container *ngIf="couponService.error.detail">(Limit:
+            {{couponService.error.detail}})</ng-container>
+        </div>
       </label>
-      <label class="display-message" *ngIf="couponService.warningMessage" fxLayout="column" fxFlex>
+      <label *ngIf="couponService.warningMessages" fxLayout="column" fxFlex>
         <span>{{'WARNING' | translate}}</span>
-        <div class="display-message-description" fxLayout="row" fxLayoutAlign="center start" fxFlex>
-          {{couponService.warningMessage}} </div>
+        <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
+          {{couponService.warningMessages | translate}}
+        </div>
       </label>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile rowspan="2" *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
+  <mat-grid-tile rowspan="2">
+    <div class="display-amount radius-5">
+      <label>
+        <span>{{'potentialMaxWinner' | translate}}</span>
+        <input type="text" name="winner" [ngModel]="couponService.stakeDisplay.MaxWinning |number: '1.2-2'" readonly />
+      </label>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="2"
+    *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
     <div fxFill class="padding-top-10">
-      <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.errorMessage" (click)="couponService.preStagedCoupon()">{{'piazza' | translate}}</button>
+      <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.error"
+        (click)="couponService.preStagedCoupon()">{{'piazza' | translate}}</button>
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="2" *ngIf="couponService.coupon && couponService.coupon.internal_isReadyToPlace">
     <div fxFill fxLayoutGap="10px">
       <div fxFill fxFlex="50" class="padding-top-10">
-        <button class="btn-default btn-warning radius-10 padding-10" [disabled]="couponService.errorMessage" (click)="couponService.cancelStagingCoupon()">{{'back' | translate}}</button>
+        <button class="btn-default btn-warning radius-10 padding-10" [disabled]="couponService.error"
+          (click)="couponService.cancelStagingCoupon()">{{'back' | translate}}</button>
       </div>
       <div fxFill fxFlex="50" class="padding-top-10">
-        <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.errorMessage" (click)="couponService.stagedCoupon()">{{'conferma' | translate}}</button>
+        <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.error"
+          (click)="couponService.stagedCoupon()">{{'conferma' | translate}}</button>
       </div>
     </div>
   </mat-grid-tile>

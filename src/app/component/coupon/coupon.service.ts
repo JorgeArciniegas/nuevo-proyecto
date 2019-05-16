@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BetCouponOdd, CouponCategory } from '@elys/elys-api';
-import { CouponServiceMessageType, ElysCouponService } from '@elys/elys-coupon';
+import { BetCouponOdd, CouponCategory, CouponType } from '@elys/elys-api';
+import { ElysCouponService, CouponServiceMessageType } from '@elys/elys-coupon';
 import { AddOddRequest, BetCouponExtended, BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Observable, Subject } from 'rxjs';
 import { BetOdd } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
-import { InternalCoupon, OddsStakeEdit, StakesDisplay } from './coupon.model';
+import { OddsStakeEdit, StakesDisplay, InternalCoupon, CouponLimit, Error } from './coupon.model';
 import { PrintCouponService } from './print-coupon/print-coupon.service';
+import { DEFAULT_BREAKPOINTS } from '@angular/flex-layout';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,10 @@ export class CouponService {
   oddStakeEditObs: Observable<OddsStakeEdit>;
 
   // Coupon messages variables
-  warningMessage: string;
-  errorMessage: string;
+  warningMessages: string;
+  error: Error;
+  // Duration of the notification of warning's messages
+  notificationInterval = 10000;
 
   fnPrintCoupon(): void {
     this.printCoupon.printWindow();
@@ -45,7 +48,6 @@ export class CouponService {
       this.coupon = coupon;
       this.couponResponseSubject.next(coupon);
       if (coupon) {
-        this.checkLimits();
         this.coupon.internal_isReadyToPlace = false;
         this.calculateAmounts();
       } else {
@@ -54,22 +56,23 @@ export class CouponService {
     });
     // Get the message from the coupon
     elysCoupon.couponServiceMessage.subscribe(message => {
+      this.error = undefined;
+      this.warningMessages = undefined;
       // Get coupon's message
       switch (message.messageType) {
         case this.messageType.error:
-          this.errorMessage = message.message;
+          this.error = new Error(message.message);
           break;
         case this.messageType.warning:
-          this.warningMessage = message.message;
+          this.warningMessages = message.message;
+          // Check the coupon's limits
+          this.checkLimits();
+          // Set the visualization time of the warning
+          setTimeout(() => (this.warningMessages = undefined), this.notificationInterval);
           break;
         default:
-          this.errorMessage = undefined;
-          this.warningMessage = undefined;
-      }
-      if (message.messageType === this.messageType.error) {
-        this.errorMessage = message.message;
-      } else {
-        this.errorMessage = undefined;
+          // Check the coupon's limits
+          this.checkLimits();
       }
     });
     this.stakeDisplaySubject = new Subject<StakesDisplay>();
@@ -79,14 +82,13 @@ export class CouponService {
     this.oddStakeEditSubject = new Subject<OddsStakeEdit>();
     this.oddStakeEditObs = this.oddStakeEditSubject.asObservable();
     this.oddStakeEditObs.subscribe(item => {
-      if (!this.coupon.internal_isReadyToPlace) {
+      if (this.coupon.internal_isReadyToPlace !== null && !this.coupon.internal_isReadyToPlace) {
         this.oddStakeEdit = item;
       }
     });
   }
 
   addRemoveToCoupon(smart: BetOdd[]): void {
-    // console.log(smart);
     try {
       if (this.coupon && this.coupon.internal_isReadyToPlace) {
         return;
@@ -123,18 +125,19 @@ export class CouponService {
     };
   }
 
-  // clear all odds to coupon
+  // Clear all odds to notificationInterval
   resetCoupon(): void {
     this.coupon = null;
     this.couponIdAdded = [];
     this.elysCoupon.betCoupon = null;
-    // reset amount
+    // Reset message's variable
+    this.error = undefined;
+    this.warningMessages = undefined;
+    // Reset amount
     const stakesDisplayTemp: StakesDisplay = {
       TotalStake: 0,
       MaxWinning: 0
     };
-    this.errorMessage = undefined;
-    this.warningMessage = undefined;
     this.stakeDisplaySubject.next(stakesDisplayTemp);
   }
 
@@ -144,15 +147,26 @@ export class CouponService {
    */
   calculateAmounts(): void {
     let stake = 0,
-      Totalwin = 0;
+      totalWin = 0;
     this.coupon.Odds.forEach(odd => {
       stake += odd.OddStake;
-      Totalwin += odd.OddStake * odd.OddValue;
     });
     //
+    // The coupon has multipleStake
+    // TO CHECK AGAIN WHEN OTHER GAMES WILL BE INTRODUCE
+    this.coupon.Groupings.map(item => {
+      if (!item.IsMultiStake && item.Selected) {
+        item.Stake = stake / item.Combinations;
+        item.MaxWinCombination = item.Stake * item.MaxWinCombinationUnit;
+      }
+      if (item.Selected) {
+        totalWin += item.Stake * item.MaxWinCombinationUnit;
+      }
+    });
+
     const stakesDisplayTemp: StakesDisplay = {
       TotalStake: stake,
-      MaxWinning: Totalwin
+      MaxWinning: totalWin
     };
 
     this.stakeDisplaySubject.next(stakesDisplayTemp);
@@ -193,11 +207,133 @@ export class CouponService {
     this.oddStakeEditSubject.next(tempOdd);
   }
 
+  // Method to execute the coupon limits check.
   checkLimits() {
-    // Check if the API call has been successfull
-    if (this.coupon.internal_ResponseStatus === 1 || this.coupon.internal_ResponseStatus === 2) {
+    // Check if it is a valid coupon
+    if (this.coupon.CouponTypeId !== CouponType.Unknown) {
+      // Get the MaxBetStake to verify
+      const maxBetStake =
+        this.coupon.CouponLimit.MaxBetStake < this.coupon.UserCouponLimit.MaxStake
+          ? this.coupon.CouponLimit.MaxBetStake
+          : this.coupon.UserCouponLimit.MaxStake;
+      let maxBetWin: number;
+      const error: Error = new Error();
+      // Check the limitation by coupon type
+      switch (this.coupon.CouponTypeId) {
+        case CouponType.SingleBet:
+          // Get the MaxBetWin to verify
+          maxBetWin =
+            this.coupon.CouponLimit.MaxSingleBetWin < this.coupon.UserCouponLimit.MaxLoss
+              ? this.coupon.CouponLimit.MaxSingleBetWin
+              : this.coupon.UserCouponLimit.MaxLoss;
+          if (this.stakeDisplay.MaxWinning > maxBetWin) {
+            // Check the MaxBetWin
+            error.setError(CouponLimit[CouponLimit.MaxSingleBetWin], maxBetWin);
+          } else if (this.coupon.Odds[0].OddStake < this.coupon.CouponLimit.MinBetStake) {
+            // Check the MinBetStake
+            error.setError(CouponLimit[CouponLimit.MinBetStake], this.coupon.CouponLimit.MinBetStake, this.coupon.Odds[0].SelectionId);
+          } else if (this.coupon.Odds[0].OddStake > maxBetStake) {
+            // Check the MaxBetStake
+            error.setError(CouponLimit[CouponLimit.MaxBetStake], maxBetStake, this.coupon.Odds[0].SelectionId);
+          }
+          break;
+        case CouponType.MultipleBet:
+          break;
+        case CouponType.CombinationsBet:
+          // Get the MaxBetWin to verify
+          maxBetWin =
+            this.coupon.CouponLimit.MaxCombinationBetWin < this.coupon.UserCouponLimit.MaxLoss
+              ? this.coupon.CouponLimit.MaxCombinationBetWin
+              : this.coupon.UserCouponLimit.MaxLoss;
+          if (this.stakeDisplay.TotalStake > maxBetStake) {
+            // Check the MaxBetStake
+            error.setError(CouponLimit[CouponLimit.MaxBetStake], maxBetStake);
+          } else if (this.stakeDisplay.MaxWinning > maxBetWin) {
+            // Check the MaxBetWin
+            error.setError(CouponLimit[CouponLimit.MaxCombinationBetWin], maxBetWin);
+          } else {
+            for (const grouping of this.coupon.Groupings) {
+              // Check the active groupings
+              if (grouping.Selected) {
+                // Check if it a system of singles
+                const isASystemOfSingle = grouping.Grouping === 1;
+                const isMultiStake = grouping.IsMultiStake;
+                for (const odd of this.coupon.Odds) {
+                  let oddStake: number;
+                  // Get the oddStake
+                  if (isMultiStake) {
+                    oddStake = odd.OddStake;
+                  } else {
+                    oddStake = grouping.Stake;
+                  }
+                  // Check the MinGroupingsBetStake
+                  if (oddStake < this.coupon.CouponLimit.MinGroupingsBetStake) {
+                    // Check if this kind of error has already been created
+                    if (error.message === CouponLimit[CouponLimit.MinGroupingsBetStake]) {
+                      // Error already present. Add a new location to its array.
+                      error.location.push(odd.SelectionId);
+                    } else {
+                      // Check if any other kind of error is already present
+                      if (error.isEmpty()) {
+                        // Create the error
+                        error.setError(
+                          CouponLimit[CouponLimit.MinGroupingsBetStake],
+                          this.coupon.CouponLimit.MinGroupingsBetStake,
+                          odd.SelectionId
+                        );
+                      }
+                    }
+                  } else if (oddStake > this.coupon.CouponLimit.MaxGroupingsBetStake) {
+                    // Check the MaxGroupingsBetStake
+                    if (error.message === CouponLimit[CouponLimit.MaxGroupingsBetStake]) {
+                      error.location.push(odd.SelectionId);
+                    } else {
+                      // Check if any other kind of error is already present
+                      if (error.isEmpty()) {
+                        // Create the error
+                        error.setError(
+                          CouponLimit[CouponLimit.MaxGroupingsBetStake],
+                          this.coupon.CouponLimit.MaxGroupingsBetStake,
+                          odd.SelectionId
+                        );
+                      }
+                    }
+                  } else if (isASystemOfSingle) {
+                    // For a system of singles
+                    // Check if the win of the single with the highest odd rispect the limit
+                    if (grouping.MaxWinCombination > this.coupon.CouponLimit.MaxSingleBetWin) {
+                      const singleWin = oddStake * odd.OddValue;
+                      // Check the "MaxSingleBetWin"
+                      if (singleWin > this.coupon.CouponLimit.MaxSingleBetWin) {
+                        if (error.message === CouponLimit[CouponLimit.MaxSingleBetWin]) {
+                          this.error.location.push(odd.SelectionId);
+                        } else {
+                          // Check if any other kind of error is already present
+                          if (error.isEmpty()) {
+                            // Create the error
+                            error.setError(
+                              CouponLimit[CouponLimit.MaxSingleBetWin],
+                              this.coupon.CouponLimit.MaxSingleBetWin,
+                              odd.SelectionId
+                            );
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          break;
+      }
+      // Set the error variable if an error has occurerd
+      if (!error.isEmpty()) {
+        this.error = error;
+      }
     }
   }
+
   /**
    *
    */

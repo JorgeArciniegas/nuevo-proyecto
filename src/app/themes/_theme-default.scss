@@ -223,6 +223,41 @@ html {
 				}
 			}
 
+			.display-message {
+				height: 86%;
+
+				label,
+				.label {
+					font-weight: 500;
+					font-size: 0.7em;
+					text-transform: uppercase;
+					height: 100%;
+
+					span {
+						display: block;
+						text-align: center;
+						padding: 5px 10px 0px 10px;
+					}
+
+					div {
+						text-transform: none;
+						margin: 5px 10px 10px 10px;
+						text-align: center;
+						font-weight: bold;
+						font-size: 12px;
+						overflow: auto;
+					}
+				}
+
+				&.display-warning {
+					@extend %color-bg-warn;
+				}
+
+				&.display-error {
+					@extend %color-bg-allert;
+				}
+			}
+
 			.display-amount {
 				@extend %color-bg-white;
 
@@ -250,30 +285,6 @@ html {
 						font-weight: 700;
 						text-align: right;
 						padding-right: 10px;
-					}
-				}
-
-				&.display-warning {
-					@extend %color-bg-warn;
-				}
-
-				&.display-error {
-					@extend %color-bg-allert;
-				}
-
-				.display-message {
-					span {
-						text-align: center;
-						padding: 5px 10px 0px 10px;
-					}
-
-					.display-message-description {
-						text-transform: none;
-						margin: 5px 10px 10px 10px;
-						text-align: center;
-						font-weight: bold;
-						font-size: 12px;
-						overflow: auto;
 					}
 				}
 			}
@@ -436,6 +447,10 @@ html {
 .card-odd {
 	@extend %dialog-card;
 
+	&.card-odd-error {
+		@extend %border-input-area-error;
+	}
+
 	.top-window {
 		@extend %dialog-card-header;
 
@@ -487,6 +502,12 @@ html {
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+}
+
+.radius-5-tl-tr {
+	border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
 }
 
 .radius-10 {
