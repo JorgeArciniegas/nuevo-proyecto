@@ -45,10 +45,6 @@ export class CouponService {
   // Duration of the notification of warning's messages
   notificationInterval = 10000;
 
-  fnPrintCoupon(): void {
-    this.printCoupon.printWindow();
-  }
-
   constructor(
     public elysCoupon: ElysCouponService,
     userService: UserService,

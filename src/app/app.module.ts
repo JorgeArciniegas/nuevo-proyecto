@@ -20,12 +20,13 @@ import { SharedModule } from './shared/shared.module';
 import { PayCancelDialogComponent } from './component/coupon/pay-cancel-dialog/pay-cancel-dialog.component';
 import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
 import { QRCodeModule } from 'angular2-qrcode';
+import { PrintReceiptComponent } from './component/coupon/pay-cancel-dialog/print-receipt/print-receipt.component';
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [componentDeclarations, DigitslimitPipe, GroupByCategoryPipe],
+  declarations: [componentDeclarations, DigitslimitPipe, GroupByCategoryPipe, PrintReceiptComponent],
   imports: [
     HttpClientModule,
     BrowserModule,

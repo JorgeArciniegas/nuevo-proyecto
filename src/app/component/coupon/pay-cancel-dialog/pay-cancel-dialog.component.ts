@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CancelCouponRequest, ErrorStatus, FlagAsPaidRequest } from '@elys/elys-api';
 import { UserService } from '../../../services/user.service';
 import { CouponService } from '../coupon.service';
+import { PrintReceiptService } from './print-receipt/print-receipt.service';
 
 @Component({
   selector: 'app-pay-cancel-dialog',
@@ -24,14 +25,12 @@ export class PayCancelDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: string,
     public fb: FormBuilder,
     private couponService: CouponService,
-    private userService: UserService
+    private userService: UserService,
+    private printReceiptService: PrintReceiptService
   ) {
     this.titleType = data;
     this.form = this.fb.group({
-      couponCode: [
-        null,
-        Validators.compose([Validators.required, Validators.minLength(2)])
-      ]
+      couponCode: [null, Validators.compose([Validators.required, Validators.minLength(2)])]
     });
   }
 
@@ -51,14 +50,10 @@ export class PayCancelDialogComponent implements OnInit {
             Product: 'V'
           };
         }
-        this.couponService
-          .flagAsPaidCoupon(this.payRequest)
-          .then(
-            message =>
-              (this.errorMessage = message.Error
-                ? this.errorMessage2[message.Error]
-                : 'Server Error')
-          );
+        this.couponService.flagAsPaidCoupon(this.payRequest).then(message => {
+          this.errorMessage = message.Error ? this.errorMessage2[message.Error] : 'Server Error';
+          this.printReceiptService.printWindow();
+        });
       }
       this.form.get('couponCode').setValue('');
     } else if (this.data === 'CANCEL') {
@@ -74,14 +69,10 @@ export class PayCancelDialogComponent implements OnInit {
             Product: 'V'
           };
         }
-        this.couponService
-          .cancelCoupon(this.cancelRequest)
-          .then(
-            message =>
-              (this.errorMessage = message.ErrorStatus
-                ? this.errorMessage2[message.ErrorStatus]
-                : 'Server Error')
-          );
+        this.couponService.cancelCoupon(this.cancelRequest).then(message => {
+          this.errorMessage = message.ErrorStatus ? this.errorMessage2[message.ErrorStatus] : 'Server Error';
+          this.printReceiptService.printWindow();
+        });
         this.form.get('couponCode').setValue('');
       }
     }
