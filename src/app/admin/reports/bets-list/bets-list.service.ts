@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CouponType, ElysApiService } from '@elys/elys-api';
-import { VirtualCouponListRequest } from '@elys/elys-api/lib/reports/reports.models';
+import { AccountVirtualSport } from '@elys/elys-api';
 import { TranslateService } from '@ngx-translate/core';
 import { CouponStatusInternal, CouponTypeInternal, VirtualSportId } from './bets-list.model';
-import { AccountVirtualSport } from '@elys/elys-api/lib/virtual/virtual.models';
+import { VirtualCouponListRequest } from '@elys/elys-api/lib/reports/reports.models';
 
 @Injectable({
   providedIn: 'root'
@@ -121,17 +121,17 @@ export class BetsListService {
   }
 
   async getAvailableSport(): Promise<void> {
-   await this.elysApi.virtual.getAvailablevirtualsports().then( items => {
-    this.availableSport = items;
-   });
+    await this.elysApi.virtual.getAvailablevirtualsports().then(items => {
+      this.availableSport = items;
+    });
 
-   this.sportId = this.availableSport[0].SportId;
+    this.sportId = this.availableSport[0].SportId;
 
   }
 
   getList(): void {
     const req: VirtualCouponListRequest = this.request;
-    if (req.sportId === VirtualSportId.ALL ) { req.sportId = 0; }
+    if (req.sportId === VirtualSportId.ALL) { req.sportId = 0; }
     this.elysApi.reports.getVirtualListOfCoupon(req);
   }
 }
