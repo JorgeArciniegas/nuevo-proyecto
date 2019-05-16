@@ -237,13 +237,23 @@ $color-text-operator: #3dab14;
 }
 
 %btn-filter-form {
-  background-color:  $color-bg-primary-op-dark;
+  background-color: $color-bg-secodary;
   border: 1px solid $border-cartd-title;
+}
+%btn-filter-mobile {
+  background-color: $color-bg-secodary;
+  border-width: 1;
+  border-color: $border-cartd-title;
 }
 
 %btn-filter-success {
   background-color: $btn-border-selected;
   border: 1px solid $border-event;
+}
+%btn-filter-success-mobile {
+  background-color: $btn-border-selected;
+  border-width: 1;
+  border-color: $border-event;
 }
 
 // BUTTONS GRADIENT
