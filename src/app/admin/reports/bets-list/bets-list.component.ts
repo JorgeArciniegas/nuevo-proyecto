@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CouponStatusInternal, CouponTypeInternal, VirtualSportId } from './bets-list.model';
+import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
 import { BetsListService } from './bets-list.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { BetsListService } from './bets-list.service';
 })
 export class BetsListComponent implements OnInit {
 
-  productList: typeof VirtualSportId = VirtualSportId;
+  // productList: typeof VirtualSportId = VirtualSportId;
   couponType: typeof CouponTypeInternal = CouponTypeInternal;
   couponStatus: typeof CouponStatusInternal = CouponStatusInternal;
 

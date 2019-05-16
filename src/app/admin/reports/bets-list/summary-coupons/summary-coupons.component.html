@@ -1,56 +1,67 @@
-<div fxFlex fxLayout="column" fxLayoutGap="20px" [style.padding.px]="10">
-  <div class="title">
-    <h3>{{'BETSLIST.LIST_TITLE' | translate}} </h3>
-  </div>
-  <div class="padding-20" fxLayout="column" fxLayoutGap="20px">
-    <div fxLayout="row">
-      <div fxFlex fxLayout="flex-start" fxLayoutGap="10px grid">
-        <div fxFlex="5" fxLayoutAlign="center center">
-          <button class="btn-filter btn-default radius-5" routerLink="../">
-            <img class="icon icon-24px" src="app/themes/skins/{{settings.theme}}/icon/baseline-arrow_back-24px.png">
-          </button>
-        </div>
-        <div fxFlex="10">
-            <div class="disabled"><small>{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}</small></div>
-            <div class="value"><strong>{{ ((!betsListService.request.dateHasPlaced) ? 'BETSLIST.BTN_DATE_PLACED' : 'BETSLIST.BTN_DATE_CLOSED') | translate }}</strong></div>
-          </div>
-        <div fxFlex="10">
-          <div class="disabled"><small>{{ 'BETSLIST.LABEL_DATE_FROM' | translate }}</small></div>
-          <div class="value"><strong>{{betsListService.request.dateFrom | date:'mediumDate'}}</strong></div>
-        </div>
-        <div fxFlex="10">
-            <div class="disabled"><small>{{ 'BETSLIST.LABEL_DATE_TO' | translate }}</small></div>
-            <div class="value"><strong>{{betsListService.request.dateTo | date:'mediumDate'}}</strong></div>
-        </div>
-        <div fxFlex="12">
-            <div class="disabled"><small>{{ 'BETSLIST.LABEL_TYPECOUPON_FORM' | translate }}</small></div>
-            <div class="value"><strong>{{ 'CouponType.' + couponType[betsListService.request.couponType] | translate}}</strong></div>
-        </div>
-        <div fxFlex="10">
-            <div class="disabled"><small>{{ 'BETSLIST.LABEL_STATUSCOUPON_FORM' | translate }}</small></div>
-            <div class="value"><strong>{{ 'BETSLIST.COUPON_STATUS.' + couponStatus[betsListService.request.couponStatus] | translate}}</strong></div>
-        </div>
-        <div fxFlex="18">
-            <div class="disabled"><small>{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}</small></div>
-            <div class="value"><strong>{{ 'SPORT.'+ betsListService.labelAvailableSportSelected | translate }} </strong></div>
-        </div>
-        <!-- PAGINATOR -->
-        <div fxFlex fxLayout="flex-end">
-          <div fxFlex="10">
-            <button class="btn-filter radius-5">&lsaquo;</button>
-          </div>
-          <div fxFlex fxLayoutAlign="center center">
-            {{'BETSLIST.PAGE' | translate }}  {{page+1}} {{'BETSLIST.PAGE_SEPARATOR' | translate }} {{maxPage}}
+<div fxFlex fxLayout="column" fxLayoutAlign="center space-between">
+  <div fxFlex="90" fxLayout="column" [style.padding.px]="20">
+    <div class="title">
+      <h3>{{'BETSLIST.LIST_TITLE' | translate}} </h3>
+    </div>
+    <div fxFlex="10" class="padding-20" fxLayout="column" fxLayoutAlign="start start">
+      <div fxFlexFill fxLayout="row" fxLayoutAlign="flex-start center">
+        <div fxFlex fxLayout="row" fxLayoutGap="10px">
+          <div fxFlex="5" fxLayoutAlign="center center">
+            <button class="btn-filter btn-default radius-5" routerLink="../">
+              <img class="icon icon-24px" src="app/themes/skins/{{settings.theme}}/icon/baseline-arrow_back-24px.png">
+            </button>
           </div>
           <div fxFlex="10">
-              <button class="btn-filter radius-5">&rsaquo;</button>
+              <div class="disabled"><small>{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}</small></div>
+              <div class="value"><strong>{{ ((!betsListService.request.dateHasPlaced) ? 'BETSLIST.BTN_DATE_PLACED' : 'BETSLIST.BTN_DATE_CLOSED') | translate }}</strong></div>
+            </div>
+          <div fxFlex="10">
+            <div class="disabled"><small>{{ 'BETSLIST.LABEL_DATE_FROM' | translate }}</small></div>
+            <div class="value"><strong>{{betsListService.request.dateFrom | date:'mediumDate'}}</strong></div>
+          </div>
+          <div fxFlex="10">
+              <div class="disabled"><small>{{ 'BETSLIST.LABEL_DATE_TO' | translate }}</small></div>
+              <div class="value"><strong>{{betsListService.request.dateTo | date:'mediumDate'}}</strong></div>
+          </div>
+          <div fxFlex="10">
+              <div class="disabled"><small>{{ 'BETSLIST.LABEL_TYPECOUPON_FORM' | translate }}</small></div>
+              <div class="value"><strong>{{ 'CouponType.' + couponType[betsListService.request.couponType] | translate}}</strong></div>
+          </div>
+          <div fxFlex="10">
+              <div class="disabled"><small>{{ 'BETSLIST.LABEL_STATUSCOUPON_FORM' | translate }}</small></div>
+              <div class="value"><strong>{{ 'BETSLIST.COUPON_STATUS.' + couponStatus[betsListService.request.couponStatus] | translate}}</strong></div>
+          </div>
+          <div fxFlex="18">
+              <div class="disabled"><small>{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}</small></div>
+              <div class="value"><strong>{{ 'SPORT.'+ betsListService.labelAvailableSportSelected | translate }} </strong></div>
+          </div>
+          <!-- PAGINATOR -->
+          <div fxFlex fxLayoutAlign="flex-end">
+            <div fxFlex="20">
+              <button class="btn-filter radius-5">&lsaquo;</button>
+            </div>
+            <div fxFlex fxLayoutAlign="center center">
+              {{'BETSLIST.PAGE' | translate }}  {{page+1}} {{'BETSLIST.PAGE_SEPARATOR' | translate }} {{maxPage}}
+            </div>
+            <div fxFlex="20">
+                <button class="btn-filter radius-5">&rsaquo;</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="padding-20 btn-filter" fxFlex fxLayout="column wrap" fxLayoutAlign="stretch">
+    <div fxFlex class="padding-20 btn-filter radius-5" fxLayout="column wrap" fxLayoutAlign="stretch">
 
+    </div>
+  </div>
+  <div fxFlex="10" fxLayout="column wrap">
+    <div fxFlex class="btn-filter" fxLayout="column wrap" fxLayoutAlign="stretch">
+        <div fxFlexFill fxLayout="row" fxLayoutAlign="flex-start center">
+            <div fxFlex fxLayout="row" fxLayoutGap="10px">
+                <div class="value"><strong>{{ 'SPORT.'+ betsListService.labelAvailableSportSelected | translate }} </strong></div>
+                <div class="disabled"><small>{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}</small></div>
+            </div>
+    </div>
   </div>
 </div>
 

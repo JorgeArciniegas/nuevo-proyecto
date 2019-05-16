@@ -1,5 +1,5 @@
 import { CouponStatus, CouponType } from '@elys/elys-api';
-
+/*
 export enum VirtualSportId {
   ALL = -1,
   DOG = 0,
@@ -19,7 +19,7 @@ export namespace VirtualSportId {
     );
   }
 }
-
+ */
 
 export enum CouponTypeInternal {
   ALL = 0,

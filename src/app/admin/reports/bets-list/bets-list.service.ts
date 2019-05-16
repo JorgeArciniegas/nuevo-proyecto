@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { CouponType, ElysApiService } from '@elys/elys-api';
 import { AccountVirtualSport } from '@elys/elys-api';
 import { TranslateService } from '@ngx-translate/core';
-import { CouponStatusInternal, CouponTypeInternal, VirtualSportId } from './bets-list.model';
-import { VirtualCouponListRequest } from '@elys/elys-api/lib/reports/reports.models';
+import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
+import { VirtualCouponListRequest, CouponSummaryCouponListResponse } from '@elys/elys-api/lib/reports/reports.models';
 import { Router } from '@angular/router';
+import { all } from 'q';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,14 @@ import { Router } from '@angular/router';
 export class BetsListService {
 
   request: VirtualCouponListRequest = null;
-  availableSport: AccountVirtualSport[] = null;
+  availableSport: AccountVirtualSport[] = [];
   pageSizeList: number[] = [10, 25, 50, 100];
   labelAvailableSportSelected: string;
-  /* productEnum: typeof VirtualSportId = VirtualSportId; */
+
+  // Result of request list
+  betsCouponList: CouponSummaryCouponListResponse = null;
+
+
   constructor(translate: TranslateService, public elysApi: ElysApiService, private router: Router) {
 
     this.getAvailableSport();
@@ -29,7 +34,7 @@ export class BetsListService {
       pageSize: this.pageSizeList[1],
       requestedPage: 0,
       couponType: CouponTypeInternal.ALL,
-      sportId: VirtualSportId.ALL,
+      sportId: this.availableSport[0].SportId,
       product: null,
       complianceCode: '',
       ticketCode: '',
@@ -124,18 +129,20 @@ export class BetsListService {
   }
 
   async getAvailableSport(): Promise<void> {
-    await this.elysApi.virtual.getAvailablevirtualsports().then(items => {
-      this.availableSport = items;
-    });
+    // first element of ALL Sport
+    this.availableSport[0] = {SportId: -1, SportName: 'ALL', VirtualCategories: [] };
 
+    await this.elysApi.virtual.getAvailablevirtualsports().then(items => {
+      items.forEach( item => this.availableSport.push(item) );
+    });
     this.sportId = this.availableSport[0].SportId;
 
   }
 
   getList(): void {
     const req: VirtualCouponListRequest = this.request;
-    if (req.sportId === VirtualSportId.ALL) { req.sportId = 0; }
-    this.elysApi.reports.getVirtualListOfCoupon(req);
+    if (req.sportId === -1) { req.sportId = null; }
+    this.elysApi.reports.getVirtualListOfCoupon(req).then( items => this.betsCouponList = items);
 
     this.router.navigateByUrl('admin/reports/betsList/summaryCoupons');
   }

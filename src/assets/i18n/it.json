@@ -126,6 +126,7 @@
     "PAGE":"Pagina"
   },
   "SPORT": {
+    "ALL": "Tutti",
     "DogRacing": "Corsa dei cani",
     "HorseRacing": "Corsa dei cavalli",
     "VirtualHorse": "Corsa dei cavalli Virtuali",
