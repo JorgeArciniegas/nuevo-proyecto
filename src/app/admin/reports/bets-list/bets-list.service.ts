@@ -16,12 +16,11 @@ export class BetsListService {
   availableSport: AccountVirtualSport[] = [];
   pageSizeList: number[] = [10, 25, 50, 100];
   labelAvailableSportSelected: string;
-
   // Result of request list
   betsCouponList: CouponSummaryCouponListResponse = null;
-
-
   constructor(translate: TranslateService, public elysApi: ElysApiService, private router: Router) {
+    // first element of ALL Sport
+    this.availableSport[0] = {SportId: 0, SportName: 'ALL', VirtualCategories: [] };
 
     this.getAvailableSport();
     /**
@@ -31,8 +30,8 @@ export class BetsListService {
       couponStatus: CouponStatusInternal.ALL,
       dateFrom: new Date(),
       dateTo: new Date(),
-      pageSize: this.pageSizeList[1],
-      requestedPage: 0,
+      pageSize: this.pageSizeList[0],
+      requestedPage: 1,
       couponType: CouponTypeInternal.ALL,
       sportId: this.availableSport[0].SportId,
       product: null,
@@ -129,14 +128,32 @@ export class BetsListService {
   }
 
   async getAvailableSport(): Promise<void> {
-    // first element of ALL Sport
-    this.availableSport[0] = {SportId: 0, SportName: 'ALL', VirtualCategories: [] };
 
     await this.elysApi.virtual.getAvailablevirtualsports().then(items => {
       items.forEach( item => this.availableSport.push(item) );
     });
     this.sportId = this.availableSport[0].SportId;
+  }
 
+  /**
+   * Paginator called from Summary Coupons
+   * @param isIncrement
+   */
+  paginatorSize(isIncrement: boolean): void {
+    let updateBetList = false;
+    if ( this.request.requestedPage > 1 && !isIncrement) {
+      this.request.requestedPage --;
+      updateBetList = true;
+    } else if (isIncrement) {
+      if ( this.request.requestedPage < this.betsCouponList.TotalPages) {
+        this.request.requestedPage++;
+        updateBetList = true;
+      }
+    }
+
+    if (updateBetList) {
+      this.getList();
+    }
   }
 
   getList(): void {

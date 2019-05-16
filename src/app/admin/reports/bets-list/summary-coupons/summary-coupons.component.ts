@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppSettings } from '../../../../app.settings';
 import { BetsListService } from '../bets-list.service';
 import { CouponTypeInternal, CouponStatusInternal } from '../bets-list.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-summary-coupons',
@@ -13,12 +14,13 @@ export class SummaryCouponsComponent implements OnInit {
   couponType: typeof CouponTypeInternal = CouponTypeInternal;
   couponStatus: typeof CouponStatusInternal = CouponStatusInternal;
 
-  public page = 0;
-  public maxPage = 0;
+  constructor(public readonly settings: AppSettings, public betsListService: BetsListService) {
 
-  constructor(public readonly settings: AppSettings, public betsListService: BetsListService) { }
+  }
 
   ngOnInit() {
+
   }
+
 
 }
