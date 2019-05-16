@@ -67,11 +67,9 @@ export class PayCancelDialogComponent implements OnInit {
             )
           )
           .catch(
-            error => (
-              console.log(error),
+            error =>
               (this.errorMessage =
                 'operation not possible (' + error.status + ')')
-            )
           );
         this.form.get('couponCode').setValue('');
       }
@@ -100,11 +98,9 @@ export class PayCancelDialogComponent implements OnInit {
             )
           )
           .catch(
-            error => (
-              console.log(error),
+            error =>
               (this.errorMessage =
                 'operation not possible (' + error.status + ')')
-            )
           );
         this.form.get('couponCode').setValue('');
       }
