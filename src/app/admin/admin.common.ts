@@ -3,7 +3,7 @@ import { AdminComponent } from './admin.component';
 import { BetsListComponent } from './reports/bets-list/bets-list.component';
 import { SummaryCouponsComponent } from './reports/bets-list/summary-coupons/summary-coupons.component';
 
-export const componentDeclarations: any[] = [AdminComponent, BetsListComponent];
+export const componentDeclarations: any[] = [AdminComponent, BetsListComponent, SummaryCouponsComponent];
 
 export const providerDeclarations: any[] = [];
 
