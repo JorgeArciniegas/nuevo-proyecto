@@ -36,9 +36,7 @@ export class PayCancelDialogComponent {
   }
 
   public onSubmit(result): void {
-    console.log(
-      this.titleType + this.type + DialogTypeCoupon[DialogTypeCoupon.PAY]
-    );
+    // console.log(DialogTypeCoupon[DialogTypeCoupon.PAY]);
     if (this.titleType === 'PAY') {
       if (result) {
         this.payRequest = {
@@ -57,6 +55,11 @@ export class PayCancelDialogComponent {
                 : 'Server Error'),
               (this.errorNumberIcon = message.Error)
             )
+          )
+          .catch(
+            error =>
+              (this.errorMessage =
+                'operation not possible (' + error.status + ')')
           );
       }
     } else if (this.titleType === 'CANCEL') {
@@ -72,12 +75,16 @@ export class PayCancelDialogComponent {
         this.couponService
           .cancelCoupon(this.cancelRequest)
           .then(
-            message => (
+            message =>
               (this.errorMessage = message.ErrorStatus
                 ? this.errorMessage2[message.ErrorStatus]
                 : 'Server Error'),
-              (this.errorNumberIcon = message.Error)
-            )
+            (this.errorNumberIcon = ErrorStatus)
+          )
+          .catch(
+            error =>
+              (this.errorMessage =
+                'operation not possible (' + error.status + ')')
           );
       }
     }

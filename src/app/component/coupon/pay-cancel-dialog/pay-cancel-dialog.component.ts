@@ -65,7 +65,15 @@ export class PayCancelDialogComponent implements OnInit {
                 : 'Server Error'),
               (this.errorNumberIcon = message.Error)
             )
+          )
+          .catch(
+            error => (
+              console.log(error),
+              (this.errorMessage =
+                'operation not possible (' + error.status + ')')
+            )
           );
+        this.form.get('couponCode').setValue('');
       }
       this.form.get('couponCode').setValue('');
     } else if (this.data === 'CANCEL') {
@@ -89,6 +97,13 @@ export class PayCancelDialogComponent implements OnInit {
                 ? this.errorMessage2[message.ErrorStatus]
                 : 'Server Error'),
               (this.errorNumberIcon = message.ErrorStatus)
+            )
+          )
+          .catch(
+            error => (
+              console.log(error),
+              (this.errorMessage =
+                'operation not possible (' + error.status + ')')
             )
           );
         this.form.get('couponCode').setValue('');

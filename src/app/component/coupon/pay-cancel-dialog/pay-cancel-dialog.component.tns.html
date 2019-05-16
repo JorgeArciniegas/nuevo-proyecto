@@ -12,7 +12,7 @@
   <GridLayout row="3" col="0" rows="*" columns="5,30,200,10" class="radius-2" verticalAlignment="center" horizontalAlignment="center">
     <StackLayout *ngIf="errorNumberIcon && errorNumberIcon !== 1" col="1" class="icon-area error-icon"></StackLayout>
     <StackLayout *ngIf="errorNumberIcon && errorNumberIcon === 1" col="1" class="icon-area check-circle-icon"></StackLayout>
-    <StackLayout *ngIf="errorMessage && errorMessage === 'Server Error'" col="1" class="icon-area error-icon"></StackLayout>
+    <StackLayout *ngIf="errorMessage && !errorNumberIcon" col="1" class="icon-area error-icon"></StackLayout>
     <Label col="2" text="{{ errorMessage }}" class="title" verticalAlignment="center" horizontalAlignment="left"></Label>
   </GridLayout>
 
