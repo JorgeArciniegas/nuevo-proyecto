@@ -4,6 +4,7 @@ import { BetsListService } from './bets-list.service';
 import { VirtualSportId, CouponTypeInternal, CouponStatusInternal } from './bets-list.model';
 import { AppSettings } from '../../../app.settings';
 import { ModalDatetimepicker } from 'nativescript-modal-datetimepicker';
+import { TextField } from 'tns-core-modules/ui/text-field/text-field';
 
 @Component({
   selector: 'app-bets-list',
@@ -32,17 +33,13 @@ export class BetsListComponent implements OnInit {
     const picker = new ModalDatetimepicker();
 
     picker.pickDate().then(result => {
-      switch (key) {
-        case 'dateFrom':
-          this.betsListService.dateFrom = new Date(result.year, result.month - 1, result.day);
-          break;
-        case 'dateTo':
-          this.betsListService.dateTo = new Date(result.year, result.month - 1, result.day);
-          break;
-        default:
-          break;
-      }
+      this.betsListService[key] = new Date(result.year, result.month - 1, result.day);
     });
+  }
+
+  public couponCode(args: any): void {
+    const textField: TextField = <TextField>args.object;
+    this.betsListService.ticketCode = textField.text;
   }
 
 }

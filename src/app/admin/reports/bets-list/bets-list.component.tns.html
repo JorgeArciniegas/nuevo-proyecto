@@ -1,8 +1,9 @@
-<GridLayout rows="*,2*,4*,2*" columns="7*,3*" class="bet-list">
-  <Label row="0" col="0" class="title" colSpan="2" text="{{'BETSLIST.LIST_TITLE' | translate}}" textWrap="true" verticalAlignment="center"></Label>
+<GridLayout rows="*,2*,4*,2*" columns="4*,3*,3*" class="bet-list">
+  <Label row="0" col="0" colSpan="3" class="title" colSpan="2" text="{{'BETSLIST.LIST_TITLE' | translate}}" textWrap="true" verticalAlignment="center"></Label>
+
   <!-- ROW 1 -->
-  <GridLayout row="1" col="0" rows="*" columns="*,*,*" class="display">
-    <!-- DATA SELECTED -->
+  <!-- DATA SELECTED -->
+  <GridLayout row="1" col="0" colSpan="2" rows="*" columns="*,*,*" class="display">
     <GridLayout col="0" rows="*,*" columns="*" class="display-content">
       <GridLayout row="0" class="button btn-default btn-filter" [ngClass]="{'btn-filter-success': !betsListService.dateHasPlaced}">
         <Button text="{{'BETSLIST.BTN_DATE_PLACED' | translate}}" class="button-internal" (tap)="changeValue('dateHasPlaced', false)"></Button>
@@ -28,18 +29,63 @@
       </GridLayout>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="1" col="1" rows="*" columns="*" class="display">
-    <!-- BETSLIP CODE -->
+  <StackLayout row="1" col="0" colSpan="2">
+    <Label class="label-overlap" text="{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}" horizontalAlignment="left"></Label>
+  </StackLayout>
+  <!-- BETSLIP CODE -->
+  <GridLayout row="1" col="2" rows="*" columns="*" class="display">
     <GridLayout rows="*,2*,*" columns="*" class="display-content">
-      <Label row="0" class="field-title" text="{{ 'BETSLIST.LABEL_COUPONCODE_FORM' | translate }}"></Label>
-      <GridLayout row="1" columns="*,6*,*" class="button btn-default btn-filter" (tap)="selectDate('dateTo')">
-        <TextField hint="{{ 'BETSLIST.LABEL_COUPONCODE_FORM' | translate }}" text=""></TextField>
-
+      <GridLayout row="1" class="button btn-default btn-filter" (tap)="selectDate('dateTo')">
+        <TextField hint="{{ 'BETSLIST.LABEL_COUPONCODE_FORM' | translate }}" (textChange)="couponCode($event)" returnKeyType="done"></TextField>
       </GridLayout>
     </GridLayout>
   </GridLayout>
-
-  <StackLayout row="1" col="0">
-    <Label class="label-overlap" text="{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}" horizontalAlignment="left"></Label>
+  <StackLayout row="1" col="2">
+    <Label class="label-overlap" text="{{ 'BETSLIST.LABEL_COUPONCODE_FORM' | translate }}" horizontalAlignment="left"></Label>
   </StackLayout>
+
+  <!-- ROW 2 -->
+  <!-- SPORT SELECTED -->
+  <GridLayout row="2" col="0" class="display">
+    <GridLayout rows="*,*,*,*" columns="*,*" class="display-content">
+      <GridLayout row="{{(i / 2) | floor}}" col="{{i % 2}}" *ngFor="let type of betsListService.availableSport; let i = index;" class="button btn-default btn-filter"
+        [ngClass]="{'btn-filter-success': betsListService.sportId === type.SportId}">
+        <Button text="{{'SPORT.'+ type.SportName | translate}}" class="button-internal" (tap)="changeValue('sportId', type.SportId)"></Button>
+      </GridLayout>
+    </GridLayout>
+  </GridLayout>
+  <StackLayout row="2" col="0">
+    <Label class="label-overlap" text="{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}" horizontalAlignment="left"></Label>
+  </StackLayout>
+  <!-- TYPE SELECTED -->
+  <GridLayout row="2" col="1" rows="*" columns="*" class="display">
+    <GridLayout rows="*,*,*,*" columns="*" class="display-content">
+      <GridLayout row="{{i}}" col="0" *ngFor="let type of couponType.values(); let i = index;" class="button btn-default btn-filter"
+        [ngClass]="{'btn-filter-success': betsListService.couponType === couponType[type]}">
+        <Button text="{{'CouponType.' + type | translate}}" class="button-internal" (tap)="changeValue('couponType', couponType[type])"></Button>
+      </GridLayout>
+    </GridLayout>
+  </GridLayout>
+  <StackLayout row="2" col="1">
+    <Label class="label-overlap" text="{{ 'BETSLIST.LABEL_TYPECOUPON_FORM' | translate }}" horizontalAlignment="left"></Label>
+  </StackLayout>
+  <!-- STATUS SELECTED -->
+  <GridLayout row="2" col="2" rows="*" columns="*" class="display">
+    <GridLayout rows="*,*,*,*" columns="*" class="display-content">
+      <GridLayout row="{{i}}" col="0" *ngFor="let type of couponStatus.values(); let i = index;" class="button btn-default btn-filter"
+        [ngClass]="{'btn-filter-success': betsListService.couponStatus === couponStatus[type]}">
+        <Button text="{{'BETSLIST.COUPON_STATUS.' + type | translate}}" class="button-internal" (tap)="changeValue('couponStatus', couponStatus[type])"></Button>
+      </GridLayout>
+    </GridLayout>
+  </GridLayout>
+  <StackLayout row="2" col="2">
+    <Label class="label-overlap" text="{{ 'BETSLIST.LABEL_STATUSCOUPON_FORM' | translate }}" horizontalAlignment="left"></Label>
+  </StackLayout>
+
+  <!-- ROW 3 -->
+  <GridLayout row="3" col="0" colSpan="3" rows="*,2*,*" columns="*,3*,*" class="display-content">
+    <GridLayout row="1" col="1" class="button btn-default btn-grey-gradient">
+      <Button text="{{'BETSLIST.BTN_SEARCH' | translate}}" class="button-internal" (tap)="betsListService.getList()"></Button>
+    </GridLayout>
+  </GridLayout>
 </GridLayout>

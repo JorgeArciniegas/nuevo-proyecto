@@ -1,36 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {
-  TranslateLoader,
-  TranslateModule,
-  TranslateService
-} from '@ngx-translate/core';
+import { ElysApiModule } from '@elys/elys-api';
+import { ElysCouponModule } from '@elys/elys-coupon';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { NgShadowModule } from 'nativescript-ng-shadow';
-import {
-  componentDeclarations,
-  providerDeclarations,
-  routes
-} from './app.common';
-import { AppComponent } from './app.component';
-import { FloorPipe } from './component/pipe/floor.pipe';
-import { SharedModule } from './shared/shared.module';
-import { ElysApiModule } from '@elys/elys-api';
 import { environment } from '../environments/environment';
-import { ElysCouponModule } from '@elys/elys-coupon';
+import { componentDeclarations, providerDeclarations, routes } from './app.common';
+import { AppComponent } from './app.component';
 import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
 import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
+import { SharedModule } from './shared/shared.module';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [componentDeclarations, FloorPipe, DigitslimitPipe, GroupByCategoryPipe],
+  declarations: [componentDeclarations, DigitslimitPipe, GroupByCategoryPipe],
   imports: [
     NativeScriptHttpClientModule,
     NativeScriptModule,
