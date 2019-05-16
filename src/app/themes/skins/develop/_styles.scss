@@ -42,10 +42,15 @@ $color-text-shadow: #8a8a8a;
 $color-text-warn: #ff0000;
 $color-text-operator: #3dab14;
 
+
 //EXTENDS
 %color-bg-default {
-	background: $color-bg-primary;
+  background: $color-bg-primary;
 	color: #ffffff;
+}
+
+%color-placeholder {
+  placeholder-color: $color-bg-accent;
 }
 
 %bg-default {

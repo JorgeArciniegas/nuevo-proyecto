@@ -36,7 +36,7 @@
   <GridLayout row="1" col="2" rows="*" columns="*" class="display">
     <GridLayout rows="*,2*,*" columns="*" class="display-content">
       <GridLayout row="1" class="button btn-default btn-filter" (tap)="selectDate('dateTo')">
-        <TextField hint="{{ 'BETSLIST.LABEL_COUPONCODE_FORM' | translate }}" (textChange)="couponCode($event)" returnKeyType="done"></TextField>
+        <TextField class="ticketCode" hint="{{ 'BETSLIST.LABEL_COUPONCODE_FORM' | translate }}" (textChange)="couponCode($event)" returnKeyType="done"></TextField>
       </GridLayout>
     </GridLayout>
   </GridLayout>
@@ -83,7 +83,7 @@
   </StackLayout>
 
   <!-- ROW 3 -->
-  <GridLayout row="3" col="0" colSpan="3" rows="*,2*,*" columns="*,3*,*" class="display-content">
+  <GridLayout row="3" col="0" colSpan="3" rows="*,2*,*" columns="*,*,*" class="display-content">
     <GridLayout row="1" col="1" class="button btn-default btn-grey-gradient">
       <Button text="{{'BETSLIST.BTN_SEARCH' | translate}}" class="button-internal" (tap)="betsListService.getList()"></Button>
     </GridLayout>

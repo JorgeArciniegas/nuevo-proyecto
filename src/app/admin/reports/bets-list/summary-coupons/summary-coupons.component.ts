@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppSettings } from 'src/app/app.settings';
+import { AppSettings } from '../../../../app.settings';
 import { BetsListService } from '../bets-list.service';
 import { CouponTypeInternal, CouponStatusInternal } from '../bets-list.model';
 

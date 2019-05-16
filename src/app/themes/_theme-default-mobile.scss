@@ -155,6 +155,9 @@
     .label-overlap {
       @extend %card-title-label;
     }
+    .ticketCode {
+      @extend %color-placeholder;
+    }
 
 		.product {
 			padding: 5 0;
