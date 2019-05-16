@@ -1,4 +1,4 @@
-<mat-grid-list cols="1" rowHeight="{{(rowHeight-1) / 2}}">
+<mat-grid-list cols="1" *ngIf="rowHeight" rowHeight="{{(rowHeight-1) / 2}}">
   <mat-grid-tile rowspan="2">
     <div class="display" fxFlexFill>
       <div class="card-title">

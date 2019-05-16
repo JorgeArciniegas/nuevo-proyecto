@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BetsListService } from './bets-list.service';
-import { CouponStatus } from '@elys/elys-api';
-import { ProductEnum } from './bets-list.model';
+import { VirtualSportId, CouponTypeInternal, CouponStatusInternal } from './bets-list.model';
 
 @Component({
   selector: 'app-bets-list',
@@ -10,10 +9,11 @@ import { ProductEnum } from './bets-list.model';
 })
 export class BetsListComponent implements OnInit {
 
-  productList: typeof ProductEnum = ProductEnum;
-
+  productList: typeof VirtualSportId = VirtualSportId;
+  couponType: typeof CouponTypeInternal = CouponTypeInternal;
+  couponStatus: typeof CouponStatusInternal = CouponStatusInternal;
   constructor(public betsListService: BetsListService) {
-    this.betsListService.couponStatus = CouponStatus.Lost;
+    this.betsListService.couponStatus = CouponStatusInternal.Placed;
     console.log(this.betsListService.sportId);
   }
 
@@ -22,8 +22,5 @@ export class BetsListComponent implements OnInit {
   changeValue(key: string, value:  any) {
     this.betsListService[key] = value;
   }
-  changeDateTypeCoupon(typeDataSelected: boolean): void {
-    this.betsListService.typeDataSelected = typeDataSelected;
-    console.log(this.betsListService.request);
-  }
+
 }

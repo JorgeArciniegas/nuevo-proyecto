@@ -1,6 +1,6 @@
 import { CouponStatus, CouponType } from '@elys/elys-api';
 
-export enum ProductEnum {
+export enum VirtualSportId {
   ALL = -1,
   DOG = 0,
   HORSE,
@@ -11,24 +11,43 @@ export enum ProductEnum {
 }
 
 
-export namespace ProductEnum {
+export namespace VirtualSportId {
 
   export function values() {
-    return Object.keys(ProductEnum).filter(
+    return Object.keys(VirtualSportId).filter(
       (type) => isNaN(<any>type) && type !== 'values'
     );
   }
 }
 
-export interface RequestBetsList {
-  couponStatus: CouponStatus;
-  dateFrom: Date;
-  dateTo: Date;
-  pageSize: number;
-  requestedPage: number;
-  ticketCode?: string;
-  couponType: CouponType;
-  complianceCode?: string;
-  language: string;
-  sportId?: number;
+
+export enum CouponTypeInternal {
+  ALL = 0,
+  SingleBet = 1,
+  MultipleBet = 2,
+  CombinationsBet = 3
+}
+
+export namespace CouponTypeInternal {
+  export function values() {
+    return Object.keys(CouponTypeInternal).filter(
+      (type) => isNaN(<any>type) && type !== 'values'
+    );
+  }
+}
+
+export enum CouponStatusInternal  {
+  ALL,
+  Placed,
+  Lost,
+  Win
+}
+
+
+export namespace CouponStatusInternal {
+  export function values() {
+    return Object.keys(CouponStatusInternal).filter(
+      (type) => isNaN(<any>type) && type !== 'values'
+    );
+  }
 }
