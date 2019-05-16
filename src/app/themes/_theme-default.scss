@@ -445,6 +445,10 @@ html {
     @extend %logo-header;
   }
   .noshow{ display: none; }
+
+  *[data='disabled']{
+    @extend %color-disabled;
+  }
 }
 
 
