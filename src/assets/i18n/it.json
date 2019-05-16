@@ -121,7 +121,9 @@
       "Placed": "Piazzato",
       "Lost":"Perdente",
       "Win": "Vincente"
-    }
+    },
+    "PAGE_SEPARATOR" : " di ",
+    "PAGE":"Pagina"
   },
   "SPORT": {
     "DogRacing": "Corsa dei cani",

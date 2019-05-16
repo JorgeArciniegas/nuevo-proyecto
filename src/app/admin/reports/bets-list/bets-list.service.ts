@@ -3,7 +3,7 @@ import { CouponType, ElysApiService } from '@elys/elys-api';
 import { VirtualCouponListRequest } from '@elys/elys-api/lib/reports/reports.models';
 import { TranslateService } from '@ngx-translate/core';
 import { CouponStatusInternal, CouponTypeInternal, VirtualSportId } from './bets-list.model';
-import { AccountVirtualSport } from '@elys/elys-api/lib/virtual/virtual.models';
+import { AccountVirtualSport, AccountVirtualCategory } from '@elys/elys-api/lib/virtual/virtual.models';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -12,9 +12,9 @@ import { Router } from '@angular/router';
 export class BetsListService {
 
   request: VirtualCouponListRequest = null;
-  availableSport: AccountVirtualSport = null;
+  availableSport: AccountVirtualSport[] = null;
   pageSizeList: number[] = [10, 25, 50, 100];
-
+  labelAvailableSportSelected: string;
   /* productEnum: typeof VirtualSportId = VirtualSportId; */
   constructor(translate: TranslateService, public elysApi: ElysApiService, private router: Router) {
 
@@ -104,6 +104,7 @@ export class BetsListService {
 
   set sportId(sportId: number) {
     this.request.sportId = sportId;
+    this.labelAvailableSportSelected = this.availableSport.filter( item => item.SportId === this.request.sportId )[0].SportName;
   }
 
   get ticketCode() {
