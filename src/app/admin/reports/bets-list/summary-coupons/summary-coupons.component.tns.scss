@@ -1,0 +1,19 @@
+.summary {
+
+  .title {
+    font-size: 20;
+    font-weight: bold;
+    margin-left: 15;
+    vertical-align: center;
+  }
+  .card {
+    margin: 15;
+  }
+  .display {
+    padding: 4;
+
+    &.toolbar {
+      border-radius: 0;
+    }
+  }
+}

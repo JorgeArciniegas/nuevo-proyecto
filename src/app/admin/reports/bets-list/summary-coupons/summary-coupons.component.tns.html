@@ -1,0 +1,28 @@
+<GridLayout rows="*,2*,10*,2*" columns="*" class="summary">
+  <Label row="0" class="title" colSpan="2" text="{{'BETSLIST.LIST_TITLE' | translate}}" textWrap="true" verticalAlignment="center"></Label>
+
+  <GridLayout row="1" columns="*,2*,2*,2*,3*,3*,3*,4*" class="card">
+    <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-arrow_back-24px.png" verticalAlignment="center"
+      horizontalAlignment="left"></Image>
+    <StackLayout col="1">
+      <Label class="disabled" text="{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}"></Label>
+      <Label text="{{ ((!betsListService.request.dateHasPlaced) ? 'BETSLIST.BTN_DATE_PLACED' : 'BETSLIST.BTN_DATE_CLOSED') | translate }}"></Label>
+    </StackLayout>
+    <StackLayout col="2">
+      <Label class="disabled" text="{{ 'BETSLIST.LABEL_DATE_FROM' | translate }}"></Label>
+      <Label text="{{betsListService.request.dateFrom | date:'mediumDate'}}"></Label>
+    </StackLayout>
+    <StackLayout col="3">
+      <Label class="disabled" text="{{ 'BETSLIST.LABEL_DATE_TO' | translate }}"></Label>
+      <Label text="{{betsListService.request.dateTo | date:'mediumDate'}}"></Label>
+    </StackLayout>
+
+  </GridLayout>
+
+  <GridLayout row="2" shadow="3" cornerRadius="6" class="card">
+    <GridLayout class="display">
+    </GridLayout>
+  </GridLayout>
+
+  <GridLayout row="3" class="toolbar display"></GridLayout>
+</GridLayout>

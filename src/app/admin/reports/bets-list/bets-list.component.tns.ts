@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { BetsListService } from './bets-list.service';
-import { VirtualSportId, CouponTypeInternal, CouponStatusInternal } from './bets-list.model';
+import { CouponTypeInternal, CouponStatusInternal } from './bets-list.model';
 import { AppSettings } from '../../../app.settings';
 import { ModalDatetimepicker } from 'nativescript-modal-datetimepicker';
 import { TextField } from 'tns-core-modules/ui/text-field/text-field';
@@ -13,7 +13,6 @@ import { TextField } from 'tns-core-modules/ui/text-field/text-field';
 })
 export class BetsListComponent implements OnInit {
 
-  productList: typeof VirtualSportId = VirtualSportId;
   couponType: typeof CouponTypeInternal = CouponTypeInternal;
   couponStatus: typeof CouponStatusInternal = CouponStatusInternal;
   constructor(
