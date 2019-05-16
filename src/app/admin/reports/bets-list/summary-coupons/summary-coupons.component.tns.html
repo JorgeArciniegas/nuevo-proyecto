@@ -5,27 +5,27 @@
     <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-arrow_back-24px.png" verticalAlignment="center"
       horizontalAlignment="left"></Image>
     <StackLayout col="1" verticalAlignment="center">
-      <Label class="header-title" text="{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}"></Label>
+      <Label class="sub-title" text="{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}"></Label>
       <Label text="{{ ((!betsListService.request.dateHasPlaced) ? 'BETSLIST.BTN_DATE_PLACED' : 'BETSLIST.BTN_DATE_CLOSED') | translate }}" textWrap="true"></Label>
     </StackLayout>
     <StackLayout col="2" verticalAlignment="center">
-      <Label class="header-title" text="{{ 'BETSLIST.LABEL_DATE_FROM' | translate }}"></Label>
+      <Label class="sub-title" text="{{ 'BETSLIST.LABEL_DATE_FROM' | translate }}"></Label>
       <Label text="{{betsListService.request.dateFrom | date:'mediumDate'}}" textWrap="true"></Label>
     </StackLayout>
     <StackLayout col="3" verticalAlignment="center">
-      <Label class="header-title" text="{{ 'BETSLIST.LABEL_DATE_TO' | translate }}"></Label>
+      <Label class="sub-title" text="{{ 'BETSLIST.LABEL_DATE_TO' | translate }}"></Label>
       <Label text="{{betsListService.request.dateTo | date:'mediumDate'}}" textWrap="true"></Label>
     </StackLayout>
     <StackLayout col="4" verticalAlignment="center">
-      <Label class="header-title" text="{{ 'BETSLIST.LABEL_TYPECOUPON_FORM' | translate }}"></Label>
+      <Label class="sub-title" text="{{ 'BETSLIST.LABEL_TYPECOUPON_FORM' | translate }}"></Label>
       <Label text="{{ 'CouponType.' + couponType[betsListService.request.couponType] | translate}}" textWrap="true"></Label>
     </StackLayout>
     <StackLayout col="5" verticalAlignment="center">
-      <Label class="header-title" text="{{ 'BETSLIST.LABEL_STATUSCOUPON_FORM' | translate }}"></Label>
+      <Label class="sub-title" text="{{ 'BETSLIST.LABEL_STATUSCOUPON_FORM' | translate }}"></Label>
       <Label text="{{ 'BETSLIST.COUPON_STATUS.' + couponStatus[betsListService.request.couponStatus] | translate}}" textWrap="true"></Label>
     </StackLayout>
     <StackLayout col="6" verticalAlignment="center">
-      <Label class="header-title" text="{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}"></Label>
+      <Label class="sub-title" text="{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}"></Label>
       <Label text="{{ 'SPORT.'+ betsListService.labelAvailableSportSelected | translate }}" textWrap="true"></Label>
     </StackLayout>
     <GridLayout col="7" rows="*" columns="*,3*,*">
@@ -46,5 +46,11 @@
     </GridLayout>
   </GridLayout>
 
-  <GridLayout row="3" class="toolbar display"></GridLayout>
+  <GridLayout row="3" columns="*,2*,2*,2*,2*,2*,2*,2*,2*,*" class="toolbar display">
+    <StackLayout col="1" verticalAlignment="center">
+      <Label class="value" text="{{ betsListService.betsCouponList.NumberOfBets | number }}" textWrap="true"></Label>
+      <Label class="sub-title" text="{{ 'TITLE.COUPON' | translate }}"></Label>
+    </StackLayout>
+  </GridLayout>
+
 </GridLayout>
