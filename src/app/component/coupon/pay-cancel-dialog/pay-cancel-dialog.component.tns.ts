@@ -1,5 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { CancelCouponRequest, ErrorStatus, FlagAsPaidRequest } from '@elys/elys-api';
+import {
+  CancelCouponRequest,
+  ErrorStatus,
+  FlagAsPaidRequest
+} from '@elys/elys-api';
 import { TextField } from 'tns-core-modules/ui/text-field';
 import { DialogTypeCoupon } from '../../../../../src/app/products/products.model';
 import { CouponService } from '../coupon.service';
@@ -14,15 +18,14 @@ import { UserService } from '../../../services/user.service';
 export class PayCancelDialogComponent {
   @Input()
   private type: string;
-
   public titleType: string;
   public errorMessage: string;
   public errorMessage2: typeof ErrorStatus = ErrorStatus;
   public errorNumberIcon: number;
-  public couponIdPatternInvalid = true;
-
+  public couponIdPatternInvalid = false;
   cancelRequest: CancelCouponRequest;
   payRequest: FlagAsPaidRequest;
+
   constructor(
     public readonly couponService: CouponService,
     public couponDialogService: CouponDialogService,
@@ -31,13 +34,13 @@ export class PayCancelDialogComponent {
     this.titleType = DialogTypeCoupon[this.couponDialogService.type];
   }
 
-  public onSubmit(result): void {
+  public onSubmit(couponCode: string): void {
     // console.log(DialogTypeCoupon[DialogTypeCoupon.PAY]);
     if (this.titleType === 'PAY') {
-      if (result) {
+      if (couponCode) {
         this.payRequest = {
           CouponId: null,
-          TicketCode: result,
+          TicketCode: couponCode,
           IsPaid: true,
           SettlingClientId: null,
           Product: 'V'
@@ -48,15 +51,19 @@ export class PayCancelDialogComponent {
             this.errorMessage = this.errorMessage2[message.Error];
             this.errorNumberIcon = message.Error;
           })
-          .catch(error => (this.errorMessage = 'operation not possible (' + error.status + ')'));
+          .catch(
+            error =>
+              (this.errorMessage =
+                'operation not possible (' + error.status + ')')
+          );
       }
     } else if (this.titleType === 'CANCEL') {
-      if (result) {
+      if (couponCode) {
         this.cancelRequest = {
           CancellationRequestUserId: this.userService.userDetail.UserId,
           ShopClientId: null,
           CouponId: null,
-          TicketCode: result,
+          TicketCode: couponCode,
           UserWalletTypeId: null,
           Product: 'V'
         };
@@ -66,21 +73,24 @@ export class PayCancelDialogComponent {
             this.errorMessage = this.errorMessage2[message.ErrorStatus];
             this.errorNumberIcon = message.ErrorStatus;
           })
-          .catch(error => (this.errorMessage = 'operation not possible (' + error.status + ')'));
+          .catch(
+            error =>
+              (this.errorMessage =
+                'operation not possible (' + error.status + ')')
+          );
       }
     }
   }
 
-  public validatePattern(args, couponId: string): void {
-    this.errorMessage = undefined;
+  public validatePattern(args, name: string): void {
     const textField = <TextField>args.object;
-    if (couponId === 'couponId') {
-      // this.couponIdPatternInvalid = textField.text;
+    const re = /^[a-zA-Z0-9]+\-[a-zA-Z0-9]+\-[a-zA-Z0-9]+$/;
+    if (name === 'couponCode') {
+      this.couponIdPatternInvalid = re.test(textField.text);
     }
   }
 
   close(): void {
-    // alert('Close ');
     this.couponDialogService.closeDialog();
   }
 }
