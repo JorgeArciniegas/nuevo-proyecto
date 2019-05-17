@@ -6,9 +6,11 @@ import {
 } from '@elys/elys-api';
 import { TextField } from 'tns-core-modules/ui/text-field';
 import { DialogTypeCoupon } from '../../../../../src/app/products/products.model';
-import { CouponService } from '../coupon.service';
-import { CouponDialogService } from '../coupon-dialog.service.tns';
 import { UserService } from '../../../services/user.service';
+import { CouponDialogService } from '../coupon-dialog.service.tns';
+import { CouponService } from '../coupon.service';
+import { Receipt } from './print-receipt/print-receipt.model';
+import { PrintReceiptService } from './print-receipt/print-receipt.service.tns';
 
 @Component({
   selector: 'app-pay-cancel-dialog',
@@ -29,7 +31,8 @@ export class PayCancelDialogComponent {
   constructor(
     public readonly couponService: CouponService,
     public couponDialogService: CouponDialogService,
-    private userService: UserService
+    private userService: UserService,
+    private printService: PrintReceiptService
   ) {
     this.titleType = DialogTypeCoupon[this.couponDialogService.type];
   }
@@ -50,6 +53,13 @@ export class PayCancelDialogComponent {
           .then(message => {
             this.errorMessage = this.errorMessage2[message.Error];
             this.errorNumberIcon = message.Error;
+            // In case of successful operation start the print of the receipt
+            if (message.Error === ErrorStatus.Success) {
+              this.printService.printWindow(
+                new Receipt(couponCode, true, message.Stake)
+              );
+              this.close();
+            }
           })
           .catch(
             error =>
@@ -72,6 +82,13 @@ export class PayCancelDialogComponent {
           .then(message => {
             this.errorMessage = this.errorMessage2[message.ErrorStatus];
             this.errorNumberIcon = message.ErrorStatus;
+            // In case of successful operation start the print of the receipt
+            if (message.ErrorStatus === ErrorStatus.Success) {
+              this.printService.printWindow(
+                new Receipt(couponCode, false, message.StakeGross)
+              );
+              this.close();
+            }
           })
           .catch(
             error =>
