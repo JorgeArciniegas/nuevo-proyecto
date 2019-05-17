@@ -75,7 +75,6 @@ export class ProductsService {
     this.playableBoardResetSubject = new Subject<boolean>();
     this.playableBoardResetObserve = this.playableBoardResetSubject.asObservable();
 
-    const currency: CurrencyCodeRequest = {currencyCode: this.storage.getData('UserData').Currency } ;
     // updated product selected
     this.productNameSelectedObserve.subscribe(
       v => {
@@ -85,6 +84,7 @@ export class ProductsService {
 
         if (!this.product) {
           this.product = product[0];
+          const currency: CurrencyCodeRequest = {currencyCode: this.storage.getData('UserData').Currency } ;
           this.elysApi.coupon.getCouponRelatedCurrency(currency).then( preset => {
             this.product.defaultAmount.push(preset.CouponPreset.CouponPresetValues.PresetOne);
             this.product.defaultAmount.push(preset.CouponPreset.CouponPresetValues.PresetTwo);
