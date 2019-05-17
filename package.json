@@ -30,7 +30,7 @@
     "@angular/router": "^7.2.13",
     "@elys/elys-api": "^0.4.3",
     "@elys/elys-coupon": "^0.2.2",
-    "@elys/elys-storage-lib": "^0.4.0",
+    "@elys/elys-storage-lib": "^0.4.1",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "angular2-qrcode": "^2.0.3",

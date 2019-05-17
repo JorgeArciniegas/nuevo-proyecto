@@ -6,7 +6,7 @@ import { ElysStorageLibService } from '@elys/elys-storage-lib';
   providedIn: 'root'
 })
 export class StorageService {
-  constructor(private storageService: ElysStorageLibService) {}
+  constructor(private storageService: ElysStorageLibService) { }
 
   /**
    * Get data.
@@ -45,7 +45,7 @@ export class StorageService {
    * @param keys keys of the items to remove.
    */
   public removeItems(...keys: string[]): void {
-    this.storageService.removeItems(keys.toString());
+    this.storageService.removeItems(keys);
   }
 
   /**

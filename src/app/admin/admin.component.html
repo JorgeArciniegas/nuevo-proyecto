@@ -1,3 +1,4 @@
-<div>
+<div fxLayout="column" fxLayoutAlign="space-between center">
   <button class="btn-default btn-success" routerLink="reports/betsList">{{'BETLIST' | translate }}</button>
+  <button class="btn-default btn-grey-gradient" (click)="userService.logout()">Logout</button>
 </div>

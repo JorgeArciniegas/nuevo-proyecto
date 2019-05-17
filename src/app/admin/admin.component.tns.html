@@ -1,3 +1,4 @@
-<GridLayout rows="*,10*">
-  <Button text="{{ 'BETLIST' | translate}}" (tap)="goToBetList()"></Button>
+<GridLayout rows="*,*,9*">
+  <Button row="0" text="{{ 'BETLIST' | translate}}" (tap)="goToBetList()"></Button>
+  <Button row="1" text="Logout" (tap)="userService.logout()"></Button>
 </GridLayout>
