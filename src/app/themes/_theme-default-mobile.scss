@@ -444,7 +444,11 @@
 
 	.logo-print-coupon {
 		@extend %logo-header-mobile;
-	}
+  }
+
+  .border-bottom-overlay {
+    @extend %border-bottom-overlay-mobile;
+  }
 }
 
 .overlay {

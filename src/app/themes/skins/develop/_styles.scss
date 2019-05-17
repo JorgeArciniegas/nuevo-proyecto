@@ -549,6 +549,14 @@ $gradient-dark2: #000000;
 	placeholder-color: $color-text-shadow;
 }
 
+%border-bottom-overlay {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+%border-bottom-overlay-mobile {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  border-bottom-width: 1;
+}
+
 // PRINT TEMPLATE
 %logo-header {
   content:url('app/themes/skins/develop/image/vgen.png');

@@ -14,9 +14,6 @@ export class SummaryCouponsComponent {
   couponType: typeof CouponTypeInternal = CouponTypeInternal;
   couponStatus: typeof CouponStatusInternal = CouponStatusInternal;
 
-  public page = 0;
-  public maxPage = 0;
-
   constructor(
     public readonly settings: AppSettings,
     public betsListService: BetsListService,
