@@ -33,7 +33,8 @@ export const componentDeclarations: any[] = [
   CouponComponent,
   ProductDialogComponent,
   PayCancelDialogComponent,
-  PrintCouponComponent
+  PrintCouponComponent,
+  PrintReceiptComponent
 ];
 
 export const providerDeclarations: any[] = [

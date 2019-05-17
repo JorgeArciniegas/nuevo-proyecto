@@ -4,9 +4,9 @@ import { Receipt } from './print-receipt.model';
 import { PrintReceiptService } from './print-receipt.service.tns';
 
 @Component({
-  selector: 'app-print-coupon',
-  templateUrl: './print-coupon.component.tns.html',
-  styleUrls: ['./print-coupon.component.tns.scss']
+  selector: 'app-print-receipt',
+  templateUrl: './print-receipt.component.tns.html',
+  styleUrls: ['./print-receipt.component.tns.scss']
 })
 export class PrintReceiptComponent implements OnInit {
   public receipt: Receipt;
