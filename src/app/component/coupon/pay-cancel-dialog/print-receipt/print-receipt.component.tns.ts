@@ -8,7 +8,7 @@ import { PrintReceiptService } from './print-receipt.service.tns';
   templateUrl: './print-coupon.component.tns.html',
   styleUrls: ['./print-coupon.component.tns.scss']
 })
-export class PrintCouponComponent implements OnInit {
+export class PrintReceiptComponent implements OnInit {
   public receipt: Receipt;
   public date: Date;
   public printer: Printer = new Printer();

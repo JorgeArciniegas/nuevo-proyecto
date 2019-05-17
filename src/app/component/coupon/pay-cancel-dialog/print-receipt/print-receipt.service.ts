@@ -13,21 +13,25 @@ export class PrintReceiptService {
   constructor(private router: Router) {}
 
   printWindow(receipt: Receipt): void {
-    /*     this.receipt = receipt;
+    this.receipt = receipt;
     this.printingEnabled = true;
     this.router.navigate(['/', { outlets: { print: 'print-receipt' } }]);
     document.getElementById('app').classList.add('isPrinting');
-    document.getElementsByClassName('cdk-overlay-container')[0].classList.add('isPrinting');
+    document
+      .getElementsByClassName('cdk-overlay-container')[0]
+      .classList.add('isPrinting');
     timer(250)
       .take(1)
       .takeWhile(() => this.printingEnabled)
       .subscribe(valTimer => {
         window.print();
         document.getElementById('app').classList.remove('isPrinting');
-        document.getElementsByClassName('cdk-overlay-container')[0].classList.remove('isPrinting');
+        document
+          .getElementsByClassName('cdk-overlay-container')[0]
+          .classList.remove('isPrinting');
         this.receipt = undefined;
         this.printingEnabled = false;
         this.router.navigate([{ outlets: { print: null } }]);
-      }); */
+      });
   }
 }

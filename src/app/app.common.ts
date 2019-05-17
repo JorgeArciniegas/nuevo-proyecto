@@ -18,7 +18,7 @@ import { BtncalcService } from './component/btncalc/btncalc.service';
 import { PayCancelDialogComponent } from './component/coupon/pay-cancel-dialog/pay-cancel-dialog.component';
 import { CouponDialogService } from './component/coupon/coupon-dialog.service.tns';
 import { PrintCouponComponent } from './component/coupon/print-coupon/print-coupon.component';
-// import { PrintReceiptComponent } from './component/coupon/pay-cancel-dialog/print-receipt/print-receipt.component';
+import { PrintReceiptComponent } from './component/coupon/pay-cancel-dialog/print-receipt/print-receipt.component';
 
 export const componentDeclarations: any[] = [
   AppComponent,
@@ -51,8 +51,14 @@ export const routes: Routes = [
   },
 
   {
-    path: 'print',
+    path: 'print-coupon',
     component: PrintCouponComponent,
+    outlet: 'print'
+  },
+
+  {
+    path: 'print-receipt',
+    component: PrintReceiptComponent,
     outlet: 'print'
   },
 
