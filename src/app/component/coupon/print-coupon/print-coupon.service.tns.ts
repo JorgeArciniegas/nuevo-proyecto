@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { StagedCoupon, StagedCouponStatus } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { Printer } from 'nativescript-printer';
+import { RouterService } from 'src/app/services/utility/router/router.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class PrintCouponService {
   couponPrint: StagedCoupon;
   printer: Printer = new Printer();
 
-  constructor(elysCoupon: ElysCouponService, private router: Router) {
+  constructor(elysCoupon: ElysCouponService, private router: RouterService) {
     elysCoupon.stagedCouponObs.subscribe(async coupons => {
       for (const coupon of coupons.filter(
         item => item.CouponStatusId === StagedCouponStatus.Placed
@@ -23,10 +23,10 @@ export class PrintCouponService {
   }
 
   printWindow(): void {
-    this.router.navigate(['/', { outlets: { print: 'print-coupon' } }]);
+    this.router.getRouter().navigate(['/', { outlets: { print: 'print-coupon' } }]);
   }
 
   resetPrint(): void {
-    this.router.navigate([{ outlets: { print: null } }]);
+    this.router.getRouter().navigate([{ outlets: { print: null } }]);
   }
 }
