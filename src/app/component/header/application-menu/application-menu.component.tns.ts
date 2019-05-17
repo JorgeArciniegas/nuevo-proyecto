@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterExtensions } from 'nativescript-angular/router';
 import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../../products/products.service';
 
@@ -13,7 +14,8 @@ export class ApplicationMenuComponent implements OnInit {
 
   constructor(
     public readonly appSettings: AppSettings,
-    public productService: ProductsService
+    public productService: ProductsService,
+    private router: RouterExtensions
   ) {
     this.settings = appSettings;
   }
@@ -24,5 +26,7 @@ export class ApplicationMenuComponent implements OnInit {
 
   productSelecting(productSelected: string) {
     this.btnSelected = productSelected;
+    this.router.navigateByUrl('/products/' + productSelected);
+    this.productService.resetBoard();
   }
 }

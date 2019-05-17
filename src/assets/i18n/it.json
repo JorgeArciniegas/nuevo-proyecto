@@ -2,6 +2,39 @@
   "ACCG": "ACCG",
   "BASE": "B",
   "BET": "Scommessa",
+  "BETSLIST": {
+    "BTN_DATE_CLOSED": "Pagamento",
+    "BTN_DATE_PLACED": "Piazzamento",
+    "BTN_SEARCH": "Cerca",
+    "COUPON_STATUS": {
+      "ALL": "Tutti",
+      "Lost": "Perdente",
+      "Placed": "Piazzato",
+      "Win": "Vincente"
+    },
+    "LABEL_AMOUNT_LOST_BETS": "TOT perso",
+    "LABEL_AMOUNT_PLACED_BETS": "TOT In corso",
+    "LABEL_AMOUNT_WON_BETS": "TOT Vinto",
+    "LABEL_COUPONCODE_FORM": "Codice coupon",
+    "LABEL_DATE_FORM": "Data",
+    "LABEL_DATE_FROM": "Da data",
+    "LABEL_DATE_PLACE": "Data piazzamento",
+    "LABEL_DATE_TO": "A data",
+    "LABEL_LOST_BETS": "Perdenti",
+    "LABEL_PLACED_BETS": "In corso",
+    "LABEL_PRODUCTS_FORM": "Filtro prodotto",
+    "LABEL_STAKE": "Giocato",
+    "LABEL_STATUSCOUPON": "Stato",
+    "LABEL_STATUSCOUPON_FORM": "Stato scommessa",
+    "LABEL_TOTAL_PLAYED": "TOT giocato",
+    "LABEL_TYPECOUPON": "Tipo",
+    "LABEL_TYPECOUPON_FORM": "Tipo di scommessa",
+    "LABEL_USERNAME": "Nome utente",
+    "LABEL_WON_BETS": "Vincenti",
+    "LIST_TITLE": "LISTA SCOMMESSE",
+    "PAGE": "Pagina",
+    "PAGE_SEPARATOR": " di "
+  },
   "Balance": "Balance",
   "C": "C",
   "CANCEL": "ANNULLA",
@@ -12,6 +45,7 @@
   "CONFIRM": "CONFIRM",
   "COUPON CODE": "Coupon Code",
   "CouponType": {
+    "ALL": "Tutte",
     "CombinationsBet": "Sistema",
     "MultipleBet": "Multipla",
     "PrintCoupon": {
@@ -72,6 +106,16 @@
     "UNDER": "UNDER",
     "VT": "VT",
     "WINNER": "VINCENTE"
+  },
+  "SPORT": {
+    "ALL": "Tutti",
+    "CockRacing": "Combattimento di galli",
+    "DogRacing": "Corsa dei cani",
+    "HorseRacing": "Corsa dei cavalli",
+    "Keno": "Keno",
+    "Roulette": "Roulette",
+    "Soccer": "Calcio",
+    "VirtualHorse": "Corsa dei cavalli Virtuali"
   },
   "ST": "ST",
   "TITLE": {

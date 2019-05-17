@@ -10,10 +10,8 @@ import { AppSettings } from '../../../app.settings';
 })
 export class PrintCouponComponent implements OnInit {
   couponType: typeof CouponType = CouponType;
-  constructor(public printCouponService: PrintCouponService, public readonly appSetting: AppSettings) {
-    /* if (!printCouponService.printingEnabled) {
-      throw new Error('You don\'t have a valid print betslip');
-    } */
+  constructor(public printCouponService: PrintCouponService, public appSetting: AppSettings) {
+
   }
 
   ngOnInit() {

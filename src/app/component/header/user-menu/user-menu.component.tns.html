@@ -1,5 +1,6 @@
 <FlexboxLayout flexDirection="row" justifyContent="flex-end" class="user-menu">
   <!-- NOTIFICATION -->
+  <ng-container  *ngIf="notifyIcon">
   <AbsoluteLayout [width]="barHeight" [height]="barHeight" class="notification">
     <Image stretch="aspectFit" [top]="barHeight * 0.25" [left]="barHeight * 0.15" [width]="notifyIcon.width" [height]="notifyIcon.height"
       class="clock-icon" src="~/app/themes/skins/{{settings.theme}}/icon/account.png"></Image>
@@ -10,6 +11,7 @@
       </StackLayout>
     </StackLayout>
   </AbsoluteLayout>
+  </ng-container>
   <FlexboxLayout flexDirection="column" class="details" justifyContent="center">
     <Label text="{{'Balance' | translate }}: 1.000.000.000,00"></Label>
     <StackLayout orientation="horizontal">
@@ -18,7 +20,7 @@
     </StackLayout>
   </FlexboxLayout>
   <GridLayout rows="*,*" columns="auto">
-    <StackLayout row="0" orientation="horizontal" class="clock" verticalAlignment="center">
+    <StackLayout row="0" orientation="horizontal" class="clock" verticalAlignment="center" *ngIf="notifyIcon">
       <Image stretch="aspectFit" class="clock-icon" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-access_time-24px.png"></Image>
       <Label [ngClass]="{'small': productService.windowSize.small}" text="{{ myTime | date:'HH:mm' }}"></Label>
     </StackLayout>

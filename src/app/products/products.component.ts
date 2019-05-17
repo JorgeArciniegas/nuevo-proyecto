@@ -23,13 +23,13 @@ export class ProductsComponent implements OnDestroy {
     public readonly couponDialogService: CouponDialogService
   ) {
     this.settings = appSettings;
-    this.observableMediaSubscribe = this.observableMedia.media$.subscribe(
-      (change: MediaChange) => {
-        this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
-        this.service.fnWindowsSize();
-        this.rowHeight = (this.service.windowSize.columnHeight - 30) / 11;
-      }
-    );
+
+    this.observableMediaSubscribe = this.observableMedia.media$.subscribe((change: MediaChange) => {
+      this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
+      this.service.fnWindowsSize();
+      this.rowHeight = (this.service.windowSize.columnHeight - 30) / 11;
+
+    });
   }
 
   ngOnDestroy(): void {

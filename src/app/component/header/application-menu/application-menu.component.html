@@ -1,13 +1,16 @@
-<div fxFlexFill fxLayout="row" fxLayoutAlign="start center">
+<div fxFlexFill fxLayout="row" fxLayoutAlign="start center" >
     <!-- MENU -->
-    <button [style.width.px]="menuIcon.width" [style.height.px]="menuIcon.height" class="btn-reset toolbar menu">
+    <button *ngIf="menuIcon" [style.width.px]="menuIcon.width" [style.height.px]="menuIcon.height"
+      class="btn-reset toolbar menu" routerLink="/admin">
         <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/baseline-menu-24px.svg">
     </button>
     <!-- LOGO -->
-    <img class="toolbar logo" [style.height.px]="logoIcon.height" src="app/themes/skins/{{settings.theme}}/image/Logo-header.png">
+    <img *ngIf="logoIcon"  class="toolbar logo" [style.height.px]="logoIcon.height" src="app/themes/skins/{{settings.theme}}/image/Logo-header.png">
     <!-- BUTTONS -->
-    <button *ngFor="let prod of settings.products" [style.width.px]="buttonIcon.width" [style.height.px]="buttonIcon.height"
-        class="btn-reset toolbar btn icon" [ngClass]="{'selected': prod.name == btnSelected}" (click)="productSelecting(prod.name)">
-        <img class="icon radius-5 elevation-z5" src="app/themes/skins/{{settings.theme}}/icon/{{prod.toolbarButton.icon}}.png">
-    </button>
+    <ng-container  *ngIf="buttonIcon">
+      <button *ngFor="let prod of settings.products" [style.width.px]="buttonIcon.width" [style.height.px]="buttonIcon.height"
+          class="btn-reset toolbar btn icon" [ngClass]="{'selected': prod.name == btnSelected}" (click)="productSelecting(prod.name)">
+          <img class="icon radius-5 elevation-z5" src="app/themes/skins/{{settings.theme}}/icon/{{prod.toolbarButton.icon}}.png">
+      </button>
+  </ng-container>
 </div>

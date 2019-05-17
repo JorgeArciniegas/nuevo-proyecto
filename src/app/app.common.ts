@@ -79,6 +79,11 @@ export const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'admin',
+    loadChildren: './admin/admin.module#AdminModule',
+    canActivate: [AuthorizationGuard]
+  },
+  {
     path: '**',
     loadChildren: './error-page/error-page.module#ErrorPageModule'
   }

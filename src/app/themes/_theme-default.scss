@@ -17,6 +17,9 @@ html {
 }
 
 .app {
+  app-login {
+    height: 100%;
+  }
 	&.develop {
 		@import "./skins/develop/styles";
 	}
@@ -199,7 +202,11 @@ html {
 		}
 
 		.display {
-			@extend %card-title;
+      @extend %card-title;
+
+      .label-overlap {
+        @extend %card-title-label;
+      }
 		}
 
 		.sub-display {
@@ -360,6 +367,14 @@ html {
 		.btn-dark-gradient {
 			@extend %btn-dark-gradient;
 		}
+    // BUTTON FILTER ADMIN
+    .btn-filter {
+      @extend %btn-filter-form;
+    }
+
+    .btn-filter-success{
+      @extend %btn-filter-success;
+    }
 
 		.advance-game {
 			padding: 0.8vh 0 0.8vh;
@@ -424,14 +439,20 @@ html {
 
 	// MEDIA PRINT ONLY
 
-	.logo-print-coupon {
-		width: 100%;
-		min-height: 15px;
-		@extend %logo-header;
-	}
-	.noshow {
-		display: none;
-	}
+  .logo-print-coupon {
+    width: 100% ;
+    min-height: 15px;
+    @extend %logo-header;
+  }
+  .noshow{ display: none; }
+
+  *[data='disabled']{
+    @extend %color-disabled;
+  }
+
+  .border-bottom-overlay-1px{
+    @extend %border-bottom-overlay;
+  }
 }
 
 .card-odd {
@@ -524,6 +545,13 @@ html {
 	-webkit-border-radius: 50px;
 }
 
+.padding-10{
+  padding: 10px;
+}
+.padding-20{
+  padding: 20px;
+}
+
 .padding-25 {
 	padding: 25px;
 }
@@ -547,7 +575,6 @@ html {
 .padding-horizontal-6 {
 	padding: 0px 6px;
 }
-
 .elevation-z5 {
 	box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 1px 5px 2px rgba(0, 0, 0, 0.3);
 }
@@ -559,7 +586,9 @@ html {
 	background: rgba(0, 0, 0, 0.6) url("app/themes/skins/develop/icon/baseline-lock-24px.svg") center center no-repeat;
 	background-size: 100px;
 }
-
+.cdk-visually-hidden, .cdk-overlay-backdrop, .cdk-overlay-dark-backdrop{
+  display: none;
+}
 .cdk-overlay-container {
 	@import "./skins/develop/styles";
 	.cdk-global-overlay-wrapper {
@@ -597,7 +626,9 @@ html {
 
 	.btn-dark-gradient {
 		@extend %btn-dark-gradient;
-	}
+  }
+
+
 }
 
 .modal-center {
@@ -617,13 +648,12 @@ html {
 }
 
 @media print {
-	.isPrinting {
-		> * {
-			display: none;
-		}
-		app-print-coupon,
-		app-print-receipt {
-			display: block;
-		}
-	}
+  .isPrinting {
+    .main-content {
+      display: none !important;
+    }
+    app-print-coupon {
+      display: block;
+    }
+  }
 }

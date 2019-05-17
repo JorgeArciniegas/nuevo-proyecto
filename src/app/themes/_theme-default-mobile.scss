@@ -150,7 +150,13 @@
 			.indicator-amount {
 				@extend %border-primary;
 			}
-		}
+    }
+    .label-overlap {
+      @extend %card-title-label;
+    }
+    .ticketCode {
+      @extend %color-placeholder;
+    }
 
 		.product {
 			padding: 5 0;
@@ -332,7 +338,20 @@
 
 		.btn-dark-gradient {
 			@extend %btn-dark-gradient-mobile;
-		}
+    }
+
+    // BUTTON FILTER ADMIN
+    .btn-filter {
+      @extend %btn-filter-mobile;
+      .button-internal {
+        padding: 0 10;
+        text-transform: none;
+      }
+    }
+
+    .btn-filter-success{
+      @extend %btn-filter-success-mobile;
+    }
 
 		.advance-game {
 			margin: 0 -2;
@@ -445,7 +464,11 @@
 
 	.logo-print-coupon {
 		@extend %logo-header-mobile;
-	}
+  }
+
+  .border-bottom-overlay {
+    @extend %border-bottom-overlay-mobile;
+  }
 }
 
 .overlay {

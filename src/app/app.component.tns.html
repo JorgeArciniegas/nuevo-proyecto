@@ -1,17 +1,25 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" actionBarHidden="true">
-    <GridLayout rows="*" id="app" class="app" [ngClass]="settings.theme">
-        <StackLayout class="main-content" *ngIf="connectionAviable">
-            <router-outlet></router-outlet>
+  <GridLayout rows="*" id="app" class="app" [ngClass]="settings.theme">
+    <StackLayout class="main-content" *ngIf="connectionAviable">
+      <!-- TOOLBAR-->
+      <GridLayout columns="*" rows="*{{userService.isUserLogged ? ',12*' : ''}}">
+        <StackLayout *ngIf="userService.isUserLogged" row="0" class="toolbar">
+          <app-header></app-header>
         </StackLayout>
-        <GridLayout class="main-content" *ngIf="!connectionAviable">
-            <StackLayout verticalAlignment="center" horizontalAlignment="center">
-                <Label text="{{ 'NO_CONNECTION' | translate }}"></Label>
-            </StackLayout>
-        </GridLayout>
-        <StackLayout>
-          <router-outlet name="print"></router-outlet>
+        <StackLayout row="{{userService.isUserLogged ? 1 : 0}}">
+          <router-outlet></router-outlet>
         </StackLayout>
+      </GridLayout>
+    </StackLayout>
+    <GridLayout class="main-content" *ngIf="!connectionAviable">
+      <StackLayout verticalAlignment="center" horizontalAlignment="center">
+        <Label text="{{ 'NO_CONNECTION' | translate }}"></Label>
+      </StackLayout>
     </GridLayout>
+    <StackLayout>
+      <router-outlet name="print"></router-outlet>
+    </StackLayout>
+  </GridLayout>
 
 
 </Page>

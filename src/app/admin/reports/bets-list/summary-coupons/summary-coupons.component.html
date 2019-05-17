@@ -1,0 +1,167 @@
+<div fxFlex fxLayout="column" fxLayoutAlign="center space-between" *ngIf="betsListService.betsCouponList">
+  <div fxFlex="93" fxLayout="column" [style.padding.px]="20">
+    <div class="title">
+      <h3>{{'BETSLIST.LIST_TITLE' | translate}} </h3>
+    </div>
+    <div fxFlex="10" class="padding-horizontal-6">
+      <div fxFlex fxLayout="row">
+        <div fxFlex fxLayout="row nowrap" fxLayoutAlign="start center">
+          <div fxFlex="5">
+            <button class="btn-default radius-5" routerLink="../">
+              <img class="icon icon-24px" src="app/themes/skins/{{settings.theme}}/icon/baseline-arrow_back-24px.png">
+            </button>
+          </div>
+          <div fxFlex="10">
+              <div><small data='disabled'>{{ 'BETSLIST.LABEL_DATE_FORM' | translate }}</small></div>
+              <div class="value"><strong>{{ ((!betsListService.request.dateHasPlaced) ? 'BETSLIST.BTN_DATE_PLACED' : 'BETSLIST.BTN_DATE_CLOSED') | translate }}</strong></div>
+            </div>
+          <div fxFlex="12">
+            <div><small data='disabled'>{{ 'BETSLIST.LABEL_DATE_FROM' | translate }}</small></div>
+            <div class="value"><strong>{{betsListService.request.dateFrom | date:'mediumDate'}}</strong></div>
+          </div>
+          <div fxFlex="12">
+              <div><small data='disabled'>{{ 'BETSLIST.LABEL_DATE_TO' | translate }}</small></div>
+              <div class="value"><strong>{{betsListService.request.dateTo | date:'mediumDate'}}</strong></div>
+          </div>
+          <div fxFlex="12">
+              <div><small data='disabled'>{{ 'BETSLIST.LABEL_TYPECOUPON_FORM' | translate }}</small></div>
+              <div class="value"><strong>{{ 'CouponType.' + couponType[betsListService.request.couponType] | translate}}</strong></div>
+          </div>
+          <div fxFlex="10">
+              <div><small data='disabled'>{{ 'BETSLIST.LABEL_STATUSCOUPON_FORM' | translate }}</small></div>
+              <div class="value"><strong>{{ 'BETSLIST.COUPON_STATUS.' + couponStatus[betsListService.request.couponStatus] | translate}}</strong></div>
+          </div>
+          <div fxFlex="12">
+              <div><small data='disabled'>{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}</small></div>
+              <div class="value"><strong>{{ 'SPORT.'+ betsListService.labelAvailableSportSelected | translate }} </strong></div>
+          </div>
+          <!-- PAGINATOR -->
+          <div fxFlex fxLayoutAlign="center center">
+            <div fxFlex="20">
+              <button class="btn-filter padding-10 radius-5"
+                [disabled]="betsListService.betsCouponList.TotalPages === 1 || betsListService.request.requestedPage === 1"
+                (click)="betsListService.paginatorSize(false)">&lsaquo;</button>
+            </div>
+            <div fxFlex fxLayoutAlign="center center">
+              {{'BETSLIST.PAGE' | translate }}  {{betsListService.request.requestedPage}} {{'BETSLIST.PAGE_SEPARATOR' | translate }} {{betsListService.betsCouponList.TotalPages}}
+            </div>
+            <div fxFlex="20">
+              <button class="btn-filter padding-10 radius-5"
+                [disabled]="betsListService.betsCouponList.TotalPages === betsListService.request.requestedPage"
+                (click)="betsListService.paginatorSize(true)">&rsaquo;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxFlex class="padding-20 btn-filter radius-5 elevation-z5 " fxLayout="column" fxLayoutAlign="flex-start">
+      <div fxLayout="column" fxFlex="5">
+          <div fxFlex  fxLayout="row" class="border-bottom-overlay-1px">
+            <div fxFlex="5"></div>
+            <div fxFlex="20">
+              <strong data='disabled'>{{ 'BETSLIST.LABEL_COUPONCODE_FORM' | translate }}</strong>
+            </div>
+            <div fxFlex="20">
+              <strong data='disabled'>{{ 'BETSLIST.LABEL_USERNAME' | translate }}</strong>
+            </div>
+            <div fxFlex="20">
+              <strong data='disabled'>{{ 'BETSLIST.LABEL_DATE_PLACE' | translate }}</strong>
+            </div>
+            <div fxFlex="7">
+              <strong data='disabled'>{{ 'BETSLIST.LABEL_STAKE' | translate }}</strong>
+            </div>
+            <div fxFlex="7" fxLayoutAlign="center">
+              <strong data='disabled'>{{ 'BETSLIST.LABEL_STATUSCOUPON' | translate }}</strong>
+            </div>
+            <div fxFlex="9">
+              <strong data='disabled'>{{ 'BETSLIST.LABEL_TYPECOUPON' | translate }}</strong>
+            </div>
+            <div fxFlex="12">
+              <strong data='disabled'>{{ 'BETSLIST.LABEL_AMOUNT_WON_BETS' | translate }}</strong>
+            </div>
+          </div>
+      </div>
+      <div fxLayout="column" fxFlex fxLayoutAlign="start">
+        <div fxFlex fxLayout="column" fxLayoutAlign="flex-start" fxLayoutAlignGap="grid">
+            <div fxFlex fxLayoutAlign="start center" class="border-bottom-overlay-1px" [style.max-height.px]="55"
+             *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons">
+              <div fxFlex="5">
+                  <img class="icon icon-24px" *ngIf="rowItem.IsAgentSettled" src="app/themes/skins/{{settings.theme}}/icon/baseline-check-24px.svg">
+              </div>
+              <div fxFlex="20">
+                <strong>{{ rowItem.CouponCode }}</strong>
+              </div>
+              <div fxFlex="20">
+                  <strong>{{rowItem.UserId + ' - ' + rowItem.UserName }}</strong>
+              </div>
+              <div fxFlex="20">
+                  <strong>{{rowItem.CouponDateOffset | date: 'dd/MM/yy HH:mm:ss' }}</strong>
+              </div>
+              <div fxFlex="7">
+                  <strong>{{rowItem.Stake  }}</strong>
+              </div>
+              <div fxFlex="7" fxLayoutAlign="center">
+                  <ng-container [ngSwitch]="rowItem.CouponStatusId">
+                      <img class="icon icon-24px" *ngSwitchDefault src="app/themes/skins/{{settings.theme}}/icon/progress-clock.svg">
+                      <!-- LOST -->
+                      <img class="icon icon-24px" *ngSwitchCase="2" src="app/themes/skins/{{settings.theme}}/icon/cancel.svg">
+                      <!-- WIN -->
+                      <img class="icon icon-24px" *ngSwitchCase="3" src="app/themes/skins/{{settings.theme}}/icon/checked.svg">
+                  </ng-container>
+              </div>
+              <div fxFlex="9">
+                <strong>{{ 'CouponType.'+couponType[rowItem.CouponTypeId] | translate }}</strong>
+              </div>
+              <div fxFlex="12">
+                <strong>{{ (rowItem.Won > 0 )? rowItem.Won : '-'  }}</strong>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxFlex="7" fxLayout="column wrap">
+    <div fxFlex class="btn-filter" fxLayout="column wrap" fxLayoutAlign="stretch">
+        <div fxFlexFill fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="20px">
+            <div fxFlex fxLayout="row wrap" fxLayoutGap="grid">
+                <div fxFlex="5"></div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.NumberOfBets | number }} </h2></div>
+                  <div><small data='disabled'>{{ 'TITLE.COUPON' | translate }}</small></div>
+                </div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.TotalStake | number: '1.2-2' }}  </h2></div>
+                  <div><small data='disabled'>{{ 'BETSLIST.LABEL_TOTAL_PLAYED' | translate }}</small></div>
+                </div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.NumberOfPlacedBets | number }}  </h2></div>
+                  <div><small data='disabled'>{{ 'BETSLIST.LABEL_PLACED_BETS' | translate }}</small></div>
+                </div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.TotalPlacedBets | number }}  </h2></div>
+                  <div ><small data='disabled'>{{ 'BETSLIST.LABEL_AMOUNT_PLACED_BETS' | translate }}</small></div>
+                </div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.NumberOfWonBets | number }}  </h2></div>
+                  <div><small data='disabled'>{{ 'BETSLIST.LABEL_WON_BETS' | translate }}</small></div>
+                </div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.TotalWon | number }}  </h2></div>
+                  <div><small data='disabled'>{{ 'BETSLIST.LABEL_AMOUNT_WON_BETS' | translate }}</small></div>
+                </div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.NumberOfLossBets | number }}  </h2></div>
+                  <div><small data='disabled'>{{ 'BETSLIST.LABEL_LOST_BETS' | translate }}</small></div>
+                </div>
+                <div fxFlex="10">
+                  <div class="value"><h2>{{ betsListService.betsCouponList.TotalLost | number }}  </h2></div>
+                  <div><small data='disabled'>{{ 'BETSLIST.LABEL_AMOUNT_LOST_BETS' | translate }}</small></div>
+                </div>
+                <div fxFlex="5"></div>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
