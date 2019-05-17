@@ -1,4 +1,4 @@
-<GridLayout rows="*,2*,14*,2*" columns="*" class="summary">
+<GridLayout rows="*,2*,14*,2*" columns="*" class="summary" *ngIf="betsListService.betsCouponList">
   <Label row="0" class="title" colSpan="2" text="{{'BETSLIST.LIST_TITLE' | translate}}" textWrap="true" verticalAlignment="center"></Label>
 
   <GridLayout row="1" columns="*,2*,2*,2*,3*,3*,3*,4*" class="card header">
