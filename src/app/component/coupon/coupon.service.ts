@@ -121,7 +121,7 @@ export class CouponService {
         }
       }
     } catch (e) {
-      console.log('err', e);
+      // console.log('err', e);
     }
   }
 
