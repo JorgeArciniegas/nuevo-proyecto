@@ -13,7 +13,7 @@ export class PrintReceiptService {
   constructor(private router: Router) {}
 
   printWindow(receipt: Receipt): void {
-    this.receipt = receipt;
+    /*     this.receipt = receipt;
     this.printingEnabled = true;
     this.router.navigate(['/', { outlets: { print: 'print-receipt' } }]);
     document.getElementById('app').classList.add('isPrinting');
@@ -28,6 +28,6 @@ export class PrintReceiptService {
         this.receipt = undefined;
         this.printingEnabled = false;
         this.router.navigate([{ outlets: { print: null } }]);
-      });
+      }); */
   }
 }
