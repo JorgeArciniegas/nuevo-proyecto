@@ -56,6 +56,7 @@ export class DogracingService {
   public currentRaceObserve: Observable<number>;
 
   private attempts = 0;
+  private initCurrentRace = false;
 
   dogList: Dog[];
   // temp array
@@ -77,9 +78,6 @@ export class DogracingService {
 
     this.currentRaceSubscribe = new Subject<number>();
     this.currentRaceObserve = this.currentRaceSubscribe.asObservable();
-
-    this.loadRaces();
-    this.loadLastResult(false);
 
     this.currentRaceObserve.subscribe((raceIndex: number) => {
       this.raceDetails.currentRace = raceIndex;
@@ -105,6 +103,12 @@ export class DogracingService {
     });
 
     this.createDogList();
+  }
+
+  initRaces(): void {
+    this.initCurrentRace = true;
+    this.loadRaces();
+    this.loadLastResult(false);
 
   }
 
@@ -236,9 +240,16 @@ export class DogracingService {
     // check current race index, if is selected a reace decrease the index because the first race is completed and removed
     if (this.raceDetails.currentRace > 0) {
       this.raceDetails.currentRace = this.raceDetails.currentRace - 1;
+      if (this.initCurrentRace) {
+        this.resetPlayRacing();
+        this.currentRaceSubscribe.next(0);
+      }
     } else if (this.raceDetails.currentRace === 0) {
       this.resetPlayRacing();
       this.currentRaceSubscribe.next(0);
+    }
+    if (this.initCurrentRace) {
+      this.initCurrentRace = false;
     }
 
     // calculate remaning time for selected race
@@ -352,7 +363,7 @@ export class DogracingService {
    */
   placingOdd(dog: Dog): void {
     if (this.coupon.checkIfCouponIsReadyToPlace()) {
-       return;
+      return;
     }
     if (this.placingRace.isSpecialBets) {
       this.resetPlayRacing();
@@ -531,6 +542,7 @@ export class DogracingService {
         areaFuncData = this.extractOdd(odd, areaFuncData, dogName);
       }
     } catch (err) {
+      console.log(err);
       areaFuncData = {};
     } finally {
       this.productService.polyfunctionalAreaSubject.next(areaFuncData);

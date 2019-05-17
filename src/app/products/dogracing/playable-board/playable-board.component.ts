@@ -25,10 +25,9 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
   public TypePlacingRace = TypePlacingRace;
   public playableTitle: string[];
 
-  constructor(public service: DogracingService) {}
+  constructor(public service: DogracingService) { }
 
   ngOnInit() {
-    this.service.placingRace = new PlacingRace();
     this.currentRaceSubscription = this.service.currentRaceObserve.subscribe(
       raceIndex =>
         (this.service.placingRace.raceNumber = this.service.raceDetails.races[
