@@ -1,23 +1,25 @@
-<StackLayout id="printing" horizontalAlignment="center" verticalAlignment="top" orientation="horizontal" >
+<StackLayout id="printing" horizontalAlignment="center" verticalAlignment="top" orientation="horizontal">
 
-    <FlexboxLayout flexDirection="column" justifyContent="space-between">
-        <Button (tap)="print()" text="PRINT" class="btn btn-primary"></Button>
-        <Button (tap)="printService.resetPrint()"  class="btn btn-accent" text="CONTINUE"></Button>
-    </FlexboxLayout>
-    <ScrollView>
-        <StackLayout #printing orientation="horizontal">
-            <FlexboxLayout flexDirection="column">
-                <StackLayout class="logo-print-coupon" height="50"></StackLayout>
-                <FlexboxLayout flexDirection="row" class="p-15" flexWrap="wrap">
-                    <Label class="p-15 text-center font-weight-bold"  text="{{ 'PRINT.COUPON.HEADER_MSG' | translate }}"></Label>
-                </FlexboxLayout>
-                <FlexboxLayout flexDirection="row" class="p-15" flexWrap="wrap">
-                    <Label class="p-15" text="{{ 'BET' | translate }} {{receipt.couponCode}}"></Label>
-                    <Label class="p-15" text="{{ 'CANCELED_ON' | translate }} {{date | date: 'dd-MM-yyyy HH:mm'}}" *ngIf="!receipt.isPayment"></Label>
-                    <Label class="p-15" text="{{ 'PAYED_ON' | translate }} {{date | date: 'dd-MM-yyyy HH:mm'}}" *ngIf="receipt.isPayment"></Label>
-                </FlexboxLayout>
-                <Label class="p-15 font-weight-bold" text="{{ 'PAYED_AMOUNT' | translate}}: {{receipt.amount}}"></Label>
-            </FlexboxLayout>
-        </StackLayout>
-    </ScrollView>
+  <FlexboxLayout flexDirection="column" justifyContent="space-between">
+    <Button (tap)="print()" text="PRINT" class="btn btn-primary"></Button>
+    <Button (tap)="printService.resetPrint()" class="btn btn-accent" text="CONTINUE"></Button>
+  </FlexboxLayout>
+  <ScrollView>
+    <StackLayout #printing orientation="horizontal">
+      <FlexboxLayout flexDirection="column">
+        <StackLayout class="logo-print-coupon" height="100"></StackLayout>
+        <FlexboxLayout flexDirection="row" class="border-5" justifyContent="center" alignItems="center" flexWrap="wrap">
+          <Label class="text-center font-weight-bold" text="{{ 'PRINT.RECEIPT.HEADER_MSG' | translate }}"></Label>
+        </FlexboxLayout>
+        <FlexboxLayout flexDirection="row" flexWrap="wrap">
+          <Label text="{{ 'BET' | translate }} {{receipt.couponCode}}"></Label>
+        </FlexboxLayout>
+        <FlexboxLayout flexDirection="row" flexWrap="wrap">
+          <Label text="{{ 'CANCELED_ON' | translate }} {{date | date: 'dd-MM-yyyy HH:mm'}}" *ngIf="!receipt.isPayment"></Label>
+          <Label text="{{ 'PAYED_ON' | translate }} {{date | date: 'dd-MM-yyyy HH:mm'}}" *ngIf="receipt.isPayment"></Label>
+        </FlexboxLayout>
+        <Label class="p-15 font-weight-bold" fontSize="14" text="{{ 'PAYED_AMOUNT' | translate}}: {{receipt.amount}}"></Label>
+      </FlexboxLayout>
+    </StackLayout>
+  </ScrollView>
 </StackLayout>

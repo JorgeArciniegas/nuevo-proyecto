@@ -81,6 +81,9 @@
       "STAKE": "Imp. Giocato",
       "TOTALPAYOUT": "TOTAL PAYOUT",
       "TYPE": "Tipo giocata"
+    },
+    "RECEIPT": {
+      "HEADER_MSG": "Ulisse Gmbh, SalurnerStrasse 12, Innsbruck (AT)"
     }
   },
   "R": "R",

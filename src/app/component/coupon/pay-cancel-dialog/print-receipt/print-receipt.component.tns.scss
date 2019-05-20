@@ -1,8 +1,11 @@
 #printing{
   background: white;
+  color: #000;
+  margin: 15;
   .border-5{
     border-width: 1;
     border-color: #000;
-    border-radius: 5;
+    padding: 0 15;
   }
 }
+
