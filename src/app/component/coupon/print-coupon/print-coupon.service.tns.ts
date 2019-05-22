@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { StagedCoupon, StagedCouponStatus } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { Printer } from 'nativescript-printer';
-import { RouterService } from 'src/app/services/utility/router/router.service';
+import { RouterService } from '../../../../../src/app/services/utility/router/router.service';
 
 @Injectable({
   providedIn: 'root'
