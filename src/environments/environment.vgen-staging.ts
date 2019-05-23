@@ -1,4 +1,4 @@
-import { Environment } from './environment.models';
+import { Environment, WidgetTypeLink } from './environment.models';
 
 export const environment: Environment = {
   production: false,
@@ -7,16 +7,93 @@ export const environment: Environment = {
   theme: 'develop',
   products: [
     {
+      sportId: 8,
+      codeProduct: 'DOG',
       name: 'dogracing',
-      label: 'Dog Racing',
+      label: 'DOG',
       defaultAmount: [],
+      order: 0,
+      productSelected: true,
+      isPlayable: true,
       toolbarButton: {
         name: 'dogracing',
         icon: 'Dog',
-        route: 'products/dogracing'
-      }
+        route: 'products/racing'
+      },
+      widgets: [
+        {
+          name: '',
+          routing: '',
+          typeLink: WidgetTypeLink.OUTLET,
+          icon: ''
+        },
+      ],
     },
     {
+      sportId: 10,
+      codeProduct: 'HORSE',
+      name: 'horseracing',
+      label: 'HORSE',
+      defaultAmount: [],
+      order: 1,
+      productSelected: false,
+      isPlayable: true,
+      toolbarButton: {
+        name: 'horseracing',
+        icon: 'Horse',
+        route: 'products/racing'
+      },
+      widgets: [],
+    },
+    {
+      sportId: 210,
+      codeProduct: 'HORSE-VIRT',
+      name: 'virtualhorse',
+      label: 'HORSE_VIRTUAL',
+      order: 2,
+      productSelected: false,
+      isPlayable: true,
+      defaultAmount: [],
+      toolbarButton: {
+        name: 'virtualhorse',
+        icon: 'Horse',
+        route: 'products/racing'
+      },
+      widgets: [],
+    },
+    {
+      sportId: 1,
+      codeProduct: 'ITA-LEAGUE',
+      name: 'Soccer',
+      label: 'FOOTBALL_ITA',
+      order: 3,
+      productSelected: false,
+      isPlayable: false,
+      defaultAmount: [],
+      toolbarButton: {
+        name: 'Italian League',
+        icon: 'Soccer-ita',
+        route: 'products/soccer'
+      },
+      widgets: [],
+    },
+    {
+      sportId: 1,
+      codeProduct: 'ENG-LEAGUE',
+      name: 'Soccer',
+      label: 'FOOTBALL_ENG',
+      order: 3,
+      productSelected: false,
+      isPlayable: false,
+      defaultAmount: [],
+      toolbarButton: {
+        name: 'Italian League',
+        icon: 'Soccer-eng',
+        route: 'products/soccer'
+      },
+      widgets: [],
+    },
+    /* {
       name: 'footballita',
       label: 'Football Ita',
       defaultAmount: [],
@@ -75,7 +152,7 @@ export const environment: Environment = {
         icon: 'Bingo',
         route: 'products/keno'
       }
-    }
+    } */
   ],
   showRaceId: true,
   couponMessageTrasmitted: 'Mandate transmitted via the Internet andaccepted on the',

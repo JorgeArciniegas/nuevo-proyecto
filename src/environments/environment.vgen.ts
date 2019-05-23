@@ -1,4 +1,4 @@
-import { Environment } from './environment.models';
+import { Environment, WidgetTypeLink } from './environment.models';
 
 export const environment: Environment = {
   production: false,
@@ -7,75 +7,92 @@ export const environment: Environment = {
   theme: 'develop',
   products: [
     {
+      sportId: 8,
+      codeProduct: 'DOG',
       name: 'dogracing',
-      label: 'Dog Racing',
+      label: 'DOG',
       defaultAmount: [],
+      order: 0,
+      productSelected: false,
+      isPlayable: true,
       toolbarButton: {
         name: 'dogracing',
         icon: 'Dog',
-        route: 'products/dogracing'
-      }
+        route: 'products/racing'
+      },
+      widgets: [
+        {
+          name: '',
+          routing: '',
+          typeLink: WidgetTypeLink.OUTLET,
+          icon: ''
+        },
+      ],
     },
     {
-      name: 'footballita',
-      label: 'Football Ita',
-      defaultAmount: [],
-      toolbarButton: {
-        name: 'footballita',
-        icon: 'Soccer-ita',
-        route: 'products/soccerita'
-      }
-    },
-    {
-      name: 'footballeng',
-      label: 'Football Eng',
-      defaultAmount: [],
-      toolbarButton: {
-        name: 'footballeng',
-        icon: 'Soccer-eng',
-        route: 'products/soccereng'
-      }
-    },
-    {
-      name: 'roulette',
-      label: 'American Roulette',
-      defaultAmount: [],
-      toolbarButton: {
-        name: 'roulette',
-        icon: 'Roulette',
-        route: 'products/roulette'
-      }
-    },
-    {
+      sportId: 10,
+      codeProduct: 'HORSE',
       name: 'horseracing',
-      label: 'Horse Racing',
+      label: 'HORSE',
       defaultAmount: [],
+      order: 1,
+      productSelected: true,
+      isPlayable: true,
       toolbarButton: {
         name: 'horseracing',
         icon: 'Horse',
-        route: 'products/horseracing'
-      }
+        route: 'products/racing'
+      },
+      widgets: [],
     },
     {
-      name: 'cockfight',
-      label: 'Cock Fight',
+      sportId: 210,
+      codeProduct: 'HORSE-VIRT',
+      name: 'virtualhorse',
+      label: 'HORSE_VIRTUAL',
+      order: 2,
+      productSelected: false,
+      isPlayable: true,
       defaultAmount: [],
       toolbarButton: {
-        name: 'cockfight',
-        icon: 'Galli',
-        route: 'products/cockfight'
-      }
+        name: 'virtualhorse',
+        icon: 'Horse',
+        route: 'products/racing'
+      },
+      widgets: [],
     },
     {
-      name: 'keno',
-      label: 'keno',
+      sportId: 1,
+      codeProduct: 'ITA-LEAGUE',
+      name: 'Soccer',
+      label: 'FOOTBALL_ITA',
+      order: 3,
+      productSelected: false,
+      isPlayable: false,
       defaultAmount: [],
       toolbarButton: {
-        name: 'keno',
-        icon: 'Bingo',
-        route: 'products/keno'
-      }
-    }
+        name: 'Italian League',
+        icon: 'Soccer-ita',
+        route: 'products/soccer'
+      },
+      widgets: [],
+    },
+    {
+      sportId: 1,
+      codeProduct: 'ENG-LEAGUE',
+      name: 'Soccer',
+      label: 'FOOTBALL_ENG',
+      order: 3,
+      productSelected: false,
+      isPlayable: false,
+      defaultAmount: [],
+      toolbarButton: {
+        name: 'Italian League',
+        icon: 'Soccer-eng',
+        route: 'products/soccer'
+      },
+      widgets: [],
+    },
   ],
   showRaceId: true,
   couponMessageTrasmitted: 'Mandate transmitted via the Internet andaccepted on the',
