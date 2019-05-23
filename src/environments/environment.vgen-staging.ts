@@ -13,7 +13,8 @@ export const environment: Environment = {
       label: 'DOG',
       defaultAmount: [],
       order: 0,
-      productSelected: false,
+      productSelected: true,
+      isPlayable: true,
       toolbarButton: {
         name: 'dogracing',
         icon: 'Dog',
@@ -35,7 +36,8 @@ export const environment: Environment = {
       label: 'HORSE',
       defaultAmount: [],
       order: 1,
-      productSelected: true,
+      productSelected: false,
+      isPlayable: true,
       toolbarButton: {
         name: 'horseracing',
         icon: 'Horse',
@@ -50,11 +52,44 @@ export const environment: Environment = {
       label: 'HORSE_VIRTUAL',
       order: 2,
       productSelected: false,
+      isPlayable: true,
       defaultAmount: [],
       toolbarButton: {
         name: 'virtualhorse',
         icon: 'Horse',
         route: 'products/racing'
+      },
+      widgets: [],
+    },
+    {
+      sportId: 1,
+      codeProduct: 'ITA-LEAGUE',
+      name: 'Soccer',
+      label: 'FOOTBALL_ITA',
+      order: 3,
+      productSelected: false,
+      isPlayable: false,
+      defaultAmount: [],
+      toolbarButton: {
+        name: 'Italian League',
+        icon: 'Soccer-ita',
+        route: 'products/soccer'
+      },
+      widgets: [],
+    },
+    {
+      sportId: 1,
+      codeProduct: 'ENG-LEAGUE',
+      name: 'Soccer',
+      label: 'FOOTBALL_ENG',
+      order: 3,
+      productSelected: false,
+      isPlayable: false,
+      defaultAmount: [],
+      toolbarButton: {
+        name: 'Italian League',
+        icon: 'Soccer-eng',
+        route: 'products/soccer'
       },
       widgets: [],
     },
