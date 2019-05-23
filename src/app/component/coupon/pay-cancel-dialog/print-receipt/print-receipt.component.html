@@ -1,16 +1,16 @@
-<div class="printCoupon">
+<div class="printReceipt">
   <div class="header">
     <img class="logo-print-coupon padding-10">
     <div class="header-content">
-      <div class="padding-5 font-size-normal">
-        {{ "PRINT.COUPON.HEADER_MSG" | translate }}
-      </div>
+      {{ "PRINT.COUPON.HEADER_MSG" | translate }}
     </div>
   </div>
   <div class="content">
-    <span>{{ "BET" | translate}} {{receipt.couponCode}}</span>
-    <span *ngIf="!receipt.isPayment">{{ "CANCELED_ON" | translate}} {{date | date: 'dd-MM-yyyy HH:mm'}}</span>
-    <span *ngIf="receipt.isPayment">{{ "PAYED_ON" | translate}} {{date | date: 'dd-MM-yyyy HH:mm'}}</span>
+    <span class="bet-info">{{ "BET" | translate}} {{receipt.couponCode}}</span>
+    <span class="operation-info" *ngIf="!receipt.isPayment">{{ "CANCELED_ON" | translate}}
+      {{date | date: 'dd/MM/yyyy HH:mm'}}</span>
+    <span class="operation-info" *ngIf="receipt.isPayment">{{ "PAYED_ON" | translate}}
+      {{date | date: 'dd/MM/yyyy HH:mm'}}</span>
   </div>
   <div class="footer">
     <span>{{ "PAYED_AMOUNT" | translate}}: {{receipt.amount}}</span>
