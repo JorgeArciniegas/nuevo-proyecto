@@ -115,7 +115,13 @@
     "Keno": "Keno",
     "Roulette": "Roulette",
     "Soccer": "Calcio",
-    "VirtualHorse": "Corsa dei cavalli Virtuali"
+    "VirtualHorse": "Corsa dei cavalli Virtuali",
+    "TITLE": {
+      "DOG": "DOG RACING",
+      "HORSE": "HORSE RACING",
+      "HORSE_VIRTUAL": "HORSE VIRTUAL RACING"
+
+    }
   },
   "ST": "ST",
   "TITLE": {
