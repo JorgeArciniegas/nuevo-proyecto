@@ -1,14 +1,8 @@
 import { Injectable } from '@angular/core';
-import {
-  AccountVirtualSport,
-  CouponType,
-  ElysApiService
-} from '@elys/elys-api';
-import {
-  CouponSummaryCouponListResponse,
-  VirtualCouponListRequest
-} from '@elys/elys-api/lib/reports/reports.models';
+import { AccountVirtualSport, CouponType, ElysApiService } from '@elys/elys-api';
+import { CouponSummaryCouponListResponse, VirtualCouponListRequest } from '@elys/elys-api/lib/reports/reports.models';
 import { TranslateService } from '@ngx-translate/core';
+import { AppSettings } from 'src/app/app.settings';
 import { RouterService } from '../../../../../src/app/services/utility/router/router.service';
 import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
 
@@ -23,9 +17,9 @@ export class BetsListService {
   // Result of request list
   betsCouponList: CouponSummaryCouponListResponse = null;
   constructor(
-    translate: TranslateService,
     public elysApi: ElysApiService,
-    private router: RouterService
+    private router: RouterService,
+    private appSettings: AppSettings
   ) {
     // first element of ALL Sport
     this.availableSport[0] = {
@@ -35,6 +29,7 @@ export class BetsListService {
     };
 
     this.getAvailableSport();
+
     /**
      * Request default object
      */
@@ -139,11 +134,28 @@ export class BetsListService {
     this.request.complianceCode = complianceCode;
   }
 
-  async getAvailableSport(): Promise<void> {
-    await this.elysApi.virtual.getAvailablevirtualsports().then(items => {
-      items.forEach(item => this.availableSport.push(item));
+  /**
+   * getAvailableSport
+   * set on the betlists the new  availableSport object
+   * it doesn't accept the duplicate sportId
+   *
+   */
+  private getAvailableSport(): void {
+    const tempKey = [];
+    this.appSettings.products.map( (item) => {
+      // check if the sportId is already exist
+      if (tempKey.includes(item.sportId)) {
+        return;
+      }
+      // put on the availableSport
+      this.availableSport.push( {
+        SportId: item.sportId,
+        SportName: item.name,
+        VirtualCategories: []
+      });
+      // update the checkArray with sportId
+      tempKey.push(item.sportId);
     });
-    this.sportId = this.availableSport[0].SportId;
   }
 
   /**

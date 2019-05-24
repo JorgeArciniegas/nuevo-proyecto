@@ -9,7 +9,7 @@ export const environment: Environment = {
     {
       sportId: 8,
       codeProduct: 'DOG',
-      name: 'dogracing',
+      name: 'DogRacing',
       label: 'DOG',
       defaultAmount: [],
       order: 0,
@@ -32,7 +32,7 @@ export const environment: Environment = {
     {
       sportId: 10,
       codeProduct: 'HORSE',
-      name: 'horseracing',
+      name: 'HorseRacing',
       label: 'HORSE',
       defaultAmount: [],
       order: 1,
@@ -48,7 +48,7 @@ export const environment: Environment = {
     {
       sportId: 210,
       codeProduct: 'HORSE-VIRT',
-      name: 'virtualhorse',
+      name: 'VirtualHorse',
       label: 'HORSE_VIRTUAL',
       order: 2,
       productSelected: false,
