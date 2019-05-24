@@ -36,7 +36,9 @@ export class PrintCouponService {
    */
   printWindow(): void {
     this.printingEnabled = true;
-    this.router.getRouter().navigate(['/', { outlets: { print: 'print-coupon' } }]);
+    this.router
+      .getRouter()
+      .navigate(['/', { outlets: { print: 'print-coupon' } }]);
     document.getElementById('app').classList.add('isPrinting');
     timer(250)
       .take(1)

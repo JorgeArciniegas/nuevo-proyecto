@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
-import { AccountVirtualSport, CouponType, ElysApiService } from '@elys/elys-api';
-import { CouponSummaryCouponListResponse, VirtualCouponListRequest } from '@elys/elys-api/lib/reports/reports.models';
+import {
+  AccountVirtualSport,
+  CouponType,
+  ElysApiService
+} from '@elys/elys-api';
+import {
+  CouponSummaryCouponListResponse,
+  VirtualCouponListRequest
+} from '@elys/elys-api/lib/reports/reports.models';
 import { TranslateService } from '@ngx-translate/core';
 import { RouterService } from '../../../../../src/app/services/utility/router/router.service';
 import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
@@ -9,16 +16,23 @@ import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
   providedIn: 'root'
 })
 export class BetsListService {
-
   request: VirtualCouponListRequest = null;
   availableSport: AccountVirtualSport[] = [];
   pageSizeList: number[] = [10, 25, 50, 100];
   labelAvailableSportSelected: string;
   // Result of request list
   betsCouponList: CouponSummaryCouponListResponse = null;
-  constructor(translate: TranslateService, public elysApi: ElysApiService, private router: RouterService) {
+  constructor(
+    translate: TranslateService,
+    public elysApi: ElysApiService,
+    private router: RouterService
+  ) {
     // first element of ALL Sport
-    this.availableSport[0] = {SportId: 0, SportName: 'ALL', VirtualCategories: [] };
+    this.availableSport[0] = {
+      SportId: 0,
+      SportName: 'ALL',
+      VirtualCategories: []
+    };
 
     this.getAvailableSport();
     /**
@@ -38,7 +52,6 @@ export class BetsListService {
       dateHasPlaced: false
     };
   }
-
 
   /**
    * GETTER AND SETTER OBJECT PROPERTY
@@ -66,7 +79,6 @@ export class BetsListService {
   set dateFrom(date: Date) {
     this.request.dateFrom = date;
   }
-
 
   get dateTo() {
     return this.request.dateTo;
@@ -106,7 +118,9 @@ export class BetsListService {
 
   set sportId(sportId: number) {
     this.request.sportId = sportId;
-    this.labelAvailableSportSelected = this.availableSport.filter( item => item.SportId === this.request.sportId )[0].SportName;
+    this.labelAvailableSportSelected = this.availableSport.filter(
+      item => item.SportId === this.request.sportId
+    )[0].SportName;
   }
 
   get ticketCode() {
@@ -126,9 +140,8 @@ export class BetsListService {
   }
 
   async getAvailableSport(): Promise<void> {
-
     await this.elysApi.virtual.getAvailablevirtualsports().then(items => {
-      items.forEach( item => this.availableSport.push(item) );
+      items.forEach(item => this.availableSport.push(item));
     });
     this.sportId = this.availableSport[0].SportId;
   }
@@ -139,11 +152,11 @@ export class BetsListService {
    */
   paginatorSize(isIncrement: boolean): void {
     let updateBetList = false;
-    if ( this.request.requestedPage > 1 && !isIncrement) {
-      this.request.requestedPage --;
+    if (this.request.requestedPage > 1 && !isIncrement) {
+      this.request.requestedPage--;
       updateBetList = true;
     } else if (isIncrement) {
-      if ( this.request.requestedPage < this.betsCouponList.TotalPages) {
+      if (this.request.requestedPage < this.betsCouponList.TotalPages) {
         this.request.requestedPage++;
         updateBetList = true;
       }
@@ -156,9 +169,15 @@ export class BetsListService {
 
   getList(): void {
     const req: VirtualCouponListRequest = this.request;
-    if (req.sportId === 0) { req.sportId = null; }
-    this.elysApi.reports.getVirtualListOfCoupon(req).then( items => this.betsCouponList = items);
+    if (req.sportId === 0) {
+      req.sportId = null;
+    }
+    this.elysApi.reports
+      .getVirtualListOfCoupon(req)
+      .then(items => (this.betsCouponList = items));
 
-    this.router.getRouter().navigateByUrl('admin/reports/betsList/summaryCoupons');
+    this.router
+      .getRouter()
+      .navigateByUrl('admin/reports/betsList/summaryCoupons');
   }
 }
