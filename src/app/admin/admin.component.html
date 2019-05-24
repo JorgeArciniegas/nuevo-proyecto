@@ -1,4 +1,34 @@
-<div fxLayout="column" fxLayoutAlign="space-between center">
-  <button class="btn-default btn-success" routerLink="reports/betsList">{{'BETLIST' | translate }}</button>
-  <button class="btn-default btn-grey-gradient" (click)="userService.logout()">Logout</button>
+<div fxLayout="row" id="admin" fxLayoutAlign="start start">
+  <div fxFlex="33.3">
+    <div fxLayout="column" fxLayoutAlign="space-between center">
+      <div class="admin-panel-container radius-15">
+        <div class="title-container">
+          <img class="img-title" src="app/themes/skins/{{settings.theme}}/icon/baseline-history-24px.svg" alt=""><span
+            class="txt-title">{{'REPORTS' | translate }}</span>
+        </div>
+        <button class="btn-default btn-success btn-admin radius-5" routerLink="reports/betsList"><img
+            src="app/themes/skins/{{settings.theme}}/icon/baseline-list-24px.svg" alt="" /> <span
+            class="-btn-admin-txt">{{'BETLIST' | translate }}</span> </button>
+      </div>
+      <div class="admin-panel-container radius-15">
+        <div class="title-container">
+          <img class="img-title" src="app/themes/skins/{{settings.theme}}/icon/baseline-settings-20px.svg" alt=""><span
+            class="txt-title">{{'SETTINGS' | translate }}</span>
+        </div>
+        <button class="btn-default btn-success btn-admin radius-5" routerLink="reports/betsList"><img
+            src="app/themes/skins/{{settings.theme}}/icon/baseline-language-24px.svg" alt="" /> <span
+            class="-btn-admin-txt">{{'LANGUAGE' | translate }}</span> </button>
+      </div>
+      <div class="admin-panel-container radius-15"> <button class="btn-default btn-grey-gradient btn-admin radius-5"
+          (click)="userService.logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+  <div fxFlex="33.3">
+
+  </div>
+  <div fxFlex="33.3">
+
+  </div>
+  <div class="logo-with-text admin-logo"></div>
 </div>

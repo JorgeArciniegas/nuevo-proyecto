@@ -69,6 +69,11 @@ $color-text-gray: #6b7279;
 	color: $color-bg-accent;
 }
 
+%bg-opacity-dark-variant {
+	background: $color-bg-primary-op-dark;
+	color: $color-text-primary;
+}
+
 %color-bg-white {
 	background: white;
 	color: $color-text-dark;
@@ -478,7 +483,11 @@ $gradient-dark2: #000000;
 %indicator {
 	color: $color-text-shadow;
 }
-
+//ADMIN (MAIN MENU)
+%admin
+{
+	background: url("app/themes/skins/develop/image/Bg-login-vdesk.jpg") center center no-repeat;
+}
 // LOGIN
 %login {
 	background: url("app/themes/skins/develop/image/Bg-login-vdesk.jpg") center center no-repeat;
