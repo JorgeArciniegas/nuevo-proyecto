@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AccountVirtualSport, CouponType, ElysApiService } from '@elys/elys-api';
 import { CouponSummaryCouponListResponse, VirtualCouponListRequest } from '@elys/elys-api/lib/reports/reports.models';
 import { TranslateService } from '@ngx-translate/core';
-import { RouterService } from 'src/app/services/utility/router/router.service';
+import { RouterService } from '../../../../../src/app/services/utility/router/router.service';
 import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
 
 @Injectable({

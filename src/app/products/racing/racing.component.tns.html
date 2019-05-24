@@ -1,4 +1,4 @@
-<GridLayout rows="3*,2*,9*,2*,2*" columns="*" class="dog-racing">
+<GridLayout rows="3*,2*,9*,2*,2*" columns="*" class="product-class" [ngClass]="productService.product.productSelected ? 'PRODUCT-'+productService.product.codeProduct+'-BG' : ''">
   <!-- Race control -->
   <GridLayout row="0">
     <app-race-control></app-race-control>
@@ -17,24 +17,24 @@
       <GridLayout row="0" col="0" shadow="3" cornerRadius="6" class="card">
         <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
           <Button text="{{ 'LUCKY' | translate }} 1" class="button-internal" (tap)="placingLucky(lucky.Lucky1)" textTransform="none"
-            [isEnabled]="!dogracingService.placingRace.timeBlocked"></Button>
+            [isEnabled]="!racingService.placingRace.timeBlocked"></Button>
         </GridLayout>
       </GridLayout>
       <GridLayout row="0" col="1" shadow="3" cornerRadius="6" class="card">
         <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
           <Button text="{{ 'LUCKY' | translate }} 2" class="button-internal" (tap)="placingLucky(lucky.Lucky2)" textTransform="none"
-            [isEnabled]="!dogracingService.placingRace.timeBlocked"></Button>
+            [isEnabled]="!racingService.placingRace.timeBlocked"></Button>
         </GridLayout>
       </GridLayout>
       <GridLayout row="0" col="2" shadow="3" cornerRadius="6" class="card">
         <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
           <Button text="{{ 'LUCKY' | translate }} 3" class="button-internal" (tap)="placingLucky(lucky.Lucky3)" textTransform="none"
-            [isEnabled]="!dogracingService.placingRace.timeBlocked"></Button>
+            [isEnabled]="!racingService.placingRace.timeBlocked"></Button>
         </GridLayout>
       </GridLayout>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="2" rowSpan="2" class="overlay radius-5" *ngIf="dogracingService.placingRace && dogracingService.placingRace.timeBlocked == true">
+  <GridLayout row="2" rowSpan="2" class="overlay radius-5" *ngIf="racingService.placingRace && racingService.placingRace.timeBlocked == true">
     <StackLayout verticalAlignment="center">
       <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png" horizontalAlignment="center" verticalAlignment="center"></Image>
     </StackLayout>

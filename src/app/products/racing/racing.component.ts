@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppSettings } from '../../app.settings';
 import { DialogService } from '../dialog.service';
 import { ProductsService } from '../products.service';
-import { Lucky } from './dogracing.models';
-import { DogracingService } from './dogracing.service';
+import { Lucky } from './racing.models';
+import { RacingService } from './racing.service';
+import { DataProduct } from '../models/product.model';
 
 @Component({
-  selector: 'app-dogracing',
-  templateUrl: './dogracing.component.html',
-  styleUrls: ['./dogracing.component.scss']
+  selector: 'app-racing',
+  templateUrl: './racing.component.html',
+  styleUrls: ['./racing.component.scss']
 })
-export class DogracingComponent implements OnInit {
+export class RacingComponent implements OnInit {
   public rowHeight: number;
   lucky: typeof Lucky = Lucky;
   public settings: AppSettings;
@@ -21,28 +22,26 @@ export class DogracingComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    public service: ProductsService,
-    public dogracingService: DogracingService,
+    public productService: ProductsService,
+    public racingService: RacingService,
     public dialog: DialogService,
     public readonly appSettings: AppSettings
   ) {
     this.settings = appSettings;
-    service.productNameSelectedSubscribe.next(route.snapshot.data.productName);
   }
 
   ngOnInit() {
-    this.rowHeight = (this.service.windowSize.columnHeight - 20 - 17) / 18;
-    this.dogracingService.initRaces();
+    this.rowHeight = (this.productService.windowSize.columnHeight - 20 - 17) / 18;
   }
 
   placingLucky(lucky: Lucky): void {
-    this.dogracingService.resetPlayRacing();
+    this.racingService.resetPlayRacing();
     let n = '';
     // extract  lucky
     for (let i = 1; i <= lucky; i++) {
       while (true) {
         // check if extract exist
-        const extTemp: number = this.dogracingService.RNGLucky2(i);
+        const extTemp: number = this.racingService.RNGLucky2(i);
         if (n.indexOf(extTemp.toString()) === -1) {
           n += extTemp;
           break;
@@ -55,7 +54,7 @@ export class DogracingComponent implements OnInit {
       this.oldLucky = n;
       for (let i = 0; i < n.length; i++) {
         const element = n.charAt(i);
-        this.dogracingService.RNGLuckyPlacing(parseInt(element, 10), i + 1);
+        this.racingService.RNGLuckyPlacing(parseInt(element, 10), i + 1);
       }
     } else {
       this.placingLucky(lucky);

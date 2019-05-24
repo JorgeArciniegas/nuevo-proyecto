@@ -8,7 +8,7 @@ import { ProductsService } from '../../../../src/app/products/products.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public service: ProductsService, public cdr: ChangeDetectorRef) {
+  constructor(private service: ProductsService, private cdr: ChangeDetectorRef) {
 
   }
 

@@ -69,13 +69,12 @@ export const routes: Routes = [
     canActivate: [AuthorizationGuard],
     children: [
       {
-        path: 'dogracing',
-        loadChildren: './products/dogracing/dogracing.module#DogracingModule',
-        data: { productName: 'dogracing' }
+        path: 'racing',
+        loadChildren: './products/racing/racing.module#RacingModule',
       },
       {
         path: '',
-        redirectTo: 'dogracing',
+        redirectTo: 'racing',
         pathMatch: 'full'
       }
     ]

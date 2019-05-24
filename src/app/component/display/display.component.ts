@@ -9,7 +9,7 @@ import {
   BetDataDialog
 } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
-import { TypeBetSlipColTot } from '../../products/dogracing/dogracing.models';
+import { TypeBetSlipColTot } from '../../products/racing/racing.models';
 
 @Component({
   selector: 'app-display',

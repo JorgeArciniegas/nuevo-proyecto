@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { CurrencyCodeRequest, ElysApiService } from '@elys/elys-api';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { ElysApiService } from '@elys/elys-api';
 import { Observable, Subject } from 'rxjs';
+import { Products } from '../../../src/environments/environment.models';
 import { AppSettings } from '../app.settings';
 import { StorageService } from '../services/utility/storage/storage.service';
 import { WindowSize } from '../services/utility/window-size/window-size.model';
 import { WindowSizeService } from '../services/utility/window-size/window-size.service';
 import { DialogService } from './dialog.service';
-import { Product } from './models/product.model';
 import { BetDataDialog, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupon } from './products.model';
 @Injectable({
   providedIn: 'root'
@@ -42,12 +42,17 @@ export class ProductsService {
   };
   windowSize: WindowSize;
   // product selected
-  product: Product;
+  product: Products;
 
-  constructor(public dialog: DialogService, private windowSizeService: WindowSizeService,
-    private appSetting: AppSettings, private elysApi: ElysApiService, private storage: StorageService) {
+  constructor(
+    public dialog: DialogService,
+    private windowSizeService: WindowSizeService,
+    private appSetting: AppSettings,
+    private elysApi: ElysApiService,
+    private storage: StorageService) {
     this.productNameSelectedSubscribe = new Subject<string>();
     this.productNameSelectedObserve = this.productNameSelectedSubscribe.asObservable();
+
     // Element for management the display
     this.polyfunctionalAreaSubject = new Subject<PolyfunctionalArea>();
     this.polyfunctionalAreaObservable = this.polyfunctionalAreaSubject.asObservable();
@@ -76,22 +81,18 @@ export class ProductsService {
     this.playableBoardResetObserve = this.playableBoardResetSubject.asObservable();
 
     // updated product selected
-    this.productNameSelectedObserve.subscribe(
-      v => {
-        const product: Product[] = appSetting.products.filter(
-          item => item.name === v
-        );
-        const currency: CurrencyCodeRequest = {currencyCode: this.storage.getData('UserData').Currency } ;
-        if (!this.product) {
-          this.product = product[0];
-
-          this.elysApi.coupon.getCouponRelatedCurrency(currency).then( preset => {
-            this.product.defaultAmount.push(preset.CouponPreset.CouponPresetValues.PresetOne);
-            this.product.defaultAmount.push(preset.CouponPreset.CouponPresetValues.PresetTwo);
-            this.product.defaultAmount.push(preset.CouponPreset.CouponPresetValues.PresetThree);
-            this.product.defaultAmount.push(preset.CouponPreset.CouponPresetValues.PresetFour);
-          });
-        }
+    // this is only entry point to modify 'product'
+    // the function that update it is changeProduct
+    // appSetting.products = environment product
+    this.productNameSelectedObserve.subscribe( v => {
+      // mark the product not selected and return the item clicked
+        const product: Products[] = appSetting.products.filter( item => {
+          item.productSelected = false;
+          return item.codeProduct === v;
+        });
+        // set the selected which product
+        this.product = product[0];
+        this.product.productSelected = true;
       }
     );
   }
@@ -112,5 +113,14 @@ export class ProductsService {
     this.playableBoardResetSubject.next(true);
     this.playableBoardResetSubject.next(false);
     this.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
+  }
+
+
+  /**
+   *
+   * @param codeProduct
+   */
+  changeProduct(codeProduct: string): void {
+    this.productNameSelectedSubscribe.next(codeProduct);
   }
 }

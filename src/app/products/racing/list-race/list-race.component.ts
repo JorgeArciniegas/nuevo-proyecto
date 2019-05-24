@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DogracingService } from '../dogracing.service';
+import { RacingService } from '../racing.service';
 
 @Component({
   selector: 'app-list-race',
@@ -12,11 +12,11 @@ export class ListRaceComponent implements OnInit {
   @Input()
   public show?: boolean;
 
-  constructor(public dogracingService: DogracingService) {}
+  constructor(public racingService: RacingService) {}
 
   ngOnInit() {}
 
   raceSelecting(selected: number) {
-    this.dogracingService.currentRaceSubscribe.next(selected);
+    this.racingService.currentRaceSubscribe.next(selected);
   }
 }

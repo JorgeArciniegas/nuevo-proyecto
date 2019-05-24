@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterExtensions } from 'nativescript-angular/router';
 import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../../products/products.service';
+import { Products } from 'src/environments/environment.models';
 
 @Component({
   selector: 'app-application-menu',
@@ -24,9 +25,10 @@ export class ApplicationMenuComponent implements OnInit {
     this.btnSelected = this.settings.products[0].name;
   }
 
-  productSelecting(productSelected: string) {
-    this.btnSelected = productSelected;
-    this.router.navigateByUrl('/products/' + productSelected);
+  productSelecting(productSelected: Products) {
+    this.btnSelected = productSelected.name;
     this.productService.resetBoard();
+    this.productService.changeProduct(productSelected.codeProduct);
+    this.router.navigateByUrl('/products/racing');
   }
 }

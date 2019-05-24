@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppSettings } from '../../../app.settings';
-import { RaceTime } from '../dogracing.models';
-import { DogracingService } from '../dogracing.service';
+import { RaceTime } from '../racing.models';
+import { RacingService } from '../racing.service';
+import { ProductsService } from '../../products.service';
 
 @Component({
   selector: 'app-race-control',
@@ -14,8 +15,9 @@ export class RaceControlComponent implements OnInit {
   public settings: AppSettings;
 
   constructor(
-    public dogracingService: DogracingService,
-    public readonly appSettings: AppSettings
+    public racingService: RacingService,
+    public readonly appSettings: AppSettings,
+    public productService: ProductsService
   ) {
     this.settings = appSettings;
   }

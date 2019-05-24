@@ -1,5 +1,5 @@
 <GridLayout rows="*" columns="*,*,*,*" class="result-list-race">
-  <GridLayout col="{{i}}" class="card-box-result" rows="*,*" columns="*" *ngFor="let race of dogracingService.listResult; let i = index;">
+  <GridLayout col="{{i}}" class="card-box-result" rows="*,*" columns="*" *ngFor="let race of racingService.listResult; let i = index;">
     <GridLayout row="0" class="header radius-5">
       <Label text="{{race.raceLabel}}" class="raceNumber" horizontalAlignment="center" verticalAlignment="center"></Label>
     </GridLayout>

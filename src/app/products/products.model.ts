@@ -12,8 +12,6 @@ export interface WindowSize {
 export class PolyfunctionalArea {
   selection?: string;
   value?: string | number;
-  /* odd?: number;
-  id?: number; */
   amount?: number;
   odds?: BetOdd[];
   labelColTot?: string;
@@ -21,8 +19,6 @@ export class PolyfunctionalArea {
   activeAssociationCol?: boolean;
   activeDistributionTot?: boolean;
   constructor() {
-    /*    this.activeAssociationCol = false;
-    this.activeDistributionTot = false;*/
     this.typeSlipCol = TypeBetSlipColTot.COL;
   }
 }

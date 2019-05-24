@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ElysApiService, TokenDataSuccess, AccountDetails } from '@elys/elys-api';
+import { ElysApiService, TokenDataSuccess, AccountDetails, CurrencyCodeRequest, CurrencyCodeResponse } from '@elys/elys-api';
 import { RouterService } from './utility/router/router.service';
 import { StorageService } from './utility/storage/storage.service';
 import { TranslateUtilityService } from './utility/translate-utility.service';
+import { AppSettings } from '../app.settings';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,13 @@ export class UserService {
     private router: RouterService,
     private storageService: StorageService,
     private translateService: TranslateUtilityService,
-    private api: ElysApiService
+    private api: ElysApiService,
+    private appSetting: AppSettings
   ) {
     // Check if the user is logged
     if (this.isUserLogged) {
       this.loadUserData(this.storageService.getData('tokenData'));
+
     }
   }
 
@@ -70,6 +73,7 @@ export class UserService {
         this.userDetail = undefined;
         return this.translateService.getTranslatedString('USER_NOT_ENABLE_TO_THE_OPERATION');
       }
+      this.checkAvailableSportAndSetPresetsAmount();
     } catch (err) {
       if (err.status === 401) {
         // if unauthorized call logout
@@ -110,5 +114,41 @@ export class UserService {
     } else {
       return false;
     }
+  }
+  /**
+   * Setting the real playble game
+   * It set defaultAmount on products from presets value.
+   * If the game is present on the environment but didn't to match on the availableSport and
+   * it didn't to playable but it is present to reports list
+   */
+  checkAvailableSportAndSetPresetsAmount(): void {
+
+    const currencyRequest: CurrencyCodeRequest = {
+      currencyCode: this.storageService.getData('UserData').Currency
+    };
+
+    let currencyCodeResponse: number[];
+    // Set  'defaultAmount'  the "presets value"
+    this.api.coupon.getCouponRelatedCurrency(currencyRequest).then( preset => {
+      currencyCodeResponse = [
+        preset.CouponPreset.CouponPresetValues.PresetOne,
+        preset.CouponPreset.CouponPresetValues.PresetTwo,
+        preset.CouponPreset.CouponPresetValues.PresetThree,
+        preset.CouponPreset.CouponPresetValues.PresetFour
+      ];
+    });
+    // match products result from api to products on the system
+    this.api.virtual.getAvailablevirtualsports().then( items => {
+
+      this.appSetting.products.map( prod => {
+        items.filter( i => {
+          if (i.SportId === prod.sportId) {
+            prod.defaultAmount = currencyCodeResponse;
+          }
+        });
+      });
+    });
+    // Order the result from minor until major
+    this.appSetting.products.sort( (a, b) => a.order <= b.order ? -1 : 1 );
   }
 }
