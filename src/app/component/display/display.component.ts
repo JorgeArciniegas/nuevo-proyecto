@@ -1,13 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AppSettings } from '../../app.settings';
-import {
-  BetOdd,
-  BetOdds,
-  PolyfunctionalArea,
-  PolyfunctionalStakeCoupon,
-  BetDataDialog
-} from '../../products/products.model';
+import { BetDataDialog, PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { TypeBetSlipColTot } from '../../products/racing/racing.models';
 

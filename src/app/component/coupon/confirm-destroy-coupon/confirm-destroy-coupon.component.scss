@@ -1,5 +1,13 @@
-::ng-deep app-confirm-destroy-coupon{
-  height: 100%;
+::ng-deep {
+  app-confirm-destroy-coupon{
+    height: 100%;
+  }
+  mat-dialog-container{
+    height: 100%;
+  }
+  .cdk-overlay-pane{
+    height: 100%;
+  }
 }
 
 .title-tns {

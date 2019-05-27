@@ -204,5 +204,9 @@
   "potentialMaxWinner": "Vincita potenziale massima",
   "race": "Race",
   "single": "Singola",
-  "tabCoupon": "Scheda scommesse"
+  "tabCoupon": "Scheda scommesse",
+  "DELETE_COUPON": {
+    "TITLE": "Reset del Coupon",
+    "MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?"
+  }
 }

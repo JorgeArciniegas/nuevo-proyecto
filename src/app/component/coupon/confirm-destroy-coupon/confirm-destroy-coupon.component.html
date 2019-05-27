@@ -1,14 +1,13 @@
-<div fxFlex="100" fxFlexFill fxLayout="column wrap" fxLayoutAlign="center center">
-  <div fxFlex="10" class="title">
-    <h4>{{'DELETE_COUPON_MSG.TITLE' | translate }}</h4>
+<div fxFlex="100" fxFlexFill fxLayout="column" fxLayoutAlign="center center">
+  <div mat-dialog-title>
+    <div  class="title">{{'DELETE_COUPON.TITLE' | translate }}</div>
   </div>
-  <div fxLayoutAlign="start center">
-      <p>{{'DELETE_COUPON_MSG.STRING' | translate }}</p>
+  <div mat-dialog-content fxLayoutAlign="start center">
+      <p>{{'DELETE_COUPON.MESSAGE' | translate }}</p>
   </div>
-  <div>
-    <div fxLayout="row" fxLayoutGap="20px">
-        <button class="btn-default btn-success radius-10 padding-10" (click)="selectedOperation(true)">{{'CONFIRM' | translate}} </button>
-        <button class="btn-default btn-warning radius-10 padding-10" (click)="selectedOperation(false)">{{'CANCEL' | translate}} </button>
-    </div>
+  <div fxLayout="row"fxLayoutGap="20px" fxLayoutAlign="center center">
+
+      <button  fxFlex="50" class="btn-default btn-success radius-10 padding-10" (click)="selectedOperation(true)">{{'CONFIRM' | translate}} </button>
+      <button  fxFlex="50"  class="btn-default btn-warning radius-10 padding-10" (click)="selectedOperation(false)">{{'CANCEL' | translate}} </button>
   </div>
 </div>
