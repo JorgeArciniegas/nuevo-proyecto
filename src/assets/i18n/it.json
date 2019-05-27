@@ -113,12 +113,13 @@
   "PAYED_AMOUNT": "Importo pagato",
   "PAYED_ON": "Pagata il",
   "PRINT": {
+    "PRINT": "Stampa",
+    "HEADER_MSG": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad",
     "COUPON": {
       "CODE": "Codice",
       "COMB": " Comb.",
       "DATE": "Data Coupon",
       "GROUPS": "Gruppi",
-      "HEADER_MSG": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad",
       "PAYOUTMAX": "MAX. PAYOUT",
       "PAYOUTMIN": "MIN. PAYOUT",
       "STAKE": "Imp. Giocato",

@@ -13,9 +13,7 @@ export class PrintCouponService {
 
   constructor(elysCoupon: ElysCouponService, private router: RouterService) {
     elysCoupon.stagedCouponObs.subscribe(async coupons => {
-      for (const coupon of coupons.filter(
-        item => item.CouponStatusId === StagedCouponStatus.Placed
-      )) {
+      for (const coupon of coupons.filter(item => item.CouponStatusId === StagedCouponStatus.Placed)) {
         this.couponPrint = coupon;
         this.printWindow();
       }

@@ -1,13 +1,13 @@
 <StackLayout id="printing" horizontalAlignment="center" verticalAlignment="top" orientation="horizontal">
 
   <FlexboxLayout flexDirection="column" justifyContent="space-between">
-    <Button (tap)="print()" text="PRINT" class="btn btn-primary"></Button>
-    <Button (tap)="printService.resetPrint()" class="btn btn-accent" text="CONTINUE"></Button>
+    <Button (tap)="print()" text="{{ PRINT.PRINT | translate }}" class="btn btn-primary"></Button>
+    <Button (tap)="printService.resetPrint()" class="btn btn-accent" text="{{ CANCEL | translate }}"></Button>
   </FlexboxLayout>
   <StackLayout #printing class="p-5">
     <FlexboxLayout flexDirection="column" class="header">
       <StackLayout class="logo-print-coupon" height="50"></StackLayout>
-      <Label class="header-content p-5 text-center " text="{{ 'PRINT.COUPON.HEADER_MSG' | translate }}"></Label>
+      <Label class="header-content p-5 text-center " text="{{ 'PRINT.HEADER_MSG' | translate }}"></Label>
     </FlexboxLayout>
     <FlexboxLayout flexDirection="column" flexWrap="wrap" class="content p-10">
       <Label class="bet-info" text="{{ 'BET' | translate }} {{receipt.couponCode}}"></Label>
