@@ -4,22 +4,20 @@
     <Button (tap)="print()" text="PRINT" class="btn btn-primary"></Button>
     <Button (tap)="printService.resetPrint()" class="btn btn-accent" text="CONTINUE"></Button>
   </FlexboxLayout>
-  <ScrollView>
-    <StackLayout #printing orientation="horizontal">
-      <FlexboxLayout flexDirection="column">
-        <StackLayout class="logo-print-coupon" height="100"></StackLayout>
-        <FlexboxLayout flexDirection="row" class="border-5" justifyContent="center" alignItems="center" flexWrap="wrap">
-          <Label class="text-center font-weight-bold" text="{{ 'PRINT.RECEIPT.HEADER_MSG' | translate }}"></Label>
-        </FlexboxLayout>
-        <FlexboxLayout flexDirection="row" flexWrap="wrap">
-          <Label text="{{ 'BET' | translate }} {{receipt.couponCode}}"></Label>
-        </FlexboxLayout>
-        <FlexboxLayout flexDirection="row" flexWrap="wrap">
-          <Label text="{{ 'CANCELED_ON' | translate }} {{date | date: 'dd-MM-yyyy HH:mm'}}" *ngIf="!receipt.isPayment"></Label>
-          <Label text="{{ 'PAYED_ON' | translate }} {{date | date: 'dd-MM-yyyy HH:mm'}}" *ngIf="receipt.isPayment"></Label>
-        </FlexboxLayout>
-        <Label class="p-15 font-weight-bold" fontSize="14" text="{{ 'PAYED_AMOUNT' | translate}}: {{receipt.amount}}"></Label>
-      </FlexboxLayout>
-    </StackLayout>
-  </ScrollView>
+  <StackLayout #printing class="p-5">
+    <FlexboxLayout flexDirection="column" class="header">
+      <StackLayout class="logo-print-coupon" height="50"></StackLayout>
+      <Label class="header-content p-5 text-center " text="{{ 'PRINT.COUPON.HEADER_MSG' | translate }}"></Label>
+    </FlexboxLayout>
+    <FlexboxLayout flexDirection="column" flexWrap="wrap" class="content p-10">
+      <Label class="bet-info" text="{{ 'BET' | translate }} {{receipt.couponCode}}"></Label>
+      <Label class="operation-info" text="{{ 'CANCELED_ON' | translate }} {{date | date: 'dd-MM-yyyy HH:mm'}}"
+        *ngIf="!receipt.isPayment"></Label>
+      <Label class="operation-info" text="{{ 'PAYED_ON' | translate }} {{date | date: 'dd-MM-yyyy HH:mm'}}"
+        *ngIf="receipt.isPayment"></Label>
+    </FlexboxLayout>
+    <FlexboxLayout flexDirection="row" flexWrap="wrap" class="footer">
+      <Label class="font-weight-bold" fontSize="20" text="{{ 'PAYED_AMOUNT' | translate}}: {{receipt.amount}}"></Label>
+    </FlexboxLayout>
+  </StackLayout>
 </StackLayout>

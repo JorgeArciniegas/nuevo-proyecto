@@ -1,11 +1,25 @@
 #printing {
 	background: white;
 	color: #000;
-	margin: 15;
 
-	.border-5 {
-		border-width: 1;
-		border-color: #000;
-		padding: 0 15;
+	.header {
+		.logo-print-coupon {
+			margin-bottom: 5;
+		}
+
+		.header-content {
+			border-width: 1;
+		}
+	}
+
+	.content {
+		.operation-info {
+			text-transform: lowercase;
+			padding-left: 5;
+		}
+	}
+
+	.footer {
+		padding: 0 10 10 10;
 	}
 }
