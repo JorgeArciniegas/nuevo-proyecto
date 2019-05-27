@@ -8,14 +8,7 @@ import { AppSettings } from '../../../app.settings';
   templateUrl: './print-coupon.component.html',
   styleUrls: ['./print-coupon.component.scss']
 })
-export class PrintCouponComponent implements OnInit {
+export class PrintCouponComponent {
   couponType: typeof CouponType = CouponType;
-  constructor(public printCouponService: PrintCouponService, public appSetting: AppSettings) {
-
-  }
-
-  ngOnInit() {
-
-  }
-
+  constructor(public printCouponService: PrintCouponService, public appSetting: AppSettings) {}
 }
