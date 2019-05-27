@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppSettings } from '../../app.settings';
 import { DialogService } from '../dialog.service';
 import { ProductsService } from '../products.service';
 import { Lucky } from './racing.models';
 import { RacingService } from './racing.service';
-import { DataProduct } from '../models/product.model';
 
 @Component({
   selector: 'app-racing',

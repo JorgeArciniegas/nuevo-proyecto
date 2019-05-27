@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterExtensions } from 'nativescript-angular/router';
 import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../../products/products.service';
-import { Products } from 'src/environments/environment.models';
+import { Products } from '../../../../../src/environments/environment.models';
 
 @Component({
   selector: 'app-application-menu',

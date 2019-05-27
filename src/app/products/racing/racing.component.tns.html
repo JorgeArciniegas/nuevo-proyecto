@@ -9,9 +9,10 @@
   </GridLayout>
   <!-- Playable board -->
   <GridLayout row="2">
-    <app-playable-board [show]="!dialog.showDialog"></app-playable-board>
+    <app-playable-board [show]="!dialog.showDialog && !productService.destroyCouponService.showDialog"></app-playable-board>
   </GridLayout>
   <!-- Special race -->
+
   <GridLayout row="3">
     <GridLayout rows="*" columns="*,*,*" class="special-box" *ngIf="!dialog.showDialog">
       <GridLayout row="0" col="0" shadow="3" cornerRadius="6" class="card">

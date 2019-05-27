@@ -13,7 +13,8 @@ import {
   VirtualSportLastResultsRequest,
   VirtualSportLastResultsResponse
 } from '@elys/elys-api';
-import { interval, Observable, Subject, Subscription, timer } from 'rxjs';
+import { interval, Observable, Subject, timer } from 'rxjs';
+import { DestroyCouponService } from '../../../../src/app/component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { AppSettings } from '../../../../src/app/app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { CouponService } from '../../component/coupon/coupon.service';
@@ -40,11 +41,14 @@ import {
   TypeBetSlipColTot,
   TypePlacingRace
 } from './racing.models';
+import { RacingServiceExtra } from './racing.service.extra';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RacingService {
+export class RacingService extends RacingServiceExtra {
+
+
 
   // screen binding
   public raceDetails: RaceDetail;
@@ -57,8 +61,6 @@ export class RacingService {
   placingRace: PlacingRace = new PlacingRace(); // place the global race
   placingRaceSubject: Subject<PlacingRace>;
 
-  public currentRaceSubscribe: Subject<number>;
-  public currentRaceObserve: Observable<number>;
 
   private attempts = 0;
   private initCurrentRace = false;
@@ -74,14 +76,18 @@ export class RacingService {
     private elysApi: ElysApiService,
     private productService: ProductsService,
     private btnService: BtncalcService,
-    private coupon: CouponService,
-    private appSettings: AppSettings
+    public coupon: CouponService,
+    private appSettings: AppSettings,
+    public destroyCouponService: DestroyCouponService
   ) {
+    super(coupon, destroyCouponService);
     this.defaultGameStart();
 
     this.productService.productNameSelectedObserve.subscribe(item => {
-        this.cacheRaces = null;
-        this.initRaces();
+        if ( !this.coupon.productHasCoupon.checked ) {
+          this.cacheRaces = null;
+          this.initRaces();
+        }
     });
 
     this.raceDetails = new RaceDetail();
@@ -93,7 +99,9 @@ export class RacingService {
     this.currentRaceObserve = this.currentRaceSubscribe.asObservable();
 
     this.currentRaceObserve.subscribe((raceIndex: number) => {
+
       this.raceDetails.currentRace = raceIndex;
+
       this.remaningRaceTime(this.raceDetails.races[raceIndex].number).then(
         (raceTime: RaceTime) => {
           this.raceDetails.raceTime = raceTime;
@@ -119,6 +127,26 @@ export class RacingService {
 
   }
 
+/*
+  changeRaceSelecting(selected: number) {
+
+    // check if the coupon is initialize
+    this.coupon.checkHasCoupon();
+    // if the coupon isn't empty
+    if (this.coupon.productHasCoupon.checked ) {
+      // open modal destory confirm coupon
+      this.destroyCouponService.openDestroyCouponDialog();
+      // subscribe to event dialog
+      this.destroyCouponService.dialogRef.afterClosed().subscribe( elem => {
+        if (elem) {
+          this.currentRaceSubscribe.next(selected);
+        }
+      });
+    } else { // to contiue
+      this.currentRaceSubscribe.next(selected);
+    }
+
+  } */
   /**
    * When the first time entry on the application, the system set the the product default.
    * It is called by constructor and it is selected from environment file and
@@ -1336,7 +1364,6 @@ export class RacingService {
         }
       }
     }
-
     return returnValues;
   }
 

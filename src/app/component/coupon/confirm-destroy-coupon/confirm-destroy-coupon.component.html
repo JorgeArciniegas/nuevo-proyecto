@@ -1,0 +1,14 @@
+<div fxFlex="100" fxFlexFill fxLayout="column wrap" fxLayoutAlign="center center">
+  <div fxFlex="10" class="title">
+    <h4>{{'DELETE_COUPON_MSG.TITLE' | translate }}</h4>
+  </div>
+  <div fxLayoutAlign="start center">
+      <p>{{'DELETE_COUPON_MSG.STRING' | translate }}</p>
+  </div>
+  <div>
+    <div fxLayout="row" fxLayoutGap="20px">
+        <button class="btn-default btn-success radius-10 padding-10" (click)="selectedOperation(true)">{{'CONFIRM' | translate}} </button>
+        <button class="btn-default btn-warning radius-10 padding-10" (click)="selectedOperation(false)">{{'CANCEL' | translate}} </button>
+    </div>
+  </div>
+</div>

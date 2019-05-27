@@ -90,3 +90,15 @@ export enum DialogTypeCoupon {
   PAY
 }
 
+
+/**
+ * checked se true fa partire la visualizzazione del coupon
+ *
+ */
+export interface CouponConfirmDelete {
+  productCodeRequest?: string;
+  checked: boolean;
+  isRacing?: boolean;
+  racingNumber?: number;
+
+}

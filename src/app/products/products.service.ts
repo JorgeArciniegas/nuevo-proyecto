@@ -1,21 +1,22 @@
-import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ElysApiService } from '@elys/elys-api';
 import { Observable, Subject } from 'rxjs';
 import { Products } from '../../../src/environments/environment.models';
 import { AppSettings } from '../app.settings';
+import { DestroyCouponService } from '../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
+import { CouponService } from '../component/coupon/coupon.service';
+import { RouterService } from '../services/utility/router/router.service';
 import { StorageService } from '../services/utility/storage/storage.service';
 import { WindowSize } from '../services/utility/window-size/window-size.model';
 import { WindowSizeService } from '../services/utility/window-size/window-size.service';
 import { DialogService } from './dialog.service';
+import { ProductsServiceExtra } from './product.service.extra';
 import { BetDataDialog, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupon } from './products.model';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
+export class ProductsService extends ProductsServiceExtra {
   public breakpoint = 1;
-
-  public productNameSelectedSubscribe: Subject<string>;
-  public productNameSelectedObserve: Observable<string>;
 
   public timeBlocked = false;
   public timeBlockedSubscribe: Subject<boolean>;
@@ -41,15 +42,23 @@ export class ProductsService {
     xs: 1
   };
   windowSize: WindowSize;
-  // product selected
-  product: Products;
+
+
 
   constructor(
     public dialog: DialogService,
     private windowSizeService: WindowSizeService,
     private appSetting: AppSettings,
     private elysApi: ElysApiService,
-    private storage: StorageService) {
+    private storage: StorageService,
+    public couponInternalService: CouponService,
+    public destroyCouponService: DestroyCouponService,
+    public router: RouterService) {
+
+      super( couponInternalService, destroyCouponService, router);
+      // Destory coupon confirmation
+      this.couponInternalService.productHasCoupon = { checked: false};
+
     this.productNameSelectedSubscribe = new Subject<string>();
     this.productNameSelectedObserve = this.productNameSelectedSubscribe.asObservable();
 
@@ -93,6 +102,9 @@ export class ProductsService {
         // set the selected which product
         this.product = product[0];
         this.product.productSelected = true;
+        // confirm destory coupon
+        this.resetBoard();
+        this.couponInternalService.productHasCoupon = {checked: false, productCodeRequest: v };
       }
     );
   }
@@ -120,7 +132,34 @@ export class ProductsService {
    *
    * @param codeProduct
    */
-  changeProduct(codeProduct: string): void {
-    this.productNameSelectedSubscribe.next(codeProduct);
-  }
+  /* changeProduct(codeProduct: string): void {
+
+    // check if the productCode is equal and it isn't to mark destroy
+    if (this.product && codeProduct === this.product.codeProduct) {
+      this.router.getRouter().navigate(['/products/racing']);
+    } else {
+      // check if the product has a temporary coupon
+      this.couponInternalService.checkHasCoupon();
+      // opening the confirm destroy coupon process
+      if (this.couponInternalService.productHasCoupon.checked ) {
+          // update productCode request for checked on the other service
+          this.couponInternalService.productHasCoupon.productCodeRequest = codeProduct;
+          // open modal destory confirm coupon
+          this.destroyCouponService.openDestroyCouponDialog();
+          // subscribe to event dialog
+          this.destroyCouponService.dialogRef.afterClosed().subscribe( elem => {
+            if (elem) {
+              this.productNameSelectedSubscribe.next(codeProduct);
+              this.router.getRouter().navigate(['/products/racing']);
+            }
+          });
+      } else { // the coupon is empty
+        this.productNameSelectedSubscribe.next(codeProduct);
+        this.router.getRouter().navigate(['/products/racing']);
+      }
+    }
+
+  } */
+
+
 }
