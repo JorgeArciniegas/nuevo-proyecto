@@ -1,4 +1,4 @@
-import { TypeBetSlipColTot } from './racing/racing.models';
+import { TypeBetSlipColTot } from './dogracing/dogracing.models';
 import { BetCouponExtended } from '@elys/elys-coupon';
 
 export interface WindowSize {
@@ -34,16 +34,21 @@ export class PolyfunctionalStakeCoupon {
   columns: number;
   typeSlipCol: TypeBetSlipColTot;
   isEnabled: boolean;
-  constructor(digitAmount?: number, totalAmount?: number, columnAmount?: number, columns?: number,
-    typeSlipCol?: TypeBetSlipColTot, isEnabled?: boolean ) {
-    this.digitAmount = digitAmount || 0.00;
-    this.totalAmount = totalAmount || 0.00;
-    this.columnAmount = columnAmount || 0.00;
+  constructor(
+    digitAmount?: number,
+    totalAmount?: number,
+    columnAmount?: number,
+    columns?: number,
+    typeSlipCol?: TypeBetSlipColTot,
+    isEnabled?: boolean
+  ) {
+    this.digitAmount = digitAmount || 0.0;
+    this.totalAmount = totalAmount || 0.0;
+    this.columnAmount = columnAmount || 0.0;
     this.columns = columns || 0;
-    this.typeSlipCol = (typeSlipCol) ? typeSlipCol : TypeBetSlipColTot.COL;
+    this.typeSlipCol = typeSlipCol ? typeSlipCol : TypeBetSlipColTot.COL;
     this.isEnabled = isEnabled || false;
   }
-
 }
 
 export class BetOdd {
@@ -62,7 +67,6 @@ export class BetOdd {
 }
 
 export class BetOdds {
-
   odds: BetOdd[];
   constructor() {
     this.odds = [];
@@ -88,9 +92,7 @@ export class DialogData {
   }
 }
 
-
 export enum DialogTypeCoupon {
   CANCEL,
   PAY
 }
-
