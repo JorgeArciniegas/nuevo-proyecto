@@ -14,10 +14,7 @@ export class PrintCouponComponent {
   printer: Printer = new Printer();
   couponType: typeof CouponType = CouponType;
   @ViewChild('printing') view: ElementRef;
-  constructor(
-    public printCouponService: PrintCouponService,
-    public appSetting: AppSettings
-  ) {}
+  constructor(public printCouponService: PrintCouponService, public appSetting: AppSettings) {}
 
   print(): void {
     this.printer

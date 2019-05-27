@@ -37,7 +37,7 @@
   },
   "Balance": "Balance",
   "C": "C",
-  "CANCEL": "ANNULLA",
+  "CANCEL": "Annulla",
   "CANCELED_ON": "Annullata il",
   "CLOSE": "Close",
   "CODA": "C",
@@ -118,13 +118,14 @@
       "COMB": " Comb.",
       "DATE": "Data Coupon",
       "GROUPS": "Gruppi",
-      "HEADER_MSG": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad",
       "PAYOUTMAX": "MAX. PAYOUT",
       "PAYOUTMIN": "MIN. PAYOUT",
       "STAKE": "Imp. Giocato",
       "TOTALPAYOUT": "TOTAL PAYOUT",
       "TYPE": "Tipo giocata"
-    }
+    },
+    "HEADER_MSG": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad",
+    "PRINT": "Stampa"
   },
   "R": "R",
   "SECTION_NOT_AVAILABLE": "Sezione non presente",
