@@ -1,8 +1,8 @@
 <StackLayout id="printing" horizontalAlignment="center" verticalAlignment="top" orientation="horizontal">
 
   <FlexboxLayout flexDirection="column" justifyContent="space-between">
-    <Button (tap)="print()" text="{{ PRINT.PRINT | translate }}" class="btn btn-primary"></Button>
-    <Button (tap)="printService.resetPrint()" class="btn btn-accent" text="{{ CANCEL | translate }}"></Button>
+    <Button (tap)="print()" text="{{ 'PRINT.PRINT' | translate }}" class="btn btn-primary"></Button>
+    <Button (tap)="printService.resetPrint()" class="btn btn-accent" text="{{ 'CANCEL' | translate }}"></Button>
   </FlexboxLayout>
   <StackLayout #printing class="p-5">
     <FlexboxLayout flexDirection="column" class="header">
