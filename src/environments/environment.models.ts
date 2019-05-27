@@ -17,8 +17,28 @@ export interface ToolbarButtons {
   route: string;
 }
 export interface Products {
+  sportId: number;
   name: string;
+  codeProduct: string;
   label: string;
+  productSelected?: boolean;
+  isPlayable?: boolean;
+  order: number;
   defaultAmount: number[];
   toolbarButton: ToolbarButtons;
+  widgets?: Widget[];
+
+}
+
+export interface Widget {
+  name: string;
+  routing: string;
+  typeLink?: WidgetTypeLink;
+  outletRouter?: string;
+  icon: string;
+}
+
+export enum  WidgetTypeLink {
+  MODAL,
+  OUTLET
 }

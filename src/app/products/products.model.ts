@@ -1,4 +1,4 @@
-import { TypeBetSlipColTot } from './dogracing/dogracing.models';
+import { TypeBetSlipColTot } from './racing/racing.models';
 import { BetCouponExtended } from '@elys/elys-coupon';
 
 export interface WindowSize {
