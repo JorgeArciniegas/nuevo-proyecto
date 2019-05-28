@@ -12,7 +12,7 @@ export class AppComponent {
   settings: Settings;
 
   constructor(
-    public readonly appSettings: AppSettings,
+    private appSettings: AppSettings,
     public userService: UserService
   ) {
     this.settings = appSettings;

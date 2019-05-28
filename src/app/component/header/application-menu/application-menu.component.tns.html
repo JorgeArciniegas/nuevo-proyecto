@@ -5,8 +5,11 @@
     <!-- LOGO -->
     <Image class="logo" src="~/app/themes/skins/{{settings.theme}}/image/Logo-header.png" stretch="aspectFit"></Image>
     <!-- BUTTONS -->
-    <StackLayout *ngFor="let prod of settings.products" class="prod" (tap)="productSelecting(prod.name)" [ngClass]="{'selected': prod.name == btnSelected}">
-        <Image src="~/app/themes/skins/{{settings.theme}}/icon/{{prod.toolbarButton.icon}}.png" stretch="aspectFit"
-            class="radius-5"></Image>
-    </StackLayout>
+    <ng-container  *ngFor="let prod of settings.products">
+      <StackLayout *ngIf="prod.isPlayable" class="prod" (tap)="productSelecting(prod)"
+      [ngClass]="{'selected': prod.productSelected}">
+          <Image src="~/app/themes/skins/{{settings.theme}}/icon/{{prod.toolbarButton.icon}}.png" stretch="aspectFit"
+              class="radius-5"></Image>
+      </StackLayout>
+    </ng-container>
 </FlexboxLayout>

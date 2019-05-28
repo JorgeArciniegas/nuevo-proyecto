@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TypePlacingRace } from '../dogracing/dogracing.models';
-import { DogracingService } from '../dogracing/dogracing.service';
+import { TypePlacingRace } from '../racing/racing.models';
+import { RacingService } from '../racing/racing.service';
 
 @Component({
   selector: 'app-advance-game',
@@ -12,7 +12,7 @@ export class AdvanceGameComponent implements OnInit {
   public timeBlocked = false;
   public buttons: AdvButton[] = [];
   typePlacingRace: typeof TypePlacingRace = TypePlacingRace;
-  constructor(public service: DogracingService) {}
+  constructor(public service: RacingService) {}
 
   ngOnInit() {
     this.buttons.push({

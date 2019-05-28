@@ -366,12 +366,26 @@
 					font-size: 16;
 				}
 			}
-		}
+    }
 
-		.dog-racing {
+		.product-class {
+      // SET IMAGES HEADER PRODUCT
+      &.PRODUCT-DOG-BG { // DOG
+        .race-control {
+          @extend %PRODUCT-DOG-BG-MOBILE;
+        }
+      }
+      &.PRODUCT-HORSE-BG { // HORSE
+        .race-control {
+          @extend %PRODUCT-HORSE-BG-MOBILE;
+        }
+      }
+      &.PRODUCT-HORSE-VIRT-BG { // HORSE VIRTUAL
+        .race-control {
+          @extend %PRODUCT-HORSE-BG-MOBILE;
+        }
+      }
 			.race-control {
-				@extend %dog-racing-bg-mobile;
-
 				.time {
 					.time-panel {
 						@extend %time-card-title-mobile;

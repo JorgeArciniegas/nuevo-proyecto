@@ -4,19 +4,30 @@ import {
   CancelCouponRequest,
   CancelCouponResponse,
   CouponCategory,
+  CouponType,
   ElysApiService,
   FlagAsPaidRequest,
-  FlagAsPaidResponse,
-  CouponType
+  FlagAsPaidResponse
 } from '@elys/elys-api';
-import { CouponServiceMessageType, ElysCouponService } from '@elys/elys-coupon';
-import { AddOddRequest, BetCouponExtended, BetCouponOddExtended } from '@elys/elys-coupon';
+import {
+  AddOddRequest,
+  BetCouponExtended,
+  BetCouponOddExtended,
+  CouponServiceMessageType,
+  ElysCouponService
+} from '@elys/elys-coupon';
 import { Observable, Subject } from 'rxjs';
-import { BetOdd } from '../../products/products.model';
+import { BetOdd, CouponConfirmDelete } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
-import { InternalCoupon, OddsStakeEdit, StakesDisplay, CouponLimit, Error } from './coupon.model';
+import { DestroyCouponService } from './confirm-destroy-coupon/destroy-coupon.service';
+import {
+  CouponLimit,
+  Error,
+  InternalCoupon,
+  OddsStakeEdit,
+  StakesDisplay
+} from './coupon.model';
 import { PrintCouponService } from './print-coupon/print-coupon.service';
-import { DEFAULT_BREAKPOINTS } from '@angular/flex-layout';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +55,8 @@ export class CouponService {
   error: Error;
   // Duration of the notification of warning's messages
   notificationInterval = 10000;
+
+  productHasCoupon: CouponConfirmDelete;
 
   constructor(
     public elysCoupon: ElysCouponService,
@@ -395,5 +408,18 @@ export class CouponService {
     } catch (err) {
       throw err.statusText;
     }
+  }
+
+  checkHasCoupon(): void {
+    if ( this.coupon ) {
+      this.productHasCoupon.checked = true;
+    }  else  {
+      this.productHasCoupon.checked = false;
+    }
+  }
+
+
+  resetProductHasCoupon(): void {
+    this.productHasCoupon = { checked: false, productCodeRequest: '', isRacing: false, racingNumber: 0 };
   }
 }

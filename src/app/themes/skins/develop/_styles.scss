@@ -425,15 +425,35 @@ $gradient-dark2: #000000;
 
 // GAME AREA
 // Dog racing
-%dog-racing-bg {
+%PRODUCT-DOG-BG {
 	background: url("app/themes/skins/develop/image/Dog-Racing.png") left top no-repeat;
 	background-size: 25%;
 }
 
-%dog-racing-bg-mobile {
+%PRODUCT-DOG-BG-MOBILE {
 	background: url("~/app/themes/skins/develop/image/Dog-Racing.png") left top no-repeat;
 	background-size: contain;
 }
+// HORSERACING
+%PRODUCT-HORSE-BG {
+	background: url("app/themes/skins/develop/image/horse-racing.png") left top no-repeat;
+	background-size: 25%;
+}
+%PRODUCT-HORSE-BG-MOBILE {
+	background: url("~/app/themes/skins/develop/image/horse-racing.png") left top no-repeat;
+	background-size: contain;
+}
+// HORSERACING-VIRTUAL
+%PRODUCT-HORSE-V-BG {
+	background: url("app/themes/skins/develop/image/horse-racing.png") left top no-repeat;
+	background-size: 25%;
+}
+%PRODUCT-HORSE-V-BG-MOBILE {
+	background: url("~/app/themes/skins/develop/image/horse-racing.png") left top no-repeat;
+	background-size: contain;
+}
+
+
 
 // BORDER BOX DEFINITION
 %border-gray {

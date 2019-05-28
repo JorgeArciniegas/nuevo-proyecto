@@ -7,22 +7,33 @@ import { RouterService } from '../../../../../src/app/services/utility/router/ro
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * PrintCouponService is only for DESKTOP version
+ * To not use on NativeScript Application
+ */
 export class PrintCouponService {
   printingEnabled: boolean;
   couponPrint: StagedCoupon;
 
   constructor(elysCoupon: ElysCouponService, private router: RouterService) {
+    // subscribe to stagedCouponObs and it is found on  "coupon library".
+    // It returns the StagedCouponDetail's array
+    // Check the status which list is provided in the enum "StagedCouponStatus".
     elysCoupon.stagedCouponObs.subscribe(async coupons => {
-      for (const coupon of coupons.filter(
-        item => item.CouponStatusId === StagedCouponStatus.Placed
-      )) {
+      // for results returned filter the item by "CouponStatusId = Placed"  and enable the print
+      for (const coupon of coupons.filter(item => item.CouponStatusId === StagedCouponStatus.Placed)) {
         this.printingEnabled = true;
         this.couponPrint = coupon;
+        // Start the print process
         this.printWindow();
       }
     });
   }
 
+  /**
+   * It Opens the new route on outlet with name=print and append to the Dom element the class "isPrinting"
+   * Please do not change it because the style of prints is set on it
+   */
   printWindow(): void {
     this.printingEnabled = true;
     this.router
@@ -34,9 +45,11 @@ export class PrintCouponService {
       .takeWhile(() => this.printingEnabled)
       .subscribe(valTimer => {
         window.print();
+        // delete class
         document.getElementById('app').classList.remove('isPrinting');
         this.printingEnabled = false;
         this.couponPrint = null;
+        // reset the router
         this.router.getRouter().navigate([{ outlets: { print: null } }]);
       });
   }
