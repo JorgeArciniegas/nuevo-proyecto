@@ -64,11 +64,6 @@ export const routes: Routes = [
     component: PrintReceiptComponent,
     outlet: 'print'
   },
-  /* {
-    path: 'destroycoupon',
-    component: ConfirmDestroyCouponComponent,
-    outlet: 'outletprd'
-  }, */
   {
     path: 'products',
     component: ProductsComponent,
