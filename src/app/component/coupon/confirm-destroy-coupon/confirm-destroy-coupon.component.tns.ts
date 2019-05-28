@@ -6,11 +6,8 @@ import { DestroyCouponService } from './destroy-coupon.service';
   templateUrl: './confirm-destroy-coupon.component.html',
   styleUrls: ['./confirm-destroy-coupon.component.scss']
 })
-export class ConfirmDestroyCouponComponent implements OnInit {
+export class ConfirmDestroyCouponComponent {
 
   constructor(public destroy: DestroyCouponService) { }
-
-  ngOnInit() {
-  }
 
 }

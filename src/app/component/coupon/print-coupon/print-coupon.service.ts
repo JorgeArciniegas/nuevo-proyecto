@@ -9,7 +9,7 @@ import { RouterService } from '../../../../../src/app/services/utility/router/ro
 })
 /**
  * PrintCouponService is only for DESKTOP version
- * doesn't to use on NativeScript Application
+ * To not use on NativeScript Application
  */
 export class PrintCouponService {
   printingEnabled: boolean;
@@ -17,8 +17,8 @@ export class PrintCouponService {
 
   constructor(elysCoupon: ElysCouponService, private router: RouterService) {
     // subscribe to stagedCouponObs and it is found on  "coupon library".
-    // It return the StagedCouponDetail's array
-    // Please check the status it can have on ENUM StagedCouponStatus
+    // It returns the StagedCouponDetail's array
+    // Check the status which list is provided in the enum "StagedCouponStatus".
     elysCoupon.stagedCouponObs.subscribe(async coupons => {
       // for results returned filter the item by "CouponStatusId = Placed"  and enable the print
       for (const coupon of coupons.filter(item => item.CouponStatusId === StagedCouponStatus.Placed)) {

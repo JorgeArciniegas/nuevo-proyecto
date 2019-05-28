@@ -26,7 +26,7 @@ export class ProductsServiceExtra {
    */
   changeProduct(codeProduct: string): void {
 
-    // check if the productCode is equal and it isn't to mark destroy
+    // Check if the productCode is equal to the current one. if it isn't, mark it as to destroy.
     if (this.product && codeProduct === this.product.codeProduct) {
       this.router.getRouter().navigate(['/products/racing']);
     } else {
@@ -34,7 +34,7 @@ export class ProductsServiceExtra {
       this.couponInternalService.checkHasCoupon();
       // opening the confirm destroy coupon process
       if (this.couponInternalService.productHasCoupon.checked ) {
-          // update productCode request for checked on the other service
+          // update productCode request for check on the other service
           this.couponInternalService.productHasCoupon.productCodeRequest = codeProduct;
           // open modal destroy confirm coupon
           this.destroyCouponService.openDestroyCouponDialog();
