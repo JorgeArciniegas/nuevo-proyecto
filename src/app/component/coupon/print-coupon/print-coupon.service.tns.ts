@@ -12,11 +12,16 @@ export class PrintCouponService {
   printer: Printer = new Printer();
 
   constructor(elysCoupon: ElysCouponService, private router: RouterService) {
+    // Subscribe to the "stageCouponObs". This observable is provided by the Elys-Coupon library.
+    // It returns the StagedCouponDetail's array
+    // Check the status which list is provided in the enum "StagedCouponStatus".
     elysCoupon.stagedCouponObs.subscribe(async coupons => {
+      // for results returned filter the item by "CouponStatusId = Placed"  and enable the print
       for (const coupon of coupons.filter(
         item => item.CouponStatusId === StagedCouponStatus.Placed
       )) {
         this.couponPrint = coupon;
+        // Start the print process
         this.printWindow();
       }
     });

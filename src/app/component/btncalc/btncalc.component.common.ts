@@ -5,7 +5,7 @@ import { Product } from '../../products/models/product.model';
 import { PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { BtncalcService } from './btncalc.service';
-import { TypeBetSlipColTot } from '../../products/dogracing/dogracing.models';
+import { TypeBetSlipColTot } from '../../products/racing/racing.models';
 import { CouponService } from '../coupon/coupon.service';
 
 

@@ -1,0 +1,18 @@
+<div fxFill fxLayout="row" class="race-control" fxLayoutAlign="start center">
+  <div fxFlex="28"></div>
+  <div fxFlex="28">
+    <span class="game-name">{{ 'SPORT.TITLE.'+ productService.product.label | translate }}</span>
+  </div>
+  <div fxFlex="42" *ngIf="racingService.raceDetails.races[racingService.raceDetails.currentRace] != null"
+    fxLayout="column" fxFlexAlign="stretch" fxLayoutAlign="space-around end">
+    <div class="current-race">{{ racingService.raceDetails.races[racingService.raceDetails.currentRace].label }}
+      <span *ngIf="settings.showRaceId" class="number">#{{
+        racingService.raceDetails.races[racingService.raceDetails.currentRace].number }}</span>
+    </div>
+    <div class="time elevation-z5" fxLayout="row" fxLayoutAlign="center center">
+      <div class="icon-baseline-timer-24px"></div>
+      {{ racingService.raceDetails.raceTime.minute | number: '2.0-0' }}:{{
+      racingService.raceDetails.raceTime.second | number: '2.0-0' }}
+    </div>
+  </div>
+</div>

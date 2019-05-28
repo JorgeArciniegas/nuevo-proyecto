@@ -37,7 +37,7 @@
   },
   "Balance": "Balance",
   "C": "C",
-  "CANCEL": "ANNULLA",
+  "CANCEL": "Annulla",
   "CANCELED_ON": "Annullata il",
   "CLOSE": "Close",
   "CODA": "C",
@@ -119,13 +119,14 @@
       "COMB": " Comb.",
       "DATE": "Data Coupon",
       "GROUPS": "Gruppi",
-      "HEADER_MSG": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad",
       "PAYOUTMAX": "MAX. PAYOUT",
       "PAYOUTMIN": "MIN. PAYOUT",
       "STAKE": "Imp. Giocato",
       "TOTALPAYOUT": "TOTAL PAYOUT",
       "TYPE": "Tipo giocata"
-    }
+    },
+    "HEADER_MSG": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad",
+    "PRINT": "Stampa"
   },
   "R": "R",
   "REPORTS": "Reports",
@@ -161,7 +162,15 @@
     "Keno": "Keno",
     "Roulette": "Roulette",
     "Soccer": "Calcio",
-    "VirtualHorse": "Corsa dei cavalli Virtuali"
+    "VirtualHorse": "Corsa dei cavalli Virtuali",
+    "TITLE": {
+      "DOG": "DOG RACING",
+      "HORSE": "HORSE RACING",
+      "HORSE_VIRTUAL": "HORSE VIRTUAL RACING",
+      "FOOTBALL_ITA": "SOCCER ITA",
+      "FOOTBALL_ENG": "SOCCER EN"
+
+    }
   },
   "ST": "ST",
   "TITLE": {
@@ -198,5 +207,9 @@
   "potentialMaxWinner": "Vincita potenziale massima",
   "race": "Race",
   "single": "Singola",
-  "tabCoupon": "Scheda scommesse"
+  "tabCoupon": "Scheda scommesse",
+  "DELETE_COUPON": {
+    "TITLE": "Reset del Coupon",
+    "MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?"
+  }
 }

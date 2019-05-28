@@ -1,21 +1,28 @@
 import { Injectable } from '@angular/core';
-import { ElysApiService } from '@elys/elys-api';
 import {
+  ElysApiService,
   VirtualBetEvent,
+  VirtualBetMarket,
   VirtualBetTournament,
+  VirtualDetailOddsOfEventRequest,
+  VirtualDetailOddsOfEventResponse,
+  VirtualEventCountDownRequest,
+  VirtualEventCountDownResponse,
   VirtualProgramTreeBySportRequest,
   VirtualProgramTreeBySportResponse,
-  VirtualDetailOddsOfEventRequest,
-  VirtualEventCountDownRequest,
   VirtualSportLastResultsRequest,
-  VirtualDetailOddsOfEventResponse,
-  VirtualBetMarket,
-  VirtualEventCountDownResponse,
   VirtualSportLastResultsResponse
-} from '@elys/elys-api/lib/virtual/virtual.models';
+} from '@elys/elys-api';
 import { interval, Observable, Subject, timer } from 'rxjs';
+import { DestroyCouponService } from '../../../../src/app/component/coupon/confirm-destroy-coupon/destroy-coupon.service';
+import { AppSettings } from '../../../../src/app/app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
-import { BetOdd, PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../products.model';
+import { CouponService } from '../../component/coupon/coupon.service';
+import {
+  BetOdd,
+  PolyfunctionalArea,
+  PolyfunctionalStakeCoupon
+} from '../products.model';
 import { ProductsService } from '../products.service';
 import {
   CombinationType,
@@ -33,13 +40,15 @@ import {
   SpecialBetValue,
   TypeBetSlipColTot,
   TypePlacingRace
-} from './dogracing.models';
-import { CouponService } from '../../component/coupon/coupon.service';
+} from './racing.models';
+import { RacingServiceExtra } from './racing.service.extra';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DogracingService {
+export class RacingService extends RacingServiceExtra {
+
+
 
   // screen binding
   public raceDetails: RaceDetail;
@@ -52,8 +61,6 @@ export class DogracingService {
   placingRace: PlacingRace = new PlacingRace(); // place the global race
   placingRaceSubject: Subject<PlacingRace>;
 
-  public currentRaceSubscribe: Subject<number>;
-  public currentRaceObserve: Observable<number>;
 
   private attempts = 0;
   private initCurrentRace = false;
@@ -69,8 +76,20 @@ export class DogracingService {
     private elysApi: ElysApiService,
     private productService: ProductsService,
     private btnService: BtncalcService,
-    private coupon: CouponService
+    public coupon: CouponService,
+    private appSettings: AppSettings,
+    public destroyCouponService: DestroyCouponService
   ) {
+    super(coupon, destroyCouponService);
+    this.defaultGameStart();
+
+    this.productService.productNameSelectedObserve.subscribe(item => {
+        if ( !this.coupon.productHasCoupon.checked ) {
+          this.cacheRaces = null;
+          this.initRaces();
+        }
+    });
+
     this.raceDetails = new RaceDetail();
     this.raceDetails.currentRace = 0;
 
@@ -80,7 +99,9 @@ export class DogracingService {
     this.currentRaceObserve = this.currentRaceSubscribe.asObservable();
 
     this.currentRaceObserve.subscribe((raceIndex: number) => {
+
       this.raceDetails.currentRace = raceIndex;
+
       this.remaningRaceTime(this.raceDetails.races[raceIndex].number).then(
         (raceTime: RaceTime) => {
           this.raceDetails.raceTime = raceTime;
@@ -103,6 +124,19 @@ export class DogracingService {
     });
 
     this.createDogList();
+
+  }
+
+  /**
+   * When the first time entry on the application, the system set the the product default.
+   * It is called by constructor and it is selected from environment file and
+   * it return the product marked to "productSelected"
+   */
+  defaultGameStart(): void {
+    const gameSelected = this.appSettings.products.filter( item => item.productSelected)[0].codeProduct;
+    this.productService.changeProduct(gameSelected);
+    // Start race
+    this.initRaces();
   }
 
   initRaces(): void {
@@ -173,7 +207,6 @@ export class DogracingService {
   }
 
   loadRaces(): void {
-    // console.log('load new race');
     if (this.cacheRaces == null || this.cacheRaces.length === 0) {
       this.loadRacesFromApi(true);
     } else {
@@ -202,8 +235,20 @@ export class DogracingService {
     }
   }
 
+
+  /**
+   *
+   * @param all = When it is true refresh the cache race
+   * On inside it must to create the request object.
+   * The reference values is taken by "ProductService" on object "product"
+   */
   loadRacesFromApi(all: boolean = false) {
-    const request: VirtualProgramTreeBySportRequest = { SportIds: '8', CategoryTypes: 'DOG' };
+
+    const request: VirtualProgramTreeBySportRequest = {
+      SportIds: this.productService.product.sportId.toString(),
+      CategoryTypes: this.productService.product.codeProduct
+    };
+
     this.elysApi.virtual.getVirtualTree(request).then((sports: VirtualProgramTreeBySportResponse) => {
       const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
 
@@ -272,7 +317,9 @@ export class DogracingService {
   }
 
   remaningRaceTime(idRace: number): Promise<RaceTime> {
-    const request: VirtualEventCountDownRequest = { SportId: '8', MatchId: idRace };
+    const request: VirtualEventCountDownRequest = {
+      SportId: this.productService.product.sportId.toString(), MatchId: idRace
+    };
     return this.elysApi.virtual.getCountdown(request).then((value: VirtualEventCountDownResponse) => {
       const sec: number = value.CountDown / 10000000;
       const raceTime: RaceTime = new RaceTime();
@@ -291,7 +338,11 @@ export class DogracingService {
   }
 
   getLastResult() {
-    const request: VirtualSportLastResultsRequest = { SportId: 8, CategoryType: 'DOG' };
+
+    const request: VirtualSportLastResultsRequest = {
+      SportId: this.productService.product.sportId,
+      CategoryType: this.productService.product.codeProduct
+    };
     this.listResult = [];
     timer(300).subscribe(() => {
       this.elysApi.virtual.getLastResult(request)
@@ -1293,7 +1344,6 @@ export class DogracingService {
         }
       }
     }
-
     return returnValues;
   }
 

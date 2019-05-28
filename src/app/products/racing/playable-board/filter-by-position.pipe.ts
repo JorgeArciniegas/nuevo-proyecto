@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Dog } from '../dogracing.models';
+import { Dog } from '../racing.models';
 
 @Pipe({
   name: 'filterByPosition'

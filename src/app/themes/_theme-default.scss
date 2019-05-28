@@ -401,42 +401,49 @@ html {
 				margin: 0 6px;
 			}
 		}
+    .product-class {
+      // SET IMAGES HEADER PRODUCT
+      &.PRODUCT-DOG-BG { //DOG
+        @extend %PRODUCT-DOG-BG;
+      }
+      &.PRODUCT-HORSE-BG { // HORSE
+        @extend %PRODUCT-HORSE-BG;
+      }
+      &.PRODUCT-HORSE-VIRT-BG { // HORSE VIRTUAL
+        @extend %PRODUCT-HORSE-BG;
+      }
+      .race-control {
+        .time {
+          @extend %time-card-title;
+        }
+      }
 
-		.dog-racing {
-			@extend %dog-racing-bg;
+      .list-race {
+        .number {
+          @extend %btn-success-gradient;
 
-			.race-control {
-				.time {
-					@extend %time-card-title;
-				}
-			}
+          &.selected {
+            @extend %btn-blue-gradient;
+          }
+        }
 
-			.list-race {
-				.number {
-					@extend %btn-success-gradient;
+        .date {
+          @extend %btn-gray-gradient;
 
-					&.selected {
-						@extend %btn-blue-gradient;
-					}
-				}
+          &.selected {
+            @extend %btn-dark-gradient;
+          }
+        }
+      }
 
-				.date {
-					@extend %btn-gray-gradient;
-
-					&.selected {
-						@extend %btn-dark-gradient;
-					}
-				}
-			}
-
-			.card-box-result {
-				.header {
-					.raceNumber {
-						@extend %card-title-noborder;
-					}
-				}
-			}
-		}
+      .card-box-result {
+        .header {
+          .raceNumber {
+            @extend %card-title-noborder;
+          }
+        }
+      }
+    }
 	}
 
 	.counter {

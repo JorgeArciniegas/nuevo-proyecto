@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { TypeBetSlipColTot } from '../../products/dogracing/dogracing.models';
+import { TypeBetSlipColTot } from '../../products/racing/racing.models';
 import { PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 

@@ -1,5 +1,5 @@
-import { TypeBetSlipColTot } from './racing/racing.models';
 import { BetCouponExtended } from '@elys/elys-coupon';
+import { TypeBetSlipColTot } from './racing/racing.models';
 
 export interface WindowSize {
   height: number;
@@ -12,8 +12,6 @@ export interface WindowSize {
 export class PolyfunctionalArea {
   selection?: string;
   value?: string | number;
-  /* odd?: number;
-  id?: number; */
   amount?: number;
   odds?: BetOdd[];
   labelColTot?: string;
@@ -21,8 +19,6 @@ export class PolyfunctionalArea {
   activeAssociationCol?: boolean;
   activeDistributionTot?: boolean;
   constructor() {
-    /*    this.activeAssociationCol = false;
-    this.activeDistributionTot = false;*/
     this.typeSlipCol = TypeBetSlipColTot.COL;
   }
 }
@@ -100,4 +96,14 @@ export class DialogData {
 export enum DialogTypeCoupon {
   CANCEL,
   PAY
+}
+
+/**
+ * when "checked" parameter is true Destroycoupon is enabled
+ */
+export interface CouponConfirmDelete {
+  productCodeRequest?: string;
+  checked: boolean;
+  isRacing?: boolean;
+  racingNumber?: number;
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Products } from '../../../../../src/environments/environment.models';
 import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../../products/products.service';
 import { IconSize } from '../../model/iconSize.model';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-application-menu',
@@ -17,7 +18,7 @@ export class ApplicationMenuComponent implements OnInit {
   public btnSelected: string;
 
   constructor(
-    public readonly appSettings: AppSettings,
+    private readonly appSettings: AppSettings,
     public productService: ProductsService,
     private router: Router
   ) {
@@ -31,14 +32,17 @@ export class ApplicationMenuComponent implements OnInit {
       this.logoIcon = new IconSize(barHeight * 0.9);
       this.menuIcon = new IconSize(barHeight * 0.7);
       this.buttonIcon = new IconSize(barHeight * 0.8 - 4, barHeight * 0.8);
-
       this.btnSelected = this.settings.products[0].name;
-
   }
 
-  productSelecting(productSelected: string) {
-    this.btnSelected = productSelected;
+  /**
+   *
+   * @param productSelected
+   * Reset the playboard and changed the product
+   */
+  productSelecting(productSelected: Products) {
     this.productService.resetBoard();
-    this.router.navigateByUrl('/products/' + productSelected);
+    this.productService.changeProduct(productSelected.codeProduct);
+    this.router.navigateByUrl('/products/racing');
   }
 }
