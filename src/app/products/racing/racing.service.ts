@@ -127,26 +127,6 @@ export class RacingService extends RacingServiceExtra {
 
   }
 
-/*
-  changeRaceSelecting(selected: number) {
-
-    // check if the coupon is initialize
-    this.coupon.checkHasCoupon();
-    // if the coupon isn't empty
-    if (this.coupon.productHasCoupon.checked ) {
-      // open modal destory confirm coupon
-      this.destroyCouponService.openDestroyCouponDialog();
-      // subscribe to event dialog
-      this.destroyCouponService.dialogRef.afterClosed().subscribe( elem => {
-        if (elem) {
-          this.currentRaceSubscribe.next(selected);
-        }
-      });
-    } else { // to contiue
-      this.currentRaceSubscribe.next(selected);
-    }
-
-  } */
   /**
    * When the first time entry on the application, the system set the the product default.
    * It is called by constructor and it is selected from environment file and

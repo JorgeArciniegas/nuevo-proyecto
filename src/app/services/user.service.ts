@@ -148,7 +148,7 @@ export class UserService {
         });
       });
     });
-    // Order the result from minor until major
+    // Order the result from minor to major
     this.appSetting.products.sort( (a, b) => a.order <= b.order ? -1 : 1 );
   }
 }

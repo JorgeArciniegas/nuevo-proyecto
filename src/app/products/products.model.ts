@@ -95,7 +95,7 @@ export enum DialogTypeCoupon {
 
 
 /**
- * checked se true fa partire la visualizzazione del DestroyCoupon
+ * when "checked" parameter is true Destroycoupon is enabled
  */
 export interface CouponConfirmDelete {
   productCodeRequest?: string;

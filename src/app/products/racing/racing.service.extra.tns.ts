@@ -23,24 +23,27 @@ export class RacingServiceExtra {
       });
 
     }
-  changeRaceSelecting(selected: number) {
 
-    // check if the coupon is initialize
+
+  /**
+  * Method to fire the current race number change.
+  * If there is a coupon, it will be asked to delete it.
+  * Otherwise, if there isn't, execute the change.
+  * @param selected number of race
+  *
+  * */
+  fireCurrentRaceChange(selected: number) {
+
+    // check if the coupon is initialized
     this.coupon.checkHasCoupon();
     // if the coupon isn't empty
     if (this.coupon.productHasCoupon.checked ) {
-      // open modal destory confirm coupon
+      // open modal destroy confirm coupon
       this.destroyCouponService.openDestroyCouponDialog();
       this.destroyCouponService.showDialog = true;
       this.coupon.productHasCoupon.isRacing = true;
       this.coupon.productHasCoupon.racingNumber = selected;
-      // subscribe to event dialog
-    /*   this.destroyCouponService.dialogRef.afterClosed().subscribe( elem => {
-        if (elem) {
-          this.currentRaceSubscribe.next(selected);
-        }
-      }); */
-    } else { // to contiue
+    } else { // to continue
       this.currentRaceSubscribe.next(selected);
     }
 

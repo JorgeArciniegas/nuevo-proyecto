@@ -56,7 +56,7 @@ export class ProductsService extends ProductsServiceExtra {
     public router: RouterService) {
 
       super( couponInternalService, destroyCouponService, router);
-      // Destory coupon confirmation
+      // Destroy coupon confirmation
       this.couponInternalService.productHasCoupon = { checked: false};
 
     this.productNameSelectedSubscribe = new Subject<string>();
@@ -90,7 +90,7 @@ export class ProductsService extends ProductsServiceExtra {
     this.playableBoardResetObserve = this.playableBoardResetSubject.asObservable();
 
     // updated product selected
-    // this is only entry point to modify 'product'
+    // This is the only entry point to modify 'product'
     // the function that update it is changeProduct
     // appSetting.products = environment product
     this.productNameSelectedObserve.subscribe( v => {
@@ -99,10 +99,10 @@ export class ProductsService extends ProductsServiceExtra {
           item.productSelected = false;
           return item.codeProduct === v;
         });
-        // set the selected which product
+        // set the selected product
         this.product = product[0];
         this.product.productSelected = true;
-        // confirm destory coupon
+        // confirm destroy coupon
         this.resetBoard();
         this.couponInternalService.productHasCoupon = {checked: false, productCodeRequest: v };
       }
@@ -126,40 +126,5 @@ export class ProductsService extends ProductsServiceExtra {
     this.playableBoardResetSubject.next(false);
     this.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
-
-
-  /**
-   *
-   * @param codeProduct
-   */
-  /* changeProduct(codeProduct: string): void {
-
-    // check if the productCode is equal and it isn't to mark destroy
-    if (this.product && codeProduct === this.product.codeProduct) {
-      this.router.getRouter().navigate(['/products/racing']);
-    } else {
-      // check if the product has a temporary coupon
-      this.couponInternalService.checkHasCoupon();
-      // opening the confirm destroy coupon process
-      if (this.couponInternalService.productHasCoupon.checked ) {
-          // update productCode request for checked on the other service
-          this.couponInternalService.productHasCoupon.productCodeRequest = codeProduct;
-          // open modal destory confirm coupon
-          this.destroyCouponService.openDestroyCouponDialog();
-          // subscribe to event dialog
-          this.destroyCouponService.dialogRef.afterClosed().subscribe( elem => {
-            if (elem) {
-              this.productNameSelectedSubscribe.next(codeProduct);
-              this.router.getRouter().navigate(['/products/racing']);
-            }
-          });
-      } else { // the coupon is empty
-        this.productNameSelectedSubscribe.next(codeProduct);
-        this.router.getRouter().navigate(['/products/racing']);
-      }
-    }
-
-  } */
-
 
 }

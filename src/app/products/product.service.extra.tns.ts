@@ -40,7 +40,7 @@ export class ProductsServiceExtra {
       if (this.couponInternalService.productHasCoupon.checked ) {
           // update productCode request for checked on the other service
           this.couponInternalService.productHasCoupon.productCodeRequest = codeProduct;
-          // open modal destory confirm coupon
+          // open modal destroy confirm coupon
           this.destroyCouponService.openDestroyCouponDialog();
           this.destroyCouponService.showDialog = true;
           this.couponInternalService.productHasCoupon.isRacing = false;
