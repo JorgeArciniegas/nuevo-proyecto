@@ -1,4 +1,34 @@
-<GridLayout rows="*,*,9*">
-  <Button row="0" text="{{ 'BETLIST' | translate}}" (tap)="goToBetList()"></Button>
-  <Button row="1" text="Logout" (tap)="userService.logout()"></Button>
+<GridLayout id="admin" rows="*" columns="3*,3*,3*">
+  <StackLayout orientation="vertical" width="100" height="100" row="0" col="0">
+    <div class="admin-panel-container radius-15">
+      <div class="title-container">
+        <img class="img-title" src="app/themes/skins/{{settings.theme}}/icon/baseline-history-24px.svg" alt=""><span
+          class="txt-title">{{'REPORTS' | translate }}</span>
+      </div>
+      <button class="btn-default btn-success btn-admin radius-5" routerLink="reports/betsList"><img
+          src="app/themes/skins/{{settings.theme}}/icon/baseline-list-24px.svg" alt="" /> <span
+          class="-btn-admin-txt">{{'BETSLIST.BETSLIST' | translate }}</span> </button>
+    </div>
+    <div class="admin-panel-container radius-15">
+      <div class="title-container">
+        <img class="img-title" src="app/themes/skins/{{settings.theme}}/icon/baseline-settings-20px.svg" alt=""><span
+          class="txt-title">{{'SETTINGS' | translate }}</span>
+      </div>
+      <button class="btn-default btn-success btn-admin radius-5" routerLink=""><img
+          src="app/themes/skins/{{settings.theme}}/icon/baseline-language-24px.svg" alt="" /> <span
+          class="-btn-admin-txt">{{'LANGUAGE' | translate }}</span> </button>
+    </div>
+    <div class="admin-panel-container logout radius-15"> <button
+        class="btn-default btn-grey-gradient btn-admin radius-5" (click)="userService.logout()">Logout</button>
+    </div>
+  </StackLayout>
+  <StackLayout orientation="vertical" width="100" height="100" row="0" col="1">
+  </StackLayout>
+  <StackLayout orientation="vertical" width="100" height="100" row="0" col="2">
+  </StackLayout>
 </GridLayout>
+
+<Button text="{{'BETSLIST.BTN_DATE_PLACED' | translate}}" class="button-internal"
+  (tap)="changeValue('dateHasPlaced', false)"></Button>
+<Image col="2" stretch="aspectFit" width="8" src="~/app/themes/skins/{{settings.theme}}/icon/Down.png"
+  verticalAlignment="center" horizontalAlignment="center"></Image>
