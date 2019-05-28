@@ -14,7 +14,7 @@
 			@extend %logo-with-text-mobile;
 		}
     #admin{
-      @extend %admin;
+      @extend %admin-mobile;
       height:100%;
       .admin-panel-container{
         @extend %bg-opacity-dark-variant;

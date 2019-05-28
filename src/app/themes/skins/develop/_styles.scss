@@ -508,6 +508,11 @@ $gradient-dark2: #000000;
 {
 	background: url("app/themes/skins/develop/image/Bg-login-vdesk.jpg") center center no-repeat;
 }
+%admin-mobile
+{
+	background: url("~/app/themes/skins/develop/image/Bg-login-vdesk.jpg") center center no-repeat;
+  background-size: cover;
+}
 // LOGIN
 %login {
 	background: url("app/themes/skins/develop/image/Bg-login-vdesk.jpg") center center no-repeat;
