@@ -117,9 +117,9 @@ export class UserService {
   }
   /**
    * Setting the real playble game
-   * It set defaultAmount on products from presets value.
-   * If the game is present on the environment but didn't to match on the availableSport and
-   * it didn't to playable but it is present to reports list
+   * It sets 'defaultAmount' on products from 'CouponPresetValues'.
+   * If the game is present on the 'environment' but it doesn't match the 'availableSport',
+   * it isn't playable and it is only shown in the reports list.
    */
   checkAvailableSportAndSetPresetsAmount(): void {
 
