@@ -39,7 +39,9 @@ html {
 		.logo-with-text {
 			@extend %logo-with-text;
 		}
-
+    .logo-with-text-mobile {
+			@extend %logo-with-text-mobile;
+		}
 		.error-message {
 			@extend %error-area;
 

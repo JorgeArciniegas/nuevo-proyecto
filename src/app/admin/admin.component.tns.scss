@@ -1,0 +1,19 @@
+.admin-panel-container{
+  height: 113;
+  padding: 15 30;
+  margin-top: 20;
+
+  &.logout{
+    padding:9% 5%;
+  }
+}
+.txt-title{
+font-weight: bold;
+font-size:20;
+text-transform: uppercase;
+margin-left: 5;
+&.txt-title-btn{
+  font-size: 17;
+}
+}
+
