@@ -4,6 +4,8 @@ export interface Environment {
   staging?: boolean;
   pageTitle?: string;
   theme?: string;
+  // Array of the supported languages. The first element of the array is the default language.
+  supportedLang?: string[];
   currency?: string;
   products: Products[];
   showRaceId: boolean;
@@ -27,7 +29,6 @@ export interface Products {
   defaultAmount: number[];
   toolbarButton: ToolbarButtons;
   widgets?: Widget[];
-
 }
 
 export interface Widget {
@@ -38,7 +39,7 @@ export interface Widget {
   icon: string;
 }
 
-export enum  WidgetTypeLink {
+export enum WidgetTypeLink {
   MODAL,
   OUTLET
 }

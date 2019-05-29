@@ -5,6 +5,7 @@ export const environment: Environment = {
   baseApiUrl: 'https://qacom-apidemo.ody-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
+  supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
   products: [
     {
       sportId: 8,
@@ -26,8 +27,8 @@ export const environment: Environment = {
           routing: '',
           typeLink: WidgetTypeLink.OUTLET,
           icon: ''
-        },
-      ],
+        }
+      ]
     },
     {
       sportId: 10,
@@ -43,7 +44,7 @@ export const environment: Environment = {
         icon: 'Horse',
         route: 'products/racing'
       },
-      widgets: [],
+      widgets: []
     },
     {
       sportId: 210,
@@ -59,7 +60,7 @@ export const environment: Environment = {
         icon: 'Horse',
         route: 'products/racing'
       },
-      widgets: [],
+      widgets: []
     },
     {
       sportId: 1,
@@ -75,7 +76,7 @@ export const environment: Environment = {
         icon: 'Soccer-ita',
         route: 'products/soccer'
       },
-      widgets: [],
+      widgets: []
     },
     {
       sportId: 1,
@@ -91,8 +92,8 @@ export const environment: Environment = {
         icon: 'Soccer-eng',
         route: 'products/soccer'
       },
-      widgets: [],
-    },
+      widgets: []
+    }
     /* {
       name: 'footballita',
       label: 'Football Ita',
@@ -157,5 +158,6 @@ export const environment: Environment = {
   showRaceId: true,
   couponMessageTrasmitted: 'Mandate transmitted via the Internet andaccepted on the',
   // tslint:disable-next-line:max-line-length
-  couponMessageLegal: 'Lorem ipsum dolor sit amet, consecteturadipisicing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Utenim ad minim veniam'
+  couponMessageLegal:
+    'Lorem ipsum dolor sit amet, consecteturadipisicing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Utenim ad minim veniam'
 };

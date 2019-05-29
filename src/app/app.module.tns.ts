@@ -46,9 +46,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     NativeScriptRouterModule,
     NativeScriptRouterModule.forRoot(routes)
   ],
-  providers: [
-    providerDeclarations /* { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true } */
-  ],
+  providers: [providerDeclarations /* { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true } */],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })
@@ -57,8 +55,8 @@ Pass your application module to the bootstrapModule function located in main.ts 
 */
 export class AppModule {
   constructor(private translateService: TranslateService) {
-    this.translateService = translateService;
-    this.translateService.setDefaultLang('it');
-    this.translateService.use('it');
+    // this.translateService = translateService;
+    // this.translateService.setDefaultLang('it');
+    // this.translateService.use('it');
   }
 }
