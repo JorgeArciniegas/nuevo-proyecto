@@ -84,7 +84,7 @@
       <div fxLayout="column" fxFlex fxLayoutAlign="start">
         <div fxFlex fxLayout="column" fxLayoutAlign="flex-start" fxLayoutAlignGap="grid">
             <div fxFlex fxLayoutAlign="start center" class="border-bottom-overlay-1px" [style.max-height.px]="55"
-             *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons">
+             *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons" [routerLink]="['../detail', rowItem.CouponCode ]">
               <div fxFlex="5">
                   <img class="icon icon-24px" *ngIf="rowItem.IsAgentSettled" src="app/themes/skins/{{settings.theme}}/icon/baseline-check-24px.svg">
               </div>

@@ -13,6 +13,7 @@ export class BetsListService {
   availableSport: AccountVirtualSport[] = [];
   pageSizeList: number[] = [10, 25, 50, 100];
   labelAvailableSportSelected: string;
+  sportIdSelected: number;
   // Result of request list
   betsCouponList: CouponSummaryCouponListResponse = null;
   constructor(
@@ -32,6 +33,7 @@ export class BetsListService {
     /**
      * Request default object
      */
+
     this.request = {
       couponStatus: CouponStatusInternal.ALL,
       dateFrom: new Date(),
@@ -39,12 +41,14 @@ export class BetsListService {
       pageSize: this.pageSizeList[0],
       requestedPage: 1,
       couponType: CouponTypeInternal.ALL,
-      sportId: this.availableSport[0].SportId,
+      sportId: null,
       product: null,
       complianceCode: '',
       ticketCode: '',
       dateHasPlaced: false
     };
+
+    this.sportId = this.availableSport[0].SportId;
   }
 
   /**
@@ -111,10 +115,14 @@ export class BetsListService {
   }
 
   set sportId(sportId: number) {
-    this.request.sportId = sportId;
-    this.labelAvailableSportSelected = this.availableSport.filter(
-      item => item.SportId === this.request.sportId
-    )[0].SportName;
+    if (sportId !== null) {
+      this.sportIdSelected = sportId;
+      this.request.sportId = sportId;
+      this.labelAvailableSportSelected = this.availableSport.filter(
+        item => item.SportId === this.request.sportId
+      )[0].SportName;
+    }
+
   }
 
   get ticketCode() {
@@ -139,7 +147,7 @@ export class BetsListService {
    * it doesn't accept the duplicate sportId
    *
    */
-  private getAvailableSport(): void {
+  getAvailableSport(): void {
     const tempKey = [];
     this.appSettings.products.map( (item) => {
       // check if the sportId is already exist
@@ -178,11 +186,12 @@ export class BetsListService {
     }
   }
 
-  getList(): void {
-    const req: VirtualCouponListRequest = this.request;
-    if (req.sportId === 0) {
-      req.sportId = null;
+  getList(reset?: boolean): void {
+    if (reset) {
+      this.request.requestedPage = 1;
     }
+    const req: VirtualCouponListRequest = this.cloneRequest();
+
     this.elysApi.reports
       .getVirtualListOfCoupon(req)
       .then(items => (this.betsCouponList = items));
@@ -190,5 +199,27 @@ export class BetsListService {
     this.router
       .getRouter()
       .navigateByUrl('admin/reports/betsList/summaryCoupons');
+  }
+
+
+  private cloneRequest(): VirtualCouponListRequest {
+
+    const dateto = new Date();
+    dateto.setDate(this.request.dateTo.getDate() + 1);
+
+    return {
+      couponStatus: this.request.couponStatus,
+      dateFrom: this.request.dateFrom,
+      dateTo: dateto,
+      pageSize: this.request.pageSize,
+      requestedPage: this.request.requestedPage,
+      couponType: this.request.couponType,
+      sportId: this.request.sportId === 0 ? null : this.request.sportId,
+      product: this.request.product,
+      complianceCode: this.request.complianceCode,
+      ticketCode: this.request.ticketCode,
+      dateHasPlaced: this.request.dateHasPlaced
+    };
+
   }
 }

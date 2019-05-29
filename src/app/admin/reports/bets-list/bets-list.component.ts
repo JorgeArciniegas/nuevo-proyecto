@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
 import { BetsListService } from './bets-list.service';
 import { filter } from 'rxjs/operators';
+import { VirtualCouponListRequest } from '@elys/elys-api/lib/reports/reports.models';
+import { AccountVirtualSport } from '@elys/elys-api';
 
 @Component({
   selector: 'app-bets-list',
@@ -58,11 +60,12 @@ export class BetsListComponent implements OnInit, OnDestroy {
     this.betsListService[key] = value;
   }
 
-
   checkClassListToDismiss(): boolean {
-
-
-
     return true;
+  }
+
+
+  trackBySportId(idx: number, request: AccountVirtualSport ): number {
+    return request.SportId;
   }
 }

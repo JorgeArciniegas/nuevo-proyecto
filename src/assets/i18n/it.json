@@ -3,6 +3,7 @@
   "BASE": "B",
   "BET": "Scommessa",
   "BETSLIST": {
+    "DETAIL_COUPON": "Lista scommesse - dettaglio",
     "BTN_DATE_CLOSED": "Pagamento",
     "BTN_DATE_PLACED": "Piazzamento",
     "BTN_SEARCH": "Cerca",
@@ -19,6 +20,7 @@
     "LABEL_DATE_FORM": "Data",
     "LABEL_DATE_FROM": "Da data",
     "LABEL_DATE_PLACE": "Data piazzamento",
+    "PAYMENT_DATA": "Data pagamento",
     "LABEL_DATE_TO": "A data",
     "LABEL_LOST_BETS": "Perdenti",
     "LABEL_PLACED_BETS": "In corso",
@@ -90,6 +92,7 @@
   "CouponType": {
     "ALL": "Tutte",
     "CombinationsBet": "Sistema",
+    "Combination": "Sistema",
     "MultipleBet": "Multipla",
     "PrintCoupon": {
       "CombinationsBet": "Sistema",
@@ -166,7 +169,6 @@
       "HORSE_VIRTUAL": "HORSE VIRTUAL RACING",
       "FOOTBALL_ITA": "SOCCER ITA",
       "FOOTBALL_ENG": "SOCCER EN"
-
     }
   },
   "ST": "ST",
@@ -201,12 +203,28 @@
   "dogRacingLabel": "DOG RACING",
   "multiple": "Multipla",
   "piazza": "Piazza",
-  "potentialMaxWinner": "Vincita potenziale massima",
   "race": "Race",
   "single": "Singola",
   "tabCoupon": "Scheda scommesse",
   "DELETE_COUPON": {
     "TITLE": "Reset del Coupon",
     "MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?"
+  },
+  "COMBINATIONS": "Combinazioni",
+  "EVENTS": "Eventi",
+  "TOTALS": "Totali",
+  "SUMMARY": "Sommario",
+  "BONUS": "Bonus",
+  "STAKE": "Giocato",
+  "REPRINT":"Ristampa",
+  "POTENTIAL_MAX_WINNER": "Vincita potenziale massima",
+  "POTENTIAL_MAX_WINNER_WITH_BONUS": "Vincita potenziale massima",
+  "POTENTIAL_MIN_WINNER": "Vincita potenziale minima",
+  "COUPON": {
+    "TYPE_PLAYED": "Tipo scommessa",
+    "STATUS": "Esito",
+    "WON": "Vinto",
+    "JACKPOT": "Jackpot"
   }
+
 }

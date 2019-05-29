@@ -60,9 +60,9 @@
       <div fxFlex="40" fxLayout="row" fxLayoutGap="20px" class="display padding-20">
         <h3 class="label-overlap">{{ 'BETSLIST.LABEL_PRODUCTS_FORM' | translate }}</h3>
         <div fxFlex fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px grid">
-          <div fxFlex="50" fxLayout="column" *ngFor="let type of betsListService.availableSport">
+          <div fxFlex="50" fxLayout="column"  *ngFor="let type of betsListService.availableSport; trackBy: trackBySportId">
             <button class="btn-filter btn-default radius-5"
-              [class.btn-filter-success]="betsListService.sportId === type.SportId"
+              [class.btn-filter-success]="betsListService.sportIdSelected === type.SportId"
               (click)="changeValue('sportId', type.SportId)">{{ 'SPORT.'+ type.SportName | translate }} </button>
           </div>
         </div>
@@ -89,7 +89,7 @@
       <div fxFlex="33"></div>
       <div fxFlex>
         <button class="btn-default btn-grey-gradient radius-5 elevation-z5 btn-filter"
-          (click)="betsListService.getList()">{{ 'BETSLIST.BTN_SEARCH' | translate }} </button>
+          (click)="betsListService.getList(true)">{{ 'BETSLIST.BTN_SEARCH' | translate }} </button>
       </div>
       <div fxFlex="33"></div>
     </div>

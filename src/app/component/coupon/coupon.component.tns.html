@@ -107,7 +107,7 @@
   </GridLayout>
   <GridLayout row="4">
     <GridLayout rows="*,3*" columns="*" class="card display-amount">
-      <Label row="0" text="{{'potentialMaxWinner' | translate}}" class="title"
+      <Label row="0" text="{{'POTENTIAL_MAX_WINNER' | translate}}" class="title"
         [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
       <Label row="1" [text]="couponService.stakeDisplay.MaxWinning |number: '1.2-2'" class="amount"
         [ngClass]="{'small': productService.windowSize.small}"></Label>

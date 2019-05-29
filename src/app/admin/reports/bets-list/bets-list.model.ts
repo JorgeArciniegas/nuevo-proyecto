@@ -1,26 +1,3 @@
-import { CouponStatus, CouponType } from '@elys/elys-api';
-/*
-export enum VirtualSportId {
-  ALL = -1,
-  DOG = 0,
-  HORSE,
-  SOCCER,
-  ROOSTER,
-  KENO,
-  ROULETTE
-}
-
-
-export namespace VirtualSportId {
-
-  export function values() {
-    return Object.keys(VirtualSportId).filter(
-      (type) => isNaN(<any>type) && type !== 'values'
-    );
-  }
-}
- */
-
 export enum CouponTypeInternal {
   ALL = 0,
   SingleBet = 1,
@@ -51,3 +28,9 @@ export namespace CouponStatusInternal {
     );
   }
 }
+
+export enum ShowBetDetailView {
+  SUMMARY,
+  EVENTS,
+  COMBINATIONS
+ }
