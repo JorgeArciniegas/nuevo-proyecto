@@ -3,7 +3,7 @@
     <div class="title">
       <h3>{{'BETSLIST.DETAIL_COUPON' | translate | uppercase }} </h3>
     </div>
-    <div fxFill fxFlex="7" class="padding-horizontal-6" fxLayoutAlign="start" fxLayoutGap="20px">
+    <div fxFill fxFlex="6" class="padding-horizontal-6" fxLayoutAlign="start" fxLayoutGap="20px">
 
         <div fxFlex="20" fxLayoutAlign="start">
 
@@ -42,6 +42,12 @@
       <app-events [data]="couponDetail" *ngIf="showDataViewSelected === showBetDetailView.EVENTS"></app-events>
       <app-combinations [data]="couponDetail" *ngIf="showDataViewSelected === showBetDetailView.COMBINATIONS"></app-combinations>
     </div>
-  <div fxFlex="3"></div>
-</div>
+    <div fxFill fxFlex="10" class="padding-vertical-10" fxLayoutAlign="flex-start center">
+      <div fxFill fxFlex="20" fxLayoutAlign="start stretch">
+          <button fxFlex="100" class="btn-default btn-success radius-5">
+            {{ 'REPRINT' | translate }}
+          </button>
+      </div>
+    </div>
+  </div>
 </div>

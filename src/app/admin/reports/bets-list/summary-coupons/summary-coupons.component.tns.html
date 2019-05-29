@@ -57,23 +57,23 @@
       <Label row="0" col="7" class="sub-title" text="{{ 'BETSLIST.LABEL_AMOUNT_WON_BETS' | translate }}" verticalAlignment="center"></Label>
       <StackLayout row="0" colSpan="8" class="border-bottom-overlay" verticalAlignment="bottom"></StackLayout>
       <!-- rows -->
-      <ng-container *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons; let i = index;">
-        <Image row="{{i + 1}}" col="0" width="24" *ngIf="rowItem.IsAgentSettled" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-check-24px.png"></Image>
-        <Label row="{{i + 1}}" col="1" text="{{ rowItem.CouponCode }}" verticalAlignment="center"></Label>
-        <Label row="{{i + 1}}" col="2" text="{{ rowItem.UserId + ' - ' + rowItem.UserName }}" verticalAlignment="center"></Label>
-        <Label row="{{i + 1}}" col="3" text="{{ rowItem.CouponDateOffset | date: 'dd/MM/yy HH:mm:ss' }}" verticalAlignment="center"></Label>
-        <Label row="{{i + 1}}" col="4" text="{{ rowItem.Stake }}" verticalAlignment="center"></Label>
+      <GridLayout (tap)="showDetails(rowItem.CouponCode)"  row="{{i + 1}}" colSpan="8" rows="*" columns="5*,20*,20*,20*,7*,7*,9*,12*" *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons; let i = index;">
+        <Image col="0" width="24" *ngIf="rowItem.IsAgentSettled" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-check-24px.png"></Image>
+        <Label col="1" text="{{ rowItem.CouponCode }}" verticalAlignment="center"></Label>
+        <Label col="2" text="{{ rowItem.UserId + ' - ' + rowItem.UserName }}" verticalAlignment="center"></Label>
+        <Label col="3" text="{{ rowItem.CouponDateOffset | date: 'dd/MM/yy HH:mm:ss' }}" verticalAlignment="center"></Label>
+        <Label col="4" text="{{ rowItem.Stake }}" verticalAlignment="center"></Label>
         <ng-container [ngSwitch]="rowItem.CouponStatusId">
-          <Image row="{{i + 1}}" col="5" width="24" *ngSwitchDefault src="~/app/themes/skins/{{settings.theme}}/icon/progress-clock.png"></Image>
+          <Image col="5" width="24" *ngSwitchDefault src="~/app/themes/skins/{{settings.theme}}/icon/progress-clock.png"></Image>
           <!-- LOST -->
-          <Image row="{{i + 1}}" col="5" width="24" *ngSwitchCase="2" src="~/app/themes/skins/{{settings.theme}}/icon/cancel.png"></Image>
+          <Image  col="5" width="24" *ngSwitchCase="2" src="~/app/themes/skins/{{settings.theme}}/icon/cancel.png"></Image>
           <!-- WIN -->
-          <Image row="{{i + 1}}" col="5" width="24" *ngSwitchCase="3" src="~/app/themes/skins/{{settings.theme}}/icon/checked.png"></Image>
+          <Image col="5" width="24" *ngSwitchCase="3" src="~/app/themes/skins/{{settings.theme}}/icon/checked.png"></Image>
         </ng-container>
-        <Label row="{{i + 1}}" col="6" text="{{ 'CouponType.'+couponType[rowItem.CouponTypeId] | translate }}" verticalAlignment="center"></Label>
-        <Label row="{{i + 1}}" col="7" text="{{ (rowItem.Won > 0 )? rowItem.Won : '-'  }}" verticalAlignment="center"></Label>
-        <StackLayout row="{{i + 1}}" colSpan="8" class="border-bottom-overlay" verticalAlignment="bottom"></StackLayout>
-      </ng-container>
+        <Label col="6" text="{{ 'CouponType.'+couponType[rowItem.CouponTypeId] | translate }}" verticalAlignment="center"></Label>
+        <Label col="7" text="{{ (rowItem.Won > 0 )? rowItem.Won : '-'  }}" verticalAlignment="center"></Label>
+        <StackLayout colSpan="8" class="border-bottom-overlay" verticalAlignment="bottom"></StackLayout>
+      </GridLayout>
     </GridLayout>
   </GridLayout>
 
@@ -111,5 +111,4 @@
       <Label class="sub-title" text="{{ 'BETSLIST.LABEL_AMOUNT_LOST_BETS' | translate }}"></Label>
     </StackLayout>
   </GridLayout>
-
 </GridLayout>

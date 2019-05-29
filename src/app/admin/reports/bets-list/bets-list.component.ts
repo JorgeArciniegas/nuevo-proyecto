@@ -1,10 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AccountVirtualSport } from '@elys/elys-api';
 import { Observable } from 'rxjs';
 import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
 import { BetsListService } from './bets-list.service';
-import { filter } from 'rxjs/operators';
-import { VirtualCouponListRequest } from '@elys/elys-api/lib/reports/reports.models';
-import { AccountVirtualSport } from '@elys/elys-api';
 
 @Component({
   selector: 'app-bets-list',

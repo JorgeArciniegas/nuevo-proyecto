@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SummaryCoupon, CouponStatus } from '@elys/elys-api';
-import { AppSettings } from 'src/app/app.settings';
+import { AppSettings } from '../../../../../../../src/app/app.settings';
 
 @Component({
   selector: 'app-summary',

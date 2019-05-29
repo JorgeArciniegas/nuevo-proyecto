@@ -1,0 +1,31 @@
+<GridLayout rows="2*,2*,20*,2*, *" columns="*" *ngIf="couponDetail">
+  <Label row="0" verticalAlignment="center" text="{{'BETSLIST.DETAIL_COUPON' | translate | uppercase }}" class="m-l-20 h3"></Label>
+  <GridLayout class="m-l-20" row="1" rows="*" columns="1*,1*,1*,1*,1*">
+      <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-arrow_back-24px.png" verticalAlignment="center"
+      horizontalAlignment="left"></Image>
+    <Button col="1" class="m-r-10 button btn-default radius-10" text="{{ 'SUMMARY' | translate }}"
+    [class.btn-grey-gradient]="showDataViewSelected === showBetDetailView.SUMMARY"
+    [class.btn-success]="showDataViewSelected !== showBetDetailView.SUMMARY"
+     (tap)="changeView(showBetDetailView.SUMMARY)"></Button>
+    <Button col="2" class="m-r-10 button btn-default radius-10" text="{{ 'EVENTS' | translate }}"
+    [class.btn-grey-gradient]="showDataViewSelected === showBetDetailView.EVENTS"
+    [class.btn-success]="showDataViewSelected !== showBetDetailView.EVENTS"
+    (tap)="changeView(showBetDetailView.EVENTS)"></Button>
+    <Button col="3" class="button btn-default" text="{{ 'COMBINATIONS' | translate }}"
+      [class.btn-grey-gradient]="showDataViewSelected === showBetDetailView.COMBINATIONS"
+      [class.btn-success]="showDataViewSelected !== showBetDetailView.COMBINATIONS"
+      (tap)="changeView(showBetDetailView.COMBINATIONS)"></Button>
+    <StackLayout col="4"></StackLayout>
+  </GridLayout>
+  <StackLayout row="2" class="m-20 display">
+    <app-summary [data]="couponDetail" *ngIf="showDataViewSelected === showBetDetailView.SUMMARY"></app-summary>
+    <app-events [data]="couponDetail" *ngIf="showDataViewSelected === showBetDetailView.EVENTS"></app-events>
+    <app-combinations [data]="couponDetail" *ngIf="showDataViewSelected === showBetDetailView.COMBINATIONS"></app-combinations>
+  </StackLayout>
+
+
+  <GridLayout row="3" rows="*" columns="2*,6*" class="p-l-20">
+      <Button col="0" verticalAlignment="center" class="button btn-default btn-success radius-10" text="{{ 'REPRINT' | translate }}"></Button>
+  </GridLayout>
+  <StackLayout row="4"></StackLayout>
+</GridLayout>

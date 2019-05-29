@@ -2,9 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CouponCategory, ElysApiService, SummaryCouponRequest } from '@elys/elys-api';
 import { Subscription } from 'rxjs';
-import { AppSettings } from '../../../../../../src/app/app.settings';
+import { AppSettings } from '../../../../app.settings';
 import { ShowBetDetailView } from '../bets-list.model';
 import { SummaryCouponExtended } from './detail-coupon.model';
+import { RouterExtensions } from 'nativescript-angular/router';
 
 @Component({
   selector: 'app-details-coupon',
@@ -20,7 +21,8 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
   constructor(
      private route: ActivatedRoute,
      private elysApi: ElysApiService,
-     public readonly settings: AppSettings
+     public readonly settings: AppSettings,
+     private router: RouterExtensions
      ) {
       this.showDataViewSelected = ShowBetDetailView.SUMMARY;
      }
@@ -45,4 +47,7 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
     this.showDataViewSelected = view;
   }
 
+  goBack(): void {
+    this.router.back();
+  }
 }

@@ -23,4 +23,8 @@ export class SummaryCouponsComponent {
   goBack(): void {
     this.router.back();
   }
+
+  showDetails(item: string) {
+    this.router.navigate(['admin/reports/betsList/detail', item]);
+  }
 }
