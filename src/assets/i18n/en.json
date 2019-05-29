@@ -102,7 +102,7 @@
   },
   "ERROR": "Error",
   "ERROR_PASSWORD_TOO_SHORT": "The password is too short (minimum 6 digits)",
-  "ERROR_REQUIRED": "It is compulsory",
+  "ERROR_REQUIRED": "is compulsory",
   "ERROR_USERNAME_TOO_SHORT": "The username is too short (minimum 2 digits)",
   "GO_TO_HOME": "Go to home",
   "LUCKY": "Lucky",
