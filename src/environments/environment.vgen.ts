@@ -13,7 +13,7 @@ export const environment: Environment = {
       label: 'DOG',
       defaultAmount: [],
       order: 0,
-      productSelected: false,
+      productSelected: true,
       isPlayable: true,
       toolbarButton: {
         name: 'dogracing',
@@ -36,7 +36,7 @@ export const environment: Environment = {
       label: 'HORSE',
       defaultAmount: [],
       order: 1,
-      productSelected: true,
+      productSelected: false,
       isPlayable: true,
       toolbarButton: {
         name: 'horseracing',
@@ -98,6 +98,5 @@ export const environment: Environment = {
   couponMessageTrasmitted:
     'Mandate transmitted via the Internet andaccepted on the',
   // tslint:disable-next-line:max-line-length
-  couponMessageLegal:
-    'Lorem ipsum dolor sit amet, consecteturadipisicing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Utenim ad minim veniam'
+  couponMessageLegal: 'Lorem ipsum dolor sit amet, consecteturadipisicing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Utenim ad minim veniam'
 };
