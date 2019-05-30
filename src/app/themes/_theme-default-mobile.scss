@@ -13,7 +13,13 @@
 		.logo-with-text {
 			@extend %logo-with-text-mobile;
 		}
-
+    #admin{
+      @extend %admin-mobile;
+      height:100%;
+      .admin-panel-container{
+        @extend %bg-opacity-dark-variant;
+    }
+    }
 		#login {
 			@extend %login-mobile;
 

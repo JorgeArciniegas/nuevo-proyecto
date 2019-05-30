@@ -17,7 +17,7 @@ html {
 }
 
 .app {
-  app-login {
+  app-login, app-admin {
     height: 100%;
   }
 	&.develop {
@@ -39,8 +39,7 @@ html {
 		.logo-with-text {
 			@extend %logo-with-text;
 		}
-
-		.error-message {
+    .error-message {
 			@extend %error-area;
 
 			.error-icon {
@@ -71,7 +70,13 @@ html {
 				}
 			}
 		}
-
+#admin{
+  @extend %admin;
+  height:100%;
+  .admin-panel-container{
+    @extend %bg-opacity-dark-variant;
+}
+}
 		#login {
 			@extend %login;
 

@@ -42,7 +42,7 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
           couponStatus: this.couponDetail.CouponStatusId,
           pageOdd: 1,
           pageOddRows: this.definedNumberRowForEvents,
-          maxPage: Math.floor(this.couponDetail.Odds.length / this.definedNumberRowForEvents),
+          maxPage: this.couponDetail.Odds.length === 1 ? 1 : Math.floor(this.couponDetail.Odds.length / this.definedNumberRowForEvents),
           odd: this.couponDetail.Odds.slice(0, this.definedNumberRowForEvents )
         };
         // setting paginator for combinations
