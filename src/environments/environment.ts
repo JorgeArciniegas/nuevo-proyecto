@@ -7,7 +7,8 @@ import { Environment } from './environment.models';
 export const environment: Environment = {
   production: false,
   products: [],
-  showRaceId: false
+  showRaceId: false,
+  isEnabledReprintCoupon: false
 };
 
 /*

@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SummaryCoupon } from '@elys/elys-api';
+import { Component, Input, OnInit } from '@angular/core';
+import { GroupingsRows } from '../detail-coupon.model';
 
 @Component({
   selector: 'app-combinations',
@@ -8,7 +8,7 @@ import { SummaryCoupon } from '@elys/elys-api';
 })
 export class CombinationsComponent implements OnInit {
 
-  @Input() data: SummaryCoupon;
+  @Input() data: GroupingsRows;
 
   constructor() { }
 

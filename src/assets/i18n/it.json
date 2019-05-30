@@ -2,8 +2,8 @@
   "ACCG": "ACCG",
   "BASE": "B",
   "BET": "Scommessa",
+  "STARTING_DATE": "Data inizio",
   "BETSLIST": {
-    "DETAIL_COUPON": "Lista scommesse - dettaglio",
     "BTN_DATE_CLOSED": "Pagamento",
     "BTN_DATE_PLACED": "Piazzamento",
     "BTN_SEARCH": "Cerca",
@@ -13,6 +13,7 @@
       "Placed": "Piazzato",
       "Win": "Vincente"
     },
+    "DETAIL_COUPON": "Lista scommesse - dettaglio",
     "LABEL_AMOUNT_LOST_BETS": "TOT perso",
     "LABEL_AMOUNT_PLACED_BETS": "TOT In corso",
     "LABEL_AMOUNT_WON_BETS": "TOT Vinto",
@@ -20,7 +21,6 @@
     "LABEL_DATE_FORM": "Data",
     "LABEL_DATE_FROM": "Da data",
     "LABEL_DATE_PLACE": "Data piazzamento",
-    "PAYMENT_DATA": "Data pagamento",
     "LABEL_DATE_TO": "A data",
     "LABEL_LOST_BETS": "Perdenti",
     "LABEL_PLACED_BETS": "In corso",
@@ -35,8 +35,10 @@
     "LABEL_WON_BETS": "Vincenti",
     "LIST_TITLE": "LISTA SCOMMESSE",
     "PAGE": "Pagina",
-    "PAGE_SEPARATOR": " di "
+    "PAGE_SEPARATOR": " di ",
+    "PAYMENT_DATA": "Data pagamento"
   },
+  "BONUS": "Bonus",
   "Balance": "Balance",
   "C": "C",
   "CANCEL": "Annulla",
@@ -44,7 +46,15 @@
   "CLOSE": "Close",
   "CODA": "C",
   "COL": "COL",
+  "COMBINATIONS": "Combinazioni",
+  "GROUPING": "Raggruppamento",
   "CONFIRM": "CONFIRM",
+  "COUPON": {
+    "JACKPOT": "Jackpot",
+    "STATUS": "Esito",
+    "TYPE_PLAYED": "Tipo scommessa",
+    "WON": "Vinto"
+  },
   "COUPON CODE": "Coupon Code",
   "COUPON_ERROR": {
     "API_ERROR": "API_ERROR",
@@ -91,8 +101,8 @@
   },
   "CouponType": {
     "ALL": "Tutte",
-    "CombinationsBet": "Sistema",
     "Combination": "Sistema",
+    "CombinationsBet": "Sistema",
     "MultipleBet": "Multipla",
     "PrintCoupon": {
       "CombinationsBet": "Sistema",
@@ -103,10 +113,15 @@
     "SingleBet": "Singola",
     "Unknown": "Sconosciuta"
   },
+  "DELETE_COUPON": {
+    "MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?",
+    "TITLE": "Reset del Coupon"
+  },
   "ERROR": "Errore",
   "ERROR_PASSWORD_TOO_SHORT": "Questa password è troppo corta, minimo 6 caratteri",
   "ERROR_REQUIRED": "É obbligatorio",
   "ERROR_USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
+  "EVENTS": "Eventi",
   "GO_TO_HOME": "Vai alla home",
   "LUCKY": "Lucky",
   "NO_CONNECTION": "Nessuna connessione disponibile",
@@ -115,6 +130,9 @@
   "PAY": "PAYMENT",
   "PAYED_AMOUNT": "Importo pagato",
   "PAYED_ON": "Pagata il",
+  "POTENTIAL_MAX_WINNER": "Vincita potenziale massima",
+  "POTENTIAL_MAX_WINNER_WITH_BONUS": "Vincita potenziale massima",
+  "POTENTIAL_MIN_WINNER": "Vincita potenziale minima",
   "PRINT": {
     "COUPON": {
       "CODE": "Codice",
@@ -131,6 +149,7 @@
     "PRINT": "Stampa"
   },
   "R": "R",
+  "REPRINT": "Ristampa",
   "SECTION_NOT_AVAILABLE": "Sezione non presente",
   "SMARTCODE": {
     "1VA": "V. ACCOPPIATA",
@@ -162,16 +181,18 @@
     "Keno": "Keno",
     "Roulette": "Roulette",
     "Soccer": "Calcio",
-    "VirtualHorse": "Corsa dei cavalli Virtuali",
     "TITLE": {
       "DOG": "DOG RACING",
-      "HORSE": "HORSE RACING",
-      "HORSE_VIRTUAL": "HORSE VIRTUAL RACING",
+      "FOOTBALL_ENG": "SOCCER EN",
       "FOOTBALL_ITA": "SOCCER ITA",
-      "FOOTBALL_ENG": "SOCCER EN"
-    }
+      "HORSE": "HORSE RACING",
+      "HORSE_VIRTUAL": "HORSE VIRTUAL RACING"
+    },
+    "VirtualHorse": "Corsa dei cavalli Virtuali"
   },
   "ST": "ST",
+  "STAKE": "Giocato",
+  "SUMMARY": "Sommario",
   "TITLE": {
     "1VA": "Vincente Accoppiata",
     "AB": "Accoppiata con Base e Coda",
@@ -196,6 +217,7 @@
     "WINNER": "Vincente"
   },
   "TOT": "TOT",
+  "TOTALS": "Totali",
   "USERNAME": "Username",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "WARNING": "AVVISO",
@@ -206,25 +228,5 @@
   "race": "Race",
   "single": "Singola",
   "tabCoupon": "Scheda scommesse",
-  "DELETE_COUPON": {
-    "TITLE": "Reset del Coupon",
-    "MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?"
-  },
-  "COMBINATIONS": "Combinazioni",
-  "EVENTS": "Eventi",
-  "TOTALS": "Totali",
-  "SUMMARY": "Sommario",
-  "BONUS": "Bonus",
-  "STAKE": "Giocato",
-  "REPRINT":"Ristampa",
-  "POTENTIAL_MAX_WINNER": "Vincita potenziale massima",
-  "POTENTIAL_MAX_WINNER_WITH_BONUS": "Vincita potenziale massima",
-  "POTENTIAL_MIN_WINNER": "Vincita potenziale minima",
-  "COUPON": {
-    "TYPE_PLAYED": "Tipo scommessa",
-    "STATUS": "Esito",
-    "WON": "Vinto",
-    "JACKPOT": "Jackpot"
-  }
-
+  "ODDS": "Quota"
 }

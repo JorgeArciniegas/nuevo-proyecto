@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StagedCoupon, StagedCouponStatus } from '@elys/elys-api';
+import { StagedCoupon, StagedCouponStatus, SummaryCoupon } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { timer } from 'rxjs';
 import { RouterService } from '../../../../../src/app/services/utility/router/router.service';
@@ -29,7 +29,9 @@ export class PrintCouponService {
       }
     });
   }
-
+  reprintCoupon(coupon: SummaryCoupon)  {
+    // this.couponPrint = coupon as StagedCoupon;
+  }
   /**
    * It Opens the new route on outlet with name=print and append to the Dom element the class "isPrinting"
    * Please do not change it because the style of prints is set on it
