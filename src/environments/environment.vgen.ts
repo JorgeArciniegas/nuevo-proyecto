@@ -10,11 +10,11 @@ export const environment: Environment = {
     {
       sportId: 8,
       codeProduct: 'DOG',
-      name: 'dogracing',
+      name: 'DogRacing',
       label: 'DOG',
       defaultAmount: [],
       order: 0,
-      productSelected: false,
+      productSelected: true,
       isPlayable: true,
       toolbarButton: {
         name: 'dogracing',
@@ -33,11 +33,11 @@ export const environment: Environment = {
     {
       sportId: 10,
       codeProduct: 'HORSE',
-      name: 'horseracing',
+      name: 'HorseRacing',
       label: 'HORSE',
       defaultAmount: [],
       order: 1,
-      productSelected: true,
+      productSelected: false,
       isPlayable: true,
       toolbarButton: {
         name: 'horseracing',
@@ -49,7 +49,7 @@ export const environment: Environment = {
     {
       sportId: 210,
       codeProduct: 'HORSE-VIRT',
-      name: 'virtualhorse',
+      name: 'VirtualHorse',
       label: 'HORSE_VIRTUAL',
       order: 2,
       productSelected: false,
@@ -96,8 +96,8 @@ export const environment: Environment = {
     }
   ],
   showRaceId: true,
-  couponMessageTrasmitted: 'Mandate transmitted via the Internet andaccepted on the',
+  couponMessageTrasmitted:
+    'Mandate transmitted via the Internet andaccepted on the',
   // tslint:disable-next-line:max-line-length
-  couponMessageLegal:
-    'Lorem ipsum dolor sit amet, consecteturadipisicing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Utenim ad minim veniam'
+  couponMessageLegal: 'Lorem ipsum dolor sit amet, consecteturadipisicing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Utenim ad minim veniam'
 };

@@ -30,7 +30,8 @@ export class RacingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.rowHeight = (this.productService.windowSize.columnHeight - 20 - 17) / 18;
+    this.rowHeight =
+      (this.productService.windowSize.columnHeight - 20 - 17) / 17;
   }
 
   placingLucky(lucky: Lucky): void {

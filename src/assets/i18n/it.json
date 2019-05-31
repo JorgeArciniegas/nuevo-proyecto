@@ -3,6 +3,7 @@
   "BASE": "B",
   "BET": "Scommessa",
   "BETSLIST": {
+    "BETSLIST": "Lista scommesse",
     "BTN_DATE_CLOSED": "Pagamento",
     "BTN_DATE_PLACED": "Piazzamento",
     "BTN_SEARCH": "Cerca",
@@ -31,7 +32,6 @@
     "LABEL_TYPECOUPON_FORM": "Tipo di scommessa",
     "LABEL_USERNAME": "Nome utente",
     "LABEL_WON_BETS": "Vincenti",
-    "LIST_TITLE": "LISTA SCOMMESSE",
     "PAGE": "Pagina",
     "PAGE_SEPARATOR": " di "
   },
@@ -105,6 +105,7 @@
   "ERROR_REQUIRED": "É obbligatorio",
   "ERROR_USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
   "GO_TO_HOME": "Vai alla home",
+  "LANGUAGE": "Lingua",
   "LUCKY": "Lucky",
   "NO_CONNECTION": "Nessuna connessione disponibile",
   "Operator": "Operator",
@@ -128,7 +129,9 @@
     "PRINT": "Stampa"
   },
   "R": "R",
+  "REPORTS": "Reports",
   "SECTION_NOT_AVAILABLE": "Sezione non presente",
+  "SETTINGS": "Impostazioni",
   "SMARTCODE": {
     "1VA": "V. ACCOPPIATA",
     "AB": "AB",

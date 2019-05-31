@@ -80,7 +80,12 @@ export class DialogData {
   breakpoint?: number;
   opened: boolean;
   betCoupon?: BetCouponExtended;
-  constructor(betOdds?: BetOdds, breakpoint?: number, betCoupon?: BetCouponExtended, title?: string) {
+  constructor(
+    betOdds?: BetOdds,
+    breakpoint?: number,
+    betCoupon?: BetCouponExtended,
+    title?: string
+  ) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;
     this.opened = false;
@@ -93,7 +98,6 @@ export enum DialogTypeCoupon {
   PAY
 }
 
-
 /**
  * when "checked" parameter is true Destroycoupon is enabled
  */
@@ -102,5 +106,4 @@ export interface CouponConfirmDelete {
   checked: boolean;
   isRacing?: boolean;
   racingNumber?: number;
-
 }
