@@ -1,0 +1,23 @@
+#language-setting {
+	.title {
+		font-size: 30;
+		font-weight: bold;
+		margin-left: 15;
+		text-transform: uppercase;
+		margin-bottom: 20;
+	}
+
+	.language-list {
+		max-width: 60%;
+	}
+
+	.display {
+		background-color: transparent;
+		padding: 40 60 40 60;
+		border-radius: 15;
+
+		.btn-filter {
+			height: 50;
+		}
+	}
+}
