@@ -21,7 +21,7 @@ export class AppComponent {
     private translateService: TranslateUtilityService
   ) {
     this.settings = appSettings;
-
+    // Set the application language passing the device one.
     this.translateService.initializeLanguages(device.language);
     this.connectionAviable = getConnectionType() !== connectionType.none;
   }

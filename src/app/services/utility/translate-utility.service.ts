@@ -1,32 +1,44 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AppSettings } from '../../app.settings';
+import { ElysApiService } from '@elys/elys-api';
+import { ElysCouponService } from '@elys/elys-coupon';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TranslateUtilityService {
-  constructor(private readonly appSettings: AppSettings, private translateService: TranslateService) {
+  private currentLanguage: string;
+
+  constructor(
+    private readonly appSettings: AppSettings,
+    private translateService: TranslateService,
+    private apiService: ElysApiService,
+    private couponService: ElysCouponService
+  ) {
     // this.initializeLanguages();
   }
 
   /**
-   * Method to inizialize the list of the application's languages and set the default language and the used one.
+   * Method to inizialize the list of the application's languages, set the default language and the used one.
    * The "TranslateService.DefaultLanguage" is the default language to use as a fallback
    * in case of a missing key in the dictionary of the language in use.
    */
   public initializeLanguages(browserLang: string): void {
     this.translateService.addLangs(this.appSettings.supportedLang);
     console.log('Languages supported: ', this.appSettings.supportedLang);
-    this.translateService.setDefaultLang(this.appSettings.supportedLang[0]);
-    console.log('Defualt language: ', this.translateService.getDefaultLang());
-
-    // Selection language's logic
+    // Set the default language only in the case the company is set in production mode
+    if (this.appSettings.production) {
+      this.translateService.setDefaultLang(this.appSettings.supportedLang[0]);
+      console.log('Default language: ', this.translateService.getDefaultLang());
+    }
     console.log('Browser language: ', browserLang);
-    this.translateService.use(
-      this.appSettings.supportedLang.findIndex(lang => lang === browserLang) !== -1 ? browserLang : this.appSettings.supportedLang[0]
-    );
-    console.log('Current language: ', this.translateService.currentLang);
+    // Selection language's logic.
+    // Use the language of the browser/device is supported or the default language who is the first element of the supportedLang array.
+    this.currentLanguage =
+      this.appSettings.supportedLang.findIndex(lang => lang === browserLang) !== -1 ? browserLang : this.appSettings.supportedLang[0];
+    this.translateService.use(this.currentLanguage);
+    console.log('Current language: ', this.currentLanguage);
   }
 
   /**
@@ -38,6 +50,10 @@ export class TranslateUtilityService {
     if (lang !== this.translateService.currentLang) {
       this.translateService.use(lang);
     }
+  }
+
+  public getCurrentLanguage(): string {
+    return this.translateService.currentLang;
   }
 
   public async getTranslatedStringAsync(value: string): Promise<string> {

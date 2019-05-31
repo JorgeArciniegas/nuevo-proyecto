@@ -20,6 +20,7 @@ export class AppComponent {
     public userService: UserService
   ) {
     this.settings = this.appSettings;
+    // Set the application language passing the browser one.
     this.translateUtilityService.initializeLanguages(this.translateService.getBrowserLang());
   }
 }
