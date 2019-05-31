@@ -1,0 +1,14 @@
+<StackLayout orientation="vertical" verticalAlignment="top">
+  <ng-container *ngFor="let group of data.groupings; let i = index;">
+    <GridLayout rows="3*, 2*, 2*, *" columns="*,10*,10*,*" verticalAlignment="top">
+      <Label row="0" colSpan="4" class="h4 text-center" text="{{'GROUPING' | translate }} {{ group.Grouping }}"></Label>
+      <StackLayout row="1"  col="0"></StackLayout>
+      <Label row="1"  col="1" text="{{group.Combinations }}" textWrap="true"></Label>
+      <Label row="2"  col="1" class="sub-title" text="{{ 'COMBINATIONS' | translate }}"></Label>
+      <Label row="1"  col="2" text="{{ group.Stake }}" textWrap="true"></Label>
+      <Label row="2"  col="2" class="sub-title" text="{{ 'STAKE' | translate }}"></Label>
+       <!-- DIVIDER -->
+      <StackLayout row="3" colSpan="4" class="border-bottom-overlay"></StackLayout>
+    </GridLayout>
+  </ng-container>
+</StackLayout>

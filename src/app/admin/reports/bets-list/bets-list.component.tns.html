@@ -59,11 +59,9 @@
   <!-- SPORT SELECTED -->
   <GridLayout row="2" col="0" class="display">
     <GridLayout rows="*,*,*,*" columns="*,*" class="display-content">
-      <GridLayout row="{{(i / 2) | floor}}" col="{{i % 2}}"
-        *ngFor="let type of betsListService.availableSport; let i = index;" class="button btn-default btn-filter"
-        [ngClass]="{'btn-filter-success': betsListService.sportId === type.SportId}">
-        <Button text="{{'SPORT.'+ type.SportName | translate}}" class="button-internal"
-          (tap)="changeValue('sportId', type.SportId)"></Button>
+      <GridLayout row="{{(i / 2) | floor}}" col="{{i % 2}}" *ngFor="let type of betsListService.availableSport; let i = index;" class="button btn-default btn-filter"
+        [ngClass]="{'btn-filter-success': betsListService.sportIdSelected === type.SportId}">
+        <Button text="{{'SPORT.'+ type.SportName | translate}}" class="button-internal" (tap)="changeValue('sportId', type.SportId)"></Button>
       </GridLayout>
     </GridLayout>
   </GridLayout>
@@ -105,8 +103,7 @@
   <!-- ROW 3 -->
   <GridLayout row="3" col="0" colSpan="3" rows="*,2*,*" columns="*,*,*" class="display-content">
     <GridLayout row="1" col="1" class="button btn-default btn-grey-gradient">
-      <Button text="{{'BETSLIST.BTN_SEARCH' | translate}}" class="button-internal"
-        (tap)="betsListService.getList()"></Button>
+      <Button text="{{'BETSLIST.BTN_SEARCH' | translate}}" class="button-internal" (tap)="betsListService.getList(true)"></Button>
     </GridLayout>
   </GridLayout>
 </GridLayout>

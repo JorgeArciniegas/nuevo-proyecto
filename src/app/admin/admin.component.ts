@@ -7,14 +7,12 @@ import { AppSettings } from '../app.settings';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent  {
   public settings: AppSettings;
   constructor(
     public readonly appSettings: AppSettings,
     public userService: UserService
   ) {this.settings = appSettings; }
 
-  ngOnInit() {
-  }
 
 }
