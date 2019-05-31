@@ -8,7 +8,7 @@ import { AppSettings } from '../app.settings';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent  {
   public settings: AppSettings;
   constructor(
     private router: RouterExtensions,
@@ -17,8 +17,6 @@ export class AdminComponent implements OnInit {
   ) {
     this.settings = appSettings;
   }
-
-  ngOnInit() {}
 
   goToBetList(): void {
     this.router.navigateByUrl('/admin/reports/betsList');

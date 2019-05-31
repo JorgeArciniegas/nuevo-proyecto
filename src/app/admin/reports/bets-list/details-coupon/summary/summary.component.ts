@@ -7,7 +7,7 @@ import { AppSettings } from '../../../../../../../src/app/app.settings';
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss']
 })
-export class SummaryComponent implements OnInit {
+export class SummaryComponent {
 
   @Input() data: SummaryCoupon;
 
@@ -16,8 +16,4 @@ export class SummaryComponent implements OnInit {
   constructor(public settings: AppSettings) {
 
   }
-
-  ngOnInit() {
-  }
-
 }

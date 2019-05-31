@@ -6,13 +6,11 @@ import { GroupingsRows } from '../detail-coupon.model';
   templateUrl: './combinations.component.html',
   styleUrls: ['./combinations.component.scss']
 })
-export class CombinationsComponent implements OnInit {
+export class CombinationsComponent {
 
   @Input() data: GroupingsRows;
 
   constructor() { }
 
-  ngOnInit() {
-  }
 
 }

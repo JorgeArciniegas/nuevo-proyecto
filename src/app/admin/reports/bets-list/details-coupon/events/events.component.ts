@@ -8,15 +8,11 @@ import { OddsEventRows } from '../detail-coupon.model';
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.scss']
 })
-export class EventsComponent implements OnInit {
+export class EventsComponent {
 
 
   @Input() data: OddsEventRows;
   couponStatus: typeof CouponStatus = CouponStatus;
 
   constructor(public settings: AppSettings) { }
-
-  ngOnInit() {
-  }
-
 }

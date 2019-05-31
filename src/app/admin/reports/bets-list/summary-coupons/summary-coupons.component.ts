@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppSettings } from '../../../../app.settings';
+import { CouponStatusInternal, CouponTypeInternal } from '../bets-list.model';
 import { BetsListService } from '../bets-list.service';
-import { CouponTypeInternal, CouponStatusInternal } from '../bets-list.model';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-summary-coupons',
   templateUrl: './summary-coupons.component.html',
   styleUrls: ['./summary-coupons.component.scss']
 })
-export class SummaryCouponsComponent implements OnInit {
+export class SummaryCouponsComponent {
 
   couponType: typeof CouponTypeInternal = CouponTypeInternal;
   couponStatus: typeof CouponStatusInternal = CouponStatusInternal;
@@ -17,10 +16,5 @@ export class SummaryCouponsComponent implements OnInit {
   constructor(public readonly settings: AppSettings, public betsListService: BetsListService) {
 
   }
-
-  ngOnInit() {
-
-  }
-
 
 }
