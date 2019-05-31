@@ -10,11 +10,7 @@ import { AppSettings } from '../app.settings';
 })
 export class AdminComponent implements OnInit {
   public settings: AppSettings;
-  constructor(
-    private router: RouterExtensions,
-    public userService: UserService,
-    public readonly appSettings: AppSettings
-  ) {
+  constructor(private router: RouterExtensions, public userService: UserService, public readonly appSettings: AppSettings) {
     this.settings = appSettings;
   }
 
@@ -22,5 +18,9 @@ export class AdminComponent implements OnInit {
 
   goToBetList(): void {
     this.router.navigateByUrl('/admin/reports/betsList');
+  }
+
+  goToLanguageSettings(): void {
+    this.router.navigateByUrl('/admin/settings/languages');
   }
 }

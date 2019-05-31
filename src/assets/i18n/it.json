@@ -35,7 +35,7 @@
     "PAGE": "Pagina",
     "PAGE_SEPARATOR": " di "
   },
-  "Balance": "Balance",
+  "Balance": "Saldo",
   "C": "C",
   "CANCEL": "Annulla",
   "CANCELED_ON": "Annullata il",
@@ -100,6 +100,10 @@
     "SingleBet": "Singola",
     "Unknown": "Sconosciuta"
   },
+  "DELETE_COUPON": {
+    "MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?",
+    "TITLE": "Reset del Coupon"
+  },
   "ERROR": "Errore",
   "ERROR_PASSWORD_TOO_SHORT": "Questa password è troppo corta, minimo 6 caratteri",
   "ERROR_REQUIRED": "É obbligatorio",
@@ -108,7 +112,7 @@
   "LANGUAGE": "Lingua",
   "LUCKY": "Lucky",
   "NO_CONNECTION": "Nessuna connessione disponibile",
-  "Operator": "Operator",
+  "Operator": "Operatore",
   "PASSWORD": "Password",
   "PAY": "PAYMENT",
   "PAYED_AMOUNT": "Importo pagato",
@@ -162,14 +166,14 @@
     "Keno": "Keno",
     "Roulette": "Roulette",
     "Soccer": "Calcio",
-    "VirtualHorse": "Corsa dei cavalli Virtuali",
     "TITLE": {
       "DOG": "DOG RACING",
-      "HORSE": "HORSE RACING",
-      "HORSE_VIRTUAL": "HORSE VIRTUAL RACING",
+      "FOOTBALL_ENG": "SOCCER EN",
       "FOOTBALL_ITA": "SOCCER ITA",
-      "FOOTBALL_ENG": "SOCCER EN"
-    }
+      "HORSE": "HORSE RACING",
+      "HORSE_VIRTUAL": "HORSE VIRTUAL RACING"
+    },
+    "VirtualHorse": "Corsa dei cavalli Virtuali"
   },
   "ST": "ST",
   "TITLE": {
@@ -206,9 +210,5 @@
   "potentialMaxWinner": "Vincita potenziale massima",
   "race": "Race",
   "single": "Singola",
-  "tabCoupon": "Scheda scommesse",
-  "DELETE_COUPON": {
-    "TITLE": "Reset del Coupon",
-    "MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?"
-  }
+  "tabCoupon": "Scheda scommesse"
 }

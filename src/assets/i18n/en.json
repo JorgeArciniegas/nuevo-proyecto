@@ -100,11 +100,16 @@
     "SingleBet": "Single",
     "Unknown": "Unknown"
   },
+  "DELETE_COUPON": {
+    "MESSAGE": "This operation will cancel the current coupon. Do you want to continue?",
+    "TITLE": "Coupon reset"
+  },
   "ERROR": "Error",
   "ERROR_PASSWORD_TOO_SHORT": "The password is too short (minimum 6 digits)",
   "ERROR_REQUIRED": "is compulsory",
   "ERROR_USERNAME_TOO_SHORT": "The username is too short (minimum 2 digits)",
   "GO_TO_HOME": "Go to home",
+  "LANGUAGE": "Language",
   "LUCKY": "Lucky",
   "NO_CONNECTION": "No connection available",
   "Operator": "Operator",
@@ -159,14 +164,14 @@
     "Keno": "Keno",
     "Roulette": "Roulette",
     "Soccer": "Soccer",
-    "VirtualHorse": "Horse virtual racing",
     "TITLE": {
       "DOG": "DOG RACING",
-      "HORSE": "HORSE RACING",
-      "HORSE_VIRTUAL": "HORSE VIRTUAL RACING",
+      "FOOTBALL_ENG": "SOCCER EN",
       "FOOTBALL_ITA": "SOCCER ITA",
-      "FOOTBALL_ENG": "SOCCER EN"
-    }
+      "HORSE": "HORSE RACING",
+      "HORSE_VIRTUAL": "HORSE VIRTUAL RACING"
+    },
+    "VirtualHorse": "Horse virtual racing"
   },
   "ST": "ST",
   "TITLE": {
@@ -203,9 +208,5 @@
   "potentialMaxWinner": "Max. potential winnings",
   "race": "Race",
   "single": "Single bet",
-  "tabCoupon": "Bet card",
-  "DELETE_COUPON": {
-    "TITLE": "Coupon reset",
-    "MESSAGE": "This operation will cancel the current coupon. Do you want to continue?"
-  }
+  "tabCoupon": "Bet card"
 }

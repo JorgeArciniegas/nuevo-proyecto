@@ -24,8 +24,8 @@
         <Label verticalAlignment="center" class="text-left txt-title" col="1"
           text="{{'SETTINGS' | translate }}"></Label>
       </StackLayout>
-      <StackLayout width="100%" class="button btn-success" orientation="horizontal" horizontalAlignment="center" row="1"
-        col="0">
+      <StackLayout (tap)="goToLanguageSettings()" width="100%" class="button btn-success" orientation="horizontal"
+        horizontalAlignment="center" row="1" col="0">
         <Image stretch="aspectFit" width="30" col="0"
           src="~/app/themes/skins/{{settings.theme}}/icon/baseline-language-24px.png" verticalAlignment="center"
           horizontalAlignment="right"></Image>

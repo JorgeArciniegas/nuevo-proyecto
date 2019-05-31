@@ -1,0 +1,16 @@
+#language-setting {
+	margin: 15px;
+
+	.title {
+		text-transform: uppercase;
+	}
+	.display {
+		background-color: transparent;
+		padding: 40px 60px 40px 60px;
+		border-radius: 15px;
+
+		.btn-filter {
+			height: 50px;
+		}
+	}
+}
