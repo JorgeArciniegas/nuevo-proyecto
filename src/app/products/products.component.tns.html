@@ -45,8 +45,8 @@
       </StackLayout>
       <!-- VINCITA POTENZIALE MASSIMA -->
       <GridLayout row="4" rows="*,3*" columns="*" class="card display-amount">
-        <Label row="0" text="{{'amountPlace' | translate}}" class="title"
-          [ngClass]="{'small': service.windowSize.small}" textTransform="uppercase"></Label>
+        <Label row="0" text="{{'AMOUNT_BET' | translate}}" class="title" [ngClass]="{'small': service.windowSize.small}"
+          textTransform="uppercase"></Label>
         <Label row="1" [text]="couponService.stakeDisplay.TotalStake |number: '1.2-2'" class="amount"
           [ngClass]="{'small': service.windowSize.small}"></Label>
       </GridLayout>

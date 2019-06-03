@@ -1,7 +1,7 @@
 <div fxFill fxLayout="row" class="race-control" fxLayoutAlign="start center">
   <div fxFlex="28"></div>
   <div fxFlex="28">
-    <span class="game-name">{{ 'SPORT.TITLE.'+ productService.product.label | translate }}</span>
+    <span class="game-name txt-uppercase">{{ 'ENUM.PRODUCT.LABEL.'+ productService.product.label | translate }}</span>
   </div>
   <div fxFlex="42" *ngIf="racingService.raceDetails.races[racingService.raceDetails.currentRace] != null"
     fxLayout="column" fxFlexAlign="stretch" fxLayoutAlign="space-around end">

@@ -15,11 +15,11 @@
 
 
 
-      {{'Balance' | translate }}: {{userService.userDetail?.Currency}}
+      {{'BALANCE' | translate }}: {{userService.userDetail?.Currency}}
       {{userService.userDetail?.PlayableBalance |number: '1.2-2'}}
     </div>
     <div fxLayout="row">
-      {{'Operator' | translate }}:<span class="operator">{{userService.userDetail?.UserName}}</span>
+      {{'OPERATOR' | translate }}:<span class="operator">{{userService.userDetail?.UserName}}</span>
     </div>
   </div>
   <div fxLayout="row" class="clock elevation-z5" fxFlexAlign="start" *ngIf="notifyIcon">

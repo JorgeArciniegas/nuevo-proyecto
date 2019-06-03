@@ -26,21 +26,10 @@
         <mat-grid-tile rowspan="1">
           <div fxFlexFill class="padding-horizontal-6">
             <div class="display-amount radius-5" fxLayout="column" fxLayoutAlign="right" fxLayoutAlignGap="10px">
-              <!-- <div fxFlex fxLayoutAlign="center right">
-                  <span>{{'amountPlace' | translate}}</span>
-              </div>
-              <div fxFlex>
-                <ng-container *ngIf="couponService.stakeDisplay.TotalStake">
-                  <input type="text" name="amount"  [ngModel]="couponService.stakeDisplay.TotalStake | number: '1.2-2'" readonly />
-                </ng-container>
-                <ng-container *ngIf="!couponService.stakeDisplay.TotalStake">
-                    <span>0.00</span>
-                </ng-container>
-
-              </div> -->
               <label>
-                <span>{{'amountPlace' | translate}}</span>
-                <input type="text" name="amount" [ngModel]="couponService.stakeDisplay.TotalStake |number: '1.2-2'" readonly />
+                <span>{{'AMOUNT_BET' | translate}}</span>
+                <input type="text" name="amount" [ngModel]="couponService.stakeDisplay.TotalStake |number: '1.2-2'"
+                  readonly />
               </label>
             </div>
           </div>
@@ -48,8 +37,10 @@
         <!-- Area polifunzionale [Fissa]  -->
         <mat-grid-tile rowspan="1" class="polifuctional-area">
           <div fxFlexFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
-            <button class="btn-default btn-success radius-10 padding-10" (click)="payCancelCoupon('PAY')">{{'PAY' | translate}}</button>
-            <button class="btn-default btn-warning radius-10 padding-10" (click)="payCancelCoupon('CANCEL')">{{'CANCEL' | translate}}</button>
+            <button class="btn-default btn-success radius-10 padding-10 txt-uppercase"
+              (click)="payCancelCoupon('PAY')">{{'PAY' | translate}}</button>
+            <button class="btn-default btn-warning radius-10 padding-10 txt-uppercase"
+              (click)="payCancelCoupon('CANCEL')">{{'CANCEL' | translate}}</button>
           </div>
         </mat-grid-tile>
 
@@ -61,7 +52,11 @@
   </div>
 </div>
 
-<div *ngIf="service.timeBlocked" id="overlayArea2" [style.top.px]="service.windowSize.height - service.windowSize.columnHeight + 4"
-  [style.left.%]="59" [style.width]="'calc(21% - 2px)'" [style.height.px]="service.windowSize.columnHeight - 10" class="overlay radius-5"></div>
-<div *ngIf="service.timeBlocked" id="overlayArea3" [style.top.px]="service.windowSize.height - service.windowSize.columnHeight + 4 "
-  [style.left.%]="80" [style.width]="'calc(20% - 2px)'" [style.height.px]="service.windowSize.columnHeight - 10" class="overlay radius-5"></div>
+<div *ngIf="service.timeBlocked" id="overlayArea2"
+  [style.top.px]="service.windowSize.height - service.windowSize.columnHeight + 4" [style.left.%]="59"
+  [style.width]="'calc(21% - 2px)'" [style.height.px]="service.windowSize.columnHeight - 10" class="overlay radius-5">
+</div>
+<div *ngIf="service.timeBlocked" id="overlayArea3"
+  [style.top.px]="service.windowSize.height - service.windowSize.columnHeight + 4 " [style.left.%]="80"
+  [style.width]="'calc(20% - 2px)'" [style.height.px]="service.windowSize.columnHeight - 10" class="overlay radius-5">
+</div>

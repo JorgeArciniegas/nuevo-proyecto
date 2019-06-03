@@ -1,7 +1,7 @@
 <StackLayout id="printing" horizontalAlignment="center" verticalAlignment="top" orientation="horizontal">
 
   <FlexboxLayout flexDirection="column" justifyContent="space-between">
-    <Button (tap)="print()" text="{{ 'PRINT.PRINT' | translate }}" class="btn btn-primary"></Button>
+    <Button (tap)="print()" text="{{ 'PRINT' | translate }}" class="btn btn-primary"></Button>
     <Button (tap)="printCouponService.resetPrint()" class="btn btn-accent" text="{{ 'CANCEL' | translate }}"></Button>
   </FlexboxLayout>
   <ScrollView>

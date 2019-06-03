@@ -1,10 +1,12 @@
 <GridLayout #gridbtn rows="*,*,*,*,*,*" columns="*,*,*,*" class="grid-btn-calc">
-  <GridLayout row="0" col="{{i}}" height="{{amountIcon.height - 1}}" width="{{amountIcon.width - 1}}" shadow="3" cornerRadius="{{amountIcon.height/2}}"
-    class="card" *ngFor="let amount of productService.product.defaultAmount; let i = index">
-    <GridLayout rows="*" columns="*" class="button btn-amount-{{i+1}}" height="{{amountIcon.height}}" width="{{amountIcon.width}}"
-      borderRadius="{{amountIcon.height/2}}">
+  <GridLayout row="0" col="{{i}}" height="{{amountIcon.height - 1}}" width="{{amountIcon.width - 1}}" shadow="3"
+    cornerRadius="{{amountIcon.height/2}}" class="card"
+    *ngFor="let amount of productService.product.defaultAmount; let i = index">
+    <GridLayout rows="*" columns="*" class="button btn-amount-{{i+1}}" height="{{amountIcon.height}}"
+      width="{{amountIcon.width}}" borderRadius="{{amountIcon.height/2}}">
       <GridLayout *ngIf="productService.product.defaultAmount">
-        <Button text="{{ amount | digitslimit }}" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnDefaultAmountsPreset(amount)"></Button>
+        <Button text="{{ amount | digitslimit }}" class="button-internal" [isEnabled]="!timeBlocked"
+          (tap)="btnDefaultAmountsPreset(amount)"></Button>
       </GridLayout>
       <GridLayout *ngIf="!productService.product.defaultAmount">
         <Button class="button-internal" [isEnabled]="!timeBlocked"></Button>
@@ -79,18 +81,21 @@
     </GridLayout>
   </GridLayout>
   <GridLayout row="4" col="3" shadow="3" cornerRadius="7" class="card">
-    <GridLayout rows="*" columns="*" class="button btn-warning" (doubleTap)="clearAll()" (tap)='polyfuncionalAmountReset()'>
+    <GridLayout rows="*" columns="*" class="button btn-warning" (doubleTap)="clearAll()"
+      (tap)='polyfuncionalAmountReset()'>
       <Button text="{{ 'C' | translate }}" class="button-internal" [isEnabled]="!timeBlocked"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="5" col="0" colSpan="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
-      <Button text="{{ 'TOT' | translate }}" class="button-internal" textTransform="uppercase" (tap)="btnTotColSet(typeBetSlipColTot.TOT)"></Button>
+      <Button text="{{ 'BTNCALC.TOT' | translate }}" class="button-internal" textTransform="uppercase"
+        (tap)="btnTotColSet(typeBetSlipColTot.TOT)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="5" col="2" colSpan="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
-      <Button text="{{ 'COL' | translate }}" class="button-internal" textTransform="uppercase" (tap)="btnTotColSet(typeBetSlipColTot.COL)"></Button>
+      <Button text="{{ 'BTNCALC.COL' | translate }}" class="button-internal" textTransform="uppercase"
+        (tap)="btnTotColSet(typeBetSlipColTot.COL)"></Button>
     </GridLayout>
   </GridLayout>
 </GridLayout>

@@ -31,28 +31,28 @@
         columns="5,30,10,auto">
         <StackLayout col="1" class="error-icon"></StackLayout>
         <StackLayout col="3" verticalAlignment="center">
-          <Label text="{{ 'USERNAME' | translate }} {{ 'ERROR_REQUIRED' | translate | lowercase  }}"></Label>
+          <Label text="{{ 'USERNAME' | translate }} {{ 'IS_REQUIRED' | translate | lowercase  }}"></Label>
         </StackLayout>
       </GridLayout>
       <GridLayout *ngIf="usernameLengthInvalid && username.touched && !username.hasError('required')" rows="auto"
         columns="5,30,10,auto">
         <StackLayout col="1" class="error-icon"></StackLayout>
         <StackLayout col="3" verticalAlignment="center">
-          <Label text="{{ 'ERROR_USERNAME_TOO_SHORT' | translate }}"></Label>
+          <Label text="{{ 'USERNAME_TOO_SHORT' | translate }}"></Label>
         </StackLayout>
       </GridLayout>
       <GridLayout *ngIf="!password.valid && password.touched && password.hasError('required')" rows="auto"
         columns="5,30,10,auto">
         <StackLayout col="1" class="error-icon"></StackLayout>
         <StackLayout col="3" verticalAlignment="center">
-          <Label text="{{ 'PASSWORD' | translate }} {{ 'ERROR_REQUIRED' | translate | lowercase  }}"></Label>
+          <Label text="{{ 'PASSWORD' | translate }} {{ 'IS_REQUIRED' | translate | lowercase  }}"></Label>
         </StackLayout>
       </GridLayout>
       <GridLayout *ngIf="passwordLengthInvalid && password.touched && !password.hasError('required')" rows="auto"
         columns="5,30,10,auto">
         <StackLayout col="1" class="error-icon"></StackLayout>
         <StackLayout col="3" verticalAlignment="center">
-          <Label text="{{ 'ERROR_PASSWORD_TOO_SHORT' | translate }}"></Label>
+          <Label text="{{ 'PASSWORD_TOO_SHORT' | translate }}"></Label>
         </StackLayout>
       </GridLayout>
       <GridLayout *ngIf="errorMessage" rows="auto" columns="5,30,10,auto">

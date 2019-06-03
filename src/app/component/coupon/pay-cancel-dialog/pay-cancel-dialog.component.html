@@ -10,7 +10,7 @@
         <div fxLayoutAlign="center center" fxFlex="40" class="pay-cancel-input input-container input radius-2">
           <i class="icon-baseline-shopping_cart-24px icon"></i>
           <input matInput class="input-field" formControlName="couponCode"
-            pattern="^[a-zA-Z0-9]+\-[a-zA-Z0-9]+\-[a-zA-Z0-9]+$" placeholder="{{ 'Coupon Code' | translate}}"
+            pattern="^[a-zA-Z0-9]+\-[a-zA-Z0-9]+\-[a-zA-Z0-9]+$" placeholder="{{ 'COUPON_CODE' | translate}}"
             autocomplete="on" />
         </div>
       </mat-grid-tile>
@@ -20,9 +20,9 @@
     <mat-grid-list cols="1" rowHeight="50px">
       <mat-grid-tile rowspan="1" class="polifuctional-area">
         <div fxFlexFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="80px">
-          <button fxFlex="24" class="btn-default btn-success radius-10 padding-10"
+          <button fxFlex="24" class="btn-default btn-success radius-10 padding-10 txt-uppercase"
             (click)="close()">{{'CLOSE' | translate | uppercase}}</button>
-          <button fxFlex="24" class="btn-default btn-warning radius-10 padding-10" type="submit"
+          <button fxFlex="24" class="btn-default btn-warning radius-10 padding-10 txt-uppercase" type="submit"
             [disabled]="form.invalid">{{'CONFIRM' | translate}}</button>
         </div>
       </mat-grid-tile>
