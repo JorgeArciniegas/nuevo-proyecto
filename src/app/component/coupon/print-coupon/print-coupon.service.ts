@@ -55,4 +55,6 @@ export class PrintCouponService {
         this.router.getRouter().navigate([{ outlets: { print: null } }]);
       });
   }
+
+  resetPrint(): void {}
 }
