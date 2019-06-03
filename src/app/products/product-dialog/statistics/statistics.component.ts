@@ -22,6 +22,7 @@ export class StatisticsComponent implements OnInit {
     /**
      * Defined coefficent percentage for fitness status
      */
+    this.data.statistics.sort( (a, b) => a.ito <= b.ito ? -1 : 1 );
     this.data.statistics.map( item => {
       this.maxDataStatistics += item.ff;
     });

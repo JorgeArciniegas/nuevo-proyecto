@@ -24,6 +24,7 @@ export class StatisticsComponent implements OnInit {
     /**
      * Defined coefficent percentage for fitness status
      */
+    this.data.statistics.sort( (a, b) => a.ito <= b.ito ? -1 : 1 );
     this.data.statistics.map( item => {
       this.rows += '3*,'; // Indicate the rows text value append to GridLayout
       this.maxDataStatistics += item.ff;
