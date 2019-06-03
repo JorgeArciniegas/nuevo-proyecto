@@ -1,9 +1,11 @@
 <StackLayout id="language-setting" class="p-20">
   <Label class="title" text="{{ 'LANGUAGE' | translate}}"></Label>
-  <FlexboxLayout FlexWrap="wrap" class="language-list display p-20">
-    <Button class="btn-filter btn-default radius-5" text="{{ languageEnum[language] }}"
-      *ngFor="let language of languages"
-      [ngClass]="{'btn-filter-success': translateService.currentLanguage === language}"
-      (tap)="changeLanguage(language)"></Button>
-  </FlexboxLayout>
+  <GridLayout rows="auto,*" columns="3*,2*">
+    <GridLayout row="0" col="0" [rows]="rowsDefinition" columns="*,*" class="language-list display p-20">
+      <Button class="btn-filter btn-default radius-5" text="{{ languageEnum[language] }}"
+        *ngFor="let language of languages; let i = index;" row="{{(i / 2) | floor}}" col="{{i % 2}}"
+        [ngClass]="{'btn-filter-success': translateService.currentLanguage === language}"
+        (tap)="changeLanguage(language)"></Button>
+    </GridLayout>
+  </GridLayout>
 </StackLayout>

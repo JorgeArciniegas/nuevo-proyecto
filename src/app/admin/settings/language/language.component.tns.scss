@@ -7,17 +7,18 @@
 		margin-bottom: 20;
 	}
 
-	.language-list {
-		max-width: 60%;
-	}
-
 	.display {
 		background-color: transparent;
-		padding: 40 60 40 60;
+		padding: 35 30 35 30;
 		border-radius: 15;
+	}
 
+	.language-list {
 		.btn-filter {
-			height: 50;
+			font-size: 20;
+			height: 60;
+			margin: 5 30;
+			text-transform: capitalize;
 		}
 	}
 }
