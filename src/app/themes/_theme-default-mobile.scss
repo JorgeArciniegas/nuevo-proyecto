@@ -330,6 +330,9 @@
 			@extend %btn-warning-mobile;
 		}
 
+    .btn-danger{
+      @extend %btn-danger;
+    }
 		.btn-success {
 			@extend %btn-success-gradient-mobile;
 		}
@@ -488,6 +491,17 @@
 
   .border-bottom-overlay {
     @extend %border-bottom-overlay-mobile;
+  }
+
+
+  .statistic-data {
+    .fitness-container{
+      background: #fff;
+      .fitness-content{
+        @extend %bar-fitness-pecentage;
+      }
+    }
+
   }
 }
 

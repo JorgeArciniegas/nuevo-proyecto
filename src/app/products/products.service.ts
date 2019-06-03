@@ -83,6 +83,7 @@ export class ProductsService extends ProductsServiceExtra {
       dialogData.betCoupon = data.betCoupon;
       dialogData.breakpoint = this.breakpoint;
       dialogData.title = data.title;
+      dialogData.statistics = data.statistics;
       this.dialog.openDialog(dialogData);
     });
 

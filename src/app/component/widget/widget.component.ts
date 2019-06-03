@@ -1,6 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppSettings } from '../../app.settings';
 import { IconSize } from '../model/iconSize.model';
+import { Products } from '../../../../src/environments/environment.models';
+import { ProductsService } from '../../../../src/app/products/products.service';
+import { BetDataDialog } from '../../../../src/app/products/products.model';
+import { RacingService } from '../../../../src/app/products/racing/racing.service';
 
 @Component({
   selector: 'app-widget',
@@ -15,13 +19,31 @@ export class WidgetComponent implements OnInit {
   @Input()
   public timeBlocked?: boolean = false;
 
+  @Input()
+  public product: Products;
+
   public widgetIcon: IconSize;
 
-  constructor(public readonly appSettings: AppSettings) {
+  constructor(public readonly appSettings: AppSettings,
+    private productService: ProductsService,
+    private racingService: RacingService) {
     this.settings = appSettings;
   }
 
   ngOnInit() {
     this.widgetIcon = new IconSize(this.rowHeight * 0.7, this.rowHeight * 0.7);
+  }
+
+  /**
+   * @argument This method invoke the modal. Before to open it,
+   * create the object and append the values loads from the current selected race.
+   * @param typeObject
+   */
+  openRouting(typeObject: string): void {
+    const data: BetDataDialog = {
+      title: typeObject.toUpperCase(),
+      statistics: (typeObject === 'statistic') ? this.racingService.getCurrentRace().tm : null
+    };
+    this.productService.openProductDialog(data);
   }
 }

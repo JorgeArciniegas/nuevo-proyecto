@@ -217,7 +217,8 @@
     "TR": "Trio in ordine con ritorno",
     "UNDER": "Under",
     "VT": "Vincente trio",
-    "WINNER": "Vincente"
+    "WINNER": "Vincente",
+    "STATISTIC":"Statistiche"
   },
   "TOT": "TOT",
   "TOTALS": "Totali",
@@ -231,5 +232,7 @@
   "race": "Race",
   "single": "Singola",
   "tabCoupon": "Scheda scommesse",
-  "ODDS": "Quota"
+  "ODDS": "Quota",
+  "FITNESS": "Forma fisica",
+  "LAST-FIVE":"Ultime 5"
 }

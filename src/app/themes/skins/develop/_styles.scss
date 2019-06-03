@@ -297,6 +297,10 @@ $gradient-dark2: #000000;
 	color: $color-text-primary;
 }
 
+%btn-danger {
+	background:$gradient-red2;
+	color: $color-text-primary;
+}
 %btn-warning-mobile {
 	background: linear-gradient(to bottom, $gradient-red1 0%, $gradient-red2 100%);
 	color: $color-text-primary;
@@ -620,3 +624,7 @@ $gradient-dark2: #000000;
 }
 
 
+// STATISTIC
+%bar-fitness-pecentage {
+  background: $border-success;
+}
