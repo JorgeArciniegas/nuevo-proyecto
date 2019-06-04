@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ElysApiService, TokenDataSuccess, AccountDetails, CurrencyCodeRequest, CurrencyCodeResponse } from '@elys/elys-api';
+import {
+  ElysApiService,
+  TokenDataSuccess,
+  AccountDetails,
+  CurrencyCodeRequest,
+  CurrencyCodeResponse,
+  UserWalletType
+} from '@elys/elys-api';
 import { RouterService } from './utility/router/router.service';
 import { StorageService } from './utility/storage/storage.service';
 import { TranslateUtilityService } from './utility/translate-utility.service';
 import { AppSettings } from '../app.settings';
+import { interval } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +30,14 @@ export class UserService {
   ) {
     // Check if the user is logged
     if (this.isUserLogged) {
+      interval(300000).subscribe(() => {
+        if (this.isUserLogged) {
+          this.loadUserData(this.storageService.getData('tokenData'));
+        }
+      });
       this.loadUserData(this.storageService.getData('tokenData'));
-
     }
   }
-
   /**
    * Method to login and store auth token.
    * @param username username
@@ -34,7 +45,9 @@ export class UserService {
    */
   async login(username: string, password: string): Promise<string | undefined> {
     try {
-      const response: TokenDataSuccess = await this.api.account.postAccessToken({ username, password });
+      const response: TokenDataSuccess = await this.api.account.postAccessToken(
+        { username, password }
+      );
       const userDataResponse = await this.loadUserData(response.access_token);
 
       // Check that we have gotten the user data.
@@ -59,7 +72,13 @@ export class UserService {
     this.storageService.removeItems('tokenData', 'UserData');
     this.router.getRouter().navigateByUrl('/login');
   }
-
+  /**
+   * Decrease the played stake from Playable amount
+   * @param stake :number
+   */
+  decreasePlayableBalance(stake: number): void {
+    this.userDetail.PlayableBalance -= stake;
+  }
   // Method to retrieve the user data
   async loadUserData(token: string): Promise<string | undefined> {
     try {
@@ -71,7 +90,9 @@ export class UserService {
       } else {
         this.storageService.removeItems('tokenData');
         this.userDetail = undefined;
-        return this.translateService.getTranslatedString('USER_NOT_ENABLE_TO_THE_OPERATION');
+        return this.translateService.getTranslatedString(
+          'USER_NOT_ENABLE_TO_THE_OPERATION'
+        );
       }
       this.checkAvailableSportAndSetPresetsAmount();
     } catch (err) {
@@ -121,27 +142,27 @@ export class UserService {
    * If the game is present on the 'environment' but it doesn't match the 'availableSport',
    * it isn't playable and it is only shown in the reports list.
    */
-  checkAvailableSportAndSetPresetsAmount(): void {
-
+  async checkAvailableSportAndSetPresetsAmount(): Promise<void> {
     const currencyRequest: CurrencyCodeRequest = {
       currencyCode: this.storageService.getData('UserData').Currency
     };
 
     let currencyCodeResponse: number[];
     // Set  'defaultAmount'  the "presets value"
-    this.api.coupon.getCouponRelatedCurrency(currencyRequest).then( preset => {
-      currencyCodeResponse = [
-        preset.CouponPreset.CouponPresetValues.PresetOne,
-        preset.CouponPreset.CouponPresetValues.PresetTwo,
-        preset.CouponPreset.CouponPresetValues.PresetThree,
-        preset.CouponPreset.CouponPresetValues.PresetFour
-      ];
-    });
+    await this.api.coupon
+      .getCouponRelatedCurrency(currencyRequest)
+      .then(preset => {
+        currencyCodeResponse = [
+          preset.CouponPreset.CouponPresetValues.PresetOne,
+          preset.CouponPreset.CouponPresetValues.PresetTwo,
+          preset.CouponPreset.CouponPresetValues.PresetThree,
+          preset.CouponPreset.CouponPresetValues.PresetFour
+        ];
+      });
     // match products result from api to products on the system
-    this.api.virtual.getAvailablevirtualsports().then( items => {
-
-      this.appSetting.products.map( prod => {
-        items.filter( i => {
+    this.api.virtual.getAvailablevirtualsports().then(items => {
+      this.appSetting.products.map(prod => {
+        items.filter(i => {
           if (i.SportId === prod.sportId) {
             prod.defaultAmount = currencyCodeResponse;
           }
@@ -149,6 +170,6 @@ export class UserService {
       });
     });
     // Order the result from minor to major
-    this.appSetting.products.sort( (a, b) => a.order <= b.order ? -1 : 1 );
+    this.appSetting.products.sort((a, b) => (a.order <= b.order ? -1 : 1));
   }
 }
