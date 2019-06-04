@@ -2,8 +2,8 @@
   <GridLayout rows="*" columns="*" class="dialog">
     <GridLayout rows="4*,16*,3*" columns="*" class="odds-grid">
       <GridLayout row="0" rows="*" columns="6*,*">
-        <Label col="0" text="{{ 'PRODUCT_DIALOG.' + title | translate }}" class="title" verticalAlignment="center"
-          horizontalAlignment="left"></Label>
+        <Label col="0" text="{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.' + title | translate }}" class="title"
+          verticalAlignment="center" horizontalAlignment="left"></Label>
         <Label col="1" text="{{page + 1}}/{{maxPage}}" *ngIf="maxPage > 1" class="indicator" verticalAlignment="bottom"
           horizontalAlignment="right" verticalAlignment="bottom"></Label>
       </GridLayout>

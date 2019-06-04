@@ -14,18 +14,18 @@
         </FlexboxLayout>
         <StackLayout class="hr-dark m-10"></StackLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-15" flexWrap="wrap">
-          <Label class="p-15 font-weight-bold" text="{{ 'PRINT.COUPON.DATE' | translate }}"></Label>
+          <Label class="p-15 font-weight-bold" text="{{ 'COUPON_DATE' | translate }}"></Label>
           <Label class="p-15 text-right"
             text="{{ printCouponService.couponPrint.CouponDateOffset | date:'yyyy-MM-dd HH.mm.ss'}}"></Label>
         </FlexboxLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-15" flexWrap="wrap">
-          <Label class="p-15 font-weight-bold" text="{{ 'PRINT.COUPON.CODE' | translate }}"></Label>
+          <Label class="p-15 font-weight-bold" text="{{ 'CODE' | translate }}"></Label>
           <Label class="p-15 text-right" text="{{ printCouponService.couponPrint.CouponCode }}"></Label>
         </FlexboxLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-15" flexWrap="wrap">
-          <Label class="p-15 font-weight-bold" text="{{ 'PRINT.COUPON.TYPE' | translate }}"></Label>
+          <Label class="p-15 font-weight-bold" text="{{ 'BET_TYPE' | translate }}"></Label>
           <Label class="p-15 text-right"
-            text="{{ 'CouponType.' + couponType[printCouponService.couponPrint.CouponTypeId] | translate }}"></Label>
+            text="{{ 'DYNAMIC_KEYS.CouponType.' + couponType[printCouponService.couponPrint.CouponTypeId] | translate }}"></Label>
         </FlexboxLayout>
         <StackLayout class="hr-dark m-10"></StackLayout>
         <!-- ODDS PARTITION -->
@@ -49,7 +49,7 @@
         <!-- FOOTER ELEMENTS-->
         <StackLayout class="hr-dark m-10"></StackLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-15" flexWrap="wrap">
-          <Label class="p-5 text-center font-weight-bold" text="{{'PRINT.COUPON.STAKE' | translate }}"></Label>
+          <Label class="p-5 text-center font-weight-bold" text="{{'STAKE_AMOUNT' | translate }}"></Label>
           <Label class="p-10 text-right" text="{{ printCouponService.couponPrint.Stake }}"></Label>
         </FlexboxLayout>
         <StackLayout class="hr-dark m-10"></StackLayout>
@@ -57,16 +57,16 @@
         <!--SINGLE BET-->
         <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-5" flexWrap="wrap"
           *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.SingleBet">
-          <Label class="h2 p-10 text-center" text="{{'PRINT.COUPON.TOTALPAYOUT' | translate }} "></Label>
+          <Label class="h2 p-10 text-center" text="{{'TOTAL_PAYOUT' | translate }}" textTransform="uppercase"></Label>
           <Label class="h3 p-10 text-center" text="{{ printCouponService.couponPrint.MaxWin }}"></Label>
           <StackLayout class="hr-dark m-10"></StackLayout>
         </FlexboxLayout>
         <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-5" flexWrap="wrap"
           *ngIf="printCouponService.couponPrint.CouponTypeId !== couponType.SingleBet">
-          <Label class="h2 p-10 text-center" text="{{'PRINT.COUPON.PAYOUTMIN' | translate }} "></Label>
+          <Label class="h2 p-10 text-center" text="{{'MIN_PAYOUT' | translate }}" textTransform="uppercase"></Label>
           <Label class="h3 p-10 text-center" text="{{ printCouponService.couponPrint.MinWin }}"></Label>
           <StackLayout class="hr-dark m-10"></StackLayout>
-          <Label class="h2 p-10 text-center" text="{{'PRINT.COUPON.PAYOUTMAX' | translate }} "></Label>
+          <Label class="h2 p-10 text-center" text="{{'MAX_PAYOUT' | translate }}" textTransform="uppercase"></Label>
           <Label class="h3 p-10 text-center" text="{{ printCouponService.couponPrint.MaxWin }}"></Label>
           <StackLayout class="hr-dark m-10"></StackLayout>
         </FlexboxLayout>

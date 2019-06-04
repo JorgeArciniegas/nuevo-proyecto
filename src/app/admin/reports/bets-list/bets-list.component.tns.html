@@ -61,7 +61,7 @@
       <GridLayout row="{{(i / 2) | floor}}" col="{{i % 2}}"
         *ngFor="let type of betsListService.availableSport; let i = index;" class="button btn-default btn-filter"
         [ngClass]="{'btn-filter-success': betsListService.sportId === type.SportId}">
-        <Button text="{{'ENUM.PRODUCT.NAME.'+ type.SportName | translate}}" class="button-internal"
+        <Button text="{{'DYNAMIC_KEYS.PRODUCT.NAME.'+ type.SportName | translate}}" class="button-internal"
           (tap)="changeValue('sportId', type.SportId)"></Button>
       </GridLayout>
     </GridLayout>
@@ -75,7 +75,7 @@
       <GridLayout row="{{i}}" col="0" *ngFor="let type of couponType.values(); let i = index;"
         class="button btn-default btn-filter"
         [ngClass]="{'btn-filter-success': betsListService.couponType === couponType[type]}">
-        <Button text="{{'CouponType.' + type | translate}}" class="button-internal"
+        <Button text="{{'DYNAMIC_KEYS.CouponType.' + type | translate}}" class="button-internal"
           (tap)="changeValue('couponType', couponType[type])"></Button>
       </GridLayout>
     </GridLayout>
@@ -89,7 +89,7 @@
       <GridLayout row="{{i}}" col="0" *ngFor="let type of couponStatus.values(); let i = index;"
         class="button btn-default btn-filter"
         [ngClass]="{'btn-filter-success': betsListService.couponStatus === couponStatus[type]}">
-        <Button text="{{'ENUM.CouponStatusInternal.' + type | translate}}" class="button-internal"
+        <Button text="{{'DYNAMIC_KEYS.CouponStatusInternal.' + type | translate}}" class="button-internal"
           (tap)="changeValue('couponStatus', couponStatus[type])"></Button>
       </GridLayout>
     </GridLayout>

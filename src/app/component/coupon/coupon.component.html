@@ -16,7 +16,7 @@
     <div class="btn-coupon-board">
       <div class="display" fxLayoutAlign="space-around center" fxLayout="row layout-wrap">
         <div fxFlex fxLayoutAlign="start center" class="coupon-type-indicator">
-          <span class="btn btn-default">{{'single' | translate}}</span>
+          <span class="btn btn-default">{{'SINGLE' | translate}}</span>
           <span
             class="indicator-odds-number radius-50">{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}</span>
         </div>
@@ -100,7 +100,7 @@
       <label *ngIf="couponService.error && !couponService.warningMessages" fxLayout="column" fxFlex>
         <span class="txt-uppercase">{{'ERROR' | translate}}</span>
         <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
-          {{"COUPON_ERROR." + couponService.error.message | translate}} <ng-container
+          {{"DYNAMIC_KEYS.COUPON_ERROR." + couponService.error.message | translate}} <ng-container
             *ngIf="couponService.error.detail">(Limit:
             {{couponService.error.detail}})</ng-container>
         </div>
@@ -108,7 +108,7 @@
       <label *ngIf="couponService.warningMessages" fxLayout="column" fxFlex>
         <span class="txt-uppercase">{{'WARNING' | translate}}</span>
         <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
-          {{"COUPON_WARNING." + couponService.warningMessages | translate}}
+          {{"DYNAMIC_KEYS.COUPON_WARNING." + couponService.warningMessages | translate}}
         </div>
       </label>
     </div>

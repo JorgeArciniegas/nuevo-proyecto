@@ -63,7 +63,7 @@
           <div fxFlex="50" fxLayout="column" *ngFor="let type of betsListService.availableSport">
             <button class="btn-filter btn-default radius-5"
               [class.btn-filter-success]="betsListService.sportId === type.SportId"
-              (click)="changeValue('sportId', type.SportId)">{{ 'ENUM.PRODUCT.NAME.'+ type.SportName | translate }}
+              (click)="changeValue('sportId', type.SportId)">{{ 'DYNAMIC_KEYS.PRODUCT.NAME.'+ type.SportName | translate }}
             </button>
           </div>
         </div>
@@ -73,7 +73,7 @@
         <div fxFlex fxLayout="column" fxLayoutGap="5px">
           <button *ngFor="let type of couponType.values()" class="btn-filter btn-default radius-5"
             [class.btn-filter-success]="betsListService.couponType === couponType[type]"
-            (click)="changeValue('couponType', couponType[type])">{{ 'CouponType.' +type | translate}}</button>
+            (click)="changeValue('couponType', couponType[type])">{{ 'DYNAMIC_KEYS.CouponType.' + type | translate}}</button>
         </div>
       </div>
       <div fxFlex="30" fxLayout="row" fxLayoutGap="20px" class="display padding-20">
@@ -81,7 +81,7 @@
         <div fxFlex fxLayout="column" fxLayoutGap="5px">
           <button *ngFor="let type of couponStatus.values()" class="btn-filter btn-default radius-5"
             [class.btn-filter-success]="betsListService.couponStatus === couponStatus[type]"
-            (click)="changeValue('couponStatus', couponStatus[type])">{{ 'ENUM.CouponStatusInternal.' + type | translate}}</button>
+            (click)="changeValue('couponStatus', couponStatus[type])">{{ 'DYNAMIC_KEYS.CouponStatusInternal.' + type | translate}}</button>
         </div>
       </div>
     </div>

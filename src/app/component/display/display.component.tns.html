@@ -2,29 +2,38 @@
   <GridLayout rows="*" columns="*" class="display">
 
     <GridLayout rows="*,*" columns="6*,*" *ngIf="polyfunctionalValue">
-      <GridLayout row="0" col="0" rows="*" columns="5*,3*" orientation="horizontal" class="title" verticalAlignment="center">
-        <Label col="0" *ngIf="polyfunctionalValue && polyfunctionalValue.selection" text="{{'SMARTCODE.'+polyfunctionalValue.selection | translate}}" verticalAlignment="center"
+      <GridLayout row="0" col="0" rows="*" columns="5*,3*" orientation="horizontal" class="title"
+        verticalAlignment="center">
+        <Label col="0" *ngIf="polyfunctionalValue && polyfunctionalValue.selection"
+          text="{{'DYNAMIC_KEYS.SMARTCODE.'+polyfunctionalValue.selection | translate}}" verticalAlignment="center"
           horizontalAlignment="left"></Label>
-        <Label col="1" *ngIf="polyfunctionalValue" text="{{polyfunctionalValue.value}}" verticalAlignment="center" horizontalAlignment="right"></Label>
+        <Label col="1" *ngIf="polyfunctionalValue" text="{{polyfunctionalValue.value}}" verticalAlignment="center"
+          horizontalAlignment="right"></Label>
       </GridLayout>
-      <GridLayout row="1" col="0" rows="*" columns="5*,3*" orientation="horizontal" class="title" verticalAlignment="center">
-        <Label col="0" *ngIf="polyfunctionalValue && polyfunctionalValue.odds && polyfunctionalValue.odds.length === 1" class="odd" verticalAlignment="center"
-          text="( {{ polyfunctionalValue.odds[0].odd | number:'1.2-2'}} )" verticalAlignment="center" horizontalAlignment="left"></Label>
-        <Label col="1" *ngIf="polyfunctionalValue" text="{{ typeBetSlipColTot[polyfunctionalValue.typeSlipCol]  }} {{polyfunctionalValue.amount  | number: '1.2-2'}}"
+      <GridLayout row="1" col="0" rows="*" columns="5*,3*" orientation="horizontal" class="title"
+        verticalAlignment="center">
+        <Label col="0" *ngIf="polyfunctionalValue && polyfunctionalValue.odds && polyfunctionalValue.odds.length === 1"
+          class="odd" verticalAlignment="center" text="( {{ polyfunctionalValue.odds[0].odd | number:'1.2-2'}} )"
+          verticalAlignment="center" horizontalAlignment="left"></Label>
+        <Label col="1" *ngIf="polyfunctionalValue"
+          text="{{ typeBetSlipColTot[polyfunctionalValue.typeSlipCol]  }} {{polyfunctionalValue.amount  | number: '1.2-2'}}"
           verticalAlignment="center" horizontalAlignment="right"></Label>
       </GridLayout>
 
       <GridLayout rowSpan="2" col="1" rows="*" columns="*" (tap)="detailOdds()">
         <Image *ngIf="polyfunctionalValue  && polyfunctionalValue.selection" stretch="aspectFit" margin="4"
-          src="~/app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png" verticalAlignment="center" [isEnabled]="!timeBlocked"></Image>
+          src="~/app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png" verticalAlignment="center"
+          [isEnabled]="!timeBlocked"></Image>
       </GridLayout>
     </GridLayout>
 
     <GridLayout rows="*" columns="2*,3*" *ngIf="!polyfunctionalValue && polyfunctionalStakeCoupon.isEnabled">
-      <Label col="0" text="{{ typeBetSlipColTot[polyfunctionalStakeCoupon.typeSlipCol] }}" verticalAlignment="center"></Label>
+      <Label col="0" text="{{ typeBetSlipColTot[polyfunctionalStakeCoupon.typeSlipCol] }}"
+        verticalAlignment="center"></Label>
       <GridLayout col="1" rows="3*,2*" columns="*">
         <GridLayout row="0" class="indicator-amount radius-5">
-          <Label text="{{ polyfunctionalStakeCoupon.digitAmount | number: '1.2-2'}}" verticalAlignment="center" horizontalAlignment="right"></Label>
+          <Label text="{{ polyfunctionalStakeCoupon.digitAmount | number: '1.2-2'}}" verticalAlignment="center"
+            horizontalAlignment="right"></Label>
         </GridLayout>
         <Label row="1" class="summary"
           text="{{ polyfunctionalStakeCoupon.columns }} x {{polyfunctionalStakeCoupon.columnAmount | number: '1.2-4'}} = {{polyfunctionalStakeCoupon.totalAmount | number : '1.2-2'}}"

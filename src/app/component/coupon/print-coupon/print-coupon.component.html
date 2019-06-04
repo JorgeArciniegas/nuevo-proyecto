@@ -13,15 +13,15 @@
   <div class="content">
     <div class="betslip-info">
       <!-- betslip date placed -->
-      <div class="col font-size-normal" [style.width.%]="40">{{ 'PRINT.COUPON.DATE' | translate }}</div>
+      <div class="col font-size-normal" [style.width.%]="40">{{ 'COUPON_DATE' | translate }}</div>
       <div class="col font-size-normal text-right" [style.width.%]="60">
         {{ printCouponService.couponPrint.CouponDateOffset | date:'yyyy-MM-dd HH.mm.ss'}}</div>
-      <div class="col font-size-normal" [style.width.%]="40">{{ 'PRINT.COUPON.CODE' | translate }}</div>
+      <div class="col font-size-normal" [style.width.%]="40">{{ 'CODE' | translate }}</div>
       <div class="col font-size-normal text-right" [style.width.%]="60">{{ printCouponService.couponPrint.CouponCode }}
       </div>
-      <div class="col font-size-normal" [style.width.%]="40">{{ 'PRINT.COUPON.TYPE' | translate }}</div>
+      <div class="col font-size-normal" [style.width.%]="40">{{ 'BET_TYPE' | translate }}</div>
       <div class="col font-size-normal text-right" [style.width.%]="60">
-        {{ 'CouponType.' + couponType[printCouponService.couponPrint.CouponTypeId] | translate }}</div>
+        {{ 'DYNAMIC_KEYS.CouponType.' + couponType[printCouponService.couponPrint.CouponTypeId] | translate }}</div>
 
     </div>
     <div class="betslip-odds">
@@ -49,7 +49,7 @@
     </div>
     <div class="betslip-payment">
       <div class="betslip-stake">
-        <div class="label" [style.font-size.mm]="4.5" [style.font-weight]="700">{{'PRINT.COUPON.STAKE' | translate }}
+        <div class="label" [style.font-size.mm]="4.5" [style.font-weight]="700">{{'STAKE_AMOUNT' | translate }}
         </div>
         <div class="value" [style.font-size.mm]="4.5" [style.font-weight]="700">
           {{printCouponService.couponPrint.Stake }}</div>
@@ -58,9 +58,9 @@
         <div class="row-grouping" *ngFor="let grouping of printCouponService.couponPrint.Groupings">
           <ng-container *ngIf="!grouping.IsMultiStake">
             <div class="container-grouping" [style.font-size.mm]="3.5">
-              <div class="label">{{'PRINT.COUPON.GROUPS' | translate }} : {{ grouping.Grouping}}</div>
+              <div class="label">{{'GROUPS' | translate }} : {{ grouping.Grouping}}</div>
               <div class="comb">
-                <span>{{'PRINT.COUPON.COMB' | translate }}: </span>
+                <span>{{'COMB' | translate }}: </span>
                 <strong>{{ grouping.Combinations + ' x ' + grouping.Stake +' = ' + (grouping.Combinations * grouping.Stake | number: '1.2-2') }}</strong>
               </div>
             </div>
@@ -71,7 +71,7 @@
         <div class="min-row" *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.SingleBet">
           <div class="min">
             <div class="decoration-title"></div>
-            <div class="title">{{'PRINT.COUPON.PAYOUTMIN' | translate }} </div>
+            <div class="title txt-uppercase">{{'MIN_PAYOUT' | translate }} </div>
             <div class="decoration-title"></div>
           </div>
           <div class="amount">
@@ -81,10 +81,12 @@
         <div class="max-row">
           <div class="max">
             <div class="decoration-title"></div>
-            <div class="title" *ngIf="printCouponService.couponPrint.CouponTypeId !== couponType.SingleBet">
-              {{'PRINT.COUPON.PAYOUTMAX' | translate }} </div>
-            <div class="title" *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.SingleBet">
-              {{'PRINT.COUPON.TOTALPAYOUT' | translate }} </div>
+            <div class="title txt-uppercase"
+              *ngIf="printCouponService.couponPrint.CouponTypeId !== couponType.SingleBet">
+              {{'MAX_PAYOUT' | translate }} </div>
+            <div class="title txt-uppercase"
+              *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.SingleBet">
+              {{'TOTAL_PAYOUT' | translate }} </div>
             <div class="decoration-title"></div>
           </div>
           <div class="amount">

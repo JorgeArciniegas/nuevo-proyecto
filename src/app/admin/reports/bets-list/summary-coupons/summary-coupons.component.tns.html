@@ -21,17 +21,18 @@
     </StackLayout>
     <StackLayout col="4" verticalAlignment="center">
       <Label class="sub-title" text="{{ 'BET_TYPE' | translate }}"></Label>
-      <Label text="{{ 'CouponType.' + couponType[betsListService.request.couponType] | translate}}"
+      <Label text="{{ 'DYNAMIC_KEYS.CouponType.' + couponType[betsListService.request.couponType] | translate}}"
         textWrap="true"></Label>
     </StackLayout>
     <StackLayout col="5" verticalAlignment="center">
       <Label class="sub-title" text="{{ 'BET_STATUS' | translate }}"></Label>
-      <Label text="{{ 'ENUM.CouponStatusInternal.' + couponStatus[betsListService.request.couponStatus] | translate}}"
+      <Label
+        text="{{ 'DYNAMIC_KEYS.CouponStatusInternal.' + couponStatus[betsListService.request.couponStatus] | translate}}"
         textWrap="true"></Label>
     </StackLayout>
     <StackLayout col="6" verticalAlignment="center">
       <Label class="sub-title" text="{{ 'PRODUCT_FILTER' | translate }}"></Label>
-      <Label text="{{ 'ENUM.PRODUCT.NAME.'+ betsListService.labelAvailableSportSelected | translate }}"
+      <Label text="{{ 'DYNAMIC_KEYS.PRODUCT.NAME.'+ betsListService.labelAvailableSportSelected | translate }}"
         textWrap="true"></Label>
     </StackLayout>
     <GridLayout col="7" rows="*" columns="*,3*,*">
@@ -42,7 +43,7 @@
           (tap)="betsListService.paginatorSize(false)"></Button>
       </GridLayout>
       <Label col="1" horizontalAlignment="center" verticalAlignment="center"
-        text="{{'PAGE' | translate }}  {{betsListService.request.requestedPage}} {{'BETSLIST.PPAGE.OF' | translate }} {{betsListService.betsCouponList.TotalPages}}"></Label>
+        text="{{'PAGE' | translate }}  {{betsListService.request.requestedPage}} {{'PAGE.OF' | translate }} {{betsListService.betsCouponList.TotalPages}}"></Label>
       <GridLayout col="2" class="button btn-default btn-filter" verticalAlignment="center"
         [ngClass]="{'disabled': betsListService.betsCouponList.TotalPages === betsListService.request.requestedPage}">
         <Button text="›" class="button-internal paginator"
@@ -86,7 +87,8 @@
           <Image row="{{i + 1}}" col="5" width="24" *ngSwitchCase="3"
             src="~/app/themes/skins/{{settings.theme}}/icon/checked.png"></Image>
         </ng-container>
-        <Label row="{{i + 1}}" col="6" text="{{ 'CouponType.'+couponType[rowItem.CouponTypeId] | translate }}"
+        <Label row="{{i + 1}}" col="6"
+          text="{{ 'DYNAMIC_KEYS.CouponType.'+couponType[rowItem.CouponTypeId] | translate }}"
           verticalAlignment="center"></Label>
         <Label row="{{i + 1}}" col="7" text="{{ (rowItem.Won > 0 )? rowItem.Won : '-'  }}"
           verticalAlignment="center"></Label>
@@ -98,7 +100,7 @@
   <GridLayout row="3" columns="*,2*,2*,2*,2*,2*,2*,2*,2*,*" class="toolbar display">
     <StackLayout col="1" verticalAlignment="center">
       <Label class="value" text="{{ betsListService.betsCouponList.NumberOfBets | number }}" textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'PRODUCT_DIALOG.COUPON' | translate }}"></Label>
+      <Label class="sub-title" text="{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.COUPON' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="2" verticalAlignment="center">
       <Label class="value" text="{{ betsListService.betsCouponList.TotalStake | number: '1.2-2' }}"

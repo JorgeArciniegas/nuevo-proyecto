@@ -14,7 +14,7 @@
   <GridLayout row="1" rows="*" columns="4*,*" class="card display btn-coupon-board"
     [ngClass]="{'small': productService.windowSize.small}">
     <StackLayout col="0" orientation="horizontal" horizontalAlignment="left">
-      <Label text="{{'single' | translate}}" verticalAlignment="center"></Label>
+      <Label text="{{'SINGLE' | translate}}" verticalAlignment="center"></Label>
       <Label class="indicator-odds-number radius-50" [ngClass]="{'small': productService.windowSize.small}"
         text="{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}" verticalAlignment="center"
         textAlignment="center"></Label>
@@ -95,13 +95,13 @@
       <Label row="0" text="{{'ERROR' | translate}}" class="title" [ngClass]="{'small': productService.windowSize.small}"
         textTransform="uppercase"></Label>
       <Label row="1"
-        text="{{ 'COUPON_ERROR.' + couponService.error.message | translate }} (Limit: {{ couponService.error.detail }})"
+        text="{{ 'DYNAMIC_KEYS.COUPON_ERROR.' + couponService.error.message | translate }} (Limit: {{ couponService.error.detail }})"
         class="amount" [ngClass]="{'small': productService.windowSize.small}" textWrap="true"></Label>
     </GridLayout>
     <GridLayout rows="*,3*" columns="*" class="display-message display-warning" *ngIf="couponService.warningMessages">
       <Label row="0" text="{{'WARNING' | translate}}" class="title"
         [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
-      <Label row="1" text="{{'COUPON_WARNING.' + couponService.warningMessage | translate}}" class="amount"
+      <Label row="1" text="{{'DYNAMIC_KEYS.COUPON_WARNING.' + couponService.warningMessage | translate}}" class="amount"
         [ngClass]="{'small': productService.windowSize.small}" textWrap="true" verticalAlignment="center"></Label>
     </GridLayout>
   </GridLayout>
