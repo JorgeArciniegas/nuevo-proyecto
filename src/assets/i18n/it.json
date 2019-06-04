@@ -32,10 +32,6 @@
   "DATE": "Data",
   "DATE_FROM": "Data da",
   "DATE_TO": "Data a",
-  "DELETE_COUPON": {
-    "MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?",
-    "TITLE": "Reset del Coupon"
-  },
   "DYNAMIC_KEYS": {
     "COUPON_ERROR": {
       "API_ERROR": "API_ERROR",

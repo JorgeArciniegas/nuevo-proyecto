@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AppSettings } from '../../app.settings';
+import { StorageService } from './storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,11 @@ import { AppSettings } from '../../app.settings';
 export class TranslateUtilityService {
   private currentLanguage: string;
 
-  constructor(private readonly appSettings: AppSettings, private translateService: TranslateService) {
+  constructor(
+    private readonly appSettings: AppSettings,
+    private translateService: TranslateService,
+    private storageService: StorageService
+  ) {
     this.translateService.onLangChange.subscribe(() => {
       this.currentLanguage = this.translateService.currentLang;
     });
@@ -26,20 +31,40 @@ export class TranslateUtilityService {
       this.translateService.setDefaultLang(this.appSettings.supportedLang[0]);
     }
     // Selection language's logic.
-    // Use the language of the browser/device is supported or the default language who is the first element of the supportedLang array.
-    this.currentLanguage =
-      this.appSettings.supportedLang.findIndex(lang => lang === browserLang) !== -1 ? browserLang : this.appSettings.supportedLang[0];
+    // Check if there is any setting on the localStorage.
+    if (this.storageService.checkIfExist('lang')) {
+      const storedLang = this.storageService.getData('lang');
+      // Check if it is a supported language.
+      if (this.appSettings.supportedLang.findIndex(lang => lang === storedLang) !== -1) {
+        // Set as the language to be used.
+        this.currentLanguage = storedLang;
+      } else {
+        // Set the default language which is the first element of the "supportedLang" array.
+        this.currentLanguage = this.appSettings.supportedLang[0];
+        // Remove the invalid language from the storage.
+        this.storageService.removeItems('lang');
+      }
+    } else {
+      /* Use the language of the browser/device if it is supported.
+         Otherwise, the default language (first element of the "supportedLang" array) will be used. */
+      this.currentLanguage =
+        this.appSettings.supportedLang.findIndex(lang => lang === browserLang) !== -1 ? browserLang : this.appSettings.supportedLang[0];
+    }
+    // Set the language to use according to the value of the variable.
     this.translateService.use(this.currentLanguage);
   }
 
   /**
-   * Method to change the language in use from the application.
+   * Method to change the language in use from the application. The new language it is also store into the 'lang' data of the storage.
    * @param lang String of the language's code that will be set.
    */
   public changeLanguage(lang: string): void {
     // Check that the language to set it isn't already in use
     if (lang !== this.translateService.currentLang) {
+      // Set the new language.
       this.translateService.use(lang);
+      // Save the new language to the storage.
+      this.storageService.setData('lang', lang);
     }
   }
 
