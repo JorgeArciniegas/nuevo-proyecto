@@ -56,7 +56,9 @@
     <app-combinations [data]="couponGroupingsRow" *ngIf="showDataViewSelected === showBetDetailView.COMBINATIONS"></app-combinations>
   </StackLayout>
   <GridLayout row="3" rows="*" columns="2*,6*" class="p-l-20">
-      <Button col="0" verticalAlignment="center" class="button btn-default btn-success radius-10" text="{{ 'REPRINT' | translate }}" *ngIf="settings.isEnabledReprintCoupon"></Button>
+      <Button col="0" verticalAlignment="center" class="button btn-default btn-success radius-10"
+        text="{{ 'REPRINT' | translate }}" *ngIf="settings.isEnabledReprintCoupon"
+        (tap)="printAgainCoupon()"></Button>
   </GridLayout>
   <StackLayout row="4"></StackLayout>
 </GridLayout>

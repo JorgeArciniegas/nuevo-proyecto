@@ -1,4 +1,4 @@
-<div  fxFlex="100" fxLayout="column" fxLayoutGap="grid"  fxLayoutAlign="space-between" class="padding-vertical-10">
+<div  fxFlex="100" fxLayout="column" fxLayoutGap="grid"  class="padding-vertical-10">
   <ng-container *ngFor="let odd of data.odd; let i = index;" >
   <!-- ROW -->
    <div fxLayout="column" fxLayoutGap="20px" [ngClass]="{'border-bottom-overlay-1px': i <  data.pageOddRows  - 1}">

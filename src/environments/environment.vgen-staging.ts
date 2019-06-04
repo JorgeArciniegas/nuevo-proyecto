@@ -99,7 +99,7 @@ export const environment: Environment = {
     },
   ],
   showRaceId: true,
-  isEnabledReprintCoupon:  false,
+  isEnabledReprintCoupon:  true,
   couponMessageTrasmitted: 'Mandate transmitted via the Internet andaccepted on the',
   // tslint:disable-next-line:max-line-length
   couponMessageLegal: 'Lorem ipsum dolor sit amet, consecteturadipisicing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Utenim ad minim veniam'
