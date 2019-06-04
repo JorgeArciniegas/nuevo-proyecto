@@ -147,26 +147,17 @@ export class UserService {
       currencyCode: this.storageService.getData('UserData').Currency
     };
 
-    let currencyCodeResponse: number[];
     // Set  'defaultAmount'  the "presets value"
-    await this.api.coupon
-      .getCouponRelatedCurrency(currencyRequest)
-      .then(preset => {
-        currencyCodeResponse = [
-          preset.CouponPreset.CouponPresetValues.PresetOne,
-          preset.CouponPreset.CouponPresetValues.PresetTwo,
-          preset.CouponPreset.CouponPresetValues.PresetThree,
-          preset.CouponPreset.CouponPresetValues.PresetFour
-        ];
-      });
+    this.api.coupon.getCouponRelatedCurrency(currencyRequest).then( preset => {
+
+      this.appSetting.defaultAmount = preset.CouponPreset.CouponPresetValues;
+
+    });
     // match products result from api to products on the system
-    this.api.virtual.getAvailablevirtualsports().then(items => {
-      this.appSetting.products.map(prod => {
-        items.filter(i => {
-          if (i.SportId === prod.sportId) {
-            prod.defaultAmount = currencyCodeResponse;
-          }
-        });
+    this.api.virtual.getAvailablevirtualsports().then( items => {
+
+      this.appSetting.products.map( prod => {
+        items.filter( i =>  i.SportId === prod.sportId );
       });
     });
     // Order the result from minor to major

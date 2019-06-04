@@ -5,13 +5,19 @@ export const environment: Environment = {
   baseApiUrl: 'https://qacom-apidemo.ody-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
+  defaultAmount: {
+    PresetOne: null,
+    PresetTwo: null,
+    PresetThree: null,
+    PresetFour: null
+  },
   products: [
     {
       sportId: 8,
       codeProduct: 'DOG',
       name: 'DogRacing',
       label: 'DOG',
-      defaultAmount: [],
+
       order: 0,
       productSelected: true,
       isPlayable: true,
@@ -34,7 +40,6 @@ export const environment: Environment = {
       codeProduct: 'HORSE',
       name: 'HorseRacing',
       label: 'HORSE',
-      defaultAmount: [],
       order: 1,
       productSelected: false,
       isPlayable: true,
@@ -53,7 +58,7 @@ export const environment: Environment = {
       order: 2,
       productSelected: false,
       isPlayable: true,
-      defaultAmount: [],
+
       toolbarButton: {
         name: 'virtualhorse',
         icon: 'Horse',
@@ -69,7 +74,6 @@ export const environment: Environment = {
       order: 3,
       productSelected: false,
       isPlayable: false,
-      defaultAmount: [],
       toolbarButton: {
         name: 'Italian League',
         icon: 'Soccer-ita',
@@ -85,7 +89,7 @@ export const environment: Environment = {
       order: 3,
       productSelected: false,
       isPlayable: false,
-      defaultAmount: [],
+
       toolbarButton: {
         name: 'Italian League',
         icon: 'Soccer-eng',
