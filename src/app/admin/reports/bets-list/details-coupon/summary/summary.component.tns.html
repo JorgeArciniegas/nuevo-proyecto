@@ -1,0 +1,92 @@
+<GridLayout rows="3*,*,3*,*,3*,*,3*,3*,*,3*,*" columns="*,5*,5*,5*,*">
+  <!-- ROW 1 -->
+  <StackLayout row="0" col="0"></StackLayout>
+  <StackLayout row="0" col="1" verticalAlignment="bottom">
+    <Label text="{{data.CouponDateOffset | date: 'dd/MM/yy HH:mm:ss' }}" textWrap="true"></Label>
+    <Label class="sub-title" text="{{ 'BETSLIST.DATE_OF_PLACEMENT' | translate }}"></Label>
+  </StackLayout>
+  <StackLayout row="0" col="2" verticalAlignment="bottom">
+    <Label text="{{data.CouponCode }}" textWrap="true"></Label>
+    <Label class="sub-title" text="{{ 'COUPON_CODE' | translate }}"></Label>
+  </StackLayout>
+  <StackLayout row="0" col="3" verticalAlignment="bottom">
+    <Label text="{{data.PaymentDateOffset | date: 'dd/MM/yy HH:mm:ss'  || ' - ' }}" textWrap="true"></Label>
+    <Label class="sub-title" text="{{ 'PAYMENT_DATE' | translate }}"></Label>
+  </StackLayout>
+  <!-- DIVIDER -->
+  <StackLayout class="border-bottom-overlay" row="1" colSpan="5"></StackLayout>
+  <!-- ROW 2 -->
+  <StackLayout row="2" col="0"></StackLayout>
+  <StackLayout row="2" col="1" verticalAlignment="bottom">
+    <Label text="{{'DYNAMIC_KEYS.CouponType.'+ data.CouponType | translate }}" textWrap="true"></Label>
+    <Label class="sub-title" text="{{ 'BET_TYPE' | translate }}"></Label>
+  </StackLayout>
+  <StackLayout row="2" col="2" verticalAlignment="bottom">
+    <GridLayout rows="*,*" columns="*,5*" verticalAlignment="center">
+      <ng-container [ngSwitch]="data.CouponStatusId">
+        <Image row="0" col="0" width="24" horizontalAlignment="left" *ngSwitchDefault
+          src="~/app/themes/skins/{{settings.theme}}/icon/progress-clock.png"></Image>
+        <!-- LOST -->
+        <Image col="0" width="24" horizontalAlignment="left" *ngSwitchCase="2"
+          src="~/app/themes/skins/{{settings.theme}}/icon/cancel.png"></Image>
+        <!-- WIN -->
+        <Image col="0" width="24" horizontalAlignment="left" *ngSwitchCase="3"
+          src="~/app/themes/skins/{{settings.theme}}/icon/checked.png"></Image>
+      </ng-container>
+      <Label row="0" col="1" verticalAlignment="center" horizontalAlignment="left"
+        text="{{ 'DYNAMIC_KEYS.CouponStatusInternal.' + couponStatus[data.CouponStatusId] | translate }}"
+        textWrap="true"></Label>
+      <Label row="1" colSpan="2" class="sub-title" text="{{ 'OUTCOME' | translate }}"></Label>
+    </GridLayout>
+  </StackLayout>
+  <StackLayout row="2" col="3" verticalAlignment="bottom">
+    <Label text="{{data.Won || ' - ' }}" textWrap="true"></Label>
+    <Label class="sub-title" text="{{ 'WON' | translate }}"></Label>
+  </StackLayout>
+  <StackLayout row="2" col="4"></StackLayout>
+  <!-- DIVIDER -->
+  <StackLayout class="border-bottom-overlay" row="3" colSpan="5"></StackLayout>
+  <!-- ROW 3 -->
+  <StackLayout row="4" col="0"></StackLayout>
+  <StackLayout row="4" col="1" colSpan="4" verticalAlignment="bottom">
+    <Label text="{{data.Jackpot || ' - ' }}" textWrap="true"></Label>
+    <Label class="sub-title" text="{{ 'JACKPOT' | translate }}"></Label>
+  </StackLayout>
+  <!-- DIVIDER -->
+  <StackLayout class="border-bottom-overlay" row="5" colSpan="5"></StackLayout>
+  <!-- ROW 4 -->
+  <StackLayout row="6" colSpan="5" verticalAlignment="bottom" horizontalAlignment="center">
+    <Label class="h3" text="{{ 'TOTALS' | translate }}"></Label>
+  </StackLayout>
+  <!-- ROW 5 -->
+  <StackLayout row="7" col="0"></StackLayout>
+  <StackLayout row="7" col="1" verticalAlignment="bottom">
+    <Label text="{{data.MaxWin || ' - ' }}" textWrap="true"></Label>
+    <Label class="sub-title" text="{{ 'MAX_POTENTIAL_WIN' | translate }}"></Label>
+  </StackLayout>
+  <StackLayout row="7" col="2" verticalAlignment="bottom">
+    <Label text="{{data.MaxBonus || ' - ' }}" textWrap="true"></Label>
+    <Label class="sub-title" text="{{ 'BONUS' | translate }}"></Label>
+  </StackLayout>
+  <StackLayout row="7" col="3" verticalAlignment="bottom">
+    <Label text="{{ data.MaxWin + data.MaxBonus || ' - ' }}" textWrap="true"></Label>
+    <Label class="sub-title" text="{{ 'MAX_POTENTIAL_WIN_WITH_BONUS' | translate }}"></Label>
+  </StackLayout>
+  <StackLayout row="7" col="4"></StackLayout>
+  <!-- DIVIDER -->
+  <StackLayout class="border-bottom-overlay" row="8" colSpan="5"></StackLayout>
+  <!-- ROW 6 -->
+  <StackLayout row="9" col="0"></StackLayout>
+  <StackLayout row="9" col="1" verticalAlignment="bottom">
+    <Label text="{{data.MinWin || ' - ' }}" textWrap="true"></Label>
+    <Label class="sub-title" text="{{ 'MIN_POTENTIAL_WIN' | translate }}"></Label>
+  </StackLayout>
+  <StackLayout row="9" col="2" verticalAlignment="bottom">
+    <Label text="{{data.Stake || ' - ' }}" textWrap="true"></Label>
+    <Label class="sub-title" text="{{ 'STAKE' | translate }}"></Label>
+  </StackLayout>
+  <StackLayout row="9" col="3"></StackLayout>
+  <StackLayout row="9" col="4"></StackLayout>
+  <!-- DIVIDER -->
+  <StackLayout class="border-bottom-overlay" row="10" colSpan="5"></StackLayout>
+</GridLayout>

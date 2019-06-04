@@ -11,6 +11,7 @@ export interface Environment {
   showRaceId: boolean;
   couponMessageTrasmitted?: string;
   couponMessageLegal?: string;
+  isEnabledReprintCoupon: boolean;
 }
 
 export interface ToolbarButtons {

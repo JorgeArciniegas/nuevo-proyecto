@@ -1,9 +1,13 @@
 #printing{
   background: white;
+  color: #000;
   .border-5{
     border-width: 1;
     border-color: #000;
     border-radius: 5;
+  }
+  .h2, .h3, .h4{
+    color: #000;
   }
 }
 

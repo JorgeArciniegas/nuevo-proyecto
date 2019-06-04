@@ -11,7 +11,7 @@ import { TextField } from 'tns-core-modules/ui/text-field/text-field';
   templateUrl: './bets-list.component.html',
   styleUrls: ['./bets-list.component.scss']
 })
-export class BetsListComponent implements OnInit {
+export class BetsListComponent  {
 
   couponType: typeof CouponTypeInternal = CouponTypeInternal;
   couponStatus: typeof CouponStatusInternal = CouponStatusInternal;
@@ -21,8 +21,6 @@ export class BetsListComponent implements OnInit {
   ) {
 
   }
-
-  ngOnInit(): void { }
 
   changeValue(key: string, value: any): void {
     this.betsListService[key] = value;

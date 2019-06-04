@@ -60,7 +60,7 @@
     <GridLayout rows="*,*,*,*" columns="*,*" class="display-content">
       <GridLayout row="{{(i / 2) | floor}}" col="{{i % 2}}"
         *ngFor="let type of betsListService.availableSport; let i = index;" class="button btn-default btn-filter"
-        [ngClass]="{'btn-filter-success': betsListService.sportId === type.SportId}">
+        [ngClass]="{'btn-filter-success': betsListService.sportIdSelected === type.SportId}">
         <Button text="{{'DYNAMIC_KEYS.PRODUCT.NAME.'+ type.SportName | translate}}" class="button-internal"
           (tap)="changeValue('sportId', type.SportId)"></Button>
       </GridLayout>
@@ -101,7 +101,7 @@
   <!-- ROW 3 -->
   <GridLayout row="3" col="0" colSpan="3" rows="*,2*,*" columns="*,*,*" class="display-content">
     <GridLayout row="1" col="1" class="button btn-default btn-grey-gradient">
-      <Button text="{{'SEARCH' | translate}}" class="button-internal" (tap)="betsListService.getList()"></Button>
+      <Button text="{{'SEARCH' | translate}}" class="button-internal" (tap)="betsListService.getList(true)"></Button>
     </GridLayout>
   </GridLayout>
 </GridLayout>

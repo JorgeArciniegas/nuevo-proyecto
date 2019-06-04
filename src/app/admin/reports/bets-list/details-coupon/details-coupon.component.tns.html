@@ -1,0 +1,69 @@
+<GridLayout rows="2*,2*,20*,2*, *" columns="*" *ngIf="couponDetail">
+  <Label row="0" verticalAlignment="center" text="{{'BETSLIST.DETAIL_COUPON' | translate | uppercase }}"
+    class="m-l-20 h3"></Label>
+  <GridLayout class="m-l-20" row="1" rows="*" columns="1*,1*,1*,1*,1*">
+    <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()"
+      src="~/app/themes/skins/{{settings.theme}}/icon/baseline-arrow_back-24px.png" verticalAlignment="center"
+      horizontalAlignment="left"></Image>
+    <Button col="1" class="m-r-10 button btn-default radius-10" text="{{ 'SUMMARY' | translate }}"
+      [class.btn-grey-gradient]="showDataViewSelected === showBetDetailView.SUMMARY"
+      [class.btn-success]="showDataViewSelected !== showBetDetailView.SUMMARY"
+      (tap)="changeView(showBetDetailView.SUMMARY)"></Button>
+    <Button col="2" class="m-r-10 button btn-default radius-10" text="{{ 'EVENTS' | translate }}"
+      [class.btn-grey-gradient]="showDataViewSelected === showBetDetailView.EVENTS"
+      [class.btn-success]="showDataViewSelected !== showBetDetailView.EVENTS"
+      (tap)="changeView(showBetDetailView.EVENTS)"></Button>
+    <Button col="3" class="button btn-default" text="{{ 'COMBINATIONS' | translate }}"
+      [class.btn-grey-gradient]="showDataViewSelected === showBetDetailView.COMBINATIONS"
+      [class.btn-success]="showDataViewSelected !== showBetDetailView.COMBINATIONS"
+      (tap)="changeView(showBetDetailView.COMBINATIONS)"></Button>
+    <StackLayout col="4">
+      <!-- ODDS PAGS -->
+      <GridLayout class="m-l-5 m-r-20" col="7" rows="*" columns="*,3*,*"
+        *ngIf="showDataViewSelected === showBetDetailView.EVENTS">
+        <GridLayout col="0" class="button btn-default btn-filter" verticalAlignment="center"
+          [ngClass]="{'disabled': couponOddEvent.pageOdd <= 1}">
+          <Button text="‹" class="button-internal paginator" [isEnabled]="couponOddEvent.pageOdd > 1"
+            (tap)="changePage(false)"></Button>
+        </GridLayout>
+        <Label col="1" horizontalAlignment="center" verticalAlignment="center"
+          text="{{'PAGE' | translate }}  {{ couponOddEvent.pageOdd }} {{'PAGE.OF' | translate }} {{  couponOddEvent.maxPage }}"></Label>
+        <GridLayout col="2" class="button btn-default btn-filter" verticalAlignment="center"
+          [ngClass]="{'disabled': couponOddEvent.pageOdd >= couponOddEvent.maxPage}">
+          <Button text="›" class="button-internal paginator"
+            [isEnabled]="couponOddEvent.pageOdd < couponOddEvent.maxPage" (tap)="changePage(true)"></Button>
+        </GridLayout>
+      </GridLayout>
+      <!-- /ODDS PAGS -->
+      <!-- GROUPINGS PAGS -->
+      <GridLayout class="m-l-5 m-r-20" col="7" rows="*" columns="*,3*,*"
+        *ngIf="showDataViewSelected === showBetDetailView.COMBINATIONS">
+        <GridLayout col="0" class="button btn-default btn-filter" verticalAlignment="center"
+          [ngClass]="{'disabled': couponGroupingsRow.pageGrouping <= 1}">
+          <Button text="‹" class="button-internal paginator" [isEnabled]="couponGroupingsRow.pageGrouping > 1"
+            (tap)="changePage(false)"></Button>
+        </GridLayout>
+        <Label col="1" horizontalAlignment="center" verticalAlignment="center"
+          text="{{'PAGE' | translate }} {{ couponGroupingsRow.pageGrouping }} {{'PAGE.OF' | translate }} {{ couponGroupingsRow.maxPage }}"></Label>
+        <GridLayout col="2" class="button btn-default btn-filter" verticalAlignment="center"
+          [ngClass]="{'disabled': couponGroupingsRow.pageGrouping >= (couponDetail.Groupings.length / couponGroupingsRow.pageGroupingRows)}">
+          <Button text="›" class="button-internal paginator"
+            [isEnabled]="couponGroupingsRow.pageGrouping < couponGroupingsRow.maxPage"
+            (tap)="changePage(true)"></Button>
+        </GridLayout>
+      </GridLayout>
+      <!-- /GROUPINGS PAGS -->
+    </StackLayout>
+  </GridLayout>
+  <StackLayout row="2" class="m-20 display">
+    <app-summary [data]="couponDetail" *ngIf="showDataViewSelected === showBetDetailView.SUMMARY"></app-summary>
+    <app-events [data]="couponOddEvent" *ngIf="showDataViewSelected === showBetDetailView.EVENTS"></app-events>
+    <app-combinations [data]="couponGroupingsRow" *ngIf="showDataViewSelected === showBetDetailView.COMBINATIONS">
+    </app-combinations>
+  </StackLayout>
+  <GridLayout row="3" rows="*" columns="2*,6*" class="p-l-20">
+    <Button col="0" verticalAlignment="center" class="button btn-default btn-success radius-10"
+      text="{{ 'REPRINT' | translate }}" *ngIf="settings.isEnabledReprintCoupon"></Button>
+  </GridLayout>
+  <StackLayout row="4"></StackLayout>
+</GridLayout>

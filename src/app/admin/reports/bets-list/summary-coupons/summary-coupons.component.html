@@ -94,33 +94,30 @@
       <div fxLayout="column" fxFlex fxLayoutAlign="start">
         <div fxFlex fxLayout="column" fxLayoutAlign="flex-start" fxLayoutAlignGap="grid">
           <div fxFlex fxLayoutAlign="start center" class="border-bottom-overlay-1px" [style.max-height.px]="55"
-            *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons">
+            *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons" [routerLink]="['../detail', rowItem.CouponCode ]">
             <div fxFlex="5">
-              <img class="icon icon-24px" *ngIf="rowItem.IsAgentSettled"
-                src="app/themes/skins/{{settings.theme}}/icon/baseline-check-24px.svg">
+                <img class="icon icon-24px" *ngIf="rowItem.IsAgentSettled" src="app/themes/skins/{{settings.theme}}/icon/baseline-check-24px.svg">
             </div>
             <div fxFlex="20">
               <strong>{{ rowItem.CouponCode }}</strong>
             </div>
             <div fxFlex="20">
-              <strong>{{rowItem.UserId + ' - ' + rowItem.UserName }}</strong>
+                <strong>{{rowItem.UserId + ' - ' + rowItem.UserName }}</strong>
             </div>
             <div fxFlex="20">
-              <strong>{{rowItem.CouponDateOffset | date: 'dd/MM/yy HH:mm:ss' }}</strong>
+                <strong>{{rowItem.CouponDateOffset | date: 'dd/MM/yy HH:mm:ss' }}</strong>
             </div>
             <div fxFlex="7">
-              <strong>{{rowItem.Stake  }}</strong>
+                <strong>{{rowItem.Stake  }}</strong>
             </div>
             <div fxFlex="7" fxLayoutAlign="center">
-              <ng-container [ngSwitch]="rowItem.CouponStatusId">
-                <img class="icon icon-24px" *ngSwitchDefault
-                  src="app/themes/skins/{{settings.theme}}/icon/progress-clock.svg">
-                <!-- LOST -->
-                <img class="icon icon-24px" *ngSwitchCase="2" src="app/themes/skins/{{settings.theme}}/icon/cancel.svg">
-                <!-- WIN -->
-                <img class="icon icon-24px" *ngSwitchCase="3"
-                  src="app/themes/skins/{{settings.theme}}/icon/checked.svg">
-              </ng-container>
+                <ng-container [ngSwitch]="rowItem.CouponStatusId">
+                    <img class="icon icon-24px" *ngSwitchDefault src="app/themes/skins/{{settings.theme}}/icon/progress-clock.svg">
+                    <!-- LOST -->
+                    <img class="icon icon-24px" *ngSwitchCase="2" src="app/themes/skins/{{settings.theme}}/icon/cancel.svg">
+                    <!-- WIN -->
+                    <img class="icon icon-24px" *ngSwitchCase="3" src="app/themes/skins/{{settings.theme}}/icon/checked.svg">
+                </ng-container>
             </div>
             <div fxFlex="9">
               <strong>{{ 'DYNAMIC_KEYS.CouponType.'+couponType[rowItem.CouponTypeId] | translate }}</strong>
