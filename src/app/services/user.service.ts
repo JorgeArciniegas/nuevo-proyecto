@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ElysApiService, TokenDataSuccess, AccountDetails, CurrencyCodeRequest, CurrencyCodeResponse } from '@elys/elys-api';
+import { AccountDetails, CurrencyCodeRequest, ElysApiService, TokenDataSuccess } from '@elys/elys-api';
+import { AppSettings } from '../app.settings';
 import { RouterService } from './utility/router/router.service';
 import { StorageService } from './utility/storage/storage.service';
 import { TranslateUtilityService } from './utility/translate-utility.service';
-import { AppSettings } from '../app.settings';
 
 @Injectable({
   providedIn: 'root'
@@ -127,25 +127,17 @@ export class UserService {
       currencyCode: this.storageService.getData('UserData').Currency
     };
 
-    let currencyCodeResponse: number[];
     // Set  'defaultAmount'  the "presets value"
     this.api.coupon.getCouponRelatedCurrency(currencyRequest).then( preset => {
-      currencyCodeResponse = [
-        preset.CouponPreset.CouponPresetValues.PresetOne,
-        preset.CouponPreset.CouponPresetValues.PresetTwo,
-        preset.CouponPreset.CouponPresetValues.PresetThree,
-        preset.CouponPreset.CouponPresetValues.PresetFour
-      ];
+
+      this.appSetting.defaultAmount = preset.CouponPreset.CouponPresetValues;
+
     });
     // match products result from api to products on the system
     this.api.virtual.getAvailablevirtualsports().then( items => {
 
       this.appSetting.products.map( prod => {
-        items.filter( i => {
-          if (i.SportId === prod.sportId) {
-            prod.defaultAmount = currencyCodeResponse;
-          }
-        });
+        items.filter( i =>  i.SportId === prod.sportId );
       });
     });
     // Order the result from minor to major

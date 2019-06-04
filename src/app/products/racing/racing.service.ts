@@ -577,7 +577,7 @@ export class RacingService extends RacingServiceExtra {
       areaFuncData = this.checkSmartCode(areaFuncData);
       // set amount
       areaFuncData.amount = !this.btnService.polyfunctionalArea
-        ? this.productService.product.defaultAmount[0]
+        ? this.appSettings.defaultAmount.PresetOne
         : this.btnService.polyfunctionalArea.amount;
       // verify if the type of betslip is set
       if (this.btnService.polyfunctionalArea !== null) {

@@ -24,7 +24,7 @@ export class BtncalcComponentCommon {
   constructor(
     public productService: ProductsService,
     public btncalcService: BtncalcService,
-    private appSetting: AppSettings,
+    public appSetting: AppSettings,
     private couponService: CouponService
   ) {
     // manages buttons COL/TOT, label amount in display, amount association/distribution

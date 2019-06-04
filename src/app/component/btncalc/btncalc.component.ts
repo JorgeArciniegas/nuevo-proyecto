@@ -17,7 +17,7 @@ export class BtncalcComponent extends BtncalcComponentCommon
   constructor(
     productService: ProductsService,
     btncalcService: BtncalcService,
-    appSetting: AppSettings,
+    public appSetting: AppSettings,
     couponService: CouponService
   ) {
     super(productService, btncalcService, appSetting, couponService);
