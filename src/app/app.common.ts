@@ -21,6 +21,8 @@ import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
 import { ConfirmDestroyCouponComponent } from './component/coupon/confirm-destroy-coupon/confirm-destroy-coupon.component';
 import { DestroyCouponService } from './component/coupon/confirm-destroy-coupon/destroy-coupon.service';
+import { BetoddsComponent } from './products/product-dialog/betodds/betodds.component';
+import { StatisticsComponent } from './products/product-dialog/statistics/statistics.component';
 
 export const componentDeclarations: any[] = [
   AppComponent,
@@ -37,7 +39,9 @@ export const componentDeclarations: any[] = [
   PayCancelDialogComponent,
   PrintCouponComponent,
   PrintReceiptComponent,
-  ConfirmDestroyCouponComponent
+  ConfirmDestroyCouponComponent,
+  BetoddsComponent,
+  StatisticsComponent
 ];
 
 export const providerDeclarations: any[] = [

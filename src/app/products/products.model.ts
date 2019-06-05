@@ -1,5 +1,6 @@
 import { BetCouponExtended } from '@elys/elys-coupon';
 import { TypeBetSlipColTot } from './racing/racing.models';
+import { VirtualBetCompetitor } from '@elys/elys-api';
 
 export interface WindowSize {
   height: number;
@@ -73,6 +74,7 @@ export interface BetDataDialog {
   title: string;
   betOdds?: BetOdds;
   betCoupon?: BetCouponExtended;
+  statistics?: VirtualBetCompetitor[];
 }
 export class DialogData {
   title: string;
@@ -80,16 +82,19 @@ export class DialogData {
   breakpoint?: number;
   opened: boolean;
   betCoupon?: BetCouponExtended;
+  statistics?: VirtualBetCompetitor[];
   constructor(
     betOdds?: BetOdds,
     breakpoint?: number,
     betCoupon?: BetCouponExtended,
-    title?: string
+    title?: string,
+    statistics?: VirtualBetCompetitor[]
   ) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;
     this.opened = false;
     this.betCoupon = betCoupon || null;
+    this.statistics = statistics || null;
   }
 }
 

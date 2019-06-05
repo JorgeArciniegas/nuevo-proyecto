@@ -29,9 +29,9 @@ export const environment: Environment = {
       widgets: [
         {
           name: '',
-          routing: '',
-          typeLink: WidgetTypeLink.OUTLET,
-          icon: ''
+          routing: 'statistic',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
         },
       ],
     },

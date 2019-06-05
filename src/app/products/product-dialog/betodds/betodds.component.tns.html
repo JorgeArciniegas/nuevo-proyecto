@@ -1,0 +1,90 @@
+<GridLayout rows="*" columns="*" class="dialog">
+  <GridLayout rows="4*,16*,3*" columns="*" class="odds-grid">
+    <GridLayout row="0" rows="*" columns="6*,*">
+      <Label col="0" text="{{ 'TITLE.' + data.title | translate }}" class="title" verticalAlignment="center"
+        horizontalAlignment="left"></Label>
+      <Label col="1" text="{{page + 1}}/{{maxPage}}" *ngIf="maxPage > 1" class="indicator" verticalAlignment="bottom"
+        horizontalAlignment="right" verticalAlignment="bottom"></Label>
+    </GridLayout>
+    <GridLayout row="1" rows="2*{{rows}},2*" columns="*{{columns}}"
+      [ngClass]="{'small': productService.windowSize.small}">
+      <!-- Scroll -->
+      <GridLayout row="0" colSpan="{{columnNumber}}" class="card-odd scroll" (tap)="previusOdds()" *ngIf="maxPage > 1"
+        [ngClass]="{'disabled': page <= 0}" [isEnabled]="page > 0">
+        <Image width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Up.png" verticalAlignment="center"></Image>
+      </GridLayout>
+      <GridLayout row="{{rowNumber + 1}}" colSpan="{{columnNumber}}" class="card-odd scroll" (tap)="nextOdds()"
+        *ngIf="maxPage > 1" [ngClass]="{'disabled': page >= maxPage - 1}" [isEnabled]="page < maxPage - 1">
+        <Image width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Down.png" verticalAlignment="center">
+        </Image>
+      </GridLayout>
+
+      <!-- Cards -->
+      <ng-container *ngIf="betOdds">
+        <GridLayout row="{{ 1 + (i / columnNumber) | floor}}" col="{{i % columnNumber}}" rows="*,2*,2*" columns="*"
+          class="card-odd" [ngClass]="{'notSelected': !odd.selected}" (tap)="toggleOdd(odd)"
+          *ngFor="let odd of betOdds; let i = index;">
+          <StackLayout row="0" class="top-window"></StackLayout>
+          <GridLayout row="1" rows="*" columns="2*,*" class="row">
+            <Label col="0" text="{{odd.label}}" horizontalAlignment="left"></Label>
+            <Label col="1" class="odd" text="{{odd.odd | number: '1.2-2'}}" horizontalAlignment="right"
+              verticalAlignment="center"></Label>
+          </GridLayout>
+          <GridLayout row="2" columns="*,*" class="row" verticalAlignment="center">
+            <StackLayout class="stake color radius-5">
+              <Label text="{{odd.amount | number: '1.2-2'}}" horizontalAlignment="center"
+                verticalAlignment="center"></Label>
+            </StackLayout>
+          </GridLayout>
+        </GridLayout>
+      </ng-container>
+      <ng-container *ngIf="betCouponOdd">
+        <GridLayout row="{{ 1 + (i / columnNumber) | floor}}" col="{{i % columnNumber}}" rows="3*,8*,6*" columns="*"
+          class="card-odd"
+          [ngClass]="{'card-odd-error': !couponService.warningMessages && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}"
+          *ngFor="let odd of betCouponOdd; let i = index;">
+          <GridLayout row="0" col="*,*" class="top-window">
+            <Label col="0" text="{{odd.EventName}}" horizontalAlignment="left"></Label>
+            <Label col="1" text="#{{odd.MatchId}}" horizontalAlignment="right"></Label>
+          </GridLayout>
+          <GridLayout row="1" rows="*" columns="7*,3*" class="row">
+            <Label col="0"
+              text="{{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})"
+              horizontalAlignment="left" textWrap="true"></Label>
+            <StackLayout col="1" horizontalAlignment="right">
+              <Label class="odd" text="{{odd.OddValue | number: '1.2-2'}}" horizontalAlignment="right"></Label>
+            </StackLayout>
+          </GridLayout>
+          <GridLayout row="2" columns="*,*" class="row" verticalAlignment="center">
+            <StackLayout col="0" class="button" width="100%"
+              [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
+              'btn-selected' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }" (tap)="checkOddToChangeStake(odd)"
+              horizontalAlignment="center" verticalAlignment="center">
+              <Label class="stake"
+                *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId"
+                text="{{odd.OddStake | number: '1.2-3'}}" horizontalAlignment="center"
+                verticalAlignment="center"></Label>
+              <Label class="stake"
+                *ngIf="couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId"
+                text="{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}" horizontalAlignment="center"
+                verticalAlignment="center"></Label>
+            </StackLayout>
+            <StackLayout col="1" class="btn-warning button" (tap)="removeOdd(odd)" horizontalAlignment="right">
+              <Image stretch="aspectFit" width="26"
+                src="~/app/themes/skins/{{settings.theme}}/icon/baseline-delete_outline-white-24px.png"
+                verticalAlignment="center" horizontalAlignment="center"></Image>
+            </StackLayout>
+          </GridLayout>
+        </GridLayout>
+      </ng-container>
+
+
+    </GridLayout>
+    <StackLayout row="3" horizontalAlignment="center">
+      <GridLayout rows="*" columns="*" class="button btn-close">
+        <Button text="{{ 'CLOSE' | translate }}" class="button-internal" (tap)="close()"
+          textTransform="none"></Button>
+      </GridLayout>
+    </StackLayout>
+  </GridLayout>
+</GridLayout>
