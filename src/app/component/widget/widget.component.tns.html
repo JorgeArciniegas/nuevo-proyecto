@@ -3,10 +3,5 @@
     <Image (tap)="openRouting( icon.routing )" *ngFor="let icon of product.widgets" stretch="aspectFit" [width]="widgetIcon.width"
       [height]="widgetIcon.height" src="~/app/themes/skins/{{settings.theme}}/icon/{{ icon.icon }}.png"
       [isEnabled]="!timeBlocked"></Image>
-      <!--
-    <Image stretch="aspectFit" [width]="widgetIcon.width" [height]="widgetIcon.height" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-assignment-24px.png"
-      [isEnabled]="!timeBlocked"></Image>
-    <Image stretch="aspectFit" [width]="widgetIcon.width" [height]="widgetIcon.height" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-find_in_page-24px.png"
-      [isEnabled]="!timeBlocked"></Image> -->
   </StackLayout>
 </GridLayout>
