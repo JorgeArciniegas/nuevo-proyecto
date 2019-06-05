@@ -14,4 +14,5 @@ export class AppSettings {
   couponMessageTrasmitted: string = environment.couponMessageTrasmitted;
   couponMessageLegal: string = environment.couponMessageLegal;
   defaultAmount: CouponPresetValues = environment.defaultAmount;
+  isEnabledReprintCoupon: boolean = environment.isEnabledReprintCoupon;
 }

@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { CouponType, StagedCoupon } from '@elys/elys-api';
+import { CouponType, StagedCoupon, CouponStatus } from '@elys/elys-api';
 import { Printer } from 'nativescript-printer';
 import { AppSettings } from '../../../app.settings';
 import { PrintCouponService } from './print-coupon.service';
@@ -12,7 +12,7 @@ import { PrintCouponService } from './print-coupon.service';
 export class PrintCouponComponent {
   couponPrint: StagedCoupon;
   printer: Printer = new Printer();
-
+  couponStatus: typeof CouponStatus = CouponStatus;
   couponType: typeof CouponType = CouponType;
   @ViewChild('printing') view: ElementRef;
   constructor(public printCouponService: PrintCouponService, public appSetting: AppSettings) {

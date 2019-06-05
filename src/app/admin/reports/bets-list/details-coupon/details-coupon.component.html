@@ -85,7 +85,7 @@
     </div>
     <div fxFill fxFlex="10" class="padding-vertical-10" fxLayoutAlign="flex-start center">
       <div fxFill fxFlex="20" fxLayoutAlign="start stretch" *ngIf="settings.isEnabledReprintCoupon">
-          <button fxFlex="100" class="btn-default btn-success radius-5">
+          <button fxFlex="100" class="btn-default btn-success radius-5" (click)="printAgainCoupon()">
             {{ 'REPRINT' | translate }}
           </button>
       </div>

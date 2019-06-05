@@ -95,7 +95,7 @@ export const environment: Environment = {
       widgets: []
     }
   ],
-  isEnabledReprintCoupon: false,
+  isEnabledReprintCoupon: true,
   showRaceId: true,
   couponMessageTrasmitted:
     'Mandate transmitted via the Internet andaccepted on the',

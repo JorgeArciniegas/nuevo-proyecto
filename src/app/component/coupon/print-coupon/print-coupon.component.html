@@ -24,6 +24,22 @@
         {{ 'CouponType.' + couponType[printCouponService.couponPrint.CouponTypeId] | translate }}</div>
 
     </div>
+    <!-- OTHER INFO REPRINT COUPON-->
+    <div class="betslip-info" *ngIf="printCouponService.isPrintAgainst">
+        <div class="betslip-reprint-info" >
+            <div class="col font-size-normal" [style.width.%]="100">{{ 'PRINT_COUPON.REPRINTED' | translate }}</div>
+            <div class="col font-size-normal" [style.width.%]="40">{{ 'PRINT_COUPON.DATE_OF_REPRINT' | translate }}</div>
+            <div class="col font-size-normal text-right" [style.width.%]="60">
+              {{ printCouponService.reprintDate | date:'yyyy-MM-dd HH.mm.ss'}}</div>
+            <ng-container *ngIf="printCouponService.couponPrint.CouponStatusId === couponStatus.Win  ||
+              printCouponService.couponPrint.CouponStatusId === couponStatus.Lost ||
+              printCouponService.couponPrint.CouponStatusId === couponStatus.Refused ||
+              printCouponService.couponPrint.CouponStatusId === couponStatus.Cancelled">
+              <div class="col font-size-normal" [style.width.%]="40">{{ 'OUTCOME' | translate }}</div>
+              <div class="col font-size-normal text-right" [style.width.%]="60">{{'DYNAMIC_KEYS.CouponStatusInternal.'+ couponStatus[printCouponService.couponPrint.CouponStatusId] | translate }}</div>
+            </ng-container>
+        </div>
+    </div>
     <div class="betslip-odds">
       <div class="row-group-odd"
         *ngFor="let groupCat of printCouponService.couponPrint.Odds | groupByCategory:'Championship'">

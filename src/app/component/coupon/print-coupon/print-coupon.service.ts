@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StagedCoupon, StagedCouponStatus, SummaryCoupon } from '@elys/elys-api';
+import { StagedCoupon, StagedCouponStatus, SummaryCoupon, CouponStatus } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { timer } from 'rxjs';
 import { RouterService } from '../../../../../src/app/services/utility/router/router.service';
@@ -14,6 +14,8 @@ import { RouterService } from '../../../../../src/app/services/utility/router/ro
 export class PrintCouponService {
   printingEnabled: boolean;
   couponPrint: StagedCoupon;
+  isPrintAgainst: boolean;
+  reprintDate: Date;
 
   constructor(elysCoupon: ElysCouponService, private router: RouterService) {
     // subscribe to stagedCouponObs and it is found on  "coupon library".
@@ -30,7 +32,10 @@ export class PrintCouponService {
     });
   }
   reprintCoupon(coupon: SummaryCoupon)  {
-    // this.couponPrint = coupon as StagedCoupon;
+    this.couponPrint = coupon as unknown as StagedCoupon;
+    this.isPrintAgainst = true;
+    this.reprintDate = new Date();
+    this.printWindow();
   }
   /**
    * It Opens the new route on outlet with name=print and append to the Dom element the class "isPrinting"
@@ -51,6 +56,7 @@ export class PrintCouponService {
         document.getElementById('app').classList.remove('isPrinting');
         this.printingEnabled = false;
         this.couponPrint = null;
+        this.isPrintAgainst = false;
         // reset the router
         this.router.getRouter().navigate([{ outlets: { print: null } }]);
       });
