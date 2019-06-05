@@ -3,6 +3,8 @@ import { AccountVirtualSport } from '@elys/elys-api';
 import { Observable } from 'rxjs';
 import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
 import { BetsListService } from './bets-list.service';
+import { DateAdapter } from '@angular/material';
+import { TranslateUtilityService } from '../../../../../src/app/services/utility/translate-utility.service';
 
 @Component({
   selector: 'app-bets-list',
@@ -18,8 +20,8 @@ export class BetsListComponent implements OnInit, OnDestroy {
   couponType: typeof CouponTypeInternal = CouponTypeInternal;
   couponStatus: typeof CouponStatusInternal = CouponStatusInternal;
 
-  constructor(public betsListService: BetsListService ) {
-
+  constructor(public betsListService: BetsListService, private translate: TranslateUtilityService, private adapter: DateAdapter<Date> ) {
+    this.adapter.setLocale(this.translate.translateService.currentLang);
     document.body.classList.add('bets-list');
 
     // close the date picker on outside click

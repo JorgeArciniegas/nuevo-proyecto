@@ -19,7 +19,6 @@ export class BetsListComponent  {
     public betsListService: BetsListService,
     public readonly settings: AppSettings
   ) {
-
   }
 
   changeValue(key: string, value: any): void {

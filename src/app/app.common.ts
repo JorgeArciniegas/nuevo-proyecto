@@ -23,6 +23,11 @@ import { ConfirmDestroyCouponComponent } from './component/coupon/confirm-destro
 import { DestroyCouponService } from './component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { BetoddsComponent } from './products/product-dialog/betodds/betodds.component';
 import { StatisticsComponent } from './products/product-dialog/statistics/statistics.component';
+import { LOCALE_ID } from '@angular/core';
+import localeIt from '@angular/common/locales/it';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeIt);
 
 export const componentDeclarations: any[] = [
   AppComponent,
@@ -50,7 +55,15 @@ export const providerDeclarations: any[] = [
   TranslateService,
   BtncalcService,
   CouponDialogService,
-  DestroyCouponService
+  DestroyCouponService,
+  /* { provide: LOCALE_ID, useValue: 'it' } */
+  {
+    provide: LOCALE_ID,
+    deps: [TranslateService],
+    // tslint:disable-next-line:typedef
+    useFactory: (confService: TranslateService) =>
+      confService.currentLang
+  },
 ];
 
 export const routes: Routes = [
