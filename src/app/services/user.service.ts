@@ -12,6 +12,8 @@ import { StorageService } from './utility/storage/storage.service';
 import { TranslateUtilityService } from './utility/translate-utility.service';
 import { AppSettings } from '../app.settings';
 import { interval } from 'rxjs';
+import { ElysCouponService } from '@elys/elys-coupon';
+import { StagedCouponStatus } from '@elys/elys-api';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +28,8 @@ export class UserService {
     private storageService: StorageService,
     private translateService: TranslateUtilityService,
     private api: ElysApiService,
-    private appSetting: AppSettings
+    private appSetting: AppSettings,
+    private elysCouponService: ElysCouponService
   ) {
     // Check if the user is logged
     if (this.isUserLogged) {
@@ -37,6 +40,16 @@ export class UserService {
       });
       this.loadUserData(this.storageService.getData('tokenData'));
     }
+    /**
+     * listening for staged coupons variation then check the status, if = Placed substracts the played stake from playable balance
+     */
+    this.elysCouponService.stagedCouponObs.subscribe(coupons => {
+      for (const coupon of coupons.filter(
+        item => item.CouponStatusId === StagedCouponStatus.Placed
+      )) {
+        this.decreasePlayableBalance(coupon.Stake);
+      }
+    });
   }
   /**
    * Method to login and store auth token.
@@ -148,16 +161,13 @@ export class UserService {
     };
 
     // Set  'defaultAmount'  the "presets value"
-    this.api.coupon.getCouponRelatedCurrency(currencyRequest).then( preset => {
-
+    this.api.coupon.getCouponRelatedCurrency(currencyRequest).then(preset => {
       this.appSetting.defaultAmount = preset.CouponPreset.CouponPresetValues;
-
     });
     // match products result from api to products on the system
-    this.api.virtual.getAvailablevirtualsports().then( items => {
-
-      this.appSetting.products.map( prod => {
-        items.filter( i =>  i.SportId === prod.sportId );
+    this.api.virtual.getAvailablevirtualsports().then(items => {
+      this.appSetting.products.map(prod => {
+        items.filter(i => i.SportId === prod.sportId);
       });
     });
     // Order the result from minor to major

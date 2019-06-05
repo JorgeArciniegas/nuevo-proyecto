@@ -30,16 +30,6 @@ export class UserMenuComponent implements OnInit {
 
   ngOnInit() {
     interval(1000).subscribe(() => this.getTime());
-    /**
-     * listening for staged coupons variation then check the status, if = Placed substracts the played stake from playable balance
-     */
-    this.elysCouponService.stagedCouponObs.subscribe(coupons => {
-      for (const coupon of coupons.filter(
-        item => item.CouponStatusId === StagedCouponStatus.Placed
-      )) {
-        this.userService.decreasePlayableBalance(coupon.Stake);
-      }
-    });
     this.barHeight =
       this.productService.windowSize.height -
       this.productService.windowSize.columnHeight;
