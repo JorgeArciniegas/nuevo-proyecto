@@ -128,7 +128,7 @@
   "NO_CONNECTION": "Nessuna connessione disponibile",
   "Operator": "Operator",
   "PASSWORD": "Password",
-  "PAY": "PAYMENT",
+  "PAY": "Pagamento",
   "PAYED_AMOUNT": "Importo pagato",
   "PAYED_ON": "Pagata il",
   "POTENTIAL_MAX_WINNER": "Vincita potenziale massima",
@@ -205,7 +205,7 @@
     "AS": "Accoppiata",
     "AT": "Accoppiata Trio",
     "AX": "Multipla Accoppiata",
-    "COUPON": "COUPON",
+    "COUPON": "Coupon",
     "EVEN": "Pari",
     "ODD": "Dispari",
     "OVER": "Over",
@@ -218,7 +218,7 @@
     "UNDER": "Under",
     "VT": "Vincente trio",
     "WINNER": "Vincente",
-    "STATISTIC":"Statistiche"
+    "STATISTIC": "Statistiche"
   },
   "TOT": "TOT",
   "TOTALS": "Totali",
@@ -234,5 +234,5 @@
   "tabCoupon": "Scheda scommesse",
   "ODDS": "Quota",
   "FITNESS": "Forma fisica",
-  "LAST-FIVE":"Ultime 5"
+  "LAST-FIVE": "Ultime 5"
 }
