@@ -20,4 +20,43 @@ The name assigned to the keys of the dictionary are formed by:
 
 ### STATIC KEY
 
+#### Generic String
+
+```
+{
+  ...
+  "BALANCE": "Balance",
+  ...
+}
+```
+
+#### Specific String
+
+```
+
+{
+  ...
+  "CONFIRM_DESTROY_COUPON.MESSAGE": "This operation will cancel the current coupon. Do you want to continue?",
+  ...
+}
+```
+
 ### DYNAMIC KEY
+
+```
+
+{
+  ...
+  "DYNAMIC_KEY": {
+    ...
+    "CouponStatusInternal": {
+      "ALL": "All",
+      "Lost": "Lost",
+      "Placed": "Placed",
+      "Win": "Won"
+    },
+    ...
+  }
+  ...
+}
+```
