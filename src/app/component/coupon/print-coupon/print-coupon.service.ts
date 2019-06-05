@@ -33,7 +33,6 @@ export class PrintCouponService {
   }
   reprintCoupon(coupon: SummaryCoupon)  {
     this.couponPrint = coupon as unknown as StagedCoupon;
-    console.log(this.couponPrint);
     this.isPrintAgainst = true;
     this.reprintDate = new Date();
     this.printWindow();
