@@ -1,0 +1,31 @@
+
+.odds-grid {
+
+  .card-odd {
+      padding: 5px;
+
+      .top-window {
+          height: 20px;
+          font-size: 12px;
+          padding: 2px 6px;
+      }
+
+      .first-row {
+          padding: 5px;
+      }
+
+      .stake {
+          padding: 2px;
+          width: 40%;
+          margin: 5px;
+          text-align: center;
+      }
+      .odd {
+          padding: 2px;
+      }
+
+      &.notSelected {
+          opacity: 0.2;
+      }
+  }
+}

@@ -20,7 +20,7 @@
     <GridLayout col="1" rows="*,2*,*" columns="*" class="display-content">
       <Label row="0" class="field-title" text="{{ 'DATE_FROM' | translate }}"></Label>
       <GridLayout row="1" columns="*,6*,*" class="button btn-default btn-filter" (tap)="selectDate('dateFrom')">
-        <Button colSpan="3" text="{{betsListService.dateFrom | date: mediumDate}}" class="button-internal"></Button>
+        <Button colSpan="3" text="{{betsListService.dateFrom | date : 'mediumDate'}}" class="button-internal"></Button>
         <Image col="0" stretch="aspectFit" width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Date.png"
           verticalAlignment="center" horizontalAlignment="right"></Image>
         <Image col="2" stretch="aspectFit" width="8" src="~/app/themes/skins/{{settings.theme}}/icon/Down.png"
@@ -30,7 +30,7 @@
     <GridLayout col="2" rows="*,2*,*" columns="*" class="display-content">
       <Label row="0" class="field-title" text="{{ 'DATE_TO' | translate }}"></Label>
       <GridLayout row="1" columns="*,6*,*" class="button btn-default btn-filter" (tap)="selectDate('dateTo')">
-        <Button colSpan="3" text="{{betsListService.dateTo | date: mediumDate}}" class="button-internal"></Button>
+        <Button colSpan="3" text="{{betsListService.dateTo | date: 'mediumDate'}}" class="button-internal"></Button>
         <Image col="0" stretch="aspectFit" width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Date.png"
           verticalAlignment="center" horizontalAlignment="right"></Image>
         <Image col="2" stretch="aspectFit" width="8" src="~/app/themes/skins/{{settings.theme}}/icon/Down.png"

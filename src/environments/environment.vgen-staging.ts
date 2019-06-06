@@ -6,13 +6,19 @@ export const environment: Environment = {
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
   supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
+  defaultAmount: {
+    PresetOne: null,
+    PresetTwo: null,
+    PresetThree: null,
+    PresetFour: null
+  },
   products: [
     {
       sportId: 8,
       codeProduct: 'DOG',
       name: 'DogRacing',
       label: 'DOG',
-      defaultAmount: [],
+
       order: 0,
       productSelected: true,
       isPlayable: true,
@@ -24,9 +30,9 @@ export const environment: Environment = {
       widgets: [
         {
           name: '',
-          routing: '',
-          typeLink: WidgetTypeLink.OUTLET,
-          icon: ''
+          routing: 'statistic',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
         }
       ]
     },
@@ -35,7 +41,6 @@ export const environment: Environment = {
       codeProduct: 'HORSE',
       name: 'HorseRacing',
       label: 'HORSE',
-      defaultAmount: [],
       order: 1,
       productSelected: false,
       isPlayable: true,
@@ -54,7 +59,7 @@ export const environment: Environment = {
       order: 2,
       productSelected: false,
       isPlayable: true,
-      defaultAmount: [],
+
       toolbarButton: {
         name: 'virtualhorse',
         icon: 'Horse',
@@ -70,7 +75,6 @@ export const environment: Environment = {
       order: 3,
       productSelected: false,
       isPlayable: false,
-      defaultAmount: [],
       toolbarButton: {
         name: 'Italian League',
         icon: 'Soccer-ita',
@@ -86,7 +90,7 @@ export const environment: Environment = {
       order: 3,
       productSelected: false,
       isPlayable: false,
-      defaultAmount: [],
+
       toolbarButton: {
         name: 'Italian League',
         icon: 'Soccer-eng',
@@ -96,7 +100,7 @@ export const environment: Environment = {
     }
   ],
   showRaceId: true,
-  isEnabledReprintCoupon: false,
+  isEnabledReprintCoupon: true,
   couponMessageTrasmitted: 'Mandate transmitted via the Internet andaccepted on the',
   // tslint:disable-next-line:max-line-length
   couponMessageLegal:

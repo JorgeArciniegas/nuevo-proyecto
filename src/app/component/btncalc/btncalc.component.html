@@ -1,18 +1,25 @@
 <!-- Btn amount default avalaible-->
-<mat-grid-list *ngIf="productService.product && productService.product.defaultAmount"
-  cols="{{productService.product.defaultAmount.length}}" class="grid-row-amount" rowHeight="{{rowHeight}}">
-  <mat-grid-tile *ngFor="let amount of productService.product.defaultAmount; let i = index">
-    <button [style.width.px]="rowHeight-12" [style.height.px]="rowHeight-12"
-      class="btn-default elevation-z5 btn-amount-{{i+1}} radius-50"
-      (click)="btnDefaultAmountsPreset(amount)">{{ amount | digitslimit }}</button>
-  </mat-grid-tile>
-</mat-grid-list>
-<!-- Btn amount default unavalaible-->
-<mat-grid-list *ngIf="productService.product && !productService.product.defaultAmount" cols="4" class="grid-row-amount"
+<mat-grid-list *ngIf="productService.product && appSetting.defaultAmount" cols="4" class="grid-row-amount"
   rowHeight="{{rowHeight}}">
-  <mat-grid-tile *ngFor="let item of ' '.repeat(4).split('')  ; let i = index">
-    <button [style.width.px]="rowHeight-12" [style.height.px]="rowHeight-12"
-      class="btn-default elevation-z5 btn-amount-{{i+1}} radius-50"></button>
+  <mat-grid-tile>
+    <button *ngIf="appSetting.defaultAmount.PresetOne > 0" [style.width.px]="rowHeight-12"
+      [style.height.px]="rowHeight-12" class="btn-default elevation-z5 btn-amount-1 radius-50"
+      (click)="btnDefaultAmountsPreset(appSetting.defaultAmount.PresetOne)">{{ appSetting.defaultAmount.PresetOne | digitslimit }}</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button *ngIf="appSetting.defaultAmount.PresetTwo > 0" [style.width.px]="rowHeight-12"
+      [style.height.px]="rowHeight-12" class="btn-default elevation-z5 btn-amount-2 radius-50"
+      (click)="btnDefaultAmountsPreset(appSetting.defaultAmount.PresetTwo)">{{ appSetting.defaultAmount.PresetTwo | digitslimit }}</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button *ngIf="appSetting.defaultAmount.PresetThree > 0" [style.width.px]="rowHeight-12"
+      [style.height.px]="rowHeight-12" class="btn-default elevation-z5 btn-amount-3 radius-50"
+      (click)="btnDefaultAmountsPreset(appSetting.defaultAmount.PresetThree)">{{ appSetting.defaultAmount.PresetThree | digitslimit }}</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button *ngIf="appSetting.defaultAmount.PresetFour > 0" [style.width.px]="rowHeight-12"
+      [style.height.px]="rowHeight-12" class="btn-default elevation-z5 btn-amount-4 radius-50"
+      (click)="btnDefaultAmountsPreset(appSetting.defaultAmount.PresetFour)">{{ appSetting.defaultAmount.PresetFour | digitslimit }}</button>
   </mat-grid-tile>
 </mat-grid-list>
 <!-- BTN calculator -->

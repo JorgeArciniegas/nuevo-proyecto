@@ -11,7 +11,8 @@ import {
   VirtualProgramTreeBySportRequest,
   VirtualProgramTreeBySportResponse,
   VirtualSportLastResultsRequest,
-  VirtualSportLastResultsResponse
+  VirtualSportLastResultsResponse,
+  VirtualBetCompetitor
 } from '@elys/elys-api';
 import { interval, Observable, Subject, timer } from 'rxjs';
 import { DestroyCouponService } from '../../../../src/app/component/coupon/confirm-destroy-coupon/destroy-coupon.service';
@@ -577,7 +578,7 @@ export class RacingService extends RacingServiceExtra {
       areaFuncData = this.checkSmartCode(areaFuncData);
       // set amount
       areaFuncData.amount = !this.btnService.polyfunctionalArea
-        ? this.productService.product.defaultAmount[0]
+        ? this.appSettings.defaultAmount.PresetOne
         : this.btnService.polyfunctionalArea.amount;
       // verify if the type of betslip is set
       if (this.btnService.polyfunctionalArea !== null) {
@@ -1357,5 +1358,16 @@ export class RacingService extends RacingServiceExtra {
       returnValues.push(value.charAt(index));
     }
     return returnValues;
+  }
+
+  /**
+   * Method to extract the current Race selected
+   * @returns VirtualBetEvent
+   */
+  public getCurrentRace(): VirtualBetEvent {
+    return this.cacheRaces.filter(
+      (cacheRace: VirtualBetEvent) => cacheRace.id === this.placingRace.raceNumber
+    )[0];
+
   }
 }

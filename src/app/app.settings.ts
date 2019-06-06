@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CouponPresetValues } from '@elys/elys-api';
 import { environment } from '../environments/environment';
 import { Products } from '../environments/environment.models';
 @Injectable()
@@ -13,4 +14,6 @@ export class AppSettings {
   showRaceId: boolean = environment.showRaceId;
   couponMessageTrasmitted: string = environment.couponMessageTrasmitted;
   couponMessageLegal: string = environment.couponMessageLegal;
+  defaultAmount: CouponPresetValues = environment.defaultAmount;
+  isEnabledReprintCoupon: boolean = environment.isEnabledReprintCoupon;
 }

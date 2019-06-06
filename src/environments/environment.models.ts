@@ -1,3 +1,5 @@
+import { CouponPresetValues } from "@elys/elys-api";
+
 export interface Environment {
   production: boolean;
   baseApiUrl?: string;
@@ -12,6 +14,7 @@ export interface Environment {
   couponMessageTrasmitted?: string;
   couponMessageLegal?: string;
   isEnabledReprintCoupon: boolean;
+  defaultAmount?: CouponPresetValues;
 }
 
 export interface ToolbarButtons {
@@ -27,7 +30,6 @@ export interface Products {
   productSelected?: boolean;
   isPlayable?: boolean;
   order: number;
-  defaultAmount: number[];
   toolbarButton: ToolbarButtons;
   widgets?: Widget[];
 }

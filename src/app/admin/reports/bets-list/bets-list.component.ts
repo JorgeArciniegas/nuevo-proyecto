@@ -3,6 +3,8 @@ import { AccountVirtualSport } from '@elys/elys-api';
 import { Observable } from 'rxjs';
 import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
 import { BetsListService } from './bets-list.service';
+import { DateAdapter } from '@angular/material';
+import { TranslateUtilityService } from '../../../../../src/app/services/utility/translate-utility.service';
 
 @Component({
   selector: 'app-bets-list',
@@ -10,23 +12,21 @@ import { BetsListService } from './bets-list.service';
   styleUrls: ['./bets-list.component.scss']
 })
 export class BetsListComponent implements OnInit, OnDestroy {
-
-
   @ViewChild('pickerDateFrom') private inputPickerDateFrom;
   @ViewChild('pickerDateTo') private inputPickerDateTo;
 
   couponType: typeof CouponTypeInternal = CouponTypeInternal;
   couponStatus: typeof CouponStatusInternal = CouponStatusInternal;
 
-  constructor(public betsListService: BetsListService ) {
-
+  constructor(public betsListService: BetsListService, private translate: TranslateUtilityService, private adapter: DateAdapter<Date>) {
+    this.adapter.setLocale(this.translate.getCurrentLanguage());
     document.body.classList.add('bets-list');
 
     // close the date picker on outside click
     Observable.fromEvent(document, 'click').subscribe((event: any) => {
       const elem: any = event.target;
       let dismiss = true;
-      event.path.forEach( htmlElem => {
+      event.path.forEach(htmlElem => {
         if (!htmlElem.classList) {
           return;
         }
@@ -37,22 +37,20 @@ export class BetsListComponent implements OnInit, OnDestroy {
         });
       });
 
-      if ( this.inputPickerDateFrom.opened && dismiss ) {
-       this.inputPickerDateFrom.close();
+      if (this.inputPickerDateFrom.opened && dismiss) {
+        this.inputPickerDateFrom.close();
       }
 
-      if ( this.inputPickerDateTo.opened &&  dismiss ) {
+      if (this.inputPickerDateTo.opened && dismiss) {
         this.inputPickerDateTo.close();
-       }
+      }
     });
   }
-
-
 
   ngOnDestroy(): void {
     document.body.classList.remove('bets-list');
   }
-  ngOnInit() { }
+  ngOnInit() {}
 
   changeValue(key: string, value: any) {
     this.betsListService[key] = value;
@@ -62,8 +60,7 @@ export class BetsListComponent implements OnInit, OnDestroy {
     return true;
   }
 
-
-  trackBySportId(idx: number, request: AccountVirtualSport ): number {
+  trackBySportId(idx: number, request: AccountVirtualSport): number {
     return request.SportId;
   }
 }

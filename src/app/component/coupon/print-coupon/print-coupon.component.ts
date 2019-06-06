@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { CouponType } from '@elys/elys-api';
-import { PrintCouponService } from './print-coupon.service';
+import { Component } from '@angular/core';
+import { CouponStatus, CouponType } from '@elys/elys-api';
 import { AppSettings } from '../../../app.settings';
+import { PrintCouponService } from './print-coupon.service';
 
 @Component({
   selector: 'app-print-coupon',
@@ -10,5 +10,6 @@ import { AppSettings } from '../../../app.settings';
 })
 export class PrintCouponComponent {
   couponType: typeof CouponType = CouponType;
+  couponStatus: typeof CouponStatus = CouponStatus;
   constructor(public printCouponService: PrintCouponService, public appSetting: AppSettings) {}
 }

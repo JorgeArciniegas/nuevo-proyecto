@@ -7,6 +7,7 @@ import { ShowBetDetailView } from '../bets-list.model';
 
 import { RouterExtensions } from 'nativescript-angular/router';
 import { OddsEventRows, GroupingsRows } from './detail-coupon.model';
+import { PrintCouponService } from '../../../../../../src/app/component/coupon/print-coupon/print-coupon.service';
 
 @Component({
   selector: 'app-details-coupon',
@@ -27,7 +28,8 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
      private route: ActivatedRoute,
      private elysApi: ElysApiService,
      public readonly settings: AppSettings,
-     private router: RouterExtensions
+     private router: RouterExtensions,
+     private printService: PrintCouponService
      ) {
       this.showDataViewSelected = ShowBetDetailView.SUMMARY;
      }
@@ -45,7 +47,7 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
           couponStatus: this.couponDetail.CouponStatusId,
           pageOdd: 1,
           pageOddRows: this.definedNumberRowForEvents,
-          maxPage: this.couponDetail.Odds.length === 1 ? 1 : Math.floor(this.couponDetail.Odds.length / this.definedNumberRowForEvents),
+          maxPage: this.couponDetail.Odds.length === 1 ? 1 : Math.round(this.couponDetail.Odds.length / this.definedNumberRowForEvents),
           odd: this.couponDetail.Odds.slice(0, this.definedNumberRowForEvents )
         };
         // setting paginator for combinations
@@ -108,5 +110,10 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
   goBack(): void {
     this.router.back();
   }
+
+  printAgainCoupon( ): void {
+    this.printService.reprintCoupon( this.couponDetail );
+  }
+
 }
 

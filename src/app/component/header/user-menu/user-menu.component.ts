@@ -20,7 +20,7 @@ export class UserMenuComponent implements OnInit, AfterViewInit {
   public settings: AppSettings;
   public myTime: Date = new Date();
   public notifyIcon: IconSize;
-
+  public playableBalance: number;
   constructor(
     public readonly appSettings: AppSettings,
     public productService: ProductsService,

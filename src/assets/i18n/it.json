@@ -187,7 +187,8 @@
       "TR": "Trio in ordine con ritorno",
       "UNDER": "Under",
       "VT": "Vincente trio",
-      "WINNER": "Vincente"
+      "WINNER": "Vincente",
+      "STATISTIC": "Statistiche"
     },
     "SMARTCODE": {
       "1VA": "V. ACCOPPIATA",
@@ -267,5 +268,7 @@
   "USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "WARNING": "Avviso",
-  "WON": "Vinto"
+  "WON": "Vinto",
+  "FITNESS": "Forma fisica",
+  "LAST_FIVE": "Ultime 5"
 }

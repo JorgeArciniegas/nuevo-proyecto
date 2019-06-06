@@ -3,7 +3,7 @@ import { interval } from 'rxjs';
 import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../../products/products.service';
 import { IconSize } from '../../model/iconSize.model';
-import { UserService } from '../../../../../src/app/services/user.service';
+import { UserService } from '../../../services/user.service';
 @Component({
   selector: 'app-user-menu',
   templateUrl: './user-menu.component.html',

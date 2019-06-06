@@ -187,7 +187,8 @@
       "TR": "Trio in ordine con ritorno",
       "UNDER": "Under",
       "VT": "Vincente trio",
-      "WINNER": "Winner"
+      "WINNER": "Winner",
+      "STATISTIC": "Statistiche"
     },
     "SMARTCODE": {
       "1VA": "S. EXACTA",
@@ -267,5 +268,7 @@
   "USERNAME_TOO_SHORT": "The username is too short (minimum 2 digits)",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "User not allowed to execute the operation",
   "WARNING": "Warning",
-  "WON": "Won"
+  "WON": "Won",
+  "FITNESS": "Fitness",
+  "LAST_FIVE": "Last 5"
 }
