@@ -13,7 +13,7 @@
   <div class="content">
     <div class="betslip-info">
       <!-- betslip date placed -->
-      <div class="col font-size-normal" [style.width.%]="40">{{ 'COUPON_DATE' | translate }}</div>
+      <div class="col font-size-normal" [style.width.%]="40">{{ 'DATE_OF_PLACEMENT' | translate }}</div>
       <div class="col font-size-normal text-right" [style.width.%]="60">
         {{ printCouponService.couponPrint.CouponDateOffset | date:'yyyy-MM-dd HH.mm.ss'}}</div>
       <div class="col font-size-normal" [style.width.%]="40">{{ 'CODE' | translate }}</div>
@@ -26,19 +26,21 @@
     </div>
     <!-- OTHER INFO REPRINT COUPON-->
     <div class="betslip-info" *ngIf="printCouponService.isPrintAgainst">
-        <div class="betslip-reprint-info" >
-            <div class="col font-size-normal" [style.width.%]="100">{{ 'PRINT_COUPON.REPRINTED' | translate }}</div>
-            <div class="col font-size-normal" [style.width.%]="40">{{ 'PRINT_COUPON.DATE_OF_REPRINT' | translate }}</div>
-            <div class="col font-size-normal text-right" [style.width.%]="60">
-              {{ printCouponService.reprintDate | date:'yyyy-MM-dd HH.mm.ss'}}</div>
-            <ng-container *ngIf="printCouponService.couponPrint.CouponStatusId === couponStatus.Win  ||
+      <div class="betslip-reprint-info">
+        <div class="col font-size-normal" [style.width.%]="100">{{ 'PRINT_COUPON.REPRINTED' | translate }}</div>
+        <div class="col font-size-normal" [style.width.%]="40">{{ 'PRINT_COUPON.DATE_OF_REPRINT' | translate }}</div>
+        <div class="col font-size-normal text-right" [style.width.%]="60">
+          {{ printCouponService.reprintDate | date:'yyyy-MM-dd HH.mm.ss'}}</div>
+        <ng-container *ngIf="printCouponService.couponPrint.CouponStatusId === couponStatus.Win  ||
               printCouponService.couponPrint.CouponStatusId === couponStatus.Lost ||
               printCouponService.couponPrint.CouponStatusId === couponStatus.Refused ||
               printCouponService.couponPrint.CouponStatusId === couponStatus.Cancelled">
-              <div class="col font-size-normal" [style.width.%]="40">{{ 'OUTCOME' | translate }}</div>
-              <div class="col font-size-normal text-right" [style.width.%]="60">{{'DYNAMIC_KEYS.CouponStatusInternal.'+ couponStatus[printCouponService.couponPrint.CouponStatusId] | translate }}</div>
-            </ng-container>
-        </div>
+          <div class="col font-size-normal" [style.width.%]="40">{{ 'OUTCOME' | translate }}</div>
+          <div class="col font-size-normal text-right" [style.width.%]="60">
+            {{'DYNAMIC_KEYS.CouponStatusInternal.'+ couponStatus[printCouponService.couponPrint.CouponStatusId] | translate }}
+          </div>
+        </ng-container>
+      </div>
     </div>
     <div class="betslip-odds">
       <div class="row-group-odd"

@@ -2,7 +2,7 @@
 
   <FlexboxLayout flexDirection="column" justifyContent="space-between">
     <Button (tap)="print()" text="{{ 'PRINT' | translate }}" class="btn btn-primary"></Button>
-    <Button (tap)="printCouponService.resetPrint()" class="btn btn-accent" text="{{ 'CANCEL' | translate }}"></Button>
+    <Button (tap)="printCouponService.resetPrint()" class="btn btn-accent" text="{{ 'DELETE' | translate }}"></Button>
   </FlexboxLayout>
   <ScrollView>
     <StackLayout #printing orientation="horizontal">
@@ -15,7 +15,7 @@
         </FlexboxLayout>
         <StackLayout class="hr-dark m-10"></StackLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-15" flexWrap="wrap">
-          <Label class="p-15 font-weight-bold" text="{{ 'COUPON_DATE' | translate }}"></Label>
+          <Label class="p-15 font-weight-bold" text="{{ 'DATE_OF_PLACEMENT' | translate }}"></Label>
           <Label class="p-15 text-right"
             text="{{ printCouponService.couponPrint.CouponDateOffset | date:'yyyy-MM-dd HH.mm.ss'}}"></Label>
         </FlexboxLayout>
@@ -36,17 +36,17 @@
           </FlexboxLayout>
           <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-15" flexWrap="wrap">
             <Label class="p-15 font-weight-bold" text="{{ 'PRINT_COUPON.DATE_OF_REPRINT' | translate }}"></Label>
-            <Label class="p-15 text-right" text="{{ printCouponService.reprintDate | date:'yyyy-MM-dd HH.mm.ss' }}"></Label>
+            <Label class="p-15 text-right"
+              text="{{ printCouponService.reprintDate | date:'yyyy-MM-dd HH.mm.ss' }}"></Label>
           </FlexboxLayout>
-          <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-15" flexWrap="wrap"
-            *ngIf="printCouponService.couponPrint.CouponStatusId === couponStatus.Win  ||
+          <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-15" flexWrap="wrap" *ngIf="printCouponService.couponPrint.CouponStatusId === couponStatus.Win  ||
             printCouponService.couponPrint.CouponStatusId === couponStatus.Lost ||
             printCouponService.couponPrint.CouponStatusId === couponStatus.Refused ||
             printCouponService.couponPrint.CouponStatusId === couponStatus.Cancelled">
-              <Label class="p-15 font-weight-bold" text="{{ 'OUTCOME' | translate }}"></Label>
-              <Label class="p-15 text-right"
-                text="{{'DYNAMIC_KEYS.CouponStatusInternal.'+ couponStatus[printCouponService.couponPrint.CouponStatusId] | translate }}"></Label>
-            </FlexboxLayout>
+            <Label class="p-15 font-weight-bold" text="{{ 'OUTCOME' | translate }}"></Label>
+            <Label class="p-15 text-right"
+              text="{{'DYNAMIC_KEYS.CouponStatusInternal.'+ couponStatus[printCouponService.couponPrint.CouponStatusId] | translate }}"></Label>
+          </FlexboxLayout>
 
         </StackLayout><!-- /OTHER INFO REPRINT COUPON-->
         <StackLayout class="hr-dark m-10"></StackLayout>

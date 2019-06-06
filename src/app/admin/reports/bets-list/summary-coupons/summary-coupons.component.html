@@ -1,7 +1,7 @@
 <div fxFlex fxLayout="column" fxLayoutAlign="center space-between" *ngIf="betsListService.betsCouponList">
   <div fxFlex="93" fxLayout="column" [style.padding.px]="20">
     <div class="title">
-      <h3>{{'BETSLIST' | translate}} </h3>
+      <h3>{{'BETS_LIST' | translate}} </h3>
     </div>
     <div fxFlex="10" class="padding-horizontal-6">
       <div fxFlex fxLayout="row">
@@ -75,7 +75,7 @@
             <strong data='disabled'>{{ 'USERNAME' | translate }}</strong>
           </div>
           <div fxFlex="20">
-            <strong data='disabled'>{{ 'BETSLIST.DATE_OF_PLACEMENT' | translate }}</strong>
+            <strong data='disabled'>{{ 'DATE_OF_PLACEMENT' | translate }}</strong>
           </div>
           <div fxFlex="7">
             <strong data='disabled'>{{ 'STAKE' | translate }}</strong>
@@ -94,30 +94,34 @@
       <div fxLayout="column" fxFlex fxLayoutAlign="start">
         <div fxFlex fxLayout="column" fxLayoutAlign="flex-start" fxLayoutAlignGap="grid">
           <div fxFlex fxLayoutAlign="start center" class="border-bottom-overlay-1px" [style.max-height.px]="55"
-            *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons" [routerLink]="['../detail', rowItem.CouponCode ]">
+            *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons"
+            [routerLink]="['../detail', rowItem.CouponCode ]">
             <div fxFlex="5">
-                <img class="icon icon-24px" *ngIf="rowItem.IsAgentSettled" src="app/themes/skins/{{settings.theme}}/icon/baseline-check-24px.svg">
+              <img class="icon icon-24px" *ngIf="rowItem.IsAgentSettled"
+                src="app/themes/skins/{{settings.theme}}/icon/baseline-check-24px.svg">
             </div>
             <div fxFlex="20">
               <strong>{{ rowItem.CouponCode }}</strong>
             </div>
             <div fxFlex="20">
-                <strong>{{rowItem.UserId + ' - ' + rowItem.UserName }}</strong>
+              <strong>{{rowItem.UserId + ' - ' + rowItem.UserName }}</strong>
             </div>
             <div fxFlex="20">
-                <strong>{{rowItem.CouponDateOffset | date: 'dd/MM/yy HH:mm:ss' }}</strong>
+              <strong>{{rowItem.CouponDateOffset | date: 'dd/MM/yy HH:mm:ss' }}</strong>
             </div>
             <div fxFlex="7">
-                <strong>{{rowItem.Stake  }}</strong>
+              <strong>{{rowItem.Stake  }}</strong>
             </div>
             <div fxFlex="7" fxLayoutAlign="center">
-                <ng-container [ngSwitch]="rowItem.CouponStatusId">
-                    <img class="icon icon-24px" *ngSwitchDefault src="app/themes/skins/{{settings.theme}}/icon/progress-clock.svg">
-                    <!-- LOST -->
-                    <img class="icon icon-24px" *ngSwitchCase="2" src="app/themes/skins/{{settings.theme}}/icon/cancel.svg">
-                    <!-- WIN -->
-                    <img class="icon icon-24px" *ngSwitchCase="3" src="app/themes/skins/{{settings.theme}}/icon/checked.svg">
-                </ng-container>
+              <ng-container [ngSwitch]="rowItem.CouponStatusId">
+                <img class="icon icon-24px" *ngSwitchDefault
+                  src="app/themes/skins/{{settings.theme}}/icon/progress-clock.svg">
+                <!-- LOST -->
+                <img class="icon icon-24px" *ngSwitchCase="2" src="app/themes/skins/{{settings.theme}}/icon/cancel.svg">
+                <!-- WIN -->
+                <img class="icon icon-24px" *ngSwitchCase="3"
+                  src="app/themes/skins/{{settings.theme}}/icon/checked.svg">
+              </ng-container>
             </div>
             <div fxFlex="9">
               <strong>{{ 'DYNAMIC_KEYS.CouponType.'+couponType[rowItem.CouponTypeId] | translate }}</strong>
@@ -151,7 +155,7 @@
             <div class="value">
               <h2>{{ betsListService.betsCouponList.NumberOfPlacedBets | number }} </h2>
             </div>
-            <div><small data='disabled'>{{ 'BETSLIST.OPEN' | translate }}</small></div>
+            <div><small data='disabled'>{{ 'BETS_LIST.OPEN' | translate }}</small></div>
           </div>
           <div fxFlex="10">
             <div class="value">
@@ -163,7 +167,7 @@
             <div class="value">
               <h2>{{ betsListService.betsCouponList.NumberOfWonBets | number }} </h2>
             </div>
-            <div><small data='disabled'>{{ 'BETSLIST.WON' | translate }}</small></div>
+            <div><small data='disabled'>{{ 'BETS_LIST.WON' | translate }}</small></div>
           </div>
           <div fxFlex="10">
             <div class="value">
@@ -175,7 +179,7 @@
             <div class="value">
               <h2>{{ betsListService.betsCouponList.NumberOfLossBets | number }} </h2>
             </div>
-            <div><small data='disabled'>{{ 'BETSLIST.LOST' | translate }}</small></div>
+            <div><small data='disabled'>{{ 'BETS_LIST.LOST' | translate }}</small></div>
           </div>
           <div fxFlex="10">
             <div class="value">

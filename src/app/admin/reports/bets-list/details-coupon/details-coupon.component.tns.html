@@ -1,6 +1,6 @@
 <GridLayout rows="2*,2*,20*,2*, *" columns="*" *ngIf="couponDetail">
-  <Label row="0" verticalAlignment="center" text="{{'BETSLIST.DETAIL_COUPON' | translate | uppercase }}"
-    class="m-l-20 h3"></Label>
+  <Label row="0" verticalAlignment="center"
+    text="{{'BETS_LIST' | translate | uppercase }} - {{'DETAIL' | translate | uppercase }}" class="m-l-20 h3"></Label>
   <GridLayout class="m-l-20" row="1" rows="*" columns="1*,1*,1*,1*,1*">
     <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()"
       src="~/app/themes/skins/{{settings.theme}}/icon/baseline-arrow_back-24px.png" verticalAlignment="center"

@@ -1,5 +1,5 @@
 <GridLayout rows="*,2*,14*,2*" columns="*" class="summary" *ngIf="betsListService.betsCouponList">
-  <Label row="0" class="title" colSpan="2" text="{{'BETSLIST' | translate}}" textWrap="true"
+  <Label row="0" class="title" colSpan="2" text="{{'BETS_LIST' | translate}}" textWrap="true"
     verticalAlignment="center"></Label>
 
   <GridLayout row="1" columns="*,2*,2*,2*,3*,3*,3*,4*" class="card header">
@@ -60,7 +60,7 @@
       <Label row="0" col="1" class="sub-title" text="{{ 'COUPON_CODE' | translate }}"
         verticalAlignment="center"></Label>
       <Label row="0" col="2" class="sub-title" text="{{ 'USERNAME' | translate }}" verticalAlignment="center"></Label>
-      <Label row="0" col="3" class="sub-title" text="{{ 'BETSLIST.DATE_OF_PLACEMENT' | translate }}"
+      <Label row="0" col="3" class="sub-title" text="{{ 'DATE_OF_PLACEMENT' | translate }}"
         verticalAlignment="center"></Label>
       <Label row="0" col="4" class="sub-title" text="{{ 'STAKE' | translate }}" verticalAlignment="center"></Label>
       <Label row="0" col="5" class="sub-title" text="{{ 'STATUS' | translate }}" verticalAlignment="center"></Label>
@@ -109,7 +109,7 @@
     <StackLayout col="3" verticalAlignment="center">
       <Label class="value" text="{{ betsListService.betsCouponList.NumberOfPlacedBets | number }}"
         textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'BETSLIST.OPEN' | translate }}"></Label>
+      <Label class="sub-title" text="{{ 'BETS_LIST.OPEN' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="4" verticalAlignment="center">
       <Label class="value" text="{{ betsListService.betsCouponList.TotalPlacedBets | number }}" textWrap="true"></Label>
@@ -117,7 +117,7 @@
     </StackLayout>
     <StackLayout col="5" verticalAlignment="center">
       <Label class="value" text="{{ betsListService.betsCouponList.NumberOfWonBets | number }}" textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'BETSLIST.WON' | translate }}"></Label>
+      <Label class="sub-title" text="{{ 'BETS_LIST.WON' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="6" verticalAlignment="center">
       <Label class="value" text="{{ betsListService.betsCouponList.TotalWon | number }}" textWrap="true"></Label>
@@ -126,7 +126,7 @@
     <StackLayout col="7" verticalAlignment="center">
       <Label class="value" text="{{ betsListService.betsCouponList.NumberOfLossBets | number }}"
         textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'BETSLIST.LOST' | translate }}"></Label>
+      <Label class="sub-title" text="{{ 'BETS_LIST.LOST' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="8" verticalAlignment="center">
       <Label class="value" text="{{ betsListService.betsCouponList.TotalLost | number }}" textWrap="true"></Label>

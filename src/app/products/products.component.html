@@ -8,7 +8,8 @@
       <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
         <!-- Area widget [Variabile] -->
         <mat-grid-tile rowspan="1">
-          <app-widget fxFlexFill [rowHeight]="rowHeight" [product]="service.product" class="padding-horizontal-6"></app-widget>
+          <app-widget fxFlexFill [rowHeight]="rowHeight" [product]="service.product" class="padding-horizontal-6">
+          </app-widget>
         </mat-grid-tile>
         <!-- Area polifunzionale / Smartcode -->
         <mat-grid-tile rowspan="1">
@@ -27,7 +28,7 @@
           <div fxFlexFill class="padding-horizontal-6">
             <div class="display-amount radius-5" fxLayout="column" fxLayoutAlign="right" fxLayoutAlignGap="10px">
               <label>
-                <span>{{'AMOUNT_BET' | translate}}</span>
+                <span>{{'TOTAL_STAKE' | translate}}</span>
                 <input type="text" name="amount" [ngModel]="couponService.stakeDisplay.TotalStake |number: '1.2-2'"
                   readonly />
               </label>
@@ -40,7 +41,7 @@
             <button class="btn-default btn-success radius-10 padding-10 txt-uppercase"
               (click)="payCancelCoupon('PAY')">{{'PAY' | translate}}</button>
             <button class="btn-default btn-warning radius-10 padding-10 txt-uppercase"
-              (click)="payCancelCoupon('CANCEL')">{{'CANCEL' | translate}}</button>
+              (click)="payCancelCoupon('CANCEL')">{{'DELETE' | translate}}</button>
           </div>
         </mat-grid-tile>
 
