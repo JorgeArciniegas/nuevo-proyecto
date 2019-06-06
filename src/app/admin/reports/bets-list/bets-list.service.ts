@@ -49,6 +49,9 @@ export class BetsListService {
     };
 
     this.sportId = this.availableSport[0].SportId;
+    const today = new Date();
+    this.dateFrom = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
+    this.dateTo = new Date(today.getFullYear(), today.getMonth(), today.getDate());
   }
 
   /**
