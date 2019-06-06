@@ -101,6 +101,9 @@ export class CouponComponent implements OnDestroy {
 
   // open dialog
   openDialog(): void {
-    this.productService.openProductDialog({ title: 'COUPON', betCoupon: this.couponService.coupon });
+    if (this.couponService.coupon) {
+      this.productService.openProductDialog({ title: 'COUPON', betCoupon: this.couponService.coupon });
+    }
+
   }
 }
