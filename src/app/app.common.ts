@@ -25,9 +25,15 @@ import { BetoddsComponent } from './products/product-dialog/betodds/betodds.comp
 import { StatisticsComponent } from './products/product-dialog/statistics/statistics.component';
 import { LOCALE_ID } from '@angular/core';
 import localeIt from '@angular/common/locales/it';
+import localeEn from '@angular/common/locales/en';
+import localeFr from '@angular/common/locales/fr';
+import localePt from '@angular/common/locales/pt';
+import localeSq from '@angular/common/locales/sq';
+import localeDe from '@angular/common/locales/de';
+
 import { registerLocaleData } from '@angular/common';
 
-registerLocaleData(localeIt);
+registerLocaleData([localeIt, localeEn, localeFr, localePt, localeSq, localeDe]);
 
 export const componentDeclarations: any[] = [
   AppComponent,
@@ -56,7 +62,6 @@ export const providerDeclarations: any[] = [
   BtncalcService,
   CouponDialogService,
   DestroyCouponService,
-  /* { provide: LOCALE_ID, useValue: 'it' } */
   {
     provide: LOCALE_ID,
     deps: [TranslateService],
