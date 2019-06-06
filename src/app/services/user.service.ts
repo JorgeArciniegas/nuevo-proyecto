@@ -22,7 +22,7 @@ export class UserService {
   public userDetail: AccountDetails;
   // URL to which was navigating before to be stopped by the authorization guard.
   public targetedUrlBeforeLogin: string;
-
+  public isModalOpen: boolean;
   constructor(
     private router: RouterService,
     private storageService: StorageService,
