@@ -23,6 +23,7 @@ import { ConfirmDestroyCouponComponent } from './component/coupon/confirm-destro
 import { DestroyCouponService } from './component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { BetoddsComponent } from './products/product-dialog/betodds/betodds.component';
 import { StatisticsComponent } from './products/product-dialog/statistics/statistics.component';
+
 import { LOCALE_ID } from '@angular/core';
 import localeIt from '@angular/common/locales/it';
 import localeEn from '@angular/common/locales/en';
@@ -33,7 +34,7 @@ import localeDe from '@angular/common/locales/de';
 
 import { registerLocaleData } from '@angular/common';
 
-registerLocaleData([localeIt, localeEn, localeFr, localePt, localeSq, localeDe]);
+registerLocaleData(localeIt);
 
 export const componentDeclarations: any[] = [
   AppComponent,
