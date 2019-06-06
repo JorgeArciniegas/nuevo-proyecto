@@ -89,6 +89,7 @@ export class CouponComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.clearCoupon();
     this.couponServiceSubscription.unsubscribe();
     // this.couponMessageServiceSubscription.unsubscribe();
   }

@@ -52,7 +52,7 @@ export class RacingService extends RacingServiceExtra {
 
 
   // screen binding
-  public raceDetails: RaceDetail;
+  // public raceDetails: RaceDetail;
   public listResult: RaceResult[];
   // api binding
   private reload: number;
