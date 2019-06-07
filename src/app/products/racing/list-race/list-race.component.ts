@@ -17,6 +17,6 @@ export class ListRaceComponent implements OnInit {
   ngOnInit() {}
 
   raceSelecting(selected: number) {
-    this.racingService.fireCurrentRaceChange(selected);
+    this.racingService.fireCurrentRaceChange(selected, true);
   }
 }

@@ -1,9 +1,17 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Observable as ObservableIdle } from 'rxjs/Rx';
 import { AppSettings } from '../../app.settings';
 import { CouponService } from '../../component/coupon/coupon.service';
 import { DialogData, BetDataDialog } from '../products.model';
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-product-dialog',
   templateUrl: './product-dialog.component.html',
@@ -26,7 +34,8 @@ export class ProductDialogComponent implements OnInit, AfterViewInit {
     public dialogRef: MatDialogRef<ProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: DialogData,
     public readonly appSettings: AppSettings,
-    public readonly couponService: CouponService
+    public readonly couponService: CouponService,
+    private userservice: UserService
   ) {
     this.settings = appSettings;
     this.dataDialog = this.data;
@@ -38,8 +47,6 @@ export class ProductDialogComponent implements OnInit, AfterViewInit {
     } else {
       this.column = 4;
     }
-
-
   }
 
   ngOnInit(): void {
@@ -51,7 +58,6 @@ export class ProductDialogComponent implements OnInit, AfterViewInit {
       ((this.elementView.nativeElement.offsetHeight - 60) % 105) / 2
     );
     this.maxItems = this.rowNumber * this.column;
-
   }
 
   ngAfterViewInit(): void {
@@ -63,6 +69,7 @@ export class ProductDialogComponent implements OnInit, AfterViewInit {
   }
   close(): void {
     this.dialogRef.close();
+    this.userservice.isModalOpen = false;
     this.couponService.oddStakeEditSubject.next(null);
     this.data.opened = false;
   }

@@ -11,3 +11,6 @@
   </div>
   <router-outlet name="print"></router-outlet>
 </div>
+<div *ngIf="userService.isModalOpen" id="overlayArea1" [style.top.px]="0" [style.left.px]="0"
+  class="overlay global-overlay radius-5">
+</div>

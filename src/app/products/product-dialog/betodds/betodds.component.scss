@@ -29,3 +29,17 @@
       }
   }
 }
+.scroll {
+  position: relative;
+
+  .indicator {
+      position: absolute;
+      right: 2px;
+      top: 2px;
+      padding: 2px;
+  }
+
+  .icon {
+      width: 20px;
+  }
+}

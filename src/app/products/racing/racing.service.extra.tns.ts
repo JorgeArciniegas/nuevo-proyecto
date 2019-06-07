@@ -1,12 +1,14 @@
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service.tns';
 import { CouponService } from '../../component/coupon/coupon.service';
 import { Subject, Observable } from 'rxjs';
+import { RaceDetail } from './racing.models';
 
 
 export class RacingServiceExtra {
 
   public currentRaceSubscribe: Subject<number>;
   public currentRaceObserve: Observable<number>;
+  public raceDetails: RaceDetail;
 
   constructor(
     public coupon: CouponService,
@@ -30,14 +32,15 @@ export class RacingServiceExtra {
   * If there is a coupon, it will be asked to delete it.
   * Otherwise, if there isn't, execute the change.
   * @param selected number of race
+  * @param userSelect if the race number is change by user  or it is forward by system
   *
   * */
-  fireCurrentRaceChange(selected: number) {
+  fireCurrentRaceChange(selected: number, userSelect = false) {
 
     // check if the coupon is initialized
     this.coupon.checkHasCoupon();
     // if the coupon isn't empty
-    if (this.coupon.productHasCoupon.checked ) {
+    if (this.coupon.productHasCoupon.checked && (this.raceDetails.currentRace !== selected || userSelect)  ) {
       // open modal destroy confirm coupon
       this.destroyCouponService.openDestroyCouponDialog();
       this.destroyCouponService.showDialog = true;

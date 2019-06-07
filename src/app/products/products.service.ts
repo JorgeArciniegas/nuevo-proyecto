@@ -11,7 +11,13 @@ import { WindowSize } from '../services/utility/window-size/window-size.model';
 import { WindowSizeService } from '../services/utility/window-size/window-size.service';
 import { DialogService } from './dialog.service';
 import { ProductsServiceExtra } from './product.service.extra';
-import { BetDataDialog, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupon } from './products.model';
+import {
+  BetDataDialog,
+  DialogData,
+  PolyfunctionalArea,
+  PolyfunctionalStakeCoupon
+} from './products.model';
+import { UserService } from '../services/user.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -43,8 +49,6 @@ export class ProductsService extends ProductsServiceExtra {
   };
   windowSize: WindowSize;
 
-
-
   constructor(
     public dialog: DialogService,
     private windowSizeService: WindowSizeService,
@@ -53,11 +57,12 @@ export class ProductsService extends ProductsServiceExtra {
     private storage: StorageService,
     public couponInternalService: CouponService,
     public destroyCouponService: DestroyCouponService,
-    public router: RouterService) {
-
-      super( couponInternalService, destroyCouponService, router);
-      // Destroy coupon confirmation
-      this.couponInternalService.productHasCoupon = { checked: false};
+    public router: RouterService,
+    private userservice: UserService
+  ) {
+    super(couponInternalService, destroyCouponService, router);
+    // Destroy coupon confirmation
+    this.couponInternalService.productHasCoupon = { checked: false };
 
     this.productNameSelectedSubscribe = new Subject<string>();
     this.productNameSelectedObserve = this.productNameSelectedSubscribe.asObservable();
@@ -67,25 +72,31 @@ export class ProductsService extends ProductsServiceExtra {
     this.polyfunctionalAreaObservable = this.polyfunctionalAreaSubject.asObservable();
 
     // stake coupon
-    this.polyfunctionalStakeCouponSubject = new Subject<PolyfunctionalStakeCoupon>();
+    this.polyfunctionalStakeCouponSubject = new Subject<
+      PolyfunctionalStakeCoupon
+    >();
     this.polyfunctionalStakeCouponObs = this.polyfunctionalStakeCouponSubject.asObservable();
 
     // time block
     this.timeBlockedSubscribe = new Subject<boolean>();
-    this.timeBlockedSubscribe.asObservable().subscribe((timeBlocked: boolean) => {
-      this.timeBlocked = timeBlocked;
-    });
+    this.timeBlockedSubscribe
+      .asObservable()
+      .subscribe((timeBlocked: boolean) => {
+        this.timeBlocked = timeBlocked;
+      });
     // Dialog management
     this.dialogProductDataSubject = new Subject<BetDataDialog>();
-    this.dialogProductDataSubject.asObservable().subscribe((data: BetDataDialog) => {
-      const dialogData: DialogData = new DialogData();
-      dialogData.betOdds = data.betOdds;
-      dialogData.betCoupon = data.betCoupon;
-      dialogData.breakpoint = this.breakpoint;
-      dialogData.title = data.title;
-      dialogData.statistics = data.statistics;
-      this.dialog.openDialog(dialogData);
-    });
+    this.dialogProductDataSubject
+      .asObservable()
+      .subscribe((data: BetDataDialog) => {
+        const dialogData: DialogData = new DialogData();
+        dialogData.betOdds = data.betOdds;
+        dialogData.betCoupon = data.betCoupon;
+        dialogData.breakpoint = this.breakpoint;
+        dialogData.title = data.title;
+        dialogData.statistics = data.statistics;
+        this.dialog.openDialog(dialogData);
+      });
 
     this.playableBoardResetSubject = new Subject<boolean>();
     this.playableBoardResetObserve = this.playableBoardResetSubject.asObservable();
@@ -94,20 +105,22 @@ export class ProductsService extends ProductsServiceExtra {
     // This is the only entry point to modify 'product'
     // the function that update it is changeProduct
     // appSetting.products = environment product
-    this.productNameSelectedObserve.subscribe( v => {
+    this.productNameSelectedObserve.subscribe(v => {
       // mark the product not selected and return the item clicked
-        const product: Products[] = appSetting.products.filter( item => {
-          item.productSelected = false;
-          return item.codeProduct === v;
-        });
-        // set the selected product
-        this.product = product[0];
-        this.product.productSelected = true;
-        // confirm destroy coupon
-        this.resetBoard();
-        this.couponInternalService.productHasCoupon = {checked: false, productCodeRequest: v };
-      }
-    );
+      const product: Products[] = appSetting.products.filter(item => {
+        item.productSelected = false;
+        return item.codeProduct === v;
+      });
+      // set the selected product
+      this.product = product[0];
+      this.product.productSelected = true;
+      // confirm destroy coupon
+      this.resetBoard();
+      this.couponInternalService.productHasCoupon = {
+        checked: false,
+        productCodeRequest: v
+      };
+    });
   }
 
   fnWindowsSize(): void {
@@ -127,5 +140,4 @@ export class ProductsService extends ProductsServiceExtra {
     this.playableBoardResetSubject.next(false);
     this.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
-
 }

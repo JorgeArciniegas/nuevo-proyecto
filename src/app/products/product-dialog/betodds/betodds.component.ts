@@ -3,6 +3,7 @@ import { BetCouponOdd } from '@elys/elys-api';
 import { BetCouponOddExtended } from '@elys/elys-coupon';
 import { CouponService } from '../../../component/coupon/coupon.service';
 import { BetDataDialog, BetOdd } from '../../products.model';
+import { AppSettings } from 'src/app/app.settings';
 
 @Component({
   selector: 'app-betodds',
@@ -29,8 +30,14 @@ export class BetoddsComponent implements OnInit {
   @Input()
   private data: BetDataDialog;
 
-  constructor(public readonly couponService: CouponService) {
-    this.couponService.couponResponse.subscribe(coupon => { this.data.betCoupon = coupon; this.filterOddsToCoupon(); });
+  constructor(
+    public readonly couponService: CouponService,
+    public readonly settings: AppSettings
+  ) {
+    this.couponService.couponResponse.subscribe(coupon => {
+      this.data.betCoupon = coupon;
+      this.filterOddsToCoupon();
+    });
   }
 
   ngOnInit() {
@@ -64,8 +71,6 @@ export class BetoddsComponent implements OnInit {
     }
   }
 
-
-
   filterOddsToCoupon() {
     const start = this.page * this.maxItems;
     let end = (this.page + 1) * this.maxItems;
@@ -84,10 +89,6 @@ export class BetoddsComponent implements OnInit {
       }
     }
   }
-
-
-
-
 
   previusOdds() {
     if (this.page <= 0) {
@@ -117,10 +118,13 @@ export class BetoddsComponent implements OnInit {
     odd.selected = !odd.selected;
   }
 
-
-
   removeOdd(odd: BetCouponOddExtended): void {
-    const betOdd: BetOdd = new BetOdd(odd.SelectionName, odd.OddValue, odd.OddStake, odd.SelectionId);
+    const betOdd: BetOdd = new BetOdd(
+      odd.SelectionName,
+      odd.OddValue,
+      odd.OddStake,
+      odd.SelectionId
+    );
     this.couponService.addRemoveToCoupon([betOdd]);
   }
 
