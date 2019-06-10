@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AppSettings } from './app.settings';
 import { Settings } from './app.settings.model';
 import { UserService } from './services/user.service';
+import { TranslateUtilityService } from './services/utility/translate-utility.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +15,12 @@ export class AppComponent {
 
   constructor(
     private appSettings: AppSettings,
+    private translateService: TranslateService,
+    private translateUtilityService: TranslateUtilityService,
     public userService: UserService
   ) {
-    this.settings = appSettings;
+    this.settings = this.appSettings;
+    // Set the application language passing the browser one.
+    this.translateUtilityService.initializeLanguages(this.translateService.getBrowserLang());
   }
 }

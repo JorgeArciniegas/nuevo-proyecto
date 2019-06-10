@@ -3,6 +3,8 @@ import { connectionType, getConnectionType } from 'tns-core-modules/connectivity
 import { AppSettings } from './app.settings';
 import { Settings } from './app.settings.model';
 import { UserService } from './services/user.service';
+import { device } from 'tns-core-modules/platform';
+import { TranslateUtilityService } from './services/utility/translate-utility.service';
 
 @Component({
   selector: 'app-root',
@@ -15,10 +17,12 @@ export class AppComponent {
 
   constructor(
     public readonly appSettings: AppSettings,
-    public userService: UserService
+    public userService: UserService,
+    private translateService: TranslateUtilityService
   ) {
     this.settings = appSettings;
-
+    // Set the application language passing the device one.
+    this.translateService.initializeLanguages(device.language);
     this.connectionAviable = getConnectionType() !== connectionType.none;
   }
 }

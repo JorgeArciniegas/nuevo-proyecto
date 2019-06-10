@@ -5,6 +5,7 @@ export const environment: Environment = {
   baseApiUrl: 'https://apidemo.vg-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
+  supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
@@ -31,8 +32,8 @@ export const environment: Environment = {
           routing: 'statistic',
           typeLink: WidgetTypeLink.MODAL,
           icon: 'baseline-assessment-24px' // without extension file
-        },
-      ],
+        }
+      ]
     },
     {
       sportId: 10,
@@ -97,8 +98,8 @@ export const environment: Environment = {
   ],
   isEnabledReprintCoupon: true,
   showRaceId: true,
-  couponMessageTrasmitted:
-    'Mandate transmitted via the Internet andaccepted on the',
+  couponMessageTrasmitted: 'Mandate transmitted via the Internet andaccepted on the',
   // tslint:disable-next-line:max-line-length
-  couponMessageLegal: 'Lorem ipsum dolor sit amet, consecteturadipisicing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Utenim ad minim veniam'
+  couponMessageLegal:
+    'Lorem ipsum dolor sit amet, consecteturadipisicing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Utenim ad minim veniam'
 };

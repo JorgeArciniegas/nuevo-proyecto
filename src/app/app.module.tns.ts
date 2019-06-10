@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ElysApiModule } from '@elys/elys-api';
+import { ElysApiModule, ElysApiService } from '@elys/elys-api';
 import { ElysCouponModule } from '@elys/elys-coupon';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
 import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
 import { SharedModule } from './shared/shared.module';
+import { TranslateUtilityService } from './services/utility/translate-utility.service';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -36,18 +37,16 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       }
     }),
     ElysApiModule.forRoot({
-      language: 'en',
       urlApi: environment.baseApiUrl
     }),
-    ElysCouponModule.forRoot({
-      language: 'en'
-    }),
+    ElysCouponModule.forRoot({}),
     SharedModule,
     NativeScriptRouterModule,
     NativeScriptRouterModule.forRoot(routes)
   ],
   providers: [
-    providerDeclarations /* { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true } */
+    providerDeclarations
+    /* { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true } */
   ],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
@@ -55,10 +54,4 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 /*
 Pass your application module to the bootstrapModule function located in main.ts to start your app
 */
-export class AppModule {
-  constructor(private translateService: TranslateService) {
-    this.translateService = translateService;
-    this.translateService.setDefaultLang('it');
-    this.translateService.use('it');
-  }
-}
+export class AppModule {}

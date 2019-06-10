@@ -14,7 +14,7 @@
   <GridLayout row="1" rows="*" columns="4*,*" class="card display btn-coupon-board"
     [ngClass]="{'small': productService.windowSize.small}">
     <StackLayout col="0" orientation="horizontal" horizontalAlignment="left">
-      <Label text="{{'single' | translate}}" verticalAlignment="center"></Label>
+      <Label text="{{'SINGLE' | translate}}" verticalAlignment="center"></Label>
       <Label class="indicator-odds-number radius-50" [ngClass]="{'small': productService.windowSize.small}"
         text="{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}" verticalAlignment="center"
         textAlignment="center"></Label>
@@ -95,19 +95,19 @@
       <Label row="0" text="{{'ERROR' | translate}}" class="title" [ngClass]="{'small': productService.windowSize.small}"
         textTransform="uppercase"></Label>
       <Label row="1"
-        text="{{ 'COUPON_ERROR.' + couponService.error.message | translate }} (Limit: {{ couponService.error.detail }})"
+        text="{{ 'DYNAMIC_KEYS.COUPON_ERROR.' + couponService.error.message | translate }} (Limit: {{ couponService.error.detail }})"
         class="amount" [ngClass]="{'small': productService.windowSize.small}" textWrap="true"></Label>
     </GridLayout>
     <GridLayout rows="*,3*" columns="*" class="display-message display-warning" *ngIf="couponService.warningMessages">
       <Label row="0" text="{{'WARNING' | translate}}" class="title"
         [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
-      <Label row="1" text="{{'COUPON_WARNING.' + couponService.warningMessage | translate}}" class="amount"
+      <Label row="1" text="{{'DYNAMIC_KEYS.COUPON_WARNING.' + couponService.warningMessage | translate}}" class="amount"
         [ngClass]="{'small': productService.windowSize.small}" textWrap="true" verticalAlignment="center"></Label>
     </GridLayout>
   </GridLayout>
   <GridLayout row="4">
     <GridLayout rows="*,3*" columns="*" class="card display-amount">
-      <Label row="0" text="{{'POTENTIAL_MAX_WINNER' | translate}}" class="title"
+      <Label row="0" text="{{'MAX_POTENTIAL_WIN' | translate}}" class="title"
         [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
       <Label row="1" [text]="couponService.stakeDisplay.MaxWinning |number: '1.2-2'" class="amount"
         [ngClass]="{'small': productService.windowSize.small}"></Label>
@@ -116,7 +116,7 @@
   <GridLayout row="5" rows="*" columns="*" class="card button btn-default btn-success"
     [ngClass]="{'disabled': couponService.error}"
     *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
-    <Button text="{{'piazza' | translate}}" class="button-internal" textTransform="uppercase"
+    <Button text="{{'COUPON.BET' | translate}}" class="button-internal" textTransform="uppercase"
       [isEnabled]="!timeBlocked && !couponService.error" (tap)="couponService.preStagedCoupon()"></Button>
   </GridLayout>
   <GridLayout row="5" rows="*" columns="*,*" class="card"

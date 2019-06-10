@@ -6,13 +6,14 @@
     horizontalAlignment="center">
     <StackLayout col="1" class="icon-area shopping-cart-icon"></StackLayout>
     <TextField ngModel #couponCode="ngModel" (textChange)="validatePattern($event, 'couponCode')" col="3"
-      hint="coupon code" returnKeyType="next" required verticalAlignment="center" horizontalAlignment="left">
+      hint="{{ 'COUPON_CODE' | translate }}" returnKeyType="next" required verticalAlignment="center"
+      horizontalAlignment="left">
     </TextField>
   </GridLayout>
 
-  <Button row="2" col="0" text="{{'CLOSE' | translate | uppercase}}" (tap)="close()" class="btn btn-outline"
+  <Button row="2" col="0" text="{{'CLOSE' | translate | uppercase}}" (tap)="close()"
     class="button btn-default btn-warning radius-2"></Button>
-  <Button row="2" col="1" text="{{'CONFIRM' | translate}}" class="button btn-default btn-success radius-2"
+  <Button row="2" col="1" text="{{'CONFIRM' | translate | uppercase}}" class="button btn-default btn-success radius-2"
     [ngClass]="{'disabled': !couponIdPatternInvalid}" (tap)="onSubmit(couponCode.value)"
     [isEnabled]="couponIdPatternInvalid"></Button>
 

@@ -6,6 +6,7 @@ import { DetailsCouponComponent } from './reports/bets-list/details-coupon/detai
 import { SummaryComponent } from './reports/bets-list/details-coupon/summary/summary.component';
 import { EventsComponent } from './reports/bets-list/details-coupon/events/events.component';
 import { CombinationsComponent } from './reports/bets-list/details-coupon/combinations/combinations.component';
+import { LanguageComponent } from './settings/language/language.component';
 
 export const componentDeclarations: any[] = [
   AdminComponent,
@@ -14,7 +15,8 @@ export const componentDeclarations: any[] = [
   DetailsCouponComponent,
   SummaryComponent,
   EventsComponent,
-  CombinationsComponent
+  CombinationsComponent,
+  LanguageComponent
 ];
 
 export const providerDeclarations: any[] = [];
@@ -35,5 +37,9 @@ export const routes: Routes = [
   {
     path: 'reports/betsList/detail/:id',
     component: DetailsCouponComponent
+  },
+  {
+    path: 'settings/languages',
+    component: LanguageComponent
   }
 ];

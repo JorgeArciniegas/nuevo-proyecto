@@ -4,7 +4,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { ElysApiModule } from '@elys/elys-api';
+import { ElysApiModule, ElysApiService } from '@elys/elys-api';
 import { ElysCouponModule } from '@elys/elys-coupon';
 import { ElysStorageLibModule } from '@elys/elys-storage-lib';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -21,7 +21,6 @@ import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
 import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
 import { SharedModule } from './shared/shared.module';
-// import { PrintReceiptComponent } from './component/coupon/pay-cancel-dialog/print-receipt/print-receipt.component';
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -51,12 +50,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
 
     ElysApiModule.forRoot({
-      language: 'en',
       urlApi: environment.baseApiUrl
     }),
-    ElysCouponModule.forRoot({
-      language: 'en'
-    }),
+    ElysCouponModule.forRoot({}),
     RouterModule.forRoot(routes)
   ],
   entryComponents: [ProductDialogComponent, PayCancelDialogComponent, ConfirmDestroyCouponComponent],
@@ -66,10 +62,4 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  constructor(private translateService: TranslateService) {
-    this.translateService = translateService;
-    this.translateService.setDefaultLang('it');
-    this.translateService.use('it');
-  }
-}
+export class AppModule {}

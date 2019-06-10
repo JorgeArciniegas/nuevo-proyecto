@@ -13,13 +13,13 @@
 		.logo-with-text {
 			@extend %logo-with-text-mobile;
 		}
-    #admin{
-      @extend %admin-mobile;
-      height:100%;
-      .admin-panel-container{
-        @extend %bg-opacity-dark-variant;
-    }
-    }
+		#admin {
+			@extend %admin-mobile;
+			height: 100%;
+			.admin-panel-container {
+				@extend %bg-opacity-dark-variant;
+			}
+		}
 		#login {
 			@extend %login-mobile;
 
@@ -153,16 +153,20 @@
 		.display {
 			@extend %card-title-mobile;
 
+			&.display-trasparent {
+				@extend %bg-transparent;
+			}
+
 			.indicator-amount {
 				@extend %border-primary;
 			}
-    }
-    .label-overlap {
-      @extend %card-title-label;
-    }
-    .ticketCode {
-      @extend %color-placeholder;
-    }
+		}
+		.label-overlap {
+			@extend %card-title-label;
+		}
+		.ticketCode {
+			@extend %color-placeholder;
+		}
 
 		.product {
 			padding: 5 0;
@@ -275,17 +279,17 @@
 							@extend %shopping-cart-icon-mobile;
 						}
 					}
-        }
-        .icon-area {
-          margin: 0;
+				}
+				.icon-area {
+					margin: 0;
 
-          &.error-icon {
-            @extend %error-icon-mobile;
-          }
-          &.check-circle-icon {
-            @extend %check-circle-icon-mobile;
-          }
-        }
+					&.error-icon {
+						@extend %error-icon-mobile;
+					}
+					&.check-circle-icon {
+						@extend %check-circle-icon-mobile;
+					}
+				}
 			}
 		}
 
@@ -330,9 +334,9 @@
 			@extend %btn-warning-mobile;
 		}
 
-    .btn-danger{
-      @extend %btn-danger;
-    }
+		.btn-danger {
+			@extend %btn-danger;
+		}
 		.btn-success {
 			@extend %btn-success-gradient-mobile;
 		}
@@ -347,20 +351,20 @@
 
 		.btn-dark-gradient {
 			@extend %btn-dark-gradient-mobile;
-    }
+		}
 
-    // BUTTON FILTER ADMIN
-    .btn-filter {
-      @extend %btn-filter-mobile;
-      .button-internal {
-        padding: 0 10;
-        text-transform: none;
-      }
-    }
+		// BUTTON FILTER ADMIN
+		.btn-filter {
+			@extend %btn-filter-mobile;
+			.button-internal {
+				padding: 0 10;
+				text-transform: none;
+			}
+		}
 
-    .btn-filter-success{
-      @extend %btn-filter-success-mobile;
-    }
+		.btn-filter-success {
+			@extend %btn-filter-success-mobile;
+		}
 
 		.advance-game {
 			margin: 0 -2;
@@ -375,25 +379,28 @@
 					font-size: 16;
 				}
 			}
-    }
+		}
 
 		.product-class {
-      // SET IMAGES HEADER PRODUCT
-      &.PRODUCT-DOG-BG { // DOG
-        .race-control {
-          @extend %PRODUCT-DOG-BG-MOBILE;
-        }
-      }
-      &.PRODUCT-HORSE-BG { // HORSE
-        .race-control {
-          @extend %PRODUCT-HORSE-BG-MOBILE;
-        }
-      }
-      &.PRODUCT-HORSE-VIRT-BG { // HORSE VIRTUAL
-        .race-control {
-          @extend %PRODUCT-HORSE-BG-MOBILE;
-        }
-      }
+			// SET IMAGES HEADER PRODUCT
+			&.PRODUCT-DOG-BG {
+				// DOG
+				.race-control {
+					@extend %PRODUCT-DOG-BG-MOBILE;
+				}
+			}
+			&.PRODUCT-HORSE-BG {
+				// HORSE
+				.race-control {
+					@extend %PRODUCT-HORSE-BG-MOBILE;
+				}
+			}
+			&.PRODUCT-HORSE-VIRT-BG {
+				// HORSE VIRTUAL
+				.race-control {
+					@extend %PRODUCT-HORSE-BG-MOBILE;
+				}
+			}
 			.race-control {
 				.time {
 					.time-panel {
@@ -487,22 +494,20 @@
 
 	.logo-print-coupon {
 		@extend %logo-header-mobile;
-  }
+	}
 
-  .border-bottom-overlay {
-    @extend %border-bottom-overlay-mobile;
-  }
+	.border-bottom-overlay {
+		@extend %border-bottom-overlay-mobile;
+	}
 
-
-  .statistic-data {
-    .fitness-container{
-      background: #fff;
-      .fitness-content{
-        @extend %bar-fitness-pecentage;
-      }
-    }
-
-  }
+	.statistic-data {
+		.fitness-container {
+			background: #fff;
+			.fitness-content {
+				@extend %bar-fitness-pecentage;
+			}
+		}
+	}
 }
 
 .overlay {

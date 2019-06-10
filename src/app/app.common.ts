@@ -26,7 +26,7 @@ import { StatisticsComponent } from './products/product-dialog/statistics/statis
 
 import { LOCALE_ID } from '@angular/core';
 import localeIt from '@angular/common/locales/it';
-import localeEn from '@angular/common/locales/en';
+import localeEs from '@angular/common/locales/es';
 import localeFr from '@angular/common/locales/fr';
 import localePt from '@angular/common/locales/pt';
 import localeSq from '@angular/common/locales/sq';
@@ -34,7 +34,13 @@ import localeDe from '@angular/common/locales/de';
 
 import { registerLocaleData } from '@angular/common';
 
+// Registration of the languages in use. The English language is registered by default.
 registerLocaleData(localeIt);
+registerLocaleData(localeFr);
+registerLocaleData(localeEs);
+registerLocaleData(localePt);
+registerLocaleData(localeSq);
+registerLocaleData(localeDe);
 
 export const componentDeclarations: any[] = [
   AppComponent,
@@ -67,9 +73,8 @@ export const providerDeclarations: any[] = [
     provide: LOCALE_ID,
     deps: [TranslateService],
     // tslint:disable-next-line:typedef
-    useFactory: (confService: TranslateService) =>
-      confService.currentLang
-  },
+    useFactory: (confService: TranslateService) => confService.currentLang
+  }
 ];
 
 export const routes: Routes = [
@@ -92,10 +97,9 @@ export const routes: Routes = [
     component: ProductsComponent,
     canActivate: [AuthorizationGuard],
     children: [
-
       {
         path: 'racing',
-        loadChildren: './products/racing/racing.module#RacingModule',
+        loadChildren: './products/racing/racing.module#RacingModule'
       },
       {
         path: 'destroycoupon',
@@ -104,9 +108,9 @@ export const routes: Routes = [
       {
         path: '',
         redirectTo: 'racing',
-        pathMatch: 'full',
+        pathMatch: 'full'
       }
-    ],
+    ]
   },
   {
     path: '',

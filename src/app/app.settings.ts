@@ -9,6 +9,7 @@ export class AppSettings {
   staging: boolean = environment.staging;
   pageTitle: string = environment.pageTitle;
   theme: string = environment.theme;
+  supportedLang: string[] = environment.supportedLang;
   products: Products[] = environment.products;
   showRaceId: boolean = environment.showRaceId;
   couponMessageTrasmitted: string = environment.couponMessageTrasmitted;

@@ -33,19 +33,19 @@
         <div fxLayout="row" fxLayoutAlign="center center"
           *ngIf="form.controls.username.invalid && (form.controls.username.dirty || form.controls.username.touched)">
           <ng-container *ngIf="form.controls.username.hasError('required')">
-            <i class="error-icon"></i> {{ 'USERNAME' | translate }} {{ 'ERROR_REQUIRED' | translate | lowercase }}
+            <i class="error-icon"></i> {{ 'USERNAME' | translate }} {{ 'IS_REQUIRED' | translate | lowercase }}
           </ng-container>
           <ng-container *ngIf="form.controls.username.hasError('minlength')">
-            <i class="error-icon"></i> {{ 'ERROR_USERNAME_TOO_SHORT' | translate }}
+            <i class="error-icon"></i> {{ 'USERNAME_TOO_SHORT' | translate }}
           </ng-container>
         </div>
         <div fxLayout="row" fxLayoutAlign="center center"
           *ngIf="form.controls.password.invalid && (form.controls.password.dirty || form.controls.password.touched)">
           <ng-container *ngIf="form.controls.password.hasError('required')">
-            <i class="error-icon"></i> {{ 'PASSWORD' | translate }} {{ 'ERROR_REQUIRED' | translate | lowercase  }}
+            <i class="error-icon"></i> {{ 'PASSWORD' | translate }} {{ 'IS_REQUIRED' | translate | lowercase  }}
           </ng-container>
           <ng-container *ngIf="form.controls.password.hasError('minlength')">
-            <i class="error-icon"></i> {{ 'ERROR_PASSWORD_TOO_SHORT' | translate }}
+            <i class="error-icon"></i> {{ 'PASSWORD_TOO_SHORT' | translate }}
           </ng-container>
         </div>
         <div fxLayout="row" fxLayoutAlign="center center" *ngIf="errorMessage">

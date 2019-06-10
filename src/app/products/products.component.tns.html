@@ -1,82 +1,92 @@
 <!-- <GridLayout columns="*" rows="*"> -->
-  <!-- TOOLBAR-->
+<!-- TOOLBAR-->
 <!--   <StackLayout row="0" class="toolbar">
     <app-header></app-header>
   </StackLayout> -->
-  <!--PRODUCT CONTAINER-->
-  <GridLayout columns="60*,20*,20*" rows="*" class="product">
-    <GridLayout col="0" rows="3*,13*,2*" columns="*" class="product-container padding-left-6 padding-right-3">
-      <StackLayout row="0" rowSpan="3">
-        <router-outlet></router-outlet>
-      </StackLayout>
-
-      <!-- Dialog polifunctional area-->
-      <GridLayout row="1" *ngIf="dialog.showDialog">
-        <app-product-dialog [data]="dialog.dialogData"></app-product-dialog>
-      </GridLayout>
-      <!-- Dialog pay cancel-->
-      <GridLayout row="1" *ngIf="couponDialogService.showDialog">
-        <app-pay-cancel-dialog></app-pay-cancel-dialog>
-      </GridLayout>
-      <!-- Dialog destroy coupon -->
-      <GridLayout row="1" *ngIf="service.destroyCouponService.showDialog">
-        <app-confirm-destroy-coupon></app-confirm-destroy-coupon>
-      </GridLayout>
-    </GridLayout>
-    <GridLayout col="1" class="product-calc padding-right-3">
-      <GridLayout rows="*,*,*,6*,*,*" columns="*">
-        <StackLayout row="0">
-          <!-- Area widget [Variabile] -->
-          <app-widget [rowHeight]="rowHeight"  [product]="service.product"  [timeBlocked]="service.timeBlocked"></app-widget>
-        </StackLayout>
-        <StackLayout row="1">
-          <!-- Area polifunzionale / Smartcode -->
-          <app-display [timeBlocked]="service.timeBlocked"></app-display>
-        </StackLayout>
-        <StackLayout row="2">
-          <!-- Area di gioco avanzata [VARIABILE] -->
-          <GridLayout rows="*" columns="*" class="card">
-            <app-advance-game [timeBlocked]="service.timeBlocked"></app-advance-game>
-          </GridLayout>
-        </StackLayout>
-        <StackLayout row="3">
-          <!-- Area inserimento [Fissa] -->
-          <app-btncalc [rowHeight]="rowHeight" [timeBlocked]="service.timeBlocked"></app-btncalc>
-        </StackLayout>
-        <!-- VINCITA POTENZIALE MASSIMA -->
-        <GridLayout row="4" rows="*,3*" columns="*" class="card display-amount">
-          <Label row="0" text="{{'amountPlace' | translate}}" class="title" [ngClass]="{'small': service.windowSize.small}" textTransform="uppercase"></Label>
-          <Label row="1" [text]="couponService.stakeDisplay.TotalStake |number: '1.2-2'" class="amount" [ngClass]="{'small': service.windowSize.small}"></Label>
-        </GridLayout>
-        <GridLayout row="5" rows="*" columns="*,*" class="card">
-          <!-- Area polifunzionale [Fissa]  -->
-          <GridLayout col="0" rows="*" columns="*" class="button left btn-success">
-            <Button text="{{'paga' | translate}}" class="button-internal" textTransform="uppercase" [isEnabled]="!service.timeBlocked"
-              (tap)="payCancelCoupon(dialogTypeCoupon.PAY)"></Button>
-          </GridLayout>
-          <GridLayout col="1" rows="*" columns="*" class="button right btn-warning">
-            <Button text="{{'annulla' | translate}}" class="button-internal" textTransform="uppercase" [isEnabled]="!service.timeBlocked"
-              (tap)="payCancelCoupon(dialogTypeCoupon.CANCEL)"></Button>
-          </GridLayout>
-        </GridLayout>
-      </GridLayout>
-    </GridLayout>
-    <GridLayout col="1" class="overlay radius-5" marginRight="3" *ngIf="service.timeBlocked">
-      <StackLayout verticalAlignment="center">
-        <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png" horizontalAlignment="center"
-          verticalAlignment="center">
-        </Image>
-      </StackLayout>
-    </GridLayout>
-    <StackLayout col="2" class="product-coupon padding-right-6">
-      <app-coupon [timeBlocked]="service.timeBlocked"></app-coupon>
+<!--PRODUCT CONTAINER-->
+<GridLayout columns="60*,20*,20*" rows="*" class="product">
+  <GridLayout col="0" rows="3*,13*,2*" columns="*" class="product-container padding-left-6 padding-right-3">
+    <StackLayout row="0" rowSpan="3">
+      <router-outlet></router-outlet>
     </StackLayout>
-    <GridLayout col="2" class="overlay radius-5" marginRight="6" *ngIf="service.timeBlocked">
-      <StackLayout verticalAlignment="center">
-        <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png" horizontalAlignment="center"
-          verticalAlignment="center">
-        </Image>
-      </StackLayout>
+
+    <!-- Dialog polifunctional area-->
+    <GridLayout row="1" *ngIf="dialog.showDialog">
+      <app-product-dialog [data]="dialog.dialogData"></app-product-dialog>
+    </GridLayout>
+    <!-- Dialog pay cancel-->
+    <GridLayout row="1" *ngIf="couponDialogService.showDialog">
+      <app-pay-cancel-dialog></app-pay-cancel-dialog>
     </GridLayout>
   </GridLayout>
+  <GridLayout col="1" class="product-calc padding-right-3">
+    <GridLayout rows="*,*,*,6*,*,*" columns="*">
+      <StackLayout row="0">
+        <!-- Area widget [Variabile] -->
+        <app-widget [rowHeight]="rowHeight" [product]="service.product" [timeBlocked]="service.timeBlocked">
+        </app-widget>
+      </StackLayout>
+      <StackLayout row="1">
+        <!-- Area polifunzionale / Smartcode -->
+        <app-display [timeBlocked]="service.timeBlocked"></app-display>
+      </StackLayout>
+      <StackLayout row="2">
+        <!-- Area di gioco avanzata [VARIABILE] -->
+        <GridLayout rows="*" columns="*" class="card">
+          <app-advance-game [timeBlocked]="service.timeBlocked"></app-advance-game>
+        </GridLayout>
+      </StackLayout>
+      <StackLayout row="3">
+        <!-- Area inserimento [Fissa] -->
+        <app-btncalc [rowHeight]="rowHeight" [timeBlocked]="service.timeBlocked"></app-btncalc>
+      </StackLayout>
+      <!-- VINCITA POTENZIALE MASSIMA -->
+      <GridLayout row="4" rows="*,3*" columns="*" class="card display-amount">
+        <Label row="0" text="{{'TOTAL_STAKE' | translate}}" class="title"
+          [ngClass]="{'small': service.windowSize.small}" textTransform="uppercase"></Label>
+        <Label row="1" [text]="couponService.stakeDisplay.TotalStake | number: '1.2-2'" class="amount"
+          [ngClass]="{'small': service.windowSize.small}"></Label>
+      </GridLayout>
+      <StackLayout row="3">
+        <!-- Area inserimento [Fissa] -->
+        <app-btncalc [rowHeight]="rowHeight" [timeBlocked]="service.timeBlocked"></app-btncalc>
+      </StackLayout>
+      <!-- VINCITA POTENZIALE MASSIMA -->
+      <GridLayout row="4" rows="*,3*" columns="*" class="card display-amount">
+        <Label row="0" text="{{'TOTAL_STAKE' | translate}}" class="title"
+          [ngClass]="{'small': service.windowSize.small}" textTransform="uppercase"></Label>
+        <Label row="1" [text]="couponService.stakeDisplay.TotalStake |number: '1.2-2'" class="amount"
+          [ngClass]="{'small': service.windowSize.small}"></Label>
+      </GridLayout>
+      <GridLayout row="5" rows="*" columns="*,*" class="card">
+        <!-- Area polifunzionale [Fissa]  -->
+        <GridLayout col="0" rows="*" columns="*" class="button left btn-success">
+          <Button text="{{'PAY' | translate}}" class="button-internal" textTransform="uppercase"
+            [isEnabled]="!service.timeBlocked" (tap)="payCancelCoupon(dialogTypeCoupon.PAY)"></Button>
+        </GridLayout>
+        <GridLayout col="1" rows="*" columns="*" class="button right btn-warning">
+          <Button text="{{'DELETE' | translate}}" class="button-internal" textTransform="uppercase"
+            [isEnabled]="!service.timeBlocked" (tap)="payCancelCoupon(dialogTypeCoupon.CANCEL)"></Button>
+        </GridLayout>
+      </GridLayout>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout col="1" class="overlay radius-5" marginRight="3" *ngIf="service.timeBlocked">
+    <StackLayout verticalAlignment="center">
+      <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png"
+        horizontalAlignment="center" verticalAlignment="center">
+      </Image>
+    </StackLayout>
+  </GridLayout>
+  <StackLayout col="2" class="product-coupon padding-right-6">
+    <app-coupon [timeBlocked]="service.timeBlocked"></app-coupon>
+  </StackLayout>
+  <GridLayout col="2" class="overlay radius-5" marginRight="6" *ngIf="service.timeBlocked">
+    <StackLayout verticalAlignment="center">
+      <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png"
+        horizontalAlignment="center" verticalAlignment="center">
+      </Image>
+    </StackLayout>
+  </GridLayout>
+</GridLayout>
 <!-- </GridLayout> -->
