@@ -2,7 +2,7 @@
   <div fxFlex="28"></div>
   <div fxFlex="28">
     <span
-      class="game-name txt-uppercase">{{ 'DYNAMIC_KEYS.PRODUCT.LABEL.'+ productService.product.label | translate }}</span>
+      class="game-name">{{ 'DYNAMIC_KEYS.PRODUCT.LABEL.'+ productService.product.label | translate | uppercase}}</span>
   </div>
   <div fxFlex="42" *ngIf="racingService.raceDetails.races[racingService.raceDetails.currentRace] != null"
     fxLayout="column" fxFlexAlign="stretch" fxLayoutAlign="space-around end">

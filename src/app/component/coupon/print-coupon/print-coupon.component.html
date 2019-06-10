@@ -89,7 +89,7 @@
         <div class="min-row" *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.SingleBet">
           <div class="min">
             <div class="decoration-title"></div>
-            <div class="title txt-uppercase">{{'MIN_PAYOUT' | translate }} </div>
+            <div class="title">{{'MIN_PAYOUT' | translate | uppercase}} </div>
             <div class="decoration-title"></div>
           </div>
           <div class="amount">
@@ -99,12 +99,10 @@
         <div class="max-row">
           <div class="max">
             <div class="decoration-title"></div>
-            <div class="title txt-uppercase"
-              *ngIf="printCouponService.couponPrint.CouponTypeId !== couponType.SingleBet">
-              {{'MAX_PAYOUT' | translate }} </div>
-            <div class="title txt-uppercase"
-              *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.SingleBet">
-              {{'TOTAL_PAYOUT' | translate }} </div>
+            <div class="title" *ngIf="printCouponService.couponPrint.CouponTypeId !== couponType.SingleBet">
+              {{'MAX_PAYOUT' | translate | uppercase}} </div>
+            <div class="title" *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.SingleBet">
+              {{'TOTAL_PAYOUT' | translate | uppercase}} </div>
             <div class="decoration-title"></div>
           </div>
           <div class="amount">

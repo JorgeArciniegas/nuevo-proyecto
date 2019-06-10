@@ -45,18 +45,22 @@ $color-text-gray: #6b7279;
 
 //EXTENDS
 %color-bg-default {
-  background: $color-bg-primary;
+	background: $color-bg-primary;
 	color: #ffffff;
 }
 
 %color-placeholder {
-  placeholder-color: $color-bg-accent;
+	placeholder-color: $color-bg-accent;
 }
-%color-disabled{
-  color: $color-text-gray;
+%color-disabled {
+	color: $color-text-gray;
 }
 %bg-default {
 	background: $color-bg-primary;
+}
+
+%bg-transparent {
+	background: $color-bg-transparent;
 }
 
 %bg-opacity {
@@ -144,7 +148,7 @@ $color-text-gray: #6b7279;
 	background-size: contain;
 }
 
-// Card tiitle
+// Card title
 %card-title {
 	background-color: $color-bg-secodary;
 	color: $color-text-primary;
@@ -161,7 +165,7 @@ $color-text-gray: #6b7279;
 }
 
 %card-title-label {
-  background-color: $color-bg-primary;
+	background-color: $color-bg-primary;
 }
 
 %sub-card-title {
@@ -249,23 +253,23 @@ $color-text-gray: #6b7279;
 }
 
 %btn-filter-form {
-  background-color: $color-bg-secodary;
-  border: 1px solid $border-cartd-title;
+	background-color: $color-bg-secodary;
+	border: 1px solid $border-cartd-title;
 }
 %btn-filter-mobile {
-  background-color: $color-bg-secodary;
-  border-width: 1;
-  border-color: $border-cartd-title;
+	background-color: $color-bg-secodary;
+	border-width: 1;
+	border-color: $border-cartd-title;
 }
 
 %btn-filter-success {
-  background-color: $btn-border-selected;
-  border: 1px solid $border-event;
+	background-color: $btn-border-selected;
+	border: 1px solid $border-event;
 }
 %btn-filter-success-mobile {
-  background-color: $btn-border-selected;
-  border-width: 1;
-  border-color: $border-event;
+	background-color: $btn-border-selected;
+	border-width: 1;
+	border-color: $border-event;
 }
 
 // BUTTONS GRADIENT
@@ -298,7 +302,7 @@ $gradient-dark2: #000000;
 }
 
 %btn-danger {
-	background:$gradient-red2;
+	background: $gradient-red2;
 	color: $color-text-primary;
 }
 %btn-warning-mobile {
@@ -462,8 +466,6 @@ $gradient-dark2: #000000;
 	background-size: contain;
 }
 
-
-
 // BORDER BOX DEFINITION
 %border-gray {
 	border-color: $color-border-box;
@@ -508,14 +510,12 @@ $gradient-dark2: #000000;
 	color: $color-text-shadow;
 }
 //ADMIN (MAIN MENU)
-%admin
-{
+%admin {
 	background: url("app/themes/skins/develop/image/Bg-login-vdesk.jpg") center center no-repeat;
 }
-%admin-mobile
-{
+%admin-mobile {
 	background: url("~/app/themes/skins/develop/image/Bg-login-vdesk.jpg") center center no-repeat;
-  background-size: cover;
+	background-size: cover;
 }
 // LOGIN
 %login {
@@ -606,25 +606,24 @@ $gradient-dark2: #000000;
 }
 
 %border-bottom-overlay {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 %border-bottom-overlay-mobile {
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-  border-bottom-width: 1;
+	border-bottom-color: rgba(255, 255, 255, 0.1);
+	border-bottom-width: 1;
 }
 
 // PRINT TEMPLATE
 %logo-header {
-  content:url('app/themes/skins/develop/image/vgen.png');
+	content: url("app/themes/skins/develop/image/vgen.png");
 }
 
 %logo-header-mobile {
-  background:url('~/app/themes/skins/develop/image/vgen.png') center center no-repeat;
-  background-size: contain;
+	background: url("~/app/themes/skins/develop/image/vgen.png") center center no-repeat;
+	background-size: contain;
 }
-
 
 // STATISTIC
 %bar-fitness-pecentage {
-  background: $border-success;
+	background: $border-success;
 }

@@ -7,9 +7,9 @@
   </div>
   <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
 
-    <button fxFlex="50" class="btn-default btn-success radius-10 padding-10 txt-uppercase"
-      (click)="selectedOperation(true)">{{'CONFIRM' | translate}} </button>
-    <button fxFlex="50" class="btn-default btn-warning radius-10 padding-10 txt-uppercase"
-      (click)="selectedOperation(false)">{{'DELETE' | translate}} </button>
+    <button fxFlex="50" class="btn-default btn-success radius-10 padding-10"
+      (click)="selectedOperation(true)">{{'CONFIRM' | translate | uppercase}} </button>
+    <button fxFlex="50" class="btn-default btn-warning radius-10 padding-10"
+      (click)="selectedOperation(false)">{{'DELETE' | translate | uppercase}} </button>
   </div>
 </div>

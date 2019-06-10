@@ -20,10 +20,10 @@
     <mat-grid-list cols="1" rowHeight="50px">
       <mat-grid-tile rowspan="1" class="polifuctional-area">
         <div fxFlexFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="80px">
-          <button fxFlex="24" class="btn-default btn-success radius-10 padding-10 txt-uppercase"
+          <button fxFlex="24" class="btn-default btn-success radius-10 padding-10"
             (click)="close()">{{'CLOSE' | translate | uppercase}}</button>
-          <button fxFlex="24" class="btn-default btn-warning radius-10 padding-10 txt-uppercase" type="submit"
-            [disabled]="form.invalid">{{'CONFIRM' | translate}}</button>
+          <button fxFlex="24" class="btn-default btn-warning radius-10 padding-10" type="submit"
+            [disabled]="form.invalid">{{'CONFIRM' | translate | uppercase}}</button>
         </div>
       </mat-grid-tile>
     </mat-grid-list>

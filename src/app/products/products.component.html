@@ -38,10 +38,10 @@
         <!-- Area polifunzionale [Fissa]  -->
         <mat-grid-tile rowspan="1" class="polifuctional-area">
           <div fxFlexFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
-            <button class="btn-default btn-success radius-10 padding-10 txt-uppercase"
-              (click)="payCancelCoupon('PAY')">{{'PAY' | translate}}</button>
-            <button class="btn-default btn-warning radius-10 padding-10 txt-uppercase"
-              (click)="payCancelCoupon('CANCEL')">{{'DELETE' | translate}}</button>
+            <button class="btn-default btn-success radius-10 padding-10"
+              (click)="payCancelCoupon('PAY')">{{'PAY' | translate | uppercase}}</button>
+            <button class="btn-default btn-warning radius-10 padding-10"
+              (click)="payCancelCoupon('CANCEL')">{{'DELETE' | translate | uppercase}}</button>
           </div>
         </mat-grid-tile>
 

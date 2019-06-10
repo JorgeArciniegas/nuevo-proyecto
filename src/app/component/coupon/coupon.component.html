@@ -98,7 +98,7 @@
     <div class="display display-message radius-5"
       [ngClass]="{'display-error': couponService.error && !couponService.warningMessages, 'display-warning': couponService.warningMessages}">
       <label *ngIf="couponService.error && !couponService.warningMessages" fxLayout="column" fxFlex>
-        <span class="txt-uppercase">{{'ERROR' | translate}}</span>
+        <span>{{'ERROR' | translate | uppercase}}</span>
         <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
           {{"DYNAMIC_KEYS.COUPON_ERROR." + couponService.error.message | translate}} <ng-container
             *ngIf="couponService.error.detail">(Limit:
@@ -106,7 +106,7 @@
         </div>
       </label>
       <label *ngIf="couponService.warningMessages" fxLayout="column" fxFlex>
-        <span class="txt-uppercase">{{'WARNING' | translate}}</span>
+        <span>{{'WARNING' | translate | uppercase}}</span>
         <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
           {{"DYNAMIC_KEYS.COUPON_WARNING." + couponService.warningMessages | translate}}
         </div>
@@ -124,19 +124,19 @@
   <mat-grid-tile rowspan="2"
     *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
     <div fxFill class="padding-top-10">
-      <button class="btn-default btn-success radius-10 padding-10 txt-uppercase" [disabled]="couponService.error"
-        (click)="couponService.preStagedCoupon()">{{'COUPON.BET' | translate}}</button>
+      <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.error"
+        (click)="couponService.preStagedCoupon()">{{'COUPON.BET' | translate | uppercase}}</button>
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="2" *ngIf="couponService.coupon && couponService.coupon.internal_isReadyToPlace">
     <div fxFill fxLayoutGap="10px">
       <div fxFill fxFlex="50" class="padding-top-10">
-        <button class="btn-default btn-warning radius-10 padding-10 txt-uppercase" [disabled]="couponService.error"
-          (click)="couponService.cancelStagingCoupon()">{{'back' | translate}}</button>
+        <button class="btn-default btn-warning radius-10 padding-10" [disabled]="couponService.error"
+          (click)="couponService.cancelStagingCoupon()">{{'back' | translate | uppercase}}</button>
       </div>
       <div fxFill fxFlex="50" class="padding-top-10">
-        <button class="btn-default btn-success radius-10 padding-10 txt-uppercase" [disabled]="couponService.error"
-          (click)="couponService.stagedCoupon()">{{'conferma' | translate}}</button>
+        <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.error"
+          (click)="couponService.stagedCoupon()">{{'conferma' | translate | uppercase}}</button>
       </div>
     </div>
   </mat-grid-tile>
