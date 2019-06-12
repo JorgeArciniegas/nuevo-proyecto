@@ -3,7 +3,7 @@ import { BetCouponOdd } from '@elys/elys-api';
 import { BetCouponOddExtended } from '@elys/elys-coupon';
 import { CouponService } from '../../../component/coupon/coupon.service';
 import { BetDataDialog, BetOdd } from '../../products.model';
-import { AppSettings } from 'src/app/app.settings';
+import { AppSettings } from '../../../../../src/app/app.settings';
 
 @Component({
   selector: 'app-betodds',

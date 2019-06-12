@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import { AppSettings } from '../../app.settings';
 import { BetOdd } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
-import { OddsStakeEdit } from './coupon.model';
 import { CouponService } from './coupon.service';
 
 @Component({

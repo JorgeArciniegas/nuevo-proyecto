@@ -125,15 +125,20 @@
       <Button text="000" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnAmountSet('000')"></Button>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="1" col="3" rowSpan="3" shadow="3" cornerRadius="7" class="card">
+  <GridLayout row="1" col="3" rowSpan="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-success" (tap)="plus()">
       <Button text="+" class="button-internal" [isEnabled]="!timeBlocked"></Button>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="4" col="3" shadow="3" cornerRadius="7" class="card">
+  <GridLayout row="3" col="3" rowSpan="btncalcService.decimalSeparator ? 1 : 2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-warning" (doubleTap)="clearAll()"
       (tap)='polyfuncionalAmountReset()'>
       <Button text="{{ 'C' | translate }}" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+    </GridLayout>
+  </GridLayout>
+  <GridLayout row="4" col="3" *ngIf="btncalcService.decimalSeparator" shadow="3" cornerRadius="7" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-keyboard small">
+      <Button text="{{ btncalcService.decimalSeparator }}" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnSeparatorSet()"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="5" col="0" colSpan="2" shadow="3" cornerRadius="7" class="card">

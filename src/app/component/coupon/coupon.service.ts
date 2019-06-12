@@ -19,7 +19,6 @@ import {
 import { Observable, Subject } from 'rxjs';
 import { BetOdd, CouponConfirmDelete } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
-import { DestroyCouponService } from './confirm-destroy-coupon/destroy-coupon.service';
 import {
   CouponLimit,
   Error,

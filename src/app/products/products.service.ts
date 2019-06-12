@@ -15,9 +15,11 @@ import {
   BetDataDialog,
   DialogData,
   PolyfunctionalArea,
-  PolyfunctionalStakeCoupon
+  PolyfunctionalStakeCoupon,
+  PolyfunctionStakePresetPlayer
 } from './products.model';
 import { UserService } from '../services/user.service';
+import { TypeBetSlipColTot } from './racing/racing.models';
 @Injectable({
   providedIn: 'root'
 })
@@ -39,6 +41,12 @@ export class ProductsService extends ProductsServiceExtra {
   // polifunctional stake coupon
   polyfunctionalStakeCouponSubject: Subject<PolyfunctionalStakeCoupon>;
   polyfunctionalStakeCouponObs: Observable<PolyfunctionalStakeCoupon>;
+
+  // polifunctional stake preset from player
+  polyfunctionStakePresetPlayerSub: Subject<PolyfunctionStakePresetPlayer>;
+  polyfunctionStakePresetPlayerObs: Observable<PolyfunctionStakePresetPlayer>;
+
+
   // tslint:disable-next-line:typedef
   gridByBreakpoint = {
     xl: 12,
@@ -72,10 +80,13 @@ export class ProductsService extends ProductsServiceExtra {
     this.polyfunctionalAreaObservable = this.polyfunctionalAreaSubject.asObservable();
 
     // stake coupon
-    this.polyfunctionalStakeCouponSubject = new Subject<
-      PolyfunctionalStakeCoupon
-    >();
+    this.polyfunctionalStakeCouponSubject = new Subject<PolyfunctionalStakeCoupon>();
     this.polyfunctionalStakeCouponObs = this.polyfunctionalStakeCouponSubject.asObservable();
+
+    // stake preset from player insert
+    this.polyfunctionStakePresetPlayerSub = new Subject<PolyfunctionStakePresetPlayer>();
+    this.polyfunctionStakePresetPlayerObs = this.polyfunctionStakePresetPlayerSub.asObservable();
+
 
     // time block
     this.timeBlockedSubscribe = new Subject<boolean>();
@@ -140,4 +151,7 @@ export class ProductsService extends ProductsServiceExtra {
     this.playableBoardResetSubject.next(false);
     this.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
+
+
+
 }

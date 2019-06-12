@@ -1,4 +1,4 @@
-<div class="advance-game" fxFlexFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+<div class="advance-game" fxFlexFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px"  [style.height.px]="((rowHeight/2))">
   <button *ngFor="let btn of buttons" fxFlex class="btn-reset btn-advance-game radius-5" (click)="setTypePlacing(btn.code)"
     [ngClass]="{'actived' : service.placingRace.typePlace === btn.code, 'inactive': service.placingRace.typePlace !== undefined && service.placingRace.typePlace !== btn.code}">
     <span class="label">{{ btn.label | translate }}</span>

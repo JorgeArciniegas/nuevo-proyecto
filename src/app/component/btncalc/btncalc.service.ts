@@ -1,8 +1,12 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { TypeBetSlipColTot } from '../../products/racing/racing.models';
-import { PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../../products/products.model';
+import { Subscription, timer } from 'rxjs';
+import { UserService } from '../../../../src/app/services/user.service';
+import { TranslateUtilityService } from '../../../../src/app/services/utility/translate-utility.service';
+import { PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
+import { TypeBetSlipColTot } from '../../products/racing/racing.models';
+import { formatCurrency } from '@angular/common';
+import { AppSettings } from 'src/app/app.settings';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +19,19 @@ export class BtncalcService implements OnDestroy {
   polyfunctionalDecimalsFlag: boolean;
   stringWholeDecimals: string;
   numberWholeDecimals: number;
-  conversionDecimals: string;
+  decimalSeparator: string;
 
   polyfunctionalStakeCoupon: PolyfunctionalStakeCoupon = new PolyfunctionalStakeCoupon();
+  polyfunctionStakePresetPlayer: PolyfunctionStakePresetPlayer;
 
-  constructor(public productService: ProductsService) {
+  constructor(
+    private setting: AppSettings,
+    public productService: ProductsService,
+    private translate: TranslateUtilityService,
+    private userService: UserService
+    ) {
+
+
     this.polyfunctionalDecimalsFlag = true;
     this.polyfunctionalAdditionFlag = true;
     // manages data display: amount addition/decimals and amount distribution
@@ -57,10 +69,46 @@ export class BtncalcService implements OnDestroy {
         this.polyfunctionalStakeCoupon = elem;
       }
     );
+
+    // Separator decimal calculate
+    this.checkSeparator();
+    // this.settingStakePresetPlayer();
+
   }
 
   ngOnDestroy(): void {
     this.polyfunctionalValueSubscribe.unsubscribe();
+  }
+
+  // default presets player
+  settingStakePresetPlayer(): void {
+    if (this.userService.userDetail) {
+      this.polyfunctionStakePresetPlayer = {
+        typeSlipCol: TypeBetSlipColTot.COL,
+        amount: this.setting.defaultAmount.PresetOne
+      };
+
+      this.productService.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
+    } else  {
+      timer(1000).subscribe( () => this.settingStakePresetPlayer() );
+    }
+  }
+
+
+
+  checkSeparator(): void {
+    // it is used on the DOM and it is put on the CALC BUTTON
+    if (this.userService.userDetail && !this.decimalSeparator) {
+      const decimalCheck = 1.2;
+      const separator = decimalCheck.toLocaleString( this.translate.getCurrentLanguage() ).substring(1, 2);
+      // tslint:disable-next-line:max-line-length
+      const currencyHasDecimal = Number(formatCurrency(decimalCheck, this.translate.getCurrentLanguage(), '', this.userService.userDetail.Currency ));
+      if ( !Number.isInteger(currencyHasDecimal) ) {
+        this.decimalSeparator  = separator;
+      }
+    } else {
+      timer(1000).subscribe( () => this.checkSeparator() );
+    }
   }
 
   // increments amount in display by preset default bottons values
@@ -106,14 +154,79 @@ export class BtncalcService implements OnDestroy {
        * algorithm to covert last two digits of number to decimals
        * assigns it back to amount
        */
+
       this.polyfunctionalArea.amount = this.returnNumberToPolyfuncArea(amount);
-      this.productService.polyfunctionalAreaSubject.next(
-        this.polyfunctionalArea
-      );
+      if ( this.polyfunctionalArea.hasDecimalSeparator &&
+          this.polyfunctionalArea.amountStr.split('.')[1].length === 2 ) {
+        this.polyfunctionalArea.disableInputCalculator = true;
+      }
+
+    } else  {
+
+      this.polyfunctionalArea = new PolyfunctionalArea();
+      this.polyfunctionalDecimalsFlag = false;
+      // this.polyfunctionalArea.firstTap = false;
+      this.polyfunctionalArea.amount =  amount;
+      this.polyfunctionalArea.amountStr = amount.toString();
+    }
+
+    // console.log(this.polyfunctionalArea);
+    this.productService.polyfunctionalAreaSubject.next(
+      this.polyfunctionalArea
+    );
+  }
+
+
+  // TOT & COL buttons on/off
+  btnTotColSelection(betTotColSelected: TypeBetSlipColTot): void {
+    if (this.polyfunctionalArea) {
+      this.polyfunctionalArea.typeSlipCol = betTotColSelected;
+      this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
+
+      // preset player selected
+      this.polyfunctionStakePresetPlayer.typeSlipCol = betTotColSelected;
+      this.productService.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
+    }
+
+  }
+
+  /**
+   * Keep in mind that the "setDecimalSeparator" variables are enabled
+   * when the user tapes the specific symbol on the calculator.
+   * If setDecimalSeparator is true the referer real amount is "amountStr's" value, viceversa it is "amount" value.
+   * All variables are in the  "PolyfunctionalArea" Object.
+   * @param amount
+   */
+  public returnNumberToPolyfuncArea(amount: number): number {
+
+    // check if hasDecimalSeparator
+    let tempAmount = (this.polyfunctionalArea.hasDecimalSeparator) ? this.polyfunctionalArea.amountStr  : this.polyfunctionalArea.amount;
+
+    // check if it is the first time that the player taps the button on calculator.
+    if (!this.polyfunctionalArea.firstTap) {
+      tempAmount +=  amount.toString();
+    } else {
+      tempAmount  = amount.toString();
+      // set to false "firstTap", so Following  append to current amount value
+      this.polyfunctionalArea.firstTap = false;
+    }
+    this.polyfunctionalArea.amountStr = tempAmount.toString();
+    // ????????? DA RIVEDERE
+    return parseFloat(tempAmount.toString());
+  }
+
+  /**
+   *
+   */
+  public setDecimal(): void {
+    if (!this.polyfunctionalArea.hasDecimalSeparator) {
+      this.polyfunctionalArea.hasDecimalSeparator = true;
+      this.polyfunctionalArea.amountStr += '.';
     }
   }
 
-  btnAmountDecimalsChangeOdd(amount: number, oddStake: number): number {
+
+  btnAmountDecimalsChangeOddFnPOS(amount: number, oddStake: number): number {
     const tmpNumberLength = (oddStake * 100).toFixed()
     .toString()
     .replace('.', '');
@@ -121,16 +234,12 @@ export class BtncalcService implements OnDestroy {
     return Number(stringTmpNumber) / 100;
   }
 
-  // TOT & COL buttons on/off
-  btnTotColSelection(betTotColSelected: TypeBetSlipColTot): void {
-    if (this.polyfunctionalArea) {
-      this.polyfunctionalArea.typeSlipCol = betTotColSelected;
-      this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
-    }
 
-  }
-
-  private returnNumberToPolyfuncArea(amount: number): number {
+  /**
+   * @deprecated
+   * @param amount
+   */
+  private returnNumberToPolyfuncAreaFnPos(amount: number): number {
     const tmpNumberLength = (this.polyfunctionalArea.amount * 100)
       .toFixed()
       .toString()

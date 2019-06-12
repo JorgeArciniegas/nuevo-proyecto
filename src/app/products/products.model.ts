@@ -1,6 +1,7 @@
 import { BetCouponExtended } from '@elys/elys-coupon';
 import { TypeBetSlipColTot } from './racing/racing.models';
 import { VirtualBetCompetitor } from '@elys/elys-api';
+import { formatCurrency, formatNumber } from '@angular/common';
 
 export interface WindowSize {
   height: number;
@@ -14,13 +15,21 @@ export class PolyfunctionalArea {
   selection?: string;
   value?: string | number;
   amount?: number;
+  amountStr?: string;
   odds?: BetOdd[];
   labelColTot?: string;
   typeSlipCol?: TypeBetSlipColTot;
   activeAssociationCol?: boolean;
   activeDistributionTot?: boolean;
+  hasDecimalSeparator?: boolean;
+  firstTap?: boolean;
+  disableInputCalculator?: boolean;
   constructor() {
     this.typeSlipCol = TypeBetSlipColTot.COL;
+    this.firstTap = false;
+    this.disableInputCalculator = false;
+    this.amount = 0;
+    this.hasDecimalSeparator = false;
   }
 }
 
@@ -31,13 +40,15 @@ export class PolyfunctionalStakeCoupon {
   columns: number;
   typeSlipCol: TypeBetSlipColTot;
   isEnabled: boolean;
+  hasDecimalSeparator: boolean;
   constructor(
     digitAmount?: number,
     totalAmount?: number,
     columnAmount?: number,
     columns?: number,
     typeSlipCol?: TypeBetSlipColTot,
-    isEnabled?: boolean
+    isEnabled?: boolean,
+    hasDecimalSeparator?: boolean
   ) {
     this.digitAmount = digitAmount || 0.0;
     this.totalAmount = totalAmount || 0.0;
@@ -45,9 +56,15 @@ export class PolyfunctionalStakeCoupon {
     this.columns = columns || 0;
     this.typeSlipCol = typeSlipCol ? typeSlipCol : TypeBetSlipColTot.COL;
     this.isEnabled = isEnabled || false;
+    this.hasDecimalSeparator =  hasDecimalSeparator || false;
   }
 }
-
+export class PolyfunctionStakePresetPlayer {
+  typeSlipCol: TypeBetSlipColTot;
+  amount: number;
+  isCleaning?: boolean;
+  disableInputCalculator?: boolean;
+}
 export class BetOdd {
   id: number;
   label: string;

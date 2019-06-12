@@ -11,6 +11,7 @@ export interface OddsStakeEdit {
   tempStake: number;
   odd: BetCouponOdd;
   isDefaultInput: boolean;
+  presetDigitPlayer?: number;
 }
 
 export interface InternalCoupon extends BetCouponExtended {

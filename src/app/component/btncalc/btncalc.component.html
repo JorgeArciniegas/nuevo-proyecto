@@ -23,7 +23,7 @@
   </mat-grid-tile>
 </mat-grid-list>
 <!-- BTN calculator -->
-<mat-grid-list cols="4" class="grid-keyboard-number" rowHeight="{{rowHeight}}">
+<mat-grid-list cols="4" class="grid-keyboard-number" rowHeight="{{rowHeight}}" >
   <mat-grid-tile>
     <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet(1)">1</button>
   </mat-grid-tile>
@@ -33,7 +33,7 @@
   <mat-grid-tile>
     <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet(3)">3</button>
   </mat-grid-tile>
-  <mat-grid-tile rowspan="3">
+  <mat-grid-tile rowspan="2">
     <button class="btn-default btn-keyboard btn-success radius-5 elevation-z5" (click)="plus()">+</button>
   </mat-grid-tile>
   <mat-grid-tile>
@@ -54,6 +54,10 @@
   <mat-grid-tile>
     <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet(9)">9</button>
   </mat-grid-tile>
+  <mat-grid-tile [rowspan]="btncalcService.decimalSeparator ? 1 : 2">
+    <button class="btn-default btn-keyboard btn-warning radius-5 elevation-z5" (dblclick)="clearAll()"
+      (click)='polyfuncionalAmountReset()'>{{ 'C' | translate }}</button>
+  </mat-grid-tile>
   <mat-grid-tile>
     <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet(0)">0</button>
   </mat-grid-tile>
@@ -63,9 +67,8 @@
   <mat-grid-tile>
     <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnAmountSet('000')">000</button>
   </mat-grid-tile>
-  <mat-grid-tile>
-    <button class="btn-default btn-keyboard btn-warning radius-5 elevation-z5" (dblclick)="clearAll()"
-      (click)='polyfuncionalAmountReset()'>{{ 'C' | translate }}</button>
+  <mat-grid-tile *ngIf="btncalcService.decimalSeparator">
+    <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnSeparatorSet()">{{btncalcService.decimalSeparator}}</button>
   </mat-grid-tile>
   <mat-grid-tile colspan="2">
     <button class="btn-default btn-keyboard btn-grey-gradient radius-5 elevation-z5"

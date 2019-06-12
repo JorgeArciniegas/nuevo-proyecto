@@ -11,7 +11,7 @@ import { Observable as ObservableIdle } from 'rxjs/Rx';
 import { AppSettings } from '../../app.settings';
 import { CouponService } from '../../component/coupon/coupon.service';
 import { DialogData, BetDataDialog } from '../products.model';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../../../src/app/services/user.service';
 @Component({
   selector: 'app-product-dialog',
   templateUrl: './product-dialog.component.html',
