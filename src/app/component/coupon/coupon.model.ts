@@ -11,6 +11,7 @@ export interface OddsStakeEdit {
   tempStake: number;
   odd: BetCouponOdd;
   isDefaultInput: boolean;
+  // to remove
   presetDigitPlayer?: number;
 }
 
@@ -22,7 +23,8 @@ export interface InternalCoupon extends BetCouponExtended {
  * Object of the coupon's error.
  * @attribute message. Error message.
  * @attribute detail. Additional information about the error. Example: The amount of a limit that was overcome.
- * @attribute location. Location of the errors if they are generated from specific selections of the coupon. It contains the "oddId" of the selections in error.
+ * @attribute location. Location of the errors if they are generated from specific selections of the coupon.
+ *            It contains the "oddId" of the selections in error.
  */
 export class Error {
   message: string;

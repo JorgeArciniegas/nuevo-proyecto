@@ -39,7 +39,6 @@ export class DisplayComponent implements OnInit, OnDestroy {
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
         this.polyfunctionalValue = element;
-        // this.amountPresetPlayer.typeSlipCol = element.typeSlipCol;
       }
 
     );

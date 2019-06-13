@@ -51,6 +51,8 @@ export class BtncalcComponentCommon {
   }
   async plus(): Promise<void> {
     this.displayDefaultAmount = 0;
+    this.btncalcService.assignStake();
+
     if (this.couponService.oddStakeEdit) {
       this.couponService.updateCoupon();
       return;
@@ -102,7 +104,7 @@ export class BtncalcComponentCommon {
       this.btncalcService.polyfunctionalArea
     );
     this.displayDefaultAmount = 0.00;
-    this.amountSetToPolyfunctionalStakeCoupon();
+    // this.amountSetToPolyfunctionalStakeCoupon();
   }
 
   // increments amount in display by preset default values
@@ -117,6 +119,40 @@ export class BtncalcComponentCommon {
       this.btncalcService.btnDefaultAmountAddition(amount);
     }
   }
+
+  /**
+   *
+   * @param amount
+   */
+  setStakePresetPlayer(amount: number): void {
+
+    if ( this.btncalcService.polyfunctionStakePresetPlayer.disableInputCalculator ) {
+      return;
+    }
+
+    if (this.couponService.oddStakeEdit) {
+      if (this.couponService.oddStakeEdit.isDefaultInput) {
+        this.couponService.oddStakeEdit.tempStake = 0;
+        this.couponService.oddStakeEdit.isDefaultInput = false;
+      }
+      this.couponService.oddStakeEdit.tempStake =
+        this.btncalcService.btnAmountDecimalsChangeOddFnPOS(amount, this.couponService.oddStakeEdit.tempStake);
+    } else {
+      if (this.polyfunctionalArea && this.polyfunctionalArea.odds.length > 0 ) {
+        this.btncalcService.polyfunctionStakePresetPlayer.isPreset = false;
+      } else {
+        this.btncalcService.polyfunctionStakePresetPlayer.isPreset = true;
+      }
+
+      this.btncalcService.polyfunctionStakePresetPlayer.amount = this.btncalcService.returnTempNumberToPolyfuncArea(amount);
+      this.productService.polyfunctionStakePresetPlayerSub.next(this.btncalcService.polyfunctionStakePresetPlayer);
+    }
+
+
+
+  }
+
+
 
   // increments digits in display amount
   btnAmountSet(amount: number): void {

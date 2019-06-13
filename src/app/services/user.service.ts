@@ -155,7 +155,7 @@ export class UserService {
    * If the game is present on the 'environment' but it doesn't match the 'availableSport',
    * it isn't playable and it is only shown in the reports list.
    */
-  async checkAvailableSportAndSetPresetsAmount(): Promise<void> {
+  checkAvailableSportAndSetPresetsAmount(): void {
     const currencyRequest: CurrencyCodeRequest = {
       currencyCode: this.storageService.getData('UserData').Currency
     };

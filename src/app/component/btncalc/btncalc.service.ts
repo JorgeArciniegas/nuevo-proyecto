@@ -7,6 +7,7 @@ import { ProductsService } from '../../products/products.service';
 import { TypeBetSlipColTot } from '../../products/racing/racing.models';
 import { formatCurrency } from '@angular/common';
 import { AppSettings } from 'src/app/app.settings';
+import { CouponService } from '../coupon/coupon.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,8 @@ export class BtncalcService implements OnDestroy {
     private setting: AppSettings,
     public productService: ProductsService,
     private translate: TranslateUtilityService,
-    private userService: UserService
+    private userService: UserService,
+    private couponService: CouponService
     ) {
 
 
@@ -37,7 +39,12 @@ export class BtncalcService implements OnDestroy {
     // manages data display: amount addition/decimals and amount distribution
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
+        // check if the odds is changed and reset the tap of preset stake
+        if (this.polyfunctionalArea.odds.length !== element.odds.length ) {
+          this.polyfunctionStakePresetPlayer.firstTap = true;
+        }
         this.polyfunctionalArea = element;
+
         if (this.polyfunctionalArea) {
           if (this.polyfunctionalArea.odds !== undefined) {
             this.polyfunctionalArea.activeDistributionTot = true;
@@ -72,7 +79,7 @@ export class BtncalcService implements OnDestroy {
 
     // Separator decimal calculate
     this.checkSeparator();
-    // this.settingStakePresetPlayer();
+    this.settingStakePresetPlayer();
 
   }
 
@@ -83,18 +90,15 @@ export class BtncalcService implements OnDestroy {
   // default presets player
   settingStakePresetPlayer(): void {
     if (this.userService.userDetail) {
-      this.polyfunctionStakePresetPlayer = {
-        typeSlipCol: TypeBetSlipColTot.COL,
-        amount: this.setting.defaultAmount.PresetOne
-      };
-
+      this.polyfunctionStakePresetPlayer = new PolyfunctionStakePresetPlayer(
+        TypeBetSlipColTot.COL,
+        this.setting.defaultAmount.PresetOne
+      );
       this.productService.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
     } else  {
       timer(1000).subscribe( () => this.settingStakePresetPlayer() );
     }
   }
-
-
 
   checkSeparator(): void {
     // it is used on the DOM and it is put on the CALC BUTTON
@@ -197,6 +201,34 @@ export class BtncalcService implements OnDestroy {
    * All variables are in the  "PolyfunctionalArea" Object.
    * @param amount
    */
+
+  public returnTempNumberToPolyfuncArea(amount: number): number {
+
+    // check if hasDecimalSeparator
+    // tslint:disable-next-line:max-line-length
+    let tempAmount = (this.polyfunctionStakePresetPlayer.hasDecimalSeparator) ? this.polyfunctionStakePresetPlayer.amountStr  : this.polyfunctionStakePresetPlayer.amount;
+
+    // check if it is the first time that the player taps the button on calculator.
+    if (!this.polyfunctionStakePresetPlayer.firstTap) {
+      tempAmount +=  amount.toString();
+    } else {
+      tempAmount  = amount.toString();
+      // set to false "firstTap", so Following  append to current amount value
+      this.polyfunctionStakePresetPlayer.firstTap = false;
+    }
+    this.polyfunctionStakePresetPlayer.amountStr = tempAmount.toString();
+    if (
+      this.polyfunctionStakePresetPlayer.hasDecimalSeparator &&
+      this.polyfunctionStakePresetPlayer.amountStr.split('.')[1].length === 2
+    ) {
+      this.polyfunctionStakePresetPlayer.disableInputCalculator = true;
+    }
+    // ????????? DA RIVEDERE
+    return parseFloat(tempAmount.toString());
+  }
+
+
+
   public returnNumberToPolyfuncArea(amount: number): number {
 
     // check if hasDecimalSeparator
@@ -219,9 +251,14 @@ export class BtncalcService implements OnDestroy {
    *
    */
   public setDecimal(): void {
-    if (!this.polyfunctionalArea.hasDecimalSeparator) {
+    /* if (!this.polyfunctionalArea.hasDecimalSeparator) {
       this.polyfunctionalArea.hasDecimalSeparator = true;
       this.polyfunctionalArea.amountStr += '.';
+    } */
+
+    if (!this.polyfunctionStakePresetPlayer.hasDecimalSeparator) {
+      this.polyfunctionStakePresetPlayer.hasDecimalSeparator = true;
+      this.polyfunctionStakePresetPlayer.amountStr += '.';
     }
   }
 
@@ -248,5 +285,39 @@ export class BtncalcService implements OnDestroy {
     return Number(stringTmpNumber) / 100;
   }
 
+  /**
+   * assign Stake To Coupon Or stake in PolyfuncionalArea
+   */
+  public assignStake(): void {
+    // controllare se esiste una selezione in polyfuncional Area e ne associo l'importo
+    // se non esiste nessuna selezione, verifica presenza coupon e ne associo l'importo
+    if (this.polyfunctionalArea.odds.length > 0 ) {
+      this.polyfunctionalArea.amount = this.polyfunctionStakePresetPlayer.amount;
+      this.productService.polyfunctionalAreaSubject.next(
+        this.polyfunctionalArea
+      );
+    } else if ( this.polyfunctionalArea.odds.length === 0 && this.couponService.coupon) {
+      const amountTemp: PolyfunctionalStakeCoupon = new PolyfunctionalStakeCoupon();
+      if (this.polyfunctionStakePresetPlayer.typeSlipCol === TypeBetSlipColTot.COL) {
+        amountTemp.totalAmount = this.polyfunctionStakePresetPlayer.amount * this.couponService.coupon.Odds.length;
+        amountTemp.columnAmount = this.polyfunctionStakePresetPlayer.amount;
+        amountTemp.typeSlipCol = TypeBetSlipColTot.COL;
+      } else {
+        amountTemp.columnAmount = this.polyfunctionStakePresetPlayer.amount / this.couponService.coupon.Odds.length;
+        amountTemp.totalAmount = this.polyfunctionStakePresetPlayer.amount;
+        amountTemp.typeSlipCol = TypeBetSlipColTot.TOT;
+      }
+      amountTemp.isEnabled = true;
+      amountTemp.columns = this.couponService.coupon.Odds.length;
+      amountTemp.digitAmount = this.polyfunctionStakePresetPlayer.amount;
+      this.productService.polyfunctionalStakeCouponSubject.next(amountTemp);
+      this.polyfunctionStakePresetPlayer.isPreset = false;
+    }
 
+
+    if (!this.polyfunctionStakePresetPlayer.isPreset) {
+      this.settingStakePresetPlayer();
+    }
+    //
+  }
 }

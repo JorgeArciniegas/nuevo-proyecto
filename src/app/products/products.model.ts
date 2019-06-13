@@ -30,6 +30,7 @@ export class PolyfunctionalArea {
     this.disableInputCalculator = false;
     this.amount = 0;
     this.hasDecimalSeparator = false;
+    this.odds = [];
   }
 }
 
@@ -62,9 +63,22 @@ export class PolyfunctionalStakeCoupon {
 export class PolyfunctionStakePresetPlayer {
   typeSlipCol: TypeBetSlipColTot;
   amount: number;
-  isCleaning?: boolean;
+  amountStr?: string;
   disableInputCalculator?: boolean;
+  firstTap?: boolean;
+  hasDecimalSeparator?: boolean;
+  isPreset?: boolean;
+  constructor (typeSlipCol: TypeBetSlipColTot, amount: number, isPreset?: boolean) {
+    this.typeSlipCol = typeSlipCol;
+    this.amount = amount;
+    this.amountStr  = amount.toString();
+    this.hasDecimalSeparator =  false;
+    this.firstTap = true;
+    this.disableInputCalculator = false;
+    this.isPreset = isPreset || true;
+  }
 }
+
 export class BetOdd {
   id: number;
   label: string;

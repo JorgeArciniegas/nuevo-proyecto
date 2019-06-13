@@ -528,8 +528,8 @@ export class RacingService extends RacingServiceExtra {
    */
   populatingPolyfunctionArea(odd: VirtualBetEvent): void {
     let areaFuncData: PolyfunctionalArea = new PolyfunctionalArea();
-    /*  areaFuncData.activeAssociationCol = false;
-    areaFuncData.activeDistributionTot = false; */
+     areaFuncData.activeAssociationCol = false;
+    areaFuncData.activeDistributionTot = false;
     try {
       // check if is first insert
       let dogName: string;
@@ -577,20 +577,9 @@ export class RacingService extends RacingServiceExtra {
       // check smartcode and extract composit bets
       areaFuncData = this.checkSmartCode(areaFuncData);
       // set amount
-      if (this.btnService.polyfunctionStakePresetPlayer.amount > 0) {
-        areaFuncData.amount = this.btnService.polyfunctionStakePresetPlayer.amount;
-      } else {
-        areaFuncData.amount = !this.btnService.polyfunctionalArea
-        ? this.appSettings.defaultAmount.PresetOne
-        : this.btnService.polyfunctionalArea.amount;
-      }
-
+      areaFuncData.amount = this.btnService.polyfunctionStakePresetPlayer.amount;
       // verify if the type of betslip is set
-      if (this.btnService.polyfunctionalArea !== null) {
-        areaFuncData.typeSlipCol = this.btnService.polyfunctionalArea.typeSlipCol;
-      } else {
-        areaFuncData.typeSlipCol = TypeBetSlipColTot.COL;
-      }
+      areaFuncData.typeSlipCol  = this.btnService.polyfunctionStakePresetPlayer.typeSlipCol;
       // extract odds
       if (this.smartCode.code) {
         areaFuncData.selection = this.smartCode.code;
