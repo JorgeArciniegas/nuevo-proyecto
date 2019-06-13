@@ -50,7 +50,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
     );
 
 
-    this.polyfunctionStakePresetPlayerSubscribe = this.productService.polyfunctionStakePresetPlayerObs.subscribe(
+    this.polyfunctionStakePresetPlayerSubscribe = this.btnService.polyfunctionStakePresetPlayerObs.subscribe(
       (item: PolyfunctionStakePresetPlayer) => {
         this.amountPresetPlayer = item;
       }

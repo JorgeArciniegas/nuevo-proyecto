@@ -5,6 +5,7 @@ import { ProductsService } from '../../products/products.service';
 import { TypeBetSlipColTot } from '../../products/racing/racing.models';
 import { CouponService } from '../coupon/coupon.service';
 import { BtncalcService } from './btncalc.service';
+import { TYPINGTYPE } from './btncalc.enum';
 
 
 export class BtncalcComponentCommon {
@@ -65,11 +66,8 @@ export class BtncalcComponentCommon {
       return;
     }
     await this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds);
-
-    // this.btncalcService.polyfunctionalArea.amount = 1;
     this.productService.closeProductDialog();
     this.productService.resetBoard();
-    this.polyfuncionalAmountReset();
   }
 
   clearAll(): void {
@@ -109,24 +107,22 @@ export class BtncalcComponentCommon {
 
   // increments amount in display by preset default values
   btnDefaultAmountsPreset(amount: number): void {
-    if (this.couponService.oddStakeEdit) {
-      if (!this.couponService.oddStakeEdit.isDefaultInput) {
-        this.couponService.oddStakeEdit.tempStake = 0;
-        this.couponService.oddStakeEdit.isDefaultInput = true;
-      }
-      this.couponService.oddStakeEdit.tempStake += amount;
-    } else {
-      this.btncalcService.btnDefaultAmountAddition(amount);
-    }
+    this.setStakePresetPlayer(amount, TYPINGTYPE.BY_PRESET);
+  }
+
+  btnKeyboardAmount(amount: number): void {
+    this.setStakePresetPlayer(amount, TYPINGTYPE.BY_KEYBOARD);
   }
 
   /**
    *
    * @param amount
    */
-  setStakePresetPlayer(amount: number): void {
-
-    if ( this.btncalcService.polyfunctionStakePresetPlayer.disableInputCalculator ) {
+  setStakePresetPlayer(amount: number, typingType: TYPINGTYPE): void {
+    if (
+      this.btncalcService.polyfunctionStakePresetPlayer.disableInputCalculator
+      && this.btncalcService.polyfunctionStakePresetPlayer.typingType === typingType
+    ) {
       return;
     }
 
@@ -144,12 +140,9 @@ export class BtncalcComponentCommon {
         this.btncalcService.polyfunctionStakePresetPlayer.isPreset = true;
       }
 
-      this.btncalcService.polyfunctionStakePresetPlayer.amount = this.btncalcService.returnTempNumberToPolyfuncArea(amount);
-      this.productService.polyfunctionStakePresetPlayerSub.next(this.btncalcService.polyfunctionStakePresetPlayer);
+      this.btncalcService.polyfunctionStakePresetPlayer.amount = this.btncalcService.returnTempNumberToPolyfuncArea(amount, typingType);
+      this.btncalcService.polyfunctionStakePresetPlayerSub.next(this.btncalcService.polyfunctionStakePresetPlayer);
     }
-
-
-
   }
 
 
@@ -209,11 +202,14 @@ export class BtncalcComponentCommon {
       this.isActiveCol = false;
       this.isActiveTot = true;
     }
-    this.amountSetToPolyfunctionalStakeCoupon();
+    // this.amountSetToPolyfunctionalStakeCoupon();
     this.btncalcService.btnTotColSelection(betTotColSelected);
   }
 
   // reset polyfunctional Stake coupon
+  /**
+   * DEPRECATED TO REMOVE
+   */
   amountSetToPolyfunctionalStakeCoupon(): void {
     try {
 

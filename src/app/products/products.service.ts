@@ -1,25 +1,18 @@
 import { Injectable } from '@angular/core';
-import { ElysApiService } from '@elys/elys-api';
+import { ElysApiService, CurrencyCodeResponse, CurrencyCodeRequest } from '@elys/elys-api';
 import { Observable, Subject } from 'rxjs';
 import { Products } from '../../../src/environments/environment.models';
 import { AppSettings } from '../app.settings';
 import { DestroyCouponService } from '../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../component/coupon/coupon.service';
+import { UserService } from '../services/user.service';
 import { RouterService } from '../services/utility/router/router.service';
 import { StorageService } from '../services/utility/storage/storage.service';
 import { WindowSize } from '../services/utility/window-size/window-size.model';
 import { WindowSizeService } from '../services/utility/window-size/window-size.service';
 import { DialogService } from './dialog.service';
 import { ProductsServiceExtra } from './product.service.extra';
-import {
-  BetDataDialog,
-  DialogData,
-  PolyfunctionalArea,
-  PolyfunctionalStakeCoupon,
-  PolyfunctionStakePresetPlayer
-} from './products.model';
-import { UserService } from '../services/user.service';
-import { TypeBetSlipColTot } from './racing/racing.models';
+import { BetDataDialog, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from './products.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -42,9 +35,6 @@ export class ProductsService extends ProductsServiceExtra {
   polyfunctionalStakeCouponSubject: Subject<PolyfunctionalStakeCoupon>;
   polyfunctionalStakeCouponObs: Observable<PolyfunctionalStakeCoupon>;
 
-  // polifunctional stake preset from player
-  polyfunctionStakePresetPlayerSub: Subject<PolyfunctionStakePresetPlayer>;
-  polyfunctionStakePresetPlayerObs: Observable<PolyfunctionStakePresetPlayer>;
 
 
   // tslint:disable-next-line:typedef
@@ -83,9 +73,6 @@ export class ProductsService extends ProductsServiceExtra {
     this.polyfunctionalStakeCouponSubject = new Subject<PolyfunctionalStakeCoupon>();
     this.polyfunctionalStakeCouponObs = this.polyfunctionalStakeCouponSubject.asObservable();
 
-    // stake preset from player insert
-    this.polyfunctionStakePresetPlayerSub = new Subject<PolyfunctionStakePresetPlayer>();
-    this.polyfunctionStakePresetPlayerObs = this.polyfunctionStakePresetPlayerSub.asObservable();
 
 
     // time block
@@ -151,7 +138,5 @@ export class ProductsService extends ProductsServiceExtra {
     this.playableBoardResetSubject.next(false);
     this.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
-
-
 
 }

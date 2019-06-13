@@ -1,16 +1,18 @@
+import { formatCurrency } from '@angular/common';
 import { Injectable, OnDestroy } from '@angular/core';
-import { Subscription, timer } from 'rxjs';
+import { Observable, Subject, Subscription, timer } from 'rxjs';
+import { AppSettings } from 'src/app/app.settings';
 import { UserService } from '../../../../src/app/services/user.service';
 import { TranslateUtilityService } from '../../../../src/app/services/utility/translate-utility.service';
 import { PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { TypeBetSlipColTot } from '../../products/racing/racing.models';
-import { formatCurrency } from '@angular/common';
-import { AppSettings } from 'src/app/app.settings';
 import { CouponService } from '../coupon/coupon.service';
+import { TYPINGTYPE } from './btncalc.enum';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
+  deps: [ UserService ]
 })
 export class BtncalcService implements OnDestroy {
   polyfunctionalValueSubscribe: Subscription;
@@ -23,8 +25,13 @@ export class BtncalcService implements OnDestroy {
   decimalSeparator: string;
 
   polyfunctionalStakeCoupon: PolyfunctionalStakeCoupon = new PolyfunctionalStakeCoupon();
-  polyfunctionStakePresetPlayer: PolyfunctionStakePresetPlayer;
 
+
+
+  // polifunctional stake preset from player
+  polyfunctionStakePresetPlayer: PolyfunctionStakePresetPlayer;
+  polyfunctionStakePresetPlayerSub: Subject<PolyfunctionStakePresetPlayer>;
+  polyfunctionStakePresetPlayerObs: Observable<PolyfunctionStakePresetPlayer>;
   constructor(
     private setting: AppSettings,
     public productService: ProductsService,
@@ -32,15 +39,13 @@ export class BtncalcService implements OnDestroy {
     private userService: UserService,
     private couponService: CouponService
     ) {
-
-
     this.polyfunctionalDecimalsFlag = true;
     this.polyfunctionalAdditionFlag = true;
     // manages data display: amount addition/decimals and amount distribution
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
         // check if the odds is changed and reset the tap of preset stake
-        if (this.polyfunctionalArea.odds.length !== element.odds.length ) {
+        if (this.polyfunctionalArea && this.polyfunctionalArea.odds.length !== element.odds.length ) {
           this.polyfunctionStakePresetPlayer.firstTap = true;
         }
         this.polyfunctionalArea = element;
@@ -71,15 +76,23 @@ export class BtncalcService implements OnDestroy {
         }
       }
     );
+
     this.productService.polyfunctionalStakeCouponObs.subscribe(
       elem => {
         this.polyfunctionalStakeCoupon = elem;
       }
     );
 
-    // Separator decimal calculate
+
+
+    // stake preset from player insert
+    this.polyfunctionStakePresetPlayerSub = new Subject<PolyfunctionStakePresetPlayer>();
+    this.polyfunctionStakePresetPlayerObs = this.polyfunctionStakePresetPlayerSub.asObservable();
+
     this.checkSeparator();
     this.settingStakePresetPlayer();
+    // this.checkSeparator();
+    // this.settingStakePresetPlayer();
 
   }
 
@@ -87,18 +100,6 @@ export class BtncalcService implements OnDestroy {
     this.polyfunctionalValueSubscribe.unsubscribe();
   }
 
-  // default presets player
-  settingStakePresetPlayer(): void {
-    if (this.userService.userDetail) {
-      this.polyfunctionStakePresetPlayer = new PolyfunctionStakePresetPlayer(
-        TypeBetSlipColTot.COL,
-        this.setting.defaultAmount.PresetOne
-      );
-      this.productService.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
-    } else  {
-      timer(1000).subscribe( () => this.settingStakePresetPlayer() );
-    }
-  }
 
   checkSeparator(): void {
     // it is used on the DOM and it is put on the CALC BUTTON
@@ -115,6 +116,23 @@ export class BtncalcService implements OnDestroy {
     }
   }
 
+  // default presets player
+  settingStakePresetPlayer(): void {
+    if (this.setting.defaultAmount.PresetOne !== null ) {
+      this.polyfunctionStakePresetPlayer = new PolyfunctionStakePresetPlayer(
+        TypeBetSlipColTot.COL,
+        this.setting.defaultAmount.PresetOne
+      );
+      this.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
+    } else {
+      timer(1000).subscribe( () => this.settingStakePresetPlayer() );
+    }
+  }
+
+  /**
+   * DEPRECATED
+   * @param amount
+   */
   // increments amount in display by preset default bottons values
   btnDefaultAmountAddition(amount: number): void {
     this.polyfunctionalDecimalsFlag = true; // resets decimals to 0
@@ -141,6 +159,10 @@ export class BtncalcService implements OnDestroy {
     }
   }
 
+  /**
+   * DEPRECATED
+   * @param amount
+   */
   btnAmountDecimals(amount: number): void {
     this.polyfunctionalAdditionFlag = true; // resets addition to 0
     // if bet present in display...
@@ -186,12 +208,10 @@ export class BtncalcService implements OnDestroy {
     if (this.polyfunctionalArea) {
       this.polyfunctionalArea.typeSlipCol = betTotColSelected;
       this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
-
       // preset player selected
       this.polyfunctionStakePresetPlayer.typeSlipCol = betTotColSelected;
-      this.productService.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
+      this.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
     }
-
   }
 
   /**
@@ -202,15 +222,23 @@ export class BtncalcService implements OnDestroy {
    * @param amount
    */
 
-  public returnTempNumberToPolyfuncArea(amount: number): number {
-
+  public returnTempNumberToPolyfuncArea(amount: number, typingType: TYPINGTYPE): number {
     // check if hasDecimalSeparator
     // tslint:disable-next-line:max-line-length
     let tempAmount = (this.polyfunctionStakePresetPlayer.hasDecimalSeparator) ? this.polyfunctionStakePresetPlayer.amountStr  : this.polyfunctionStakePresetPlayer.amount;
 
+    if (this.polyfunctionStakePresetPlayer.typingType !== typingType) {
+      this.polyfunctionStakePresetPlayer.firstTap = true;
+      this.polyfunctionStakePresetPlayer.typingType = typingType;
+      this.polyfunctionStakePresetPlayer.hasDecimalSeparator = false;
+      this.polyfunctionStakePresetPlayer.disableInputCalculator = false;
+    }
+
     // check if it is the first time that the player taps the button on calculator.
-    if (!this.polyfunctionStakePresetPlayer.firstTap) {
+    if (!this.polyfunctionStakePresetPlayer.firstTap && this.polyfunctionStakePresetPlayer.typingType === TYPINGTYPE.BY_KEYBOARD) {
       tempAmount +=  amount.toString();
+    } else if (!this.polyfunctionStakePresetPlayer.firstTap && this.polyfunctionStakePresetPlayer.typingType === TYPINGTYPE.BY_PRESET) {
+      tempAmount = Number(tempAmount) + amount;
     } else {
       tempAmount  = amount.toString();
       // set to false "firstTap", so Following  append to current amount value
@@ -251,11 +279,6 @@ export class BtncalcService implements OnDestroy {
    *
    */
   public setDecimal(): void {
-    /* if (!this.polyfunctionalArea.hasDecimalSeparator) {
-      this.polyfunctionalArea.hasDecimalSeparator = true;
-      this.polyfunctionalArea.amountStr += '.';
-    } */
-
     if (!this.polyfunctionStakePresetPlayer.hasDecimalSeparator) {
       this.polyfunctionStakePresetPlayer.hasDecimalSeparator = true;
       this.polyfunctionStakePresetPlayer.amountStr += '.';

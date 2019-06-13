@@ -2,6 +2,7 @@ import { BetCouponExtended } from '@elys/elys-coupon';
 import { TypeBetSlipColTot } from './racing/racing.models';
 import { VirtualBetCompetitor } from '@elys/elys-api';
 import { formatCurrency, formatNumber } from '@angular/common';
+import { TYPINGTYPE } from '../component/btncalc/btncalc.enum';
 
 export interface WindowSize {
   height: number;
@@ -67,6 +68,7 @@ export class PolyfunctionStakePresetPlayer {
   disableInputCalculator?: boolean;
   firstTap?: boolean;
   hasDecimalSeparator?: boolean;
+  typingType: TYPINGTYPE;
   isPreset?: boolean;
   constructor (typeSlipCol: TypeBetSlipColTot, amount: number, isPreset?: boolean) {
     this.typeSlipCol = typeSlipCol;
@@ -76,6 +78,7 @@ export class PolyfunctionStakePresetPlayer {
     this.firstTap = true;
     this.disableInputCalculator = false;
     this.isPreset = isPreset || true;
+    this.typingType = TYPINGTYPE.BY_PRESET;
   }
 }
 
