@@ -4,8 +4,8 @@
       <GridLayout row="0" col="0" rows="*" columns="5*,3*" orientation="horizontal" class="title"
         verticalAlignment="center">
         <Label col="0" *ngIf="polyfunctionalValue && polyfunctionalValue.selection"
-          text="{{'DYNAMIC_KEYS.SMARTCODE.'+polyfunctionalValue.selection | translate}}" verticalAlignment="center"
-          horizontalAlignment="left"></Label>
+          text="{{'DYNAMIC_KEYS.SMARTCODE.'+polyfunctionalValue.selection | translate | uppercase}}"
+          verticalAlignment="center" horizontalAlignment="left"></Label>
         <Label col="1" *ngIf="polyfunctionalValue" text="{{polyfunctionalValue.value}}" verticalAlignment="center"
           horizontalAlignment="right"></Label>
       </GridLayout>
