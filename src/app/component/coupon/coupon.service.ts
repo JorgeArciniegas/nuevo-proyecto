@@ -57,12 +57,20 @@ export class CouponService {
 
   productHasCoupon: CouponConfirmDelete;
 
+  // Information coupon when has been placed
+  private couponHasBeenPlacedSub: Subject<boolean>;
+  couponHasBeenPlacedObs: Observable<boolean>;
+
   constructor(
     public elysCoupon: ElysCouponService,
     userService: UserService,
     public printCoupon: PrintCouponService,
     public elysApi: ElysApiService
   ) {
+    // Initialize the observable to broadcast the coupon placement
+    this.couponHasBeenPlacedSub = new Subject<boolean>();
+    this.couponHasBeenPlacedObs = this.couponHasBeenPlacedSub.asObservable();
+
     this.couponResponseSubject = new Subject<BetCouponExtended>();
     this.couponResponse = this.couponResponseSubject.asObservable();
 
@@ -161,6 +169,7 @@ export class CouponService {
       TotalStake: 0,
       MaxWinning: 0
     };
+    this.couponHasBeenPlacedSub.next(true);
     this.stakeDisplaySubject.next(stakesDisplayTemp);
   }
 

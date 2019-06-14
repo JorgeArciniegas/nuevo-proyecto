@@ -9,6 +9,7 @@ import { ProductsService } from '../../products/products.service';
 import { TypeBetSlipColTot } from '../../products/racing/racing.models';
 import { CouponService } from '../coupon/coupon.service';
 import { TYPINGTYPE } from './btncalc.enum';
+import { OddsStakeEdit } from '../coupon/coupon.model';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +33,10 @@ export class BtncalcService implements OnDestroy {
   polyfunctionStakePresetPlayer: PolyfunctionStakePresetPlayer;
   polyfunctionStakePresetPlayerSub: Subject<PolyfunctionStakePresetPlayer>;
   polyfunctionStakePresetPlayerObs: Observable<PolyfunctionStakePresetPlayer>;
+
+  // coupon placement
+  couponHasBeenPlacedSubscription: Subscription;
+
   constructor(
     private setting: AppSettings,
     public productService: ProductsService,
@@ -39,6 +44,12 @@ export class BtncalcService implements OnDestroy {
     private userService: UserService,
     private couponService: CouponService
     ) {
+      // Listen to the coupon placement and reset the player's preset stake
+      this.couponHasBeenPlacedSubscription =  couponService.couponHasBeenPlacedObs.subscribe( () => {
+        this.settingStakePresetPlayer();
+      });
+
+
     this.polyfunctionalDecimalsFlag = true;
     this.polyfunctionalAdditionFlag = true;
     // manages data display: amount addition/decimals and amount distribution
@@ -83,24 +94,22 @@ export class BtncalcService implements OnDestroy {
       }
     );
 
-
-
     // stake preset from player insert
     this.polyfunctionStakePresetPlayerSub = new Subject<PolyfunctionStakePresetPlayer>();
     this.polyfunctionStakePresetPlayerObs = this.polyfunctionStakePresetPlayerSub.asObservable();
-
+    // setup the default values
     this.checkSeparator();
     this.settingStakePresetPlayer();
-    // this.checkSeparator();
-    // this.settingStakePresetPlayer();
-
   }
 
   ngOnDestroy(): void {
+    this.couponHasBeenPlacedSubscription.unsubscribe();
     this.polyfunctionalValueSubscribe.unsubscribe();
   }
 
-
+  /**
+   *
+   */
   checkSeparator(): void {
     // it is used on the DOM and it is put on the CALC BUTTON
     if (this.userService.userDetail && !this.decimalSeparator) {
@@ -129,79 +138,6 @@ export class BtncalcService implements OnDestroy {
     }
   }
 
-  /**
-   * DEPRECATED
-   * @param amount
-   */
-  // increments amount in display by preset default bottons values
-  btnDefaultAmountAddition(amount: number): void {
-    this.polyfunctionalDecimalsFlag = true; // resets decimals to 0
-    // if bet present in display...
-    if (this.polyfunctionalArea) {
-      // if bet displayed for the first time.....
-      if (this.polyfunctionalAdditionFlag) {
-        this.polyfunctionalArea.amount = 0; // resets amount to 0
-        // if preset button value 1 and amount 0, pre-add 1 to increment sum
-        if (amount === 1) {
-          this.polyfunctionalArea.amount =
-            this.polyfunctionalArea.amount + amount;
-        }
-        // resets flag to stop reseting amount to 0
-        this.polyfunctionalAdditionFlag = false;
-      }
-
-      // increments amount by preset key values
-      this.polyfunctionalArea.amount = this.polyfunctionalArea.amount + amount;
-      this.productService.polyfunctionalAreaSubject.next(
-        this.polyfunctionalArea
-      );
-      // this.selectedAmountSubject.next(this.polyfunctionalValue.amount);
-    }
-  }
-
-  /**
-   * DEPRECATED
-   * @param amount
-   */
-  btnAmountDecimals(amount: number): void {
-    this.polyfunctionalAdditionFlag = true; // resets addition to 0
-    // if bet present in display...
-    if (this.polyfunctionalArea) {
-      // if bet displayed for the first time.....
-      if (this.polyfunctionalDecimalsFlag) {
-        this.polyfunctionalArea.amount = 0; // resets amount to 0
-        this.stringWholeDecimals = ''; // sets decimals string
-        this.polyfunctionalDecimalsFlag = false; // resets flag
-      }
-
-      /*
-       * converts amount to string, concatenates to accumalated decimal string
-       * converts accumulated decimal string back to number
-       * algorithm to covert last two digits of number to decimals
-       * assigns it back to amount
-       */
-
-      this.polyfunctionalArea.amount = this.returnNumberToPolyfuncArea(amount);
-      if ( this.polyfunctionalArea.hasDecimalSeparator &&
-          this.polyfunctionalArea.amountStr.split('.')[1].length === 2 ) {
-        this.polyfunctionalArea.disableInputCalculator = true;
-      }
-
-    } else  {
-
-      this.polyfunctionalArea = new PolyfunctionalArea();
-      this.polyfunctionalDecimalsFlag = false;
-      // this.polyfunctionalArea.firstTap = false;
-      this.polyfunctionalArea.amount =  amount;
-      this.polyfunctionalArea.amountStr = amount.toString();
-    }
-
-    // console.log(this.polyfunctionalArea);
-    this.productService.polyfunctionalAreaSubject.next(
-      this.polyfunctionalArea
-    );
-  }
-
 
   // TOT & COL buttons on/off
   btnTotColSelection(betTotColSelected: TypeBetSlipColTot): void {
@@ -220,8 +156,8 @@ export class BtncalcService implements OnDestroy {
    * If setDecimalSeparator is true the referer real amount is "amountStr's" value, viceversa it is "amount" value.
    * All variables are in the  "PolyfunctionalArea" Object.
    * @param amount
+   * @param typingType
    */
-
   public returnTempNumberToPolyfuncArea(amount: number, typingType: TYPINGTYPE): number {
     // check if hasDecimalSeparator
     // tslint:disable-next-line:max-line-length
@@ -255,57 +191,35 @@ export class BtncalcService implements OnDestroy {
     return parseFloat(tempAmount.toString());
   }
 
-
-
-  public returnNumberToPolyfuncArea(amount: number): number {
-
+  public setAmountToOdd(amount: number, oddStake: OddsStakeEdit): void {
     // check if hasDecimalSeparator
-    let tempAmount = (this.polyfunctionalArea.hasDecimalSeparator) ? this.polyfunctionalArea.amountStr  : this.polyfunctionalArea.amount;
-
+    let tempAmount = oddStake.tempStakeStr;
     // check if it is the first time that the player taps the button on calculator.
-    if (!this.polyfunctionalArea.firstTap) {
+    if (oddStake.hasDecimalSeparator && oddStake.tempStakeStr.split('.')[1].length === 2) {
+      return;
+    }
+
+    if (Number(tempAmount) > 0 || oddStake.hasDecimalSeparator) {
       tempAmount +=  amount.toString();
     } else {
       tempAmount  = amount.toString();
-      // set to false "firstTap", so Following  append to current amount value
-      this.polyfunctionalArea.firstTap = false;
     }
-    this.polyfunctionalArea.amountStr = tempAmount.toString();
-    // ????????? DA RIVEDERE
-    return parseFloat(tempAmount.toString());
+    oddStake.tempStakeStr = tempAmount;
+    oddStake.tempStake =  parseFloat(tempAmount.toString());
   }
 
   /**
    *
    */
   public setDecimal(): void {
-    if (!this.polyfunctionStakePresetPlayer.hasDecimalSeparator) {
+    if (this.couponService.oddStakeEdit && !this.couponService.oddStakeEdit.hasDecimalSeparator) {
+      this.couponService.oddStakeEdit.tempStakeStr += '.';
+      this.couponService.oddStakeEdit.hasDecimalSeparator = true;
+    }
+    if (!this.polyfunctionStakePresetPlayer.hasDecimalSeparator ) {
       this.polyfunctionStakePresetPlayer.hasDecimalSeparator = true;
       this.polyfunctionStakePresetPlayer.amountStr += '.';
     }
-  }
-
-
-  btnAmountDecimalsChangeOddFnPOS(amount: number, oddStake: number): number {
-    const tmpNumberLength = (oddStake * 100).toFixed()
-    .toString()
-    .replace('.', '');
-    const stringTmpNumber = tmpNumberLength.toString() + amount.toString();
-    return Number(stringTmpNumber) / 100;
-  }
-
-
-  /**
-   * @deprecated
-   * @param amount
-   */
-  private returnNumberToPolyfuncAreaFnPos(amount: number): number {
-    const tmpNumberLength = (this.polyfunctionalArea.amount * 100)
-      .toFixed()
-      .toString()
-      .replace('.', '');
-    const stringTmpNumber = tmpNumberLength.toString() + amount.toString();
-    return Number(stringTmpNumber) / 100;
   }
 
   /**

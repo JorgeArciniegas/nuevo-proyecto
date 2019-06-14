@@ -9,8 +9,10 @@ export interface StakesDisplay {
 export interface OddsStakeEdit {
   indexOdd: number;
   tempStake: number;
+  tempStakeStr?: string;
   odd: BetCouponOdd;
   isDefaultInput: boolean;
+  hasDecimalSeparator?: boolean;
   // to remove
   presetDigitPlayer?: number;
 }
