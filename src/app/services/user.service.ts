@@ -44,9 +44,7 @@ export class UserService {
      * listening for staged coupons variation then check the status, if = Placed substracts the played stake from playable balance
      */
     this.elysCouponService.stagedCouponObs.subscribe(coupons => {
-      for (const coupon of coupons.filter(
-        item => item.CouponStatusId === StagedCouponStatus.Placed
-      )) {
+      for (const coupon of coupons.filter(item => item.CouponStatusId === StagedCouponStatus.Placed)) {
         this.decreasePlayableBalance(coupon.Stake);
       }
     });
@@ -58,9 +56,7 @@ export class UserService {
    */
   async login(username: string, password: string): Promise<string | undefined> {
     try {
-      const response: TokenDataSuccess = await this.api.account.postAccessToken(
-        { username, password }
-      );
+      const response: TokenDataSuccess = await this.api.account.postAccessToken({ username, password });
       const userDataResponse = await this.loadUserData(response.access_token);
 
       // Check that we have gotten the user data.
@@ -103,9 +99,7 @@ export class UserService {
       } else {
         this.storageService.removeItems('tokenData');
         this.userDetail = undefined;
-        return this.translateService.getTranslatedString(
-          'USER_NOT_ENABLE_TO_THE_OPERATION'
-        );
+        return this.translateService.getTranslatedString('USER_NOT_ENABLE_TO_THE_OPERATION');
       }
       this.checkAvailableSportAndSetPresetsAmount();
     } catch (err) {
@@ -141,8 +135,7 @@ export class UserService {
       this.userDetail.UserPolicies.CanCreateEndUserChildren === false &&
       this.userDetail.UserPolicies.CanHaveChildren === false &&
       this.userDetail.UserPolicies.CanHaveCommissions === true &&
-      this.userDetail.UserPolicies.CanPlaySportbookLiveByItself === true &&
-      this.userDetail.UserPolicies.CanPlaySportbookPrematchByItself === true
+      this.userDetail.UserPolicies.CanPlayVirtualGenerationsByItself === true
     ) {
       return true;
     } else {
