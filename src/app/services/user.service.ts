@@ -62,7 +62,7 @@ export class UserService {
       if (this.userDetail) {
         /* If there is a previous Url which is different then the admin area.
           To avoid to go back to the menu where the user had gone just to do the "logout" or to the lists that wouldn't miss the data. */
-        if (this.targetedUrlBeforeLogin.indexOf('/admin') !== -1) {
+        if (this.targetedUrlBeforeLogin && !this.targetedUrlBeforeLogin.includes('/admin')) {
           this.router.getRouter().navigateByUrl(this.targetedUrlBeforeLogin);
         } else {
           this.router.getRouter().navigateByUrl('/products');

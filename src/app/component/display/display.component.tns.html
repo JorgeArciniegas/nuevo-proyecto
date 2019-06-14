@@ -1,5 +1,5 @@
-<GridLayout  rows="*,*" shadow="3" cornerRadius="6" class="card">
-  <GridLayout row="0" rows="*" columns="*" class="display">
+<GridLayout rows="5*,*,4*">
+  <StackLayout row="0" class="display">
     <GridLayout rows="*,*" columns="6*,*" *ngIf="polyfunctionalValue">
       <GridLayout row="0" col="0" rows="*" columns="5*,3*" orientation="horizontal" class="title"
         verticalAlignment="center">
@@ -16,18 +16,20 @@
           verticalAlignment="center" horizontalAlignment="left"></Label>
       </GridLayout>
 
-      <GridLayout rowSpan="2" col="1" rows="*" columns="*" (tap)="detailOdds()">
+      <GridLayout rowSpan="2" col="1" rows="*" columns="*" (tap)="detailOdds()" verticalAlignment="center">
         <Image *ngIf="polyfunctionalValue  && polyfunctionalValue.selection" stretch="aspectFit" margin="4"
           src="~/app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png" verticalAlignment="center"
           [isEnabled]="!timeBlocked"></Image>
       </GridLayout>
     </GridLayout>
+  </StackLayout>
+  <StackLayout row="1"></StackLayout>
 
-  </GridLayout>
-  <GridLayout row="1" rows="*" columns="*, *" class="display">
-    <ng-container *ngIf="amountPresetPlayer">
+  <StackLayout row="2" class="display">
+    <GridLayout rows="*" columns="*,*" verticalAlignment="center" *ngIf="amountPresetPlayer">
       <Label col="0" text="{{ typeBetSlipColTot[amountPresetPlayer.typeSlipCol] }}"></Label>
-      <Label col="1" text="{{ amountPresetPlayer.amount | currency : userService.userDetail.Currency }}"></Label>
-    </ng-container>
-  </GridLayout>
+      <Label col="1" horizontalAlignment="right"
+        text="{{ amountPresetPlayer.amount | currency : userService.userDetail.Currency }}"></Label>
+    </GridLayout>
+  </StackLayout>
 </GridLayout>
