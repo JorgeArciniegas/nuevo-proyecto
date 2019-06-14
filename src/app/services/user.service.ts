@@ -136,8 +136,7 @@ export class UserService {
       this.userDetail.UserPolicies.CanCreateEndUserChildren === false &&
       this.userDetail.UserPolicies.CanHaveChildren === false &&
       this.userDetail.UserPolicies.CanHaveCommissions === true &&
-      this.userDetail.UserPolicies.CanPlaySportbookLiveByItself === true &&
-      this.userDetail.UserPolicies.CanPlaySportbookPrematchByItself === true
+      this.userDetail.UserPolicies.CanPlayVirtualGenerationsByItself === true
     ) {
       return true;
     } else {
