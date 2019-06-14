@@ -43,9 +43,7 @@ export class UserService {
      * listening for staged coupons variation then check the status, if = Placed substracts the played stake from playable balance
      */
     this.elysCouponService.stagedCouponObs.subscribe(coupons => {
-      for (const coupon of coupons.filter(
-        item => item.CouponStatusId === StagedCouponStatus.Placed
-      )) {
+      for (const coupon of coupons.filter(item => item.CouponStatusId === StagedCouponStatus.Placed)) {
         this.decreasePlayableBalance(coupon.Stake);
       }
     });
@@ -57,14 +55,14 @@ export class UserService {
    */
   async login(username: string, password: string): Promise<string | undefined> {
     try {
-      const response: TokenDataSuccess = await this.api.account.postAccessToken(
-        { username, password }
-      );
+      const response: TokenDataSuccess = await this.api.account.postAccessToken({ username, password });
       const userDataResponse = await this.loadUserData(response.access_token);
 
       // Check that we have gotten the user data.
       if (this.userDetail) {
-        if (this.targetedUrlBeforeLogin) {
+        /* If there is a previous Url which is different then the admin area.
+          To avoid to go back to the menu where the user had gone just to do the "logout" or to the lists that wouldn't miss the data. */
+        if (this.targetedUrlBeforeLogin.indexOf('/admin') !== -1) {
           this.router.getRouter().navigateByUrl(this.targetedUrlBeforeLogin);
         } else {
           this.router.getRouter().navigateByUrl('/products');
@@ -102,9 +100,7 @@ export class UserService {
       } else {
         this.storageService.removeItems('tokenData');
         this.userDetail = undefined;
-        return this.translateService.getTranslatedString(
-          'USER_NOT_ENABLE_TO_THE_OPERATION'
-        );
+        return this.translateService.getTranslatedString('USER_NOT_ENABLE_TO_THE_OPERATION');
       }
       await this.checkAvailableSportAndSetPresetsAmount();
     } catch (err) {
@@ -155,7 +151,6 @@ export class UserService {
    * it isn't playable and it is only shown in the reports list.
    */
   async checkAvailableSportAndSetPresetsAmount(): Promise<void> {
-
     // Set  'defaultAmount'  the "presets value"
     this.getDefaultPreset().then(preset => {
       this.appSetting.defaultAmount = preset.CouponPreset.CouponPresetValues;
@@ -171,12 +166,10 @@ export class UserService {
   }
 
   //
-  getDefaultPreset(): Promise<CurrencyCodeResponse>  {
+  getDefaultPreset(): Promise<CurrencyCodeResponse> {
     const currencyRequest: CurrencyCodeRequest = {
       currencyCode: this.storageService.getData('UserData').Currency
     };
     return this.api.coupon.getCouponRelatedCurrency(currencyRequest);
-
   }
-
 }
