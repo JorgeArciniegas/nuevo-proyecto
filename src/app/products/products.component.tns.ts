@@ -27,7 +27,7 @@ export class ProductsComponent {
     this.settings = appSettings;
 
     this.service.fnWindowsSize();
-    this.rowHeight = (this.service.windowSize.columnHeight - 30) / 12;
+    this.rowHeight = (this.service.windowSize.columnHeight - 30) / 11;
   }
 
   payCancelCoupon(type: DialogTypeCoupon): void {

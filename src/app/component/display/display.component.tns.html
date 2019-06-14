@@ -1,6 +1,6 @@
 <GridLayout rows="5*,*,4*">
   <StackLayout row="0" class="display">
-    <GridLayout rows="*,*" columns="6*,*" *ngIf="polyfunctionalValue">
+    <!-- <GridLayout rows="*,*" columns="6*,*" *ngIf="polyfunctionalValue" class="p-l-5">
       <GridLayout row="0" col="0" rows="*" columns="5*,3*" orientation="horizontal" class="title"
         verticalAlignment="center">
         <Label col="0" *ngIf="polyfunctionalValue && polyfunctionalValue.selection"
@@ -21,15 +21,32 @@
           src="~/app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png" verticalAlignment="center"
           [isEnabled]="!timeBlocked"></Image>
       </GridLayout>
+    </GridLayout> -->
+
+    <GridLayout rows="*" columns="5*,3*,*" *ngIf="polyfunctionalValue" class="p-l-5">
+      <StackLayout col="0" verticalAlignement="center">
+        <Label *ngIf="polyfunctionalValue && polyfunctionalValue.selection"
+          text="{{'DYNAMIC_KEYS.SMARTCODE.'+polyfunctionalValue.selection | translate | uppercase}}"></Label>
+        <Label *ngIf="polyfunctionalValue && polyfunctionalValue.odds && polyfunctionalValue.odds.length === 1"
+          text="( {{ polyfunctionalValue.odds[0].odd | number:'1.2-2'}} )"></Label>
+      </StackLayout>
+      <Label col="1" *ngIf="polyfunctionalValue" text="{{polyfunctionalValue.value}}" verticalAlignment="center"
+        horizontalAlignment="right"></Label>
+      <Image col="2" *ngIf="polyfunctionalValue  && polyfunctionalValue.selection" margin="4"
+        src="~/app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png" verticalAlignment="center"
+        [isEnabled]="!timeBlocked"></Image>
+
     </GridLayout>
+
   </StackLayout>
   <StackLayout row="1"></StackLayout>
 
   <StackLayout row="2" class="display">
-    <GridLayout rows="*" columns="*,*" verticalAlignment="center" *ngIf="amountPresetPlayer">
-      <Label col="0" text="{{ typeBetSlipColTot[amountPresetPlayer.typeSlipCol] }}"></Label>
-      <Label col="1" horizontalAlignment="right"
-        text="{{ amountPresetPlayer.amount | currency : userService.userDetail.Currency }}"></Label>
+    <GridLayout rows="*" columns="*,*" *ngIf="amountPresetPlayer">
+      <Label col="0" verticalAlignment="center" text="{{ typeBetSlipColTot[amountPresetPlayer.typeSlipCol] }}"
+        class="p-l-5"></Label>
+      <Label col="1" verticalAlignment="center" horizontalAlignment="right"
+        text="{{ amountPresetPlayer.amount | currency : userService.userDetail.Currency }}" class="p-r-5"></Label>
     </GridLayout>
   </StackLayout>
 </GridLayout>
