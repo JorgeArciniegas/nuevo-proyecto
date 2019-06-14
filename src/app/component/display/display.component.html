@@ -33,7 +33,7 @@
       <span *ngIf="amountPresetPlayer">{{  typeBetSlipColTot[amountPresetPlayer.typeSlipCol]}}</span>
     </div>
     <div fxFill fxLayout="column" fxFlex="80" fxLayoutAlign="center flex-end">
-      <span *ngIf="amountPresetPlayer">{{ amountPresetPlayer.amount | currency : userService.userDetail.Currency }}</span>
+      <span *ngIf="amountPresetPlayer">{{ amountPresetPlayer.amount | currency : userService.userDetail.Currency : 'symbol-narrow' }}</span>
     </div>
 
   </div>
