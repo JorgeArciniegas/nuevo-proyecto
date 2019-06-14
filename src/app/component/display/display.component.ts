@@ -5,7 +5,7 @@ import { BetDataDialog, PolyfunctionalArea, PolyfunctionalStakeCoupon, Polyfunct
 import { ProductsService } from '../../products/products.service';
 import { TypeBetSlipColTot } from '../../products/racing/racing.models';
 import { BtncalcService } from '../btncalc/btncalc.service';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../../../src/app/services/user.service';
 
 @Component({
   selector: 'app-display',

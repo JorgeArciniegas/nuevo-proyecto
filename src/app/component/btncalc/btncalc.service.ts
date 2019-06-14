@@ -1,7 +1,7 @@
 import { formatCurrency } from '@angular/common';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
-import { AppSettings } from 'src/app/app.settings';
+import { AppSettings } from '../../../../src/app/app.settings';
 import { UserService } from '../../../../src/app/services/user.service';
 import { TranslateUtilityService } from '../../../../src/app/services/utility/translate-utility.service';
 import { PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from '../../products/products.model';
