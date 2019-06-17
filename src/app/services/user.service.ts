@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import {
-  ElysApiService,
-  TokenDataSuccess,
   AccountDetails,
   CurrencyCodeRequest,
   CurrencyCodeResponse,
-  UserWalletType
+  ElysApiService,
+  StagedCouponStatus,
+  TokenDataSuccess
 } from '@elys/elys-api';
+import { ElysCouponService } from '@elys/elys-coupon';
+import { interval } from 'rxjs';
+import { AppSettings } from '../app.settings';
 import { RouterService } from './utility/router/router.service';
 import { StorageService } from './utility/storage/storage.service';
 import { TranslateUtilityService } from './utility/translate-utility.service';
-import { AppSettings } from '../app.settings';
-import { interval } from 'rxjs';
-import { ElysCouponService } from '@elys/elys-coupon';
-import { StagedCouponStatus } from '@elys/elys-api';
 
 @Injectable({
   providedIn: 'root'
@@ -61,7 +60,9 @@ export class UserService {
 
       // Check that we have gotten the user data.
       if (this.userDetail) {
-        if (this.targetedUrlBeforeLogin) {
+        /* If there is a previous Url which is different then the admin area.
+          To avoid to go back to the menu where the user had gone just to do the "logout" or to the lists that wouldn't miss the data. */
+        if (this.targetedUrlBeforeLogin && !this.targetedUrlBeforeLogin.includes('/admin')) {
           this.router.getRouter().navigateByUrl(this.targetedUrlBeforeLogin);
         } else {
           this.router.getRouter().navigateByUrl('/products');
@@ -101,7 +102,7 @@ export class UserService {
         this.userDetail = undefined;
         return this.translateService.getTranslatedString('USER_NOT_ENABLE_TO_THE_OPERATION');
       }
-      this.checkAvailableSportAndSetPresetsAmount();
+      await this.checkAvailableSportAndSetPresetsAmount();
     } catch (err) {
       if (err.status === 401) {
         // if unauthorized call logout
@@ -149,12 +150,8 @@ export class UserService {
    * it isn't playable and it is only shown in the reports list.
    */
   async checkAvailableSportAndSetPresetsAmount(): Promise<void> {
-    const currencyRequest: CurrencyCodeRequest = {
-      currencyCode: this.storageService.getData('UserData').Currency
-    };
-
     // Set  'defaultAmount'  the "presets value"
-    this.api.coupon.getCouponRelatedCurrency(currencyRequest).then(preset => {
+    this.getDefaultPreset().then(preset => {
       this.appSetting.defaultAmount = preset.CouponPreset.CouponPresetValues;
     });
     // match products result from api to products on the system
@@ -165,5 +162,13 @@ export class UserService {
     });
     // Order the result from minor to major
     this.appSetting.products.sort((a, b) => (a.order <= b.order ? -1 : 1));
+  }
+
+  //
+  getDefaultPreset(): Promise<CurrencyCodeResponse> {
+    const currencyRequest: CurrencyCodeRequest = {
+      currencyCode: this.storageService.getData('UserData').Currency
+    };
+    return this.api.coupon.getCouponRelatedCurrency(currencyRequest);
   }
 }

@@ -10,6 +10,9 @@ import { RacingService } from '../racing/racing.service';
 export class AdvanceGameComponent implements OnInit {
   @Input()
   public timeBlocked = false;
+  @Input()
+  public rowHeight: number;
+
   public buttons: AdvButton[] = [];
   typePlacingRace: typeof TypePlacingRace = TypePlacingRace;
   constructor(public service: RacingService) {}

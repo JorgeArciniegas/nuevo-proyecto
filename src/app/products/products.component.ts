@@ -27,7 +27,7 @@ export class ProductsComponent implements OnDestroy {
     this.observableMediaSubscribe = this.observableMedia.media$.subscribe((change: MediaChange) => {
       this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
       this.service.fnWindowsSize();
-      this.rowHeight = (this.service.windowSize.columnHeight - 30) / 11;
+      this.rowHeight = (this.service.windowSize.columnHeight - 30) / 12;
 
     });
   }

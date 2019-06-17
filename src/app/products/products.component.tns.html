@@ -20,7 +20,7 @@
     </GridLayout>
   </GridLayout>
   <GridLayout col="1" class="product-calc padding-right-3">
-    <GridLayout rows="*,*,*,6*,*,*" columns="*">
+    <GridLayout rows="*,3*,2*,12*,2*,2*" columns="*">
       <StackLayout row="0">
         <!-- Area widget [Variabile] -->
         <app-widget [rowHeight]="rowHeight" [product]="service.product" [timeBlocked]="service.timeBlocked">
@@ -36,17 +36,6 @@
           <app-advance-game [timeBlocked]="service.timeBlocked"></app-advance-game>
         </GridLayout>
       </StackLayout>
-      <StackLayout row="3">
-        <!-- Area inserimento [Fissa] -->
-        <app-btncalc [rowHeight]="rowHeight" [timeBlocked]="service.timeBlocked"></app-btncalc>
-      </StackLayout>
-      <!-- VINCITA POTENZIALE MASSIMA -->
-      <GridLayout row="4" rows="*,3*" columns="*" class="card display-amount">
-        <Label row="0" text="{{'TOTAL_STAKE' | translate}}" class="title"
-          [ngClass]="{'small': service.windowSize.small}" textTransform="uppercase"></Label>
-        <Label row="1" [text]="couponService.stakeDisplay.TotalStake | number: '1.2-2'" class="amount"
-          [ngClass]="{'small': service.windowSize.small}"></Label>
-      </GridLayout>
       <StackLayout row="3">
         <!-- Area inserimento [Fissa] -->
         <app-btncalc [rowHeight]="rowHeight" [timeBlocked]="service.timeBlocked"></app-btncalc>

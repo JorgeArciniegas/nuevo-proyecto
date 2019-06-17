@@ -373,7 +373,7 @@ export class RacingService extends RacingServiceExtra {
     ].number;
     this.createDogList();
 
-    this.productService.polyfunctionalAreaSubject.next(null);
+    this.productService.polyfunctionalAreaSubject.next(new PolyfunctionalArea());
     this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
 
@@ -527,9 +527,9 @@ export class RacingService extends RacingServiceExtra {
    * @param odd
    */
   populatingPolyfunctionArea(odd: VirtualBetEvent): void {
-    let areaFuncData: PolyfunctionalArea = {};
-    /*  areaFuncData.activeAssociationCol = false;
-    areaFuncData.activeDistributionTot = false; */
+    let areaFuncData: PolyfunctionalArea = new PolyfunctionalArea();
+     areaFuncData.activeAssociationCol = false;
+    areaFuncData.activeDistributionTot = false;
     try {
       // check if is first insert
       let dogName: string;
@@ -577,15 +577,9 @@ export class RacingService extends RacingServiceExtra {
       // check smartcode and extract composit bets
       areaFuncData = this.checkSmartCode(areaFuncData);
       // set amount
-      areaFuncData.amount = !this.btnService.polyfunctionalArea
-        ? this.appSettings.defaultAmount.PresetOne
-        : this.btnService.polyfunctionalArea.amount;
+      areaFuncData.amount = this.btnService.polyfunctionStakePresetPlayer.amount;
       // verify if the type of betslip is set
-      if (this.btnService.polyfunctionalArea !== null) {
-        areaFuncData.typeSlipCol = this.btnService.polyfunctionalArea.typeSlipCol;
-      } else {
-        areaFuncData.typeSlipCol = TypeBetSlipColTot.COL;
-      }
+      areaFuncData.typeSlipCol  = this.btnService.polyfunctionStakePresetPlayer.typeSlipCol;
       // extract odds
       if (this.smartCode.code) {
         areaFuncData.selection = this.smartCode.code;
@@ -597,6 +591,7 @@ export class RacingService extends RacingServiceExtra {
       console.log(err);
       areaFuncData = {};
     } finally {
+      areaFuncData.firstTap = true;
       this.productService.polyfunctionalAreaSubject.next(areaFuncData);
     }
   }
