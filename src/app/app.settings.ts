@@ -16,4 +16,5 @@ export class AppSettings {
   couponMessageLegal: string = environment.couponMessageLegal;
   defaultAmount: CouponPresetValues = environment.defaultAmount;
   isEnabledReprintCoupon: boolean = environment.isEnabledReprintCoupon;
+  couponDirectPlace: boolean = environment.couponDirectPlace;
 }

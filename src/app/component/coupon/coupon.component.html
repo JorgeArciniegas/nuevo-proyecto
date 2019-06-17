@@ -128,7 +128,7 @@
         (click)="couponService.preStagedCoupon()">{{'COUPON.BET' | translate | uppercase}}</button>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile rowspan="2" *ngIf="couponService.coupon && couponService.coupon.internal_isReadyToPlace">
+  <mat-grid-tile rowspan="2" *ngIf="!settings.couponDirectPlace && couponService.coupon && couponService.coupon.internal_isReadyToPlace">
     <div fxFill fxLayoutGap="10px">
       <div fxFill fxFlex="50" class="padding-top-10">
         <button class="btn-default btn-warning radius-10 padding-10" [disabled]="couponService.error"

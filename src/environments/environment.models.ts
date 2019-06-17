@@ -15,6 +15,7 @@ export interface Environment {
   couponMessageLegal?: string;
   isEnabledReprintCoupon: boolean;
   defaultAmount?: CouponPresetValues;
+  couponDirectPlace: boolean;
 }
 
 export interface ToolbarButtons {
