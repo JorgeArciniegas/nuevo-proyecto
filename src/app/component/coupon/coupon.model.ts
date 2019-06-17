@@ -13,8 +13,6 @@ export interface OddsStakeEdit {
   odd: BetCouponOdd;
   isDefaultInput: boolean;
   hasDecimalSeparator?: boolean;
-  // to remove
-  presetDigitPlayer?: number;
 }
 
 export interface InternalCoupon extends BetCouponExtended {

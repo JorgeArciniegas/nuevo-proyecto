@@ -187,7 +187,6 @@ export class BtncalcService implements OnDestroy {
     ) {
       this.polyfunctionStakePresetPlayer.disableInputCalculator = true;
     }
-    // ????????? DA RIVEDERE
     return parseFloat(tempAmount.toString());
   }
 
@@ -226,8 +225,8 @@ export class BtncalcService implements OnDestroy {
    * assign Stake To Coupon Or stake in PolyfuncionalArea
    */
   public assignStake(): void {
-    // controllare se esiste una selezione in polyfuncional Area e ne associo l'importo
-    // se non esiste nessuna selezione, verifica presenza coupon e ne associo l'importo
+    // check if there is a selection in polyfuncional Area and associate the amount if there is no selection,
+    // check for coupon and associate the amount
     if (this.polyfunctionalArea.odds.length > 0 ) {
       this.polyfunctionalArea.amount = this.polyfunctionStakePresetPlayer.amount;
       this.productService.polyfunctionalAreaSubject.next(
@@ -255,6 +254,5 @@ export class BtncalcService implements OnDestroy {
     if (!this.polyfunctionStakePresetPlayer.isPreset) {
       this.settingStakePresetPlayer();
     }
-    //
   }
 }
