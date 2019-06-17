@@ -11,6 +11,27 @@
           <app-widget fxFlexFill [rowHeight]="rowHeight" [product]="service.product" class="padding-horizontal-6">
           </app-widget>
         </mat-grid-tile>
+        <mat-grid-tile rowspan="1">
+          <div fxFlexFill>
+            <div class="display display-message radius-5"
+              [ngClass]="{'display-error': couponService.error && !couponService.warningMessages, 'display-warning': couponService.warningMessages}">
+              <label *ngIf="couponService.error && !couponService.warningMessages" fxLayout="column" fxFlex>
+                <span>{{'ERROR' | translate | uppercase}}</span>
+                <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
+                  {{"DYNAMIC_KEYS.COUPON_ERROR." + couponService.error.message | translate}} <ng-container
+                    *ngIf="couponService.error.detail">(Limit:
+                    {{couponService.error.detail}})</ng-container>
+                </div>
+              </label>
+              <label *ngIf="couponService.warningMessages" fxLayout="column" fxFlex>
+                <span>{{'WARNING' | translate | uppercase}}</span>
+                <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
+                  {{"DYNAMIC_KEYS.COUPON_WARNING." + couponService.warningMessages | translate}}
+                </div>
+              </label>
+            </div>
+          </div>
+        </mat-grid-tile>
         <!-- Area polifunzionale / Smartcode -->
         <mat-grid-tile rowspan="2">
           <app-display fxFlexFill [rowHeight]="rowHeight"></app-display>
@@ -24,7 +45,7 @@
           <app-btncalc [rowHeight]="rowHeight"></app-btncalc>
         </mat-grid-tile>
         <!-- VINCITA POTENZIALE MASSIMA -->
-        <mat-grid-tile rowspan="1">
+        <!-- <mat-grid-tile rowspan="1">
           <div fxFlexFill class="padding-horizontal-6">
             <div class="display-amount radius-5" fxLayout="column" fxLayoutAlign="right" fxLayoutAlignGap="10px">
               <label>
@@ -34,7 +55,7 @@
               </label>
             </div>
           </div>
-        </mat-grid-tile>
+        </mat-grid-tile> -->
         <!-- Area polifunzionale [Fissa]  -->
         <mat-grid-tile rowspan="1" class="polifuctional-area">
           <div fxFlexFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
