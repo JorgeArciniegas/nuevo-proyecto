@@ -1,16 +1,18 @@
 <div fxFlex fxLayout="column">
   <!--PRODUCT CONTAINER-->
   <div class="product" fxFlex="93" fxLayout="row">
+    <!-- Gameboard area -->
     <div class="product-container" fxLayout="column" fxFlex>
       <router-outlet></router-outlet>
     </div>
     <div class="product-calc" fxLayout="column" fxFlex="21">
       <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
-        <!-- Area widget [Variabile] -->
+        <!-- Widget area [Variable] -->
         <mat-grid-tile rowspan="1">
           <app-widget fxFlexFill [rowHeight]="rowHeight" [product]="service.product" class="padding-horizontal-6">
           </app-widget>
         </mat-grid-tile>
+        <!-- Coupon message area -->
         <mat-grid-tile rowspan="1">
           <div fxFlexFill>
             <div class="display display-message radius-5"
@@ -32,31 +34,19 @@
             </div>
           </div>
         </mat-grid-tile>
-        <!-- Area polifunzionale / Smartcode -->
+        <!-- Polyfunctional area / Smartcode -->
         <mat-grid-tile rowspan="2">
           <app-display fxFlexFill [rowHeight]="rowHeight"></app-display>
         </mat-grid-tile>
-        <!-- Area di gioco avanzata [VARIABILE] -->
+        <!-- Advanced game area [Variable] -->
         <mat-grid-tile rowspan="1">
           <app-advance-game fxFlexFill [rowHeight]="rowHeight" class="padding-horizontal-6"></app-advance-game>
         </mat-grid-tile>
-        <!-- Area inserimento [Fissa] -->
+        <!-- Keyboard -->
         <mat-grid-tile rowspan="6">
           <app-btncalc [rowHeight]="rowHeight"></app-btncalc>
         </mat-grid-tile>
-        <!-- VINCITA POTENZIALE MASSIMA -->
-        <!-- <mat-grid-tile rowspan="1">
-          <div fxFlexFill class="padding-horizontal-6">
-            <div class="display-amount radius-5" fxLayout="column" fxLayoutAlign="right" fxLayoutAlignGap="10px">
-              <label>
-                <span>{{'TOTAL_STAKE' | translate}}</span>
-                <input type="text" name="amount" [ngModel]="couponService.stakeDisplay.TotalStake |number: '1.2-2'"
-                  readonly />
-              </label>
-            </div>
-          </div>
-        </mat-grid-tile> -->
-        <!-- Area polifunzionale [Fissa]  -->
+        <!-- Payment/cancellation coupon area -->
         <mat-grid-tile rowspan="1" class="polifuctional-area">
           <div fxFlexFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
             <button class="btn-default btn-success radius-10 padding-10"
@@ -68,6 +58,7 @@
 
       </mat-grid-list>
     </div>
+    <!-- Coupon area -->
     <div class="product-coupon" fxFlexFill fxLayout="column" fxFlex="20">
       <app-coupon fxFlexFill [rowHeight]="rowHeight" class="padding-horizontal-6"></app-coupon>
     </div>
