@@ -4,15 +4,15 @@
       <div fxLayout="column" fxFlex="88" fxLayoutAlign="center flex-start">
         <div fxLayout="row" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2"
           [style.min-height.px]="(rowHeight - 20) / 2">
-          <div fxLayout="column" fxFlex="70" fxLayoutAlign="center flex-start"
-            *ngIf="polyfunctionalValue.selection">
+          <div fxLayout="column" fxFlex="70" fxLayoutAlign="center flex-start" *ngIf="polyfunctionalValue.selection">
             {{"DYNAMIC_KEYS.SMARTCODE."+polyfunctionalValue.selection | translate | uppercase}}
           </div>
           <div fxLayout="column" fxFlex="25" fxLayoutAlign="center flex-end">
             {{polyfunctionalValue.value}}</div>
         </div>
         <div fxLayout="row" class="second-row" fxFill [style.height.px]="(rowHeight - 20) / 2"
-          [style.min-height.px]="(rowHeight - 20) / 2" *ngIf="polyfunctionalValue.odds && polyfunctionalValue.odds.length === 1 ">
+          [style.min-height.px]="(rowHeight - 20) / 2"
+          *ngIf="polyfunctionalValue.odds && polyfunctionalValue.odds.length === 1 ">
           <div fxLayout="column" fxFlex="45" fxLayoutAlign="center flex-start">
             <span>(
               {{ polyfunctionalValue.odds[0].odd | number:'1.2-2'}} )</span>
@@ -28,12 +28,13 @@
     </ng-container>
 
   </div>
-  <div fxFill fxFlex="30" fxLayout="row" class="display elevation-z5"  [style.height.px]="((rowHeight/2)-5)">
+  <div fxFill fxFlex="30" fxLayout="row" class="display elevation-z5" [style.height.px]="((rowHeight/2)-5)">
     <div fxLayout="column" fxFlex="20" fxLayoutAlign="center flex-srtart">
       <span *ngIf="amountPresetPlayer">{{  typeBetSlipColTot[amountPresetPlayer.typeSlipCol]}}</span>
     </div>
     <div fxFill fxLayout="column" fxFlex="80" fxLayoutAlign="center flex-end">
-      <span *ngIf="amountPresetPlayer">{{ amountPresetPlayer.amount | currency : userService.userDetail.Currency : 'symbol-narrow' }}</span>
+      <span
+        *ngIf="amountPresetPlayer">{{ amountPresetPlayer.amount | currency : userService.userDetail.Currency : 'symbol-narrow' }}</span>
     </div>
 
   </div>
