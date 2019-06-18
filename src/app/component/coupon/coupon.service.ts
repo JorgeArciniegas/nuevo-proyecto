@@ -27,6 +27,7 @@ import {
   StakesDisplay
 } from './coupon.model';
 import { PrintCouponService } from './print-coupon/print-coupon.service';
+import { AppSettings } from '../../../../src/app/app.settings';
 
 @Injectable({
   providedIn: 'root'
@@ -65,7 +66,8 @@ export class CouponService {
     public elysCoupon: ElysCouponService,
     userService: UserService,
     public printCoupon: PrintCouponService,
-    public elysApi: ElysApiService
+    public elysApi: ElysApiService,
+    private appSetting: AppSettings
   ) {
     // Initialize the observable to broadcast the coupon placement
     this.couponHasBeenPlacedSub = new Subject<boolean>();
@@ -377,6 +379,9 @@ export class CouponService {
     await this.elysCoupon.updateCoupon(this.coupon);
     // enabled process to staging coupon
     this.coupon.internal_isReadyToPlace = true;
+    if (this.appSetting.couponDirectPlace) {
+      this.stagedCoupon();
+    }
   }
 
   checkIfCouponIsReadyToPlace(): boolean {
