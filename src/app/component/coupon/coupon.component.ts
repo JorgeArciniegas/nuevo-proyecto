@@ -7,6 +7,7 @@ import { AppSettings } from '../../app.settings';
 import { BetOdd } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { CouponService } from './coupon.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-coupon',
@@ -32,7 +33,8 @@ export class CouponComponent implements OnDestroy {
     private elysCoupon: ElysCouponService,
     public couponService: CouponService,
     public readonly settings: AppSettings,
-    public productService: ProductsService
+    public productService: ProductsService,
+    public userService: UserService
   ) {
     if (this.productService.windowSize && this.productService.windowSize.small) {
       this.maxItems = 4;
@@ -103,6 +105,5 @@ export class CouponComponent implements OnDestroy {
     if (this.couponService.coupon) {
       this.productService.openProductDialog({ title: 'COUPON', betCoupon: this.couponService.coupon });
     }
-
   }
 }

@@ -98,7 +98,8 @@
     <div class="display-amount radius-5" fxFlexFill>
       <label>
         <span>{{'TOTAL_STAKE' | translate}}</span>
-        <input type=" text" name="amount" [ngModel]="couponService.stakeDisplay.TotalStake |number: '1.2-2'" readonly />
+        <input type=" text" name="amount"
+          [ngModel]="couponService.stakeDisplay.TotalStake | currency : userService.userDetail.Currency" readonly />
       </label>
     </div>
   </mat-grid-tile>
@@ -106,7 +107,8 @@
     <div class="display-amount radius-5" fxFlexFill>
       <label>
         <span>{{'MAX_POTENTIAL_WIN' | translate}}</span>
-        <input type="text" name="winner" [ngModel]="couponService.stakeDisplay.MaxWinning |number: '1.2-2'" readonly />
+        <input type="text" name="winner"
+          [ngModel]="couponService.stakeDisplay.MaxWinning | currency : userService.userDetail.Currency" readonly />
       </label>
     </div>
   </mat-grid-tile>
