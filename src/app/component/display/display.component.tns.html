@@ -1,5 +1,5 @@
-<GridLayout rows="5*,*,4*">
-  <StackLayout row="0" class="display">
+<GridLayout rows="5*,4*">
+  <StackLayout row="0" class="display m-b-5">
     <GridLayout rows="*" columns="5*,3*,*" *ngIf="polyfunctionalValue" class="p-l-5">
       <StackLayout col="0" verticalAlignment="center">
         <Label *ngIf="polyfunctionalValue && polyfunctionalValue.selection"
@@ -15,14 +15,13 @@
     </GridLayout>
   </StackLayout>
 
-  <StackLayout row="1"></StackLayout>
-
-  <StackLayout row="2" class="display">
+  <StackLayout row="1" class="display">
     <GridLayout rows="*" columns="*,*" *ngIf="amountPresetPlayer">
       <Label col="0" verticalAlignment="center" text="{{ typeBetSlipColTot[amountPresetPlayer.typeSlipCol] }}"
         class="p-l-5"></Label>
       <Label col="1" verticalAlignment="center" horizontalAlignment="right"
-        text="{{ amountPresetPlayer.amount | currency : userService.userDetail.Currency }}" class="p-r-5"></Label>
+        text="{{ amountPresetPlayer.amount | currency : userService.userDetail.Currency : 'symbol-narrow'}}"
+        class="p-r-5"></Label>
     </GridLayout>
   </StackLayout>
 </GridLayout>

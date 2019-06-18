@@ -28,7 +28,7 @@
   <GridLayout row="2">
     <GridLayout rows="2*,6*,6*,6*,6*,{{ productService.windowSize.small ? '' : '6*,' }}2*" columns="*"
       *ngIf="couponService.coupon" [ngClass]="{'small': productService.windowSize.small}">
-      <!-- paginator -->
+      <!-- Paginator -->
       <GridLayout row="0" columns="*,2*,*" class="card-odd scroll" (tap)="previusOdds()"
         [ngClass]="{'disabled': page <= 0}" [isEnabled]="page > 0">
         <Image col="1" width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Up.png" verticalAlignment="center">
@@ -47,7 +47,7 @@
             [text]="couponService.coupon.Odds.length - ((page + 1) * maxItems)"></Label>
         </StackLayout>
       </GridLayout>
-      <!-- coupon items -->
+      <!-- Coupon items -->
       <GridLayout row="{{ 1 + i }}" rows="3*,8*,6*" columns="*" class="card-odd"
         *ngFor="let odd of listOdds; let i = index;"
         [ngClass]="{'card-odd-error': !couponService.warningMessages && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}">
@@ -77,6 +77,7 @@
               text="{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}" horizontalAlignment="center"
               verticalAlignment="center"></Label>
           </StackLayout>
+          <!-- Paginator -->
           <StackLayout col="1" class="btn-warning button" (tap)="removeOdd(odd)" horizontalAlignment="right">
             <Image stretch="aspectFit" width="26"
               src="~/app/themes/skins/{{settings.theme}}/icon/baseline-delete_outline-white-24px.png"
@@ -86,32 +87,21 @@
       </GridLayout>
     </GridLayout>
   </GridLayout>
-
-  <GridLayout row="3" shadow="3" cornerRadius="6" class="card">
-    <GridLayout rows="*,3*" columns="*" class="display" *ngIf="!couponService.error && !couponService.warningMessages">
-    </GridLayout>
-    <GridLayout rows="*,3*" columns="*" class="display-message display-error"
-      *ngIf="couponService.error && !couponService.warningMessages">
-      <Label row="0" text="{{'ERROR' | translate}}" class="title" [ngClass]="{'small': productService.windowSize.small}"
-        textTransform="uppercase"></Label>
-      <Label row="1"
-        text="{{ 'DYNAMIC_KEYS.COUPON_ERROR.' + couponService.error.message | translate }} (Limit: {{ couponService.error.detail }})"
-        class="amount" [ngClass]="{'small': productService.windowSize.small}" textWrap="true"></Label>
-    </GridLayout>
-    <GridLayout rows="*,3*" columns="*" class="display-message display-warning" *ngIf="couponService.warningMessages">
-      <Label row="0" text="{{'WARNING' | translate}}" class="title"
-        [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
-      <Label row="1" text="{{'DYNAMIC_KEYS.COUPON_WARNING.' + couponService.warningMessage | translate}}" class="amount"
-        [ngClass]="{'small': productService.windowSize.small}" textWrap="true" verticalAlignment="center"></Label>
-    </GridLayout>
+  <!-- Total stake -->
+  <GridLayout row="3" rows="*,3*" columns="*" class="card display-amount">
+    <Label row="0" text="{{'TOTAL_STAKE' | translate}}" class="title"
+      [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
+    <Label row="1"
+      [text]="couponService.stakeDisplay.TotalStake | currency : userService.userDetail.Currency : 'symbol-narrow'"
+      class="amount" [ngClass]="{'small': productService.windowSize.small}"></Label>
   </GridLayout>
-  <GridLayout row="4">
-    <GridLayout rows="*,3*" columns="*" class="card display-amount">
-      <Label row="0" text="{{'MAX_POTENTIAL_WIN' | translate}}" class="title"
-        [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
-      <Label row="1" [text]="couponService.stakeDisplay.MaxWinning |number: '1.2-2'" class="amount"
-        [ngClass]="{'small': productService.windowSize.small}"></Label>
-    </GridLayout>
+  <!-- Max potential win -->
+  <GridLayout row="4" rows="*,3*" columns="*" class="card display-amount">
+    <Label row="0" text="{{'MAX_POTENTIAL_WIN' | translate}}" class="title"
+      [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
+    <Label row="1"
+      [text]="couponService.stakeDisplay.MaxWinning | currency : userService.userDetail.Currency : 'symbol-narrow'"
+      class="amount" [ngClass]="{'small': productService.windowSize.small}"></Label>
   </GridLayout>
   <GridLayout row="5" rows="*" columns="*" class="card button btn-default btn-success"
     [ngClass]="{'disabled': couponService.error}"

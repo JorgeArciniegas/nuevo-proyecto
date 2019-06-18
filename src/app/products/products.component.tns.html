@@ -1,54 +1,61 @@
-<!-- <GridLayout columns="*" rows="*"> -->
-<!-- TOOLBAR-->
-<!--   <StackLayout row="0" class="toolbar">
-    <app-header></app-header>
-  </StackLayout> -->
 <!--PRODUCT CONTAINER-->
 <GridLayout columns="60*,20*,20*" rows="*" class="product">
   <GridLayout col="0" rows="3*,13*,2*" columns="*" class="product-container padding-left-6 padding-right-3">
+    <!-- Gameboard area -->
     <StackLayout row="0" rowSpan="3">
       <router-outlet></router-outlet>
     </StackLayout>
-
-    <!-- Dialog polifunctional area-->
+    <!-- Dialog polyfunctional area-->
     <GridLayout row="1" *ngIf="dialog.showDialog">
       <app-product-dialog [data]="dialog.dialogData"></app-product-dialog>
     </GridLayout>
-    <!-- Dialog pay cancel-->
+    <!-- Dialog pay/cancel-->
     <GridLayout row="1" *ngIf="couponDialogService.showDialog">
       <app-pay-cancel-dialog></app-pay-cancel-dialog>
     </GridLayout>
   </GridLayout>
   <GridLayout col="1" class="product-calc padding-right-3">
-    <GridLayout rows="*,3*,2*,12*,2*,2*" columns="*">
+    <GridLayout rows="*,2*,3*,2*,12*,2*" columns="*">
+      <!-- Widget area [Variable] -->
       <StackLayout row="0">
-        <!-- Area widget [Variabile] -->
         <app-widget [rowHeight]="rowHeight" [product]="service.product" [timeBlocked]="service.timeBlocked">
         </app-widget>
       </StackLayout>
-      <StackLayout row="1">
-        <!-- Area polifunzionale / Smartcode -->
+      <!-- Coupon message area -->
+      <GridLayout row="1" rows="*,3*" columns="*" cornerRadius="6" class="display m-b-5"
+        *ngIf="!couponService.error && !couponService.warningMessages">
+      </GridLayout>
+      <GridLayout row="1" rows="*,3*" columns="*" cornerRadius="6" class="display-message display-error m-b-5"
+        *ngIf="couponService.error && !couponService.warningMessages">
+        <Label row="0" text="{{'ERROR' | translate}}" class="title" [ngClass]="{'small': service.windowSize.small}"
+          textTransform="uppercase"></Label>
+        <Label row="1"
+          text="{{ 'DYNAMIC_KEYS.COUPON_ERROR.' + couponService.error.message | translate }} (Limit: {{ couponService.error.detail }})"
+          class="amount" [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
+      </GridLayout>
+      <GridLayout row="1" rows="*,3*" columns="*" cornerRadius="6" class="display-message display-warning m-b-5"
+        *ngIf="couponService.warningMessages">
+        <Label row="0" text="{{'WARNING' | translate}}" class="title" [ngClass]="{'small': service.windowSize.small}"
+          textTransform="uppercase"></Label>
+        <Label row="1" text="{{'DYNAMIC_KEYS.COUPON_WARNING.' + couponService.warningMessages | translate}}"
+          class="amount" [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
+      </GridLayout>
+      <!-- Polyfunctional area / Smartcode -->
+      <StackLayout row="2">
         <app-display [timeBlocked]="service.timeBlocked"></app-display>
       </StackLayout>
-      <StackLayout row="2">
-        <!-- Area di gioco avanzata [VARIABILE] -->
+      <!-- Advanced game area [Variable] -->
+      <StackLayout row="3">
         <GridLayout rows="*" columns="*" class="card">
           <app-advance-game [timeBlocked]="service.timeBlocked"></app-advance-game>
         </GridLayout>
       </StackLayout>
-      <StackLayout row="3">
-        <!-- Area inserimento [Fissa] -->
+      <!-- Keyboard -->
+      <StackLayout row="4">
         <app-btncalc [rowHeight]="rowHeight" [timeBlocked]="service.timeBlocked"></app-btncalc>
       </StackLayout>
-      <!-- VINCITA POTENZIALE MASSIMA -->
-      <GridLayout row="4" rows="*,3*" columns="*" class="card display-amount">
-        <Label row="0" text="{{'TOTAL_STAKE' | translate}}" class="title"
-          [ngClass]="{'small': service.windowSize.small}" textTransform="uppercase"></Label>
-        <Label row="1" [text]="couponService.stakeDisplay.TotalStake |number: '1.2-2'" class="amount"
-          [ngClass]="{'small': service.windowSize.small}"></Label>
-      </GridLayout>
+      <!-- Payment/cancellation coupon area -->
       <GridLayout row="5" rows="*" columns="*,*" class="card">
-        <!-- Area polifunzionale [Fissa]  -->
         <GridLayout col="0" rows="*" columns="*" class="button left btn-success">
           <Button text="{{'PAY' | translate}}" class="button-internal" textTransform="uppercase"
             [isEnabled]="!service.timeBlocked" (tap)="payCancelCoupon(dialogTypeCoupon.PAY)"></Button>
@@ -67,6 +74,7 @@
       </Image>
     </StackLayout>
   </GridLayout>
+  <!-- Coupon area -->
   <StackLayout col="2" class="product-coupon padding-right-6">
     <app-coupon [timeBlocked]="service.timeBlocked"></app-coupon>
   </StackLayout>
@@ -78,4 +86,3 @@
     </StackLayout>
   </GridLayout>
 </GridLayout>
-<!-- </GridLayout> -->

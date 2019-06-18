@@ -94,30 +94,23 @@
       </ng-container>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile rowspan="2">
-    <div class="display display-message radius-5"
-      [ngClass]="{'display-error': couponService.error && !couponService.warningMessages, 'display-warning': couponService.warningMessages}">
-      <label *ngIf="couponService.error && !couponService.warningMessages" fxLayout="column" fxFlex>
-        <span>{{'ERROR' | translate | uppercase}}</span>
-        <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
-          {{"DYNAMIC_KEYS.COUPON_ERROR." + couponService.error.message | translate}} <ng-container
-            *ngIf="couponService.error.detail">(Limit:
-            {{couponService.error.detail}})</ng-container>
-        </div>
-      </label>
-      <label *ngIf="couponService.warningMessages" fxLayout="column" fxFlex>
-        <span>{{'WARNING' | translate | uppercase}}</span>
-        <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
-          {{"DYNAMIC_KEYS.COUPON_WARNING." + couponService.warningMessages | translate}}
-        </div>
+  <mat-grid-tile rowspan="2" class="tile-p-t-5 tile-p-b-5">
+    <div class="display-amount radius-5" fxFlexFill>
+      <label>
+        <span>{{'TOTAL_STAKE' | translate}}</span>
+        <input type=" text" name="amount"
+          [ngModel]="couponService.stakeDisplay.TotalStake | currency : userService.userDetail.Currency : 'symbol-narrow'"
+          readonly />
       </label>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile rowspan="2">
-    <div class="display-amount radius-5">
+  <mat-grid-tile rowspan="2" class="tile-p-t-5 tile-p-b-5">
+    <div class="display-amount radius-5" fxFlexFill>
       <label>
         <span>{{'MAX_POTENTIAL_WIN' | translate}}</span>
-        <input type="text" name="winner" [ngModel]="couponService.stakeDisplay.MaxWinning |number: '1.2-2'" readonly />
+        <input type="text" name="winner"
+          [ngModel]="couponService.stakeDisplay.MaxWinning | currency : userService.userDetail.Currency : 'symbol-narrow'"
+          readonly />
       </label>
     </div>
   </mat-grid-tile>

@@ -275,7 +275,6 @@ html {
 			.display-amount {
 				@extend %color-bg-white;
 
-				min-height: 100%;
 				width: 100%;
 
 				label,
@@ -315,6 +314,20 @@ html {
 							}
 						}
 					}
+				}
+			}
+		}
+
+		mat-grid-tile {
+			&.tile-p-t-5 {
+				figure {
+					padding-top: 5px;
+				}
+			}
+
+			&.tile-p-b-5 {
+				figure {
+					padding-bottom: 5px;
 				}
 			}
 		}
