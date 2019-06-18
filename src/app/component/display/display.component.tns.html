@@ -20,7 +20,8 @@
       <Label col="0" verticalAlignment="center" text="{{ typeBetSlipColTot[amountPresetPlayer.typeSlipCol] }}"
         class="p-l-5"></Label>
       <Label col="1" verticalAlignment="center" horizontalAlignment="right"
-        text="{{ amountPresetPlayer.amount | currency : userService.userDetail.Currency }}" class="p-r-5"></Label>
+        text="{{ amountPresetPlayer.amount | currency : userService.userDetail.Currency : 'symbol-narrow'}}"
+        class="p-r-5"></Label>
     </GridLayout>
   </StackLayout>
 </GridLayout>

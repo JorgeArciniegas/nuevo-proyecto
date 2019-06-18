@@ -99,7 +99,8 @@
       <label>
         <span>{{'TOTAL_STAKE' | translate}}</span>
         <input type=" text" name="amount"
-          [ngModel]="couponService.stakeDisplay.TotalStake | currency : userService.userDetail.Currency" readonly />
+          [ngModel]="couponService.stakeDisplay.TotalStake | currency : userService.userDetail.Currency : 'symbol-narrow'"
+          readonly />
       </label>
     </div>
   </mat-grid-tile>
@@ -108,7 +109,8 @@
       <label>
         <span>{{'MAX_POTENTIAL_WIN' | translate}}</span>
         <input type="text" name="winner"
-          [ngModel]="couponService.stakeDisplay.MaxWinning | currency : userService.userDetail.Currency" readonly />
+          [ngModel]="couponService.stakeDisplay.MaxWinning | currency : userService.userDetail.Currency : 'symbol-narrow'"
+          readonly />
       </label>
     </div>
   </mat-grid-tile>
