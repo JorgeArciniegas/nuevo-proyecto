@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RacingService } from '../racing.service';
+import { MainService } from '../main.service';
 
 @Component({
   selector: 'app-list-race',
@@ -12,7 +12,7 @@ export class ListRaceComponent implements OnInit {
   @Input()
   public show?: boolean;
 
-  constructor(public racingService: RacingService) {}
+  constructor(public racingService: MainService) {}
 
   ngOnInit() {}
 

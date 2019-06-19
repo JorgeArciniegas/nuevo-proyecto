@@ -28,7 +28,7 @@ export class ProductsServiceExtra {
 
     // Check if the productCode is equal to the current one. if it isn't, mark it as to destroy.
     if (this.product && codeProduct === this.product.codeProduct) {
-      this.router.getRouter().navigate(['/products/racing']);
+      this.router.getRouter().navigate(['/products/main']);
     } else {
       // check if the product has a temporary coupon
       this.couponInternalService.checkHasCoupon();
@@ -42,12 +42,12 @@ export class ProductsServiceExtra {
           this.destroyCouponService.dialogRef.afterClosed().subscribe( elem => {
             if (elem) {
               this.productNameSelectedSubscribe.next(codeProduct);
-              this.router.getRouter().navigate(['/products/racing']);
+              this.router.getRouter().navigate(['/products/main']);
             }
           });
       } else { // the coupon is empty
         this.productNameSelectedSubscribe.next(codeProduct);
-        this.router.getRouter().navigate(['/products/racing']);
+        this.router.getRouter().navigate(['/products/main']);
       }
     }
 

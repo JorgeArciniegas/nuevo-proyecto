@@ -3,15 +3,15 @@ import { ActivatedRoute } from '@angular/router';
 import { AppSettings } from '../../app.settings';
 import { DialogService } from '../dialog.service';
 import { ProductsService } from '../products.service';
-import { Lucky } from './racing.models';
-import { RacingService } from './racing.service';
+import { Lucky } from './main.models';
+import { MainService } from './main.service';
 
 @Component({
-  selector: 'app-racing',
-  templateUrl: './racing.component.html',
-  styleUrls: ['./racing.component.scss']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss']
 })
-export class RacingComponent implements OnInit {
+export class MainComponent implements OnInit {
   public rowHeight: number;
   lucky: typeof Lucky = Lucky;
   public settings: AppSettings;
@@ -22,7 +22,7 @@ export class RacingComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public productService: ProductsService,
-    public racingService: RacingService,
+    public racingService: MainService,
     public dialog: DialogService,
     public readonly appSettings: AppSettings
   ) {
