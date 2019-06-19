@@ -11,13 +11,12 @@ import {
   VirtualProgramTreeBySportRequest,
   VirtualProgramTreeBySportResponse,
   VirtualSportLastResultsRequest,
-  VirtualSportLastResultsResponse,
-  VirtualBetCompetitor
+  VirtualSportLastResultsResponse
 } from '@elys/elys-api';
-import { interval, Observable, Subject, timer } from 'rxjs';
-import { DestroyCouponService } from '../../../../src/app/component/coupon/confirm-destroy-coupon/destroy-coupon.service';
-import { AppSettings } from '../../../../src/app/app.settings';
+import { interval, Subject, timer } from 'rxjs';
+import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
+import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
 import {
   BetOdd,
@@ -41,13 +40,13 @@ import {
   SpecialBetValue,
   TypeBetSlipColTot,
   TypePlacingRace
-} from './racing.models';
-import { RacingServiceExtra } from './racing.service.extra';
+} from './main.models';
+import { MainServiceExtra } from './main.service.extra';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RacingService extends RacingServiceExtra {
+export class MainService extends MainServiceExtra {
 
 
 

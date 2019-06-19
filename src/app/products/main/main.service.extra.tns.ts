@@ -1,10 +1,10 @@
-import { DestroyCouponService } from '../../../../src/app/component/coupon/confirm-destroy-coupon/destroy-coupon.service';
-import { CouponService } from '../../../../src/app/component/coupon/coupon.service';
+import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service.tns';
+import { CouponService } from '../../component/coupon/coupon.service';
 import { Subject, Observable } from 'rxjs';
-import { RaceDetail } from './racing.models';
+import { RaceDetail } from './main.models';
 
 
-export class RacingServiceExtra {
+export class MainServiceExtra {
 
   public currentRaceSubscribe: Subject<number>;
   public currentRaceObserve: Observable<number>;
@@ -13,8 +13,18 @@ export class RacingServiceExtra {
   constructor(
     public coupon: CouponService,
     public destroyCouponService: DestroyCouponService
-    ) {}
 
+    ) {
+
+      this.destroyCouponService.confirmDestroyObs.subscribe( elem => {
+        this.destroyCouponService.showDialog = false;
+        if ( elem && this.coupon.productHasCoupon.isRacing ) {
+          this.currentRaceSubscribe.next(this.coupon.productHasCoupon.racingNumber);
+          this.coupon.resetProductHasCoupon();
+        }
+      });
+
+    }
 
 
   /**
@@ -26,20 +36,18 @@ export class RacingServiceExtra {
   *
   * */
   fireCurrentRaceChange(selected: number, userSelect = false) {
+
     // check if the coupon is initialized
     this.coupon.checkHasCoupon();
     // if the coupon isn't empty
-    if (this.coupon.productHasCoupon.checked && (this.raceDetails.currentRace !== selected || userSelect) ) {
+    if (this.coupon.productHasCoupon.checked && (this.raceDetails.currentRace !== selected || userSelect)  ) {
       // open modal destroy confirm coupon
       this.destroyCouponService.openDestroyCouponDialog();
-      // subscribe to event dialog
-      this.destroyCouponService.dialogRef.afterClosed().subscribe( elem => {
-        if (elem) {
-          this.currentRaceSubscribe.next(selected);
-        }
-      });
+      this.destroyCouponService.showDialog = true;
+      this.coupon.productHasCoupon.isRacing = true;
+      this.coupon.productHasCoupon.racingNumber = selected;
     } else { // to continue
       this.currentRaceSubscribe.next(selected);
     }
-  }
-}
+
+  }}

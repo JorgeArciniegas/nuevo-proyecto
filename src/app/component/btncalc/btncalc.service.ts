@@ -6,7 +6,7 @@ import { UserService } from '../../../../src/app/services/user.service';
 import { TranslateUtilityService } from '../../../../src/app/services/utility/translate-utility.service';
 import { PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
-import { TypeBetSlipColTot } from '../../products/racing/racing.models';
+import { TypeBetSlipColTot } from '../../products/main/main.models';
 import { CouponService } from '../coupon/coupon.service';
 import { TYPINGTYPE } from './btncalc.enum';
 import { OddsStakeEdit } from '../coupon/coupon.model';

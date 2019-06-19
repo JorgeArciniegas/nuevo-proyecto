@@ -1,5 +1,5 @@
 import { BetCouponExtended } from '@elys/elys-coupon';
-import { TypeBetSlipColTot } from './racing/racing.models';
+import { TypeBetSlipColTot } from './main/main.models';
 import { VirtualBetCompetitor } from '@elys/elys-api';
 import { formatCurrency, formatNumber } from '@angular/common';
 import { TYPINGTYPE } from '../component/btncalc/btncalc.enum';

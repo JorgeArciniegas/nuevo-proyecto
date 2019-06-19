@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductsService } from '../../products.service';
-import { RacingService } from '../racing.service';
+import { MainService } from '../main.service';
 
 @Component({
   selector: 'app-result-list',
@@ -12,7 +12,7 @@ export class ResultListComponent implements OnInit {
   public rowHeight: number;
 
   constructor(
-    public racingService: RacingService,
+    public racingService: MainService,
     public productService: ProductsService
   ) {}
 

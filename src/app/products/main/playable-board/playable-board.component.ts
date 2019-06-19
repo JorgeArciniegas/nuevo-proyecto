@@ -5,8 +5,8 @@ import {
   PlacingRace,
   SpecialBet,
   TypePlacingRace
-} from '../racing.models';
-import { RacingService } from '../racing.service';
+} from '../main.models';
+import { MainService } from '../main.service';
 
 @Component({
   selector: 'app-playable-board',
@@ -25,7 +25,7 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
   public TypePlacingRace = TypePlacingRace;
   public playableTitle: string[];
 
-  constructor(public service: RacingService) { }
+  constructor(public service: MainService) { }
 
   ngOnInit() {
     this.currentRaceSubscription = this.service.currentRaceObserve.subscribe(
