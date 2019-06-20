@@ -16,6 +16,7 @@ export interface Environment {
   isEnabledReprintCoupon: boolean;
   defaultAmount?: CouponPresetValues;
   couponDirectPlace: boolean;
+  currencyDefault: string;
 }
 
 export interface ToolbarButtons {

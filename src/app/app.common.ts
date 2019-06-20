@@ -102,10 +102,6 @@ export const routes: Routes = [
         loadChildren: './products/main/main.module#MainModule'
       },
       {
-        path: 'destroycoupon',
-        component: ConfirmDestroyCouponComponent
-      },
-      {
         path: '',
         redirectTo: 'main',
         pathMatch: 'full'

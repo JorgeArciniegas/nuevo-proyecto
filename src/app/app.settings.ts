@@ -17,4 +17,5 @@ export class AppSettings {
   defaultAmount: CouponPresetValues = environment.defaultAmount;
   isEnabledReprintCoupon: boolean = environment.isEnabledReprintCoupon;
   couponDirectPlace: boolean = environment.couponDirectPlace;
+  currencyDefault: string = environment.currencyDefault;
 }
