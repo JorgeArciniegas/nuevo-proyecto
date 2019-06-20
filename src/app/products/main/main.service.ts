@@ -42,6 +42,7 @@ import {
   TypePlacingRace
 } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
+import { ResultsService } from './results/results.service';
 
 @Injectable({
   providedIn: 'root'
@@ -78,7 +79,8 @@ export class MainService extends MainServiceExtra {
     private btnService: BtncalcService,
     public coupon: CouponService,
     private appSettings: AppSettings,
-    public destroyCouponService: DestroyCouponService
+    public destroyCouponService: DestroyCouponService,
+    private resultService: ResultsService
   ) {
     super(coupon, destroyCouponService);
     this.defaultGameStart();
@@ -142,7 +144,7 @@ export class MainService extends MainServiceExtra {
   initRaces(): void {
     this.initCurrentEvent = true;
     this.loadRaces();
-    this.loadLastResult(false);
+    this.resultService.loadLastResult(false);
 
   }
 
@@ -162,14 +164,14 @@ export class MainService extends MainServiceExtra {
     try {
       if (this.remmaningTime.second === 0 && this.remmaningTime.minute === 0) {
         this.loadRaces();
-        this.loadLastResult();
+        this.resultService.loadLastResult();
       } else {
         if (this.remmaningTime.second < 0 || this.remmaningTime.minute < 0) {
           // if remaining time is negative there is an error, reload all
           // '::::reset');
           this.cacheEvents = null;
           this.loadRaces();
-          this.loadLastResult(false);
+          this.resultService.loadLastResult(false);
         }
         if (this.remmaningTime.second === 0) {
           // remaing time
@@ -202,7 +204,7 @@ export class MainService extends MainServiceExtra {
       // console.log('catch', err);
       this.cacheEvents = null;
       this.loadRaces();
-      this.loadLastResult(false);
+      this.resultService.loadLastResult(false);
     }
   }
 
@@ -329,7 +331,7 @@ export class MainService extends MainServiceExtra {
     });
   }
 
-  loadLastResult(delay: boolean = true): void {
+  /* loadLastResult(delay: boolean = true): void {
     if (delay) {
       timer(10000).subscribe(() => this.getLastResult());
     } else {
@@ -363,7 +365,7 @@ export class MainService extends MainServiceExtra {
         });
     });
   }
-
+ */
   resetPlayRacing(): void {
     this.placingRace = new PlacingRace();
     this.smartCode = new Smartcode();
