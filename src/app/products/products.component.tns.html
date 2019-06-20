@@ -13,6 +13,10 @@
     <GridLayout row="1" *ngIf="couponDialogService.showDialog">
       <app-pay-cancel-dialog></app-pay-cancel-dialog>
     </GridLayout>
+    <!-- Dialog destroy coupon -->
+    <GridLayout row="1" *ngIf="service.destroyCouponService.showDialog">
+      <app-confirm-destroy-coupon></app-confirm-destroy-coupon>
+    </GridLayout>
   </GridLayout>
   <GridLayout col="1" class="product-calc padding-right-3">
     <GridLayout rows="*,2*,3*,2*,12*,2*" columns="*">
