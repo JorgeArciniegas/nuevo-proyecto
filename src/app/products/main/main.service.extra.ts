@@ -6,8 +6,8 @@ import { RaceDetail } from './main.models';
 
 export class MainServiceExtra {
 
-  public currentRaceSubscribe: Subject<number>;
-  public currentRaceObserve: Observable<number>;
+  public currentEventSubscribe: Subject<number>;
+  public currentEventObserve: Observable<number>;
   public raceDetails: RaceDetail;
 
   constructor(
@@ -35,11 +35,11 @@ export class MainServiceExtra {
       // subscribe to event dialog
       this.destroyCouponService.dialogRef.afterClosed().subscribe( elem => {
         if (elem) {
-          this.currentRaceSubscribe.next(selected);
+          this.currentEventSubscribe.next(selected);
         }
       });
     } else { // to continue
-      this.currentRaceSubscribe.next(selected);
+      this.currentEventSubscribe.next(selected);
     }
   }
 }

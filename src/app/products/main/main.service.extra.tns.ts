@@ -6,8 +6,8 @@ import { RaceDetail } from './main.models';
 
 export class MainServiceExtra {
 
-  public currentRaceSubscribe: Subject<number>;
-  public currentRaceObserve: Observable<number>;
+  public currentEventSubscribe: Subject<number>;
+  public currentEventObserve: Observable<number>;
   public raceDetails: RaceDetail;
 
   constructor(
@@ -19,7 +19,7 @@ export class MainServiceExtra {
       this.destroyCouponService.confirmDestroyObs.subscribe( elem => {
         this.destroyCouponService.showDialog = false;
         if ( elem && this.coupon.productHasCoupon.isRacing ) {
-          this.currentRaceSubscribe.next(this.coupon.productHasCoupon.racingNumber);
+          this.currentEventSubscribe.next(this.coupon.productHasCoupon.racingNumber);
           this.coupon.resetProductHasCoupon();
         }
       });
@@ -47,7 +47,7 @@ export class MainServiceExtra {
       this.coupon.productHasCoupon.isRacing = true;
       this.coupon.productHasCoupon.racingNumber = selected;
     } else { // to continue
-      this.currentRaceSubscribe.next(selected);
+      this.currentEventSubscribe.next(selected);
     }
 
   }}

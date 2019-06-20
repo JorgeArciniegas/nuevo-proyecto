@@ -116,7 +116,7 @@ export class BtncalcService implements OnDestroy {
       const decimalCheck = 1.2;
       const separator = decimalCheck.toLocaleString( this.translate.getCurrentLanguage() ).substring(1, 2);
       // tslint:disable-next-line:max-line-length
-      const currencyHasDecimal = Number(formatCurrency(decimalCheck, this.translate.getCurrentLanguage(), '', this.userService.userDetail.Currency ));
+      const currencyHasDecimal = Number(formatCurrency(decimalCheck, this.translate.getCurrentLanguage(), '', this.userService.userCurrency ));
       if ( !Number.isInteger(currencyHasDecimal) ) {
         this.decimalSeparator  = separator;
       }

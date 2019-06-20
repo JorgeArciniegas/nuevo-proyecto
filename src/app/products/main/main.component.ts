@@ -22,7 +22,7 @@ export class MainComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public productService: ProductsService,
-    public racingService: MainService,
+    public mainService: MainService,
     public dialog: DialogService,
     public readonly appSettings: AppSettings
   ) {
@@ -35,13 +35,13 @@ export class MainComponent implements OnInit {
   }
 
   placingLucky(lucky: Lucky): void {
-    this.racingService.resetPlayRacing();
+    this.mainService.resetPlayRacing();
     let n = '';
     // extract  lucky
     for (let i = 1; i <= lucky; i++) {
       while (true) {
         // check if extract exist
-        const extTemp: number = this.racingService.RNGLucky2(i);
+        const extTemp: number = this.mainService.RNGLucky2(i);
         if (n.indexOf(extTemp.toString()) === -1) {
           n += extTemp;
           break;
@@ -54,7 +54,7 @@ export class MainComponent implements OnInit {
       this.oldLucky = n;
       for (let i = 0; i < n.length; i++) {
         const element = n.charAt(i);
-        this.racingService.RNGLuckyPlacing(parseInt(element, 10), i + 1);
+        this.mainService.RNGLuckyPlacing(parseInt(element, 10), i + 1);
       }
     } else {
       this.placingLucky(lucky);
