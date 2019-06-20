@@ -6,6 +6,7 @@ export const environment: Environment = {
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
   couponDirectPlace: false,
+  currencyDefault: 'EUR',
   supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
   defaultAmount: {
     PresetOne: null,
