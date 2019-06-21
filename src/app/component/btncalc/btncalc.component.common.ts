@@ -2,7 +2,7 @@ import { Subscription } from 'rxjs';
 import { AppSettings } from '../../app.settings';
 import { PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
-import { TypeBetSlipColTot } from '../../products/racing/racing.models';
+import { TypeBetSlipColTot } from '../../products/main/main.models';
 import { CouponService } from '../coupon/coupon.service';
 import { BtncalcService } from './btncalc.service';
 import { TYPINGTYPE } from './btncalc.enum';

@@ -9,7 +9,8 @@ export const environment: Environment = {
   products: [],
   showRaceId: false,
   isEnabledReprintCoupon: false,
-  couponDirectPlace: false
+  couponDirectPlace: false,
+  currencyDefault: 'EUR'
 };
 
 /*

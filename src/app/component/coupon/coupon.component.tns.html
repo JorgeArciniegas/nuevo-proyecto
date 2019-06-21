@@ -92,7 +92,7 @@
     <Label row="0" text="{{'TOTAL_STAKE' | translate}}" class="title"
       [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
     <Label row="1"
-      [text]="couponService.stakeDisplay.TotalStake | currency : userService.userDetail.Currency : 'symbol-narrow'"
+      [text]="couponService.stakeDisplay.TotalStake | currency : userService.userCurrency : 'symbol-narrow'"
       class="amount" [ngClass]="{'small': productService.windowSize.small}"></Label>
   </GridLayout>
   <!-- Max potential win -->
@@ -100,7 +100,7 @@
     <Label row="0" text="{{'MAX_POTENTIAL_WIN' | translate}}" class="title"
       [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
     <Label row="1"
-      [text]="couponService.stakeDisplay.MaxWinning | currency : userService.userDetail.Currency : 'symbol-narrow'"
+      [text]="couponService.stakeDisplay.MaxWinning | currency : userService.userCurrency : 'symbol-narrow'"
       class="amount" [ngClass]="{'small': productService.windowSize.small}"></Label>
   </GridLayout>
   <GridLayout row="5" rows="*" columns="*" class="card button btn-default btn-success"

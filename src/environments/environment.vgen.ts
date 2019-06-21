@@ -1,4 +1,4 @@
-import { Environment, WidgetTypeLink } from './environment.models';
+import { Environment, WidgetTypeLink, LAYOUT_RESULT_LIST_TYPE } from './environment.models';
 
 export const environment: Environment = {
   production: false,
@@ -6,6 +6,7 @@ export const environment: Environment = {
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
   couponDirectPlace: false,
+  currencyDefault: 'EUR',
   supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
   defaultAmount: {
     PresetOne: null,
@@ -13,7 +14,7 @@ export const environment: Environment = {
     PresetThree: null,
     PresetFour: null
   },
-  products: [
+  products:  [
     {
       sportId: 8,
       codeProduct: 'DOG',
@@ -22,6 +23,10 @@ export const environment: Environment = {
       order: 0,
       productSelected: true,
       isPlayable: true,
+      layoutResultList: { // defines the layout type for last results widget
+        name: LAYOUT_RESULT_LIST_TYPE.RACING,
+        items: 4
+      },
       toolbarButton: {
         name: 'dogracing',
         icon: 'Dog',
@@ -44,6 +49,10 @@ export const environment: Environment = {
       order: 1,
       productSelected: false,
       isPlayable: true,
+      layoutResultList: {
+        name: LAYOUT_RESULT_LIST_TYPE.RACING,
+        items: 4
+      },
       toolbarButton: {
         name: 'horseracing',
         icon: 'Horse',
@@ -59,6 +68,10 @@ export const environment: Environment = {
       order: 2,
       productSelected: false,
       isPlayable: true,
+      layoutResultList: {
+        name: LAYOUT_RESULT_LIST_TYPE.RACING,
+        items: 4
+      },
       toolbarButton: {
         name: 'virtualhorse',
         icon: 'Horse',
@@ -74,6 +87,10 @@ export const environment: Environment = {
       order: 3,
       productSelected: false,
       isPlayable: false,
+      layoutResultList: {
+        name: LAYOUT_RESULT_LIST_TYPE.SOCCER,
+        items: 9
+      },
       toolbarButton: {
         name: 'Italian League',
         icon: 'Soccer-ita',
@@ -89,6 +106,10 @@ export const environment: Environment = {
       order: 3,
       productSelected: false,
       isPlayable: false,
+      layoutResultList: {
+        name: LAYOUT_RESULT_LIST_TYPE.SOCCER,
+        items: 9
+      },
       toolbarButton: {
         name: 'Italian League',
         icon: 'Soccer-eng',

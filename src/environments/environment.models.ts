@@ -1,4 +1,5 @@
 import { CouponPresetValues } from "@elys/elys-api";
+import { MatRadioChange } from "@angular/material";
 
 export interface Environment {
   production: boolean;
@@ -16,6 +17,7 @@ export interface Environment {
   isEnabledReprintCoupon: boolean;
   defaultAmount?: CouponPresetValues;
   couponDirectPlace: boolean;
+  currencyDefault: string;
 }
 
 export interface ToolbarButtons {
@@ -33,6 +35,7 @@ export interface Products {
   order: number;
   toolbarButton: ToolbarButtons;
   widgets?: Widget[];
+  layoutResultList: LayoutResultList; // accept race, fight, soccer, keno
 }
 
 export interface Widget {
@@ -46,4 +49,22 @@ export interface Widget {
 export enum WidgetTypeLink {
   MODAL,
   OUTLET
+}
+
+/**
+ * @name LayoutResultList
+ * @property 'name' is the layout type
+ * @property 'items' is the number of elements displayed
+ * @example: layoutResultList: { name: LAYOUT_RESULT_LIST_TYPE.RACING, items: 4 }
+ */
+export interface LayoutResultList {
+  name: LAYOUT_RESULT_LIST_TYPE;
+  items: number;
+}
+
+
+export enum LAYOUT_RESULT_LIST_TYPE  {
+  RACING,
+  COCK_FIGHT,
+  SOCCER
 }

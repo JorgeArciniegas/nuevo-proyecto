@@ -11,13 +11,12 @@ import {
   VirtualProgramTreeBySportRequest,
   VirtualProgramTreeBySportResponse,
   VirtualSportLastResultsRequest,
-  VirtualSportLastResultsResponse,
-  VirtualBetCompetitor
+  VirtualSportLastResultsResponse
 } from '@elys/elys-api';
-import { interval, Observable, Subject, timer } from 'rxjs';
-import { DestroyCouponService } from '../../../../src/app/component/coupon/confirm-destroy-coupon/destroy-coupon.service';
-import { AppSettings } from '../../../../src/app/app.settings';
+import { interval, Subject, timer } from 'rxjs';
+import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
+import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
 import {
   BetOdd,
@@ -41,13 +40,14 @@ import {
   SpecialBetValue,
   TypeBetSlipColTot,
   TypePlacingRace
-} from './racing.models';
-import { RacingServiceExtra } from './racing.service.extra';
+} from './main.models';
+import { MainServiceExtra } from './main.service.extra';
+import { ResultsService } from './results/results.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RacingService extends RacingServiceExtra {
+export class MainService extends MainServiceExtra {
 
 
 
@@ -56,7 +56,7 @@ export class RacingService extends RacingServiceExtra {
   public listResult: RaceResult[];
   // api binding
   private reload: number;
-  private cacheRaces: VirtualBetEvent[] = [];
+  private cacheEvents: VirtualBetEvent[] = [];
   // working variable
   private remmaningTime: RaceTime = new RaceTime();
   placingRace: PlacingRace = new PlacingRace(); // place the global race
@@ -64,7 +64,7 @@ export class RacingService extends RacingServiceExtra {
 
 
   private attempts = 0;
-  private initCurrentRace = false;
+  private initCurrentEvent = false;
 
   dogList: Dog[];
   // temp array
@@ -79,14 +79,15 @@ export class RacingService extends RacingServiceExtra {
     private btnService: BtncalcService,
     public coupon: CouponService,
     private appSettings: AppSettings,
-    public destroyCouponService: DestroyCouponService
+    public destroyCouponService: DestroyCouponService,
+    private resultService: ResultsService
   ) {
     super(coupon, destroyCouponService);
     this.defaultGameStart();
 
     this.productService.productNameSelectedObserve.subscribe(item => {
         if ( !this.coupon.productHasCoupon.checked ) {
-          this.cacheRaces = null;
+          this.cacheEvents = null;
           this.initRaces();
         }
     });
@@ -96,10 +97,10 @@ export class RacingService extends RacingServiceExtra {
 
     interval(1000).subscribe(() => this.getTime());
 
-    this.currentRaceSubscribe = new Subject<number>();
-    this.currentRaceObserve = this.currentRaceSubscribe.asObservable();
+    this.currentEventSubscribe = new Subject<number>();
+    this.currentEventObserve = this.currentEventSubscribe.asObservable();
 
-    this.currentRaceObserve.subscribe((raceIndex: number) => {
+    this.currentEventObserve.subscribe((raceIndex: number) => {
 
       this.raceDetails.currentRace = raceIndex;
 
@@ -141,9 +142,9 @@ export class RacingService extends RacingServiceExtra {
   }
 
   initRaces(): void {
-    this.initCurrentRace = true;
+    this.initCurrentEvent = true;
     this.loadRaces();
-    this.loadLastResult(false);
+    this.resultService.loadLastResult(false);
 
   }
 
@@ -163,14 +164,14 @@ export class RacingService extends RacingServiceExtra {
     try {
       if (this.remmaningTime.second === 0 && this.remmaningTime.minute === 0) {
         this.loadRaces();
-        this.loadLastResult();
+        this.resultService.loadLastResult();
       } else {
         if (this.remmaningTime.second < 0 || this.remmaningTime.minute < 0) {
           // if remaining time is negative there is an error, reload all
           // '::::reset');
-          this.cacheRaces = null;
+          this.cacheEvents = null;
           this.loadRaces();
-          this.loadLastResult(false);
+          this.resultService.loadLastResult(false);
         }
         if (this.remmaningTime.second === 0) {
           // remaing time
@@ -201,25 +202,25 @@ export class RacingService extends RacingServiceExtra {
       }
     } catch (err) {
       // console.log('catch', err);
-      this.cacheRaces = null;
+      this.cacheEvents = null;
       this.loadRaces();
-      this.loadLastResult(false);
+      this.resultService.loadLastResult(false);
     }
   }
 
   loadRaces(): void {
-    if (this.cacheRaces == null || this.cacheRaces.length === 0) {
+    if (this.cacheEvents == null || this.cacheEvents.length === 0) {
       this.loadRacesFromApi(true);
     } else {
       // delete the first element
-      this.cacheRaces.shift();
+      this.cacheEvents.shift();
       this.raceDetails.races.shift();
 
       // add the new race
       const race: Race = new Race();
-      race.number = this.cacheRaces[4].id;
-      race.label = this.cacheRaces[4].nm;
-      race.date = new Date(this.cacheRaces[4].sdtoffset);
+      race.number = this.cacheEvents[4].id;
+      race.label = this.cacheEvents[4].nm;
+      race.date = new Date(this.cacheEvents[4].sdtoffset);
 
       this.raceDetails.races[4] = race;
 
@@ -255,26 +256,26 @@ export class RacingService extends RacingServiceExtra {
 
       if (all) {
         // load all race
-        this.cacheRaces = tournament.evs;
+        this.cacheEvents = tournament.evs;
         for (let index = 0; index < 5; index++) {
           const race: Race = new Race();
-          race.number = this.cacheRaces[index].id;
-          race.label = this.cacheRaces[index].nm;
-          race.date = new Date(this.cacheRaces[index].sdtoffset);
+          race.number = this.cacheEvents[index].id;
+          race.label = this.cacheEvents[index].nm;
+          race.date = new Date(this.cacheEvents[index].sdtoffset);
 
           this.raceDetails.races[index] = race;
         }
         this.currentAndSelectedRaceTime();
-        this.currentRaceSubscribe.next(0);
+        this.currentEventSubscribe.next(0);
       } else {
         // add only new race
         tournament.evs.forEach((race: VirtualBetEvent) => {
           if (
-            this.cacheRaces.filter(
+            this.cacheEvents.filter(
               (cacheRace: VirtualBetEvent) => cacheRace.id === race.id
             ).length === 0
           ) {
-            this.cacheRaces.push(race);
+            this.cacheEvents.push(race);
           }
         });
       }
@@ -286,16 +287,16 @@ export class RacingService extends RacingServiceExtra {
     // check current race index, if is selected a reace decrease the index because the first race is completed and removed
     if (this.raceDetails.currentRace > 0) {
       this.raceDetails.currentRace = this.raceDetails.currentRace - 1;
-      if (this.initCurrentRace) {
+      if (this.initCurrentEvent) {
         this.resetPlayRacing();
-        this.currentRaceSubscribe.next(0);
+        this.currentEventSubscribe.next(0);
       }
     } else if (this.raceDetails.currentRace === 0) {
       this.resetPlayRacing();
-      this.currentRaceSubscribe.next(0);
+      this.currentEventSubscribe.next(0);
     }
-    if (this.initCurrentRace) {
-      this.initCurrentRace = false;
+    if (this.initCurrentEvent) {
+      this.initCurrentEvent = false;
     }
 
     // calculate remaning time for selected race
@@ -330,7 +331,7 @@ export class RacingService extends RacingServiceExtra {
     });
   }
 
-  loadLastResult(delay: boolean = true): void {
+  /* loadLastResult(delay: boolean = true): void {
     if (delay) {
       timer(10000).subscribe(() => this.getLastResult());
     } else {
@@ -364,7 +365,7 @@ export class RacingService extends RacingServiceExtra {
         });
     });
   }
-
+ */
   resetPlayRacing(): void {
     this.placingRace = new PlacingRace();
     this.smartCode = new Smartcode();
@@ -379,7 +380,7 @@ export class RacingService extends RacingServiceExtra {
 
   raceDetailOdds(raceNumber: number): void {
     // console.log('get detail', raceNumber);
-    const race: VirtualBetEvent = this.cacheRaces.filter(
+    const race: VirtualBetEvent = this.cacheEvents.filter(
       (cacheRace: VirtualBetEvent) => cacheRace.id === raceNumber
     )[0];
     const request: VirtualDetailOddsOfEventRequest = { sportId: 8, matchId: raceNumber };
@@ -454,7 +455,7 @@ export class RacingService extends RacingServiceExtra {
       return;
     }
     // extract the raceOdd from cache
-    const odds: VirtualBetEvent = this.cacheRaces.filter(
+    const odds: VirtualBetEvent = this.cacheEvents.filter(
       (cacheRace: VirtualBetEvent) => cacheRace.id === this.placingRace.raceNumber
     )[0];
     this.smartCode = new Smartcode();
@@ -1360,7 +1361,7 @@ export class RacingService extends RacingServiceExtra {
    * @returns VirtualBetEvent
    */
   public getCurrentRace(): VirtualBetEvent {
-    return this.cacheRaces.filter(
+    return this.cacheEvents.filter(
       (cacheRace: VirtualBetEvent) => cacheRace.id === this.placingRace.raceNumber
     )[0];
 

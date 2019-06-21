@@ -4,7 +4,7 @@ import { IconSize } from '../model/iconSize.model';
 import { Products } from '../../../../src/environments/environment.models';
 import { ProductsService } from '../../../../src/app/products/products.service';
 import { BetDataDialog } from '../../../../src/app/products/products.model';
-import { RacingService } from '../../../../src/app/products/racing/racing.service';
+import { MainService } from '../../products/main/main.service';
 
 @Component({
   selector: 'app-widget',
@@ -26,7 +26,7 @@ export class WidgetComponent implements OnInit {
 
   constructor(public readonly appSettings: AppSettings,
     private productService: ProductsService,
-    private racingService: RacingService) {
+    private racingService: MainService) {
     this.settings = appSettings;
   }
 

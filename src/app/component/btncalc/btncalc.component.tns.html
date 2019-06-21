@@ -117,7 +117,7 @@
       <Button text="+" class="button-internal" [isEnabled]="!timeBlocked"></Button>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="3" col="3" rowSpan="btncalcService.decimalSeparator ? 1 : 2" shadow="3" cornerRadius="7" class="card">
+  <GridLayout row="3" col="3" rowSpan="{{btncalcService.decimalSeparator ? 1 : 2}}" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-warning" (doubleTap)="clearAll()"
       (tap)='polyfuncionalAmountReset()'>
       <Button text="{{ 'C' | translate }}" class="button-internal" [isEnabled]="!timeBlocked"></Button>

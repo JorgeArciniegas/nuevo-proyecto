@@ -5,5 +5,6 @@ export const environment: Environment = {
   products: [],
   showRaceId: true,
   isEnabledReprintCoupon: false,
-  couponDirectPlace: false
+  couponDirectPlace: false,
+  currencyDefault: 'EUR'
 };

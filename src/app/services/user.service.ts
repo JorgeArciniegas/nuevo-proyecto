@@ -22,6 +22,7 @@ export class UserService {
   // URL to which was navigating before to be stopped by the authorization guard.
   public targetedUrlBeforeLogin: string;
   public isModalOpen: boolean;
+  public userCurrency: string;
   constructor(
     private router: RouterService,
     private storageService: StorageService,
@@ -30,6 +31,7 @@ export class UserService {
     private appSetting: AppSettings,
     private elysCouponService: ElysCouponService
   ) {
+    this.userCurrency = appSetting.currencyDefault;
     // Check if the user is logged
     if (this.isUserLogged) {
       interval(300000).subscribe(() => {
@@ -97,6 +99,11 @@ export class UserService {
       // Save the data only if the user is a valid user.
       if (this.isAValidUser()) {
         this.storageService.setData('UserData', this.userDetail);
+        try {
+          this.userCurrency = this.userDetail.Currency;
+        } catch (err)  {
+          console.log(err);
+        }
       } else {
         this.storageService.removeItems('tokenData');
         this.userDetail = undefined;
