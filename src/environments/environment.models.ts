@@ -35,7 +35,7 @@ export interface Products {
   order: number;
   toolbarButton: ToolbarButtons;
   widgets?: Widget[];
-  layoutResultList: LayoutResultList; // accept race, fight, soccer, keno
+  layoutProducts: LayoutProducts; // accept race, fight, soccer, keno
 }
 
 export interface Widget {
@@ -52,19 +52,20 @@ export enum WidgetTypeLink {
 }
 
 /**
- * @name LayoutResultList
- * @property 'name' is the layout type
- * @property 'items' is the number of elements displayed
- * @example: layoutResultList: { name: LAYOUT_RESULT_LIST_TYPE.RACING, items: 4 }
+ * @name LayoutProducts
+ * @property 'type' is the layout type
+ * @property 'resultItems' is the number of elements displayed into the results area
+ * @example: layoutProducts: { type: LAYOUT_TYPE.RACING, resultItems: 4 }
  */
-export interface LayoutResultList {
-  name: LAYOUT_RESULT_LIST_TYPE;
-  items: number;
+export interface LayoutProducts {
+  type: LAYOUT_TYPE;
+  resultItems: number;
 }
 
 
-export enum LAYOUT_RESULT_LIST_TYPE  {
+export enum LAYOUT_TYPE  {
   RACING,
   COCK_FIGHT,
-  SOCCER
+  SOCCER,
+  KENO
 }
