@@ -1,4 +1,4 @@
-import { Environment, WidgetTypeLink, LAYOUT_RESULT_LIST_TYPE } from './environment.models';
+import { Environment, WidgetTypeLink, LAYOUT_TYPE } from './environment.models';
 
 export const environment: Environment = {
   production: false,
@@ -23,9 +23,9 @@ export const environment: Environment = {
       order: 0,
       productSelected: true,
       isPlayable: true,
-      layoutResultList: { // defines the layout type for last results widget
-        name: LAYOUT_RESULT_LIST_TYPE.RACING,
-        items: 4
+      layoutProducts: { // defines the layout type for last results widget
+        type: LAYOUT_TYPE.RACING,
+        resultItems: 4
       },
       toolbarButton: {
         name: 'dogracing',
@@ -49,9 +49,9 @@ export const environment: Environment = {
       order: 1,
       productSelected: false,
       isPlayable: true,
-      layoutResultList: {
-        name: LAYOUT_RESULT_LIST_TYPE.RACING,
-        items: 4
+      layoutProducts: {
+        type: LAYOUT_TYPE.RACING,
+        resultItems: 4
       },
       toolbarButton: {
         name: 'horseracing',
@@ -68,9 +68,9 @@ export const environment: Environment = {
       order: 2,
       productSelected: false,
       isPlayable: true,
-      layoutResultList: {
-        name: LAYOUT_RESULT_LIST_TYPE.RACING,
-        items: 4
+      layoutProducts: {
+        type: LAYOUT_TYPE.RACING,
+        resultItems: 4
       },
       toolbarButton: {
         name: 'virtualhorse',
@@ -87,9 +87,9 @@ export const environment: Environment = {
       order: 3,
       productSelected: false,
       isPlayable: false,
-      layoutResultList: {
-        name: LAYOUT_RESULT_LIST_TYPE.SOCCER,
-        items: 10
+      layoutProducts: {
+        type: LAYOUT_TYPE.SOCCER,
+        resultItems: 10
       },
       toolbarButton: {
         name: 'Italian League',
@@ -106,9 +106,9 @@ export const environment: Environment = {
       order: 3,
       productSelected: false,
       isPlayable: false,
-      layoutResultList: {
-        name: LAYOUT_RESULT_LIST_TYPE.SOCCER,
-        items: 10
+      layoutProducts: {
+        type: LAYOUT_TYPE.SOCCER,
+        resultItems: 10
       },
       toolbarButton: {
         name: 'Italian League',

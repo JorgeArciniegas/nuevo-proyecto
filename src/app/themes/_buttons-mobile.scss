@@ -31,28 +31,34 @@
 	}
 }
 
-.btn-dog-1 {
+.btn-DOG-1,
+.btn-HORSE-1,
+.btn-HORSE-VIRT-1  {
 	background: #ff0000;
 	border-color: #ff0000;
 }
-.btn-dog-2 {
+.btn-DOG-2,
+.btn-HORSE-3,
+.btn-HORSE-VIRT-3 {
 	background: #4472c4;
 	border-color: #4472c4;
 }
-.btn-dog-3 {
+.btn-DOG-3,
+.btn-HORSE-2,
+.btn-HORSE-VIRT-2 {
 	background: #fff;
 	color: #000;
 	border-color: #fff;
 }
-.btn-dog-4 {
+.btn-DOG-4 {
 	background: #000;
 	border-color: #fff;
 }
-.btn-dog-5 {
+.btn-DOG-5 {
 	background: #f25900;
 	border-color: #f25900;
 }
-.btn-dog-6 {
+.btn-DOG-6 {
 	background: linear-gradient(
 		to bottom,
 		#000,
@@ -81,6 +87,25 @@
 	}
 }
 
+
+.btn-HORSE-4,
+.btn-HORSE-VIRT-4 {
+	background: #ffff00;
+  border-color: #ffff00;
+  color: #000;
+}
+.btn-HORSE-5,
+.btn-HORSE-VIRT-5 {
+	background: #008000;
+	border-color: #008000;
+}
+.btn-HORSE-6,
+.btn-HORSE-VIRT-6 {
+	background: #000;
+  border-color: #fff;
+  color: #ffff00;
+}
+
 .playable-special-bets {
 	.button {
 		border-width: 2;
@@ -90,12 +115,3 @@
 		}
 	}
 }
-// .playable-grid-repeat,
-// .advance-game {
-//   button {
-//     font-size: 2.8vh;
-//     &.actived {
-//       box-shadow: 0px 0px 5px 3px #ffca18;
-//     }
-//   }
-// }

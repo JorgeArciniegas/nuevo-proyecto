@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../shared/shared.module';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { routes, componentDeclarations } from './main.common';
-import { RaceComponent } from './results/templates/race/race.component';
+import { SharedModule } from '../../shared/shared.module';
+import { componentDeclarations, routes } from './main.common';
 
 @NgModule({
-  declarations: [componentDeclarations, RaceComponent],
-  imports: [CommonModule, SharedModule, RouterModule.forChild(routes)]
+  declarations: [componentDeclarations],
+  imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MainModule { }

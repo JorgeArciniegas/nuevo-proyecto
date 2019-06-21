@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppSettings } from '../../../app.settings';
-import { RaceTime } from '../main.models';
+import { EventTime } from '../main.models';
 import { MainService } from '../main.service';
 import { ProductsService } from '../../products.service';
 
@@ -10,7 +10,7 @@ import { ProductsService } from '../../products.service';
   styleUrls: ['./race-control.component.scss']
 })
 export class RaceControlComponent implements OnInit {
-  public raceTime: RaceTime;
+  public raceTime: EventTime;
   public race: number;
   public settings: AppSettings;
 

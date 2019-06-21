@@ -5,6 +5,8 @@ import { PlayableBoardComponent } from './playable-board/playable-board.componen
 import { RaceControlComponent } from './race-control/race-control.component';
 import { MainComponent as MainComponent } from './main.component';
 import { ResultsComponent } from './results/results.component';
+import { RaceComponent } from './results/templates/race/race.component';
+import { PlayableRaceComponent } from './playable-board/templates/race/playablerace.component';
 
 
 export const componentDeclarations: any[] = [
@@ -13,7 +15,9 @@ export const componentDeclarations: any[] = [
   ListRaceComponent,
   ResultsComponent,
   PlayableBoardComponent,
-  FilterByPositionPipe
+  FilterByPositionPipe,
+  RaceComponent,
+  PlayableRaceComponent
 ];
 
 export const providerDeclarations: any[] = [];
