@@ -18,35 +18,35 @@
       </GridLayout>
     </GridLayout>
     <GridLayout row="0" col="{{i + 1}}" shadow="3" cornerRadius="16" class="card"
-      *ngFor="let dog of service.dogList | filterByPosition: 1; let i = index;">
+      *ngFor="let runner of service.runnersList | filterByPosition: 1; let i = index;">
       <GridLayout rows="*" columns="*" class="bg-playable">
-        <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{dog.number}}"
-          [ngClass]="{'btn-dog-play-actived': dog.actived, 'disabled': !dog.selectable}">
+        <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{runner.number}}"
+          [ngClass]="{'btn-dog-play-actived': runner.actived, 'disabled': !runner.selectable}">
           <StackLayout class="label"></StackLayout>
-          <Button text="{{dog.number}}" class="button-internal" (tap)="dogplaced(dog)"
-            [isEnabled]="dog.selectable && !service.placingRace.timeBlocked"></Button>
+          <Button text="{{runner.number}}" class="button-internal" (tap)="runnerplaced(runner)"
+            [isEnabled]="runner.selectable && !service.placingRace.timeBlocked"></Button>
         </GridLayout>
       </GridLayout>
     </GridLayout>
     <GridLayout row="1" col="{{i + 1}}" shadow="3" cornerRadius="16" class="card"
-      *ngFor="let dog of service.dogList | filterByPosition: 2; let i = index;">
+      *ngFor="let runner of service.runnersList | filterByPosition: 2; let i = index;">
       <GridLayout rows="*" columns="*" class="bg-playable">
-        <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{dog.number}}"
-          [ngClass]="{'btn-dog-play-actived': dog.actived, 'disabled': !dog.selectable || service.placingRace.secondRowDisabled}">
+        <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{runner.number}}"
+          [ngClass]="{'btn-dog-play-actived': runner.actived, 'disabled': !runner.selectable || service.placingRace.secondRowDisabled}">
           <StackLayout class="label"></StackLayout>
-          <Button text="{{dog.number}}" class="button-internal" (tap)="dogplaced(dog)"
-            [isEnabled]="dog.selectable && !service.placingRace.timeBlocked && !service.placingRace.secondRowDisabled"></Button>
+          <Button text="{{runner.number}}" class="button-internal" (tap)="runnerplaced(runner)"
+            [isEnabled]="runner.selectable && !service.placingRace.timeBlocked && !service.placingRace.secondRowDisabled"></Button>
         </GridLayout>
       </GridLayout>
     </GridLayout>
     <GridLayout row="2" col="{{i + 1}}" shadow="3" cornerRadius="16" class="card"
-      *ngFor="let dog of service.dogList | filterByPosition: 3; let i = index;">
+      *ngFor="let runner of service.runnersList | filterByPosition: 3; let i = index;">
       <GridLayout rows="*" columns="*" class="bg-playable">
-        <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{dog.number}}"
-          [ngClass]="{'btn-dog-play-actived': dog.actived, 'disabled': !dog.selectable  || service.placingRace.thirdRowDisabled}">
+        <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{runner.number}}"
+          [ngClass]="{'btn-dog-play-actived': runner.actived, 'disabled': !runner.selectable  || service.placingRace.thirdRowDisabled}">
           <StackLayout class="label"></StackLayout>
-          <Button text="{{dog.number}}" class="button-internal" (tap)="dogplaced(dog)"
-            [isEnabled]="dog.selectable && !service.placingRace.timeBlocked && !service.placingRace.thirdRowDisabled"></Button>
+          <Button text="{{runner.number}}" class="button-internal" (tap)="runnerplaced(runner)"
+            [isEnabled]="runner.selectable && !service.placingRace.timeBlocked && !service.placingRace.thirdRowDisabled"></Button>
         </GridLayout>
       </GridLayout>
     </GridLayout>

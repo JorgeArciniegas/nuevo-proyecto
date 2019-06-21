@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { TypePlacingRace, Dog, SpecialBet } from '../../../main.models';
+import { TypePlacingRace, Runner, SpecialBet } from '../../../main.models';
 import { MainService } from '../../../main.service';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../../../../../../../src/app/products/products.service';
@@ -20,22 +20,20 @@ export class PlayableRaceComponent implements OnInit, OnDestroy {
   public specialBet: typeof SpecialBet = SpecialBet;
 
   // Listen to the race selection
-  private currentRaceSubscription: Subscription;
+  private currentEventSubscription: Subscription;
   private currentProductSelection: Subscription;
   // code of product. it's used for change the layout color to buttons
   codeProduct: string;
   constructor(public service: MainService, private productService: ProductsService) {
-    this.currentRaceSubscription = this.service.currentEventObserve.subscribe(
+    this.currentEventSubscription = this.service.currentEventObserve.subscribe(
       raceIndex =>
         (this.service.placingRace.raceNumber = this.service.raceDetails.races[
           raceIndex
         ].number)
     );
-
     this.currentProductSelection = productService.productNameSelectedObserve.subscribe( () => {
       this.codeProduct  = productService.product.codeProduct;
     });
-
   }
 
   ngOnInit() {
@@ -43,16 +41,16 @@ export class PlayableRaceComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.currentRaceSubscription.unsubscribe();
+    this.currentEventSubscription.unsubscribe();
     this.currentProductSelection.unsubscribe();
   }
 
   /**
    *
-   * @param dog
+   * @param runnner
    */
-  dogplaced(dog: Dog): void {
-    this.service.placingOdd(dog);
+  runnerplaced(runnner: Runner): void {
+    this.service.placingOdd(runnner);
   }
 
 

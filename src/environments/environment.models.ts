@@ -1,5 +1,4 @@
-import { CouponPresetValues } from "@elys/elys-api";
-import { MatRadioChange } from "@angular/material";
+import { CouponPresetValues } from '@elys/elys-api';
 
 export interface Environment {
   production: boolean;

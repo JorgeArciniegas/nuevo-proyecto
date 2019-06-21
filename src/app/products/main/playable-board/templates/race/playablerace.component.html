@@ -13,11 +13,11 @@
         {{row}}
       </span>
     </mat-grid-tile>
-    <mat-grid-tile *ngFor="let dog of service.dogList | filterByPosition: i+1" colspan="2">
-      <button (click)="dogplaced(dog)" [ngClass]="{'btn-dog-play-actived': dog.actived}"
-        class="btn btn-default btn-default-dog-play radius-15 btn-{{codeProduct}}-{{dog.number}}"
-        [disabled]="!dog.selectable || ((i === 1 && service.placingRace.secondRowDisabled) || (i === 2 && service.placingRace.thirdRowDisabled))">
-        <span>{{dog.number}}</span>
+    <mat-grid-tile *ngFor="let runner of service.runnersList | filterByPosition: i+1" colspan="2">
+      <button (click)="dogplaced(runner)" [ngClass]="{'btn-dog-play-actived': runner.actived}"
+        class="btn btn-default btn-default-dog-play radius-15 btn-{{codeProduct}}-{{runner.number}}"
+        [disabled]="!runner.selectable || ((i === 1 && service.placingRace.secondRowDisabled) || (i === 2 && service.placingRace.thirdRowDisabled))">
+        <span>{{runner.number}}</span>
       </button>
     </mat-grid-tile>
   </ng-container>

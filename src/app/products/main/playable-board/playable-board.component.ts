@@ -1,8 +1,6 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, Input } from '@angular/core';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { ProductsService } from '../../products.service';
-import { SpecialBet, TypePlacingRace } from '../main.models';
 
 @Component({
   selector: 'app-playable-board',
