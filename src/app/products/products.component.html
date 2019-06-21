@@ -22,7 +22,9 @@
                   src="app/themes/skins/{{settings.theme}}/icon/baseline-check_circle_white-24px.svg">
                 <label fxLayout="column" fxFlex>
                   <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
-                    {{'COUPON_SUCCESS_PLACEMENT_MESSAGE' | translate}}
+                    {{'COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION' | translate}}
+                    <br>
+                    {{'COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE' | translate}}
                   </div>
                 </label>
               </ng-container>
@@ -31,22 +33,22 @@
                 <img fxFlex="40px" class="icon-24px"
                   src="app/themes/skins/{{settings.theme}}/icon/baseline-error-24px.svg">
                 <label fxLayout="column" fxFlex>
-                  <!-- <span>{{'ERROR' | translate | uppercase}}</span> -->
-                  <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
+                  <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
                     {{'DYNAMIC_KEYS.COUPON_ERROR_INTRODUCTION.MessageSource.' + messageSource[couponService.error.source] | translate}}
                     <br>
                     {{"DYNAMIC_KEYS.COUPON_ERROR." + couponService.error.message | translate}} <ng-container
-                      *ngIf="couponService.error.detail">(Limit:
-                      {{couponService.error.detail}})</ng-container>
+                      *ngIf="couponService.error.detail">({{ 'LIMIT' | translate }}:
+                      {{couponService.error.detail | currency : userService.userCurrency : 'symbol-narrow'}})
+                    </ng-container>
                   </div>
                 </label>
               </ng-container>
               <ng-container *ngIf="couponService.warningMessage && !couponService.successMessage">
                 <img fxFlex="40px" class="icon-24px"
                   src="app/themes/skins/{{settings.theme}}/icon/baseline-warning-24px.svg">
-                <label fxLayout="column" fxFlex>
+                <label fxLayout="column" fxLayoutAlign="center center" fxFlex>
                   <span>{{'WARNING' | translate | uppercase}}</span>
-                  <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
+                  <div>
                     {{"DYNAMIC_KEYS.COUPON_WARNING." + couponService.warningMessage | translate}}
                   </div>
                 </label>

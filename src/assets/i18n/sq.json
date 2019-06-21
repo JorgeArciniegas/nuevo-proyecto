@@ -34,7 +34,7 @@
   "DYNAMIC_KEYS": {
     "COUPON_ERROR_INTRODUCTION": {
       "MessageSource": {
-        "UNKNOWN": "",
+        "UNKNOWN": "Gabim",
         "COUPON_CREATION": "",
         "ODDS_INSERTION": "",
         "ODDS_REMOVAL": "",
@@ -231,6 +231,7 @@
   "JACKPOT": "Jackpot",
   "LANGUAGE": "Gjuhë",
   "LAST_FIVE": "5 ndeshjet e fundit",
+  "LIMIT": "Limit",
   "LUCKY": "Lucky",
   "MAX_PAYOUT": "Fitimi max.",
   "MAX_POTENTIAL_WIN": "Max. fitimet e mundshme",

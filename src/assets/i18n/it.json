@@ -24,7 +24,8 @@
   "COUPON.BET": "Scommetti",
   "COUPON_CODE": "Codice coupon",
   "COUPON_RESET": "Reset del coupon",
-  "COUPON_SUCCESS_PLACEMENT_MESSAGE": "Coupon accettato e confermato...\n Controlla la lista scommesse",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Coupon accettato e confermato...",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "Controlla la lista scommesse",
   "DATE": "Data",
   "DATE_FROM": "Data da",
   "DATE_OF_PLACEMENT": "Data piazzamento",
@@ -38,8 +39,8 @@
         "UNKNOWN": "Errore:",
         "COUPON_CREATION": "Errore in creazione coupon:",
         "ODDS_INSERTION": "Errore in inserimento quota:",
-        "ODDS_REMOVAL": "Errore in rimozione quota",
-        "COUPON_UPDATE": "Errore in aggiornamento coupon",
+        "ODDS_REMOVAL": "Errore in rimozione quota:",
+        "COUPON_UPDATE": "Errore in aggiornamento coupon:",
         "COUPON_PLACEMENT": "Errore in inserimento scommessa:"
       }
     },
@@ -232,6 +233,7 @@
   "JACKPOT": "Jackpot",
   "LANGUAGE": "Lingua",
   "LAST_FIVE": "Ultime 5",
+  "LIMIT": "Limite",
   "LUCKY": "Lucky",
   "MAX_PAYOUT": "Vincita massima",
   "MAX_POTENTIAL_WIN": "Vincita potenziale massima",

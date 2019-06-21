@@ -34,7 +34,7 @@
   "DYNAMIC_KEYS": {
     "COUPON_ERROR_INTRODUCTION": {
       "MessageSource": {
-        "UNKNOWN": "",
+        "UNKNOWN": "Erreur",
         "COUPON_CREATION": "",
         "ODDS_INSERTION": "",
         "ODDS_REMOVAL": "",
@@ -231,6 +231,7 @@
   "JACKPOT": "Jackpot",
   "LANGUAGE": "Langue",
   "LAST_FIVE": "5 Derniers",
+  "LIMIT": "Limite",
   "LUCKY": "Lucky",
   "MAX_PAYOUT": "Gain max.",
   "MAX_POTENTIAL_WIN": "Gain potentiel max.",
