@@ -11,6 +11,7 @@ export class RaceComponent {
   @Input() items: number;
   @Input() rowHeight: number;
   @Input() results: EventResult[];
+  @Input() codeProduct: string;
   @Input() windowSize: WindowSize;
   constructor() { }
 
