@@ -1,0 +1,37 @@
+.playable-grid-buttons {
+	margin: 2 0;
+
+	.card {
+		margin: 3;
+
+		.playable-row-tile {
+			font-size: 28;
+		}
+		.btn-default-dog-play {
+			font-size: 36;
+			&.button {
+				border-radius: 15;
+				padding: -2;
+			}
+		}
+	}
+
+	&.playable-special-bets {
+		.special-bet {
+			margin: 4 15;
+			.button {
+				border-radius: 10;
+				padding: -2;
+			}
+		}
+	}
+
+	&.playable-grid-repeat {
+		.card-x {
+			margin: 2 3 0;
+			.button-internal {
+				padding: 0;
+			}
+		}
+	}
+}

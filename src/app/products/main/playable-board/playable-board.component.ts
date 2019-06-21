@@ -1,12 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import {
-  Dog,
-  PlacingRace,
-  SpecialBet,
-  TypePlacingRace
-} from '../main.models';
-import { MainService } from '../main.service';
+import { LAYOUT_RESULT_LIST_TYPE } from '../../../../../src/environments/environment.models';
+import { ProductsService } from '../../products.service';
+import { SpecialBet, TypePlacingRace } from '../main.models';
 
 @Component({
   selector: 'app-playable-board',
@@ -24,22 +20,22 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
 
   public TypePlacingRace = TypePlacingRace;
   public playableTitle: string[];
-
-  constructor(public service: MainService) { }
+  public typeLayout: typeof LAYOUT_RESULT_LIST_TYPE = LAYOUT_RESULT_LIST_TYPE;
+  constructor(public productService: ProductsService) { }
 
   ngOnInit() {
-    this.currentRaceSubscription = this.service.currentEventObserve.subscribe(
+   /*  this.currentRaceSubscription = this.service.currentEventObserve.subscribe(
       raceIndex =>
         (this.service.placingRace.raceNumber = this.service.raceDetails.races[
           raceIndex
         ].number)
-    );
+    ); */
   }
 
   ngOnDestroy(): void {
-    this.currentRaceSubscription.unsubscribe();
+    // this.currentRaceSubscription.unsubscribe();
   }
-
+  /*
   dogplaced(dog: Dog): void {
     this.service.placingOdd(dog);
   }
@@ -63,5 +59,5 @@ export class PlayableBoardComponent implements OnInit, OnDestroy {
 
   setRepeat(repeat: number): void {
     this.service.placingRace.repeat = repeat;
-  }
+  } */
 }
