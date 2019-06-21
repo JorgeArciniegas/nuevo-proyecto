@@ -9,11 +9,9 @@ import {
   VirtualEventCountDownRequest,
   VirtualEventCountDownResponse,
   VirtualProgramTreeBySportRequest,
-  VirtualProgramTreeBySportResponse,
-  VirtualSportLastResultsRequest,
-  VirtualSportLastResultsResponse
+  VirtualProgramTreeBySportResponse
 } from '@elys/elys-api';
-import { interval, Subject, timer } from 'rxjs';
+import { interval, Subject } from 'rxjs';
 import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
