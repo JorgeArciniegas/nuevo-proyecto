@@ -263,6 +263,10 @@ html {
 					}
 				}
 
+				&.display-success {
+					@extend %color-bg-success;
+				}
+
 				&.display-warning {
 					@extend %color-bg-warn;
 				}

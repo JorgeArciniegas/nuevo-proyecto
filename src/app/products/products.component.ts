@@ -5,6 +5,7 @@ import { AppSettings } from '../app.settings';
 import { ProductsService } from './products.service';
 import { CouponService } from '../component/coupon/coupon.service';
 import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
+import { MessageSource } from '@elys/elys-coupon';
 
 @Component({
   selector: 'app-products',
@@ -15,6 +16,8 @@ export class ProductsComponent implements OnDestroy {
   observableMediaSubscribe: Subscription;
   public rowHeight: number;
   public settings: AppSettings;
+  public messageSource: typeof MessageSource = MessageSource;
+
   constructor(
     private observableMedia: MediaObserver,
     public service: ProductsService,
@@ -28,7 +31,6 @@ export class ProductsComponent implements OnDestroy {
       this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
       this.service.fnWindowsSize();
       this.rowHeight = (this.service.windowSize.columnHeight - 30) / 12;
-
     });
   }
 

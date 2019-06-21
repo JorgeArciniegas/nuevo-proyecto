@@ -23,10 +23,10 @@
       </StackLayout>
       <!-- Coupon message area -->
       <GridLayout row="1" rows="*,3*" columns="*" cornerRadius="6" class="display m-b-5"
-        *ngIf="!couponService.error && !couponService.warningMessages">
+        *ngIf="!couponService.error && !couponService.warningMessage">
       </GridLayout>
       <GridLayout row="1" rows="*,3*" columns="*" cornerRadius="6" class="display-message display-error m-b-5"
-        *ngIf="couponService.error && !couponService.warningMessages">
+        *ngIf="couponService.error && !couponService.warningMessage">
         <Label row="0" text="{{'ERROR' | translate}}" class="title" [ngClass]="{'small': service.windowSize.small}"
           textTransform="uppercase"></Label>
         <Label row="1"
@@ -34,10 +34,10 @@
           class="amount" [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
       </GridLayout>
       <GridLayout row="1" rows="*,3*" columns="*" cornerRadius="6" class="display-message display-warning m-b-5"
-        *ngIf="couponService.warningMessages">
+        *ngIf="couponService.warningMessage">
         <Label row="0" text="{{'WARNING' | translate}}" class="title" [ngClass]="{'small': service.windowSize.small}"
           textTransform="uppercase"></Label>
-        <Label row="1" text="{{'DYNAMIC_KEYS.COUPON_WARNING.' + couponService.warningMessages | translate}}"
+        <Label row="1" text="{{'DYNAMIC_KEYS.COUPON_WARNING.' + couponService.warningMessage | translate}}"
           class="amount" [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
       </GridLayout>
       <!-- Polyfunctional area / Smartcode -->

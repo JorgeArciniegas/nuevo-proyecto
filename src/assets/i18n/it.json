@@ -24,6 +24,7 @@
   "COUPON.BET": "Scommetti",
   "COUPON_CODE": "Codice coupon",
   "COUPON_RESET": "Reset del coupon",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE": "Coupon accettato e confermato...\n Controlla la lista scommesse",
   "DATE": "Data",
   "DATE_FROM": "Data da",
   "DATE_OF_PLACEMENT": "Data piazzamento",
@@ -32,6 +33,16 @@
   "DELETED_ON": "Annullata il",
   "DETAIL": "Dettaglio",
   "DYNAMIC_KEYS": {
+    "COUPON_ERROR_INTRODUCTION": {
+      "MessageSource": {
+        "UNKNOWN": "Errore:",
+        "COUPON_CREATION": "Errore in creazione coupon:",
+        "ODDS_INSERTION": "Errore in inserimento quota:",
+        "ODDS_REMOVAL": "Errore in rimozione quota",
+        "COUPON_UPDATE": "Errore in aggiornamento coupon",
+        "COUPON_PLACEMENT": "Errore in inserimento scommessa:"
+      }
+    },
     "COUPON_ERROR": {
       "API_ERROR": "Errore API generico",
       "AccountInsertDataError": "Errore inserimento conto utente [Cod. C11]",

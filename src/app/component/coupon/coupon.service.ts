@@ -14,18 +14,13 @@ import {
   BetCouponExtended,
   BetCouponOddExtended,
   CouponServiceMessageType,
-  ElysCouponService
+  ElysCouponService,
+  MessageSource
 } from '@elys/elys-coupon';
 import { Observable, Subject } from 'rxjs';
 import { BetOdd, CouponConfirmDelete } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
-import {
-  CouponLimit,
-  Error,
-  InternalCoupon,
-  OddsStakeEdit,
-  StakesDisplay
-} from './coupon.model';
+import { CouponLimit, Error, InternalCoupon, OddsStakeEdit, StakesDisplay } from './coupon.model';
 import { PrintCouponService } from './print-coupon/print-coupon.service';
 import { AppSettings } from '../../../../src/app/app.settings';
 
@@ -51,10 +46,11 @@ export class CouponService {
   oddStakeEditObs: Observable<OddsStakeEdit>;
 
   // Coupon messages variables
-  warningMessages: string;
+  warningMessage: string;
+  successMessage: string;
   error: Error;
-  // Duration of the notification of warning's messages
-  notificationInterval = 10000;
+  // Duration of the notification of timed messages
+  notificationInterval = 1500;
 
   productHasCoupon: CouponConfirmDelete;
 
@@ -89,19 +85,29 @@ export class CouponService {
     });
     // Get the message from the coupon
     elysCoupon.couponServiceMessage.subscribe(message => {
+      this.successMessage = undefined;
       this.error = undefined;
-      this.warningMessages = undefined;
+      this.warningMessage = undefined;
+      console.log(message);
       // Get coupon's message
       switch (message.messageType) {
+        case this.messageType.success:
+          // Take only the success message on coupon placement
+          if (message.messageSource === MessageSource.COUPON_PLACEMENT) {
+            this.successMessage = message.message;
+            // Set the visualization time of the success message
+            setTimeout(() => (this.successMessage = undefined), this.notificationInterval);
+          }
+          break;
         case this.messageType.error:
-          this.error = new Error(message.message);
+          this.error = new Error(message.message, message.messageSource);
           break;
         case this.messageType.warning:
-          this.warningMessages = message.message;
+          this.warningMessage = message.message;
           // Check the coupon's limits
           this.checkLimits();
           // Set the visualization time of the warning
-          setTimeout(() => (this.warningMessages = undefined), this.notificationInterval);
+          setTimeout(() => (this.warningMessage = undefined), this.notificationInterval);
           break;
         default:
           // Check the coupon's limits
@@ -165,7 +171,7 @@ export class CouponService {
     this.elysCoupon.betCoupon = null;
     // Reset message's variable
     this.error = undefined;
-    this.warningMessages = undefined;
+    this.warningMessage = undefined;
     // Reset amount
     const stakesDisplayTemp: StakesDisplay = {
       TotalStake: 0,
@@ -262,13 +268,18 @@ export class CouponService {
               : this.coupon.UserCouponLimit.MaxLoss;
           if (this.stakeDisplay.MaxWinning > maxBetWin) {
             // Check the MaxBetWin
-            error.setError(CouponLimit[CouponLimit.MaxSingleBetWin], maxBetWin);
+            error.setError(CouponLimit[CouponLimit.MaxSingleBetWin], MessageSource.UNKNOWN, maxBetWin);
           } else if (this.coupon.Odds[0].OddStake < this.coupon.CouponLimit.MinBetStake) {
             // Check the MinBetStake
-            error.setError(CouponLimit[CouponLimit.MinBetStake], this.coupon.CouponLimit.MinBetStake, this.coupon.Odds[0].SelectionId);
+            error.setError(
+              CouponLimit[CouponLimit.MinBetStake],
+              MessageSource.UNKNOWN,
+              this.coupon.CouponLimit.MinBetStake,
+              this.coupon.Odds[0].SelectionId
+            );
           } else if (this.coupon.Odds[0].OddStake > maxBetStake) {
             // Check the MaxBetStake
-            error.setError(CouponLimit[CouponLimit.MaxBetStake], maxBetStake, this.coupon.Odds[0].SelectionId);
+            error.setError(CouponLimit[CouponLimit.MaxBetStake], MessageSource.UNKNOWN, maxBetStake, this.coupon.Odds[0].SelectionId);
           }
           break;
         case CouponType.MultipleBet:
@@ -281,10 +292,10 @@ export class CouponService {
               : this.coupon.UserCouponLimit.MaxLoss;
           if (this.stakeDisplay.TotalStake > maxBetStake) {
             // Check the MaxBetStake
-            error.setError(CouponLimit[CouponLimit.MaxBetStake], maxBetStake);
+            error.setError(CouponLimit[CouponLimit.MaxBetStake], MessageSource.UNKNOWN, maxBetStake);
           } else if (this.stakeDisplay.MaxWinning > maxBetWin) {
             // Check the MaxBetWin
-            error.setError(CouponLimit[CouponLimit.MaxCombinationBetWin], maxBetWin);
+            error.setError(CouponLimit[CouponLimit.MaxCombinationBetWin], MessageSource.UNKNOWN, maxBetWin);
           } else {
             for (const grouping of this.coupon.Groupings) {
               // Check the active groupings
@@ -312,6 +323,7 @@ export class CouponService {
                         // Create the error
                         error.setError(
                           CouponLimit[CouponLimit.MinGroupingsBetStake],
+                          MessageSource.UNKNOWN,
                           this.coupon.CouponLimit.MinGroupingsBetStake,
                           odd.SelectionId
                         );
@@ -327,6 +339,7 @@ export class CouponService {
                         // Create the error
                         error.setError(
                           CouponLimit[CouponLimit.MaxGroupingsBetStake],
+                          MessageSource.UNKNOWN,
                           this.coupon.CouponLimit.MaxGroupingsBetStake,
                           odd.SelectionId
                         );
@@ -347,6 +360,7 @@ export class CouponService {
                             // Create the error
                             error.setError(
                               CouponLimit[CouponLimit.MaxSingleBetWin],
+                              MessageSource.UNKNOWN,
                               this.coupon.CouponLimit.MaxSingleBetWin,
                               odd.SelectionId
                             );
@@ -424,13 +438,12 @@ export class CouponService {
   }
 
   checkHasCoupon(): void {
-    if ( this.coupon ) {
+    if (this.coupon) {
       this.productHasCoupon.checked = true;
-    }  else  {
+    } else {
       this.productHasCoupon.checked = false;
     }
   }
-
 
   resetProductHasCoupon(): void {
     this.productHasCoupon = { checked: false, productCodeRequest: '', isRacing: false, racingNumber: 0 };

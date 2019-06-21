@@ -261,6 +261,10 @@
 					overflow: auto;
 				}
 
+				&.display-success {
+					@extend %color-bg-success;
+				}
+
 				&.display-error {
 					@extend %color-bg-allert;
 				}

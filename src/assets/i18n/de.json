@@ -32,6 +32,16 @@
   "DELETED_ON": "Annullata il",
   "DETAIL": "Detail",
   "DYNAMIC_KEYS": {
+    "COUPON_ERROR_INTRODUCTION": {
+      "MessageSource": {
+        "UNKNOWN": "",
+        "COUPON_CREATION": "",
+        "ODDS_INSERTION": "",
+        "ODDS_REMOVAL": "",
+        "COUPON_UPDATE": "",
+        "COUPON_PLACEMENT": "Fehler bei der Platzierung der Wette"
+      }
+    },
     "COUPON_ERROR": {
       "API_ERROR": "Errore API generico",
       "AccountInsertDataError": "Während des Hinzufügens des Benutzerkontos ist ein Fehler aufgetreten [Code C11]",

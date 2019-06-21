@@ -32,6 +32,16 @@
   "DELETED_ON": "Annullata il",
   "DETAIL": "Detaj",
   "DYNAMIC_KEYS": {
+    "COUPON_ERROR_INTRODUCTION": {
+      "MessageSource": {
+        "UNKNOWN": "",
+        "COUPON_CREATION": "",
+        "ODDS_INSERTION": "",
+        "ODDS_REMOVAL": "",
+        "COUPON_UPDATE": "",
+        "COUPON_PLACEMENT": "Gabim vendosjeje"
+      }
+    },
     "COUPON_ERROR": {
       "API_ERROR": "Errore API generico",
       "AccountInsertDataError": "Pati nje problem gjate shtuarjes se perdoruesit [Kodi C11]",

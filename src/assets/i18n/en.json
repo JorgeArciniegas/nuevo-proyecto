@@ -32,6 +32,16 @@
   "DELETED_ON": "Deleted on",
   "DETAIL": "Detail",
   "DYNAMIC_KEYS": {
+    "COUPON_ERROR_INTRODUCTION": {
+      "MessageSource": {
+        "UNKNOWN": "",
+        "COUPON_CREATION": "",
+        "ODDS_INSERTION": "",
+        "ODDS_REMOVAL": "",
+        "COUPON_UPDATE": "",
+        "COUPON_PLACEMENT": "Placement error"
+      }
+    },
     "COUPON_ERROR": {
       "API_ERROR": "Generic API error",
       "AccountInsertDataError": "An error occurred while adding the user account [Code C11]",
