@@ -1,0 +1,7 @@
+<div>
+  <!-- result RACE -->
+  <app-race
+    *ngIf="service.listResult.length > 0 && productService.product.layoutResultList.name === service.typeLayout.RACING"
+    [items]="productService.product.layoutResultList.items" rowHeight="{{rowHeight}}" [results]="service.listResult">
+  </app-race>
+</div>

@@ -3,15 +3,15 @@ import { ListRaceComponent } from './list-race/list-race.component';
 import { FilterByPositionPipe } from './playable-board/filter-by-position.pipe';
 import { PlayableBoardComponent } from './playable-board/playable-board.component';
 import { RaceControlComponent } from './race-control/race-control.component';
-import { RacingComponent as RacingComponent } from './racing.component';
-import { ResultListComponent } from './result-list/result-list.component';
+import { MainComponent as MainComponent } from './main.component';
+import { ResultsComponent } from './results/results.component';
 
 
 export const componentDeclarations: any[] = [
-  RacingComponent,
+  MainComponent,
   RaceControlComponent,
   ListRaceComponent,
-  ResultListComponent,
+  ResultsComponent,
   PlayableBoardComponent,
   FilterByPositionPipe
 ];
@@ -21,7 +21,7 @@ export const providerDeclarations: any[] = [];
 export const routes: Routes = [
   {
     path: '',
-    component: RacingComponent
+    component: MainComponent
   },
 
 

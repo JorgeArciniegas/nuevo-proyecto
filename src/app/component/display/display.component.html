@@ -1,6 +1,6 @@
 <div fxFlexFill fxLayout="column">
   <div fxFlex="70" fxLayout="row" class="display" [style.height.px]="((rowHeight/2))">
-    <ng-container *ngIf="polyfunctionalValue && polyfunctionalValue.selection || amountPresetPlayer ">
+    <ng-container *ngIf="polyfunctionalValue && polyfunctionalValue.selection">
       <div fxLayout="column" fxFlex="88" fxLayoutAlign="center flex-start">
         <div fxLayout="row" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2"
           [style.min-height.px]="(rowHeight - 20) / 2">
@@ -34,7 +34,7 @@
     </div>
     <div fxFill fxLayout="column" fxFlex="80" fxLayoutAlign="center flex-end">
       <span
-        *ngIf="amountPresetPlayer">{{ amountPresetPlayer.amount | currency : userService.userDetail.Currency : 'symbol-narrow' }}</span>
+        *ngIf="amountPresetPlayer">{{ amountPresetPlayer.amount | currency : userService.userCurrency : 'symbol-narrow' }}</span>
     </div>
 
   </div>

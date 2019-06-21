@@ -10,7 +10,7 @@ import { HttpLoaderFactory } from 'src/app/app.module';
 import { AppSettings } from 'src/app/app.settings';
 import { ProductDialogComponent } from 'src/app/products/product-dialog/product-dialog.component';
 import { ProductsService } from 'src/app/products/products.service';
-import { RacingService } from 'src/app/products/racing/racing.service';
+import { MainService } from 'src/app/products/main/main.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
 import { WidgetTypeLink } from 'src/environments/environment.models';
@@ -42,7 +42,7 @@ describe('WidgetComponent', () => {
           urlApi: environment.baseApiUrl
         })
       ],
-      providers: [AppSettings, ProductsService, RacingService, TranslateService, MatDialog],
+      providers: [AppSettings, ProductsService, MainService, TranslateService, MatDialog],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).overrideModule(BrowserDynamicTestingModule, {
       set: {
@@ -60,7 +60,7 @@ describe('WidgetComponent', () => {
     component = fixture.debugElement.componentInstance;
   }); */
 
-  it('should create the app', async((appSettings: AppSettings, productService: ProductsService, racingService: RacingService) => {
+  it('should create the app', async((appSettings: AppSettings, productService: ProductsService, racingService: MainService) => {
     fixture = TestBed.createComponent(WidgetComponent);
     component = fixture.debugElement.componentInstance;
     productService.product = {

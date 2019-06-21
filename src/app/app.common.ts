@@ -98,12 +98,12 @@ export const routes: Routes = [
     canActivate: [AuthorizationGuard],
     children: [
       {
-        path: 'racing',
-        loadChildren: './products/racing/racing.module#RacingModule'
+        path: 'main',
+        loadChildren: './products/main/main.module#MainModule'
       },
       {
         path: '',
-        redirectTo: 'racing',
+        redirectTo: 'main',
         pathMatch: 'full'
       }
     ]
