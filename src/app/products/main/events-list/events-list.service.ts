@@ -13,7 +13,6 @@ export class EventsListService {
   public getEventDetailsList(): EventList[] {
     this.eventsDetails = [];
     this.mainService.raceDetails.races.forEach(race => {
-      console.log(race);
       this.eventsDetails.push({
         eventLabel: race.label,
         eventStart: race.date,
