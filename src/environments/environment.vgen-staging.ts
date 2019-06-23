@@ -23,9 +23,11 @@ export const environment: Environment = {
       order: 0,
       productSelected: true,
       isPlayable: true,
-      layoutProducts: { // defines the layout type for last results widget
+      layoutProducts: {
+        // defines the layout type for last results widget
         type: LAYOUT_TYPE.RACING,
-        resultItems: 4
+        resultItems: 4,
+        nextEventItems: 5
       },
       toolbarButton: {
         name: 'dogracing',
@@ -51,7 +53,8 @@ export const environment: Environment = {
       isPlayable: true,
       layoutProducts: {
         type: LAYOUT_TYPE.RACING,
-        resultItems: 4
+        resultItems: 4,
+        nextEventItems: 5
       },
       toolbarButton: {
         name: 'horseracing',
@@ -70,7 +73,8 @@ export const environment: Environment = {
       isPlayable: true,
       layoutProducts: {
         type: LAYOUT_TYPE.RACING,
-        resultItems: 4
+        resultItems: 4,
+        nextEventItems: 5
       },
       toolbarButton: {
         name: 'virtualhorse',
@@ -89,7 +93,8 @@ export const environment: Environment = {
       isPlayable: false,
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
-        resultItems: 10
+        resultItems: 10,
+        nextEventItems: 3
       },
       toolbarButton: {
         name: 'Italian League',
@@ -108,7 +113,8 @@ export const environment: Environment = {
       isPlayable: false,
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
-        resultItems: 10
+        resultItems: 10,
+        nextEventItems: 3
       },
       toolbarButton: {
         name: 'Italian League',
@@ -120,7 +126,8 @@ export const environment: Environment = {
   ],
   showRaceId: true,
   isEnabledReprintCoupon: true,
-  couponMessageTrasmitted: 'Mandate transmitted via the Internet andaccepted on the',
+  couponMessageTrasmitted:
+    'Mandate transmitted via the Internet andaccepted on the',
   // tslint:disable-next-line:max-line-length
   couponMessageLegal:
     'Lorem ipsum dolor sit amet, consecteturadipisicing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Utenim ad minim veniam'

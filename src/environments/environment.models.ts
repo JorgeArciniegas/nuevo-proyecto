@@ -59,10 +59,10 @@ export enum WidgetTypeLink {
 export interface LayoutProducts {
   type: LAYOUT_TYPE;
   resultItems: number;
+  nextEventItems: number;
 }
 
-
-export enum LAYOUT_TYPE  {
+export enum LAYOUT_TYPE {
   RACING,
   COCK_FIGHT,
   SOCCER,
