@@ -9,6 +9,7 @@
   "BETS_LIST.WON": "Vincenti",
   "BET_STATUS": "Estado Apuesta",
   "BET_TYPE": "Tipo de Apuesta",
+  "BET_UNDER_EVALUATION": "Apuesta bajo aprobación, por favor espera",
   "BONUS": "Bonus",
   "BTNCALC.COL": "COL",
   "BTNCALC.TOT": "TOT",
@@ -24,6 +25,8 @@
   "COUPON.BET": "Apuesta",
   "COUPON_CODE": "Código cupón",
   "COUPON_RESET": "Reset del coupon",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Apuesta aceptada,",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "comprueba la Lista de Apuestas",
   "DATE": "Fecha",
   "DATE_FROM": "Data da",
   "DATE_OF_PLACEMENT": "Data piazzamento",
@@ -32,16 +35,6 @@
   "DELETED_ON": "Annullata il",
   "DETAIL": "Detalle",
   "DYNAMIC_KEYS": {
-    "COUPON_ERROR_INTRODUCTION": {
-      "MessageSource": {
-        "UNKNOWN": "Error",
-        "COUPON_CREATION": "",
-        "ODDS_INSERTION": "",
-        "ODDS_REMOVAL": "",
-        "COUPON_UPDATE": "",
-        "COUPON_PLACEMENT": "Error de colocacion"
-      }
-    },
     "COUPON_ERROR": {
       "API_ERROR": "Errore API generico",
       "AccountInsertDataError": "Se produjo un error al agregar la cuenta de usuario [Cód. C11]",
@@ -113,6 +106,16 @@
       "WrongCurrency": "Divisa no correspondiente [Cód. C15]",
       "WrongPassword": "Contraseña incorrecta [Cód. C5]",
       "WrongUserNetwork": "Red de usuario equivocada [Cód. C8]"
+    },
+    "COUPON_ERROR_INTRODUCTION": {
+      "MessageSource": {
+        "COUPON_CREATION": "",
+        "COUPON_PLACEMENT": "Error de colocacion",
+        "COUPON_UPDATE": "",
+        "ODDS_INSERTION": "",
+        "ODDS_REMOVAL": "",
+        "UNKNOWN": "Error"
+      }
     },
     "COUPON_WARNING": {
       "AlreadyExistsError": "Este registro ya existe [Cód. C3]",

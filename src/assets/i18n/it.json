@@ -9,6 +9,7 @@
   "BETS_LIST.WON": "Vincenti",
   "BET_STATUS": "Stato scommessa",
   "BET_TYPE": "Tipo scommessa",
+  "BET_UNDER_EVALUATION": "Coupon in elaborazione... Attendere",
   "BONUS": "Bonus",
   "BTNCALC.COL": "COL",
   "BTNCALC.TOT": "TOT",
@@ -34,16 +35,6 @@
   "DELETED_ON": "Annullata il",
   "DETAIL": "Dettaglio",
   "DYNAMIC_KEYS": {
-    "COUPON_ERROR_INTRODUCTION": {
-      "MessageSource": {
-        "UNKNOWN": "Errore:",
-        "COUPON_CREATION": "Errore in creazione coupon:",
-        "ODDS_INSERTION": "Errore in inserimento quota:",
-        "ODDS_REMOVAL": "Errore in rimozione quota:",
-        "COUPON_UPDATE": "Errore in aggiornamento coupon:",
-        "COUPON_PLACEMENT": "Errore in inserimento scommessa:"
-      }
-    },
     "COUPON_ERROR": {
       "API_ERROR": "Errore API generico",
       "AccountInsertDataError": "Errore inserimento conto utente [Cod. C11]",
@@ -115,6 +106,16 @@
       "WrongCurrency": "Valuta non corrispondente [Cod. C15]",
       "WrongPassword": "Password errata [Cod. C5]",
       "WrongUserNetwork": "Rete utente errata [Cod. C8]"
+    },
+    "COUPON_ERROR_INTRODUCTION": {
+      "MessageSource": {
+        "COUPON_CREATION": "Errore in creazione coupon:",
+        "COUPON_PLACEMENT": "Errore in inserimento scommessa:",
+        "COUPON_UPDATE": "Errore in aggiornamento coupon:",
+        "ODDS_INSERTION": "Errore in inserimento quota:",
+        "ODDS_REMOVAL": "Errore in rimozione quota:",
+        "UNKNOWN": "Errore:"
+      }
     },
     "COUPON_WARNING": {
       "AlreadyExistsError": "Record già esistente [Cod. C3]",

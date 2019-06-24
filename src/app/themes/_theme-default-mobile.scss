@@ -271,12 +271,12 @@
 					@extend %color-bg-success;
 				}
 
-				&.display-error {
-					@extend %color-bg-allert;
-				}
-
 				&.display-warning {
 					@extend %color-bg-warn;
+				}
+
+				&.display-error {
+					@extend %color-bg-allert;
 				}
 			}
 

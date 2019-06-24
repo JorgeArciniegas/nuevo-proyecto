@@ -104,10 +104,11 @@
       class="amount" [ngClass]="{'small': productService.windowSize.small}"></Label>
   </GridLayout>
   <GridLayout row="5" rows="*" columns="*" class="card button btn-default btn-success"
-    [ngClass]="{'disabled': couponService.error}"
+    [ngClass]="{'disabled': couponService.error || couponService.isWaitingConclusionOperation}"
     *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
     <Button text="{{'COUPON.BET' | translate}}" class="button-internal" textTransform="uppercase"
-      [isEnabled]="!timeBlocked && !couponService.error" (tap)="couponService.preStagedCoupon()"></Button>
+      [isEnabled]="!timeBlocked && !couponService.error && !couponService.isWaitingConclusionOperation"
+      (tap)="couponService.preStagedCoupon()"></Button>
   </GridLayout>
   <GridLayout row="5" rows="*" columns="*,*" class="card"
     *ngIf="couponService.coupon && couponService.coupon.internal_isReadyToPlace">

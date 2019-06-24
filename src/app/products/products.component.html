@@ -16,8 +16,17 @@
         <mat-grid-tile rowspan="1">
           <div fxFlexFill>
             <div fxLayout="row" fxLayoutAlign="center center" class="display display-message radius-5"
-              [ngClass]="{'display-error': couponService.error && !couponService.successMessage && !couponService.warningMessage, 'display-warning': couponService.warningMessage && !couponService.successMessage, 'display-success': couponService.successMessage }">
-              <ng-container *ngIf="couponService.successMessage">
+              [ngClass]="{'display-error': couponService.error && !couponService.isASuccess && !couponService.warningMessage, 'display-warning': (couponService.warningMessage && !couponService.isASuccess)  || (couponService.isWaitingConclusionOperation && !couponService.isASuccess && !couponService.error), 'display-success': couponService.isASuccess }">
+              <ng-container
+                *ngIf="couponService.isWaitingConclusionOperation && !couponService.isASuccess && !couponService.error && !couponService.warningMessage">
+                <img fxFlex="40px" class="icon-24px" src="app/themes/skins/{{settings.theme}}/icon/progress-alert.svg">
+                <label fxLayout="column" fxFlex>
+                  <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
+                    {{'BET_UNDER_EVALUATION' | translate}}
+                  </div>
+                </label>
+              </ng-container>
+              <ng-container *ngIf="couponService.isASuccess">
                 <img fxFlex="40px" class="icon-24px"
                   src="app/themes/skins/{{settings.theme}}/icon/baseline-check_circle_white-24px.svg">
                 <label fxLayout="column" fxFlex>
@@ -28,8 +37,7 @@
                   </div>
                 </label>
               </ng-container>
-              <ng-container
-                *ngIf="couponService.error && !couponService.successMessage && !couponService.warningMessage">
+              <ng-container *ngIf="couponService.error && !couponService.isASuccess && !couponService.warningMessage">
                 <img fxFlex="40px" class="icon-24px"
                   src="app/themes/skins/{{settings.theme}}/icon/baseline-error-24px.svg">
                 <label fxLayout="column" fxFlex>
@@ -43,7 +51,7 @@
                   </div>
                 </label>
               </ng-container>
-              <ng-container *ngIf="couponService.warningMessage && !couponService.successMessage">
+              <ng-container *ngIf="couponService.warningMessage && !couponService.isASuccess">
                 <img fxFlex="40px" class="icon-24px"
                   src="app/themes/skins/{{settings.theme}}/icon/baseline-warning-24px.svg">
                 <label fxLayout="column" fxLayoutAlign="center center" fxFlex>

@@ -9,6 +9,7 @@
   "BETS_LIST.WON": "Won",
   "BET_STATUS": "Bet status",
   "BET_TYPE": "Bet type",
+  "BET_UNDER_EVALUATION": "Bet under evaluation, please wait",
   "BONUS": "Bonus",
   "BTNCALC.COL": "COL",
   "BTNCALC.TOT": "TOT",
@@ -24,6 +25,8 @@
   "COUPON.BET": "Bet",
   "COUPON_CODE": "Coupon code",
   "COUPON_RESET": "Coupon reset",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Bet accepted,",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "check the Bet List",
   "DATE": "Date",
   "DATE_FROM": "Date from",
   "DATE_OF_PLACEMENT": "Date of placement",
@@ -32,16 +35,6 @@
   "DELETED_ON": "Deleted on",
   "DETAIL": "Detail",
   "DYNAMIC_KEYS": {
-    "COUPON_ERROR_INTRODUCTION": {
-      "MessageSource": {
-        "UNKNOWN": "Error",
-        "COUPON_CREATION": "",
-        "ODDS_INSERTION": "",
-        "ODDS_REMOVAL": "",
-        "COUPON_UPDATE": "",
-        "COUPON_PLACEMENT": "Placement error"
-      }
-    },
     "COUPON_ERROR": {
       "API_ERROR": "Generic API error",
       "AccountInsertDataError": "An error occurred while adding the user account [Code C11]",
@@ -113,6 +106,16 @@
       "WrongCurrency": "Currency mismatch [Code C15]",
       "WrongPassword": "Wrong password [Code C5]",
       "WrongUserNetwork": "Wrong user network [Code C8]"
+    },
+    "COUPON_ERROR_INTRODUCTION": {
+      "MessageSource": {
+        "COUPON_CREATION": "",
+        "COUPON_PLACEMENT": "Placement error",
+        "COUPON_UPDATE": "",
+        "ODDS_INSERTION": "",
+        "ODDS_REMOVAL": "",
+        "UNKNOWN": "Error"
+      }
     },
     "COUPON_WARNING": {
       "AlreadyExistsError": "This record already exists [Code C3]",

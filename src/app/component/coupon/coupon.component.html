@@ -117,7 +117,8 @@
   <mat-grid-tile rowspan="2"
     *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
     <div fxFill class="padding-top-10">
-      <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.error"
+      <button class="btn-default btn-success radius-10 padding-10"
+        [disabled]="couponService.error || couponService.isWaitingConclusionOperation"
         (click)="couponService.preStagedCoupon()">{{'COUPON.BET' | translate | uppercase}}</button>
     </div>
   </mat-grid-tile>

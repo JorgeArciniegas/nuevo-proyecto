@@ -9,6 +9,7 @@
   "BETS_LIST.WON": "Vincenti",
   "BET_STATUS": "Statusi Bastit",
   "BET_TYPE": "Lloji Bastit",
+  "BET_UNDER_EVALUATION": "Koef. Ne vleresim ju lutem prisni",
   "BONUS": "Bonus",
   "BTNCALC.COL": "COL",
   "BTNCALC.TOT": "TOT",
@@ -24,6 +25,8 @@
   "COUPON.BET": "Bast",
   "COUPON_CODE": "Kodi Biletes",
   "COUPON_RESET": "Reset del coupon",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Basti u pranua,",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "shiko listen e basteve",
   "DATE": "Data",
   "DATE_FROM": "Data da",
   "DATE_OF_PLACEMENT": "Data piazzamento",
@@ -32,16 +35,6 @@
   "DELETED_ON": "Annullata il",
   "DETAIL": "Detaj",
   "DYNAMIC_KEYS": {
-    "COUPON_ERROR_INTRODUCTION": {
-      "MessageSource": {
-        "UNKNOWN": "Gabim",
-        "COUPON_CREATION": "",
-        "ODDS_INSERTION": "",
-        "ODDS_REMOVAL": "",
-        "COUPON_UPDATE": "",
-        "COUPON_PLACEMENT": "Gabim vendosjeje"
-      }
-    },
     "COUPON_ERROR": {
       "API_ERROR": "Errore API generico",
       "AccountInsertDataError": "Pati nje problem gjate shtuarjes se perdoruesit [Kodi C11]",
@@ -113,6 +106,16 @@
       "WrongCurrency": "Mospërputhja e monedhës [Kodi C15]",
       "WrongPassword": "Password I gabuar [Kodi C5]",
       "WrongUserNetwork": "Gabim networku [Kodi C8]"
+    },
+    "COUPON_ERROR_INTRODUCTION": {
+      "MessageSource": {
+        "COUPON_CREATION": "",
+        "COUPON_PLACEMENT": "Gabim vendosjeje",
+        "COUPON_UPDATE": "",
+        "ODDS_INSERTION": "",
+        "ODDS_REMOVAL": "",
+        "UNKNOWN": "Gabim"
+      }
     },
     "COUPON_WARNING": {
       "AlreadyExistsError": "Ky regjistrim tashmë ekziston [Kodi C3]",

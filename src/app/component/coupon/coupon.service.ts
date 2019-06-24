@@ -7,7 +7,8 @@ import {
   CouponType,
   ElysApiService,
   FlagAsPaidRequest,
-  FlagAsPaidResponse
+  FlagAsPaidResponse,
+  StagedCouponStatus
 } from '@elys/elys-api';
 import {
   AddOddRequest,
@@ -17,7 +18,7 @@ import {
   ElysCouponService,
   MessageSource
 } from '@elys/elys-coupon';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, timer } from 'rxjs';
 import { BetOdd, CouponConfirmDelete } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
 import { CouponLimit, Error, InternalCoupon, OddsStakeEdit, StakesDisplay } from './coupon.model';
@@ -47,8 +48,11 @@ export class CouponService {
 
   // Coupon messages variables
   warningMessage: string;
-  successMessage: string;
   error: Error;
+  // Variable to show/hide coupon loading message
+  isWaitingConclusionOperation: boolean;
+  // Variable to show/hide coupon success message
+  isASuccess: boolean;
   // Duration of the notification of timed messages
   notificationInterval = 1500;
 
@@ -60,7 +64,7 @@ export class CouponService {
 
   constructor(
     public elysCoupon: ElysCouponService,
-    userService: UserService,
+    public userService: UserService,
     public printCoupon: PrintCouponService,
     public elysApi: ElysApiService,
     private appSetting: AppSettings
@@ -85,18 +89,17 @@ export class CouponService {
     });
     // Get the message from the coupon
     elysCoupon.couponServiceMessage.subscribe(message => {
-      this.successMessage = undefined;
+      this.isASuccess = false;
       this.error = undefined;
       this.warningMessage = undefined;
-      console.log(message);
+      this.isWaitingConclusionOperation = false;
       // Get coupon's message
       switch (message.messageType) {
         case this.messageType.success:
           // Take only the success message on coupon placement
           if (message.messageSource === MessageSource.COUPON_PLACEMENT) {
-            this.successMessage = message.message;
-            // Set the visualization time of the success message
-            setTimeout(() => (this.successMessage = undefined), this.notificationInterval);
+            // Show the loading message
+            this.isWaitingConclusionOperation = true;
           }
           break;
         case this.messageType.error:
@@ -123,6 +126,19 @@ export class CouponService {
     this.oddStakeEditObs.subscribe(item => {
       if (this.coupon.internal_isReadyToPlace !== null && !this.coupon.internal_isReadyToPlace) {
         this.oddStakeEdit = item;
+      }
+    });
+
+    // Check the placement status of the coupon
+    elysCoupon.stagedCouponObs.subscribe(async coupons => {
+      // Get the placed one and show the success message.
+      for (const coupon of coupons.filter(item => item.CouponStatusId === StagedCouponStatus.Placed)) {
+        // Remove the loading message
+        this.isWaitingConclusionOperation = false;
+        // Set the success message
+        this.isASuccess = true;
+        // Remove the message
+        setTimeout(() => (this.isASuccess = false), this.notificationInterval);
       }
     });
   }
