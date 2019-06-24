@@ -27,7 +27,13 @@ export class EventListComponent implements OnInit, OnDestroy {
     this.nativeNextEventsItems = this.eventService.genColumns(
       this.productService.product.layoutProducts.nextEventItems
     );
-
+    // subscribe to the product change.
+    // Used by native to get the correct number of events column when product changes
+    this.productService.productNameSelectedSubscribe.subscribe(prod => {
+      this.nativeNextEventsItems = this.eventService.genColumns(
+        this.productService.product.layoutProducts.nextEventItems
+      );
+    });
     // subscribe to the event change
     this.currentEventSubscription = this.mainService.currentEventSubscribe.subscribe(
       event => {
