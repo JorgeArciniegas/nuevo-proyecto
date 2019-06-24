@@ -1,6 +1,7 @@
 <StackLayout>
     <app-race
     *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.RACING"
-    [items]="productService.product.layoutProducts.resultItems" windowSize="productService.windowSize" rowHeight="{{rowHeight}}" [results]="service.listResult">
+    [items]="productService.product.layoutProducts.resultItems" windowSize="productService.windowSize" rowHeight="{{rowHeight}}"
+    [results]="service.listResult" [codeProduct]="productService.product.codeProduct">
   </app-race>
 </StackLayout>

@@ -4,13 +4,13 @@
       <Label text="{{race.eventLabel}}" class="raceNumber" horizontalAlignment="center" verticalAlignment="center"></Label>
     </GridLayout>
     <GridLayout row="1" rows="*" columns="*,*,*">
-      <GridLayout row="0" col="0" class="position btn-default-dog-play btn-dog-{{race.racePodium.firstPlace}}" [ngClass]="{'small': windowSize.small}">
+      <GridLayout row="0" col="0" class="position btn-default-dog-play btn-{{codeProduct}}-{{race.racePodium.firstPlace}}" [ngClass]="{'small': windowSize.small}">
         <Label text="{{race.racePodium.firstPlace}}" class="label" horizontalAlignment="center" verticalAlignment="center"></Label>
       </GridLayout>
-      <GridLayout row="0" col="1" class="position btn-default-dog-play btn-dog-{{race.racePodium.secondPlace}}" [ngClass]="{'small': windowSize.small}">
+      <GridLayout row="0" col="1" class="position btn-default-dog-play btn-{{codeProduct}}-{{race.racePodium.secondPlace}}" [ngClass]="{'small': windowSize.small}">
         <Label text="{{race.racePodium.secondPlace}}" class="label" horizontalAlignment="center" verticalAlignment="center"></Label>
       </GridLayout>
-      <GridLayout row="0" col="2" class="position btn-default-dog-play btn-dog-{{race.racePodium.thirdPlace}}" [ngClass]="{'small': windowSize.small}">
+      <GridLayout row="0" col="2" class="position btn-default-dog-play btn-{{codeProduct}}-{{race.racePodium.thirdPlace}}" [ngClass]="{'small': windowSize.small}">
         <Label text="{{race.racePodium.thirdPlace}}" class="label" horizontalAlignment="center" verticalAlignment="center"></Label>
       </GridLayout>
     </GridLayout>
