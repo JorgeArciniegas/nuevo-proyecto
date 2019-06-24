@@ -432,6 +432,10 @@ html {
 				// HORSE VIRTUAL
 				@extend %PRODUCT-HORSE-BG;
 			}
+			&.PRODUCT-COCK-FIGHT-BG {
+				// COCK FIGHT
+				@extend %PRODUCT-COCK-FIGHT-BG;
+			}
 			.race-control {
 				.time {
 					@extend %time-card-title;
@@ -746,5 +750,5 @@ html {
 /**
 * Import layout's component
 **/
-@import './results-list/results-list';
-@import './playable-board/playablerace';
+@import "./results-list/results-list";
+@import "./playable-board/playablerace";

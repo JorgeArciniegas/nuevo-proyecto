@@ -401,6 +401,12 @@
 					@extend %PRODUCT-HORSE-BG-MOBILE;
 				}
 			}
+			&.PRODUCT-COCK-FIGHT-BG {
+				// COCK FIGHT
+				.race-control {
+					@extend %PRODUCT-COCK-FIGHT-BG-MOBILE;
+				}
+			}
 			.race-control {
 				.time {
 					.time-panel {
@@ -590,5 +596,5 @@
 /**
 * Import layout's component
 **/
-@import './results-list/results-list';
-@import './playable-board/playablerace';
+@import "./results-list/results-list";
+@import "./playable-board/playablerace";

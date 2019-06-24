@@ -23,7 +23,8 @@ export const environment: Environment = {
       order: 0,
       productSelected: true,
       isPlayable: true,
-      layoutProducts: { // defines the layout type for last results widget
+      layoutProducts: {
+        // defines the layout type for last results widget
         type: LAYOUT_TYPE.RACING,
         resultItems: 4
       },
@@ -116,6 +117,33 @@ export const environment: Environment = {
         route: 'products/soccer'
       },
       widgets: []
+    },
+    {
+      sportId: 20,
+      codeProduct: 'COCK-FIGHT',
+      name: 'CockFight',
+      label: 'COCK_FIGHT',
+      order: 3,
+      productSelected: false,
+      isPlayable: true,
+      layoutProducts: {
+        // defines the layout type for last results widget
+        type: LAYOUT_TYPE.COCK_FIGHT,
+        resultItems: 4
+      },
+      toolbarButton: {
+        name: 'cockfight',
+        icon: 'Cocks',
+        route: 'products/cock-fight'
+      },
+      widgets: [
+        {
+          name: '',
+          routing: 'statistic',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ]
     }
   ],
   showRaceId: true,

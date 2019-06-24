@@ -101,7 +101,7 @@ export class UserService {
         this.storageService.setData('UserData', this.userDetail);
         try {
           this.userCurrency = this.userDetail.Currency;
-        } catch (err)  {
+        } catch (err) {
           console.log(err);
         }
       } else {
