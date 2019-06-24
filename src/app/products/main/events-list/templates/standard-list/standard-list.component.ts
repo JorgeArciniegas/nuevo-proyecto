@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { EventList } from '../../event-list.model';
+import { EventsList } from '../../event-list.model';
 import { MainService } from '../../../main.service';
 @Component({
   selector: 'app-standard-list',
@@ -9,10 +9,14 @@ import { MainService } from '../../../main.service';
 export class StandardListComponent implements OnInit {
   @Input() items: number;
   @Input() rowHeight: number;
-  @Input() eventsList: EventList[];
+  @Input() eventsList: EventsList;
   constructor(private mainService: MainService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout(() => {
+      console.log(this.eventsList.events.length);
+    }, 1000);
+  }
 
   raceSelecting(selected: number) {
     this.mainService.fireCurrentRaceChange(selected, true);

@@ -1,23 +1,28 @@
 import { Injectable } from '@angular/core';
 import { MainService } from '../main.service';
-import { EventList } from './event-list.model';
-import { LAYOUT_TYPE } from 'src/environments/environment.models';
+import { EventsList, EventList } from './event-list.model';
+import { LAYOUT_TYPE } from '../../../../environments/environment.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsListService {
-  public eventsDetails: EventList[];
+  public eventsDetails: EventsList;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   constructor(private mainService: MainService) {}
-  public getEventDetailsList(): EventList[] {
-    this.eventsDetails = [];
+  /**
+   * @getEventDetailsList thrown on each event change
+   * @returns next events collection
+   */
+  public getEventDetailsList(): EventsList {
+    // initialize empty layout object
+    this.eventsDetails = { currentEvent: 0, events: [] };
+    this.eventsDetails.currentEvent = this.mainService.raceDetails.currentRace;
     this.mainService.raceDetails.races.forEach(race => {
-      this.eventsDetails.push({
+      this.eventsDetails.events.push({
         eventLabel: race.label,
         eventStart: race.date,
-        eventNumber: race.number,
-        currentEvent: this.mainService.raceDetails.currentRace
+        eventNumber: race.number
       });
     });
     return this.eventsDetails;

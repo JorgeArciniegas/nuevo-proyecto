@@ -24,10 +24,10 @@ export const environment: Environment = {
       productSelected: true,
       isPlayable: true,
       layoutProducts: {
-        // defines the layout type for last results widget
+        // defines the layout type for different product group
         type: LAYOUT_TYPE.RACING,
-        resultItems: 4,
-        nextEventItems: 5
+        resultItems: 4, // items to show for last result
+        nextEventItems: 5 // items to show for next events
       },
       toolbarButton: {
         name: 'dogracing',
