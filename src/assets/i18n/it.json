@@ -96,6 +96,12 @@
       "RoleAlreadyExists": "Questo ruolo è già presente [Cod. C41]",
       "SelfExclusionActive": "Un auto esclusione è attiva",
       "SingleBetMaxLimitByUser": "Limite massimo di scommesse singole per utente [Cod. C26]",
+      "StagedCouponStatus": {
+        "Canceled": "",
+        "Refunded": "",
+        "RefusedToRefund": "",
+        "Unknown": ""
+      },
       "StakeTooHighToCancel": "Operazione non consentita, l'importo del coupon risulta troppo alto per essere annullato [Cod. C35]",
       "TeamAlreadyExists": "Questa squadra è già presente [Cod. C30]",
       "TimeoutForCouponCancelation": "Richiesta di annullamento fuori tempo limite [Cod. C7]",

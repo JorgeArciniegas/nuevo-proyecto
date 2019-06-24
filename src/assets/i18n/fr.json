@@ -96,6 +96,12 @@
       "RoleAlreadyExists": "Ce rôle existe déjà [Code C41]",
       "SelfExclusionActive": "Un auto esclusione è attiva",
       "SingleBetMaxLimitByUser": "Nombre de paris simples max. par utilisateur [Code C26]",
+      "StagedCouponStatus": {
+        "Canceled": "",
+        "Refunded": "",
+        "RefusedToRefund": "",
+        "Unknown": ""
+      },
       "StakeTooHighToCancel": "Opération non autorisée, ce pari ne peut pas être annulé car la mise est trop élevée [Code C35]",
       "TeamAlreadyExists": "Cette équipe existe déjà [Code C30]",
       "TimeoutForCouponCancelation": "Ce pari ne peut plus être annulé [Code C7]",

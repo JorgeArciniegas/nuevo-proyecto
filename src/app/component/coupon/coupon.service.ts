@@ -131,14 +131,29 @@ export class CouponService {
 
     // Check the placement status of the coupon
     elysCoupon.stagedCouponObs.subscribe(async coupons => {
-      // Get the placed one and show the success message.
-      for (const coupon of coupons.filter(item => item.CouponStatusId === StagedCouponStatus.Placed)) {
-        // Remove the loading message
-        this.isWaitingConclusionOperation = false;
-        // Set the success message
-        this.isASuccess = true;
-        // Remove the message
-        setTimeout(() => (this.isASuccess = false), this.notificationInterval);
+      /* For the rules were adopted on coupon placement (only a coupon at a time can be place)
+       * the staged coupon array can contain maximum an element.
+       */
+      // Set the message to show according with the stagedCouponStatus
+      switch (coupons[0].CouponStatusId) {
+        // Success on bet
+        case StagedCouponStatus.Placed:
+          // Remove the loading message
+          this.isWaitingConclusionOperation = false;
+          // Set the success messageRefusedToRefund,
+          this.isASuccess = true;
+          // Remove the message
+          setTimeout(() => (this.isASuccess = false), this.notificationInterval);
+          break;
+        // Failure on bet
+        case StagedCouponStatus.Canceled:
+        case StagedCouponStatus.Refunded:
+        case StagedCouponStatus.RefusedToRefund:
+        case StagedCouponStatus.Unknown:
+          // Remove the loading message
+          this.isWaitingConclusionOperation = false;
+          this.error = new Error('StagedCouponStatus.' + StagedCouponStatus[coupons[0].CouponStatusId], MessageSource.COUPON_PLACEMENT);
+          break;
       }
     });
   }

@@ -96,6 +96,12 @@
       "RoleAlreadyExists": "A função já existe [Cód. C41]",
       "SelfExclusionActive": "Un auto esclusione è attiva",
       "SingleBetMaxLimitByUser": "Número máx. de apostas simples pelo usuário [Cód. C26]",
+      "StagedCouponStatus": {
+        "Canceled": "",
+        "Refunded": "",
+        "RefusedToRefund": "",
+        "Unknown": ""
+      },
       "StakeTooHighToCancel": "Operação não permitida. Essa aposta não pode ser anulada pois a aposta é muito alta [Cód. C35]",
       "TeamAlreadyExists": "O time já existe [Cód. C30]",
       "TimeoutForCouponCancelation": "Essa aposta não pode mais ser anulada [Cód. C7]",

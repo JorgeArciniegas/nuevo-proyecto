@@ -96,6 +96,12 @@
       "RoleAlreadyExists": "This role already exists [Code C41]",
       "SelfExclusionActive": "A self-exclusion is active",
       "SingleBetMaxLimitByUser": "Max. number of single bets by user [Code C26]",
+      "StagedCouponStatus": {
+        "Canceled": "",
+        "Refunded": "",
+        "RefusedToRefund": "",
+        "Unknown": ""
+      },
       "StakeTooHighToCancel": "Operation not allowed, this bet cannot be voided as the stake is too high [Code C35]",
       "TeamAlreadyExists": "This team already exists [Code C30]",
       "TimeoutForCouponCancelation": "This bet cannot be voided anymore [Code C7]",

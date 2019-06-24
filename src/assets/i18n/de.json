@@ -96,6 +96,12 @@
       "RoleAlreadyExists": "Diese Rolle existiert bereits [Code C41]",
       "SelfExclusionActive": "Un auto esclusione è attiva",
       "SingleBetMaxLimitByUser": "Max. Anzahl der Einzelwetten durch Benutzer [Code C26]",
+      "StagedCouponStatus": {
+        "Canceled": "",
+        "Refunded": "",
+        "RefusedToRefund": "",
+        "Unknown": ""
+      },
       "StakeTooHighToCancel": "Vorgang nicht erlaubt, diese Wette kann nicht storniert werden, da der Wetteinsatz zu hoch ist [Code C35]",
       "TeamAlreadyExists": "Dieses Team existiert bereits [Code C30]",
       "TimeoutForCouponCancelation": "Dieser Einsatz kann nicht mehr annulliert werden [Code C7]",
