@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Dog } from '../main.models';
+import { Runner } from '../main.models';
 
 @Pipe({
   name: 'filterByPosition'
 })
 export class FilterByPositionPipe implements PipeTransform {
-  transform(dog: Dog[], position?: number): Dog[] {
-    return dog.filter(d => d.position === position);
+  transform(runner: Runner[], position?: number): Runner[] {
+    return runner.filter(d => d.position === position);
   }
 }

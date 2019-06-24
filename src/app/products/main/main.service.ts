@@ -9,11 +9,9 @@ import {
   VirtualEventCountDownRequest,
   VirtualEventCountDownResponse,
   VirtualProgramTreeBySportRequest,
-  VirtualProgramTreeBySportResponse,
-  VirtualSportLastResultsRequest,
-  VirtualSportLastResultsResponse
+  VirtualProgramTreeBySportResponse
 } from '@elys/elys-api';
-import { interval, Subject, timer } from 'rxjs';
+import { interval, Subject } from 'rxjs';
 import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
@@ -26,14 +24,14 @@ import {
 import { ProductsService } from '../products.service';
 import {
   CombinationType,
-  Dog,
+  Runner,
   Lucky,
   PlacingRace,
   Podium,
   Race,
   RaceDetail,
   RaceResult,
-  RaceTime,
+  EventTime,
   Smartcode,
   SmartCodeType,
   SpecialBet,
@@ -58,7 +56,7 @@ export class MainService extends MainServiceExtra {
   private reload: number;
   private cacheEvents: VirtualBetEvent[] = [];
   // working variable
-  private remmaningTime: RaceTime = new RaceTime();
+  private remmaningTime: EventTime = new EventTime();
   placingRace: PlacingRace = new PlacingRace(); // place the global race
   placingRaceSubject: Subject<PlacingRace>;
 
@@ -66,7 +64,7 @@ export class MainService extends MainServiceExtra {
   private attempts = 0;
   private initCurrentEvent = false;
 
-  dogList: Dog[];
+  runnersList: Runner[];
   // temp array
 
   smartCode: Smartcode;
@@ -105,7 +103,7 @@ export class MainService extends MainServiceExtra {
       this.raceDetails.currentRace = raceIndex;
 
       this.remaningRaceTime(this.raceDetails.races[raceIndex].number).then(
-        (raceTime: RaceTime) => {
+        (raceTime: EventTime) => {
           this.raceDetails.raceTime = raceTime;
         }
       );
@@ -149,13 +147,13 @@ export class MainService extends MainServiceExtra {
   }
 
   createDogList(): void {
-    this.dogList = [];
+    this.runnersList = [];
     for (const i of [1, 2, 3]) {
       for (const d of [1, 2, 3, 4, 5, 6]) {
-        const dog: Dog = new Dog();
+        const dog: Runner = new Runner();
         dog.number = d;
         dog.position = i;
-        this.dogList.push(dog);
+        this.runnersList.push(dog);
       }
     }
   }
@@ -302,7 +300,7 @@ export class MainService extends MainServiceExtra {
     // calculate remaning time for selected race
     this.remaningRaceTime(
       this.raceDetails.races[this.raceDetails.currentRace].number
-    ).then((raceTime: RaceTime) => {
+    ).then((raceTime: EventTime) => {
       this.raceDetails.raceTime = raceTime;
       if (this.raceDetails.currentRace === 0) {
         this.remmaningTime.minute = raceTime.minute;
@@ -313,18 +311,18 @@ export class MainService extends MainServiceExtra {
     // calculate remaning time
     if (this.raceDetails.currentRace > 0) {
       this.remaningRaceTime(this.raceDetails.races[0].number).then(
-        (raceTime: RaceTime) => (this.remmaningTime = raceTime)
+        (raceTime: EventTime) => (this.remmaningTime = raceTime)
       );
     }
   }
 
-  remaningRaceTime(idRace: number): Promise<RaceTime> {
+  remaningRaceTime(idRace: number): Promise<EventTime> {
     const request: VirtualEventCountDownRequest = {
       SportId: this.productService.product.sportId.toString(), MatchId: idRace
     };
     return this.elysApi.virtual.getCountdown(request).then((value: VirtualEventCountDownResponse) => {
       const sec: number = value.CountDown / 10000000;
-      const raceTime: RaceTime = new RaceTime();
+      const raceTime: EventTime = new EventTime();
       raceTime.minute = Math.floor(sec / 60);
       raceTime.second = Math.floor(sec % 60);
       return raceTime;
@@ -414,7 +412,7 @@ export class MainService extends MainServiceExtra {
    * PLACING THE DOG SELECTED INSIDE TO POLYFUNCTIONAL AREA AND SMARTBET
    * @param dog
    */
-  placingOdd(dog: Dog): void {
+  placingOdd(dog: Runner): void {
     if (this.coupon.checkIfCouponIsReadyToPlace()) {
       return;
     }
@@ -490,8 +488,8 @@ export class MainService extends MainServiceExtra {
     }
   }
 
-  private checkedIsSelected(dog: Dog, reset: boolean = false): void {
-    this.dogList.forEach((d: Dog) => {
+  private checkedIsSelected(dog: Runner, reset: boolean = false): void {
+    this.runnersList.forEach((d: Runner) => {
       if (d.number === dog.number && d.position !== dog.position && !reset) {
         d.selectable = false;
       } else if (d.number === dog.number && reset) {
@@ -509,14 +507,14 @@ export class MainService extends MainServiceExtra {
     const extractNumber: number =
       Math.floor(
         Math.random() *
-        this.dogList.filter(dog => dog.position === lucky).length
+        this.runnersList.filter(dog => dog.position === lucky).length
       ) + 1;
     return extractNumber;
   }
 
   RNGLuckyPlacing(dogNumber: number, dogPosition: number): void {
     // extract the dog
-    const dogExtract: Dog = this.dogList.filter(
+    const dogExtract: Runner = this.runnersList.filter(
       dog => dog.position === dogPosition && dog.number === dogNumber
     )[0];
     // place the dog

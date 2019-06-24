@@ -744,3 +744,9 @@ html {
 		}
 	}
 }
+
+/**
+* Import layout's component
+**/
+@import './results-list/results-list';
+@import './playable-board/playablerace';

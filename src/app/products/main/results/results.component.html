@@ -1,7 +1,7 @@
 <div>
   <!-- result RACE -->
   <app-race
-    *ngIf="service.listResult.length > 0 && productService.product.layoutResultList.name === service.typeLayout.RACING"
-    [items]="productService.product.layoutResultList.items" rowHeight="{{rowHeight}}" [results]="service.listResult">
+    *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.RACING"
+    [items]="productService.product.layoutProducts.resultItems" rowHeight="{{rowHeight}}" [results]="service.listResult" [codeProduct]="productService.product.codeProduct">
   </app-race>
 </div>

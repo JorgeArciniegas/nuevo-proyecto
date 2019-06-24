@@ -596,3 +596,9 @@
 		margin: 5;
 	}
 }
+
+/**
+* Import layout's component
+**/
+@import './results-list/results-list';
+@import './playable-board/playablerace';

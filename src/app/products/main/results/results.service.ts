@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ElysApiService, VirtualSportLastResultsRequest, VirtualSportLastResultsResponse } from '@elys/elys-api';
 import { timer } from 'rxjs';
-import { LAYOUT_RESULT_LIST_TYPE } from '../../../../../src/environments/environment.models';
+import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { ProductsService } from '../../products.service';
 import { EventResult } from './results.model';
 
@@ -11,7 +11,7 @@ import { EventResult } from './results.model';
 export class ResultsService {
 
   private _listResult: EventResult[];
-  typeLayout: typeof LAYOUT_RESULT_LIST_TYPE = LAYOUT_RESULT_LIST_TYPE;
+  typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   constructor(
     private productService: ProductsService,
     private elysApi: ElysApiService
@@ -35,7 +35,7 @@ export class ResultsService {
       this.elysApi.virtual.getLastResult(request)
         .then((eventResults: VirtualSportLastResultsResponse) => {
 
-          for (let i = 0; i < this.productService.product.layoutResultList.items; i++) {
+          for (let i = 0; i < this.productService.product.layoutProducts.resultItems; i++) {
             const results: string[] = eventResults.EventResults[i].Result.split(
               '-'
             );
@@ -45,22 +45,22 @@ export class ResultsService {
               eventNumber: eventResults.EventResults[i].EventId
             };
             // finds and set sport's result
-            switch (this.productService.product.layoutResultList.name) {
-              case LAYOUT_RESULT_LIST_TYPE.RACING:
+            switch (this.productService.product.layoutProducts.type) {
+              case LAYOUT_TYPE.RACING:
                 tempEventResult.racePodium = {
                   firstPlace: Number.parseInt(results[0]),
                   secondPlace: Number.parseInt(results[1]),
                   thirdPlace: Number.parseInt(results[2])
                 };
                 break;
-              case  LAYOUT_RESULT_LIST_TYPE.COCK_FIGHT:
+              case  LAYOUT_TYPE.COCK_FIGHT:
                 tempEventResult.cockResult = {
                   winner: Number.parseInt(results[0]),
                   ou: results[1],
                   sector: Number.parseInt(results[2]),
                 };
                 break;
-              case LAYOUT_RESULT_LIST_TYPE.SOCCER:
+              case LAYOUT_TYPE.SOCCER:
               default:
                 break;
 
