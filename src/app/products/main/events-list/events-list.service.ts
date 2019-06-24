@@ -27,4 +27,13 @@ export class EventsListService {
     });
     return this.eventsDetails;
   }
+  // Method to build the number of columns needed to show on the NativeScript template "event-list".
+  public genColumns(items: number): string {
+    // Create the string to use on the template.
+    let templateString = '*';
+    for (let i = 1; i < items; i++) {
+      templateString += ',*';
+    }
+    return templateString;
+  }
 }

@@ -1,12 +1,9 @@
 <StackLayout *ngIf="show">
   <app-standard-list
     *ngIf="productService.product.layoutProducts.type === eventService.typeLayout.RACING || productService.product.layoutProducts.type === eventService.typeLayout.COCK_FIGHT || productService.product.layoutProducts.type === eventService.typeLayout.SOCCER"
-    [items]="productService.product.layoutProducts.nextEventItems" [eventsList]="eventsDetails"
-    rowHeight="{{rowHeight}}">
+    [webColumnDefinition]="productService.product.layoutProducts.nextEventItems"
+    [nativeColumnDefinition]="nativeNextEventsItems" [eventsList]="eventsDetails" rowHeight="{{rowHeight}}">
   </app-standard-list>
-  <StackLayout>
-    <Label text="chiamante"></Label>
-  </StackLayout>
 </StackLayout>
 <!-- *ngIf="productService.product.layoutProducts.type === eventService.typeLayout.RACING || productService.product.layoutProducts.type === eventService.typeLayout.COCK_FIGHT || productService.product.layoutProducts.type === eventService.typeLayout.SOCCER"
 [items]="productService.product.layoutProducts.nextEventItems" [eventsList]="eventsDetails"
