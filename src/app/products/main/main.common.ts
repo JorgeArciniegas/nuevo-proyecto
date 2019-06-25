@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { EventListComponent } from './events-list/events-list.component';
 import { FilterByPositionPipe } from './playable-board/filter-by-position.pipe';
 import { PlayableBoardComponent } from './playable-board/playable-board.component';
-import { RaceControlComponent } from './race-control/race-control.component';
+import { EventControlComponent } from './event-control/event-control.component';
 import { MainComponent } from './main.component';
 import { ResultsComponent } from './results/results.component';
 import { RaceComponent } from './results/templates/race/race.component';
@@ -11,7 +11,7 @@ import { StandardListComponent } from './events-list/templates/standard-list/sta
 
 export const componentDeclarations: any[] = [
   MainComponent,
-  RaceControlComponent,
+  EventControlComponent,
   EventListComponent,
   ResultsComponent,
   PlayableBoardComponent,

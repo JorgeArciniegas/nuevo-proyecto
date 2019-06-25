@@ -4,7 +4,7 @@
     <mat-grid-list fxFill cols="1" rowHeight="{{rowHeight}}" (click)="raceSelecting(i)" *ngIf="race != null">
       <mat-grid-tile class="card-box">
         <!-- header -->
-        <button fxFill fxLayoutAlign="eventsDetail center" class="btn-reset number radius-5"
+        <button fxFill fxLayoutAlign="center center" class="btn-reset number radius-5"
           [ngClass]="{ 'selected' : eventsList.currentEvent == i }">
           {{race.eventLabel}}
         </button>

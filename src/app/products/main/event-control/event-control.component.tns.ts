@@ -5,11 +5,11 @@ import { EventTime } from '../main.models';
 import { MainService } from '../main.service';
 
 @Component({
-  selector: 'app-race-control',
-  templateUrl: './race-control.component.html',
-  styleUrls: ['./race-control.component.scss']
+  selector: 'app-event-control',
+  templateUrl: './event-control.component.html',
+  styleUrls: ['./event-control.component.scss']
 })
-export class RaceControlComponent implements OnInit {
+export class EventControlComponent implements OnInit {
   public eventTime: EventTime;
   public race: number;
   public settings: AppSettings;
