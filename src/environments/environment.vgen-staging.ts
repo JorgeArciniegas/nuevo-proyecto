@@ -125,7 +125,7 @@ export const environment: Environment = {
     },
     {
       sportId: 20,
-      codeProduct: 'COCK-FIGHT',
+      codeProduct: 'COCK',
       name: 'CockFight',
       label: 'COCK_FIGHT',
       order: 3,
