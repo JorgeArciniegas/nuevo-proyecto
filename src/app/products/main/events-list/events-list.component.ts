@@ -24,7 +24,7 @@ export class EventListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.nativeNextEventsItems = this.eventService.genColumns(
+      this.nativeNextEventsItems = this.eventService.genColumns(
       this.productService.product.layoutProducts.nextEventItems
     );
     // subscribe to the product change.
