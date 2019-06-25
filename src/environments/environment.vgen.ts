@@ -24,9 +24,10 @@ export const environment: Environment = {
       productSelected: true,
       isPlayable: true,
       layoutProducts: {
-        // defines the layout type for last results widget
+        // defines the layout type for different product group
         type: LAYOUT_TYPE.RACING,
-        resultItems: 4
+        resultItems: 4, // items to show for last result
+        nextEventItems: 5 // items to show for next events
       },
       toolbarButton: {
         name: 'dogracing',
@@ -52,7 +53,8 @@ export const environment: Environment = {
       isPlayable: true,
       layoutProducts: {
         type: LAYOUT_TYPE.RACING,
-        resultItems: 4
+        resultItems: 4,
+        nextEventItems: 5
       },
       toolbarButton: {
         name: 'horseracing',
@@ -71,7 +73,8 @@ export const environment: Environment = {
       isPlayable: true,
       layoutProducts: {
         type: LAYOUT_TYPE.RACING,
-        resultItems: 4
+        resultItems: 4,
+        nextEventItems: 5
       },
       toolbarButton: {
         name: 'virtualhorse',
@@ -90,7 +93,8 @@ export const environment: Environment = {
       isPlayable: false,
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
-        resultItems: 9
+        resultItems: 10,
+        nextEventItems: 3
       },
       toolbarButton: {
         name: 'Italian League',
@@ -109,7 +113,8 @@ export const environment: Environment = {
       isPlayable: false,
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
-        resultItems: 9
+        resultItems: 10,
+        nextEventItems: 3
       },
       toolbarButton: {
         name: 'Italian League',
@@ -129,7 +134,8 @@ export const environment: Environment = {
       layoutProducts: {
         // defines the layout type for last results widget
         type: LAYOUT_TYPE.COCK_FIGHT,
-        resultItems: 4
+        resultItems: 4,
+        nextEventItems: 5
       },
       toolbarButton: {
         name: 'cockfight',

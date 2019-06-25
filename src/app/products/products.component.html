@@ -15,22 +15,52 @@
         <!-- Coupon message area -->
         <mat-grid-tile rowspan="1">
           <div fxFlexFill>
-            <div class="display display-message radius-5"
-              [ngClass]="{'display-error': couponService.error && !couponService.warningMessages, 'display-warning': couponService.warningMessages}">
-              <label *ngIf="couponService.error && !couponService.warningMessages" fxLayout="column" fxFlex>
-                <span>{{'ERROR' | translate | uppercase}}</span>
-                <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
-                  {{"DYNAMIC_KEYS.COUPON_ERROR." + couponService.error.message | translate}} <ng-container
-                    *ngIf="couponService.error.detail">(Limit:
-                    {{couponService.error.detail}})</ng-container>
-                </div>
-              </label>
-              <label *ngIf="couponService.warningMessages" fxLayout="column" fxFlex>
-                <span>{{'WARNING' | translate | uppercase}}</span>
-                <div fxLayout="row" fxLayoutAlign="center start" fxFlex>
-                  {{"DYNAMIC_KEYS.COUPON_WARNING." + couponService.warningMessages | translate}}
-                </div>
-              </label>
+            <div fxLayout="row" fxLayoutAlign="center center" class="display display-message radius-5"
+              [ngClass]="{'display-error': couponService.error && !couponService.isASuccess && !couponService.warningMessage, 'display-warning': (couponService.warningMessage && !couponService.isASuccess)  || (couponService.isWaitingConclusionOperation && !couponService.isASuccess && !couponService.error), 'display-success': couponService.isASuccess }">
+              <ng-container
+                *ngIf="couponService.isWaitingConclusionOperation && !couponService.isASuccess && !couponService.error && !couponService.warningMessage">
+                <img fxFlex="40px" class="icon-24px" src="app/themes/skins/{{settings.theme}}/icon/progress-alert.svg">
+                <label fxLayout="column" fxFlex>
+                  <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
+                    {{'BET_UNDER_EVALUATION' | translate}}
+                  </div>
+                </label>
+              </ng-container>
+              <ng-container *ngIf="couponService.isASuccess">
+                <img fxFlex="40px" class="icon-24px"
+                  src="app/themes/skins/{{settings.theme}}/icon/baseline-check_circle_white-24px.svg">
+                <label fxLayout="column" fxFlex>
+                  <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
+                    {{'COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION' | translate}}
+                    <br>
+                    {{'COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE' | translate}}
+                  </div>
+                </label>
+              </ng-container>
+              <ng-container *ngIf="couponService.error && !couponService.isASuccess && !couponService.warningMessage">
+                <img fxFlex="40px" class="icon-24px"
+                  src="app/themes/skins/{{settings.theme}}/icon/baseline-error-24px.svg">
+                <label fxLayout="column" fxFlex>
+                  <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
+                    {{'DYNAMIC_KEYS.COUPON_ERROR_INTRODUCTION.MessageSource.' + messageSource[couponService.error.source] | translate}}
+                    <br>
+                    {{"DYNAMIC_KEYS.COUPON_ERROR." + couponService.error.message | translate}} <ng-container
+                      *ngIf="couponService.error.detail">({{ 'LIMIT' | translate }}:
+                      {{couponService.error.detail | currency : userService.userCurrency : 'symbol-narrow'}})
+                    </ng-container>
+                  </div>
+                </label>
+              </ng-container>
+              <ng-container *ngIf="couponService.warningMessage && !couponService.isASuccess">
+                <img fxFlex="40px" class="icon-24px"
+                  src="app/themes/skins/{{settings.theme}}/icon/baseline-warning-24px.svg">
+                <label fxLayout="column" fxLayoutAlign="center center" fxFlex>
+                  <span>{{'WARNING' | translate | uppercase}}</span>
+                  <div>
+                    {{"DYNAMIC_KEYS.COUPON_WARNING." + couponService.warningMessage | translate}}
+                  </div>
+                </label>
+              </ng-container>
             </div>
           </div>
         </mat-grid-tile>

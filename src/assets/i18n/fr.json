@@ -9,6 +9,7 @@
   "BETS_LIST.WON": "Vincenti",
   "BET_STATUS": "Statut Pari",
   "BET_TYPE": "Type de Pari",
+  "BET_UNDER_EVALUATION": "Pari en cours d'acceptation, veuillez patienter",
   "BONUS": "Bonus",
   "BTNCALC.COL": "COL",
   "BTNCALC.TOT": "TOT",
@@ -24,6 +25,8 @@
   "COUPON.BET": "Parie",
   "COUPON_CODE": "Code coupon",
   "COUPON_RESET": "Reset del coupon",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Pari accepté,",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "vérifie la Liste des Paris",
   "DATE": "Date",
   "DATE_FROM": "Data da",
   "DATE_OF_PLACEMENT": "Data piazzamento",
@@ -93,6 +96,12 @@
       "RoleAlreadyExists": "Ce rôle existe déjà [Code C41]",
       "SelfExclusionActive": "Un auto esclusione è attiva",
       "SingleBetMaxLimitByUser": "Nombre de paris simples max. par utilisateur [Code C26]",
+      "StagedCouponStatus": {
+        "Canceled": "",
+        "Refunded": "",
+        "RefusedToRefund": "",
+        "Unknown": ""
+      },
       "StakeTooHighToCancel": "Opération non autorisée, ce pari ne peut pas être annulé car la mise est trop élevée [Code C35]",
       "TeamAlreadyExists": "Cette équipe existe déjà [Code C30]",
       "TimeoutForCouponCancelation": "Ce pari ne peut plus être annulé [Code C7]",
@@ -103,6 +112,16 @@
       "WrongCurrency": "La devise se correspond pas [Code C15]",
       "WrongPassword": "Mot de passe incorrect [Code C5]",
       "WrongUserNetwork": "Réseau utilisateur erroné [Code C8]"
+    },
+    "COUPON_ERROR_INTRODUCTION": {
+      "MessageSource": {
+        "COUPON_CREATION": "",
+        "COUPON_PLACEMENT": "Erreur de placement",
+        "COUPON_UPDATE": "",
+        "ODDS_INSERTION": "",
+        "ODDS_REMOVAL": "",
+        "UNKNOWN": "Erreur"
+      }
     },
     "COUPON_WARNING": {
       "AlreadyExistsError": "Cet enregistrement existe déjà [Code C3]",
@@ -222,6 +241,7 @@
   "JACKPOT": "Jackpot",
   "LANGUAGE": "Langue",
   "LAST_FIVE": "5 Derniers",
+  "LIMIT": "Limite",
   "LUCKY": "Lucky",
   "MAX_PAYOUT": "Gain max.",
   "MAX_POTENTIAL_WIN": "Gain potentiel max.",

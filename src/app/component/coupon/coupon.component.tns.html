@@ -50,7 +50,7 @@
       <!-- Coupon items -->
       <GridLayout row="{{ 1 + i }}" rows="3*,8*,6*" columns="*" class="card-odd"
         *ngFor="let odd of listOdds; let i = index;"
-        [ngClass]="{'card-odd-error': !couponService.warningMessages && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}">
+        [ngClass]="{'card-odd-error': !couponService.warningMessage && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}">
         <GridLayout row="0" col="*,*" class="top-window">
           <Label col="0" text="{{odd.EventName}}" horizontalAlignment="left"></Label>
           <Label col="1" text="#{{odd.MatchId}}" horizontalAlignment="right"></Label>
@@ -104,10 +104,11 @@
       class="amount" [ngClass]="{'small': productService.windowSize.small}"></Label>
   </GridLayout>
   <GridLayout row="5" rows="*" columns="*" class="card button btn-default btn-success"
-    [ngClass]="{'disabled': couponService.error}"
+    [ngClass]="{'disabled': couponService.error || couponService.isWaitingConclusionOperation}"
     *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
     <Button text="{{'COUPON.BET' | translate}}" class="button-internal" textTransform="uppercase"
-      [isEnabled]="!timeBlocked && !couponService.error" (tap)="couponService.preStagedCoupon()"></Button>
+      [isEnabled]="!timeBlocked && !couponService.error && !couponService.isWaitingConclusionOperation"
+      (tap)="couponService.preStagedCoupon()"></Button>
   </GridLayout>
   <GridLayout row="5" rows="*" columns="*,*" class="card"
     *ngIf="couponService.coupon && couponService.coupon.internal_isReadyToPlace">

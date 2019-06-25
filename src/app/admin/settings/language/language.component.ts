@@ -14,7 +14,10 @@ export class LanguageComponent implements OnInit {
   // String for the generation of rows on NativeScript template
   rowsDefinition: string;
 
-  constructor(private appSettings: AppSettings, private translateService: TranslateUtilityService) {
+  constructor(
+    private appSettings: AppSettings,
+    private translateService: TranslateUtilityService
+  ) {
     this.languages = appSettings.supportedLang;
   }
 
@@ -31,7 +34,7 @@ export class LanguageComponent implements OnInit {
     // Get the number of languages to show.
     const langNum = this.languages.length;
     // Calculate the number of rows are needed to show the language on a template of two columns.
-    const rowsNum = Math.ceil(this.languages.length / 2);
+    const rowsNum = Math.ceil(langNum / 2);
     // Create the string to use on the template.
     let templateString = '*';
     for (let i = 1; i < rowsNum; i++) {

@@ -261,12 +261,22 @@
 					overflow: auto;
 				}
 
-				&.display-error {
-					@extend %color-bg-allert;
+				.message {
+					text-align: center;
+					font-size: 12;
+					overflow: auto;
+				}
+
+				&.display-success {
+					@extend %color-bg-success;
 				}
 
 				&.display-warning {
 					@extend %color-bg-warn;
+				}
+
+				&.display-error {
+					@extend %color-bg-allert;
 				}
 			}
 

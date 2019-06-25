@@ -3,10 +3,9 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 import { componentDeclarations, routes } from './main.common';
-
 @NgModule({
   declarations: [componentDeclarations],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class MainModule { }
+export class MainModule {}

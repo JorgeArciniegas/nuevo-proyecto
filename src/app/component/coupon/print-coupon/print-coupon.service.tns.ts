@@ -20,9 +20,7 @@ export class PrintCouponService {
     // Check the status which list is provided in the enum "StagedCouponStatus".
     elysCoupon.stagedCouponObs.subscribe(async coupons => {
       // for results returned filter the item by "CouponStatusId = Placed"  and enable the print
-      for (const coupon of coupons.filter(
-        item => item.CouponStatusId === StagedCouponStatus.Placed
-      )) {
+      for (const coupon of coupons.filter(item => item.CouponStatusId === StagedCouponStatus.Placed)) {
         this.couponPrint = coupon;
         // Start the print process
         this.printWindow();
@@ -30,8 +28,8 @@ export class PrintCouponService {
     });
   }
 
-  reprintCoupon(coupon: SummaryCoupon)  {
-    this.couponPrint = coupon as unknown as StagedCoupon;
+  reprintCoupon(coupon: SummaryCoupon) {
+    this.couponPrint = (coupon as unknown) as StagedCoupon;
     this.isPrintAgainst = true;
     this.reprintDate = new Date();
     this.printWindow();

@@ -1,5 +1,5 @@
 import { BetCouponOdd } from '@elys/elys-api';
-import { BetCouponExtended } from '@elys/elys-coupon';
+import { BetCouponExtended, MessageSource } from '@elys/elys-coupon';
 
 export interface StakesDisplay {
   TotalStake: number;
@@ -22,17 +22,20 @@ export interface InternalCoupon extends BetCouponExtended {
 /**
  * Object of the coupon's error.
  * @attribute message. Error message.
+ * @attribute source. Source of the message. API type (Enum MessageSource of the Coupon library) that has generated the message.
  * @attribute detail. Additional information about the error. Example: The amount of a limit that was overcome.
  * @attribute location. Location of the errors if they are generated from specific selections of the coupon.
  *            It contains the "oddId" of the selections in error.
  */
 export class Error {
   message: string;
+  source: MessageSource;
   location: number[] = [];
   detail?: string | number;
 
-  constructor(message?: string, detail?: string | number, location?: number) {
+  constructor(message?: string, source?: MessageSource, detail?: string | number, location?: number) {
     this.message = message || undefined;
+    this.source = source || undefined;
     if (detail) {
       this.detail = detail;
     }
@@ -44,11 +47,13 @@ export class Error {
   /**
    * Method to set the error object
    * @param message Error message.
+   * @param source Source of the message. API type (Enum MessageSource of the Coupon library) that has generated the message.
    * @param detail Additional information about the error. Example: The amount of a limit that was overcome.
    * @param location Option parameter to indicate the location of the error if available.
    */
-  setError(message: string, detail?: string | number, location?: number) {
+  setError(message: string, source: MessageSource, detail?: string | number, location?: number) {
     this.message = message;
+    this.source = source;
     this.detail = detail || null;
     this.location = [location] || null;
   }
