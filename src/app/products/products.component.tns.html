@@ -27,22 +27,59 @@
       </StackLayout>
       <!-- Coupon message area -->
       <GridLayout row="1" rows="*,3*" columns="*" cornerRadius="6" class="display m-b-5"
-        *ngIf="!couponService.error && !couponService.warningMessages">
+        *ngIf="!couponService.error && !couponService.warningMessage && !couponService.isASuccess && !couponService.isWaitingConclusionOperation">
       </GridLayout>
-      <GridLayout row="1" rows="*,3*" columns="*" cornerRadius="6" class="display-message display-error m-b-5"
-        *ngIf="couponService.error && !couponService.warningMessages">
-        <Label row="0" text="{{'ERROR' | translate}}" class="title" [ngClass]="{'small': service.windowSize.small}"
-          textTransform="uppercase"></Label>
-        <Label row="1"
-          text="{{ 'DYNAMIC_KEYS.COUPON_ERROR.' + couponService.error.message | translate }} (Limit: {{ couponService.error.detail }})"
-          class="amount" [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
+      <GridLayout row="1" rows="*" columns="*, 5*" cornerRadius="6" class="display-message display-warning m-b-5"
+        *ngIf="couponService.isWaitingConclusionOperation && !couponService.isASuccess && !couponService.error && !couponService.warningMessage">
+        <Image col="0" width="25" src="~/app/themes/skins/{{settings.theme}}/icon/progress-alert.png"
+          horizontalAlignment="center" verticalAlignment="center">
+        </Image>
+        <Label col="1" text="{{ 'BET_UNDER_EVALUATION' | translate }}" class="message"
+          [ngClass]="{'small': service.windowSize.small}" horizontalAlignment="center" verticalAlignment="center"
+          textWrap="true"></Label>
       </GridLayout>
-      <GridLayout row="1" rows="*,3*" columns="*" cornerRadius="6" class="display-message display-warning m-b-5"
-        *ngIf="couponService.warningMessages">
-        <Label row="0" text="{{'WARNING' | translate}}" class="title" [ngClass]="{'small': service.windowSize.small}"
-          textTransform="uppercase"></Label>
-        <Label row="1" text="{{'DYNAMIC_KEYS.COUPON_WARNING.' + couponService.warningMessages | translate}}"
-          class="amount" [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
+      <GridLayout row="1" rows="*" columns="*, 5*" cornerRadius="6" class="display-message display-success m-b-5"
+        *ngIf="couponService.isASuccess">
+        <Image col="0" width="25" src="~/app/themes/skins/{{settings.theme}}/icon/baseline_check_white_18dp.png"
+          horizontalAlignment="center" verticalAlignment="center">
+        </Image>
+        <StackLayout col="1" class="p-r-5 p-t-5 p-b-5" horizontalAlignment="center" verticalAlignment="center">
+          <Label col="1" text="{{ 'COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION' | translate }}" class="message"
+            [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
+          <Label text="{{ 'COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE' | translate }}" class="message"
+            [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
+        </StackLayout>
+      </GridLayout>
+      <GridLayout row="1" rows="*" columns="*, 5*" cornerRadius="6" class="display-message display-error m-b-5"
+        *ngIf="couponService.error && !couponService.isASuccess && !couponService.warningMessage">
+        <Image col="0" width="25" src="~/app/themes/skins/{{settings.theme}}/icon/baseline_error_white_18dp.png"
+          horizontalAlignment="center" verticalAlignment="center">
+        </Image>
+        <StackLayout col="1" class="p-r-5 p-t-5 p-b-5" horizontalAlignment="center" verticalAlignment="center">
+          <Label
+            text="{{'DYNAMIC_KEYS.COUPON_ERROR_INTRODUCTION.MessageSource.' + messageSource[couponService.error.source] | translate}}"
+            class="message" [ngClass]="{'small': service.windowSize.small}"></Label>
+          <StackLayout orientation="horizontal">
+            <Label *ngIf="!couponService.error.detail"
+              text="{{ 'DYNAMIC_KEYS.COUPON_ERROR.' + couponService.error.message | translate }}" class="message"
+              [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
+            <Label *ngIf="couponService.error.detail"
+              text="{{ 'DYNAMIC_KEYS.COUPON_ERROR.' + couponService.error.message | translate }} ({{ 'LIMIT' | translate }}: {{ couponService.error.detail | currency : userService.userCurrency : 'symbol-narrow' }})"
+              class="message" [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
+          </StackLayout>
+        </StackLayout>
+      </GridLayout>
+      <GridLayout row="1" rows="*" columns="*, 5*" cornerRadius="6" class="display-message display-warning m-b-5"
+        *ngIf="couponService.warningMessage && !couponService.isASuccess">
+        <Image col="0" width="25" src="~/app/themes/skins/{{settings.theme}}/icon/baseline_warning_black_18dp.png"
+          horizontalAlignment="center" verticalAlignment="center">
+        </Image>
+        <StackLayout col="1" class="p-r-5 p-t-5 p-b-5" horizontalAlignment="center" verticalAlignment="center">
+          <Label text="{{'WARNING' | translate}}" class="title" [ngClass]="{'small': service.windowSize.small}"
+            textTransform="uppercase"></Label>
+          <Label text="{{'DYNAMIC_KEYS.COUPON_WARNING.' + couponService.warningMessage | translate}}" class="amount"
+            [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
+        </StackLayout>
       </GridLayout>
       <!-- Polyfunctional area / Smartcode -->
       <StackLayout row="2">

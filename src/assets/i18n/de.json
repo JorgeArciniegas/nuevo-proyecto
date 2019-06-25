@@ -9,6 +9,7 @@
   "BETS_LIST.WON": "Vincenti",
   "BET_STATUS": "Wettstatus",
   "BET_TYPE": "Wettart",
+  "BET_UNDER_EVALUATION": "Wette wird geprüft, bitte warten Sie",
   "BONUS": "Bonus",
   "BTNCALC.COL": "COL",
   "BTNCALC.TOT": "TOT",
@@ -24,6 +25,8 @@
   "COUPON.BET": "Wette",
   "COUPON_CODE": "Wettschein-Code",
   "COUPON_RESET": "Reset del coupon",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Wette angenommen,",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "prüfen Sie die Wettliste",
   "DATE": "Datum",
   "DATE_FROM": "Data da",
   "DATE_OF_PLACEMENT": "Data piazzamento",
@@ -93,6 +96,12 @@
       "RoleAlreadyExists": "Diese Rolle existiert bereits [Code C41]",
       "SelfExclusionActive": "Un auto esclusione è attiva",
       "SingleBetMaxLimitByUser": "Max. Anzahl der Einzelwetten durch Benutzer [Code C26]",
+      "StagedCouponStatus": {
+        "Canceled": "",
+        "Refunded": "",
+        "RefusedToRefund": "",
+        "Unknown": ""
+      },
       "StakeTooHighToCancel": "Vorgang nicht erlaubt, diese Wette kann nicht storniert werden, da der Wetteinsatz zu hoch ist [Code C35]",
       "TeamAlreadyExists": "Dieses Team existiert bereits [Code C30]",
       "TimeoutForCouponCancelation": "Dieser Einsatz kann nicht mehr annulliert werden [Code C7]",
@@ -103,6 +112,16 @@
       "WrongCurrency": "Nichtübereinstimmung bei Währung [Code C15]",
       "WrongPassword": "Falsches Passwort [Code C5]",
       "WrongUserNetwork": "Falsches Benutzernetzwerk [Code C8]"
+    },
+    "COUPON_ERROR_INTRODUCTION": {
+      "MessageSource": {
+        "COUPON_CREATION": "",
+        "COUPON_PLACEMENT": "Fehler bei der Platzierung der Wette",
+        "COUPON_UPDATE": "",
+        "ODDS_INSERTION": "",
+        "ODDS_REMOVAL": "",
+        "UNKNOWN": "Fehler"
+      }
     },
     "COUPON_WARNING": {
       "AlreadyExistsError": "Dieser Eintrag existiert bereits [Code C3]",
@@ -221,6 +240,7 @@
   "JACKPOT": "Jackpot",
   "LANGUAGE": "Sprache",
   "LAST_FIVE": "Letzte 5",
+  "LIMIT": "Limit",
   "LUCKY": "Lucky",
   "MAX_PAYOUT": "Max. Auszahlung",
   "MAX_POTENTIAL_WIN": "Max. mögliche Auszahlung",

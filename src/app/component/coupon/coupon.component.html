@@ -45,7 +45,7 @@
         <div fxFlex="90" fxLayout="column" fxLayoutAlign="start stretch">
           <div *ngFor="let odd of listOdds" class="card-odd-container" fxFlex="20">
             <div fxFill class="card-odd radius-5"
-              [ngClass]="{'card-odd-error': !couponService.warningMessages && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}"
+              [ngClass]="{'card-odd-error': !couponService.warningMessage && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}"
               fxLayout="column" fxLayoutAlign="space-between stretch">
               <div fxFlex="24" class="top-window radius-5-tl-tr" fxLayoutAlign="space-between center">
                 <div>{{odd.EventName}}</div>
@@ -117,11 +117,13 @@
   <mat-grid-tile rowspan="2"
     *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
     <div fxFill class="padding-top-10">
-      <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.error"
+      <button class="btn-default btn-success radius-10 padding-10"
+        [disabled]="couponService.error || couponService.isWaitingConclusionOperation"
         (click)="couponService.preStagedCoupon()">{{'COUPON.BET' | translate | uppercase}}</button>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile rowspan="2" *ngIf="!settings.couponDirectPlace && couponService.coupon && couponService.coupon.internal_isReadyToPlace">
+  <mat-grid-tile rowspan="2"
+    *ngIf="!settings.couponDirectPlace && couponService.coupon && couponService.coupon.internal_isReadyToPlace">
     <div fxFill fxLayoutGap="10px">
       <div fxFill fxFlex="50" class="padding-top-10">
         <button class="btn-default btn-warning radius-10 padding-10" [disabled]="couponService.error"
