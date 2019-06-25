@@ -110,7 +110,7 @@ export class CouponService {
           // Check the coupon's limits
           this.checkLimits();
           // Set the visualization time of the warning
-          setTimeout(() => (this.warningMessage = undefined), this.notificationInterval);
+          timer(this.notificationInterval).subscribe(() => (this.warningMessage = undefined));
           break;
         default:
           // Check the coupon's limits
@@ -143,7 +143,7 @@ export class CouponService {
           // Set the success messageRefusedToRefund,
           this.isASuccess = true;
           // Remove the message
-          setTimeout(() => (this.isASuccess = false), this.notificationInterval);
+          timer(this.notificationInterval).subscribe(() => (this.isASuccess = false));
           break;
         // Failure on bet
         case StagedCouponStatus.Canceled:
