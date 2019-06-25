@@ -1,0 +1,18 @@
+.list-race {
+	.card-box {
+		margin: 3;
+
+		.button {
+			.button-internal {
+				padding: 0;
+			}
+
+			&.number {
+				font-size: 16;
+			}
+			&.date {
+				font-size: 18;
+			}
+		}
+	}
+}

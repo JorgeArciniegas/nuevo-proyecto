@@ -1,0 +1,17 @@
+<GridLayout rows="*" [columns]="nativeColumnDefinition" class="list-race">
+  <GridLayout *ngFor="let race of eventsList?.events  | slice:0:webColumnDefinition; let i = index" row="0" col="{{i}}"
+    rows="*,*" columns="*" (tap)="raceSelecting(i)">
+    <GridLayout row="0" shadow="3" cornerRadius="6" class="card-box">
+      <GridLayout *ngIf="race != null" rows="*" columns="*" class="button number"
+        [ngClass]="{ 'selected' : eventsList.currentEvent == i }">
+        <Button text="{{race.eventLabel}}" class="button-internal" textTransform="none"></Button>
+      </GridLayout>
+    </GridLayout>
+    <GridLayout row="1" shadow="3" cornerRadius="6" class="card-box">
+      <GridLayout *ngIf="race != null" row="1" rows="*" columns="*" class="button date"
+        [ngClass]="{ 'selected' : eventsList.currentEvent == i }">
+        <Button text="{{ race.eventStart | date:'HH:mm' }}" class="button-internal"></Button>
+      </GridLayout>
+    </GridLayout>
+  </GridLayout>
+</GridLayout>
