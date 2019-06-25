@@ -83,6 +83,11 @@ $color-text-gray: #6b7279;
 	color: $color-text-dark;
 }
 
+%color-bg-success {
+	background: $color-bg-success;
+	color: $color-text-primary;
+}
+
 %color-bg-allert {
 	background: $color-bg-allert;
 	color: $color-text-primary;

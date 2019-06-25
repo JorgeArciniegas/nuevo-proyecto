@@ -5,6 +5,8 @@ import { ProductsService } from './products.service';
 import { DialogService } from './dialog.service';
 import { CouponDialogService } from '../component/coupon/coupon-dialog.service.tns';
 import { DialogTypeCoupon } from './products.model';
+import { MessageSource } from '@elys/elys-coupon';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-products',
@@ -14,12 +16,14 @@ import { DialogTypeCoupon } from './products.model';
 export class ProductsComponent {
   public rowHeight: number;
   public settings: AppSettings;
+  public messageSource: typeof MessageSource = MessageSource;
 
   dialogTypeCoupon: typeof DialogTypeCoupon = DialogTypeCoupon;
 
   constructor(
     public service: ProductsService,
     public readonly appSettings: AppSettings,
+    public readonly userService: UserService,
     public readonly couponService: CouponService,
     public dialog: DialogService,
     public couponDialogService: CouponDialogService
