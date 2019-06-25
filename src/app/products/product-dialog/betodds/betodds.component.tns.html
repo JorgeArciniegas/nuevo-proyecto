@@ -41,7 +41,7 @@
       <ng-container *ngIf="betCouponOdd">
         <GridLayout row="{{ 1 + (i / columnNumber) | floor}}" col="{{i % columnNumber}}" rows="3*,8*,6*" columns="*"
           class="card-odd"
-          [ngClass]="{'card-odd-error': !couponService.warningMessages && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}"
+          [ngClass]="{'card-odd-error': !couponService.warningMessage && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}"
           *ngFor="let odd of betCouponOdd; let i = index;">
           <GridLayout row="0" col="*,*" class="top-window">
             <Label col="0" text="{{odd.EventName}}" horizontalAlignment="left"></Label>

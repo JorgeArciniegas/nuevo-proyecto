@@ -1,87 +1,9 @@
-<GridLayout rows="6*,2*" columns="*" *ngIf="show">
-  <GridLayout class="playable-grid-buttons" rows="*,*,*" columns="*,2*,2*,2*,2*,2*,2*">
-    <GridLayout row="{{i}}" col="0" shadow="3" cornerRadius="6" class="card"
-      *ngFor="let row of ['I','II','III']; let i = index;">
-      <GridLayout rows="*" columns="*" class="bg-playable">
-        <GridLayout rows="*" columns="*" class="" class="playable-row-tile display"
-          [ngClass]="{'disabled': (i === 1 && service.placingRace.secondRowDisabled) || (i === 2 && service.placingRace.thirdRowDisabled)}">
-          <StackLayout verticalAlignment="center" horizontalAlignment="center">
-            <Label *ngIf="i === 0"
-              text="{{ service.placingRace.typePlace === TypePlacingRace.ACCG ? ('BASE' | translate) : row }}"
-              verticalAlignment="center"></Label>
-            <Label *ngIf="i === 1"
-              text="{{ service.placingRace.typePlace === TypePlacingRace.ACCG ? ('CODA' | translate) : row }}"
-              verticalAlignment="center"></Label>
-            <Label *ngIf="i === 2" text="{{ row }}" verticalAlignment="center"></Label>
-          </StackLayout>
-        </GridLayout>
-      </GridLayout>
-    </GridLayout>
-    <GridLayout row="0" col="{{i + 1}}" shadow="3" cornerRadius="16" class="card"
-      *ngFor="let dog of service.dogList | filterByPosition: 1; let i = index;">
-      <GridLayout rows="*" columns="*" class="bg-playable">
-        <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-dog-{{dog.number}}"
-          [ngClass]="{'btn-dog-play-actived': dog.actived, 'disabled': !dog.selectable}">
-          <StackLayout class="label"></StackLayout>
-          <Button text="{{dog.number}}" class="button-internal" (tap)="dogplaced(dog)"
-            [isEnabled]="dog.selectable && !service.placingRace.timeBlocked"></Button>
-        </GridLayout>
-      </GridLayout>
-    </GridLayout>
-    <GridLayout row="1" col="{{i + 1}}" shadow="3" cornerRadius="16" class="card"
-      *ngFor="let dog of service.dogList | filterByPosition: 2; let i = index;">
-      <GridLayout rows="*" columns="*" class="bg-playable">
-        <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-dog-{{dog.number}}"
-          [ngClass]="{'btn-dog-play-actived': dog.actived, 'disabled': !dog.selectable || service.placingRace.secondRowDisabled}">
-          <StackLayout class="label"></StackLayout>
-          <Button text="{{dog.number}}" class="button-internal" (tap)="dogplaced(dog)"
-            [isEnabled]="dog.selectable && !service.placingRace.timeBlocked && !service.placingRace.secondRowDisabled"></Button>
-        </GridLayout>
-      </GridLayout>
-    </GridLayout>
-    <GridLayout row="2" col="{{i + 1}}" shadow="3" cornerRadius="16" class="card"
-      *ngFor="let dog of service.dogList | filterByPosition: 3; let i = index;">
-      <GridLayout rows="*" columns="*" class="bg-playable">
-        <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-dog-{{dog.number}}"
-          [ngClass]="{'btn-dog-play-actived': dog.actived, 'disabled': !dog.selectable  || service.placingRace.thirdRowDisabled}">
-          <StackLayout class="label"></StackLayout>
-          <Button text="{{dog.number}}" class="button-internal" (tap)="dogplaced(dog)"
-            [isEnabled]="dog.selectable && !service.placingRace.timeBlocked && !service.placingRace.thirdRowDisabled"></Button>
-        </GridLayout>
-      </GridLayout>
-    </GridLayout>
-  </GridLayout>
-
-  <GridLayout row="1" class="playable-grid-buttons playable-special-bets" rows="*" columns="*,*,*,*">
-    <GridLayout col="0" rows="*" columns="*" shadow="3" cornerRadius="11" class="special-bet">
-      <GridLayout rows="*" columns="*" class="button btn-success"
-        [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['ODD']) }">
-        <Button text="{{'ODD' | translate}}" class="button-internal" (tap)="specialBets('ODD')"
-          [isEnabled]="!service.placingRace.timeBlocked"></Button>
-      </GridLayout>
-    </GridLayout>
-    <GridLayout col="1" rows="*" columns="*" shadow="3" cornerRadius="11" class="special-bet">
-      <GridLayout rows="*" columns="*" class="button btn-success"
-        [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['EVEN']) }">
-        <Button text="{{'EVEN' | translate}}" class="button-internal" (tap)="specialBets('EVEN')"
-          [isEnabled]="!service.placingRace.timeBlocked"></Button>
-      </GridLayout>
-    </GridLayout>
-    <GridLayout col="2" rows="*" columns="*" shadow="3" cornerRadius="11" class="special-bet">
-      <GridLayout rows="*" columns="*" class="button btn-success"
-        [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['UNDER']) }">
-        <Button text="{{'UNDER' | translate}}" class="button-internal" (tap)="specialBets('UNDER')"
-          [isEnabled]="!service.placingRace.timeBlocked"></Button>
-      </GridLayout>
-    </GridLayout>
-    <GridLayout col="3" rows="*" columns="*" shadow="3" cornerRadius="11" class="special-bet">
-      <GridLayout rows="*" columns="*" class="button btn-success"
-        [ngClass]="{'actived' : (service.placingRace.isSpecialBets && service.placingRace.specialBetValue === specialBet['OVER']) }">
-        <Button text="{{'OVER' | translate}}" class="button-internal" (tap)="specialBets('OVER')"
-          [isEnabled]="!service.placingRace.timeBlocked"></Button>
-      </GridLayout>
-    </GridLayout>
-  </GridLayout>
+<StackLayout *ngIf="show">
+  <!-- TEMPLATE RACE -->
+  <app-playable-race
+  [rowHeight]="rowHeight"
+  *ngIf="productService.product.layoutProducts.type === typeLayout.RACING"></app-playable-race>
+</StackLayout>
 
   <!-- <GridLayout row="2" class="playable-grid-buttons playable-grid-repeat" rows="*" columns="*,*,*,*,*,*,*,*">
     <GridLayout col="{{i}}" shadow="3" cornerRadius="6" class="card-x" *ngFor="let n of [1,2,3,4,5,6,7,8]; let i = index;">
@@ -91,5 +13,3 @@
       </GridLayout>
     </GridLayout>
   </GridLayout> -->
-
-</GridLayout>

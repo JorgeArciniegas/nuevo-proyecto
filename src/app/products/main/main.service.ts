@@ -9,11 +9,9 @@ import {
   VirtualEventCountDownRequest,
   VirtualEventCountDownResponse,
   VirtualProgramTreeBySportRequest,
-  VirtualProgramTreeBySportResponse,
-  VirtualSportLastResultsRequest,
-  VirtualSportLastResultsResponse
+  VirtualProgramTreeBySportResponse
 } from '@elys/elys-api';
-import { interval, Subject, timer } from 'rxjs';
+import { interval, Subject } from 'rxjs';
 import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
@@ -26,14 +24,14 @@ import {
 import { ProductsService } from '../products.service';
 import {
   CombinationType,
-  Dog,
+  Runner,
   Lucky,
   PlacingRace,
   Podium,
   Race,
   RaceDetail,
   RaceResult,
-  RaceTime,
+  EventTime,
   Smartcode,
   SmartCodeType,
   SpecialBet,
@@ -42,14 +40,12 @@ import {
   TypePlacingRace
 } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
+import { ResultsService } from './results/results.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MainService extends MainServiceExtra {
-
-
-
   // screen binding
   // public raceDetails: RaceDetail;
   public listResult: RaceResult[];
@@ -57,15 +53,14 @@ export class MainService extends MainServiceExtra {
   private reload: number;
   private cacheEvents: VirtualBetEvent[] = [];
   // working variable
-  private remmaningTime: RaceTime = new RaceTime();
+  private remmaningTime: EventTime = new EventTime();
   placingRace: PlacingRace = new PlacingRace(); // place the global race
   placingRaceSubject: Subject<PlacingRace>;
-
 
   private attempts = 0;
   private initCurrentEvent = false;
 
-  dogList: Dog[];
+  runnersList: Runner[];
   // temp array
 
   smartCode: Smartcode;
@@ -78,16 +73,17 @@ export class MainService extends MainServiceExtra {
     private btnService: BtncalcService,
     public coupon: CouponService,
     private appSettings: AppSettings,
-    public destroyCouponService: DestroyCouponService
+    public destroyCouponService: DestroyCouponService,
+    private resultService: ResultsService
   ) {
     super(coupon, destroyCouponService);
     this.defaultGameStart();
 
     this.productService.productNameSelectedObserve.subscribe(item => {
-        if ( !this.coupon.productHasCoupon.checked ) {
-          this.cacheEvents = null;
-          this.initRaces();
-        }
+      if (!this.coupon.productHasCoupon.checked) {
+        this.cacheEvents = null;
+        this.initRaces();
+      }
     });
 
     this.raceDetails = new RaceDetail();
@@ -99,11 +95,10 @@ export class MainService extends MainServiceExtra {
     this.currentEventObserve = this.currentEventSubscribe.asObservable();
 
     this.currentEventObserve.subscribe((raceIndex: number) => {
-
       this.raceDetails.currentRace = raceIndex;
 
       this.remaningRaceTime(this.raceDetails.races[raceIndex].number).then(
-        (raceTime: RaceTime) => {
+        (raceTime: EventTime) => {
           this.raceDetails.raceTime = raceTime;
         }
       );
@@ -124,7 +119,6 @@ export class MainService extends MainServiceExtra {
     });
 
     this.createDogList();
-
   }
 
   /**
@@ -133,7 +127,9 @@ export class MainService extends MainServiceExtra {
    * it return the product marked to "productSelected"
    */
   defaultGameStart(): void {
-    const gameSelected = this.appSettings.products.filter( item => item.productSelected)[0].codeProduct;
+    const gameSelected = this.appSettings.products.filter(
+      item => item.productSelected
+    )[0].codeProduct;
     this.productService.changeProduct(gameSelected);
     // Start race
     this.initRaces();
@@ -142,18 +138,17 @@ export class MainService extends MainServiceExtra {
   initRaces(): void {
     this.initCurrentEvent = true;
     this.loadRaces();
-    this.loadLastResult(false);
-
+    this.resultService.loadLastResult(false);
   }
 
   createDogList(): void {
-    this.dogList = [];
+    this.runnersList = [];
     for (const i of [1, 2, 3]) {
       for (const d of [1, 2, 3, 4, 5, 6]) {
-        const dog: Dog = new Dog();
+        const dog: Runner = new Runner();
         dog.number = d;
         dog.position = i;
-        this.dogList.push(dog);
+        this.runnersList.push(dog);
       }
     }
   }
@@ -162,14 +157,14 @@ export class MainService extends MainServiceExtra {
     try {
       if (this.remmaningTime.second === 0 && this.remmaningTime.minute === 0) {
         this.loadRaces();
-        this.loadLastResult();
+        this.resultService.loadLastResult();
       } else {
         if (this.remmaningTime.second < 0 || this.remmaningTime.minute < 0) {
           // if remaining time is negative there is an error, reload all
           // '::::reset');
           this.cacheEvents = null;
           this.loadRaces();
-          this.loadLastResult(false);
+          this.resultService.loadLastResult(false);
         }
         if (this.remmaningTime.second === 0) {
           // remaing time
@@ -202,7 +197,7 @@ export class MainService extends MainServiceExtra {
       // console.log('catch', err);
       this.cacheEvents = null;
       this.loadRaces();
-      this.loadLastResult(false);
+      this.resultService.loadLastResult(false);
     }
   }
 
@@ -235,7 +230,6 @@ export class MainService extends MainServiceExtra {
     }
   }
 
-
   /**
    *
    * @param all = When it is true refresh the cache race
@@ -243,42 +237,44 @@ export class MainService extends MainServiceExtra {
    * The reference values is taken by "ProductService" on object "product"
    */
   loadRacesFromApi(all: boolean = false) {
-
     const request: VirtualProgramTreeBySportRequest = {
       SportIds: this.productService.product.sportId.toString(),
       CategoryTypes: this.productService.product.codeProduct
     };
 
-    this.elysApi.virtual.getVirtualTree(request).then((sports: VirtualProgramTreeBySportResponse) => {
-      const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
+    this.elysApi.virtual
+      .getVirtualTree(request)
+      .then((sports: VirtualProgramTreeBySportResponse) => {
+        const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
 
-      if (all) {
-        // load all race
-        this.cacheEvents = tournament.evs;
-        for (let index = 0; index < 5; index++) {
-          const race: Race = new Race();
-          race.number = this.cacheEvents[index].id;
-          race.label = this.cacheEvents[index].nm;
-          race.date = new Date(this.cacheEvents[index].sdtoffset);
+        if (all) {
+          // load all race
+          this.cacheEvents = tournament.evs;
+          for (let index = 0; index < 5; index++) {
+            const race: Race = new Race();
+            race.number = this.cacheEvents[index].id;
+            race.label = this.cacheEvents[index].nm;
+            race.date = new Date(this.cacheEvents[index].sdtoffset);
 
-          this.raceDetails.races[index] = race;
-        }
-        this.currentAndSelectedRaceTime();
-        this.currentEventSubscribe.next(0);
-      } else {
-        // add only new race
-        tournament.evs.forEach((race: VirtualBetEvent) => {
-          if (
-            this.cacheEvents.filter(
-              (cacheRace: VirtualBetEvent) => cacheRace.id === race.id
-            ).length === 0
-          ) {
-            this.cacheEvents.push(race);
+            this.raceDetails.races[index] = race;
           }
-        });
-      }
-      this.reload = 4;
-    });
+          this.currentAndSelectedRaceTime();
+          this.currentEventSubscribe.next(0);
+        } else {
+          // add only new race
+          tournament.evs.forEach((race: VirtualBetEvent) => {
+            if (
+              this.cacheEvents.filter(
+                (cacheRace: VirtualBetEvent) => cacheRace.id === race.id
+              ).length === 0
+            ) {
+              this.cacheEvents.push(race);
+            }
+          });
+        }
+
+        this.reload = 4;
+      });
   }
 
   currentAndSelectedRaceTime() {
@@ -300,7 +296,7 @@ export class MainService extends MainServiceExtra {
     // calculate remaning time for selected race
     this.remaningRaceTime(
       this.raceDetails.races[this.raceDetails.currentRace].number
-    ).then((raceTime: RaceTime) => {
+    ).then((raceTime: EventTime) => {
       this.raceDetails.raceTime = raceTime;
       if (this.raceDetails.currentRace === 0) {
         this.remmaningTime.minute = raceTime.minute;
@@ -311,25 +307,28 @@ export class MainService extends MainServiceExtra {
     // calculate remaning time
     if (this.raceDetails.currentRace > 0) {
       this.remaningRaceTime(this.raceDetails.races[0].number).then(
-        (raceTime: RaceTime) => (this.remmaningTime = raceTime)
+        (raceTime: EventTime) => (this.remmaningTime = raceTime)
       );
     }
   }
 
-  remaningRaceTime(idRace: number): Promise<RaceTime> {
+  remaningRaceTime(idRace: number): Promise<EventTime> {
     const request: VirtualEventCountDownRequest = {
-      SportId: this.productService.product.sportId.toString(), MatchId: idRace
+      SportId: this.productService.product.sportId.toString(),
+      MatchId: idRace
     };
-    return this.elysApi.virtual.getCountdown(request).then((value: VirtualEventCountDownResponse) => {
-      const sec: number = value.CountDown / 10000000;
-      const raceTime: RaceTime = new RaceTime();
-      raceTime.minute = Math.floor(sec / 60);
-      raceTime.second = Math.floor(sec % 60);
-      return raceTime;
-    });
+    return this.elysApi.virtual
+      .getCountdown(request)
+      .then((value: VirtualEventCountDownResponse) => {
+        const sec: number = value.CountDown / 10000000;
+        const raceTime: EventTime = new EventTime();
+        raceTime.minute = Math.floor(sec / 60);
+        raceTime.second = Math.floor(sec % 60);
+        return raceTime;
+      });
   }
 
-  loadLastResult(delay: boolean = true): void {
+  /* loadLastResult(delay: boolean = true): void {
     if (delay) {
       timer(10000).subscribe(() => this.getLastResult());
     } else {
@@ -363,7 +362,7 @@ export class MainService extends MainServiceExtra {
         });
     });
   }
-
+ */
   resetPlayRacing(): void {
     this.placingRace = new PlacingRace();
     this.smartCode = new Smartcode();
@@ -372,8 +371,12 @@ export class MainService extends MainServiceExtra {
     ].number;
     this.createDogList();
 
-    this.productService.polyfunctionalAreaSubject.next(new PolyfunctionalArea());
-    this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
+    this.productService.polyfunctionalAreaSubject.next(
+      new PolyfunctionalArea()
+    );
+    this.productService.polyfunctionalStakeCouponSubject.next(
+      new PolyfunctionalStakeCoupon()
+    );
   }
 
   raceDetailOdds(raceNumber: number): void {
@@ -381,10 +384,14 @@ export class MainService extends MainServiceExtra {
     const race: VirtualBetEvent = this.cacheEvents.filter(
       (cacheRace: VirtualBetEvent) => cacheRace.id === raceNumber
     )[0];
-    const request: VirtualDetailOddsOfEventRequest = { sportId: 8, matchId: raceNumber };
+    const request: VirtualDetailOddsOfEventRequest = {
+      sportId: 8,
+      matchId: raceNumber
+    };
     // check, if is empty load from api
     if (race.mk == null || race.mk.length === 0) {
-      this.elysApi.virtual.getVirtualEventDetail(request)
+      this.elysApi.virtual
+        .getVirtualEventDetail(request)
         .then((sportDetail: VirtualDetailOddsOfEventResponse) => {
           try {
             race.mk = sportDetail.Sport.ts[0].evs[0].mk;
@@ -412,7 +419,7 @@ export class MainService extends MainServiceExtra {
    * PLACING THE DOG SELECTED INSIDE TO POLYFUNCTIONAL AREA AND SMARTBET
    * @param dog
    */
-  placingOdd(dog: Dog): void {
+  placingOdd(dog: Runner): void {
     if (this.coupon.checkIfCouponIsReadyToPlace()) {
       return;
     }
@@ -454,7 +461,8 @@ export class MainService extends MainServiceExtra {
     }
     // extract the raceOdd from cache
     const odds: VirtualBetEvent = this.cacheEvents.filter(
-      (cacheRace: VirtualBetEvent) => cacheRace.id === this.placingRace.raceNumber
+      (cacheRace: VirtualBetEvent) =>
+        cacheRace.id === this.placingRace.raceNumber
     )[0];
     this.smartCode = new Smartcode();
     this.populatingPolyfunctionArea(odds);
@@ -488,8 +496,8 @@ export class MainService extends MainServiceExtra {
     }
   }
 
-  private checkedIsSelected(dog: Dog, reset: boolean = false): void {
-    this.dogList.forEach((d: Dog) => {
+  private checkedIsSelected(dog: Runner, reset: boolean = false): void {
+    this.runnersList.forEach((d: Runner) => {
       if (d.number === dog.number && d.position !== dog.position && !reset) {
         d.selectable = false;
       } else if (d.number === dog.number && reset) {
@@ -507,14 +515,14 @@ export class MainService extends MainServiceExtra {
     const extractNumber: number =
       Math.floor(
         Math.random() *
-        this.dogList.filter(dog => dog.position === lucky).length
+          this.runnersList.filter(dog => dog.position === lucky).length
       ) + 1;
     return extractNumber;
   }
 
   RNGLuckyPlacing(dogNumber: number, dogPosition: number): void {
     // extract the dog
-    const dogExtract: Dog = this.dogList.filter(
+    const dogExtract: Runner = this.runnersList.filter(
       dog => dog.position === dogPosition && dog.number === dogNumber
     )[0];
     // place the dog
@@ -527,7 +535,7 @@ export class MainService extends MainServiceExtra {
    */
   populatingPolyfunctionArea(odd: VirtualBetEvent): void {
     let areaFuncData: PolyfunctionalArea = new PolyfunctionalArea();
-     areaFuncData.activeAssociationCol = false;
+    areaFuncData.activeAssociationCol = false;
     areaFuncData.activeDistributionTot = false;
     try {
       // check if is first insert
@@ -578,7 +586,7 @@ export class MainService extends MainServiceExtra {
       // set amount
       areaFuncData.amount = this.btnService.polyfunctionStakePresetPlayer.amount;
       // verify if the type of betslip is set
-      areaFuncData.typeSlipCol  = this.btnService.polyfunctionStakePresetPlayer.typeSlipCol;
+      areaFuncData.typeSlipCol = this.btnService.polyfunctionStakePresetPlayer.typeSlipCol;
       // extract odds
       if (this.smartCode.code) {
         areaFuncData.selection = this.smartCode.code;
@@ -705,7 +713,12 @@ export class MainService extends MainServiceExtra {
       // If the selection is PODIUM, WINNER or SHOW
       if (dogName) {
         for (const checkOdd of m.sls.filter(o => o.nm === dogName)) {
-          const betOdd: BetOdd = new BetOdd(dogName, checkOdd.ods[0].vl, areaFuncData.amount, checkOdd.id);
+          const betOdd: BetOdd = new BetOdd(
+            dogName,
+            checkOdd.ods[0].vl,
+            areaFuncData.amount,
+            checkOdd.id
+          );
           areaFuncData.odds.push(betOdd);
           /*   areaFuncData.odd = checkOdd.ods[0].vl;
             areaFuncData.id = checkOdd.id; */
@@ -715,14 +728,18 @@ export class MainService extends MainServiceExtra {
         for (const checkOdd of m.sls.filter(
           o => o.nm.toUpperCase() === areaFuncData.selection.toUpperCase()
         )) {
-          const betOdd: BetOdd = new BetOdd(checkOdd.nm.toUpperCase(), checkOdd.ods[0].vl, areaFuncData.amount, checkOdd.id);
+          const betOdd: BetOdd = new BetOdd(
+            checkOdd.nm.toUpperCase(),
+            checkOdd.ods[0].vl,
+            areaFuncData.amount,
+            checkOdd.id
+          );
           areaFuncData.odds.push(betOdd);
           /*  areaFuncData.odd = checkOdd.ods[0].vl;
            areaFuncData.id = checkOdd.id; */
         }
       } else {
         if (oddsToSearch.length > 0) {
-
           // search for multiple odds
           for (const checkOdd of m.sls) {
             if (oddsToSearch.includes(checkOdd.nm)) {
@@ -744,7 +761,12 @@ export class MainService extends MainServiceExtra {
             .toString()
             .replace(/\//g, '-');
           for (const checkOdd of m.sls.filter(o => o.nm === matchName)) {
-            const betOdd: BetOdd = new BetOdd(checkOdd.nm.toUpperCase(), checkOdd.ods[0].vl, areaFuncData.amount, checkOdd.id);
+            const betOdd: BetOdd = new BetOdd(
+              checkOdd.nm.toUpperCase(),
+              checkOdd.ods[0].vl,
+              areaFuncData.amount,
+              checkOdd.id
+            );
             areaFuncData.odds.push(betOdd);
             /*  areaFuncData.odd = checkOdd.ods[0].vl;
              areaFuncData.id = checkOdd.id; */
@@ -912,14 +934,14 @@ export class MainService extends MainServiceExtra {
         if (this.smartCode.selWinner.length === 2) {
           // Single
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function (a, b) {
+          this.smartCode.selWinner.sort(function(a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('-');
           return SmartCodeType[SmartCodeType.AS];
         } else if (this.smartCode.selWinner.length > 2) {
           // Multiple
-          this.smartCode.selWinner.sort(function (a, b) {
+          this.smartCode.selWinner.sort(function(a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('');
@@ -947,10 +969,10 @@ export class MainService extends MainServiceExtra {
         } else {
           // Combination with base and tail
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function (a, b) {
+          this.smartCode.selWinner.sort(function(a, b) {
             return a - b;
           });
-          this.smartCode.selPlaced.sort(function (a, b) {
+          this.smartCode.selPlaced.sort(function(a, b) {
             return a - b;
           });
           areaFuncData.value =
@@ -980,7 +1002,7 @@ export class MainService extends MainServiceExtra {
         // Requirements "Trio a girare"
         if (this.smartCode.selWinner.length >= 3) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function (a, b) {
+          this.smartCode.selWinner.sort(function(a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('');
@@ -996,7 +1018,7 @@ export class MainService extends MainServiceExtra {
           // Enough selections on the second row to be able to create a trio
           if (this.smartCode.selPlaced.length >= 2) {
             // Sort the displayed values
-            this.smartCode.selPlaced.sort(function (a, b) {
+            this.smartCode.selPlaced.sort(function(a, b) {
               return a - b;
             });
             areaFuncData.value =
@@ -1010,12 +1032,12 @@ export class MainService extends MainServiceExtra {
           // Enough selections on the second row to be able to create a trio
           if (this.smartCode.selPlaced.length >= 1) {
             // Sort the displayed values
-            this.smartCode.selWinner.sort(function (a, b) {
+            this.smartCode.selWinner.sort(function(a, b) {
               return a - b;
             });
             if (this.smartCode.selPlaced.length > 1) {
               // Sort the displayed values
-              this.smartCode.selPlaced.sort(function (a, b) {
+              this.smartCode.selPlaced.sort(function(a, b) {
                 return a - b;
               });
             }
@@ -1047,7 +1069,7 @@ export class MainService extends MainServiceExtra {
         // Requirements "Accoppiata in ordine con ritorno"
         if (this.smartCode.selWinner.length === 2) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function (a, b) {
+          this.smartCode.selWinner.sort(function(a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('');
@@ -1061,14 +1083,14 @@ export class MainService extends MainServiceExtra {
         // Selections in the first row
         if (this.smartCode.selWinner.length > 1) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function (a, b) {
+          this.smartCode.selWinner.sort(function(a, b) {
             return a - b;
           });
         }
         // Selections in the second row
         if (this.smartCode.selPlaced.length > 1) {
           // Sort the displayed values
-          this.smartCode.selPlaced.sort(function (a, b) {
+          this.smartCode.selPlaced.sort(function(a, b) {
             return a - b;
           });
         }
@@ -1085,21 +1107,21 @@ export class MainService extends MainServiceExtra {
         // Selections in the first row
         if (this.smartCode.selWinner.length > 1) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function (a, b) {
+          this.smartCode.selWinner.sort(function(a, b) {
             return a - b;
           });
         }
         // Selections in the second row
         if (this.smartCode.selPlaced.length > 1) {
           // Sort the displayed values
-          this.smartCode.selPlaced.sort(function (a, b) {
+          this.smartCode.selPlaced.sort(function(a, b) {
             return a - b;
           });
         }
         // Selections in the third row
         if (this.smartCode.selPodium.length > 1) {
           // Sort the displayed values
-          this.smartCode.selPodium.sort(function (a, b) {
+          this.smartCode.selPodium.sort(function(a, b) {
             return a - b;
           });
         }
@@ -1198,18 +1220,18 @@ export class MainService extends MainServiceExtra {
                           ) {
                             returnValues.push(
                               values1[i1] +
-                              '-' +
-                              values2[i2b] +
-                              '-' +
-                              values2[i2]
+                                '-' +
+                                values2[i2b] +
+                                '-' +
+                                values2[i2]
                             );
                           } else {
                             returnValues.push(
                               values1[i1] +
-                              '-' +
-                              values2[i2] +
-                              '-' +
-                              values2[i2b]
+                                '-' +
+                                values2[i2] +
+                                '-' +
+                                values2[i2b]
                             );
                           }
                         } else {
@@ -1360,8 +1382,8 @@ export class MainService extends MainServiceExtra {
    */
   public getCurrentRace(): VirtualBetEvent {
     return this.cacheEvents.filter(
-      (cacheRace: VirtualBetEvent) => cacheRace.id === this.placingRace.raceNumber
+      (cacheRace: VirtualBetEvent) =>
+        cacheRace.id === this.placingRace.raceNumber
     )[0];
-
   }
 }

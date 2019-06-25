@@ -6,7 +6,11 @@ import { routes, componentDeclarations } from './main.common';
 
 @NgModule({
   declarations: [componentDeclarations],
-  imports: [NativeScriptCommonModule, SharedModule, NativeScriptRouterModule.forChild(routes)],
+  imports: [
+    NativeScriptCommonModule,
+    SharedModule,
+    NativeScriptRouterModule.forChild(routes)
+  ],
   schemas: [NO_ERRORS_SCHEMA]
 })
-export class MainModule { }
+export class MainModule {}

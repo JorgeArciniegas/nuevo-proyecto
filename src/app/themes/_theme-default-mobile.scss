@@ -261,12 +261,22 @@
 					overflow: auto;
 				}
 
-				&.display-error {
-					@extend %color-bg-allert;
+				.message {
+					text-align: center;
+					font-size: 12;
+					overflow: auto;
+				}
+
+				&.display-success {
+					@extend %color-bg-success;
 				}
 
 				&.display-warning {
 					@extend %color-bg-warn;
+				}
+
+				&.display-error {
+					@extend %color-bg-allert;
 				}
 			}
 
@@ -399,6 +409,12 @@
 				// HORSE VIRTUAL
 				.race-control {
 					@extend %PRODUCT-HORSE-BG-MOBILE;
+				}
+			}
+			&.PRODUCT-COCK-BG {
+				// COCK FIGHT
+				.race-control {
+					@extend %PRODUCT-COCK-BG-MOBILE;
 				}
 			}
 			.race-control {
@@ -586,3 +602,9 @@
 		margin: 5;
 	}
 }
+
+/**
+* Import layout's component
+**/
+@import "./results-list/results-list.tns";
+@import "./playable-board/playablerace.tns";

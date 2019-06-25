@@ -9,6 +9,7 @@
   "BETS_LIST.WON": "Won",
   "BET_STATUS": "Bet status",
   "BET_TYPE": "Bet type",
+  "BET_UNDER_EVALUATION": "Bet under evaluation, please wait",
   "BONUS": "Bonus",
   "BTNCALC.COL": "COL",
   "BTNCALC.TOT": "TOT",
@@ -24,6 +25,8 @@
   "COUPON.BET": "Bet",
   "COUPON_CODE": "Coupon code",
   "COUPON_RESET": "Coupon reset",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Bet accepted,",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "check the Bet List",
   "DATE": "Date",
   "DATE_FROM": "Date from",
   "DATE_OF_PLACEMENT": "Date of placement",
@@ -93,6 +96,12 @@
       "RoleAlreadyExists": "This role already exists [Code C41]",
       "SelfExclusionActive": "A self-exclusion is active",
       "SingleBetMaxLimitByUser": "Max. number of single bets by user [Code C26]",
+      "StagedCouponStatus": {
+        "Canceled": "",
+        "Refunded": "",
+        "RefusedToRefund": "",
+        "Unknown": ""
+      },
       "StakeTooHighToCancel": "Operation not allowed, this bet cannot be voided as the stake is too high [Code C35]",
       "TeamAlreadyExists": "This team already exists [Code C30]",
       "TimeoutForCouponCancelation": "This bet cannot be voided anymore [Code C7]",
@@ -103,6 +112,16 @@
       "WrongCurrency": "Currency mismatch [Code C15]",
       "WrongPassword": "Wrong password [Code C5]",
       "WrongUserNetwork": "Wrong user network [Code C8]"
+    },
+    "COUPON_ERROR_INTRODUCTION": {
+      "MessageSource": {
+        "COUPON_CREATION": "",
+        "COUPON_PLACEMENT": "Placement error",
+        "COUPON_UPDATE": "",
+        "ODDS_INSERTION": "",
+        "ODDS_REMOVAL": "",
+        "UNKNOWN": "Error"
+      }
     },
     "COUPON_WARNING": {
       "AlreadyExistsError": "This record already exists [Code C3]",
@@ -148,6 +167,7 @@
     },
     "PRODUCT": {
       "LABEL": {
+        "COCK_FIGHT": "Cock fight",
         "DOG": "Greyhounds",
         "FOOTBALL_ENG": "Soccer ENG",
         "FOOTBALL_ITA": "Soccer ITA",
@@ -221,6 +241,7 @@
   "JACKPOT": "Jackpot",
   "LANGUAGE": "Language",
   "LAST_FIVE": "Last 5",
+  "LIMIT": "Limit",
   "LUCKY": "Lucky",
   "MAX_PAYOUT": "Max. payout",
   "MAX_POTENTIAL_WIN": "Max. potential win",

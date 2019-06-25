@@ -1,4 +1,4 @@
-import { Environment, WidgetTypeLink } from './environment.models';
+import { Environment, WidgetTypeLink, LAYOUT_TYPE } from './environment.models';
 
 export const environment: Environment = {
   production: false,
@@ -23,6 +23,12 @@ export const environment: Environment = {
       order: 0,
       productSelected: true,
       isPlayable: true,
+      layoutProducts: {
+        // defines the layout type for different product group
+        type: LAYOUT_TYPE.RACING,
+        resultItems: 4, // items to show for last result
+        nextEventItems: 5 // items to show for next events
+      },
       toolbarButton: {
         name: 'dogracing',
         icon: 'Dog',
@@ -45,6 +51,11 @@ export const environment: Environment = {
       order: 1,
       productSelected: false,
       isPlayable: true,
+      layoutProducts: {
+        type: LAYOUT_TYPE.RACING,
+        resultItems: 4,
+        nextEventItems: 5
+      },
       toolbarButton: {
         name: 'horseracing',
         icon: 'Horse',
@@ -60,6 +71,11 @@ export const environment: Environment = {
       order: 2,
       productSelected: false,
       isPlayable: true,
+      layoutProducts: {
+        type: LAYOUT_TYPE.RACING,
+        resultItems: 4,
+        nextEventItems: 5
+      },
       toolbarButton: {
         name: 'virtualhorse',
         icon: 'Horse',
@@ -75,6 +91,11 @@ export const environment: Environment = {
       order: 3,
       productSelected: false,
       isPlayable: false,
+      layoutProducts: {
+        type: LAYOUT_TYPE.SOCCER,
+        resultItems: 10,
+        nextEventItems: 3
+      },
       toolbarButton: {
         name: 'Italian League',
         icon: 'Soccer-ita',
@@ -90,12 +111,45 @@ export const environment: Environment = {
       order: 3,
       productSelected: false,
       isPlayable: false,
+      layoutProducts: {
+        type: LAYOUT_TYPE.SOCCER,
+        resultItems: 10,
+        nextEventItems: 3
+      },
       toolbarButton: {
         name: 'Italian League',
         icon: 'Soccer-eng',
         route: 'products/soccer'
       },
       widgets: []
+    },
+    {
+      sportId: 20,
+      codeProduct: 'COCK-FIGHT',
+      name: 'CockFight',
+      label: 'COCK_FIGHT',
+      order: 3,
+      productSelected: false,
+      isPlayable: true,
+      layoutProducts: {
+        // defines the layout type for last results widget
+        type: LAYOUT_TYPE.COCK_FIGHT,
+        resultItems: 4,
+        nextEventItems: 5
+      },
+      toolbarButton: {
+        name: 'cockfight',
+        icon: 'Cocks',
+        route: 'products/cock-fight'
+      },
+      widgets: [
+        {
+          name: '',
+          routing: 'statistic',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ]
     }
   ],
   isEnabledReprintCoupon: true,

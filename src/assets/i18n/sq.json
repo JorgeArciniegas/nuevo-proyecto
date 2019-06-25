@@ -9,6 +9,7 @@
   "BETS_LIST.WON": "Vincenti",
   "BET_STATUS": "Statusi Bastit",
   "BET_TYPE": "Lloji Bastit",
+  "BET_UNDER_EVALUATION": "Koef. Ne vleresim ju lutem prisni",
   "BONUS": "Bonus",
   "BTNCALC.COL": "COL",
   "BTNCALC.TOT": "TOT",
@@ -24,6 +25,8 @@
   "COUPON.BET": "Bast",
   "COUPON_CODE": "Kodi Biletes",
   "COUPON_RESET": "Reset del coupon",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Basti u pranua,",
+  "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "shiko listen e basteve",
   "DATE": "Data",
   "DATE_FROM": "Data da",
   "DATE_OF_PLACEMENT": "Data piazzamento",
@@ -93,6 +96,12 @@
       "RoleAlreadyExists": "Ky funksion ekziston tashme [Kodi C41]",
       "SelfExclusionActive": "Un auto esclusione è attiva",
       "SingleBetMaxLimitByUser": "Max.i numrit te basteve teke nga perdoruesi [Kodi C26]",
+      "StagedCouponStatus": {
+        "Canceled": "",
+        "Refunded": "",
+        "RefusedToRefund": "",
+        "Unknown": ""
+      },
       "StakeTooHighToCancel": "Veprim I palejuar, kjo bilete nuk mund te anullohet, vlera eshte shum e larte [Kodi C35]",
       "TeamAlreadyExists": "Ekipi ekziston tashme [Kodi C30]",
       "TimeoutForCouponCancelation": "Ky bast nuk mund të anullohet më [Kodi C7]",
@@ -103,6 +112,16 @@
       "WrongCurrency": "Mospërputhja e monedhës [Kodi C15]",
       "WrongPassword": "Password I gabuar [Kodi C5]",
       "WrongUserNetwork": "Gabim networku [Kodi C8]"
+    },
+    "COUPON_ERROR_INTRODUCTION": {
+      "MessageSource": {
+        "COUPON_CREATION": "",
+        "COUPON_PLACEMENT": "Gabim vendosjeje",
+        "COUPON_UPDATE": "",
+        "ODDS_INSERTION": "",
+        "ODDS_REMOVAL": "",
+        "UNKNOWN": "Gabim"
+      }
     },
     "COUPON_WARNING": {
       "AlreadyExistsError": "Ky regjistrim tashmë ekziston [Kodi C3]",
@@ -148,6 +167,7 @@
     },
     "PRODUCT": {
       "LABEL": {
+        "COCK_FIGHT": "Combattimento di galli",
         "DOG": "Qen",
         "FOOTBALL_ENG": "Calcio ENG",
         "FOOTBALL_ITA": "Calcio ITA",
@@ -221,6 +241,7 @@
   "JACKPOT": "Jackpot",
   "LANGUAGE": "Gjuhë",
   "LAST_FIVE": "5 ndeshjet e fundit",
+  "LIMIT": "Limit",
   "LUCKY": "Lucky",
   "MAX_PAYOUT": "Fitimi max.",
   "MAX_POTENTIAL_WIN": "Max. fitimet e mundshme",

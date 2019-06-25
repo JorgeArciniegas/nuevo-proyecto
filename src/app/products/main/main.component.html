@@ -4,11 +4,11 @@
   <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
     <!-- Race control -->
     <mat-grid-tile rowspan="3">
-      <app-race-control fxFill></app-race-control>
+      <app-event-control fxFill></app-event-control>
     </mat-grid-tile>
     <!-- List races -->
     <mat-grid-tile rowspan="2">
-      <app-list-race fxFill [rowHeight]="rowHeight"></app-list-race>
+      <app-events-list fxFill [rowHeight]="rowHeight"></app-events-list>
     </mat-grid-tile>
     <!-- Playable board -->
     <mat-grid-tile rowspan="8">
@@ -33,7 +33,7 @@
     </mat-grid-tile>
     <!-- List of result -->
     <mat-grid-tile rowspan="2">
-      <app-result-list fxFill [rowHeight]="rowHeight"></app-result-list>
+      <app-results fxFill [rowHeight]="rowHeight"></app-results>
     </mat-grid-tile>
   </mat-grid-list>
 </div>

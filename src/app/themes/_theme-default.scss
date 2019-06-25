@@ -255,12 +255,14 @@ html {
 
 					div {
 						text-transform: none;
-						margin: 5px 10px 10px 10px;
+						margin: 5px 10px 5px 0px;
 						text-align: center;
-						font-weight: bold;
-						font-size: 12px;
 						overflow: auto;
 					}
+				}
+
+				&.display-success {
+					@extend %color-bg-success;
 				}
 
 				&.display-warning {
@@ -431,6 +433,10 @@ html {
 			&.PRODUCT-HORSE-VIRT-BG {
 				// HORSE VIRTUAL
 				@extend %PRODUCT-HORSE-BG;
+			}
+			&.PRODUCT-COCK-BG {
+				// COCK FIGHT
+				@extend %PRODUCT-COCK-BG;
 			}
 			.race-control {
 				.time {
@@ -742,3 +748,9 @@ html {
 		}
 	}
 }
+
+/**
+* Import layout's component
+**/
+@import "./results-list/results-list";
+@import "./playable-board/playablerace";

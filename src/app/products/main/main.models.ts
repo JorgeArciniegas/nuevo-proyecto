@@ -65,7 +65,7 @@ export class PlacingRace {
   typePlace: TypePlacingRace;
   secondRowDisabled: boolean;
   thirdRowDisabled: boolean;
-  dogs: Dog[];
+  dogs: Runner[];
   amount: number;
   repeat: number;
   isSpecialBets: boolean;
@@ -84,7 +84,7 @@ export class PlacingRace {
   }
 }
 
-export class Dog {
+export class Runner {
   number: number;
   selectable: boolean;
   actived: boolean;
@@ -96,7 +96,7 @@ export class Dog {
     this.position = 0;
   }
 }
-export class RaceTime {
+export class EventTime {
   minute: number;
   second: number;
 }
@@ -109,11 +109,11 @@ export class Race {
 
 export class RaceDetail {
   constructor() {
-    this.raceTime = new RaceTime();
+    this.raceTime = new EventTime();
     this.races = new Array(5);
     this.currentRace = 0;
   }
-  raceTime: RaceTime;
+  raceTime: EventTime;
   races: Race[];
   currentRace: number;
 }
