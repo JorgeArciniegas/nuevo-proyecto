@@ -101,7 +101,7 @@ export class EventTime {
   second: number;
 }
 
-export class Race {
+export class EventInfo {
   number: number;
   label: string;
   date: Date;
@@ -114,7 +114,7 @@ export class RaceDetail {
     this.currentRace = 0;
   }
   raceTime: EventTime;
-  races: Race[];
+  races: EventInfo[];
   currentRace: number;
 }
 

@@ -28,7 +28,7 @@ import {
   Lucky,
   PlacingRace,
   Podium,
-  Race,
+  EventInfo,
   RaceDetail,
   RaceResult,
   EventTime,
@@ -210,7 +210,7 @@ export class MainService extends MainServiceExtra {
       this.raceDetails.races.shift();
 
       // add the new race
-      const race: Race = new Race();
+      const race: EventInfo = new EventInfo();
       race.number = this.cacheEvents[4].id;
       race.label = this.cacheEvents[4].nm;
       race.date = new Date(this.cacheEvents[4].sdtoffset);
@@ -251,7 +251,7 @@ export class MainService extends MainServiceExtra {
           // load all race
           this.cacheEvents = tournament.evs;
           for (let index = 0; index < 5; index++) {
-            const race: Race = new Race();
+            const race: EventInfo = new EventInfo();
             race.number = this.cacheEvents[index].id;
             race.label = this.cacheEvents[index].nm;
             race.date = new Date(this.cacheEvents[index].sdtoffset);

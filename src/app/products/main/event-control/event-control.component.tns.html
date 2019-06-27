@@ -1,4 +1,6 @@
-<GridLayout rows="*" columns="28*,28*,42*" class="race-control">
+<GridLayout
+  [ngClass]="productService.product.productSelected ? 'PRODUCT-'+productService.product.codeProduct+'-BG' : ''" rows="*"
+  columns="28*,28*,42*" class="race-control">
   <StackLayout col="1" verticalAlignment="center">
     <Label class="game-name" [ngClass]="{'small': productService.windowSize.small}"
       text="{{ 'DYNAMIC_KEYS.PRODUCT.LABEL.'+ productService.product.label | translate }}" textTransform="uppercase"

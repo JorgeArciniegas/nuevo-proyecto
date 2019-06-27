@@ -16,6 +16,7 @@ export class EventsListService {
    */
   public getEventDetailsList(): EventsList {
     // initialize empty layout object
+    console.log('getEventDetailsList');
     this.eventsDetails = { currentEvent: 0, events: [] };
     this.eventsDetails.currentEvent = this.mainService.raceDetails.currentRace;
     this.mainService.raceDetails.races.forEach(race => {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../products.service';
 import { EventTime } from '../main.models';
@@ -9,7 +9,7 @@ import { MainService } from '../main.service';
   templateUrl: './event-control.component.html',
   styleUrls: ['./event-control.component.scss']
 })
-export class EventControlComponent implements OnInit {
+export class EventControlComponent {
   public eventTime: EventTime;
   public race: number;
   public settings: AppSettings;
@@ -21,6 +21,4 @@ export class EventControlComponent implements OnInit {
   ) {
     this.settings = appSettings;
   }
-
-  ngOnInit() {}
 }
