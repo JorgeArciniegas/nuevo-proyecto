@@ -16,7 +16,7 @@ export class EventListComponent implements OnInit, OnDestroy {
   public show?: boolean;
   public eventsDetails: EventsList;
   public nativeNextEventsItems: string;
-  private currentEventSubscription: Subscription;
+  //  private currentEventSubscription: Subscription;
   constructor(
     private mainService: MainService,
     private eventService: EventsListService,
@@ -35,16 +35,16 @@ export class EventListComponent implements OnInit, OnDestroy {
       );
     });
     // subscribe to the event change
-    this.currentEventSubscription = this.mainService.currentEventSubscribe.subscribe(
-      event => {
-        /**
-         * @eventsDetails is passed as input to a list template
-         */
-        this.eventsDetails = this.eventService.getEventDetailsList();
-      }
-    );
+    // this.currentEventSubscription = this.mainService.currentEventSubscribe.subscribe(
+    //   event => {
+    //     /**
+    //      * @eventsDetails is passed as input to a list template
+    //      */
+    //     this.eventsDetails = this.eventService.getEventDetailsList();
+    //   }
+    // );
   }
   ngOnDestroy() {
-    this.currentEventSubscription.unsubscribe();
+    this.eventService.customUnsubscribe();
   }
 }
