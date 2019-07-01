@@ -36,7 +36,9 @@ export class BetoddsComponent implements OnInit {
   ) {
     this.couponService.couponResponse.subscribe(coupon => {
       this.data.betCoupon = coupon;
-      this.filterOddsToCoupon();
+      if (coupon) {
+        this.filterOddsToCoupon();
+      }
     });
   }
 
@@ -50,6 +52,9 @@ export class BetoddsComponent implements OnInit {
       this.filterOddsToCoupon();
     }
   }
+  /**
+   *
+   */
   filterOdds() {
     const start = this.page * this.maxItems;
     let end = (this.page + 1) * this.maxItems;

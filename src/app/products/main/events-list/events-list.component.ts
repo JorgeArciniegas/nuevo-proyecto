@@ -2,7 +2,6 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { EventsListService } from './events-list.service';
 import { EventsList } from './event-list.model';
 import { ProductsService } from '../../products.service';
-
 @Component({
   selector: 'app-events-list',
   templateUrl: './events-list.component.html',
@@ -18,7 +17,7 @@ export class EventListComponent implements OnInit, OnDestroy {
   constructor(
     private eventService: EventsListService,
     private productService: ProductsService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.nativeNextEventsItems = this.eventService.genColumns(
@@ -33,6 +32,6 @@ export class EventListComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy() {
-    this.eventService.customUnsubscribe();
+    // this.eventService.customUnsubscribe();
   }
 }

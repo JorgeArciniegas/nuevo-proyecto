@@ -40,10 +40,18 @@ export class WidgetComponent implements OnInit {
    * @param typeObject
    */
   openRouting(typeObject: string): void {
-    const data: BetDataDialog = {
-      title: typeObject.toUpperCase(),
-      statistics: (typeObject === 'statistic') ? this.racingService.getCurrentRace().tm : null
-    };
+    const data: BetDataDialog = { title: typeObject.toUpperCase() };
+    switch (typeObject) {
+      case 'statistic':
+          data.statistics =  {
+            codeProduct: this.productService.product.codeProduct,
+            virtualBetCompetitor: this.racingService.getCurrentRace().tm
+          };
+          break;
+      default:
+          data.statistics = null;
+    }
+
     this.productService.openProductDialog(data);
   }
 }

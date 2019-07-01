@@ -11,10 +11,10 @@
       <StackLayout row="1" colSpan="3" class="m-t-5 border-bottom-overlay"></StackLayout>
     </GridLayout>
     <!-- content data -->
-    <GridLayout row="2" rows="{{rows}}" columns="*,2*,8*" class="p-l-10 statistic-data" *ngIf="data.statistics">
-      <ng-container *ngFor="let stat of data.statistics; let i=index">
+    <GridLayout row="2" rows="{{rows}}" columns="*,2*,8*" class="p-l-10 statistic-data" *ngIf="data.statistics.virtualBetCompetitor">
+      <ng-container *ngFor="let stat of data.statistics.virtualBetCompetitor; let i=index">
         <GridLayout row="{{i}}" col="0" rows="*" columns="*" class="bg-playable">
-          <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-dog-{{stat.ito}}">
+          <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{data.statistics.codeProduct}}-{{stat.ito}}">
             <StackLayout class="label"></StackLayout>
             <Button text="{{stat.ito}}" class="text-center button-internal" isEnabled="false"></Button>
           </GridLayout>

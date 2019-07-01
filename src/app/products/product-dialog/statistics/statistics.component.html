@@ -6,10 +6,10 @@
   </div>
 
   <div fxFlex="90" *ngIf="data.statistics">
-    <div fxLayout="row" fxLayoutGap="grid" fxLayoutAlign="space-between center" *ngFor="let stat of data.statistics"
+    <div fxLayout="row" fxLayoutGap="grid" fxLayoutAlign="space-between center" *ngFor="let stat of data.statistics.virtualBetCompetitor"
       class="statistic-data">
       <div fxFlex="10" fxLayoutAlign="center">
-        <button class="btn btn-default btn-default-dog-play radius-5 btn-dog-{{stat.ito}}" disabled>
+        <button class="btn btn-default btn-default-dog-play radius-5 btn-{{data.statistics.codeProduct}}-{{stat.ito}}" disabled>
           <span>{{stat.ito}}</span>
         </button>
       </div>

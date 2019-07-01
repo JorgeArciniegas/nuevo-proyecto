@@ -3,7 +3,6 @@ import { MainService } from '../main.service';
 import { EventsList, EventList } from './event-list.model';
 import { LAYOUT_TYPE } from '../../../../environments/environment.models';
 import { Subscription } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -11,22 +10,25 @@ export class EventsListService {
   public eventsDetails: EventsList;
   private currentEventSubscription: Subscription;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
+
+  // private currentEventSubscription: Subscription;
   constructor(private mainService: MainService) {
-    // subscribe to the event change
-    this.currentEventSubscription = this.mainService.currentEventSubscribe.subscribe(
+
+     // subscribe to the event change
+     this.mainService.currentEventSubscribe.subscribe(
       event => {
         /**
          * @eventsDetails is passed as input to a list template
          */
-        this.eventsDetails = this.getEventDetailsList();
+        this.getEventDetailsList();
       }
     );
   }
   /**
    * @getEventDetailsList thrown on each event change
-   * @returns next events collection
+   * @returns void
    */
-  public getEventDetailsList(): EventsList {
+  public getEventDetailsList(): void {
     // initialize empty layout object
     console.log('getEventDetailsList');
     this.eventsDetails = { currentEvent: 0, events: [] };
@@ -38,7 +40,6 @@ export class EventsListService {
         eventNumber: race.number
       });
     });
-    return this.eventsDetails;
   }
   // Method to build the number of columns needed to show on the NativeScript template "event-list".
   public genColumns(items: number): string {
@@ -48,8 +49,5 @@ export class EventsListService {
       templateString += ',*';
     }
     return templateString;
-  }
-  customUnsubscribe() {
-    this.currentEventSubscription.unsubscribe();
   }
 }
