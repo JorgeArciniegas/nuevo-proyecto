@@ -1,5 +1,4 @@
-<div>
-  <app-standard [eventControlDetails]="eventControlService.eventControlDetails"
-    *ngIf="productService.product.layoutProducts.type === eventControlService.typeLayout.RACING || productService.product.layoutProducts.type === eventControlService.typeLayout.COCK_FIGHT || productService.product.layoutProducts.type === eventControlService.typeLayout.SOCCER">
-  </app-standard>
-</div>
+<app-standard fxFill [eventControlDetails]="eventControlService.eventControlDetails" *ngIf="productService.product.layoutProducts.type === eventControlService.typeLayout.RACING
+     || productService.product.layoutProducts.type === eventControlService.typeLayout.COCK_FIGHT
+     || productService.product.layoutProducts.type === eventControlService.typeLayout.SOCCER">
+</app-standard>

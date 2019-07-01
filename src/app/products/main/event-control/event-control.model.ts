@@ -4,8 +4,8 @@ export class EventControl {
   currentEvent: CurrentEvent;
   eventLabel: string;
   eventNumber: number;
-  eventTimeMinutes: number;
-  eventTimeSeconds: number;
+  eventTimeMinutes?: number;
+  eventTimeSeconds?: number;
   showEventId: boolean;
 }
 

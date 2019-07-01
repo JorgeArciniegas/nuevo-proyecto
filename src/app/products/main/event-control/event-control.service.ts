@@ -4,7 +4,7 @@ import { MainService } from '../main.service';
 import { EventControl } from './event-control.model';
 import { AppSettings } from 'src/app/app.settings';
 import { ProductsService } from '../../products.service';
-import { Subscription } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,8 @@ import { Subscription } from 'rxjs';
 export class EventControlService {
   public eventsControlDetails: EventControl;
   private currentEventSubscription: Subscription;
+  private currentMinuteSubscription: Subscription;
+  private currentSecondSubscription: Subscription;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   private settings: AppSettings;
   public eventControlDetails: EventControl;
@@ -30,7 +32,6 @@ export class EventControlService {
         this.eventControlDetails = this.getEventControl();
         (this.eventControlDetails.eventTimeMinutes = this.mainService.raceDetails.raceTime.minute),
           (this.eventControlDetails.eventTimeSeconds = this.mainService.raceDetails.raceTime.second);
-        // console.log(this.eventControlDetails);
       }
     );
   }
@@ -54,13 +55,27 @@ export class EventControlService {
       eventNumber: this.mainService.raceDetails.races[
         this.mainService.raceDetails.currentRace
       ].number,
-      eventTimeMinutes: this.mainService.raceDetails.raceTime.minute,
-      eventTimeSeconds: this.mainService.raceDetails.raceTime.second,
       showEventId: this.settings.showRaceId
     };
+    this.getMinutes();
+    this.getSeconds();
     return this.eventsControlDetails;
   }
+  // polling on event minutes count down and update eventsControlDetails.eventTimeMinutes
+  public getMinutes(): void {
+    this.currentMinuteSubscription = timer(0, 1000).subscribe(val => {
+      this.eventsControlDetails.eventTimeMinutes = this.mainService.raceDetails.raceTime.minute;
+    });
+  }
+  // polling on event seconds count down and update eventsControlDetails.eventTimeSeconds
+  public getSeconds(): void {
+    this.currentSecondSubscription = timer(0, 1000).subscribe(val => {
+      this.eventsControlDetails.eventTimeSeconds = this.mainService.raceDetails.raceTime.second;
+    });
+  }
   customUnsubscribe() {
-    this.currentEventSubscription.unsubscribe();
+    // this.currentEventSubscription.unsubscribe();
+    this.currentMinuteSubscription.unsubscribe();
+    this.currentMinuteSubscription.unsubscribe();
   }
 }
