@@ -35,7 +35,7 @@ export class DisplayComponent implements OnInit, OnDestroy {
     public readonly settings: AppSettings,
     public userService: UserService
   ) {
-
+    this.amountPresetPlayer = this.btnService.polyfunctionStakePresetPlayer;
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
       element => {
         this.polyfunctionalValue = element;

@@ -24,12 +24,12 @@ export class StatisticsComponent implements OnInit {
     /**
      * Defined coefficent percentage for fitness status
      */
-    this.data.statistics.sort( (a, b) => a.ito <= b.ito ? -1 : 1 );
-    this.data.statistics.map( item => {
+    this.data.statistics.virtualBetCompetitor.sort( (a, b) => a.ito <= b.ito ? -1 : 1 );
+    this.data.statistics.virtualBetCompetitor.map( item => {
       this.rows += '3*,'; // Indicate the rows text value append to GridLayout
       this.maxDataStatistics += item.ff;
     });
-    this.rows = this.rows.substr(0, this.rows.length -1 );  // removed last `,` to string Rows
+    this.rows = this.rows.substr(0, this.rows.length - 1 );  // removed last `,` to string Rows
     this.maxDataStatistics = this.maxDataStatistics ;
   }
 

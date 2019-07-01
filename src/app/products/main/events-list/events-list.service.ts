@@ -2,19 +2,32 @@ import { Injectable } from '@angular/core';
 import { MainService } from '../main.service';
 import { EventsList, EventList } from './event-list.model';
 import { LAYOUT_TYPE } from '../../../../environments/environment.models';
-
+import { Subscription } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class EventsListService {
   public eventsDetails: EventsList;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
-  constructor(private mainService: MainService) {}
+
+  // private currentEventSubscription: Subscription;
+  constructor(private mainService: MainService) {
+
+     // subscribe to the event change
+     this.mainService.currentEventSubscribe.subscribe(
+      event => {
+        /**
+         * @eventsDetails is passed as input to a list template
+         */
+        this.getEventDetailsList();
+      }
+    );
+  }
   /**
    * @getEventDetailsList thrown on each event change
-   * @returns next events collection
+   * @returns void
    */
-  public getEventDetailsList(): EventsList {
+  public getEventDetailsList(): void {
     // initialize empty layout object
     this.eventsDetails = { currentEvent: 0, events: [] };
     this.eventsDetails.currentEvent = this.mainService.raceDetails.currentRace;
@@ -25,7 +38,6 @@ export class EventsListService {
         eventNumber: race.number
       });
     });
-    return this.eventsDetails;
   }
   // Method to build the number of columns needed to show on the NativeScript template "event-list".
   public genColumns(items: number): string {
@@ -36,4 +48,5 @@ export class EventsListService {
     }
     return templateString;
   }
+
 }

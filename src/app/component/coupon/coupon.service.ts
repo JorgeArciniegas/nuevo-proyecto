@@ -124,7 +124,7 @@ export class CouponService {
     this.oddStakeEditSubject = new Subject<OddsStakeEdit>();
     this.oddStakeEditObs = this.oddStakeEditSubject.asObservable();
     this.oddStakeEditObs.subscribe(item => {
-      if (this.coupon.internal_isReadyToPlace !== null && !this.coupon.internal_isReadyToPlace) {
+      if (this.coupon && this.coupon.hasOwnProperty('internal_isReadyToPlace') && this.coupon.internal_isReadyToPlace !== null) {
         this.oddStakeEdit = item;
       }
     });

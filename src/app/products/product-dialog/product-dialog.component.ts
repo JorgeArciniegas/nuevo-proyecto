@@ -1,17 +1,10 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Inject,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Observable as ObservableIdle } from 'rxjs/Rx';
+import { UserService } from '../../../../src/app/services/user.service';
 import { AppSettings } from '../../app.settings';
 import { CouponService } from '../../component/coupon/coupon.service';
-import { DialogData, BetDataDialog } from '../products.model';
-import { UserService } from '../../../../src/app/services/user.service';
+import { DialogData } from '../products.model';
 @Component({
   selector: 'app-product-dialog',
   templateUrl: './product-dialog.component.html',

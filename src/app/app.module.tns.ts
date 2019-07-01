@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ElysApiModule, ElysApiService } from '@elys/elys-api';
+import { ElysApiModule } from '@elys/elys-api';
 import { ElysCouponModule } from '@elys/elys-coupon';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
@@ -16,7 +16,6 @@ import { AppComponent } from './app.component';
 import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
 import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
 import { SharedModule } from './shared/shared.module';
-import { TranslateUtilityService } from './services/utility/translate-utility.service';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);

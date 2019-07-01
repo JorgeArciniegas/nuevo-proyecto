@@ -600,5 +600,6 @@
 /**
 * Import layout's component
 **/
-@import './results-list/results-list';
-@import './playable-board/playablerace';
+@import './results-list/results-list.tns';
+@import './playable-board/playablerace.tns';
+@import './statistics/statistics.component.tns';
