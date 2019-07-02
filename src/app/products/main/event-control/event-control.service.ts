@@ -30,8 +30,6 @@ export class EventControlService {
          * @eventsDetails is passed as input to a control template
          */
         this.eventControlDetails = this.getEventControl();
-        // (this.eventControlDetails.eventTimeMinutes = this.mainService.raceDetails.raceTime.minute),
-        //   (this.eventControlDetails.eventTimeSeconds = this.mainService.raceDetails.raceTime.second);
       }
     );
   }
