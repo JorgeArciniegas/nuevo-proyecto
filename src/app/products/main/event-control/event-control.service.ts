@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { MainService } from '../main.service';
 import { EventControl } from './event-control.model';
-import { AppSettings } from 'src/app/app.settings';
+import { AppSettings } from '../../../../../src/app/app.settings';
 import { ProductsService } from '../../products.service';
 import { Subscription, timer } from 'rxjs';
 
@@ -40,7 +40,7 @@ export class EventControlService {
    * @returns next events collection
    */
   public getEventControl(): EventControl {
-    // initialize empty layout object
+    // Create layout object
     this.eventsControlDetails = {
       productImageClass: this.productService.product.productSelected
         ? 'PRODUCT-' + this.productService.product.codeProduct + '-BG'
@@ -55,7 +55,9 @@ export class EventControlService {
       eventNumber: this.mainService.raceDetails.races[
         this.mainService.raceDetails.currentRace
       ].number,
-      showEventId: this.settings.showRaceId
+      showEventId: this.settings.showRaceId,
+      isWindowSizeSmall: this.productService.windowSize.small,
+      theme: this.settings.theme
     };
     this.getMinutes();
     this.getSeconds();
@@ -76,6 +78,6 @@ export class EventControlService {
   customUnsubscribe() {
     // this.currentEventSubscription.unsubscribe();
     this.currentMinuteSubscription.unsubscribe();
-    this.currentMinuteSubscription.unsubscribe();
+    this.currentSecondSubscription.unsubscribe();
   }
 }

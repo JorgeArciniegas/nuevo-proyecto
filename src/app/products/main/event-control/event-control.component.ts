@@ -10,10 +10,9 @@ import { ProductsService } from '../../products.service';
 })
 export class EventControlComponent implements OnDestroy {
   public eventControlDetails: EventControl;
-  //  private currentEventSubscription: Subscription;
   constructor(
     private eventControlService: EventControlService,
-    public productService: ProductsService
+    private productService: ProductsService
   ) {}
   ngOnDestroy() {
     this.eventControlService.customUnsubscribe();

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MainService } from '../main.service';
-import { EventsList, EventList } from './event-list.model';
+import { EventsList } from './event-list.model';
 import { LAYOUT_TYPE } from '../../../../environments/environment.models';
 import { Subscription } from 'rxjs';
 @Injectable({
@@ -11,11 +11,9 @@ export class EventsListService {
   private currentEventSubscription: Subscription;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
 
-  // private currentEventSubscription: Subscription;
   constructor(private mainService: MainService) {
-
-     // subscribe to the event change
-     this.mainService.currentEventSubscribe.subscribe(
+    // subscribe to the event change
+    this.currentEventSubscription = this.mainService.currentEventSubscribe.subscribe(
       event => {
         /**
          * @eventsDetails is passed as input to a list template
@@ -30,7 +28,6 @@ export class EventsListService {
    */
   public getEventDetailsList(): void {
     // initialize empty layout object
-    console.log('getEventDetailsList');
     this.eventsDetails = { currentEvent: 0, events: [] };
     this.eventsDetails.currentEvent = this.mainService.raceDetails.currentRace;
     this.mainService.raceDetails.races.forEach(race => {
