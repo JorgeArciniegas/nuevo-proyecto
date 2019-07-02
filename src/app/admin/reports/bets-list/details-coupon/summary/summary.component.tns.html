@@ -18,7 +18,7 @@
   <!-- ROW 2 -->
   <StackLayout row="2" col="0"></StackLayout>
   <StackLayout row="2" col="1" verticalAlignment="bottom">
-    <Label text="{{'DYNAMIC_KEYS.CouponType.'+ data.CouponType | translate }}" textWrap="true"></Label>
+    <Label text="{{'DYNAMIC_KEYS.CouponType.'+ couponType[data.CouponTypeId] | translate }}" textWrap="true"></Label>
     <Label class="sub-title" text="{{ 'BET_TYPE' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="2" col="2" verticalAlignment="bottom">
@@ -40,7 +40,8 @@
     </GridLayout>
   </StackLayout>
   <StackLayout row="2" col="3" verticalAlignment="bottom">
-    <Label text="{{data.Won || ' - ' }}" textWrap="true"></Label>
+    <Label text="{{(data.Won > 0 )? (data.Won | currency : userService.userCurrency : 'symbol-narrow') : '-'}}"
+      textWrap="true"></Label>
     <Label class="sub-title" text="{{ 'WON' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="2" col="4"></StackLayout>
@@ -49,7 +50,8 @@
   <!-- ROW 3 -->
   <StackLayout row="4" col="0"></StackLayout>
   <StackLayout row="4" col="1" colSpan="4" verticalAlignment="bottom">
-    <Label text="{{data.Jackpot || ' - ' }}" textWrap="true"></Label>
+    <Label text="{{(data.Jackpot > 0 )? (data.Jackpot | currency : userService.userCurrency : 'symbol-narrow') : '-'}}"
+      textWrap="true"></Label>
     <Label class="sub-title" text="{{ 'JACKPOT' | translate }}"></Label>
   </StackLayout>
   <!-- DIVIDER -->
@@ -61,15 +63,18 @@
   <!-- ROW 5 -->
   <StackLayout row="7" col="0"></StackLayout>
   <StackLayout row="7" col="1" verticalAlignment="bottom">
-    <Label text="{{data.MaxWin || ' - ' }}" textWrap="true"></Label>
+    <Label text="{{data.MaxWin | currency : userService.userCurrency : 'symbol-narrow' }}" textWrap="true"></Label>
     <Label class="sub-title" text="{{ 'MAX_POTENTIAL_WIN' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="7" col="2" verticalAlignment="bottom">
-    <Label text="{{data.MaxBonus || ' - ' }}" textWrap="true"></Label>
+    <Label *ngIf="data.MaxBonus" text="{{data.MaxBonus | currency : userService.userCurrency : 'symbol-narrow' }}"
+      textWrap="true"></Label>
+    <Label *ngIf="!data.MaxBonus" text="-" textWrap="true"></Label>
     <Label class="sub-title" text="{{ 'BONUS' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="7" col="3" verticalAlignment="bottom">
-    <Label text="{{ data.MaxWin + data.MaxBonus || ' - ' }}" textWrap="true"></Label>
+    <Label text="{{ data.MaxWin + data.MaxBonus | currency : userService.userCurrency : 'symbol-narrow' }}"
+      textWrap="true"></Label>
     <Label class="sub-title" text="{{ 'MAX_POTENTIAL_WIN_WITH_BONUS' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="7" col="4"></StackLayout>
@@ -78,11 +83,11 @@
   <!-- ROW 6 -->
   <StackLayout row="9" col="0"></StackLayout>
   <StackLayout row="9" col="1" verticalAlignment="bottom">
-    <Label text="{{data.MinWin || ' - ' }}" textWrap="true"></Label>
+    <Label text="{{data.MinWin | currency : userService.userCurrency : 'symbol-narrow' }}" textWrap="true"></Label>
     <Label class="sub-title" text="{{ 'MIN_POTENTIAL_WIN' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="9" col="2" verticalAlignment="bottom">
-    <Label text="{{data.Stake || ' - ' }}" textWrap="true"></Label>
+    <Label text="{{data.Stake | currency : userService.userCurrency : 'symbol-narrow' }}" textWrap="true"></Label>
     <Label class="sub-title" text="{{ 'STAKE' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="9" col="3"></StackLayout>
