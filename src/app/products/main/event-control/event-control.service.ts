@@ -39,8 +39,8 @@ export class EventControlService {
     );
   }
   /**
-   * @getEventDetailsList thrown on each event change
-   * @returns next events collection
+   * @getEventControl thrown on each event change
+   * @returns event info object
    */
   public getEventControl(): EventControl {
     // Create layout object
