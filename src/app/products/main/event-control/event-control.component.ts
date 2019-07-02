@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { EventControlService } from './event-control.service';
 import { EventControl } from './event-control.model';
 import { ProductsService } from '../../products.service';
@@ -8,13 +8,10 @@ import { ProductsService } from '../../products.service';
   templateUrl: './event-control.component.html',
   styleUrls: ['./event-control.component.scss']
 })
-export class EventControlComponent implements OnDestroy {
+export class EventControlComponent {
   public eventControlDetails: EventControl;
   constructor(
     private eventControlService: EventControlService,
     private productService: ProductsService
   ) {}
-  ngOnDestroy() {
-    this.eventControlService.customUnsubscribe();
-  }
 }

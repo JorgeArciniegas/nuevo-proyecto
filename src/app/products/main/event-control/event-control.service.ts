@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { MainService } from '../main.service';
 import { EventControl } from './event-control.model';
@@ -26,8 +26,13 @@ export class EventControlService {
     this.settings = this.appSettings;
     this.currentEventSubscription = this.mainService.currentEventSubscribe.subscribe(
       event => {
+        // Reset polling on timer when event changes
+        // check if timer subscriptions exist, if so unsubscribe them.
+        if (this.currentMinuteSubscription && this.currentSecondSubscription) {
+          this.timerUnsubscribe();
+        }
         /**
-         * @eventsDetails is passed as input to a control template
+         * @eventControlDetails is passed as input to a control template
          */
         this.eventControlDetails = this.getEventControl();
       }
@@ -57,24 +62,24 @@ export class EventControlService {
       isWindowSizeSmall: this.productService.windowSize.small,
       theme: this.settings.theme
     };
+
     this.getMinutes();
     this.getSeconds();
     return this.eventsControlDetails;
   }
   // polling on event minutes count down and update eventsControlDetails.eventTimeMinutes
   public getMinutes(): void {
-    this.currentMinuteSubscription = timer(0, 500).subscribe(val => {
+    this.currentMinuteSubscription = timer(0, 100).subscribe(val => {
       this.eventsControlDetails.eventTimeMinutes = this.mainService.raceDetails.raceTime.minute;
     });
   }
   // polling on event seconds count down and update eventsControlDetails.eventTimeSeconds
   public getSeconds(): void {
-    this.currentSecondSubscription = timer(0, 500).subscribe(val => {
+    this.currentSecondSubscription = timer(0, 100).subscribe(val => {
       this.eventsControlDetails.eventTimeSeconds = this.mainService.raceDetails.raceTime.second;
     });
   }
-  customUnsubscribe() {
-    // this.currentEventSubscription.unsubscribe();
+  timerUnsubscribe() {
     this.currentMinuteSubscription.unsubscribe();
     this.currentSecondSubscription.unsubscribe();
   }
