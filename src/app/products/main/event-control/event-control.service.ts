@@ -30,8 +30,8 @@ export class EventControlService {
          * @eventsDetails is passed as input to a control template
          */
         this.eventControlDetails = this.getEventControl();
-        (this.eventControlDetails.eventTimeMinutes = this.mainService.raceDetails.raceTime.minute),
-          (this.eventControlDetails.eventTimeSeconds = this.mainService.raceDetails.raceTime.second);
+        // (this.eventControlDetails.eventTimeMinutes = this.mainService.raceDetails.raceTime.minute),
+        //   (this.eventControlDetails.eventTimeSeconds = this.mainService.raceDetails.raceTime.second);
       }
     );
   }
@@ -65,13 +65,13 @@ export class EventControlService {
   }
   // polling on event minutes count down and update eventsControlDetails.eventTimeMinutes
   public getMinutes(): void {
-    this.currentMinuteSubscription = timer(0, 1000).subscribe(val => {
+    this.currentMinuteSubscription = timer(0, 500).subscribe(val => {
       this.eventsControlDetails.eventTimeMinutes = this.mainService.raceDetails.raceTime.minute;
     });
   }
   // polling on event seconds count down and update eventsControlDetails.eventTimeSeconds
   public getSeconds(): void {
-    this.currentSecondSubscription = timer(0, 1000).subscribe(val => {
+    this.currentSecondSubscription = timer(0, 500).subscribe(val => {
       this.eventsControlDetails.eventTimeSeconds = this.mainService.raceDetails.raceTime.second;
     });
   }
