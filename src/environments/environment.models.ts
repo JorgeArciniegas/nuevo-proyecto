@@ -10,7 +10,7 @@ export interface Environment {
   supportedLang?: string[];
   currency?: string;
   products: Products[];
-  showRaceId: boolean;
+  showEventId: boolean;
   couponMessageTrasmitted?: string;
   couponMessageLegal?: string;
   isEnabledReprintCoupon: boolean;

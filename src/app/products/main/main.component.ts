@@ -35,7 +35,7 @@ export class MainComponent implements OnInit {
   }
 
   placingLucky(lucky: Lucky): void {
-    this.mainService.resetPlayRacing();
+    this.mainService.resetPlayEvent();
     let n = '';
     // extract  lucky
     for (let i = 1; i <= lucky; i++) {

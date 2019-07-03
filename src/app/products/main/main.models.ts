@@ -1,4 +1,4 @@
-export enum TypePlacingRace {
+export enum TypePlacingEvent {
   ST = 0,
   ACCG = 1,
   R = 2
@@ -60,12 +60,12 @@ export enum TypeBetSlipColTot {
   TOT
 }
 
-export class PlacingRace {
-  raceNumber: number;
-  typePlace: TypePlacingRace;
+export class PlacingEvent {
+  eventNumber: number;
+  typePlace: TypePlacingEvent;
   secondRowDisabled: boolean;
   thirdRowDisabled: boolean;
-  dogs: Runner[];
+  players: Player[];
   amount: number;
   repeat: number;
   isSpecialBets: boolean;
@@ -73,18 +73,18 @@ export class PlacingRace {
   timeBlocked: boolean;
   smartcode?: SmartCodeType;
   constructor() {
-    this.raceNumber = 0;
+    this.eventNumber = 0;
     this.repeat = 1;
     this.amount = 0;
     this.isSpecialBets = false;
-    this.dogs = [];
+    this.players = [];
     this.secondRowDisabled = false;
     this.thirdRowDisabled = false;
     // this.dogs = new Dog();
   }
 }
 
-export class Runner {
+export class Player {
   number: number;
   selectable: boolean;
   actived: boolean;
@@ -107,23 +107,15 @@ export class EventInfo {
   date: Date;
 }
 
-export class RaceDetail {
-  constructor() {
-    this.raceTime = new EventTime();
-    this.races = new Array(5);
-    this.currentRace = 0;
+export class EventDetail {
+  constructor(eventsToShow: number) {
+    this.eventTime = new EventTime();
+    this.events = new Array(eventsToShow);
+    this.currentEvent = 0;
   }
-  raceTime: EventTime;
-  races: EventInfo[];
-  currentRace: number;
-}
-
-export class RaceResult {
-  raceLabel: string;
-  raceNumber: number;
-  firstPlace: number;
-  secondPlace: number;
-  thirdPlace: number;
+  eventTime: EventTime;
+  events: EventInfo[];
+  currentEvent: number;
 }
 
 export class Smartcode {

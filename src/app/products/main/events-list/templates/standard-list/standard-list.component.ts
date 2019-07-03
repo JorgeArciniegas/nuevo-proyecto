@@ -13,7 +13,7 @@ export class StandardListComponent {
   @Input() eventsList: EventsList;
   constructor(private mainService: MainService) {}
 
-  raceSelecting(selected: number) {
-    this.mainService.fireCurrentRaceChange(selected, true);
+  eventSelecting(selected: number) {
+    this.mainService.fireCurrentEventChange(selected, true);
   }
 }

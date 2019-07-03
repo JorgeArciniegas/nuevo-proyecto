@@ -131,7 +131,7 @@ export const environment: Environment = {
       widgets: []
     }
   ],
-  showRaceId: true,
+  showEventId: true,
   isEnabledReprintCoupon: true,
   couponMessageTrasmitted:
     'Mandate transmitted via the Internet andaccepted on the',

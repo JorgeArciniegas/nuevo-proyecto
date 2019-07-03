@@ -29,12 +29,12 @@ export class EventsListService {
   public getEventDetailsList(): void {
     // initialize empty layout object
     this.eventsDetails = { currentEvent: 0, events: [] };
-    this.eventsDetails.currentEvent = this.mainService.raceDetails.currentRace;
-    this.mainService.raceDetails.races.forEach(race => {
+    this.eventsDetails.currentEvent = this.mainService.eventDetails.currentEvent;
+    this.mainService.eventDetails.events.forEach(event => {
       this.eventsDetails.events.push({
-        eventLabel: race.label,
-        eventStart: race.date,
-        eventNumber: race.number
+        eventLabel: event.label,
+        eventStart: event.date,
+        eventNumber: event.number
       });
     });
   }

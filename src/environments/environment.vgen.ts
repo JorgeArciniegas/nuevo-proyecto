@@ -125,7 +125,7 @@ export const environment: Environment = {
     }
   ],
   isEnabledReprintCoupon: true,
-  showRaceId: true,
+  showEventId: true,
   couponMessageTrasmitted:
     'Mandate transmitted via the Internet andaccepted on the',
   // tslint:disable-next-line:max-line-length

@@ -11,7 +11,7 @@ export class AppSettings {
   theme: string = environment.theme;
   supportedLang: string[] = environment.supportedLang;
   products: Products[] = environment.products;
-  showRaceId: boolean = environment.showRaceId;
+  showEventId: boolean = environment.showEventId;
   couponMessageTrasmitted: string = environment.couponMessageTrasmitted;
   couponMessageLegal: string = environment.couponMessageLegal;
   defaultAmount: CouponPresetValues = environment.defaultAmount;
