@@ -2,6 +2,8 @@ import { CouponPresetValues } from '@elys/elys-api';
 
 export interface Environment {
   production: boolean;
+  companyDetails: string;
+  license: LICENSE_TYPE;
   baseApiUrl?: string;
   staging?: boolean;
   pageTitle?: string;
@@ -10,6 +12,7 @@ export interface Environment {
   supportedLang?: string[];
   currency?: string;
   products: Products[];
+  printSettings: PrintSettings;
   showRaceId: boolean;
   couponMessageTrasmitted?: string;
   couponMessageLegal?: string;
@@ -45,6 +48,12 @@ export interface Widget {
   icon: string;
 }
 
+// Setting on the print feature
+export interface PrintSettings {
+  isEnabledReprintCoupon: boolean;
+  isTrasmitionInfoMessageShown: boolean;
+}
+
 export enum WidgetTypeLink {
   MODAL,
   OUTLET
@@ -68,3 +77,5 @@ export enum LAYOUT_TYPE {
   SOCCER,
   KENO
 }
+
+export enum LICENSE_TYPE {}

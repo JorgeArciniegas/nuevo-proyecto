@@ -3,6 +3,7 @@ import { CouponType, StagedCoupon, CouponStatus } from '@elys/elys-api';
 import { Printer } from 'nativescript-printer';
 import { AppSettings } from '../../../app.settings';
 import { PrintCouponService } from './print-coupon.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-print-coupon',
@@ -15,8 +16,7 @@ export class PrintCouponComponent {
   couponStatus: typeof CouponStatus = CouponStatus;
   couponType: typeof CouponType = CouponType;
   @ViewChild('printing') view: ElementRef;
-  constructor(public printCouponService: PrintCouponService, public appSetting: AppSettings) {
-  }
+  constructor(public printCouponService: PrintCouponService, public appSetting: AppSettings, public userService: UserService) {}
 
   print(): void {
     this.printer

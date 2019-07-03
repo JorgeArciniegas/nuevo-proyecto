@@ -63,17 +63,19 @@
   <!-- ROW 5 -->
   <StackLayout row="7" col="0"></StackLayout>
   <StackLayout row="7" col="1" verticalAlignment="bottom">
-    <Label text="{{data.MaxWin | currency : userService.userCurrency : 'symbol-narrow' }}" textWrap="true"></Label>
+    <Label text="{{(data.MaxWin > 0 )? (data.MaxWin | currency : userService.userCurrency : 'symbol-narrow') : '-'}}"
+      textWrap="true"></Label>
     <Label class="sub-title" text="{{ 'MAX_POTENTIAL_WIN' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="7" col="2" verticalAlignment="bottom">
-    <Label *ngIf="data.MaxBonus" text="{{data.MaxBonus | currency : userService.userCurrency : 'symbol-narrow' }}"
+    <Label
+      text="{{(data.MaxBonus > 0 )? (data.MaxBonus | currency : userService.userCurrency : 'symbol-narrow') : '-'}}"
       textWrap="true"></Label>
-    <Label *ngIf="!data.MaxBonus" text="-" textWrap="true"></Label>
     <Label class="sub-title" text="{{ 'BONUS' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="7" col="3" verticalAlignment="bottom">
-    <Label text="{{ data.MaxWin + data.MaxBonus | currency : userService.userCurrency : 'symbol-narrow' }}"
+    <Label
+      text="{{((data.MaxWin + data.MaxBonus) > 0 )? ((data.MaxWin + data.MaxBonus) | currency : userService.userCurrency : 'symbol-narrow') : '-'}}"
       textWrap="true"></Label>
     <Label class="sub-title" text="{{ 'MAX_POTENTIAL_WIN_WITH_BONUS' | translate }}"></Label>
   </StackLayout>
@@ -83,11 +85,13 @@
   <!-- ROW 6 -->
   <StackLayout row="9" col="0"></StackLayout>
   <StackLayout row="9" col="1" verticalAlignment="bottom">
-    <Label text="{{data.MinWin | currency : userService.userCurrency : 'symbol-narrow' }}" textWrap="true"></Label>
+    <Label text="{{(data.MinWin > 0 )? (data.MinWin | currency : userService.userCurrency : 'symbol-narrow') : '-'}}"
+      textWrap="true"></Label>
     <Label class="sub-title" text="{{ 'MIN_POTENTIAL_WIN' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="9" col="2" verticalAlignment="bottom">
-    <Label text="{{data.Stake | currency : userService.userCurrency : 'symbol-narrow' }}" textWrap="true"></Label>
+    <Label text="{{(data.Stake > 0 )? (data.Stake | currency : userService.userCurrency : 'symbol-narrow') : '-'}}"
+      textWrap="true"></Label>
     <Label class="sub-title" text="{{ 'STAKE' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="9" col="3"></StackLayout>

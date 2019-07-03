@@ -30,6 +30,7 @@
   "DATE": "Data",
   "DATE_FROM": "Data da",
   "DATE_OF_PLACEMENT": "Data piazzamento",
+  "DATE_OF_REPRINT": "Data ristampa",
   "DATE_TO": "Data a",
   "DELETE": "Cancella",
   "DELETED_ON": "Annullata il",
@@ -171,7 +172,7 @@
         "FOOTBALL_ENG": "Calcio ENG",
         "FOOTBALL_ITA": "Calcio ITA",
         "HORSE": "Ippica",
-        "HORSE_VIRTUAL": "Corsa dai cavalli virtuali"
+        "HORSE_VIRTUAL": "Corsa dei cavalli virtuali"
       },
       "NAME": {
         "ALL": "Tutti",
