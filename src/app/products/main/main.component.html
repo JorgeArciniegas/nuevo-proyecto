@@ -35,7 +35,7 @@
     </mat-grid-tile>
   </mat-grid-list>
 </div>
-<div *ngIf="mainService.placingRace.timeBlocked" id="overlayArea1"
+<div *ngIf="mainService.placingEvent.timeBlocked" id="overlayArea1"
   [style.top.px]="(productService.windowSize.height - productService.windowSize.columnHeight) + 12 + (rowHeight * 5)"
   [style.left.px]="0" [style.width]="'calc(59% - 2px)'" [style.height.px]="rowHeight * 10" class="overlay radius-5">
 </div>

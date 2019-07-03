@@ -3,7 +3,7 @@ import { Environment } from './environment.models';
 export const environment: Environment = {
   production: true,
   products: [],
-  showRaceId: true,
+  showEventId: true,
   isEnabledReprintCoupon: false,
   couponDirectPlace: false,
   currencyDefault: 'EUR'
