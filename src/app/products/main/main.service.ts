@@ -30,7 +30,6 @@ import {
   Podium,
   EventInfo,
   EventDetail,
-  // RaceResult,
   EventTime,
   Smartcode,
   SmartCodeType,
@@ -418,7 +417,7 @@ export class MainService extends MainServiceExtra {
   }
 
   /**
-   * PLACING THE DOG SELECTED INSIDE TO POLYFUNCTIONAL AREA AND SMARTBET
+   * PLACING THE PLAYER SELECTED INSIDE TO POLYFUNCTIONAL AREA AND SMARTBET
    * @param player
    */
   placingOdd(player: Player): void {
@@ -483,7 +482,7 @@ export class MainService extends MainServiceExtra {
         this.placingEvent.typePlace !== undefined &&
         this.placingEvent.typePlace !== 2
       ) {
-        // deselect all dogs in the row #3
+        // deselect all players in the row #3
         this.deselectRowPlayers(3);
         this.placingEvent.thirdRowDisabled = true;
       } else {
@@ -530,12 +529,12 @@ export class MainService extends MainServiceExtra {
   }
 
   RNGLuckyPlacing(playerNumber: number, playerPosition: number): void {
-    // extract the dog
+    // extract the player
     const playerExtract: Player = this.playersList.filter(
       player =>
         player.position === playerPosition && player.number === playerNumber
     )[0];
-    // place the dog
+    // place the player
     this.placingOdd(playerExtract);
   }
 
@@ -558,7 +557,7 @@ export class MainService extends MainServiceExtra {
         // single selection
         areaFuncData.selection = Podium[this.placingEvent.players[0].position];
         areaFuncData.value = this.placingEvent.players[0].number;
-        // match dog from object tm with mk
+        // match player from object tm with mk
         playerName = odd.tm.filter(t => t.ito === areaFuncData.value)[0].nm;
       } else if (
         (this.placingEvent.players.length > 1 &&
@@ -967,7 +966,7 @@ export class MainService extends MainServiceExtra {
           this.smartCode.selWinner.length === 1 &&
           this.smartCode.selPlaced.length === 1
         ) {
-          // Only a dog is selected on the first and second row the result is a single "Combination".
+          // Only a player is selected on the first and second row the result is a single "Combination".
           // Sort the selections
           if (this.smartCode.selWinner[0] > this.smartCode.selPlaced[0]) {
             areaFuncData.value =

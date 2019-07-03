@@ -118,14 +118,6 @@ export class EventDetail {
   currentEvent: number;
 }
 
-// export class RaceResult {
-//   raceLabel: string;
-//   raceNumber: number;
-//   firstPlace: number;
-//   secondPlace: number;
-//   thirdPlace: number;
-// }
-
 export class Smartcode {
   code: string;
   selWinner: number[];
