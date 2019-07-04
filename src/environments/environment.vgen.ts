@@ -1,7 +1,11 @@
-import { Environment, WidgetTypeLink, LAYOUT_TYPE } from './environment.models';
+import { Environment, WidgetTypeLink, LAYOUT_TYPE, LICENSE_TYPE } from './environment.models';
 
 export const environment: Environment = {
   production: false,
+  // tslint:disable-next-line:max-line-length
+  bookmakerDetails:
+    'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
+  license: LICENSE_TYPE.DEMO_LICENSE,
   baseApiUrl: 'https://apidemo.vg-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
@@ -124,11 +128,9 @@ export const environment: Environment = {
       widgets: []
     }
   ],
-  isEnabledReprintCoupon: true,
   showRaceId: true,
-  couponMessageTrasmitted:
-    'Mandate transmitted via the Internet andaccepted on the',
-  // tslint:disable-next-line:max-line-length
-  couponMessageLegal:
-    'Lorem ipsum dolor sit amet, consecteturadipisicing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Utenim ad minim veniam'
+  printSettings: {
+    isEnabledReprintCoupon: true,
+    isTrasmitionInfoMessageShown: true
+  }
 };

@@ -2,7 +2,7 @@ import { CouponPresetValues } from '@elys/elys-api';
 
 export interface Environment {
   production: boolean;
-  companyDetails: string;
+  bookmakerDetails: string;
   license: LICENSE_TYPE;
   baseApiUrl?: string;
   staging?: boolean;
@@ -16,7 +16,6 @@ export interface Environment {
   showRaceId: boolean;
   couponMessageTrasmitted?: string;
   couponMessageLegal?: string;
-  isEnabledReprintCoupon: boolean;
   defaultAmount?: CouponPresetValues;
   couponDirectPlace: boolean;
   currencyDefault: string;
@@ -78,4 +77,7 @@ export enum LAYOUT_TYPE {
   KENO
 }
 
-export enum LICENSE_TYPE {}
+// Bookmaker's identifier
+export enum LICENSE_TYPE {
+  DEMO_LICENSE
+}

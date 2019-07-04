@@ -3,7 +3,7 @@
     <img class="logo-print-coupon padding-10">
     <div class="header-content">
       <div class="padding-5 font-size-normal">
-        {{ 'PRINT.HEADER_MSG' | translate }}
+        {{appSetting.bookmakerDetails}}
       </div>
       <div class="qr-code">
         <qr-code [value]="printCouponService.couponPrint.CouponCode" [size]="50"></qr-code>
@@ -113,9 +113,11 @@
       </div>
     </div>
     <div class="betslip-other-info">
-      <div class="message-company-trasmitted font-size-normal">{{appSetting.couponMessageTrasmitted}}
+      <div *ngIf="appSetting.printSettings.isTrasmitionInfoMessageShown"
+        class="message-company-trasmitted font-size-normal">{{'PRINT_COUPON.TRANSMISSION_MESSAGE' | translate}}
         {{ printCouponService.couponPrint.CouponDateOffset | date : 'dd/MM/yyyy HH:mm:ss' }} </div>
-      <div class="message-company-legal font-size-normal">{{appSetting.couponMessageLegal}}</div>
+      <div class="message-company-legal font-size-normal">
+        {{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSetting.license] | translate}}</div>
     </div>
   </div>
   <div class="footer">
