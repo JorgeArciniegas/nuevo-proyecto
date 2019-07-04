@@ -5,7 +5,7 @@ export const environment: Environment = {
   baseApiUrl: 'https://apidemo.vg-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
-  couponDirectPlace: false,
+  couponDirectPlace: true,
   currencyDefault: 'EUR',
   supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
   defaultAmount: {
