@@ -131,10 +131,19 @@ export class BetoddsComponent implements OnInit {
       odd.SelectionId
     );
     this.couponService.addRemoveToCoupon([betOdd]);
+    this.couponService.isBtnCalcEditable = false;
   }
 
   // change stake from odd's coupon
   checkOddToChangeStake(odd: BetCouponOdd): void {
+    this.couponService.isBtnCalcEditable = true;
+    if (
+      this.couponService.oddStakeEdit &&
+      this.couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId
+    ) {
+      this.couponService.isBtnCalcEditable = false;
+    }
+
     this.couponService.checkOddToChangeStake(odd);
   }
 }

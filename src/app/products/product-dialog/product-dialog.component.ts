@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Observable as ObservableIdle } from 'rxjs/Rx';
 import { UserService } from '../../../../src/app/services/user.service';
@@ -61,6 +68,7 @@ export class ProductDialogComponent implements OnInit, AfterViewInit {
       });
   }
   close(): void {
+    this.couponService.isBtnCalcEditable = false;
     this.dialogRef.close();
     this.userservice.isModalOpen = false;
     this.couponService.oddStakeEditSubject.next(null);

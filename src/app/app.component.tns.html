@@ -20,6 +20,16 @@
       <router-outlet name="print"></router-outlet>
     </StackLayout>
   </GridLayout>
-
-
+  <StackLayout class="overlay radius-5" verticalAlignment="center" *ngIf="userService.isModalOpen">
+    <Image stretch="aspectFit" width="100" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png"
+      horizontalAlignment="center" verticalAlignment="center">
+    </Image>
+  </StackLayout>
+  <!-- <GridLayout col="2" class="overlay radius-5" marginRight="6" *ngIf="userService.isModalOpen">
+    <StackLayout class="overlay radius-5" verticalAlignment="center" *ngIf="userService.isModalOpen">
+      <Image stretch="aspectFit" width="100" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png"
+        horizontalAlignment="center" verticalAlignment="center">
+      </Image>
+    </StackLayout>
+  </GridLayout> -->
 </Page>

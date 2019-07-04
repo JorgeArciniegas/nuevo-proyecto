@@ -73,7 +73,7 @@
           <app-advance-game fxFlexFill [rowHeight]="rowHeight" class="padding-horizontal-6"></app-advance-game>
         </mat-grid-tile>
         <!-- Keyboard -->
-        <mat-grid-tile rowspan="6">
+        <mat-grid-tile rowspan="6" [ngClass]="{'bypass-overlay': couponService.isBtnCalcEditable}">
           <app-btncalc [rowHeight]="rowHeight"></app-btncalc>
         </mat-grid-tile>
         <!-- Payment/cancellation coupon area -->

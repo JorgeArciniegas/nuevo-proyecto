@@ -13,7 +13,6 @@ import { ProductsService } from '../../products.service';
   styleUrls: ['./betodds.component.tns.scss']
 })
 export class BetoddsComponent implements OnInit {
-
   private rowNumber = 3;
   public columnNumber = 3;
 
@@ -41,7 +40,10 @@ export class BetoddsComponent implements OnInit {
     public readonly couponService: CouponService
   ) {
     this.settings = appSettings;
-    if (this.productService.windowSize && this.productService.windowSize.small) {
+    if (
+      this.productService.windowSize &&
+      this.productService.windowSize.small
+    ) {
       this.rowNumber = 2;
     }
 
@@ -142,15 +144,23 @@ export class BetoddsComponent implements OnInit {
   close(): void {
     this.couponService.oddStakeEditSubject.next(null);
     this.dialog.showDialog = false;
+    this.couponService.isBtnCalcEditable = false;
   }
 
   removeOdd(odd: BetCouponOddExtended): void {
-    const betOdd: BetOdd = new BetOdd(odd.SelectionName, odd.OddValue, odd.OddStake, odd.SelectionId);
+    const betOdd: BetOdd = new BetOdd(
+      odd.SelectionName,
+      odd.OddValue,
+      odd.OddStake,
+      odd.SelectionId
+    );
     this.couponService.addRemoveToCoupon([betOdd]);
+    this.couponService.isBtnCalcEditable = false;
   }
 
   // change stake from odd's coupon
   checkOddToChangeStake(odd: BetCouponOdd): void {
+    this.couponService.isBtnCalcEditable = true;
     this.couponService.checkOddToChangeStake(odd);
   }
 }
