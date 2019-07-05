@@ -110,7 +110,7 @@
               <strong>{{rowItem.CouponDateOffset | date: 'dd/MM/yy HH:mm:ss' }}</strong>
             </div>
             <div fxFlex="7">
-              <strong>{{rowItem.Stake  }}</strong>
+              <strong>{{rowItem.Stake | currency : userService.userCurrency : 'symbol-narrow'}}</strong>
             </div>
             <div fxFlex="7" fxLayoutAlign="center">
               <ng-container [ngSwitch]="rowItem.CouponStatusId">
@@ -127,7 +127,7 @@
               <strong>{{ 'DYNAMIC_KEYS.CouponType.'+couponType[rowItem.CouponTypeId] | translate }}</strong>
             </div>
             <div fxFlex="12">
-              <strong>{{ (rowItem.Won > 0 )? rowItem.Won : '-'  }}</strong>
+              <strong>{{ (rowItem.Won > 0 )? (rowItem.Won | currency : userService.userCurrency : 'symbol-narrow') : '-'  }}</strong>
             </div>
           </div>
         </div>
@@ -147,7 +147,9 @@
           </div>
           <div fxFlex="10">
             <div class="value">
-              <h2>{{ betsListService.betsCouponList.TotalStake | number: '1.2-2' }} </h2>
+              <h2>
+                {{ betsListService.betsCouponList.TotalStake | currency : userService.userCurrency : 'symbol-narrow' }}
+              </h2>
             </div>
             <div><small data='disabled'>{{ 'TOT_BET' | translate }}</small></div>
           </div>
@@ -159,7 +161,9 @@
           </div>
           <div fxFlex="10">
             <div class="value">
-              <h2>{{ betsListService.betsCouponList.TotalPlacedBets | number }} </h2>
+              <h2>
+                {{ betsListService.betsCouponList.TotalPlacedBets | currency : userService.userCurrency : 'symbol-narrow' }}
+              </h2>
             </div>
             <div><small data='disabled'>{{ 'TOT_OPEN' | translate }}</small></div>
           </div>
@@ -171,7 +175,8 @@
           </div>
           <div fxFlex="10">
             <div class="value">
-              <h2>{{ betsListService.betsCouponList.TotalWon | number }} </h2>
+              <h2>{{ betsListService.betsCouponList.TotalWon | currency : userService.userCurrency : 'symbol-narrow' }}
+              </h2>
             </div>
             <div><small data='disabled'>{{ 'TOT_WON' | translate }}</small></div>
           </div>
@@ -183,7 +188,8 @@
           </div>
           <div fxFlex="10">
             <div class="value">
-              <h2>{{ betsListService.betsCouponList.TotalLost | number }} </h2>
+              <h2>{{ betsListService.betsCouponList.TotalLost | currency : userService.userCurrency : 'symbol-narrow' }}
+              </h2>
             </div>
             <div><small data='disabled'>{{ 'TOT_LOST' | translate }}</small></div>
           </div>

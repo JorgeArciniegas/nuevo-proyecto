@@ -30,6 +30,7 @@
   "DATE": "Date",
   "DATE_FROM": "Date from",
   "DATE_OF_PLACEMENT": "Date of placement",
+  "DATE_OF_REPRINT": "Date of reprint",
   "DATE_TO": "Date to",
   "DELETE": "Delete",
   "DELETED_ON": "Deleted on",
@@ -165,6 +166,11 @@
       "SingleBet": "Single bet",
       "Unknown": "Unknown"
     },
+    "PRINT_COUPON": {
+      "LICENSE_MESSAGE": {
+        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua."
+      }
+    },
     "PRODUCT": {
       "LABEL": {
         "DOG": "Greyhounds",
@@ -262,7 +268,7 @@
   "PAYMENT_DATE": "Payment date",
   "PLACEMENT": "Placement",
   "PRINT": "Print",
-  "PRINT.HEADER_MSG": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad",
+  "PRINT_COUPON.TRANSMISSION_MESSAGE": "Mandate transmitted via the Internet and accepted on the",
   "PRODUCT_FILTER": "Product filter",
   "R": "R",
   "REPORTS": "Reports",

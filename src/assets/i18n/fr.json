@@ -30,6 +30,7 @@
   "DATE": "Date",
   "DATE_FROM": "Data da",
   "DATE_OF_PLACEMENT": "Data piazzamento",
+  "DATE_OF_REPRINT": "Data ristampa",
   "DATE_TO": "Data a",
   "DELETE": "Cancella",
   "DELETED_ON": "Annullata il",
@@ -165,6 +166,11 @@
       "SingleBet": "Pari simple",
       "Unknown": "Sconosciuta"
     },
+    "PRINT_COUPON": {
+      "LICENSE_MESSAGE": {
+        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua."
+      }
+    },
     "PRODUCT": {
       "LABEL": {
         "DOG": "Lévriers",
@@ -262,7 +268,7 @@
   "PAYMENT_DATE": "Data pagamento",
   "PLACEMENT": "Piazzamento",
   "PRINT": "Stampa",
-  "PRINT.HEADER_MSG": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad",
+  "PRINT_COUPON.TRANSMISSION_MESSAGE": "Mandate transmitted via the Internet and accepted on the",
   "PRODUCT_FILTER": "Filtro prodotto",
   "R": "R",
   "REPORTS": "Reports",
