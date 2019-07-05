@@ -177,7 +177,7 @@
         "FOOTBALL_ENG": "Calcio ENG",
         "FOOTBALL_ITA": "Calcio ITA",
         "HORSE": "Pferde",
-        "HORSE_VIRTUAL": "Corsa dai cavalli virtuali"
+        "HORSE_VIRTUAL": "Corsa dei cavalli virtuali"
       },
       "NAME": {
         "ALL": "Tutti",
@@ -217,23 +217,23 @@
     "SMARTCODE": {
       "1VA": "Z. m. Feld",
       "AB": "AB",
-      "AO": "Zweierwette",
-      "AOX": "Acc. in ordine",
+      "AO": "ACO",
+      "AOX": "ACO",
       "AR": "AR",
       "AS": "Zwillingswette Box",
-      "AT": "AT",
-      "AX": "AX",
+      "AT": "A2X",
+      "AX": "ACG",
       "EVEN": "Gerade",
       "ODD": "Ungerade",
       "OVER": "Über",
       "PLACED": "Platziert",
       "SHOW": "Zeigen",
-      "T": "Dreierwette",
+      "T": "T3X",
       "TNX": "TNX",
-      "TOX": "Dreierwette",
-      "TR": "TR",
+      "TOX": "T3X",
+      "TR": "T3X",
       "UNDER": "Unter",
-      "VT": "VT",
+      "VT": "VX",
       "WINNER": "Gewinner"
     }
   },

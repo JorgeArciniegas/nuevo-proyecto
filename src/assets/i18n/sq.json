@@ -177,7 +177,7 @@
         "FOOTBALL_ENG": "Calcio ENG",
         "FOOTBALL_ITA": "Calcio ITA",
         "HORSE": "Kuaj",
-        "HORSE_VIRTUAL": "Corsa dai cavalli virtuali"
+        "HORSE_VIRTUAL": "Corsa dei cavalli virtuali"
       },
       "NAME": {
         "ALL": "Tutti",
@@ -217,23 +217,23 @@
     "SMARTCODE": {
       "1VA": "Dy te paret",
       "AB": "AB",
-      "AO": "Dyshja fituese",
-      "AOX": "Acc. in ordine",
+      "AO": "ACO",
+      "AOX": "ACO",
       "AR": "AR",
       "AS": "Dy te paret",
-      "AT": "AT",
-      "AX": "AX",
+      "AT": "A2X",
+      "AX": "ACG",
       "EVEN": "Cift",
       "ODD": "Tek",
       "OVER": "Larte",
       "PLACED": "Ze vendin e",
       "SHOW": "Podium",
-      "T": "Treshja fituese",
+      "T": "T3X",
       "TNX": "TNX",
-      "TOX": "Treshja fituese",
-      "TR": "TR",
+      "TOX": "T3X",
+      "TR": "T3X",
       "UNDER": "Poshte",
-      "VT": "VT",
+      "VT": "VX",
       "WINNER": "Fitues"
     }
   },

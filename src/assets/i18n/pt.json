@@ -177,7 +177,7 @@
         "FOOTBALL_ENG": "Calcio ENG",
         "FOOTBALL_ITA": "Calcio ITA",
         "HORSE": "Cavalos",
-        "HORSE_VIRTUAL": "Corsa dai cavalli virtuali"
+        "HORSE_VIRTUAL": "Corsa dei cavalli virtuali"
       },
       "NAME": {
         "ALL": "Tutti",
@@ -217,23 +217,23 @@
     "SMARTCODE": {
       "1VA": "Exata v.",
       "AB": "AB",
-      "AO": "Exata",
-      "AOX": "Acc. in ordine",
+      "AO": "ACO",
+      "AOX": "ACO",
       "AR": "AR",
       "AS": "Dupla",
-      "AT": "AT",
-      "AX": "AX",
+      "AT": "A2X",
+      "AX": "ACG",
       "EVEN": "Par",
       "ODD": "Ímpar",
       "OVER": "Acima",
       "PLACED": "Placê",
       "SHOW": "Show",
-      "T": "Trifeta",
+      "T": "T3X",
       "TNX": "TNX",
-      "TOX": "Trifeta",
-      "TR": "TR",
+      "TOX": "T3X",
+      "TR": "T3X",
       "UNDER": "Abaixo",
-      "VT": "VT",
+      "VT": "VX",
       "WINNER": "Vencedor"
     }
   },
