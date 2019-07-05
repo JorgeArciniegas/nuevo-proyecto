@@ -13,7 +13,7 @@ export interface Environment {
   currency?: string;
   products: Products[];
   printSettings: PrintSettings;
-  showRaceId: boolean;
+  showEventId: boolean;
   couponMessageTrasmitted?: string;
   couponMessageLegal?: string;
   defaultAmount?: CouponPresetValues;

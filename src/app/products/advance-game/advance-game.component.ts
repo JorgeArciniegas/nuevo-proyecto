@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TypePlacingRace } from '../main/main.models';
+import { TypePlacingEvent } from '../main/main.models';
 import { MainService } from '../main/main.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class AdvanceGameComponent implements OnInit {
   public rowHeight: number;
 
   public buttons: AdvButton[] = [];
-  typePlacingRace: typeof TypePlacingRace = TypePlacingRace;
+  typePlacingRace: typeof TypePlacingEvent = TypePlacingEvent;
   constructor(public service: MainService) {}
 
   ngOnInit() {
@@ -32,12 +32,12 @@ export class AdvanceGameComponent implements OnInit {
     });
   }
 
-  setTypePlacing(type: TypePlacingRace): void {
+  setTypePlacing(type: TypePlacingEvent): void {
     this.service.typePlacing(type);
   }
 }
 
 export class AdvButton {
   public label: string;
-  public code: TypePlacingRace;
+  public code: TypePlacingEvent;
 }

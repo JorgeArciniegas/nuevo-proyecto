@@ -14,7 +14,7 @@ export class AppSettings {
   supportedLang: string[] = environment.supportedLang;
   products: Products[] = environment.products;
   printSettings: PrintSettings = environment.printSettings;
-  showRaceId: boolean = environment.showRaceId;
+  showEventId: boolean = environment.showEventId;
   defaultAmount: CouponPresetValues = environment.defaultAmount;
   couponDirectPlace: boolean = environment.couponDirectPlace;
   currencyDefault: string = environment.currencyDefault;

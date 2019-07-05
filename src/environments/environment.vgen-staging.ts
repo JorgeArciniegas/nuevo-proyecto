@@ -135,7 +135,7 @@ export const environment: Environment = {
       widgets: []
     }
   ],
-  showRaceId: true,
+  showEventId: true,
   printSettings: {
     isEnabledReprintCoupon: true,
     isTrasmitionInfoMessageShown: true

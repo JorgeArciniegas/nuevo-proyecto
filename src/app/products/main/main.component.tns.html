@@ -1,5 +1,4 @@
-<GridLayout rows="3*,2*,9*,2*,2*" columns="*" class="product-class"
-  [ngClass]="productService.product.productSelected ? 'PRODUCT-'+productService.product.codeProduct+'-BG' : ''">
+<GridLayout rows="3*,2*,9*,2*,2*" columns="*" class="product-class">
   <!-- Race control -->
   <GridLayout row="0">
     <app-event-control></app-event-control>
@@ -20,25 +19,25 @@
       <GridLayout row="0" col="0" shadow="3" cornerRadius="6" class="card">
         <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
           <Button text="{{ 'LUCKY' | translate }} 1" class="button-internal" (tap)="placingLucky(lucky.Lucky1)"
-            textTransform="none" [isEnabled]="!mainService.placingRace.timeBlocked"></Button>
+            textTransform="none" [isEnabled]="!mainService.placingEvent.timeBlocked"></Button>
         </GridLayout>
       </GridLayout>
       <GridLayout row="0" col="1" shadow="3" cornerRadius="6" class="card">
         <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
           <Button text="{{ 'LUCKY' | translate }} 2" class="button-internal" (tap)="placingLucky(lucky.Lucky2)"
-            textTransform="none" [isEnabled]="!mainService.placingRace.timeBlocked"></Button>
+            textTransform="none" [isEnabled]="!mainService.placingEvent.timeBlocked"></Button>
         </GridLayout>
       </GridLayout>
       <GridLayout row="0" col="2" shadow="3" cornerRadius="6" class="card">
         <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
           <Button text="{{ 'LUCKY' | translate }} 3" class="button-internal" (tap)="placingLucky(lucky.Lucky3)"
-            textTransform="none" [isEnabled]="!mainService.placingRace.timeBlocked"></Button>
+            textTransform="none" [isEnabled]="!mainService.placingEvent.timeBlocked"></Button>
         </GridLayout>
       </GridLayout>
     </GridLayout>
   </GridLayout>
   <GridLayout row="2" rowSpan="2" class="overlay radius-5"
-    *ngIf="mainService.placingRace && mainService.placingRace.timeBlocked == true">
+    *ngIf="mainService.placingEvent && mainService.placingEvent.timeBlocked == true">
     <StackLayout verticalAlignment="center">
       <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png"
         horizontalAlignment="center" verticalAlignment="center"></Image>

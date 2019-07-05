@@ -9,7 +9,7 @@ export const environment: Environment = {
   products: [],
   couponDirectPlace: false,
   currencyDefault: 'EUR',
-  showRaceId: true,
+  showEventId: true,
   printSettings: {
     isEnabledReprintCoupon: false,
     isTrasmitionInfoMessageShown: true

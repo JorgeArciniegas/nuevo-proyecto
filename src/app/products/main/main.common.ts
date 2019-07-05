@@ -8,6 +8,7 @@ import { ResultsComponent } from './results/results.component';
 import { RaceComponent } from './results/templates/race/race.component';
 import { PlayableRaceComponent } from './playable-board/templates/race/playablerace.component';
 import { StandardListComponent } from './events-list/templates/standard-list/standard-list.component';
+import { StandardComponent } from './event-control/templates/standard/standard.component';
 
 export const componentDeclarations: any[] = [
   MainComponent,
@@ -18,7 +19,8 @@ export const componentDeclarations: any[] = [
   FilterByPositionPipe,
   RaceComponent,
   PlayableRaceComponent,
-  StandardListComponent
+  StandardListComponent,
+  StandardComponent
 ];
 
 export const providerDeclarations: any[] = [];
