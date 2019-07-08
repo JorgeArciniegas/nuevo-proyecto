@@ -80,7 +80,8 @@ export const providerDeclarations: any[] = [
 export const routes: Routes = [
   {
     path: 'login',
-    loadChildren: './login/login.module#LoginModule'
+    loadChildren: './login/login.module#LoginModule',
+    canActivate: [AuthorizationGuard]
   },
   {
     path: 'print-coupon',
@@ -117,6 +118,10 @@ export const routes: Routes = [
     path: 'admin',
     loadChildren: './admin/admin.module#AdminModule',
     canActivate: [AuthorizationGuard]
+  },
+  {
+    path: 'error-page',
+    loadChildren: './error-page/error-page.module#ErrorPageModule'
   },
   {
     path: '**',

@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AppSettings } from '../../../app.settings';
-import { EventTime } from '../main.models';
-import { MainService } from '../main.service';
+import { Component } from '@angular/core';
+import { EventControlService } from './event-control.service';
+import { EventControl } from './event-control.model';
 import { ProductsService } from '../../products.service';
 
 @Component({
@@ -9,18 +8,10 @@ import { ProductsService } from '../../products.service';
   templateUrl: './event-control.component.html',
   styleUrls: ['./event-control.component.scss']
 })
-export class EventControlComponent implements OnInit {
-  public raceTime: EventTime;
-  public race: number;
-  public settings: AppSettings;
-
+export class EventControlComponent {
+  public eventControlDetails: EventControl;
   constructor(
-    public racingService: MainService,
-    public readonly appSettings: AppSettings,
-    public productService: ProductsService
-  ) {
-    this.settings = appSettings;
-  }
-
-  ngOnInit() {}
+    private eventControlService: EventControlService,
+    private productService: ProductsService
+  ) {}
 }

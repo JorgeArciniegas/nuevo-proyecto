@@ -45,7 +45,12 @@ export class BetoddsComponent implements OnInit {
       this.rowNumber = 2;
     }
 
-    this.couponService.couponResponse.subscribe(coupon => { this.data.betCoupon = coupon; this.filterOddsToCoupon(); });
+    this.couponService.couponResponse.subscribe(coupon => {
+      this.data.betCoupon = coupon;
+      if (coupon) {
+        this.filterOddsToCoupon();
+      }
+    });
   }
 
   ngOnInit(): void {

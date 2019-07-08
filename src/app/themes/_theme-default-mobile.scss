@@ -393,21 +393,21 @@
 
 		.product-class {
 			// SET IMAGES HEADER PRODUCT
-			&.PRODUCT-DOG-BG {
+			.PRODUCT-DOG-BG {
 				// DOG
-				.race-control {
+				&.race-control {
 					@extend %PRODUCT-DOG-BG-MOBILE;
 				}
 			}
-			&.PRODUCT-HORSE-BG {
+			.PRODUCT-HORSE-BG {
 				// HORSE
-				.race-control {
+				&.race-control {
 					@extend %PRODUCT-HORSE-BG-MOBILE;
 				}
 			}
-			&.PRODUCT-HORSE-VIRT-BG {
+			.PRODUCT-HORSE-VIRT-BG {
 				// HORSE VIRTUAL
-				.race-control {
+				&.race-control {
 					@extend %PRODUCT-HORSE-BG-MOBILE;
 				}
 			}
@@ -608,3 +608,4 @@
 **/
 @import "./results-list/results-list.tns";
 @import "./playable-board/playablerace.tns";
+@import "./statistics/statistics.component.tns";

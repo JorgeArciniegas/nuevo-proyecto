@@ -11,6 +11,7 @@ export class StatisticsComponent implements OnInit {
   @Input()
   data: BetDataDialog;
   maxDataStatistics: number;
+
   constructor() {
     this.maxDataStatistics = 1;
 
@@ -22,8 +23,8 @@ export class StatisticsComponent implements OnInit {
     /**
      * Defined coefficent percentage for fitness status
      */
-    this.data.statistics.sort( (a, b) => a.ito <= b.ito ? -1 : 1 );
-    this.data.statistics.map( item => {
+    this.data.statistics.virtualBetCompetitor.sort( (a, b) => a.ito <= b.ito ? -1 : 1 );
+    this.data.statistics.virtualBetCompetitor.map( item => {
       this.maxDataStatistics += item.ff;
     });
 

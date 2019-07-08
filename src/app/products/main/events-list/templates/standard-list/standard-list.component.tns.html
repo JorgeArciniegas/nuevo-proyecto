@@ -1,6 +1,6 @@
 <GridLayout rows="*" [columns]="nativeColumnDefinition" class="list-race">
   <GridLayout *ngFor="let race of eventsList?.events  | slice:0:webColumnDefinition; let i = index" row="0" col="{{i}}"
-    rows="*,*" columns="*" (tap)="raceSelecting(i)">
+    rows="*,*" columns="*" (tap)="eventSelecting(i)">
     <GridLayout row="0" shadow="3" cornerRadius="6" class="card-box">
       <GridLayout *ngIf="race != null" rows="*" columns="*" class="button number"
         [ngClass]="{ 'selected' : eventsList.currentEvent == i }">

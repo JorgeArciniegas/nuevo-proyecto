@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GroupingsRows } from '../detail-coupon.model';
+import { UserService } from '../../../../../services/user.service';
 
 @Component({
   selector: 'app-combinations',
@@ -7,10 +8,7 @@ import { GroupingsRows } from '../detail-coupon.model';
   styleUrls: ['./combinations.component.scss']
 })
 export class CombinationsComponent {
-
   @Input() data: GroupingsRows;
 
-  constructor() { }
-
-
+  constructor(public userService: UserService) {}
 }

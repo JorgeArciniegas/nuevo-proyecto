@@ -77,7 +77,8 @@
         <Label col="2" text="{{ rowItem.UserId + ' - ' + rowItem.UserName }}" verticalAlignment="center"></Label>
         <Label col="3" text="{{ rowItem.CouponDateOffset | date: 'dd/MM/yy HH:mm:ss' }}"
           verticalAlignment="center"></Label>
-        <Label col="4" text="{{ rowItem.Stake }}" verticalAlignment="center"></Label>
+        <Label col="4" text="{{ rowItem.Stake | currency : userService.userCurrency : 'symbol-narrow' }}"
+          verticalAlignment="center"></Label>
         <ng-container [ngSwitch]="rowItem.CouponStatusId">
           <Image col="5" width="24" *ngSwitchDefault
             src="~/app/themes/skins/{{settings.theme}}/icon/progress-clock.png"></Image>
@@ -90,7 +91,9 @@
         </ng-container>
         <Label col="6" text="{{ 'DYNAMIC_KEYS.CouponType.' + couponType[rowItem.CouponTypeId] | translate }}"
           verticalAlignment="center"></Label>
-        <Label col="7" text="{{ (rowItem.Won > 0 )? rowItem.Won : '-'  }}" verticalAlignment="center"></Label>
+        <Label col="7"
+          text="{{ (rowItem.Won > 0 )? (rowItem.Won | currency : userService.userCurrency : 'symbol-narrow') : '-'  }}"
+          verticalAlignment="center"></Label>
         <StackLayout colSpan="8" class="border-bottom-overlay" verticalAlignment="bottom"></StackLayout>
       </GridLayout>
     </GridLayout>
@@ -102,7 +105,8 @@
       <Label class="sub-title" text="{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.COUPON' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="2" verticalAlignment="center">
-      <Label class="value" text="{{ betsListService.betsCouponList.TotalStake | number: '1.2-2' }}"
+      <Label class="value"
+        text="{{ betsListService.betsCouponList.TotalStake | currency : userService.userCurrency : 'symbol-narrow' }}"
         textWrap="true"></Label>
       <Label class="sub-title" text="{{ 'TOT_BET' | translate }}"></Label>
     </StackLayout>
@@ -112,7 +116,9 @@
       <Label class="sub-title" text="{{ 'BETS_LIST.OPEN' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="4" verticalAlignment="center">
-      <Label class="value" text="{{ betsListService.betsCouponList.TotalPlacedBets | number }}" textWrap="true"></Label>
+      <Label class="value"
+        text="{{ betsListService.betsCouponList.TotalPlacedBets | currency : userService.userCurrency : 'symbol-narrow' }}"
+        textWrap="true"></Label>
       <Label class="sub-title" text="{{ 'TOT_OPEN' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="5" verticalAlignment="center">
@@ -120,7 +126,9 @@
       <Label class="sub-title" text="{{ 'BETS_LIST.WON' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="6" verticalAlignment="center">
-      <Label class="value" text="{{ betsListService.betsCouponList.TotalWon | number }}" textWrap="true"></Label>
+      <Label class="value"
+        text="{{ betsListService.betsCouponList.TotalWon | currency : userService.userCurrency : 'symbol-narrow' }}"
+        textWrap="true"></Label>
       <Label class="sub-title" text="{{ 'TOT_WON' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="7" verticalAlignment="center">
@@ -129,7 +137,9 @@
       <Label class="sub-title" text="{{ 'BETS_LIST.LOST' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="8" verticalAlignment="center">
-      <Label class="value" text="{{ betsListService.betsCouponList.TotalLost | number }}" textWrap="true"></Label>
+      <Label class="value"
+        text="{{ betsListService.betsCouponList.TotalLost | currency : userService.userCurrency : 'symbol-narrow' }}"
+        textWrap="true"></Label>
       <Label class="sub-title" text="{{ 'TOT_LOST' | translate }}"></Label>
     </StackLayout>
   </GridLayout>

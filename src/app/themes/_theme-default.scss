@@ -422,15 +422,15 @@ html {
 		}
 		.product-class {
 			// SET IMAGES HEADER PRODUCT
-			&.PRODUCT-DOG-BG {
+			.PRODUCT-DOG-BG {
 				//DOG
 				@extend %PRODUCT-DOG-BG;
 			}
-			&.PRODUCT-HORSE-BG {
+			.PRODUCT-HORSE-BG {
 				// HORSE
 				@extend %PRODUCT-HORSE-BG;
 			}
-			&.PRODUCT-HORSE-VIRT-BG {
+			.PRODUCT-HORSE-VIRT-BG {
 				// HORSE VIRTUAL
 				@extend %PRODUCT-HORSE-BG;
 			}
@@ -754,3 +754,4 @@ html {
 **/
 @import "./results-list/results-list";
 @import "./playable-board/playablerace";
+@import "./statistics/statistics.component";

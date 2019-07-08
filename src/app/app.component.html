@@ -3,7 +3,7 @@
     <!-- TOOLBAR-->
     <div fxFlex fxLayout="column">
       <div *ngIf="userService.isUserLogged" class="toolbar" fxFlex="7" fxLayout="row">
-        <app-header fxFlexFill></app-header>
+        <app-header fxFlex="100"></app-header>
       </div>
       <router-outlet></router-outlet>
     </div>

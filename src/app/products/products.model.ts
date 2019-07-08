@@ -108,7 +108,7 @@ export interface BetDataDialog {
   title: string;
   betOdds?: BetOdds;
   betCoupon?: BetCouponExtended;
-  statistics?: VirtualBetCompetitor[];
+  statistics?: StatisticDialog;
 }
 export class DialogData {
   title: string;
@@ -116,13 +116,13 @@ export class DialogData {
   breakpoint?: number;
   opened: boolean;
   betCoupon?: BetCouponExtended;
-  statistics?: VirtualBetCompetitor[];
+  statistics?: StatisticDialog;
   constructor(
     betOdds?: BetOdds,
     breakpoint?: number,
     betCoupon?: BetCouponExtended,
     title?: string,
-    statistics?: VirtualBetCompetitor[]
+    statistics?: StatisticDialog
   ) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;
@@ -131,7 +131,10 @@ export class DialogData {
     this.statistics = statistics || null;
   }
 }
-
+export interface StatisticDialog {
+  codeProduct: string;
+  virtualBetCompetitor: VirtualBetCompetitor[];
+}
 export enum DialogTypeCoupon {
   CANCEL,
   PAY
