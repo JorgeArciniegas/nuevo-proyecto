@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { MainService } from '../../../main.service';
+import { ProductsService } from '../../../../../products/products.service';
 
 @Component({
   selector: 'app-playable-board-cock-fight',
@@ -6,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./playable-board-cock-fight.component.scss']
 })
 export class PlayableBoardCockFightComponent implements OnInit {
-  constructor() {}
+  @Input()
+  public rowHeight: number;
+
+  constructor(public service: MainService, private productService: ProductsService) {}
 
   ngOnInit() {}
 }

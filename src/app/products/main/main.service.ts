@@ -329,41 +329,6 @@ export class MainService extends MainServiceExtra {
       });
   }
 
-  /* loadLastResult(delay: boolean = true): void {
-    if (delay) {
-      timer(10000).subscribe(() => this.getLastResult());
-    } else {
-      this.getLastResult();
-    }
-  }
-
-  getLastResult() {
-
-    const request: VirtualSportLastResultsRequest = {
-      SportId: this.productService.product.sportId,
-      CategoryType: this.productService.product.codeProduct
-    };
-    this.listResult = [];
-    timer(300).subscribe(() => {
-      this.elysApi.virtual.getLastResult(request)
-        .then((eventResults: VirtualSportLastResultsResponse) => {
-          for (const i of [3, 2, 1, 0]) {
-            const results: string[] = eventResults.EventResults[i].Result.split(
-              '-'
-            );
-
-            this.listResult.push({
-              raceLabel: eventResults.EventResults[i].EventName,
-              raceNumber: eventResults.EventResults[i].EventId,
-              firstPlace: Number.parseInt(results[0]),
-              secondPlace: Number.parseInt(results[1]),
-              thirdPlace: Number.parseInt(results[2])
-            });
-          }
-        });
-    });
-  }
- */
   resetPlayEvent(): void {
     this.placingEvent = new PlacingEvent();
     this.smartCode = new Smartcode();
