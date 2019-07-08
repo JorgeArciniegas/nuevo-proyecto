@@ -1,0 +1,18 @@
+<GridLayout rows="*" columns="*,*,*,*" class="result-list-race">
+  <GridLayout col="{{i}}" class="card-box-result" rows="*,*" columns="*" *ngFor="let event of results; let i = index;">
+    <GridLayout row="0" class="header radius-5">
+      <Label text="{{event.eventLabel}}" class="raceNumber" horizontalAlignment="center" verticalAlignment="center"></Label>
+    </GridLayout>
+    <GridLayout row="1" rows="*" columns="*,*,*">
+      <GridLayout row="0" col="0" class="position btn-default-result-cock btn-cock-{{event.cockResult.winner}}" [ngClass]="{'small': windowSize.small}">
+        <Label text="{{(event.cockResult.winner === 0) ? 'X' : event.cockResult.winner}}" class="label" horizontalAlignment="center" verticalAlignment="center"></Label>
+      </GridLayout>
+      <GridLayout row="0" col="1" class="position btn-default-result-cock btn-cock-{{event.cockResult.winner}}" [ngClass]="{'small': windowSize.small}">
+        <Label text="{{'DYNAMIC_KEYS.OVER_UNDER_COCKFIGHT.'+ event.cockResult.ou | translate | lowercase }}" class="label" horizontalAlignment="center" verticalAlignment="center"></Label>
+      </GridLayout>
+      <GridLayout row="0" col="2" class="position btn-default-result-cock btn-cock-{{event.cockResult.winner}}" [ngClass]="{'small': windowSize.small}">
+        <Label text="{{(event.cockResult.sector === 0) ? '-' : 's' + event.cockResult.sector}}" class="label" horizontalAlignment="center" verticalAlignment="center"></Label>
+      </GridLayout>
+    </GridLayout>
+  </GridLayout>
+</GridLayout>

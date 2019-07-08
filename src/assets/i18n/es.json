@@ -236,6 +236,10 @@
       "UNDER": "Baja",
       "VT": "GTX",
       "WINNER": "Ganador"
+    },
+    "OVER_UNDER_COCKFIGHT":{
+      "O": "al",
+      "U": "ba"
     }
   },
   "ERROR": "Error",
