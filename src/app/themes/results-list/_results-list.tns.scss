@@ -19,3 +19,18 @@
 		}
 	}
 }
+
+.btn-default-result-cock {
+  .icon{
+    width: 36px;
+    height: 36px;
+    &.icon-cock-red{
+      background: url('~/assets/images/cockfight/cock-red.png') no-repeat center;
+      background-size: contain;
+    }
+    &.icon-cock-blue{
+      background: url('~/assets/images/cockfight/cock-blue.png') no-repeat center;
+      background-size: contain;
+    }
+  }
+}
