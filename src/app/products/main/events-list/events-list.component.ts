@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { EventsListService } from './events-list.service';
 import { EventsList } from './event-list.model';
-import { MainService } from '../main.service';
 import { ProductsService } from '../../products.service';
 @Component({
   selector: 'app-events-list',
@@ -15,9 +14,7 @@ export class EventListComponent implements OnInit, OnDestroy {
   public show?: boolean;
   public eventsDetails: EventsList;
   public nativeNextEventsItems: string;
-
   constructor(
-    private mainService: MainService,
     private eventService: EventsListService,
     private productService: ProductsService
   ) { }

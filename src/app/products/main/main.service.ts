@@ -24,20 +24,19 @@ import {
 import { ProductsService } from '../products.service';
 import {
   CombinationType,
-  Runner,
+  Player,
   Lucky,
-  PlacingRace,
+  PlacingEvent,
   Podium,
-  Race,
-  RaceDetail,
-  RaceResult,
+  EventInfo,
+  EventDetail,
   EventTime,
   Smartcode,
   SmartCodeType,
   SpecialBet,
   SpecialBetValue,
   TypeBetSlipColTot,
-  TypePlacingRace
+  TypePlacingEvent
 } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
@@ -48,19 +47,19 @@ import { ResultsService } from './results/results.service';
 export class MainService extends MainServiceExtra {
   // screen binding
   // public raceDetails: RaceDetail;
-  public listResult: RaceResult[];
+  // public listResult: RaceResult[];
   // api binding
   private reload: number;
   private cacheEvents: VirtualBetEvent[] = [];
   // working variable
-  private remmaningTime: EventTime = new EventTime();
-  placingRace: PlacingRace = new PlacingRace(); // place the global race
-  placingRaceSubject: Subject<PlacingRace>;
+  private remainingTime: EventTime = new EventTime();
+  placingEvent: PlacingEvent = new PlacingEvent(); // place the global race
+  placingEventSubject: Subject<PlacingEvent>;
 
   private attempts = 0;
   private initCurrentEvent = false;
 
-  runnersList: Runner[];
+  playersList: Player[];
   // temp array
 
   smartCode: Smartcode;
@@ -86,8 +85,10 @@ export class MainService extends MainServiceExtra {
       }
     });
 
-    this.raceDetails = new RaceDetail();
-    this.raceDetails.currentRace = 0;
+    this.eventDetails = new EventDetail(
+      this.productService.product.layoutProducts.nextEventItems
+    );
+    this.eventDetails.currentEvent = 0;
 
     interval(1000).subscribe(() => this.getTime());
 
@@ -95,30 +96,30 @@ export class MainService extends MainServiceExtra {
     this.currentEventObserve = this.currentEventSubscribe.asObservable();
 
     this.currentEventObserve.subscribe((raceIndex: number) => {
-      this.raceDetails.currentRace = raceIndex;
+      this.eventDetails.currentEvent = raceIndex;
 
-      this.remaningRaceTime(this.raceDetails.races[raceIndex].number).then(
+      this.remainingRaceTime(this.eventDetails.events[raceIndex].number).then(
         (raceTime: EventTime) => {
-          this.raceDetails.raceTime = raceTime;
+          this.eventDetails.eventTime = raceTime;
         }
       );
       // reset coupon
       this.coupon.resetCoupon();
       // reset playload
-      this.resetPlayRacing();
+      this.resetPlayEvent();
       // get race odds
-      this.raceDetailOdds(this.raceDetails.races[raceIndex].number);
+      this.raceDetailOdds(this.eventDetails.events[raceIndex].number);
     });
 
-    this.placingRaceSubject = new Subject<PlacingRace>();
+    this.placingEventSubject = new Subject<PlacingEvent>();
 
     this.productService.playableBoardResetObserve.subscribe(reset => {
       if (reset) {
-        this.resetPlayRacing();
+        this.resetPlayEvent();
       }
     });
 
-    this.createDogList();
+    this.createPlayerList();
   }
 
   /**
@@ -141,57 +142,57 @@ export class MainService extends MainServiceExtra {
     this.resultService.loadLastResult(false);
   }
 
-  createDogList(): void {
-    this.runnersList = [];
+  createPlayerList(): void {
+    this.playersList = [];
     for (const i of [1, 2, 3]) {
       for (const d of [1, 2, 3, 4, 5, 6]) {
-        const dog: Runner = new Runner();
-        dog.number = d;
-        dog.position = i;
-        this.runnersList.push(dog);
+        const player: Player = new Player();
+        player.number = d;
+        player.position = i;
+        this.playersList.push(player);
       }
     }
   }
 
   getTime(): void {
     try {
-      if (this.remmaningTime.second === 0 && this.remmaningTime.minute === 0) {
+      if (this.remainingTime.second === 0 && this.remainingTime.minute === 0) {
         this.loadRaces();
         this.resultService.loadLastResult();
       } else {
-        if (this.remmaningTime.second < 0 || this.remmaningTime.minute < 0) {
+        if (this.remainingTime.second < 0 || this.remainingTime.minute < 0) {
           // if remaining time is negative there is an error, reload all
           // '::::reset');
           this.cacheEvents = null;
           this.loadRaces();
           this.resultService.loadLastResult(false);
         }
-        if (this.remmaningTime.second === 0) {
+        if (this.remainingTime.second === 0) {
           // remaing time
-          this.remmaningTime.second = 59;
-          this.remmaningTime.minute = this.remmaningTime.minute - 1;
+          this.remainingTime.second = 59;
+          this.remainingTime.minute = this.remainingTime.minute - 1;
           // remaing showed time
-          this.raceDetails.raceTime.minute =
-            this.raceDetails.raceTime.minute - 1;
+          this.eventDetails.eventTime.minute =
+            this.eventDetails.eventTime.minute - 1;
         } else {
           // remaing time
-          this.remmaningTime.second = this.remmaningTime.second - 1;
+          this.remainingTime.second = this.remainingTime.second - 1;
           // check time blocked
           if (
-            this.raceDetails.raceTime.second <= 10 &&
-            this.raceDetails.raceTime.minute === 0
+            this.eventDetails.eventTime.second <= 10 &&
+            this.eventDetails.eventTime.minute === 0
           ) {
-            this.placingRace.timeBlocked = true;
+            this.placingEvent.timeBlocked = true;
             this.productService.closeProductDialog();
           } else {
-            this.placingRace.timeBlocked = false;
+            this.placingEvent.timeBlocked = false;
           }
           this.productService.timeBlockedSubscribe.next(
-            this.placingRace.timeBlocked
+            this.placingEvent.timeBlocked
           );
         }
         // showed second
-        this.raceDetails.raceTime.second = this.remmaningTime.second;
+        this.eventDetails.eventTime.second = this.remainingTime.second;
       }
     } catch (err) {
       // console.log('catch', err);
@@ -207,15 +208,15 @@ export class MainService extends MainServiceExtra {
     } else {
       // delete the first element
       this.cacheEvents.shift();
-      this.raceDetails.races.shift();
+      this.eventDetails.events.shift();
 
       // add the new race
-      const race: Race = new Race();
+      const race: EventInfo = new EventInfo();
       race.number = this.cacheEvents[4].id;
       race.label = this.cacheEvents[4].nm;
       race.date = new Date(this.cacheEvents[4].sdtoffset);
 
-      this.raceDetails.races[4] = race;
+      this.eventDetails.events[4] = race;
 
       this.currentAndSelectedRaceTime();
       this.reload--;
@@ -226,7 +227,7 @@ export class MainService extends MainServiceExtra {
       }
 
       // get race odds
-      this.raceDetailOdds(this.raceDetails.races[0].number);
+      this.raceDetailOdds(this.eventDetails.events[0].number);
     }
   }
 
@@ -251,12 +252,12 @@ export class MainService extends MainServiceExtra {
           // load all race
           this.cacheEvents = tournament.evs;
           for (let index = 0; index < 5; index++) {
-            const race: Race = new Race();
+            const race: EventInfo = new EventInfo();
             race.number = this.cacheEvents[index].id;
             race.label = this.cacheEvents[index].nm;
             race.date = new Date(this.cacheEvents[index].sdtoffset);
 
-            this.raceDetails.races[index] = race;
+            this.eventDetails.events[index] = race;
           }
           this.currentAndSelectedRaceTime();
           this.currentEventSubscribe.next(0);
@@ -279,14 +280,14 @@ export class MainService extends MainServiceExtra {
 
   currentAndSelectedRaceTime() {
     // check current race index, if is selected a reace decrease the index because the first race is completed and removed
-    if (this.raceDetails.currentRace > 0) {
-      this.raceDetails.currentRace = this.raceDetails.currentRace - 1;
+    if (this.eventDetails.currentEvent > 0) {
+      this.eventDetails.currentEvent = this.eventDetails.currentEvent - 1;
       if (this.initCurrentEvent) {
-        this.resetPlayRacing();
+        this.resetPlayEvent();
         this.currentEventSubscribe.next(0);
       }
-    } else if (this.raceDetails.currentRace === 0) {
-      this.resetPlayRacing();
+    } else if (this.eventDetails.currentEvent === 0) {
+      this.resetPlayEvent();
       this.currentEventSubscribe.next(0);
     }
     if (this.initCurrentEvent) {
@@ -294,28 +295,28 @@ export class MainService extends MainServiceExtra {
     }
 
     // calculate remaning time for selected race
-    this.remaningRaceTime(
-      this.raceDetails.races[this.raceDetails.currentRace].number
+    this.remainingRaceTime(
+      this.eventDetails.events[this.eventDetails.currentEvent].number
     ).then((raceTime: EventTime) => {
-      this.raceDetails.raceTime = raceTime;
-      if (this.raceDetails.currentRace === 0) {
-        this.remmaningTime.minute = raceTime.minute;
-        this.remmaningTime.second = raceTime.second;
+      this.eventDetails.eventTime = raceTime;
+      if (this.eventDetails.currentEvent === 0) {
+        this.remainingTime.minute = raceTime.minute;
+        this.remainingTime.second = raceTime.second;
       }
     });
 
     // calculate remaning time
-    if (this.raceDetails.currentRace > 0) {
-      this.remaningRaceTime(this.raceDetails.races[0].number).then(
-        (raceTime: EventTime) => (this.remmaningTime = raceTime)
+    if (this.eventDetails.currentEvent > 0) {
+      this.remainingRaceTime(this.eventDetails.events[0].number).then(
+        (raceTime: EventTime) => (this.remainingTime = raceTime)
       );
     }
   }
 
-  remaningRaceTime(idRace: number): Promise<EventTime> {
+  remainingRaceTime(idEvent: number): Promise<EventTime> {
     const request: VirtualEventCountDownRequest = {
       SportId: this.productService.product.sportId.toString(),
-      MatchId: idRace
+      MatchId: idEvent
     };
     return this.elysApi.virtual
       .getCountdown(request)
@@ -363,13 +364,13 @@ export class MainService extends MainServiceExtra {
     });
   }
  */
-  resetPlayRacing(): void {
-    this.placingRace = new PlacingRace();
+  resetPlayEvent(): void {
+    this.placingEvent = new PlacingEvent();
     this.smartCode = new Smartcode();
-    this.placingRace.raceNumber = this.raceDetails.races[
-      this.raceDetails.currentRace
+    this.placingEvent.eventNumber = this.eventDetails.events[
+      this.eventDetails.currentEvent
     ].number;
-    this.createDogList();
+    this.createPlayerList();
 
     this.productService.polyfunctionalAreaSubject.next(
       new PolyfunctionalArea()
@@ -416,40 +417,43 @@ export class MainService extends MainServiceExtra {
   }
 
   /**
-   * PLACING THE DOG SELECTED INSIDE TO POLYFUNCTIONAL AREA AND SMARTBET
-   * @param dog
+   * PLACING THE PLAYER SELECTED INSIDE TO POLYFUNCTIONAL AREA AND SMARTBET
+   * @param player
    */
-  placingOdd(dog: Runner): void {
+  placingOdd(player: Player): void {
     if (this.coupon.checkIfCouponIsReadyToPlace()) {
       return;
     }
-    if (this.placingRace.isSpecialBets) {
-      this.resetPlayRacing();
+    if (this.placingEvent.isSpecialBets) {
+      this.resetPlayEvent();
     }
     let removed: boolean;
 
-    if (!this.placingRace) {
-      this.placingRace.raceNumber = this.raceDetails.races[
-        this.raceDetails.currentRace
+    if (!this.placingEvent) {
+      this.placingEvent.eventNumber = this.eventDetails.events[
+        this.eventDetails.currentEvent
       ].number;
     }
-    dog.actived = true;
+    player.actived = true;
 
-    if (this.placingRace.dogs.length === 0) {
-      this.placingRace.dogs.push(dog);
-      this.checkedIsSelected(dog);
+    if (this.placingEvent.players.length === 0) {
+      this.placingEvent.players.push(player);
+      this.checkedIsSelected(player);
     } else {
-      for (let idx = 0; idx < this.placingRace.dogs.length; idx++) {
-        const item = this.placingRace.dogs[idx];
-        if (item.number === dog.number && item.position === dog.position) {
-          this.placingRace.dogs.splice(idx, 1);
-          this.checkedIsSelected(dog, true);
+      for (let idx = 0; idx < this.placingEvent.players.length; idx++) {
+        const item = this.placingEvent.players[idx];
+        if (
+          item.number === player.number &&
+          item.position === player.position
+        ) {
+          this.placingEvent.players.splice(idx, 1);
+          this.checkedIsSelected(player, true);
           removed = true;
         }
       }
       if (!removed) {
-        this.placingRace.dogs.push(dog);
-        this.checkedIsSelected(dog);
+        this.placingEvent.players.push(player);
+        this.checkedIsSelected(player);
       }
     }
     this.placeOdd();
@@ -462,45 +466,49 @@ export class MainService extends MainServiceExtra {
     // extract the raceOdd from cache
     const odds: VirtualBetEvent = this.cacheEvents.filter(
       (cacheRace: VirtualBetEvent) =>
-        cacheRace.id === this.placingRace.raceNumber
+        cacheRace.id === this.placingEvent.eventNumber
     )[0];
     this.smartCode = new Smartcode();
     this.populatingPolyfunctionArea(odds);
   }
 
-  typePlacing(type: TypePlacingRace) {
-    if (this.placingRace.typePlace === type) {
-      this.placingRace.typePlace = undefined;
-      this.placingRace.thirdRowDisabled = false;
+  typePlacing(type: TypePlacingEvent) {
+    if (this.placingEvent.typePlace === type) {
+      this.placingEvent.typePlace = undefined;
+      this.placingEvent.thirdRowDisabled = false;
     } else {
-      this.placingRace.typePlace = type;
+      this.placingEvent.typePlace = type;
       if (
-        this.placingRace.typePlace !== undefined &&
-        this.placingRace.typePlace !== 2
+        this.placingEvent.typePlace !== undefined &&
+        this.placingEvent.typePlace !== 2
       ) {
-        // deselect all dogs in the row #3
-        this.deselectRowDogs(3);
-        this.placingRace.thirdRowDisabled = true;
+        // deselect all players in the row #3
+        this.deselectRowPlayers(3);
+        this.placingEvent.thirdRowDisabled = true;
       } else {
-        this.placingRace.thirdRowDisabled = false;
+        this.placingEvent.thirdRowDisabled = false;
       }
     }
     this.placeOdd();
   }
 
-  private deselectRowDogs(position: number): void {
-    for (const dog of this.placingRace.dogs.filter(
+  private deselectRowPlayers(position: number): void {
+    for (const player of this.placingEvent.players.filter(
       item => item.position === position
     )) {
-      this.placingOdd(dog);
+      this.placingOdd(player);
     }
   }
 
-  private checkedIsSelected(dog: Runner, reset: boolean = false): void {
-    this.runnersList.forEach((d: Runner) => {
-      if (d.number === dog.number && d.position !== dog.position && !reset) {
+  private checkedIsSelected(player: Player, reset: boolean = false): void {
+    this.playersList.forEach((d: Player) => {
+      if (
+        d.number === player.number &&
+        d.position !== player.position &&
+        !reset
+      ) {
         d.selectable = false;
-      } else if (d.number === dog.number && reset) {
+      } else if (d.number === player.number && reset) {
         d.selectable = true;
         d.actived = false;
       }
@@ -515,18 +523,19 @@ export class MainService extends MainServiceExtra {
     const extractNumber: number =
       Math.floor(
         Math.random() *
-          this.runnersList.filter(dog => dog.position === lucky).length
+          this.playersList.filter(player => player.position === lucky).length
       ) + 1;
     return extractNumber;
   }
 
-  RNGLuckyPlacing(dogNumber: number, dogPosition: number): void {
-    // extract the dog
-    const dogExtract: Runner = this.runnersList.filter(
-      dog => dog.position === dogPosition && dog.number === dogNumber
+  RNGLuckyPlacing(playerNumber: number, playerPosition: number): void {
+    // extract the player
+    const playerExtract: Player = this.playersList.filter(
+      player =>
+        player.position === playerPosition && player.number === playerNumber
     )[0];
-    // place the dog
-    this.placingOdd(dogExtract);
+    // place the player
+    this.placingOdd(playerExtract);
   }
 
   /**
@@ -539,23 +548,24 @@ export class MainService extends MainServiceExtra {
     areaFuncData.activeDistributionTot = false;
     try {
       // check if is first insert
-      let dogName: string;
+      let playerName: string;
       if (
-        this.placingRace.dogs.length === 1 &&
-        !this.placingRace.isSpecialBets &&
-        this.placingRace.typePlace === undefined
+        this.placingEvent.players.length === 1 &&
+        !this.placingEvent.isSpecialBets &&
+        this.placingEvent.typePlace === undefined
       ) {
         // single selection
-        areaFuncData.selection = Podium[this.placingRace.dogs[0].position];
-        areaFuncData.value = this.placingRace.dogs[0].number;
-        // match dog from object tm with mk
-        dogName = odd.tm.filter(t => t.ito === areaFuncData.value)[0].nm;
+        areaFuncData.selection = Podium[this.placingEvent.players[0].position];
+        areaFuncData.value = this.placingEvent.players[0].number;
+        // match player from object tm with mk
+        playerName = odd.tm.filter(t => t.ito === areaFuncData.value)[0].nm;
       } else if (
-        (this.placingRace.dogs.length > 1 && !this.placingRace.isSpecialBets) ||
-        this.placingRace.typePlace
+        (this.placingEvent.players.length > 1 &&
+          !this.placingEvent.isSpecialBets) ||
+        this.placingEvent.typePlace
       ) {
         // composit selection
-        this.placingRace.dogs.forEach(item => {
+        this.placingEvent.players.forEach(item => {
           if (item.position === 1) {
             this.smartCode.selWinner.push(item.number);
           } else if (item.position === 2) {
@@ -566,19 +576,19 @@ export class MainService extends MainServiceExtra {
         });
         // type Place particular iterations
         if (
-          this.placingRace.typePlace === TypePlacingRace.ST &&
+          this.placingEvent.typePlace === TypePlacingEvent.ST &&
           this.smartCode.selWinner.length > 2
         ) {
-          this.placingRace.secondRowDisabled = true;
-          this.deselectRowDogs(2);
+          this.placingEvent.secondRowDisabled = true;
+          this.deselectRowPlayers(2);
         } else {
-          this.placingRace.secondRowDisabled = false;
+          this.placingEvent.secondRowDisabled = false;
         }
-      } else if (this.placingRace.isSpecialBets) {
+      } else if (this.placingEvent.isSpecialBets) {
         // specialbets OVER / UNDER / EVEN / ODD
         // setting label selection
-        areaFuncData.selection = SpecialBet[this.placingRace.specialBetValue];
-        areaFuncData.value = SpecialBetValue[this.placingRace.specialBetValue];
+        areaFuncData.selection = SpecialBet[this.placingEvent.specialBetValue];
+        areaFuncData.value = SpecialBetValue[this.placingEvent.specialBetValue];
       }
 
       // check smartcode and extract composit bets
@@ -592,7 +602,7 @@ export class MainService extends MainServiceExtra {
         areaFuncData.selection = this.smartCode.code;
         areaFuncData = this.extractOdd(odd, areaFuncData);
       } else {
-        areaFuncData = this.extractOdd(odd, areaFuncData, dogName);
+        areaFuncData = this.extractOdd(odd, areaFuncData, playerName);
       }
     } catch (err) {
       console.log(err);
@@ -607,12 +617,12 @@ export class MainService extends MainServiceExtra {
    *
    * @param odd
    * @param areaFuncData
-   * @param dogName
+   * @param playerName
    */
   public extractOdd(
     odd: VirtualBetEvent,
     areaFuncData: PolyfunctionalArea,
-    dogName?: string
+    playerName?: string
   ): PolyfunctionalArea {
     let oddsToSearch: string[] = [];
 
@@ -711,10 +721,10 @@ export class MainService extends MainServiceExtra {
         market.tp === this.typeSelection(areaFuncData.selection)
     )) {
       // If the selection is PODIUM, WINNER or SHOW
-      if (dogName) {
-        for (const checkOdd of m.sls.filter(o => o.nm === dogName)) {
+      if (playerName) {
+        for (const checkOdd of m.sls.filter(o => o.nm === playerName)) {
           const betOdd: BetOdd = new BetOdd(
-            dogName,
+            playerName,
             checkOdd.ods[0].vl,
             areaFuncData.amount,
             checkOdd.id
@@ -829,14 +839,14 @@ export class MainService extends MainServiceExtra {
   private checkSmartCode(areaFuncData: PolyfunctionalArea): PolyfunctionalArea {
     this.smartCode.code = null;
 
-    switch (this.placingRace.typePlace) {
-      case TypePlacingRace.ACCG: // Place ACCG bet
+    switch (this.placingEvent.typePlace) {
+      case TypePlacingEvent.ACCG: // Place ACCG bet
         this.smartCode.code = this.placeTypeACCG(areaFuncData);
         break;
-      case TypePlacingRace.ST: // Place ST bet
+      case TypePlacingEvent.ST: // Place ST bet
         this.smartCode.code = this.placeTypeST(areaFuncData);
         break;
-      case TypePlacingRace.R: // Place R bet
+      case TypePlacingEvent.R: // Place R bet
         this.smartCode.code = this.placeTypeR(areaFuncData);
         break;
       default:
@@ -956,7 +966,7 @@ export class MainService extends MainServiceExtra {
           this.smartCode.selWinner.length === 1 &&
           this.smartCode.selPlaced.length === 1
         ) {
-          // Only a dog is selected on the first and second row the result is a single "Combination".
+          // Only a player is selected on the first and second row the result is a single "Combination".
           // Sort the selections
           if (this.smartCode.selWinner[0] > this.smartCode.selPlaced[0]) {
             areaFuncData.value =
@@ -1383,7 +1393,7 @@ export class MainService extends MainServiceExtra {
   public getCurrentRace(): VirtualBetEvent {
     return this.cacheEvents.filter(
       (cacheRace: VirtualBetEvent) =>
-        cacheRace.id === this.placingRace.raceNumber
+        cacheRace.id === this.placingEvent.eventNumber
     )[0];
   }
 }

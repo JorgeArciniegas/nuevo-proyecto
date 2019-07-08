@@ -1,0 +1,20 @@
+<div [ngClass]="eventControlDetails?.productImageClass" fxFill fxLayout="row" class="race-control"
+  fxLayoutAlign="start center">
+  <div fxFlex="28"></div>
+  <div fxFlex="28">
+    <span
+      class="game-name">{{ 'DYNAMIC_KEYS.PRODUCT.LABEL.'+ eventControlDetails?.productName | translate | uppercase}}</span>
+  </div>
+  <div fxFlex="42" *ngIf="eventControlDetails?.currentEvent != null" fxLayout="column" fxFlexAlign="stretch"
+    fxLayoutAlign="space-around end">
+    <div class="current-race">{{ eventControlDetails?.eventLabel }}
+      <span *ngIf="eventControlDetails?.showEventId" class="number">#{{
+        eventControlDetails?.eventNumber }}</span>
+    </div>
+    <div class="time elevation-z5" fxLayout="row" fxLayoutAlign="center center">
+      <div class="icon-baseline-timer-24px"></div>
+      {{ eventControlDetails?.eventTimeMinutes | number: '2.0-0' }}:{{
+        eventControlDetails?.eventTimeSeconds | number: '2.0-0' }}
+    </div>
+  </div>
+</div>

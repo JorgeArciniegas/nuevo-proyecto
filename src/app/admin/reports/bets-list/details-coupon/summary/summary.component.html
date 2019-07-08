@@ -32,7 +32,7 @@
       <div fxFlex="10"></div>
       <div fxFlex="30">
         <div>
-          <h4>{{'DYNAMIC_KEYS.CouponType.'+ data.CouponType | translate }}</h4>
+          <h4>{{'DYNAMIC_KEYS.CouponType.'+ couponType[data.CouponTypeId] | translate }}</h4>
           <div data="disabled">{{'BET_TYPE' | translate }}</div>
         </div>
       </div>
@@ -60,7 +60,7 @@
       </div>
       <div fxFlex="30">
         <div>
-          <h4>{{data.Won || ' - ' }}</h4>
+          <h4>{{(data.Won > 0 )? (data.Won | currency : userService.userCurrency : 'symbol-narrow') : '-'}}</h4>
           <div data="disabled">{{'WON' | translate }}</div>
         </div>
       </div>
@@ -74,7 +74,7 @@
       <div fxFlex="10"></div>
       <div fxFlex="80">
         <div>
-          <h4>{{data.Jackpot || ' - '}}</h4>
+          <h4>{{(data.Jackpot > 0 )? (data.Jackpot | currency : userService.userCurrency : 'symbol-narrow') : '-'}}</h4>
           <div data="disabled">{{'JACKPOT' | translate }}</div>
         </div>
       </div>
@@ -96,19 +96,22 @@
       <div fxFlex="10"></div>
       <div fxFlex="30">
         <div>
-          <h4>{{ data.MaxWin }}</h4>
+          <h4>{{(data.MaxWin > 0 )? (data.MaxWin | currency : userService.userCurrency : 'symbol-narrow') : '-'}}</h4>
           <div data="disabled">{{'MAX_POTENTIAL_WIN' | translate }}</div>
         </div>
       </div>
       <div fxFlex="30">
         <div>
-          <h4>{{data.MaxBonus || ' - ' }}</h4>
+          <h4>{{(data.MaxBonus > 0 )? (data.MaxBonus | currency : userService.userCurrency : 'symbol-narrow') : '-'}}
+          </h4>
           <div data="disabled">{{'BONUS' | translate }}</div>
         </div>
       </div>
       <div fxFlex="30">
         <div>
-          <h4>{{ data.MaxWin + data.MaxBonus  || ' - ' }}</h4>
+          <h4>
+            {{((data.MaxWin + data.MaxBonus) > 0 )? ((data.MaxWin + data.MaxBonus) | currency : userService.userCurrency : 'symbol-narrow') : '-'}}
+          </h4>
           <div data="disabled">{{'MAX_POTENTIAL_WIN_WITH_BONUS' | translate }}</div>
         </div>
       </div>
@@ -121,13 +124,13 @@
       <div fxFlex="10"></div>
       <div fxFlex="30">
         <div>
-          <h4>{{ data.MinWin }}</h4>
+          <h4>{{(data.MinWin > 0 )? (data.MinWin | currency : userService.userCurrency : 'symbol-narrow') : '-'}}</h4>
           <div data="disabled">{{'MIN_POTENTIAL_WIN' | translate }}</div>
         </div>
       </div>
       <div fxFlex="30">
         <div>
-          <h4>{{data.Stake || ' - ' }}</h4>
+          <h4>{{(data.Stake > 0 )? (data.Stake | currency : userService.userCurrency : 'symbol-narrow') : '-'}}</h4>
           <div data="disabled">{{'STAKE' | translate }}</div>
         </div>
       </div>

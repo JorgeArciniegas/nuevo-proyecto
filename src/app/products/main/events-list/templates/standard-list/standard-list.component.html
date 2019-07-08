@@ -1,7 +1,7 @@
 <mat-grid-list class="list-race" fxFill cols="5" rowHeight="{{rowHeight * 2 + 1}}">
   <mat-grid-tile *ngFor="let race of eventsList?.events  | slice:0:webColumnDefinition; let i = index">
 
-    <mat-grid-list fxFill cols="1" rowHeight="{{rowHeight}}" (click)="raceSelecting(i)" *ngIf="race != null">
+    <mat-grid-list fxFill cols="1" rowHeight="{{rowHeight}}" (click)="eventSelecting(i)" *ngIf="race != null">
       <mat-grid-tile class="card-box">
         <!-- header -->
         <button fxFill fxLayoutAlign="center center" class="btn-reset number radius-5"

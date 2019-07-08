@@ -1,15 +1,14 @@
 <StackLayout *ngIf="show">
   <!-- TEMPLATE RACE -->
-  <app-playable-race
-  [rowHeight]="rowHeight"
-  *ngIf="productService.product.layoutProducts.type === typeLayout.RACING"></app-playable-race>
+  <app-playable-race [rowHeight]="rowHeight" *ngIf="productService.product.layoutProducts.type === typeLayout.RACING">
+  </app-playable-race>
 </StackLayout>
 
-  <!-- <GridLayout row="2" class="playable-grid-buttons playable-grid-repeat" rows="*" columns="*,*,*,*,*,*,*,*">
+<!-- <GridLayout row="2" class="playable-grid-buttons playable-grid-repeat" rows="*" columns="*,*,*,*,*,*,*,*">
     <GridLayout col="{{i}}" shadow="3" cornerRadius="6" class="card-x" *ngFor="let n of [1,2,3,4,5,6,7,8]; let i = index;">
 
-      <GridLayout rows="*" columns="*" class="button btn-grey-gradient" [ngClass]="{'btn-dark-gradient' : service.placingRace.repeat === n}">x{{n}}>
-        <Button text="x{{n}}" class="button-internal" (tap)="setRepeat(n)" [isEnabled]="!service.placingRace.timeBlocked"></Button>
+      <GridLayout rows="*" columns="*" class="button btn-grey-gradient" [ngClass]="{'btn-dark-gradient' : service.placingEvent.repeat === n}">x{{n}}>
+        <Button text="x{{n}}" class="button-internal" (tap)="setRepeat(n)" [isEnabled]="!service.placingEvent.timeBlocked"></Button>
       </GridLayout>
     </GridLayout>
   </GridLayout> -->
