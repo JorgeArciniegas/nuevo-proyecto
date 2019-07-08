@@ -5,7 +5,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { componentDeclarations, routes } from './main.common';
 import { CockfightComponent } from './results/templates/cockfight/cockfight.component';
 @NgModule({
-  declarations: [componentDeclarations, CockfightComponent],
+  declarations: [componentDeclarations],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
