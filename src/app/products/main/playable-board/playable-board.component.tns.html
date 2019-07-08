@@ -1,7 +1,12 @@
 <StackLayout *ngIf="show">
   <!-- TEMPLATE RACE -->
-  <app-playable-race [rowHeight]="rowHeight" *ngIf="productService.product.layoutProducts.type === typeLayout.RACING">
-  </app-playable-race>
+  <app-playable-board-race [rowHeight]="rowHeight"
+    *ngIf="productService.product.layoutProducts.type === typeLayout.RACING">
+  </app-playable-board-race>
+  <!-- TEMPLATE COCK FIGHT -->
+  <app-playable-board-cock-fight [rowHeight]="rowHeight"
+    *ngIf="productService.product.layoutProducts.type === typeLayout.COCK_FIGHT">
+  </app-playable-board-cock-fight>
 </StackLayout>
 
 <!-- <GridLayout row="2" class="playable-grid-buttons playable-grid-repeat" rows="*" columns="*,*,*,*,*,*,*,*">

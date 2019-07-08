@@ -6,7 +6,7 @@ import { EventControlComponent } from './event-control/event-control.component';
 import { MainComponent } from './main.component';
 import { ResultsComponent } from './results/results.component';
 import { RaceComponent } from './results/templates/race/race.component';
-import { PlayableRaceComponent } from './playable-board/templates/race/playablerace.component';
+import { PlayableBoardRaceComponent } from './playable-board/templates/playable-board-race/playable-board-race.component';
 import { StandardListComponent } from './events-list/templates/standard-list/standard-list.component';
 import { StandardComponent } from './event-control/templates/standard/standard.component';
 
@@ -18,7 +18,7 @@ export const componentDeclarations: any[] = [
   PlayableBoardComponent,
   FilterByPositionPipe,
   RaceComponent,
-  PlayableRaceComponent,
+  PlayableBoardRaceComponent,
   StandardListComponent,
   StandardComponent
 ];
