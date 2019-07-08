@@ -13,6 +13,7 @@
                 <mat-grid-list fxFill cols="3" rowHeight="{{rowHeight}}" class="position">
                     <mat-grid-tile>
                       <div fxFill fxLayoutAlign="center center" class="radius-10 btn-default-result-cock btn-cock-{{event.cockResult.winner}}">
+                        <span *ngIf="event.cockResult.winner !== 0" class="icon icon-cock-{{event.cockResult.winner}}"></span>
                         <span>{{(event.cockResult.winner === 0) ? 'X' : event.cockResult.winner}}</span>
                       </div>
                     </mat-grid-tile>
