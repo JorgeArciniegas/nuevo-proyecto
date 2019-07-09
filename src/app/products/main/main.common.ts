@@ -6,10 +6,11 @@ import { EventControlComponent } from './event-control/event-control.component';
 import { MainComponent } from './main.component';
 import { ResultsComponent } from './results/results.component';
 import { RaceComponent as ResultsRaceComponent } from './results/templates/race/race.component';
-import { PlayableBoardRaceComponent } from './playable-board/templates/playable-board-race/playable-board-race.component';
+import { RaceComponent as PlayableBoardRaceComponent } from './playable-board/templates/race/race.component';
 import { StandardListComponent } from './events-list/templates/standard-list/standard-list.component';
 import { StandardComponent } from './event-control/templates/standard/standard.component';
-import { CockfightComponent } from './results/templates/cockfight/cockfight.component';
+import { CockfightComponent as ResultsCockFightComponent } from './results/templates/cockfight/cockfight.component';
+import { CockFightComponent as PlayableBoardCockFightComponent } from './playable-board/templates/cock-fight/cock-fight.component';
 
 export const componentDeclarations: any[] = [
   MainComponent,
@@ -22,7 +23,8 @@ export const componentDeclarations: any[] = [
   PlayableBoardRaceComponent,
   StandardListComponent,
   StandardComponent,
-  CockfightComponent
+  ResultsCockFightComponent,
+  PlayableBoardCockFightComponent
 ];
 
 export const providerDeclarations: any[] = [];

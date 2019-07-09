@@ -6,10 +6,10 @@ import { ProductsService } from '../../../../products.service';
 
 @Component({
   selector: 'app-playable-board-race',
-  templateUrl: './playable-board-race.component.html',
-  styleUrls: ['./playable-board-race.component.scss']
+  templateUrl: './race.component.html',
+  styleUrls: ['./race.component.scss']
 })
-export class PlayableBoardRaceComponent implements OnInit, OnDestroy {
+export class RaceComponent implements OnInit, OnDestroy {
   @Input()
   public rowHeight: number;
   @Input()
