@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { EventResult } from './../../results.model';
 
 @Component({
-  selector: 'app-race',
+  selector: 'app-results-race',
   templateUrl: './race.component.html',
   styleUrls: ['./race.component.scss']
 })

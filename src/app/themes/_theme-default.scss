@@ -434,7 +434,7 @@ html {
 				// HORSE VIRTUAL
 				@extend %PRODUCT-HORSE-BG;
 			}
-			&.PRODUCT-COCK-BG {
+			.PRODUCT-COCK-BG {
 				// COCK FIGHT
 				@extend %PRODUCT-COCK-BG;
 			}
@@ -464,7 +464,8 @@ html {
 
 			.card-box-result {
 				.header {
-					.raceNumber {
+          .raceNumber,
+          .eventNumber {
 						@extend %card-title-noborder;
 					}
 				}
@@ -752,6 +753,7 @@ html {
 /**
 * Import layout's component
 **/
-@import "./results-list/results-list";
-@import "./playable-board/playablerace";
-@import "./statistics/statistics.component";
+@import './results-list/results-list';
+@import './playable-board/playablerace';
+@import './statistics/statistics.component';
+@import './event-control/event-control-standard';

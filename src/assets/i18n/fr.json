@@ -236,6 +236,10 @@
       "UNDER": "Moins",
       "VT": "VX",
       "WINNER": "Gagnant"
+    },
+    "OVER_UNDER_COCKFIGHT":{
+      "O": "pl",
+      "U": "mo"
     }
   },
   "ERROR": "Erreur",
