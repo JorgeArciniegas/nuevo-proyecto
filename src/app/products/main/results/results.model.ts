@@ -16,10 +16,15 @@ export interface RacePodium {
 
 export interface CockFightingResult {
   winner: number; // Winner 1 = RED, 2 = BLUE
-  ou: string; // OVER / UNDER
+  ou: OVER_UNDER_COCKFIGHT; // O / U
   sector: number; // Sector
 }
 
 export interface SoccerResult {
   finalTime: string;
+}
+
+export enum OVER_UNDER_COCKFIGHT {
+  O = 'ov',
+  U = 'un'
 }

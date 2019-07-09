@@ -236,6 +236,10 @@
       "UNDER": "Poshte",
       "VT": "VX",
       "WINNER": "Fitues"
+    },
+    "OVER_UNDER_COCKFIGHT":{
+      "O": "la",
+      "U": "po"
     }
   },
   "ERROR": "Gabim",

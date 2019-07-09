@@ -464,7 +464,8 @@ html {
 
 			.card-box-result {
 				.header {
-					.raceNumber {
+          .raceNumber,
+          .eventNumber {
 						@extend %card-title-noborder;
 					}
 				}
