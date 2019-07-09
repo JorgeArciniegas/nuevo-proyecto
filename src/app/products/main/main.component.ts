@@ -31,7 +31,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.rowHeight =
-      (this.productService.windowSize.columnHeight - 20 - 17) / 17;
+      (this.productService.windowSize.columnHeight - 30 - 12) / 24;
   }
 
   placingLucky(lucky: Lucky): void {
