@@ -3,7 +3,7 @@
     <img class="logo-print-coupon padding-10">
     <div class="header-content">
       <div class="padding-5 font-size-normal">
-        {{ 'PRINT.HEADER_MSG' | translate }}
+        {{appSetting.bookmakerDetails}}
       </div>
       <div class="qr-code">
         <qr-code [value]="printCouponService.couponPrint.CouponCode" [size]="50"></qr-code>
@@ -28,8 +28,8 @@
     <!-- OTHER INFO REPRINT COUPON-->
     <div class="betslip-info" *ngIf="printCouponService.isPrintAgainst">
       <div class="betslip-reprint-info">
-        <div class="col font-size-normal" [style.width.%]="100">{{ 'PRINT_COUPON.REPRINTED' | translate }}</div>
-        <div class="col font-size-normal" [style.width.%]="40">{{ 'PRINT_COUPON.DATE_OF_REPRINT' | translate }}</div>
+        <div class="col font-size-normal" [style.width.%]="100">{{ 'REPRINT' | translate }}</div>
+        <div class="col font-size-normal" [style.width.%]="40">{{ 'DATE_OF_REPRINT' | translate }}</div>
         <div class="col font-size-normal text-right" [style.width.%]="60">
           {{ printCouponService.reprintDate | date:'yyyy-MM-dd HH.mm.ss'}}</div>
         <ng-container *ngIf="printCouponService.couponPrint.CouponStatusId === couponStatus.Win  ||
@@ -71,7 +71,7 @@
         <div class="label" [style.font-size.mm]="4.5" [style.font-weight]="700">{{'STAKE_AMOUNT' | translate }}
         </div>
         <div class="value" [style.font-size.mm]="4.5" [style.font-weight]="700">
-          {{printCouponService.couponPrint.Stake }}</div>
+          {{printCouponService.couponPrint.Stake | currency : userService.userCurrency : 'symbol-narrow' }}</div>
       </div>
       <div class="groupings">
         <div class="row-grouping" *ngFor="let grouping of printCouponService.couponPrint.Groupings">
@@ -80,7 +80,7 @@
               <div class="label">{{'GROUPS' | translate }} : {{ grouping.Grouping}}</div>
               <div class="comb">
                 <span>{{'COMB' | translate }}: </span>
-                <strong>{{ grouping.Combinations + ' x ' + grouping.Stake +' = ' + (grouping.Combinations * grouping.Stake | number: '1.2-2') }}</strong>
+                <strong>{{ grouping.Combinations + ' x ' + grouping.Stake +' = ' + (grouping.Combinations * grouping.Stake | currency : userService.userCurrency : 'symbol-narrow') }}</strong>
               </div>
             </div>
           </ng-container>
@@ -94,7 +94,7 @@
             <div class="decoration-title"></div>
           </div>
           <div class="amount">
-            <span>{{ printCouponService.couponPrint.MinWin }}</span>
+            <span>{{ printCouponService.couponPrint.MinWin | currency : userService.userCurrency : 'symbol-narrow' }}</span>
           </div>
         </div>
         <div class="max-row">
@@ -107,15 +107,17 @@
             <div class="decoration-title"></div>
           </div>
           <div class="amount">
-            <span>{{ printCouponService.couponPrint.MaxWin }}</span>
+            <span>{{ printCouponService.couponPrint.MaxWin | currency : userService.userCurrency : 'symbol-narrow' }}</span>
           </div>
         </div>
       </div>
     </div>
     <div class="betslip-other-info">
-      <div class="message-company-trasmitted font-size-normal">{{appSetting.couponMessageTrasmitted}}
+      <div *ngIf="appSetting.printSettings.isTrasmitionInfoMessageShown"
+        class="message-company-trasmitted font-size-normal">{{'PRINT_COUPON.TRANSMISSION_MESSAGE' | translate}}
         {{ printCouponService.couponPrint.CouponDateOffset | date : 'dd/MM/yyyy HH:mm:ss' }} </div>
-      <div class="message-company-legal font-size-normal">{{appSetting.couponMessageLegal}}</div>
+      <div class="message-company-legal font-size-normal">
+        {{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSetting.license] | translate}}</div>
     </div>
   </div>
   <div class="footer">

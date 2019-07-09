@@ -15,7 +15,7 @@
   </ng-container>
   <FlexboxLayout flexDirection="column" class="details" justifyContent="center">
     <Label
-      text="{{'BALANCE' | translate }}: {{userService.userDetail?.Currency}} {{userService.userDetail?.PlayableBalance |number: '1.2-2'}}"></Label>
+      text="{{'BALANCE' | translate }}: {{userService.userDetail?.PlayableBalance | currency : userService.userCurrency : 'symbol-narrow'}}"></Label>
     <StackLayout orientation="horizontal">
       <Label text="{{'OPERATOR' | translate }}:"></Label>
       <Label class="operator" text="{{userService.userDetail?.UserName}}"></Label>

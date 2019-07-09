@@ -9,7 +9,7 @@
       <FlexboxLayout flexDirection="column">
         <StackLayout class="logo-print-coupon" height="50"></StackLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-15" flexWrap="wrap">
-          <Label class="p-15 text-center font-weight-bold" text="{{ 'PRINT.HEADER_MSG' | translate }}"></Label>
+          <Label class="p-15 text-center font-weight-bold" text="{{appSetting.bookmakerDetails}}"></Label>
           <Label class="p-15 text-center font-weight-bold" text="qrcode"></Label>
 
         </FlexboxLayout>
@@ -32,10 +32,10 @@
         <StackLayout *ngIf="printCouponService.isPrintAgainst">
           <StackLayout class="hr-dark m-10"></StackLayout>
           <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-15" flexWrap="wrap">
-            <Label class="p-15 font-weight-bold" text="{{ 'PRINT_COUPON.REPRINTED' | translate }}"></Label>
+            <Label class="p-15 font-weight-bold" text="{{ 'REPRINT' | translate }}"></Label>
           </FlexboxLayout>
           <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-15" flexWrap="wrap">
-            <Label class="p-15 font-weight-bold" text="{{ 'PRINT_COUPON.DATE_OF_REPRINT' | translate }}"></Label>
+            <Label class="p-15 font-weight-bold" text="{{ 'DATE_OF_REPRINT' | translate }}"></Label>
             <Label class="p-15 text-right"
               text="{{ printCouponService.reprintDate | date:'yyyy-MM-dd HH.mm.ss' }}"></Label>
           </FlexboxLayout>
@@ -72,7 +72,8 @@
         <StackLayout class="hr-dark m-10"></StackLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-15" flexWrap="wrap">
           <Label class="p-5 text-center font-weight-bold" text="{{'STAKE_AMOUNT' | translate }}"></Label>
-          <Label class="p-10 text-right" text="{{ printCouponService.couponPrint.Stake }}"></Label>
+          <Label class="p-10 text-right"
+            text="{{ printCouponService.couponPrint.Stake | currency : userService.userCurrency : 'symbol-narrow' }}"></Label>
         </FlexboxLayout>
         <StackLayout class="hr-dark m-10"></StackLayout>
         <!-- PAYOUT -->
@@ -80,24 +81,30 @@
         <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-5" flexWrap="wrap"
           *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.SingleBet">
           <Label class="h2 p-10 text-center" text="{{'TOTAL_PAYOUT' | translate }}" textTransform="uppercase"></Label>
-          <Label class="h3 p-10 text-center" text="{{ printCouponService.couponPrint.MaxWin }}"></Label>
+          <Label class="h3 p-10 text-center"
+            text="{{ printCouponService.couponPrint.MaxWin | currency : userService.userCurrency : 'symbol-narrow' }}"></Label>
           <StackLayout class="hr-dark m-10"></StackLayout>
         </FlexboxLayout>
         <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-5" flexWrap="wrap"
           *ngIf="printCouponService.couponPrint.CouponTypeId !== couponType.SingleBet">
           <Label class="h2 p-10 text-center" text="{{'MIN_PAYOUT' | translate }}" textTransform="uppercase"></Label>
-          <Label class="h3 p-10 text-center" text="{{ printCouponService.couponPrint.MinWin }}"></Label>
+          <Label class="h3 p-10 text-center"
+            text="{{ printCouponService.couponPrint.MinWin | currency : userService.userCurrency : 'symbol-narrow' }}"></Label>
           <StackLayout class="hr-dark m-10"></StackLayout>
           <Label class="h2 p-10 text-center" text="{{'MAX_PAYOUT' | translate }}" textTransform="uppercase"></Label>
-          <Label class="h3 p-10 text-center" text="{{ printCouponService.couponPrint.MaxWin }}"></Label>
+          <Label class="h3 p-10 text-center"
+            text="{{ printCouponService.couponPrint.MaxWin | currency : userService.userCurrency : 'symbol-narrow' }}"></Label>
           <StackLayout class="hr-dark m-10"></StackLayout>
         </FlexboxLayout>
         <!-- FOOTER INFO -->
         <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-15">
+          <ng-container *ngIf="appSetting.printSettings.isTrasmitionInfoMessageShown">
+            <Label class="p-10 text-left"
+              text="{{'PRINT_COUPON.TRANSMISSION_MESSAGE' | translate}} {{ printCouponService.couponPrint.CouponDateOffset | date : 'dd/MM/yyyy HH:mm:ss' }}"></Label>
+            <StackLayout class="hr-dark m-10"></StackLayout>
+          </ng-container>
           <Label class="p-10 text-left"
-            text="{{ appSetting.couponMessageTrasmitted }} {{ printCouponService.couponPrint.CouponDateOffset | date : 'dd/MM/yyyy HH:mm:ss' }}"></Label>
-          <StackLayout class="hr-dark m-10"></StackLayout>
-          <Label class="p-10 text-left" text="{{appSetting.couponMessageLegal}}"></Label>
+            text="{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSetting.license] | translate}}"></Label>
         </FlexboxLayout>
       </FlexboxLayout>
     </StackLayout>

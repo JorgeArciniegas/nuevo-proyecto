@@ -2,6 +2,8 @@ import { CouponPresetValues } from '@elys/elys-api';
 
 export interface Environment {
   production: boolean;
+  bookmakerDetails: string;
+  license: LICENSE_TYPE;
   baseApiUrl?: string;
   staging?: boolean;
   pageTitle?: string;
@@ -10,10 +12,10 @@ export interface Environment {
   supportedLang?: string[];
   currency?: string;
   products: Products[];
+  printSettings: PrintSettings;
   showEventId: boolean;
   couponMessageTrasmitted?: string;
   couponMessageLegal?: string;
-  isEnabledReprintCoupon: boolean;
   defaultAmount?: CouponPresetValues;
   couponDirectPlace: boolean;
   currencyDefault: string;
@@ -45,6 +47,12 @@ export interface Widget {
   icon: string;
 }
 
+// Setting on the print feature
+export interface PrintSettings {
+  isEnabledReprintCoupon: boolean;
+  isTrasmitionInfoMessageShown: boolean;
+}
+
 export enum WidgetTypeLink {
   MODAL,
   OUTLET
@@ -67,4 +75,9 @@ export enum LAYOUT_TYPE {
   COCK_FIGHT,
   SOCCER,
   KENO
+}
+
+// Bookmaker's identifier
+export enum LICENSE_TYPE {
+  DEMO_LICENSE
 }

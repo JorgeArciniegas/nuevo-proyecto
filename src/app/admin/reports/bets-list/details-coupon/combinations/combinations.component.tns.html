@@ -5,7 +5,8 @@
       <StackLayout row="1" col="0"></StackLayout>
       <Label row="1" col="1" text="{{group.Combinations }}" textWrap="true"></Label>
       <Label row="2" col="1" class="sub-title" text="{{ 'COMBINATIONS' | translate }}"></Label>
-      <Label row="1" col="2" text="{{ group.Stake }}" textWrap="true"></Label>
+      <Label row="1" col="2" text="{{group.Stake | currency : userService.userCurrency : 'symbol-narrow'}}"
+        textWrap="true"></Label>
       <Label row="2" col="2" class="sub-title" text="{{ 'STAKE' | translate }}"></Label>
       <!-- DIVIDER -->
       <StackLayout row="3" colSpan="4" class="border-bottom-overlay"></StackLayout>

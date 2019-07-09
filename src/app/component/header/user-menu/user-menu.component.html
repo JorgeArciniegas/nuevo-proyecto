@@ -12,11 +12,8 @@
   </div>
   <div fxLayout="column" class="details">
     <div fxLayout="column">
-
-
-
-      {{'BALANCE' | translate }}: {{userService.userDetail?.Currency}}
-      {{userService.userDetail?.PlayableBalance |number: '1.2-2'}}
+      {{'BALANCE' | translate }}:
+      {{userService.userDetail?.PlayableBalance | currency : userService.userCurrency : 'symbol-narrow'}}
     </div>
     <div fxLayout="row">
       {{'OPERATOR' | translate }}:<span class="operator">{{userService.userDetail?.UserName}}</span>
