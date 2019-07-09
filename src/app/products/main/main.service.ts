@@ -351,7 +351,7 @@ export class MainService extends MainServiceExtra {
       (cacheRace: VirtualBetEvent) => cacheRace.id === raceNumber
     )[0];
     const request: VirtualDetailOddsOfEventRequest = {
-      sportId: 8,
+      sportId: this.productService.product.sportId,
       matchId: raceNumber
     };
     // check, if is empty load from api
