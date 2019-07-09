@@ -3,7 +3,7 @@ import { WindowSize } from '../../../../../../../src/app/products/products.model
 import { EventResult } from './../../results.model';
 
 @Component({
-  selector: 'app-race',
+  selector: 'app-results-race',
   templateUrl: './race.component.html',
   styleUrls: ['./race.component.scss']
 })

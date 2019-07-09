@@ -3,7 +3,7 @@ import { EventResult } from '../../results.model';
 import { WindowSize } from '../../../../../../../src/app/products/products.model';
 
 @Component({
-  selector: 'app-cockfight',
+  selector: 'app-results-cockfight',
   templateUrl: './cockfight.component.html',
   styleUrls: ['./cockfight.component.scss']
 })

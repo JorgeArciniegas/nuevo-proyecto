@@ -3,7 +3,7 @@ import { EventResult } from '../../results.model';
 
 
 @Component({
-  selector: 'app-cockfight',
+  selector: 'app-results-cockfight',
   templateUrl: './cockfight.component.html',
   styleUrls: ['./cockfight.component.scss']
 })

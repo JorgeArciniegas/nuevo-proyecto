@@ -1,11 +1,11 @@
 <div>
   <!-- result RACE -->
-  <app-race
+  <app-results-race
     *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.RACING"
     [items]="productService.product.layoutProducts.resultItems" rowHeight="{{rowHeight}}" [results]="service.listResult" [codeProduct]="productService.product.codeProduct">
-  </app-race>
-  <app-cockfight
+  </app-results-race>
+  <app-results-cockfight
   *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.COCK_FIGHT"
   [items]="productService.product.layoutProducts.resultItems" rowHeight="{{rowHeight}}" [results]="service.listResult" [codeProduct]="productService.product.codeProduct">
-</app-cockfight>
+</app-results-cockfight>
 </div>
