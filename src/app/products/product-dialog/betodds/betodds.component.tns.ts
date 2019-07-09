@@ -6,6 +6,7 @@ import { CouponService } from '../../../component/coupon/coupon.service';
 import { DialogService } from '../../dialog.service';
 import { BetOdd, DialogData } from '../../products.model';
 import { ProductsService } from '../../products.service';
+import { UserService } from '../../../../../src/app/services/user.service';
 
 @Component({
   selector: 'app-betodds',
@@ -37,7 +38,8 @@ export class BetoddsComponent implements OnInit {
     private dialog: DialogService,
     private productService: ProductsService,
     public readonly appSettings: AppSettings,
-    public readonly couponService: CouponService
+    public readonly couponService: CouponService,
+    public userService: UserService
   ) {
     this.settings = appSettings;
     if (
@@ -144,7 +146,8 @@ export class BetoddsComponent implements OnInit {
   close(): void {
     this.couponService.oddStakeEditSubject.next(null);
     this.dialog.showDialog = false;
-    this.couponService.isBtnCalcEditable = false;
+    this.userService.isBtnCalcEditable = true;
+    this.userService.isModalOpen = false;
   }
 
   removeOdd(odd: BetCouponOddExtended): void {
@@ -155,12 +158,18 @@ export class BetoddsComponent implements OnInit {
       odd.SelectionId
     );
     this.couponService.addRemoveToCoupon([betOdd]);
-    this.couponService.isBtnCalcEditable = false;
+    this.userService.isBtnCalcEditable = false;
   }
 
   // change stake from odd's coupon
   checkOddToChangeStake(odd: BetCouponOdd): void {
-    this.couponService.isBtnCalcEditable = true;
+    this.userService.isBtnCalcEditable = true;
+    if (
+      this.couponService.oddStakeEdit &&
+      this.couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId
+    ) {
+      this.userService.isBtnCalcEditable = false;
+    }
     this.couponService.checkOddToChangeStake(odd);
   }
 }

@@ -2,6 +2,6 @@
   <GridLayout *ngFor="let btn of buttons" flexGrow="1" rows="*" columns="*" class="card button btn-advance-game"
     [ngClass]="{'actived' : service.placingEvent.typePlace === btn.code, 'inactive': service.placingEvent.typePlace !== undefined && service.placingEvent.typePlace !== btn.code}">
     <Button text="{{ btn.label | translate }}" class="button-internal" (tap)="setTypePlacing(btn.code)"
-      [isEnabled]="!timeBlocked"></Button>
+      [isEnabled]="!timeBlocked && !userService.isModalOpen"></Button>
   </GridLayout>
 </FlexboxLayout>

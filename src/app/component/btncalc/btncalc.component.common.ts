@@ -10,6 +10,7 @@ import { TypeBetSlipColTot } from '../../products/main/main.models';
 import { CouponService } from '../coupon/coupon.service';
 import { BtncalcService } from './btncalc.service';
 import { TYPINGTYPE } from './btncalc.enum';
+import { UserService } from '../../../../src/app/services/user.service';
 
 export class BtncalcComponentCommon {
   polyfunctionalValueSubscribe: Subscription;
@@ -21,7 +22,8 @@ export class BtncalcComponentCommon {
     public productService: ProductsService,
     public btncalcService: BtncalcService,
     public appSetting: AppSettings,
-    private couponService: CouponService
+    private couponService: CouponService,
+    private userService: UserService
   ) {
     // manages buttons COL/TOT, label amount in display, amount association/distribution
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
@@ -50,7 +52,9 @@ export class BtncalcComponentCommon {
   }
   async plus(): Promise<void> {
     this.btncalcService.assignStake();
-    this.couponService.isBtnCalcEditable = false;
+    if (this.userService.isModalOpen) {
+      this.userService.isBtnCalcEditable = false;
+    }
     if (this.couponService.oddStakeEdit) {
       this.couponService.updateCoupon();
       return;

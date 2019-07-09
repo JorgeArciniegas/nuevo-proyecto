@@ -22,6 +22,7 @@ export class UserService {
   // URL to which was navigating before to be stopped by the authorization guard.
   public targetedUrlBeforeLogin: string;
   public isModalOpen = false;
+  public isBtnCalcEditable = true;
   public userCurrency: string;
   constructor(
     private router: RouterService,
@@ -41,6 +42,7 @@ export class UserService {
       });
       this.loadUserData(this.storageService.getData('tokenData'));
     }
+
     /**
      * listening for staged coupons variation then check the status, if = Placed substracts the played stake from playable balance
      */

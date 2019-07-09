@@ -1,4 +1,4 @@
-import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service.tns';
+import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
 import { Subject, Observable } from 'rxjs';
 import { EventDetail } from './main.models';
@@ -12,6 +12,7 @@ export class MainServiceExtra {
     public coupon: CouponService,
     public destroyCouponService: DestroyCouponService
   ) {
+    // fake error, the reason is a misunderstanding by tslint about tns files import
     this.destroyCouponService.confirmDestroyObs.subscribe(elem => {
       this.destroyCouponService.showDialog = false;
       if (elem && this.coupon.productHasCoupon.isRacing) {

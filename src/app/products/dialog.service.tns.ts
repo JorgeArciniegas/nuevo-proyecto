@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DialogData } from './products.model';
 import { UserService } from '../services/user.service';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -13,11 +12,14 @@ export class DialogService {
 
   openDialog(dialogData: DialogData) {
     this.userservice.isModalOpen = true;
+    this.userservice.isBtnCalcEditable = false;
     this.dialogData = dialogData;
     this.showDialog = true;
   }
+
   closeDialog(): void {
     this.showDialog = false;
-    this.userservice.isModalOpen = true;
+    this.userservice.isBtnCalcEditable = true;
+    this.userservice.isModalOpen = false;
   }
 }

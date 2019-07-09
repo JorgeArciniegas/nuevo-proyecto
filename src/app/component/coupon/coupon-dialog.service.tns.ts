@@ -13,18 +13,21 @@ export class CouponDialogService {
 
   openPayCancelDialog(type: DialogTypeCoupon) {
     this.userService.isModalOpen = true;
+    this.userService.isBtnCalcEditable = false;
     this.type = type;
     this.showDialog = true;
   }
 
   openDialog() {
     this.userService.isModalOpen = true;
+    this.userService.isBtnCalcEditable = false;
     this.showDialog = true;
   }
 
   closeDialog() {
     this.type = null;
     this.showDialog = false;
-    this.userService.isModalOpen = true;
+    this.userService.isModalOpen = false;
+    this.userService.isBtnCalcEditable = true;
   }
 }

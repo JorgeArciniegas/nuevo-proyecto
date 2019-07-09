@@ -67,7 +67,6 @@ export class CouponService {
   // Information coupon when has been placed
   private couponHasBeenPlacedSub: Subject<boolean>;
   couponHasBeenPlacedObs: Observable<boolean>;
-  public isBtnCalcEditable = false;
   constructor(
     public elysCoupon: ElysCouponService,
     public userService: UserService,

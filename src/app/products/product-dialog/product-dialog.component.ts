@@ -68,7 +68,7 @@ export class ProductDialogComponent implements OnInit, AfterViewInit {
       });
   }
   close(): void {
-    this.couponService.isBtnCalcEditable = false;
+    this.userservice.isBtnCalcEditable = true;
     this.dialogRef.close();
     this.userservice.isModalOpen = false;
     this.couponService.oddStakeEditSubject.next(null);
