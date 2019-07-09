@@ -96,19 +96,20 @@ export class MainService extends MainServiceExtra {
     this.currentEventObserve = this.currentEventSubscribe.asObservable();
 
     this.currentEventObserve.subscribe((raceIndex: number) => {
-      this.eventDetails.currentEvent = raceIndex;
-
-      this.remainingRaceTime(this.eventDetails.events[raceIndex].number).then(
-        (raceTime: EventTime) => {
-          this.eventDetails.eventTime = raceTime;
-        }
-      );
-      // reset coupon
-      this.coupon.resetCoupon();
-      // reset playload
-      this.resetPlayEvent();
-      // get race odds
-      this.raceDetailOdds(this.eventDetails.events[raceIndex].number);
+      if (this.eventDetails.currentEvent !== raceIndex) {
+        this.eventDetails.currentEvent = raceIndex;
+        this.remainingRaceTime(this.eventDetails.events[raceIndex].number).then(
+          (raceTime: EventTime) => {
+            this.eventDetails.eventTime = raceTime;
+          }
+        );
+        // reset coupon
+        this.coupon.resetCoupon();
+        // reset playload
+        this.resetPlayEvent();
+        // get race odds
+        this.raceDetailOdds(this.eventDetails.events[raceIndex].number);
+      }
     });
 
     this.placingEventSubject = new Subject<PlacingEvent>();
@@ -225,9 +226,6 @@ export class MainService extends MainServiceExtra {
         // if remain only 1 new race reload other race
         this.loadRacesFromApi();
       }
-
-      // get race odds
-      this.raceDetailOdds(this.eventDetails.events[0].number);
     }
   }
 
@@ -273,7 +271,8 @@ export class MainService extends MainServiceExtra {
             }
           });
         }
-
+        // get race odds
+        this.raceDetailOdds(this.eventDetails.events[0].number);
         this.reload = 4;
       });
   }
@@ -304,13 +303,6 @@ export class MainService extends MainServiceExtra {
         this.remainingTime.second = raceTime.second;
       }
     });
-
-    // calculate remaning time
-    if (this.eventDetails.currentEvent > 0) {
-      this.remainingRaceTime(this.eventDetails.events[0].number).then(
-        (raceTime: EventTime) => (this.remainingTime = raceTime)
-      );
-    }
   }
 
   remainingRaceTime(idEvent: number): Promise<EventTime> {
