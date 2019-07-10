@@ -95,10 +95,10 @@ export class MainService extends MainServiceExtra {
     this.currentEventSubscribe = new Subject<number>();
     this.currentEventObserve = this.currentEventSubscribe.asObservable();
 
-    this.currentEventObserve.subscribe((raceIndex: number) => {
-      if (this.eventDetails.currentEvent !== raceIndex) {
-        this.eventDetails.currentEvent = raceIndex;
-        this.remainingRaceTime(this.eventDetails.events[raceIndex].number).then(
+    this.currentEventObserve.subscribe((eventIndex: number) => {
+      if (this.eventDetails.currentEvent !== eventIndex) {
+        this.eventDetails.currentEvent = eventIndex;
+        this.remainingRaceTime(this.eventDetails.events[eventIndex].number).then(
           (raceTime: EventTime) => {
             this.eventDetails.eventTime = raceTime;
           }
@@ -108,7 +108,7 @@ export class MainService extends MainServiceExtra {
         // reset playload
         this.resetPlayEvent();
         // get race odds
-        this.raceDetailOdds(this.eventDetails.events[raceIndex].number);
+        this.raceDetailOdds(this.eventDetails.events[eventIndex].number);
       }
     });
 
@@ -141,6 +141,22 @@ export class MainService extends MainServiceExtra {
     this.initCurrentEvent = true;
     this.loadRaces();
     this.resultService.loadLastResult(false);
+  }
+
+  /**
+   * Method to get the details of the event required or the current selected event (call without parameter).
+   * @param eventIndex Optional parameter containing the index of the event into the cacheEvent array.
+   */
+  getCurrentEventDetails(eventIndex?: number): VirtualBetEvent {
+    let eventDetails: VirtualBetEvent;
+    if (this.cacheEvents) {
+      if (eventIndex) {
+        eventDetails = this.cacheEvents[eventIndex];
+      } else {
+        eventDetails = this.cacheEvents[this.eventDetails.currentEvent];
+      }
+    }
+    return eventDetails;
   }
 
   createPlayerList(): void {
