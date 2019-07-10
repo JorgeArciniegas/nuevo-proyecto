@@ -15,7 +15,6 @@ export class ProductsServiceExtra {
     public destroyCouponService: DestroyCouponService,
     public router: RouterService
   ) {
-    // fake error, the reason is a misunderstanding by tslint about tns files import
     this.destroyCouponService.confirmDestroyObs.subscribe(elem => {
       this.destroyCouponService.showDialog = false;
       if (elem && !this.couponInternalService.productHasCoupon.isRacing) {
