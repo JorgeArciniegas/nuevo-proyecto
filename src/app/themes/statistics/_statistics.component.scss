@@ -15,8 +15,11 @@ app-product-dialog{
       height: 30px;
       width: 0%;
       border-radius: 25px;
+    }
+    &.fitness-race{
+      .fitness-content{
       @extend %bar-fitness-pecentage;
-
+      }
     }
   }
 
