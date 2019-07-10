@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RouterExtensions } from 'nativescript-angular/router';
 import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../../products/products.service';
 import { Products } from '../../../../../src/environments/environment.models';
+import { UserService } from '../../../../../src/app/services/user.service';
 
 @Component({
   selector: 'app-application-menu',
@@ -16,7 +17,8 @@ export class ApplicationMenuComponent implements OnInit {
   constructor(
     public readonly appSettings: AppSettings,
     public productService: ProductsService,
-    private router: RouterExtensions
+    private router: RouterExtensions,
+    public readonly userService: UserService
   ) {
     this.settings = appSettings;
   }

@@ -15,6 +15,7 @@ export class DialogService {
 
   openDialog(dialogData: DialogData) {
     this.userservice.isModalOpen = true;
+    this.userservice.isBtnCalcEditable = false;
     this.dialogProductRef = this.dialog.open(ProductDialogComponent, {
       data: dialogData
     });
@@ -24,6 +25,7 @@ export class DialogService {
     if (this.dialogProductRef != null) {
       this.dialogProductRef.close();
       this.userservice.isModalOpen = false;
+      this.userservice.isBtnCalcEditable = true;
     }
   }
 }

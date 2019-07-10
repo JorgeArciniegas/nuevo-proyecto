@@ -24,7 +24,7 @@
           [ngClass]="{'btn-dog-play-actived': runner.actived, 'disabled': !runner.selectable}">
           <StackLayout class="label"></StackLayout>
           <Button text="{{runner.number}}" class="button-internal" (tap)="runnerplaced(runner)"
-            [isEnabled]="runner.selectable && !service.placingEvent.timeBlocked"></Button>
+            [isEnabled]="runner.selectable && !service.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
         </GridLayout>
       </GridLayout>
     </GridLayout>
@@ -35,7 +35,7 @@
           [ngClass]="{'btn-dog-play-actived': runner.actived, 'disabled': !runner.selectable || service.placingEvent.secondRowDisabled}">
           <StackLayout class="label"></StackLayout>
           <Button text="{{runner.number}}" class="button-internal" (tap)="runnerplaced(runner)"
-            [isEnabled]="runner.selectable && !service.placingEvent.timeBlocked && !service.placingEvent.secondRowDisabled"></Button>
+            [isEnabled]="runner.selectable && !service.placingEvent.timeBlocked && !service.placingEvent.secondRowDisabled && !userService.isModalOpen"></Button>
         </GridLayout>
       </GridLayout>
     </GridLayout>
@@ -46,7 +46,7 @@
           [ngClass]="{'btn-dog-play-actived': runner.actived, 'disabled': !runner.selectable  || service.placingEvent.thirdRowDisabled}">
           <StackLayout class="label"></StackLayout>
           <Button text="{{runner.number}}" class="button-internal" (tap)="runnerplaced(runner)"
-            [isEnabled]="runner.selectable && !service.placingEvent.timeBlocked && !service.placingEvent.thirdRowDisabled"></Button>
+            [isEnabled]="runner.selectable && !service.placingEvent.timeBlocked && !service.placingEvent.thirdRowDisabled && !userService.isModalOpen"></Button>
         </GridLayout>
       </GridLayout>
     </GridLayout>
@@ -57,28 +57,28 @@
       <GridLayout rows="*" columns="*" class="button btn-success"
         [ngClass]="{'actived' : (service.placingEvent.isSpecialBets && service.placingEvent.specialBetValue === specialBet['ODD']) }">
         <Button text="{{'ODD' | translate}}" class="button-internal" (tap)="specialBets('ODD')"
-          [isEnabled]="!service.placingEvent.timeBlocked"></Button>
+          [isEnabled]="!service.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
       </GridLayout>
     </GridLayout>
     <GridLayout col="1" rows="*" columns="*" shadow="3" cornerRadius="11" class="special-bet">
       <GridLayout rows="*" columns="*" class="button btn-success"
         [ngClass]="{'actived' : (service.placingEvent.isSpecialBets && service.placingEvent.specialBetValue === specialBet['EVEN']) }">
         <Button text="{{'EVEN' | translate}}" class="button-internal" (tap)="specialBets('EVEN')"
-          [isEnabled]="!service.placingEvent.timeBlocked"></Button>
+          [isEnabled]="!service.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
       </GridLayout>
     </GridLayout>
     <GridLayout col="2" rows="*" columns="*" shadow="3" cornerRadius="11" class="special-bet">
       <GridLayout rows="*" columns="*" class="button btn-success"
         [ngClass]="{'actived' : (service.placingEvent.isSpecialBets && service.placingEvent.specialBetValue === specialBet['UNDER']) }">
         <Button text="{{'UNDER' | translate}}" class="button-internal" (tap)="specialBets('UNDER')"
-          [isEnabled]="!service.placingEvent.timeBlocked"></Button>
+          [isEnabled]="!service.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
       </GridLayout>
     </GridLayout>
     <GridLayout col="3" rows="*" columns="*" shadow="3" cornerRadius="11" class="special-bet">
       <GridLayout rows="*" columns="*" class="button btn-success"
         [ngClass]="{'actived' : (service.placingEvent.isSpecialBets && service.placingEvent.specialBetValue === specialBet['OVER']) }">
         <Button text="{{'OVER' | translate}}" class="button-internal" (tap)="specialBets('OVER')"
-          [isEnabled]="!service.placingEvent.timeBlocked"></Button>
+          [isEnabled]="!service.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
       </GridLayout>
     </GridLayout>
   </GridLayout>

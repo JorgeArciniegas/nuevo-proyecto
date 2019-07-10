@@ -50,9 +50,13 @@
                       'btn-selected ' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }"
               (click)="checkOddToChangeStake(odd)">
               <span
-                *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId">{{odd.OddStake | number: '1.2-3'}}</span>
+                *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId">{{odd.OddStake | number: '1.2-3'}}
+
+              </span>
               <span
-                *ngIf="couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId">{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}</span>
+                *ngIf="couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId">{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}
+
+              </span>
             </button>
           </div>
           <div fxFlex="12" fxLayoutAlign="center center" [style.padding.px]="5">

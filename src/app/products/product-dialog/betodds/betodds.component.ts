@@ -4,6 +4,7 @@ import { BetCouponOddExtended } from '@elys/elys-coupon';
 import { CouponService } from '../../../component/coupon/coupon.service';
 import { BetDataDialog, BetOdd } from '../../products.model';
 import { AppSettings } from '../../../../../src/app/app.settings';
+import { UserService } from '../../../../../src/app/services/user.service';
 
 @Component({
   selector: 'app-betodds',
@@ -32,7 +33,8 @@ export class BetoddsComponent implements OnInit {
 
   constructor(
     public readonly couponService: CouponService,
-    public readonly settings: AppSettings
+    public readonly settings: AppSettings,
+    public userService: UserService
   ) {
     this.couponService.couponResponse.subscribe(coupon => {
       this.data.betCoupon = coupon;
@@ -131,10 +133,19 @@ export class BetoddsComponent implements OnInit {
       odd.SelectionId
     );
     this.couponService.addRemoveToCoupon([betOdd]);
+    this.userService.isBtnCalcEditable = false;
   }
 
   // change stake from odd's coupon
   checkOddToChangeStake(odd: BetCouponOdd): void {
+    this.userService.isBtnCalcEditable = true;
+    if (
+      this.couponService.oddStakeEdit &&
+      this.couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId
+    ) {
+      this.userService.isBtnCalcEditable = false;
+    }
+
     this.couponService.checkOddToChangeStake(odd);
   }
 }
