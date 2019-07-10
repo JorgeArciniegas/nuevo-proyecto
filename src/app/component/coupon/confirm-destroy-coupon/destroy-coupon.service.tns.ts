@@ -9,7 +9,7 @@ export class DestroyCouponService {
   public showDialog = false;
   public confirmDestroySub: Subject<boolean>;
   public confirmDestroyObs: Observable<boolean>;
-  constructor(private userService: UserService) {
+  constructor(public userService: UserService) {
     this.confirmDestroySub = new Subject();
     this.confirmDestroyObs = this.confirmDestroySub.asObservable();
   }

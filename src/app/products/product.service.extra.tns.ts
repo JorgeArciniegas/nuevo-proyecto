@@ -1,9 +1,8 @@
 import { Observable, Subject } from 'rxjs';
 import { Products } from '../../environments/environment.models';
-import { DestroyCouponService } from '../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
+import { DestroyCouponService } from '../component/coupon/confirm-destroy-coupon/destroy-coupon.service.tns';
 import { CouponService } from '../component/coupon/coupon.service';
 import { RouterService } from '../services/utility/router/router.service';
-import { DialogService } from './dialog.service';
 export class ProductsServiceExtra {
   public productNameSelectedSubscribe: Subject<string>;
   public productNameSelectedObserve: Observable<string>;

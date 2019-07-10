@@ -10,14 +10,12 @@ import { ProductsService } from '../../products.service';
 export class EventListComponent implements OnInit, OnDestroy {
   @Input()
   public rowHeight: number;
-  @Input()
-  public show?: boolean;
   public eventsDetails: EventsList;
   public nativeNextEventsItems: string;
   constructor(
     private eventService: EventsListService,
     private productService: ProductsService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.nativeNextEventsItems = this.eventService.genColumns(

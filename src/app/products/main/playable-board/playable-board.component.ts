@@ -9,8 +9,6 @@ import { ProductsService } from '../../products.service';
 export class PlayableBoardComponent {
   @Input()
   public rowHeight: number;
-  @Input()
-  public show?: boolean;
   public typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
 
   constructor(public productService: ProductsService) {}

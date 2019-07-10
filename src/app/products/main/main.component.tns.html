@@ -5,11 +5,11 @@
   </GridLayout>
   <!-- List races -->
   <GridLayout row="1">
-    <app-events-list [show]="!dialog.showDialog"></app-events-list>
+    <app-events-list></app-events-list>
   </GridLayout>
   <!-- Playable board -->
   <GridLayout row="2">
-    <app-playable-board [show]="!dialog.showDialog && !productService.destroyCouponService.showDialog">
+    <app-playable-board>
     </app-playable-board>
   </GridLayout>
   <!-- Special race -->
