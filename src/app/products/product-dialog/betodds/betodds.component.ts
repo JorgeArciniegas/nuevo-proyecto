@@ -121,6 +121,10 @@ export class BetoddsComponent implements OnInit {
     }
   }
 
+  /**
+   * @deprecated
+   * @param odd
+   */
   toggleOdd(odd: BetOdd) {
     odd.selected = !odd.selected;
   }
