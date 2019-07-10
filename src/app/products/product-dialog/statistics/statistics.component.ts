@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { BetDataDialog } from '../../products.model';
 
 @Component({
@@ -6,29 +7,14 @@ import { BetDataDialog } from '../../products.model';
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss']
 })
-export class StatisticsComponent implements OnInit {
+export class StatisticsComponent {
 
   @Input()
   data: BetDataDialog;
-  maxDataStatistics: number;
+  layout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
 
   constructor() {
-    this.maxDataStatistics = 1;
 
-
-  }
-
-  ngOnInit() {
-
-    /**
-     * Defined coefficent percentage for fitness status
-     */
-    this.data.statistics.virtualBetCompetitor.sort( (a, b) => a.ito <= b.ito ? -1 : 1 );
-    this.data.statistics.virtualBetCompetitor.map( item => {
-      this.maxDataStatistics += item.ff;
-    });
-
-    this.maxDataStatistics = this.maxDataStatistics ;
   }
 
 }

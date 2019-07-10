@@ -9,7 +9,7 @@ import { RaceComponent as ResultsRaceComponent } from './results/templates/race/
 import { PlayableRaceComponent } from './playable-board/templates/race/playablerace.component';
 import { StandardListComponent } from './events-list/templates/standard-list/standard-list.component';
 import { StandardComponent } from './event-control/templates/standard/standard.component';
-import { CockfightComponent } from './results/templates/cockfight/cockfight.component';
+import { CockfightComponent as ResultsCockfightComponent } from './results/templates/cockfight/cockfight.component';
 
 export const componentDeclarations: any[] = [
   MainComponent,
@@ -22,7 +22,7 @@ export const componentDeclarations: any[] = [
   PlayableRaceComponent,
   StandardListComponent,
   StandardComponent,
-  CockfightComponent
+  ResultsCockfightComponent
 ];
 
 export const providerDeclarations: any[] = [];

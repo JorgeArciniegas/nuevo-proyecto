@@ -45,7 +45,8 @@ export class WidgetComponent implements OnInit {
       case 'statistic':
           data.statistics =  {
             codeProduct: this.productService.product.codeProduct,
-            virtualBetCompetitor: this.racingService.getCurrentRace().tm
+            virtualBetCompetitor: this.racingService.getCurrentRace().tm,
+            layoutProducts: this.productService.product.layoutProducts.type
           };
           break;
       default:
