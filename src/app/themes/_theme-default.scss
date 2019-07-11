@@ -1,5 +1,14 @@
 @import "./buttons";
 
+
+/**
+* Import layout's component
+**/
+@import './results-list/results-list';
+@import './playable-board/playablerace';
+@import './statistics/statistics.component';
+@import './event-control/event-control-standard';
+
 *,
 *:after,
 *:before {
@@ -727,18 +736,6 @@ html {
 	}
 }
 
-//STATISTIC
-
-.statistic-data {
-	.fitness-container {
-		background: #fff;
-
-		.fitness-content {
-			@extend %bar-fitness-pecentage;
-		}
-	}
-}
-
 @media print {
 	.isPrinting {
 		.main-content {
@@ -749,11 +746,3 @@ html {
 		}
 	}
 }
-
-/**
-* Import layout's component
-**/
-@import './results-list/results-list';
-@import './playable-board/playablerace';
-@import './statistics/statistics.component';
-@import './event-control/event-control-standard';

@@ -23,7 +23,9 @@ import { ConfirmDestroyCouponComponent } from './component/coupon/confirm-destro
 import { DestroyCouponService } from './component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { BetoddsComponent } from './products/product-dialog/betodds/betodds.component';
 import { StatisticsComponent } from './products/product-dialog/statistics/statistics.component';
-
+import { RaceComponent as RaceStatisticsComponent } from './products/product-dialog/statistics/templates/race/race.component';
+// tslint:disable-next-line:max-line-length
+import { CockfightComponent  as CockfightStatisticsComponent } from './products/product-dialog/statistics/templates/cockfight/cockfight.component';
 import { LOCALE_ID } from '@angular/core';
 import localeIt from '@angular/common/locales/it';
 import localeEs from '@angular/common/locales/es';
@@ -59,7 +61,10 @@ export const componentDeclarations: any[] = [
   PrintReceiptComponent,
   ConfirmDestroyCouponComponent,
   BetoddsComponent,
-  StatisticsComponent
+  StatisticsComponent,
+  RaceStatisticsComponent,
+  CockfightStatisticsComponent
+
 ];
 
 export const providerDeclarations: any[] = [
