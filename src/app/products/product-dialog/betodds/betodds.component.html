@@ -6,8 +6,7 @@
     </button>
   </mat-grid-tile>
   <ng-container *ngIf="betOdds">
-    <mat-grid-tile rowspan="3" class="card-odd radius-5" [ngClass]="{'notSelected': !odd.selected}"
-      (click)="toggleOdd(odd)" *ngFor="let odd of betOdds">
+    <mat-grid-tile rowspan="3" class="card-odd radius-5" [ngClass]="{'notSelected': !odd.selected}" *ngFor="let odd of betOdds">
       <div fxFill fxLayout="column" fxLayoutAlign="space-between stretch">
         <div fxFlex="24" class="top-window"></div>
         <div fxFlex="38" class="first-row" fxLayout="row">

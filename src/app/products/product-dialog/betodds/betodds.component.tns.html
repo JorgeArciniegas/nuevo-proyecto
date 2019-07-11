@@ -22,7 +22,7 @@
       <!-- Cards -->
       <ng-container *ngIf="betOdds">
         <GridLayout row="{{ 1 + (i / columnNumber) | floor}}" col="{{i % columnNumber}}" rows="*,2*,2*" columns="*"
-          class="card-odd" [ngClass]="{'notSelected': !odd.selected}" (tap)="toggleOdd(odd)"
+          class="card-odd" [ngClass]="{'notSelected': !odd.selected}"
           *ngFor="let odd of betOdds; let i = index;">
           <StackLayout row="0" class="top-window"></StackLayout>
           <GridLayout row="1" rows="*" columns="2*,*" class="row">
