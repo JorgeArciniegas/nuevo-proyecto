@@ -1,59 +1,28 @@
+<!-- MARKET'S ROW -->
 <mat-grid-list class="playable-grid-buttons" cols="27" rowHeight="{{rowHeight *2}}">
-  <!-- "WIN" ROW -->
-  <mat-grid-tile colspan="3">
-    <span class="playable-row-tile display radius-5">
-      {{ "WIN" | translate }}
-    </span>
-  </mat-grid-tile>
-  <mat-grid-tile *ngFor="let player of service.playersList | filterByPosition: i+1" colspan="8">
-    <button (click)="runnerplaced(player)" [ngClass]="{'btn-dog-play-actived': player.actived}"
-      class="btn btn-default btn-default-dog-play radius-15 btn-{{codeProduct}}-{{player.number}}"
-      [disabled]="!player.selectable || ((i === 1 && service.placingEvent.secondRowDisabled) || (i === 2 && service.placingEvent.thirdRowDisabled))">
-      <span>{{player.number}}</span>
-    </button>
-  </mat-grid-tile>
+  <ng-container *ngFor="let market of mainService.currentEventDetails.mk | filterAndSortByShownMarkets : shownMarkets">
+    <mat-grid-tile colspan="3">
+      <span class="playable-row-tile display radius-5">
+        {{ market.nm | translate }}
+      </span>
+    </mat-grid-tile>
+    <ng-container *ngFor="let selection of market.sls">
+      <mat-grid-tile *ngIf="selection.tp !== 3 || selection.tp === 3 && market.tp !== cockMarket['1X2OverUnder']"
+        colspan="{{market.tp !== cockMarket['1X2OverUnder'] ? 24 / market.sls.length : 24 / (market.sls.length - 1)}}">
+        <button (click)="runnerplaced(player)" class="btn btn-default btn-default-dog-play radius-15">
+          <ng-container *ngIf="market.tp === cockMarket['1X2'] && (selection.tp === 1 || selection.tp === 3)">
+            <div class="icon" [ngClass]="{'icon-cock-red': selection.tp === 1, 'icon-cock-blue': selection.tp === 3}">
+            </div>
+            <span *ngIf="selection.tp === 1">{{mainService.currentEventDetails.tm | filterByCompetitor: 1}}</span>
+            <span *ngIf="selection.tp === 2">{{mainService.currentEventDetails.tm | filterByCompetitor: 2}}</span>
+          </ng-container>
 
-  <!-- "WIN + U/O" ROW -->
-  <mat-grid-tile colspan="3">
-    <span class="playable-row-tile display radius-5">
-      {{ "WIN + U/O" | translate }}
-    </span>
-  </mat-grid-tile>
-  <mat-grid-tile *ngFor="let player of service.playersList | filterByPosition: i+1" colspan="4">
-    <button (click)="runnerplaced(player)" [ngClass]="{'btn-dog-play-actived': player.actived}"
-      class="btn btn-default btn-default-dog-play radius-15 btn-{{codeProduct}}-{{player.number}}"
-      [disabled]="!player.selectable || ((i === 1 && service.placingEvent.secondRowDisabled) || (i === 2 && service.placingEvent.thirdRowDisabled))">
-      <span>{{player.number}}</span>
-    </button>
-  </mat-grid-tile>
-
-  <!-- "WIN + SECTOR" ROW -->
-  <mat-grid-tile colspan="3">
-    <span class="playable-row-tile display radius-5">
-      {{ "WIN + SECTOR" | translate }}
-    </span>
-  </mat-grid-tile>
-  <mat-grid-tile *ngFor="let player of service.playersList | filterByPosition: i+1" colspan="2">
-    <button (click)="runnerplaced(player)" [ngClass]="{'btn-dog-play-actived': player.actived}"
-      class="btn btn-default btn-default-dog-play radius-15 btn-{{codeProduct}}-{{player.number}}"
-      [disabled]="!player.selectable || ((i === 1 && service.placingEvent.secondRowDisabled) || (i === 2 && service.placingEvent.thirdRowDisabled))">
-      <span>{{player.number}}</span>
-    </button>
-  </mat-grid-tile>
-
-  <!-- "SECTOR" ROW -->
-  <mat-grid-tile colspan="3">
-    <span class="playable-row-tile display radius-5">
-      {{ "SECTOR" | translate }}
-    </span>
-  </mat-grid-tile>
-  <mat-grid-tile *ngFor="let player of service.playersList | filterByPosition: i+1" colspan="4">
-    <button (click)="runnerplaced(player)" [ngClass]="{'btn-dog-play-actived': player.actived}"
-      class="btn btn-default btn-default-dog-play radius-15 btn-{{codeProduct}}-{{player.number}}"
-      [disabled]="!player.selectable || ((i === 1 && service.placingEvent.secondRowDisabled) || (i === 2 && service.placingEvent.thirdRowDisabled))">
-      <span>{{player.number}}</span>
-    </button>
-  </mat-grid-tile>
+          <span *ngIf="market.tp !== cockMarket['1X2']">{{ selection.nm }}</span>
+          <span>{{ selection.ods[0].vl }}</span>
+        </button>
+      </mat-grid-tile>
+    </ng-container>
+  </ng-container>
 </mat-grid-list>
 
 <!-- SPECIAL BETS -->
@@ -61,12 +30,10 @@
   <mat-grid-tile colspan="3"></mat-grid-tile>
   <mat-grid-tile colspan="12">
     <button (click)="specialBets('OVER')"
-      [ngClass]="{'actived' : (service.placingEvent.isSpecialBets && service.placingEvent.specialBetValue === specialBet['ODD']) }"
       class="btn-reset btn-default btn-success radius-10 elevation-z5">{{'OVER' | translate}}</button>
   </mat-grid-tile>
   <mat-grid-tile colspan="12">
     <button (click)="specialBets('UNDER')"
-      [ngClass]="{'actived' : (service.placingEvent.isSpecialBets && service.placingEvent.specialBetValue === specialBet['EVEN']) }"
       class="btn-reset btn-default btn-success radius-10 elevation-z5">{{'UNDER' | translate}}</button>
   </mat-grid-tile>
 </mat-grid-list>

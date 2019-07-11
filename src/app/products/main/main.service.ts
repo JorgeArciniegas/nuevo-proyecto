@@ -54,7 +54,7 @@ export class MainService extends MainServiceExtra {
   // working variable
   private remainingTime: EventTime = new EventTime();
   placingEvent: PlacingEvent = new PlacingEvent(); // place the global race
-  placingEventSubject: Subject<PlacingEvent>;
+  public currentEventDetails: VirtualBetEvent;
 
   private attempts = 0;
   private initCurrentEvent = false;
@@ -112,8 +112,6 @@ export class MainService extends MainServiceExtra {
       }
     });
 
-    this.placingEventSubject = new Subject<PlacingEvent>();
-
     this.productService.playableBoardResetObserve.subscribe(reset => {
       if (reset) {
         this.resetPlayEvent();
@@ -141,22 +139,6 @@ export class MainService extends MainServiceExtra {
     this.initCurrentEvent = true;
     this.loadRaces();
     this.resultService.loadLastResult(false);
-  }
-
-  /**
-   * Method to get the details of the event required or the current selected event (call without parameter).
-   * @param eventIndex Optional parameter containing the index of the event into the cacheEvent array.
-   */
-  getCurrentEventDetails(eventIndex?: number): VirtualBetEvent {
-    let eventDetails: VirtualBetEvent;
-    if (this.cacheEvents) {
-      if (eventIndex) {
-        eventDetails = this.cacheEvents[eventIndex];
-      } else {
-        eventDetails = this.cacheEvents[this.eventDetails.currentEvent];
-      }
-    }
-    return eventDetails;
   }
 
   createPlayerList(): void {
@@ -370,6 +352,7 @@ export class MainService extends MainServiceExtra {
           try {
             race.mk = sportDetail.Sport.ts[0].evs[0].mk;
             race.tm = sportDetail.Sport.ts[0].evs[0].tm;
+            this.currentEventDetails = race;
             this.attempts = 0;
           } catch (err) {
             if (this.attempts < 5) {
