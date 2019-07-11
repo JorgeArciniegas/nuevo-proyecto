@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { MainService } from '../main.service';
 import { Lucky } from './lucky.model';
 import { Player } from '../main.models';
+import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 @Injectable({
   providedIn: 'root'
 })
 export class LuckyService {
   oldLucky: string;
+  typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   constructor(private mainService: MainService) {}
   placingLucky(lucky: Lucky): void {
     this.mainService.resetPlayEvent();
