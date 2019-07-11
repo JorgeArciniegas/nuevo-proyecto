@@ -4,6 +4,7 @@ import { ProductsService } from '../../products/products.service';
 import { CouponService } from '../coupon/coupon.service';
 import { BtncalcComponentCommon } from './btncalc.component.common';
 import { BtncalcService } from './btncalc.service';
+import { UserService } from '../../../../src/app/services/user.service';
 
 @Component({
   selector: 'app-btncalc',
@@ -18,9 +19,16 @@ export class BtncalcComponent extends BtncalcComponentCommon
     productService: ProductsService,
     btncalcService: BtncalcService,
     public appSetting: AppSettings,
-    couponService: CouponService
+    couponService: CouponService,
+    userService: UserService
   ) {
-    super(productService, btncalcService, appSetting, couponService);
+    super(
+      productService,
+      btncalcService,
+      appSetting,
+      couponService,
+      userService
+    );
   }
 
   ngOnInit(): void {}

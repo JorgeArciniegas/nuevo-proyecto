@@ -96,20 +96,18 @@ export class MainService extends MainServiceExtra {
     this.currentEventObserve = this.currentEventSubscribe.asObservable();
 
     this.currentEventObserve.subscribe((raceIndex: number) => {
-      if (this.eventDetails.currentEvent !== raceIndex) {
-        this.eventDetails.currentEvent = raceIndex;
-        this.remainingRaceTime(this.eventDetails.events[raceIndex].number).then(
-          (raceTime: EventTime) => {
-            this.eventDetails.eventTime = raceTime;
-          }
-        );
-        // reset coupon
-        this.coupon.resetCoupon();
-        // reset playload
-        this.resetPlayEvent();
-        // get race odds
-        this.raceDetailOdds(this.eventDetails.events[raceIndex].number);
-      }
+      this.eventDetails.currentEvent = raceIndex;
+      this.remainingRaceTime(this.eventDetails.events[raceIndex].number).then(
+        (raceTime: EventTime) => {
+          this.eventDetails.eventTime = raceTime;
+        }
+      );
+      // reset coupon
+      this.coupon.resetCoupon();
+      // reset playload
+      this.resetPlayEvent();
+      // get race odds
+      this.raceDetailOdds(this.eventDetails.events[raceIndex].number);
     });
 
     this.placingEventSubject = new Subject<PlacingEvent>();
@@ -225,6 +223,9 @@ export class MainService extends MainServiceExtra {
       if (this.reload <= 0) {
         // if remain only 1 new race reload other race
         this.loadRacesFromApi();
+      } else {
+        // get race odds
+        this.raceDetailOdds(this.eventDetails.events[0].number);
       }
     }
   }

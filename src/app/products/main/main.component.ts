@@ -5,6 +5,7 @@ import { DialogService } from '../dialog.service';
 import { ProductsService } from '../products.service';
 import { Lucky } from './main.models';
 import { MainService } from './main.service';
+import { UserService } from '../../../../src/app/services/user.service';
 
 @Component({
   selector: 'app-main',
@@ -24,6 +25,7 @@ export class MainComponent implements OnInit {
     public productService: ProductsService,
     public mainService: MainService,
     public dialog: DialogService,
+    private userService: UserService,
     public readonly appSettings: AppSettings
   ) {
     this.settings = appSettings;

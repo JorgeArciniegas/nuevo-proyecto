@@ -5,13 +5,15 @@ import { CouponService } from '../coupon/coupon.service';
 import { IconSize } from '../model/iconSize.model';
 import { BtncalcComponentCommon } from './btncalc.component.common';
 import { BtncalcService } from './btncalc.service';
+import { UserService } from '../../../../src/app/services/user.service';
 
 @Component({
   selector: 'app-btncalc',
   templateUrl: './btncalc.component.html',
   styleUrls: ['./btncalc.component.scss']
 })
-export class BtncalcComponent extends BtncalcComponentCommon implements OnInit, OnDestroy {
+export class BtncalcComponent extends BtncalcComponentCommon
+  implements OnInit, OnDestroy {
   public amountIcon: IconSize;
   @Input()
   private rowHeight: number;
@@ -22,9 +24,16 @@ export class BtncalcComponent extends BtncalcComponentCommon implements OnInit, 
     productService: ProductsService,
     btncalcService: BtncalcService,
     appSetting: AppSettings,
-    couponService: CouponService
+    couponService: CouponService,
+    userService: UserService
   ) {
-    super(productService, btncalcService, appSetting, couponService);
+    super(
+      productService,
+      btncalcService,
+      appSetting,
+      couponService,
+      userService
+    );
   }
 
   ngOnInit(): void {

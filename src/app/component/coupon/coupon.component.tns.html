@@ -4,7 +4,8 @@
       <StackLayout col="0" orientation="horizontal" class="title" verticalAlignment="center" horizontalAlignment="left">
         <Label text="{{ 'coupon' | translate }}" textTransform="uppercase" verticalAlignment="center"></Label>
       </StackLayout>
-      <StackLayout col="1" class="button btn-warning " (tap)="clearCoupon()" horizontalAlignment="right">
+      <StackLayout col="1" class="button btn-warning " [isEnabled]="!userService.isModalOpen" (tap)="clearCoupon()"
+        horizontalAlignment="right">
         <Image stretch="aspectFit" width="26" margin="0 5"
           src="~/app/themes/skins/{{settings.theme}}/icon/baseline-delete_outline-white-24px.png"
           verticalAlignment="center" horizontalAlignment="center"></Image>
@@ -19,7 +20,7 @@
         text="{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}" verticalAlignment="center"
         textAlignment="center"></Label>
     </StackLayout>
-    <StackLayout col="1" class="button btn-dark-gradient" (tap)="openDialog()">
+    <StackLayout col="1" [isEnabled]="!userService.isModalOpen" class="button btn-dark-gradient" (tap)="openDialog()">
       <Image stretch="aspectFit" width="26"
         src="~/app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png" verticalAlignment="center">
       </Image>
@@ -30,7 +31,7 @@
       *ngIf="couponService.coupon" [ngClass]="{'small': productService.windowSize.small}">
       <!-- Paginator -->
       <GridLayout row="0" columns="*,2*,*" class="card-odd scroll" (tap)="previusOdds()"
-        [ngClass]="{'disabled': page <= 0}" [isEnabled]="page > 0">
+        [ngClass]="{'disabled': page <= 0}" [isEnabled]="page > 0 && !userService.isModalOpen">
         <Image col="1" width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Up.png" verticalAlignment="center">
         </Image>
         <StackLayout col="2" horizontalAlignment="right" verticalAlignment="center">
@@ -38,7 +39,7 @@
         </StackLayout>
       </GridLayout>
       <GridLayout row="6" columns="*,2*,*" class="card-odd scroll" (tap)="nextOdds()"
-        [ngClass]="{'disabled': page >= maxPage - 1}" [isEnabled]="page < maxPage - 1">
+        [ngClass]="{'disabled': page >= maxPage - 1}" [isEnabled]="page < maxPage - 1 && !userService.isModalOpen">
         <Image col="1" width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Down.png" verticalAlignment="center">
         </Image>
         <StackLayout col="2" horizontalAlignment="right" verticalAlignment="center">
@@ -67,8 +68,8 @@
         <GridLayout row="2" col="0" columns="*,*" class="row" verticalAlignment="center">
           <StackLayout col="0" class="button" width="100%"
             [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
-          'btn-selected' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }" (tap)="checkOddToChangeStake(odd)"
-            horizontalAlignment="center" verticalAlignment="center">
+          'btn-selected' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }" [isEnabled]="!userService.isModalOpen"
+            (tap)="checkOddToChangeStake(odd)" horizontalAlignment="center" verticalAlignment="center">
             <Label class="stake"
               *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId"
               text="{{odd.OddStake | number: '1.2-3'}}" horizontalAlignment="center" verticalAlignment="center"></Label>
@@ -78,7 +79,8 @@
               verticalAlignment="center"></Label>
           </StackLayout>
           <!-- Paginator -->
-          <StackLayout col="1" class="btn-warning button" (tap)="removeOdd(odd)" horizontalAlignment="right">
+          <StackLayout col="1" class="btn-warning button" (tap)="removeOdd(odd)" [isEnabled]="!userService.isModalOpen"
+            horizontalAlignment="right">
             <Image stretch="aspectFit" width="26"
               src="~/app/themes/skins/{{settings.theme}}/icon/baseline-delete_outline-white-24px.png"
               verticalAlignment="center" horizontalAlignment="center"></Image>
@@ -107,7 +109,7 @@
     [ngClass]="{'disabled': couponService.error || couponService.isWaitingConclusionOperation}"
     *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
     <Button text="{{'COUPON.BET' | translate}}" class="button-internal" textTransform="uppercase"
-      [isEnabled]="!timeBlocked && !couponService.error && !couponService.isWaitingConclusionOperation"
+      [isEnabled]="!timeBlocked && !couponService.error && !couponService.isWaitingConclusionOperation && !userService.isModalOpen"
       (tap)="couponService.preStagedCoupon()"></Button>
   </GridLayout>
   <GridLayout row="5" rows="*" columns="*,*" class="card"
@@ -115,12 +117,14 @@
     <GridLayout col="0" rows="*" columns="*" class="button left btn-default btn-warning"
       [ngClass]="{'disabled': couponService.error}">
       <Button text="{{'back' | translate}}" class="button-internal" textTransform="uppercase"
-        [isEnabled]="!timeBlocked && !couponService.error" (tap)="couponService.cancelStagingCoupon()"></Button>
+        [isEnabled]="!timeBlocked && !couponService.error && !userService.isModalOpen"
+        (tap)="couponService.cancelStagingCoupon()"></Button>
     </GridLayout>
     <GridLayout col="1" rows="*" columns="*" class="button right btn-default btn-success"
       [ngClass]="{'disabled': couponService.error}">
       <Button text="{{'conferma' | translate}}" class="button-internal" textTransform="uppercase"
-        [isEnabled]="!timeBlocked && !couponService.error" (tap)="couponService.stagedCoupon()"></Button>
+        [isEnabled]="!timeBlocked && !couponService.error && !userService.isModalOpen"
+        (tap)="couponService.stagedCoupon()"></Button>
     </GridLayout>
   </GridLayout>
 </GridLayout>

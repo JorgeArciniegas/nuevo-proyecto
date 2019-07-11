@@ -3,6 +3,7 @@ import { TypePlacingEvent, Player, SpecialBet } from '../../../main.models';
 import { MainService } from '../../../main.service';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../../../../../../../src/app/products/products.service';
+import { UserService } from '../../../../../../../src/app/services/user.service';
 
 @Component({
   selector: 'app-playable-race',
@@ -25,7 +26,8 @@ export class PlayableRaceComponent implements OnInit, OnDestroy {
   codeProduct: string;
   constructor(
     public service: MainService,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private userService: UserService
   ) {
     this.currentEventSubscription = this.service.currentEventObserve.subscribe(
       raceIndex =>
