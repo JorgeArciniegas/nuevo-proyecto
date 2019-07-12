@@ -33,31 +33,4 @@ export class MainComponent implements OnInit {
     this.rowHeight =
       (this.productService.windowSize.columnHeight - 30 - 12) / 24;
   }
-
-  // placingLucky(lucky: Lucky): void {
-  //   this.mainService.resetPlayEvent();
-  //   let n = '';
-  //   // extract  lucky
-  //   for (let i = 1; i <= lucky; i++) {
-  //     while (true) {
-  //       // check if extract exist
-  //       const extTemp: number = this.mainService.RNGLucky2(i);
-  //       if (n.indexOf(extTemp.toString()) === -1) {
-  //         n += extTemp;
-  //         break;
-  //       }
-  //     }
-  //   }
-  //   // if the selection is not equals to oldLucky selected place bet
-  //   if (n !== this.oldLucky || this.oldLucky === undefined) {
-  //     // save the temporary selection
-  //     this.oldLucky = n;
-  //     for (let i = 0; i < n.length; i++) {
-  //       const element = n.charAt(i);
-  //       this.mainService.RNGLuckyPlacing(parseInt(element, 10), i + 1);
-  //     }
-  //   } else {
-  //     this.placingLucky(lucky);
-  //   }
-  // }
 }
