@@ -7,6 +7,7 @@ import { CouponService } from '../component/coupon/coupon.service';
 import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
 import { MessageSource } from '@elys/elys-coupon';
 import { UserService } from '../services/user.service';
+import { DialogTypeCoupon } from './products.model';
 
 @Component({
   selector: 'app-products',
@@ -18,7 +19,7 @@ export class ProductsComponent implements OnDestroy {
   public rowHeight: number;
   public settings: AppSettings;
   public messageSource: typeof MessageSource = MessageSource;
-
+  dialogTypeCoupon: typeof DialogTypeCoupon = DialogTypeCoupon;
   constructor(
     private observableMedia: MediaObserver,
     public service: ProductsService,
@@ -29,11 +30,13 @@ export class ProductsComponent implements OnDestroy {
   ) {
     this.settings = appSettings;
 
-    this.observableMediaSubscribe = this.observableMedia.media$.subscribe((change: MediaChange) => {
-      this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
-      this.service.fnWindowsSize();
-      this.rowHeight = (this.service.windowSize.columnHeight - 30) / 12;
-    });
+    this.observableMediaSubscribe = this.observableMedia.media$.subscribe(
+      (change: MediaChange) => {
+        this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
+        this.service.fnWindowsSize();
+        this.rowHeight = (this.service.windowSize.columnHeight - 30) / 12;
+      }
+    );
   }
 
   ngOnDestroy(): void {

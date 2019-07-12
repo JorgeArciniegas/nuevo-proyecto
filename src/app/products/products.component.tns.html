@@ -105,7 +105,7 @@
         <GridLayout col="1" rows="*" columns="*" class="button right btn-warning">
           <Button text="{{'DELETE' | translate}}" class="button-internal" textTransform="uppercase"
             [isEnabled]="!service.timeBlocked && !userService.isModalOpen"
-            (tap)="payCancelCoupon(dialogTypeCoupon.CANCEL)"></Button>
+            (tap)="payCancelCoupon(dialogTypeCoupon.DELETE)"></Button>
         </GridLayout>
       </GridLayout>
     </GridLayout>

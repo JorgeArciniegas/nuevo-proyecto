@@ -58,7 +58,7 @@ export class PolyfunctionalStakeCoupon {
     this.columns = columns || 0;
     this.typeSlipCol = typeSlipCol ? typeSlipCol : TypeBetSlipColTot.COL;
     this.isEnabled = isEnabled || false;
-    this.hasDecimalSeparator =  hasDecimalSeparator || false;
+    this.hasDecimalSeparator = hasDecimalSeparator || false;
   }
 }
 export class PolyfunctionStakePresetPlayer {
@@ -70,11 +70,15 @@ export class PolyfunctionStakePresetPlayer {
   hasDecimalSeparator?: boolean;
   typingType: TYPINGTYPE;
   isPreset?: boolean;
-  constructor (typeSlipCol: TypeBetSlipColTot, amount: number, isPreset?: boolean) {
+  constructor(
+    typeSlipCol: TypeBetSlipColTot,
+    amount: number,
+    isPreset?: boolean
+  ) {
     this.typeSlipCol = typeSlipCol;
     this.amount = amount;
-    this.amountStr  = amount.toString();
-    this.hasDecimalSeparator =  false;
+    this.amountStr = amount.toString();
+    this.hasDecimalSeparator = false;
     this.firstTap = true;
     this.disableInputCalculator = false;
     this.isPreset = isPreset || true;
@@ -137,7 +141,7 @@ export interface StatisticDialog {
   layoutProducts: LAYOUT_TYPE;
 }
 export enum DialogTypeCoupon {
-  CANCEL,
+  DELETE,
   PAY
 }
 
