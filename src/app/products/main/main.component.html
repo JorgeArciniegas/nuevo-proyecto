@@ -10,25 +10,13 @@
     </mat-grid-tile>
     <!-- Playable board -->
     <mat-grid-tile rowspan="16" fxLayoutAlign="center">
-      <app-playable-board fxFill  rowHeight="{{rowHeight}}"></app-playable-board>
+      <app-playable-board fxFill rowHeight="{{rowHeight}}"></app-playable-board>
     </mat-grid-tile>
     <!-- Special race -->
     <mat-grid-tile rowspan="2" fxLayout="column">
-      <div fxFill fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="1vw" class="special-box">
-        <button (click)="placingLucky(lucky.Lucky1)"
-          class="btn-default btn-lucky btn-grey-gradient radius-5 elevation-z5">
-          {{ 'LUCKY' | translate }} 1
-        </button>
-        <button (click)="placingLucky(lucky.Lucky2)"
-          class="btn-default btn-lucky btn-grey-gradient radius-5 elevation-z5">
-          {{ 'LUCKY' | translate }} 2
-        </button>
-        <button (click)="placingLucky(lucky.Lucky3)"
-          class="btn-default btn-lucky btn-grey-gradient radius-5 elevation-z5">
-          {{ 'LUCKY' | translate }} 3
-        </button>
-      </div>
+      <app-lucky fxFill></app-lucky>
     </mat-grid-tile>
+
     <!-- List of result -->
     <mat-grid-tile rowspan="2">
       <app-results fxFill [rowHeight]="rowHeight"></app-results>
@@ -37,5 +25,6 @@
 </div>
 <div *ngIf="mainService.placingEvent.timeBlocked" id="overlayArea1"
   [style.top.px]="(productService.windowSize.height - productService.windowSize.columnHeight) + 12 + (rowHeight * 4)"
-  [style.left.px]="0" [style.width]="'calc(59% - 2px)'" [style.height.px]="rowHeight * 18 + 20" class="overlay radius-5">
+  [style.left.px]="0" [style.width]="'calc(59% - 2px)'" [style.height.px]="rowHeight * 18 + 20"
+  class="overlay radius-5">
 </div>

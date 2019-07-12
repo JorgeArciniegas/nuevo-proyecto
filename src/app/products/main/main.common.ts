@@ -6,15 +6,19 @@ import { EventControlComponent } from './event-control/event-control.component';
 import { MainComponent } from './main.component';
 import { ResultsComponent } from './results/results.component';
 import { RaceComponent as ResultsRaceComponent } from './results/templates/race/race.component';
+import { RaceComponent as LuckyRaceComponent } from './lucky/templates/race/race.component';
 import { PlayableRaceComponent } from './playable-board/templates/race/playablerace.component';
 import { StandardListComponent } from './events-list/templates/standard-list/standard-list.component';
 import { StandardComponent } from './event-control/templates/standard/standard.component';
+import { LuckyComponent } from './lucky/lucky.component';
 import { CockfightComponent as ResultsCockfightComponent } from './results/templates/cockfight/cockfight.component';
 
 export const componentDeclarations: any[] = [
   MainComponent,
   EventControlComponent,
   EventListComponent,
+  LuckyComponent,
+  LuckyRaceComponent,
   ResultsComponent,
   PlayableBoardComponent,
   FilterByPositionPipe,

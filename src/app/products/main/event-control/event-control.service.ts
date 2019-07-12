@@ -8,7 +8,6 @@ import { Subscription, timer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
-  // deps: [MainService, ProductsService]
 })
 export class EventControlService {
   public eventsControlDetails: EventControl;
