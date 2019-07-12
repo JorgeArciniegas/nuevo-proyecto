@@ -9,16 +9,20 @@ import { RaceComponent as ResultsRaceComponent } from './results/templates/race/
 import { RaceComponent as PlayableBoardRaceComponent } from './playable-board/templates/race/race.component';
 import { StandardListComponent } from './events-list/templates/standard-list/standard-list.component';
 import { StandardComponent } from './event-control/templates/standard/standard.component';
-import { CockfightComponent as ResultsCockFightComponent } from './results/templates/cockfight/cockfight.component';
 import { CockFightComponent as PlayableBoardCockFightComponent } from './playable-board/templates/cock-fight/cock-fight.component';
 import { FilterAndSortByShownMarketsPipe } from './playable-board/filter-and-sort-by-shown-markets.pipe';
 import { FilterByCompetitorPipe } from './playable-board/filter-by-competitor.pipe';
 import { GetCompetitorNamePipe } from './playable-board/get-competitor-name.pipe';
+import { RaceComponent as LuckyRaceComponent } from './lucky/templates/race/race.component';
+import { LuckyComponent } from './lucky/lucky.component';
+import { CockfightComponent as ResultsCockfightComponent } from './results/templates/cockfight/cockfight.component';
 
 export const componentDeclarations: any[] = [
   MainComponent,
   EventControlComponent,
   EventListComponent,
+  LuckyComponent,
+  LuckyRaceComponent,
   ResultsComponent,
   PlayableBoardComponent,
   FilterByPositionPipe,
@@ -29,7 +33,7 @@ export const componentDeclarations: any[] = [
   PlayableBoardRaceComponent,
   StandardListComponent,
   StandardComponent,
-  ResultsCockFightComponent,
+  ResultsCockfightComponent,
   PlayableBoardCockFightComponent
 ];
 

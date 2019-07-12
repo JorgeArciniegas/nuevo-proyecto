@@ -10,6 +10,7 @@ import { UserService } from '../../../services/user.service';
 import { CouponService } from '../coupon.service';
 import { PrintReceiptService } from './print-receipt/print-receipt.service';
 import { Receipt } from './print-receipt/print-receipt.model';
+import { DialogTypeCoupon } from 'src/app/products/products.model';
 
 @Component({
   selector: 'app-pay-cancel-dialog',
@@ -25,16 +26,16 @@ export class PayCancelDialogComponent implements OnInit {
 
   cancelRequest: CancelCouponRequest;
   payRequest: FlagAsPaidRequest;
-
+  dialogTypeCoupon: typeof DialogTypeCoupon = DialogTypeCoupon;
   constructor(
     public dialogRef: MatDialogRef<PayCancelDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: string,
+    @Inject(MAT_DIALOG_DATA) private data: DialogTypeCoupon,
     public fb: FormBuilder,
     private couponService: CouponService,
     private userService: UserService,
     private printReceiptService: PrintReceiptService
   ) {
-    this.titleType = data;
+    this.titleType = this.dialogTypeCoupon[data];
     this.form = this.fb.group({
       couponCode: [
         null,
@@ -47,7 +48,7 @@ export class PayCancelDialogComponent implements OnInit {
 
   public onSubmit(form: FormGroup): void {
     let couponCode: string;
-    if (this.data === 'PAY') {
+    if (this.data === this.dialogTypeCoupon.PAY) {
       if (this.form.valid) {
         couponCode = this.form.get('couponCode').value;
         if (couponCode) {
@@ -80,7 +81,7 @@ export class PayCancelDialogComponent implements OnInit {
         this.form.get('couponCode').setValue('');
       }
       this.form.get('couponCode').setValue('');
-    } else if (this.data === 'CANCEL') {
+    } else if (this.data === this.dialogTypeCoupon.DELETE) {
       if (this.form.valid) {
         couponCode = this.form.get('couponCode').value;
         if (couponCode) {

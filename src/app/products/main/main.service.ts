@@ -21,7 +21,6 @@ import { ProductsService } from '../products.service';
 import {
   CombinationType,
   Player,
-  Lucky,
   PlacingEvent,
   Podium,
   EventInfo,
@@ -419,24 +418,6 @@ export class MainService extends MainServiceExtra {
         d.actived = false;
       }
     });
-  }
-
-  /**
-   * RNG FOR TO PLACE THE LUCKY
-   */
-
-  RNGLucky2(lucky: Lucky): number {
-    const extractNumber: number = Math.floor(Math.random() * this.playersList.filter(player => player.position === lucky).length) + 1;
-    return extractNumber;
-  }
-
-  RNGLuckyPlacing(playerNumber: number, playerPosition: number): void {
-    // extract the player
-    const playerExtract: Player = this.playersList.filter(
-      player => player.position === playerPosition && player.number === playerNumber
-    )[0];
-    // place the player
-    this.placingOdd(playerExtract);
   }
 
   /**

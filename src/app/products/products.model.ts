@@ -131,7 +131,7 @@ export interface StatisticDialog {
   layoutProducts: LAYOUT_TYPE;
 }
 export enum DialogTypeCoupon {
-  CANCEL,
+  DELETE,
   PAY
 }
 

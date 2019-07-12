@@ -19,7 +19,7 @@ import { PrintReceiptService } from './print-receipt/print-receipt.service.tns';
 })
 export class PayCancelDialogComponent {
   @Input()
-  private type: string;
+  private type: DialogTypeCoupon;
   public titleType: string;
   public errorMessage: string;
   public errorMessage2: typeof ErrorStatus = ErrorStatus;
@@ -39,7 +39,7 @@ export class PayCancelDialogComponent {
 
   public onSubmit(couponCode: string): void {
     // console.log(DialogTypeCoupon[DialogTypeCoupon.PAY]);
-    if (this.titleType === 'PAY') {
+    if (this.couponDialogService.type === DialogTypeCoupon.PAY) {
       if (couponCode) {
         this.payRequest = {
           CouponId: null,
@@ -69,7 +69,7 @@ export class PayCancelDialogComponent {
                 'operation not possible (' + error.status + ')')
           );
       }
-    } else if (this.titleType === 'CANCEL') {
+    } else if (this.couponDialogService.type === DialogTypeCoupon.DELETE) {
       if (couponCode) {
         this.cancelRequest = {
           CancellationRequestUserId: this.userService.userDetail.UserId,
