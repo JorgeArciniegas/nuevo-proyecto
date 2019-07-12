@@ -6,6 +6,9 @@ import { VirtualBetCompetitor } from '@elys/elys-api';
 })
 export class FilterByCompetitorPipe implements PipeTransform {
   transform(competitors: VirtualBetCompetitor[], competitorId: number): VirtualBetCompetitor[] {
-    return competitors.filter(competitor => competitor.ito === competitorId);
+    return competitors.filter(competitor => {
+      console.log(competitorId);
+      return competitor.ito === competitorId;
+    });
   }
 }

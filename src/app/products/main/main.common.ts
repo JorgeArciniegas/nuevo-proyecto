@@ -13,6 +13,7 @@ import { CockfightComponent as ResultsCockFightComponent } from './results/templ
 import { CockFightComponent as PlayableBoardCockFightComponent } from './playable-board/templates/cock-fight/cock-fight.component';
 import { FilterAndSortByShownMarketsPipe } from './playable-board/filter-and-sort-by-shown-markets.pipe';
 import { FilterByCompetitorPipe } from './playable-board/filter-by-competitor.pipe';
+import { GetCompetitorNamePipe } from './playable-board/get-competitor-name.pipe';
 
 export const componentDeclarations: any[] = [
   MainComponent,
@@ -23,6 +24,7 @@ export const componentDeclarations: any[] = [
   FilterByPositionPipe,
   FilterByCompetitorPipe,
   FilterAndSortByShownMarketsPipe,
+  GetCompetitorNamePipe,
   ResultsRaceComponent,
   PlayableBoardRaceComponent,
   StandardListComponent,

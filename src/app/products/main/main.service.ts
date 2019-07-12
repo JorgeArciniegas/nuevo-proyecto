@@ -16,11 +16,7 @@ import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
-import {
-  BetOdd,
-  PolyfunctionalArea,
-  PolyfunctionalStakeCoupon
-} from '../products.model';
+import { BetOdd, PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../products.model';
 import { ProductsService } from '../products.service';
 import {
   CombinationType,
@@ -85,9 +81,7 @@ export class MainService extends MainServiceExtra {
       }
     });
 
-    this.eventDetails = new EventDetail(
-      this.productService.product.layoutProducts.nextEventItems
-    );
+    this.eventDetails = new EventDetail(this.productService.product.layoutProducts.nextEventItems);
     this.eventDetails.currentEvent = 0;
 
     interval(1000).subscribe(() => this.getTime());
@@ -97,11 +91,9 @@ export class MainService extends MainServiceExtra {
 
     this.currentEventObserve.subscribe((eventIndex: number) => {
       this.eventDetails.currentEvent = eventIndex;
-      this.remainingRaceTime(this.eventDetails.events[eventIndex].number).then(
-        (raceTime: EventTime) => {
-          this.eventDetails.eventTime = raceTime;
-        }
-      );
+      this.remainingRaceTime(this.eventDetails.events[eventIndex].number).then((raceTime: EventTime) => {
+        this.eventDetails.eventTime = raceTime;
+      });
       // reset coupon
       this.coupon.resetCoupon();
       // reset playload
@@ -125,9 +117,7 @@ export class MainService extends MainServiceExtra {
    * it return the product marked to "productSelected"
    */
   defaultGameStart(): void {
-    const gameSelected = this.appSettings.products.filter(
-      item => item.productSelected
-    )[0].codeProduct;
+    const gameSelected = this.appSettings.products.filter(item => item.productSelected)[0].codeProduct;
     this.productService.changeProduct(gameSelected);
     // Start race
     this.initRaces();
@@ -169,24 +159,18 @@ export class MainService extends MainServiceExtra {
           this.remainingTime.second = 59;
           this.remainingTime.minute = this.remainingTime.minute - 1;
           // remaing showed time
-          this.eventDetails.eventTime.minute =
-            this.eventDetails.eventTime.minute - 1;
+          this.eventDetails.eventTime.minute = this.eventDetails.eventTime.minute - 1;
         } else {
           // remaing time
           this.remainingTime.second = this.remainingTime.second - 1;
           // check time blocked
-          if (
-            this.eventDetails.eventTime.second <= 10 &&
-            this.eventDetails.eventTime.minute === 0
-          ) {
+          if (this.eventDetails.eventTime.second <= 10 && this.eventDetails.eventTime.minute === 0) {
             this.placingEvent.timeBlocked = true;
             this.productService.closeProductDialog();
           } else {
             this.placingEvent.timeBlocked = false;
           }
-          this.productService.timeBlockedSubscribe.next(
-            this.placingEvent.timeBlocked
-          );
+          this.productService.timeBlockedSubscribe.next(this.placingEvent.timeBlocked);
         }
         // showed second
         this.eventDetails.eventTime.second = this.remainingTime.second;
@@ -240,40 +224,34 @@ export class MainService extends MainServiceExtra {
       CategoryTypes: this.productService.product.codeProduct
     };
 
-    this.elysApi.virtual
-      .getVirtualTree(request)
-      .then((sports: VirtualProgramTreeBySportResponse) => {
-        const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
+    this.elysApi.virtual.getVirtualTree(request).then((sports: VirtualProgramTreeBySportResponse) => {
+      const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
 
-        if (all) {
-          // load all race
-          this.cacheEvents = tournament.evs;
-          for (let index = 0; index < 5; index++) {
-            const race: EventInfo = new EventInfo();
-            race.number = this.cacheEvents[index].id;
-            race.label = this.cacheEvents[index].nm;
-            race.date = new Date(this.cacheEvents[index].sdtoffset);
+      if (all) {
+        // load all race
+        this.cacheEvents = tournament.evs;
+        for (let index = 0; index < 5; index++) {
+          const race: EventInfo = new EventInfo();
+          race.number = this.cacheEvents[index].id;
+          race.label = this.cacheEvents[index].nm;
+          race.date = new Date(this.cacheEvents[index].sdtoffset);
 
-            this.eventDetails.events[index] = race;
-          }
-          this.currentAndSelectedRaceTime();
-          this.currentEventSubscribe.next(0);
-        } else {
-          // add only new race
-          tournament.evs.forEach((race: VirtualBetEvent) => {
-            if (
-              this.cacheEvents.filter(
-                (cacheRace: VirtualBetEvent) => cacheRace.id === race.id
-              ).length === 0
-            ) {
-              this.cacheEvents.push(race);
-            }
-          });
+          this.eventDetails.events[index] = race;
         }
-        // get race odds
-        this.raceDetailOdds(this.eventDetails.events[0].number);
-        this.reload = 4;
-      });
+        this.currentAndSelectedRaceTime();
+        this.currentEventSubscribe.next(0);
+      } else {
+        // add only new race
+        tournament.evs.forEach((race: VirtualBetEvent) => {
+          if (this.cacheEvents.filter((cacheRace: VirtualBetEvent) => cacheRace.id === race.id).length === 0) {
+            this.cacheEvents.push(race);
+          }
+        });
+      }
+      // get race odds
+      this.raceDetailOdds(this.eventDetails.events[0].number);
+      this.reload = 4;
+    });
   }
 
   currentAndSelectedRaceTime() {
@@ -293,9 +271,7 @@ export class MainService extends MainServiceExtra {
     }
 
     // calculate remaning time for selected race
-    this.remainingRaceTime(
-      this.eventDetails.events[this.eventDetails.currentEvent].number
-    ).then((raceTime: EventTime) => {
+    this.remainingRaceTime(this.eventDetails.events[this.eventDetails.currentEvent].number).then((raceTime: EventTime) => {
       this.eventDetails.eventTime = raceTime;
       if (this.eventDetails.currentEvent === 0) {
         this.remainingTime.minute = raceTime.minute;
@@ -309,63 +285,51 @@ export class MainService extends MainServiceExtra {
       SportId: this.productService.product.sportId.toString(),
       MatchId: idEvent
     };
-    return this.elysApi.virtual
-      .getCountdown(request)
-      .then((value: VirtualEventCountDownResponse) => {
-        const sec: number = value.CountDown / 10000000;
-        const raceTime: EventTime = new EventTime();
-        raceTime.minute = Math.floor(sec / 60);
-        raceTime.second = Math.floor(sec % 60);
-        return raceTime;
-      });
+    return this.elysApi.virtual.getCountdown(request).then((value: VirtualEventCountDownResponse) => {
+      const sec: number = value.CountDown / 10000000;
+      const raceTime: EventTime = new EventTime();
+      raceTime.minute = Math.floor(sec / 60);
+      raceTime.second = Math.floor(sec % 60);
+      return raceTime;
+    });
   }
 
   resetPlayEvent(): void {
     this.placingEvent = new PlacingEvent();
     this.smartCode = new Smartcode();
-    this.placingEvent.eventNumber = this.eventDetails.events[
-      this.eventDetails.currentEvent
-    ].number;
+    this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
     this.createPlayerList();
 
-    this.productService.polyfunctionalAreaSubject.next(
-      new PolyfunctionalArea()
-    );
-    this.productService.polyfunctionalStakeCouponSubject.next(
-      new PolyfunctionalStakeCoupon()
-    );
+    this.productService.polyfunctionalAreaSubject.next(new PolyfunctionalArea());
+    this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
 
   raceDetailOdds(raceNumber: number): void {
     // console.log('get detail', raceNumber);
-    const race: VirtualBetEvent = this.cacheEvents.filter(
-      (cacheRace: VirtualBetEvent) => cacheRace.id === raceNumber
-    )[0];
+    const race: VirtualBetEvent = this.cacheEvents.filter((cacheRace: VirtualBetEvent) => cacheRace.id === raceNumber)[0];
     const request: VirtualDetailOddsOfEventRequest = {
       sportId: this.productService.product.sportId,
       matchId: raceNumber
     };
     // check, if is empty load from api
     if (race.mk == null || race.mk.length === 0) {
-      this.elysApi.virtual
-        .getVirtualEventDetail(request)
-        .then((sportDetail: VirtualDetailOddsOfEventResponse) => {
-          try {
-            race.mk = sportDetail.Sport.ts[0].evs[0].mk;
-            race.tm = sportDetail.Sport.ts[0].evs[0].tm;
-            this.currentEventDetails = race;
+      this.elysApi.virtual.getVirtualEventDetail(request).then((sportDetail: VirtualDetailOddsOfEventResponse) => {
+        try {
+          race.mk = sportDetail.Sport.ts[0].evs[0].mk;
+          race.tm = sportDetail.Sport.ts[0].evs[0].tm;
+          this.currentEventDetails = race;
+          this.attempts = 0;
+        } catch (err) {
+          if (this.attempts < 5) {
+            this.attempts++;
+            setTimeout(() => {
+              this.raceDetailOdds(raceNumber);
+            }, 1000);
+          } else {
             this.attempts = 0;
-          } catch (err) {
-            if (this.attempts < 5) {
-              this.attempts++;
-              setTimeout(() => {
-                this.raceDetailOdds(raceNumber);
-              }, 1000);
-            } else {
-              this.attempts = 0;
-            }
           }
-        });
+        }
+      });
     }
   }
 
@@ -387,9 +351,7 @@ export class MainService extends MainServiceExtra {
     let removed: boolean;
 
     if (!this.placingEvent) {
-      this.placingEvent.eventNumber = this.eventDetails.events[
-        this.eventDetails.currentEvent
-      ].number;
+      this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
     }
     player.actived = true;
 
@@ -399,10 +361,7 @@ export class MainService extends MainServiceExtra {
     } else {
       for (let idx = 0; idx < this.placingEvent.players.length; idx++) {
         const item = this.placingEvent.players[idx];
-        if (
-          item.number === player.number &&
-          item.position === player.position
-        ) {
+        if (item.number === player.number && item.position === player.position) {
           this.placingEvent.players.splice(idx, 1);
           this.checkedIsSelected(player, true);
           removed = true;
@@ -422,8 +381,7 @@ export class MainService extends MainServiceExtra {
     }
     // extract the raceOdd from cache
     const odds: VirtualBetEvent = this.cacheEvents.filter(
-      (cacheRace: VirtualBetEvent) =>
-        cacheRace.id === this.placingEvent.eventNumber
+      (cacheRace: VirtualBetEvent) => cacheRace.id === this.placingEvent.eventNumber
     )[0];
     this.smartCode = new Smartcode();
     this.populatingPolyfunctionArea(odds);
@@ -435,10 +393,7 @@ export class MainService extends MainServiceExtra {
       this.placingEvent.thirdRowDisabled = false;
     } else {
       this.placingEvent.typePlace = type;
-      if (
-        this.placingEvent.typePlace !== undefined &&
-        this.placingEvent.typePlace !== 2
-      ) {
+      if (this.placingEvent.typePlace !== undefined && this.placingEvent.typePlace !== 2) {
         // deselect all players in the row #3
         this.deselectRowPlayers(3);
         this.placingEvent.thirdRowDisabled = true;
@@ -450,20 +405,14 @@ export class MainService extends MainServiceExtra {
   }
 
   private deselectRowPlayers(position: number): void {
-    for (const player of this.placingEvent.players.filter(
-      item => item.position === position
-    )) {
+    for (const player of this.placingEvent.players.filter(item => item.position === position)) {
       this.placingOdd(player);
     }
   }
 
   private checkedIsSelected(player: Player, reset: boolean = false): void {
     this.playersList.forEach((d: Player) => {
-      if (
-        d.number === player.number &&
-        d.position !== player.position &&
-        !reset
-      ) {
+      if (d.number === player.number && d.position !== player.position && !reset) {
         d.selectable = false;
       } else if (d.number === player.number && reset) {
         d.selectable = true;
@@ -477,19 +426,14 @@ export class MainService extends MainServiceExtra {
    */
 
   RNGLucky2(lucky: Lucky): number {
-    const extractNumber: number =
-      Math.floor(
-        Math.random() *
-          this.playersList.filter(player => player.position === lucky).length
-      ) + 1;
+    const extractNumber: number = Math.floor(Math.random() * this.playersList.filter(player => player.position === lucky).length) + 1;
     return extractNumber;
   }
 
   RNGLuckyPlacing(playerNumber: number, playerPosition: number): void {
     // extract the player
     const playerExtract: Player = this.playersList.filter(
-      player =>
-        player.position === playerPosition && player.number === playerNumber
+      player => player.position === playerPosition && player.number === playerNumber
     )[0];
     // place the player
     this.placingOdd(playerExtract);
@@ -506,21 +450,13 @@ export class MainService extends MainServiceExtra {
     try {
       // check if is first insert
       let playerName: string;
-      if (
-        this.placingEvent.players.length === 1 &&
-        !this.placingEvent.isSpecialBets &&
-        this.placingEvent.typePlace === undefined
-      ) {
+      if (this.placingEvent.players.length === 1 && !this.placingEvent.isSpecialBets && this.placingEvent.typePlace === undefined) {
         // single selection
         areaFuncData.selection = Podium[this.placingEvent.players[0].position];
         areaFuncData.value = this.placingEvent.players[0].number;
         // match player from object tm with mk
         playerName = odd.tm.filter(t => t.ito === areaFuncData.value)[0].nm;
-      } else if (
-        (this.placingEvent.players.length > 1 &&
-          !this.placingEvent.isSpecialBets) ||
-        this.placingEvent.typePlace
-      ) {
+      } else if ((this.placingEvent.players.length > 1 && !this.placingEvent.isSpecialBets) || this.placingEvent.typePlace) {
         // composit selection
         this.placingEvent.players.forEach(item => {
           if (item.position === 1) {
@@ -532,10 +468,7 @@ export class MainService extends MainServiceExtra {
           }
         });
         // type Place particular iterations
-        if (
-          this.placingEvent.typePlace === TypePlacingEvent.ST &&
-          this.smartCode.selWinner.length > 2
-        ) {
+        if (this.placingEvent.typePlace === TypePlacingEvent.ST && this.smartCode.selWinner.length > 2) {
           this.placingEvent.secondRowDisabled = true;
           this.deselectRowPlayers(2);
         } else {
@@ -576,131 +509,67 @@ export class MainService extends MainServiceExtra {
    * @param areaFuncData
    * @param playerName
    */
-  public extractOdd(
-    odd: VirtualBetEvent,
-    areaFuncData: PolyfunctionalArea,
-    playerName?: string
-  ): PolyfunctionalArea {
+  public extractOdd(odd: VirtualBetEvent, areaFuncData: PolyfunctionalArea, playerName?: string): PolyfunctionalArea {
     let oddsToSearch: string[] = [];
 
     switch (areaFuncData.selection) {
       case SmartCodeType[SmartCodeType['1VA']]:
       case SmartCodeType[SmartCodeType.AOX]:
         // Generate sorted combination by 2 of the selections in the rows.
-        oddsToSearch = this.generateOdds(
-          areaFuncData.value.toString(),
-          CombinationType.By2,
-          false
-        );
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By2, false);
         break;
       case SmartCodeType[SmartCodeType.AB]:
         // Generate sorted combination by 2 of the selections in the rows in order.
-        oddsToSearch = this.generateOdds(
-          areaFuncData.value.toString(),
-          CombinationType.By2,
-          true
-        );
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By2, true);
         break;
       case SmartCodeType[SmartCodeType.TOX]:
         // Generate sorted combination by 3 of the selections in the rows.
-        oddsToSearch = this.generateOdds(
-          areaFuncData.value.toString(),
-          CombinationType.By3,
-          true
-        );
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, true);
         break;
       case SmartCodeType[SmartCodeType.AR]:
         // Generate combination by 2 of the first row selections not in order with return.
         if (areaFuncData.value.toString().indexOf('/') === -1) {
-          oddsToSearch = this.generateOddsRow(
-            areaFuncData.value.toString(),
-            CombinationType.By2,
-            false,
-            true
-          );
+          oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By2, false, true);
         } else {
           // of the first and second row selections in order with return
-          oddsToSearch = this.generateOdds(
-            areaFuncData.value.toString(),
-            CombinationType.By2,
-            false,
-            true
-          );
+          oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By2, false, true);
         }
         break;
       case SmartCodeType[SmartCodeType.AX]:
         // Generate sorted combination by 2 of the first row selections.
-        oddsToSearch = this.generateOddsRow(
-          areaFuncData.value.toString(),
-          CombinationType.By2,
-          true
-        );
+        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By2, true);
         break;
       case SmartCodeType[SmartCodeType.TNX]: // Trifecta
         // Generate combination by 3 of the first row selections not in order.
-        oddsToSearch = this.generateOddsRow(
-          areaFuncData.value.toString(),
-          CombinationType.By3,
-          false
-        );
+        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By3, false);
         break;
       case SmartCodeType[SmartCodeType.VT]: // Winning trio
         // Generate combination by 3 of the selections in the rows not in order.
-        oddsToSearch = this.generateOdds(
-          areaFuncData.value.toString(),
-          CombinationType.By3,
-          false
-        );
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, false);
         break;
       case SmartCodeType[SmartCodeType.AT]: // Combined trio
         // Generate combination by 3 of the selections in the rows not in order and with the first row fixed.
-        oddsToSearch = this.generateOdds(
-          areaFuncData.value.toString(),
-          CombinationType.By3,
-          false,
-          false,
-          true
-        );
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, false, false, true);
         break;
       case SmartCodeType[SmartCodeType.TR]: // multiple selection Trio in order with return
         // Generate combination by 3 of the first, second and third row selections in order with return.
-        oddsToSearch = this.generateOdds(
-          areaFuncData.value.toString(),
-          CombinationType.By3,
-          true,
-          true
-        );
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, true, true);
         break;
     }
     areaFuncData.odds = [];
-    for (const m of odd.mk.filter(
-      (market: VirtualBetMarket) =>
-        market.tp === this.typeSelection(areaFuncData.selection)
-    )) {
+    for (const m of odd.mk.filter((market: VirtualBetMarket) => market.tp === this.typeSelection(areaFuncData.selection))) {
       // If the selection is PODIUM, WINNER or SHOW
       if (playerName) {
         for (const checkOdd of m.sls.filter(o => o.nm === playerName)) {
-          const betOdd: BetOdd = new BetOdd(
-            playerName,
-            checkOdd.ods[0].vl,
-            areaFuncData.amount,
-            checkOdd.id
-          );
+          const betOdd: BetOdd = new BetOdd(playerName, checkOdd.ods[0].vl, areaFuncData.amount, checkOdd.id);
           areaFuncData.odds.push(betOdd);
           /*   areaFuncData.odd = checkOdd.ods[0].vl;
             areaFuncData.id = checkOdd.id; */
         }
       } else if (!this.smartCode.code) {
         // if the selection is EVEN, ODD, UNDER or OVER
-        for (const checkOdd of m.sls.filter(
-          o => o.nm.toUpperCase() === areaFuncData.selection.toUpperCase()
-        )) {
-          const betOdd: BetOdd = new BetOdd(
-            checkOdd.nm.toUpperCase(),
-            checkOdd.ods[0].vl,
-            areaFuncData.amount,
-            checkOdd.id
-          );
+        for (const checkOdd of m.sls.filter(o => o.nm.toUpperCase() === areaFuncData.selection.toUpperCase())) {
+          const betOdd: BetOdd = new BetOdd(checkOdd.nm.toUpperCase(), checkOdd.ods[0].vl, areaFuncData.amount, checkOdd.id);
           areaFuncData.odds.push(betOdd);
           /*  areaFuncData.odd = checkOdd.ods[0].vl;
            areaFuncData.id = checkOdd.id; */
@@ -714,9 +583,7 @@ export class MainService extends MainServiceExtra {
                 new BetOdd(
                   checkOdd.nm,
                   checkOdd.ods[0].vl,
-                  areaFuncData.typeSlipCol === TypeBetSlipColTot.TOT
-                    ? areaFuncData.amount / oddsToSearch.length
-                    : areaFuncData.amount,
+                  areaFuncData.typeSlipCol === TypeBetSlipColTot.TOT ? areaFuncData.amount / oddsToSearch.length : areaFuncData.amount,
                   checkOdd.id
                 )
               );
@@ -724,16 +591,9 @@ export class MainService extends MainServiceExtra {
           }
         } else {
           // search for matchName
-          const matchName: string = areaFuncData.value
-            .toString()
-            .replace(/\//g, '-');
+          const matchName: string = areaFuncData.value.toString().replace(/\//g, '-');
           for (const checkOdd of m.sls.filter(o => o.nm === matchName)) {
-            const betOdd: BetOdd = new BetOdd(
-              checkOdd.nm.toUpperCase(),
-              checkOdd.ods[0].vl,
-              areaFuncData.amount,
-              checkOdd.id
-            );
+            const betOdd: BetOdd = new BetOdd(checkOdd.nm.toUpperCase(), checkOdd.ods[0].vl, areaFuncData.amount, checkOdd.id);
             areaFuncData.odds.push(betOdd);
             /*  areaFuncData.odd = checkOdd.ods[0].vl;
              areaFuncData.id = checkOdd.id; */
@@ -810,10 +670,7 @@ export class MainService extends MainServiceExtra {
         // Normal bet
         // Setting the PolyfunctionalArea with only a winning selection
         if (this.smartCode.selWinner.length === 1) {
-          if (
-            this.smartCode.selPlaced.length === 1 &&
-            this.smartCode.selPodium.length === 0
-          ) {
+          if (this.smartCode.selPlaced.length === 1 && this.smartCode.selPodium.length === 0) {
             this.smartCode.code = SmartCodeType[SmartCodeType.AO];
           } else if (
             // The second selection is multiple of 1
@@ -821,64 +678,31 @@ export class MainService extends MainServiceExtra {
             this.smartCode.selPodium.length === 0
           ) {
             this.smartCode.code = SmartCodeType[SmartCodeType['1VA']];
-          } else if (
-            this.smartCode.selPlaced.length === 1 &&
-            this.smartCode.selPodium.length === 1
-          ) {
+          } else if (this.smartCode.selPlaced.length === 1 && this.smartCode.selPodium.length === 1) {
             this.smartCode.code = SmartCodeType[SmartCodeType['T']];
             areaFuncData.value =
-              this.smartCode.selWinner.join('') +
-              '/' +
-              this.smartCode.selPlaced.join('') +
-              '/' +
-              this.smartCode.selPodium.join('');
-          } else if (
-            this.smartCode.selPlaced.length > 0 &&
-            this.smartCode.selPodium.length > 0
-          ) {
+              this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
+          } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length > 0) {
             this.smartCode.code = SmartCodeType[SmartCodeType.TOX];
             areaFuncData.value =
-              this.smartCode.selWinner.join('') +
-              '/' +
-              this.smartCode.selPlaced.join('') +
-              '/' +
-              this.smartCode.selPodium.join('');
+              this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
           }
         } else if (this.smartCode.selWinner.length > 1) {
-          if (
-            this.smartCode.selPlaced.length > 0 &&
-            this.smartCode.selPodium.length === 0
-          ) {
+          if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
             // Items in the first and second row
             this.smartCode.code = SmartCodeType[SmartCodeType.AOX];
-          } else if (
-            this.smartCode.selPlaced.length > 0 &&
-            this.smartCode.selPodium.length > 0
-          ) {
+          } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length > 0) {
             // Items in all the rows
             this.smartCode.code = SmartCodeType[SmartCodeType.TOX];
             areaFuncData.value =
-              this.smartCode.selWinner.join('') +
-              '/' +
-              this.smartCode.selPlaced.join('') +
-              '/' +
-              this.smartCode.selPodium.join('');
+              this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
           }
         }
-        if (
-          this.smartCode.selPlaced.length > 0 &&
-          this.smartCode.selPodium.length === 0
-        ) {
+        if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
           if (this.smartCode.code === 'AO') {
-            areaFuncData.value =
-              this.smartCode.selWinner.join('') +
-              '-' +
-              this.smartCode.selPlaced.join('');
+            areaFuncData.value = this.smartCode.selWinner.join('') + '-' + this.smartCode.selPlaced.join('');
           } else {
-            areaFuncData.value =
-              this.smartCode.selWinner.join('') +
-              '/' +
-              this.smartCode.selPlaced.join('');
+            areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
           }
         }
     }
@@ -893,10 +717,7 @@ export class MainService extends MainServiceExtra {
   private placeTypeACCG(areaFuncData: PolyfunctionalArea): string {
     // One or more selections on the first row
     if (this.smartCode.selWinner.length >= 1) {
-      if (
-        this.smartCode.selPlaced.length === 0 &&
-        this.smartCode.selPodium.length === 0
-      ) {
+      if (this.smartCode.selPlaced.length === 0 && this.smartCode.selPodium.length === 0) {
         // only selections in the first row
         if (this.smartCode.selWinner.length === 2) {
           // Single
@@ -914,23 +735,15 @@ export class MainService extends MainServiceExtra {
           areaFuncData.value = this.smartCode.selWinner.join('');
           return SmartCodeType[SmartCodeType.AX];
         }
-      } else if (
-        this.smartCode.selPlaced.length > 0 &&
-        this.smartCode.selPodium.length === 0
-      ) {
+      } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
         // Selections in the first and second row
-        if (
-          this.smartCode.selWinner.length === 1 &&
-          this.smartCode.selPlaced.length === 1
-        ) {
+        if (this.smartCode.selWinner.length === 1 && this.smartCode.selPlaced.length === 1) {
           // Only a player is selected on the first and second row the result is a single "Combination".
           // Sort the selections
           if (this.smartCode.selWinner[0] > this.smartCode.selPlaced[0]) {
-            areaFuncData.value =
-              this.smartCode.selPlaced[0] + '-' + this.smartCode.selWinner[0];
+            areaFuncData.value = this.smartCode.selPlaced[0] + '-' + this.smartCode.selWinner[0];
           } else {
-            areaFuncData.value =
-              this.smartCode.selWinner[0] + '-' + this.smartCode.selPlaced[0];
+            areaFuncData.value = this.smartCode.selWinner[0] + '-' + this.smartCode.selPlaced[0];
           }
           return SmartCodeType[SmartCodeType.AS];
         } else {
@@ -942,10 +755,7 @@ export class MainService extends MainServiceExtra {
           this.smartCode.selPlaced.sort(function(a, b) {
             return a - b;
           });
-          areaFuncData.value =
-            this.smartCode.selWinner.join('') +
-            '/' +
-            this.smartCode.selPlaced.join('');
+          areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
           return SmartCodeType[SmartCodeType.AB];
         }
       }
@@ -962,10 +772,7 @@ export class MainService extends MainServiceExtra {
     // One or more selections on the first row
     if (this.smartCode.selWinner.length >= 1) {
       // Only selections in the first row
-      if (
-        this.smartCode.selPlaced.length === 0 &&
-        this.smartCode.selPodium.length === 0
-      ) {
+      if (this.smartCode.selPlaced.length === 0 && this.smartCode.selPodium.length === 0) {
         // Requirements "Trio a girare"
         if (this.smartCode.selWinner.length >= 3) {
           // Sort the displayed values
@@ -975,10 +782,7 @@ export class MainService extends MainServiceExtra {
           areaFuncData.value = this.smartCode.selWinner.join('');
           return SmartCodeType[SmartCodeType.TNX];
         }
-      } else if (
-        this.smartCode.selPlaced.length > 0 &&
-        this.smartCode.selPodium.length === 0
-      ) {
+      } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
         // Sections in the first and second row.
         if (this.smartCode.selWinner.length === 1) {
           // Requirements "Vincente Trio"
@@ -988,10 +792,7 @@ export class MainService extends MainServiceExtra {
             this.smartCode.selPlaced.sort(function(a, b) {
               return a - b;
             });
-            areaFuncData.value =
-              this.smartCode.selWinner[0] +
-              '/' +
-              this.smartCode.selPlaced.join('');
+            areaFuncData.value = this.smartCode.selWinner[0] + '/' + this.smartCode.selPlaced.join('');
             return SmartCodeType[SmartCodeType.VT];
           }
         } else if (this.smartCode.selWinner.length === 2) {
@@ -1008,10 +809,7 @@ export class MainService extends MainServiceExtra {
                 return a - b;
               });
             }
-            areaFuncData.value =
-              this.smartCode.selWinner.join('') +
-              '/' +
-              this.smartCode.selPlaced.join('');
+            areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
             return SmartCodeType[SmartCodeType.AT];
           }
         }
@@ -1029,10 +827,7 @@ export class MainService extends MainServiceExtra {
     // One or more selections on the first row
     if (this.smartCode.selWinner.length >= 1) {
       // Only selections in the first row
-      if (
-        this.smartCode.selPlaced.length === 0 &&
-        this.smartCode.selPodium.length === 0
-      ) {
+      if (this.smartCode.selPlaced.length === 0 && this.smartCode.selPodium.length === 0) {
         // Requirements "Accoppiata in ordine con ritorno"
         if (this.smartCode.selWinner.length === 2) {
           // Sort the displayed values
@@ -1043,10 +838,7 @@ export class MainService extends MainServiceExtra {
           return SmartCodeType[SmartCodeType.AR];
         }
         // Only selections in the first and second row
-      } else if (
-        this.smartCode.selPlaced.length > 0 &&
-        this.smartCode.selPodium.length === 0
-      ) {
+      } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length === 0) {
         // Selections in the first row
         if (this.smartCode.selWinner.length > 1) {
           // Sort the displayed values
@@ -1061,16 +853,10 @@ export class MainService extends MainServiceExtra {
             return a - b;
           });
         }
-        areaFuncData.value =
-          this.smartCode.selWinner.join('') +
-          '/' +
-          this.smartCode.selPlaced.join('');
+        areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
         return SmartCodeType[SmartCodeType.AR];
         // Only selections in the first, second and third row
-      } else if (
-        this.smartCode.selPlaced.length > 0 &&
-        this.smartCode.selPodium.length > 0
-      ) {
+      } else if (this.smartCode.selPlaced.length > 0 && this.smartCode.selPodium.length > 0) {
         // Selections in the first row
         if (this.smartCode.selWinner.length > 1) {
           // Sort the displayed values
@@ -1093,11 +879,7 @@ export class MainService extends MainServiceExtra {
           });
         }
         areaFuncData.value =
-          this.smartCode.selWinner.join('') +
-          '/' +
-          this.smartCode.selPlaced.join('') +
-          '/' +
-          this.smartCode.selPodium.join('');
+          this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('') + '/' + this.smartCode.selPodium.join('');
         return SmartCodeType[SmartCodeType.TR];
       }
     }
@@ -1158,13 +940,9 @@ export class MainService extends MainServiceExtra {
               if (isFirstRowFixed && selections.length === 2) {
                 for (let i1b = i1 + 1; i1b < selections[0].length; i1b++) {
                   for (let i2 = 0; i2 < selections[1].length; i2++) {
-                    returnValues.push(
-                      values1[i1] + '-' + values1[i1b] + '-' + values2[i2]
-                    );
+                    returnValues.push(values1[i1] + '-' + values1[i1b] + '-' + values2[i2]);
                     if (!ordered) {
-                      returnValues.push(
-                        values1[i1b] + '-' + values1[i1] + '-' + values2[i2]
-                      );
+                      returnValues.push(values1[i1b] + '-' + values1[i1] + '-' + values2[i2]);
                     }
                   }
                 }
@@ -1174,78 +952,37 @@ export class MainService extends MainServiceExtra {
                   if (selections.length === 2) {
                     // There are enough selections on the second row to make a trio.
                     if (selections[1].length >= 2) {
-                      for (
-                        let i2b = i2 + 1;
-                        i2b < selections[1].length;
-                        i2b++
-                      ) {
+                      for (let i2b = i2 + 1; i2b < selections[1].length; i2b++) {
                         if (ordered) {
                           // Sort the combination
-                          if (
-                            parseInt(values2[i2], 10) >=
-                            parseInt(values2[i2b], 10)
-                          ) {
-                            returnValues.push(
-                              values1[i1] +
-                                '-' +
-                                values2[i2b] +
-                                '-' +
-                                values2[i2]
-                            );
+                          if (parseInt(values2[i2], 10) >= parseInt(values2[i2b], 10)) {
+                            returnValues.push(values1[i1] + '-' + values2[i2b] + '-' + values2[i2]);
                           } else {
-                            returnValues.push(
-                              values1[i1] +
-                                '-' +
-                                values2[i2] +
-                                '-' +
-                                values2[i2b]
-                            );
+                            returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values2[i2b]);
                           }
                         } else {
-                          returnValues.push(
-                            values1[i1] + '-' + values2[i2] + '-' + values2[i2b]
-                          );
-                          returnValues.push(
-                            values1[i1] + '-' + values2[i2b] + '-' + values2[i2]
-                          );
+                          returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values2[i2b]);
+                          returnValues.push(values1[i1] + '-' + values2[i2b] + '-' + values2[i2]);
                         }
                       }
                     }
                   } else if (selections.length > 2) {
                     // Selections on all three rows.
                     // Extraction of the selections in the third row.
-                    const values3: string[] = this.extractOddFromString(
-                      selections[2]
-                    );
+                    const values3: string[] = this.extractOddFromString(selections[2]);
                     for (let i3 = 0; i3 < selections[2].length; i3++) {
                       if (ordered) {
-                        returnValues.push(
-                          values1[i1] + '-' + values2[i2] + '-' + values3[i3]
-                        );
+                        returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values3[i3]);
                         if (withReturn) {
-                          returnValues.push(
-                            values3[i3] + '-' + values2[i2] + '-' + values1[i1]
-                          );
+                          returnValues.push(values3[i3] + '-' + values2[i2] + '-' + values1[i1]);
                         }
                       } else {
-                        returnValues.push(
-                          values1[i1] + '-' + values2[i2] + '-' + values3[i3]
-                        );
-                        returnValues.push(
-                          values1[i1] + '-' + values3[i3] + '-' + values2[i2]
-                        );
-                        returnValues.push(
-                          values2[i2] + '-' + values1[i1] + '-' + values3[i3]
-                        );
-                        returnValues.push(
-                          values2[i2] + '-' + values3[i3] + '-' + values1[i1]
-                        );
-                        returnValues.push(
-                          values3[i3] + '-' + values1[i1] + '-' + values2[i2]
-                        );
-                        returnValues.push(
-                          values3[i3] + '-' + values2[i2] + '-' + values1[i1]
-                        );
+                        returnValues.push(values1[i1] + '-' + values2[i2] + '-' + values3[i3]);
+                        returnValues.push(values1[i1] + '-' + values3[i3] + '-' + values2[i2]);
+                        returnValues.push(values2[i2] + '-' + values1[i1] + '-' + values3[i3]);
+                        returnValues.push(values2[i2] + '-' + values3[i3] + '-' + values1[i1]);
+                        returnValues.push(values3[i3] + '-' + values1[i1] + '-' + values2[i2]);
+                        returnValues.push(values3[i3] + '-' + values2[i2] + '-' + values1[i1]);
                       }
                     }
                   }
@@ -1272,12 +1009,7 @@ export class MainService extends MainServiceExtra {
    * @returns Array of combinations. Ex: For type "By2": 1-2, 1-3, 1-4, 2-3, 2-4, 3-4. For type "By3": 1-2-3, 1-3-4, 1-2-4, 2-1-3, 2-3-4, ecc.
    */
   // tslint:enable:max-line-length
-  generateOddsRow(
-    value: string,
-    combinationType: CombinationType,
-    ordered: boolean,
-    withReturn: boolean = false
-  ): string[] {
+  generateOddsRow(value: string, combinationType: CombinationType, ordered: boolean, withReturn: boolean = false): string[] {
     const returnValues: string[] = [];
 
     if (value.length > 0) {
@@ -1299,28 +1031,14 @@ export class MainService extends MainServiceExtra {
             case CombinationType.By3: // Combination of the selections By 3
               for (let k = j + 1; k < value.length; k++) {
                 if (ordered) {
-                  returnValues.push(
-                    values[i] + '-' + values[j] + '-' + values[k]
-                  );
+                  returnValues.push(values[i] + '-' + values[j] + '-' + values[k]);
                 } else {
-                  returnValues.push(
-                    values[i] + '-' + values[j] + '-' + values[k]
-                  );
-                  returnValues.push(
-                    values[i] + '-' + values[k] + '-' + values[j]
-                  );
-                  returnValues.push(
-                    values[j] + '-' + values[i] + '-' + values[k]
-                  );
-                  returnValues.push(
-                    values[j] + '-' + values[k] + '-' + values[i]
-                  );
-                  returnValues.push(
-                    values[k] + '-' + values[i] + '-' + values[j]
-                  );
-                  returnValues.push(
-                    values[k] + '-' + values[j] + '-' + values[i]
-                  );
+                  returnValues.push(values[i] + '-' + values[j] + '-' + values[k]);
+                  returnValues.push(values[i] + '-' + values[k] + '-' + values[j]);
+                  returnValues.push(values[j] + '-' + values[i] + '-' + values[k]);
+                  returnValues.push(values[j] + '-' + values[k] + '-' + values[i]);
+                  returnValues.push(values[k] + '-' + values[i] + '-' + values[j]);
+                  returnValues.push(values[k] + '-' + values[j] + '-' + values[i]);
                 }
               }
               break;
@@ -1344,13 +1062,13 @@ export class MainService extends MainServiceExtra {
   }
 
   /**
-   * Method to extract the current Race selected
+   * Method to extract the current event selected
    * @returns VirtualBetEvent
    */
-  public getCurrentRace(): VirtualBetEvent {
-    return this.cacheEvents.filter(
-      (cacheRace: VirtualBetEvent) =>
-        cacheRace.id === this.placingEvent.eventNumber
-    )[0];
+  public getCurrentEvent(): Promise<VirtualBetEvent> {
+    const response = new Promise<VirtualBetEvent>((resolve, reject) => {
+      resolve(this.cacheEvents.filter((cacheRace: VirtualBetEvent) => cacheRace.id === this.placingEvent.eventNumber)[0]);
+    });
+    return response;
   }
 }

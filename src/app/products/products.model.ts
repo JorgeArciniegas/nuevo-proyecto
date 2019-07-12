@@ -146,7 +146,7 @@ export interface CouponConfirmDelete {
 }
 
 // Enum of the markets for the prodict "cock fight"
-export enum COCK_MARKET {
+export enum CockMarket {
   '1X2' = 10,
   'OverUnder' = 60,
   'WinningSector' = 171,
