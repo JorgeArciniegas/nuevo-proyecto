@@ -41,7 +41,7 @@ export class LuckyService {
     }
   }
   /**
-   * RNG FOR TO PLACE THE LUCKY
+   * RNG TO PLACE THE LUCKY
    */
 
   RNGLucky2(lucky: Lucky): number {
