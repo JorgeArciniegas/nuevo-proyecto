@@ -10,14 +10,18 @@ export class LuckyService {
   oldLucky: string;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   constructor(private mainService: MainService) {}
+  /**
+   * @param lucky number of players involved (1: winner 2: acc, 3: trifecta)
+   */
   placingLucky(lucky: Lucky): void {
     this.mainService.resetPlayEvent();
     let n = '';
-    // extract  lucky
+    // loop the number of player involved
     for (let i = 1; i <= lucky; i++) {
       while (true) {
-        // check if extract exist
+        // for each one get the player number randomly according the current lucky (this.RNGLucky2(i);)
         const extTemp: number = this.RNGLucky2(i);
+        // check if the player extracted already exists
         if (n.indexOf(extTemp.toString()) === -1) {
           n += extTemp;
           break;
