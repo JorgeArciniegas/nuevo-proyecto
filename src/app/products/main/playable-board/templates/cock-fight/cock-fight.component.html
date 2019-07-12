@@ -13,8 +13,10 @@
           <ng-container *ngIf="market.tp === cockMarket['1X2'] && (selection.tp === 1 || selection.tp === 3)">
             <div class="icon" [ngClass]="{'icon-cock-red': selection.tp === 1, 'icon-cock-blue': selection.tp === 3}">
             </div>
-            <span *ngIf="selection.tp === 1">{{mainService.currentEventDetails.tm | filterByCompetitor: 1}}</span>
-            <span *ngIf="selection.tp === 2">{{mainService.currentEventDetails.tm | filterByCompetitor: 2}}</span>
+            <ng-container
+              *ngFor="let competitor of mainService.currentEventDetails.tm | filterByCompetitor: ((selection.tp === 1) ? 1 : 2)">
+              <span>{{ competitor.nm }}</span>
+            </ng-container>
           </ng-container>
 
           <span *ngIf="market.tp !== cockMarket['1X2']">{{ selection.nm }}</span>

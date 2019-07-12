@@ -12,6 +12,7 @@ import { StandardComponent } from './event-control/templates/standard/standard.c
 import { CockfightComponent as ResultsCockFightComponent } from './results/templates/cockfight/cockfight.component';
 import { CockFightComponent as PlayableBoardCockFightComponent } from './playable-board/templates/cock-fight/cock-fight.component';
 import { FilterAndSortByShownMarketsPipe } from './playable-board/filter-and-sort-by-shown-markets.pipe';
+import { FilterByCompetitorPipe } from './playable-board/filter-by-competitor.pipe';
 
 export const componentDeclarations: any[] = [
   MainComponent,
@@ -20,6 +21,7 @@ export const componentDeclarations: any[] = [
   ResultsComponent,
   PlayableBoardComponent,
   FilterByPositionPipe,
+  FilterByCompetitorPipe,
   FilterAndSortByShownMarketsPipe,
   ResultsRaceComponent,
   PlayableBoardRaceComponent,
