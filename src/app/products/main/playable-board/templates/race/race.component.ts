@@ -3,6 +3,7 @@ import { TypePlacingEvent, Player, SpecialBet } from '../../../main.models';
 import { MainService } from '../../../main.service';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../../../../products.service';
+import { UserService } from '../../../../../../../src/app/services/user.service';
 
 @Component({
   selector: 'app-playable-board-race',
@@ -23,7 +24,7 @@ export class RaceComponent implements OnInit, OnDestroy {
   private currentProductSelection: Subscription;
   // code of product. it's used for change the layout color to buttons
   codeProduct: string;
-  constructor(public service: MainService, private productService: ProductsService) {
+  constructor(public service: MainService, private productService: ProductsService, private userService: UserService) {
     this.currentEventSubscription = this.service.currentEventObserve.subscribe(
       raceIndex => (this.service.placingEvent.eventNumber = this.service.eventDetails.events[raceIndex].number)
     );

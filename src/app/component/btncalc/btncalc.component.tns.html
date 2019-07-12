@@ -5,10 +5,12 @@
       width="{{amountIcon.width}}" borderRadius="{{amountIcon.height/2}}">
       <GridLayout *ngIf="appSetting.defaultAmount.PresetOne > 0">
         <Button text="{{ appSetting.defaultAmount.PresetOne | digitslimit }}" class="button-internal"
-          [isEnabled]="!timeBlocked" (tap)="btnDefaultAmountsPreset(appSetting.defaultAmount.PresetOne)"></Button>
+          [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+          (tap)="btnDefaultAmountsPreset(appSetting.defaultAmount.PresetOne)"></Button>
       </GridLayout>
       <GridLayout *ngIf="!appSetting.defaultAmount.PresetOne">
-        <Button class="button-internal" [isEnabled]="!timeBlocked"></Button>
+        <Button class="button-internal"
+          [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"></Button>
       </GridLayout>
     </GridLayout>
   </GridLayout>
@@ -18,10 +20,12 @@
       width="{{amountIcon.width}}" borderRadius="{{amountIcon.height/2}}">
       <GridLayout *ngIf="appSetting.defaultAmount.PresetTwo > 0">
         <Button text="{{ appSetting.defaultAmount.PresetTwo | digitslimit }}" class="button-internal"
-          [isEnabled]="!timeBlocked" (tap)="btnDefaultAmountsPreset(appSetting.defaultAmount.PresetTwo)"></Button>
+          [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+          (tap)="btnDefaultAmountsPreset(appSetting.defaultAmount.PresetTwo)"></Button>
       </GridLayout>
       <GridLayout *ngIf="!appSetting.defaultAmount.PresetTwo">
-        <Button class="button-internal" [isEnabled]="!timeBlocked"></Button>
+        <Button class="button-internal"
+          [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"></Button>
       </GridLayout>
     </GridLayout>
   </GridLayout>
@@ -31,10 +35,12 @@
       width="{{amountIcon.width}}" borderRadius="{{amountIcon.height/2}}">
       <GridLayout *ngIf="appSetting.defaultAmount.PresetThree > 0">
         <Button text="{{ appSetting.defaultAmount.PresetThree | digitslimit }}" class="button-internal"
-          [isEnabled]="!timeBlocked" (tap)="btnDefaultAmountsPreset(appSetting.defaultAmount.PresetThree)"></Button>
+          [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+          (tap)="btnDefaultAmountsPreset(appSetting.defaultAmount.PresetThree)"></Button>
       </GridLayout>
       <GridLayout *ngIf="!appSetting.defaultAmount.PresetThree">
-        <Button class="button-internal" [isEnabled]="!timeBlocked"></Button>
+        <Button class="button-internal"
+          [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"></Button>
       </GridLayout>
     </GridLayout>
   </GridLayout>
@@ -44,99 +50,134 @@
       width="{{amountIcon.width}}" borderRadius="{{amountIcon.height/2}}">
       <GridLayout *ngIf="appSetting.defaultAmount.PresetFour > 0">
         <Button text="{{ appSetting.defaultAmount.PresetFour | digitslimit }}" class="button-internal"
-          [isEnabled]="!timeBlocked" (tap)="btnDefaultAmountsPreset(appSetting.defaultAmount.PresetFour)"></Button>
+          [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+          (tap)="btnDefaultAmountsPreset(appSetting.defaultAmount.PresetFour)"></Button>
       </GridLayout>
       <GridLayout *ngIf="!appSetting.defaultAmount.PresetFour">
-        <Button class="button-internal" [isEnabled]="!timeBlocked"></Button>
+        <Button class="button-internal"
+          [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"></Button>
       </GridLayout>
     </GridLayout>
   </GridLayout>
   <!-- BTN calculator -->
   <GridLayout row="1" col="0" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="1" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnKeyboardAmount(1)"></Button>
+      <Button text="1" class="button-internal"
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+        (tap)="btnKeyboardAmount(1)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="1" col="1" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="2" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnKeyboardAmount(2)"></Button>
+      <Button text="2" class="button-internal"
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+        (tap)="btnKeyboardAmount(2)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="1" col="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="3" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnKeyboardAmount(3)"></Button>
+      <Button text="3" class="button-internal"
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+        (tap)="btnKeyboardAmount(3)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="2" col="0" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="4" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnKeyboardAmount(4)"></Button>
+      <Button text="4" class="button-internal"
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+        (tap)="btnKeyboardAmount(4)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="2" col="1" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="5" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnKeyboardAmount(5)"></Button>
+      <Button text="5" class="button-internal"
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+        (tap)="btnKeyboardAmount(5)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="2" col="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="6" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnKeyboardAmount(6)"></Button>
+      <Button text="6" class="button-internal"
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+        (tap)="btnKeyboardAmount(6)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="3" col="0" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="7" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnKeyboardAmount(7)"></Button>
+      <Button text="7" class="button-internal"
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+        (tap)="btnKeyboardAmount(7)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="3" col="1" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="8" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnKeyboardAmount(8)"></Button>
+      <Button text="8" class="button-internal"
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+        (tap)="btnKeyboardAmount(8)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="3" col="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="9" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnKeyboardAmount(9)"></Button>
+      <Button text="9" class="button-internal"
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+        (tap)="btnKeyboardAmount(9)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="4" col="0" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard">
-      <Button text="0" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnKeyboardAmount(0)"></Button>
+      <Button text="0" class="button-internal"
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+        (tap)="btnKeyboardAmount(0)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="4" col="1" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard small">
-      <Button text="00" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnKeyboardAmount('00')"></Button>
+      <Button text="00" class="button-internal"
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+        (tap)="btnKeyboardAmount('00')"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="4" col="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard small">
-      <Button text="000" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnKeyboardAmount('000')"></Button>
+      <Button text="000" class="button-internal"
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+        (tap)="btnKeyboardAmount('000')"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="1" col="3" rowSpan="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-success" (tap)="plus()">
-      <Button text="+" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+      <Button text="+" class="button-internal"
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"></Button>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="3" col="3" rowSpan="{{btncalcService.decimalSeparator ? 1 : 2}}" shadow="3" cornerRadius="7" class="card">
+  <GridLayout row="3" col="3" rowSpan="{{btncalcService.decimalSeparator ? 1 : 2}}" shadow="3" cornerRadius="7"
+    class="card">
     <GridLayout rows="*" columns="*" class="button btn-warning" (doubleTap)="clearAll()"
       (tap)='polyfuncionalAmountReset()'>
-      <Button text="{{ 'C' | translate }}" class="button-internal" [isEnabled]="!timeBlocked"></Button>
+      <Button text="{{ 'C' | translate }}" class="button-internal"
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="4" col="3" *ngIf="btncalcService.decimalSeparator" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-keyboard small">
-      <Button text="{{ btncalcService.decimalSeparator }}" class="button-internal" [isEnabled]="!timeBlocked" (tap)="btnSeparatorSet()"></Button>
+      <Button text="{{ btncalcService.decimalSeparator }}" class="button-internal"
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+        (tap)="btnSeparatorSet()"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="5" col="0" colSpan="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
-      <Button text="{{ 'BTNCALC.TOT' | translate }}" class="button-internal" textTransform="uppercase"
+      <Button
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+        text="{{ 'BTNCALC.TOT' | translate }}" class="button-internal" textTransform="uppercase"
         (tap)="btnTotColSet(typeBetSlipColTot.TOT)"></Button>
     </GridLayout>
   </GridLayout>
   <GridLayout row="5" col="2" colSpan="2" shadow="3" cornerRadius="7" class="card">
     <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
-      <Button text="{{ 'BTNCALC.COL' | translate }}" class="button-internal" textTransform="uppercase"
+      <Button
+        [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
+        text="{{ 'BTNCALC.COL' | translate }}" class="button-internal" textTransform="uppercase"
         (tap)="btnTotColSet(typeBetSlipColTot.COL)"></Button>
     </GridLayout>
   </GridLayout>

@@ -1,5 +1,14 @@
 @import "./buttons";
 
+
+/**
+* Import layout's component
+**/
+@import './results-list/results-list';
+@import './playable-board/playablerace';
+@import './statistics/statistics.component';
+@import './event-control/event-control-standard';
+
 *,
 *:after,
 *:before {
@@ -700,7 +709,8 @@ html {
 
 			transform: translate(-50%, -50%);
 			box-shadow: 0px 0px 0px 3px rgba(0, 0, 0, 0.1), 0px 1px 5px 5px rgba(0, 0, 0, 0.3);
-			padding: 10px;
+      padding: 10px;
+      z-index: 9999;
 		}
 	}
 }
@@ -727,18 +737,6 @@ html {
 	}
 }
 
-//STATISTIC
-
-.statistic-data {
-	.fitness-container {
-		background: #fff;
-
-		.fitness-content {
-			@extend %bar-fitness-pecentage;
-		}
-	}
-}
-
 @media print {
 	.isPrinting {
 		.main-content {
@@ -749,11 +747,3 @@ html {
 		}
 	}
 }
-
-/**
-* Import layout's component
-**/
-@import './results-list/results-list';
-@import './playable-board/playablerace';
-@import './statistics/statistics.component';
-@import './event-control/event-control-standard';

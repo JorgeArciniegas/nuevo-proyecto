@@ -300,5 +300,8 @@
   "USERNAME_TOO_SHORT": "The username is too short (minimum 2 digits)",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "User not allowed to execute the operation",
   "WARNING": "Warning",
-  "WON": "Won"
+  "WON": "Won",
+  "STRENGTH": "strength",
+  "ENDURANCE": "endurance",
+  "AGILITY": "agility"
 }

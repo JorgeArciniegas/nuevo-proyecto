@@ -300,5 +300,8 @@
   "USERNAME_TOO_SHORT": "Este nombre de usuario es demasiado corto (minimo 2 caracteres)",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "Usuario no autorizado para la operación",
   "WARNING": "Aviso",
-  "WON": "Ganado"
+  "WON": "Ganado",
+  "STRENGTH": "fuerza",
+  "ENDURANCE": "resistencia",
+  "AGILITY": "agilidad"
 }

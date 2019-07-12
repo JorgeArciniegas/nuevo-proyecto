@@ -59,6 +59,8 @@ export class PayCancelDialogComponent {
                 new Receipt(couponCode, true, message.Stake)
               );
               this.close();
+              this.userService.isModalOpen = false;
+              this.userService.isBtnCalcEditable = true;
             }
           })
           .catch(
@@ -88,6 +90,8 @@ export class PayCancelDialogComponent {
                 new Receipt(couponCode, false, message.StakeGross)
               );
               this.close();
+              this.userService.isModalOpen = false;
+              this.userService.isBtnCalcEditable = true;
             }
           })
           .catch(
@@ -109,5 +113,7 @@ export class PayCancelDialogComponent {
 
   close(): void {
     this.couponDialogService.closeDialog();
+    this.userService.isModalOpen = false;
+    this.userService.isBtnCalcEditable = true;
   }
 }

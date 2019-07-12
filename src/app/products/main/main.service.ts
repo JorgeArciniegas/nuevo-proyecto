@@ -96,20 +96,18 @@ export class MainService extends MainServiceExtra {
     this.currentEventObserve = this.currentEventSubscribe.asObservable();
 
     this.currentEventObserve.subscribe((eventIndex: number) => {
-      if (this.eventDetails.currentEvent !== eventIndex) {
-        this.eventDetails.currentEvent = eventIndex;
-        this.remainingRaceTime(this.eventDetails.events[eventIndex].number).then(
-          (raceTime: EventTime) => {
-            this.eventDetails.eventTime = raceTime;
-          }
-        );
-        // reset coupon
-        this.coupon.resetCoupon();
-        // reset playload
-        this.resetPlayEvent();
-        // get race odds
-        this.raceDetailOdds(this.eventDetails.events[eventIndex].number);
-      }
+      this.eventDetails.currentEvent = eventIndex;
+      this.remainingRaceTime(this.eventDetails.events[eventIndex].number).then(
+        (raceTime: EventTime) => {
+          this.eventDetails.eventTime = raceTime;
+        }
+      );
+      // reset coupon
+      this.coupon.resetCoupon();
+      // reset playload
+      this.resetPlayEvent();
+      // get race odds
+      this.raceDetailOdds(this.eventDetails.events[eventIndex].number);
     });
 
     this.productService.playableBoardResetObserve.subscribe(reset => {
@@ -223,6 +221,9 @@ export class MainService extends MainServiceExtra {
       if (this.reload <= 0) {
         // if remain only 1 new race reload other race
         this.loadRacesFromApi();
+      } else {
+        // get race odds
+        this.raceDetailOdds(this.eventDetails.events[0].number);
       }
     }
   }

@@ -16,6 +16,7 @@ export class CouponDialogService {
   openPayCancelDialog(type: DialogTypeCoupon): void {
     this.close();
     this.userService.isModalOpen = true;
+    this.userService.isBtnCalcEditable = false;
     this.dialogRef = this.dialog.open(PayCancelDialogComponent, {
       data: type,
       id: 'pay-cancel-dialog'
@@ -27,6 +28,7 @@ export class CouponDialogService {
     if (this.dialogRef) {
       this.dialogRef.close();
       this.userService.isModalOpen = false;
+      this.userService.isBtnCalcEditable = true;
     }
   }
 }

@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { ProductsService } from '../../products.service';
-
 @Component({
   selector: 'app-playable-board',
   templateUrl: './playable-board.component.html',
@@ -10,11 +9,7 @@ import { ProductsService } from '../../products.service';
 export class PlayableBoardComponent {
   @Input()
   public rowHeight: number;
-  @Input()
-  public show?: boolean;
   public typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
 
-
-  constructor(public productService: ProductsService) { }
-
+  constructor(public productService: ProductsService) {}
 }

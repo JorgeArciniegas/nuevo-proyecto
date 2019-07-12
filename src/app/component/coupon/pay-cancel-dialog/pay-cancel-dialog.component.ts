@@ -119,5 +119,6 @@ export class PayCancelDialogComponent implements OnInit {
   close(): void {
     this.dialogRef.close();
     this.userService.isModalOpen = false;
+    this.userService.isBtnCalcEditable = true;
   }
 }

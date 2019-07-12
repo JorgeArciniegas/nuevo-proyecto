@@ -1,8 +1,8 @@
-import { BetCouponExtended } from '@elys/elys-coupon';
-import { TypeBetSlipColTot } from './main/main.models';
 import { VirtualBetCompetitor } from '@elys/elys-api';
-import { formatCurrency, formatNumber } from '@angular/common';
+import { BetCouponExtended } from '@elys/elys-coupon';
+import { LAYOUT_TYPE } from '../../../src/environments/environment.models';
 import { TYPINGTYPE } from '../component/btncalc/btncalc.enum';
+import { TypeBetSlipColTot } from './main/main.models';
 
 export interface WindowSize {
   height: number;
@@ -128,6 +128,7 @@ export class DialogData {
 export interface StatisticDialog {
   codeProduct: string;
   virtualBetCompetitor: VirtualBetCompetitor[];
+  layoutProducts: LAYOUT_TYPE;
 }
 export enum DialogTypeCoupon {
   CANCEL,

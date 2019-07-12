@@ -16,7 +16,6 @@ export const environment: Environment = {
   currencyDefault: 'EUR',
   license: LICENSE_TYPE.DEMO_LICENSE,
   bookmakerDetails: ''
-
 };
 
 /*

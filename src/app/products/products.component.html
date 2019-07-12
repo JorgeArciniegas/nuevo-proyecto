@@ -73,7 +73,8 @@
           <app-advance-game fxFlexFill [rowHeight]="rowHeight" class="padding-horizontal-6"></app-advance-game>
         </mat-grid-tile>
         <!-- Keyboard -->
-        <mat-grid-tile rowspan="6">
+        <mat-grid-tile rowspan="6"
+          [ngClass]="{'bypass-overlay': !service.timeBlocked  && (userService.isBtnCalcEditable && userService.isModalOpen)}">
           <app-btncalc [rowHeight]="rowHeight"></app-btncalc>
         </mat-grid-tile>
         <!-- Payment/cancellation coupon area -->
@@ -95,11 +96,11 @@
   </div>
 </div>
 
-<div *ngIf="service.timeBlocked" id="overlayArea2"
+<div *ngIf="service.timeBlocked || (userService.isModalOpen && !userService.isBtnCalcEditable)" id="overlayArea2"
   [style.top.px]="service.windowSize.height - service.windowSize.columnHeight + 4" [style.left.%]="59"
   [style.width]="'calc(21% - 2px)'" [style.height.px]="service.windowSize.columnHeight - 10" class="overlay radius-5">
 </div>
-<div *ngIf="service.timeBlocked" id="overlayArea3"
+<div *ngIf="service.timeBlocked || (userService.isModalOpen)" id="overlayArea3"
   [style.top.px]="service.windowSize.height - service.windowSize.columnHeight + 4 " [style.left.%]="80"
   [style.width]="'calc(20% - 2px)'" [style.height.px]="service.windowSize.columnHeight - 10" class="overlay radius-5">
 </div>
