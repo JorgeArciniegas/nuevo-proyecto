@@ -2,15 +2,15 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { TypePlacingEvent, Player, SpecialBet } from '../../../main.models';
 import { MainService } from '../../../main.service';
 import { Subscription } from 'rxjs';
-import { ProductsService } from '../../../../../../../src/app/products/products.service';
+import { ProductsService } from '../../../../products.service';
 import { UserService } from '../../../../../../../src/app/services/user.service';
 
 @Component({
-  selector: 'app-playable-race',
-  templateUrl: './playablerace.component.html',
-  styleUrls: ['./playablerace.component.scss']
+  selector: 'app-playable-board-race',
+  templateUrl: './race.component.html',
+  styleUrls: ['./race.component.scss']
 })
-export class PlayableRaceComponent implements OnInit, OnDestroy {
+export class RaceComponent implements OnInit, OnDestroy {
   @Input()
   public rowHeight: number;
   @Input()
@@ -24,22 +24,13 @@ export class PlayableRaceComponent implements OnInit, OnDestroy {
   private currentProductSelection: Subscription;
   // code of product. it's used for change the layout color to buttons
   codeProduct: string;
-  constructor(
-    public service: MainService,
-    private productService: ProductsService,
-    private userService: UserService
-  ) {
+  constructor(public service: MainService, private productService: ProductsService, private userService: UserService) {
     this.currentEventSubscription = this.service.currentEventObserve.subscribe(
-      raceIndex =>
-        (this.service.placingEvent.eventNumber = this.service.eventDetails.events[
-          raceIndex
-        ].number)
+      raceIndex => (this.service.placingEvent.eventNumber = this.service.eventDetails.events[raceIndex].number)
     );
-    this.currentProductSelection = productService.productNameSelectedObserve.subscribe(
-      () => {
-        this.codeProduct = productService.product.codeProduct;
-      }
-    );
+    this.currentProductSelection = productService.productNameSelectedObserve.subscribe(() => {
+      this.codeProduct = productService.product.codeProduct;
+    });
   }
 
   ngOnInit() {
@@ -67,10 +58,7 @@ export class PlayableRaceComponent implements OnInit, OnDestroy {
     if (this.service.placingEvent.players.length > 0) {
       this.service.resetPlayEvent();
     }
-    if (
-      this.service.placingEvent.isSpecialBets &&
-      this.specialBet[type] === this.service.placingEvent.specialBetValue
-    ) {
+    if (this.service.placingEvent.isSpecialBets && this.specialBet[type] === this.service.placingEvent.specialBetValue) {
       this.service.placingEvent.isSpecialBets = false;
       this.service.placingEvent.specialBetValue = null;
     } else {

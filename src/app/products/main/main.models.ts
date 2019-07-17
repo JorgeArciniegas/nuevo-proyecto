@@ -1,3 +1,6 @@
+import { VirtualBetSelection } from '@elys/elys-api';
+import { markParentViewsForCheckProjectedViews } from '@angular/core/src/view/util';
+
 export enum TypePlacingEvent {
   ST = 0,
   ACCG = 1,
@@ -46,7 +49,10 @@ export enum SmartCodeType {
   AB, // Quinella with base and tail
   VT, // Winning trio
   AR, // Quinella in order with return
-  AT // Combined trio
+  AT, // Combined trio
+  S, // Sector
+  OU, // Over/Under
+  MULTI // Multiple selections
 }
 
 // Enum of the type of combinations available.
@@ -66,6 +72,7 @@ export class PlacingEvent {
   secondRowDisabled: boolean;
   thirdRowDisabled: boolean;
   players: Player[];
+  odds: VirtualBetSelectionExtended[];
   amount: number;
   repeat: number;
   isSpecialBets: boolean;
@@ -78,6 +85,7 @@ export class PlacingEvent {
     this.amount = 0;
     this.isSpecialBets = false;
     this.players = [];
+    this.odds = [];
     this.secondRowDisabled = false;
     this.thirdRowDisabled = false;
     // this.dogs = new Dog();
@@ -96,6 +104,11 @@ export class Player {
     this.position = 0;
   }
 }
+
+export interface VirtualBetSelectionExtended extends VirtualBetSelection {
+  marketId?: number;
+}
+
 export class EventTime {
   minute: number;
   second: number;
@@ -123,11 +136,7 @@ export class Smartcode {
   selWinner: number[];
   selPlaced: number[];
   selPodium: number[];
-  constructor(
-    win: number[] = [],
-    placed: number[] = [],
-    podium: number[] = []
-  ) {
+  constructor(win: number[] = [], placed: number[] = [], podium: number[] = []) {
     this.selPlaced = placed;
     this.selPodium = podium;
     this.selWinner = win;

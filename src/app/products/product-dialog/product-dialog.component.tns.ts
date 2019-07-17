@@ -31,10 +31,7 @@ export class ProductDialogComponent implements OnInit {
     public readonly couponService: CouponService
   ) {
     this.settings = appSettings;
-    if (
-      this.productService.windowSize &&
-      this.productService.windowSize.small
-    ) {
+    if (this.productService.windowSize && this.productService.windowSize.small) {
       this.rowNumber = 2;
     }
   }

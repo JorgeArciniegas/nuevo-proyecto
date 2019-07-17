@@ -1,4 +1,5 @@
 import { CouponPresetValues } from '@elys/elys-api';
+import { Market } from 'src/app/products/products.model';
 
 export interface Environment {
   production: boolean;
@@ -68,6 +69,8 @@ export interface LayoutProducts {
   type: LAYOUT_TYPE;
   resultItems: number;
   nextEventItems: number;
+  // List of visible markets on the template. The index of the array is taken to show them on the different rows of the template.
+  shownMarkets?: Market[];
 }
 
 export enum LAYOUT_TYPE {
