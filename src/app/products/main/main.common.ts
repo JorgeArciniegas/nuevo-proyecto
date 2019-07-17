@@ -7,6 +7,7 @@ import { MainComponent } from './main.component';
 import { ResultsComponent } from './results/results.component';
 import { RaceComponent as ResultsRaceComponent } from './results/templates/race/race.component';
 import { RaceComponent as LuckyRaceComponent } from './lucky/templates/race/race.component';
+import { CockComponent as LuckyCockComponent } from './lucky/templates/cock/cock.component';
 import { PlayableRaceComponent } from './playable-board/templates/race/playablerace.component';
 import { StandardListComponent } from './events-list/templates/standard-list/standard-list.component';
 import { StandardComponent } from './event-control/templates/standard/standard.component';
@@ -18,6 +19,7 @@ export const componentDeclarations: any[] = [
   EventControlComponent,
   EventListComponent,
   LuckyComponent,
+  LuckyCockComponent,
   LuckyRaceComponent,
   ResultsComponent,
   PlayableBoardComponent,

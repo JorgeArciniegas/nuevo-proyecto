@@ -1,4 +1,4 @@
-import { VirtualBetCompetitor } from '@elys/elys-api';
+import { VirtualBetCompetitor, VirtualBetSelection } from '@elys/elys-api';
 import { BetCouponExtended } from '@elys/elys-coupon';
 import { LAYOUT_TYPE } from '../../../src/environments/environment.models';
 import { TYPINGTYPE } from '../component/btncalc/btncalc.enum';
