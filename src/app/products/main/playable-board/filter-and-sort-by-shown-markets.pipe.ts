@@ -16,13 +16,6 @@ export class FilterAndSortByShownMarketsPipe implements PipeTransform {
     let shownMarket: VirtualBetMarket[] = markets.filter(market => shownMarkets.includes(market.tp as number));
     // Sort the selection of each market using their "tp" attribute.
     shownMarket = shownMarket.map(market => {
-      market.sls.map(selection => {
-        // Remove the informaton about the competitor from the selection name if they are present.
-        const index = selection.nm.indexOf('+');
-        if (index > 0 && index < 3) {
-          selection.nm = selection.nm.substring(index + 2);
-        }
-      });
       market.sls = market.sls.sort((a, b) => a.tp - b.tp);
       return market;
     });

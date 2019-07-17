@@ -475,20 +475,21 @@ export class MainService extends MainServiceExtra {
       // Variable containing the identifier of the selected odds.
       let value: string;
       const odds: BetOdd[] = [];
-      if (this.placingEvent.odds.length === 1) {
-        // Single selection.
-        selection = SmartCodeType[this.getMarketIdentifier(this.placingEvent.odds[0].marketId)];
-        value = this.placingEvent.odds[0].nm;
-        odds.push(
-          new BetOdd(
-            this.placingEvent.odds[0].nm,
-            this.placingEvent.odds[0].ods[0].vl,
-            this.btnService.polyfunctionStakePresetPlayer.amount,
-            this.placingEvent.odds[0].id
-          )
-        );
-      } else if (this.placingEvent.odds.length > 1) {
-        // Multiple selections.
+      // if (this.placingEvent.odds.length === 1) {
+      //   // Single selection.
+      //   selection = SmartCodeType[this.getMarketIdentifier(this.placingEvent.odds[0].marketId)];
+      //   value = this.placingEvent.odds[0].nm;
+      //   odds.push(
+      //     new BetOdd(
+      //       this.placingEvent.odds[0].nm,
+      //       this.placingEvent.odds[0].ods[0].vl,
+      //       this.btnService.polyfunctionStakePresetPlayer.amount,
+      //       this.placingEvent.odds[0].id
+      //     )
+      //   );
+      // } else if (this.placingEvent.odds.length > 1) {
+      //   // Multiple selections.
+      if (this.placingEvent.odds.length !== 0) {
         let lastMarket: Market;
         let marketHasChanged: boolean;
         for (const odd of this.placingEvent.odds) {
@@ -504,7 +505,7 @@ export class MainService extends MainServiceExtra {
             lastMarket = odd.marketId;
             selection = SmartCodeType[this.getMarketIdentifier(odd.marketId)];
           }
-          value = value === undefined ? odd.nm : value + '/' + odd.nm;
+          value = value === undefined ? this.getSelectionIdentifier(odd.nm) : value + '/' + this.getSelectionIdentifier(odd.nm);
           odds.push(new BetOdd(odd.nm, odd.ods[0].vl, this.btnService.polyfunctionStakePresetPlayer.amount, odd.id));
         }
       }
@@ -685,6 +686,16 @@ export class MainService extends MainServiceExtra {
       }
     }
     return areaFuncData;
+  }
+
+  // Method to get the selection identifier to show on the polyfunctional area.
+  getSelectionIdentifier(selectionName: string): string {
+    const index = selectionName.indexOf('+');
+    if (index > 0 && index < 3) {
+      const competitor = selectionName[0];
+      selectionName = competitor + selectionName.substring(index + 2);
+    }
+    return selectionName;
   }
 
   /**

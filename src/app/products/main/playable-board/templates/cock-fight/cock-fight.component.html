@@ -21,7 +21,7 @@
                 <span>{{ selection.nm | competitorName: eventDetails.tm }}</span>
               </ng-container>
 
-              <span *ngIf="market.tp !== market['1X2']">{{ selection.nm }}</span>
+              <span *ngIf="market.tp !== market['1X2']">{{ selection.nm | extractSign }}</span>
               <span>{{ selection.ods[0].vl }}</span>
             </button>
           </mat-grid-tile>
