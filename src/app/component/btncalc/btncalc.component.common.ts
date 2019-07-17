@@ -66,6 +66,7 @@ export class BtncalcComponentCommon {
     if (!this.polyfunctionalArea || !this.polyfunctionalArea.odds) {
       return;
     }
+    // Check if the "shortcut method" is available for the selection
     if (this.polyfunctionalArea.shortcut) {
       await this.couponService.addRemoveToCouponSC(this.polyfunctionalArea);
     } else {

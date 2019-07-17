@@ -694,7 +694,10 @@ export class MainService extends MainServiceExtra {
         );
         break;
     }
+
     if (isShortCutPlayeable) {
+      // When the smart code has a shortcut available,
+      // it is written inside the "PolyfunctionalArea" object that will be read by the couponService
       areaFuncData.shortcut = areaFuncData.shortcut ? areaFuncData.shortcut  : SmartCodeType[areaFuncData.selection];
       areaFuncData.smartBetCode = odd.smc;
     }
