@@ -90,9 +90,6 @@ export class CockComponent implements OnInit {
       this.placingLucky(lucky);
     }
   }
-  testFunction(lucky): void {
-    console.log(this.mainService.getCurrentRace());
-  }
   RNGLuckyCock(limit: number): number {
     const extractNumber: number = Math.floor(Math.random() * limit) + 1;
     return extractNumber;
