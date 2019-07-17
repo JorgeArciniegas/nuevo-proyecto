@@ -24,7 +24,7 @@ export enum Podium {
 }
 
 export enum SmartCodeType {
-  V,
+  V = 1,
   '2P',
   '3P',
   AO,

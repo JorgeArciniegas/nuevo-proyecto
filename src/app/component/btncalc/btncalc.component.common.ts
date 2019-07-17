@@ -66,7 +66,11 @@ export class BtncalcComponentCommon {
     if (!this.polyfunctionalArea || !this.polyfunctionalArea.odds) {
       return;
     }
-    await this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds);
+    if (this.polyfunctionalArea.shortcut) {
+      await this.couponService.addRemoveToCouponSC(this.polyfunctionalArea);
+    } else {
+      await this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds);
+    }
 
     this.productService.closeProductDialog();
     this.productService.resetBoard();

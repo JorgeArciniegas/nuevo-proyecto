@@ -16,20 +16,24 @@ import {
   BetCouponOddExtended,
   CouponServiceMessageType,
   ElysCouponService,
-  MessageSource
+  MessageSource,
+  AddOddRequestSC,
+  ShortCutMarket
 } from '@elys/elys-coupon';
 import { Observable, Subject, timer } from 'rxjs';
-import { BetOdd, CouponConfirmDelete } from '../../products/products.model';
+import { BetOdd, CouponConfirmDelete, PolyfunctionalArea } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
 import {
   CouponLimit,
   Error,
   InternalCoupon,
   OddsStakeEdit,
-  StakesDisplay
+  StakesDisplay,
+  ShortcutToCoupon
 } from './coupon.model';
 import { PrintCouponService } from './print-coupon/print-coupon.service';
 import { AppSettings } from '../../../../src/app/app.settings';
+import { SmartCodeType, TypeBetSlipColTot } from 'src/app/products/main/main.models';
 
 @Injectable({
   providedIn: 'root'
@@ -176,6 +180,38 @@ export class CouponService {
       }
     });
   }
+
+  addRemoveToCouponSC(smart: PolyfunctionalArea): void {
+    try {
+      if (this.coupon && this.coupon.internal_isReadyToPlace) {
+        return;
+      }
+      if (smart) {
+        const val: string = smart.value.toString().replace('-', '');
+        const amount = smart.typeSlipCol === TypeBetSlipColTot.COL ? smart.amount : smart.amount / smart.odds.length;
+        const req: AddOddRequestSC = {
+          cCat: CouponCategory.Virtual,
+          colAmount: amount,
+          smc: smart.smartBetCode,
+          shortcut: SmartCodeType[smart.shortcut] + val
+        };
+        this.elysCoupon.manageOddSC(req);
+      }
+    } catch (err)  {
+
+    }
+  }
+
+
+  extractShortcut(smart: PolyfunctionalArea): ShortcutToCoupon {
+
+    const shortcut: ShortcutToCoupon = { code: null, val: null };
+   /*  switch smart.shortcut {
+      case
+    } */
+    return shortcut;
+  }
+
   addRemoveToCoupon(smart: BetOdd[]): void {
     try {
       if (this.coupon && this.coupon.internal_isReadyToPlace) {
@@ -545,4 +581,5 @@ export class CouponService {
       racingNumber: 0
     };
   }
+
 }
