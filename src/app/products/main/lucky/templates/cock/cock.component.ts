@@ -50,7 +50,9 @@ export class CockComponent implements OnInit {
             break;
           case 689:
             eventMarkets.sls.forEach(marketSelections => {
-              this.ouWinModel.push(marketSelections);
+              if (marketSelections.tp !== 3) {
+                this.ouWinModel.push(marketSelections);
+              }
             });
             break;
           case 172:
@@ -60,7 +62,6 @@ export class CockComponent implements OnInit {
             break;
         }
       });
-
       this.isNewEvent = false;
     }
     const currentSelection = { tp: 0, selection: null };
