@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, OnDestroy, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { MainService } from '../../../main.service';
-import { VirtualBetEvent } from '@elys/elys-api';
+import { VirtualBetEvent, VirtualBetSelection } from '@elys/elys-api';
 import { Subscription, timer } from 'rxjs';
-import { CockMarket } from 'src/app/products/products.model';
+import { Market } from '../../../../../products/products.model';
 import { SpecialBet } from '../../../main.models';
+import { ProductsService } from '../../../../../products/products.service';
 
 @Component({
   selector: 'app-playable-board-cock-fight',
@@ -14,21 +15,17 @@ export class CockFightComponent implements OnDestroy {
   @Input()
   public rowHeight: number;
   public eventDetails: VirtualBetEvent;
-  public cockMarket: typeof CockMarket = CockMarket;
+  public market: typeof Market = Market;
   public specialBet: typeof SpecialBet = SpecialBet;
   // List of visible markets on the template. The index of the array is taken to show them on the different rows of the template.
-  public shownMarkets: CockMarket[] = [
-    CockMarket['1X2'],
-    CockMarket['1X2OverUnder'],
-    CockMarket['1X2WinningSector'],
-    CockMarket['WinningSector']
-  ];
+  public shownMarkets: Market[];
   private currentEventSubscription: Subscription;
 
-  constructor(public mainService: MainService) {
-    // Get the event's details
-    // this.getEventDetails();
+  constructor(public mainService: MainService, public productService: ProductsService) {
+    // Get the setting information on the order to show the market on the template.
+    this.shownMarkets = this.productService.product.layoutProducts.shownMarkets;
 
+    // Get the event's details.
     this.currentEventSubscription = this.mainService.currentEventObserve.subscribe(() => {
       this.getEventDetails();
     });
@@ -47,7 +44,7 @@ export class CockFightComponent implements OnDestroy {
       .getCurrentEvent()
       .then(eventDetails => {
         this.eventDetails = eventDetails;
-        console.log(this.eventDetails, attemptsNumber);
+        console.log(this.eventDetails);
       })
       .catch(error => {
         // Limit of attempts is 5 recall.
@@ -59,21 +56,7 @@ export class CockFightComponent implements OnDestroy {
       });
   }
 
-  /**
-   *
-   * @param type
-   */
-  specialBets(type: string): void {
-    if (this.mainService.placingEvent.players.length > 0) {
-      this.mainService.resetPlayEvent();
-    }
-    if (this.mainService.placingEvent.isSpecialBets && this.specialBet[type] === this.mainService.placingEvent.specialBetValue) {
-      this.mainService.placingEvent.isSpecialBets = false;
-      this.mainService.placingEvent.specialBetValue = null;
-    } else {
-      this.mainService.placingEvent.isSpecialBets = true;
-      this.mainService.placingEvent.specialBetValue = this.specialBet[type];
-    }
-    this.mainService.placeOdd();
+  selectOdd(marketId: number, selection: VirtualBetSelection) {
+    this.mainService.placingOddByOdd(marketId, selection);
   }
 }

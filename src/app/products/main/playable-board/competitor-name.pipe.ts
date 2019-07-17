@@ -1,18 +1,19 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { VirtualBetCompetitor } from '@elys/elys-api';
-import { strictEqual } from 'assert';
 
+/**
+ * Pipe to get the competitor's name associated with the selection passed.
+ * This information is gotten through the ito code indicated into the selection's name.
+ */
 @Pipe({
-  name: 'getCompetitorName'
+  name: 'competitorName'
 })
-export class GetCompetitorNamePipe implements PipeTransform {
+export class CompetitorNamePipe implements PipeTransform {
   transform(selectionName: string, competitors: VirtualBetCompetitor[]): string {
     let competitorName = '';
     if (selectionName.includes('1', 0)) {
-      console.log('Sono 1!');
       competitorName = competitors.find(competitor => competitor.ito === 1).nm;
     } else if (selectionName.includes('2', 0)) {
-      console.log('Sono 2!');
       competitorName = competitors.find(competitor => competitor.ito === 2).nm;
     }
     return competitorName;

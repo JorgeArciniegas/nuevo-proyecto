@@ -11,11 +11,11 @@ import { StandardListComponent } from './events-list/templates/standard-list/sta
 import { StandardComponent } from './event-control/templates/standard/standard.component';
 import { CockFightComponent as PlayableBoardCockFightComponent } from './playable-board/templates/cock-fight/cock-fight.component';
 import { FilterAndSortByShownMarketsPipe } from './playable-board/filter-and-sort-by-shown-markets.pipe';
-import { FilterByCompetitorPipe } from './playable-board/filter-by-competitor.pipe';
-import { GetCompetitorNamePipe } from './playable-board/get-competitor-name.pipe';
+import { CompetitorNamePipe } from './playable-board/competitor-name.pipe';
 import { RaceComponent as LuckyRaceComponent } from './lucky/templates/race/race.component';
 import { LuckyComponent } from './lucky/lucky.component';
 import { CockfightComponent as ResultsCockfightComponent } from './results/templates/cockfight/cockfight.component';
+import { CompetitorItoPipe } from './playable-board/competitor-ito.pipe';
 
 export const componentDeclarations: any[] = [
   MainComponent,
@@ -26,9 +26,9 @@ export const componentDeclarations: any[] = [
   ResultsComponent,
   PlayableBoardComponent,
   FilterByPositionPipe,
-  FilterByCompetitorPipe,
   FilterAndSortByShownMarketsPipe,
-  GetCompetitorNamePipe,
+  CompetitorNamePipe,
+  CompetitorItoPipe,
   ResultsRaceComponent,
   PlayableBoardRaceComponent,
   StandardListComponent,

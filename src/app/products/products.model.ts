@@ -145,8 +145,8 @@ export interface CouponConfirmDelete {
   racingNumber?: number;
 }
 
-// Enum of the markets for the prodict "cock fight"
-export enum CockMarket {
+// Enum of the markets
+export enum Market {
   '1X2' = 10,
   'OverUnder' = 60,
   'WinningSector' = 171,

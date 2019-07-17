@@ -9,14 +9,15 @@ import {
   VirtualEventCountDownRequest,
   VirtualEventCountDownResponse,
   VirtualProgramTreeBySportRequest,
-  VirtualProgramTreeBySportResponse
+  VirtualProgramTreeBySportResponse,
+  VirtualBetSelection
 } from '@elys/elys-api';
 import { interval, Subject } from 'rxjs';
 import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
-import { BetOdd, PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../products.model';
+import { BetOdd, PolyfunctionalArea, PolyfunctionalStakeCoupon, Market } from '../products.model';
 import { ProductsService } from '../products.service';
 import {
   CombinationType,
@@ -31,7 +32,8 @@ import {
   SpecialBet,
   SpecialBetValue,
   TypeBetSlipColTot,
-  TypePlacingEvent
+  TypePlacingEvent,
+  VirtualBetSelectionExtended
 } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
@@ -337,6 +339,47 @@ export class MainService extends MainServiceExtra {
   }
 
   /**
+   * Method to add an odd to the polifunction are from playble board showing odds.
+   * @param odd Selected odd.
+   */
+  placingOddByOdd(marketId: number, odd: VirtualBetSelection): void {
+    if (this.coupon.checkIfCouponIsReadyToPlace()) {
+      return;
+    }
+    if (this.placingEvent.isSpecialBets) {
+      this.resetPlayEvent();
+    }
+    let removed: boolean;
+
+    if (!this.placingEvent) {
+      this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
+    }
+    // GESTIRE LA SELEZIONE
+    // player.actived = true;
+    const oddSelected: VirtualBetSelectionExtended = odd;
+    oddSelected.marketId = marketId;
+    if (this.placingEvent.odds.length === 0) {
+      this.placingEvent.odds.push(oddSelected);
+      // this.checkedIsSelected(player);
+    } else {
+      for (let idx = 0; idx < this.placingEvent.odds.length; idx++) {
+        const item = this.placingEvent.odds[idx];
+        if (item.id === odd.id && item.marketId === marketId) {
+          this.placingEvent.odds.splice(idx, 1);
+          // this.checkedIsSelected(player, true);
+          removed = true;
+        }
+      }
+      if (!removed) {
+        this.placingEvent.odds.push(oddSelected);
+        // this.checkedIsSelected(player);
+      }
+    }
+    this.smartCode = new Smartcode();
+    this.populatingPolyfunctionAreaByOdds();
+  }
+
+  /**
    * PLACING THE PLAYER SELECTED INSIDE TO POLYFUNCTIONAL AREA AND SMARTBET
    * @param player
    */
@@ -418,6 +461,65 @@ export class MainService extends MainServiceExtra {
         d.actived = false;
       }
     });
+  }
+
+  // Method to populate the polyfunctional object with the odd of a layout that shows odds.
+  populatingPolyfunctionAreaByOdds() {
+    let areaFuncData: PolyfunctionalArea = new PolyfunctionalArea();
+    areaFuncData.activeAssociationCol = false;
+    areaFuncData.activeDistributionTot = false;
+    try {
+      // Set the variables for the message to show on the polyfunctional area
+      // Variable containing the market identifier
+      let selection: string;
+      // Variable containing the identifier of the selected odds.
+      let value: string;
+      const odds: BetOdd[] = [];
+      if (this.placingEvent.odds.length === 1) {
+        // Single selection.
+        selection = SmartCodeType[this.getMarketIdentifier(this.placingEvent.odds[0].marketId)];
+        value = this.placingEvent.odds[0].nm;
+        odds.push(
+          new BetOdd(
+            this.placingEvent.odds[0].nm,
+            this.placingEvent.odds[0].ods[0].vl,
+            this.btnService.polyfunctionStakePresetPlayer.amount,
+            this.placingEvent.odds[0].id
+          )
+        );
+      } else if (this.placingEvent.odds.length > 1) {
+        // Multiple selections.
+        let lastMarket: Market;
+        let marketHasChanged: boolean;
+        for (const odd of this.placingEvent.odds) {
+          // Check if there are selections on different markets and set the market identifier.
+          if (lastMarket && !marketHasChanged) {
+            if (odd.marketId === lastMarket) {
+              marketHasChanged = false;
+            } else {
+              marketHasChanged = true;
+              selection = SmartCodeType[SmartCodeType.MULTI];
+            }
+          } else if (!lastMarket) {
+            lastMarket = odd.marketId;
+            selection = SmartCodeType[this.getMarketIdentifier(odd.marketId)];
+          }
+          value = value === undefined ? odd.nm : value + '/' + odd.nm;
+          odds.push(new BetOdd(odd.nm, odd.ods[0].vl, this.btnService.polyfunctionStakePresetPlayer.amount, odd.id));
+        }
+      }
+      areaFuncData.selection = selection;
+      areaFuncData.value = value;
+      areaFuncData.amount = this.btnService.polyfunctionStakePresetPlayer.amount;
+      areaFuncData.typeSlipCol = this.btnService.polyfunctionStakePresetPlayer.typeSlipCol;
+      areaFuncData.odds = odds;
+    } catch (err) {
+      console.log(err);
+      areaFuncData = {};
+    } finally {
+      areaFuncData.firstTap = true;
+      this.productService.polyfunctionalAreaSubject.next(areaFuncData);
+    }
   }
 
   /**
@@ -583,6 +685,23 @@ export class MainService extends MainServiceExtra {
       }
     }
     return areaFuncData;
+  }
+
+  /**
+   * Method to get the market identifier to use on the polyfunctional area.
+   * @param marketId Enum of the market based on the market.tp of the feed.
+   */
+  getMarketIdentifier(marketId: Market): SmartCodeType {
+    switch (marketId) {
+      case Market['1X2']:
+      case Market['1X2OverUnder']:
+      case Market['1X2WinningSector']:
+        return SmartCodeType.V;
+      case Market['WinningSector']:
+        return SmartCodeType.S;
+      case Market['OverUnder']:
+        return SmartCodeType.OU;
+    }
   }
 
   /**
