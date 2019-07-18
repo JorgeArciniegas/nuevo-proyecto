@@ -21,14 +21,19 @@ export class CockFightComponent implements OnDestroy {
   public shownMarkets: Market[];
   private currentEventSubscription: Subscription;
 
-  constructor(public mainService: MainService, public productService: ProductsService) {
+  constructor(
+    public mainService: MainService,
+    public productService: ProductsService
+  ) {
     // Get the setting information on the order to show the market on the template.
     this.shownMarkets = this.productService.product.layoutProducts.shownMarkets;
 
     // Get the event's details.
-    this.currentEventSubscription = this.mainService.currentEventObserve.subscribe(() => {
-      this.getEventDetails();
-    });
+    this.currentEventSubscription = this.mainService.currentEventObserve.subscribe(
+      () => {
+        this.getEventDetails();
+      }
+    );
   }
 
   ngOnDestroy() {
@@ -44,7 +49,6 @@ export class CockFightComponent implements OnDestroy {
       .getCurrentEvent()
       .then(eventDetails => {
         this.eventDetails = eventDetails;
-        console.log(this.eventDetails);
       })
       .catch(error => {
         // Limit of attempts is 5 recall.
