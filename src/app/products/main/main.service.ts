@@ -594,7 +594,8 @@ export class MainService extends MainServiceExtra {
     playerName?: string
   ): PolyfunctionalArea {
     let oddsToSearch: string[] = [];
-
+   // check if the smartcode is playable to shortcut method
+    let isShortCutPlayeable: boolean;
     switch (areaFuncData.selection) {
       case SmartCodeType[SmartCodeType['1VA']]:
       case SmartCodeType[SmartCodeType.AOX]:
@@ -604,6 +605,7 @@ export class MainService extends MainServiceExtra {
           CombinationType.By2,
           false
         );
+        isShortCutPlayeable = true;
         break;
       case SmartCodeType[SmartCodeType.AB]:
         // Generate sorted combination by 2 of the selections in the rows in order.
@@ -647,6 +649,7 @@ export class MainService extends MainServiceExtra {
           CombinationType.By2,
           true
         );
+        isShortCutPlayeable = true;
         break;
       case SmartCodeType[SmartCodeType.TNX]: // Trifecta
         // Generate combination by 3 of the first row selections not in order.
@@ -655,6 +658,7 @@ export class MainService extends MainServiceExtra {
           CombinationType.By3,
           false
         );
+        isShortCutPlayeable = true;
         break;
       case SmartCodeType[SmartCodeType.VT]: // Winning trio
         // Generate combination by 3 of the selections in the rows not in order.
@@ -663,6 +667,8 @@ export class MainService extends MainServiceExtra {
           CombinationType.By3,
           false
         );
+        areaFuncData.shortcut = SmartCodeType.VX;
+        isShortCutPlayeable = true;
         break;
       case SmartCodeType[SmartCodeType.AT]: // Combined trio
         // Generate combination by 3 of the selections in the rows not in order and with the first row fixed.
@@ -673,6 +679,8 @@ export class MainService extends MainServiceExtra {
           false,
           true
         );
+        areaFuncData.shortcut = SmartCodeType.ASX;
+        isShortCutPlayeable = true;
         break;
       case SmartCodeType[SmartCodeType.TR]: // multiple selection Trio in order with return
         // Generate combination by 3 of the first, second and third row selections in order with return.
@@ -683,6 +691,13 @@ export class MainService extends MainServiceExtra {
           true
         );
         break;
+    }
+
+    if (isShortCutPlayeable) {
+      // When the smart code has a shortcut available,
+      // it is written inside the "PolyfunctionalArea" object that will be read by the couponService
+      areaFuncData.shortcut = areaFuncData.shortcut ? areaFuncData.shortcut  : SmartCodeType[areaFuncData.selection];
+      areaFuncData.smartBetCode = odd.smc;
     }
     areaFuncData.odds = [];
     for (const m of odd.mk.filter(

@@ -1,5 +1,5 @@
 import { BetCouponExtended } from '@elys/elys-coupon';
-import { TypeBetSlipColTot } from './main/main.models';
+import { TypeBetSlipColTot, SmartCodeType } from './main/main.models';
 import { VirtualBetCompetitor } from '@elys/elys-api';
 import { formatCurrency, formatNumber } from '@angular/common';
 import { TYPINGTYPE } from '../component/btncalc/btncalc.enum';
@@ -25,6 +25,8 @@ export class PolyfunctionalArea {
   hasDecimalSeparator?: boolean;
   firstTap?: boolean;
   disableInputCalculator?: boolean;
+  shortcut?: SmartCodeType;
+  smartBetCode?: number;
   constructor() {
     this.typeSlipCol = TypeBetSlipColTot.COL;
     this.firstTap = false;
