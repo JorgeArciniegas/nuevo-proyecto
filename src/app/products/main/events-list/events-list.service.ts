@@ -18,6 +18,7 @@ export class EventsListService {
         /**
          * @eventsDetails is passed as input to a list template
          */
+        console.log('event subs');
         this.getEventDetailsList();
       }
     );

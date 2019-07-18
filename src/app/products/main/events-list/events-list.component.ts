@@ -10,7 +10,7 @@ import { ProductsService } from '../../products.service';
 export class EventListComponent implements OnInit, OnDestroy {
   @Input()
   public rowHeight: number;
-  public eventsDetails: EventsList;
+  // public eventsDetails: EventsList;
   public nativeNextEventsItems: string;
   constructor(
     private eventService: EventsListService,
