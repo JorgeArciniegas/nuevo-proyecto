@@ -13,7 +13,7 @@
           <mat-grid-tile *ngIf="selection.tp !== 3 || selection.tp === 3 && market.tp !== marketEnum['1X2OverUnder']"
             colspan="{{market.tp !== marketEnum['1X2OverUnder'] ? 24 / market.sls.length : 24 / (market.sls.length - 1)}}">
             <button (click)="selectOdd(market.tp, selection)"
-              [ngClass]="{'btn-actived': mainService.oddsSelected?.includes(selection.id)}"
+              [ngClass]="{'btn-actived': oddsSelected?.includes(selection.id)}"
               class="btn btn-default btn-default-cock radius-5  btn-cock-{{ selection.nm | competitorIto }}">
               <div *ngIf="market.tp === marketEnum['1X2'] && (selection.tp === 1 || selection.tp === 3)" class="icon"
                 [ngClass]="{'icon-cock-red': selection.tp === 1, 'icon-cock-blue': selection.tp === 3}">
@@ -39,7 +39,7 @@
         <mat-grid-tile colspan="12" *ngFor="let index of [0,1]">
           <button (click)="selectOdd(market.tp, market.sls[index])"
             class="btn-reset btn-default btn-success radius-5 elevation-z5"
-            [ngClass]="{'actived': mainService.oddsSelected?.includes(market.sls[index].id)}" fxLayout="column"
+            [ngClass]="{'actived': oddsSelected?.includes(market.sls[index].id)}" fxLayout="column"
             fxLayoutAlign="center center">
             <span class="selection-name">{{market.sls[index].nm | translate | uppercase}}</span>
             <span class="selection-value">{{market.sls[index].ods[0].vl | number: '1.2-2'}}</span>
