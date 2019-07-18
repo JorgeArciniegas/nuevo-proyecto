@@ -240,7 +240,6 @@ export class MainService extends MainServiceExtra {
           this.eventDetails.events[index] = race;
         }
         this.currentAndSelectedRaceTime();
-        this.currentEventSubscribe.next(0);
       } else {
         // add only new race
         tournament.evs.forEach((race: VirtualBetEvent) => {
@@ -262,6 +261,8 @@ export class MainService extends MainServiceExtra {
       if (this.initCurrentEvent) {
         this.resetPlayEvent();
         this.currentEventSubscribe.next(0);
+      } else {
+        this.currentEventSubscribe.next(this.eventDetails.currentEvent );
       }
     } else if (this.eventDetails.currentEvent === 0) {
       this.resetPlayEvent();
@@ -279,6 +280,15 @@ export class MainService extends MainServiceExtra {
         this.remainingTime.second = raceTime.second;
       }
     });
+
+     // calculate remaning time
+     if (this.eventDetails.currentEvent > 0) {
+      this.remainingRaceTime(this.eventDetails.events[0].number).then(
+        (eventTime: EventTime) => {
+          this.remainingTime = eventTime;
+        }
+      );
+    }
   }
 
   remainingRaceTime(idEvent: number): Promise<EventTime> {
@@ -594,12 +604,18 @@ export class MainService extends MainServiceExtra {
    */
   public extractOdd(odd: VirtualBetEvent, areaFuncData: PolyfunctionalArea, playerName?: string): PolyfunctionalArea {
     let oddsToSearch: string[] = [];
-
+   // check if the smartcode is playable to shortcut method
+    let isShortCutPlayeable: boolean;
     switch (areaFuncData.selection) {
       case SmartCodeType[SmartCodeType['1VA']]:
       case SmartCodeType[SmartCodeType.AOX]:
         // Generate sorted combination by 2 of the selections in the rows.
-        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By2, false);
+        oddsToSearch = this.generateOdds(
+          areaFuncData.value.toString(),
+          CombinationType.By2,
+          false
+        );
+        isShortCutPlayeable = true;
         break;
       case SmartCodeType[SmartCodeType.AB]:
         // Generate sorted combination by 2 of the selections in the rows in order.
@@ -620,24 +636,55 @@ export class MainService extends MainServiceExtra {
         break;
       case SmartCodeType[SmartCodeType.AX]:
         // Generate sorted combination by 2 of the first row selections.
-        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By2, true);
+        oddsToSearch = this.generateOddsRow(
+          areaFuncData.value.toString(),
+          CombinationType.By2,
+          true
+        );
+        isShortCutPlayeable = true;
         break;
       case SmartCodeType[SmartCodeType.TNX]: // Trifecta
         // Generate combination by 3 of the first row selections not in order.
-        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By3, false);
+        oddsToSearch = this.generateOddsRow(
+          areaFuncData.value.toString(),
+          CombinationType.By3,
+          false
+        );
+        isShortCutPlayeable = true;
         break;
       case SmartCodeType[SmartCodeType.VT]: // Winning trio
         // Generate combination by 3 of the selections in the rows not in order.
-        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, false);
+        oddsToSearch = this.generateOdds(
+          areaFuncData.value.toString(),
+          CombinationType.By3,
+          false
+        );
+        areaFuncData.shortcut = SmartCodeType.VX;
+        isShortCutPlayeable = true;
         break;
       case SmartCodeType[SmartCodeType.AT]: // Combined trio
         // Generate combination by 3 of the selections in the rows not in order and with the first row fixed.
-        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, false, false, true);
+        oddsToSearch = this.generateOdds(
+          areaFuncData.value.toString(),
+          CombinationType.By3,
+          false,
+          false,
+          true
+        );
+        areaFuncData.shortcut = SmartCodeType.ASX;
+        isShortCutPlayeable = true;
         break;
       case SmartCodeType[SmartCodeType.TR]: // multiple selection Trio in order with return
         // Generate combination by 3 of the first, second and third row selections in order with return.
         oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, true, true);
         break;
+    }
+
+    if (isShortCutPlayeable) {
+      // When the smart code has a shortcut available,
+      // it is written inside the "PolyfunctionalArea" object that will be read by the couponService
+      areaFuncData.shortcut = areaFuncData.shortcut ? areaFuncData.shortcut  : SmartCodeType[areaFuncData.selection];
+      areaFuncData.smartBetCode = odd.smc;
     }
     areaFuncData.odds = [];
     for (const m of odd.mk.filter((market: VirtualBetMarket) => market.tp === this.typeSelection(areaFuncData.selection))) {
