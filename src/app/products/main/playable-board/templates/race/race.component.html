@@ -1,4 +1,4 @@
-<mat-grid-list class="playable-grid-buttons" cols="13" rowHeight="{{(rowHeight * 4  + (rowHeight/3)) }}">
+<mat-grid-list class="playable-grid-buttons" cols="13" rowHeight="{{(rowHeight * (16 / 4)  + (rowHeight/3)) }}">
   <ng-container *ngFor="let row of ['I','II','III']; let i = index">
     <mat-grid-tile>
       <span *ngIf="i === 0" class="playable-row-tile display radius-5">

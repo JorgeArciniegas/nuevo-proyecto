@@ -33,7 +33,7 @@ import {
   SpecialBetValue,
   TypeBetSlipColTot,
   TypePlacingEvent,
-  VirtualBetSelectionExtended,
+  VirtualBetSelectionExtended
 } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
@@ -57,7 +57,8 @@ export class MainService extends MainServiceExtra {
   private initCurrentEvent = false;
 
   playersList: Player[];
-  // temp array
+  // List of odds selected on playable with the template where are shown the odds.
+  public oddsSelected: number[] = [];
 
   smartCode: Smartcode;
 
@@ -300,6 +301,8 @@ export class MainService extends MainServiceExtra {
     this.smartCode = new Smartcode();
     this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
     this.createPlayerList();
+    // Reset the list of odds selected on playable with the template where are shown the odds.
+    this.oddsSelected = [];
 
     this.productService.polyfunctionalAreaSubject.next(new PolyfunctionalArea());
     this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
@@ -346,33 +349,31 @@ export class MainService extends MainServiceExtra {
     if (this.coupon.checkIfCouponIsReadyToPlace()) {
       return;
     }
-    if (this.placingEvent.isSpecialBets) {
-      this.resetPlayEvent();
-    }
     let removed: boolean;
 
     if (!this.placingEvent) {
       this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
     }
-    // GESTIRE LA SELEZIONE
-    // player.actived = true;
     const oddSelected: VirtualBetSelectionExtended = odd;
     oddSelected.marketId = marketId;
     if (this.placingEvent.odds.length === 0) {
       this.placingEvent.odds.push(oddSelected);
-      // this.checkedIsSelected(player);
+      // Add the odd to the list of selected one.
+      this.oddsSelected.push(oddSelected.id);
     } else {
       for (let idx = 0; idx < this.placingEvent.odds.length; idx++) {
         const item = this.placingEvent.odds[idx];
         if (item.id === odd.id && item.marketId === marketId) {
           this.placingEvent.odds.splice(idx, 1);
-          // this.checkedIsSelected(player, true);
+          // Remove the odd from the list of selected one.
+          this.oddsSelected.splice(idx, 1);
           removed = true;
         }
       }
       if (!removed) {
         this.placingEvent.odds.push(oddSelected);
-        // this.checkedIsSelected(player);
+        // Add the odd to the list of selected one.
+        this.oddsSelected.push(oddSelected.id);
       }
     }
     this.smartCode = new Smartcode();

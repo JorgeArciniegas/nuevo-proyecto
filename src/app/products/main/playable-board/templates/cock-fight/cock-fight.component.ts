@@ -44,7 +44,6 @@ export class CockFightComponent implements OnDestroy {
       .getCurrentEvent()
       .then(eventDetails => {
         this.eventDetails = eventDetails;
-        console.log(this.eventDetails);
       })
       .catch(error => {
         // Limit of attempts is 5 recall.

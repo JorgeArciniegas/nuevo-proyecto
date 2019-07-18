@@ -213,7 +213,11 @@
       "TR": "Trio in ordine con ritorno",
       "UNDER": "Under",
       "VT": "Vincente trio",
-      "WINNER": "Vincente"
+      "WINNER": "Vincente",
+      "V": "V",
+      "S": "Sector",
+      "OU": "Over/Under",
+      "MULTI": "Multi"
     },
     "SMARTCODE": {
       "1VA": "V. accoppiata",
@@ -238,8 +242,8 @@
       "WINNER": "Vincente",
       "V": "V",
       "S": "S",
-      "OU": "OU",
-      "MULTI": "MULTI"
+      "OU": "Ou",
+      "MULTI": "Multi"
     },
     "OVER_UNDER_COCKFIGHT": {
       "O": "ov",
@@ -248,10 +252,10 @@
     "CockMarket": {
       "NAME": {
         "1X2": "Win",
-        "Over/Under": "Win+o/u",
+        "Over/Under": "O/u",
         "Winning Sector": "Sector",
-        "1X2 + Winning Sector": "1x2+sector",
-        "1X2 + OverUnder": "1x2+o/u"
+        "1X2 + Winning Sector": "Win+ sector",
+        "1X2 + OverUnder": "Win+ o/u"
       }
     }
   },
