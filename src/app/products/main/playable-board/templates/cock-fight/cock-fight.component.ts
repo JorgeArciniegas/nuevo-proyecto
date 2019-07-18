@@ -15,7 +15,7 @@ export class CockFightComponent implements OnDestroy {
   @Input()
   public rowHeight: number;
   public eventDetails: VirtualBetEvent;
-  public market: typeof Market = Market;
+  public marketEnum: typeof Market = Market;
   public specialBet: typeof SpecialBet = SpecialBet;
   // List of visible markets on the template. The index of the array is taken to show them on the different rows of the template.
   public shownMarkets: Market[];

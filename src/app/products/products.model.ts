@@ -153,3 +153,33 @@ export enum Market {
   '1X2WinningSector' = 172,
   '1X2OverUnder' = 689
 }
+
+/**
+ * Enum of the selection identifier to show on the polyfunctional area.
+ * It contains the "Selection: " prefix to be able to define values of the enum whoes name would have contained only number.
+ * Operation not allowed in JavaScript.
+ * Ex: '1' the value of the selection '1' of the market '1X2'.
+ * */
+export enum SelectionIdentifier {
+  'Selection: 1' = '1',
+  'Selection: X' = 'X',
+  'Selection: 2' = '2',
+  'Selection: S1' = 's1',
+  'Selection: S2' = 's2',
+  'Selection: S3' = 's3',
+  'Selection: S4' = 's4',
+  'Selection: 1 + S1' = '1s1',
+  'Selection: 1 + S2' = '1s2',
+  'Selection: 1 + S3' = '1s3',
+  'Selection: 1 + S4' = '1s4',
+  'Selection: 2 + S1' = '2s1',
+  'Selection: 2 + S2' = '2s2',
+  'Selection: 2 + S3' = '2s3',
+  'Selection: 2 + S4' = '2s4',
+  'Selection: Over' = 'o',
+  'Selection: Under' = 'u',
+  'Selection: 1 + Over' = '1o',
+  'Selection: 1 + Under' = '1u',
+  'Selection: 2 + Over' = '2o',
+  'Selection: 2 + Under' = '1u'
+}

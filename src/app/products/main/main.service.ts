@@ -17,7 +17,7 @@ import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
-import { BetOdd, PolyfunctionalArea, PolyfunctionalStakeCoupon, Market } from '../products.model';
+import { BetOdd, PolyfunctionalArea, PolyfunctionalStakeCoupon, Market, SelectionIdentifier } from '../products.model';
 import { ProductsService } from '../products.service';
 import {
   CombinationType,
@@ -33,7 +33,7 @@ import {
   SpecialBetValue,
   TypeBetSlipColTot,
   TypePlacingEvent,
-  VirtualBetSelectionExtended
+  VirtualBetSelectionExtended,
 } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
@@ -475,20 +475,6 @@ export class MainService extends MainServiceExtra {
       // Variable containing the identifier of the selected odds.
       let value: string;
       const odds: BetOdd[] = [];
-      // if (this.placingEvent.odds.length === 1) {
-      //   // Single selection.
-      //   selection = SmartCodeType[this.getMarketIdentifier(this.placingEvent.odds[0].marketId)];
-      //   value = this.placingEvent.odds[0].nm;
-      //   odds.push(
-      //     new BetOdd(
-      //       this.placingEvent.odds[0].nm,
-      //       this.placingEvent.odds[0].ods[0].vl,
-      //       this.btnService.polyfunctionStakePresetPlayer.amount,
-      //       this.placingEvent.odds[0].id
-      //     )
-      //   );
-      // } else if (this.placingEvent.odds.length > 1) {
-      //   // Multiple selections.
       if (this.placingEvent.odds.length !== 0) {
         let lastMarket: Market;
         let marketHasChanged: boolean;
@@ -505,8 +491,10 @@ export class MainService extends MainServiceExtra {
             lastMarket = odd.marketId;
             selection = SmartCodeType[this.getMarketIdentifier(odd.marketId)];
           }
-          value = value === undefined ? this.getSelectionIdentifier(odd.nm) : value + '/' + this.getSelectionIdentifier(odd.nm);
-          odds.push(new BetOdd(odd.nm, odd.ods[0].vl, this.btnService.polyfunctionStakePresetPlayer.amount, odd.id));
+          // Get the selection identifier to use on the polyfunctional area.
+          const selectionIdentifier = SelectionIdentifier['Selection: ' + odd.nm];
+          value = value === undefined ? selectionIdentifier : value + '/' + selectionIdentifier;
+          odds.push(new BetOdd(selectionIdentifier, odd.ods[0].vl, this.btnService.polyfunctionStakePresetPlayer.amount, odd.id));
         }
       }
       areaFuncData.selection = selection;
