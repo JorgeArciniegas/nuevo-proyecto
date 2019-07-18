@@ -258,7 +258,6 @@ export class MainService extends MainServiceExtra {
             this.eventDetails.events[index] = race;
           }
           this.currentAndSelectedRaceTime();
-          this.currentEventSubscribe.next(0);
         } else {
           // add only new race
           tournament.evs.forEach((race: VirtualBetEvent) => {
@@ -284,6 +283,8 @@ export class MainService extends MainServiceExtra {
       if (this.initCurrentEvent) {
         this.resetPlayEvent();
         this.currentEventSubscribe.next(0);
+      } else {
+        this.currentEventSubscribe.next(this.eventDetails.currentEvent );
       }
     } else if (this.eventDetails.currentEvent === 0) {
       this.resetPlayEvent();
@@ -303,6 +304,15 @@ export class MainService extends MainServiceExtra {
         this.remainingTime.second = raceTime.second;
       }
     });
+
+     // calculate remaning time
+     if (this.eventDetails.currentEvent > 0) {
+      this.remainingRaceTime(this.eventDetails.events[0].number).then(
+        (eventTime: EventTime) => {
+          this.remainingTime = eventTime;
+        }
+      );
+    }
   }
 
   remainingRaceTime(idEvent: number): Promise<EventTime> {

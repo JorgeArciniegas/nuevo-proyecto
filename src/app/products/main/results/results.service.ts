@@ -31,7 +31,6 @@ export class ResultsService {
       CategoryType: this.productService.product.codeProduct
     };
     this.listResult = [];
-    timer(300).subscribe(() => {
       this.elysApi.virtual.getLastResult(request)
         .then((eventResults: VirtualSportLastResultsResponse) => {
 
@@ -69,7 +68,6 @@ export class ResultsService {
             this.listResult.push(tempEventResult);
           }
         });
-    });
   }
 
 
