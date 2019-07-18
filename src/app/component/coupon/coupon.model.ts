@@ -88,3 +88,8 @@ export enum CouponLimit {
   MaxCombinationsByCoupon,
   MinCombinationBetRate
 }
+
+export interface ShortcutToCoupon {
+  code: string;
+  val: string;
+}

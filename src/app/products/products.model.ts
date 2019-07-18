@@ -2,7 +2,7 @@ import { VirtualBetCompetitor } from '@elys/elys-api';
 import { BetCouponExtended } from '@elys/elys-coupon';
 import { LAYOUT_TYPE } from '../../../src/environments/environment.models';
 import { TYPINGTYPE } from '../component/btncalc/btncalc.enum';
-import { TypeBetSlipColTot } from './main/main.models';
+import { TypeBetSlipColTot, SmartCodeType } from './main/main.models';
 
 export interface WindowSize {
   height: number;
@@ -25,6 +25,8 @@ export class PolyfunctionalArea {
   hasDecimalSeparator?: boolean;
   firstTap?: boolean;
   disableInputCalculator?: boolean;
+  shortcut?: SmartCodeType;
+  smartBetCode?: number;
   constructor() {
     this.typeSlipCol = TypeBetSlipColTot.COL;
     this.firstTap = false;
