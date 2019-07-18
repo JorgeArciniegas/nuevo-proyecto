@@ -2,7 +2,7 @@ import { VirtualBetCompetitor } from '@elys/elys-api';
 import { BetCouponExtended } from '@elys/elys-coupon';
 import { LAYOUT_TYPE } from '../../../src/environments/environment.models';
 import { TYPINGTYPE } from '../component/btncalc/btncalc.enum';
-import { SmartCodeType, TypeBetSlipColTot } from './main/main.models';
+import { TypeBetSlipColTot, SmartCodeType } from './main/main.models';
 
 export interface WindowSize {
   height: number;

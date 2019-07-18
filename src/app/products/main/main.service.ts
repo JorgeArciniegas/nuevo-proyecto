@@ -240,7 +240,6 @@ export class MainService extends MainServiceExtra {
           this.eventDetails.events[index] = race;
         }
         this.currentAndSelectedRaceTime();
-        this.currentEventSubscribe.next(0);
       } else {
         // add only new race
         tournament.evs.forEach((race: VirtualBetEvent) => {
