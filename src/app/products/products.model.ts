@@ -70,11 +70,7 @@ export class PolyfunctionStakePresetPlayer {
   hasDecimalSeparator?: boolean;
   typingType: TYPINGTYPE;
   isPreset?: boolean;
-  constructor(
-    typeSlipCol: TypeBetSlipColTot,
-    amount: number,
-    isPreset?: boolean
-  ) {
+  constructor(typeSlipCol: TypeBetSlipColTot, amount: number, isPreset?: boolean) {
     this.typeSlipCol = typeSlipCol;
     this.amount = amount;
     this.amountStr = amount.toString();
@@ -121,13 +117,7 @@ export class DialogData {
   opened: boolean;
   betCoupon?: BetCouponExtended;
   statistics?: StatisticDialog;
-  constructor(
-    betOdds?: BetOdds,
-    breakpoint?: number,
-    betCoupon?: BetCouponExtended,
-    title?: string,
-    statistics?: StatisticDialog
-  ) {
+  constructor(betOdds?: BetOdds, breakpoint?: number, betCoupon?: BetCouponExtended, title?: string, statistics?: StatisticDialog) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;
     this.opened = false;
@@ -153,4 +143,13 @@ export interface CouponConfirmDelete {
   checked: boolean;
   isRacing?: boolean;
   racingNumber?: number;
+}
+
+// Enum of the markets
+export enum Market {
+  '1X2' = 10,
+  'OverUnder' = 60,
+  'WinningSector' = 171,
+  '1X2WinningSector' = 172,
+  '1X2OverUnder' = 689
 }
