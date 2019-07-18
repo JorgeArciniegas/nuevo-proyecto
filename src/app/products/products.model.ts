@@ -1,8 +1,8 @@
-import { VirtualBetCompetitor, VirtualBetSelection } from '@elys/elys-api';
+import { VirtualBetCompetitor } from '@elys/elys-api';
 import { BetCouponExtended } from '@elys/elys-coupon';
 import { LAYOUT_TYPE } from '../../../src/environments/environment.models';
 import { TYPINGTYPE } from '../component/btncalc/btncalc.enum';
-import { TypeBetSlipColTot } from './main/main.models';
+import { SmartCodeType, TypeBetSlipColTot } from './main/main.models';
 
 export interface WindowSize {
   height: number;
@@ -25,6 +25,8 @@ export class PolyfunctionalArea {
   hasDecimalSeparator?: boolean;
   firstTap?: boolean;
   disableInputCalculator?: boolean;
+  shortcut?: SmartCodeType;
+  smartBetCode?: number;
   constructor() {
     this.typeSlipCol = TypeBetSlipColTot.COL;
     this.firstTap = false;
@@ -70,7 +72,11 @@ export class PolyfunctionStakePresetPlayer {
   hasDecimalSeparator?: boolean;
   typingType: TYPINGTYPE;
   isPreset?: boolean;
-  constructor(typeSlipCol: TypeBetSlipColTot, amount: number, isPreset?: boolean) {
+  constructor(
+    typeSlipCol: TypeBetSlipColTot,
+    amount: number,
+    isPreset?: boolean
+  ) {
     this.typeSlipCol = typeSlipCol;
     this.amount = amount;
     this.amountStr = amount.toString();
@@ -117,7 +123,13 @@ export class DialogData {
   opened: boolean;
   betCoupon?: BetCouponExtended;
   statistics?: StatisticDialog;
-  constructor(betOdds?: BetOdds, breakpoint?: number, betCoupon?: BetCouponExtended, title?: string, statistics?: StatisticDialog) {
+  constructor(
+    betOdds?: BetOdds,
+    breakpoint?: number,
+    betCoupon?: BetCouponExtended,
+    title?: string,
+    statistics?: StatisticDialog
+  ) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;
     this.opened = false;
