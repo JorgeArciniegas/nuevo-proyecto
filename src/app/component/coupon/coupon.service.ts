@@ -203,15 +203,6 @@ export class CouponService {
   }
 
 
-  extractShortcut(smart: PolyfunctionalArea): ShortcutToCoupon {
-
-    const shortcut: ShortcutToCoupon = { code: null, val: null };
-   /*  switch smart.shortcut {
-      case
-    } */
-    return shortcut;
-  }
-
   addRemoveToCoupon(smart: BetOdd[]): void {
     try {
       if (this.coupon && this.coupon.internal_isReadyToPlace) {

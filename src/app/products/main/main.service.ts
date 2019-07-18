@@ -573,7 +573,6 @@ export class MainService extends MainServiceExtra {
       } else {
         areaFuncData = this.extractOdd(odd, areaFuncData, playerName);
       }
-      // areaFuncData.smartBetCode = odd.smc;
     } catch (err) {
       console.log(err);
       areaFuncData = {};
@@ -642,7 +641,6 @@ export class MainService extends MainServiceExtra {
             true
           );
         }
-        // isShortCutPlayeable = true;
         break;
       case SmartCodeType[SmartCodeType.AX]:
         // Generate sorted combination by 2 of the first row selections.
