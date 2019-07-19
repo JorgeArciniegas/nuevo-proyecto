@@ -5,7 +5,7 @@ import {
   CurrencyCodeRequest
 } from '@elys/elys-api';
 import { Observable, Subject } from 'rxjs';
-import { Products } from '../../../src/environments/environment.models';
+import { Products, LayoutProducts } from '../../../src/environments/environment.models';
 import { AppSettings } from '../app.settings';
 import { DestroyCouponService } from '../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../component/coupon/coupon.service';
@@ -146,4 +146,20 @@ export class ProductsService extends ProductsServiceExtra {
     this.playableBoardResetSubject.next(false);
     this.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
+
+
+
+   /**
+   * @returns LayoutProducts from current product selected
+   */
+  public getCurrentLayoutProducts(): Promise<LayoutProducts> {
+
+    const response: Promise<LayoutProducts> = new Promise<LayoutProducts>(
+      (resolve, reject) => {
+        resolve(this.product.layoutProducts);
+        reject(new Error('LayoutProducts not found'));
+      });
+    return response;
+  }
+
 }
