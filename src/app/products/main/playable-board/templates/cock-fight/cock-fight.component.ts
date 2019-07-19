@@ -34,7 +34,7 @@ export class CockFightComponent implements OnDestroy {
     });
 
     // Get the change of the polyfunctional area's object.
-    this.productService.polyfunctionalAreaSubject.subscribe(polyfunctional => {
+    this.productService.polyfunctionalAreaObservable.subscribe(polyfunctional => {
       // Delete the list of selections when the object of polyfunctional area is empty.
       if (polyfunctional.odds.length === 0 && this.oddsSelected.length !== 0) {
         this.oddsSelected = [];
