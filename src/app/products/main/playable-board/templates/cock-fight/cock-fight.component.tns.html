@@ -1,20 +1,35 @@
-<GridLayout class="playable-grid-buttons" rows="*,*,*,*,*" columns="*,3*" *ngIf="eventDetails" class="card">
+<GridLayout class="playable-grid-buttons" rows="*,*,*,*,*" columns="*,5*" *ngIf="eventDetails" class="card">
   <ng-container *ngFor="let market of eventDetails.mk | filterAndSortByShownMarkets: shownMarkets; let i = index;">
     <!-- MARKET'S ROW -->
     <ng-container *ngIf="market.tp !== marketEnum['OverUnder']">
-      <GridLayout row="{{i}}" col="0" shadow="3" cornerRadius="6" class="playable-row-tile display">
+      <GridLayout row="{{i}}" col="0" shadow="3" cornerRadius="6" class="playable-row-tile display m-4 m-l-5">
         <StackLayout verticalAlignment="center" horizontalAlignment="center">
-          <Label text="{{ 'DYNAMIC_KEYS.CockMarket.NAME.' + market.nm | translate | uppercase}}"></Label>
+          <Label text="{{ 'DYNAMIC_KEYS.CockMarket.NAME.' + market.nm | translate | uppercase}}"
+            textWrap="true"></Label>
         </StackLayout>
       </GridLayout>
       <GridLayout row="{{i}}" col="1" rows="*" columns="{{getColumnsString(market.sls.length)}}">
-        <ng-container *ngFor="let selection of market.sls | rmSelFromMarket: '1 + Over'; let i2 = index">
-          <GridLayout col="{{i2}}" shadow="3" cornerRadius="6"
-            class="btn btn-default btn-default-cock radius-5  btn-cock-{{ selection.nm | competitorIto }}">
-            <Button text="{{selection.ods[0].vl}}" class="button-internal" (tap)="selectOdd(market.tp, selection)"
-              [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"
-              [ngClass]="{'btn-actived': oddsSelected?.includes(selection.id)}">
-            </Button>
+        <ng-container *ngFor="let selection of market.sls | rmSelFromMarket: 'X + Over'; let i2 = index">
+          <GridLayout col="{{i2}}" class="btn-default-cock btn-cock-{{ selection.nm | competitorIto }} m-4 radius-5"
+            [ngClass]="{'btn-actived': oddsSelected?.includes(selection.id)}" (tap)="selectOdd(market.tp, selection)"
+            [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen">
+            <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
+              <StackLayout *ngIf="market.tp === marketEnum['1X2'] && selection.tp === 1" verticalAlignment="center"
+                horizontalAlignment="center" class="icon icon-cock-red" width="40%" height="90%">
+              </StackLayout>
+              <StackLayout verticalAlignment="center" horizontalAlignment="center" width="55%">
+                <Label text="{{ selection.nm | competitorName: eventDetails.tm }}"
+                  *ngIf="market.tp === marketEnum['1X2'] && (selection.tp === 1 || selection.tp === 3)"
+                  horizontalAlignment="center" class="selection-name"></Label>
+                <Label text="{{ selection.nm | extractSign | uppercase }}" *ngIf="market.tp !== marketEnum['1X2']"
+                  horizontalAlignment="center" class="selection-name"></Label>
+                <Label text="{{ selection.ods[0].vl | number: '1.2-2' }}" horizontalAlignment="center"
+                  class="selection-value"></Label>
+              </StackLayout>
+              <StackLayout *ngIf="market.tp === marketEnum['1X2'] && selection.tp === 3" verticalAlignment="center"
+                horizontalAlignment="center" class="icon icon-cock-blue" width="40%" height="90%">
+              </StackLayout>
+            </StackLayout>
           </GridLayout>
         </ng-container>
       </GridLayout>
@@ -23,13 +38,19 @@
     <!-- SPECIAL BETS -->
     <ng-container *ngIf="market.tp === marketEnum['OverUnder']">
       <StackLayout row="{{i}}" col="{{0}}"></StackLayout>
-      <GridLayout row="{{i}}" col="1" rows="*" columns="{{getColumnsString(market.sls.length)}}">
-        <GridLayout col="{{index}}" shadow="3" cornerRadius="6" class="playable-grid-buttons playable-special-bets"
-          *ngFor="let index of [0,1]">
-          <Button text="{{market.sls[index].ods[0].vl | number: '1.2-2'}}" class="button-internal"
-            (tap)="selectOdd(market.tp, market.sls[index])"
-            [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"
-            [ngClass]="{'actived': oddsSelected?.includes(market.sls[index].id)}"></Button>
+      <GridLayout row="{{i}}" col="1" rows="*" columns="{{getColumnsString(market.sls.length)}}"
+        class="playable-special-bets">
+        <GridLayout col="{{index}}" *ngFor="let index of [0,1]" class="button btn-success btn-special-cock m-4"
+          [ngClass]="{'actived': oddsSelected?.includes(market.sls[index].id)}"
+          (tap)="selectOdd(market.tp, market.sls[index])"
+          [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen">
+          <StackLayout verticalAlignment="center" horizontalAlignment="center" verticalAlignment="center"
+            horizontalAlignment="center">
+            <Label text="{{ market.sls[index].nm | translate | uppercase }}" horizontalAlignment="center"
+              class="selection-name"></Label>
+            <Label text="{{ market.sls[index].ods[0].vl | number: '1.2-2' }}" horizontalAlignment="center"
+              class="selection-value"></Label>
+          </StackLayout>
         </GridLayout>
       </GridLayout>
     </ng-container>
