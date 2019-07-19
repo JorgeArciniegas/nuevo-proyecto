@@ -1,40 +1,13 @@
 import { Injectable } from '@angular/core';
-import {
-  ElysApiService,
-  VirtualBetEvent,
-  VirtualBetMarket,
-  VirtualBetTournament,
-  VirtualDetailOddsOfEventRequest,
-  VirtualDetailOddsOfEventResponse,
-  VirtualEventCountDownRequest,
-  VirtualEventCountDownResponse,
-  VirtualProgramTreeBySportRequest,
-  VirtualProgramTreeBySportResponse,
-  VirtualBetSelection
-} from '@elys/elys-api';
+import { ElysApiService, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualDetailOddsOfEventRequest, VirtualDetailOddsOfEventResponse, VirtualEventCountDownRequest, VirtualEventCountDownResponse, VirtualProgramTreeBySportRequest, VirtualProgramTreeBySportResponse } from '@elys/elys-api';
 import { interval, Subject } from 'rxjs';
 import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
-import { BetOdd, PolyfunctionalArea, PolyfunctionalStakeCoupon, Market } from '../products.model';
+import { BetOdd, Market, PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../products.model';
 import { ProductsService } from '../products.service';
-import {
-  CombinationType,
-  Player,
-  PlacingEvent,
-  Podium,
-  EventInfo,
-  EventDetail,
-  EventTime,
-  Smartcode,
-  SmartCodeType,
-  SpecialBet,
-  SpecialBetValue,
-  TypeBetSlipColTot,
-  TypePlacingEvent,
-  VirtualBetSelectionExtended
-} from './main.models';
+import { CombinationType, EventDetail, EventInfo, EventTime, PlacingEvent, Player, Podium, Smartcode, SmartCodeType, SpecialBet, SpecialBetValue, TypeBetSlipColTot, TypePlacingEvent, VirtualBetSelectionExtended } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
 
@@ -1218,4 +1191,6 @@ export class MainService extends MainServiceExtra {
     });
     return response;
   }
+
+
 }

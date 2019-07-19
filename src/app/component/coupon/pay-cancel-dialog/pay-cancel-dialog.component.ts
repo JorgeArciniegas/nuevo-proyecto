@@ -10,7 +10,7 @@ import { UserService } from '../../../services/user.service';
 import { CouponService } from '../coupon.service';
 import { PrintReceiptService } from './print-receipt/print-receipt.service';
 import { Receipt } from './print-receipt/print-receipt.model';
-import { DialogTypeCoupon } from 'src/app/products/products.model';
+import { DialogTypeCoupon } from '../../../../../src/app/products/products.model';
 
 @Component({
   selector: 'app-pay-cancel-dialog',
