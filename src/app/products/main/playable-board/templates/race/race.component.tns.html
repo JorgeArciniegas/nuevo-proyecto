@@ -3,7 +3,7 @@
     <GridLayout row="{{i}}" col="0" shadow="3" cornerRadius="6" class="card"
       *ngFor="let row of ['I','II','III']; let i = index;">
       <GridLayout rows="*" columns="*" class="bg-playable">
-        <GridLayout rows="*" columns="*" class="" class="playable-row-tile display"
+        <GridLayout rows="*" columns="*" class="playable-row-tile display"
           [ngClass]="{'disabled': (i === 1 && service.placingEvent.secondRowDisabled) || (i === 2 && service.placingEvent.thirdRowDisabled)}">
           <StackLayout verticalAlignment="center" horizontalAlignment="center">
             <Label *ngIf="i === 0"

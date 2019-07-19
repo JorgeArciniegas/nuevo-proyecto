@@ -5,6 +5,7 @@ import { Subscription, timer } from 'rxjs';
 import { Market } from '../../../../../products/products.model';
 import { SpecialBet } from '../../../main.models';
 import { ProductsService } from '../../../../../products/products.service';
+import { UserService } from '../../../../../services/user.service';
 
 @Component({
   selector: 'app-playable-board-cock-fight',
@@ -23,7 +24,7 @@ export class CockFightComponent implements OnDestroy {
   // List of odds selected.
   public oddsSelected: number[];
 
-  constructor(public mainService: MainService, public productService: ProductsService) {
+  constructor(public mainService: MainService, public productService: ProductsService, public userService: UserService) {
     this.oddsSelected = [];
     // Get the setting information on the order to show the market on the template.
     this.shownMarkets = this.productService.product.layoutProducts.shownMarkets;
