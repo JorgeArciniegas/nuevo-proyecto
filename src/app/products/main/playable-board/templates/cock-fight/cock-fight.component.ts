@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import { MainService } from '../../../main.service';
 import { VirtualBetEvent, VirtualBetSelection } from '@elys/elys-api';
 import { Subscription, timer } from 'rxjs';
-import { Market } from '../../../../../products/products.model';
+import { Market, PolyfunctionalArea } from '../../../../../products/products.model';
 import { SpecialBet } from '../../../main.models';
 import { ProductsService } from '../../../../../products/products.service';
 
@@ -47,11 +47,23 @@ export class CockFightComponent implements OnDestroy {
           this.oddsSelected.length !== 0
         ) {
           this.oddsSelected = [];
+        } else {
+          this.checkOddSelected(polyfunctional);
         }
       }
     );
   }
-
+  /**
+   * When "oddsSelected" does not have the odds contains from "polifunctionalArea", append it.
+   * @param polyfunctional PolyfunctionalArea
+   */
+  private checkOddSelected(polyfunctional: PolyfunctionalArea): void  {
+    polyfunctional.odds.filter( item => {
+      if ( !this.oddsSelected.includes(item.id) ) {
+        this.oddsSelected.push(item.id);
+      }
+    });
+  }
   ngOnDestroy() {
     this.currentEventSubscription.unsubscribe();
   }
