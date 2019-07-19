@@ -4,7 +4,7 @@ import { UserService } from '../../../../../services/user.service';
 import { MainService } from '../../../main.service';
 import { Subscription } from 'rxjs';
 import { VirtualBetEvent, VirtualBetSelection } from '@elys/elys-api';
-import { Market } from 'src/app/products/products.model';
+import { Market } from '../../../../../../../src/app/products/products.model';
 
 @Component({
   selector: 'app-lucky-cock',
@@ -141,7 +141,6 @@ export class CockComponent implements OnInit {
    */
   RNGLuckyCock(limit: number): number {
     const extractNumber: number = Math.floor(Math.random() * limit);
-    console.log(extractNumber);
     return extractNumber;
   }
 }

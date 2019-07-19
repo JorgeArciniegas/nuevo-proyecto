@@ -33,7 +33,7 @@ import {
 } from './coupon.model';
 import { PrintCouponService } from './print-coupon/print-coupon.service';
 import { AppSettings } from '../../../../src/app/app.settings';
-import { SmartCodeType, TypeBetSlipColTot } from 'src/app/products/main/main.models';
+import { SmartCodeType, TypeBetSlipColTot } from '../../../../src/app/products/main/main.models';
 
 @Injectable({
   providedIn: 'root'

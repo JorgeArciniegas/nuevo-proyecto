@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Lucky } from '../../lucky.model';
 import { UserService } from '../../../../../../../src/app/services/user.service';
 import { MainService } from '../../../main.service';
-import { LAYOUT_TYPE } from 'src/environments/environment.models';
+import { LAYOUT_TYPE } from '../../../../../../../src/environments/environment.models';
 import { Player } from '../../../main.models';
 
 @Component({
