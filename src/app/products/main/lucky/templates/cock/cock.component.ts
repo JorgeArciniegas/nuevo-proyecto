@@ -4,6 +4,7 @@ import { UserService } from '../../../../../services/user.service';
 import { MainService } from '../../../main.service';
 import { Subscription } from 'rxjs';
 import { VirtualBetEvent, VirtualBetSelection } from '@elys/elys-api';
+import { Market } from 'src/app/products/products.model';
 
 @Component({
   selector: 'app-lucky-cock',
@@ -11,6 +12,8 @@ import { VirtualBetEvent, VirtualBetSelection } from '@elys/elys-api';
   styleUrls: ['./cock.component.scss']
 })
 export class CockComponent implements OnInit {
+  public market: typeof Market = Market;
+
   lucky: typeof Lucky = Lucky;
   /**
    * contains "winning" selections
@@ -69,19 +72,19 @@ export class CockComponent implements OnInit {
          * populates market selection containers by market type
          */
         switch (eventMarkets.tp) {
-          case 10: // winner
+          case this.market['1X2']: // winner
             eventMarkets.sls.forEach(marketSelections => {
               this.winModel.push(marketSelections);
             });
             break;
-          case 689: // winner + o/u
+          case this.market['1X2OverUnder']: // winner + o/u
             eventMarkets.sls.forEach(marketSelections => {
               if (marketSelections.tp !== 3) {
                 this.ouWinModel.push(marketSelections);
               }
             });
             break;
-          case 172: // winner + sector
+          case this.market['1X2WinningSector']: // winner + sector
             eventMarkets.sls.forEach(marketSelections => {
               this.sectorWinModel.push(marketSelections);
             });
@@ -99,15 +102,15 @@ export class CockComponent implements OnInit {
     switch (lucky) {
       case 1:
         currentSelection.selection = this.winModel[this.RNGLuckyCock(3)];
-        currentSelection.tp = 10;
+        currentSelection.tp = this.market['1X2'];
         break;
       case 2:
         currentSelection.selection = this.ouWinModel[this.RNGLuckyCock(4)];
-        currentSelection.tp = 689;
+        currentSelection.tp = this.market['1X2OverUnder'];
         break;
       case 3:
         currentSelection.selection = this.sectorWinModel[this.RNGLuckyCock(8)];
-        currentSelection.tp = 172;
+        currentSelection.tp = this.market['1X2WinningSector'];
         break;
     }
     /**
