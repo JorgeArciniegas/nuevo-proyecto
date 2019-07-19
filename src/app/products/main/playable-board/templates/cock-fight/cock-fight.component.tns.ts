@@ -2,9 +2,9 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import { MainService } from '../../../main.service';
 import { VirtualBetEvent, VirtualBetSelection } from '@elys/elys-api';
 import { Subscription, timer } from 'rxjs';
-import { Market } from '../../../../../products/products.model';
+import { Market } from '../../../../products.model';
 import { SpecialBet } from '../../../main.models';
-import { ProductsService } from '../../../../../products/products.service';
+import { ProductsService } from '../../../../products.service';
 import { UserService } from '../../../../../services/user.service';
 
 @Component({
