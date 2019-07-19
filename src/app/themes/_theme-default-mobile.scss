@@ -3,11 +3,12 @@
 /**
 * Import layout's component
 **/
-@import './results-list/results-list.tns';
-@import './playable-board/playablerace.tns';
-@import './statistics/statistics.component.tns';
-@import './event-control/event-control-standard.tns';
-@import './lucky/lucky-race-fight.tns';
+@import "./results-list/results-list.tns";
+@import "./playable-board/race.tns";
+@import "./playable-board/cock-fight.tns";
+@import "./statistics/statistics.component.tns";
+@import "./event-control/event-control-standard.tns";
+@import "./lucky/lucky-race-fight.tns";
 
 .app {
 	&.develop {
@@ -525,14 +526,13 @@
 		@extend %border-bottom-overlay-mobile;
 	}
 
-
-  // cock fight icon
-  .icon-cock-red{
-    @extend %ICON-COCK-RED;
-  }
-  .icon-cock-blue{
-    @extend %ICON-COCK-BLUE;
-  }
+	// cock fight icon
+	.icon-cock-red {
+		@extend %ICON-COCK-RED;
+	}
+	.icon-cock-blue {
+		@extend %ICON-COCK-BLUE;
+	}
 }
 
 .overlay {

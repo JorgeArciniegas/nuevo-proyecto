@@ -11,9 +11,9 @@ import { VirtualBetCompetitor } from '@elys/elys-api';
 export class CompetitorNamePipe implements PipeTransform {
   transform(selectionName: string, competitors: VirtualBetCompetitor[]): string {
     let competitorName = '';
-    if (selectionName.includes('1', 0)) {
+    if (selectionName.indexOf('1') === 0) {
       competitorName = competitors.find(competitor => competitor.ito === 1).nm;
-    } else if (selectionName.includes('2', 0)) {
+    } else if (selectionName.indexOf('2') === 0) {
       competitorName = competitors.find(competitor => competitor.ito === 2).nm;
     }
     return competitorName;
