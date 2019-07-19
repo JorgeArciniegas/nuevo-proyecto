@@ -38,26 +38,22 @@ export class CockFightComponent implements OnDestroy {
     });
 
     // Get the change of the polyfunctional area's object.
-    this.polyfunctionalAreaSubscription = this.productService.polyfunctionalAreaObservable.subscribe(
-      polyfunctional => {
-        // Delete the list of selections when the object of polyfunctional area is empty.
-        if (
-          polyfunctional.odds.length === 0 &&
-          this.oddsSelected.length !== 0
-        ) {
-          this.oddsSelected = [];
-        } else {
-          this.checkOddSelected(polyfunctional);
-        }
+    this.polyfunctionalAreaSubscription = this.productService.polyfunctionalAreaObservable.subscribe(polyfunctional => {
+      // Delete the list of selections when the object of polyfunctional area is empty.
+      if (polyfunctional.odds.length === 0 && this.oddsSelected.length !== 0) {
+        this.oddsSelected = [];
+      } else {
+        this.checkOddSelected(polyfunctional);
+      }
     });
   }
   /**
    * When "oddsSelected" does not have the odds contains from "polifunctionalArea", append it.
    * @param polyfunctional PolyfunctionalArea
    */
-  private checkOddSelected(polyfunctional: PolyfunctionalArea): void  {
-    polyfunctional.odds.filter( item => {
-      if ( !this.oddsSelected.includes(item.id) ) {
+  private checkOddSelected(polyfunctional: PolyfunctionalArea): void {
+    polyfunctional.odds.filter(item => {
+      if (!this.oddsSelected.includes(item.id)) {
         this.oddsSelected.push(item.id);
       }
     });
@@ -98,6 +94,7 @@ export class CockFightComponent implements OnDestroy {
     this.mainService.placingOddByOdd(marketId, selection);
   }
 
+  // Method used only on native template.
   getColumnsString(colNum: number): string {
     let colDefiner = '*';
     for (let i = 1; i < colNum; i++) {
