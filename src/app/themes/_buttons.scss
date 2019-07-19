@@ -87,6 +87,9 @@ button:active:not([disabled]) {
 	&.inactive {
 		opacity: 0.8;
 	}
+  &.disabled {
+    opacity: 0.1;
+  }
 }
 .playable-row-tile {
 	&.disabled {
