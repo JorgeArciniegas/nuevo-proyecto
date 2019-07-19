@@ -79,6 +79,7 @@ export class CockComponent implements OnInit {
             break;
           case this.market['1X2OverUnder']: // winner + o/u
             eventMarkets.sls.forEach(marketSelections => {
+              // exclude X + O/U
               if (marketSelections.tp !== 3) {
                 this.ouWinModel.push(marketSelections);
               }
