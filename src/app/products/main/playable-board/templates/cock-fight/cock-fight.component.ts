@@ -23,23 +23,33 @@ export class CockFightComponent implements OnDestroy {
   // List of odds selected.
   public oddsSelected: number[];
 
-  constructor(public mainService: MainService, public productService: ProductsService) {
+  constructor(
+    public mainService: MainService,
+    public productService: ProductsService
+  ) {
     this.oddsSelected = [];
     // Get the setting information on the order to show the market on the template.
     this.shownMarkets = this.productService.product.layoutProducts.shownMarkets;
 
     // Get the event's details.
-    this.currentEventSubscription = this.mainService.currentEventObserve.subscribe(() => {
-      this.getEventDetails();
-    });
+    this.currentEventSubscription = this.mainService.currentEventObserve.subscribe(
+      () => {
+        this.getEventDetails();
+      }
+    );
 
     // Get the change of the polyfunctional area's object.
-    this.productService.polyfunctionalAreaObservable.subscribe(polyfunctional => {
-      // Delete the list of selections when the object of polyfunctional area is empty.
-      if (polyfunctional.odds.length === 0 && this.oddsSelected.length !== 0) {
-        this.oddsSelected = [];
+    this.productService.polyfunctionalAreaObservable.subscribe(
+      polyfunctional => {
+        // Delete the list of selections when the object of polyfunctional area is empty.
+        if (
+          polyfunctional.odds.length === 0 &&
+          this.oddsSelected.length !== 0
+        ) {
+          this.oddsSelected = [];
+        }
       }
-    });
+    );
   }
 
   ngOnDestroy() {
