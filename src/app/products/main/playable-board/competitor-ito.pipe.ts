@@ -10,10 +10,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CompetitorItoPipe implements PipeTransform {
   transform(selectionName: string, args?: any): number {
     let competitorIto: number;
-    if (selectionName.includes('1', 0)) {
+    if (selectionName.indexOf('1') === 0) {
       // The selection is associated to the competitor's ito '1'.
       competitorIto = 1;
-    } else if (selectionName.includes('2', 0)) {
+    } else if (selectionName.indexOf('2') === 0) {
       // The selection is associated to the competitor's ito '2'.
       competitorIto = 2;
     } else {

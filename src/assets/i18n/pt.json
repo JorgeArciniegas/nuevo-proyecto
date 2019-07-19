@@ -213,7 +213,11 @@
       "TR": "Trio in ordine con ritorno",
       "UNDER": "Abaixo",
       "VT": "Vincente trio",
-      "WINNER": "Vencedor"
+      "WINNER": "Vencedor",
+      "V": "V",
+      "S": "Sector",
+      "OU": "Over/Under",
+      "MULTI": "Multi"
     },
     "SMARTCODE": {
       "1VA": "Exata v.",
@@ -235,7 +239,11 @@
       "TR": "T3X",
       "UNDER": "Abaixo",
       "VT": "VX",
-      "WINNER": "Vencedor"
+      "WINNER": "Vencedor",
+      "V": "V",
+      "S": "S",
+      "OU": "Ou",
+      "MULTI": "Multi"
     },
     "OVER_UNDER_COCKFIGHT": {
       "O": "ma",
@@ -244,10 +252,10 @@
     "CockMarket": {
       "NAME": {
         "1X2": "Win",
-        "Over/Under": "Win+o/u",
+        "Over/Under": "O/u",
         "Winning Sector": "Sector",
-        "1X2 + Winning Sector": "1x2+sector",
-        "1X2 + OverUnder": "1x2+o/u"
+        "1X2 + Winning Sector": "Win+ sector",
+        "1X2 + OverUnder": "Win+ o/u"
       }
     }
   },
