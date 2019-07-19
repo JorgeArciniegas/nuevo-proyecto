@@ -17,6 +17,7 @@ import { CompetitorNamePipe } from './playable-board/competitor-name.pipe';
 import { LuckyComponent } from './lucky/lucky.component';
 import { CockfightComponent as ResultsCockfightComponent } from './results/templates/cockfight/cockfight.component';
 import { CompetitorItoPipe } from './playable-board/competitor-ito.pipe';
+import { ExtractSignPipe } from './playable-board/extract-sign.pipe';
 
 export const componentDeclarations: any[] = [
   MainComponent,
@@ -31,6 +32,7 @@ export const componentDeclarations: any[] = [
   FilterAndSortByShownMarketsPipe,
   CompetitorNamePipe,
   CompetitorItoPipe,
+  ExtractSignPipe,
   ResultsRaceComponent,
   PlayableBoardRaceComponent,
   StandardListComponent,

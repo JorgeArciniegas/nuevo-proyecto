@@ -206,10 +206,10 @@ $color-text-gray: #6b7279;
 }
 // RACE-CONTROL HEADER INFO
 %current-event {
-  color: $color-bg-success;
+	color: $color-bg-success;
 }
 %current-event-id {
-  color: $color-text-primary;
+	color: $color-text-primary;
 }
 // LINK
 %primary-link {
@@ -488,15 +488,14 @@ $gradient-dark2: #000000;
 }
 
 %ICON-COCK-RED {
-    background: url('~/app/themes/skins/develop/image/cockfight/cock-red.png') no-repeat center;
-    background-size: contain;
+	background: url("~/app/themes/skins/develop/image/cockfight/cock-red.png") no-repeat center;
+	background-size: contain;
 }
 
 %ICON-COCK-BLUE {
-    background: url('~/app/themes/skins/develop/image/cockfight/cock-blue.png') no-repeat center;
-    background-size: contain;
+	background: url("~/app/themes/skins/develop/image/cockfight/cock-blue.png") no-repeat center;
+	background-size: contain;
 }
-
 
 // BORDER BOX DEFINITION
 %border-gray {

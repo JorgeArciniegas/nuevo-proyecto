@@ -17,7 +17,7 @@ import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
-import { BetOdd, PolyfunctionalArea, PolyfunctionalStakeCoupon, Market } from '../products.model';
+import { BetOdd, PolyfunctionalArea, PolyfunctionalStakeCoupon, Market, SelectionIdentifier } from '../products.model';
 import { ProductsService } from '../products.service';
 import {
   CombinationType,
@@ -57,7 +57,6 @@ export class MainService extends MainServiceExtra {
   private initCurrentEvent = false;
 
   playersList: Player[];
-  // temp array
 
   smartCode: Smartcode;
 
@@ -262,7 +261,7 @@ export class MainService extends MainServiceExtra {
         this.resetPlayEvent();
         this.currentEventSubscribe.next(0);
       } else {
-        this.currentEventSubscribe.next(this.eventDetails.currentEvent );
+        this.currentEventSubscribe.next(this.eventDetails.currentEvent);
       }
     } else if (this.eventDetails.currentEvent === 0) {
       this.resetPlayEvent();
@@ -281,13 +280,11 @@ export class MainService extends MainServiceExtra {
       }
     });
 
-     // calculate remaning time
-     if (this.eventDetails.currentEvent > 0) {
-      this.remainingRaceTime(this.eventDetails.events[0].number).then(
-        (eventTime: EventTime) => {
-          this.remainingTime = eventTime;
-        }
-      );
+    // calculate remaning time
+    if (this.eventDetails.currentEvent > 0) {
+      this.remainingRaceTime(this.eventDetails.events[0].number).then((eventTime: EventTime) => {
+        this.remainingTime = eventTime;
+      });
     }
   }
 
@@ -356,33 +353,25 @@ export class MainService extends MainServiceExtra {
     if (this.coupon.checkIfCouponIsReadyToPlace()) {
       return;
     }
-    if (this.placingEvent.isSpecialBets) {
-      this.resetPlayEvent();
-    }
     let removed: boolean;
 
     if (!this.placingEvent) {
       this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
     }
-    // GESTIRE LA SELEZIONE
-    // player.actived = true;
     const oddSelected: VirtualBetSelectionExtended = odd;
     oddSelected.marketId = marketId;
     if (this.placingEvent.odds.length === 0) {
       this.placingEvent.odds.push(oddSelected);
-      // this.checkedIsSelected(player);
     } else {
       for (let idx = 0; idx < this.placingEvent.odds.length; idx++) {
         const item = this.placingEvent.odds[idx];
         if (item.id === odd.id && item.marketId === marketId) {
           this.placingEvent.odds.splice(idx, 1);
-          // this.checkedIsSelected(player, true);
           removed = true;
         }
       }
       if (!removed) {
         this.placingEvent.odds.push(oddSelected);
-        // this.checkedIsSelected(player);
       }
     }
     this.smartCode = new Smartcode();
@@ -485,20 +474,7 @@ export class MainService extends MainServiceExtra {
       // Variable containing the identifier of the selected odds.
       let value: string;
       const odds: BetOdd[] = [];
-      if (this.placingEvent.odds.length === 1) {
-        // Single selection.
-        selection = SmartCodeType[this.getMarketIdentifier(this.placingEvent.odds[0].marketId)];
-        value = this.placingEvent.odds[0].nm;
-        odds.push(
-          new BetOdd(
-            this.placingEvent.odds[0].nm,
-            this.placingEvent.odds[0].ods[0].vl,
-            this.btnService.polyfunctionStakePresetPlayer.amount,
-            this.placingEvent.odds[0].id
-          )
-        );
-      } else if (this.placingEvent.odds.length > 1) {
-        // Multiple selections.
+      if (this.placingEvent.odds.length !== 0) {
         let lastMarket: Market;
         let marketHasChanged: boolean;
         for (const odd of this.placingEvent.odds) {
@@ -514,8 +490,10 @@ export class MainService extends MainServiceExtra {
             lastMarket = odd.marketId;
             selection = SmartCodeType[this.getMarketIdentifier(odd.marketId)];
           }
-          value = value === undefined ? odd.nm : value + '/' + odd.nm;
-          odds.push(new BetOdd(odd.nm, odd.ods[0].vl, this.btnService.polyfunctionStakePresetPlayer.amount, odd.id));
+          // Get the selection identifier to use on the polyfunctional area.
+          const selectionIdentifier = SelectionIdentifier['Selection: ' + odd.nm];
+          value = value === undefined ? selectionIdentifier : value + '/' + selectionIdentifier;
+          odds.push(new BetOdd(selectionIdentifier, odd.ods[0].vl, this.btnService.polyfunctionStakePresetPlayer.amount, odd.id));
         }
       }
       areaFuncData.selection = selection;
@@ -604,17 +582,13 @@ export class MainService extends MainServiceExtra {
    */
   public extractOdd(odd: VirtualBetEvent, areaFuncData: PolyfunctionalArea, playerName?: string): PolyfunctionalArea {
     let oddsToSearch: string[] = [];
-   // check if the smartcode is playable to shortcut method
+    // check if the smartcode is playable to shortcut method
     let isShortCutPlayeable: boolean;
     switch (areaFuncData.selection) {
       case SmartCodeType[SmartCodeType['1VA']]:
       case SmartCodeType[SmartCodeType.AOX]:
         // Generate sorted combination by 2 of the selections in the rows.
-        oddsToSearch = this.generateOdds(
-          areaFuncData.value.toString(),
-          CombinationType.By2,
-          false
-        );
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By2, false);
         isShortCutPlayeable = true;
         break;
       case SmartCodeType[SmartCodeType.AB]:
@@ -636,41 +610,23 @@ export class MainService extends MainServiceExtra {
         break;
       case SmartCodeType[SmartCodeType.AX]:
         // Generate sorted combination by 2 of the first row selections.
-        oddsToSearch = this.generateOddsRow(
-          areaFuncData.value.toString(),
-          CombinationType.By2,
-          true
-        );
+        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By2, true);
         isShortCutPlayeable = true;
         break;
       case SmartCodeType[SmartCodeType.TNX]: // Trifecta
         // Generate combination by 3 of the first row selections not in order.
-        oddsToSearch = this.generateOddsRow(
-          areaFuncData.value.toString(),
-          CombinationType.By3,
-          false
-        );
+        oddsToSearch = this.generateOddsRow(areaFuncData.value.toString(), CombinationType.By3, false);
         isShortCutPlayeable = true;
         break;
       case SmartCodeType[SmartCodeType.VT]: // Winning trio
         // Generate combination by 3 of the selections in the rows not in order.
-        oddsToSearch = this.generateOdds(
-          areaFuncData.value.toString(),
-          CombinationType.By3,
-          false
-        );
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, false);
         areaFuncData.shortcut = SmartCodeType.VX;
         isShortCutPlayeable = true;
         break;
       case SmartCodeType[SmartCodeType.AT]: // Combined trio
         // Generate combination by 3 of the selections in the rows not in order and with the first row fixed.
-        oddsToSearch = this.generateOdds(
-          areaFuncData.value.toString(),
-          CombinationType.By3,
-          false,
-          false,
-          true
-        );
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, false, false, true);
         areaFuncData.shortcut = SmartCodeType.ASX;
         isShortCutPlayeable = true;
         break;
@@ -683,7 +639,7 @@ export class MainService extends MainServiceExtra {
     if (isShortCutPlayeable) {
       // When the smart code has a shortcut available,
       // it is written inside the "PolyfunctionalArea" object that will be read by the couponService
-      areaFuncData.shortcut = areaFuncData.shortcut ? areaFuncData.shortcut  : SmartCodeType[areaFuncData.selection];
+      areaFuncData.shortcut = areaFuncData.shortcut ? areaFuncData.shortcut : SmartCodeType[areaFuncData.selection];
       areaFuncData.smartBetCode = odd.smc;
     }
     areaFuncData.odds = [];
@@ -732,6 +688,16 @@ export class MainService extends MainServiceExtra {
       }
     }
     return areaFuncData;
+  }
+
+  // Method to get the selection identifier to show on the polyfunctional area.
+  getSelectionIdentifier(selectionName: string): string {
+    const index = selectionName.indexOf('+');
+    if (index > 0 && index < 3) {
+      const competitor = selectionName[0];
+      selectionName = competitor + selectionName.substring(index + 2);
+    }
+    return selectionName;
   }
 
   /**
