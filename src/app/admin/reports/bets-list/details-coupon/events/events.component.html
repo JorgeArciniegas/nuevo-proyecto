@@ -42,19 +42,19 @@
           <div>
             <div fxLaoyut="row">
               <div fxFlex="10" fxLayoutAlign="flex-start center">
-                <ng-container [ngSwitch]="data.couponStatus">
+                <ng-container [ngSwitch]="odd.Result">
                   <img class="icon icon-24px" *ngSwitchDefault
                     src="app/themes/skins/{{settings.theme}}/icon/progress-clock.svg">
                   <!-- LOST -->
-                  <img class="icon icon-24px" *ngSwitchCase="2"
+                  <img class="icon icon-24px" *ngSwitchCase="'Lost'"
                     src="app/themes/skins/{{settings.theme}}/icon/cancel.svg">
                   <!-- WIN -->
-                  <img class="icon icon-24px" *ngSwitchCase="3"
+                  <img class="icon icon-24px" *ngSwitchCase="'Won'"
                     src="app/themes/skins/{{settings.theme}}/icon/checked.svg">
                 </ng-container>
               </div>
               <div fxFlex="90">
-                <h4>{{couponStatus[data.couponStatus] }}</h4>
+                <h4>{{ odd.Result | uppercase | translate  }}</h4>
               </div>
 
             </div>
