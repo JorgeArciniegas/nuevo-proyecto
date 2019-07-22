@@ -15,11 +15,20 @@
 
 		&.icon-cock-red {
 			@extend %ICON-COCK-RED;
-			float: left;
 		}
 		&.icon-cock-blue {
 			@extend %ICON-COCK-BLUE;
-			float: right;
+		}
+	}
+
+	&.btn-default-cock {
+		.icon {
+			&.icon-cock-red {
+				float: left;
+			}
+			&.icon-cock-blue {
+				float: right;
+			}
 		}
 	}
 
