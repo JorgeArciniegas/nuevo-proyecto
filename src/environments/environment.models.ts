@@ -1,5 +1,5 @@
 import { CouponPresetValues } from '@elys/elys-api';
-import { Market } from '../../src/app/products/products.model';
+import { Market } from '../app/products/products.model';
 
 export interface Environment {
   production: boolean;

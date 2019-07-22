@@ -1,16 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import {
-  CancelCouponRequest,
-  ErrorStatus,
-  FlagAsPaidRequest
-} from '@elys/elys-api';
+import { CancelCouponRequest, ErrorStatus, FlagAsPaidRequest } from '@elys/elys-api';
 import { UserService } from '../../../services/user.service';
 import { CouponService } from '../coupon.service';
 import { PrintReceiptService } from './print-receipt/print-receipt.service';
 import { Receipt } from './print-receipt/print-receipt.model';
-import { DialogTypeCoupon } from '../../../../../src/app/products/products.model';
+import { DialogTypeCoupon } from '../../../products/products.model';
 
 @Component({
   selector: 'app-pay-cancel-dialog',
@@ -37,10 +33,7 @@ export class PayCancelDialogComponent implements OnInit {
   ) {
     this.titleType = this.dialogTypeCoupon[data];
     this.form = this.fb.group({
-      couponCode: [
-        null,
-        Validators.compose([Validators.required, Validators.minLength(2)])
-      ]
+      couponCode: [null, Validators.compose([Validators.required, Validators.minLength(2)])]
     });
   }
 
@@ -67,17 +60,11 @@ export class PayCancelDialogComponent implements OnInit {
             this.errorNumberIcon = message.Error;
             // In case of successful operation start the print of the receipt
             if (message.Error === ErrorStatus.Success) {
-              this.printReceiptService.printWindow(
-                new Receipt(couponCode, true, message.Stake)
-              );
+              this.printReceiptService.printWindow(new Receipt(couponCode, true, message.Stake));
               this.close();
             }
           })
-          .catch(
-            error =>
-              (this.errorMessage =
-                'operation not possible (' + error.status + ')')
-          );
+          .catch(error => (this.errorMessage = 'operation not possible (' + error.status + ')'));
         this.form.get('couponCode').setValue('');
       }
       this.form.get('couponCode').setValue('');
@@ -101,17 +88,11 @@ export class PayCancelDialogComponent implements OnInit {
             this.errorNumberIcon = message.ErrorStatus;
             // In case of successful operation start the print of the receipt
             if (message.ErrorStatus === ErrorStatus.Success) {
-              this.printReceiptService.printWindow(
-                new Receipt(couponCode, false, message.StakeGross)
-              );
+              this.printReceiptService.printWindow(new Receipt(couponCode, false, message.StakeGross));
               this.close();
             }
           })
-          .catch(
-            error =>
-              (this.errorMessage =
-                'operation not possible (' + error.status + ')')
-          );
+          .catch(error => (this.errorMessage = 'operation not possible (' + error.status + ')'));
         this.form.get('couponCode').setValue('');
       }
     }

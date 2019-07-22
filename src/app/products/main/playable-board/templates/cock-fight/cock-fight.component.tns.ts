@@ -2,9 +2,9 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import { MainService } from '../../../main.service';
 import { VirtualBetEvent, VirtualBetSelection } from '@elys/elys-api';
 import { Subscription, timer } from 'rxjs';
-import { Market, PolyfunctionalArea } from '../../../../../products/products.model';
+import { Market } from '../../../../products.model';
 import { SpecialBet } from '../../../main.models';
-import { ProductsService } from '../../../../../products/products.service';
+import { ProductsService } from '../../../../products.service';
 import { UserService } from '../../../../../services/user.service';
 
 @Component({
@@ -21,7 +21,6 @@ export class CockFightComponent implements OnDestroy {
   // List of visible markets on the template. The index of the array is taken to show them on the different rows of the template.
   public shownMarkets: Market[];
   private currentEventSubscription: Subscription;
-  private polyfunctionalAreaSubscription: Subscription;
   // List of odds selected.
   public oddsSelected: number[];
 
@@ -38,29 +37,16 @@ export class CockFightComponent implements OnDestroy {
     });
 
     // Get the change of the polyfunctional area's object.
-    this.polyfunctionalAreaSubscription = this.productService.polyfunctionalAreaObservable.subscribe(polyfunctional => {
+    this.productService.polyfunctionalAreaObservable.subscribe(polyfunctional => {
       // Delete the list of selections when the object of polyfunctional area is empty.
       if (polyfunctional.odds.length === 0 && this.oddsSelected.length !== 0) {
         this.oddsSelected = [];
-      } else {
-        this.checkOddSelected(polyfunctional);
       }
     });
   }
-  /**
-   * When "oddsSelected" does not have the odds contains from "polifunctionalArea", append it.
-   * @param polyfunctional PolyfunctionalArea
-   */
-  private checkOddSelected(polyfunctional: PolyfunctionalArea): void {
-    polyfunctional.odds.filter(item => {
-      if (!this.oddsSelected.includes(item.id)) {
-        this.oddsSelected.push(item.id);
-      }
-    });
-  }
+
   ngOnDestroy() {
     this.currentEventSubscription.unsubscribe();
-    this.polyfunctionalAreaSubscription.unsubscribe();
   }
 
   /**
@@ -94,7 +80,6 @@ export class CockFightComponent implements OnDestroy {
     this.mainService.placingOddByOdd(marketId, selection);
   }
 
-  // Method used only on native template.
   getColumnsString(colNum: number): string {
     let colDefiner = '*';
     for (let i = 1; i < colNum; i++) {

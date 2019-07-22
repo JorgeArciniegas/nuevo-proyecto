@@ -9,7 +9,7 @@
             {{ "DYNAMIC_KEYS.CockMarket.NAME." + market.nm | translate | uppercase}}
           </span>
         </mat-grid-tile>
-        <ng-container *ngFor=" let selection of market.sls">
+        <ng-container *ngFor="let selection of market.sls">
           <mat-grid-tile *ngIf="selection.tp !== 3 || selection.tp === 3 && market.tp !== marketEnum['1X2OverUnder']"
             colspan="{{market.tp !== marketEnum['1X2OverUnder'] ? 24 / market.sls.length : 24 / (market.sls.length - 1)}}">
             <button (click)="selectOdd(market.tp, selection)"
@@ -25,7 +25,6 @@
                   *ngIf="market.tp !== marketEnum['1X2']">{{ selection.nm | extractSign | uppercase }}</span>
                 <span class="selection-value">{{ selection.ods[0].vl | number: '1.2-2'}}</span>
               </div>
-
             </button>
           </mat-grid-tile>
         </ng-container>
