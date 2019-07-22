@@ -421,9 +421,9 @@
 					@extend %PRODUCT-HORSE-BG-MOBILE;
 				}
 			}
-			&.PRODUCT-COCK-BG {
+			.PRODUCT-COCK-BG {
 				// COCK FIGHT
-				.race-control {
+				&.race-control {
 					@extend %PRODUCT-COCK-BG-MOBILE;
 				}
 			}

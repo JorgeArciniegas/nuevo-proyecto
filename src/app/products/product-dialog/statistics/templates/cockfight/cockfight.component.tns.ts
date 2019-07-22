@@ -38,6 +38,6 @@ export class CockfightComponent implements OnInit {
 
 
   close(): void {
-    this.dialog.showDialog = false;
+    this.dialog.closeDialog();
   }
 }

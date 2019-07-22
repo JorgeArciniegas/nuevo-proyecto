@@ -8,7 +8,6 @@ import { DialogService } from '../../../../../../../src/app/products/dialog.serv
   styleUrls: ['./race.component.scss']
 })
 export class RaceComponent implements OnInit {
-
   @Input()
   data: BetDataDialog;
 
@@ -18,26 +17,23 @@ export class RaceComponent implements OnInit {
   constructor(private dialog: DialogService) {
     this.maxDataStatistics = 1;
     this.maxDataStatistics = 1;
-    this.rows  = '';
-
+    this.rows = '';
   }
 
   ngOnInit() {
-
     /**
      * Defined coefficent percentage for fitness status
      */
-    this.data.statistics.virtualBetCompetitor.sort( (a, b) => a.ito <= b.ito ? -1 : 1 );
-    this.data.statistics.virtualBetCompetitor.map( item => {
+    this.data.statistics.virtualBetCompetitor.sort((a, b) => (a.ito <= b.ito ? -1 : 1));
+    this.data.statistics.virtualBetCompetitor.map(item => {
       this.rows += '3*,'; // Indicate the rows text value append to GridLayout
       this.maxDataStatistics += item.ff;
     });
-    this.rows = this.rows.substr(0, this.rows.length - 1 );  // removed last `,` to string Rows
-    this.maxDataStatistics = this.maxDataStatistics ;
+    this.rows = this.rows.substr(0, this.rows.length - 1); // removed last `,` to string Rows
+    this.maxDataStatistics = this.maxDataStatistics;
   }
 
-
   close(): void {
-    this.dialog.showDialog = false;
+    this.dialog.closeDialog();
   }
 }
