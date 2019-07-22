@@ -50,8 +50,8 @@
       <!-- BETSLIP CODE -->
       <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center" class="display padding-20">
         <h3 class="label-overlap">{{ 'COUPON_CODE' | translate }}</h3>
-        <mat-form-field fxFlex class="btn-filter btn-default padding-5 radius-5">
-          <input matInput type="text" class="padding-5" [(ngModel)]="betsListService.ticketCode">
+        <mat-form-field fxFlex class="btn-filter btn-default padding-10 radius-5" fxLayoutAlign="start center">
+          <input matInput type="text" [(ngModel)]="betsListService.ticketCode">
         </mat-form-field>
       </div>
     </div>
