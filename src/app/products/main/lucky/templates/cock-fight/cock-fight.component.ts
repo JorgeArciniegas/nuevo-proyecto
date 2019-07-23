@@ -4,14 +4,14 @@ import { UserService } from '../../../../../services/user.service';
 import { MainService } from '../../../main.service';
 import { Subscription } from 'rxjs';
 import { VirtualBetEvent, VirtualBetSelection } from '@elys/elys-api';
-import { Market } from '../../../../../../../src/app/products/products.model';
+import { Market } from '../../../../products.model';
 
 @Component({
-  selector: 'app-lucky-cock',
-  templateUrl: './cock.component.html',
-  styleUrls: ['./cock.component.scss']
+  selector: 'app-lucky-cock-fight',
+  templateUrl: './cock-fight.component.html',
+  styleUrls: ['./cock-fight.component.scss']
 })
-export class CockComponent implements OnInit {
+export class CockFightComponent implements OnInit {
   public market: typeof Market = Market;
 
   lucky: typeof Lucky = Lucky;
@@ -37,19 +37,14 @@ export class CockComponent implements OnInit {
   private isNewEvent = true;
   evtChangeSubscription: Subscription;
   private currentEvent: VirtualBetEvent;
-  constructor(
-    private userService: UserService,
-    private mainService: MainService
-  ) {
-    this.evtChangeSubscription = this.mainService.currentEventSubscribe.subscribe(
-      event => {
-        /**
-         * listen to event change
-         */
-        this.isNewEvent = true;
-        this.oldLuckyCock = 0;
-      }
-    );
+  constructor(private userService: UserService, private mainService: MainService) {
+    this.evtChangeSubscription = this.mainService.currentEventSubscribe.subscribe(event => {
+      /**
+       * listen to event change
+       */
+      this.isNewEvent = true;
+      this.oldLuckyCock = 0;
+    });
   }
   ngOnInit() {}
 
@@ -117,18 +112,12 @@ export class CockComponent implements OnInit {
     /**
      * check if the current selection is equal to the previous
      */
-    if (
-      this.oldLuckyCock === 0 ||
-      this.oldLuckyCock !== currentSelection.selection.id
-    ) {
+    if (this.oldLuckyCock === 0 || this.oldLuckyCock !== currentSelection.selection.id) {
       this.oldLuckyCock = currentSelection.selection.id;
       /**
        * places the selection on the main service
        */
-      this.mainService.placingOddByOdd(
-        currentSelection.tp,
-        currentSelection.selection
-      );
+      this.mainService.placingOddByOdd(currentSelection.tp, currentSelection.selection);
     } else {
       this.placingLucky(lucky);
     }

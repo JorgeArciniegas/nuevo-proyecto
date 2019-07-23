@@ -1,4 +1,5 @@
 <div>
   <app-statistics-race *ngIf="data.statistics.layoutProducts === layout.RACING" [data]="data"></app-statistics-race>
-  <app-statistics-cockfight *ngIf="data.statistics.layoutProducts === layout.COCK_FIGHT" [data]="data"></app-statistics-cockfight>
+  <app-statistics-cock-fight *ngIf="data.statistics.layoutProducts === layout.COCK_FIGHT" [data]="data">
+  </app-statistics-cock-fight>
 </div>

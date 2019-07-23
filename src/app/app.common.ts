@@ -31,7 +31,7 @@ import { StatisticsComponent } from './products/product-dialog/statistics/statis
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
 // tslint:disable-next-line:max-line-length
-import { CockfightComponent  as CockfightStatisticsComponent } from './products/product-dialog/statistics/templates/cockfight/cockfight.component';
+import { CockFightComponent as CockFightStatisticsComponent } from './products/product-dialog/statistics/templates/cock-fight/cock-fight.component';
 import { RaceComponent as RaceStatisticsComponent } from './products/product-dialog/statistics/templates/race/race.component';
 
 // Registration of the languages in use. The English language is registered by default.
@@ -61,8 +61,7 @@ export const componentDeclarations: any[] = [
   BetoddsComponent,
   StatisticsComponent,
   RaceStatisticsComponent,
-  CockfightStatisticsComponent
-
+  CockFightStatisticsComponent
 ];
 
 export const providerDeclarations: any[] = [

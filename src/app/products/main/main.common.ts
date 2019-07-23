@@ -7,15 +7,15 @@ import { MainComponent } from './main.component';
 import { ResultsComponent } from './results/results.component';
 import { RaceComponent as ResultsRaceComponent } from './results/templates/race/race.component';
 import { RaceComponent as LuckyRaceComponent } from './lucky/templates/race/race.component';
-import { CockComponent as LuckyCockComponent } from './lucky/templates/cock/cock.component';
+import { CockFightComponent as LuckyCockFightComponent } from './lucky/templates/cock-fight/cock-fight.component';
 import { RaceComponent as PlayableBoardRaceComponent } from './playable-board/templates/race/race.component';
-import { StandardListComponent } from './events-list/templates/standard-list/standard-list.component';
-import { StandardComponent } from './event-control/templates/standard/standard.component';
+import { StandardComponent as EventsListStandardComponent } from './events-list/templates/standard/standard.component';
+import { StandardComponent as EventControlStandardComponent } from './event-control/templates/standard/standard.component';
 import { CockFightComponent as PlayableBoardCockFightComponent } from './playable-board/templates/cock-fight/cock-fight.component';
 import { FilterAndSortByShownMarketsPipe } from './playable-board/filter-and-sort-by-shown-markets.pipe';
 import { CompetitorNamePipe } from './playable-board/competitor-name.pipe';
 import { LuckyComponent } from './lucky/lucky.component';
-import { CockfightComponent as ResultsCockfightComponent } from './results/templates/cockfight/cockfight.component';
+import { CockFightComponent as ResultsCockFightComponent } from './results/templates/cock-fight/cock-fight.component';
 import { CompetitorItoPipe } from './playable-board/competitor-ito.pipe';
 import { ExtractSignPipe } from './playable-board/extract-sign.pipe';
 
@@ -24,7 +24,7 @@ export const componentDeclarations: any[] = [
   EventControlComponent,
   EventListComponent,
   LuckyComponent,
-  LuckyCockComponent,
+  LuckyCockFightComponent,
   LuckyRaceComponent,
   ResultsComponent,
   PlayableBoardComponent,
@@ -35,9 +35,9 @@ export const componentDeclarations: any[] = [
   ExtractSignPipe,
   ResultsRaceComponent,
   PlayableBoardRaceComponent,
-  StandardListComponent,
-  StandardComponent,
-  ResultsCockfightComponent,
+  EventsListStandardComponent,
+  EventControlStandardComponent,
+  ResultsCockFightComponent,
   PlayableBoardCockFightComponent
 ];
 
