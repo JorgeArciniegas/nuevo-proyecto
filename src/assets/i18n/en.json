@@ -1,15 +1,16 @@
 {
   "ACCG": "QUI",
+  "AGILITY": "agility",
   "BALANCE": "Balance",
   "BASE": "B",
   "BET": "Bet",
+  "BET_STATUS": "Bet status",
+  "BET_TYPE": "Bet type",
+  "BET_UNDER_EVALUATION": "Bet under evaluation, please wait",
   "BETS_LIST": "Bets List",
   "BETS_LIST.LOST": "Lost",
   "BETS_LIST.OPEN": "Open",
   "BETS_LIST.WON": "Won",
-  "BET_STATUS": "Bet status",
-  "BET_TYPE": "Bet type",
-  "BET_UNDER_EVALUATION": "Bet under evaluation, please wait",
   "BONUS": "Bonus",
   "BTNCALC.COL": "COL",
   "BTNCALC.TOT": "TOT",
@@ -22,11 +23,11 @@
   "CONDITION": "Condition",
   "CONFIRM": "Confirm",
   "CONFIRM_DESTROY_COUPON.MESSAGE": "This operation will cancel the current coupon. Do you want to continue?",
-  "COUPON.BET": "Bet",
   "COUPON_CODE": "Coupon code",
   "COUPON_RESET": "Coupon reset",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Bet accepted,",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "check the Bet List",
+  "COUPON.BET": "Bet",
   "DATE": "Date",
   "DATE_FROM": "Date from",
   "DATE_OF_PLACEMENT": "Date of placement",
@@ -36,10 +37,19 @@
   "DELETED_ON": "Deleted on",
   "DETAIL": "Detail",
   "DYNAMIC_KEYS": {
+    "CockMarket": {
+      "NAME": {
+        "1X2": "Win",
+        "1X2 + OverUnder": "Win+ o/u",
+        "1X2 + Winning Sector": "Win+ sector",
+        "Over/Under": "O/u",
+        "Winning Sector": "Sector"
+      }
+    },
     "COUPON_ERROR": {
-      "API_ERROR": "Generic API error",
       "AccountInsertDataError": "An error occurred while adding the user account [Code ES11]",
       "AgentBettorMismatch": "This user does not belong to your network [Code ES18]",
+      "API_ERROR": "Generic API error",
       "BankerNotAllowedOnIntegral": "You cannot add a banker to an integral bet [Code ES22]",
       "BetAlreadyPaid": "This coupon has already been paid [Code ES19]",
       "BetLost": "Bet lost [Code ES21]",
@@ -166,6 +176,15 @@
       "SingleBet": "Single bet",
       "Unknown": "Coupon type unknow"
     },
+    "ODDS_RESULT": {
+      "LOST": "Lost",
+      "UNSET": "Open",
+      "WON": "Won"
+    },
+    "OVER_UNDER_COCKFIGHT": {
+      "O": "ov",
+      "U": "un"
+    },
     "PRINT_COUPON": {
       "LICENSE_MESSAGE": {
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua."
@@ -202,9 +221,12 @@
       "AX": "Quinella",
       "COUPON": "Coupon",
       "EVEN": "Even",
+      "MULTI": "Multi",
       "ODD": "Odd",
+      "OU": "Over/Under",
       "OVER": "Over",
       "PLACED": "Placed",
+      "S": "Sector",
       "SHOW": "Show",
       "STATISTIC": "Statistics",
       "T": "Trifecta",
@@ -212,12 +234,9 @@
       "TOX": "Trifecta",
       "TR": "Trifecta returned",
       "UNDER": "Under",
-      "VT": "Standout trifecta",
-      "WINNER": "Winner",
       "V": "V",
-      "S": "Sector",
-      "OU": "Over/Under",
-      "MULTI": "Multi"
+      "VT": "Standout trifecta",
+      "WINNER": "Winner"
     },
     "SMARTCODE": {
       "1VA": "S. exacta",
@@ -229,36 +248,24 @@
       "AT": "Q2X",
       "AX": "QUI",
       "EVEN": "Even",
+      "MULTI": "Multi",
       "ODD": "Odd",
+      "OU": "Ou",
       "OVER": "Over",
       "PLACED": "Placed",
+      "S": "S",
       "SHOW": "Show",
       "T": "T3X",
       "TNX": "TNX",
       "TOX": "T3X",
       "TR": "T3X",
       "UNDER": "Under",
-      "VT": "SX",
-      "WINNER": "Winner",
       "V": "V",
-      "S": "S",
-      "OU": "Ou",
-      "MULTI": "Multi"
-    },
-    "OVER_UNDER_COCKFIGHT": {
-      "O": "ov",
-      "U": "un"
-    },
-    "CockMarket": {
-      "NAME": {
-        "1X2": "Win",
-        "Over/Under": "O/u",
-        "Winning Sector": "Sector",
-        "1X2 + Winning Sector": "Win+ sector",
-        "1X2 + OverUnder": "Win+ o/u"
-      }
+      "VT": "SX",
+      "WINNER": "Winner"
     }
   },
+  "ENDURANCE": "endurance",
   "ERROR": "Error",
   "EVENTS": "Events",
   "GO_TO_HOME": "Go to home",
@@ -304,21 +311,19 @@
   "STAKE_AMOUNT": "Stake",
   "STARTING_DATE": "Starting date",
   "STATUS": "Status",
+  "STRENGTH": "strength",
   "SUMMARY": "Summary",
-  "TOTALS": "Totals",
-  "TOTAL_PAYOUT": "Total payout",
-  "TOTAL_STAKE": "Total stake",
   "TOT_BET": "TOT bet",
   "TOT_LOST": "TOT lost",
   "TOT_OPEN": "TOT open",
   "TOT_WON": "TOT won",
+  "TOTAL_PAYOUT": "Total payout",
+  "TOTAL_STAKE": "Total stake",
+  "TOTALS": "Totals",
   "TYPE": "Type",
+  "USER_NOT_ENABLE_TO_THE_OPERATION": "User not allowed to execute the operation",
   "USERNAME": "Username",
   "USERNAME_TOO_SHORT": "The username is too short (minimum 2 digits)",
-  "USER_NOT_ENABLE_TO_THE_OPERATION": "User not allowed to execute the operation",
   "WARNING": "Warning",
-  "WON": "Won",
-  "STRENGTH": "strength",
-  "ENDURANCE": "endurance",
-  "AGILITY": "agility"
+  "WON": "Won"
 }

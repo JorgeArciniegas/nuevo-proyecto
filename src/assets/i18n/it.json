@@ -1,15 +1,16 @@
 {
   "ACCG": "ACCG",
+  "AGILITY": "agilità",
   "BALANCE": "Saldo",
   "BASE": "B",
   "BET": "Scommessa",
+  "BET_STATUS": "Stato scommessa",
+  "BET_TYPE": "Tipo scommessa",
+  "BET_UNDER_EVALUATION": "Coupon in elaborazione... Attendere",
   "BETS_LIST": "Lista scommesse",
   "BETS_LIST.LOST": "Perdenti",
   "BETS_LIST.OPEN": "In corso",
   "BETS_LIST.WON": "Vincenti",
-  "BET_STATUS": "Stato scommessa",
-  "BET_TYPE": "Tipo scommessa",
-  "BET_UNDER_EVALUATION": "Coupon in elaborazione... Attendere",
   "BONUS": "Bonus",
   "BTNCALC.COL": "COL",
   "BTNCALC.TOT": "TOT",
@@ -22,11 +23,11 @@
   "CONDITION": "Forma fisica",
   "CONFIRM": "Conferma",
   "CONFIRM_DESTROY_COUPON.MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?",
-  "COUPON.BET": "Scommetti",
   "COUPON_CODE": "Codice coupon",
   "COUPON_RESET": "Reset del coupon",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Coupon accettato e confermato...",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "Controlla la lista scommesse",
+  "COUPON.BET": "Scommetti",
   "DATE": "Data",
   "DATE_FROM": "Data da",
   "DATE_OF_PLACEMENT": "Data piazzamento",
@@ -36,10 +37,19 @@
   "DELETED_ON": "Annullata il",
   "DETAIL": "Dettaglio",
   "DYNAMIC_KEYS": {
+    "CockMarket": {
+      "NAME": {
+        "1X2": "Win",
+        "1X2 + OverUnder": "Win+ o/u",
+        "1X2 + Winning Sector": "Win+ sector",
+        "Over/Under": "O/u",
+        "Winning Sector": "Sector"
+      }
+    },
     "COUPON_ERROR": {
-      "API_ERROR": "Errore API generico",
       "AccountInsertDataError": "Errore inserimento conto utente [Cod. ES11]",
       "AgentBettorMismatch": "L'utente non appartiene alla rete dell'agente [Cod. ES18]",
+      "API_ERROR": "Errore API generico",
       "BankerNotAllowedOnIntegral": "Non è possibile aggiungere quote fisse a una scommessa integrale [Cod. ES22]",
       "BetAlreadyPaid": "Questo coupon è già stato pagato [Cod. ES19]",
       "BetLost": "Scommessa perdente [Cod. ES21]",
@@ -166,6 +176,15 @@
       "SingleBet": "Singola",
       "Unknown": "Formato coupon non riconosciuto"
     },
+    "ODDS_RESULT": {
+      "LOST": "Perdente",
+      "UNSET": "In gioco",
+      "WON": "Vinto"
+    },
+    "OVER_UNDER_COCKFIGHT": {
+      "O": "ov",
+      "U": "un"
+    },
     "PRINT_COUPON": {
       "LICENSE_MESSAGE": {
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua."
@@ -202,9 +221,12 @@
       "AX": "Accoppiata a girare",
       "COUPON": "Coupon",
       "EVEN": "Pari",
+      "MULTI": "Multi",
       "ODD": "Dispari",
+      "OU": "Over/Under",
       "OVER": "Over",
       "PLACED": "Piazzato",
+      "S": "Sector",
       "SHOW": "Podio",
       "STATISTIC": "Statistiche",
       "T": "Trio in ordine",
@@ -212,12 +234,9 @@
       "TOX": "Trio in ordine",
       "TR": "Trio in ordine con ritorno",
       "UNDER": "Under",
-      "VT": "Vincente trio",
-      "WINNER": "Vincente",
       "V": "V",
-      "S": "Sector",
-      "OU": "Over/Under",
-      "MULTI": "Multi"
+      "VT": "Vincente trio",
+      "WINNER": "Vincente"
     },
     "SMARTCODE": {
       "1VA": "V. accoppiata",
@@ -229,36 +248,24 @@
       "AT": "A2X",
       "AX": "ACG",
       "EVEN": "Pari",
+      "MULTI": "Multi",
       "ODD": "Dispari",
+      "OU": "Ou",
       "OVER": "Over",
       "PLACED": "Piazzato",
+      "S": "S",
       "SHOW": "Podio",
       "T": "T3X",
       "TNX": "TNX",
       "TOX": "T3X",
       "TR": "T3X",
       "UNDER": "Under",
-      "VT": "VX",
-      "WINNER": "Vincente",
       "V": "V",
-      "S": "S",
-      "OU": "Ou",
-      "MULTI": "Multi"
-    },
-    "OVER_UNDER_COCKFIGHT": {
-      "O": "ov",
-      "U": "un"
-    },
-    "CockMarket": {
-      "NAME": {
-        "1X2": "Win",
-        "Over/Under": "O/u",
-        "Winning Sector": "Sector",
-        "1X2 + Winning Sector": "Win+ sector",
-        "1X2 + OverUnder": "Win+ o/u"
-      }
+      "VT": "VX",
+      "WINNER": "Vincente"
     }
   },
+  "ENDURANCE": "resistenza",
   "ERROR": "Errore",
   "EVENTS": "Eventi",
   "GO_TO_HOME": "Vai alla home",
@@ -304,21 +311,19 @@
   "STAKE_AMOUNT": "Imp. giocato",
   "STARTING_DATE": "Data inizio",
   "STATUS": "Stato",
+  "STRENGTH": "forza",
   "SUMMARY": "Sommario",
-  "TOTALS": "Totali",
-  "TOTAL_PAYOUT": "Totale pagamento",
-  "TOTAL_STAKE": "Importo totale",
   "TOT_BET": "TOT giocato",
   "TOT_LOST": "TOT perso",
   "TOT_OPEN": "TOT in corso",
   "TOT_WON": "TOT vinto",
+  "TOTAL_PAYOUT": "Totale pagamento",
+  "TOTAL_STAKE": "Importo totale",
+  "TOTALS": "Totali",
   "TYPE": "Tipo",
+  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "USERNAME": "Nome utente",
   "USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
-  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "WARNING": "Avviso",
-  "WON": "Vinto",
-  "STRENGTH": "forza",
-  "ENDURANCE": "resistenza",
-  "AGILITY": "agilità"
+  "WON": "Vinto"
 }
