@@ -72,11 +72,7 @@ export class PolyfunctionStakePresetPlayer {
   hasDecimalSeparator?: boolean;
   typingType: TYPINGTYPE;
   isPreset?: boolean;
-  constructor(
-    typeSlipCol: TypeBetSlipColTot,
-    amount: number,
-    isPreset?: boolean
-  ) {
+  constructor(typeSlipCol: TypeBetSlipColTot, amount: number, isPreset?: boolean) {
     this.typeSlipCol = typeSlipCol;
     this.amount = amount;
     this.amountStr = amount.toString();
@@ -123,13 +119,7 @@ export class DialogData {
   opened: boolean;
   betCoupon?: BetCouponExtended;
   statistics?: StatisticDialog;
-  constructor(
-    betOdds?: BetOdds,
-    breakpoint?: number,
-    betCoupon?: BetCouponExtended,
-    title?: string,
-    statistics?: StatisticDialog
-  ) {
+  constructor(betOdds?: BetOdds, breakpoint?: number, betCoupon?: BetCouponExtended, title?: string, statistics?: StatisticDialog) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;
     this.opened = false;
@@ -148,13 +138,13 @@ export enum DialogTypeCoupon {
 }
 
 /**
- * when "checked" parameter is true Destroycoupon is enabled
+ * When "checked" parameter is true Destroycoupon is enabled
  */
 export interface CouponConfirmDelete {
   productCodeRequest?: string;
   checked: boolean;
   isRacing?: boolean;
-  racingNumber?: number;
+  eventNumber?: number;
 }
 
 // Enum of the markets

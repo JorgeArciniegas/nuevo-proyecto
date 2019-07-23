@@ -502,7 +502,7 @@ export class CouponService {
       checked: false,
       productCodeRequest: '',
       isRacing: false,
-      racingNumber: 0
+      eventNumber: 0
     };
   }
 }

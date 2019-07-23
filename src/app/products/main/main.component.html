@@ -1,10 +1,10 @@
 <div fxFlexFill fxLayout="column" class="product-class padding-horizontal-6">
   <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
-    <!-- Race control -->
+    <!-- Event control -->
     <mat-grid-tile rowspan="2">
       <app-event-control fxFill></app-event-control>
     </mat-grid-tile>
-    <!-- List races -->
+    <!-- List events -->
     <mat-grid-tile rowspan="2">
       <app-events-list fxFill [rowHeight]="rowHeight"></app-events-list>
     </mat-grid-tile>
@@ -12,7 +12,7 @@
     <mat-grid-tile rowspan="16" fxLayoutAlign="center">
       <app-playable-board fxFill rowHeight="{{rowHeight}}"></app-playable-board>
     </mat-grid-tile>
-    <!-- Special race -->
+    <!-- Special event -->
     <mat-grid-tile rowspan="2" fxLayout="column">
       <app-lucky fxFill></app-lucky>
     </mat-grid-tile>

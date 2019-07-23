@@ -1,4 +1,4 @@
-import { TypePlacingEvent } from "../main/main.models";
+import { TypePlacingEvent } from '../main/main.models';
 
 export class AdvButton {
   public label: string;
