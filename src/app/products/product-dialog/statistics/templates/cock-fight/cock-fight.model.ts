@@ -3,8 +3,8 @@ export class DataStaticsChart {
   ENDURANCE: number;
   AGILITY: number;
   constructor(strength?: number, endurance?: number, agility?: number) {
-    this.AGILITY = agility || 1;
-    this.ENDURANCE = endurance || 1;
-    this.STRENGTH = strength || 1;
+    this.AGILITY = agility || 0;
+    this.ENDURANCE = endurance || 0;
+    this.STRENGTH = strength || 0;
   }
 }
