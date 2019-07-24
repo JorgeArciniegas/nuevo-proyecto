@@ -37,6 +37,7 @@ import {
 } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
+import { LAYOUT_TYPE } from 'src/environments/environment.models';
 
 @Injectable({
   providedIn: 'root'
@@ -44,11 +45,12 @@ import { ResultsService } from './results/results.service';
 export class MainService extends MainServiceExtra {
   private reload: number;
   private cacheEvents: VirtualBetEvent[] = [];
+  private cacheTournaments: VirtualBetTournament[] = [];
   // Working variable
   private remainingTime: EventTime = new EventTime();
   placingEvent: PlacingEvent = new PlacingEvent();
   public currentEventDetails: VirtualBetEvent;
-
+  public currentProductDetails: VirtualBetTournament;
   private attempts = 0;
   private initCurrentEvent = false;
 
@@ -219,32 +221,88 @@ export class MainService extends MainServiceExtra {
     };
 
     this.elysApi.virtual.getVirtualTree(request).then((sports: VirtualProgramTreeBySportResponse) => {
-      const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
+      // cache all tournaments
+      this.cacheTournaments = sports.Sports[0].ts;
 
-      if (all) {
-        // Load all events
-        this.cacheEvents = tournament.evs;
-        for (let index = 0; index < 5; index++) {
-          const event: EventInfo = new EventInfo();
-          event.number = this.cacheEvents[index].id;
-          event.label = this.cacheEvents[index].nm;
-          event.date = new Date(this.cacheEvents[index].sdtoffset);
+      if ( this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER ) {
+        const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
+        if (all) {
+          // Load all events
+          this.cacheEvents = tournament.evs;
+          for (let index = 0; index <  this.productService.product.layoutProducts.nextEventItems; index++) {
+            const event: EventInfo = new EventInfo();
+            event.number = this.cacheEvents[index].id;
+            event.label = this.cacheEvents[index].nm;
+            event.date = new Date(this.cacheEvents[index].sdtoffset);
 
-          this.eventDetails.events[index] = event;
-        }
-        this.currentAndSelectedEventTime();
-      } else {
-        // Add only new event
-        tournament.evs.forEach((event: VirtualBetEvent) => {
-          if (this.cacheEvents.filter((cacheEvent: VirtualBetEvent) => cacheEvent.id === event.id).length === 0) {
-            this.cacheEvents.push(event);
+            this.eventDetails.events[index] = event;
           }
-        });
+          this.currentAndSelectedEventTime();
+        } else {
+          // Add only new event
+          tournament.evs.forEach((event: VirtualBetEvent) => {
+            if (this.cacheEvents.filter((cacheEvent: VirtualBetEvent) => cacheEvent.id === event.id).length === 0) {
+              this.cacheEvents.push(event);
+            }
+          });
+        }
+        // Get event's odds
+        this.eventDetailOdds(this.eventDetails.events[0].number);
+      // load markets from PRODUCT SOCCER
+      } else {
+
+        if (all) {
+          for (let index = 0; index <  this.productService.product.layoutProducts.nextEventItems; index++) {
+            const event: EventInfo = new EventInfo();
+            event.number = this.cacheTournaments[index].id;
+            event.label = this.cacheTournaments[index].nm;
+            event.date = new Date(this.cacheTournaments[index].sdtoffset);
+
+            this.eventDetails.events[index] = event;
+          }
+          this.currentAndSelectedEventTime();
+        } else {
+           // Add only new event
+           this.cacheTournaments.forEach((tournament: VirtualBetTournament) => {
+            // tslint:disable-next-line:max-line-length
+            if (this.cacheTournaments.filter((cacheTournament: VirtualBetTournament) => cacheTournament.id === tournament.id).length === 0) {
+              this.cacheTournaments.push(tournament);
+            }
+          });
+        }
+        // Get event's odds
+        this.eventDetailOddsByCacheTournament(this.eventDetails.events[0].number);
       }
-      // Get event's odds
-      this.eventDetailOdds(this.eventDetails.events[0].number);
-      this.reload = 4;
     });
+    this.reload = this.productService.product.layoutProducts.nextEventItems - 1;
+  }
+
+  private eventDetailOddsByCacheTournament(tournamentNumber: number): void {
+    const tournament: VirtualBetTournament = this.cacheTournaments.filter(
+      (cacheTournament: VirtualBetTournament) => cacheTournament.id === tournamentNumber)[0];
+    const request: VirtualDetailOddsOfEventRequest = {
+      sportId: this.productService.product.sportId,
+      matchId: tournamentNumber
+    };
+    // Ceck, if it is empty load from api
+    if (tournament.evs == null || tournament.evs.length === 0) {
+      this.elysApi.virtual.getVirtualEventDetail(request).then((sportDetail: VirtualDetailOddsOfEventResponse) => {
+        try {
+          tournament.evs = sportDetail.Sport.ts[0].evs;
+          this.currentProductDetails = tournament;
+          this.attempts = 0;
+        } catch (err) {
+          if (this.attempts < 5) {
+            this.attempts++;
+            setTimeout(() => {
+              this.eventDetailOddsByCacheTournament(tournamentNumber);
+            }, 1000);
+          } else {
+            this.attempts = 0;
+          }
+        }
+      });
+    }
   }
 
   currentAndSelectedEventTime() {
@@ -307,6 +365,10 @@ export class MainService extends MainServiceExtra {
   }
 
   eventDetailOdds(eventNumber: number): void {
+    if ( this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER ) {
+      this.eventDetailOddsByCacheTournament(eventNumber);
+      return;
+    }
     const event: VirtualBetEvent = this.cacheEvents.filter((cacheEvent: VirtualBetEvent) => cacheEvent.id === eventNumber)[0];
     const request: VirtualDetailOddsOfEventRequest = {
       sportId: this.productService.product.sportId,
@@ -1169,4 +1231,14 @@ export class MainService extends MainServiceExtra {
     });
     return response;
   }
+
+  public getCurrentTournament(): Promise<VirtualBetTournament> {
+    const response = new Promise<VirtualBetTournament>((resolve, reject) => {
+      resolve(this.cacheTournaments.filter(
+        (cacheTournament: VirtualBetTournament) => cacheTournament.id === this.placingEvent.eventNumber)[0]);
+    });
+    return response;
+  }
+
+
 }
