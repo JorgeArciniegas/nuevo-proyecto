@@ -1,6 +1,6 @@
 {
   "ACCG": "ACCG",
-  "AGILITY": "agilità",
+  "AGILITY": "Agilità",
   "BALANCE": "Saldo",
   "BASE": "B",
   "BET": "Scommessa",
@@ -265,7 +265,7 @@
       "WINNER": "Vincente"
     }
   },
-  "ENDURANCE": "resistenza",
+  "ENDURANCE": "Resistenza",
   "ERROR": "Errore",
   "EVENTS": "Eventi",
   "GO_TO_HOME": "Vai alla home",
@@ -311,7 +311,7 @@
   "STAKE_AMOUNT": "Imp. giocato",
   "STARTING_DATE": "Data inizio",
   "STATUS": "Stato",
-  "STRENGTH": "forza",
+  "STRENGTH": "Forza",
   "SUMMARY": "Sommario",
   "TOT_BET": "TOT giocato",
   "TOT_LOST": "TOT perso",

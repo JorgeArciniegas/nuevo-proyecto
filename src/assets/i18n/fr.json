@@ -1,6 +1,6 @@
 {
   "ACCG": "ACCG",
-  "AGILITY": "agilitè",
+  "AGILITY": "Agilitè",
   "BALANCE": "Solde",
   "BASE": "B",
   "BET": "Pari",
@@ -265,7 +265,7 @@
       "WINNER": "Gagnant"
     }
   },
-  "ENDURANCE": "endurance",
+  "ENDURANCE": "Endurance",
   "ERROR": "Erreur",
   "EVENTS": "Événements",
   "GO_TO_HOME": "Vai alla home",
@@ -311,7 +311,7 @@
   "STAKE_AMOUNT": "Mise",
   "STARTING_DATE": "Data inizio",
   "STATUS": "Statut",
-  "STRENGTH": "force",
+  "STRENGTH": "Force",
   "SUMMARY": "Sommario",
   "TOT_BET": "TOT giocato",
   "TOT_LOST": "TOT perso",

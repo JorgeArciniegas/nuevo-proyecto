@@ -1,6 +1,6 @@
 {
   "ACCG": "QUI",
-  "AGILITY": "agility",
+  "AGILITY": "Agility",
   "BALANCE": "Balance",
   "BASE": "B",
   "BET": "Bet",
@@ -265,7 +265,7 @@
       "WINNER": "Winner"
     }
   },
-  "ENDURANCE": "endurance",
+  "ENDURANCE": "Endurance",
   "ERROR": "Error",
   "EVENTS": "Events",
   "GO_TO_HOME": "Go to home",
@@ -311,7 +311,7 @@
   "STAKE_AMOUNT": "Stake",
   "STARTING_DATE": "Starting date",
   "STATUS": "Status",
-  "STRENGTH": "strength",
+  "STRENGTH": "Strength",
   "SUMMARY": "Summary",
   "TOT_BET": "TOT bet",
   "TOT_LOST": "TOT lost",

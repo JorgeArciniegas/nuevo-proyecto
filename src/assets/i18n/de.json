@@ -1,6 +1,6 @@
 {
   "ACCG": "ACCG",
-  "AGILITY": "geschicklichkeit",
+  "AGILITY": "Geschicklichkeit",
   "BALANCE": "Kontostand",
   "BASE": "B",
   "BET": "Wett",
@@ -265,7 +265,7 @@
       "WINNER": "Gewinner"
     }
   },
-  "ENDURANCE": "ausdauer",
+  "ENDURANCE": "Ausdauer",
   "ERROR": "Fehler",
   "EVENTS": "Ereignisse",
   "GO_TO_HOME": "Vai alla home",
@@ -311,7 +311,7 @@
   "STAKE_AMOUNT": "Wetteinsatz",
   "STARTING_DATE": "Data inizio",
   "STATUS": "Status",
-  "STRENGTH": "stärke",
+  "STRENGTH": "Stärke",
   "SUMMARY": "Sommario",
   "TOT_BET": "TOT giocato",
   "TOT_LOST": "TOT perso",

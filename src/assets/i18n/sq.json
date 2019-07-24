@@ -1,6 +1,6 @@
 {
   "ACCG": "ACCG",
-  "AGILITY": "shkathtësi",
+  "AGILITY": "Shkathtësi",
   "BALANCE": "Balance",
   "BASE": "B",
   "BET": "Bastit",
@@ -265,7 +265,7 @@
       "WINNER": "Fitues"
     }
   },
-  "ENDURANCE": "durim",
+  "ENDURANCE": "Durim",
   "ERROR": "Gabim",
   "EVENTS": "Eventet",
   "GO_TO_HOME": "Vai alla home",
@@ -311,7 +311,7 @@
   "STAKE_AMOUNT": "Shuma",
   "STARTING_DATE": "Data inizio",
   "STATUS": "Statusi",
-  "STRENGTH": "forcë",
+  "STRENGTH": "Forcë",
   "SUMMARY": "Sommario",
   "TOT_BET": "TOT giocato",
   "TOT_LOST": "TOT perso",
