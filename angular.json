@@ -46,7 +46,7 @@
               "buildOptimizer": true
             },
             "vgen-prod": {
-              "outputPath": "dist-vgen-prod",
+              "outputPath": "dist-vgen",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
