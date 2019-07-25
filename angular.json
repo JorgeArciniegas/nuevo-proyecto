@@ -55,7 +55,7 @@
               ]
             },
             "vgen-staging": {
-              "outputPath": "dist-vgen-staging",
+              "outputPath": "dist-vgen",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
