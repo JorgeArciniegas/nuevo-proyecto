@@ -37,7 +37,7 @@ import {
 } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
-import { LAYOUT_TYPE } from 'src/environments/environment.models';
+import { LAYOUT_TYPE } from '../../../environments/environment.models';
 
 @Injectable({
   providedIn: 'root'
