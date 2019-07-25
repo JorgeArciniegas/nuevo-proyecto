@@ -16,7 +16,7 @@ export const environment: Environment = (() => {
       case 'prod':
         envVars = prodEnvironment;
         break;
-      case 'vgen':
+      case 'vgen-prod':
         envVars = vgenEnvironment;
         break;
       case 'vgen-staging':

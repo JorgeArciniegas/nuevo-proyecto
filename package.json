@@ -10,8 +10,8 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build",
-    "vgen": "ng serve -c vgen",
-    "android-vgen": "tns run android --bundle --env.environment=\"vgen\"",
+    "vgen": "ng serve -c vgen-prod",
+    "android-vgen": "tns run android --bundle --env.environment=\"vgen-prod\"",
     "postinstall": "node ./version.js"
   },
   "private": true,
