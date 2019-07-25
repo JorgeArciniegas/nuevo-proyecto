@@ -33,11 +33,16 @@ import {
   SpecialBetValue,
   TypeBetSlipColTot,
   TypePlacingEvent,
-  VirtualBetSelectionExtended
+  VirtualBetSelectionExtended,
+  Areas,
+  Match,
+  MarketArea,
+  VirtualBetTournamentExtended
 } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';
+import { areas, overviewAreas } from './SoccerAreas';
 
 @Injectable({
   providedIn: 'root'
@@ -278,7 +283,9 @@ export class MainService extends MainServiceExtra {
   }
 
   private eventDetailOddsByCacheTournament(tournamentNumber: number): void {
-    const tournament: VirtualBetTournament = this.cacheTournaments.filter(
+
+    // modifica
+    const tournament: VirtualBetTournamentExtended = this.cacheTournaments.filter(
       (cacheTournament: VirtualBetTournament) => cacheTournament.id === tournamentNumber)[0];
     const request: VirtualDetailOddsOfEventRequest = {
       sportId: this.productService.product.sportId,
@@ -288,8 +295,50 @@ export class MainService extends MainServiceExtra {
     if (tournament.evs == null || tournament.evs.length === 0) {
       this.elysApi.virtual.getVirtualEventDetail(request).then((sportDetail: VirtualDetailOddsOfEventResponse) => {
         try {
+          // scorro gl elementi ed estraggo i matches
+          const matches: Match[] = [];
+
+          for (const match of sportDetail.Sport.ts[0].evs) {
+            const tmpMatch: Match = {
+              id: match.id,
+              name: match.nm,
+              smartcode: match.smc,
+              hasOddsSelected: false,
+              isVideoShown: match.ehv,
+              isDetailOpened: false
+            };
+            const overViewArea: Areas = Object.assign({}, overviewAreas);
+            const detailArea: Areas[] = Object.assign({}, areas);
+            // ciclare market di ogni singolo evento e associarlo alla area di appartenenza
+            for (const market of match.mk) {
+              // riempio i dati per l'overview
+              overViewArea.markets.filter( oMarket =>  {
+                if (oMarket.id === market.tp) {
+                  oMarket.selections = market.sls;
+                  console.log(oMarket,market.sls);
+                }
+               });
+
+            }
+
+            // riempio i dati per il dettaglio
+            for (const detail of detailArea) {
+              for (const areaMarket of detail.markets) {
+                const tmpMk: VirtualBetMarket = match.mk.filter(market => market.tp === areaMarket.id)[0];
+                areaMarket.selections = tmpMk.sls;
+              }
+            }
+
+            tmpMatch.detailAreas = detailArea;
+            tmpMatch.overviewArea = overViewArea;
+
+            matches.push(tmpMatch);
+          }
+          tournament.matches = matches;
           tournament.evs = sportDetail.Sport.ts[0].evs;
           this.currentProductDetails = tournament;
+
+          console.log(tournament.matches);
           this.attempts = 0;
         } catch (err) {
           if (this.attempts < 5) {
@@ -1233,12 +1282,13 @@ export class MainService extends MainServiceExtra {
   }
 
   public getCurrentTournament(): Promise<VirtualBetTournament> {
+    const tournamentSelected: VirtualBetTournament = this.cacheTournaments.filter(
+      (cacheTournament: VirtualBetTournament) => cacheTournament.id === this.placingEvent.eventNumber)[0];
+
     const response = new Promise<VirtualBetTournament>((resolve, reject) => {
-      resolve(this.cacheTournaments.filter(
-        (cacheTournament: VirtualBetTournament) => cacheTournament.id === this.placingEvent.eventNumber)[0]);
+      resolve(tournamentSelected);
     });
     return response;
   }
-
-
 }
+
