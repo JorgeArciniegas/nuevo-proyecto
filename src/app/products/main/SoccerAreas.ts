@@ -1,14 +1,17 @@
-import { Areas } from './main.models';
-export const overviewAreas: Areas = {
+import { Area } from './main.models';
+export const overviewAreas: Area = {
   id: 0,
   name: 'Overview',
+  layoutDefinition: {
+    areaCols: 1
+  },
   markets: [
     {
       id: 10,
       name: '1X2',
       hasSpecialValue: false,
       specialValueOrSpread: 0,
-      colsNumber: 3,
+      selectionCount: 3,
       selections: []
     },
     {
@@ -16,7 +19,7 @@ export const overviewAreas: Areas = {
       name: 'Over/Under',
       hasSpecialValue: true,
       specialValueOrSpread: 2.5,
-      colsNumber: 2,
+      selectionCount: 2,
       selections: []
     },
     {
@@ -24,23 +27,26 @@ export const overviewAreas: Areas = {
       name: 'Goal/NoGoal',
       hasSpecialValue: false,
       specialValueOrSpread: 0,
-      colsNumber: 2,
+      selectionCount: 2,
       selections: []
     }
   ]
 };
 
-export const areas: Areas[] = [
+export const areas: Area[] = [
   {
     id: 1,
     name: 'Main',
+    layoutDefinition: {
+      areaCols: 1
+    },
     markets: [
       {
         id: 10,
         name: '1X2',
         hasSpecialValue: false,
         specialValueOrSpread: 0,
-        colsNumber: 3,
+        selectionCount: 3,
         selections: []
       },
       {
@@ -48,7 +54,7 @@ export const areas: Areas[] = [
         name: 'Over/Under',
         hasSpecialValue: true,
         specialValueOrSpread: 2.5,
-        colsNumber: 2,
+        selectionCount: 2,
         selections: []
       },
       {
@@ -56,7 +62,7 @@ export const areas: Areas[] = [
         name: 'DoubleChance',
         hasSpecialValue: false,
         specialValueOrSpread: 0,
-        colsNumber: 3,
+        selectionCount: 3,
         selections: []
       },
       {
@@ -64,7 +70,7 @@ export const areas: Areas[] = [
         name: 'Goal/NoGoal',
         hasSpecialValue: false,
         specialValueOrSpread: 0,
-        colsNumber: 2,
+        selectionCount: 2,
         selections: []
       }
     ]
@@ -72,13 +78,16 @@ export const areas: Areas[] = [
   {
     id: 2,
     name: 'Over/Under',
+    layoutDefinition: {
+      areaCols: 2
+    },
     markets: [
       {
         id: 60,
         name: 'Over/Under',
         hasSpecialValue: true,
         specialValueOrSpread: 1.5,
-        colsNumber: 2,
+        selectionCount: 2,
         selections: []
       },
       {
@@ -86,7 +95,7 @@ export const areas: Areas[] = [
         name: 'Over/Under',
         hasSpecialValue: true,
         specialValueOrSpread: 2.5,
-        colsNumber: 2,
+        selectionCount: 2,
         selections: []
       },
       {
@@ -94,7 +103,7 @@ export const areas: Areas[] = [
         name: 'Over/Under',
         hasSpecialValue: true,
         specialValueOrSpread: 3.5,
-        colsNumber: 2,
+        selectionCount: 2,
         selections: []
       },
       {
@@ -102,7 +111,7 @@ export const areas: Areas[] = [
         name: 'Over/Under',
         hasSpecialValue: true,
         specialValueOrSpread: 4.5,
-        colsNumber: 2,
+        selectionCount: 2,
         selections: []
       },
       {
@@ -110,7 +119,7 @@ export const areas: Areas[] = [
         name: 'HomeO/U',
         hasSpecialValue: true,
         specialValueOrSpread: 0.5,
-        colsNumber: 2,
+        selectionCount: 2,
         selections: []
       },
       {
@@ -118,7 +127,7 @@ export const areas: Areas[] = [
         name: 'HomeO/U',
         hasSpecialValue: true,
         specialValueOrSpread: 1.5,
-        colsNumber: 2,
+        selectionCount: 2,
         selections: []
       },
       {
@@ -126,7 +135,7 @@ export const areas: Areas[] = [
         name: 'HomeO/U',
         hasSpecialValue: true,
         specialValueOrSpread: 2.5,
-        colsNumber: 2,
+        selectionCount: 2,
         selections: []
       },
       {
@@ -134,7 +143,7 @@ export const areas: Areas[] = [
         name: 'HomeO/U',
         hasSpecialValue: true,
         specialValueOrSpread: 3.5,
-        colsNumber: 2,
+        selectionCount: 2,
         selections: []
       },
       {
@@ -142,7 +151,7 @@ export const areas: Areas[] = [
         name: 'AwayO/U',
         hasSpecialValue: true,
         specialValueOrSpread: 0.5,
-        colsNumber: 2,
+        selectionCount: 2,
         selections: []
       },
       {
@@ -150,7 +159,7 @@ export const areas: Areas[] = [
         name: 'AwayO/U',
         hasSpecialValue: true,
         specialValueOrSpread: 1.5,
-        colsNumber: 2,
+        selectionCount: 2,
         selections: []
       },
       {
@@ -158,7 +167,7 @@ export const areas: Areas[] = [
         name: 'AwayO/U',
         hasSpecialValue: true,
         specialValueOrSpread: 2.5,
-        colsNumber: 2,
+        selectionCount: 2,
         selections: []
       },
       {
@@ -166,7 +175,7 @@ export const areas: Areas[] = [
         name: 'AwayO/U',
         hasSpecialValue: true,
         specialValueOrSpread: 3.5,
-        colsNumber: 2,
+        selectionCount: 2,
         selections: []
       }
     ]
@@ -180,7 +189,7 @@ export const areas: Areas[] = [
         name: 'HT/FT',
         hasSpecialValue: false,
         specialValueOrSpread: 0,
-        colsNumber: 9,
+        selectionCount: 9,
         selections: []
       }
     ]
@@ -194,7 +203,7 @@ export const areas: Areas[] = [
         name: 'FinalGoalsNumber',
         hasSpecialValue: false,
         specialValueOrSpread: 0,
-        colsNumber: 9,
+        selectionCount: 9,
         selections: []
       },
       {
@@ -202,7 +211,7 @@ export const areas: Areas[] = [
         name: 'TotalGoals',
         hasSpecialValue: false,
         specialValueOrSpread: 0,
-        colsNumber: 4,
+        selectionCount: 4,
         selections: []
       }
     ]
@@ -216,35 +225,41 @@ export const areas: Areas[] = [
         name: 'CorrectScore',
         hasSpecialValue: false,
         specialValueOrSpread: 0,
-        colsNumber: 25,
+        selectionCount: 25,
         selections: []
       }
     ]
   },
   {
     id: 6,
-    name: 'Scores1HT/2HT',
+    name: 'Scores1HT',
     markets: [
       {
         id: 1009,
         name: 'CScore1HT',
         hasSpecialValue: false,
         specialValueOrSpread: 0,
-        colsNumber: 9,
-        selections: []
-      },
-      {
-        id: 1018,
-        name: 'CScore2HT',
-        hasSpecialValue: false,
-        specialValueOrSpread: 0,
-        colsNumber: 9,
+        selectionCount: 9,
         selections: []
       }
     ]
   },
   {
     id: 7,
+    name: 'Scores2HT',
+    markets: [
+      {
+        id: 1018,
+        name: 'CScore2HT',
+        hasSpecialValue: false,
+        specialValueOrSpread: 0,
+        selectionCount: 9,
+        selections: []
+      }
+    ]
+  },
+  {
+    id: 8,
     name: 'ComboO/U',
     markets: [
       {
@@ -252,7 +267,7 @@ export const areas: Areas[] = [
         name: '1X2+O/U',
         hasSpecialValue: true,
         specialValueOrSpread: 1.5,
-        colsNumber: 6,
+        selectionCount: 6,
         selections: []
       },
       {
@@ -260,7 +275,7 @@ export const areas: Areas[] = [
         name: '1X2+O/U',
         hasSpecialValue: true,
         specialValueOrSpread: 2.5,
-        colsNumber: 6,
+        selectionCount: 6,
         selections: []
       },
       {
@@ -268,7 +283,7 @@ export const areas: Areas[] = [
         name: '1X2+O/U',
         hasSpecialValue: true,
         specialValueOrSpread: 3.5,
-        colsNumber: 6,
+        selectionCount: 6,
         selections: []
       },
       {
@@ -276,7 +291,7 @@ export const areas: Areas[] = [
         name: 'DoubleChance+O/U',
         hasSpecialValue: true,
         specialValueOrSpread: 1.5,
-        colsNumber: 6,
+        selectionCount: 6,
         selections: []
       },
       {
@@ -284,7 +299,7 @@ export const areas: Areas[] = [
         name: 'DoubleChance+O/U',
         hasSpecialValue: true,
         specialValueOrSpread: 2.5,
-        colsNumber: 6,
+        selectionCount: 6,
         selections: []
       },
       {
@@ -292,13 +307,13 @@ export const areas: Areas[] = [
         name: 'DoubleChance+O/U',
         hasSpecialValue: true,
         specialValueOrSpread: 3.5,
-        colsNumber: 6,
+        selectionCount: 6,
         selections: []
       }
     ]
   },
   {
-    id: 8,
+    id: 9,
     name: 'ComboGG/NG',
     markets: [
       {
@@ -306,7 +321,7 @@ export const areas: Areas[] = [
         name: '1X2+GG/NG',
         hasSpecialValue: false,
         specialValueOrSpread: 0,
-        colsNumber: 6,
+        selectionCount: 6,
         selections: []
       },
       {
@@ -314,7 +329,7 @@ export const areas: Areas[] = [
         name: 'DoubleChance+GG/NG',
         hasSpecialValue: false,
         specialValueOrSpread: 0,
-        colsNumber: 6,
+        selectionCount: 6,
         selections: []
       }
     ]

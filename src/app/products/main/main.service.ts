@@ -34,16 +34,17 @@ import {
   TypeBetSlipColTot,
   TypePlacingEvent,
   VirtualBetSelectionExtended,
-  Areas,
+  Area,
   Match,
   MarketArea,
-  VirtualBetTournamentExtended
+  VirtualBetTournamentExtended,
+  ListArea
 } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { areas, overviewAreas } from './SoccerAreas';
-
+import { cloneDeep as clone} from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
@@ -295,13 +296,17 @@ export class MainService extends MainServiceExtra {
       matchId: tournamentNumber
     };
     // If the tournament doesn't contain yet the events information, load them calling the API.
-    if (tournament.evs == null || tournament.evs.length === 0) {
+    if (!tournament.matches || tournament.matches == null || tournament.matches.length === 0) {
       this.elysApi.virtual.getVirtualEventDetail(request).then((sportDetail: VirtualDetailOddsOfEventResponse) => {
         try {
-          // scorro gli elementi ed estraggo i matches
-          const matches: Match[] = [];
 
+          const matches: Match[] = [];
+          const overViewArea: Area[] = [];
+          const listDetailArea: ListArea[] = [];
+
+          // cicle the tournament's matches and save their data
           for (const match of sportDetail.Sport.ts[0].evs) {
+            // created a temporary match object
             const tmpMatch: Match = {
               id: match.id,
               name: match.nm,
@@ -310,38 +315,40 @@ export class MainService extends MainServiceExtra {
               isVideoShown: match.ehv,
               isDetailOpened: false
             };
-            const overViewArea: Areas = Object.assign({}, overviewAreas);
-            const detailArea: Areas[] = Object.assign({}, areas);
-            // ciclare market di ogni singolo evento e associarlo alla area di appartenenza
+            // clone temporary areas from default values
+            const tmpAreaOverview = clone(overviewAreas);
+            const tmpDetailArea = clone(areas);
+            // cicle the current match's markets and save on the temporary "tmpAreaOverview"
             for (const market of match.mk) {
-              // riempio i dati per l'overview
-              overViewArea.markets.filter( oMarket =>  {
-                if (oMarket.id === market.tp) {
-                  oMarket.selections = market.sls;
-                  console.log(oMarket,market.sls);
+              // find the occurrence and append the selections' data
+              tmpAreaOverview.markets.map( (marketOverviewFilter) =>  {
+                if (marketOverviewFilter.id === market.tp) {
+                  marketOverviewFilter.selections = market.sls;
                 }
-               });
-
+              });
             }
 
-            // riempio i dati per il dettaglio
-            for (const detail of detailArea) {
+            // cicle the temporary detail's area
+            for (const detail of tmpDetailArea) {
+              // cicle the current match's markets and save on the temporary "tmpDetailArea"
               for (const areaMarket of detail.markets) {
+                // find the occurrence and append the selections' data
                 const tmpMk: VirtualBetMarket = match.mk.filter(market => market.tp === areaMarket.id)[0];
                 areaMarket.selections = tmpMk.sls;
               }
             }
-
-            tmpMatch.detailAreas = detailArea;
-            tmpMatch.overviewArea = overViewArea;
-
+            // save the datas to tournament object
             matches.push(tmpMatch);
+            overViewArea.push(tmpAreaOverview);
+            listDetailArea.push(tmpDetailArea);
           }
+
           tournament.matches = matches;
-          tournament.evs = sportDetail.Sport.ts[0].evs;
+          tournament.overviewArea = overViewArea;
+          tournament.listDetailAreas = listDetailArea;
+          // tournament.evs = sportDetail.Sport.ts[0].evs;
           this.currentProductDetails = tournament;
 
-          console.log(tournament.matches);
           this.attempts = 0;
         } catch (err) {
           if (this.attempts < 5) {

@@ -146,13 +146,19 @@ export class Smartcode {
 
 export interface VirtualBetTournamentExtended extends VirtualBetTournament {
   matches?: Match[];
+  overviewArea?: Area[];
+  listDetailAreas?: ListArea[];
 }
 
+export interface ListArea {
+  areas: Area[];
+}
 
-export interface Areas {
+export interface Area {
   id: number;
   name: string;
   markets: MarketArea[];
+  layoutDefinition?: LayoutGridDefinition;
 }
 
 export interface MarketArea {
@@ -160,8 +166,9 @@ export interface MarketArea {
   name: string;
   hasSpecialValue?: boolean;
   specialValueOrSpread: number;
-  colsNumber: number;
+  selectionCount: number;
   selections?: VirtualBetSelection[];
+  layoutGridDefinition?: LayoutGridDefinition;
 }
 
 export interface Match {
@@ -171,6 +178,12 @@ export interface Match {
   isVideoShown: boolean; // when it is true, the camera's icon should be active. The default value is false.
   hasOddsSelected: boolean;
   isDetailOpened: boolean;
-  overviewArea?: Areas;
-  detailAreas?: Areas[];
+
+}
+
+
+export interface LayoutGridDefinition {
+  areaCols?: number;
+  marketCols?: number;
+  marketRows?: number;
 }
