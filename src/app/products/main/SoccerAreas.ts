@@ -12,7 +12,12 @@ export const overviewAreas: Area = {
       hasSpecialValue: false,
       specialValueOrSpread: 0,
       selectionCount: 3,
-      selections: []
+      selections: [],
+      layoutGridDefinition: {
+        marketPositionOnColArea: 1,
+        marketCols: 3,
+        marketRows: 1
+      }
     },
     {
       id: 60,
@@ -20,7 +25,12 @@ export const overviewAreas: Area = {
       hasSpecialValue: true,
       specialValueOrSpread: 2.5,
       selectionCount: 2,
-      selections: []
+      selections: [],
+      layoutGridDefinition: {
+        marketPositionOnColArea: 1,
+        marketCols: 2,
+        marketRows: 1
+      }
     },
     {
       id: 43,
@@ -28,7 +38,12 @@ export const overviewAreas: Area = {
       hasSpecialValue: false,
       specialValueOrSpread: 0,
       selectionCount: 2,
-      selections: []
+      selections: [],
+      layoutGridDefinition: {
+        marketPositionOnColArea: 1,
+        marketCols: 2,
+        marketRows: 1
+      }
     }
   ]
 };
@@ -47,7 +62,12 @@ export const areas: Area[] = [
         hasSpecialValue: false,
         specialValueOrSpread: 0,
         selectionCount: 3,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 3,
+          marketRows: 1
+        }
       },
       {
         id: 60,
@@ -55,7 +75,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 2.5,
         selectionCount: 2,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 2,
+          marketRows: 1
+        }
       },
       {
         id: 46,
@@ -63,7 +88,12 @@ export const areas: Area[] = [
         hasSpecialValue: false,
         specialValueOrSpread: 0,
         selectionCount: 3,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 3,
+          marketRows: 1
+        }
       },
       {
         id: 43,
@@ -71,7 +101,12 @@ export const areas: Area[] = [
         hasSpecialValue: false,
         specialValueOrSpread: 0,
         selectionCount: 2,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 2,
+          marketRows: 1
+        }
       }
     ]
   },
@@ -88,7 +123,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 1.5,
         selectionCount: 2,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 2,
+          marketRows: 1
+        }
       },
       {
         id: 60,
@@ -96,7 +136,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 2.5,
         selectionCount: 2,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 2,
+          marketRows: 1
+        }
       },
       {
         id: 60,
@@ -104,7 +149,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 3.5,
         selectionCount: 2,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 2,
+          marketRows: 1
+        }
       },
       {
         id: 60,
@@ -112,7 +162,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 4.5,
         selectionCount: 2,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 2,
+          marketRows: 1
+        }
       },
       {
         id: 22,
@@ -120,7 +175,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 0.5,
         selectionCount: 2,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 2,
+          marketCols: 2,
+          marketRows: 1
+        }
       },
       {
         id: 22,
@@ -128,7 +188,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 1.5,
         selectionCount: 2,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 2,
+          marketCols: 2,
+          marketRows: 1
+        }
       },
       {
         id: 22,
@@ -136,7 +201,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 2.5,
         selectionCount: 2,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 2,
+          marketCols: 2,
+          marketRows: 1
+        }
       },
       {
         id: 22,
@@ -144,7 +214,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 3.5,
         selectionCount: 2,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 2,
+          marketCols: 2,
+          marketRows: 1
+        }
       },
       {
         id: 23,
@@ -152,7 +227,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 0.5,
         selectionCount: 2,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 2,
+          marketCols: 2,
+          marketRows: 1
+        }
       },
       {
         id: 23,
@@ -160,7 +240,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 1.5,
         selectionCount: 2,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 2,
+          marketCols: 2,
+          marketRows: 1
+        }
       },
       {
         id: 23,
@@ -168,7 +253,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 2.5,
         selectionCount: 2,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 2,
+          marketCols: 2,
+          marketRows: 1
+        }
       },
       {
         id: 23,
@@ -176,13 +266,21 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 3.5,
         selectionCount: 2,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 2,
+          marketCols: 2,
+          marketRows: 1
+        }
       }
     ]
   },
   {
     id: 3,
     name: 'HalfTime/FinalTime',
+    layoutDefinition: {
+      areaCols: 1
+    },
     markets: [
       {
         id: 44,
@@ -190,13 +288,21 @@ export const areas: Area[] = [
         hasSpecialValue: false,
         specialValueOrSpread: 0,
         selectionCount: 9,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 3,
+          marketRows: 3
+        }
       }
     ]
   },
   {
     id: 4,
     name: 'Goals',
+    layoutDefinition: {
+      areaCols: 2
+    },
     markets: [
       {
         id: 13,
@@ -204,7 +310,12 @@ export const areas: Area[] = [
         hasSpecialValue: false,
         specialValueOrSpread: 0,
         selectionCount: 9,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 3,
+          marketRows: 3
+        }
       },
       {
         id: 658,
@@ -212,13 +323,21 @@ export const areas: Area[] = [
         hasSpecialValue: false,
         specialValueOrSpread: 0,
         selectionCount: 4,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 2,
+          marketCols: 1,
+          marketRows: 4
+        }
       }
     ]
   },
   {
     id: 5,
     name: 'CorrectScore',
+    layoutDefinition: {
+      areaCols: 1
+    },
     markets: [
       {
         id: 2,
@@ -226,13 +345,21 @@ export const areas: Area[] = [
         hasSpecialValue: false,
         specialValueOrSpread: 0,
         selectionCount: 25,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 3,
+          marketRows: 9
+        }
       }
     ]
   },
   {
     id: 6,
     name: 'Scores1HT',
+    layoutDefinition: {
+      areaCols: 1
+    },
     markets: [
       {
         id: 1009,
@@ -240,13 +367,21 @@ export const areas: Area[] = [
         hasSpecialValue: false,
         specialValueOrSpread: 0,
         selectionCount: 9,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 3,
+          marketRows: 3
+        }
       }
     ]
   },
   {
     id: 7,
     name: 'Scores2HT',
+    layoutDefinition: {
+      areaCols: 1
+    },
     markets: [
       {
         id: 1018,
@@ -254,13 +389,21 @@ export const areas: Area[] = [
         hasSpecialValue: false,
         specialValueOrSpread: 0,
         selectionCount: 9,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 3,
+          marketRows: 3
+        }
       }
     ]
   },
   {
     id: 8,
     name: 'ComboO/U',
+    layoutDefinition: {
+      areaCols: 1
+    },
     markets: [
       {
         id: 689,
@@ -268,7 +411,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 1.5,
         selectionCount: 6,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 6,
+          marketRows: 1
+        }
       },
       {
         id: 689,
@@ -276,7 +424,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 2.5,
         selectionCount: 6,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 6,
+          marketRows: 1
+        }
       },
       {
         id: 689,
@@ -284,7 +437,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 3.5,
         selectionCount: 6,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 6,
+          marketRows: 1
+        }
       },
       {
         id: 32,
@@ -292,7 +450,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 1.5,
         selectionCount: 6,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 6,
+          marketRows: 1
+        }
       },
       {
         id: 32,
@@ -300,7 +463,12 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 2.5,
         selectionCount: 6,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 6,
+          marketRows: 1
+        }
       },
       {
         id: 32,
@@ -308,13 +476,21 @@ export const areas: Area[] = [
         hasSpecialValue: true,
         specialValueOrSpread: 3.5,
         selectionCount: 6,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 6,
+          marketRows: 1
+        }
       }
     ]
   },
   {
     id: 9,
     name: 'ComboGG/NG',
+    layoutDefinition: {
+      areaCols: 2
+    },
     markets: [
       {
         id: 722,
@@ -322,7 +498,12 @@ export const areas: Area[] = [
         hasSpecialValue: false,
         specialValueOrSpread: 0,
         selectionCount: 6,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 1,
+          marketCols: 3,
+          marketRows: 2
+        }
       },
       {
         id: 34,
@@ -330,7 +511,12 @@ export const areas: Area[] = [
         hasSpecialValue: false,
         specialValueOrSpread: 0,
         selectionCount: 6,
-        selections: []
+        selections: [],
+        layoutGridDefinition: {
+          marketPositionOnColArea: 2,
+          marketCols: 3,
+          marketRows: 2
+        }
       }
     ]
   }

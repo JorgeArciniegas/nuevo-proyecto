@@ -18,6 +18,7 @@ import { LuckyComponent } from './lucky/lucky.component';
 import { CockFightComponent as ResultsCockFightComponent } from './results/templates/cock-fight/cock-fight.component';
 import { CompetitorItoPipe } from './playable-board/competitor-ito.pipe';
 import { ExtractSignPipe } from './playable-board/extract-sign.pipe';
+import { SoccerComponent as PlayableBoardSoccerComponent } from './playable-board/templates/soccer/soccer.component';
 
 export const componentDeclarations: any[] = [
   MainComponent,
@@ -38,7 +39,8 @@ export const componentDeclarations: any[] = [
   EventsListStandardComponent,
   EventControlStandardComponent,
   ResultsCockFightComponent,
-  PlayableBoardCockFightComponent
+  PlayableBoardCockFightComponent,
+  PlayableBoardSoccerComponent
 ];
 
 export const providerDeclarations: any[] = [];

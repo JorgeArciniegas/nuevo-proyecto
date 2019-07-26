@@ -143,7 +143,6 @@ export class Smartcode {
   }
 }
 
-
 export interface VirtualBetTournamentExtended extends VirtualBetTournament {
   matches?: Match[];
   overviewArea?: Area[];
@@ -178,12 +177,11 @@ export interface Match {
   isVideoShown: boolean; // when it is true, the camera's icon should be active. The default value is false.
   hasOddsSelected: boolean;
   isDetailOpened: boolean;
-
 }
-
 
 export interface LayoutGridDefinition {
   areaCols?: number;
+  marketPositionOnColArea?: number;
   marketCols?: number;
   marketRows?: number;
 }

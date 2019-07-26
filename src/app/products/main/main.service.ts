@@ -51,7 +51,7 @@ import { cloneDeep as clone} from 'lodash';
 export class MainService extends MainServiceExtra {
   private reload: number;
   private cacheEvents: VirtualBetEvent[] = [];
-  private cacheTournaments: VirtualBetTournament[] = [];
+  private cacheTournaments: VirtualBetTournamentExtended[] = [];
   // Working variable
   private remainingTime: EventTime = new EventTime();
   placingEvent: PlacingEvent = new PlacingEvent();
@@ -1291,11 +1291,11 @@ export class MainService extends MainServiceExtra {
     return response;
   }
 
-  public getCurrentTournament(): Promise<VirtualBetTournament> {
-    const tournamentSelected: VirtualBetTournament = this.cacheTournaments.filter(
-      (cacheTournament: VirtualBetTournament) => cacheTournament.id === this.placingEvent.eventNumber)[0];
+  public getCurrentTournament(): Promise<VirtualBetTournamentExtended> {
+    const tournamentSelected: VirtualBetTournamentExtended = this.cacheTournaments.filter(
+      (cacheTournament: VirtualBetTournamentExtended) => cacheTournament.id === this.placingEvent.eventNumber)[0];
 
-    const response = new Promise<VirtualBetTournament>((resolve, reject) => {
+    const response = new Promise<VirtualBetTournamentExtended>((resolve, reject) => {
       resolve(tournamentSelected);
     });
     return response;
