@@ -282,20 +282,23 @@ export class MainService extends MainServiceExtra {
     this.reload = this.productService.product.layoutProducts.nextEventItems - 1;
   }
 
+  /**
+   * Method to retrieve the details of the events contained in the tournament.
+   * @param tournamentNumber tournament for which collect the events' details.
+   */
   private eventDetailOddsByCacheTournament(tournamentNumber: number): void {
-
-    // modifica
+    // Get the tournament information from the chace.
     const tournament: VirtualBetTournamentExtended = this.cacheTournaments.filter(
       (cacheTournament: VirtualBetTournament) => cacheTournament.id === tournamentNumber)[0];
     const request: VirtualDetailOddsOfEventRequest = {
       sportId: this.productService.product.sportId,
       matchId: tournamentNumber
     };
-    // Ceck, if it is empty load from api
+    // If the tournament doesn't contain yet the events information, load them calling the API.
     if (tournament.evs == null || tournament.evs.length === 0) {
       this.elysApi.virtual.getVirtualEventDetail(request).then((sportDetail: VirtualDetailOddsOfEventResponse) => {
         try {
-          // scorro gl elementi ed estraggo i matches
+          // scorro gli elementi ed estraggo i matches
           const matches: Match[] = [];
 
           for (const match of sportDetail.Sport.ts[0].evs) {
