@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { VirtualBetTournament } from '@elys/elys-api';
 import { Subscription, timer } from 'rxjs';
 import { MainService } from '../../../main.service';
-import { VirtualBetTournamentExtended } from '../../../main.models';
+import { VirtualBetTournamentExtended, Match } from '../../../main.models';
 
 @Component({
   selector: 'app-playable-board-soccer',
@@ -14,6 +14,7 @@ export class SoccerComponent implements OnInit, OnDestroy {
   public rowHeight: number;
   private currentEventSubscription: Subscription;
   public tournament: VirtualBetTournamentExtended;
+  public selectedMatch: Match;
 
   constructor(private mainService: MainService) {
     // Get the event's detail at the access of the section

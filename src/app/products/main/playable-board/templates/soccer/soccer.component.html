@@ -13,16 +13,40 @@
     </mat-grid-tile>
     <mat-grid-tile class="tile-market-selection" colspan="8" rowspan="10">
       <div [style.width.%]="100">
-        <ng-container *ngFor="let row of tournament.overviewArea; let i = index">
-          <mat-grid-list cols="7" rowHeight="{{rowHeight * 16/10}}">
-            <ng-container *ngFor="let market of tournament.overviewArea[i].markets">
-              <mat-grid-tile *ngFor="let odd of market.selections">
-                <button class="playable-row-tile display radius-5">
-                  {{ odd.nm }} {{ odd.ods[0].vl}}
-                </button>
-              </mat-grid-tile>
-            </ng-container>
-          </mat-grid-list>
+        <ng-container *ngIf="!selectedMatch">
+          <!-- TOURNAMENT'S OVERVIEW -->
+          <ng-container *ngFor="let row of tournament.overviewArea; let i = index">
+            <mat-grid-list cols="7" rowHeight="{{rowHeight * 16/10}}">
+              <ng-container *ngFor="let market of tournament.overviewArea[i].markets">
+                <mat-grid-tile *ngFor="let odd of market.selections">
+                  <button class="btn btn-default btn-default-cock radius-5">
+                    <div class="selection-details" fxLayout="column" fxLayoutAlign="center center">
+                      <span class="selection-name">{{ odd.nm }}</span>
+                      <span class="selection-value">{{ odd.ods[0].vl}}</span>
+                    </div>
+                  </button>
+                </mat-grid-tile>
+              </ng-container>
+            </mat-grid-list>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="selectedMatch">
+          <!-- EVENT'S DETAIL -->
+          <ng-container *ngFor="let row of tournament.overviewArea; let i = index">
+            <mat-grid-list cols="7" rowHeight="{{rowHeight * 16/10}}">
+              <ng-container *ngFor="let market of tournament.overviewArea[i].markets">
+                <mat-grid-tile *ngFor="let odd of market.selections">
+                  <button class="btn btn-default btn-default-cock radius-5">
+                    <div class="selection-details" fxLayout="column" fxLayoutAlign="center center">
+                      <span class="selection-name">{{ odd.nm }}</span>
+                      <span class="selection-value">{{ odd.ods[0].vl}}</span>
+                    </div>
+                  </button>
+                </mat-grid-tile>
+              </ng-container>
+            </mat-grid-list>
+          </ng-container>
         </ng-container>
       </div>
     </mat-grid-tile>
