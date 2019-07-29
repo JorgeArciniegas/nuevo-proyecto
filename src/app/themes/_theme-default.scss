@@ -425,6 +425,32 @@ html {
 			}
 		}
 
+		// Badge
+		.badge {
+			border-radius: 50%;
+			height: 2.4vh;
+			width: 2.4vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			&.badge--on {
+				@extend %badge--on;
+			}
+
+			&.badge--off {
+				@extend %badge--off;
+			}
+		}
+
+		.playable-row-tile {
+			&--active {
+				@extend %color-border-blu-2;
+				border-style: solid !important;
+				border-width: 2px !important;
+			}
+		}
+
 		.polifuctional-area {
 			.mat-figure {
 				padding-top: 10px;
@@ -737,6 +763,22 @@ html {
 			height: 100%;
 		}
 	}
+}
+
+.star-yellow-icon {
+	@extend %star-yellow-icon;
+}
+
+.star-red-icon {
+	@extend %star-red-icon;
+}
+
+.video-disabled-icon {
+	@extend %video-disabled-icon;
+}
+
+.video-enabled-icon {
+	@extend %video-enabled-icon;
 }
 
 @media print {

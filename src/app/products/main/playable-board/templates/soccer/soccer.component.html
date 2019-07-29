@@ -3,9 +3,14 @@
     <mat-grid-tile class="tile-match-name" colspan="2" rowspan="10">
       <div [style.width.%]="100">
         <mat-grid-list cols="1" rowHeight="{{rowHeight * 16/10}}">
-          <mat-grid-tile *ngFor="let match of tournament.matches">
-            <button class="playable-row-tile display radius-5">
-              {{ match.name }}
+          <mat-grid-tile *ngFor="let match of tournament.matches; let i = index">
+            <button class="playable-row-tile--soccer display radius-5"
+              [ngClass]="{'playable-row-tile--active': match.selectedMatch}">
+              <div class="badge"
+                [ngClass]="{'badge--on': match.hasOddsSelected === true, 'badge--off': match.hasOddsSelected === false}">
+                {{ i + 1 }}</div>
+              <div class="video-enabled-icon"></div>
+              <span>{{ match.name }}</span>
             </button>
           </mat-grid-tile>
         </mat-grid-list>
@@ -33,7 +38,7 @@
 
         <ng-container *ngIf="selectedMatch">
           <!-- EVENT'S DETAIL -->
-          <ng-container *ngFor="let row of tournament.overviewArea; let i = index">
+          <!-- <ng-container *ngFor="let row of tournament.overviewArea; let i = index">
             <mat-grid-list cols="7" rowHeight="{{rowHeight * 16/10}}">
               <ng-container *ngFor="let market of tournament.overviewArea[i].markets">
                 <mat-grid-tile *ngFor="let odd of market.selections">
@@ -46,7 +51,7 @@
                 </mat-grid-tile>
               </ng-container>
             </mat-grid-list>
-          </ng-container>
+          </ng-container> -->
         </ng-container>
       </div>
     </mat-grid-tile>

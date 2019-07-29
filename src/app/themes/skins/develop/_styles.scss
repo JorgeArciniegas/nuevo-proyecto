@@ -28,7 +28,7 @@ $btn-bg-yellow: #ffca18;
 //BORDERS COLOR
 $border-warning: #ffffff;
 $border-success: #02a502;
-$border-cartd-title: #313d4f;
+$border-card-title: #313d4f;
 $border-event: #1fb537;
 $color-border-box: #6b7279;
 $btn-border-keyboard: #03030a;
@@ -157,14 +157,14 @@ $color-text-gray: #6b7279;
 %card-title {
 	background-color: $color-bg-secodary;
 	color: $color-text-primary;
-	border: 1px solid $border-cartd-title;
+	border: 1px solid $border-card-title;
 	border-radius: 4px;
 }
 
 %card-title-mobile {
 	background-color: $color-bg-secodary;
 	color: $color-text-primary;
-	border-color: $border-cartd-title;
+	border-color: $border-card-title;
 	border-width: 1;
 	border-radius: 5;
 }
@@ -265,12 +265,12 @@ $color-text-gray: #6b7279;
 
 %btn-filter-form {
 	background-color: $color-bg-secodary;
-	border: 1px solid $border-cartd-title;
+	border: 1px solid $border-card-title;
 }
 %btn-filter-mobile {
 	background-color: $color-bg-secodary;
 	border-width: 1;
-	border-color: $border-cartd-title;
+	border-color: $border-card-title;
 }
 
 %btn-filter-success {
@@ -302,6 +302,10 @@ $gradient-white1: #ffffff;
 $gradient-white2: #e4e4e4;
 $gradient-dark1: #393939;
 $gradient-dark2: #000000;
+
+%color-border-blu-2 {
+	border-color: $gradient-blue2;
+}
 
 %btn-warning {
 	background: $gradient-red1;
@@ -447,6 +451,23 @@ $gradient-dark2: #000000;
 	color: $color-text-primary;
 }
 
+// BADGE
+%badge--off {
+	border: 1px solid $border-card-title;
+	background-color: $border-card-title;
+	color: $color-text-primary;
+}
+
+%badge--on {
+	border: 1px solid $border-card-title;
+	background: $gradient-blue1;
+	background: -moz-linear-gradient(top, $gradient-blue1 34%, $gradient-blue2 100%);
+	background: -webkit-linear-gradient(top, $gradient-blue1 34%, $gradient-blue2 100%);
+	background: linear-gradient(to bottom, $gradient-blue1 34%, $gradient-blue2 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-blue1', endColorstr='$gradient-blue2',GradientType=0 );
+	color: $color-text-primary;
+}
+
 // GAME AREA
 // Dog racing
 %PRODUCT-DOG-BG {
@@ -510,7 +531,7 @@ $gradient-dark2: #000000;
 %dialog {
 	background-color: $color-bg-primary;
 	color: $color-text-primary;
-	border: 1px solid $border-cartd-title;
+	border: 1px solid $border-card-title;
 	border-radius: 5px;
 }
 
@@ -518,23 +539,23 @@ $gradient-dark2: #000000;
 	background-color: $color-bg-primary;
 	color: $color-text-primary;
 	border-width: 1;
-	border-color: $border-cartd-title;
+	border-color: $border-card-title;
 	border-radius: 5;
 }
 
 %dialog-card {
 	background-color: $color-bg-secodary;
-	border: 1px solid $border-cartd-title;
+	border: 1px solid $border-card-title;
 }
 
 %dialog-card-mobile {
 	background-color: $color-bg-secodary;
 	border-width: 1;
-	border-color: $border-cartd-title;
+	border-color: $border-card-title;
 }
 
 %dialog-card-header {
-	background-color: $border-cartd-title;
+	background-color: $border-card-title;
 }
 
 %indicator {
@@ -603,8 +624,44 @@ $gradient-dark2: #000000;
 	background-size: contain;
 }
 
+%star-yellow-icon {
+	background: url("app/themes/skins/develop/icon/baseline-star_rate-18px.svg") center center no-repeat;
+}
+
+%star-yellow-icon-mobile {
+	background: url("~/app/themes/skins/develop/icon/baseline_star_rate_yellow_18dp.png") center center no-repeat;
+	background-size: contain;
+}
+
+%star-red-icon {
+	background: url("app/themes/skins/develop/icon/baseline-star_rate-18px.svg") center center no-repeat;
+}
+
+%star-red-icon-mobile {
+	background: url("~/app/themes/skins/develop/icon/baseline_star_rate_red_18dp.png") center center no-repeat;
+	background-size: contain;
+}
+
+%video-enabled-icon {
+	background: url("app/themes/skins/develop/icon/vdo.svg") center center no-repeat;
+}
+
+%video-enabled-icon-mobile {
+	background: url("~/app/themes/skins/develop/icon/vdo-enabled.png") center center no-repeat;
+	background-size: contain;
+}
+
+%video-disabled-icon {
+	background: url("app/themes/skins/develop/icon/vdo.svg") center center no-repeat;
+}
+
+%video-disabled-icon-mobile {
+	background: url("~/app/themes/skins/develop/icon/vdo-disabled.png") center center no-repeat;
+	background-size: contain;
+}
+
 %border-input-area {
-	border: 1px solid $border-cartd-title;
+	border: 1px solid $border-card-title;
 }
 
 %border-input-area-error {
@@ -613,7 +670,7 @@ $gradient-dark2: #000000;
 
 %border-input-area-mobile {
 	border-width: 1;
-	border-color: $border-cartd-title;
+	border-color: $border-card-title;
 }
 
 %border-input-area-error-mobile {
