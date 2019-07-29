@@ -1,4 +1,4 @@
-import { VirtualBetSelection } from '@elys/elys-api';
+import { VirtualBetSelection, VirtualBetTournament } from '@elys/elys-api';
 import { markParentViewsForCheckProjectedViews } from '@angular/core/src/view/util';
 
 export enum TypePlacingEvent {
@@ -141,4 +141,47 @@ export class Smartcode {
     this.selPodium = podium;
     this.selWinner = win;
   }
+}
+
+export interface VirtualBetTournamentExtended extends VirtualBetTournament {
+  matches?: Match[];
+  overviewArea?: Area[];
+  listDetailAreas?: ListArea[];
+}
+
+export interface ListArea {
+  areas: Area[];
+}
+
+export interface Area {
+  id: number;
+  name: string;
+  markets: MarketArea[];
+  layoutDefinition?: LayoutGridDefinition;
+}
+
+export interface MarketArea {
+  id: number;
+  name: string;
+  hasSpecialValue?: boolean;
+  specialValueOrSpread: number;
+  selectionCount: number;
+  selections?: VirtualBetSelection[];
+  layoutGridDefinition?: LayoutGridDefinition;
+}
+
+export interface Match {
+  id: number;
+  name: string;
+  smartcode: number;
+  isVideoShown: boolean; // when it is true, the camera's icon should be active. The default value is false.
+  hasOddsSelected: boolean;
+  isDetailOpened: boolean;
+}
+
+export interface LayoutGridDefinition {
+  areaCols?: number;
+  marketPositionOnColArea?: number;
+  marketCols?: number;
+  marketRows?: number;
 }

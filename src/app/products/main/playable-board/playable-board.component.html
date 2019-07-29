@@ -8,6 +8,10 @@
   <app-playable-board-cock-fight [rowHeight]="rowHeight"
     *ngIf="productService.product.layoutProducts.type === typeLayout.COCK_FIGHT">
   </app-playable-board-cock-fight>
+  <!-- TEMPLATE SOCCER -->
+  <app-playable-board-soccer [rowHeight]="rowHeight"
+    *ngIf="productService.product.layoutProducts.type === typeLayout.SOCCER">
+  </app-playable-board-soccer>
 </div>
 
 <!-- <mat-grid-list class="playable-grid-buttons playable-grid-repeat" cols="8" rowHeight="{{rowHeight}}">
