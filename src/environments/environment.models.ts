@@ -38,6 +38,7 @@ export interface Products {
   toolbarButton: ToolbarButtons;
   widgets?: Widget[];
   layoutProducts: LayoutProducts; // accept race, fight, soccer, keno
+  typeCoupon?: TypeCoupon; // Experimental
 }
 
 export interface Widget {
@@ -83,4 +84,11 @@ export enum LAYOUT_TYPE {
 // Bookmaker's identifier
 export enum LICENSE_TYPE {
   DEMO_LICENSE
+}
+
+
+export interface TypeCoupon {
+  isMultipleStake: boolean;
+  acceptMultiStake: boolean;
+  typeLayout: LAYOUT_TYPE;
 }

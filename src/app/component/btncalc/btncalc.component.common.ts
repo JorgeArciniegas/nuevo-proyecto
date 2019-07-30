@@ -51,49 +51,11 @@ export class BtncalcComponentCommon {
     );
   }
   async plus(): Promise<void> {
-    this.btncalcService.assignStake();
-    if (this.userService.isModalOpen) {
-      this.userService.isBtnCalcEditable = false;
-    }
-    if (this.couponService.oddStakeEdit) {
-      this.couponService.updateCoupon();
-      return;
-    }
-    if (this.btncalcService.polyfunctionalStakeCoupon.isEnabled) {
-      this.updateCouponStake();
-      return;
-    }
-    if (!this.polyfunctionalArea || !this.polyfunctionalArea.odds) {
-      return;
-    }
-    // Check if the "shortcut method" is available for the selection
-    if (this.polyfunctionalArea.shortcut) {
-      await this.couponService.addRemoveToCouponSC(this.polyfunctionalArea);
-    } else {
-      await this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds);
-    }
-
-    this.productService.closeProductDialog();
-    this.productService.resetBoard();
+    this.btncalcService.tapPlus();
   }
 
   clearAll(): void {
-    this.productService.closeProductDialog();
-    this.productService.resetBoard();
-
-    if (this.btncalcService.polyfunctionalArea) {
-      this.btncalcService.polyfunctionalArea.amount = 1;
-    }
-    this.btncalcService.polyfunctionalAdditionFlag = true;
-    this.btncalcService.polyfunctionalDecimalsFlag = true;
-
-    /*
-    // reset the input preset amount
-    this.btncalcService.settingStakePresetPlayer(); */
-    /* this.amountSetToPolyfunctionalStakeCoupon(); */
-    this.productService.polyfunctionalStakeCouponSubject.next(
-      new PolyfunctionalStakeCoupon()
-    );
+   this.btncalcService.clearAll();
   }
 
   polyfuncionalAmountReset(): void {
@@ -170,17 +132,4 @@ export class BtncalcComponentCommon {
     this.btncalcService.btnTotColSelection(betTotColSelected);
   }
 
-  // updated global amount to coupon
-  private updateCouponStake(): void {
-    if (
-      this.couponService.coupon &&
-      this.btncalcService.polyfunctionalStakeCoupon.isEnabled
-    ) {
-      this.couponService.coupon.Odds.forEach(item => {
-        item.OddStake = this.btncalcService.polyfunctionalStakeCoupon.columnAmount;
-      });
-      this.couponService.updateCoupon();
-      this.clearAll();
-    }
-  }
 }

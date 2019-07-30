@@ -20,7 +20,7 @@
               <ng-container *ngFor="let market of tournament.overviewArea[i].markets">
                 <mat-grid-tile *ngFor="let odd of market.selections">
                   <button class="btn btn-default btn-default-cock radius-5">
-                    <div class="selection-details" fxLayout="column" fxLayoutAlign="center center">
+                    <div class="selection-details" fxLayout="column" fxLayoutAlign="center center" (click)="selectOdd(odd.id, odd)">
                       <span class="selection-name">{{ odd.nm }}</span>
                       <span class="selection-value">{{ odd.ods[0].vl}}</span>
                     </div>
