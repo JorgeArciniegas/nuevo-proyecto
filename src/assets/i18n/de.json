@@ -4,13 +4,13 @@
   "BALANCE": "Kontostand",
   "BASE": "B",
   "BET": "Wett",
-  "BET_STATUS": "Wettstatus",
-  "BET_TYPE": "Wettart",
-  "BET_UNDER_EVALUATION": "Wette wird geprüft, bitte warten Sie",
   "BETS_LIST": "Wettliste",
   "BETS_LIST.LOST": "Perdenti",
   "BETS_LIST.OPEN": "Offen",
   "BETS_LIST.WON": "Vincenti",
+  "BET_STATUS": "Wettstatus",
+  "BET_TYPE": "Wettart",
+  "BET_UNDER_EVALUATION": "Wette wird geprüft, bitte warten Sie",
   "BONUS": "Bonus",
   "BTNCALC.COL": "COL",
   "BTNCALC.TOT": "TOT",
@@ -23,11 +23,11 @@
   "CONDITION": "Bedingung",
   "CONFIRM": "Conferma",
   "CONFIRM_DESTROY_COUPON.MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?",
+  "COUPON.BET": "Wette",
   "COUPON_CODE": "Wettschein-Code",
   "COUPON_RESET": "Reset del coupon",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Wette angenommen,",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "prüfen Sie die Wettliste",
-  "COUPON.BET": "Wette",
   "DATE": "Datum",
   "DATE_FROM": "Data da",
   "DATE_OF_PLACEMENT": "Data piazzamento",
@@ -37,19 +37,10 @@
   "DELETED_ON": "Annullata il",
   "DETAIL": "Detail",
   "DYNAMIC_KEYS": {
-    "CockMarket": {
-      "NAME": {
-        "1X2": "Win",
-        "1X2 + OverUnder": "Win+ o/u",
-        "1X2 + Winning Sector": "Win+ sector",
-        "Over/Under": "O/u",
-        "Winning Sector": "Sector"
-      }
-    },
     "COUPON_ERROR": {
+      "API_ERROR": "Errore API generico",
       "AccountInsertDataError": "Während des Hinzufügens des Benutzerkontos ist ein Fehler aufgetreten [Code ES11]",
       "AgentBettorMismatch": "Dieser Benutzer gehört nicht zu Ihrem Netzwerk [Code ES18]",
-      "API_ERROR": "Errore API generico",
       "BankerNotAllowedOnIntegral": "Sie können bei einer integralen Wette keine festgelegte Auswahl hinzufügen [Code ES22]",
       "BetAlreadyPaid": "Dieser Wettschein wurde bereits bezahlt [Code ES19]",
       "BetLost": "Wette verloren [Code ES21]",
@@ -156,6 +147,15 @@
       "OverMaxBetStake": "Maximaler Wetteinsatz überschritten [Code CRS17]",
       "UnderMinBetStake": "Mindestwetteinsatz nicht erreicht [Code CRS18]",
       "Unknown": "Unbekannter Fehler, bitte versuchen Sie es erneut [Code CRS0]"
+    },
+    "CockMarket": {
+      "NAME": {
+        "1X2": "Win",
+        "1X2 + OverUnder": "Win+ o/u",
+        "1X2 + Winning Sector": "Win+ sector",
+        "Over/Under": "O/u",
+        "Winning Sector": "Sector"
+      }
     },
     "CouponStatusInternal": {
       "ALL": "Tutti",
@@ -277,6 +277,7 @@
   "LAST_FIVE": "Letzte 5",
   "LIMIT": "Limit",
   "LUCKY": "Lucky",
+  "MARKETS": "Mercati",
   "MAX_PAYOUT": "Max. Auszahlung",
   "MAX_POTENTIAL_WIN": "Max. mögliche Auszahlung",
   "MAX_POTENTIAL_WIN_WITH_BONUS": "Vincita potenziale massima con bonus",
@@ -313,17 +314,17 @@
   "STATUS": "Status",
   "STRENGTH": "Stärke",
   "SUMMARY": "Sommario",
+  "TOTALS": "Summen",
+  "TOTAL_PAYOUT": "Total payout",
+  "TOTAL_STAKE": "Summe wetteinsatz",
   "TOT_BET": "TOT giocato",
   "TOT_LOST": "TOT perso",
   "TOT_OPEN": "TOT in corso",
   "TOT_WON": "TOT vinto",
-  "TOTAL_PAYOUT": "Total payout",
-  "TOTAL_STAKE": "Summe wetteinsatz",
-  "TOTALS": "Summen",
   "TYPE": "Art",
-  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "USERNAME": "Benutzername",
   "USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
+  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "WARNING": "Avviso",
   "WON": "Vinto"
 }

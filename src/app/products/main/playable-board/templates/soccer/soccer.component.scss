@@ -1,0 +1,27 @@
+.badge {
+	flex-shrink: 0;
+}
+
+.video-icon {
+	height: 1.5vh;
+	width: 2vh;
+	margin: 0 10px;
+	flex-shrink: 0;
+}
+
+.star-icon {
+	height: 1.8vh;
+	width: 1.8vh;
+}
+
+.column-selection {
+	.btn-soccer-odd {
+		padding: 5px 10px;
+		border: 0;
+
+		.selection-name {
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+	}
+}

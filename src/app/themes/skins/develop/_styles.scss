@@ -625,7 +625,7 @@ $gradient-dark2: #000000;
 }
 
 %star-yellow-icon {
-	background: url("app/themes/skins/develop/icon/baseline-star_rate-18px.svg") center center no-repeat;
+	background: url("app/themes/skins/develop/icon/baseline_star_rate_yellow_18px.svg") center center no-repeat;
 }
 
 %star-yellow-icon-mobile {
@@ -634,7 +634,7 @@ $gradient-dark2: #000000;
 }
 
 %star-red-icon {
-	background: url("app/themes/skins/develop/icon/baseline-star_rate-18px.svg") center center no-repeat;
+	background: url("app/themes/skins/develop/icon/baseline_star_rate_red_18px.svg") center center no-repeat;
 }
 
 %star-red-icon-mobile {
@@ -643,20 +643,22 @@ $gradient-dark2: #000000;
 }
 
 %video-enabled-icon {
-	background: url("app/themes/skins/develop/icon/vdo.svg") center center no-repeat;
+	background: url("app/themes/skins/develop/icon/video-enabled.svg") center center no-repeat;
+	background-size: contain;
 }
 
 %video-enabled-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/vdo-enabled.png") center center no-repeat;
+	background: url("~/app/themes/skins/develop/icon/video-enabled.png") center center no-repeat;
 	background-size: contain;
 }
 
 %video-disabled-icon {
-	background: url("app/themes/skins/develop/icon/vdo.svg") center center no-repeat;
+	background: url("app/themes/skins/develop/icon/video-disabled.svg") center center no-repeat;
+	background-size: contain;
 }
 
 %video-disabled-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/vdo-disabled.png") center center no-repeat;
+	background: url("~/app/themes/skins/develop/icon/video-disabled.png") center center no-repeat;
 	background-size: contain;
 }
 

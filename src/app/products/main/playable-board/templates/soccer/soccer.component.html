@@ -1,22 +1,26 @@
 <ng-container *ngIf="tournament">
   <mat-grid-list cols="10" rowHeight="{{rowHeight * 16/10}}" class="playable-grid-buttons">
-    <mat-grid-tile class="tile-match-name" colspan="2" rowspan="10">
+    <mat-grid-tile class="match-name-col" colspan="2" rowspan="10">
       <div [style.width.%]="100">
         <mat-grid-list cols="1" rowHeight="{{rowHeight * 16/10}}">
+          <mat-grid-tile>{{ 'EVENTS' | translate }}</mat-grid-tile>
           <mat-grid-tile *ngFor="let match of tournament.matches; let i = index">
             <button class="playable-row-tile--soccer display radius-5"
               [ngClass]="{'playable-row-tile--active': match.selectedMatch}">
               <div class="badge"
                 [ngClass]="{'badge--on': match.hasOddsSelected === true, 'badge--off': match.hasOddsSelected === false}">
                 {{ i + 1 }}</div>
-              <div class="video-enabled-icon"></div>
+              <div class="video-icon"
+                [ngClass]="{'video-enabled-icon': match.isVideoShown === true, 'video-disabled-icon': match.isVideoShown === false}">
+              </div>
               <span>{{ match.name }}</span>
             </button>
           </mat-grid-tile>
         </mat-grid-list>
       </div>
     </mat-grid-tile>
-    <mat-grid-tile class="tile-market-selection" colspan="8" rowspan="10">
+    <mat-grid-tile colspan='8' rowspan="1">{{ 'MARKETS' | translate }}</mat-grid-tile>
+    <mat-grid-tile class="column-selection" colspan="8" rowspan="10">
       <div [style.width.%]="100">
         <ng-container *ngIf="!selectedMatch">
           <!-- TOURNAMENT'S OVERVIEW -->
@@ -24,10 +28,15 @@
             <mat-grid-list cols="7" rowHeight="{{rowHeight * 16/10}}">
               <ng-container *ngFor="let market of tournament.overviewArea[i].markets">
                 <mat-grid-tile *ngFor="let odd of market.selections">
-                  <button class="btn btn-default btn-default-cock radius-5">
+                  <button class="btn-soccer-odd radius-5"
+                    [ngClass]="{'btn-grey-gradient': !oddsSelected.includes(odd.id), 'btn-selected': oddsSelected.includes(odd.id)}"
+                    (click)="selectOdd(market.id, odd)">
                     <div class="selection-details" fxLayout="column" fxLayoutAlign="center center">
-                      <span class="selection-name">{{ odd.nm }}</span>
-                      <span class="selection-value">{{ odd.ods[0].vl}}</span>
+                      <div class="selection-name">
+                        <span>{{ odd.nm }}</span>
+                        <span *ngIf="market.hasSpecialValue"> {{ market.specialValueOrSpread }}</span>
+                      </div>
+                      <span class="selection-value">{{ odd.ods[0].vl }}</span>
                     </div>
                   </button>
                 </mat-grid-tile>
@@ -36,7 +45,7 @@
           </ng-container>
         </ng-container>
 
-        <ng-container *ngIf="selectedMatch">
+        <ng-container *ngIf=" selectedMatch">
           <!-- EVENT'S DETAIL -->
           <!-- <ng-container *ngFor="let row of tournament.overviewArea; let i = index">
             <mat-grid-list cols="7" rowHeight="{{rowHeight * 16/10}}">
