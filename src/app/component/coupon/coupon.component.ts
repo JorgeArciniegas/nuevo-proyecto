@@ -8,6 +8,7 @@ import { BetOdd } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { CouponService } from './coupon.service';
 import { UserService } from '../../services/user.service';
+import { TypeCoupon, LAYOUT_TYPE } from '../../../../src/environments/environment.models';
 
 @Component({
   selector: 'app-coupon',
@@ -29,6 +30,10 @@ export class CouponComponent implements OnDestroy {
   private couponServiceSubscription: Subscription;
   private couponMessageServiceSubscription: Subscription;
 
+  // Type coupon
+  couponLayout: TypeCoupon;
+  layoutProduct: typeof LAYOUT_TYPE = LAYOUT_TYPE;
+  productChange: Subscription;
   constructor(
     private elysCoupon: ElysCouponService,
     public couponService: CouponService,
@@ -36,6 +41,7 @@ export class CouponComponent implements OnDestroy {
     public productService: ProductsService,
     public userService: UserService
   ) {
+
     if (this.productService.windowSize && this.productService.windowSize.small) {
       this.maxItems = 4;
     }
@@ -51,6 +57,13 @@ export class CouponComponent implements OnDestroy {
       }
       this.filterOdds();
     });
+
+    // management coupon layout
+    this.couponLayout = this.productService.product.typeCoupon;
+
+    this.productChange = this.productService.productNameSelectedObserve.subscribe( () => {
+      this.couponLayout = this.productService.product.typeCoupon;
+    });
   }
 
   filterOdds(): void {
@@ -62,6 +75,8 @@ export class CouponComponent implements OnDestroy {
       index++;
       return index > start && index <= end;
     }).reverse();
+
+
   }
 
   previusOdds(): void {
@@ -92,6 +107,7 @@ export class CouponComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.clearCoupon();
     this.couponServiceSubscription.unsubscribe();
+    this.productChange.unsubscribe();
     // this.couponMessageServiceSubscription.unsubscribe();
   }
 

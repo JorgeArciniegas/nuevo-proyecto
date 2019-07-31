@@ -46,7 +46,12 @@ export const environment: Environment = {
           typeLink: WidgetTypeLink.MODAL,
           icon: 'baseline-assessment-24px' // without extension file
         }
-      ]
+      ],
+      typeCoupon: {
+        isMultipleStake: true,
+        acceptMultiStake: true,
+        typeLayout: LAYOUT_TYPE.RACING
+      }
     },
     {
       sportId: 10,
@@ -73,7 +78,12 @@ export const environment: Environment = {
           typeLink: WidgetTypeLink.MODAL,
           icon: 'baseline-assessment-24px' // without extension file
         }
-      ]
+      ],
+      typeCoupon: {
+        isMultipleStake: true,
+        acceptMultiStake: true,
+        typeLayout: LAYOUT_TYPE.RACING
+      }
     },
     {
       sportId: 210,
@@ -93,7 +103,12 @@ export const environment: Environment = {
         icon: 'Horse',
         route: 'products/racing'
       },
-      widgets: []
+      widgets: [],
+      typeCoupon: {
+        isMultipleStake: true,
+        acceptMultiStake: true,
+        typeLayout: LAYOUT_TYPE.RACING
+      }
     },
     {
       sportId: 1,
@@ -113,7 +128,12 @@ export const environment: Environment = {
         icon: 'Soccer-ita',
         route: 'products/soccer'
       },
-      widgets: []
+      widgets: [],
+      typeCoupon: {
+        isMultipleStake: false,
+        acceptMultiStake: false,
+        typeLayout: LAYOUT_TYPE.SOCCER
+      }
     },
     {
       sportId: 1,
@@ -133,7 +153,12 @@ export const environment: Environment = {
         icon: 'Soccer-eng',
         route: 'products/soccer'
       },
-      widgets: []
+      widgets: [],
+      typeCoupon: {
+        isMultipleStake: false,
+        acceptMultiStake: false,
+        typeLayout: LAYOUT_TYPE.SOCCER
+      }
     },
     {
       sportId: 20,
@@ -162,7 +187,12 @@ export const environment: Environment = {
           typeLink: WidgetTypeLink.MODAL,
           icon: 'baseline-assessment-24px' // without extension file
         }
-      ]
+      ],
+      typeCoupon: {
+        isMultipleStake: true,
+        acceptMultiStake: true,
+        typeLayout: LAYOUT_TYPE.COCK_FIGHT
+      }
     }
   ],
   showEventId: true,

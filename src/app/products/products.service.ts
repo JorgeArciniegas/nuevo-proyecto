@@ -23,6 +23,7 @@ import {
   PolyfunctionalStakeCoupon,
   PolyfunctionStakePresetPlayer
 } from './products.model';
+import { ElysCouponService } from '@elys/elys-coupon';
 @Injectable({
   providedIn: 'root'
 })
@@ -78,9 +79,7 @@ export class ProductsService extends ProductsServiceExtra {
     this.polyfunctionalAreaObservable = this.polyfunctionalAreaSubject.asObservable();
 
     // stake coupon
-    this.polyfunctionalStakeCouponSubject = new Subject<
-      PolyfunctionalStakeCoupon
-    >();
+    this.polyfunctionalStakeCouponSubject = new Subject<PolyfunctionalStakeCoupon>();
     this.polyfunctionalStakeCouponObs = this.polyfunctionalStakeCouponSubject.asObservable();
 
     // time block
@@ -127,6 +126,7 @@ export class ProductsService extends ProductsServiceExtra {
         productCodeRequest: v
       };
     });
+
   }
 
   fnWindowsSize(): void {

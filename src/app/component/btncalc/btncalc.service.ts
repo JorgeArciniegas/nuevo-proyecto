@@ -110,6 +110,73 @@ export class BtncalcService implements OnDestroy {
   /**
    *
    */
+  tapPlus(): void {
+    this.assignStake();
+    if (this.userService.isModalOpen) {
+      this.userService.isBtnCalcEditable = false;
+    }
+    if (this.couponService.oddStakeEdit) {
+      this.couponService.updateCoupon();
+      return;
+    }
+    if (this.polyfunctionalStakeCoupon.isEnabled) {
+      this.updateCouponStake();
+      return;
+    }
+    if (!this.polyfunctionalArea || !this.polyfunctionalArea.odds) {
+      return;
+    }
+    // Check if the "shortcut method" is available for the selection
+    if (this.polyfunctionalArea.shortcut) {
+      this.couponService.addRemoveToCouponSC(this.polyfunctionalArea);
+    } else {
+      this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds, this.productService.product.typeCoupon.acceptMultiStake);
+    }
+
+    this.productService.closeProductDialog();
+    this.productService.resetBoard();
+  }
+
+
+  // updated global amount to coupon
+  private updateCouponStake(): void {
+    if (
+      this.couponService.coupon &&
+      this.polyfunctionalStakeCoupon.isEnabled
+    ) {
+      this.couponService.coupon.Odds.forEach(item => {
+        item.OddStake = this.polyfunctionalStakeCoupon.columnAmount;
+      });
+      this.couponService.updateCoupon();
+      this.clearAll();
+    }
+  }
+
+  /**
+   *
+   */
+  public clearAll(): void {
+    this.productService.closeProductDialog();
+    this.productService.resetBoard();
+
+    if (this.polyfunctionalArea) {
+      this.polyfunctionalArea.amount = 1;
+    }
+    this.polyfunctionalAdditionFlag = true;
+    this.polyfunctionalDecimalsFlag = true;
+
+    /*
+    // reset the input preset amount
+    this.btncalcService.settingStakePresetPlayer(); */
+    /* this.amountSetToPolyfunctionalStakeCoupon(); */
+    this.productService.polyfunctionalStakeCouponSubject.next(
+      new PolyfunctionalStakeCoupon()
+    );
+  }
+
+  /**
+   *
+   */
   checkSeparator(): void {
     // it is used on the DOM and it is put on the CALC BUTTON
     if (this.userService.userDetail && !this.decimalSeparator) {
@@ -227,14 +294,18 @@ export class BtncalcService implements OnDestroy {
   public assignStake(): void {
     // check if there is a selection in polyfuncional Area and associate the amount if there is no selection,
     // check for coupon and associate the amount
-    if (this.polyfunctionalArea.odds.length > 0 ) {
+    if (this.polyfunctionalArea.odds.length > 0 && this.productService.product.typeCoupon.acceptMultiStake) {
       this.polyfunctionalArea.amount = this.polyfunctionStakePresetPlayer.amount;
       this.productService.polyfunctionalAreaSubject.next(
         this.polyfunctionalArea
       );
-    } else if ( this.polyfunctionalArea.odds.length === 0 && this.couponService.coupon) {
+    } else if (
+      this.polyfunctionalArea.odds.length === 0 &&
+      this.couponService.coupon &&
+      this.productService.product.typeCoupon.acceptMultiStake
+    ) {
       const amountTemp: PolyfunctionalStakeCoupon = new PolyfunctionalStakeCoupon();
-      if (this.polyfunctionStakePresetPlayer.typeSlipCol === TypeBetSlipColTot.COL) {
+      if ( this.polyfunctionStakePresetPlayer.typeSlipCol === TypeBetSlipColTot.COL ) {
         amountTemp.totalAmount = this.polyfunctionStakePresetPlayer.amount * this.couponService.coupon.Odds.length;
         amountTemp.columnAmount = this.polyfunctionStakePresetPlayer.amount;
         amountTemp.typeSlipCol = TypeBetSlipColTot.COL;
@@ -245,6 +316,41 @@ export class BtncalcService implements OnDestroy {
       }
       amountTemp.isEnabled = true;
       amountTemp.columns = this.couponService.coupon.Odds.length;
+      amountTemp.digitAmount = this.polyfunctionStakePresetPlayer.amount;
+      this.productService.polyfunctionalStakeCouponSubject.next(amountTemp);
+      this.polyfunctionStakePresetPlayer.isPreset = false;
+    } else if (
+      this.polyfunctionalArea.odds.length === 0 &&
+      this.couponService.coupon &&
+      !this.productService.product.typeCoupon.acceptMultiStake
+    ) {
+      const amountTemp: PolyfunctionalStakeCoupon = new PolyfunctionalStakeCoupon();
+      // number's combinations played
+      let groupNumberCombinations: number = 0;
+      const groupIndexSelected: number[] =  [];
+      this.couponService.coupon.Groupings.forEach( (group, idx) => {
+        if (group.Selected) {
+          groupNumberCombinations += group.Combinations;
+          groupIndexSelected.push(idx);
+        }
+      });
+
+      if ( this.polyfunctionStakePresetPlayer.typeSlipCol === TypeBetSlipColTot.COL ) {
+        amountTemp.totalAmount = this.polyfunctionStakePresetPlayer.amount * groupNumberCombinations;
+        amountTemp.columnAmount = this.polyfunctionStakePresetPlayer.amount;
+        amountTemp.typeSlipCol = TypeBetSlipColTot.COL;
+      } else {
+        amountTemp.columnAmount = this.polyfunctionStakePresetPlayer.amount / groupNumberCombinations;
+        amountTemp.totalAmount = this.polyfunctionStakePresetPlayer.amount;
+        amountTemp.typeSlipCol = TypeBetSlipColTot.TOT;
+      }
+
+      for(const i of groupIndexSelected) {
+        this.couponService.coupon.Groupings[i].Stake =  amountTemp.columnAmount;
+      }
+
+      amountTemp.isEnabled = true;
+      amountTemp.columns = groupNumberCombinations;
       amountTemp.digitAmount = this.polyfunctionStakePresetPlayer.amount;
       this.productService.polyfunctionalStakeCouponSubject.next(amountTemp);
       this.polyfunctionStakePresetPlayer.isPreset = false;

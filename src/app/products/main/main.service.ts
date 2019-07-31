@@ -12,18 +12,29 @@ import {
   VirtualProgramTreeBySportRequest,
   VirtualProgramTreeBySportResponse
 } from '@elys/elys-api';
+import { cloneDeep as clone } from 'lodash';
 import { interval, Subject } from 'rxjs';
+import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
-import { BetOdd, PolyfunctionalArea, PolyfunctionalStakeCoupon, Market, SelectionIdentifier } from '../products.model';
+import {
+  BetOdd,
+  Market,
+  PolyfunctionalArea,
+  PolyfunctionalStakeCoupon,
+  SelectionIdentifier
+} from '../products.model';
 import { ProductsService } from '../products.service';
 import {
+  Area,
   CombinationType,
   EventDetail,
   EventInfo,
   EventTime,
+  ListArea,
+  Match,
   PlacingEvent,
   Player,
   Podium,
@@ -34,17 +45,11 @@ import {
   TypeBetSlipColTot,
   TypePlacingEvent,
   VirtualBetSelectionExtended,
-  Area,
-  Match,
-  MarketArea,
-  VirtualBetTournamentExtended,
-  ListArea
+  VirtualBetTournamentExtended
 } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
-import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { areas, overviewAreas } from './SoccerAreas';
-import { cloneDeep as clone} from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
