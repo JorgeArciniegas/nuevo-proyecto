@@ -52,6 +52,7 @@ export const areas: Area[] = [
   {
     id: 1,
     name: 'Main',
+    isSelected: true,
     layoutDefinition: {
       areaCols: 1
     },
@@ -113,6 +114,7 @@ export const areas: Area[] = [
   {
     id: 2,
     name: 'Over/Under',
+    isSelected: false,
     layoutDefinition: {
       areaCols: 2
     },
@@ -278,6 +280,7 @@ export const areas: Area[] = [
   {
     id: 3,
     name: 'HalfTime/FinalTime',
+    isSelected: false,
     layoutDefinition: {
       areaCols: 1
     },
@@ -300,6 +303,7 @@ export const areas: Area[] = [
   {
     id: 4,
     name: 'Goals',
+    isSelected: false,
     layoutDefinition: {
       areaCols: 2
     },
@@ -335,6 +339,7 @@ export const areas: Area[] = [
   {
     id: 5,
     name: 'CorrectScore',
+    isSelected: false,
     layoutDefinition: {
       areaCols: 1
     },
@@ -357,6 +362,7 @@ export const areas: Area[] = [
   {
     id: 6,
     name: 'Scores1HT',
+    isSelected: false,
     layoutDefinition: {
       areaCols: 1
     },
@@ -379,6 +385,7 @@ export const areas: Area[] = [
   {
     id: 7,
     name: 'Scores2HT',
+    isSelected: false,
     layoutDefinition: {
       areaCols: 1
     },
@@ -401,6 +408,7 @@ export const areas: Area[] = [
   {
     id: 8,
     name: 'ComboO/U',
+    isSelected: false,
     layoutDefinition: {
       areaCols: 1
     },
@@ -488,6 +496,7 @@ export const areas: Area[] = [
   {
     id: 9,
     name: 'ComboGG/NG',
+    isSelected: false,
     layoutDefinition: {
       areaCols: 2
     },

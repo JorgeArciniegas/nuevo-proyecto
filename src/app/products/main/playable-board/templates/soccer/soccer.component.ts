@@ -3,8 +3,8 @@ import { VirtualBetSelection } from '@elys/elys-api';
 import { Subscription, timer } from 'rxjs';
 import { MainService } from '../../../main.service';
 import { VirtualBetTournamentExtended, Match } from '../../../main.models';
-import { PolyfunctionalArea } from 'src/app/products/products.model';
-import { ProductsService } from 'src/app/products/products.service';
+import { PolyfunctionalArea } from '../../../../../products/products.model';
+import { ProductsService } from '../../../../../products/products.service';
 
 @Component({
   selector: 'app-playable-board-soccer',
@@ -16,12 +16,20 @@ export class SoccerComponent implements OnInit, OnDestroy {
   public rowHeight: number;
   private currentEventSubscription: Subscription;
   public tournament: VirtualBetTournamentExtended;
-  public selectedMatch: Match;
+  // Index of the match array of the selected match;
+  public selectedMatch: number;
+  // Index of the areas array of the selected match;
+  public selectedArea: number;
   public oddsSelected: number[];
   private polyfunctionalAreaSubscription: Subscription;
 
   constructor(private mainService: MainService, private productService: ProductsService) {
+    // Variables inizialization.
+    this.selectedMatch = -1;
+    // Set the default Area "Main".
+    this.selectedArea = 0;
     this.oddsSelected = [];
+
     // Get the event's detail at the access of the section
     this.getTournamentDetails();
   }
@@ -66,6 +74,43 @@ export class SoccerComponent implements OnInit, OnDestroy {
           console.log(error);
         }
       });
+  }
+
+  // Method to open the details of the selected match
+  openEventDetails(matchIndex: number): void {
+    this.tournament.matches[matchIndex].isDetailOpened = !this.tournament.matches[matchIndex].isDetailOpened;
+    // Reset the defaut Area "Main".
+    this.selectedArea = 0;
+    // Check if the match details is already open.
+    if (this.selectedMatch === matchIndex) {
+      // Remove the selected match.
+      this.selectedMatch = -1;
+    } else if (this.selectedMatch !== matchIndex && this.selectedMatch === -1) {
+      // Set the new open match.
+      this.selectedMatch = matchIndex;
+    } else {
+      // Change the status of the match whoes detail was open
+      this.tournament.matches[this.selectedMatch].isDetailOpened = !this.tournament.matches[this.selectedMatch].isDetailOpened;
+      // Set the new open match.
+      this.selectedMatch = matchIndex;
+    }
+  }
+
+  // Method to show the selected area. In case the button is already selected no operations will be execute.
+  changeArea(areaIndex: number): void {
+    // Operate only if the area is not selected yet.
+    if (this.selectedArea !== areaIndex) {
+      // Change status of the current area.
+      // tslint:disable-next-line:max-line-length
+      this.tournament.listDetailAreas[this.selectedMatch].areas[this.selectedArea].isSelected = !this.tournament.listDetailAreas[
+        this.selectedMatch
+      ].areas[this.selectedArea].isSelected;
+      // Change status of the newly selected area.
+      // tslint:disable-next-line:max-line-length
+      this.tournament.listDetailAreas[this.selectedMatch].areas[areaIndex].isSelected = !this.tournament.listDetailAreas[this.selectedMatch]
+        .areas[areaIndex].isSelected;
+      this.selectedArea = areaIndex;
+    }
   }
 
   selectOdd(marketId: number, selection: VirtualBetSelection): void {

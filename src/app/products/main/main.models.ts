@@ -158,6 +158,9 @@ export interface Area {
   name: string;
   markets: MarketArea[];
   layoutDefinition?: LayoutGridDefinition;
+  isSelected?: boolean;
+  hasLowestOdd?: boolean;
+  hasHighestOdd?: boolean;
 }
 
 export interface MarketArea {
