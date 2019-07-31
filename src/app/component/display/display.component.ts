@@ -6,7 +6,7 @@ import { ProductsService } from '../../products/products.service';
 import { TypeBetSlipColTot } from '../../products/main/main.models';
 import { BtncalcService } from '../btncalc/btncalc.service';
 import { UserService } from '../../../../src/app/services/user.service';
-import { LAYOUT_TYPE } from 'src/environments/environment.models';
+import { LAYOUT_TYPE } from '../../../../src/environments/environment.models';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { CouponService } from '../coupon/coupon.service';
 

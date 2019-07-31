@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit, Input } from '@angular/core';
-import { VirtualBetTournament, VirtualBetSelection } from '@elys/elys-api';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { VirtualBetSelection } from '@elys/elys-api';
 import { Subscription, timer } from 'rxjs';
+import { BtncalcService } from '../../../../../../../src/app/component/btncalc/btncalc.service';
+import { Match, VirtualBetTournamentExtended } from '../../../main.models';
 import { MainService } from '../../../main.service';
-import { VirtualBetTournamentExtended, Match } from '../../../main.models';
-import { BtncalcService } from 'src/app/component/btncalc/btncalc.service';
 
 @Component({
   selector: 'app-playable-board-soccer',

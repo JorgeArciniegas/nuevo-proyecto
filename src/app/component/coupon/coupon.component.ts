@@ -8,7 +8,7 @@ import { BetOdd } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { CouponService } from './coupon.service';
 import { UserService } from '../../services/user.service';
-import { TypeCoupon, LAYOUT_TYPE } from 'src/environments/environment.models';
+import { TypeCoupon, LAYOUT_TYPE } from '../../../../src/environments/environment.models';
 
 @Component({
   selector: 'app-coupon',
