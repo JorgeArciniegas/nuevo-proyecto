@@ -34,9 +34,7 @@ export class BtncalcComponentCommon {
     // management coupon stake changed
     this.CouponoddStakeEditObs = this.couponService.oddStakeEditObs.subscribe(
       oddStakeEdit => {
-        this.productService.polyfunctionalStakeCouponSubject.next(
-          new PolyfunctionalStakeCoupon()
-        );
+        this.productService.polyfunctionalStakeCouponSubject.next( new PolyfunctionalStakeCoupon() );
       }
     );
 

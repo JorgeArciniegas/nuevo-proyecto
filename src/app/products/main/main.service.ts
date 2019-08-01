@@ -418,13 +418,25 @@ export class MainService extends MainServiceExtra {
     });
   }
 
+  /**
+   *
+   */
   resetPlayEvent(): void {
     this.placingEvent = new PlacingEvent();
     this.smartCode = new Smartcode();
     this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
     this.createPlayerList();
 
-    this.productService.polyfunctionalAreaSubject.next(new PolyfunctionalArea());
+    // Create a new polyfunctionArea object
+    const  polyfunctionalArea: PolyfunctionalArea = new PolyfunctionalArea();
+    // take the last polyfunctionArea's value from Subject
+    const tempPolyfunctionalArea: PolyfunctionalArea = this.productService.polyfunctionalAreaSubject.getValue();
+    // check if global 'PolyfunctionalArea' has the grouping and put it on new object before to replace it
+    if (tempPolyfunctionalArea.hasOwnProperty('grouping')) {
+      polyfunctionalArea.grouping = tempPolyfunctionalArea.grouping;
+    }
+    // updated the new PolyfunctionalArea
+    this.productService.polyfunctionalAreaSubject.next(polyfunctionalArea);
     this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
 

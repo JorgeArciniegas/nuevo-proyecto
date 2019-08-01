@@ -52,7 +52,7 @@
                     <span *ngIf="couponLayout && couponLayout.typeLayout === layoutProduct.SOCCER">
                       {{ listOdds[0].DefaultTournamentName }} -
                     </span>
-                    <span [ngClass]="{ 'typography-700 typography-size-9' : couponLayout.typeLayout === layoutProduct.SOCCER}">{{odd.EventName}}</span>
+                    <span [ngClass]="{ 'typography-weight-700 typography-size-11' : couponLayout.typeLayout === layoutProduct.SOCCER}">{{odd.EventName}}</span>
                 </div>
                 <div>#{{odd.MatchId}}</div>
               </div>

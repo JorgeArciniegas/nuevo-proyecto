@@ -94,8 +94,8 @@ export class DisplayComponent implements OnDestroy {
       };
     } else {
       data = {
-        title:  this.polyfunctionalValue.selection,
-        betCoupon:  this.elysCoupon.betCoupon
+        title:  'GROUPINGS',
+        groupings:  this.elysCoupon.betCoupon.Groupings
       };
     }
     this.productService.openProductDialog(data);

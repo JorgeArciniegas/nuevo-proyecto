@@ -221,6 +221,7 @@
       "AX": "Accoppiata a girare",
       "COUPON": "Coupon",
       "EVEN": "Pari",
+      "GROUPINGS": "Raggruppamenti di sistema",
       "MULTI": "Multi",
       "ODD": "Dispari",
       "OU": "Over/Under",
@@ -263,6 +264,16 @@
       "V": "V",
       "VT": "VX",
       "WINNER": "Vincente"
+    },
+    "GROUPINGS":{
+      "SINGLE": "Singola",
+      "SINGLES": "Singole",
+      "DOUBLE": "Doppia",
+      "DOUBLES": "Doppie",
+      "TRIPLE": "Tripla",
+      "TRIPLES": "Triple",
+      "UPLE": "-upla",
+      "UPLES": "-uple"
     }
   },
   "ENDURANCE": "Resistenza",
