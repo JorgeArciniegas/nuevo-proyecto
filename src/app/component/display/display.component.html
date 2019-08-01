@@ -29,7 +29,9 @@
     <ng-container *ngIf="polyfunctionalValue && polyfunctionalValue.grouping && !productService.product.typeCoupon.acceptMultiStake">
       <div fxLayout="column" fxFlex="88" fxLayoutAlign="center flex-start">
         <div fxLayout="row" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2" [style.min-height.px]="(rowHeight - 20) / 2">
-          <span class="group-title" [ngClass]="{'selected' : group.Selected}" *ngFor="let group of polyfunctionalValue.grouping">{{group.Combinations +'-' + group.Grouping }}</span>
+          <ng-container  *ngFor="let group of polyfunctionalValue.grouping">
+            <span *ngIf="group.Selected" class="group-title" [ngClass]="{'selected' : group.Selected}">{{group.Combinations +'-' + group.Grouping }}</span>
+          </ng-container>
         </div>
       </div>
       <div fxLayout="column" fxFlex="10" fxLayoutAlign="center center"
