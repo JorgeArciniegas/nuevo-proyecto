@@ -98,6 +98,7 @@ export class GroupingsComponent implements OnInit {
       grouping.Stake = 0;
     }
     this.couponService.calculateAmounts();
+    this.couponService.updateCoupon();
   }
 
   changeStakeToGrouping(grouping: BetCouponGroup): void {
