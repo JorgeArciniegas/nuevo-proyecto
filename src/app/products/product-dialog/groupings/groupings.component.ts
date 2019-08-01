@@ -39,6 +39,12 @@ export class GroupingsComponent implements OnInit {
     private btnService: BtncalcService
   ) {
     this.amountPresetPlayer = this.btnService.polyfunctionStakePresetPlayer;
+    this.couponService.couponResponse.subscribe(coupon => {
+      this.data.groupings = coupon.Groupings;
+      if (coupon) {
+        this.filterGroupings();
+      }
+    });
   }
 
   ngOnInit() {
