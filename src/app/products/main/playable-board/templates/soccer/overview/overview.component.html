@@ -1,0 +1,26 @@
+<!-- <mat-grid-tile class="column-selection" colspan="8" rowspan="11">
+  <div [style.width.%]="100"> -->
+<mat-grid-list cols="7" rowHeight="{{rowHeight * 16/21}}">
+  <mat-grid-tile class="section-identifier" colspan='7'>{{ 'MARKETS' | translate }}</mat-grid-tile>
+</mat-grid-list>
+<ng-container *ngFor="let row of soccerService.tournament.overviewArea; let i = index">
+  <mat-grid-list cols="7" rowHeight="{{rowHeight * 16/21}}">
+    <ng-container *ngFor="let market of soccerService.tournament.overviewArea[i].markets">
+      <mat-grid-tile *ngFor="let odd of market.selections" rowspan="2">
+        <button class="btn-soccer-odd radius-5"
+          [ngClass]="{'btn-grey-gradient': !soccerService.oddsSelected.includes(odd.id), 'btn-selected': soccerService.oddsSelected.includes(odd.id)}"
+          (click)="selectOdd(market.id, odd)">
+          <div class="btn-soccer-odd__details" fxLayout="column" fxLayoutAlign="center center">
+            <div class="btn-soccer-odd__details--name">
+              <span>{{ odd.nm }}</span>
+              <span *ngIf="market.hasSpecialValue"> {{ market.specialValueOrSpread }}</span>
+            </div>
+            <span class="btn-soccer-odd__details--value">{{ odd.ods[0].vl }}</span>
+          </div>
+        </button>
+      </mat-grid-tile>
+    </ng-container>
+  </mat-grid-list>
+</ng-container>
+<!-- </div>
+</mat-grid-tile> -->

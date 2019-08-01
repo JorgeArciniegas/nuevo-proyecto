@@ -1,0 +1,64 @@
+<mat-grid-list cols="10" rowHeight="{{rowHeight * 16/11}}">
+  <!-- AREAS -->
+  <mat-grid-tile colspan="2" rowspan="11">
+    <div [style.width.%]="100">
+      <mat-grid-list cols="1" rowHeight="{{rowHeight * 16/21}}">
+        <mat-grid-tile class="section-identifier">{{ 'AREAS' | translate }}</mat-grid-tile>
+        <mat-grid-tile
+          *ngFor="let area of soccerService.tournament.listDetailAreas[soccerService.selectedMatch]; let i = index"
+          rowspan="2">
+          <button class="btn-soccer-area radius-5"
+            [ngClass]="{'btn-grey-gradient': !area.isSelected, 'btn-selected': area.isSelected}"
+            (click)="changeArea(i)">
+            <div class="btn-soccer-area__details" fxLayoutAlign="center center">
+              <span class="btn-soccer-area__details--name">{{ area.name }}</span>
+              <div class="star-icon"
+                [ngClass]="{'star-red-icon': area.hasLowestOdd, 'star-yellow-icon': area.hasHighestOdd}"
+                *ngIf="area.hasLowestOdd || area.hasHighestOdd">
+              </div>
+            </div>
+          </button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </mat-grid-tile>
+
+  <!-- SELECTIONS -->
+  <mat-grid-tile colspan="8" rowspan="11">
+    <div [style.width.%]="100">
+      <mat-grid-list
+        cols="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaCols }}"
+        rowHeight="{{rowHeight * 16/21}}">
+        <mat-grid-tile class="section-identifier"
+          colspan="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaCols }}">
+          {{ 'MARKETS' | translate }}</mat-grid-tile>
+        <mat-grid-tile
+          colspan="{{ 2 / soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaCols }}"
+          rowspan="10"
+          *ngFor="let colunm of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaCols | getArrayFromNumber">
+          <div [style.width.%]="100">
+            <mat-grid-list cols='1' rowHeight="{{rowHeight * 16/21}}">Column 1</mat-grid-list>
+            <mat-grid-list cols='1' rowHeight="{{rowHeight * 16/21}}">Column 2</mat-grid-list>
+          </div>
+        </mat-grid-tile>
+        <ng-container
+          *ngFor="let market of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets; let i = index">
+          <mat-grid-tile *ngFor="let odd of market.selections" colspan=""
+            rowspan="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.marketRows }} * 2">
+            <button class="btn-soccer-odd radius-5"
+              [ngClass]="{'btn-grey-gradient': !soccerService.oddsSelected.includes(odd.id), 'btn-selected': soccerService.oddsSelected.includes(odd.id)}"
+              (click)="selectOdd(market.id, odd)">
+              <div class="btn-soccer-odd__details" fxLayout="column" fxLayoutAlign="center center">
+                <div class="btn-soccer-odd__details--name">
+                  <span>{{ odd.nm }}</span>
+                  <span *ngIf="market.hasSpecialValue"> {{ market.specialValueOrSpread }}</span>
+                </div>
+                <span class="btn-soccer-odd__details--value">{{ odd.ods[0].vl }}</span>
+              </div>
+            </button>
+          </mat-grid-tile>
+        </ng-container>
+      </mat-grid-list>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

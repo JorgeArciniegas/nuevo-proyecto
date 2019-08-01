@@ -626,6 +626,7 @@ $gradient-dark2: #000000;
 
 %star-yellow-icon {
 	background: url("app/themes/skins/develop/icon/baseline_star_rate_yellow_18px.svg") center center no-repeat;
+	background-size: contain;
 }
 
 %star-yellow-icon-mobile {
@@ -635,6 +636,7 @@ $gradient-dark2: #000000;
 
 %star-red-icon {
 	background: url("app/themes/skins/develop/icon/baseline_star_rate_red_18px.svg") center center no-repeat;
+	background-size: contain;
 }
 
 %star-red-icon-mobile {
