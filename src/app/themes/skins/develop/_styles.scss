@@ -656,3 +656,16 @@ $gradient-dark2: #000000;
 %bar-fitness-pecentage {
 	background: $border-success;
 }
+
+// GROUPINGS
+
+%bg-slide-toggle-thumb-container-selected {
+  background: $color-bg-event;
+  box-shadow:  0px 0px 3px 0px $color-bg-primary-op-dark;
+}
+%bg-slide-toggle-thumb-label {
+  background: $color-bg-primary;
+}
+%bg-slide-toggle-thumb-label-selected {
+  background: $color-bg-event;
+}

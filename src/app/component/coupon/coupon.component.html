@@ -16,9 +16,12 @@
     <div class="btn-coupon-board">
       <div class="display" fxLayoutAlign="space-around center" fxLayout="row layout-wrap">
         <div fxFlex fxLayoutAlign="start center" class="coupon-type-indicator">
-          <span class="btn btn-default">{{'SINGLE' | translate}}</span>
-          <span
-            class="indicator-odds-number radius-50">{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}</span>
+          <!-- Type Coupon and Number of odds -->
+            <ng-container *ngIf="couponService.coupon && couponService.coupon.Odds.length > 0">
+              <span class="btn btn-default" *ngIf="couponLayout.acceptMultiStake">{{'SINGLE' | translate}}</span>
+              <span class="btn btn-default" *ngIf="!couponLayout.acceptMultiStake">{{ 'DYNAMIC_KEYS.CouponType.'+couponTypeId[couponService.coupon.CouponTypeId] | translate}}</span>
+              <span class="indicator-odds-number radius-50">{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}</span>
+          </ng-container>
         </div>
         <div fxFlex="15">
           <button class="btn-reset btn-display btn-dark-gradient radius-5" (click)="openDialog()">
@@ -52,7 +55,7 @@
                     <span *ngIf="couponLayout && couponLayout.typeLayout === layoutProduct.SOCCER">
                       {{ listOdds[0].DefaultTournamentName }} -
                     </span>
-                    <span [ngClass]="{ 'typography-700 typography-size-9' : couponLayout.typeLayout === layoutProduct.SOCCER}">{{odd.EventName}}</span>
+                    <span [ngClass]="{ 'typography-weight-700 typography-size-11' : couponLayout.typeLayout === layoutProduct.SOCCER}">{{odd.EventName}}</span>
                 </div>
                 <div>#{{odd.MatchId}}</div>
               </div>

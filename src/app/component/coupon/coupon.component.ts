@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy } from '@angular/core';
-import { BetCouponOdd } from '@elys/elys-api';
+import { BetCouponOdd, CouponType } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Subscription } from 'rxjs';
@@ -34,6 +34,7 @@ export class CouponComponent implements OnDestroy {
   couponLayout: TypeCoupon;
   layoutProduct: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   productChange: Subscription;
+  couponTypeId: typeof CouponType = CouponType;
   constructor(
     private elysCoupon: ElysCouponService,
     public couponService: CouponService,

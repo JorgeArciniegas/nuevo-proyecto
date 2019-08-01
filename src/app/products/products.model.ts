@@ -112,6 +112,7 @@ export interface BetDataDialog {
   betOdds?: BetOdds;
   betCoupon?: BetCouponExtended;
   statistics?: StatisticDialog;
+  groupings?: BetCouponGroup[];
 }
 export class DialogData {
   title: string;
@@ -120,12 +121,17 @@ export class DialogData {
   opened: boolean;
   betCoupon?: BetCouponExtended;
   statistics?: StatisticDialog;
-  constructor(betOdds?: BetOdds, breakpoint?: number, betCoupon?: BetCouponExtended, title?: string, statistics?: StatisticDialog) {
+  groupings?: BetCouponGroup[];
+  constructor(
+    betOdds?: BetOdds, breakpoint?: number, betCoupon?: BetCouponExtended,
+    title?: string, statistics?: StatisticDialog, groupings?: BetCouponGroup[]
+  ) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;
     this.opened = false;
     this.betCoupon = betCoupon || null;
     this.statistics = statistics || null;
+    this.groupings = groupings || null;
   }
 }
 export interface StatisticDialog {

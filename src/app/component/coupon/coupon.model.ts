@@ -1,4 +1,4 @@
-import { BetCouponOdd } from '@elys/elys-api';
+import { BetCouponOdd, BetCouponGroup } from '@elys/elys-api';
 import { BetCouponExtended, MessageSource } from '@elys/elys-coupon';
 
 export interface StakesDisplay {
@@ -11,6 +11,7 @@ export interface OddsStakeEdit {
   tempStake: number;
   tempStakeStr?: string;
   odd: BetCouponOdd;
+  grouping?: BetCouponGroup;
   isDefaultInput: boolean;
   hasDecimalSeparator?: boolean;
 }

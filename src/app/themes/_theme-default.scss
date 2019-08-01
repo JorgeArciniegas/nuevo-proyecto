@@ -1,5 +1,5 @@
 @import "./buttons";
-
+@import "./typography";
 /**
 * Import layout's component
 **/
@@ -10,7 +10,7 @@
 @import "./statistics/statistics.component";
 @import "./event-control/event-control-standard";
 @import "./lucky/lucky-race-fight";
-@import "./typography";
+@import "./groupings/groupings";
 *,
 *:after,
 *:before {

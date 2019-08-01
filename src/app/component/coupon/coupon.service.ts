@@ -8,7 +8,8 @@ import {
   ElysApiService,
   FlagAsPaidRequest,
   FlagAsPaidResponse,
-  StagedCouponStatus
+  StagedCouponStatus,
+  BetCouponGroup
 } from '@elys/elys-api';
 import {
   AddOddRequest,
@@ -275,7 +276,6 @@ export class CouponService {
 
   /**
    * calculate stake and winning max
-   * this sum does not consider groupings other than singles
    */
   calculateAmounts(): void {
     let stake = 0,
@@ -284,30 +284,31 @@ export class CouponService {
       this.appSetting.products.filter(prod => prod.productSelected)[0]
         .typeCoupon.acceptMultiStake
     ) {
+      // The coupon has multipleStake
       this.coupon.Odds.forEach(odd => {
         stake += odd.OddStake;
       });
+      // Updated the grouping
+      this.coupon.Groupings.map(item => {
+        if (!item.IsMultiStake && item.Selected) {
+          item.Stake = stake / item.Combinations;
+          item.MaxWinCombination = item.Stake * item.MaxWinCombinationUnit;
+        }
+        if (item.Selected) {
+
+        }
+      });
+
     } else {
       this.coupon.Groupings.forEach(grouping => {
         if (grouping.Selected && !grouping.IsMultiStake) {
-          stake += grouping.Stake;
+          stake += grouping.Stake * grouping.Combinations;
+          totalWin += grouping.Stake * grouping.MaxWinCombinationUnit;
         }
       });
       this.coupon.Stake = stake;
     }
 
-    //
-    // The coupon has multipleStake
-    // TO CHECK AGAIN WHEN OTHER GAMES WILL BE INTRODUCE
-    this.coupon.Groupings.map(item => {
-      if (!item.IsMultiStake && item.Selected) {
-        item.Stake = stake / item.Combinations;
-        item.MaxWinCombination = item.Stake * item.MaxWinCombinationUnit;
-      }
-      if (item.Selected) {
-        totalWin += item.Stake * item.MaxWinCombinationUnit;
-      }
-    });
 
     const stakesDisplayTemp: StakesDisplay = {
       TotalStake: stake,
@@ -319,16 +320,15 @@ export class CouponService {
 
   updateCoupon(): void {
     if (this.oddStakeEdit) {
-      if (this.oddStakeEdit.tempStake > 0) {
+      if (this.oddStakeEdit.tempStake > 0 && !this.oddStakeEdit.grouping) {
         this.coupon.Odds[
           this.oddStakeEdit.indexOdd
         ].OddStake = this.oddStakeEdit.tempStake;
-        this.elysCoupon.updateCoupon(this.coupon);
+       // this.elysCoupon.updateCoupon(this.coupon);
       }
       this.oddStakeEditSubject.next(null);
-    } else {
-      this.elysCoupon.updateCoupon(this.coupon);
     }
+    this.elysCoupon.updateCoupon(this.coupon);
   }
 
   checkOddToChangeStake(odd: BetCouponOdd): void {
@@ -356,6 +356,37 @@ export class CouponService {
 
     this.oddStakeEditSubject.next(tempOdd);
   }
+
+
+  //
+
+  checkGroupingToChangeStake(grouping: BetCouponGroup): void {
+    const tempOdd: OddsStakeEdit = {
+      indexOdd: -1,
+      tempStake: 0.0,
+      odd: null,
+      grouping: null,
+      isDefaultInput: false
+    };
+    // search if the odd is selected and it reset
+    if (
+      this.oddStakeEdit &&
+      this.oddStakeEdit.grouping.Grouping === grouping.Grouping
+    ) {
+      this.oddStakeEditSubject.next(null);
+      return;
+    }
+    // filter the odd to coupon and extract the index and value
+    this.coupon.Groupings.filter((item: BetCouponGroup, idx) => {
+      if (item.Grouping === grouping.Grouping) {
+        tempOdd.indexOdd = idx;
+        tempOdd.grouping = item;
+      }
+    });
+
+   this.oddStakeEditSubject.next(tempOdd);
+  }
+
 
   // Method to execute the coupon limits check.
   checkLimits() {
