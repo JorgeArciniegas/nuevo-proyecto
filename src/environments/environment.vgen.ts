@@ -95,7 +95,7 @@ export const environment: Environment = {
       label: 'FOOTBALL_ITA',
       order: 3,
       productSelected: false,
-      isPlayable: false,
+      isPlayable: true,
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,

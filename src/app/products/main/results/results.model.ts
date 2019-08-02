@@ -4,7 +4,7 @@ export class EventResult {
   eventNumber: number;
   racePodium?: RacePodium;
   cockResult?: CockFightingResult;
-  soccerResult?: SoccerResult;
+  soccerResult?: SoccerResult[];
 }
 
 
@@ -21,7 +21,11 @@ export interface CockFightingResult {
 }
 
 export interface SoccerResult {
-  finalTime: string;
+  EventId: number;
+  EventName: string;
+  TournamentId: number;
+  TournamentName: string;
+  Result: string;
 }
 
 export enum OVER_UNDER_COCKFIGHT {

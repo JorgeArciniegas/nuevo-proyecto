@@ -26,3 +26,22 @@
 		height: 32;
 	}
 }
+
+// SOCCER
+.card-box-result-soccer{
+  margin: 0 5;
+  .header {
+    @extend %card-title-noborder;
+    .eventNumber {
+      font-size: 14;
+      font-weight: 500;
+    }
+  }
+  .btn-soccer-result {
+    font-size: 10;
+    font-weight: 600;
+    @extend %card-title-noborder;
+  }
+}
+
+
