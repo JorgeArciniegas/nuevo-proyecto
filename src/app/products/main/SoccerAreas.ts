@@ -54,7 +54,9 @@ export const areas: Area[] = [
     name: 'Main',
     isSelected: true,
     layoutDefinition: {
-      areaCols: 1
+      areaCols: 1,
+      areaMaxMarketColsByCol: [6],
+      areaRowsByCol: [4]
     },
     markets: [
       {
@@ -116,7 +118,9 @@ export const areas: Area[] = [
     name: 'Over/Under',
     isSelected: false,
     layoutDefinition: {
-      areaCols: 2
+      areaCols: 2,
+      areaMaxMarketColsByCol: [2, 2],
+      areaRowsByCol: [4, 8]
     },
     markets: [
       {
@@ -282,7 +286,9 @@ export const areas: Area[] = [
     name: 'HalfTime/FinalTime',
     isSelected: false,
     layoutDefinition: {
-      areaCols: 1
+      areaCols: 1,
+      areaMaxMarketColsByCol: [3],
+      areaRowsByCol: [3]
     },
     markets: [
       {
@@ -305,7 +311,9 @@ export const areas: Area[] = [
     name: 'Goals',
     isSelected: false,
     layoutDefinition: {
-      areaCols: 2
+      areaCols: 2,
+      areaMaxMarketColsByCol: [3, 1],
+      areaRowsByCol: [3, 4]
     },
     markets: [
       {
@@ -341,7 +349,9 @@ export const areas: Area[] = [
     name: 'CorrectScore',
     isSelected: false,
     layoutDefinition: {
-      areaCols: 1
+      areaCols: 1,
+      areaMaxMarketColsByCol: [3],
+      areaRowsByCol: [10]
     },
     markets: [
       {
@@ -354,7 +364,7 @@ export const areas: Area[] = [
         layoutGridDefinition: {
           marketPositionOnColArea: 1,
           marketCols: 3,
-          marketRows: 9
+          marketRows: 10
         }
       }
     ]
@@ -364,7 +374,9 @@ export const areas: Area[] = [
     name: 'Scores1HT',
     isSelected: false,
     layoutDefinition: {
-      areaCols: 1
+      areaCols: 1,
+      areaMaxMarketColsByCol: [3],
+      areaRowsByCol: [3]
     },
     markets: [
       {
@@ -387,7 +399,9 @@ export const areas: Area[] = [
     name: 'Scores2HT',
     isSelected: false,
     layoutDefinition: {
-      areaCols: 1
+      areaCols: 1,
+      areaMaxMarketColsByCol: [3],
+      areaRowsByCol: [3]
     },
     markets: [
       {
@@ -410,7 +424,9 @@ export const areas: Area[] = [
     name: 'ComboO/U',
     isSelected: false,
     layoutDefinition: {
-      areaCols: 1
+      areaCols: 1,
+      areaMaxMarketColsByCol: [6],
+      areaRowsByCol: [6]
     },
     markets: [
       {
@@ -498,7 +514,9 @@ export const areas: Area[] = [
     name: 'ComboGG/NG',
     isSelected: false,
     layoutDefinition: {
-      areaCols: 2
+      areaCols: 2,
+      areaMaxMarketColsByCol: [3, 3],
+      areaRowsByCol: [2, 2]
     },
     markets: [
       {

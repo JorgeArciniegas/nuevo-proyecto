@@ -184,6 +184,9 @@ export interface Match {
 
 export interface LayoutGridDefinition {
   areaCols?: number;
+  // tslint:disable-next-line:max-line-length
+  areaMaxMarketColsByCol?: number[]; // Max number of market's columns into the area column (mathematical minum common multiple). The array index identify the column for whom is valid the setting.
+  areaRowsByCol?: number[]; // Number of rows per area column. The array index identify the column for whom is valid the setting.
   marketPositionOnColArea?: number;
   marketCols?: number;
   marketRows?: number;

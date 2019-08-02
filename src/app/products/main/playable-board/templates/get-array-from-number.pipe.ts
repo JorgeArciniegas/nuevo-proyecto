@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'getArrayFromNumber'
 })
 export class GetArrayFromNumberPipe implements PipeTransform {
-  transform(value: number): any {
+  transform(value: number): Array<any> {
     return new Array(value);
   }
 }

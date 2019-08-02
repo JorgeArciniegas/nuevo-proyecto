@@ -53,6 +53,17 @@ export class SoccerService implements OnDestroy {
    * @param attemptsNumber The number of attempted call executed. Limit of attempts is 5 recall.
    */
   getTournamentDetails(attemptsNumber: number = 0): void {
+    // Reset variables.
+    // Reset the default Area to "Main".
+    if (this.selectedArea !== 0) {
+      this.changeArea(0);
+    }
+    // Deselect the match is any is selected
+    if (this.selectedMatch !== -1) {
+      this.openEventDetails(this.selectedMatch);
+    }
+    this.oddsSelected = [];
+
     this.mainService
       .getCurrentTournament()
       .then(tournamentDetails => {
@@ -71,8 +82,10 @@ export class SoccerService implements OnDestroy {
   // Method to open the details of the selected match
   openEventDetails(matchIndex: number): void {
     this.tournament.matches[matchIndex].isDetailOpened = !this.tournament.matches[matchIndex].isDetailOpened;
-    // Reset the defaut Area "Main".
-    this.selectedArea = 0;
+    // Reset the default Area to "Main".
+    if (this.selectedArea !== 0) {
+      this.changeArea(0);
+    }
     // Check if the match details is already open.
     if (this.selectedMatch === matchIndex) {
       // Remove the selected match.
