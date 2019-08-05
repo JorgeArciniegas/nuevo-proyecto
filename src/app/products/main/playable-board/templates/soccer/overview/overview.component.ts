@@ -13,7 +13,7 @@ export class OverviewComponent {
 
   constructor(public soccerService: SoccerService) {}
 
-  selectOdd(marketId: number, selection: VirtualBetSelection): void {
-    this.soccerService.selectOdd(marketId, selection);
+  selectOdd(matchIndex: number, marketId: number, selection: VirtualBetSelection): void {
+    this.soccerService.selectOdd(matchIndex, marketId, selection);
   }
 }

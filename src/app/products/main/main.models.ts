@@ -167,7 +167,7 @@ export interface MarketArea {
   id: number;
   name: string;
   hasSpecialValue?: boolean;
-  specialValueOrSpread: number;
+  specialValueOrSpread: string;
   selectionCount: number;
   selections?: VirtualBetSelection[];
   layoutGridDefinition?: LayoutGridDefinition;

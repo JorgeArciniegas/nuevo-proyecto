@@ -10,7 +10,7 @@ export const overviewAreas: Area = {
       id: 10,
       name: '1X2',
       hasSpecialValue: false,
-      specialValueOrSpread: 0,
+      specialValueOrSpread: '',
       selectionCount: 3,
       selections: [],
       layoutGridDefinition: {
@@ -23,7 +23,7 @@ export const overviewAreas: Area = {
       id: 60,
       name: 'Over/Under',
       hasSpecialValue: true,
-      specialValueOrSpread: 2.5,
+      specialValueOrSpread: '2.5',
       selectionCount: 2,
       selections: [],
       layoutGridDefinition: {
@@ -36,7 +36,7 @@ export const overviewAreas: Area = {
       id: 43,
       name: 'Goal/NoGoal',
       hasSpecialValue: false,
-      specialValueOrSpread: 0,
+      specialValueOrSpread: '',
       selectionCount: 2,
       selections: [],
       layoutGridDefinition: {
@@ -63,7 +63,7 @@ export const areas: Area[] = [
         id: 10,
         name: '1X2',
         hasSpecialValue: false,
-        specialValueOrSpread: 0,
+        specialValueOrSpread: '',
         selectionCount: 3,
         selections: [],
         layoutGridDefinition: {
@@ -76,7 +76,7 @@ export const areas: Area[] = [
         id: 60,
         name: 'Over/Under',
         hasSpecialValue: true,
-        specialValueOrSpread: 2.5,
+        specialValueOrSpread: '2.5',
         selectionCount: 2,
         selections: [],
         layoutGridDefinition: {
@@ -89,7 +89,7 @@ export const areas: Area[] = [
         id: 46,
         name: 'DoubleChance',
         hasSpecialValue: false,
-        specialValueOrSpread: 0,
+        specialValueOrSpread: '',
         selectionCount: 3,
         selections: [],
         layoutGridDefinition: {
@@ -102,7 +102,7 @@ export const areas: Area[] = [
         id: 43,
         name: 'Goal/NoGoal',
         hasSpecialValue: false,
-        specialValueOrSpread: 0,
+        specialValueOrSpread: '',
         selectionCount: 2,
         selections: [],
         layoutGridDefinition: {
@@ -127,7 +127,7 @@ export const areas: Area[] = [
         id: 60,
         name: 'Over/Under',
         hasSpecialValue: true,
-        specialValueOrSpread: 1.5,
+        specialValueOrSpread: '1.5',
         selectionCount: 2,
         selections: [],
         layoutGridDefinition: {
@@ -140,7 +140,7 @@ export const areas: Area[] = [
         id: 60,
         name: 'Over/Under',
         hasSpecialValue: true,
-        specialValueOrSpread: 2.5,
+        specialValueOrSpread: '2.5',
         selectionCount: 2,
         selections: [],
         layoutGridDefinition: {
@@ -153,7 +153,7 @@ export const areas: Area[] = [
         id: 60,
         name: 'Over/Under',
         hasSpecialValue: true,
-        specialValueOrSpread: 3.5,
+        specialValueOrSpread: '3.5',
         selectionCount: 2,
         selections: [],
         layoutGridDefinition: {
@@ -166,7 +166,7 @@ export const areas: Area[] = [
         id: 60,
         name: 'Over/Under',
         hasSpecialValue: true,
-        specialValueOrSpread: 4.5,
+        specialValueOrSpread: '4.5',
         selectionCount: 2,
         selections: [],
         layoutGridDefinition: {
@@ -179,7 +179,7 @@ export const areas: Area[] = [
         id: 22,
         name: 'HomeO/U',
         hasSpecialValue: true,
-        specialValueOrSpread: 0.5,
+        specialValueOrSpread: '0.5',
         selectionCount: 2,
         selections: [],
         layoutGridDefinition: {
@@ -192,7 +192,7 @@ export const areas: Area[] = [
         id: 22,
         name: 'HomeO/U',
         hasSpecialValue: true,
-        specialValueOrSpread: 1.5,
+        specialValueOrSpread: '1.5',
         selectionCount: 2,
         selections: [],
         layoutGridDefinition: {
@@ -205,7 +205,7 @@ export const areas: Area[] = [
         id: 22,
         name: 'HomeO/U',
         hasSpecialValue: true,
-        specialValueOrSpread: 2.5,
+        specialValueOrSpread: '2.5',
         selectionCount: 2,
         selections: [],
         layoutGridDefinition: {
@@ -218,7 +218,7 @@ export const areas: Area[] = [
         id: 22,
         name: 'HomeO/U',
         hasSpecialValue: true,
-        specialValueOrSpread: 3.5,
+        specialValueOrSpread: '3.5',
         selectionCount: 2,
         selections: [],
         layoutGridDefinition: {
@@ -231,7 +231,7 @@ export const areas: Area[] = [
         id: 23,
         name: 'AwayO/U',
         hasSpecialValue: true,
-        specialValueOrSpread: 0.5,
+        specialValueOrSpread: '0.5',
         selectionCount: 2,
         selections: [],
         layoutGridDefinition: {
@@ -244,7 +244,7 @@ export const areas: Area[] = [
         id: 23,
         name: 'AwayO/U',
         hasSpecialValue: true,
-        specialValueOrSpread: 1.5,
+        specialValueOrSpread: '1.5',
         selectionCount: 2,
         selections: [],
         layoutGridDefinition: {
@@ -257,7 +257,7 @@ export const areas: Area[] = [
         id: 23,
         name: 'AwayO/U',
         hasSpecialValue: true,
-        specialValueOrSpread: 2.5,
+        specialValueOrSpread: '2.5',
         selectionCount: 2,
         selections: [],
         layoutGridDefinition: {
@@ -270,7 +270,7 @@ export const areas: Area[] = [
         id: 23,
         name: 'AwayO/U',
         hasSpecialValue: true,
-        specialValueOrSpread: 3.5,
+        specialValueOrSpread: '3.5',
         selectionCount: 2,
         selections: [],
         layoutGridDefinition: {
@@ -295,7 +295,7 @@ export const areas: Area[] = [
         id: 44,
         name: 'HT/FT',
         hasSpecialValue: false,
-        specialValueOrSpread: 0,
+        specialValueOrSpread: '',
         selectionCount: 9,
         selections: [],
         layoutGridDefinition: {
@@ -320,7 +320,7 @@ export const areas: Area[] = [
         id: 13,
         name: 'FinalGoalsNumber',
         hasSpecialValue: false,
-        specialValueOrSpread: 0,
+        specialValueOrSpread: '',
         selectionCount: 9,
         selections: [],
         layoutGridDefinition: {
@@ -333,7 +333,7 @@ export const areas: Area[] = [
         id: 658,
         name: 'TotalGoals',
         hasSpecialValue: false,
-        specialValueOrSpread: 0,
+        specialValueOrSpread: '',
         selectionCount: 4,
         selections: [],
         layoutGridDefinition: {
@@ -358,7 +358,7 @@ export const areas: Area[] = [
         id: 2,
         name: 'CorrectScore',
         hasSpecialValue: false,
-        specialValueOrSpread: 0,
+        specialValueOrSpread: '',
         selectionCount: 25,
         selections: [],
         layoutGridDefinition: {
@@ -383,7 +383,7 @@ export const areas: Area[] = [
         id: 1009,
         name: 'CScore1HT',
         hasSpecialValue: false,
-        specialValueOrSpread: 0,
+        specialValueOrSpread: '',
         selectionCount: 9,
         selections: [],
         layoutGridDefinition: {
@@ -408,7 +408,7 @@ export const areas: Area[] = [
         id: 1018,
         name: 'CScore2HT',
         hasSpecialValue: false,
-        specialValueOrSpread: 0,
+        specialValueOrSpread: '',
         selectionCount: 9,
         selections: [],
         layoutGridDefinition: {
@@ -433,7 +433,7 @@ export const areas: Area[] = [
         id: 689,
         name: '1X2+O/U',
         hasSpecialValue: true,
-        specialValueOrSpread: 1.5,
+        specialValueOrSpread: '1.5',
         selectionCount: 6,
         selections: [],
         layoutGridDefinition: {
@@ -446,7 +446,7 @@ export const areas: Area[] = [
         id: 689,
         name: '1X2+O/U',
         hasSpecialValue: true,
-        specialValueOrSpread: 2.5,
+        specialValueOrSpread: '2.5',
         selectionCount: 6,
         selections: [],
         layoutGridDefinition: {
@@ -459,7 +459,7 @@ export const areas: Area[] = [
         id: 689,
         name: '1X2+O/U',
         hasSpecialValue: true,
-        specialValueOrSpread: 3.5,
+        specialValueOrSpread: '3.5',
         selectionCount: 6,
         selections: [],
         layoutGridDefinition: {
@@ -472,7 +472,7 @@ export const areas: Area[] = [
         id: 32,
         name: 'DoubleChance+O/U',
         hasSpecialValue: true,
-        specialValueOrSpread: 1.5,
+        specialValueOrSpread: '1.5',
         selectionCount: 6,
         selections: [],
         layoutGridDefinition: {
@@ -485,7 +485,7 @@ export const areas: Area[] = [
         id: 32,
         name: 'DoubleChance+O/U',
         hasSpecialValue: true,
-        specialValueOrSpread: 2.5,
+        specialValueOrSpread: '2.5',
         selectionCount: 6,
         selections: [],
         layoutGridDefinition: {
@@ -498,7 +498,7 @@ export const areas: Area[] = [
         id: 32,
         name: 'DoubleChance+O/U',
         hasSpecialValue: true,
-        specialValueOrSpread: 3.5,
+        specialValueOrSpread: '3.5',
         selectionCount: 6,
         selections: [],
         layoutGridDefinition: {
@@ -523,7 +523,7 @@ export const areas: Area[] = [
         id: 722,
         name: '1X2+GG/NG',
         hasSpecialValue: false,
-        specialValueOrSpread: 0,
+        specialValueOrSpread: '',
         selectionCount: 6,
         selections: [],
         layoutGridDefinition: {
@@ -536,7 +536,7 @@ export const areas: Area[] = [
         id: 34,
         name: 'DoubleChance+GG/NG',
         hasSpecialValue: false,
-        specialValueOrSpread: 0,
+        specialValueOrSpread: '',
         selectionCount: 6,
         selections: [],
         layoutGridDefinition: {

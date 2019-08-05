@@ -4,8 +4,7 @@ import { SoccerService } from './soccer.service';
 @Component({
   selector: 'app-playable-board-soccer',
   templateUrl: './soccer.component.html',
-  styleUrls: ['./soccer.component.scss'],
-  providers: [SoccerService]
+  styleUrls: ['./soccer.component.scss']
 })
 export class SoccerComponent {
   @Input()

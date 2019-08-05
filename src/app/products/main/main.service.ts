@@ -44,7 +44,7 @@ import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { areas, overviewAreas } from './SoccerAreas';
-import { cloneDeep as clone} from 'lodash';
+import { cloneDeep as clone } from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
@@ -230,12 +230,12 @@ export class MainService extends MainServiceExtra {
       // cache all tournaments
       this.cacheTournaments = sports.Sports[0].ts;
 
-      if ( this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER ) {
+      if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
         const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
         if (all) {
           // Load all events
           this.cacheEvents = tournament.evs;
-          for (let index = 0; index <  this.productService.product.layoutProducts.nextEventItems; index++) {
+          for (let index = 0; index < this.productService.product.layoutProducts.nextEventItems; index++) {
             const event: EventInfo = new EventInfo();
             event.number = this.cacheEvents[index].id;
             event.label = this.cacheEvents[index].nm;
@@ -254,11 +254,10 @@ export class MainService extends MainServiceExtra {
         }
         // Get event's odds
         this.eventDetailOdds(this.eventDetails.events[0].number);
-      // load markets from PRODUCT SOCCER
+        // load markets from PRODUCT SOCCER
       } else {
-
         if (all) {
-          for (let index = 0; index <  this.productService.product.layoutProducts.nextEventItems; index++) {
+          for (let index = 0; index < this.productService.product.layoutProducts.nextEventItems; index++) {
             const event: EventInfo = new EventInfo();
             event.number = this.cacheTournaments[index].id;
             event.label = this.cacheTournaments[index].nm;
@@ -268,10 +267,12 @@ export class MainService extends MainServiceExtra {
           }
           this.currentAndSelectedEventTime();
         } else {
-           // Add only new event
-           this.cacheTournaments.forEach((tournament: VirtualBetTournament) => {
+          // Add only new event
+          this.cacheTournaments.forEach((tournament: VirtualBetTournament) => {
             // tslint:disable-next-line:max-line-length
-            if (this.cacheTournaments.filter((cacheTournament: VirtualBetTournament) => cacheTournament.id === tournament.id).length === 0) {
+            if (
+              this.cacheTournaments.filter((cacheTournament: VirtualBetTournament) => cacheTournament.id === tournament.id).length === 0
+            ) {
               this.cacheTournaments.push(tournament);
             }
           });
@@ -290,7 +291,8 @@ export class MainService extends MainServiceExtra {
   private eventDetailOddsByCacheTournament(tournamentNumber: number): void {
     // Get the tournament information from the chace.
     const tournament: VirtualBetTournamentExtended = this.cacheTournaments.filter(
-      (cacheTournament: VirtualBetTournament) => cacheTournament.id === tournamentNumber)[0];
+      (cacheTournament: VirtualBetTournament) => cacheTournament.id === tournamentNumber
+    )[0];
     const request: VirtualDetailOddsOfEventRequest = {
       sportId: this.productService.product.sportId,
       matchId: tournamentNumber
@@ -299,7 +301,6 @@ export class MainService extends MainServiceExtra {
     if (!tournament.matches || tournament.matches == null || tournament.matches.length === 0) {
       this.elysApi.virtual.getVirtualEventDetail(request).then((sportDetail: VirtualDetailOddsOfEventResponse) => {
         try {
-
           const matches: Match[] = [];
           const overViewArea: Area[] = [];
           const listDetailArea: ListArea[] = [];
@@ -321,8 +322,8 @@ export class MainService extends MainServiceExtra {
             // cicle the current match's markets and save on the temporary "tmpAreaOverview"
             for (const market of match.mk) {
               // find the occurrence and append the selections' data
-              tmpAreaOverview.markets.map( (marketOverviewFilter) =>  {
-                if (marketOverviewFilter.id === market.tp) {
+              tmpAreaOverview.markets.map(marketOverviewFilter => {
+                if (marketOverviewFilter.id === market.tp && market.spv === marketOverviewFilter.specialValueOrSpread) {
                   marketOverviewFilter.selections = market.sls;
                 }
               });
@@ -333,7 +334,9 @@ export class MainService extends MainServiceExtra {
               // cicle the current match's markets and save on the temporary "tmpDetailArea"
               for (const areaMarket of detail.markets) {
                 // find the occurrence and append the selections' data
-                const tmpMk: VirtualBetMarket = match.mk.filter(market => market.tp === areaMarket.id)[0];
+                const tmpMk: VirtualBetMarket = match.mk.filter(
+                  market => market.tp === areaMarket.id && market.spv === areaMarket.specialValueOrSpread
+                )[0];
                 areaMarket.selections = tmpMk.sls;
               }
             }
@@ -424,7 +427,7 @@ export class MainService extends MainServiceExtra {
   }
 
   eventDetailOdds(eventNumber: number): void {
-    if ( this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER ) {
+    if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
       this.eventDetailOddsByCacheTournament(eventNumber);
       return;
     }
@@ -1293,7 +1296,8 @@ export class MainService extends MainServiceExtra {
 
   public getCurrentTournament(): Promise<VirtualBetTournamentExtended> {
     const tournamentSelected: VirtualBetTournamentExtended = this.cacheTournaments.filter(
-      (cacheTournament: VirtualBetTournamentExtended) => cacheTournament.id === this.placingEvent.eventNumber)[0];
+      (cacheTournament: VirtualBetTournamentExtended) => cacheTournament.id === this.placingEvent.eventNumber
+    )[0];
 
     const response = new Promise<VirtualBetTournamentExtended>((resolve, reject) => {
       resolve(tournamentSelected);
@@ -1301,4 +1305,3 @@ export class MainService extends MainServiceExtra {
     return response;
   }
 }
-

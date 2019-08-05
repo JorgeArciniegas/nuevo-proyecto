@@ -18,7 +18,7 @@ export class DetailComponent {
     this.soccerService.changeArea(areaIndex);
   }
 
-  selectOdd(marketId: number, selection: VirtualBetSelection): void {
-    this.soccerService.selectOdd(marketId, selection);
+  selectOdd(matchIndex: number, marketId: number, selection: VirtualBetSelection): void {
+    this.soccerService.selectOdd(matchIndex, marketId, selection);
   }
 }
