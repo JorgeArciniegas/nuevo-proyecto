@@ -10,7 +10,7 @@
 @import "./statistics/statistics.component.tns";
 @import "./event-control/event-control-standard.tns";
 @import "./lucky/lucky-race-fight.tns";
-
+@import "./events-list/events-list.tns";
 .app {
 	&.develop {
 		@import "./skins/develop/styles";
@@ -436,7 +436,7 @@
 				}
 			}
 
-			.list-race {
+			/* .list-race {
 				.number {
 					@extend %btn-success-gradient-mobile;
 
@@ -452,7 +452,7 @@
 						@extend %btn-dark-gradient-mobile;
 					}
 				}
-			}
+			} */
 
 			.card-box-result {
 				.header {
