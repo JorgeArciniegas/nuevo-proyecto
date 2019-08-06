@@ -37,7 +37,7 @@ export interface Products {
   order: number;
   toolbarButton: ToolbarButtons;
   widgets?: Widget[];
-  layoutProducts: LayoutProducts; // accept race, fight, soccer, keno
+  layoutProducts?: LayoutProducts; // accept race, fight, soccer, keno
 }
 
 export interface Widget {
@@ -69,6 +69,7 @@ export interface LayoutProducts {
   type: LAYOUT_TYPE;
   resultItems: number;
   nextEventItems: number;
+  cacheEventsItem: number;
   // List of visible markets on the template. The index of the array is taken to show them on the different rows of the template.
   shownMarkets?: Market[];
 }

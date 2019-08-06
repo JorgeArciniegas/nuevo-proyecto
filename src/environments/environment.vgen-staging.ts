@@ -32,7 +32,8 @@ export const environment: Environment = {
         // defines the layout type for different product group
         type: LAYOUT_TYPE.RACING,
         resultItems: 4, // items to show for last result
-        nextEventItems: 5 // items to show for next events
+        nextEventItems: 5, // items to show for next events
+        cacheEventsItem: 10
       },
       toolbarButton: {
         name: 'dogracing',
@@ -59,7 +60,8 @@ export const environment: Environment = {
       layoutProducts: {
         type: LAYOUT_TYPE.RACING,
         resultItems: 4,
-        nextEventItems: 5
+        nextEventItems: 5,
+        cacheEventsItem: 10
       },
       toolbarButton: {
         name: 'horseracing',
@@ -86,7 +88,8 @@ export const environment: Environment = {
       layoutProducts: {
         type: LAYOUT_TYPE.RACING,
         resultItems: 4,
-        nextEventItems: 5
+        nextEventItems: 5,
+        cacheEventsItem: 10
       },
       toolbarButton: {
         name: 'virtualhorse',
@@ -106,7 +109,8 @@ export const environment: Environment = {
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
-        nextEventItems: 3
+        nextEventItems: 3,
+        cacheEventsItem: 3
       },
       toolbarButton: {
         name: 'Italian League',
@@ -126,7 +130,8 @@ export const environment: Environment = {
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
-        nextEventItems: 3
+        nextEventItems: 3,
+        cacheEventsItem: 3
       },
       toolbarButton: {
         name: 'Italian League',
@@ -148,7 +153,8 @@ export const environment: Environment = {
         type: LAYOUT_TYPE.COCK_FIGHT,
         resultItems: 4,
         nextEventItems: 5,
-        shownMarkets: [Market['1X2'], Market['1X2OverUnder'], Market['1X2WinningSector'], Market['WinningSector'], Market['OverUnder']]
+        shownMarkets: [Market['1X2'], Market['1X2OverUnder'], Market['1X2WinningSector'], Market['WinningSector'], Market['OverUnder']],
+        cacheEventsItem: 10
       },
       toolbarButton: {
         name: 'cockfight',

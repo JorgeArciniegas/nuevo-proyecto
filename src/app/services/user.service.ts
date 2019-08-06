@@ -24,6 +24,7 @@ export class UserService {
   public isModalOpen = false;
   public isBtnCalcEditable = true;
   public userCurrency: string;
+  private isInitUser = true;
   constructor(
     private router: RouterService,
     private storageService: StorageService,
@@ -120,7 +121,10 @@ export class UserService {
           'USER_NOT_ENABLE_TO_THE_OPERATION'
         );
       }
-      await this.checkAvailableSportAndSetPresetsAmount();
+      if (this.isInitUser) {
+        await this.checkAvailableSportAndSetPresetsAmount();
+        this.isInitUser = false;
+      }
     } catch (err) {
       if (err.status === 401) {
         // if unauthorized call logout
