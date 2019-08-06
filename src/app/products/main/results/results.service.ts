@@ -3,7 +3,7 @@ import { ElysApiService, VirtualSportLastResultsRequest, VirtualSportLastResults
 import { timer } from 'rxjs';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { ProductsService } from '../../products.service';
-import { EventResult, OVER_UNDER_COCKFIGHT } from './results.model';
+import { EventResult, OVER_UNDER_COCKFIGHT, SoccerResult } from './results.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,8 @@ export class ResultsService {
     this.listResult = [];
       this.elysApi.virtual.getLastResult(request)
         .then((eventResults: VirtualSportLastResultsResponse) => {
-
+          // results for products
+          if ( this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
           for (let i = 0; i < this.productService.product.layoutProducts.resultItems; i++) {
             const results: string[] = eventResults.EventResults[i].Result.split(
               '-'
@@ -43,6 +44,7 @@ export class ResultsService {
               eventLabel: eventResults.EventResults[i].EventName,
               eventNumber: eventResults.EventResults[i].EventId
             };
+
             // finds and set sport's result
             switch (this.productService.product.layoutProducts.type) {
               case LAYOUT_TYPE.RACING:
@@ -59,7 +61,6 @@ export class ResultsService {
                   sector: Number.parseInt(results[2]),
                 };
                 break;
-              case LAYOUT_TYPE.SOCCER:
               default:
                 break;
 
@@ -67,7 +68,18 @@ export class ResultsService {
             // put the new object on the global list results
             this.listResult.push(tempEventResult);
           }
-        });
+        } else {
+          // create last Result
+          const tempEventResult: EventResult = {
+            eventLabel: eventResults.EventResults[0].TournamentName,
+            eventNumber: eventResults.EventResults[0].TournamentId
+          };
+
+          // group by last Tournament
+          tempEventResult.soccerResult = eventResults.EventResults.filter( item => item.TournamentId === tempEventResult.eventNumber);
+          this.listResult.push(tempEventResult);
+        }
+    });
   }
 
 

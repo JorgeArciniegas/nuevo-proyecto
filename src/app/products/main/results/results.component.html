@@ -10,4 +10,9 @@
     [items]="productService.product.layoutProducts.resultItems" rowHeight="{{rowHeight}}" [results]="service.listResult"
     [codeProduct]="productService.product.codeProduct">
   </app-results-cock-fight>
+
+  <app-results-soccer *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.SOCCER"
+      [items]="productService.product.layoutProducts.resultItems" rowHeight="{{rowHeight}}" [results]="service.listResult"
+    [codeProduct]="productService.product.codeProduct">
+  </app-results-soccer>
 </div>
