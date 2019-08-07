@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { VirtualBetSelection } from '@elys/elys-api';
 import { MainService } from '../../../main.service';
-import { VirtualBetTournamentExtended } from '../../../main.models';
+import { VirtualBetTournamentExtended, Match } from '../../../main.models';
 import { ProductsService } from 'src/app/products/products.service';
 import { Subscription, timer } from 'rxjs';
 import { BtncalcService } from '../../../../../../../src/app/component/btncalc/btncalc.service';
@@ -41,30 +41,21 @@ export class SoccerService implements OnDestroy {
 
     // Get the change of the coupon's object.
     this.elysCoupon.couponHasChanged.subscribe(coupon => {
-      const matches = this.tournament.matches.filter(match => match.hasOddsSelected === true);
-      coupon.Odds.forEach(odd => {
-        for (const match of matches.filter(m => m.id === odd.MatchId)) {
-        }
+      this.tournament.matches.forEach( match => {
+        match.selectedOdds.forEach( (oddSelected, idx) => {
+          let matchHasOdd = false;
+          if ( coupon.Odds.filter( odd => odd.SelectionId === oddSelected ).length > 0 ) {
+            matchHasOdd = true;
+          }
+          if (!matchHasOdd) {
+            match.selectedOdds.splice(idx, 1);
+            if ( match.selectedOdds.length === 0 ) {
+              match.hasOddsSelected =   false;
+            }
+          }
+        });
       });
     });
-
-    // this.polyfunctionalAreaSubscription = this.productService.polyfunctionalAreaObservable.subscribe(polyfunctional => {
-    //   // Reset the list of selections by match when the object of polyfunctional area is empty.
-    //   if (polyfunctional.odds.length === 0) {
-    //     // Check if any match contains selected odds.
-    //     this.selectionsByMatch.forEach((match, index) => {
-    //       if (match.selections.length > 0) {
-    //         // Change the match's status.
-    //         this.tournament.matches[index].hasOddsSelected = false;
-    //       }
-    //     });
-    //     this.selectionsByMatch = Array(10)
-    //       .fill(undefined)
-    //       .map(u => ({ selections: [] }));
-    //   } else {
-    //     // this.checkOddSelected(polyfunctional);
-    //   }
-    // });
   }
 
   ngOnDestroy() {
@@ -86,10 +77,6 @@ export class SoccerService implements OnDestroy {
     if (this.selectedMatch !== -1) {
       this.openEventDetails(this.selectedMatch);
     }
-    // Reset the selected odd for match.
-    // this.selectionsByMatch = Array(10)
-    //   .fill(undefined)
-    //   .map(u => ({ selections: [] }));
 
     this.mainService
       .getCurrentTournament()
@@ -175,15 +162,4 @@ export class SoccerService implements OnDestroy {
     this.btnCalcService.tapPlus();
   }
 
-  /**
-   * When "oddsSelected" does not have the odds contains from "polifunctionalArea", append it.
-   * @param polyfunctional PolyfunctionalArea
-   */
-  // private checkOddSelected(polyfunctional: PolyfunctionalArea): void {
-  //   polyfunctional.odds.filter(item => {
-  //     if (!this.oddsSelected.includes(item.id)) {
-  //       this.oddsSelected.push(item.id);
-  //     }
-  //   });
-  // }
 }

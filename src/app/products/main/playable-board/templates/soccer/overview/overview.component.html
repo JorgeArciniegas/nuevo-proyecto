@@ -3,10 +3,10 @@
 </mat-grid-list>
 <ng-container *ngFor="let row of soccerService.tournament.overviewArea; let i = index">
   <mat-grid-list cols="7" rowHeight="{{rowHeight * 16/21}}">
-    <ng-container *ngFor="let market of soccerService.tournament.overviewArea[i].markets">
+    <ng-container *ngFor="let market of row.markets">
       <mat-grid-tile *ngFor="let odd of market.selections" rowspan="2">
         <button class="btn-soccer-odd radius-5"
-          [ngClass]="{'btn-grey-gradient': !soccerService.tournament.matches[i].selectedOdds.includes(odd.id), 'btn-selected': soccerService.tournament.matches[i].selectedOdds.includes(odd.id)}"
+        [ngClass]="soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
           (click)="selectOdd(i, market.id, odd)">
           <div class="btn-soccer-odd__details" fxLayout="column" fxLayoutAlign="center center">
             <div class="btn-soccer-odd__details--name">
