@@ -435,25 +435,6 @@
 					}
 				}
 			}
-
-			/* .list-race {
-				.number {
-					@extend %btn-success-gradient-mobile;
-
-					&.selected {
-						@extend %btn-blue-gradient-mobile;
-					}
-				}
-
-				.date {
-					@extend %btn-gray-gradient-mobile;
-
-					&.selected {
-						@extend %btn-dark-gradient-mobile;
-					}
-				}
-			} */
-
 			.card-box-result {
 				.header {
 					@extend %card-title-noborder;
