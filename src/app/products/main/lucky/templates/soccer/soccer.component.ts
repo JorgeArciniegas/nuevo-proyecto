@@ -1,8 +1,8 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
-import { Lucky } from '../../lucky.model';
+import { Component } from '@angular/core';
+import { UserService } from '../../../../../services/user.service';
+import { Area } from '../../../main.models';
 import { MainService } from '../../../main.service';
-import { MarketArea, Area } from '../../../main.models';
-import { UserService } from '~/app/services/user.service';
+import { Lucky } from '../../lucky.model';
 
 @Component({
   selector: 'app-lucky-soccer',

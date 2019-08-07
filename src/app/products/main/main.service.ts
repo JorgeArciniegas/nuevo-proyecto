@@ -13,7 +13,7 @@ import {
   VirtualProgramTreeBySportResponse
 } from '@elys/elys-api';
 import { cloneDeep as clone } from 'lodash';
-import { interval, Observable, Subject } from 'rxjs';
+import { interval, Subject, Observable } from 'rxjs';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
@@ -50,7 +50,6 @@ import {
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
 import { areas, overviewAreas } from './SoccerAreas';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -486,6 +485,9 @@ export class MainService extends MainServiceExtra {
       });
   }
 
+  /**
+   *
+   */
   resetPlayEvent(): void {
     this.placingEvent = new PlacingEvent();
     this.smartCode = new Smartcode();
@@ -494,12 +496,17 @@ export class MainService extends MainServiceExtra {
     ].number;
     this.createPlayerList();
 
-    this.productService.polyfunctionalAreaSubject.next(
-      new PolyfunctionalArea()
-    );
-    this.productService.polyfunctionalStakeCouponSubject.next(
-      new PolyfunctionalStakeCoupon()
-    );
+    // Create a new polyfunctionArea object
+    const  polyfunctionalArea: PolyfunctionalArea = new PolyfunctionalArea();
+    // take the last polyfunctionArea's value from Subject
+    const tempPolyfunctionalArea: PolyfunctionalArea = this.productService.polyfunctionalAreaSubject.getValue();
+    // check if global 'PolyfunctionalArea' has the grouping and put it on new object before to replace it
+    if (tempPolyfunctionalArea.hasOwnProperty('grouping')) {
+      polyfunctionalArea.grouping = tempPolyfunctionalArea.grouping;
+    }
+    // updated the new PolyfunctionalArea
+    this.productService.polyfunctionalAreaSubject.next(polyfunctionalArea);
+    this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
 
   eventDetailOdds(eventNumber: number): void {

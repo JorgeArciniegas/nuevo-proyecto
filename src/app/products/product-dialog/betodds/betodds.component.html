@@ -44,7 +44,7 @@
         </div>
         <div fxFlex="98" fxLayoutAlign="space-between">
           <div fxFlex="38" class="stake radius-5">
-            <button class="btn-reset btn-default color radius-5"
+            <button *ngIf="multiStake" class="btn-reset btn-default color radius-5"
               [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
                       'btn-selected ' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }"
               (click)="checkOddToChangeStake(odd)">
