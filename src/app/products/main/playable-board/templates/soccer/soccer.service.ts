@@ -6,6 +6,7 @@ import { ProductsService } from 'src/app/products/products.service';
 import { Subscription, timer } from 'rxjs';
 import { BtncalcService } from '../../../../../../../src/app/component/btncalc/btncalc.service';
 import { ElysCouponService } from '@elys/elys-coupon';
+import { CouponService } from 'src/app/component/coupon/coupon.service';
 // import { PolyfunctionalArea } from 'src/app/products/products.model';
 
 @Injectable({
@@ -19,12 +20,15 @@ export class SoccerService implements OnDestroy {
   public selectedArea: number;
   private currentEventSubscription: Subscription;
   private polyfunctionalAreaSubscription: Subscription;
-
+  // Listen the coupon's change
+  couponHasChangedSubscription: Subscription;
+  couponHasBeenPlacedSubscription: Subscription;
   constructor(
     private mainService: MainService,
     private productService: ProductsService,
     private btnCalcService: BtncalcService,
-    private elysCoupon: ElysCouponService
+    private elysCoupon: ElysCouponService,
+    private couponService: CouponService
   ) {
     // Variables inizialization.
     this.selectedMatch = -1;
@@ -40,7 +44,7 @@ export class SoccerService implements OnDestroy {
     });
 
     // Get the change of the coupon's object.
-    this.elysCoupon.couponHasChanged.subscribe(coupon => {
+    this.couponHasChangedSubscription = this.elysCoupon.couponHasChanged.subscribe(coupon => {
       this.tournament.matches.forEach( match => {
         match.selectedOdds.forEach( (oddSelected, idx) => {
           let matchHasOdd = false;
@@ -56,11 +60,20 @@ export class SoccerService implements OnDestroy {
         });
       });
     });
+
+    this.couponHasBeenPlacedSubscription = this.couponService.couponHasBeenPlacedObs.subscribe( coupon => {
+      this.tournament.matches.forEach( match => {
+        match.hasOddsSelected = false;
+        match.selectedOdds = [];
+      });
+    });
   }
 
   ngOnDestroy() {
     this.currentEventSubscription.unsubscribe();
     this.polyfunctionalAreaSubscription.unsubscribe();
+    this.couponHasChangedSubscription.unsubscribe();
+    this.couponHasBeenPlacedSubscription.unsubscribe();
   }
 
   /**
