@@ -515,8 +515,8 @@ export const areas: Area[] = [
     isSelected: false,
     layoutDefinition: {
       areaCols: 2,
-      areaMaxMarketColsByCol: [3, 3],
-      areaRowsByCol: [2, 2]
+      areaMaxMarketColsByCol: [2, 2],
+      areaRowsByCol: [3, 3]
     },
     markets: [
       {
@@ -528,8 +528,8 @@ export const areas: Area[] = [
         selections: [],
         layoutGridDefinition: {
           marketPositionOnColArea: 1,
-          marketCols: 3,
-          marketRows: 2
+          marketCols: 2,
+          marketRows: 3
         }
       },
       {
@@ -541,8 +541,8 @@ export const areas: Area[] = [
         selections: [],
         layoutGridDefinition: {
           marketPositionOnColArea: 2,
-          marketCols: 3,
-          marketRows: 2
+          marketCols: 2,
+          marketRows: 3
         }
       }
     ]

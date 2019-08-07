@@ -16,9 +16,12 @@
     <div class="btn-coupon-board">
       <div class="display" fxLayoutAlign="space-around center" fxLayout="row layout-wrap">
         <div fxFlex fxLayoutAlign="start center" class="coupon-type-indicator">
-          <span class="btn btn-default">{{'SINGLE' | translate}}</span>
-          <span
-            class="indicator-odds-number radius-50">{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}</span>
+          <!-- Type Coupon and Number of odds -->
+            <ng-container *ngIf="couponService.coupon && couponService.coupon.Odds.length > 0">
+              <span class="btn btn-default" *ngIf="couponLayout.acceptMultiStake">{{'SINGLE' | translate}}</span>
+              <span class="btn btn-default" *ngIf="!couponLayout.acceptMultiStake">{{ 'DYNAMIC_KEYS.CouponType.'+couponTypeId[couponService.coupon.CouponTypeId] | translate}}</span>
+              <span class="indicator-odds-number radius-50">{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}</span>
+          </ng-container>
         </div>
         <div fxFlex="15">
           <button class="btn-reset btn-display btn-dark-gradient radius-5" (click)="openDialog()">
@@ -48,33 +51,61 @@
               [ngClass]="{'card-odd-error': !couponService.warningMessage && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}"
               fxLayout="column" fxLayoutAlign="space-between stretch">
               <div fxFlex="24" class="top-window radius-5-tl-tr" fxLayoutAlign="space-between center">
-                <div>{{odd.EventName}}</div>
+                <div>
+                    <span *ngIf="couponLayout && couponLayout.typeLayout === layoutProduct.SOCCER">
+                      {{ listOdds[0].DefaultTournamentName }} -
+                    </span>
+                    <span [ngClass]="{ 'typography-weight-700 typography-size-11' : couponLayout.typeLayout === layoutProduct.SOCCER}">{{odd.EventName}}</span>
+                </div>
                 <div>#{{odd.MatchId}}</div>
               </div>
-              <div fxFlex="38" class="row" fxLayout="row">
-                <div fxFlex="78" fxLayoutAlign="start center">
-                  {{odd.MarketName}} -
-                  ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})
+              <!-- COUPON MULTISTAKE-->
+              <ng-container  *ngIf="couponLayout.acceptMultiStake">
+                <div fxFlex="38" class="row" fxLayout="row">
+                  <div fxFlex="78" fxLayoutAlign="start center">
+                    {{odd.MarketName}} -
+                    ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})
+                  </div>
+                  <div fxFlex="22" class="odd radius-5" fxLayoutAlign="center center">
+                    {{odd.OddValue | number: '1.2-2'}}
+                  </div>
                 </div>
-                <div fxFlex="22" class="odd radius-5" fxLayoutAlign="center center">
-                  {{odd.OddValue | number: '1.2-2'}}
-                </div>
-              </div>
-              <div fxFlex="38" class="row" fxLayout="row" fxLayoutAlign="space-between stretch">
-                <button fxFlex="40" class="btn-default stake radius-5" fxLayoutAlign="center center"
-                  [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
-                  'btn-selected ' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }" (click)="checkOddToChangeStake(odd)">
-                  <span
-                    *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId">{{odd.OddStake | number: '1.2-3'}}</span>
-                  <span
-                    *ngIf="couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId">{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}</span>
-                </button>
-                <div fxFlex="16" fxLayoutAlign="end center">
-                  <button class="btn-default btn-warning radius-5 remove" (click)="removeOdd(odd)">
-                    <div class="icon"></div>
+                <div fxFlex="38" class="row" fxLayout="row" fxLayoutAlign="space-between stretch">
+                  <button fxFlex="40" class="btn-default stake radius-5" fxLayoutAlign="center center"
+                    [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
+                    'btn-selected ' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }" (click)="checkOddToChangeStake(odd)">
+                    <span
+                      *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId">{{odd.OddStake | number: '1.2-3'}}</span>
+                    <span
+                      *ngIf="couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId">{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}</span>
                   </button>
+                  <div fxFlex="16" fxLayoutAlign="end center">
+                    <button class="btn-default btn-warning radius-5 remove" (click)="removeOdd(odd)">
+                      <div class="icon"></div>
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </ng-container>
+              <!-- COUPON NO MULTISTAKE-->
+              <ng-container  *ngIf="!couponLayout.acceptMultiStake">
+                <div fxFlex="76" class="row" fxLayout="row">
+                    <div fxFlex="75" fxLayoutAlign="start center">
+                      {{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})
+                    </div>
+                    <div fxFlex="25" fxLayoutAlign="center">
+                      <div fxLayout="column" fxFill fxLayoutGap="10px">
+                        <div fxFlex="40" class="odd radius-5" fxLayoutAlign="center">
+                          {{odd.OddValue | number: '1.2-2'}}
+                        </div>
+                        <div fxFlex="50" fxLayoutAlign="end center">
+                          <button class="btn-default btn-warning radius-5 remove" (click)="removeOdd(odd)">
+                            <div class="icon"></div>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </ng-container>
             </div>
           </div>
         </div>

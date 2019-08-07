@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i");
-
 @import "icons";
 
 /**
@@ -722,4 +720,17 @@ $gradient-dark2: #000000;
 // STATISTIC
 %bar-fitness-pecentage {
 	background: $border-success;
+}
+
+// GROUPINGS
+
+%bg-slide-toggle-thumb-container-selected {
+  background: $color-bg-event;
+  box-shadow:  0px 0px 3px 0px $color-bg-primary-op-dark;
+}
+%bg-slide-toggle-thumb-label {
+  background: $color-bg-primary;
+}
+%bg-slide-toggle-thumb-label-selected {
+  background: $color-bg-event;
 }

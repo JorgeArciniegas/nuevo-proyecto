@@ -4,7 +4,7 @@ import {
   CurrencyCodeResponse,
   CurrencyCodeRequest
 } from '@elys/elys-api';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Products, LayoutProducts } from '../../../src/environments/environment.models';
 import { AppSettings } from '../app.settings';
 import { DestroyCouponService } from '../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
@@ -23,6 +23,7 @@ import {
   PolyfunctionalStakeCoupon,
   PolyfunctionStakePresetPlayer
 } from './products.model';
+import { ElysCouponService } from '@elys/elys-coupon';
 @Injectable({
   providedIn: 'root'
 })
@@ -38,7 +39,7 @@ export class ProductsService extends ProductsServiceExtra {
   public playableBoardResetObserve: Observable<boolean>;
 
   // polifunctional area object declare
-  polyfunctionalAreaSubject: Subject<PolyfunctionalArea>;
+  polyfunctionalAreaSubject: BehaviorSubject<PolyfunctionalArea>;
   polyfunctionalAreaObservable: Observable<PolyfunctionalArea>;
 
   // polifunctional stake coupon
@@ -74,13 +75,11 @@ export class ProductsService extends ProductsServiceExtra {
     this.productNameSelectedObserve = this.productNameSelectedSubscribe.asObservable();
 
     // Element for management the display
-    this.polyfunctionalAreaSubject = new Subject<PolyfunctionalArea>();
+    this.polyfunctionalAreaSubject = new BehaviorSubject<PolyfunctionalArea>(new PolyfunctionalArea());
     this.polyfunctionalAreaObservable = this.polyfunctionalAreaSubject.asObservable();
 
     // stake coupon
-    this.polyfunctionalStakeCouponSubject = new Subject<
-      PolyfunctionalStakeCoupon
-    >();
+    this.polyfunctionalStakeCouponSubject = new Subject<PolyfunctionalStakeCoupon>();
     this.polyfunctionalStakeCouponObs = this.polyfunctionalStakeCouponSubject.asObservable();
 
     // time block
@@ -101,6 +100,7 @@ export class ProductsService extends ProductsServiceExtra {
         dialogData.breakpoint = this.breakpoint;
         dialogData.title = data.title;
         dialogData.statistics = data.statistics;
+        dialogData.groupings = data.groupings;
         this.dialog.openDialog(dialogData);
       });
 
@@ -127,6 +127,7 @@ export class ProductsService extends ProductsServiceExtra {
         productCodeRequest: v
       };
     });
+
   }
 
   fnWindowsSize(): void {

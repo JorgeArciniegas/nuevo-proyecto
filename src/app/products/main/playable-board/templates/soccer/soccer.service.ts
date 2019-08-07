@@ -4,6 +4,8 @@ import { MainService } from '../../../main.service';
 import { VirtualBetTournamentExtended } from '../../../main.models';
 import { ProductsService } from 'src/app/products/products.service';
 import { Subscription, timer } from 'rxjs';
+import { BtncalcService } from '../../../../../../../src/app/component/btncalc/btncalc.service';
+import { ElysCouponService } from '@elys/elys-coupon';
 // import { PolyfunctionalArea } from 'src/app/products/products.model';
 
 @Injectable({
@@ -18,7 +20,12 @@ export class SoccerService implements OnDestroy {
   private currentEventSubscription: Subscription;
   private polyfunctionalAreaSubscription: Subscription;
 
-  constructor(private mainService: MainService, private productService: ProductsService) {
+  constructor(
+    private mainService: MainService,
+    private productService: ProductsService,
+    private btnCalcService: BtncalcService,
+    private elysCoupon: ElysCouponService
+  ) {
     // Variables inizialization.
     this.selectedMatch = -1;
     // Set the default Area "Main".
@@ -32,7 +39,15 @@ export class SoccerService implements OnDestroy {
       this.getTournamentDetails();
     });
 
-    // Get the change of the polyfunctional area's object.
+    // Get the change of the coupon's object.
+    this.elysCoupon.couponHasChanged.subscribe(coupon => {
+      const matches = this.tournament.matches.filter(match => match.hasOddsSelected === true);
+      coupon.Odds.forEach(odd => {
+        for (const match of matches.filter(m => m.id === odd.MatchId)) {
+        }
+      });
+    });
+
     // this.polyfunctionalAreaSubscription = this.productService.polyfunctionalAreaObservable.subscribe(polyfunctional => {
     //   // Reset the list of selections by match when the object of polyfunctional area is empty.
     //   if (polyfunctional.odds.length === 0) {
@@ -156,6 +171,8 @@ export class SoccerService implements OnDestroy {
       this.tournament.matches[matchIndex].hasOddsSelected = !this.tournament.matches[matchIndex].hasOddsSelected;
     }
     this.mainService.placingOddByOdd(marketId, selection);
+    // tap su plus automatico
+    this.btnCalcService.tapPlus();
   }
 
   /**

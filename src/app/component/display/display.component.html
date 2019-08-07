@@ -1,6 +1,6 @@
 <div fxFlexFill fxLayout="column">
   <div fxFlex="70" fxLayout="row" class="display" [style.height.px]="((rowHeight/2))">
-    <ng-container *ngIf="polyfunctionalValue && polyfunctionalValue.selection">
+    <ng-container *ngIf="polyfunctionalValue && polyfunctionalValue.selection && productService.product.typeCoupon.acceptMultiStake">
       <div fxLayout="column" fxFlex="88" fxLayoutAlign="center flex-start">
         <div fxLayout="row" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2"
           [style.min-height.px]="(rowHeight - 20) / 2">
@@ -20,13 +20,27 @@
         </div>
       </div>
       <div fxLayout="column" fxFlex="10" fxLayoutAlign="center center"
-        *ngIf="polyfunctionalValue  && polyfunctionalValue.selection">
+        *ngIf="polyfunctionalValue  && polyfunctionalValue.selection ">
         <button class="btn-reset btn-display" (click)="detailOdds()">
           <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png">
         </button>
       </div>
     </ng-container>
-
+    <ng-container *ngIf="polyfunctionalValue && polyfunctionalValue.grouping && !productService.product.typeCoupon.acceptMultiStake">
+      <div fxLayout="column" fxFlex="88" fxLayoutAlign="center flex-start">
+        <div fxLayout="row" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2" [style.min-height.px]="(rowHeight - 20) / 2">
+          <ng-container  *ngFor="let group of polyfunctionalValue.grouping">
+            <span *ngIf="group.Selected" class="group-title" [ngClass]="{'selected' : group.Selected}">{{group.Combinations +'-' + group.Grouping }}</span>
+          </ng-container>
+        </div>
+      </div>
+      <div fxLayout="column" fxFlex="10" fxLayoutAlign="center center"
+      *ngIf="polyfunctionalValue  && polyfunctionalValue.grouping.length > 0 ">
+      <button class="btn-reset btn-display" (click)="detailOdds('true')">
+        <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png">
+      </button>
+    </div>
+    </ng-container>
   </div>
   <div fxFill fxFlex="30" fxLayout="row" class="display" [style.height.px]="((rowHeight/2)-5)">
     <div fxLayout="column" fxFlex="20" fxLayoutAlign="center flex-srtart">

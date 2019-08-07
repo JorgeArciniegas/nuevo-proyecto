@@ -1,8 +1,9 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
-import { Lucky } from '../../lucky.model';
-import { MainService } from '../../../main.service';
-import { MarketArea, Area } from '../../../main.models';
+import { Component } from '@angular/core';
 import { UserService } from '../../../../../services/user.service';
+import { Area } from '../../../main.models';
+import { MainService } from '../../../main.service';
+import { SoccerService } from '../../../playable-board/templates/soccer/soccer.service';
+import { Lucky } from '../../lucky.model';
 
 @Component({
   selector: 'app-lucky-soccer',
@@ -11,7 +12,7 @@ import { UserService } from '../../../../../services/user.service';
 })
 export class SoccerComponent {
   lucky: typeof Lucky = Lucky;
-  constructor(private mainService: MainService, public userService: UserService) {}
+  constructor(private mainService: MainService, public userService: UserService, private soccerService: SoccerService) {}
 
   /**
    *
@@ -32,7 +33,7 @@ export class SoccerComponent {
   private selectAllMatches(): number[] {
     const extractMatchesIdx: number[] = [];
     for (let i = 0; i < Lucky.Lucky10; i++) {
-      extractMatchesIdx.push(i + 1);
+      extractMatchesIdx.push(i);
     }
     return extractMatchesIdx;
   }
@@ -62,11 +63,12 @@ export class SoccerComponent {
    */
   private rngMarketsAndPlace(extractMatchesIdx: number[], areas: Area[]): void {
     while (extractMatchesIdx.length > 0) {
-      const match = extractMatchesIdx.shift() - 1;
+      const match = extractMatchesIdx.shift();
       const tournament = areas[match].markets;
       const rngMarkets = Math.floor(Math.random() * tournament.length);
       const rngSelection = Math.floor(Math.random() * areas[match].markets[rngMarkets].selectionCount);
-      this.mainService.placingOddByOdd(
+      this.soccerService.selectOdd(
+        match,
         areas[match].markets[rngMarkets].selections[rngSelection].tp,
         areas[match].markets[rngMarkets].selections[rngSelection]
       );

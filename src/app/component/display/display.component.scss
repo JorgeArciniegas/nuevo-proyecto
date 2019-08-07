@@ -24,3 +24,9 @@
       padding-top: 4px;
     }
 }
+.group-title{
+  margin-right: 5px;
+  font-weight: 700;
+  font-size: 12pt;
+  &.selected  {color: yellow;}
+}
