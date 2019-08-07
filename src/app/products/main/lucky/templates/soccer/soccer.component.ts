@@ -2,6 +2,7 @@ import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Lucky } from '../../lucky.model';
 import { MainService } from '../../../main.service';
 import { MarketArea, Area } from '../../../main.models';
+import { UserService } from '~/app/services/user.service';
 
 @Component({
   selector: 'app-lucky-soccer',
@@ -11,7 +12,7 @@ import { MarketArea, Area } from '../../../main.models';
 export class SoccerComponent {
 
   lucky: typeof Lucky = Lucky;
-  constructor(private mainService: MainService) { }
+  constructor(private mainService: MainService, public userService: UserService) { }
 
   /**
    *
