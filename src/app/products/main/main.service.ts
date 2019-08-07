@@ -314,7 +314,8 @@ export class MainService extends MainServiceExtra {
               smartcode: match.smc,
               hasOddsSelected: false,
               isVideoShown: match.ehv,
-              isDetailOpened: false
+              isDetailOpened: false,
+              selectedOdds: []
             };
             // clone temporary areas from default values
             const tmpAreaOverview = clone(overviewAreas);

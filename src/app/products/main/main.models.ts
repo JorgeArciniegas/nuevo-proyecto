@@ -180,6 +180,7 @@ export interface Match {
   isVideoShown: boolean; // when it is true, the camera's icon should be active. The default value is false.
   hasOddsSelected: boolean;
   isDetailOpened: boolean;
+  selectedOdds: number[];
 }
 
 export interface LayoutGridDefinition {

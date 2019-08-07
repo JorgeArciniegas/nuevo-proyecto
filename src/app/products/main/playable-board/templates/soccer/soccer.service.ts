@@ -4,9 +4,7 @@ import { MainService } from '../../../main.service';
 import { VirtualBetTournamentExtended } from '../../../main.models';
 import { ProductsService } from 'src/app/products/products.service';
 import { Subscription, timer } from 'rxjs';
-import { PolyfunctionalArea } from 'src/app/products/products.model';
-import { root } from 'rxjs/internal/util/root';
-import { cloneDeep as clone } from 'lodash';
+// import { PolyfunctionalArea } from 'src/app/products/products.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +15,6 @@ export class SoccerService implements OnDestroy {
   public selectedMatch: number;
   // Index of the areas array of the selected match;
   public selectedArea: number;
-  // public oddsSelected: number[];
-  // Array containing the number of selections active for match. The array index indicates the match.
-  private selectionsByMatch: { selections: number[] }[];
-  // private numMatchsSelections: number[];
   private currentEventSubscription: Subscription;
   private polyfunctionalAreaSubscription: Subscription;
 
@@ -29,13 +23,6 @@ export class SoccerService implements OnDestroy {
     this.selectedMatch = -1;
     // Set the default Area "Main".
     this.selectedArea = 0;
-    // this.oddsSelected = [];
-    this.selectionsByMatch = Array(10)
-      .fill(undefined)
-      .map(u => ({ selections: [] }));
-    console.log(this.selectionsByMatch);
-    // Create an array with the lenght of the number of matches and filled of 0.
-    // this.numMatchsSelections = Array(10).fill(0);
 
     // Get the event's detail at the access of the section
     this.getTournamentDetails();
@@ -46,18 +33,23 @@ export class SoccerService implements OnDestroy {
     });
 
     // Get the change of the polyfunctional area's object.
-    this.polyfunctionalAreaSubscription = this.productService.polyfunctionalAreaObservable.subscribe(polyfunctional => {
-      // Reset the list of selections and the numMatchesSelections when the object of polyfunctional area is empty.
-      if (polyfunctional.odds.length === 0 && this.selectionsByMatch.length !== 0) {
-        // this.oddsSelected = [];
-        this.selectionsByMatch = Array(10)
-          .fill(undefined)
-          .map(u => ({ selections: [] }));
-        // this.numMatchsSelections = this.numMatchsSelections.fill(0);
-      } else {
-        // this.checkOddSelected(polyfunctional);
-      }
-    });
+    // this.polyfunctionalAreaSubscription = this.productService.polyfunctionalAreaObservable.subscribe(polyfunctional => {
+    //   // Reset the list of selections by match when the object of polyfunctional area is empty.
+    //   if (polyfunctional.odds.length === 0) {
+    //     // Check if any match contains selected odds.
+    //     this.selectionsByMatch.forEach((match, index) => {
+    //       if (match.selections.length > 0) {
+    //         // Change the match's status.
+    //         this.tournament.matches[index].hasOddsSelected = false;
+    //       }
+    //     });
+    //     this.selectionsByMatch = Array(10)
+    //       .fill(undefined)
+    //       .map(u => ({ selections: [] }));
+    //   } else {
+    //     // this.checkOddSelected(polyfunctional);
+    //   }
+    // });
   }
 
   ngOnDestroy() {
@@ -75,14 +67,14 @@ export class SoccerService implements OnDestroy {
     if (this.selectedArea !== 0) {
       this.changeArea(0);
     }
-    // Deselect the match is any is selected
+    // Deselect the match if any it is selected
     if (this.selectedMatch !== -1) {
       this.openEventDetails(this.selectedMatch);
     }
-    // this.oddsSelected = [];
-    this.selectionsByMatch = Array(10)
-      .fill(undefined)
-      .map(u => ({ selections: [] }));
+    // Reset the selected odd for match.
+    // this.selectionsByMatch = Array(10)
+    //   .fill(undefined)
+    //   .map(u => ({ selections: [] }));
 
     this.mainService
       .getCurrentTournament()
@@ -140,70 +132,29 @@ export class SoccerService implements OnDestroy {
   }
 
   selectOdd(matchIndex: number, marketId: number, selection: VirtualBetSelection): void {
-    // Get the odd index into the oddsSelected array if present.
-    // const oddIndex = this.oddsSelected.indexOf(selection.id);
-    // Determin if is an new insertion to the coupon.
-    // const isAnInsertion = oddIndex === -1;
-
-    // Check if the match has already selections
-    // const selectedMatch = this.selectionsByMatch.filter(match => match.index === matchIndex);
-    // if (selectedMatch.length > 0) {
-    if (this.selectionsByMatch[matchIndex].selections.length > 0) {
+    const selectedOdds = this.tournament.matches[matchIndex].selectedOdds;
+    // Check if the match has already selected odds.
+    if (selectedOdds.length > 0) {
       // The market is already present
-      const oddIndex = this.selectionsByMatch[matchIndex].selections.indexOf(selection.id);
+      const oddIndex = selectedOdds.indexOf(selection.id);
       // Insert or delete the selection from the list of selected odds.
       if (oddIndex !== -1) {
         // It is a removal
-        this.selectionsByMatch[matchIndex].selections.splice(oddIndex, 1);
-        if (this.selectionsByMatch[matchIndex].selections.length === 0) {
+        selectedOdds.splice(oddIndex, 1);
+        if (selectedOdds.length === 0) {
           // If the match doesn't have any more selections change its "hasOddsSelected" status.
           this.tournament.matches[matchIndex].hasOddsSelected = !this.tournament.matches[matchIndex].hasOddsSelected;
         }
       } else {
         // It is an insertion
-        this.selectionsByMatch[matchIndex].selections.push(selection.id);
+        selectedOdds.push(selection.id);
       }
     } else {
       // It is an insertion
-      this.selectionsByMatch[matchIndex].selections.push(selection.id);
+      selectedOdds.push(selection.id);
       // Set the match as contening a selected odd.
       this.tournament.matches[matchIndex].hasOddsSelected = !this.tournament.matches[matchIndex].hasOddsSelected;
     }
-    // } else {
-    //   // The match needs to be added to the list of match containing selections
-    //   this.selectionsByMatch.push({ index: matchIndex, selections: [selection.id] });
-    //   // Set the match as contening a selected odd.
-    //   this.tournament.matches[matchIndex].hasOddsSelected = !this.tournament.matches[matchIndex].hasOddsSelected;
-    // }
-
-    // if (this.numMatchsSelections[matchIndex] <= 0) {
-    //   // If it is an insertion a odd.
-    //   if (isAnInsertion) {
-    //     // Set the match as contening a selected odd.
-    //     this.tournament.matches[matchIndex].hasOddsSelected = !this.tournament.matches[matchIndex].hasOddsSelected;
-    //     this.numMatchsSelections[matchIndex]++;
-    //   }
-    // } else {
-    //   if (isAnInsertion) {
-    //     // Increment the number of odd selected for the match.
-    //     this.numMatchsSelections[matchIndex]++;
-    //   } else {
-    //     // Decrement the number of odd selected for the match.
-    //     this.numMatchsSelections[matchIndex]--;
-    //     if (this.numMatchsSelections[matchIndex] === 0) {
-    //       // If the match doesn't have any more selections change its "hasOddsSelected" status.
-    //       this.tournament.matches[matchIndex].hasOddsSelected = !this.tournament.matches[matchIndex].hasOddsSelected;
-    //     }
-    //   }
-    // }
-
-    // // Insert or delete the selection from the list of selected odds.
-    // if (isAnInsertion) {
-    //   this.oddsSelected.push(selection.id);
-    // } else {
-    //   this.oddsSelected.splice(oddIndex, 1);
-    // }
-    console.log(this.selectionsByMatch);
     this.mainService.placingOddByOdd(marketId, selection);
   }
 
