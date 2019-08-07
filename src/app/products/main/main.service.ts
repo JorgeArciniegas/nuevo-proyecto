@@ -12,18 +12,23 @@ import {
   VirtualProgramTreeBySportRequest,
   VirtualProgramTreeBySportResponse
 } from '@elys/elys-api';
-import { interval, Subject } from 'rxjs';
+import { cloneDeep as clone } from 'lodash';
+import { interval, Observable, Subject } from 'rxjs';
+import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
-import { BetOdd, PolyfunctionalArea, PolyfunctionalStakeCoupon, Market, SelectionIdentifier } from '../products.model';
+import { BetOdd, Market, PolyfunctionalArea, PolyfunctionalStakeCoupon, SelectionIdentifier } from '../products.model';
 import { ProductsService } from '../products.service';
 import {
+  Area,
   CombinationType,
   EventDetail,
   EventInfo,
   EventTime,
+  ListArea,
+  Match,
   PlacingEvent,
   Player,
   Podium,
@@ -34,17 +39,12 @@ import {
   TypeBetSlipColTot,
   TypePlacingEvent,
   VirtualBetSelectionExtended,
-  Area,
-  Match,
-  MarketArea,
-  VirtualBetTournamentExtended,
-  ListArea
+  VirtualBetTournamentExtended
 } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
-import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { areas, overviewAreas } from './SoccerAreas';
-import { cloneDeep as clone } from 'lodash';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -57,6 +57,10 @@ export class MainService extends MainServiceExtra {
   placingEvent: PlacingEvent = new PlacingEvent();
   public currentEventDetails: VirtualBetEvent;
   public currentProductDetails: VirtualBetTournament;
+
+  private remaingTimeCounter: Subject<EventTime>;
+  public remaingTimeCounterObs: Observable<EventTime>;
+
   private attempts = 0;
   private initCurrentEvent = false;
 
@@ -76,6 +80,10 @@ export class MainService extends MainServiceExtra {
     private resultService: ResultsService
   ) {
     super(coupon, destroyCouponService);
+
+    // counter obser
+    this.remaingTimeCounter = new Subject<EventTime>();
+    this.remaingTimeCounterObs = this.remaingTimeCounter.asObservable();
     this.defaultGameStart();
 
     this.productService.productNameSelectedObserve.subscribe(item => {
@@ -97,6 +105,10 @@ export class MainService extends MainServiceExtra {
       this.eventDetails.currentEvent = eventIndex;
       this.remainingEventTime(this.eventDetails.events[eventIndex].number).then((eventTime: EventTime) => {
         this.eventDetails.eventTime = eventTime;
+        if (this.eventDetails.currentEvent === 0) {
+          this.remainingTime.minute = eventTime.minute;
+          this.remainingTime.second = eventTime.second;
+        }
       });
       // Reset coupon
       this.coupon.resetCoupon();
@@ -177,6 +189,7 @@ export class MainService extends MainServiceExtra {
         }
         // Shown seconds
         this.eventDetails.eventTime.second = this.remainingTime.second;
+        this.remaingTimeCounter.next(this.eventDetails.eventTime);
       }
     } catch (err) {
       this.cacheEvents = null;
@@ -194,12 +207,13 @@ export class MainService extends MainServiceExtra {
       this.eventDetails.events.shift();
 
       // Add the new event
+      const nextEventItems: number = this.productService.product.layoutProducts.nextEventItems - 1;
       const event: EventInfo = new EventInfo();
-      event.number = this.cacheEvents[4].id;
-      event.label = this.cacheEvents[4].nm;
-      event.date = new Date(this.cacheEvents[4].sdtoffset);
+      event.number = this.cacheEvents[nextEventItems].id;
+      event.label = this.cacheEvents[nextEventItems].nm;
+      event.date = new Date(this.cacheEvents[nextEventItems].sdtoffset);
 
-      this.eventDetails.events[4] = event;
+      this.eventDetails.events[nextEventItems] = event;
 
       this.currentAndSelectedEventTime();
       this.reload--;
@@ -251,9 +265,9 @@ export class MainService extends MainServiceExtra {
               this.cacheEvents.push(event);
             }
           });
+          // Get event's odds
+          this.eventDetailOdds(this.eventDetails.events[0].number);
         }
-        // Get event's odds
-        this.eventDetailOdds(this.eventDetails.events[0].number);
         // load markets from PRODUCT SOCCER
       } else {
         if (all) {
@@ -276,12 +290,12 @@ export class MainService extends MainServiceExtra {
               this.cacheTournaments.push(tournament);
             }
           });
+          // Get event's odds
+          this.eventDetailOddsByCacheTournament(this.eventDetails.events[0].number);
         }
-        // Get event's odds
-        this.eventDetailOddsByCacheTournament(this.eventDetails.events[0].number);
       }
     });
-    this.reload = this.productService.product.layoutProducts.nextEventItems - 1;
+    this.reload = this.productService.product.layoutProducts.cacheEventsItem - 1;
   }
 
   /**
@@ -289,7 +303,7 @@ export class MainService extends MainServiceExtra {
    * @param tournamentNumber tournament for which collect the events' details.
    */
   private eventDetailOddsByCacheTournament(tournamentNumber: number): void {
-    // Get the tournament information from the chace.
+    // Get the tournament information from the cache.
     const tournament: VirtualBetTournamentExtended = this.cacheTournaments.filter(
       (cacheTournament: VirtualBetTournament) => cacheTournament.id === tournamentNumber
     )[0];
@@ -386,16 +400,19 @@ export class MainService extends MainServiceExtra {
       this.initCurrentEvent = false;
     }
 
+    // TEST MOVE IT TO "currentEventObserve"
     // Calculate remaning time for selected event
-    this.remainingEventTime(this.eventDetails.events[this.eventDetails.currentEvent].number).then((eventTime: EventTime) => {
+    /*   this.remainingEventTime(
+      this.eventDetails.events[this.eventDetails.currentEvent].number
+    ).then((eventTime: EventTime) => {
       this.eventDetails.eventTime = eventTime;
       if (this.eventDetails.currentEvent === 0) {
         this.remainingTime.minute = eventTime.minute;
         this.remainingTime.second = eventTime.second;
       }
     });
-
-    // Calculate remaning time
+ */
+    // Calculate remaning time for first Event
     if (this.eventDetails.currentEvent > 0) {
       this.remainingEventTime(this.eventDetails.events[0].number).then((eventTime: EventTime) => {
         this.remainingTime = eventTime;

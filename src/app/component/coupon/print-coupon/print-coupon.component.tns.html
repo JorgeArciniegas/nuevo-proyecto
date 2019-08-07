@@ -75,6 +75,12 @@
           <Label class="p-10 text-right"
             text="{{ printCouponService.couponPrint.Stake | currency : userService.userCurrency : 'symbol-narrow' }}"></Label>
         </FlexboxLayout>
+        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-15" flexWrap="wrap" *ngIf="printCouponService.couponPrint.MaxBonus > 0">
+            <Label  *ngIf="printCouponService.couponPrint.CouponTypeId !== couponType.CombinationsBet" class="p-5 text-center font-weight-bold" text="{{'BONUS' | translate }}:"></Label>
+            <Label  *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.CombinationsBet" class="p-5 text-center font-weight-bold" text="{{'BONUS_MAX' | translate }}:"></Label>
+            <Label class="p-10 text-right"
+              text="{{ printCouponService.couponPrint.MaxBonus | currency : userService.userCurrency : 'symbol-narrow' }}"></Label>
+          </FlexboxLayout>
         <StackLayout class="hr-dark m-10"></StackLayout>
         <!-- PAYOUT -->
         <!--SINGLE BET-->

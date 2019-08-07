@@ -10,7 +10,7 @@
 @import "./statistics/statistics.component.tns";
 @import "./event-control/event-control-standard.tns";
 @import "./lucky/lucky-race-fight.tns";
-
+@import "./events-list/events-list.tns";
 .app {
 	&.develop {
 		@import "./skins/develop/styles";
@@ -435,25 +435,6 @@
 					}
 				}
 			}
-
-			.list-race {
-				.number {
-					@extend %btn-success-gradient-mobile;
-
-					&.selected {
-						@extend %btn-blue-gradient-mobile;
-					}
-				}
-
-				.date {
-					@extend %btn-gray-gradient-mobile;
-
-					&.selected {
-						@extend %btn-dark-gradient-mobile;
-					}
-				}
-			}
-
 			.card-box-result {
 				.header {
 					@extend %card-title-noborder;

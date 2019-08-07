@@ -10,7 +10,7 @@
 @import "./statistics/statistics.component";
 @import "./event-control/event-control-standard";
 @import "./lucky/lucky-race-fight";
-
+@import "./events-list/events-list";
 *,
 *:after,
 *:before {
@@ -481,24 +481,6 @@ html {
 				}
 			}
 
-			.list-race {
-				.number {
-					@extend %btn-success-gradient;
-
-					&.selected {
-						@extend %btn-blue-gradient;
-					}
-				}
-
-				.date {
-					@extend %btn-gray-gradient;
-
-					&.selected {
-						@extend %btn-dark-gradient;
-					}
-				}
-			}
-
 			.card-box-result {
 				.header {
 					.raceNumber,
@@ -624,6 +606,9 @@ html {
 	-webkit-border-radius: 50px;
 }
 
+.padding-5 {
+	padding: 5px;
+}
 .padding-10 {
 	padding: 10px;
 }

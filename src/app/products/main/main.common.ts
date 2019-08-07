@@ -22,6 +22,8 @@ import { SoccerComponent as PlayableBoardSoccerComponent } from './playable-boar
 import { OverviewComponent as PlayableBoardSoccerOverviewComponent } from './playable-board/templates/soccer/overview/overview.component';
 import { DetailComponent as PlayableBoardSoccerDetailComponent } from './playable-board/templates/soccer/detail/detail.component';
 
+import { SoccerComponent as ResultsSoccerComponent } from './results/templates/soccer/soccer.component';
+import { SoccerComponent as LuckySoccerComponent } from './lucky/templates/soccer/soccer.component';
 export const componentDeclarations: any[] = [
   MainComponent,
   EventControlComponent,
@@ -44,7 +46,9 @@ export const componentDeclarations: any[] = [
   PlayableBoardCockFightComponent,
   PlayableBoardSoccerComponent,
   PlayableBoardSoccerOverviewComponent,
-  PlayableBoardSoccerDetailComponent
+  PlayableBoardSoccerDetailComponent,
+  ResultsSoccerComponent,
+  LuckySoccerComponent
 ];
 
 export const providerDeclarations: any[] = [];

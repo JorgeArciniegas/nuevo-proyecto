@@ -12,8 +12,7 @@ import { Subscription, timer } from 'rxjs';
 export class EventControlService {
   public eventsControlDetails: EventControl;
   private currentEventSubscription: Subscription;
-  private currentMinuteSubscription: Subscription;
-  private currentSecondSubscription: Subscription;
+  private remaingTimeCounterSubscription: Subscription;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   private settings: AppSettings;
   public eventControlDetails: EventControl;
@@ -27,8 +26,8 @@ export class EventControlService {
       event => {
         // Reset polling on timer when event changes
         // check if timer subscriptions exist, if so unsubscribe them.
-        if (this.currentMinuteSubscription && this.currentSecondSubscription) {
-          this.timerUnsubscribe();
+        if (this.remaingTimeCounterSubscription) {
+          this.remaingTimeCounterSubscription.unsubscribe();
         }
         /**
          * @eventControlDetails is passed as input to a control template
@@ -61,26 +60,12 @@ export class EventControlService {
       isWindowSizeSmall: this.productService.windowSize.small,
       theme: this.settings.theme
     };
-    this.getMinutes();
-    this.getSeconds();
+    this.remaingTimeCounterSubscription = this.mainService.remaingTimeCounterObs.subscribe( timerEvent => {
+      this.eventsControlDetails.eventTimeMinutes = timerEvent.minute;
+      this.eventsControlDetails.eventTimeSeconds = timerEvent.second;
+    });
+
     return this.eventsControlDetails;
   }
-  // polling on event minutes count down and update eventsControlDetails.eventTimeMinutes
-  public getMinutes(): void {
-    this.eventsControlDetails.eventTimeMinutes = 0;
-    this.currentMinuteSubscription = timer(0, 100).subscribe(val => {
-      this.eventsControlDetails.eventTimeMinutes = this.mainService.eventDetails.eventTime.minute;
-    });
-  }
-  // polling on event seconds count down and update eventsControlDetails.eventTimeSeconds
-  public getSeconds(): void {
-    this.eventsControlDetails.eventTimeSeconds = 0;
-    this.currentSecondSubscription = timer(0, 100).subscribe(val => {
-      this.eventsControlDetails.eventTimeSeconds = this.mainService.eventDetails.eventTime.second;
-    });
-  }
-  timerUnsubscribe() {
-    this.currentMinuteSubscription.unsubscribe();
-    this.currentSecondSubscription.unsubscribe();
-  }
+
 }
