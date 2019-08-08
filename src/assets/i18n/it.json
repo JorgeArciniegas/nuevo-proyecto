@@ -1,16 +1,17 @@
 {
   "ACCG": "ACCG",
   "AGILITY": "Agilità",
+  "AREAS": "Aree",
   "BALANCE": "Saldo",
   "BASE": "B",
   "BET": "Scommessa",
-  "BET_STATUS": "Stato scommessa",
-  "BET_TYPE": "Tipo scommessa",
-  "BET_UNDER_EVALUATION": "Coupon in elaborazione... Attendere",
   "BETS_LIST": "Lista scommesse",
   "BETS_LIST.LOST": "Perdenti",
   "BETS_LIST.OPEN": "In corso",
   "BETS_LIST.WON": "Vincenti",
+  "BET_STATUS": "Stato scommessa",
+  "BET_TYPE": "Tipo scommessa",
+  "BET_UNDER_EVALUATION": "Coupon in elaborazione... Attendere",
   "BONUS": "Bonus",
   "BONUS_MAX": "Bonus Max",
   "BTNCALC.COL": "COL",
@@ -24,11 +25,11 @@
   "CONDITION": "Forma fisica",
   "CONFIRM": "Conferma",
   "CONFIRM_DESTROY_COUPON.MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?",
+  "COUPON.BET": "Scommetti",
   "COUPON_CODE": "Codice coupon",
   "COUPON_RESET": "Reset del coupon",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Coupon accettato e confermato...",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "Controlla la lista scommesse",
-  "COUPON.BET": "Scommetti",
   "DATE": "Data",
   "DATE_FROM": "Data da",
   "DATE_OF_PLACEMENT": "Data piazzamento",
@@ -38,19 +39,10 @@
   "DELETED_ON": "Annullata il",
   "DETAIL": "Dettaglio",
   "DYNAMIC_KEYS": {
-    "CockMarket": {
-      "NAME": {
-        "1X2": "Win",
-        "1X2 + OverUnder": "Win+ o/u",
-        "1X2 + Winning Sector": "Win+ sector",
-        "Over/Under": "O/u",
-        "Winning Sector": "Sector"
-      }
-    },
     "COUPON_ERROR": {
+      "API_ERROR": "Errore API generico",
       "AccountInsertDataError": "Errore inserimento conto utente [Cod. ES11]",
       "AgentBettorMismatch": "L'utente non appartiene alla rete dell'agente [Cod. ES18]",
-      "API_ERROR": "Errore API generico",
       "BankerNotAllowedOnIntegral": "Non è possibile aggiungere quote fisse a una scommessa integrale [Cod. ES22]",
       "BetAlreadyPaid": "Questo coupon è già stato pagato [Cod. ES19]",
       "BetLost": "Scommessa perdente [Cod. ES21]",
@@ -158,6 +150,15 @@
       "UnderMinBetStake": "Limite minimo di giocata non raggiunto [Cod. CRS18]",
       "Unknown": "Errore sconosciuto, si prega di riprovare [Cod. CRS0]"
     },
+    "CockMarket": {
+      "NAME": {
+        "1X2": "Win",
+        "1X2 + OverUnder": "Win+ o/u",
+        "1X2 + Winning Sector": "Win+ sector",
+        "Over/Under": "O/u",
+        "Winning Sector": "Sector"
+      }
+    },
     "CouponStatusInternal": {
       "ALL": "Tutti",
       "Lost": "Perdente",
@@ -176,6 +177,16 @@
       },
       "SingleBet": "Singola",
       "Unknown": "Formato coupon non riconosciuto"
+    },
+    "GROUPINGS": {
+      "DOUBLE": "Doppia",
+      "DOUBLES": "Doppie",
+      "SINGLE": "Singola",
+      "SINGLES": "Singole",
+      "TRIPLE": "Tripla",
+      "TRIPLES": "Triple",
+      "UPLE": "-upla",
+      "UPLES": "-uple"
     },
     "ODDS_RESULT": {
       "LOST": "Perdente",
@@ -265,16 +276,6 @@
       "V": "V",
       "VT": "VX",
       "WINNER": "Vincente"
-    },
-    "GROUPINGS":{
-      "SINGLE": "Singola",
-      "SINGLES": "Singole",
-      "DOUBLE": "Doppia",
-      "DOUBLES": "Doppie",
-      "TRIPLE": "Tripla",
-      "TRIPLES": "Triple",
-      "UPLE": "-upla",
-      "UPLES": "-uple"
     }
   },
   "ENDURANCE": "Resistenza",
@@ -289,6 +290,7 @@
   "LAST_FIVE": "Ultime 5",
   "LIMIT": "Limite",
   "LUCKY": "Lucky",
+  "MARKETS": "Mercati",
   "MAX_PAYOUT": "Vincita massima",
   "MAX_POTENTIAL_WIN": "Vincita potenziale massima",
   "MAX_POTENTIAL_WIN_WITH_BONUS": "Vincita potenziale massima con bonus",
@@ -325,17 +327,17 @@
   "STATUS": "Stato",
   "STRENGTH": "Forza",
   "SUMMARY": "Sommario",
+  "TOTALS": "Totali",
+  "TOTAL_PAYOUT": "Totale pagamento",
+  "TOTAL_STAKE": "Importo totale",
   "TOT_BET": "TOT giocato",
   "TOT_LOST": "TOT perso",
   "TOT_OPEN": "TOT in corso",
   "TOT_WON": "TOT vinto",
-  "TOTAL_PAYOUT": "Totale pagamento",
-  "TOTAL_STAKE": "Importo totale",
-  "TOTALS": "Totali",
   "TYPE": "Tipo",
-  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "USERNAME": "Nome utente",
   "USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
+  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "WARNING": "Avviso",
   "WON": "Vinto"
 }

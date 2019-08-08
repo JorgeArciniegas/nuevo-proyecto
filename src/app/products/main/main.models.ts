@@ -158,13 +158,16 @@ export interface Area {
   name: string;
   markets: MarketArea[];
   layoutDefinition?: LayoutGridDefinition;
+  isSelected?: boolean;
+  hasLowestOdd?: boolean;
+  hasHighestOdd?: boolean;
 }
 
 export interface MarketArea {
   id: number;
   name: string;
   hasSpecialValue?: boolean;
-  specialValueOrSpread: number;
+  specialValueOrSpread: string;
   selectionCount: number;
   selections?: VirtualBetSelection[];
   layoutGridDefinition?: LayoutGridDefinition;
@@ -177,10 +180,14 @@ export interface Match {
   isVideoShown: boolean; // when it is true, the camera's icon should be active. The default value is false.
   hasOddsSelected: boolean;
   isDetailOpened: boolean;
+  selectedOdds: number[];
 }
 
 export interface LayoutGridDefinition {
   areaCols?: number;
+  // tslint:disable-next-line:max-line-length
+  areaMaxMarketColsByCol?: number[]; // Max number of market's columns into the area column (mathematical minum common multiple). The array index identify the column for whom is valid the setting.
+  areaRowsByCol?: number[]; // Number of rows per area column. The array index identify the column for whom is valid the setting.
   marketPositionOnColArea?: number;
   marketCols?: number;
   marketRows?: number;

@@ -42,7 +42,6 @@ export class CouponComponent implements OnDestroy {
     public productService: ProductsService,
     public userService: UserService
   ) {
-
     if (this.productService.windowSize && this.productService.windowSize.small) {
       this.maxItems = 4;
     }
@@ -62,7 +61,7 @@ export class CouponComponent implements OnDestroy {
     // management coupon layout
     this.couponLayout = this.productService.product.typeCoupon;
 
-    this.productChange = this.productService.productNameSelectedObserve.subscribe( () => {
+    this.productChange = this.productService.productNameSelectedObserve.subscribe(() => {
       this.couponLayout = this.productService.product.typeCoupon;
     });
   }
@@ -76,8 +75,6 @@ export class CouponComponent implements OnDestroy {
       index++;
       return index > start && index <= end;
     }).reverse();
-
-
   }
 
   previusOdds(): void {

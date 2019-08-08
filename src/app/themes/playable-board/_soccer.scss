@@ -1,0 +1,46 @@
+.playable-board-soccer {
+	.mat-figure {
+		align-items: flex-start !important;
+	}
+
+	.column-matches,
+	.column-selections {
+		.section-identifier {
+			text-transform: uppercase;
+			font-weight: bold;
+			font-size: 1.3vh;
+		}
+	}
+
+	.column-selections {
+		.btn-soccer-odd,
+		.btn-soccer-area {
+			padding: 5px 10px;
+			border: 0;
+
+			.btn-soccer-odd__details,
+			.btn-soccer-area__details {
+				&--name {
+					font-weight: bold;
+					text-transform: uppercase;
+					width: 100%;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					overflow: hidden;
+				}
+			}
+
+			.btn-soccer-area__details {
+				&--name {
+					display: block;
+					text-align: left;
+				}
+
+				&--icon {
+					height: 4vh;
+					width: 4vh;
+				}
+			}
+		}
+	}
+}

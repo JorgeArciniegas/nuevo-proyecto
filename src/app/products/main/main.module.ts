@@ -3,8 +3,6 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 import { componentDeclarations, routes } from './main.common';
-import { MatSlideToggleModule } from '@angular/material';
-
 
 @NgModule({
   declarations: [componentDeclarations],

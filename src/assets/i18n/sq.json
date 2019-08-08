@@ -1,18 +1,19 @@
 {
   "ACCG": "ACCG",
   "AGILITY": "Shkathtësi",
+  "AREAS": "Aree",
   "BALANCE": "Balance",
   "BASE": "B",
   "BET": "Bastit",
-  "BET_STATUS": "Statusi Bastit",
-  "BET_TYPE": "Lloji Bastit",
-  "BET_UNDER_EVALUATION": "Koef. Ne vleresim ju lutem prisni",
   "BETS_LIST": "Lista basteve",
   "BETS_LIST.LOST": "Perdenti",
   "BETS_LIST.OPEN": "Hapur",
   "BETS_LIST.WON": "Vincenti",
+  "BET_STATUS": "Statusi Bastit",
+  "BET_TYPE": "Lloji Bastit",
+  "BET_UNDER_EVALUATION": "Koef. Ne vleresim ju lutem prisni",
   "BONUS": "Bônus",
-  "BONUS_MAX": "Bonus Max",
+  "BONUS_MAX": "Bônus Max",
   "BTNCALC.COL": "COL",
   "BTNCALC.TOT": "TOT",
   "C": "C",
@@ -24,11 +25,11 @@
   "CONDITION": "Forma",
   "CONFIRM": "Conferma",
   "CONFIRM_DESTROY_COUPON.MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?",
+  "COUPON.BET": "Bast",
   "COUPON_CODE": "Kodi Biletes",
   "COUPON_RESET": "Reset del coupon",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Basti u pranua,",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "shiko listen e basteve",
-  "COUPON.BET": "Bast",
   "DATE": "Data",
   "DATE_FROM": "Data da",
   "DATE_OF_PLACEMENT": "Data piazzamento",
@@ -38,19 +39,10 @@
   "DELETED_ON": "Annullata il",
   "DETAIL": "Detaj",
   "DYNAMIC_KEYS": {
-    "CockMarket": {
-      "NAME": {
-        "1X2": "Win",
-        "1X2 + OverUnder": "Win+ o/u",
-        "1X2 + Winning Sector": "Win+ sector",
-        "Over/Under": "O/u",
-        "Winning Sector": "Sector"
-      }
-    },
     "COUPON_ERROR": {
+      "API_ERROR": "Errore API generico",
       "AccountInsertDataError": "Pati nje problem gjate shtuarjes se perdoruesit [Kodi ES11]",
       "AgentBettorMismatch": "Ky perdorues nuk I perket rrjetit tuaj [Kodi ES18]",
-      "API_ERROR": "Errore API generico",
       "BankerNotAllowedOnIntegral": "Ju nuk mund të shtoni një bankier në një bast integral [Kodi ES22]",
       "BetAlreadyPaid": "Ky kupon eshte paguar [Kodi ES19]",
       "BetLost": "Bast I humbur [Kodi ES21]",
@@ -158,6 +150,15 @@
       "UnderMinBetStake": "Vlera minimale nuk është arritur [Kodi CRS18]",
       "Unknown": "Gabim I panjohur.Ju lutem provoni perseri [Kodi CRS0]"
     },
+    "CockMarket": {
+      "NAME": {
+        "1X2": "Win",
+        "1X2 + OverUnder": "Win+ o/u",
+        "1X2 + Winning Sector": "Win+ sector",
+        "Over/Under": "O/u",
+        "Winning Sector": "Sector"
+      }
+    },
     "CouponStatusInternal": {
       "ALL": "Tutti",
       "Lost": "Perdente",
@@ -176,6 +177,16 @@
       },
       "SingleBet": "Bast Tek",
       "Unknown": "Sconosciuta"
+    },
+    "GROUPINGS": {
+      "DOUBLE": "Doppia",
+      "DOUBLES": "Doppie",
+      "SINGLE": "Singola",
+      "SINGLES": "Singole",
+      "TRIPLE": "Tripla",
+      "TRIPLES": "Triple",
+      "UPLE": "-upla",
+      "UPLES": "-uple"
     },
     "ODDS_RESULT": {
       "LOST": "Perdente",
@@ -279,6 +290,7 @@
   "LAST_FIVE": "5 ndeshjet e fundit",
   "LIMIT": "Limit",
   "LUCKY": "Lucky",
+  "MARKETS": "Mercati",
   "MAX_PAYOUT": "Fitimi max.",
   "MAX_POTENTIAL_WIN": "Max. fitimet e mundshme",
   "MAX_POTENTIAL_WIN_WITH_BONUS": "Vincita potenziale massima con bonus",
@@ -315,17 +327,17 @@
   "STATUS": "Statusi",
   "STRENGTH": "Forcë",
   "SUMMARY": "Sommario",
+  "TOTALS": "Totalet",
+  "TOTAL_PAYOUT": "Total payout",
+  "TOTAL_STAKE": "Shuma totale",
   "TOT_BET": "TOT giocato",
   "TOT_LOST": "TOT perso",
   "TOT_OPEN": "TOT in corso",
   "TOT_WON": "TOT vinto",
-  "TOTAL_PAYOUT": "Total payout",
-  "TOTAL_STAKE": "Shuma totale",
-  "TOTALS": "Totalet",
   "TYPE": "Tipi",
-  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "USERNAME": "Perdorues",
   "USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
+  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "WARNING": "Avviso",
   "WON": "Vinto"
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from '../../../../../services/user.service';
 import { Area } from '../../../main.models';
 import { MainService } from '../../../main.service';
+import { SoccerService } from '../../../playable-board/templates/soccer/soccer.service';
 import { Lucky } from '../../lucky.model';
 
 @Component({
@@ -10,9 +11,8 @@ import { Lucky } from '../../lucky.model';
   styleUrls: ['./soccer.component.scss']
 })
 export class SoccerComponent {
-
   lucky: typeof Lucky = Lucky;
-  constructor(private mainService: MainService, public userService: UserService) { }
+  constructor(private mainService: MainService, public userService: UserService, private soccerService: SoccerService) {}
 
   /**
    *
@@ -33,7 +33,7 @@ export class SoccerComponent {
   private selectAllMatches(): number[] {
     const extractMatchesIdx: number[] = [];
     for (let i = 0; i < Lucky.Lucky10; i++) {
-      extractMatchesIdx.push(i + 1);
+      extractMatchesIdx.push(i);
     }
     return extractMatchesIdx;
   }
@@ -44,7 +44,7 @@ export class SoccerComponent {
    */
   private rngMatches(extractCounterIdx: number): number[] {
     const extractMatchesIdx: number[] = [];
-    while ( true ) {
+    while (true) {
       const extractNumber: number = Math.floor(Math.random() * 10);
       if (!extractMatchesIdx.includes(extractNumber)) {
         extractMatchesIdx.push(extractNumber);
@@ -62,14 +62,16 @@ export class SoccerComponent {
    * @param areas
    */
   private rngMarketsAndPlace(extractMatchesIdx: number[], areas: Area[]): void {
-    while (extractMatchesIdx.length > 0 ) {
-      const match = extractMatchesIdx.shift() - 1 ;
+    while (extractMatchesIdx.length > 0) {
+      const match = extractMatchesIdx.shift();
       const tournament = areas[match].markets;
-      const rngMarkets = Math.floor(Math.random() * tournament.length );
-      const rngSelection =  Math.floor(Math.random() * areas[match].markets[rngMarkets].selectionCount );
-      this.mainService.placingOddByOdd(areas[match].markets[rngMarkets].selections[rngSelection].tp,
-         areas[match].markets[rngMarkets].selections[rngSelection] );
+      const rngMarkets = Math.floor(Math.random() * tournament.length);
+      const rngSelection = Math.floor(Math.random() * areas[match].markets[rngMarkets].selectionCount);
+      this.soccerService.selectOdd(
+        match,
+        areas[match].markets[rngMarkets].selections[rngSelection].tp,
+        areas[match].markets[rngMarkets].selections[rngSelection]
+      );
     }
-
   }
 }
