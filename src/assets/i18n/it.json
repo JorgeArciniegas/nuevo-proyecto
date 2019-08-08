@@ -178,6 +178,16 @@
       "SingleBet": "Singola",
       "Unknown": "Formato coupon non riconosciuto"
     },
+    "GROUPINGS": {
+      "DOUBLE": "Doppia",
+      "DOUBLES": "Doppie",
+      "SINGLE": "Singola",
+      "SINGLES": "Singole",
+      "TRIPLE": "Tripla",
+      "TRIPLES": "Triple",
+      "UPLE": "-upla",
+      "UPLES": "-uple"
+    },
     "ODDS_RESULT": {
       "LOST": "Perdente",
       "UNSET": "In gioco",
@@ -266,16 +276,6 @@
       "V": "V",
       "VT": "VX",
       "WINNER": "Vincente"
-    },
-    "GROUPINGS":{
-      "SINGLE": "Singola",
-      "SINGLES": "Singole",
-      "DOUBLE": "Doppia",
-      "DOUBLES": "Doppie",
-      "TRIPLE": "Tripla",
-      "TRIPLES": "Triple",
-      "UPLE": "-upla",
-      "UPLES": "-uple"
     }
   },
   "ENDURANCE": "Resistenza",

@@ -1,13 +1,11 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { VirtualBetSelection } from '@elys/elys-api';
 import { MainService } from '../../../main.service';
-import { VirtualBetTournamentExtended, Match } from '../../../main.models';
-import { ProductsService } from 'src/app/products/products.service';
+import { VirtualBetTournamentExtended } from '../../../main.models';
+import { ProductsService } from '../../../../../products/products.service';
 import { Subscription, timer } from 'rxjs';
-import { BtncalcService } from '../../../../../../../src/app/component/btncalc/btncalc.service';
+import { BtncalcService } from '../../../../../component/btncalc/btncalc.service';
 import { ElysCouponService } from '@elys/elys-coupon';
-import { CouponService } from 'src/app/component/coupon/coupon.service';
-// import { PolyfunctionalArea } from 'src/app/products/products.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,13 +21,7 @@ export class SoccerService implements OnDestroy {
   // Listen the coupon's change
   couponHasChangedSubscription: Subscription;
   couponHasBeenPlacedSubscription: Subscription;
-  constructor(
-    private mainService: MainService,
-    private productService: ProductsService,
-    private btnCalcService: BtncalcService,
-    private elysCoupon: ElysCouponService,
-    private couponService: CouponService
-  ) {
+  constructor(private mainService: MainService, private btnCalcService: BtncalcService, private elysCoupon: ElysCouponService) {
     // Variables inizialization.
     this.selectedMatch = -1;
     // Set the default Area "Main".
@@ -45,27 +37,31 @@ export class SoccerService implements OnDestroy {
 
     // Get the change of the coupon's object.
     this.couponHasChangedSubscription = this.elysCoupon.couponHasChanged.subscribe(coupon => {
-      this.tournament.matches.forEach( match => {
-        match.selectedOdds.forEach( (oddSelected, idx) => {
-          let matchHasOdd = false;
-          if ( coupon.Odds.filter( odd => odd.SelectionId === oddSelected ).length > 0 ) {
-            matchHasOdd = true;
-          }
-          if (!matchHasOdd) {
-            match.selectedOdds.splice(idx, 1);
-            if ( match.selectedOdds.length === 0 ) {
-              match.hasOddsSelected =   false;
+      if (coupon) {
+        // There was a change on the coupon.
+        this.tournament.matches.forEach(match => {
+          match.selectedOdds.forEach((oddSelected, idx) => {
+            let matchHasOdd = false;
+            if (coupon.Odds.filter(odd => odd.SelectionId === oddSelected).length > 0) {
+              matchHasOdd = true;
             }
+            if (!matchHasOdd) {
+              match.selectedOdds.splice(idx, 1);
+              if (match.selectedOdds.length === 0) {
+                match.hasOddsSelected = false;
+              }
+            }
+          });
+        });
+      } else {
+        // The coupon was removed.
+        this.tournament.matches.map(match => {
+          if (match.hasOddsSelected) {
+            match.hasOddsSelected = false;
+            match.selectedOdds = [];
           }
         });
-      });
-    });
-
-    this.couponHasBeenPlacedSubscription = this.couponService.couponHasBeenPlacedObs.subscribe( coupon => {
-      this.tournament.matches.forEach( match => {
-        match.hasOddsSelected = false;
-        match.selectedOdds = [];
-      });
+      }
     });
   }
 
@@ -174,5 +170,4 @@ export class SoccerService implements OnDestroy {
     // tap su plus automatico
     this.btnCalcService.tapPlus();
   }
-
 }

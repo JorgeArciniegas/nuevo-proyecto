@@ -178,6 +178,16 @@
       "SingleBet": "Pari simple",
       "Unknown": "Sconosciuta"
     },
+    "GROUPINGS": {
+      "DOUBLE": "Doppia",
+      "DOUBLES": "Doppie",
+      "SINGLE": "Singola",
+      "SINGLES": "Singole",
+      "TRIPLE": "Tripla",
+      "TRIPLES": "Triple",
+      "UPLE": "-upla",
+      "UPLES": "-uple"
+    },
     "ODDS_RESULT": {
       "LOST": "Perdente",
       "UNSET": "In gioco",

@@ -178,6 +178,16 @@
       "SingleBet": "Single bet",
       "Unknown": "Coupon type unknow"
     },
+    "GROUPINGS": {
+      "DOUBLE": "Double",
+      "DOUBLES": "Doubles",
+      "SINGLE": "Single",
+      "SINGLES": "Singles",
+      "TRIPLE": "Triple",
+      "TRIPLES": "Triples",
+      "UPLE": "-upla",
+      "UPLES": "-uple"
+    },
     "ODDS_RESULT": {
       "LOST": "Lost",
       "UNSET": "Open",
