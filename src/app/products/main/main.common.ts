@@ -24,6 +24,9 @@ import { DetailComponent as PlayableBoardSoccerDetailComponent } from './playabl
 
 import { SoccerComponent as ResultsSoccerComponent } from './results/templates/soccer/soccer.component';
 import { SoccerComponent as LuckySoccerComponent } from './lucky/templates/soccer/soccer.component';
+import { GetArrayFromNumberPipe } from './playable-board/templates/get-array-from-number.pipe';
+import { FilterMarketsByAreaColumnPipe } from './playable-board/filter-markets-by-area-column.pipe';
+
 export const componentDeclarations: any[] = [
   MainComponent,
   EventControlComponent,
@@ -35,6 +38,8 @@ export const componentDeclarations: any[] = [
   PlayableBoardComponent,
   FilterByPositionPipe,
   FilterAndSortByShownMarketsPipe,
+  GetArrayFromNumberPipe,
+  FilterMarketsByAreaColumnPipe,
   CompetitorNamePipe,
   CompetitorItoPipe,
   ExtractSignPipe,
