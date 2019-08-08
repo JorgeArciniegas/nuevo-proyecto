@@ -1,13 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BetCouponGroup } from '@elys/elys-api';
-import { AppSettings } from 'src/app/app.settings';
-import { CouponService } from 'src/app/component/coupon/coupon.service';
-import { UserService } from 'src/app/services/user.service';
-import {
-  BetDataDialog,
-  PolyfunctionStakePresetPlayer
-} from '../../products.model';
-import { BtncalcService } from 'src/app/component/btncalc/btncalc.service';
+import { AppSettings } from '../../../app.settings';
+import { CouponService } from '../../../component/coupon/coupon.service';
+import { UserService } from '../../../services/user.service';
+import { BetDataDialog, PolyfunctionStakePresetPlayer } from '../../products.model';
+import { BtncalcService } from '../../../component/btncalc/btncalc.service';
 import { TypeBetSlipColTot } from '../../main/main.models';
 
 @Component({
@@ -63,11 +60,7 @@ export class GroupingsComponent implements OnInit {
       this.groupings = this.data.groupings.slice(start, end);
 
       if (this.page === this.maxPage - 1) {
-        for (
-          let index = 0;
-          index < this.maxItems - this.groupings.length;
-          index++
-        ) {
+        for (let index = 0; index < this.maxItems - this.groupings.length; index++) {
           this.emptyGroupings.push('');
         }
       } else {
@@ -111,12 +104,9 @@ export class GroupingsComponent implements OnInit {
     try {
       const tmpAmount = grouping.Stake;
       this.userService.isBtnCalcEditable = true;
-      if (
-        this.couponService.oddStakeEdit &&
-        this.couponService.oddStakeEdit.grouping.Grouping === grouping.Grouping
-      ) {
+      if (this.couponService.oddStakeEdit && this.couponService.oddStakeEdit.grouping.Grouping === grouping.Grouping) {
         this.userService.isBtnCalcEditable = false;
-        if (grouping.Stake === 0 ) {
+        if (grouping.Stake === 0) {
           grouping.Stake = tmpAmount;
         }
       }

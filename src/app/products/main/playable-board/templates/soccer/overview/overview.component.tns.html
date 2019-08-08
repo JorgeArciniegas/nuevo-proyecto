@@ -1,0 +1,20 @@
+<GridLayout rows="*,2*,2*,2*,2*,2*,2*,2*,2*,2*,2*">
+  <Label row="0" text="{{ 'MARKETS' | translate }}" horizontalAlignment="center" class="section-identifier"></Label>
+  <ng-container *ngFor="let row of soccerService.tournament.overviewArea; let i = index">
+    <StackLayout row="{{ i + 1 }}">
+      <FlexBoxLayout flexDirection="row" flexWrap="wrap">
+        <ng-container *ngFor="let market of row.markets; let i1 = index">
+          <StackLayout orientation="vertical" *ngFor="let odd of market.selections; let i2 = index"
+            class="btn-soccer-odd radius-5"
+            [ngClass]="soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
+            (tap)="selectOdd(i, market.id, odd)" marginBottom="5">
+            <Label text="{{ odd.nm }}" class="btn-soccer-odd__details--name" *ngIf="!market.hasSpecialValue"></Label>
+            <Label text="{{ odd.nm }} {{ market.specialValueOrSpread }}" class="btn-soccer-odd__details--name"
+              *ngIf="market.hasSpecialValue"></Label>
+            <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value"></Label>
+          </StackLayout>
+        </ng-container>
+      </FlexBoxLayout>
+    </StackLayout>
+  </ng-container>
+</GridLayout>

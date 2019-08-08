@@ -1,0 +1,19 @@
+.playable-row-tile--soccer {
+	font-size: 12;
+	font-weight: bold;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5 10;
+
+	.badge {
+		flex-shrink: 0;
+	}
+
+	.icon {
+		// height: 1.5vh;
+		// width: 2vh;
+		margin: 0 4;
+		// flex-shrink: 0;
+	}
+}

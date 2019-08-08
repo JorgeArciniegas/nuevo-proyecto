@@ -3,7 +3,8 @@ export const overviewAreas: Area = {
   id: 0,
   name: 'Overview',
   layoutDefinition: {
-    areaCols: 1
+    areaCols: 1,
+    areaMaxMarketColsByCol: [7]
   },
   markets: [
     {
