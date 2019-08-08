@@ -417,6 +417,14 @@
 			}
 		}
 
+		.playable-row-tile {
+			&--active {
+				@extend %color-border-blu-2;
+				border-style: solid !important;
+				border-width: 2 !important;
+			}
+		}
+
 		.product-class {
 			// SET IMAGES HEADER PRODUCT
 			.PRODUCT-DOG-BG {
