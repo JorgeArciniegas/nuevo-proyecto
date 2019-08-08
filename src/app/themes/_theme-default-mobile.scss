@@ -402,6 +402,21 @@
 			}
 		}
 
+		// Badge
+		.badge {
+			border-radius: 50;
+			height: 20;
+			width: 20;
+
+			&.badge--on {
+				@extend %badge--on;
+			}
+
+			&.badge--off {
+				@extend %badge--off;
+			}
+		}
+
 		.product-class {
 			// SET IMAGES HEADER PRODUCT
 			.PRODUCT-DOG-BG {
@@ -592,4 +607,21 @@
 	.icon-area {
 		margin: 5;
 	}
+}
+
+// PLAYABLE BOARD - SOCCER
+.star-yellow-icon {
+	@extend %star-yellow-icon-mobile;
+}
+
+.star-red-icon {
+	@extend %star-red-icon-mobile;
+}
+
+.video-disabled-icon {
+	@extend %video-disabled-icon-mobile;
+}
+
+.video-enabled-icon {
+	@extend %video-enabled-icon-mobile;
 }
