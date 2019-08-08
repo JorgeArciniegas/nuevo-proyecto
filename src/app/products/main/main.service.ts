@@ -207,14 +207,7 @@ export class MainService extends MainServiceExtra {
         this.eventDetails.events.shift();
 
         // Add the new event
-        const nextEventItems: number = this.productService.product
-          .layoutProducts.nextEventItems;
-        const event: EventInfo = new EventInfo();
-        event.number = this.cacheEvents[nextEventItems].id;
-        event.label = this.cacheEvents[nextEventItems].nm;
-        event.date = new Date(this.cacheEvents[nextEventItems].sdtoffset);
-
-        this.eventDetails.events[nextEventItems] = event;
+        this.addNewEvent();
 
         this.currentAndSelectedEventTime();
         this.reload--;
@@ -230,6 +223,22 @@ export class MainService extends MainServiceExtra {
     } catch (err) {
       console.log('main --> loadEvents : ', err);
     }
+  }
+
+  /**
+  *
+  */
+  private addNewEvent(): void {
+    let nextEventItems: number = this.productService.product.layoutProducts.nextEventItems;
+    // check the exception layout
+    if ( this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER ) {
+      nextEventItems = nextEventItems - 1;
+    }
+    const event: EventInfo = new EventInfo();
+    event.number = this.cacheEvents[nextEventItems].id;
+    event.label = this.cacheEvents[nextEventItems].nm;
+    event.date = new Date(this.cacheEvents[nextEventItems].sdtoffset);
+    this.eventDetails.events[nextEventItems] = event;
   }
 
   /**
