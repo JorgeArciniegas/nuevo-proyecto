@@ -13,7 +13,7 @@ import {
   VirtualProgramTreeBySportResponse
 } from '@elys/elys-api';
 import { cloneDeep as clone } from 'lodash';
-import { interval, Subject, Observable } from 'rxjs';
+import { interval, Observable, Subject } from 'rxjs';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
@@ -198,32 +198,37 @@ export class MainService extends MainServiceExtra {
   }
 
   loadEvents(): void {
-    if (this.cacheEvents == null || this.cacheEvents.length === 0) {
-      this.loadEventsFromApi(true);
-    } else {
-      // Delete the first element
-      this.cacheEvents.shift();
-      this.eventDetails.events.shift();
-
-      // Add the new event
-      const nextEventItems: number = this.productService.product.layoutProducts.nextEventItems - 1;
-      const event: EventInfo = new EventInfo();
-      event.number = this.cacheEvents[nextEventItems].id;
-      event.label = this.cacheEvents[nextEventItems].nm;
-      event.date = new Date(this.cacheEvents[nextEventItems].sdtoffset);
-
-      this.eventDetails.events[nextEventItems] = event;
-
-      this.currentAndSelectedEventTime();
-      this.reload--;
-
-      if (this.reload <= 0) {
-        // If remain only 1 new event reload other events
-        this.loadEventsFromApi();
+    try {
+      if (this.cacheEvents == null || this.cacheEvents.length === 0) {
+        this.loadEventsFromApi(true);
       } else {
-        // Get event's odds
-        this.eventDetailOdds(this.eventDetails.events[0].number);
+        // Delete the first element
+        this.cacheEvents.shift();
+        this.eventDetails.events.shift();
+
+        // Add the new event
+        const nextEventItems: number = this.productService.product
+          .layoutProducts.nextEventItems;
+        const event: EventInfo = new EventInfo();
+        event.number = this.cacheEvents[nextEventItems].id;
+        event.label = this.cacheEvents[nextEventItems].nm;
+        event.date = new Date(this.cacheEvents[nextEventItems].sdtoffset);
+
+        this.eventDetails.events[nextEventItems] = event;
+
+        this.currentAndSelectedEventTime();
+        this.reload--;
+
+        if (this.reload <= 0) {
+          // If remain only 1 new event reload other events
+          this.loadEventsFromApi();
+        } else {
+          // Get event's odds
+          this.eventDetailOdds(this.eventDetails.events[0].number);
+        }
       }
+    } catch (err) {
+      console.log('main --> loadEvents : ', err);
     }
   }
 
@@ -294,7 +299,7 @@ export class MainService extends MainServiceExtra {
         }
       }
     });
-    this.reload = this.productService.product.layoutProducts.cacheEventsItem - 1;
+    this.reload = this.productService.product.layoutProducts.cacheEventsItem;
   }
 
   /**
@@ -452,7 +457,9 @@ export class MainService extends MainServiceExtra {
     }
     // updated the new PolyfunctionalArea
     this.productService.polyfunctionalAreaSubject.next(polyfunctionalArea);
-    this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
+    this.productService.polyfunctionalStakeCouponSubject.next(
+      new PolyfunctionalStakeCoupon()
+    );
   }
 
   eventDetailOdds(eventNumber: number): void {
