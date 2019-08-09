@@ -1,6 +1,6 @@
 <GridLayout rows="5*,4*">
   <StackLayout row="0" class="display m-b-5">
-    <GridLayout rows="*" columns="5*,3*,*" *ngIf="polyfunctionalValue" class="p-l-5">
+    <GridLayout rows="*" columns="5*,3*,*" *ngIf="polyfunctionalValue && polyfunctionalValue.selection && productService.product.typeCoupon.acceptMultiStake" class="p-l-5">
       <StackLayout col="0" verticalAlignment="center">
         <Label *ngIf="polyfunctionalValue && polyfunctionalValue.selection"
           text="{{'DYNAMIC_KEYS.SMARTCODE.'+polyfunctionalValue.selection | translate | uppercase}}"></Label>
@@ -10,6 +10,16 @@
       <Label col="1" *ngIf="polyfunctionalValue" text="{{polyfunctionalValue.value}}" verticalAlignment="center"
         horizontalAlignment="right"></Label>
       <Image col="2" *ngIf="polyfunctionalValue  && polyfunctionalValue.selection" margin="4" (tap)="detailOdds()"
+        src="~/app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png" verticalAlignment="center"
+        [isEnabled]="!timeBlocked"></Image>
+    </GridLayout>
+    <GridLayout rows="*" columns="7*,3*"  *ngIf="polyfunctionalValue && polyfunctionalValue.grouping && !productService.product.typeCoupon.acceptMultiStake">
+        <StackLayout col="0" verticalAlignment="center" orientation="horizontal">
+          <ng-container  *ngFor="let group of polyfunctionalValue.grouping">
+            <Label *ngIf="group.Selected" class="group-title m-r-5" [ngClass]="{'selected' : group.Selected}" text="{{group.Combinations +'-' + group.Grouping }}"></Label>
+          </ng-container>
+        </StackLayout>
+        <Image col="1" margin="4" (tap)="detailOdds('true')"
         src="~/app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png" verticalAlignment="center"
         [isEnabled]="!timeBlocked"></Image>
     </GridLayout>

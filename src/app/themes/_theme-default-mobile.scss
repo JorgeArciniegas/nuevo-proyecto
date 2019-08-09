@@ -11,6 +11,7 @@
 @import "./event-control/event-control-standard.tns";
 @import "./lucky/lucky-race-fight.tns";
 @import "./events-list/events-list.tns";
+@import "./groupings/groupings.tns";
 .app {
 	&.develop {
 		@import "./skins/develop/styles";

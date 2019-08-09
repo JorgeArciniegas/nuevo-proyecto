@@ -28,7 +28,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [componentDeclarations, DigitslimitPipe, GroupByCategoryPipe, LabelByGroupingPipe],
+  declarations: [componentDeclarations, DigitslimitPipe, GroupByCategoryPipe],
   imports: [
     HttpClientModule,
     BrowserModule,
