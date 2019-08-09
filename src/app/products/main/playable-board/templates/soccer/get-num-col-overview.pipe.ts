@@ -19,7 +19,6 @@ export class GetNumColOverviewPipe implements PipeTransform {
       colNum = oldColNum + oddIndex;
     }
 
-    console.log(colNum);
     return colNum;
   }
 }

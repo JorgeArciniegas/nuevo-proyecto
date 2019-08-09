@@ -2,12 +2,12 @@
   <!-- AREAS -->
   <GridLayout col="0" rows="*,2*,2*,2*,2*,2*,2*,2*,2*,2*,2*" class="areas-column">
     <Label row="0" text="{{ 'AREAS' | translate }}" horizontalAlignment="center" class="section-identifier"
-      marginLeft="5" marginBottom="5"></Label>
+      marginLeft="10" marginBottom="5"></Label>
     <ng-container
       *ngFor="let area of soccerService.tournament.listDetailAreas[soccerService.selectedMatch]; let i = index">
       <FlexBoxLayout row="{{i + 1}}" flexDirection="row" justifyContent="space-between" alignItems="center"
         class="btn-soccer-area radius-5" [ngClass]="area.isSelected ?  'btn-selected': 'btn-grey-gradient'"
-        (tap)="changeArea(i)" marginLeft="5" marginBottom="5" paddingLeft="10" paddingRight="10">
+        (tap)="changeArea(i)" marginLeft="10" marginBottom="5" paddingLeft="10" paddingRight="10">
         <Label text="{{ area.name }}" class="btn-soccer-area__details--name"></Label>
         <Label class="btn-soccer-area__details--icon"
           [ngClass]="{'star-red-icon': area.hasLowestOdd, 'star-yellow-icon': area.hasHighestOdd}"
@@ -15,24 +15,29 @@
       </FlexBoxLayout>
     </ng-container>
   </GridLayout>
-  <GridLayout col="1" rows="*,20*" class="areas-column">
+
+  <!-- SELECTIONS -->
+  <GridLayout col="1" rows="*,20*">
     <Label row="0" text="{{ 'MARKETS' | translate }}" horizontalAlignment="center" class="section-identifier"
-      marginBottom="5"></Label>
+      marginLeft="10" marginBottom="5"></Label>
     <GridLayout row="1"
-      columns="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaCols | getColumnsGrid }}">
-      <GridLayout row="{{i}}"
-        rows="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaRowsByCol[i] | getColumnsGrid }}"
-        columns="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaMaxMarketColsByCol[i] | getColumnsGrid }}"
-        *ngFor="let colunm of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaCols | getArrayFromNumber; let i = index">
-        <ng-container
-          *ngFor="let market of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets; let i1 = index">
+      columns="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaCols | getGridStringSetting }}"
+      marginLeft="5">
+      <ng-container
+        *ngFor="let market of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets; let i1 = index">
+        <GridLayout col="{{i}}"
+          rows="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaRowsByCol[i] | getGridStringSetting }}"
+          columns="{{ market.layoutGridDefinition.marketCols | getGridStringSetting }}"
+          class="markets-selections-column"
+          *ngFor="let colunm of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaCols | getArrayFromNumber; let i = index">
           <ng-container *ngFor="let odd of market.selections; let i2 = index">
-            <StackLayout
-              col="{{soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets | getNumColOverview: i1: i2}}"
-              orientation="vertical" *ngFor="let odd of market.selections; let i2 = index"
-              class="btn-soccer-odd radius-5"
+            <FlexBoxLayout
+              row="{{soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets | getNumGridElemDetail: 'row': i1: i2 }}"
+              col="{{soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets | getNumGridElemDetail: 'col': i1: i2 }}"
+              flexDirection="column" justifyContent="center" alignItems="center" class="btn-soccer-odd radius-5"
               [ngClass]="soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
-              (tap)="selectOdd(i, market.id, odd)" verticalAlignment="center" marginLeft="5">
+              (tap)="selectOdd(i, market.id, odd)" marginLeft="5" marginBottom="5"
+              *ngIf="market.layoutGridDefinition.marketPositionOnColArea === i + 1">
               <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
                 <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
                 <Label text="{{ market.specialValueOrSpread }}" horizontalAlignment="left"
@@ -40,10 +45,10 @@
               </StackLayout>
               <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value"
                 horizontalAlignment="center"></Label>
-            </StackLayout>
+            </FlexBoxLayout>
           </ng-container>
-        </ng-container>
-      </GridLayout>
+        </GridLayout>
+      </ng-container>
     </GridLayout>
   </GridLayout>
 </GridLayout>
