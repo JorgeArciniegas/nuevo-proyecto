@@ -5,9 +5,10 @@ import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { routes, componentDeclarations } from './main.common';
 import { RmSelFromMarketPipe } from './playable-board/rm-sel-from-market.pipe';
 import { GetNumColOverviewPipe } from './playable-board/templates/soccer/get-num-col-overview.pipe';
+import { GetColumnsGridPipe } from './playable-board/get-columns-grid.pipe';
 
 @NgModule({
-  declarations: [componentDeclarations, RmSelFromMarketPipe, GetNumColOverviewPipe],
+  declarations: [componentDeclarations, RmSelFromMarketPipe, GetNumColOverviewPipe, GetColumnsGridPipe],
   imports: [NativeScriptCommonModule, SharedModule, NativeScriptRouterModule.forChild(routes)],
   schemas: [NO_ERRORS_SCHEMA]
 })

@@ -10,10 +10,16 @@ export class GetNumColOverviewPipe implements PipeTransform {
     if (marketIndex === 0) {
       colNum = oddIndex;
     } else {
-      const oldColNum = markets[marketIndex - 1].selections.length;
-      colNum = oldColNum + oddIndex + 1;
+      let oldColNum = 0;
+      let i = 0;
+      while (i < marketIndex) {
+        oldColNum += markets[i].selections.length;
+        i++;
+      }
+      colNum = oldColNum + oddIndex;
     }
 
+    console.log(colNum);
     return colNum;
   }
 }

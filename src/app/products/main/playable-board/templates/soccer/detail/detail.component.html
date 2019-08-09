@@ -7,12 +7,11 @@
         <mat-grid-tile
           *ngFor="let area of soccerService.tournament.listDetailAreas[soccerService.selectedMatch]; let i = index"
           rowspan="2">
-          <button class="btn-soccer-area radius-5"
-            [ngClass]="area.isSelected ?  'btn-selected': 'btn-grey-gradient'"
+          <button class="btn-soccer-area radius-5" [ngClass]="area.isSelected ?  'btn-selected': 'btn-grey-gradient'"
             (click)="changeArea(i)">
             <div class="btn-soccer-area__details" fxLayoutAlign="center center">
               <span class="btn-soccer-area__details--name">{{ area.name }}</span>
-              <div class="star-icon"
+              <div class="btn-soccer-area__details--icon"
                 [ngClass]="{'star-red-icon': area.hasLowestOdd, 'star-yellow-icon': area.hasHighestOdd}"
                 *ngIf="area.hasLowestOdd || area.hasHighestOdd">
               </div>
