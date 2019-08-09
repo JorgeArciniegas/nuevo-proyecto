@@ -75,7 +75,6 @@ export class GroupingsComponent implements OnInit {
         end = this.data.groupings.length;
       }
       this.groupings = this.data.groupings.slice(start, end);
-      console.log(this.data.groupings);
       if (this.page === this.maxPage - 1) {
         for (let index = 0; index < this.maxItems - this.groupings.length; index++) {
           this.emptyGroupings.push('');
