@@ -5,7 +5,8 @@
       marginBottom="5"></Label>
     <ng-container *ngFor="let match of soccerService.tournament.matches; let i = index">
       <GridLayout row="{{i + 1}}" columns="*,*,4*" [ngClass]="{'playable-row-tile--active': match.isDetailOpened}"
-        (tap)="openEventDetails(i)" class="playable-row-tile--soccer display radius-5" marginBottom="5">
+        [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen" (tap)="openEventDetails(i)"
+        class="playable-row-tile--soccer display radius-5" marginBottom="5">
         <Label col="0" text="{{ i + 1 }}" textAlignment="center" class="badge"
           [ngClass]="match.hasOddsSelected ? 'badge--on' : 'badge--off'"></Label>
         <Label col="1" verticalAlignment="center" class="icon"

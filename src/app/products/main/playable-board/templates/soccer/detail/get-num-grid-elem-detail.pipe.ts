@@ -1,17 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { MarketArea } from '../../../../../../products/main/main.models';
+import { MarketArea, Area } from '../../../../../../products/main/main.models';
 
+// Pipe to calculate the number of row or column where the element is located. Available only with a maximum number of two columns per Area.
 @Pipe({
   name: 'getNumGridElemDetail'
 })
 export class GetNumGridElemDetailPipe implements PipeTransform {
-  transform(markets: MarketArea[], elemType: string, marketIndex: number, oddIndex: number): number {
+  transform(area: Area, elemType: string, areaColumnIndex: number, marketIndex: number, oddIndex: number): number {
     let elemNum: number;
     switch (elemType) {
       case 'row':
         if (marketIndex === 0) {
-          if (markets[marketIndex].layoutGridDefinition.marketCols <= oddIndex) {
-            elemNum = Math.floor(oddIndex / markets[marketIndex].layoutGridDefinition.marketCols);
+          if (area.markets[marketIndex].layoutGridDefinition.marketCols <= oddIndex) {
+            elemNum = Math.floor(oddIndex / area.markets[marketIndex].layoutGridDefinition.marketCols);
           } else {
             elemNum = 0;
           }
@@ -19,30 +20,22 @@ export class GetNumGridElemDetailPipe implements PipeTransform {
           let oldRowNum = 0;
           let i = 0;
           while (i < marketIndex) {
-            oldRowNum += markets[i].layoutGridDefinition.marketRows;
+            oldRowNum += area.markets[i].layoutGridDefinition.marketRows;
             i++;
           }
-          elemNum = oldRowNum + Math.floor(oddIndex / markets[marketIndex].layoutGridDefinition.marketCols);
+          elemNum = oldRowNum + Math.floor(oddIndex / area.markets[marketIndex].layoutGridDefinition.marketCols);
         }
-        console.log(
-          'Market col: ',
-          markets[marketIndex].layoutGridDefinition.marketCols,
-          'Market index: ',
-          marketIndex,
-          'Market name: ',
-          markets[marketIndex].name,
-          'Odd index: ',
-          oddIndex,
-          'Elem num: ',
-          elemNum
-        );
+        // Logic to calculate the row number of the second column.
+        if (areaColumnIndex !== 0) {
+          elemNum = elemNum - areaColumnIndex * area.layoutDefinition.areaRowsByCol[areaColumnIndex - 1];
+        }
         break;
       case 'col':
-        if (markets[marketIndex].layoutGridDefinition.marketCols <= oddIndex) {
+        if (area.markets[marketIndex].layoutGridDefinition.marketCols <= oddIndex) {
           elemNum =
             oddIndex -
-            Math.floor(oddIndex / markets[marketIndex].layoutGridDefinition.marketCols) *
-              markets[marketIndex].layoutGridDefinition.marketCols;
+            Math.floor(oddIndex / area.markets[marketIndex].layoutGridDefinition.marketCols) *
+              area.markets[marketIndex].layoutGridDefinition.marketCols;
         } else {
           elemNum = oddIndex;
         }
