@@ -34,6 +34,7 @@ import { CockFightComponent as CockFightStatisticsComponent } from './products/p
 import { RaceComponent as RaceStatisticsComponent } from './products/product-dialog/statistics/templates/race/race.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
+import { LabelByGroupingPipe } from './component/pipe/label-by-grouping.pipe';
 
 // Registration of the languages in use. The English language is registered by default.
 registerLocaleData(localeIt);
@@ -63,7 +64,8 @@ export const componentDeclarations: any[] = [
   StatisticsComponent,
   RaceStatisticsComponent,
   CockFightStatisticsComponent,
-  GroupingsComponent
+  GroupingsComponent,
+  LabelByGroupingPipe
 ];
 
 export const providerDeclarations: any[] = [

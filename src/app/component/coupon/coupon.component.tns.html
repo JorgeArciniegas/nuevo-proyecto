@@ -15,10 +15,13 @@
   <GridLayout row="1" rows="*" columns="4*,*" class="card display btn-coupon-board"
     [ngClass]="{'small': productService.windowSize.small}">
     <StackLayout col="0" orientation="horizontal" horizontalAlignment="left">
-      <Label text="{{'SINGLE' | translate}}" verticalAlignment="center"></Label>
-      <Label class="indicator-odds-number radius-50" [ngClass]="{'small': productService.windowSize.small}"
-        text="{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}" verticalAlignment="center"
-        textAlignment="center"></Label>
+      <ng-container *ngIf="couponService.coupon && couponService.coupon.Odds.length > 0">
+        <Label *ngIf="couponLayout.acceptMultiStake" text="{{'SINGLE' | translate}}" verticalAlignment="center"></Label>
+        <Label *ngIf="!couponLayout.acceptMultiStake" text="{{'DYNAMIC_KEYS.CouponType.' + couponTypeId[couponService.coupon.CouponTypeId] | translate}}" verticalAlignment="center"></Label>
+        <Label class="indicator-odds-number radius-50" [ngClass]="{'small': productService.windowSize.small}"
+          text="{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}" verticalAlignment="center"
+          textAlignment="center"></Label>
+      </ng-container>
     </StackLayout>
     <StackLayout col="1" [isEnabled]="!userService.isModalOpen" class="button btn-dark-gradient" (tap)="openDialog()">
       <Image stretch="aspectFit" width="26"
@@ -92,24 +95,24 @@
         </ng-container>
         <!-- COUPON NO MULTISTAKE-->
         <ng-container  *ngIf="couponLayout && !couponLayout.acceptMultiStake">
-            <GridLayout row="1" rows="*" columns="7*,2*" class="row" verticalAlignment="center">
-              <Label rowSpan="2" col="0"
-                text="{{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})"
-                horizontalAlignment="left" textWrap="true"></Label>
-              <StackLayout col="1" horizontalAlignment="right">
-                <Label class="odd" text="{{odd.OddValue | number: '1.2-2'}}" horizontalAlignment="center"
-                  verticalAlignment="center"></Label>
-              </StackLayout>
-            </GridLayout>
-            <GridLayout row="2" col="0" columns="*,*" class="row" verticalAlignment="center">
-                <StackLayout col="1" class="btn-warning button" (tap)="removeOdd(odd)" [isEnabled]="!userService.isModalOpen"
-                  horizontalAlignment="right">
-                  <Image stretch="aspectFit" width="26"
-                  src="~/app/themes/skins/{{settings.theme}}/icon/baseline-delete_outline-white-24px.png"
-                  verticalAlignment="center" horizontalAlignment="center"></Image>
-                </StackLayout>
-              </GridLayout>
-            </ng-container>
+          <GridLayout rowSpan="2" row="1" rows="*,*" columns="7*,2*"  class="row" >
+            <StackLayout rowSpan="2" col="0" verticalAlignment="center">
+              <Label verticalAlignment="center"
+              text="{{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})"
+              horizontalAlignment="left" textWrap="true"></Label>
+            </StackLayout>
+            <StackLayout row="0" col="1" horizontalAlignment="right" verticalAlignment="center">
+              <Label class="odd" text="{{odd.OddValue | number: '1.2-2'}}" horizontalAlignment="center"
+                verticalAlignment="center"></Label>
+            </StackLayout>
+            <StackLayout row="1" col="1" class="btn-warning button" (tap)="removeOdd(odd)" [isEnabled]="!userService.isModalOpen"
+              horizontalAlignment="right">
+              <Image stretch="aspectFit" width="26"
+              src="~/app/themes/skins/{{settings.theme}}/icon/baseline-delete_outline-white-24px.png"
+              verticalAlignment="center" horizontalAlignment="center"></Image>
+            </StackLayout>
+          </GridLayout>
+        </ng-container>
       </GridLayout>
     </GridLayout>
   </GridLayout>

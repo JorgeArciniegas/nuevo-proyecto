@@ -4,4 +4,6 @@
     [data]="data"></app-betodds>
   <!-- STATISTICS MODAL -->
   <app-statistics *ngIf="data.statistics" [data]="data"></app-statistics>
+  <!-- GROUPINGS COUPON-->
+  <app-groupings *ngIf="data.groupings" [column]="column" [maxPage]="maxPage" [maxItems]="maxItems"  [data]="data"></app-groupings>
 </GridLayout>

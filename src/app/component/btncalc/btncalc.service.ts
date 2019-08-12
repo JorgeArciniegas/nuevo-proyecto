@@ -432,7 +432,6 @@ export class BtncalcService implements OnDestroy {
       amountTemp.digitAmount = this.couponService.oddStakeEdit.tempStake;
       amountTemp.columns = groupNumberCombinations;
       amountTemp.isEnabled = true;
-      console.log(amountTemp);
       this.productService.polyfunctionalStakeCouponSubject.next(amountTemp);
       this.polyfunctionStakePresetPlayer.isPreset = false;
     }

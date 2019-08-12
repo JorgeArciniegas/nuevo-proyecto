@@ -1,0 +1,54 @@
+<GridLayout rows="*" columns="*" class="dialog">
+  <GridLayout rows="4*,16*,3*" columns="*" class="odds-grid">
+    <GridLayout row="0" rows="*" columns="6*,*">
+      <Label col="0" text="{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.' + data.title | translate }}" class="title"
+        verticalAlignment="center" horizontalAlignment="left"></Label>
+      <Label col="1" text="{{page + 1}}/{{maxPage}}" *ngIf="maxPage > 1" class="indicator" verticalAlignment="bottom"
+        horizontalAlignment="right" verticalAlignment="bottom"></Label>
+    </GridLayout>
+    <GridLayout row="1" rows="2*{{rows}},2*" columns="*{{columns}}"
+      [ngClass]="{'small': productService.windowSize.small}">
+      <!-- Scroll -->
+      <GridLayout row="0" colSpan="{{columnNumber}}" class="card-odd scroll" (tap)="previusOdds()" *ngIf="maxPage > 1"
+        [ngClass]="{'disabled': page <= 0}" [isEnabled]="page > 0">
+        <Image width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Up.png" verticalAlignment="center"></Image>
+      </GridLayout>
+      <GridLayout row="{{rowNumber + 1}}" colSpan="{{columnNumber}}" class="card-odd scroll" (tap)="nextOdds()"
+        *ngIf="maxPage > 1" [ngClass]="{'disabled': page >= maxPage - 1}" [isEnabled]="page < maxPage - 1">
+        <Image width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Down.png" verticalAlignment="center">
+        </Image>
+      </GridLayout>
+      <!-- GROUPINGS -->
+      <ng-container  *ngIf="groupings">
+        <GridLayout row="{{ 1 + (i / columnNumber) | floor}}" col="{{i % columnNumber}}" rows="*,2*" columns="*"
+        class="card-odd" *ngFor="let grouping of groupings; let i = index;">
+          <StackLayout row="0" class="top-window"></StackLayout>
+          <GridLayout row="1" rows="*,*" columns="*,2*,2*" class="row">
+            <Label row="0" col="0" text="{{ grouping.Combinations }}"></Label>
+            <Label row="0" col="1" text="{{ 'DYNAMIC_KEYS.GROUPINGS.' | labelByGrouping : grouping.Grouping : grouping.Combinations | translate }}"></Label>
+            <StackLayout row="1" col="0" colSpan="2" class="button" width="100%"
+              [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.grouping.Grouping !== grouping.Grouping ,
+              'btn-selected' : couponService.oddStakeEdit && couponService.oddStakeEdit.grouping.Grouping === grouping.Grouping }"
+              (tap)="changeStakeToGrouping(grouping)" horizontalAlignment="center" verticalAlignment="center">
+              <Label class="stake"
+                *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.grouping.Grouping !== grouping.Grouping"
+                text="{{grouping.Stake | number: '1.2-3'}}" horizontalAlignment="center"
+                verticalAlignment="center"></Label>
+              <Label class="stake"
+                *ngIf="couponService.oddStakeEdit && couponService.oddStakeEdit.grouping.Grouping === grouping.Grouping"
+                text="{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}" horizontalAlignment="center"
+                verticalAlignment="center"></Label>
+            </StackLayout>
+            <Switch col="2" rowSpan="2" (tap)="checkedGrouping(grouping)" [checked]="grouping.Selected"></Switch>
+          </GridLayout>
+        </GridLayout>
+      </ng-container>
+      <!-- /GROUPINGS -->
+    </GridLayout>
+    <StackLayout row="3" horizontalAlignment="center">
+      <GridLayout rows="*" columns="*" class="button btn-close">
+        <Button text="{{ 'CLOSE' | translate }}" class="button-internal" (tap)="close()" textTransform="none"></Button>
+      </GridLayout>
+    </StackLayout>
+  </GridLayout>
+</GridLayout>
