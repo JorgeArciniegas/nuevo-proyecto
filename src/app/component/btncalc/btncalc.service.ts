@@ -4,11 +4,7 @@ import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { AppSettings } from '../../../../src/app/app.settings';
 import { UserService } from '../../../../src/app/services/user.service';
 import { TranslateUtilityService } from '../../../../src/app/services/utility/translate-utility.service';
-import {
-  PolyfunctionalArea,
-  PolyfunctionalStakeCoupon,
-  PolyfunctionStakePresetPlayer
-} from '../../products/products.model';
+import { PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { TypeBetSlipColTot } from '../../products/main/main.models';
 import { CouponService } from '../coupon/coupon.service';
@@ -47,52 +43,40 @@ export class BtncalcService implements OnDestroy {
     private couponService: CouponService
   ) {
     // Listen to the coupon placement and reset the player's preset stake
-    this.couponHasBeenPlacedSubscription = couponService.couponHasBeenPlacedObs.subscribe(
-      () => {
-        this.settingStakePresetPlayer();
-      }
-    );
+    this.couponHasBeenPlacedSubscription = couponService.couponHasBeenPlacedObs.subscribe(() => {
+      this.settingStakePresetPlayer();
+    });
 
     this.polyfunctionalDecimalsFlag = true;
     this.polyfunctionalAdditionFlag = true;
     // manages data display: amount addition/decimals and amount distribution
-    this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
-      element => {
-        // check if the odds is changed and reset the tap of preset stake
-        if (
-          this.polyfunctionalArea &&
-          this.polyfunctionalArea.odds.length !== element.odds.length
-        ) {
-          this.polyfunctionStakePresetPlayer.firstTap = true;
-        }
-        this.polyfunctionalArea = element;
+    this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(element => {
+      // check if the odds is changed and reset the tap of preset stake
+      if (this.polyfunctionalArea && this.polyfunctionalArea.odds.length !== element.odds.length) {
+        this.polyfunctionStakePresetPlayer.firstTap = true;
+      }
+      this.polyfunctionalArea = element;
 
-        if (this.polyfunctionalArea) {
-          if (this.polyfunctionalArea.odds !== undefined) {
-            this.polyfunctionalArea.activeDistributionTot = true;
-            this.polyfunctionalArea.activeAssociationCol = true;
-          } else {
-            this.polyfunctionalArea.activeDistributionTot = false;
-            this.polyfunctionalArea.activeAssociationCol = true;
-          }
-          // update type Betslip on change distribution amount for COL or TOT
-          if (
-            this.polyfunctionalArea.typeSlipCol === TypeBetSlipColTot.TOT &&
-            this.polyfunctionalArea.odds !== undefined
-          ) {
-            this.polyfunctionalArea.odds.map(item => {
-              item.amount =
-                this.polyfunctionalArea.amount /
-                this.polyfunctionalArea.odds.length;
-            });
-          } else if (this.polyfunctionalArea.odds !== undefined) {
-            this.polyfunctionalArea.odds.map(item => {
-              item.amount = this.polyfunctionalArea.amount;
-            });
-          }
+      if (this.polyfunctionalArea) {
+        if (this.polyfunctionalArea.odds !== undefined) {
+          this.polyfunctionalArea.activeDistributionTot = true;
+          this.polyfunctionalArea.activeAssociationCol = true;
+        } else {
+          this.polyfunctionalArea.activeDistributionTot = false;
+          this.polyfunctionalArea.activeAssociationCol = true;
+        }
+        // update type Betslip on change distribution amount for COL or TOT
+        if (this.polyfunctionalArea.typeSlipCol === TypeBetSlipColTot.TOT && this.polyfunctionalArea.odds !== undefined) {
+          this.polyfunctionalArea.odds.map(item => {
+            item.amount = this.polyfunctionalArea.amount / this.polyfunctionalArea.odds.length;
+          });
+        } else if (this.polyfunctionalArea.odds !== undefined) {
+          this.polyfunctionalArea.odds.map(item => {
+            item.amount = this.polyfunctionalArea.amount;
+          });
         }
       }
-    );
+    });
 
     this.productService.polyfunctionalStakeCouponObs.subscribe(elem => {
       this.polyfunctionalStakeCoupon = elem;
@@ -134,10 +118,7 @@ export class BtncalcService implements OnDestroy {
     if (this.polyfunctionalArea.shortcut) {
       this.couponService.addRemoveToCouponSC(this.polyfunctionalArea);
     } else {
-      this.couponService.addRemoveToCoupon(
-        this.polyfunctionalArea.odds,
-        this.productService.product.typeCoupon.acceptMultiStake
-      );
+      this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds, this.productService.product.typeCoupon.acceptMultiStake);
     }
     if (!groupingChange) {
       this.productService.closeProductDialog();
@@ -169,11 +150,8 @@ export class BtncalcService implements OnDestroy {
     this.polyfunctionalAdditionFlag = true;
     this.polyfunctionalDecimalsFlag = true;
 
-
     // reset the input preset amount
-    this.productService.polyfunctionalStakeCouponSubject.next(
-      new PolyfunctionalStakeCoupon()
-    );
+    this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
 
   /**
@@ -183,17 +161,10 @@ export class BtncalcService implements OnDestroy {
     // it is used on the DOM and it is put on the CALC BUTTON
     if (this.userService.userDetail && !this.decimalSeparator) {
       const decimalCheck = 1.2;
-      const separator = decimalCheck
-        .toLocaleString(this.translate.getCurrentLanguage())
-        .substring(1, 2);
+      const separator = decimalCheck.toLocaleString(this.translate.getCurrentLanguage()).substring(1, 2);
       // tslint:disable-next-line:max-line-length
       const currencyHasDecimal = Number(
-        formatCurrency(
-          decimalCheck,
-          this.translate.getCurrentLanguage(),
-          '',
-          this.userService.userCurrency
-        )
+        formatCurrency(decimalCheck, this.translate.getCurrentLanguage(), '', this.userService.userCurrency)
       );
       if (!Number.isInteger(currencyHasDecimal)) {
         this.decimalSeparator = separator;
@@ -206,13 +177,8 @@ export class BtncalcService implements OnDestroy {
   // default presets player
   settingStakePresetPlayer(): void {
     if (this.setting.defaultAmount.PresetOne !== null) {
-      this.polyfunctionStakePresetPlayer = new PolyfunctionStakePresetPlayer(
-        TypeBetSlipColTot.COL,
-        this.setting.defaultAmount.PresetOne
-      );
-      this.polyfunctionStakePresetPlayerSub.next(
-        this.polyfunctionStakePresetPlayer
-      );
+      this.polyfunctionStakePresetPlayer = new PolyfunctionStakePresetPlayer(TypeBetSlipColTot.COL, this.setting.defaultAmount.PresetOne);
+      this.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
     } else {
       timer(1000).subscribe(() => this.settingStakePresetPlayer());
     }
@@ -222,14 +188,10 @@ export class BtncalcService implements OnDestroy {
   btnTotColSelection(betTotColSelected: TypeBetSlipColTot): void {
     if (this.polyfunctionalArea) {
       this.polyfunctionalArea.typeSlipCol = betTotColSelected;
-      this.productService.polyfunctionalAreaSubject.next(
-        this.polyfunctionalArea
-      );
+      this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
       // preset player selected
       this.polyfunctionStakePresetPlayer.typeSlipCol = betTotColSelected;
-      this.polyfunctionStakePresetPlayerSub.next(
-        this.polyfunctionStakePresetPlayer
-      );
+      this.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
     }
   }
 
@@ -241,10 +203,7 @@ export class BtncalcService implements OnDestroy {
    * @param amount
    * @param typingType
    */
-  public returnTempNumberToPolyfuncArea(
-    amount: number,
-    typingType: TYPINGTYPE
-  ): number {
+  public returnTempNumberToPolyfuncArea(amount: number, typingType: TYPINGTYPE): number {
     // check if hasDecimalSeparator
     // tslint:disable-next-line:max-line-length
     let tempAmount = this.polyfunctionStakePresetPlayer.hasDecimalSeparator
@@ -259,15 +218,9 @@ export class BtncalcService implements OnDestroy {
     }
 
     // check if it is the first time that the player taps the button on calculator.
-    if (
-      !this.polyfunctionStakePresetPlayer.firstTap &&
-      this.polyfunctionStakePresetPlayer.typingType === TYPINGTYPE.BY_KEYBOARD
-    ) {
+    if (!this.polyfunctionStakePresetPlayer.firstTap && this.polyfunctionStakePresetPlayer.typingType === TYPINGTYPE.BY_KEYBOARD) {
       tempAmount += amount.toString();
-    } else if (
-      !this.polyfunctionStakePresetPlayer.firstTap &&
-      this.polyfunctionStakePresetPlayer.typingType === TYPINGTYPE.BY_PRESET
-    ) {
+    } else if (!this.polyfunctionStakePresetPlayer.firstTap && this.polyfunctionStakePresetPlayer.typingType === TYPINGTYPE.BY_PRESET) {
       tempAmount = Number(tempAmount) + amount;
     } else {
       tempAmount = amount.toString();
@@ -275,10 +228,7 @@ export class BtncalcService implements OnDestroy {
       this.polyfunctionStakePresetPlayer.firstTap = false;
     }
     this.polyfunctionStakePresetPlayer.amountStr = tempAmount.toString();
-    if (
-      this.polyfunctionStakePresetPlayer.hasDecimalSeparator &&
-      this.polyfunctionStakePresetPlayer.amountStr.split('.')[1].length === 2
-    ) {
+    if (this.polyfunctionStakePresetPlayer.hasDecimalSeparator && this.polyfunctionStakePresetPlayer.amountStr.split('.')[1].length === 2) {
       this.polyfunctionStakePresetPlayer.disableInputCalculator = true;
     }
     return parseFloat(tempAmount.toString());
@@ -288,10 +238,7 @@ export class BtncalcService implements OnDestroy {
     // check if hasDecimalSeparator
     let tempAmount = oddStake.tempStakeStr;
     // check if it is the first time that the player taps the button on calculator.
-    if (
-      oddStake.hasDecimalSeparator &&
-      oddStake.tempStakeStr.split('.')[1].length === 2
-    ) {
+    if (oddStake.hasDecimalSeparator && oddStake.tempStakeStr.split('.')[1].length === 2) {
       return;
     }
 
@@ -308,10 +255,7 @@ export class BtncalcService implements OnDestroy {
    *
    */
   public setDecimal(): void {
-    if (
-      this.couponService.oddStakeEdit &&
-      !this.couponService.oddStakeEdit.hasDecimalSeparator
-    ) {
+    if (this.couponService.oddStakeEdit && !this.couponService.oddStakeEdit.hasDecimalSeparator) {
       this.couponService.oddStakeEdit.tempStakeStr += '.';
       this.couponService.oddStakeEdit.hasDecimalSeparator = true;
     }
@@ -327,32 +271,21 @@ export class BtncalcService implements OnDestroy {
   public assignStake(): void {
     // check if there is a selection in polyfuncional Area and associate the amount if there is no selection,
     // check for coupon and associate the amount
-    if (
-      this.polyfunctionalArea.odds.length > 0 &&
-      this.productService.product.typeCoupon.acceptMultiStake
-    ) {
+    if (this.polyfunctionalArea.odds.length > 0 && this.productService.product.typeCoupon.acceptMultiStake) {
       this.polyfunctionalArea.amount = this.polyfunctionStakePresetPlayer.amount;
-      this.productService.polyfunctionalAreaSubject.next(
-        this.polyfunctionalArea
-      );
+      this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
     } else if (
       this.polyfunctionalArea.odds.length === 0 &&
       this.couponService.coupon &&
       this.productService.product.typeCoupon.acceptMultiStake
     ) {
       const amountTemp: PolyfunctionalStakeCoupon = new PolyfunctionalStakeCoupon();
-      if (
-        this.polyfunctionStakePresetPlayer.typeSlipCol === TypeBetSlipColTot.COL
-      ) {
-        amountTemp.totalAmount =
-          this.polyfunctionStakePresetPlayer.amount *
-          this.couponService.coupon.Odds.length;
+      if (this.polyfunctionStakePresetPlayer.typeSlipCol === TypeBetSlipColTot.COL) {
+        amountTemp.totalAmount = this.polyfunctionStakePresetPlayer.amount * this.couponService.coupon.Odds.length;
         amountTemp.columnAmount = this.polyfunctionStakePresetPlayer.amount;
         amountTemp.typeSlipCol = TypeBetSlipColTot.COL;
       } else {
-        amountTemp.columnAmount =
-          this.polyfunctionStakePresetPlayer.amount /
-          this.couponService.coupon.Odds.length;
+        amountTemp.columnAmount = this.polyfunctionStakePresetPlayer.amount / this.couponService.coupon.Odds.length;
         amountTemp.totalAmount = this.polyfunctionStakePresetPlayer.amount;
         amountTemp.typeSlipCol = TypeBetSlipColTot.TOT;
       }
@@ -378,16 +311,12 @@ export class BtncalcService implements OnDestroy {
         }
       });
 
-      if (
-        this.polyfunctionStakePresetPlayer.typeSlipCol === TypeBetSlipColTot.COL
-      ) {
-        amountTemp.totalAmount =
-          this.polyfunctionStakePresetPlayer.amount * groupNumberCombinations;
+      if (this.polyfunctionStakePresetPlayer.typeSlipCol === TypeBetSlipColTot.COL) {
+        amountTemp.totalAmount = this.polyfunctionStakePresetPlayer.amount * groupNumberCombinations;
         amountTemp.columnAmount = this.polyfunctionStakePresetPlayer.amount;
         amountTemp.typeSlipCol = TypeBetSlipColTot.COL;
       } else {
-        amountTemp.columnAmount =
-          this.polyfunctionStakePresetPlayer.amount / groupNumberCombinations;
+        amountTemp.columnAmount = this.polyfunctionStakePresetPlayer.amount / groupNumberCombinations;
         amountTemp.totalAmount = this.polyfunctionStakePresetPlayer.amount;
         amountTemp.typeSlipCol = TypeBetSlipColTot.TOT;
       }
@@ -412,14 +341,11 @@ export class BtncalcService implements OnDestroy {
 
       amountTemp.typeSlipCol = this.polyfunctionStakePresetPlayer.typeSlipCol;
 
-      if (
-        this.polyfunctionStakePresetPlayer.typeSlipCol === TypeBetSlipColTot.COL
-      ) {
+      if (this.polyfunctionStakePresetPlayer.typeSlipCol === TypeBetSlipColTot.COL) {
         this.couponService.oddStakeEdit.grouping.Stake = this.couponService.oddStakeEdit.tempStake;
       } else {
         this.couponService.oddStakeEdit.grouping.Stake =
-          this.couponService.oddStakeEdit.tempStake /
-          this.couponService.oddStakeEdit.grouping.Grouping;
+          this.couponService.oddStakeEdit.tempStake / this.couponService.oddStakeEdit.grouping.Combinations;
       }
 
       this.couponService.coupon.Groupings.forEach(group => {

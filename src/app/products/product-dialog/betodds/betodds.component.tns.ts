@@ -28,6 +28,7 @@ export class BetoddsComponent implements OnInit {
   public rows = '';
   @Input()
   private maxItems = 0;
+  public multiStake: boolean;
   public betOdds: BetOdd[];
 
   public emptyOdds: string[] = [];
@@ -42,10 +43,8 @@ export class BetoddsComponent implements OnInit {
     public userService: UserService
   ) {
     this.settings = appSettings;
-    if (
-      this.productService.windowSize &&
-      this.productService.windowSize.small
-    ) {
+    this.multiStake = this.settings.products.filter(prod => prod.productSelected)[0].typeCoupon.acceptMultiStake;
+    if (this.productService.windowSize && this.productService.windowSize.small) {
       this.rowNumber = 2;
     }
 
@@ -84,11 +83,7 @@ export class BetoddsComponent implements OnInit {
     this.betOdds = this.data.betOdds.odds.slice(start, end);
 
     if (this.page === this.maxPage - 1) {
-      for (
-        let index = 0;
-        index < this.maxItems - this.betOdds.length;
-        index++
-      ) {
+      for (let index = 0; index < this.maxItems - this.betOdds.length; index++) {
         this.emptyOdds.push('');
       }
     } else {
@@ -105,11 +100,7 @@ export class BetoddsComponent implements OnInit {
     this.betCouponOdd = this.data.betCoupon.Odds.slice(start, end);
     this.emptyOdds = [];
     if (this.page === this.maxPage - 1) {
-      for (
-        let index = 0;
-        index < this.maxItems - this.betCouponOdd.length;
-        index++
-      ) {
+      for (let index = 0; index < this.maxItems - this.betCouponOdd.length; index++) {
         this.emptyOdds.push('');
       }
     }
@@ -155,12 +146,7 @@ export class BetoddsComponent implements OnInit {
   }
 
   removeOdd(odd: BetCouponOddExtended): void {
-    const betOdd: BetOdd = new BetOdd(
-      odd.SelectionName,
-      odd.OddValue,
-      odd.OddStake,
-      odd.SelectionId
-    );
+    const betOdd: BetOdd = new BetOdd(odd.SelectionName, odd.OddValue, odd.OddStake, odd.SelectionId);
     this.couponService.addRemoveToCoupon([betOdd]);
     this.userService.isBtnCalcEditable = false;
   }
@@ -168,10 +154,7 @@ export class BetoddsComponent implements OnInit {
   // change stake from odd's coupon
   checkOddToChangeStake(odd: BetCouponOdd): void {
     this.userService.isBtnCalcEditable = true;
-    if (
-      this.couponService.oddStakeEdit &&
-      this.couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId
-    ) {
+    if (this.couponService.oddStakeEdit && this.couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId) {
       this.userService.isBtnCalcEditable = false;
     }
     this.couponService.checkOddToChangeStake(odd);
