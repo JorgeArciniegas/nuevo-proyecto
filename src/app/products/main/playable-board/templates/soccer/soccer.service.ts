@@ -2,10 +2,10 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { VirtualBetSelection } from '@elys/elys-api';
 import { MainService } from '../../../main.service';
 import { VirtualBetTournamentExtended } from '../../../main.models';
-import { ProductsService } from '../../../../../products/products.service';
 import { Subscription, timer } from 'rxjs';
 import { BtncalcService } from '../../../../../component/btncalc/btncalc.service';
 import { ElysCouponService } from '@elys/elys-coupon';
+import { CouponService } from '../../../../../component/coupon/coupon.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,11 @@ export class SoccerService implements OnDestroy {
   // Listen the coupon's change
   couponHasChangedSubscription: Subscription;
   couponHasBeenPlacedSubscription: Subscription;
-  constructor(private mainService: MainService, private btnCalcService: BtncalcService, private elysCoupon: ElysCouponService) {
+  constructor(
+    private mainService: MainService,
+    private btnCalcService: BtncalcService,
+    private elysCoupon: ElysCouponService,
+    private couponService: CouponService) {
     // Variables inizialization.
     this.selectedMatch = -1;
     // Set the default Area "Main".
@@ -34,6 +38,20 @@ export class SoccerService implements OnDestroy {
     this.currentEventSubscription = this.mainService.currentEventObserve.subscribe(() => {
       this.getTournamentDetails();
     });
+
+    // Remove selected odd when delete all Selection from coupon.
+    this.couponHasBeenPlacedSubscription = this.couponService.couponHasBeenPlacedObs.subscribe(
+      b => {
+        if (b && this.tournament) {
+          this.tournament.matches.forEach(match => {
+            if (match.hasOddsSelected) {
+              match.hasOddsSelected = false;
+              match.selectedOdds = [];
+            }
+          });
+        }
+      }
+    );
 
     // Get the change of the coupon's object.
     this.couponHasChangedSubscription = this.elysCoupon.couponHasChanged.subscribe(coupon => {
