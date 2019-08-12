@@ -22,8 +22,7 @@
       <!-- Cards -->
       <ng-container *ngIf="betOdds">
         <GridLayout row="{{ 1 + (i / columnNumber) | floor}}" col="{{i % columnNumber}}" rows="*,2*,2*" columns="*"
-          class="card-odd" [ngClass]="{'notSelected': !odd.selected}"
-          *ngFor="let odd of betOdds; let i = index;">
+          class="card-odd" [ngClass]="{'notSelected': !odd.selected}" *ngFor="let odd of betOdds; let i = index;">
           <StackLayout row="0" class="top-window"></StackLayout>
           <GridLayout row="1" rows="*" columns="2*,*" class="row">
             <Label col="0" text="{{odd.label}}" horizontalAlignment="left"></Label>
@@ -56,7 +55,7 @@
             </StackLayout>
           </GridLayout>
           <GridLayout row="2" columns="*,*" class="row" verticalAlignment="center">
-            <StackLayout col="0" class="button" width="100%"
+            <StackLayout col="0" class="button" width="100%" *ngIf="multiStake"
               [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
               'btn-selected' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }" (tap)="checkOddToChangeStake(odd)"
               horizontalAlignment="center" verticalAlignment="center">

@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { SoccerService } from '../soccer.service';
 import { VirtualBetSelection } from '@elys/elys-api';
+import { UserService } from '../../../../../../services/user.service';
+import { MainService } from '../../../../../../products/main/main.service';
 
 @Component({
   selector: 'app-overview',
@@ -11,7 +13,7 @@ export class OverviewComponent {
   @Input()
   public rowHeight: number;
 
-  constructor(public soccerService: SoccerService) {}
+  constructor(public soccerService: SoccerService, public mainService: MainService, public userService: UserService) {}
 
   selectOdd(matchIndex: number, marketId: number, selection: VirtualBetSelection): void {
     this.soccerService.selectOdd(matchIndex, marketId, selection);

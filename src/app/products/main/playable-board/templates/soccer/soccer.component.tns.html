@@ -1,9 +1,12 @@
-<GridLayout class="playable-grid-buttons" rows="*" columns="2*,7*" *ngIf="soccerService.tournament" class="card">
+<GridLayout rows="*" columns="*,4*" *ngIf="soccerService.tournament" class="card" class="playable-grid-buttons">
   <!-- MATCHES COLUMN -->
-  <GridLayout col="0" rows="*,2*,2*,2*,2*,2*,2*,2*,2*,2*,2*">
-    <Label row="0" text="{{ 'EVENTS' | translate }}" horizontalAlignment="center" class="section-identifier"></Label>
+  <GridLayout col="0" rows="*,2*,2*,2*,2*,2*,2*,2*,2*,2*,2*" class="column-matches">
+    <Label row="0" text="{{ 'EVENTS' | translate }}" horizontalAlignment="center" class="section-identifier"
+      marginBottom="5"></Label>
     <ng-container *ngFor="let match of soccerService.tournament.matches; let i = index">
-      <GridLayout row="{{i + 1}}" columns="*,*,4*" class="playable-row-tile--soccer display radius-5" marginBottom="5">
+      <GridLayout row="{{i + 1}}" columns="*,*,4*" [ngClass]="{'playable-row-tile--active': match.isDetailOpened}"
+        [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen" (tap)="openEventDetails(i)"
+        class="playable-row-tile--soccer display radius-5" marginBottom="5">
         <Label col="0" text="{{ i + 1 }}" textAlignment="center" class="badge"
           [ngClass]="match.hasOddsSelected ? 'badge--on' : 'badge--off'"></Label>
         <Label col="1" verticalAlignment="center" class="icon"
@@ -14,7 +17,7 @@
   </GridLayout>
 
   <!-- ODDS AREA -->
-  <StackLayout col="1">
+  <StackLayout col="1" class="column-selections">
     <!-- TOURNAMENT'S OVERVIEW -->
     <app-overview [rowHeight]="rowHeight" *ngIf="soccerService.selectedMatch < 0"></app-overview>
     <!-- EVENT'S DETAIL -->
