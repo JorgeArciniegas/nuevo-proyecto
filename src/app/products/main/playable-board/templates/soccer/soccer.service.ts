@@ -25,7 +25,8 @@ export class SoccerService implements OnDestroy {
     private mainService: MainService,
     private btnCalcService: BtncalcService,
     private elysCoupon: ElysCouponService,
-    private couponService: CouponService) {
+    private couponService: CouponService
+  ) {
     // Variables inizialization.
     this.selectedMatch = -1;
     // Set the default Area "Main".
@@ -40,18 +41,16 @@ export class SoccerService implements OnDestroy {
     });
 
     // Remove selected odd when delete all Selection from coupon.
-    this.couponHasBeenPlacedSubscription = this.couponService.couponHasBeenPlacedObs.subscribe(
-      b => {
-        if (b && this.tournament) {
-          this.tournament.matches.forEach(match => {
-            if (match.hasOddsSelected) {
-              match.hasOddsSelected = false;
-              match.selectedOdds = [];
-            }
-          });
-        }
+    this.couponHasBeenPlacedSubscription = this.couponService.couponHasBeenPlacedObs.subscribe(b => {
+      if (b && this.tournament && this.tournament.matches) {
+        this.tournament.matches.forEach(match => {
+          if (match.hasOddsSelected) {
+            match.hasOddsSelected = false;
+            match.selectedOdds = [];
+          }
+        });
       }
-    );
+    });
 
     // Get the change of the coupon's object.
     this.couponHasChangedSubscription = this.elysCoupon.couponHasChanged.subscribe(coupon => {

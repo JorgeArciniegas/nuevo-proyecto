@@ -39,7 +39,8 @@ import {
   TypeBetSlipColTot,
   TypePlacingEvent,
   VirtualBetSelectionExtended,
-  VirtualBetTournamentExtended
+  VirtualBetTournamentExtended,
+  SpecialOddData
 } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
@@ -226,12 +227,12 @@ export class MainService extends MainServiceExtra {
   }
 
   /**
-  *
-  */
+   *
+   */
   private addNewEvent(): void {
     let nextEventItems: number = this.productService.product.layoutProducts.nextEventItems;
     // check the exception layout
-    if ( this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER ) {
+    if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
       nextEventItems = nextEventItems - 1;
     }
     const event: EventInfo = new EventInfo();
@@ -357,18 +358,59 @@ export class MainService extends MainServiceExtra {
               });
             }
 
-            // cicle the temporary detail's area
-            for (const detail of tmpDetailArea) {
-              // cicle the current match's markets and save on the temporary "tmpDetailArea"
-              for (const areaMarket of detail.markets) {
-                // find the occurrence and append the selections' data
+            // Initialize the lowestOdd and highestOdd.
+            const lowestOdd: SpecialOddData = {
+              areaIndex: 0,
+              marketIndex: 0,
+              oddIndex: 0,
+              val: match.mk[0].sls[0].ods[0].vl
+            };
+            const highestOdd: SpecialOddData = {
+              areaIndex: 0,
+              marketIndex: 0,
+              oddIndex: 0,
+              val: match.mk[0].sls[0].ods[0].vl
+            };
+            // Cicle the temporary detail's area
+            tmpDetailArea.forEach((detail, areaIndex) => {
+              // Cicle the current match's markets and save on the temporary "tmpDetailArea"
+              detail.markets.forEach((areaMarket, marketIndex) => {
+                // Find the occurrence and append the selections' data
                 const tmpMk: VirtualBetMarket = match.mk.filter(
                   market => market.tp === areaMarket.id && market.spv === areaMarket.specialValueOrSpread
                 )[0];
                 areaMarket.selections = tmpMk.sls;
-              }
-            }
-            // save the datas to tournament object
+                // Looking for the highest and lowest odd.
+                tmpMk.sls.forEach((odd, oddIndex) => {
+                  if (odd.ods[0].vl < lowestOdd.val) {
+                    if (areaIndex !== lowestOdd.areaIndex) {
+                      lowestOdd.areaIndex = areaIndex;
+                    }
+                    if (marketIndex !== lowestOdd.marketIndex) {
+                      lowestOdd.marketIndex = marketIndex;
+                    }
+                    lowestOdd.oddIndex = oddIndex;
+                    lowestOdd.val = odd.ods[0].vl;
+                  }
+                  if (odd.ods[0].vl > highestOdd.val) {
+                    if (areaIndex !== lowestOdd.areaIndex) {
+                      highestOdd.areaIndex = areaIndex;
+                    }
+                    if (marketIndex !== lowestOdd.marketIndex) {
+                      highestOdd.marketIndex = marketIndex;
+                    }
+                    highestOdd.oddIndex = oddIndex;
+                    highestOdd.val = odd.ods[0].vl;
+                  }
+                });
+              });
+            });
+            // Set lowest and highest odd.
+            tmpDetailArea[lowestOdd.areaIndex].hasLowestOdd = true;
+            tmpDetailArea[lowestOdd.areaIndex].markets[lowestOdd.marketIndex].selections[lowestOdd.oddIndex].isLowestOdd = true;
+            tmpDetailArea[highestOdd.areaIndex].hasHighestOdd = true;
+            tmpDetailArea[highestOdd.areaIndex].markets[highestOdd.marketIndex].selections[highestOdd.oddIndex].isHighestOdd = true;
+            // Save the datas to tournament object
             matches.push(tmpMatch);
             overViewArea.push(tmpAreaOverview);
             listDetailArea.push(tmpDetailArea);
@@ -377,7 +419,6 @@ export class MainService extends MainServiceExtra {
           tournament.matches = matches;
           tournament.overviewArea = overViewArea;
           tournament.listDetailAreas = listDetailArea;
-          // tournament.evs = sportDetail.Sport.ts[0].evs;
           this.currentProductDetails = tournament;
 
           this.attempts = 0;
@@ -413,18 +454,6 @@ export class MainService extends MainServiceExtra {
       this.initCurrentEvent = false;
     }
 
-    // TEST MOVE IT TO "currentEventObserve"
-    // Calculate remaning time for selected event
-    /*   this.remainingEventTime(
-      this.eventDetails.events[this.eventDetails.currentEvent].number
-    ).then((eventTime: EventTime) => {
-      this.eventDetails.eventTime = eventTime;
-      if (this.eventDetails.currentEvent === 0) {
-        this.remainingTime.minute = eventTime.minute;
-        this.remainingTime.second = eventTime.second;
-      }
-    });
- */
     // Calculate remaning time for first Event
     if (this.eventDetails.currentEvent > 0) {
       this.remainingEventTime(this.eventDetails.events[0].number).then((eventTime: EventTime) => {
@@ -466,9 +495,7 @@ export class MainService extends MainServiceExtra {
     }
     // updated the new PolyfunctionalArea
     this.productService.polyfunctionalAreaSubject.next(polyfunctionalArea);
-    this.productService.polyfunctionalStakeCouponSubject.next(
-      new PolyfunctionalStakeCoupon()
-    );
+    this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
 
   eventDetailOdds(eventNumber: number): void {

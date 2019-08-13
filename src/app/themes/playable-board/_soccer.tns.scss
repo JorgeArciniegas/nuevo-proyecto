@@ -23,24 +23,26 @@
 				padding: 1 3;
 				border: 0;
 
-				.btn-soccer-odd__details--name,
-				.btn-soccer-area__details--name {
-					font-weight: bold;
-					text-transform: uppercase;
-					white-space: nowrap;
-					text-overflow: ellipsis;
-					overflow: hidden;
+				.btn-soccer-odd__details,
+				.btn-soccer-area__details {
+					&--name {
+						font-weight: bold;
+						text-transform: uppercase;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+						overflow: hidden;
+					}
+
+					&--icon {
+						height: 14;
+						width: 14;
+					}
 				}
 
 				.btn-soccer-area__details {
 					&--name {
 						display: block;
 						text-align: left;
-					}
-
-					&--icon {
-						height: 14;
-						width: 14;
 					}
 				}
 			}
