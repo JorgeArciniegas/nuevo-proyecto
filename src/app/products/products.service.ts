@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  ElysApiService,
-  CurrencyCodeResponse,
-  CurrencyCodeRequest
+  ElysApiService
 } from '@elys/elys-api';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Products, LayoutProducts } from '../../../src/environments/environment.models';
@@ -20,10 +18,9 @@ import {
   BetDataDialog,
   DialogData,
   PolyfunctionalArea,
-  PolyfunctionalStakeCoupon,
-  PolyfunctionStakePresetPlayer
+  PolyfunctionalStakeCoupon
 } from './products.model';
-import { ElysCouponService } from '@elys/elys-coupon';
+
 @Injectable({
   providedIn: 'root'
 })

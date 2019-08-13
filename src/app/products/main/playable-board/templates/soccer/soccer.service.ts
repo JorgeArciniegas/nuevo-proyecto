@@ -4,7 +4,7 @@ import { MainService } from '../../../main.service';
 import { VirtualBetTournamentExtended } from '../../../main.models';
 import { Subscription, timer } from 'rxjs';
 import { BtncalcService } from '../../../../../component/btncalc/btncalc.service';
-import { ElysCouponService } from '@elys/elys-coupon';
+import { ElysCouponService, BetCouponExtended } from '@elys/elys-coupon';
 import { CouponService } from '../../../../../component/coupon/coupon.service';
 
 @Injectable({
@@ -21,6 +21,9 @@ export class SoccerService implements OnDestroy {
   // Listen the coupon's change
   couponHasChangedSubscription: Subscription;
   couponHasBeenPlacedSubscription: Subscription;
+
+  isCheckedCoupon: boolean;
+  timerCheckedSelectionSub: Subscription;
   constructor(
     private mainService: MainService,
     private btnCalcService: BtncalcService,
@@ -55,21 +58,7 @@ export class SoccerService implements OnDestroy {
     // Get the change of the coupon's object.
     this.couponHasChangedSubscription = this.elysCoupon.couponHasChanged.subscribe(coupon => {
       if (coupon) {
-        // There was a change on the coupon.
-        this.tournament.matches.forEach(match => {
-          match.selectedOdds.forEach((oddSelected, idx) => {
-            let matchHasOdd = false;
-            if (coupon.Odds.filter(odd => odd.SelectionId === oddSelected).length > 0) {
-              matchHasOdd = true;
-            }
-            if (!matchHasOdd) {
-              match.selectedOdds.splice(idx, 1);
-              if (match.selectedOdds.length === 0) {
-                match.hasOddsSelected = false;
-              }
-            }
-          });
-        });
+         this.verifySelectedOdds(coupon);
       } else {
         // The coupon was removed.
         this.tournament.matches.map(match => {
@@ -80,6 +69,37 @@ export class SoccerService implements OnDestroy {
         });
       }
     });
+  }
+
+  verifySelectedOdds(coupon: BetCouponExtended): void {
+    if (this.isCheckedCoupon) {
+      this.timerCheckedSelectionSub.unsubscribe();
+      this.isCheckedCoupon = false;
+      this.verifySelectedOdds(coupon);
+
+    } else {
+      this.isCheckedCoupon = true;
+      this.timerCheckedSelectionSub = timer(1000).subscribe( () => {
+          // There was a change on the coupon.
+        this.tournament.matches.forEach(match => {
+          match.selectedOdds.forEach((oddSelected, idx) => {
+            let matchHasOdd = false;
+            if (coupon.Odds.filter(odd => odd.SelectionId === oddSelected).length > 0) {
+              matchHasOdd = true;
+            }
+
+            if (!matchHasOdd) {
+              match.selectedOdds.splice(idx, 1);
+              if (match.selectedOdds.length === 0) {
+                match.hasOddsSelected = false;
+              }
+            }
+          });
+        });
+        this.isCheckedCoupon = false;
+      });
+
+    }
   }
 
   ngOnDestroy() {

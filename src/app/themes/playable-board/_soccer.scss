@@ -55,3 +55,17 @@
 		}
 	}
 }
+
+.detail-section{
+  .areas-column {
+    >.mat-figure {
+      align-items: flex-start;
+      padding: 0;
+    }
+    .section-identifier {
+      .mat-figure{
+        padding: 0;
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 <div fxFlexFill fxLayout="column">
   <div fxFlex="70" fxLayout="row" class="display" [style.height.px]="((rowHeight/2))">
-    <ng-container *ngIf="polyfunctionalValue && polyfunctionalValue.selection && productService.product.typeCoupon.acceptMultiStake">
+    <ng-container *ngIf="polyfunctionalValue && polyfunctionalValue.selection && productService.product && productService.product.typeCoupon.acceptMultiStake">
       <div fxLayout="column" fxFlex="88" fxLayoutAlign="center flex-start">
         <div fxLayout="row" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2"
           [style.min-height.px]="(rowHeight - 20) / 2">
