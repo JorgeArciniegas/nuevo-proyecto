@@ -26,6 +26,7 @@ import { SoccerComponent as ResultsSoccerComponent } from './results/templates/s
 import { SoccerComponent as LuckySoccerComponent } from './lucky/templates/soccer/soccer.component';
 import { GetArrayFromNumberPipe } from './playable-board/templates/get-array-from-number.pipe';
 import { FilterMarketsByAreaColumnPipe } from './playable-board/filter-markets-by-area-column.pipe';
+import { ExtractCorrectScorePipe } from './playable-board/extract-correct-score.pipe';
 
 export const componentDeclarations: any[] = [
   MainComponent,
@@ -53,7 +54,8 @@ export const componentDeclarations: any[] = [
   PlayableBoardSoccerOverviewComponent,
   PlayableBoardSoccerDetailComponent,
   ResultsSoccerComponent,
-  LuckySoccerComponent
+  LuckySoccerComponent,
+  ExtractCorrectScorePipe
 ];
 
 export const providerDeclarations: any[] = [];
