@@ -18,7 +18,7 @@
   </GridLayout>
 
   <!-- SELECTIONS -->
-  <GridLayout col="1" rows="*,20*">
+  <GridLayout col="1" rows="*,20*"  *ngIf="soccerService.selectedArea !== 4">
     <Label row="0" text="{{ 'MARKETS' | translate }}" horizontalAlignment="center" class="section-identifier"
       marginLeft="10" marginBottom="5"></Label>
     <GridLayout row="1"
@@ -53,4 +53,67 @@
       </ng-container>
     </GridLayout>
   </GridLayout>
+  <!-- Selection CorrectScore-->
+  <GridLayout col="1" rows="*,20*"  *ngIf="soccerService.selectedArea === 4">
+      <Label row="0" text="{{ 'MARKETS' | translate }}" horizontalAlignment="center" class="section-identifier"
+        marginLeft="10" marginBottom="5"></Label>
+      <GridLayout row="1" columns="*,*,*" marginLeft="5">
+          <ng-container *ngFor="let market of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets | extractCorrectScore:'1'">
+            <GridLayout col="0" class="markets-selections-column"
+            rows="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaRowsByCol[0] | getGridStringSetting }}">
+              <ng-container *ngFor="let odd of market.selections; let i = index">
+                <FlexBoxLayout row="{{i}}"
+                  flexDirection="column" justifyContent="center" alignItems="center" class="btn-soccer-odd radius-5"
+                  [ngClass]="soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
+                  [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"
+                  (tap)="selectOdd(i, market.id, odd)" marginLeft="5" marginBottom="5">
+                  <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
+                    <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
+                  </StackLayout>
+                  <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value"
+                    horizontalAlignment="center"></Label>
+                </FlexBoxLayout>
+              </ng-container>
+            </GridLayout>
+          </ng-container>
+          <ng-container *ngFor="let market of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets | extractCorrectScore:'X'">
+            <GridLayout col="1" rows="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaRowsByCol[0] | getGridStringSetting }}"
+             class="markets-selections-column">
+              <ng-container *ngFor="let odd of market.selections; let i = index">
+                <FlexBoxLayout
+                  row="{{i}}"
+                  flexDirection="column" justifyContent="center" alignItems="center" class="btn-soccer-odd radius-5"
+                  [ngClass]="soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
+                  [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"
+                  (tap)="selectOdd(i, market.id, odd)" marginLeft="5" marginBottom="5">
+                  <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
+                    <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
+                   </StackLayout>
+                  <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value"
+                    horizontalAlignment="center"></Label>
+                </FlexBoxLayout>
+              </ng-container>
+            </GridLayout>
+          </ng-container>
+          <ng-container *ngFor="let market of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets | extractCorrectScore:'2'">
+            <GridLayout col="2" rows="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaRowsByCol[0] | getGridStringSetting }}"
+              class="markets-selections-column">
+              <ng-container *ngFor="let odd of market.selections; let i = index">
+                <FlexBoxLayout
+                  row="{{i}}"
+                  flexDirection="column" justifyContent="center" alignItems="center" class="btn-soccer-odd radius-5"
+                  [ngClass]="soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
+                  [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"
+                  (tap)="selectOdd(i, market.id, odd)" marginLeft="5" marginBottom="5">
+                  <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
+                    <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
+                  </StackLayout>
+                  <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value"
+                    horizontalAlignment="center"></Label>
+                </FlexBoxLayout>
+              </ng-container>
+            </GridLayout>
+          </ng-container>
+        </GridLayout>
+      </GridLayout>
 </GridLayout>
