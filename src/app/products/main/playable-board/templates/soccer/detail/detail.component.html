@@ -87,7 +87,13 @@
                         <div class="btn-soccer-odd__details--name">
                           <span>{{ odd.nm }}</span>
                         </div>
-                        <span class="btn-soccer-odd__details--value">{{ odd.ods[0].vl }}</span>
+                        <div class="btn-soccer-odd__details--second_line">
+                          <span class="btn-soccer-odd__details--value">{{ odd.ods[0].vl }}</span>
+                          <div class="btn-soccer-odd__details--icon"
+                            [ngClass]="{'star-yellow-icon': odd.isLowestOdd, 'star-red-icon': odd.isHighestOdd}"
+                            *ngIf="odd.isLowestOdd || odd.isHighestOdd">
+                          </div>
+                        </div>
                       </div>
                     </button>
                   </mat-grid-tile>
@@ -108,7 +114,13 @@
                           <div class="btn-soccer-odd__details--name">
                             <span>{{ odd.nm }}</span>
                           </div>
-                          <span class="btn-soccer-odd__details--value">{{ odd.ods[0].vl }}</span>
+                          <div class="btn-soccer-odd__details--second_line">
+                            <span class="btn-soccer-odd__details--value">{{ odd.ods[0].vl }}</span>
+                            <div class="btn-soccer-odd__details--icon"
+                              [ngClass]="{'star-yellow-icon': odd.isLowestOdd, 'star-red-icon': odd.isHighestOdd}"
+                              *ngIf="odd.isLowestOdd || odd.isHighestOdd">
+                            </div>
+                          </div>
                         </div>
                       </button>
                     </mat-grid-tile>
@@ -129,7 +141,13 @@
                         <div class="btn-soccer-odd__details--name">
                           <span>{{ odd.nm }}</span>
                         </div>
-                        <span class="btn-soccer-odd__details--value">{{ odd.ods[0].vl }}</span>
+                        <div class="btn-soccer-odd__details--second_line">
+                          <span class="btn-soccer-odd__details--value">{{ odd.ods[0].vl }}</span>
+                          <div class="btn-soccer-odd__details--icon"
+                            [ngClass]="{'star-yellow-icon': odd.isLowestOdd, 'star-red-icon': odd.isHighestOdd}"
+                            *ngIf="odd.isLowestOdd || odd.isHighestOdd">
+                          </div>
+                        </div>
                       </div>
                     </button>
                   </mat-grid-tile>

@@ -75,8 +75,13 @@
                   <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
                     <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
                   </StackLayout>
-                  <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value"
-                    horizontalAlignment="center"></Label>
+                  <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
+                    horizontalAlignment="center">
+                    <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value"></Label>
+                    <Label class="btn-soccer-odd__details--icon"
+                      [ngClass]="{'star-red-icon': odd.isLowestOdd, 'star-yellow-icon': odd.isHighestOdd}"
+                      *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
+                  </StackLayout>
                 </FlexBoxLayout>
               </ng-container>
             </GridLayout>
@@ -94,8 +99,13 @@
                   <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
                     <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
                    </StackLayout>
-                  <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value"
-                    horizontalAlignment="center"></Label>
+                   <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
+                    horizontalAlignment="center">
+                    <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value"></Label>
+                    <Label class="btn-soccer-odd__details--icon"
+                      [ngClass]="{'star-red-icon': odd.isLowestOdd, 'star-yellow-icon': odd.isHighestOdd}"
+                      *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
+                 </StackLayout>
                 </FlexBoxLayout>
               </ng-container>
             </GridLayout>
@@ -113,8 +123,13 @@
                   <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
                     <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
                   </StackLayout>
-                  <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value"
-                    horizontalAlignment="center"></Label>
+                  <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
+                    horizontalAlignment="center">
+                    <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value"></Label>
+                    <Label class="btn-soccer-odd__details--icon"
+                      [ngClass]="{'star-red-icon': odd.isLowestOdd, 'star-yellow-icon': odd.isHighestOdd}"
+                      *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
+                  </StackLayout>
                 </FlexBoxLayout>
               </ng-container>
             </GridLayout>
