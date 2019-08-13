@@ -12,7 +12,7 @@
             <div class="btn-soccer-area__details" fxLayoutAlign="center center">
               <span class="btn-soccer-area__details--name">{{ area.name }}</span>
               <div class="btn-soccer-area__details--icon"
-                [ngClass]="{'star-red-icon': area.hasLowestOdd, 'star-yellow-icon': area.hasHighestOdd}"
+                [ngClass]="{'star-yellow-icon': area.hasLowestOdd, 'star-red-icon': area.hasHighestOdd}"
                 *ngIf="area.hasLowestOdd || area.hasHighestOdd">
               </div>
             </div>
@@ -51,7 +51,13 @@
                           <span>{{ odd.nm }}</span>
                           <span *ngIf="market.hasSpecialValue"> {{ market.specialValueOrSpread }}</span>
                         </div>
-                        <span class="btn-soccer-odd__details--value">{{ odd.ods[0].vl }}</span>
+                        <div class="btn-soccer-odd__details--second_line">
+                          <span class="btn-soccer-odd__details--value">{{ odd.ods[0].vl }}</span>
+                          <div class="btn-soccer-odd__details--icon"
+                            [ngClass]="{'star-yellow-icon': odd.isLowestOdd, 'star-red-icon': odd.isHighestOdd}"
+                            *ngIf="odd.isLowestOdd || odd.isHighestOdd">
+                          </div>
+                        </div>
                       </div>
                     </button>
                   </mat-grid-tile>

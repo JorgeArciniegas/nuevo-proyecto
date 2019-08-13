@@ -1,8 +1,8 @@
 .playable-board-soccer {
 	.playable-grid-buttons {
-		.mat-figure {
-			align-items: flex-start !important;
-		}
+		// .mat-figure {
+		// 	align-items: flex-start !important;
+		// }
 
 		.column-matches,
 		.column-selections {
@@ -38,8 +38,17 @@
 					}
 
 					&--icon {
-						height: 4vh;
-						width: 4vh;
+						height: 30px;
+						width: 30px;
+					}
+				}
+
+				.btn-soccer-odd__details--second_line {
+					display: flex;
+
+					.btn-soccer-odd__details--icon {
+						height: 16px;
+						width: 16px;
 					}
 				}
 			}

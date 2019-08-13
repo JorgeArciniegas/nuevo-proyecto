@@ -107,6 +107,8 @@ export class Player {
 
 export interface VirtualBetSelectionExtended extends VirtualBetSelection {
   marketId?: number;
+  isLowestOdd?: boolean;
+  isHighestOdd?: boolean;
 }
 
 export class EventTime {
@@ -169,7 +171,7 @@ export interface MarketArea {
   hasSpecialValue?: boolean;
   specialValueOrSpread: string;
   selectionCount: number;
-  selections?: VirtualBetSelection[];
+  selections?: VirtualBetSelectionExtended[];
   layoutGridDefinition?: LayoutGridDefinition;
 }
 
@@ -191,4 +193,12 @@ export interface LayoutGridDefinition {
   marketPositionOnColArea?: number;
   marketCols?: number;
   marketRows?: number;
+}
+
+// Interface of the object used to host the data of the lower and higher odd.
+export interface SpecialOddData {
+  areaIndex: number;
+  marketIndex: number;
+  oddIndex: number;
+  val: number;
 }
