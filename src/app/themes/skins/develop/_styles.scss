@@ -204,7 +204,13 @@ $color-text-gray: #6b7279;
 	background-color: $color-bg-secodary;
 	color: $color-text-primary;
 }
-
+// RACE-CONTROL HEADER INFO
+%current-event {
+	color: $color-bg-success;
+}
+%current-event-id {
+	color: $color-text-primary;
+}
 // LINK
 %primary-link {
 	color: $color-text-primary;
@@ -444,30 +450,50 @@ $gradient-dark2: #000000;
 // GAME AREA
 // Dog racing
 %PRODUCT-DOG-BG {
-	background: url("app/themes/skins/develop/image/Dog-Racing.png") left top no-repeat;
-	background-size: 25%;
+	background: url("app/themes/skins/develop/image/Dog-Racing.png") left center no-repeat;
+	background-size: 15%;
 }
 
 %PRODUCT-DOG-BG-MOBILE {
-	background: url("~/app/themes/skins/develop/image/Dog-Racing.png") left top no-repeat;
+	background: url("~/app/themes/skins/develop/image/Dog-Racing.png") left center no-repeat;
 	background-size: contain;
 }
 // HORSERACING
 %PRODUCT-HORSE-BG {
-	background: url("app/themes/skins/develop/image/horse-racing.png") left top no-repeat;
-	background-size: 25%;
+	background: url("app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
+	background-size: 15%;
 }
 %PRODUCT-HORSE-BG-MOBILE {
-	background: url("~/app/themes/skins/develop/image/horse-racing.png") left top no-repeat;
+	background: url("~/app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
 	background-size: contain;
 }
 // HORSERACING-VIRTUAL
 %PRODUCT-HORSE-V-BG {
-	background: url("app/themes/skins/develop/image/horse-racing.png") left top no-repeat;
-	background-size: 25%;
+	background: url("app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
+	background-size: 15%;
 }
 %PRODUCT-HORSE-V-BG-MOBILE {
-	background: url("~/app/themes/skins/develop/image/horse-racing.png") left top no-repeat;
+	background: url("~/app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
+	background-size: contain;
+}
+
+// COCK FIGHT
+%PRODUCT-COCK-BG {
+	background: url("app/themes/skins/develop/image/Cock-fight.png") left center no-repeat;
+	background-size: 20%;
+}
+%PRODUCT-COCK-BG-MOBILE {
+	background: url("~/app/themes/skins/develop/image/Cock-fight.png") left center no-repeat;
+	background-size: contain;
+}
+
+%ICON-COCK-RED {
+	background: url("~/app/themes/skins/develop/image/cockfight/cock-red.png") no-repeat center;
+	background-size: contain;
+}
+
+%ICON-COCK-BLUE {
+	background: url("~/app/themes/skins/develop/image/cockfight/cock-blue.png") no-repeat center;
 	background-size: contain;
 }
 

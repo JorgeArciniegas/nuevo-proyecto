@@ -6,8 +6,7 @@
     </button>
   </mat-grid-tile>
   <ng-container *ngIf="betOdds">
-    <mat-grid-tile rowspan="3" class="card-odd radius-5" [ngClass]="{'notSelected': !odd.selected}"
-      (click)="toggleOdd(odd)" *ngFor="let odd of betOdds">
+    <mat-grid-tile rowspan="3" class="card-odd radius-5" [ngClass]="{'notSelected': !odd.selected}" *ngFor="let odd of betOdds">
       <div fxFill fxLayout="column" fxLayoutAlign="space-between stretch">
         <div fxFlex="24" class="top-window"></div>
         <div fxFlex="38" class="first-row" fxLayout="row">
@@ -50,9 +49,13 @@
                       'btn-selected ' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }"
               (click)="checkOddToChangeStake(odd)">
               <span
-                *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId">{{odd.OddStake | number: '1.2-3'}}</span>
+                *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId">{{odd.OddStake | number: '1.2-3'}}
+
+              </span>
               <span
-                *ngIf="couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId">{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}</span>
+                *ngIf="couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId">{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}
+
+              </span>
             </button>
           </div>
           <div fxFlex="12" fxLayoutAlign="center center" [style.padding.px]="5">

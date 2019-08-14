@@ -18,19 +18,24 @@
         <Label row="4" col="1" text="{{ odd.FixedOdd? 'YES' : 'NO' | translate }}" textWrap="true"></Label>
         <Label row="5" col="1" verticalAlignment="bottom" class="sub-title" text="{{ 'BANKER' | translate }}"></Label>
         <GridLayout row="4" col="2" rows="*" columns="*, 5*" verticalAlignment="top">
-          <ng-container [ngSwitch]="data.couponStatus">
+          <ng-container [ngSwitch]="oddResult[odd.Result]">
             <Image col="0" width="24" horizontalAlignment="left" verticalAlignment="center" *ngSwitchDefault
               src="~/app/themes/skins/{{settings.theme}}/icon/progress-clock.png"></Image>
             <!-- LOST -->
-            <Image col="0" width="24" horizontalAlignment="left" verticalAlignment="center" *ngSwitchCase="2"
+            <Image col="0" width="24" horizontalAlignment="left" verticalAlignment="center" *ngSwitchCase="oddResult.Lost"
               src="~/app/themes/skins/{{settings.theme}}/icon/cancel.png"></Image>
             <!-- WIN -->
-            <Image col="0" width="24" horizontalAlignment="left" verticalAlignment="center" *ngSwitchCase="3"
+            <Image col="0" width="24" horizontalAlignment="left" verticalAlignment="center" *ngSwitchCase="oddResult.Won"
               src="~/app/themes/skins/{{settings.theme}}/icon/checked.png"></Image>
           </ng-container>
-          <Label col="1" text="{{ couponStatus[data.couponStatus] }}" textWrap="true"></Label>
+          <Label col="1" text="{{ odd.Result | uppercase | translate }}" textWrap="true"></Label>
         </GridLayout>
         <Label row="5" col="2" verticalAlignment="bottom" class="sub-title" text="{{ 'OUTCOME' | translate }}"></Label>
+        <ng-container *ngIf="odd.OddStake > 0">
+          <Label row="4" col="3" text="{{ odd.OddStake  | currency : userService.userCurrency : 'symbol-narrow' }}" textWrap="true"></Label>
+          <Label row="5" col="3" verticalAlignment="bottom" class="sub-title p-b-5"
+            text="{{ 'STAKE' | translate }}"></Label>
+        </ng-container>
         <!-- DIVIDER -->
         <StackLayout row="6" colSpan="5" [ngClass]="{'border-bottom-overlay': i < data.pageOddRows - 1}"></StackLayout>
       </GridLayout>

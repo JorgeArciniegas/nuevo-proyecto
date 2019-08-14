@@ -1,0 +1,51 @@
+.tile-market-name {
+	width: 100%;
+	word-break: break-word;
+	text-align: center;
+
+	span {
+		width: 100%;
+	}
+}
+
+.btn-default {
+	.icon {
+		width: 40%;
+		height: 100%;
+
+		&.icon-cock-red {
+			@extend %ICON-COCK-RED;
+		}
+		&.icon-cock-blue {
+			@extend %ICON-COCK-BLUE;
+		}
+	}
+
+	&.btn-default-cock {
+		.icon {
+			&.icon-cock-red {
+				float: left;
+			}
+			&.icon-cock-blue {
+				float: right;
+			}
+		}
+	}
+
+	.selection-details {
+		display: block;
+		height: 100%;
+		padding: 5px;
+		word-break: break-word;
+	}
+
+	.selection-name {
+		font-weight: bold;
+		font-size: 1.8vh;
+	}
+
+	.selection-value {
+		font-weight: bold;
+		font-size: 2.2vh;
+	}
+}

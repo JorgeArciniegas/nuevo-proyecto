@@ -44,8 +44,8 @@
   <!-- BETSLIP CODE -->
   <GridLayout row="1" col="2" rows="*" columns="*" class="display">
     <GridLayout rows="*,2*,*" columns="*" class="display-content">
-      <GridLayout row="1" class="button btn-default btn-filter" (tap)="selectDate('dateTo')">
-        <TextField class="ticketCode" hint="{{ 'COUPON_CODE' | translate }}" (textChange)="couponCode($event)"
+      <GridLayout row="1" class="button btn-default btn-filter" >
+        <TextField class="ticketCode" hint="{{ 'COUPON_CODE' | translate }}" text="{{ betsListService.ticketCode }}" (textChange)="couponCode($event)"
           returnKeyType="done"></TextField>
       </GridLayout>
     </GridLayout>

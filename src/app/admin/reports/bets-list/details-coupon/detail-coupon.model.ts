@@ -1,4 +1,4 @@
-import { SummaryCoupon, CouponOdd, CouponStatus, CouponGroup } from '@elys/elys-api';
+import { CouponGroup, CouponOdd, CouponStatus } from '@elys/elys-api';
 
 export interface OddsEventRows {
   couponStatus?: CouponStatus;
@@ -13,4 +13,5 @@ export interface GroupingsRows {
   pageGrouping?: number;
   pageGroupingRows?: number;
   maxPage?: number;
+  couponStake?: number;
 }

@@ -1,4 +1,4 @@
-<mat-grid-list class="playable-grid-buttons" cols="13" rowHeight="{{rowHeight *2}}">
+<mat-grid-list class="playable-grid-buttons" cols="13" rowHeight="{{(rowHeight * (16 / 4)  + (rowHeight/3)) }}">
   <ng-container *ngFor="let row of ['I','II','III']; let i = index">
     <mat-grid-tile>
       <span *ngIf="i === 0" class="playable-row-tile display radius-5">
@@ -22,7 +22,7 @@
     </mat-grid-tile>
   </ng-container>
 </mat-grid-list>
-<mat-grid-list class="playable-grid-buttons playable-special-bets" cols="4" rowHeight="{{rowHeight *2}}">
+<mat-grid-list class="playable-grid-buttons playable-special-bets" cols="4" rowHeight="{{rowHeight * 3 }}">
   <mat-grid-tile>
     <button (click)="specialBets('ODD')"
       [ngClass]="{'actived' : (service.placingEvent.isSpecialBets && service.placingEvent.specialBetValue === specialBet['ODD']) }"

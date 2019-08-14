@@ -1,19 +1,35 @@
 .card-box-result {
-      padding: 0.3vh 0.8vw;
-  }
+	padding: 0.3vh 0.8vw;
+}
 
 .card-box-result {
+	.header .mat-figure,
+	.position .mat-figure {
+		padding: 0.4vh;
+	}
 
-  .header .mat-figure, .position .mat-figure {
-      padding: 0.4vh;
-  }
+	.position .mat-figure {
+		font-size: 1.2em;
+		font-weight: 700;
+	}
 
-  .position .mat-figure {
-      font-size: 1.2em;
-      font-weight: 700;
-  }
+	.btn-default-dog-play,
+	.btn-default-cock {
+		border-width: 2px;
+	}
+	.btn-default-cock {
+		.icon {
+			width: 36px;
+			height: 36px;
 
-  .btn-default-dog-play {
-      border-width: 2px;
-  }
+			&.icon-cock-red {
+				background: url("~/app/themes/skins/develop/image/cockfight/cock-red.png") no-repeat center;
+				background-size: contain;
+			}
+			&.icon-cock-blue {
+				background: url("~/app/themes/skins/develop/image/cockfight/cock-blue.png") no-repeat center;
+				background-size: contain;
+			}
+		}
+	}
 }

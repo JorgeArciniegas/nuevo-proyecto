@@ -1,7 +1,8 @@
 <GridLayout rows="*" columns="*">
   <StackLayout orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" *ngIf="product">
-    <Image (tap)="openRouting( icon.routing )" *ngFor="let icon of product.widgets" stretch="aspectFit" [width]="widgetIcon.width"
-      [height]="widgetIcon.height" src="~/app/themes/skins/{{settings.theme}}/icon/{{ icon.icon }}.png"
-      [isEnabled]="!timeBlocked"></Image>
+    <Image (tap)="openRouting( icon.routing )" *ngFor="let icon of product.widgets" stretch="aspectFit"
+      [width]="widgetIcon.width" [height]="widgetIcon.height"
+      src="~/app/themes/skins/{{settings.theme}}/icon/{{ icon.icon }}.png"
+      [isEnabled]="!timeBlocked && !userService.isModalOpen"></Image>
   </StackLayout>
 </GridLayout>

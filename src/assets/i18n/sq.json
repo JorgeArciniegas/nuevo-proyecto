@@ -1,15 +1,16 @@
 {
   "ACCG": "ACCG",
+  "AGILITY": "Shkathtësi",
   "BALANCE": "Balance",
   "BASE": "B",
   "BET": "Bastit",
+  "BET_STATUS": "Statusi Bastit",
+  "BET_TYPE": "Lloji Bastit",
+  "BET_UNDER_EVALUATION": "Koef. Ne vleresim ju lutem prisni",
   "BETS_LIST": "Lista basteve",
   "BETS_LIST.LOST": "Perdenti",
   "BETS_LIST.OPEN": "Hapur",
   "BETS_LIST.WON": "Vincenti",
-  "BET_STATUS": "Statusi Bastit",
-  "BET_TYPE": "Lloji Bastit",
-  "BET_UNDER_EVALUATION": "Koef. Ne vleresim ju lutem prisni",
   "BONUS": "Bonus",
   "BTNCALC.COL": "COL",
   "BTNCALC.TOT": "TOT",
@@ -22,11 +23,11 @@
   "CONDITION": "Forma",
   "CONFIRM": "Conferma",
   "CONFIRM_DESTROY_COUPON.MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?",
-  "COUPON.BET": "Bast",
   "COUPON_CODE": "Kodi Biletes",
   "COUPON_RESET": "Reset del coupon",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Basti u pranua,",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "shiko listen e basteve",
+  "COUPON.BET": "Bast",
   "DATE": "Data",
   "DATE_FROM": "Data da",
   "DATE_OF_PLACEMENT": "Data piazzamento",
@@ -36,10 +37,19 @@
   "DELETED_ON": "Annullata il",
   "DETAIL": "Detaj",
   "DYNAMIC_KEYS": {
+    "CockMarket": {
+      "NAME": {
+        "1X2": "Win",
+        "1X2 + OverUnder": "Win+ o/u",
+        "1X2 + Winning Sector": "Win+ sector",
+        "Over/Under": "O/u",
+        "Winning Sector": "Sector"
+      }
+    },
     "COUPON_ERROR": {
-      "API_ERROR": "Errore API generico",
       "AccountInsertDataError": "Pati nje problem gjate shtuarjes se perdoruesit [Kodi ES11]",
       "AgentBettorMismatch": "Ky perdorues nuk I perket rrjetit tuaj [Kodi ES18]",
+      "API_ERROR": "Errore API generico",
       "BankerNotAllowedOnIntegral": "Ju nuk mund të shtoni një bankier në një bast integral [Kodi ES22]",
       "BetAlreadyPaid": "Ky kupon eshte paguar [Kodi ES19]",
       "BetLost": "Bast I humbur [Kodi ES21]",
@@ -166,6 +176,15 @@
       "SingleBet": "Bast Tek",
       "Unknown": "Sconosciuta"
     },
+    "ODDS_RESULT": {
+      "LOST": "Perdente",
+      "UNSET": "In gioco",
+      "WON": "Vinto"
+    },
+    "OVER_UNDER_COCKFIGHT": {
+      "O": "la",
+      "U": "po"
+    },
     "PRINT_COUPON": {
       "LICENSE_MESSAGE": {
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua."
@@ -173,6 +192,7 @@
     },
     "PRODUCT": {
       "LABEL": {
+        "COCK_FIGHT": "Combattimento di galli",
         "DOG": "Qen",
         "FOOTBALL_ENG": "Calcio ENG",
         "FOOTBALL_ITA": "Calcio ITA",
@@ -201,9 +221,12 @@
       "AX": "Multipla Accoppiata",
       "COUPON": "Coupon",
       "EVEN": "Cift",
+      "MULTI": "Multi",
       "ODD": "Tek",
+      "OU": "Over/Under",
       "OVER": "Larte",
       "PLACED": "Ze vendin e",
+      "S": "Sector",
       "SHOW": "Podium",
       "STATISTIC": "Statistkat",
       "T": "Treshja fituese",
@@ -211,6 +234,7 @@
       "TOX": "Treshja fituese",
       "TR": "Trio in ordine con ritorno",
       "UNDER": "Poshte",
+      "V": "V",
       "VT": "Vincente trio",
       "WINNER": "Fitues"
     },
@@ -224,19 +248,24 @@
       "AT": "A2X",
       "AX": "ACG",
       "EVEN": "Cift",
+      "MULTI": "Multi",
       "ODD": "Tek",
+      "OU": "Ou",
       "OVER": "Larte",
       "PLACED": "Ze vendin e",
+      "S": "S",
       "SHOW": "Podium",
       "T": "T3X",
       "TNX": "TNX",
       "TOX": "T3X",
       "TR": "T3X",
       "UNDER": "Poshte",
+      "V": "V",
       "VT": "VX",
       "WINNER": "Fitues"
     }
   },
+  "ENDURANCE": "Durim",
   "ERROR": "Gabim",
   "EVENTS": "Eventet",
   "GO_TO_HOME": "Vai alla home",
@@ -282,18 +311,19 @@
   "STAKE_AMOUNT": "Shuma",
   "STARTING_DATE": "Data inizio",
   "STATUS": "Statusi",
+  "STRENGTH": "Forcë",
   "SUMMARY": "Sommario",
-  "TOTALS": "Totalet",
-  "TOTAL_PAYOUT": "Total payout",
-  "TOTAL_STAKE": "Shuma totale",
   "TOT_BET": "TOT giocato",
   "TOT_LOST": "TOT perso",
   "TOT_OPEN": "TOT in corso",
   "TOT_WON": "TOT vinto",
+  "TOTAL_PAYOUT": "Total payout",
+  "TOTAL_STAKE": "Shuma totale",
+  "TOTALS": "Totalet",
   "TYPE": "Tipi",
+  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "USERNAME": "Perdorues",
   "USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
-  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "WARNING": "Avviso",
   "WON": "Vinto"
 }

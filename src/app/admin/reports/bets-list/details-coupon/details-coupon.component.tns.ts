@@ -56,7 +56,8 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
           pageGrouping: 1,
           pageGroupingRows: this.definedNumberRowForGroupings,
           maxPage: this.couponDetail.Groupings.length === 1 ?
-            1 : Math.floor(this.couponDetail.Groupings.length / this.definedNumberRowForGroupings)
+            1 : Math.floor(this.couponDetail.Groupings.length / this.definedNumberRowForGroupings),
+          couponStake: this.couponDetail.Stake
         };
       });
    });

@@ -45,7 +45,7 @@
               "vendorChunk": false,
               "buildOptimizer": true
             },
-            "vgen": {
+            "vgen-prod": {
               "outputPath": "dist-vgen",
               "fileReplacements": [
                 {
@@ -55,7 +55,7 @@
               ]
             },
             "vgen-staging": {
-              "outputPath": "dist-vgen-staging",
+              "outputPath": "dist-vgen",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -74,8 +74,8 @@
             "production": {
               "browserTarget": "vdesk:build:production"
             },
-            "vgen": {
-              "browserTarget": "vdesk:build:vgen"
+            "vgen-prod": {
+              "browserTarget": "vdesk:build:vgen-prod"
             },
             "vgen-staging": {
               "browserTarget": "vdesk:build:vgen-staging"

@@ -1,5 +1,15 @@
 @import "./buttons-mobile";
 
+/**
+* Import layout's component
+**/
+@import "./results-list/results-list.tns";
+@import "./playable-board/race.tns";
+@import "./playable-board/cock-fight.tns";
+@import "./statistics/statistics.component.tns";
+@import "./event-control/event-control-standard.tns";
+@import "./lucky/lucky-race-fight.tns";
+
 .app {
 	&.develop {
 		@import "./skins/develop/styles";
@@ -411,6 +421,12 @@
 					@extend %PRODUCT-HORSE-BG-MOBILE;
 				}
 			}
+			.PRODUCT-COCK-BG {
+				// COCK FIGHT
+				&.race-control {
+					@extend %PRODUCT-COCK-BG-MOBILE;
+				}
+			}
 			.race-control {
 				.time {
 					.time-panel {
@@ -510,13 +526,12 @@
 		@extend %border-bottom-overlay-mobile;
 	}
 
-	.statistic-data {
-		.fitness-container {
-			background: #fff;
-			.fitness-content {
-				@extend %bar-fitness-pecentage;
-			}
-		}
+	// cock fight icon
+	.icon-cock-red {
+		@extend %ICON-COCK-RED;
+	}
+	.icon-cock-blue {
+		@extend %ICON-COCK-BLUE;
 	}
 }
 
@@ -596,10 +611,3 @@
 		margin: 5;
 	}
 }
-
-/**
-* Import layout's component
-**/
-@import './results-list/results-list.tns';
-@import './playable-board/playablerace.tns';
-@import './statistics/statistics.component.tns';

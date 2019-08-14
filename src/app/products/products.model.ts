@@ -1,8 +1,8 @@
-import { BetCouponExtended } from '@elys/elys-coupon';
-import { TypeBetSlipColTot } from './main/main.models';
 import { VirtualBetCompetitor } from '@elys/elys-api';
-import { formatCurrency, formatNumber } from '@angular/common';
+import { BetCouponExtended } from '@elys/elys-coupon';
+import { LAYOUT_TYPE } from '../../../src/environments/environment.models';
 import { TYPINGTYPE } from '../component/btncalc/btncalc.enum';
+import { TypeBetSlipColTot, SmartCodeType } from './main/main.models';
 
 export interface WindowSize {
   height: number;
@@ -25,6 +25,8 @@ export class PolyfunctionalArea {
   hasDecimalSeparator?: boolean;
   firstTap?: boolean;
   disableInputCalculator?: boolean;
+  shortcut?: SmartCodeType;
+  smartBetCode?: number;
   constructor() {
     this.typeSlipCol = TypeBetSlipColTot.COL;
     this.firstTap = false;
@@ -58,7 +60,7 @@ export class PolyfunctionalStakeCoupon {
     this.columns = columns || 0;
     this.typeSlipCol = typeSlipCol ? typeSlipCol : TypeBetSlipColTot.COL;
     this.isEnabled = isEnabled || false;
-    this.hasDecimalSeparator =  hasDecimalSeparator || false;
+    this.hasDecimalSeparator = hasDecimalSeparator || false;
   }
 }
 export class PolyfunctionStakePresetPlayer {
@@ -70,11 +72,11 @@ export class PolyfunctionStakePresetPlayer {
   hasDecimalSeparator?: boolean;
   typingType: TYPINGTYPE;
   isPreset?: boolean;
-  constructor (typeSlipCol: TypeBetSlipColTot, amount: number, isPreset?: boolean) {
+  constructor(typeSlipCol: TypeBetSlipColTot, amount: number, isPreset?: boolean) {
     this.typeSlipCol = typeSlipCol;
     this.amount = amount;
-    this.amountStr  = amount.toString();
-    this.hasDecimalSeparator =  false;
+    this.amountStr = amount.toString();
+    this.hasDecimalSeparator = false;
     this.firstTap = true;
     this.disableInputCalculator = false;
     this.isPreset = isPreset || true;
@@ -117,13 +119,7 @@ export class DialogData {
   opened: boolean;
   betCoupon?: BetCouponExtended;
   statistics?: StatisticDialog;
-  constructor(
-    betOdds?: BetOdds,
-    breakpoint?: number,
-    betCoupon?: BetCouponExtended,
-    title?: string,
-    statistics?: StatisticDialog
-  ) {
+  constructor(betOdds?: BetOdds, breakpoint?: number, betCoupon?: BetCouponExtended, title?: string, statistics?: StatisticDialog) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;
     this.opened = false;
@@ -134,18 +130,58 @@ export class DialogData {
 export interface StatisticDialog {
   codeProduct: string;
   virtualBetCompetitor: VirtualBetCompetitor[];
+  layoutProducts: LAYOUT_TYPE;
 }
 export enum DialogTypeCoupon {
-  CANCEL,
+  DELETE,
   PAY
 }
 
 /**
- * when "checked" parameter is true Destroycoupon is enabled
+ * When "checked" parameter is true Destroycoupon is enabled
  */
 export interface CouponConfirmDelete {
   productCodeRequest?: string;
   checked: boolean;
   isRacing?: boolean;
-  racingNumber?: number;
+  eventNumber?: number;
+}
+
+// Enum of the markets
+export enum Market {
+  '1X2' = 10,
+  'OverUnder' = 60,
+  'WinningSector' = 171,
+  '1X2WinningSector' = 172,
+  '1X2OverUnder' = 689
+}
+
+/**
+ * Enum of the selection identifier to show on the polyfunctional area.
+ * It contains the "Selection: " prefix to be able to define values of the enum whoes name would have contained only number.
+ * Operation not allowed in JavaScript.
+ * Ex: '1' the value of the selection '1' of the market '1X2'.
+ * */
+export enum SelectionIdentifier {
+  'Selection: 1' = '1',
+  'Selection: X' = 'X',
+  'Selection: 2' = '2',
+  'Selection: S1' = 's1',
+  'Selection: S2' = 's2',
+  'Selection: S3' = 's3',
+  'Selection: S4' = 's4',
+  'Selection: 1 + S1' = '1s1',
+  'Selection: 1 + S2' = '1s2',
+  'Selection: 1 + S3' = '1s3',
+  'Selection: 1 + S4' = '1s4',
+  'Selection: 2 + S1' = '2s1',
+  'Selection: 2 + S2' = '2s2',
+  'Selection: 2 + S3' = '2s3',
+  'Selection: 2 + S4' = '2s4',
+  'Selection: Over' = 'o',
+  'Selection: Under' = 'u',
+  'Selection: 1 + Over' = '1o',
+  'Selection: 1 + Under' = '1u',
+  'Selection: 2 + Over' = '2o',
+  'Selection: 2 + Under' = '1u'
 }

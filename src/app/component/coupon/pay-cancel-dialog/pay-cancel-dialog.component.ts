@@ -1,15 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import {
-  CancelCouponRequest,
-  ErrorStatus,
-  FlagAsPaidRequest
-} from '@elys/elys-api';
+import { CancelCouponRequest, ErrorStatus, FlagAsPaidRequest } from '@elys/elys-api';
 import { UserService } from '../../../services/user.service';
 import { CouponService } from '../coupon.service';
 import { PrintReceiptService } from './print-receipt/print-receipt.service';
 import { Receipt } from './print-receipt/print-receipt.model';
+import { DialogTypeCoupon } from '../../../products/products.model';
 
 @Component({
   selector: 'app-pay-cancel-dialog',
@@ -25,21 +22,18 @@ export class PayCancelDialogComponent implements OnInit {
 
   cancelRequest: CancelCouponRequest;
   payRequest: FlagAsPaidRequest;
-
+  dialogTypeCoupon: typeof DialogTypeCoupon = DialogTypeCoupon;
   constructor(
     public dialogRef: MatDialogRef<PayCancelDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: string,
+    @Inject(MAT_DIALOG_DATA) private data: DialogTypeCoupon,
     public fb: FormBuilder,
     private couponService: CouponService,
     private userService: UserService,
     private printReceiptService: PrintReceiptService
   ) {
-    this.titleType = data;
+    this.titleType = this.dialogTypeCoupon[data];
     this.form = this.fb.group({
-      couponCode: [
-        null,
-        Validators.compose([Validators.required, Validators.minLength(2)])
-      ]
+      couponCode: [null, Validators.compose([Validators.required, Validators.minLength(2)])]
     });
   }
 
@@ -47,7 +41,7 @@ export class PayCancelDialogComponent implements OnInit {
 
   public onSubmit(form: FormGroup): void {
     let couponCode: string;
-    if (this.data === 'PAY') {
+    if (this.data === this.dialogTypeCoupon.PAY) {
       if (this.form.valid) {
         couponCode = this.form.get('couponCode').value;
         if (couponCode) {
@@ -66,21 +60,15 @@ export class PayCancelDialogComponent implements OnInit {
             this.errorNumberIcon = message.Error;
             // In case of successful operation start the print of the receipt
             if (message.Error === ErrorStatus.Success) {
-              this.printReceiptService.printWindow(
-                new Receipt(couponCode, true, message.Stake)
-              );
+              this.printReceiptService.printWindow(new Receipt(couponCode, true, message.Stake));
               this.close();
             }
           })
-          .catch(
-            error =>
-              (this.errorMessage =
-                'operation not possible (' + error.status + ')')
-          );
+          .catch(error => (this.errorMessage = 'operation not possible (' + error.status + ')'));
         this.form.get('couponCode').setValue('');
       }
       this.form.get('couponCode').setValue('');
-    } else if (this.data === 'CANCEL') {
+    } else if (this.data === this.dialogTypeCoupon.DELETE) {
       if (this.form.valid) {
         couponCode = this.form.get('couponCode').value;
         if (couponCode) {
@@ -100,17 +88,11 @@ export class PayCancelDialogComponent implements OnInit {
             this.errorNumberIcon = message.ErrorStatus;
             // In case of successful operation start the print of the receipt
             if (message.ErrorStatus === ErrorStatus.Success) {
-              this.printReceiptService.printWindow(
-                new Receipt(couponCode, false, message.StakeGross)
-              );
+              this.printReceiptService.printWindow(new Receipt(couponCode, false, message.StakeGross));
               this.close();
             }
           })
-          .catch(
-            error =>
-              (this.errorMessage =
-                'operation not possible (' + error.status + ')')
-          );
+          .catch(error => (this.errorMessage = 'operation not possible (' + error.status + ')'));
         this.form.get('couponCode').setValue('');
       }
     }
@@ -119,5 +101,6 @@ export class PayCancelDialogComponent implements OnInit {
   close(): void {
     this.dialogRef.close();
     this.userService.isModalOpen = false;
+    this.userService.isBtnCalcEditable = true;
   }
 }

@@ -5,6 +5,7 @@ import { CouponService } from '../../component/coupon/coupon.service';
 import { DialogService } from '../dialog.service';
 import { BetOdd, DialogData } from '../products.model';
 import { ProductsService } from '../products.service';
+import { UserService } from '../../../../src/app/services/user.service';
 
 @Component({
   selector: 'app-product-dialog',
@@ -29,12 +30,10 @@ export class ProductDialogComponent implements OnInit {
     public readonly appSettings: AppSettings,
     public readonly couponService: CouponService
   ) {
-
     this.settings = appSettings;
     if (this.productService.windowSize && this.productService.windowSize.small) {
       this.rowNumber = 2;
     }
-
   }
 
   ngOnInit(): void {

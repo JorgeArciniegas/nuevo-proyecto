@@ -1,0 +1,41 @@
+<GridLayout rows="*" columns="*" class="dialog">
+  <GridLAyout rows="3*,2*, auto, 3*">
+    <!-- header  -->
+    <Label row="0" text="{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.STATISTIC' | translate | uppercase }}" class="h4 title"
+      verticalAlignment="center" horizontalAlignment="center" class="p-10"></Label>
+    <GridLayout row="1" rows="10*,6*" columns="*,2*,8*" verticalAlignment="top" class="p-l-10">
+      <Label row="0" col="0" class="text-center" text="#"></Label>
+      <Label row="0" col="1" class="text-center" text="{{'LAST_FIVE' | translate}}"></Label>
+      <Label row="0" col="2" class="text-center" text="{{'CONDITION' | translate}}"></Label>
+      <!-- DIVIDER -->
+      <StackLayout row="1" colSpan="3" class="m-t-5 border-bottom-overlay"></StackLayout>
+    </GridLayout>
+    <!-- content data -->
+    <GridLayout row="2" rows="{{rows}}" columns="*,2*,8*" class="p-l-10 statistic-data" *ngIf="data.statistics.virtualBetCompetitor">
+      <ng-container *ngFor="let stat of data.statistics.virtualBetCompetitor; let i=index">
+        <GridLayout row="{{i}}" col="0" rows="*" columns="*" class="bg-playable">
+          <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{data.statistics.codeProduct}}-{{stat.ito}}">
+            <StackLayout class="label"></StackLayout>
+            <Button text="{{stat.ito}}" class="text-center button-internal" isEnabled="false"></Button>
+          </GridLayout>
+        </GridLayout>
+        <Label class="text-center p-10" row="{{i}}" col="1" text="{{stat.lrrs}}"></Label>
+        <StackLayout row="{{i}}" col="2" class="p-10">
+          <StackLayout class="fitness-container fitness-race">
+            <StackLayout class="fitness-content" horizontalAlignment="left"
+              [style.width.%]="(( stat.ff / maxDataStatistics) * 100) + 20"></StackLayout>
+          </StackLayout>
+        </StackLayout>
+      </ng-container>
+    </GridLayout>
+    <!-- close button -->
+    <StackLayout row="3" horizontalAlignment="center" verticalAlignment="center">
+      <GridLayout rows="*" columns="25*, 25*, 25*" class="m-10">
+        <StackLayout col="0"></StackLayout>
+        <Button col="1" text="{{ 'CLOSE' | translate }}" borderRadius="15"
+          class="button btn-danger btn-close button-internal" (tap)="close()" textTransform="none"></Button>
+        <StackLayout col="2"></StackLayout>
+      </GridLayout>
+    </StackLayout>
+  </GridLAyout>
+</GridLayout>

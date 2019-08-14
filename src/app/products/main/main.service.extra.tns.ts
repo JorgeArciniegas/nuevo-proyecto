@@ -8,16 +8,11 @@ export class MainServiceExtra {
   public currentEventObserve: Observable<number>;
   public eventDetails: EventDetail;
 
-  constructor(
-    public coupon: CouponService,
-    public destroyCouponService: DestroyCouponService
-  ) {
+  constructor(public coupon: CouponService, public destroyCouponService: DestroyCouponService) {
     this.destroyCouponService.confirmDestroyObs.subscribe(elem => {
       this.destroyCouponService.showDialog = false;
       if (elem && this.coupon.productHasCoupon.isRacing) {
-        this.currentEventSubscribe.next(
-          this.coupon.productHasCoupon.racingNumber
-        );
+        this.currentEventSubscribe.next(this.coupon.productHasCoupon.eventNumber);
         this.coupon.resetProductHasCoupon();
       }
     });
@@ -35,15 +30,12 @@ export class MainServiceExtra {
     // check if the coupon is initialized
     this.coupon.checkHasCoupon();
     // if the coupon isn't empty
-    if (
-      this.coupon.productHasCoupon.checked &&
-      (this.eventDetails.currentEvent !== selected || userSelect)
-    ) {
+    if (this.coupon.productHasCoupon.checked && (this.eventDetails.currentEvent !== selected || userSelect)) {
       // open modal destroy confirm coupon
       this.destroyCouponService.openDestroyCouponDialog();
       this.destroyCouponService.showDialog = true;
       this.coupon.productHasCoupon.isRacing = true;
-      this.coupon.productHasCoupon.racingNumber = selected;
+      this.coupon.productHasCoupon.eventNumber = selected;
     } else {
       // to continue
       this.currentEventSubscribe.next(selected);

@@ -1,26 +1,31 @@
-<GridLayout [ngClass]="eventControlDetails?.productImageClass" rows="*" columns="28*,28*,42*" class="race-control">
-  <StackLayout col="1" verticalAlignment="center">
-    <Label class="game-name" [ngClass]="{'small': eventControlDetails?.isWindowSizeSmall}"
-      text="{{ 'DYNAMIC_KEYS.PRODUCT.LABEL.'+ eventControlDetails?.productName | translate}}" textTransform="uppercase"
-      textWrap="true" verticalAlignment="center"></Label>
-  </StackLayout>
-  <GridLayout col="2" rows="2*,3*" columns="*" *ngIf="eventControlDetails?.currentEvent != null">
-    <StackLayout row="0" orientation="horizontal" horizontalAlignment="right">
-      <Label class="current-race" [ngClass]="{'small': eventControlDetails?.isWindowSizeSmall}"
-        verticalAlignment="center" text="{{ eventControlDetails?.eventLabel }}"></Label>
-      <Label *ngIf="eventControlDetails?.showEventId" class="number" verticalAlignment="center" text="#{{
-          eventControlDetails?.eventNumber }}"></Label>
+<GridLayout *ngIf="eventControlDetails" [ngClass]="eventControlDetails?.productImageClass" rows="*" columns="7*,70*,10*"
+  class="race-control">
+  <GridLayout columns="60*,20*,8*" col="1" verticalAlignment="center">
+    <!-- TITLE PRODUCT -->
+    <StackLayout col="0" verticalAlignment="center">
+      <Label class="game-name" [ngClass]="{'small': eventControlDetails?.isWindowSizeSmall}"
+        text="{{ 'DYNAMIC_KEYS.PRODUCT.LABEL.'+ eventControlDetails?.productName | translate}}"
+        textTransform="uppercase" textWrap="true" verticalAlignment="center"></Label>
     </StackLayout>
-    <StackLayout row="1" shadow="5" [cornerRadius]="5" class="time" horizontalAlignment="right"
-      verticalAlignment="center">
-      <StackLayout orientation="horizontal" class="time-panel" verticalAlignment="center">
-        <Image height="26" stretch="aspectFit"
-          src="~/app/themes/skins/{{eventControlDetails?.theme}}/icon/baseline-timer-24px.png"
-          verticalAlignment="center"></Image>
-        <Label [ngClass]="{'small': eventControlDetails?.isWindowSizeSmall}"
-          text="{{ eventControlDetails?.eventTimeMinutes | number: '2.0-0' }}:{{ eventControlDetails?.eventTimeSeconds | number: '2.0-0' }}"
-          verticalAlignment="center"></Label>
-      </StackLayout>
-    </StackLayout>
+    <!-- /TITLE PRODUCT -->
+    <!-- TITLE EVENT'S SELECTED -->
+    <Label col="1" class="current-race" [ngClass]="{'small': eventControlDetails?.isWindowSizeSmall}"
+      text="{{ eventControlDetails?.eventLabel }}" horizontalAlignment="right" verticalAlignment="bottom"></Label>
+    <Label col="2" *ngIf="eventControlDetails?.showEventId" class="number" text="#{{
+            eventControlDetails?.eventNumber }}" verticalAlignment="bottom" horizontalAlignment="right"></Label>
   </GridLayout>
+  <!-- /TITLE EVENT'S SELECTED -->
+  <!-- TIMER -->
+  <StackLayout col="2" shadow="5" [cornerRadius]="5" class="time m-4" horizontalAlignment="right"
+    verticalAlignment="center">
+    <StackLayout orientation="horizontal" class="time-panel" verticalAlignment="center">
+      <Image height="24" stretch="aspectFit" class="m-r-2"
+        src="~/app/themes/skins/{{eventControlDetails?.theme}}/icon/baseline-timer-24px.png" verticalAlignment="center">
+      </Image>
+      <Label [ngClass]="{'small': eventControlDetails?.isWindowSizeSmall}"
+        text="{{ eventControlDetails?.eventTimeMinutes | number: '2.0-0' }}:{{ eventControlDetails?.eventTimeSeconds | number: '2.0-0' }}"
+        verticalAlignment="center"></Label>
+    </StackLayout>
+  </StackLayout>
+  <!-- /TIMER -->
 </GridLayout>

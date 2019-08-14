@@ -18,7 +18,7 @@
         </div>
         <div fxFlex="50">
           <div>
-            <h4>{{group.Stake | currency : userService.userCurrency : 'symbol-narrow'}}</h4>
+            <h4>{{ (!group.IsMultiStake ? group.Stake : data.couponStake ) | currency : userService.userCurrency : 'symbol-narrow'}}</h4>
             <div data="disabled">{{ 'STAKE' | translate }}</div>
           </div>
         </div>

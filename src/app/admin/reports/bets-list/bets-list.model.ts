@@ -20,6 +20,11 @@ export enum CouponStatusInternal  {
   Win
 }
 
+export enum OddResult {
+  Lost = 0,
+  Won,
+  Unset
+}
 
 export namespace CouponStatusInternal {
   export function values() {

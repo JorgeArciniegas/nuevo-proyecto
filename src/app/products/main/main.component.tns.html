@@ -1,43 +1,23 @@
-<GridLayout rows="3*,2*,9*,2*,2*" columns="*" class="product-class">
-  <!-- Race control -->
+<GridLayout rows="*,3*,12*,2*,3*" columns="*" class="product-class">
+  <!-- Event control -->
   <GridLayout row="0">
     <app-event-control></app-event-control>
   </GridLayout>
-  <!-- List races -->
+  <!-- List events -->
   <GridLayout row="1">
-    <app-events-list [show]="!dialog.showDialog"></app-events-list>
+    <app-events-list></app-events-list>
   </GridLayout>
   <!-- Playable board -->
   <GridLayout row="2">
-    <app-playable-board [show]="!dialog.showDialog && !productService.destroyCouponService.showDialog">
+    <app-playable-board>
     </app-playable-board>
   </GridLayout>
-  <!-- Special race -->
-
-  <GridLayout row="3">
-    <GridLayout rows="*" columns="*,*,*" class="special-box" *ngIf="!dialog.showDialog">
-      <GridLayout row="0" col="0" shadow="3" cornerRadius="6" class="card">
-        <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
-          <Button text="{{ 'LUCKY' | translate }} 1" class="button-internal" (tap)="placingLucky(lucky.Lucky1)"
-            textTransform="none" [isEnabled]="!mainService.placingEvent.timeBlocked"></Button>
-        </GridLayout>
-      </GridLayout>
-      <GridLayout row="0" col="1" shadow="3" cornerRadius="6" class="card">
-        <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
-          <Button text="{{ 'LUCKY' | translate }} 2" class="button-internal" (tap)="placingLucky(lucky.Lucky2)"
-            textTransform="none" [isEnabled]="!mainService.placingEvent.timeBlocked"></Button>
-        </GridLayout>
-      </GridLayout>
-      <GridLayout row="0" col="2" shadow="3" cornerRadius="6" class="card">
-        <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
-          <Button text="{{ 'LUCKY' | translate }} 3" class="button-internal" (tap)="placingLucky(lucky.Lucky3)"
-            textTransform="none" [isEnabled]="!mainService.placingEvent.timeBlocked"></Button>
-        </GridLayout>
-      </GridLayout>
-    </GridLayout>
-  </GridLayout>
+  <!-- Special event -->
+  <StackLayout row="3">
+    <app-lucky></app-lucky>
+  </StackLayout>
   <GridLayout row="2" rowSpan="2" class="overlay radius-5"
-    *ngIf="mainService.placingEvent && mainService.placingEvent.timeBlocked == true">
+    *ngIf="mainService.placingEvent && mainService.placingEvent.timeBlocked == true || userService.isModalOpen">
     <StackLayout verticalAlignment="center">
       <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png"
         horizontalAlignment="center" verticalAlignment="center"></Image>

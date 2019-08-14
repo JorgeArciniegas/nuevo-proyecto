@@ -99,16 +99,19 @@
       <GridLayout row="5" rows="*" columns="*,*" class="card">
         <GridLayout col="0" rows="*" columns="*" class="button left btn-success">
           <Button text="{{'PAY' | translate}}" class="button-internal" textTransform="uppercase"
-            [isEnabled]="!service.timeBlocked" (tap)="payCancelCoupon(dialogTypeCoupon.PAY)"></Button>
+            [isEnabled]="!service.timeBlocked && !userService.isModalOpen"
+            (tap)="payCancelCoupon(dialogTypeCoupon.PAY)"></Button>
         </GridLayout>
         <GridLayout col="1" rows="*" columns="*" class="button right btn-warning">
           <Button text="{{'DELETE' | translate}}" class="button-internal" textTransform="uppercase"
-            [isEnabled]="!service.timeBlocked" (tap)="payCancelCoupon(dialogTypeCoupon.CANCEL)"></Button>
+            [isEnabled]="!service.timeBlocked && !userService.isModalOpen"
+            (tap)="payCancelCoupon(dialogTypeCoupon.DELETE)"></Button>
         </GridLayout>
       </GridLayout>
     </GridLayout>
   </GridLayout>
-  <GridLayout col="1" class="overlay radius-5" marginRight="3" *ngIf="service.timeBlocked">
+  <GridLayout col="1" class="overlay radius-5" marginRight="3"
+    *ngIf="service.timeBlocked || (userService.isModalOpen && !userService.isBtnCalcEditable)">
     <StackLayout verticalAlignment="center">
       <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png"
         horizontalAlignment="center" verticalAlignment="center">
@@ -119,7 +122,7 @@
   <StackLayout col="2" class="product-coupon padding-right-6">
     <app-coupon [timeBlocked]="service.timeBlocked"></app-coupon>
   </StackLayout>
-  <GridLayout col="2" class="overlay radius-5" marginRight="6" *ngIf="service.timeBlocked">
+  <GridLayout col="2" class="overlay radius-5" marginRight="6" *ngIf="service.timeBlocked || userService.isModalOpen">
     <StackLayout verticalAlignment="center">
       <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png"
         horizontalAlignment="center" verticalAlignment="center">

@@ -1,15 +1,16 @@
 {
   "ACCG": "ACCG",
+  "AGILITY": "Agilitè",
   "BALANCE": "Solde",
   "BASE": "B",
   "BET": "Pari",
+  "BET_STATUS": "Statut Pari",
+  "BET_TYPE": "Type de Pari",
+  "BET_UNDER_EVALUATION": "Pari en cours d'acceptation, veuillez patienter",
   "BETS_LIST": "Liste des paris",
   "BETS_LIST.LOST": "Perdenti",
   "BETS_LIST.OPEN": "En cours",
   "BETS_LIST.WON": "Vincenti",
-  "BET_STATUS": "Statut Pari",
-  "BET_TYPE": "Type de Pari",
-  "BET_UNDER_EVALUATION": "Pari en cours d'acceptation, veuillez patienter",
   "BONUS": "Bonus",
   "BTNCALC.COL": "COL",
   "BTNCALC.TOT": "TOT",
@@ -22,11 +23,11 @@
   "CONDITION": "Condition",
   "CONFIRM": "Conferma",
   "CONFIRM_DESTROY_COUPON.MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?",
-  "COUPON.BET": "Parie",
   "COUPON_CODE": "Code coupon",
   "COUPON_RESET": "Reset del coupon",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Pari accepté,",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "vérifie la Liste des Paris",
+  "COUPON.BET": "Parie",
   "DATE": "Date",
   "DATE_FROM": "Data da",
   "DATE_OF_PLACEMENT": "Data piazzamento",
@@ -36,10 +37,19 @@
   "DELETED_ON": "Annullata il",
   "DETAIL": "Détail",
   "DYNAMIC_KEYS": {
+    "CockMarket": {
+      "NAME": {
+        "1X2": "Win",
+        "1X2 + OverUnder": "Win+ o/u",
+        "1X2 + Winning Sector": "Win+ sector",
+        "Over/Under": "O/u",
+        "Winning Sector": "Sector"
+      }
+    },
     "COUPON_ERROR": {
-      "API_ERROR": "Errore API generico",
       "AccountInsertDataError": "Une erreur est survenue lors de l'ajout du compte d'utilisateur [Code ES11]",
       "AgentBettorMismatch": "Cet utilisateur n'appartient pas à votre réseau [Code ES18]",
+      "API_ERROR": "Errore API generico",
       "BankerNotAllowedOnIntegral": "Vous ne pouvez pas ajouter un banquier à un pari intégral [Code ES22]",
       "BetAlreadyPaid": "Ce coupon a déjà été payé [Code ES19]",
       "BetLost": "Pari perdu [Code ES21]",
@@ -166,6 +176,15 @@
       "SingleBet": "Pari simple",
       "Unknown": "Sconosciuta"
     },
+    "ODDS_RESULT": {
+      "LOST": "Perdente",
+      "UNSET": "In gioco",
+      "WON": "Vinto"
+    },
+    "OVER_UNDER_COCKFIGHT": {
+      "O": "pl",
+      "U": "mo"
+    },
     "PRINT_COUPON": {
       "LICENSE_MESSAGE": {
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua."
@@ -173,6 +192,7 @@
     },
     "PRODUCT": {
       "LABEL": {
+        "COCK_FIGHT": "Combat de Coqs",
         "DOG": "Lévriers",
         "FOOTBALL_ENG": "Calcio ENG",
         "FOOTBALL_ITA": "Calcio ITA",
@@ -201,9 +221,12 @@
       "AX": "Multipla Accoppiata",
       "COUPON": "Coupon",
       "EVEN": "Pair",
+      "MULTI": "Multi",
       "ODD": "Impair",
+      "OU": "Over/Under",
       "OVER": "Plus",
       "PLACED": "Placé",
+      "S": "Sector",
       "SHOW": "Podium",
       "STATISTIC": "Statistiques",
       "T": "Tiercé",
@@ -211,6 +234,7 @@
       "TOX": "Tiercé",
       "TR": "Trio in ordine con ritorno",
       "UNDER": "Moins",
+      "V": "V",
       "VT": "Vincente trio",
       "WINNER": "Gagnant"
     },
@@ -224,19 +248,24 @@
       "AT": "A2X",
       "AX": "ACG",
       "EVEN": "Pair",
+      "MULTI": "Multi",
       "ODD": "Impair",
+      "OU": "Ou",
       "OVER": "Plus",
       "PLACED": "Placé",
+      "S": "S",
       "SHOW": "Podium",
       "T": "T3X",
       "TNX": "TNX",
       "TOX": "T3X",
       "TR": "T3X",
       "UNDER": "Moins",
+      "V": "V",
       "VT": "VX",
       "WINNER": "Gagnant"
     }
   },
+  "ENDURANCE": "Endurance",
   "ERROR": "Erreur",
   "EVENTS": "Événements",
   "GO_TO_HOME": "Vai alla home",
@@ -282,18 +311,19 @@
   "STAKE_AMOUNT": "Mise",
   "STARTING_DATE": "Data inizio",
   "STATUS": "Statut",
+  "STRENGTH": "Force",
   "SUMMARY": "Sommario",
-  "TOTALS": "Totaux",
-  "TOTAL_PAYOUT": "Total payout",
-  "TOTAL_STAKE": "Mise totale",
   "TOT_BET": "TOT giocato",
   "TOT_LOST": "TOT perso",
   "TOT_OPEN": "TOT in corso",
   "TOT_WON": "TOT vinto",
+  "TOTAL_PAYOUT": "Total payout",
+  "TOTAL_STAKE": "Mise totale",
+  "TOTALS": "Totaux",
   "TYPE": "Type",
+  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "USERNAME": "Nom d'Utilisateur",
   "USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
-  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "WARNING": "Avviso",
   "WON": "Vinto"
 }

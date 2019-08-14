@@ -1,4 +1,4 @@
-import { Environment } from './environment.models';
+import { Environment, LICENSE_TYPE } from './environment.models';
 
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
@@ -8,9 +8,14 @@ export const environment: Environment = {
   production: false,
   products: [],
   showEventId: false,
-  isEnabledReprintCoupon: false,
+  printSettings: {
+    isEnabledReprintCoupon: true,
+    isTrasmitionInfoMessageShown: true
+  },
   couponDirectPlace: false,
-  currencyDefault: 'EUR'
+  currencyDefault: 'EUR',
+  license: LICENSE_TYPE.DEMO_LICENSE,
+  bookmakerDetails: ''
 };
 
 /*

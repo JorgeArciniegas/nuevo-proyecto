@@ -1,0 +1,22 @@
+<GridLayout row="3">
+  <GridLayout rows="*" columns="*,*,*" class="special-box">
+    <GridLayout row="0" col="0" shadow="3" cornerRadius="6" class="card">
+      <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
+        <Button text="{{ 'LUCKY' | translate }} 1" class="button-internal" (tap)="placingLucky(lucky.Lucky1)"
+          textTransform="none" [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
+      </GridLayout>
+    </GridLayout>
+    <GridLayout row="0" col="1" shadow="3" cornerRadius="6" class="card">
+      <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
+        <Button text="{{ 'LUCKY' | translate }} 2" class="button-internal" (tap)="placingLucky(lucky.Lucky2)"
+          textTransform="none" [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
+      </GridLayout>
+    </GridLayout>
+    <GridLayout row="0" col="2" shadow="3" cornerRadius="6" class="card">
+      <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
+        <Button text="{{ 'LUCKY' | translate }} 3" class="button-internal" (tap)="placingLucky(lucky.Lucky3)"
+          textTransform="none" [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
+      </GridLayout>
+    </GridLayout>
+  </GridLayout>
+</GridLayout>

@@ -3,7 +3,7 @@ import { ElysApiService, VirtualSportLastResultsRequest, VirtualSportLastResults
 import { timer } from 'rxjs';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { ProductsService } from '../../products.service';
-import { EventResult } from './results.model';
+import { EventResult, OVER_UNDER_COCKFIGHT } from './results.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,6 @@ export class ResultsService {
       CategoryType: this.productService.product.codeProduct
     };
     this.listResult = [];
-    timer(300).subscribe(() => {
       this.elysApi.virtual.getLastResult(request)
         .then((eventResults: VirtualSportLastResultsResponse) => {
 
@@ -56,7 +55,7 @@ export class ResultsService {
               case  LAYOUT_TYPE.COCK_FIGHT:
                 tempEventResult.cockResult = {
                   winner: Number.parseInt(results[0]),
-                  ou: results[1],
+                  ou: results[1] as OVER_UNDER_COCKFIGHT,
                   sector: Number.parseInt(results[2]),
                 };
                 break;
@@ -69,7 +68,6 @@ export class ResultsService {
             this.listResult.push(tempEventResult);
           }
         });
-    });
   }
 
 

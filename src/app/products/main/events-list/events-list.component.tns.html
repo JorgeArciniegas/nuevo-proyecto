@@ -1,9 +1,9 @@
-<StackLayout *ngIf="show">
-  <app-standard-list *ngIf="productService.product.layoutProducts.type === eventService.typeLayout.RACING ||
+<StackLayout>
+  <app-events-list-standard *ngIf="productService.product.layoutProducts.type === eventService.typeLayout.RACING ||
       productService.product.layoutProducts.type === eventService.typeLayout.COCK_FIGHT ||
       productService.product.layoutProducts.type === eventService.typeLayout.SOCCER"
     [webColumnDefinition]="productService.product.layoutProducts.nextEventItems"
     [nativeColumnDefinition]="nativeNextEventsItems" [eventsList]="eventService.eventsDetails"
     rowHeight="{{rowHeight}}">
-  </app-standard-list>
+  </app-events-list-standard>
 </StackLayout>
