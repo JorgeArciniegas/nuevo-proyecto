@@ -111,7 +111,7 @@ export const environment: Environment = {
       codeProduct: 'ITA-LEAGUE',
       name: 'Soccer',
       label: 'FOOTBALL_ITA',
-      order: 3,
+      order: 4,
       productSelected: false,
       isPlayable: true,
       layoutProducts: {
@@ -137,9 +137,9 @@ export const environment: Environment = {
       codeProduct: 'ENG-LEAGUE',
       name: 'Soccer',
       label: 'FOOTBALL_ENG',
-      order: 3,
+      order: 5,
       productSelected: false,
-      isPlayable: false,
+      isPlayable: true,
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
