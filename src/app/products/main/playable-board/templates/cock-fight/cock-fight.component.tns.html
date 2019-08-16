@@ -10,7 +10,7 @@
       </GridLayout>
       <GridLayout row="{{i}}" col="1" rows="*" columns="{{getColumnsString(market.sls.length)}}">
         <ng-container *ngFor="let selection of market.sls | rmSelFromMarket: 'X + Over'; let i2 = index">
-          <GridLayout col="{{i2}}" class="btn-default-cock btn-cock-{{ selection.nm | competitorIto }} m-4 radius-5"
+          <GridLayout col="{{i2}}" class="button btn-default-cock btn-cock-{{ selection.nm | competitorIto }} m-4 radius-5"
             [ngClass]="{'btn-actived': oddsSelected?.includes(selection.id)}" (tap)="selectOdd(market.tp, selection)"
             [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen">
             <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">

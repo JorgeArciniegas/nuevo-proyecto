@@ -164,7 +164,7 @@ $color-text-gray: #6b7279;
 	color: $color-text-primary;
 	border-color: $border-card-title;
 	border-width: 1;
-	border-radius: 5;
+	border-radius: 4;
 }
 
 %card-title-label {
@@ -180,7 +180,7 @@ $color-text-gray: #6b7279;
 %sub-card-title-mobile {
 	background-color: $color-bg-event;
 	color: $color-text-primary;
-	border-radius: 5;
+	border-radius: 4;
 }
 
 %time-card-title {

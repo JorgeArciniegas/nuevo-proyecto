@@ -1,10 +1,11 @@
 <GridLayout columns="*" rows="*,*,14*,2*,2*,2*" class="grid-coupon">
-  <GridLayout row="0" shadow="3" cornerRadius="6" class="card">
+  <GridLayout row="0" shadow="3" cornerRadius="6" class="m-b-2">
     <GridLayout rows="*" columns="4*,*" class="display" verticalAlignment="center">
       <StackLayout col="0" orientation="horizontal" class="title" verticalAlignment="center" horizontalAlignment="left">
-        <Label text="{{ 'coupon' | translate }}" textTransform="uppercase" verticalAlignment="center"></Label>
+        <Label text="{{ 'coupon' | translate }}"
+          textTransform="uppercase" verticalAlignment="center"></Label>
       </StackLayout>
-      <StackLayout col="1" class="button btn-warning " [isEnabled]="!userService.isModalOpen" (tap)="clearCoupon()"
+      <StackLayout col="1" class="button btn-warning" [isEnabled]="!userService.isModalOpen" (tap)="clearCoupon()"
         horizontalAlignment="right">
         <Image stretch="aspectFit" width="26" margin="0 5"
           src="~/app/themes/skins/{{settings.theme}}/icon/baseline-delete_outline-white-24px.png"
@@ -12,7 +13,7 @@
       </StackLayout>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="1" rows="*" columns="4*,*" class="card display btn-coupon-board"
+  <GridLayout row="1" rows="*" columns="4*,*" class="m-y-2 display btn-coupon-board"
     [ngClass]="{'small': productService.windowSize.small}">
     <StackLayout col="0" orientation="horizontal" horizontalAlignment="left">
       <ng-container *ngIf="couponService.coupon && couponService.coupon.Odds.length > 0">
@@ -85,7 +86,7 @@
               text="{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}" horizontalAlignment="center"
               verticalAlignment="center"></Label>
             </StackLayout>
-            <StackLayout col="1" class="btn-warning button" (tap)="removeOdd(odd)" [isEnabled]="!userService.isModalOpen"
+            <StackLayout col="1" class="button btn-warning" (tap)="removeOdd(odd)" [isEnabled]="!userService.isModalOpen"
               horizontalAlignment="right">
               <Image stretch="aspectFit" width="26"
               src="~/app/themes/skins/{{settings.theme}}/icon/baseline-delete_outline-white-24px.png"
