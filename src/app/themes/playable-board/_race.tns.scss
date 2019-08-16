@@ -10,7 +10,7 @@
 		.btn-default-dog-play {
 			font-size: 36;
 			&.button {
-				border-radius: 15;
+				border-radius: 4;
 				padding: -2;
 			}
 		}
@@ -18,9 +18,9 @@
 
 	&.playable-special-bets {
 		.special-bet {
-			margin: 4 15;
+			margin: 3 4;
 			.button {
-				border-radius: 10;
+				border-radius: 4;
 				padding: -2;
 			}
 		}

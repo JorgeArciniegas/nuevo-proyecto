@@ -142,7 +142,7 @@
 		.button {
 			font-weight: 700;
 			font-size: 17;
-			border-radius: 5;
+			border-radius: 4;
 			text-transform: none;
 
 			&.small {
@@ -455,7 +455,9 @@
 			.race-control {
 				.time {
 					.time-panel {
-						@extend %time-card-title-mobile;
+            @extend %time-card-title-mobile;
+            border-width: 1;
+	          border-radius: 4;
 					}
 				}
 			}
@@ -472,7 +474,8 @@
 
 		.dialog {
 			@extend %dialog-mobile;
-
+      border-radius: 4;
+      border-width: 1;
 			.odds-grid {
 				.btn-close {
 					@extend %btn-transparent;
