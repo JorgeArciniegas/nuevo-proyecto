@@ -13,7 +13,7 @@ import {
   VirtualProgramTreeBySportResponse
 } from '@elys/elys-api';
 import { cloneDeep as clone } from 'lodash';
-import { interval, Observable, Subject } from 'rxjs';
+import { interval, Observable, Subject, Subscription, timer } from 'rxjs';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
@@ -70,6 +70,7 @@ export class MainService extends MainServiceExtra {
 
   amount: number;
 
+  countdownSub: Subscription;
   constructor(
     private elysApi: ElysApiService,
     private productService: ProductsService,
@@ -96,7 +97,7 @@ export class MainService extends MainServiceExtra {
     this.eventDetails = new EventDetail(this.productService.product.layoutProducts.nextEventItems);
     this.eventDetails.currentEvent = 0;
 
-    interval(1000).subscribe(() => this.getTime());
+    this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
 
     this.currentEventSubscribe = new Subject<number>();
     this.currentEventObserve = this.currentEventSubscribe.asObservable();
@@ -159,11 +160,19 @@ export class MainService extends MainServiceExtra {
 
   getTime(): void {
     try {
+      // when countdown is stopped, it doesn't load the new data
+      if (this.countdownSub.closed) {
+        return;
+      }
       if (this.remainingTime.second === 0 && this.remainingTime.minute === 0) {
+        // stop the countdown to prevent multiple calls
+        this.countdownSub.unsubscribe();
         this.loadEvents();
         this.resultService.loadLastResult();
       } else {
         if (this.remainingTime.second < 0 || this.remainingTime.minute < 0) {
+          // stop the countdown to prevent multiple calls
+          this.countdownSub.unsubscribe();
           // If remaining time is negative there is an error, reload all.
           this.cacheEvents = null;
           this.loadEvents();
@@ -192,6 +201,7 @@ export class MainService extends MainServiceExtra {
         this.remaingTimeCounter.next(this.eventDetails.eventTime);
       }
     } catch (err) {
+      console.log('GET TIME ERROR ---> ', err);
       this.cacheEvents = null;
       this.loadEvents();
       this.resultService.loadLastResult(false);
@@ -220,6 +230,10 @@ export class MainService extends MainServiceExtra {
           // Get event's odds
           this.eventDetailOdds(this.eventDetails.events[0].number);
         }
+      }
+      // Resume event's countdown
+      if (this.countdownSub && this.countdownSub.closed) {
+        this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
       }
     } catch (err) {
       console.log('main --> loadEvents : ', err);
@@ -310,6 +324,7 @@ export class MainService extends MainServiceExtra {
       }
     });
     this.reload = this.productService.product.layoutProducts.cacheEventsItem;
+
   }
 
   /**
@@ -450,6 +465,7 @@ export class MainService extends MainServiceExtra {
       this.resetPlayEvent();
       this.currentEventSubscribe.next(0);
     }
+
     if (this.initCurrentEvent) {
       this.initCurrentEvent = false;
     }
