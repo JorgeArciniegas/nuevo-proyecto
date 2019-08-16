@@ -37,6 +37,12 @@
 					}
 				}
 
+				.btn-soccer-odd__details {
+					&--value {
+						line-height: 2.3vh;
+					}
+				}
+
 				.btn-soccer-odd__details--second_line {
 					display: flex;
 

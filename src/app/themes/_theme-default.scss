@@ -476,6 +476,17 @@ html {
 				// COCK FIGHT
 				@extend %PRODUCT-COCK-BG;
 			}
+
+			.PRODUCT-ITA-LEAGUE-BG {
+				// SOCCER
+				@extend %PRODUCT-ITA-LEAGUE-BG;
+			}
+
+			.PRODUCT-ENG-LEAGUE-BG {
+				// SOCCER
+				@extend %PRODUCT-ENG-LEAGUE-BG;
+			}
+
 			.race-control {
 				.time {
 					@extend %time-card-title;
