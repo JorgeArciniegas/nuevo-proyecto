@@ -2,11 +2,11 @@
   <!-- AREAS -->
   <GridLayout col="0" rows="*,2*,2*,2*,2*,2*,2*,2*,2*,2*,2*" class="areas-column">
     <Label row="0" text="{{ 'AREAS' | translate }}" horizontalAlignment="center" class="section-identifier"
-      marginLeft="10" marginBottom="5"></Label>
+      marginLeft="10" marginBottom="2"></Label>
     <ng-container
       *ngFor="let area of soccerService.tournament.listDetailAreas[soccerService.selectedMatch]; let i = index">
       <FlexBoxLayout row="{{i + 1}}" flexDirection="row" justifyContent="space-between" alignItems="center"
-        class="btn-soccer-area radius-5" [ngClass]="area.isSelected ?  'btn-selected': 'btn-grey-gradient'"
+        class="btn-soccer-area" [ngClass]="area.isSelected ?  'btn-selected': 'btn-grey-gradient'"
         [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen" (tap)="changeArea(i)"
         marginLeft="10" marginBottom="5" paddingLeft="10" paddingRight="10">
         <Label text="{{ area.name }}" class="btn-soccer-area__details--name"></Label>
@@ -20,7 +20,7 @@
   <!-- SELECTIONS -->
   <GridLayout col="1" rows="*,20*"  *ngIf="soccerService.selectedArea !== 4">
     <Label row="0" text="{{ 'MARKETS' | translate }}" horizontalAlignment="center" class="section-identifier"
-      marginLeft="10" marginBottom="5"></Label>
+      marginLeft="10" marginBottom="2"></Label>
     <GridLayout row="1"
       columns="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaCols | getGridStringSetting }}"
       marginLeft="5">

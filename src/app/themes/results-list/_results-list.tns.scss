@@ -1,20 +1,22 @@
 .card-box-result {
-	margin: 0 6;
+	margin: 0 2;
 
 	.header,
 	.position {
 		margin: 3;
 	}
-
+  .header {
+    border-radius: 4;
+  }
 	.position {
 		font-size: 14;
 		font-weight: 700;
 		padding: 0;
 
-		border-radius: 5;
+		border-radius: 4;
 
 		&.small {
-			border-radius: 5;
+			border-radius: 4;
 			font-size: 12;
 		}
 	}
@@ -29,17 +31,19 @@
 
 // SOCCER
 .card-box-result-soccer{
-  margin: 0 5;
+
   .header {
     @extend %card-title-noborder;
+    border-radius: 4;
     .eventNumber {
       font-size: 11;
       font-weight: 500;
     }
   }
   .btn-soccer-result {
-    font-size: 10;
-    font-weight: 600;
+    font-size: 9;
+    font-weight: 400;
+    border-radius: 4;
     @extend %card-title-noborder;
   }
 }

@@ -1,6 +1,6 @@
 <GridLayout rows="*" columns="*,*,*,*" class="result-list-race">
   <GridLayout col="{{i}}" class="card-box-result" rows="*,*" columns="*" *ngFor="let event of results; let i = index;">
-    <GridLayout row="0" class="header radius-5">
+    <GridLayout row="0" class="header">
       <Label text="{{event.eventLabel}}" class="raceNumber" horizontalAlignment="center"
         verticalAlignment="center"></Label>
     </GridLayout>

@@ -4,7 +4,7 @@
     <ng-container *ngIf="market.tp !== marketEnum['OverUnder']">
       <GridLayout row="{{i}}" col="0" shadow="3" cornerRadius="6" class="playable-row-tile display m-4 m-l-5">
         <StackLayout verticalAlignment="center" horizontalAlignment="center">
-          <Label text="{{ 'DYNAMIC_KEYS.CockMarket.NAME.' + market.nm | translate | uppercase}}"
+          <Label class="text-center" text="{{ 'DYNAMIC_KEYS.CockMarket.NAME.' + market.nm | translate | uppercase}}"
             textWrap="true"></Label>
         </StackLayout>
       </GridLayout>
@@ -17,7 +17,7 @@
               <StackLayout *ngIf="market.tp === marketEnum['1X2'] && selection.tp === 1" verticalAlignment="center"
                 horizontalAlignment="center" class="icon icon-cock-red" width="40%" height="90%">
               </StackLayout>
-              <StackLayout verticalAlignment="center" horizontalAlignment="center" width="55%">
+              <StackLayout verticalAlignment="center" horizontalAlignment="center" width="60%">
                 <Label text="{{ selection.nm | competitorName: eventDetails.tm }}"
                   *ngIf="market.tp === marketEnum['1X2'] && (selection.tp === 1 || selection.tp === 3)"
                   horizontalAlignment="center" class="selection-name"></Label>
