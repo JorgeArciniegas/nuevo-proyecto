@@ -25,7 +25,7 @@ export class CockFightComponent implements OnInit {
      */
     this.data.statistics.virtualBetCompetitor.sort((a, b) => (a.ito <= b.ito ? -1 : 1));
     this.data.statistics.virtualBetCompetitor.map(item => {
-      this.rows += '5*,'; // Indicate the rows text value append to GridLayout
+      this.rows += '4*,'; // Indicate the rows text value append to GridLayout
       this.dataStaticsChart.STRENGTH += item.ac[0];
       this.dataStaticsChart.ENDURANCE += item.ac[1];
       this.dataStaticsChart.AGILITY += item.ac[2];

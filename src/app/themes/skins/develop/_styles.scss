@@ -194,8 +194,7 @@ $color-text-gray: #6b7279;
 	background-color: $color-bg-event;
 	color: $color-text-primary;
 	border-color: $border-event;
-	border-width: 1;
-	border-radius: 5;
+
 }
 
 %card-title-noborder {
@@ -540,9 +539,7 @@ $gradient-dark2: #000000;
 %dialog-mobile {
 	background-color: $color-bg-primary;
 	color: $color-text-primary;
-	border-width: 1;
 	border-color: $border-card-title;
-	border-radius: 5;
 }
 
 %dialog-card {

@@ -1,12 +1,12 @@
 <!--PRODUCT CONTAINER-->
 <GridLayout columns="60*,20*,20*" rows="*" class="product">
-  <GridLayout col="0" rows="3*,13*,2*" columns="*" class="product-container padding-left-6 padding-right-3">
+  <GridLayout col="0" rows="3*,13*" columns="*" class="product-container padding-left-6 padding-right-3">
     <!-- Gameboard area -->
     <StackLayout row="0" rowSpan="3">
       <router-outlet></router-outlet>
     </StackLayout>
     <!-- Dialog polyfunctional area-->
-    <GridLayout row="1" *ngIf="dialog.showDialog">
+    <GridLayout row="0" rowSpan="2" *ngIf="dialog.showDialog">
       <app-product-dialog [data]="dialog.dialogData"></app-product-dialog>
     </GridLayout>
     <!-- Dialog pay/cancel-->

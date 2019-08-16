@@ -2,28 +2,27 @@
 	font-size: 14;
 	font-weight: 900;
 	&.small {
-		font-size: 9;
+		font-size: 11;
 	}
 }
 
 .current-race {
 	font-size: 14;
   font-weight: 900;
-  margin-bottom: -2;
 	&.small {
-		font-size: 8;
+		font-size: 11;
 	}
 }
 .number {
-	font-size: 9;
+	font-size: 11;
 	font-weight: 600;
 }
 
 .time {
 	.time-panel {
-		padding: 3 5;
+		padding: 2 3;
 		font-size: 11;
-		font-weight: 900;
+		font-weight: 500;
 		.small {
 			font-size: 8;
 		}
