@@ -324,7 +324,6 @@ export class MainService extends MainServiceExtra {
       }
     });
     this.reload = this.productService.product.layoutProducts.cacheEventsItem;
-
   }
 
   /**
@@ -374,18 +373,8 @@ export class MainService extends MainServiceExtra {
             }
 
             // Initialize the lowestOdd and highestOdd.
-            const lowestOdd: SpecialOddData = {
-              areaIndex: 0,
-              marketIndex: 0,
-              oddIndex: 0,
-              val: match.mk[0].sls[0].ods[0].vl
-            };
-            const highestOdd: SpecialOddData = {
-              areaIndex: 0,
-              marketIndex: 0,
-              oddIndex: 0,
-              val: match.mk[0].sls[0].ods[0].vl
-            };
+            let lowestOdd: SpecialOddData;
+            let highestOdd: SpecialOddData;
             // Cicle the temporary detail's area
             tmpDetailArea.forEach((detail, areaIndex) => {
               // Cicle the current match's markets and save on the temporary "tmpDetailArea"
@@ -397,7 +386,26 @@ export class MainService extends MainServiceExtra {
                 areaMarket.selections = tmpMk.sls;
                 // Looking for the highest and lowest odd.
                 tmpMk.sls.forEach((odd, oddIndex) => {
-                  if (odd.ods[0].vl < lowestOdd.val) {
+                  // Initialization of "lowestOdd".
+                  if (!lowestOdd && odd.ods[0].vl > 1.05) {
+                    lowestOdd = {
+                      areaIndex: areaIndex,
+                      marketIndex: marketIndex,
+                      oddIndex: oddIndex,
+                      val: odd.ods[0].vl
+                    };
+                  }
+                  // Initialization of "highestOdd".
+                  if (!highestOdd) {
+                    highestOdd = {
+                      areaIndex: areaIndex,
+                      marketIndex: marketIndex,
+                      oddIndex: oddIndex,
+                      val: odd.ods[0].vl
+                    };
+                  }
+                  // Looking for the highest and lowest odd.
+                  if (lowestOdd && odd.ods[0].vl < lowestOdd.val && odd.ods[0].vl > 1.05) {
                     if (areaIndex !== lowestOdd.areaIndex) {
                       lowestOdd.areaIndex = areaIndex;
                     }
@@ -407,11 +415,11 @@ export class MainService extends MainServiceExtra {
                     lowestOdd.oddIndex = oddIndex;
                     lowestOdd.val = odd.ods[0].vl;
                   }
-                  if (odd.ods[0].vl > highestOdd.val) {
-                    if (areaIndex !== lowestOdd.areaIndex) {
+                  if (highestOdd && odd.ods[0].vl > highestOdd.val) {
+                    if (areaIndex !== highestOdd.areaIndex) {
                       highestOdd.areaIndex = areaIndex;
                     }
-                    if (marketIndex !== lowestOdd.marketIndex) {
+                    if (marketIndex !== highestOdd.marketIndex) {
                       highestOdd.marketIndex = marketIndex;
                     }
                     highestOdd.oddIndex = oddIndex;

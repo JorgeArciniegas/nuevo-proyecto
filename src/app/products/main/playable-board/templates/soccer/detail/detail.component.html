@@ -45,6 +45,7 @@
                     rowspan="{{ 120 / soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaRowsByCol[i] }}">
                     <button class="btn-soccer-odd radius-5"
                       [ngClass]="soccerService.tournament.matches[soccerService.selectedMatch].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
+                      [disabled]="odd.ods[0].vl <= 1.05"
                       (click)="selectOdd(soccerService.selectedMatch, market.id, odd)">
                       <div class="btn-soccer-odd__details" fxLayout="column" fxLayoutAlign="center center">
                         <div class="btn-soccer-odd__details--name">
@@ -52,7 +53,9 @@
                           <span *ngIf="market.hasSpecialValue"> {{ market.specialValueOrSpread }}</span>
                         </div>
                         <div class="btn-soccer-odd__details--second_line">
-                          <span class="btn-soccer-odd__details--value">{{ odd.ods[0].vl }}</span>
+                          <span class="btn-soccer-odd__details--value"
+                            *ngIf="odd.ods[0].vl > 1.05">{{ odd.ods[0].vl }}</span>
+                          <span class="btn-soccer-odd__details--value" *ngIf="odd.ods[0].vl <= 1.05">-</span>
                           <div class="btn-soccer-odd__details--icon"
                             [ngClass]="{'star-yellow-icon': odd.isLowestOdd, 'star-red-icon': odd.isHighestOdd}"
                             *ngIf="odd.isLowestOdd || odd.isHighestOdd">
@@ -83,13 +86,15 @@
                 rowspan="{{ 120 / soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaRowsByCol[0] }}">
                 <button class="btn-soccer-odd radius-5"
                   [ngClass]="soccerService.tournament.matches[soccerService.selectedMatch].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
-                  (click)="selectOdd(soccerService.selectedMatch, market.id, odd)">
+                  [disabled]="odd.ods[0].vl <= 1.05" (click)="selectOdd(soccerService.selectedMatch, market.id, odd)">
                   <div class="btn-soccer-odd__details" fxLayout="column" fxLayoutAlign="center center">
                     <div class="btn-soccer-odd__details--name">
                       <span>{{ odd.nm }}</span>
                     </div>
                     <div class="btn-soccer-odd__details--second_line">
-                      <span class="btn-soccer-odd__details--value">{{ odd.ods[0].vl }}</span>
+                      <span class="btn-soccer-odd__details--value"
+                        *ngIf="odd.ods[0].vl > 1.05">{{ odd.ods[0].vl }}</span>
+                      <span class="btn-soccer-odd__details--value" *ngIf="odd.ods[0].vl <= 1.05">-</span>
                       <div class="btn-soccer-odd__details--icon"
                         [ngClass]="{'star-yellow-icon': odd.isLowestOdd, 'star-red-icon': odd.isHighestOdd}"
                         *ngIf="odd.isLowestOdd || odd.isHighestOdd">
@@ -111,13 +116,15 @@
                 rowspan="{{ 120 / soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaRowsByCol[0] }}">
                 <button class="btn-soccer-odd radius-5"
                   [ngClass]="soccerService.tournament.matches[soccerService.selectedMatch].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
-                  (click)="selectOdd(soccerService.selectedMatch, market.id, odd)">
+                  [disabled]="odd.ods[0].vl <= 1.05" (click)="selectOdd(soccerService.selectedMatch, market.id, odd)">
                   <div class="btn-soccer-odd__details" fxLayout="column" fxLayoutAlign="center center">
                     <div class="btn-soccer-odd__details--name">
                       <span>{{ odd.nm }}</span>
                     </div>
                     <div class="btn-soccer-odd__details--second_line">
-                      <span class="btn-soccer-odd__details--value">{{ odd.ods[0].vl }}</span>
+                      <span class="btn-soccer-odd__details--value"
+                        *ngIf="odd.ods[0].vl > 1.05">{{ odd.ods[0].vl }}</span>
+                      <span class="btn-soccer-odd__details--value" *ngIf="odd.ods[0].vl <= 1.05">-</span>
                       <div class="btn-soccer-odd__details--icon"
                         [ngClass]="{'star-yellow-icon': odd.isLowestOdd, 'star-red-icon': odd.isHighestOdd}"
                         *ngIf="odd.isLowestOdd || odd.isHighestOdd">
@@ -139,13 +146,15 @@
                 rowspan="{{ 120 / soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaRowsByCol[0] }}">
                 <button class="btn-soccer-odd radius-5"
                   [ngClass]="soccerService.tournament.matches[soccerService.selectedMatch].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
-                  (click)="selectOdd(soccerService.selectedMatch, market.id, odd)">
+                  [disabled]="odd.ods[0].vl <= 1.05" (click)="selectOdd(soccerService.selectedMatch, market.id, odd)">
                   <div class="btn-soccer-odd__details" fxLayout="column" fxLayoutAlign="center center">
                     <div class="btn-soccer-odd__details--name">
                       <span>{{ odd.nm }}</span>
                     </div>
                     <div class="btn-soccer-odd__details--second_line">
-                      <span class="btn-soccer-odd__details--value">{{ odd.ods[0].vl }}</span>
+                      <span class="btn-soccer-odd__details--value"
+                        *ngIf="odd.ods[0].vl > 1.05">{{ odd.ods[0].vl }}</span>
+                      <span class="btn-soccer-odd__details--value" *ngIf="odd.ods[0].vl <= 1.05">-</span>
                       <div class="btn-soccer-odd__details--icon"
                         [ngClass]="{'star-yellow-icon': odd.isLowestOdd, 'star-red-icon': odd.isHighestOdd}"
                         *ngIf="odd.isLowestOdd || odd.isHighestOdd">

@@ -7,14 +7,18 @@
         <FlexBoxLayout col="{{row.markets | getNumColOverview: i1: i2}}" flexDirection="column" justifyContent="center"
           alignItems="center" marginLeft="5" class="btn-soccer-odd"
           [ngClass]="soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
-          [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"
+          [ngClass]="{'disabled': odd.ods[0].vl <= 1.05}"
+          [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen && odd.ods[0].vl > 1.05"
           (tap)="selectOdd(i, market.id, odd)" *ngFor="let odd of market.selections; let i2 = index">
           <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
             <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
             <Label text="{{ market.specialValueOrSpread }}" horizontalAlignment="left" *ngIf="market.hasSpecialValue"
               marginLeft="5"></Label>
           </StackLayout>
-          <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value" horizontalAlignment="center"></Label>
+          <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value" horizontalAlignment="center"
+            *ngIf="odd.ods[0].vl > 1.05"></Label>
+          <Label text="-" class="btn-soccer-odd__details--value" horizontalAlignment="center"
+            *ngIf="odd.ods[0].vl <= 1.05"></Label>
         </FlexBoxLayout>
       </ng-container>
     </GridLayout>
