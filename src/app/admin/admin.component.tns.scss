@@ -1,19 +1,24 @@
-.admin-panel-container{
-  height: 113;
-  padding: 15 30;
-  margin-top: 20;
+.admin-panel-container {
+	padding: 15 30;
+	margin-top: 20;
 
-  &.logout{
-    padding:9% 5%;
-  }
-}
-.txt-title{
-font-weight: bold;
-font-size:20;
-text-transform: uppercase;
-margin-left: 5;
-&.txt-title-btn{
-  font-size: 17;
-}
-}
+	&.logout {
+		.btn-admin {
+			margin-top: 0;
+		}
+	}
 
+	.btn-admin {
+		height: 40;
+		margin-top: 10;
+	}
+}
+.txt-title {
+	font-weight: bold;
+	font-size: 20;
+	text-transform: uppercase;
+	margin-left: 5;
+	&.txt-title-btn {
+		font-size: 17;
+	}
+}

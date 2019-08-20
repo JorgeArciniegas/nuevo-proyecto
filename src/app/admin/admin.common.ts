@@ -7,10 +7,12 @@ import { SummaryComponent } from './reports/bets-list/details-coupon/summary/sum
 import { EventsComponent } from './reports/bets-list/details-coupon/events/events.component';
 import { CombinationsComponent } from './reports/bets-list/details-coupon/combinations/combinations.component';
 import { LanguageComponent } from './settings/language/language.component';
+import { TransactionsListComponent } from './reports/transactions-list/transactions-list.component';
 
 export const componentDeclarations: any[] = [
   AdminComponent,
   BetsListComponent,
+  TransactionsListComponent,
   SummaryCouponsComponent,
   DetailsCouponComponent,
   SummaryComponent,
@@ -37,6 +39,10 @@ export const routes: Routes = [
   {
     path: 'reports/betsList/detail/:id',
     component: DetailsCouponComponent
+  },
+  {
+    path: 'reports/transactionsList',
+    component: TransactionsListComponent
   },
   {
     path: 'settings/languages',
