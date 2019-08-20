@@ -164,7 +164,7 @@ $color-text-gray: #6b7279;
 	color: $color-text-primary;
 	border-color: $border-card-title;
 	border-width: 1;
-	border-radius: 5;
+	border-radius: 4;
 }
 
 %card-title-label {
@@ -180,7 +180,7 @@ $color-text-gray: #6b7279;
 %sub-card-title-mobile {
 	background-color: $color-bg-event;
 	color: $color-text-primary;
-	border-radius: 5;
+	border-radius: 4;
 }
 
 %time-card-title {
@@ -194,8 +194,6 @@ $color-text-gray: #6b7279;
 	background-color: $color-bg-event;
 	color: $color-text-primary;
 	border-color: $border-event;
-	border-width: 1;
-	border-radius: 5;
 }
 
 %card-title-noborder {
@@ -323,8 +321,8 @@ $gradient-dark2: #000000;
 	color: $color-text-primary;
 }
 %btn-success {
-  background: $color-bg-success;
-  color: $color-text-primary;
+	background: $color-bg-success;
+	color: $color-text-primary;
 }
 
 %btn-success-gradient {
@@ -474,7 +472,7 @@ $gradient-dark2: #000000;
 // Dog racing
 %PRODUCT-DOG-BG {
 	background: url("app/themes/skins/develop/image/Dog-Racing.png") left center no-repeat;
-	background-size: 15%;
+	background-size: contain;
 }
 
 %PRODUCT-DOG-BG-MOBILE {
@@ -484,7 +482,7 @@ $gradient-dark2: #000000;
 // HORSERACING
 %PRODUCT-HORSE-BG {
 	background: url("app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
-	background-size: 15%;
+	background-size: contain;
 }
 %PRODUCT-HORSE-BG-MOBILE {
 	background: url("~/app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
@@ -493,7 +491,7 @@ $gradient-dark2: #000000;
 // HORSERACING-VIRTUAL
 %PRODUCT-HORSE-V-BG {
 	background: url("app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
-	background-size: 15%;
+	background-size: contain;
 }
 %PRODUCT-HORSE-V-BG-MOBILE {
 	background: url("~/app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
@@ -503,7 +501,7 @@ $gradient-dark2: #000000;
 // COCK FIGHT
 %PRODUCT-COCK-BG {
 	background: url("app/themes/skins/develop/image/Cock-fight.png") left center no-repeat;
-	background-size: 20%;
+	background-size: contain;
 }
 %PRODUCT-COCK-BG-MOBILE {
 	background: url("~/app/themes/skins/develop/image/Cock-fight.png") left center no-repeat;
@@ -517,6 +515,26 @@ $gradient-dark2: #000000;
 
 %ICON-COCK-BLUE {
 	background: url("~/app/themes/skins/develop/image/cockfight/cock-blue.png") no-repeat center;
+	background-size: contain;
+}
+
+// SOCCER FIGHT
+%PRODUCT-ITA-LEAGUE-BG {
+	background: url("app/themes/skins/develop/image/Soccer-IT.png") left center no-repeat;
+	background-size: contain;
+}
+%PRODUCT-ITA-LEAGUE-BG-MOBILE {
+	background: url("~/app/themes/skins/develop/image/Soccer-IT.png") left center no-repeat;
+	background-size: contain;
+}
+
+%PRODUCT-ENG-LEAGUE-BG {
+	background: url("app/themes/skins/develop/image/Soccer-EN.png") left center no-repeat;
+	background-size: contain;
+}
+
+%PRODUCT-ENG-LEAGUE-BG-MOBILE {
+	background: url("~/app/themes/skins/develop/image/Soccer-EN.png") left center no-repeat;
 	background-size: contain;
 }
 
@@ -540,9 +558,7 @@ $gradient-dark2: #000000;
 %dialog-mobile {
 	background-color: $color-bg-primary;
 	color: $color-text-primary;
-	border-width: 1;
 	border-color: $border-card-title;
-	border-radius: 5;
 }
 
 %dialog-card {
@@ -725,12 +741,12 @@ $gradient-dark2: #000000;
 // GROUPINGS
 
 %bg-slide-toggle-thumb-container-selected {
-  background: $color-bg-event;
-  box-shadow:  0px 0px 3px 0px $color-bg-primary-op-dark;
+	background: $color-bg-event;
+	box-shadow: 0px 0px 3px 0px $color-bg-primary-op-dark;
 }
 %bg-slide-toggle-thumb-label {
-  background: $color-bg-primary;
+	background: $color-bg-primary;
 }
 %bg-slide-toggle-thumb-label-selected {
-  background: $color-bg-event;
+	background: $color-bg-event;
 }

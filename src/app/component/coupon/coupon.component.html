@@ -17,10 +17,12 @@
       <div class="display" fxLayoutAlign="space-around center" fxLayout="row layout-wrap">
         <div fxFlex fxLayoutAlign="start center" class="coupon-type-indicator">
           <!-- Type Coupon and Number of odds -->
-            <ng-container *ngIf="couponService.coupon && couponService.coupon.Odds.length > 0">
-              <span class="btn btn-default" *ngIf="couponLayout.acceptMultiStake">{{'SINGLE' | translate}}</span>
-              <span class="btn btn-default" *ngIf="!couponLayout.acceptMultiStake">{{ 'DYNAMIC_KEYS.CouponType.'+couponTypeId[couponService.coupon.CouponTypeId] | translate}}</span>
-              <span class="indicator-odds-number radius-50">{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}</span>
+          <ng-container *ngIf="couponService.coupon && couponService.coupon.Odds.length > 0">
+            <span class="btn btn-default" *ngIf="couponLayout.acceptMultiStake">{{'SINGLE' | translate}}</span>
+            <span class="btn btn-default"
+              *ngIf="!couponLayout.acceptMultiStake">{{ 'DYNAMIC_KEYS.CouponType.'+couponTypeId[couponService.coupon.CouponTypeId] | translate}}</span>
+            <span
+              class="indicator-odds-number radius-50">{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}</span>
           </ng-container>
         </div>
         <div fxFlex="15">
@@ -52,15 +54,16 @@
               fxLayout="column" fxLayoutAlign="space-between stretch">
               <div fxFlex="24" class="top-window radius-5-tl-tr" fxLayoutAlign="space-between center">
                 <div>
-                    <span *ngIf="couponLayout && couponLayout.typeLayout === layoutProduct.SOCCER">
-                      {{ listOdds[0].DefaultTournamentName }} -
-                    </span>
-                    <span [ngClass]="{ 'typography-weight-700 typography-size-11' : couponLayout.typeLayout === layoutProduct.SOCCER}">{{odd.EventName}}</span>
+                  <span *ngIf="couponLayout && couponLayout.typeLayout === layoutProduct.SOCCER">
+                    {{ listOdds[0].DefaultTournamentName }} -
+                  </span>
+                  <span
+                    [ngClass]="{ 'typography-weight-700 typography-size-11' : couponLayout.typeLayout === layoutProduct.SOCCER}">{{odd.EventName}}</span>
                 </div>
                 <div>#{{odd.MatchId}}</div>
               </div>
               <!-- COUPON MULTISTAKE-->
-              <ng-container  *ngIf="couponLayout.acceptMultiStake">
+              <ng-container *ngIf="couponLayout.acceptMultiStake">
                 <div fxFlex="38" class="row" fxLayout="row">
                   <div fxFlex="78" fxLayoutAlign="start center">
                     {{odd.MarketName}} -
@@ -87,23 +90,24 @@
                 </div>
               </ng-container>
               <!-- COUPON NO MULTISTAKE-->
-              <ng-container  *ngIf="!couponLayout.acceptMultiStake">
+              <ng-container *ngIf="!couponLayout.acceptMultiStake">
                 <div fxFlex="76" class="row" fxLayout="row">
-                    <div fxFlex="75" fxLayoutAlign="start center">
-                      {{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})
-                    </div>
-                    <div fxFlex="25" fxLayoutAlign="center">
-                      <div fxLayout="column" fxFill fxLayoutGap="10px">
-                        <div fxFlex="40" class="odd radius-5" fxLayoutAlign="center">
-                          {{odd.OddValue | number: '1.2-2'}}
-                        </div>
-                        <div fxFlex="50" fxLayoutAlign="end center">
-                          <button class="btn-default btn-warning radius-5 remove" (click)="removeOdd(odd)">
-                            <div class="icon"></div>
-                          </button>
-                        </div>
+                  <div fxFlex="75" fxLayoutAlign="start center">
+                    {{odd.MarketName}} -
+                    ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})
+                  </div>
+                  <div fxFlex="25" fxLayoutAlign="center">
+                    <div fxLayout="column" fxFill fxLayoutGap="10px">
+                      <div fxFlex="40" class="odd radius-5" fxLayoutAlign="center">
+                        {{odd.OddValue | number: '1.2-2'}}
+                      </div>
+                      <div fxFlex="50" fxLayoutAlign="end center">
+                        <button class="btn-default btn-warning radius-5 remove" (click)="removeOdd(odd)">
+                          <div class="icon"></div>
+                        </button>
                       </div>
                     </div>
+                  </div>
                 </div>
               </ng-container>
             </div>
@@ -148,7 +152,7 @@
   <mat-grid-tile rowspan="2"
     *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
     <div fxFill class="padding-top-10">
-      <button class="btn-default btn-success radius-10 padding-10"
+      <button class="btn-default btn-success radius-5 padding-10"
         [disabled]="couponService.error || couponService.isWaitingConclusionOperation"
         (click)="couponService.preStagedCoupon()">{{'COUPON.BET' | translate | uppercase}}</button>
     </div>
@@ -157,11 +161,11 @@
     *ngIf="!settings.couponDirectPlace && couponService.coupon && couponService.coupon.internal_isReadyToPlace">
     <div fxFill fxLayoutGap="10px">
       <div fxFill fxFlex="50" class="padding-top-10">
-        <button class="btn-default btn-warning radius-10 padding-10" [disabled]="couponService.error"
+        <button class="btn-default btn-warning radius-5 padding-10" [disabled]="couponService.error"
           (click)="couponService.cancelStagingCoupon()">{{'back' | translate | uppercase}}</button>
       </div>
       <div fxFill fxFlex="50" class="padding-top-10">
-        <button class="btn-default btn-success radius-10 padding-10" [disabled]="couponService.error"
+        <button class="btn-default btn-success radius-5 padding-10" [disabled]="couponService.error"
           (click)="couponService.stagedCoupon()">{{'conferma' | translate | uppercase}}</button>
       </div>
     </div>

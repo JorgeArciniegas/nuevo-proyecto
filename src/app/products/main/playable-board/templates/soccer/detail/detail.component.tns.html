@@ -2,25 +2,26 @@
   <!-- AREAS -->
   <GridLayout col="0" rows="*,2*,2*,2*,2*,2*,2*,2*,2*,2*,2*" class="areas-column">
     <Label row="0" text="{{ 'AREAS' | translate }}" horizontalAlignment="center" class="section-identifier"
-      marginLeft="10" marginBottom="5"></Label>
+      marginLeft="10" marginBottom="2"></Label>
     <ng-container
       *ngFor="let area of soccerService.tournament.listDetailAreas[soccerService.selectedMatch]; let i = index">
       <FlexBoxLayout row="{{i + 1}}" flexDirection="row" justifyContent="space-between" alignItems="center"
-        class="btn-soccer-area radius-5" [ngClass]="area.isSelected ?  'btn-selected': 'btn-grey-gradient'"
+        class="btn-soccer-area" [ngClass]="area.isSelected ?  'btn-selected': 'btn-grey-gradient'"
         [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen" (tap)="changeArea(i)"
         marginLeft="10" marginBottom="5" paddingLeft="10" paddingRight="10">
-        <Label text="{{ area.name }}" class="btn-soccer-area__details--name"></Label>
+        <Label text="{{ 'DYNAMIC_KEYS.SOCCER.AREAS.' + area.name | translate }}"
+          class="btn-soccer-area__details--name"></Label>
         <Label class="btn-soccer-area__details--icon"
-          [ngClass]="{'star-red-icon': area.hasLowestOdd, 'star-yellow-icon': area.hasHighestOdd}"
+          [ngClass]="{'star-red-icon': area.hasHighestOdd, 'star-yellow-icon': area.hasLowestOdd}"
           *ngIf="area.hasLowestOdd || area.hasHighestOdd"></Label>
       </FlexBoxLayout>
     </ng-container>
   </GridLayout>
 
   <!-- SELECTIONS -->
-  <GridLayout col="1" rows="*,20*"  *ngIf="soccerService.selectedArea !== 4">
+  <GridLayout col="1" rows="*,20*" *ngIf="soccerService.selectedArea !== 4">
     <Label row="0" text="{{ 'MARKETS' | translate }}" horizontalAlignment="center" class="section-identifier"
-      marginLeft="10" marginBottom="5"></Label>
+      marginLeft="10" marginBottom="2"></Label>
     <GridLayout row="1"
       columns="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaCols | getGridStringSetting }}"
       marginLeft="5">
@@ -36,20 +37,30 @@
               row="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea] | getNumGridElemDetail: 'row': i: i1: i2 }}"
               col="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea] | getNumGridElemDetail: 'col': i: i1: i2 }}"
               flexDirection="column" justifyContent="center" alignItems="center" class="btn-soccer-odd radius-5"
-              [ngClass]="soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
-              [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"
+              [ngClass]="[soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient', odd.isValid ? '' : 'disabled']"
+              [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen && odd.isValid"
               (tap)="selectOdd(i, market.id, odd)" marginLeft="5" marginBottom="5"
               *ngIf="market.layoutGridDefinition.marketPositionOnColArea === i + 1">
               <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
-                <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
+                <Label text="{{ 'DYNAMIC_KEYS.SOCCER.MARKETS.' + odd.nm | translate | uppercase }}"
+                  horizontalAlignment="right"
+                  *ngIf="market.id !== 2 && market.id !== 10 && market.id !== 13 && market.id !== 44 && market.id !== 46 && market.id !== 658 && market.id !== 1009 && market.id !== 1018"></Label>
+                <Label text="{{ odd.nm | uppercase }}" horizontalAlignment="right"
+                  *ngIf="market.id === 2 || market.id === 10 || market.id === 13 || market.id === 44 || market.id === 46 || market.id === 658 || market.id === 1009 || market.id === 1018"></Label>
+                <Label text="{{ 'HOME' | translate | uppercase }}" horizontalAlignment="right" *ngIf="market.id === 22"
+                  marginLeft="5"></Label>
+                <Label text="{{ 'AWAY' | translate | uppercase }}" horizontalAlignment="right" *ngIf="market.id === 23"
+                  marginLeft="5"></Label>
                 <Label text="{{ market.specialValueOrSpread }}" horizontalAlignment="left"
                   *ngIf="market.hasSpecialValue" marginLeft="5"></Label>
               </StackLayout>
               <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
                 horizontalAlignment="center">
-                <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value"></Label>
+                <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value" *ngIf="odd.isValid"></Label>
+                <Label text="-" class="btn-soccer-odd__details--value" horizontalAlignment="center"
+                  *ngIf="!odd.isValid"></Label>
                 <Label class="btn-soccer-odd__details--icon"
-                  [ngClass]="{'star-red-icon': odd.isLowestOdd, 'star-yellow-icon': odd.isHighestOdd}"
+                  [ngClass]="{'star-red-icon': odd.isHighestOdd, 'star-yellow-icon': odd.isLowestOdd}"
                   *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
               </StackLayout>
             </FlexBoxLayout>
@@ -59,81 +70,90 @@
     </GridLayout>
   </GridLayout>
   <!-- Selection CorrectScore-->
-  <GridLayout col="1" rows="*,20*"  *ngIf="soccerService.selectedArea === 4">
-      <Label row="0" text="{{ 'MARKETS' | translate }}" horizontalAlignment="center" class="section-identifier"
-        marginLeft="10" marginBottom="5"></Label>
-      <GridLayout row="1" columns="*,*,*" marginLeft="5">
-          <ng-container *ngFor="let market of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets | extractCorrectScore:'1'">
-            <GridLayout col="0" class="markets-selections-column"
-            rows="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaRowsByCol[0] | getGridStringSetting }}">
-              <ng-container *ngFor="let odd of market.selections; let i = index">
-                <FlexBoxLayout row="{{i}}"
-                  flexDirection="column" justifyContent="center" alignItems="center" class="btn-soccer-odd radius-5"
-                  [ngClass]="soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
-                  [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"
-                  (tap)="selectOdd(i, market.id, odd)" marginLeft="5" marginBottom="5">
-                  <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
-                    <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
-                  </StackLayout>
-                  <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
-                    horizontalAlignment="center">
-                    <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value"></Label>
-                    <Label class="btn-soccer-odd__details--icon"
-                      [ngClass]="{'star-red-icon': odd.isLowestOdd, 'star-yellow-icon': odd.isHighestOdd}"
-                      *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
-                  </StackLayout>
-                </FlexBoxLayout>
-              </ng-container>
-            </GridLayout>
-          </ng-container>
-          <ng-container *ngFor="let market of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets | extractCorrectScore:'X'">
-            <GridLayout col="1" rows="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaRowsByCol[0] | getGridStringSetting }}"
-             class="markets-selections-column">
-              <ng-container *ngFor="let odd of market.selections; let i = index">
-                <FlexBoxLayout
-                  row="{{i}}"
-                  flexDirection="column" justifyContent="center" alignItems="center" class="btn-soccer-odd radius-5"
-                  [ngClass]="soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
-                  [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"
-                  (tap)="selectOdd(i, market.id, odd)" marginLeft="5" marginBottom="5">
-                  <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
-                    <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
-                   </StackLayout>
-                   <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
-                    horizontalAlignment="center">
-                    <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value"></Label>
-                    <Label class="btn-soccer-odd__details--icon"
-                      [ngClass]="{'star-red-icon': odd.isLowestOdd, 'star-yellow-icon': odd.isHighestOdd}"
-                      *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
-                 </StackLayout>
-                </FlexBoxLayout>
-              </ng-container>
-            </GridLayout>
-          </ng-container>
-          <ng-container *ngFor="let market of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets | extractCorrectScore:'2'">
-            <GridLayout col="2" rows="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaRowsByCol[0] | getGridStringSetting }}"
-              class="markets-selections-column">
-              <ng-container *ngFor="let odd of market.selections; let i = index">
-                <FlexBoxLayout
-                  row="{{i}}"
-                  flexDirection="column" justifyContent="center" alignItems="center" class="btn-soccer-odd radius-5"
-                  [ngClass]="soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
-                  [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"
-                  (tap)="selectOdd(i, market.id, odd)" marginLeft="5" marginBottom="5">
-                  <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
-                    <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
-                  </StackLayout>
-                  <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
-                    horizontalAlignment="center">
-                    <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value"></Label>
-                    <Label class="btn-soccer-odd__details--icon"
-                      [ngClass]="{'star-red-icon': odd.isLowestOdd, 'star-yellow-icon': odd.isHighestOdd}"
-                      *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
-                  </StackLayout>
-                </FlexBoxLayout>
-              </ng-container>
-            </GridLayout>
+  <GridLayout col="1" rows="*,20*" *ngIf="soccerService.selectedArea === 4">
+    <Label row="0" text="{{ 'MARKETS' | translate }}" horizontalAlignment="center" class="section-identifier"
+      marginLeft="10" marginBottom="5"></Label>
+    <GridLayout row="1" columns="*,*,*" marginLeft="5">
+      <ng-container
+        *ngFor="let market of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets | extractCorrectScore:'1'">
+        <GridLayout col="0" class="markets-selections-column"
+          rows="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaRowsByCol[0] | getGridStringSetting }}">
+          <ng-container *ngFor="let odd of market.selections; let i = index">
+            <FlexBoxLayout row="{{i}}" flexDirection="column" justifyContent="center" alignItems="center"
+              class="btn-soccer-odd radius-5"
+              [ngClass]="[soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient', odd.isValid ? '' : 'disabled']"
+              [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen && odd.isValid"
+              (tap)="selectOdd(i, market.id, odd)" marginLeft="5" marginBottom="5">
+              <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
+                <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
+              </StackLayout>
+              <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
+                horizontalAlignment="center">
+                <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value" *ngIf="odd.isValid"></Label>
+                <Label text="-" class="btn-soccer-odd__details--value" horizontalAlignment="center"
+                  *ngIf="!odd.isValid"></Label>
+                <Label class="btn-soccer-odd__details--icon"
+                  [ngClass]="{'star-red-icon': odd.isHighestOdd, 'star-yellow-icon': odd.isLowestOdd}"
+                  *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
+              </StackLayout>
+            </FlexBoxLayout>
           </ng-container>
         </GridLayout>
-      </GridLayout>
+      </ng-container>
+      <ng-container
+        *ngFor="let market of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets | extractCorrectScore:'X'">
+        <GridLayout col="1"
+          rows="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaRowsByCol[0] | getGridStringSetting }}"
+          class="markets-selections-column">
+          <ng-container *ngFor="let odd of market.selections; let i = index">
+            <FlexBoxLayout row="{{i}}" flexDirection="column" justifyContent="center" alignItems="center"
+              class="btn-soccer-odd radius-5"
+              [ngClass]="[soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient', odd.isValid ? '' : 'disabled']"
+              [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen && odd.isValid"
+              (tap)="selectOdd(i, market.id, odd)" marginLeft="5" marginBottom="5">
+              <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
+                <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
+              </StackLayout>
+              <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
+                horizontalAlignment="center">
+                <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value" *ngIf="odd.isValid"></Label>
+                <Label text="-" class="btn-soccer-odd__details--value" horizontalAlignment="center"
+                  *ngIf="!odd.isValid"></Label>
+                <Label class="btn-soccer-odd__details--icon"
+                  [ngClass]="{'star-red-icon': odd.isHighestOdd, 'star-yellow-icon': odd.isLowestOdd}"
+                  *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
+              </StackLayout>
+            </FlexBoxLayout>
+          </ng-container>
+        </GridLayout>
+      </ng-container>
+      <ng-container
+        *ngFor="let market of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets | extractCorrectScore:'2'">
+        <GridLayout col="2"
+          rows="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].layoutDefinition.areaRowsByCol[0] | getGridStringSetting }}"
+          class="markets-selections-column">
+          <ng-container *ngFor="let odd of market.selections; let i = index">
+            <FlexBoxLayout row="{{i}}" flexDirection="column" justifyContent="center" alignItems="center"
+              class="btn-soccer-odd radius-5"
+              [ngClass]="[soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient', odd.isValid ? '' : 'disabled']"
+              [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen && odd.isValid"
+              (tap)="selectOdd(i, market.id, odd)" marginLeft="5" marginBottom="5">
+              <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
+                <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
+              </StackLayout>
+              <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
+                horizontalAlignment="center">
+                <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value" *ngIf="odd.isValid"></Label>
+                <Label text="-" class="btn-soccer-odd__details--value" horizontalAlignment="center"
+                  *ngIf="!odd.isValid"></Label>
+                <Label class="btn-soccer-odd__details--icon"
+                  [ngClass]="{'star-red-icon': odd.isHighestOdd, 'star-yellow-icon': odd.isLowestOdd}"
+                  *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
+              </StackLayout>
+            </FlexBoxLayout>
+          </ng-container>
+        </GridLayout>
+      </ng-container>
+    </GridLayout>
+  </GridLayout>
 </GridLayout>

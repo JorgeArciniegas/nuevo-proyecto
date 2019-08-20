@@ -1,12 +1,12 @@
-<GridLayout rows="5*,4*">
+<GridLayout rows="5*,4*" class="grid-display-component">
   <StackLayout row="0" class="display m-b-5">
     <GridLayout rows="*" columns="5*,3*,*"
       *ngIf="polyfunctionalValue && polyfunctionalValue.selection && productService.product.typeCoupon.acceptMultiStake"
       class="p-l-5">
-      <StackLayout col="0" verticalAlignment="center">
-        <Label *ngIf="polyfunctionalValue && polyfunctionalValue.selection"
+      <StackLayout col="0" orientation="horizontal" verticalAlignment="center">
+        <Label class="title" *ngIf="polyfunctionalValue && polyfunctionalValue.selection"
           text="{{'DYNAMIC_KEYS.SMARTCODE.'+polyfunctionalValue.selection | translate | uppercase}}"></Label>
-        <Label *ngIf="polyfunctionalValue && polyfunctionalValue.odds && polyfunctionalValue.odds.length === 1"
+        <Label verticalAlignment="center" class="odd-label m-l-4" *ngIf="polyfunctionalValue && polyfunctionalValue.odds && polyfunctionalValue.odds.length === 1"
           text="( {{ polyfunctionalValue.odds[0].odd | number:'1.2-2'}} )"></Label>
       </StackLayout>
       <Label col="1" *ngIf="polyfunctionalValue" text="{{polyfunctionalValue.value}}" verticalAlignment="center"
@@ -32,10 +32,10 @@
   <StackLayout row="1" class="display">
     <GridLayout rows="*" columns="*,*" *ngIf="amountPresetPlayer">
       <Label col="0" verticalAlignment="center" text="{{ typeBetSlipColTot[amountPresetPlayer.typeSlipCol] }}"
-        class="p-l-5"></Label>
+        class="title p-l-5"></Label>
       <Label col="1" verticalAlignment="center" horizontalAlignment="right"
         text="{{ amountPresetPlayer.amount | currency : userService.userCurrency : 'symbol-narrow'}}"
-        class="p-r-5"></Label>
+        class="title p-r-5"></Label>
     </GridLayout>
   </StackLayout>
 </GridLayout>

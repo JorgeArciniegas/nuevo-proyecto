@@ -16,6 +16,7 @@
 	.btn-default-dog-play,
 	.btn-default-cock {
 		border-width: 2px;
+		overflow: hidden;
 	}
 	.btn-default-cock {
 		.icon {
@@ -31,24 +32,24 @@
 				background-size: contain;
 			}
 		}
-  }
+	}
 }
- // SOCCER
- .results-event{
-  margin-left: 0.5vw;
-  width: calc(100% - 0.5vw);
-  max-width: calc(100% - 0.5vw);
- }
-.card-box-result-soccer{
-  padding: 2px;
-  .header {
-    @extend %card-title-noborder;
-  }
+// SOCCER
+.results-event {
+	margin-left: 0.5vw;
+	width: calc(100% - 0.5vw);
+	max-width: calc(100% - 0.5vw);
+}
+.card-box-result-soccer {
+	padding: 2px;
+	.header {
+		@extend %card-title-noborder;
+	}
 }
 
 .btn-soccer-result {
-  font-size: 0.8rem !important;
-  width: calc(100% - 5px) !important;
-  min-width: calc(100% - 5px) !important;
-  @extend %card-title-noborder;
+	font-size: 1.3vh !important;
+	width: calc(100% - 5px) !important;
+	min-width: calc(100% - 5px) !important;
+	@extend %card-title-noborder;
 }

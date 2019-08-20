@@ -1,6 +1,6 @@
 <GridLayout id="admin" rows="4*,1*" columns="1*,1*,1*">
   <StackLayout verticalAlignment="top" class="p-20" orientation="vertical" row="0" col="0">
-    <GridLayout class="admin-panel-container radius-15" rows="1*,1*" columns="*">
+    <GridLayout class="admin-panel-container radius-5" rows="1*,1*" columns="*">
       <StackLayout orientation="horizontal" horizontalAlignment="center" row="0" col="0">
         <Image stretch="aspectFit" width="30" col="0"
           src="~/app/themes/skins/{{settings.theme}}/icon/baseline-history-24px.png" verticalAlignment="center"
@@ -16,7 +16,7 @@
           text="{{'BETS_LIST' | translate }}"></Label>
       </StackLayout>
     </GridLayout>
-    <GridLayout class="admin-panel-container radius-15" rows="1*,1*" columns="*">
+    <GridLayout class="admin-panel-container radius-5" rows="1*,1*" columns="*">
       <StackLayout orientation="horizontal" horizontalAlignment="center" row="0" col="0">
         <Image stretch="aspectFit" width="30" col="0"
           src="~/app/themes/skins/{{settings.theme}}/icon/baseline-settings-20px.png" verticalAlignment="center"
@@ -33,7 +33,7 @@
           text="{{'LANGUAGE' | translate }}"></Label>
       </StackLayout>
     </GridLayout>
-    <GridLayout class="admin-panel-container radius-15">
+    <GridLayout class="admin-panel-container radius-5">
       <StackLayout (tap)="userService.logout()" width="100%" height="40%" class="button btn-default btn-grey-gradient"
         orientation="horizontal" horizontalAlignment="center" row="0" col="0">
         <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"

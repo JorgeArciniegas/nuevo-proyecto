@@ -1,15 +1,13 @@
-.card {
-	margin: 3 2;
+.grid-display-component{
 
-	.display {
-		padding: 0 5;
+  .display {
 
-		.title {
-			font-size: 13;
-		}
-		.odd {
-			font-size: 13;
-		}
+    .title {
+      font-size: 13;
+    }
+    .odd-label {
+      font-size: 11;
+    }
   }
   .indicator-amount{
     border-width: 1;

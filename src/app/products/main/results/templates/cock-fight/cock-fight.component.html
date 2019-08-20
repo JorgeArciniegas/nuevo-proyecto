@@ -13,7 +13,7 @@
             <mat-grid-list fxFill cols="3" rowHeight="{{rowHeight}}" class="position">
               <mat-grid-tile>
                 <div fxFill fxLayoutAlign="center center"
-                  class="radius-10 btn-default-cock btn-cock-{{event.cockResult.winner}}">
+                  class="radius-5 btn-default-cock btn-cock-{{event.cockResult.winner}}">
                   <ng-container [ngSwitch]="event.cockResult.winner">
                     <span *ngSwitchCase="1" class="icon icon-cock-red"></span>
                     <span *ngSwitchCase="2" class="icon icon-cock-blue"></span>
@@ -23,13 +23,13 @@
               </mat-grid-tile>
               <mat-grid-tile>
                 <div fxFill fxLayoutAlign="center center"
-                  class="radius-10 btn-default-cock  btn-cock-{{event.cockResult.winner}} btn-{{codeProduct}}-{{event.cockResult.ou}}">
+                  class="radius-5 btn-default-cock  btn-cock-{{event.cockResult.winner}} btn-{{codeProduct}}-{{event.cockResult.ou}}">
                   <span>{{'DYNAMIC_KEYS.OVER_UNDER_COCKFIGHT.'+ event.cockResult.ou | translate | lowercase }}</span>
                 </div>
               </mat-grid-tile>
               <mat-grid-tile>
                 <div fxFill fxLayoutAlign="center center"
-                  class="radius-10 btn-default-cock  btn-cock-{{event.cockResult.winner}} btn-{{codeProduct}}-{{event.cockResult.sector}}">
+                  class="radius-5 btn-default-cock  btn-cock-{{event.cockResult.winner}} btn-{{codeProduct}}-{{event.cockResult.sector}}">
                   <span>{{(event.cockResult.sector === 0) ? '-' : 's' + event.cockResult.sector}}</span>
                 </div>
               </mat-grid-tile>

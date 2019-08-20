@@ -11,17 +11,32 @@
 			.section-identifier {
 				text-transform: uppercase;
 				font-weight: bold;
-				font-size: 12;
+				font-size: 9;
+			}
+		}
+
+		.column-matches {
+			font-size: 9;
+			.match-name,
+			.badge {
+				font-size: 9;
 			}
 		}
 
 		.column-selections {
-			font-size: 10;
+			font-size: 9;
+
+			.btn-soccer-odd {
+				&.disabled {
+					opacity: 0.5;
+				}
+			}
 
 			.btn-soccer-odd,
 			.btn-soccer-area {
 				padding: 1 3;
 				border: 0;
+				border-radius: 4;
 
 				.btn-soccer-odd__details,
 				.btn-soccer-area__details {

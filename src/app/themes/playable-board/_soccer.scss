@@ -1,9 +1,5 @@
 .playable-board-soccer {
 	.playable-grid-buttons {
-		// .mat-figure {
-		// 	align-items: flex-start !important;
-		// }
-
 		.column-matches,
 		.column-selections {
 			.section-identifier {
@@ -14,10 +10,22 @@
 		}
 
 		.column-selections {
+			.btn-soccer-odd {
+				&[disabled] {
+					opacity: 0.5;
+					cursor: auto;
+
+					:focus {
+						background: inherit;
+					}
+				}
+			}
+
 			.btn-soccer-odd,
 			.btn-soccer-area {
 				padding: 5px 10px;
 				border: 0;
+				font-size: 1.3vh;
 
 				.btn-soccer-odd__details,
 				.btn-soccer-area__details {
@@ -25,9 +33,6 @@
 						font-weight: bold;
 						text-transform: uppercase;
 						width: 100%;
-						white-space: nowrap;
-						text-overflow: ellipsis;
-						overflow: hidden;
 					}
 				}
 
@@ -38,8 +43,14 @@
 					}
 
 					&--icon {
-						height: 30px;
-						width: 30px;
+						height: 18px;
+						width: 18px;
+					}
+				}
+
+				.btn-soccer-odd__details {
+					&--value {
+						line-height: 2.3vh;
 					}
 				}
 
@@ -56,16 +67,16 @@
 	}
 }
 
-.detail-section{
-  .areas-column {
-    >.mat-figure {
-      align-items: flex-start;
-      padding: 0;
-    }
-    .section-identifier {
-      .mat-figure{
-        padding: 0;
-      }
-    }
-  }
+.detail-section {
+	.areas-column {
+		> .mat-figure {
+			align-items: flex-start;
+			padding: 0;
+		}
+		.section-identifier {
+			.mat-figure {
+				padding: 0;
+			}
+		}
+	}
 }

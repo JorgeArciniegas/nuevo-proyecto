@@ -1,98 +1,102 @@
-.card {
-	margin: 3 2;
-}
+.grid-coupon{
 
-.button {
-
-  .button-internal{
-    font-size: 14;
+  .card {
+    margin: 3 2;
   }
 
-	&.left {
-		margin-right: 3;
-	}
-	&.right {
-		margin-left: 3;
-	}
-}
-.display {
-  padding-left: 3;
-	.title {
-		width: 100%;
-	}
-}
+  .button {
 
-.sub-display {
-	.title {
-		width: 100%;
-		text-align: center;
-	}
-}
+    .button-internal{
+      font-size: 14;
+    }
 
-.btn-coupon-board {
-	border-radius: 5;
-
-	.indicator-odds-number {
-    margin-left: 5;
-    border-width: 1;
-    width: 30;
-    font-size: 11;
-    font-weight: 600;
-    &.small {
-      font-size: 9;
+    &.left {
+      margin-right: 3;
+    }
+    &.right {
+      margin-left: 3;
     }
   }
-}
+  .display {
+    padding-left: 3;
+    .title {
+      font-size: 14;
+      // width: 100%;
+    }
+  }
 
-.remove-all {
-  margin-left: 5;
-}
+  .sub-display {
+    .title {
+      // width: 100%;
+      text-align: center;
+    }
+  }
 
-.card-odd {
-  border-radius: 5;
-  margin: 2;
-  .top-window {
+  .btn-coupon-board {
     border-radius: 5;
-    font-size: 9;
-    padding: 0 5;
-  }
-  .row {
-    padding: 2 4;
-    font-size: 11;
-  }
-  .odd {
-    border-radius: 3;
-    padding: 0 2;
-    font-size: 11;
-  }
-  .stake {
-    font-size: 12;
-  }
-  .counter {
-    font-size: 9;
-    padding: 0 2;
-    border-radius: 2;
-    margin-right: 3;
-  }
-}
 
-.small{
+    .indicator-odds-number {
+      margin-left: 5;
+      border-width: 1;
+      width: 30;
+      font-size: 11;
+      font-weight: 600;
+      &.small {
+        font-size: 9;
+      }
+    }
+  }
+
+  .remove-all {
+    margin-left: 5;
+  }
+
   .card-odd {
+    border-radius: 4;
+    margin: 2;
     .top-window {
-      font-size: 8;
+      border-radius: 4;
+      font-size: 9;
+      padding: 0 5;
     }
     .row {
-      font-size: 10;
-      padding: 1 4;
-    }
-    .odd {
-      font-size: 9;
-    }
-    .stake {
+      padding: 2 4;
       font-size: 11;
     }
+    .odd {
+      border-radius: 4;
+      padding: 0 4;
+      font-size: 11;
+    }
+    .stake {
+      font-size: 12;
+    }
     .counter {
-      font-size: 8;
+      font-size: 9;
+      padding: 0 2;
+      border-radius: 2;
+      margin-right: 3;
+    }
+  }
+
+  .small{
+    .card-odd {
+      .top-window {
+        font-size: 8;
+      }
+      .row {
+        font-size: 10;
+        padding: 1 4;
+      }
+      .odd {
+        font-size: 9;
+      }
+      .stake {
+        font-size: 11;
+      }
+      .counter {
+        font-size: 8;
+      }
     }
   }
 }

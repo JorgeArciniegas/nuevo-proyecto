@@ -1,28 +1,29 @@
-<GridLayout *ngIf="eventControlDetails" [ngClass]="eventControlDetails?.productImageClass" rows="*" columns="7*,70*,10*"
+<GridLayout *ngIf="eventControlDetails" [ngClass]="eventControlDetails?.productImageClass" rows="*" columns="7*,60*,40*"
   class="race-control">
-  <GridLayout columns="60*,20*,8*" col="1" verticalAlignment="center">
+
     <!-- TITLE PRODUCT -->
-    <StackLayout col="0" verticalAlignment="center">
+    <StackLayout col="1" verticalAlignment="center" orientation="horizontal">
       <Label class="game-name" [ngClass]="{'small': eventControlDetails?.isWindowSizeSmall}"
         text="{{ 'DYNAMIC_KEYS.PRODUCT.LABEL.'+ eventControlDetails?.productName | translate}}"
         textTransform="uppercase" textWrap="true" verticalAlignment="center"></Label>
+      <!-- TITLE EVENT'S SELECTED -->
+      <Label class="m-l-5 current-race" [ngClass]="{'small': eventControlDetails?.isWindowSizeSmall}"
+        text="{{ eventControlDetails?.eventLabel }}" horizontalAlignment="left" verticalAlignment="center"></Label>
+      <!-- /TITLE EVENT'S SELECTED -->
+      <!-- TITLE EVENT SELECTED ID -->
+      <Label col="1" *ngIf="eventControlDetails?.showEventId" class="m-l-5 number" text="#{{
+              eventControlDetails?.eventNumber }}" verticalAlignment="center" horizontalAlignment="left"></Label>
+      <!-- /TITLE EVENT SELECTED ID -->
     </StackLayout>
     <!-- /TITLE PRODUCT -->
-    <!-- TITLE EVENT'S SELECTED -->
-    <Label col="1" class="current-race" [ngClass]="{'small': eventControlDetails?.isWindowSizeSmall}"
-      text="{{ eventControlDetails?.eventLabel }}" horizontalAlignment="right" verticalAlignment="bottom"></Label>
-    <Label col="2" *ngIf="eventControlDetails?.showEventId" class="number" text="#{{
-            eventControlDetails?.eventNumber }}" verticalAlignment="bottom" horizontalAlignment="right"></Label>
-  </GridLayout>
-  <!-- /TITLE EVENT'S SELECTED -->
   <!-- TIMER -->
-  <StackLayout col="2" shadow="5" [cornerRadius]="5" class="time m-4" horizontalAlignment="right"
-    verticalAlignment="center">
+  <StackLayout col="2" shadow="5" class="m-r-2 time" horizontalAlignment="right" verticalAlignment="center">
     <StackLayout orientation="horizontal" class="time-panel" verticalAlignment="center">
-      <Image height="24" stretch="aspectFit" class="m-r-2"
+      <Image height="24" stretch="aspectFit" class="m-r-4"
         src="~/app/themes/skins/{{eventControlDetails?.theme}}/icon/baseline-timer-24px.png" verticalAlignment="center">
       </Image>
-      <Label [ngClass]="{'small': eventControlDetails?.isWindowSizeSmall}"
+      <!--  [ngClass]="{'small': eventControlDetails?.isWindowSizeSmall}" -->
+      <Label
         text="{{ eventControlDetails?.eventTimeMinutes | number: '2.0-0' }}:{{ eventControlDetails?.eventTimeSeconds | number: '2.0-0' }}"
         verticalAlignment="center"></Label>
     </StackLayout>

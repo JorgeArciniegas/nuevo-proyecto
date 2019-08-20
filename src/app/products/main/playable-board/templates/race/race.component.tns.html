@@ -1,6 +1,6 @@
-<GridLayout rows="10*,2*" columns="*">
+<GridLayout rows="10*,2*" columns="*" class="playable-race">
   <GridLayout class="playable-grid-buttons" rows="*,*,*" columns="*,2*,2*,2*,2*,2*,2*">
-    <GridLayout row="{{i}}" col="0" shadow="3" cornerRadius="6" class="card"
+    <GridLayout row="{{i}}" col="0" shadow="3" cornerRadius="4" class="card"
       *ngFor="let row of ['I','II','III']; let i = index;">
       <GridLayout rows="*" columns="*" class="bg-playable">
         <GridLayout rows="*" columns="*" class="playable-row-tile display"
@@ -17,7 +17,7 @@
         </GridLayout>
       </GridLayout>
     </GridLayout>
-    <GridLayout row="0" col="{{i + 1}}" shadow="3" cornerRadius="16" class="card"
+    <GridLayout row="0" col="{{i + 1}}" shadow="3" class="card"
       *ngFor="let runner of service.playersList | filterByPosition: 1; let i = index;">
       <GridLayout rows="*" columns="*" class="bg-playable">
         <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{runner.number}}"
@@ -28,7 +28,7 @@
         </GridLayout>
       </GridLayout>
     </GridLayout>
-    <GridLayout row="1" col="{{i + 1}}" shadow="3" cornerRadius="16" class="card"
+    <GridLayout row="1" col="{{i + 1}}" shadow="3" class="card"
       *ngFor="let runner of service.playersList | filterByPosition: 2; let i = index;">
       <GridLayout rows="*" columns="*" class="bg-playable">
         <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{runner.number}}"
