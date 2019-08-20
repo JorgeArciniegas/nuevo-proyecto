@@ -10,7 +10,8 @@
           <button class="btn-soccer-area radius-5" [ngClass]="area.isSelected ?  'btn-selected': 'btn-grey-gradient'"
             (click)="changeArea(i)">
             <div class="btn-soccer-area__details" fxLayoutAlign="center center">
-              <span class="btn-soccer-area__details--name">{{ area.name }}</span>
+              <span
+                class="btn-soccer-area__details--name">{{ 'DYNAMIC_KEYS.SOCCER.AREAS.' + area.name | translate }}</span>
               <div class="btn-soccer-area__details--icon"
                 [ngClass]="{'star-yellow-icon': area.hasLowestOdd, 'star-red-icon': area.hasHighestOdd}"
                 *ngIf="area.hasLowestOdd || area.hasHighestOdd">
@@ -48,7 +49,12 @@
                       [disabled]="!odd.isValid" (click)="selectOdd(soccerService.selectedMatch, market.id, odd)">
                       <div class="btn-soccer-odd__details" fxLayout="column" fxLayoutAlign="center center">
                         <div class="btn-soccer-odd__details--name">
-                          <span>{{ odd.nm }}</span>
+                          <span
+                            *ngIf="market.id !== 2 && market.id !== 10 && market.id !== 13 && market.id !== 44 && market.id !== 46 && market.id !== 658 && market.id !== 1009 && market.id !== 1018">{{ 'DYNAMIC_KEYS.SOCCER.MARKETS.' + odd.nm | translate }}</span>
+                          <span
+                            *ngIf="market.id === 2 || market.id === 10 || market.id === 13 || market.id === 44 || market.id === 46 || market.id === 658 || market.id === 1009 || market.id === 1018">{{ odd.nm }}</span>
+                          <span *ngIf="market.id === 22"> {{ 'HOME' | translate }}</span>
+                          <span *ngIf="market.id === 23"> {{ 'AWAY' | translate }}</span>
                           <span *ngIf="market.hasSpecialValue"> {{ market.specialValueOrSpread }}</span>
                         </div>
                         <div class="btn-soccer-odd__details--second_line">
@@ -76,7 +82,7 @@
       <mat-grid-tile class="section-identifier" colspan="3">
         {{ 'MARKETS' | translate }}</mat-grid-tile>
       <mat-grid-tile rowspan="20" colspan="1">
-        <mat-grid-list cols="1" fxFill class="markets-selections-column" rowHeight="{{rowHeight * 16/21 * 1/7.64}}">
+        <mat-grid-list cols="1" fxFill class="markets-selections-column" rowHeight="{{rowHeight * 16/21 * 1/7.82}}">
           <ng-container
             *ngFor="let market of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets | extractCorrectScore:'1'">
             <ng-container *ngFor="let odd of market.selections">
@@ -105,7 +111,7 @@
         </mat-grid-list>
       </mat-grid-tile>
       <mat-grid-tile rowspan="20" colspan="1">
-        <mat-grid-list cols="1" fxFill class="markets-selections-column" rowHeight="{{rowHeight * 16/21 * 1/7.64}}">
+        <mat-grid-list cols="1" fxFill class="markets-selections-column" rowHeight="{{rowHeight * 16/21 * 1/7.82}}">
           <ng-container
             *ngFor="let market of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets | extractCorrectScore:'X'">
             <ng-container *ngFor="let odd of market.selections">
@@ -134,7 +140,7 @@
         </mat-grid-list>
       </mat-grid-tile>
       <mat-grid-tile rowspan="20" colspan="1">
-        <mat-grid-list cols="1" fxFill class="markets-selections-column" rowHeight="{{rowHeight * 16/21 * 1/7.64}}">
+        <mat-grid-list cols="1" fxFill class="markets-selections-column" rowHeight="{{rowHeight * 16/21 * 1/7.82}}">
           <ng-container
             *ngFor="let market of soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea].markets | extractCorrectScore:'2'">
             <ng-container *ngFor="let odd of market.selections">

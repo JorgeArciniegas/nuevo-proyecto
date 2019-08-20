@@ -6,12 +6,13 @@
       <ng-container *ngFor="let market of row.markets; let i1 = index">
         <FlexBoxLayout col="{{row.markets | getNumColOverview: i1: i2}}" flexDirection="column" justifyContent="center"
           alignItems="center" marginLeft="5" class="btn-soccer-odd"
-          [ngClass]="soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
-          [ngClass]="{'disabled': !odd.isValid}"
+          [ngClass]="[soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient', odd.isValid ? '' : 'disabled']"
           [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen && odd.isValid"
           (tap)="selectOdd(i, market.id, odd)" *ngFor="let odd of market.selections; let i2 = index">
           <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
-            <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
+            <Label text="{{ 'DYNAMIC_KEYS.SOCCER.MARKETS.' + odd.nm | translate | uppercase }}"
+              horizontalAlignment="right" *ngIf="market.id !== 10"></Label>
+            <Label text="{{ odd.nm | uppercase }}" horizontalAlignment="right" *ngIf="market.id === 10"></Label>
             <Label text="{{ market.specialValueOrSpread }}" horizontalAlignment="left" *ngIf="market.hasSpecialValue"
               marginLeft="5"></Label>
           </StackLayout>

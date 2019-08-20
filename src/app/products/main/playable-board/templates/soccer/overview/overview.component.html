@@ -10,7 +10,8 @@
           [disabled]="!odd.isValid" (click)="selectOdd(i, market.id, odd)">
           <div class="btn-soccer-odd__details" fxLayout="column" fxLayoutAlign="center center">
             <div class="btn-soccer-odd__details--name">
-              <span>{{ odd.nm }}</span>
+              <span *ngIf="market.id !== 10">{{ 'DYNAMIC_KEYS.SOCCER.MARKETS.' + odd.nm | translate }}</span>
+              <span *ngIf="market.id === 10">{{ odd.nm }}</span>
               <span *ngIf="market.hasSpecialValue"> {{ market.specialValueOrSpread }}</span>
             </div>
             <span class="btn-soccer-odd__details--value" *ngIf="odd.isValid">{{ odd.ods[0].vl }}</span>
