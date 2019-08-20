@@ -40,7 +40,9 @@ import {
   TypePlacingEvent,
   VirtualBetSelectionExtended,
   VirtualBetTournamentExtended,
-  SpecialOddData
+  SpecialOddData,
+  VirtualBetMarketExtended,
+  VirtualBetEventExtended
 } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
@@ -359,12 +361,26 @@ export class MainService extends MainServiceExtra {
               isDetailOpened: false,
               selectedOdds: []
             };
-            // clone temporary areas from default values
+            // Clone temporary areas from default values
             const tmpAreaOverview = clone(overviewAreas);
             const tmpDetailArea = clone(areas);
-            // cicle the current match's markets and save on the temporary "tmpAreaOverview"
-            for (const market of match.mk) {
-              // find the occurrence and append the selections' data
+            const matchExtended: VirtualBetEventExtended = clone(match);
+            const tmpMarkets: VirtualBetMarketExtended[] = matchExtended.mk.map(market => {
+              // Check the validity of the odds. Odd is valid if greater than 1.05.
+              for (const selection of market.sls) {
+                if (selection.ods[0].vl <= 1.05) {
+                  selection.isValid = false;
+                } else {
+                  selection.isValid = true;
+                }
+              }
+              // Sort the selection of each market using their "tp" attribute.
+              market.sls = market.sls.sort((a, b) => a.tp - b.tp);
+              return market;
+            });
+            // Cicle the current match's markets and save on the temporary "tmpAreaOverview"
+            for (const market of tmpMarkets) {
+              // Find the occurrence and append the selections' data
               tmpAreaOverview.markets.map(marketOverviewFilter => {
                 if (marketOverviewFilter.id === market.tp && market.spv === marketOverviewFilter.specialValueOrSpread) {
                   marketOverviewFilter.selections = market.sls;
@@ -380,14 +396,14 @@ export class MainService extends MainServiceExtra {
               // Cicle the current match's markets and save on the temporary "tmpDetailArea"
               detail.markets.forEach((areaMarket, marketIndex) => {
                 // Find the occurrence and append the selections' data
-                const tmpMk: VirtualBetMarket = match.mk.filter(
+                const tmpMk: VirtualBetMarketExtended = tmpMarkets.filter(
                   market => market.tp === areaMarket.id && market.spv === areaMarket.specialValueOrSpread
                 )[0];
                 areaMarket.selections = tmpMk.sls;
                 // Looking for the highest and lowest odd.
                 tmpMk.sls.forEach((odd, oddIndex) => {
                   // Initialization of "lowestOdd".
-                  if (!lowestOdd && odd.ods[0].vl > 1.05) {
+                  if (!lowestOdd && odd.isValid) {
                     lowestOdd = {
                       areaIndex: areaIndex,
                       marketIndex: marketIndex,
@@ -405,7 +421,7 @@ export class MainService extends MainServiceExtra {
                     };
                   }
                   // Looking for the highest and lowest odd.
-                  if (lowestOdd && odd.ods[0].vl < lowestOdd.val && odd.ods[0].vl > 1.05) {
+                  if (lowestOdd && odd.ods[0].vl < lowestOdd.val && odd.isValid) {
                     if (areaIndex !== lowestOdd.areaIndex) {
                       lowestOdd.areaIndex = areaIndex;
                     }
@@ -446,6 +462,7 @@ export class MainService extends MainServiceExtra {
 
           this.attempts = 0;
         } catch (err) {
+          console.log(err);
           if (this.attempts < 5) {
             this.attempts++;
             setTimeout(() => {

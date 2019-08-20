@@ -66,16 +66,11 @@ export class SoccerComponent {
       const match = extractMatchesIdx.shift();
       const tournament = areas[match].markets;
       const rngMarkets = Math.floor(Math.random() * tournament.length);
-      // Get the odd to select. It must have a value greater than 1.05
+      // Get the odd to select. It must have a value greater than 1.05.
       let rngSelection: number;
-      let validSelection = false;
       do {
         rngSelection = Math.floor(Math.random() * areas[match].markets[rngMarkets].selectionCount);
-        // Check if at the chosen index there is a valid odd (with value greater than 1.05).
-        if (areas[match].markets[rngMarkets].selections[rngSelection].ods[0].vl > 1.05) {
-          validSelection = true;
-        }
-      } while (!validSelection);
+      } while (!areas[match].markets[rngMarkets].selections[rngSelection].isValid);
       this.soccerService.selectOdd(
         match,
         areas[match].markets[rngMarkets].selections[rngSelection].tp,

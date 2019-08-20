@@ -7,14 +7,14 @@
       <mat-grid-tile *ngFor="let odd of market.selections" rowspan="2">
         <button class="btn-soccer-odd radius-5"
           [ngClass]="soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient'"
-          [disabled]="odd.ods[0].vl <= 1.05" (click)="selectOdd(i, market.id, odd)">
+          [disabled]="!odd.isValid" (click)="selectOdd(i, market.id, odd)">
           <div class="btn-soccer-odd__details" fxLayout="column" fxLayoutAlign="center center">
             <div class="btn-soccer-odd__details--name">
               <span>{{ odd.nm }}</span>
               <span *ngIf="market.hasSpecialValue"> {{ market.specialValueOrSpread }}</span>
             </div>
-            <span class="btn-soccer-odd__details--value" *ngIf="odd.ods[0].vl > 1.05">{{ odd.ods[0].vl }}</span>
-            <span class="btn-soccer-odd__details--value" *ngIf="odd.ods[0].vl <= 1.05">-</span>
+            <span class="btn-soccer-odd__details--value" *ngIf="odd.isValid">{{ odd.ods[0].vl }}</span>
+            <span class="btn-soccer-odd__details--value" *ngIf="!odd.isValid">-</span>
           </div>
         </button>
       </mat-grid-tile>
