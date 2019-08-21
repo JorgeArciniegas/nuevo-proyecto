@@ -1,6 +1,9 @@
 {
   "ACCG": "QUI",
   "AGILITY": "Agility",
+  "AMOUNT": "Amount",
+  "AMOUNT_FROM": "Amount from",
+  "AMOUNT_TO": "Amount to",
   "AREAS": "Areas",
   "AWAY": "Away",
   "BALANCE": "Balance",
@@ -320,6 +323,19 @@
         "X2 + Over": "X2 + Over",
         "X2 + Under": "X2 + Under"
       }
+    },
+    "TransactionType": {
+      "ALL": "All",
+      "AWARD": "Award",
+      "BET": "Bet",
+      "CANCELATION": "Cancelation",
+      "COMMISSION": "Commission",
+      "CREDIT": "Credit",
+      "DEDUCTION": "Deduction",
+      "DEPOSIT": "Deposit",
+      "PROMOTION": "Promotion",
+      "REFUND_ERROR": "Refund/Error",
+      "WITHDRAWAL": "Withdrawal"
     }
   },
   "ENDURANCE": "Endurance",
@@ -379,6 +395,8 @@
   "TOT_LOST": "TOT lost",
   "TOT_OPEN": "TOT open",
   "TOT_WON": "TOT won",
+  "TRANSACTIONS_LIST": "Transaction list",
+  "TRANSACTION_TYPE": "Transaction type",
   "TYPE": "Type",
   "USERNAME": "Username",
   "USERNAME_TOO_SHORT": "The username is too short (minimum 2 digits)",

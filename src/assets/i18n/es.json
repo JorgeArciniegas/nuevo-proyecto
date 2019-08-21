@@ -1,6 +1,9 @@
 {
   "ACCG": "GB",
   "AGILITY": "Agilidad",
+  "AMOUNT": "Importo",
+  "AMOUNT_FROM": "Importo da",
+  "AMOUNT_TO": "Importo a",
   "AREAS": "Aree",
   "AWAY": "Visitante",
   "BALANCE": "Saldo",
@@ -320,6 +323,19 @@
         "X2 + Over": "X2 + Alta",
         "X2 + Under": "X2 + Baja"
       }
+    },
+    "TransactionType": {
+      "ALL": "Tutti",
+      "AWARD": "Premi",
+      "BET": "Scommesse",
+      "CANCELATION": "Cancellate",
+      "COMMISSION": "Commissioni",
+      "CREDIT": "Crediti",
+      "DEDUCTION": "Deduzioni",
+      "DEPOSIT": "Depositi",
+      "PROMOTION": "Promozioni",
+      "REFUND_ERROR": "Rimborsi/Errori",
+      "WITHDRAWAL": "Prelievi"
     }
   },
   "ENDURANCE": "Resistencia",
@@ -379,6 +395,8 @@
   "TOT_LOST": "TOT perdido",
   "TOT_OPEN": "TOT abierto",
   "TOT_WON": "TOT ganado",
+  "TRANSACTIONS_LIST": "Lista transazioni",
+  "TRANSACTION_TYPE": "Tipo transazione",
   "TYPE": "Tipo",
   "USERNAME": "Nombre de usuario",
   "USERNAME_TOO_SHORT": "Este nombre de usuario es demasiado corto (minimo 2 caracteres)",

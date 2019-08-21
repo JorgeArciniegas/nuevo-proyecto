@@ -1,6 +1,9 @@
 {
   "ACCG": "ACCG",
   "AGILITY": "Agilidade",
+  "AMOUNT": "Importo",
+  "AMOUNT_FROM": "Importo da",
+  "AMOUNT_TO": "Importo a",
   "AREAS": "Aree",
   "AWAY": "Fora",
   "BALANCE": "Saldo",
@@ -320,6 +323,19 @@
         "X2 + Over": "X2 + Acima",
         "X2 + Under": "X2 + Abaixo"
       }
+    },
+    "TransactionType": {
+      "ALL": "Tutti",
+      "AWARD": "Premi",
+      "BET": "Scommesse",
+      "CANCELATION": "Cancellate",
+      "COMMISSION": "Commissioni",
+      "CREDIT": "Crediti",
+      "DEDUCTION": "Deduzioni",
+      "DEPOSIT": "Depositi",
+      "PROMOTION": "Promozioni",
+      "REFUND_ERROR": "Rimborsi/Errori",
+      "WITHDRAWAL": "Prelievi"
     }
   },
   "ENDURANCE": "Resistência",
@@ -379,6 +395,8 @@
   "TOT_LOST": "TOT perso",
   "TOT_OPEN": "TOT in corso",
   "TOT_WON": "TOT vinto",
+  "TRANSACTIONS_LIST": "Lista transazioni",
+  "TRANSACTION_TYPE": "Tipo transazione",
   "TYPE": "Tipo",
   "USERNAME": "Nome de usuário",
   "USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",

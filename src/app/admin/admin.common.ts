@@ -8,6 +8,7 @@ import { EventsComponent } from './reports/bets-list/details-coupon/events/event
 import { CombinationsComponent } from './reports/bets-list/details-coupon/combinations/combinations.component';
 import { LanguageComponent } from './settings/language/language.component';
 import { TransactionsListComponent } from './reports/transactions-list/transactions-list.component';
+import { SummaryTransactionsComponent } from './reports/transactions-list/summary-transactions/summary-transactions.component';
 
 export const componentDeclarations: any[] = [
   AdminComponent,
@@ -43,6 +44,10 @@ export const routes: Routes = [
   {
     path: 'reports/transactionsList',
     component: TransactionsListComponent
+  },
+  {
+    path: 'reports/transactionsList/summaryTransactions',
+    component: SummaryTransactionsComponent
   },
   {
     path: 'settings/languages',
