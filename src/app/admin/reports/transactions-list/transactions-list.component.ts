@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { TransactionsListService } from './transactions-list.service';
 import { Observable } from 'rxjs';
-import { TranslateUtilityService } from 'src/app/services/utility/translate-utility.service';
+import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
 import { DateAdapter } from '@angular/material';
-import { TransactionType } from './transaction-list.model';
+import { TransactionType } from './transactions-list.model';
 
 @Component({
   selector: 'app-transactions-list',
@@ -54,7 +54,7 @@ export class TransactionsListComponent implements OnDestroy {
     document.body.classList.remove('bets-list');
   }
 
-  changeValue(key: string, value: any) {
+  changeValue(key: string, value: TransactionType): void {
     this.transactionsListService[key] = value;
   }
 }

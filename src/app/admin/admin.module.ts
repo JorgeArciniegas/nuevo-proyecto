@@ -4,10 +4,9 @@ import { MatDatepickerModule, MatInputModule, MatNativeDateModule } from '@angul
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { componentDeclarations, routes } from './admin.common';
-import { SummaryTransactionsComponent } from './reports/transactions-list/summary-transactions/summary-transactions.component';
 
 @NgModule({
-  declarations: [componentDeclarations, SummaryTransactionsComponent],
+  declarations: [componentDeclarations],
   imports: [CommonModule, SharedModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, RouterModule.forChild(routes)]
 })
 export class AdminModule {}

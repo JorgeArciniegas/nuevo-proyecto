@@ -9,6 +9,7 @@ import { CombinationsComponent } from './reports/bets-list/details-coupon/combin
 import { LanguageComponent } from './settings/language/language.component';
 import { TransactionsListComponent } from './reports/transactions-list/transactions-list.component';
 import { SummaryTransactionsComponent } from './reports/transactions-list/summary-transactions/summary-transactions.component';
+import { DetailsTransactionComponent } from './reports/transactions-list/details-transaction/details-transaction.component';
 
 export const componentDeclarations: any[] = [
   AdminComponent,
@@ -19,7 +20,9 @@ export const componentDeclarations: any[] = [
   SummaryComponent,
   EventsComponent,
   CombinationsComponent,
-  LanguageComponent
+  LanguageComponent,
+  SummaryTransactionsComponent,
+  DetailsTransactionComponent
 ];
 
 export const providerDeclarations: any[] = [];
@@ -31,23 +34,37 @@ export const routes: Routes = [
   },
   {
     path: 'reports/betsList',
-    component: BetsListComponent
-  },
-  {
-    path: 'reports/betsList/summaryCoupons',
-    component: SummaryCouponsComponent
-  },
-  {
-    path: 'reports/betsList/detail/:id',
-    component: DetailsCouponComponent
+    children: [
+      {
+        path: '',
+        component: BetsListComponent
+      },
+      {
+        path: 'summaryCoupons',
+        component: SummaryCouponsComponent
+      },
+      {
+        path: 'detail/:id',
+        component: DetailsCouponComponent
+      }
+    ]
   },
   {
     path: 'reports/transactionsList',
-    component: TransactionsListComponent
-  },
-  {
-    path: 'reports/transactionsList/summaryTransactions',
-    component: SummaryTransactionsComponent
+    children: [
+      {
+        path: '',
+        component: TransactionsListComponent
+      },
+      {
+        path: 'summaryTransactions',
+        component: SummaryTransactionsComponent
+      },
+      {
+        path: 'detail/:id',
+        component: DetailsTransactionComponent
+      }
+    ]
   },
   {
     path: 'settings/languages',

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { TransactionType } from './transaction-list.model';
-import { RouterService } from 'src/app/services/utility/router/router.service';
+import { RouterService } from '../../../services/utility/router/router.service';
 import { ElysApiService } from '@elys/elys-api';
 import { ReportsAccountStatementResponse, ReportsAccountStatementRequest } from '@elys/elys-api/lib/reports/reports.models';
+import { TransactionType } from './transactions-list.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class TransactionsListService {
       dateTo: new Date(),
       amountFrom: 0,
       amountTo: 0,
-      service: 'Unknown,Bank,SkrillWallet,Backoffice,Jackpot,WalletApi,SecureApi,Wirecard,CartaSi,Poste',
+      service: '',
       pageSize: this.pageSizeList[0],
       requestedPage: 1,
       userWalletType: null
@@ -33,8 +33,8 @@ export class TransactionsListService {
   }
 
   // Getter and setter object property.
-  get transactionTypesCsv() {
-    return TransactionType[this.request.transactionTypesCsv];
+  get transactionTypesCsv(): TransactionType {
+    return this.request.transactionTypesCsv as TransactionType;
   }
 
   set transactionTypesCsv(type: TransactionType) {

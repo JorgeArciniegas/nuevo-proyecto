@@ -44,7 +44,7 @@
               <h4>{{ 'AMOUNT_FROM' | translate }}</h4>
               <mat-form-field fxFlex="50" class="row" fxLayoutGap="20px"
                 class="btn-filter btn-default padding-10 radius-5" fxLayoutAlign="start center">
-                <input matInput type="text" [(ngModel)]="transactionsListService.amountFrom">
+                <input matInput type="number" [(ngModel)]="transactionsListService.amountFrom">
               </mat-form-field>
             </div>
           </div>
@@ -55,7 +55,7 @@
               <h4>{{ 'AMOUNT_TO' | translate }}</h4>
               <mat-form-field fxFlex="50" class="row" fxLayoutGap="20px"
                 class="btn-filter btn-default padding-10 radius-5" fxLayoutAlign="start center">
-                <input matInput type="text" [(ngModel)]="transactionsListService.amountTo">
+                <input matInput type="number" [(ngModel)]="transactionsListService.amountTo">
               </mat-form-field>
             </div>
           </div>
@@ -70,8 +70,8 @@
         <div fxFlex fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="20px grid">
           <div fxFlex="25" fxLayout="column" *ngFor="let type of object.keys(transactionType)">
             <button class="btn-filter btn-default radius-5"
-              [class.btn-filter-success]="transactionsListService.transactionTypesCsv === transactionType[transactionType[type]]"
-              (click)="changeValue('transactionType', transactionType[type])">{{ 'DYNAMIC_KEYS.TransactionType.'+ type | translate }}
+              [class.btn-filter-success]="transactionsListService.transactionTypesCsv == transactionType[type]"
+              (click)="changeValue('transactionTypesCsv', transactionType[type])">{{ 'DYNAMIC_KEYS.TransactionType.'+ type | translate }}
             </button>
           </div>
         </div>
