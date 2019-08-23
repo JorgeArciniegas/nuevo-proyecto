@@ -43,8 +43,9 @@
             <div fxLayout="column" fxLayoutGap="5px">
               <h4>{{ 'AMOUNT_FROM' | translate }}</h4>
               <mat-form-field fxFlex="50" class="row" fxLayoutGap="20px"
-                class="btn-filter btn-default padding-10 radius-5" fxLayoutAlign="start center">
-                <input matInput type="number" [(ngModel)]="transactionsListService.amountFrom">
+                class="btn-filter btn-default padding-10 radius-5" fxLayoutAlign="start center" floatLabel="never">
+                <input matInput type="number" [(ngModel)]="transactionsListService.amountFrom"
+                  placeholder="{{ '0' | currency : userService.userCurrency : 'symbol-narrow'}}">
               </mat-form-field>
             </div>
           </div>
@@ -54,8 +55,9 @@
             <div fxLayout="column" fxLayoutGap="5px">
               <h4>{{ 'AMOUNT_TO' | translate }}</h4>
               <mat-form-field fxFlex="50" class="row" fxLayoutGap="20px"
-                class="btn-filter btn-default padding-10 radius-5" fxLayoutAlign="start center">
-                <input matInput type="number" [(ngModel)]="transactionsListService.amountTo">
+                class="btn-filter btn-default padding-10 radius-5" fxLayoutAlign="start center" floatLabel="never">
+                <input matInput type="number" [(ngModel)]="transactionsListService.amountTo"
+                  placeholder="{{'0' | currency : userService.userCurrency : 'symbol-narrow'}}">
               </mat-form-field>
             </div>
           </div>

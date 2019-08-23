@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
 import { DateAdapter } from '@angular/material';
 import { TransactionType } from './transactions-list.model';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-transactions-list',
@@ -19,6 +20,7 @@ export class TransactionsListComponent implements OnDestroy {
 
   constructor(
     public transactionsListService: TransactionsListService,
+    public userService: UserService,
     private translate: TranslateUtilityService,
     private adapter: DateAdapter<Date>
   ) {

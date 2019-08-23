@@ -16,20 +16,7 @@ export class TransactionsListService {
 
   constructor(public elysApi: ElysApiService, private router: RouterService) {
     // Request default object.
-    this.request = {
-      transactionTypesCsv: TransactionType.ALL,
-      dateFrom: new Date(),
-      dateTo: new Date(),
-      amountFrom: 0,
-      amountTo: 0,
-      service: '',
-      pageSize: this.pageSizeList[0],
-      requestedPage: 1,
-      userWalletType: null
-    };
-    const today = new Date();
-    this.dateFrom = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
-    this.dateTo = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    this.initResetRequest();
   }
 
   // Getter and setter object property.
@@ -131,10 +118,27 @@ export class TransactionsListService {
       this.request.requestedPage = 1;
     }
     const req: ReportsAccountStatementRequest = this.cloneRequest();
-
     this.elysApi.reports.getTransactionsHistory(req).then(items => (this.transactionsList = items));
-
+    this.initResetRequest();
     this.router.getRouter().navigateByUrl('admin/reports/transactionsList/summaryTransactions');
+  }
+
+  // Method to init or reset the request object.
+  private initResetRequest(): void {
+    const today = new Date();
+    this.request = {
+      transactionTypesCsv: TransactionType.ALL,
+      // Set the date from the begin of the day.
+      dateFrom: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0),
+      // Set the date to the current time of the day.
+      dateTo: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+      amountFrom: undefined,
+      amountTo: undefined,
+      service: '',
+      pageSize: this.pageSizeList[0],
+      requestedPage: 1,
+      userWalletType: null
+    };
   }
 
   private cloneRequest(): ReportsAccountStatementRequest {
