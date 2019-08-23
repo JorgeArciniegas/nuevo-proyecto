@@ -39,6 +39,7 @@
       <GridLayout row="1" columns="*,6*,*" class="button btn-default btn-filter" (tap)="selectAmount('amountFrom')">
         <TextField colSpan="3" keyboardType="number"
           hint="{{ '0' | currency : userService.userCurrency : 'symbol-narrow'}}"
+          text="{{ transactionsListService.amountFrom}}"
           (textChange)="transactionsListService.amountFrom = $event.object.text" returnKeyType="done"></TextField>
       </GridLayout>
     </GridLayout>
@@ -47,6 +48,7 @@
       <GridLayout row="1" columns="*,6*,*" class="button btn-default btn-filter" (tap)="selectAmount('amontTo')">
         <TextField colSpan="3" keyboardType="number"
           hint="{{ '0' | currency : userService.userCurrency : 'symbol-narrow'}}"
+          text="{{ transactionsListService.amountTo}}"
           (textChange)="transactionsListService.amountTo = $event.object.text" returnKeyType="done"></TextField>
       </GridLayout>
     </GridLayout>
@@ -61,7 +63,7 @@
     <GridLayout rows="*,*,*" columns="*,*,*,*" class="display-content">
       <GridLayout row="{{(i / 4) | floor}}" col="{{i % 4}}"
         *ngFor="let type of object.keys(transactionType); let i = index;" class="button btn-default btn-filter"
-        [ngClass]="{'btn-filter-success': transactionsListService.transactionTypesCsv == transactionType[type]}">
+        [ngClass]="{'btn-filter-success': (transactionsListService.transactionTypesCsv | getEnumKeyByEnumValue) == type}">
         <Button text="{{'DYNAMIC_KEYS.TransactionType.'+ type | translate}}" class="button-internal"
           (tap)="changeValue('transactionTypesCsv', transactionType[type])"></Button>
       </GridLayout>
