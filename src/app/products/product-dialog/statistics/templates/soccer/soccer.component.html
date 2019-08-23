@@ -1,0 +1,33 @@
+<div fxFlex="100" fxLayout="column" fxLayoutGap="grid" fxLayoutAlign="space-between stretch">
+  <div fxLayout="row" fxLayoutGap="5px" fxLayoutGap="grid" fxLayoutAlign="space-between center"
+    class="border-bottom-overlay-1px">
+    <div fxFlex="10" fxLayoutAlign="center">{{'TEAM' | translate | uppercase}}</div>
+    <div fxFlex="30" fxLayoutAlign="center">{{'COND' | translate | uppercase}}</div>
+    <div fxFlex="30" fxLayoutAlign="center">{{'ATT' | translate | uppercase}}</div>
+    <div fxFlex="30" fxLayoutAlign="center">{{'DEF' | translate | uppercase}}</div>
+  </div>
+
+  <div *ngIf="data.statistics">
+    <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-between center"
+      *ngFor="let stat of data.statistics.virtualBetCompetitor" class="statistic-data statistic-data-soccer">
+      <div fxFlex="10" fxLayoutAlign="center">
+        <span>{{stat.nm}}</span>
+      </div>
+      <div fxFlex="30" fxLayoutAlign="center">
+        <div class="fitness-container fitness">
+          <div class="fitness-content" [style.width.%]="(( stat.ff / 10) * 100)"></div>
+        </div>
+      </div>
+      <div fxFlex="30">
+        <div class="fitness-container fitness">
+          <div class="fitness-content" [style.width.%]="(( stat.ac[0] / 10) * 100)"></div>
+        </div>
+      </div>
+      <div fxFlex="30">
+        <div class="fitness-container fitness">
+          <div class="fitness-content" [style.width.%]="(( stat.ac[1] / 10) * 100)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

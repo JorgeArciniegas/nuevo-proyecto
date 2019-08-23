@@ -5,7 +5,8 @@ import { Products } from '../../../../src/environments/environment.models';
 import { ProductsService } from '../../../../src/app/products/products.service';
 import { BetDataDialog } from '../../../../src/app/products/products.model';
 import { MainService } from '../../products/main/main.service';
-import { UserService } from '../../../../src/app/services/user.service';
+import { EventsListService } from 'src/app/products/main/events-list/events-list.service';
+import { VirtualBetCompetitor } from '@elys/elys-api/lib/virtual/virtual.models';
 
 @Component({
   selector: 'app-widget',
@@ -29,7 +30,7 @@ export class WidgetComponent implements OnInit {
     public readonly appSettings: AppSettings,
     private productService: ProductsService,
     private mainService: MainService,
-    private userService: UserService
+    private eventsListService: EventsListService
   ) {
     this.settings = appSettings;
   }
@@ -44,20 +45,50 @@ export class WidgetComponent implements OnInit {
    * @param typeObject
    */
   openRouting(typeObject: string): void {
-    this.mainService.getCurrentEvent().then(currentEventDetails => {
-      const data: BetDataDialog = { title: typeObject.toUpperCase() };
-      switch (typeObject) {
-        case 'statistic':
-          data.statistics = {
-            codeProduct: this.productService.product.codeProduct,
-            virtualBetCompetitor: currentEventDetails.tm,
-            layoutProducts: this.productService.product.layoutProducts.type
-          };
-          break;
-        default:
-          data.statistics = null;
-      }
-      this.productService.openProductDialog(data);
-    });
+    if (
+      this.productService.product.layoutProducts.type ===
+      this.eventsListService.typeLayout.SOCCER
+    ) {
+      this.mainService.getCurrentTournament().then(currentEventDetails => {
+        const data: BetDataDialog = { title: typeObject.toUpperCase() };
+        switch (typeObject) {
+          case 'statistic':
+            const virtualBetCompetitorStatistics: VirtualBetCompetitor[] = [];
+            for (const match of currentEventDetails.matches) {
+              virtualBetCompetitorStatistics.push(
+                match.virtualBetCompetitor[0]
+              );
+              virtualBetCompetitorStatistics.push(
+                match.virtualBetCompetitor[1]
+              );
+            }
+            data.statistics = {
+              codeProduct: this.productService.product.codeProduct,
+              virtualBetCompetitor: virtualBetCompetitorStatistics,
+              layoutProducts: this.productService.product.layoutProducts.type
+            };
+            break;
+          default:
+            data.statistics = null;
+        }
+        this.productService.openProductDialog(data);
+      });
+    } else {
+      this.mainService.getCurrentEvent().then(currentEventDetails => {
+        const data: BetDataDialog = { title: typeObject.toUpperCase() };
+        switch (typeObject) {
+          case 'statistic':
+            data.statistics = {
+              codeProduct: this.productService.product.codeProduct,
+              virtualBetCompetitor: currentEventDetails.tm,
+              layoutProducts: this.productService.product.layoutProducts.type
+            };
+            break;
+          default:
+            data.statistics = null;
+        }
+        this.productService.openProductDialog(data);
+      });
+    }
   }
 }

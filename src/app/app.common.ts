@@ -35,6 +35,7 @@ import { RaceComponent as RaceStatisticsComponent } from './products/product-dia
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
 import { LabelByGroupingPipe } from './component/pipe/label-by-grouping.pipe';
+import { SoccerComponent as SoccerStatisticsComponent } from './products/product-dialog/statistics/templates/soccer/soccer.component';
 
 // Registration of the languages in use. The English language is registered by default.
 registerLocaleData(localeIt);
@@ -64,6 +65,7 @@ export const componentDeclarations: any[] = [
   StatisticsComponent,
   RaceStatisticsComponent,
   CockFightStatisticsComponent,
+  SoccerStatisticsComponent,
   GroupingsComponent,
   LabelByGroupingPipe
 ];
