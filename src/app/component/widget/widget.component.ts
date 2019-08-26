@@ -1,12 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppSettings } from '../../app.settings';
 import { IconSize } from '../model/iconSize.model';
-import { Products } from '../../../../src/environments/environment.models';
+import {
+  Products,
+  LAYOUT_TYPE
+} from '../../../../src/environments/environment.models';
 import { ProductsService } from '../../../../src/app/products/products.service';
 import { BetDataDialog } from '../../../../src/app/products/products.model';
 import { MainService } from '../../products/main/main.service';
 import { VirtualBetCompetitor } from '@elys/elys-api/lib/virtual/virtual.models';
-import { EventsListService } from '../../products/main/events-list/events-list.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-widget',
@@ -30,7 +33,7 @@ export class WidgetComponent implements OnInit {
     public readonly appSettings: AppSettings,
     private productService: ProductsService,
     private mainService: MainService,
-    private eventsListService: EventsListService
+    private userService: UserService
   ) {
     this.settings = appSettings;
   }
@@ -46,8 +49,7 @@ export class WidgetComponent implements OnInit {
    */
   openRouting(typeObject: string): void {
     if (
-      this.productService.product.layoutProducts.type ===
-      this.eventsListService.typeLayout.SOCCER
+      this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER
     ) {
       this.mainService.getCurrentTournament().then(currentEventDetails => {
         const data: BetDataDialog = { title: typeObject.toUpperCase() };
