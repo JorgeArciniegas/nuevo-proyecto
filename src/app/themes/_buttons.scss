@@ -182,3 +182,6 @@ button:active:not([disabled]) {
 		}
 	}
 }
+.btn-grey {
+  @extend %btn-gray;
+}

@@ -30,7 +30,8 @@ html {
 
 .app {
 	app-login,
-	app-admin {
+  app-admin,
+  app-create {
 		height: 100%;
 	}
 	&.develop {

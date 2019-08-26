@@ -24,22 +24,36 @@ export const providerDeclarations: any[] = [];
 export const routes: Routes = [
   {
     path: '',
-    component: AdminComponent
+    children: [
+      {
+        path: '',
+        component: AdminComponent,
+      },
+      {
+        path: 'reports/betsList',
+        children: [
+          {
+            path: '',
+            component: BetsListComponent
+          },
+          {
+            path: 'summaryCoupons',
+            component: SummaryCouponsComponent
+          },
+          {
+            path: 'detail/:id',
+            component: DetailsCouponComponent
+          }
+        ]
+      },
+      {
+        path: 'settings/languages',
+        component: LanguageComponent
+      },
+      {
+        path: 'operators',
+        loadChildren: './settings/operators/operators.module#OperatorsModule'
+      }
+    ]
   },
-  {
-    path: 'reports/betsList',
-    component: BetsListComponent
-  },
-  {
-    path: 'reports/betsList/summaryCoupons',
-    component: SummaryCouponsComponent
-  },
-  {
-    path: 'reports/betsList/detail/:id',
-    component: DetailsCouponComponent
-  },
-  {
-    path: 'settings/languages',
-    component: LanguageComponent
-  }
 ];

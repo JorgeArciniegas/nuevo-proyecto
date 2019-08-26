@@ -1,0 +1,57 @@
+<div fxLayout="column" fxLayoutGap="20px" [style.padding.px]="10" [style.height.%]="100">
+  <div class="title">
+    <h1>{{ 'LIST_OF_OPERATORS' | translate }} </h1>
+  </div>
+  <div fxFlex class="padding-horizontal-6">
+      <div fxFlexFill fxLayout="row nowrap" fxLayoutAlign="start center">
+        <div fxFlex="30">
+          <button class="btn btn-default btn-grey radius-5" [routerLink]="'./create'">{{ 'CREATE_NEW_OPERATOR' | translate }}</button>
+        </div>
+        <div fxFlex="40"></div>
+        <!-- PAGINATOR -->
+        <div fxFlex="30" fxLayoutAlign="center center">
+          <div fxFlex="20">
+            <button class="btn-filter padding-10 radius-5">&lsaquo;</button>
+          </div>
+          <div fxFlex="60" fxLayoutAlign="center center">
+            {{'PAGE' | translate }} {{operatorService.listOfOperators?.actualPages}}
+            {{'PAGE.OF' | translate }} {{operatorService.listOfOperators?.totalPages}}
+          </div>
+          <div fxFlex="20">
+            <button class="btn-filter padding-10 radius-5">&rsaquo;</button>
+          </div>
+        </div>
+      </div>
+  </div>
+  <!-- RESULT  -->
+  <div fxFlex class="padding-20 btn-filter radius-5 elevation-z5" fxLayout="column" fxLayoutAlign="flex-start" [style.height.%]="100">
+    <!-- HEADER -->
+    <div fxLayout="column" fxFlex="5">
+      <div fxFlex fxLayout="row" class="border-bottom-overlay-1px">
+        <div fxFlex="5"></div>
+        <div fxFlex="30">
+          <strong data='disabled'>{{ 'USERNAME' | translate }}</strong>
+        </div>
+        <div fxFlex="20">
+          <strong data='disabled'>{{ 'DATE_OF_CREATED' | translate }}</strong>
+        </div>
+        <div fxFlex></div>
+      </div>
+    </div>
+    <!-- ROWS -->
+    <div fxLayout="column" fxFlexFill fxLayoutAlign="start">
+      <div fxFlex fxLayout="column" fxLayoutAlign="flex-start" fxLayoutAlignGap="grid">
+        <div fxFlex fxLayoutAlign="start center" class="border-bottom-overlay-1px" [style.max-height.px]="55"
+            *ngFor="let rowItem of operatorService.listOfOperators?.operators">
+          <div fxFlex="5"></div>
+          <!-- USERNAME -->
+          <div fxFlex="30"></div>
+          <!-- DATE OF CREATED -->
+          <div fxFlex="20"></div>
+          <!-- ACTIONS -->
+          <div fxFlex></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
