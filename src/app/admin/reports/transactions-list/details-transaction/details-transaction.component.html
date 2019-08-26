@@ -25,14 +25,14 @@
             </div>
             <div fxFlex="30" fxLayoutAlign="left center">
               <div>
-                <h4>{{transactionDetails.TransactionType}}</h4>
+                <h4>{{ 'DYNAMIC_KEYS.TransactionType.' + transactionDetails.TransactionType | translate }}</h4>
                 <div data="disabled">{{'TRANSACTION_TYPE' | translate }}</div>
               </div>
             </div>
             <div fxFlex="30" fxLayoutAlign="left center">
               <div>
                 <h4>{{transactionDetails.TransactionMessage | translate }}</h4>
-                <div data="disabled">{{'CASUALE' | translate }}</div>
+                <div data="disabled">{{'REFERENCE' | translate }}</div>
               </div>
             </div>
             <div fxFlex="5"></div>

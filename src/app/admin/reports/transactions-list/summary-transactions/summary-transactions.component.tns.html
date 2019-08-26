@@ -1,7 +1,6 @@
 <GridLayout rows="*,2*,14*,2*" columns="*" class="summary" *ngIf="transactionsListService.transactionsList">
-  <Label row="0" class="title" colSpan="2" text="{{'TRANSACTIONS_LIST' | translate | uppercase}}" textWrap="true"
+  <Label row="0" class="title" text="{{'TRANSACTIONS_LIST' | translate | uppercase}}" textWrap="true"
     verticalAlignment="center"></Label>
-
   <GridLayout row="1" columns="*,2*,2*,2*,4*" class="card header">
     <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()"
       src="~/app/themes/skins/{{settings.theme}}/icon/baseline-arrow_back-24px.png" verticalAlignment="center"
@@ -17,7 +16,7 @@
     <StackLayout col="3" verticalAlignment="center">
       <Label class="sub-title" text="{{ 'TRANSACTION_TYPE' | translate }}"></Label>
       <Label
-        text="{{ 'DYNAMIC_KEYS.TransactionType.' + (transactionsListService.transactionTypesCsv | getEnumKeyByEnumValue) | translate }}"
+        text="{{ 'DYNAMIC_KEYS.TransactionCategory.' + (transactionsListService.transactionTypesCsv | getEnumKeyByEnumValue) | translate }}"
         textWrap="true"></Label>
     </StackLayout>
     <GridLayout col="4" rows="*" columns="*,3*,*">
@@ -45,17 +44,16 @@
       <Label row="0" col="1" class="sub-title" text="{{ 'DATE' | translate }}" verticalAlignment="center"></Label>
       <Label row="0" col="2" class="sub-title" text="{{ 'TRANSACTION_TYPE' | translate }}"
         verticalAlignment="center"></Label>
-      <Label row="0" col="3" class="sub-title" text="{{ 'CAUSALE' | translate }}" verticalAlignment="center"></Label>
+      <Label row="0" col="3" class="sub-title" text="{{ 'REFERENCE' | translate }}" verticalAlignment="center"></Label>
       <Label row="0" col="4" class="sub-title" text="{{ 'AMOUNT' | translate }}" verticalAlignment="center"></Label>
       <StackLayout row="0" colSpan="6" class="border-bottom-overlay" verticalAlignment="bottom"></StackLayout>
       <!-- rows -->
-      <GridLayout (tap)="showDetails(transaction.CouponCode)" row="{{i + 1}}" colSpan="6" rows="*"
+      <GridLayout (tap)="showDetails(transaction.ReferenceId)" row="{{i + 1}}" colSpan="6" rows="*"
         columns="2*,20*,18*,40*,18*,2*"
         *ngFor="let transaction of transactionsListService.transactionsList.Transactions; let i = index;">
         <Label col="1" text="{{ transaction.UserTransactionDateOffset | date: 'dd/MM/yy HH:mm:ss' }}"
           verticalAlignment="center"></Label>
-        <Label col="2"
-          text="{{ 'DYNAMIC_KEYS.TransactionType.' + (transactionsListService.transactionTypesCsv | getEnumKeyByEnumValue) | translate }}"
+        <Label col="2" text="{{ 'DYNAMIC_KEYS.TransactionType.' + transaction.TransactionType | translate }}"
           verticalAlignment="center"></Label>
         <Label col="3" text="{{ transaction.TransactionMessage | translate }}" verticalAlignment="center"></Label>
         <Label col="4" text="{{ transaction.Amount | currency : userService.userCurrency : 'symbol-narrow' }}"

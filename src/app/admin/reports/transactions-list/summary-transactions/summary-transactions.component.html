@@ -22,7 +22,7 @@
           <div fxFlex="12">
             <div><small data='disabled'>{{ 'TRANSACTION_TYPE' | translate }}</small></div>
             <div class="value">
-              <strong>{{ 'DYNAMIC_KEYS.TransactionType.' + (transactionsListService.transactionTypesCsv | getEnumKeyByEnumValue) | translate }}</strong>
+              <strong>{{ 'DYNAMIC_KEYS.TransactionCategory.' + (transactionsListService.transactionTypesCsv | getEnumKeyByEnumValue) | translate }}</strong>
             </div>
           </div>
           <!-- PAGINATOR -->
@@ -56,7 +56,7 @@
             <strong data='disabled'>{{ 'TRANSACTION_TYPE' | translate }}</strong>
           </div>
           <div fxFlex="40">
-            <strong data='disabled'>{{ 'CAUSALE' | translate }}</strong>
+            <strong data='disabled'>{{ 'REFERENCE' | translate }}</strong>
           </div>
           <div fxFlex="18">
             <strong data='disabled'>{{ 'AMOUNT' | translate }}</strong>
@@ -74,7 +74,7 @@
               <strong>{{transaction.UserTransactionDateOffset | date: 'dd/MM/yy HH:mm:ss' }}</strong>
             </div>
             <div fxFlex="18">
-              <strong>{{ 'DYNAMIC_KEYS.TransactionType.' + (transactionsListService.transactionTypesCsv | getEnumKeyByEnumValue) | translate }}</strong>
+              <strong>{{ 'DYNAMIC_KEYS.TransactionType.' + transaction.TransactionType | translate }}</strong>
             </div>
             <div fxFlex="40">
               <strong>{{ transaction.TransactionMessage | translate }}</strong>

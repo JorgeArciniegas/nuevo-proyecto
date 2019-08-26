@@ -70,10 +70,10 @@
       <div fxFlex="100" fxLayout="row" fxLayoutGap="20px" class="display padding-left-20 padding-top-30">
         <h3 class="label-overlap">{{ 'TRANSACTION_TYPE' | translate }}</h3>
         <div fxFlex fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="20px grid">
-          <div fxFlex="25" fxLayout="column" *ngFor="let type of object.keys(transactionType)">
+          <div fxFlex="25" fxLayout="column" *ngFor="let type of object.keys(transactionCategory)">
             <button class="btn-filter btn-default radius-5"
               [ngClass]="{'btn-filter-success': (transactionsListService.transactionTypesCsv | getEnumKeyByEnumValue) == type}"
-              (click)="changeValue('transactionTypesCsv', transactionType[type])">{{ 'DYNAMIC_KEYS.TransactionType.'+ type | translate }}
+              (click)="changeValue('transactionTypesCsv', transactionCategory[type])">{{ 'DYNAMIC_KEYS.TransactionCategory.'+ type | translate }}
             </button>
           </div>
         </div>

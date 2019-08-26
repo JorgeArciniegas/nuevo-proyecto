@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { TransactionsListService } from './transactions-list.service';
-import { TransactionType } from './transactions-list.model';
+import { TransactionCategory } from './transactions-list.model';
 import { ModalDatetimepicker } from 'nativescript-modal-datetimepicker';
 import { AppSettings } from '../../../app.settings';
 import { UserService } from '../../../services/user.service';
@@ -12,7 +12,7 @@ import { UserService } from '../../../services/user.service';
 })
 export class TransactionsListComponent {
   object = Object;
-  transactionType: typeof TransactionType = TransactionType;
+  transactionCategory: typeof TransactionCategory = TransactionCategory;
 
   constructor(
     public transactionsListService: TransactionsListService,
@@ -20,7 +20,7 @@ export class TransactionsListComponent {
     public userService: UserService
   ) {}
 
-  changeValue(key: string, value: TransactionType): void {
+  changeValue(key: string, value: TransactionCategory): void {
     this.transactionsListService[key] = value;
   }
 

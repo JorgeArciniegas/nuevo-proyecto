@@ -3,7 +3,7 @@ import { TransactionsListService } from './transactions-list.service';
 import { Observable } from 'rxjs';
 import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
 import { DateAdapter } from '@angular/material';
-import { TransactionType } from './transactions-list.model';
+import { TransactionCategory } from './transactions-list.model';
 import { UserService } from '../../../services/user.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class TransactionsListComponent implements OnDestroy {
   @ViewChild('pickerDateTo') private inputPickerDateTo;
 
   object = Object;
-  transactionType: typeof TransactionType = TransactionType;
+  transactionCategory: typeof TransactionCategory = TransactionCategory;
 
   constructor(
     public transactionsListService: TransactionsListService,
@@ -56,7 +56,7 @@ export class TransactionsListComponent implements OnDestroy {
     document.body.classList.remove('bets-list');
   }
 
-  changeValue(key: string, value: TransactionType): void {
+  changeValue(key: string, value: TransactionCategory): void {
     this.transactionsListService[key] = value;
   }
 }

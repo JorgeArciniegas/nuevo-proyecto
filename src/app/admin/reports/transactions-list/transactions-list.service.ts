@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { RouterService } from '../../../services/utility/router/router.service';
 import { ElysApiService } from '@elys/elys-api';
 import { ReportsAccountStatementResponse, ReportsAccountStatementRequest } from '@elys/elys-api/lib/reports/reports.models';
-import { TransactionType } from './transactions-list.model';
+import { TransactionCategory } from './transactions-list.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +20,11 @@ export class TransactionsListService {
   }
 
   // Getter and setter object property.
-  get transactionTypesCsv(): TransactionType {
-    return this.request.transactionTypesCsv as TransactionType;
+  get transactionTypesCsv(): TransactionCategory {
+    return this.request.transactionTypesCsv as TransactionCategory;
   }
 
-  set transactionTypesCsv(type: TransactionType) {
+  set transactionTypesCsv(type: TransactionCategory) {
     this.request.transactionTypesCsv = type;
   }
 
@@ -127,7 +127,7 @@ export class TransactionsListService {
   private initResetRequest(): void {
     const today = new Date();
     this.request = {
-      transactionTypesCsv: TransactionType.ALL,
+      transactionTypesCsv: TransactionCategory.ALL,
       // Set the date from the begin of the day.
       dateFrom: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0),
       // Set the date to the current time of the day.
