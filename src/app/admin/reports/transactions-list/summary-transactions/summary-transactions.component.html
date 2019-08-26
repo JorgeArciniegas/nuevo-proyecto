@@ -22,7 +22,7 @@
           <div fxFlex="12">
             <div><small data='disabled'>{{ 'TRANSACTION_TYPE' | translate }}</small></div>
             <div class="value">
-              <strong>{{ 'DYNAMIC_KEYS.TransactionCategory.' + (transactionsListService.transactionTypesCsv | getEnumKeyByEnumValue) | translate }}</strong>
+              <strong>{{ 'DYNAMIC_KEYS.TransactionCategory.' + (transactionsListService.transactionTypesCsv | getTransactionCategoryKeyByEnumValue) | translate }}</strong>
             </div>
           </div>
           <!-- PAGINATOR -->

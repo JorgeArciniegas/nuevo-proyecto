@@ -16,7 +16,7 @@
     <StackLayout col="3" verticalAlignment="center">
       <Label class="sub-title" text="{{ 'TRANSACTION_TYPE' | translate }}"></Label>
       <Label
-        text="{{ 'DYNAMIC_KEYS.TransactionCategory.' + (transactionsListService.transactionTypesCsv | getEnumKeyByEnumValue) | translate }}"
+        text="{{ 'DYNAMIC_KEYS.TransactionCategory.' + (transactionsListService.transactionTypesCsv | getTransactionCategoryKeyByEnumValue) | translate }}"
         textWrap="true"></Label>
     </StackLayout>
     <GridLayout col="4" rows="*" columns="*,3*,*">

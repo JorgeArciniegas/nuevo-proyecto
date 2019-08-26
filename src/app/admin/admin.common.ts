@@ -10,6 +10,7 @@ import { LanguageComponent } from './settings/language/language.component';
 import { TransactionsListComponent } from './reports/transactions-list/transactions-list.component';
 import { SummaryTransactionsComponent } from './reports/transactions-list/summary-transactions/summary-transactions.component';
 import { DetailsTransactionComponent } from './reports/transactions-list/details-transaction/details-transaction.component';
+import { GetTransactionVategoryKeyByEnumValuePipe } from './reports/transactions-list/get-transaction-category-key-by-enum-value.pipe';
 
 export const componentDeclarations: any[] = [
   AdminComponent,
@@ -22,7 +23,8 @@ export const componentDeclarations: any[] = [
   CombinationsComponent,
   LanguageComponent,
   SummaryTransactionsComponent,
-  DetailsTransactionComponent
+  DetailsTransactionComponent,
+  GetTransactionVategoryKeyByEnumValuePipe
 ];
 
 export const providerDeclarations: any[] = [];

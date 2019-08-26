@@ -1,10 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TransactionCategory } from '../../admin/reports/transactions-list/transactions-list.model';
+import { TransactionCategory } from './transactions-list.model';
 
 @Pipe({
-  name: 'getEnumKeyByEnumValue'
+  name: 'getTransactionCategoryKeyByEnumValue'
 })
-export class GetEnumKeyByEnumValuePipe implements PipeTransform {
+export class GetTransactionVategoryKeyByEnumValuePipe implements PipeTransform {
   transform(enumValue: TransactionCategory): string {
     return Object.keys(TransactionCategory).filter(x => TransactionCategory[x] === enumValue)[0];
   }

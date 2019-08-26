@@ -72,7 +72,7 @@
         <div fxFlex fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap="20px grid">
           <div fxFlex="25" fxLayout="column" *ngFor="let type of object.keys(transactionCategory)">
             <button class="btn-filter btn-default radius-5"
-              [ngClass]="{'btn-filter-success': (transactionsListService.transactionTypesCsv | getEnumKeyByEnumValue) == type}"
+              [ngClass]="{'btn-filter-success': (transactionsListService.transactionTypesCsv | getTransactionCategoryKeyByEnumValue) == type}"
               (click)="changeValue('transactionTypesCsv', transactionCategory[type])">{{ 'DYNAMIC_KEYS.TransactionCategory.'+ type | translate }}
             </button>
           </div>
