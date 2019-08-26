@@ -5,8 +5,8 @@ import { Products } from '../../../../src/environments/environment.models';
 import { ProductsService } from '../../../../src/app/products/products.service';
 import { BetDataDialog } from '../../../../src/app/products/products.model';
 import { MainService } from '../../products/main/main.service';
-import { EventsListService } from 'src/app/products/main/events-list/events-list.service';
 import { VirtualBetCompetitor } from '@elys/elys-api/lib/virtual/virtual.models';
+import { EventsListService } from '../../products/main/events-list/events-list.service';
 
 @Component({
   selector: 'app-widget',

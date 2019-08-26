@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { BetDataDialog } from '../../../../../products/products.model';
 import { DataStaticsChart } from '../soccer/soccer.model';
 import { DialogService } from '../../../../../products/dialog.service';
-import { BetDataDialog } from '../../../../../products/products.model';
 
 @Component({
   selector: 'app-statistics-soccer',
