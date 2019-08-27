@@ -87,7 +87,7 @@ export const environment: Environment = {
       label: 'HORSE_VIRTUAL',
       order: 2,
       productSelected: false,
-      isPlayable: false,
+      isPlayable: true,
       layoutProducts: {
         type: LAYOUT_TYPE.RACING,
         resultItems: 4,
