@@ -94,7 +94,7 @@ export const environment: Environment = {
       label: 'HORSE_VIRTUAL',
       order: 2,
       productSelected: false,
-      isPlayable: true,
+      isPlayable: false,
       layoutProducts: {
         type: LAYOUT_TYPE.RACING,
         resultItems: 4,
@@ -120,7 +120,7 @@ export const environment: Environment = {
       label: 'FOOTBALL_ITA',
       order: 4,
       productSelected: false,
-      isPlayable: true,
+      isPlayable: false,
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,

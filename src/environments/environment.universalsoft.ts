@@ -7,7 +7,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.DEMO_LICENSE,
-  baseApiUrl: 'https://apidemo.vg-services.net',
+  baseApiUrl: 'https://apiuniversalsoft.vg-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
   couponDirectPlace: true,
@@ -87,7 +87,7 @@ export const environment: Environment = {
       label: 'HORSE_VIRTUAL',
       order: 2,
       productSelected: false,
-      isPlayable: true,
+      isPlayable: false,
       layoutProducts: {
         type: LAYOUT_TYPE.RACING,
         resultItems: 4,
@@ -113,7 +113,7 @@ export const environment: Environment = {
       label: 'FOOTBALL_ITA',
       order: 4,
       productSelected: false,
-      isPlayable: true,
+      isPlayable: false,
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
