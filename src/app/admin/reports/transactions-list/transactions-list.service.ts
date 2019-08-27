@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RouterService } from '../../../services/utility/router/router.service';
-import { ElysApiService } from '@elys/elys-api';
-import { ReportsAccountStatementResponse, ReportsAccountStatementRequest } from '@elys/elys-api/lib/reports/reports.models';
+import { ElysApiService, ReportsAccountStatementRequest, ReportsAccountStatementResponse } from '@elys/elys-api';
 import { TransactionCategory } from './transactions-list.model';
 
 @Injectable({

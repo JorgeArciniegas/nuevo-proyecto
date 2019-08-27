@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TransactionsListService } from '../transactions-list.service';
-import { UserTransaction } from '@elys/elys-api/lib/reports/reports.models';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AppSettings } from '../../../../app.settings';
 import { UserService } from '../../../../services/user.service';
+import { UserTransaction } from '@elys/elys-api';
 
 @Component({
   selector: 'app-details-transaction',
