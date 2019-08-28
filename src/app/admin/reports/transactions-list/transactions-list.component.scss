@@ -12,6 +12,12 @@
 		position: relative;
 		background-color: transparent;
 
+		.filter-input {
+			h4 {
+				margin-top: 5px;
+			}
+		}
+
 		.label-overlap {
 			position: absolute;
 			top: -30px;
