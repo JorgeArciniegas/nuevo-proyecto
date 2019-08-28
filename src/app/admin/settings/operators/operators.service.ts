@@ -1,7 +1,16 @@
 import { Injectable } from '@angular/core';
-import { ElysApiService, ListOfOperators } from '@elys/elys-api';
+import {
+  AccountOperator,
+  CreateShopOperatorResponse,
+  DeleteShopOperatorRequest,
+  ElysApiService,
+  ErrorStatus,
+  ShopOperatorRequest,
+  UserStatus,
+  ShopOperatorResponse
+} from '@elys/elys-api';
 import { UserService } from 'src/app/services/user.service';
-import { DataListOfOperators } from './operators.model';
+import { DataListOfOperators, OperatorCreteByForm } from './operators.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,30 +18,61 @@ import { DataListOfOperators } from './operators.model';
 export class OperatorsService {
 
   listOfOperators: DataListOfOperators;
+  listTempOperators: AccountOperator[];
+  rowNumber = 5;
+  operatorMarked: AccountOperator;
   constructor(private userService: UserService, private elysApi: ElysApiService) {
     this.initLoad();
   }
 
 
   getListOfOperators(): void {
-    this.elysApi.account.getistOfOperators(this.userService.userDetail.UserName).then(
+    this.elysApi.account.getistOfOperators().then(
       resp => {
-       this.listOfOperators.operators = resp.listOperators;
+       this.listOfOperators.operators = resp.Operators;
        this.pagination();
       }
     );
   }
 
-  createNewOperator(): void  {
-
+  createNewOperator(operatorForm: OperatorCreteByForm): Promise<CreateShopOperatorResponse>  {
+    const operator: ShopOperatorRequest =  {
+      Operator: {
+        IDClient: 0,
+        IsBalanceEnabled: true,
+        IsFullBalanceEnabled: false,
+        IsLiveEnabled: false,
+        IsLiveWidgetEnabled: false,
+        IsPrematchEnabled: false,
+        IsPrintTransactionEnabled: true,
+        IsVirtualGamesEnabled: true,
+        OperatorClientType: {OperatorTypeId: 1, Description: 'new operator'},
+        Password: operatorForm.password,
+        StakeLimit: null,
+        StakeLower: null,
+        UserId: this.userService.userDetail.UserId,
+        UserName: operatorForm.username,
+        UserStatusId: UserStatus.Enabled,
+        CanFilterBetListByAnotherOperator: false,
+        IsSmartCodeErrorSoundEnabled: false,
+        IsSmartCodeHelperEnabled: false,
+        IsSmartCodeShortcutIntellisenseEnabled: false,
+        SubscriptionDate: new Date()
+      }
+    };
+    return this.elysApi.account.createOperator(operator);
   }
 
-  deleteOperator(): void {
+  deleteOperator(): Promise<ErrorStatus> {
+    const operatorReq:  DeleteShopOperatorRequest = {ClientId: this.operatorMarked.IDClient};
 
+    return this.elysApi.account.deleteOperator(operatorReq);
   }
 
-  updateOperator(): void {
-
+  updateOperator(password: string): Promise<ShopOperatorResponse> {
+    this.operatorMarked.Password = password;
+    const req: ShopOperatorRequest = { Operator: this.operatorMarked };
+    return this.elysApi.account.updateOperator(req);
   }
 
   initLoad(): void {
@@ -46,7 +86,22 @@ export class OperatorsService {
   private pagination(): void {
     if (this.listOfOperators.operators) {
       this.listOfOperators.totalPages = (this.listOfOperators.operators.length > 0)
-        ? Math.ceil( this.listOfOperators.operators.length / 10 ) :  0;
+        ? Math.ceil( this.listOfOperators.operators.length / this.rowNumber ) :  0;
+
+        this.filterOperators();
     }
   }
+
+
+  filterOperators(): void  {
+    const start = this.listOfOperators.actualPages  * this.rowNumber;
+    let end = (this.listOfOperators.actualPages + 1) * this.rowNumber;
+    if (end > this.listOfOperators.totalOperators )  {
+      end = this.listOfOperators.totalOperators;
+    }
+
+    this.listTempOperators = this.listOfOperators.operators.slice(start, end);
+  }
+
+
 }

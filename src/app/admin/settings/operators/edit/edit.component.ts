@@ -1,4 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ValidatorFn,
+  AbstractControl
+} from '@angular/forms';
+import { AppSettings } from '../../../../app.settings';
+import { OperatorEditByForm } from '../operators.model';
+import { OperatorsService } from '../operators.service';
+import { passwordValidator } from '../password-validator';
+import { ErrorStatus } from '@elys/elys-api';
 
 @Component({
   selector: 'app-edit',
@@ -7,9 +19,59 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+  public errorMessage: string | undefined;
+  isEdited: boolean;
 
-  ngOnInit() {
+  constructor(
+    public operatorService: OperatorsService,
+    public readonly settings: AppSettings,
+    private fb: FormBuilder
+  ) {
+    this.form = this.fb.group(
+      {
+        password: [
+          null,
+          Validators.compose([Validators.required, passwordValidator])
+        ],
+        confirmPassword: [
+          null,
+          Validators.compose([Validators.required, passwordValidator])
+        ]
+      },
+      {
+        validator: this.checkPasswords
+      }
+    );
   }
 
+  ngOnInit() {}
+
+  checkPasswords(group: FormGroup) {
+    // here we have the 'passwords' group
+    if (
+      group.value['password'] !==
+      group.value['confirmPassword']
+    ) {
+      group.controls['confirmPassword'].setErrors({ notSame: true });
+    } else {
+      group.controls['confirmPassword'].setErrors(null);
+    }
+    return group.controls['password'].value ===
+      group.controls['confirmPassword'].value ? null : { notSame: true };
+  }
+
+  onSubmit(operatorEdit: OperatorEditByForm): void {
+    if (this.form.valid) {
+      this.operatorService.updateOperator(operatorEdit.password).then(
+        message => {
+          this.errorMessage = ErrorStatus[message.Status];
+
+          if (message.Status === ErrorStatus.Success) {
+            this.isEdited = true;
+          }
+        }
+      );
+    }
+  }
 }

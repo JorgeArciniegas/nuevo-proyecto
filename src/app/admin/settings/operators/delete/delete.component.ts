@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { OperatorsService } from '../operators.service';
+import { AppSettings } from 'src/app/app.settings';
+import { ErrorStatus } from '@elys/elys-api';
 
 @Component({
   selector: 'app-delete',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeleteComponent implements OnInit {
 
-  constructor() { }
+  isDeleted: boolean;
+
+  constructor(
+    public readonly settings: AppSettings,
+    public operatorService: OperatorsService
+  ) { }
 
   ngOnInit() {
+  }
+
+
+  onSubmit() {
+    this.operatorService.deleteOperator().then( message =>  {
+      if (message === ErrorStatus.Success)  {
+        this.isDeleted = true;
+      }
+    });
   }
 
 }

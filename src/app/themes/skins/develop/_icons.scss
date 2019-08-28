@@ -15,7 +15,10 @@
         width: 24px;
         height: 24px;
     }
-
+    &[class*="-48px"]{
+      width: 48px;
+      height: 48px;
+    }
   }
 
 
@@ -68,4 +71,20 @@
 
 .icon-baseline-supervised-user-circle-white:before {
   content: url("app/themes/skins/develop/icon/baseline_supervised_user_circle_white.png");
+}
+.user-icon {
+  background: url("app/themes/skins/develop/icon/icona-user.png") no-repeat center;
+}
+
+.pwd-icon {
+	background: url("app/themes/skins/develop/icon/icona-pwd.png") no-repeat center ;
+}
+
+.warning-icon {
+  background: url("app/themes/skins/develop/icon/warning.png") no-repeat center;
+  background-size: contain;
+}
+.success-icon {
+  background: url("app/themes/skins/develop/icon/checked.png") no-repeat center center;
+  background-size: contain;
 }

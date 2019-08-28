@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AppSettings } from 'src/app/app.settings';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { AppSettings } from '../../../../app.settings';
+import { FormGroup, FormBuilder, Validators, FormControl, NgControlStatus } from '@angular/forms';
+import { OperatorsService } from '../operators.service';
+import { ErrorStatus } from '@elys/elys-api';
+import { OperatorCreteByForm } from '../operators.model';
+import { passwordValidator } from '../password-validator';
 
-
-export function passwordValidator(
-  control: FormControl
-): { [key: string]: boolean } {
-  const passwordRegexp: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_\.])[A-Za-z\d$@!%*?&_\.]{8,15}$/;
-  if (control.value && !passwordRegexp.test(control.value)) {
-    return { invalidPassword: true };
-  }
-}
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -20,15 +15,20 @@ export function passwordValidator(
 export class CreateComponent implements OnInit {
 
   form: FormGroup;
-
+  public errorMessage: string | undefined;
+  isCreated: boolean;
   constructor(
     public readonly settings: AppSettings,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private operatorService: OperatorsService
   ) {
     this.form = this.fb.group({
       username: [null, Validators.compose([Validators.required, Validators.minLength(4)])],
       password: [null, Validators.compose([Validators.required, passwordValidator])],
-      confirmPassword: [null, Validators.compose([Validators.required, this.checkPasswords])],
+      confirmPassword: [null, Validators.compose([Validators.required, passwordValidator])],
+    },
+    {
+      validator: this.checkPasswords
     });
    }
 
@@ -36,12 +36,32 @@ export class CreateComponent implements OnInit {
   }
 
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
-  if (group.value) {
-    const pass = group.get('password').value;
-    const confirmPass = group.get('confirmPassword').value;
-    return pass === confirmPass ? null : { notSame: true };
-
+  if (
+    group.value['password'] !==
+    group.value['confirmPassword']
+  ) {
+    group.controls['confirmPassword'].setErrors({ notSame: true });
+  } else {
+    group.controls['confirmPassword'].setErrors(null);
   }
-}
+   return group.controls['password'].value === group.controls['confirmPassword'].value ? null : {notSame: true};
+  }
 
+  public onSubmit(form: OperatorCreteByForm): void {
+    if (this.form.valid) {
+      this.operatorService.createNewOperator(form).then(
+        message => {
+          this.errorMessage = ErrorStatus[message.Status];
+
+          if (message.Status === ErrorStatus.Success) {
+            this.isCreated = true;
+          }
+        }
+      );
+    }
+  }
+
+  public valueChange(): void {
+    this.errorMessage = undefined;
+  }
 }

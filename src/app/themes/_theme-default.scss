@@ -12,6 +12,7 @@
 @import "./lucky/lucky-race-fight";
 @import "./events-list/events-list";
 @import "./groupings/groupings";
+@import "./operators/operators";
 *,
 *:after,
 *:before {
@@ -30,8 +31,7 @@ html {
 
 .app {
 	app-login,
-  app-admin,
-  app-create {
+  app-admin {
 		height: 100%;
 	}
 	&.develop {
@@ -131,7 +131,8 @@ html {
 					}
 				}
 			}
-		}
+    }
+
 
 		.toolbar {
 			@extend %header;
