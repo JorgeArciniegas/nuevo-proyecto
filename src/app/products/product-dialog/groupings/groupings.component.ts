@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BetCouponGroup } from '@elys/elys-api';
-import { AppSettings } from '../../../app.settings';
 import { CouponService } from '../../../component/coupon/coupon.service';
 import { UserService } from '../../../services/user.service';
 import { BetDataDialog, PolyfunctionStakePresetPlayer } from '../../products.model';
@@ -29,12 +28,7 @@ export class GroupingsComponent implements OnInit {
   groupings: BetCouponGroup[];
   emptyGroupings: string[] = [];
   amountPresetPlayer: PolyfunctionStakePresetPlayer;
-  constructor(
-    public userService: UserService,
-    public readonly settings: AppSettings,
-    public readonly couponService: CouponService,
-    private btnService: BtncalcService
-  ) {
+  constructor(public userService: UserService, public readonly couponService: CouponService, private btnService: BtncalcService) {
     this.amountPresetPlayer = this.btnService.polyfunctionStakePresetPlayer;
     this.couponService.couponResponse.subscribe(coupon => {
       this.data.groupings = coupon.Groupings;

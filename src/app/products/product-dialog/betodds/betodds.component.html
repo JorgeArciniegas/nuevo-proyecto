@@ -2,11 +2,12 @@
   <mat-grid-tile colspan="{{column}}">
     <button *ngIf="maxPage > 1" class="btn-reset card-odd radius-5 scroll" (click)="previusOdds()"
       [disabled]="page <= 0">
-      <img class="icon" src="../app/themes/skins/{{settings.theme}}/icon/Up.svg">
+      <img class="icon" src="/assets/icons/Up.svg">
     </button>
   </mat-grid-tile>
   <ng-container *ngIf="betOdds">
-    <mat-grid-tile rowspan="3" class="card-odd radius-5" [ngClass]="{'notSelected': !odd.selected}" *ngFor="let odd of betOdds">
+    <mat-grid-tile rowspan="3" class="card-odd radius-5" [ngClass]="{'notSelected': !odd.selected}"
+      *ngFor="let odd of betOdds">
       <div fxFill fxLayout="column" fxLayoutAlign="space-between stretch">
         <div fxFlex="24" class="top-window"></div>
         <div fxFlex="38" class="first-row" fxLayout="row">
@@ -46,8 +47,7 @@
           <div fxFlex="38" class="stake radius-5">
             <button *ngIf="multiStake" class="btn-reset btn-default color radius-5"
               [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
-                      'btn-selected ' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }"
-              (click)="checkOddToChangeStake(odd)">
+                      'btn-selected ' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }" (click)="checkOddToChangeStake(odd)">
               <span
                 *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId">{{odd.OddStake | number: '1.2-3'}}
 
@@ -71,7 +71,7 @@
   <mat-grid-tile colspan="{{column}}">
     <button *ngIf="maxPage > 1" class="btn-reset card-odd radius-5 scroll" (click)="nextOdds()"
       [disabled]="page >= maxPage - 1">
-      <img class="icon" src="app/themes/skins/{{settings.theme}}/icon/Down.svg">
+      <img class="icon" src="/assets/icons/Down.svg">
     </button>
   </mat-grid-tile>
 </mat-grid-list>

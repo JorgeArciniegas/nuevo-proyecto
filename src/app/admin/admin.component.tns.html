@@ -2,33 +2,29 @@
   <StackLayout verticalAlignment="top" class="p-20" orientation="vertical" row="0" col="0">
     <GridLayout class="admin-panel-container radius-5" rows="1*,1*" columns="*">
       <StackLayout orientation="horizontal" horizontalAlignment="center" row="0" col="0">
-        <Image stretch="aspectFit" width="30" col="0"
-          src="~/app/themes/skins/{{settings.theme}}/icon/baseline-history-24px.png" verticalAlignment="center"
-          horizontalAlignment="right"></Image>
+        <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-history-24px.png"
+          verticalAlignment="center" horizontalAlignment="right"></Image>
         <Label verticalAlignment="center" class="text-left txt-title" col="1" text="{{'REPORTS' | translate }}"></Label>
       </StackLayout>
       <StackLayout (tap)="goToBetList()" width="100%" class="button btn-success" orientation="horizontal"
         horizontalAlignment="center" row="1" col="0">
-        <Image stretch="aspectFit" width="30" col="0"
-          src="~/app/themes/skins/{{settings.theme}}/icon/baseline-list-24px.png" verticalAlignment="center"
-          horizontalAlignment="right"></Image>
+        <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-list-24px.png"
+          verticalAlignment="center" horizontalAlignment="right"></Image>
         <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"
           text="{{'BETS_LIST' | translate }}"></Label>
       </StackLayout>
     </GridLayout>
     <GridLayout class="admin-panel-container radius-5" rows="1*,1*" columns="*">
       <StackLayout orientation="horizontal" horizontalAlignment="center" row="0" col="0">
-        <Image stretch="aspectFit" width="30" col="0"
-          src="~/app/themes/skins/{{settings.theme}}/icon/baseline-settings-20px.png" verticalAlignment="center"
-          horizontalAlignment="right"></Image>
+        <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-settings-20px.png"
+          verticalAlignment="center" horizontalAlignment="right"></Image>
         <Label verticalAlignment="center" class="text-left txt-title" col="1"
           text="{{'SETTINGS' | translate }}"></Label>
       </StackLayout>
       <StackLayout (tap)="goToLanguageSettings()" width="100%" class="button btn-success" orientation="horizontal"
         horizontalAlignment="center" row="1" col="0">
-        <Image stretch="aspectFit" width="30" col="0"
-          src="~/app/themes/skins/{{settings.theme}}/icon/baseline-language-24px.png" verticalAlignment="center"
-          horizontalAlignment="right"></Image>
+        <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-language-24px.png"
+          verticalAlignment="center" horizontalAlignment="right"></Image>
         <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"
           text="{{'LANGUAGE' | translate }}"></Label>
       </StackLayout>
