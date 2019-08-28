@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TransactionsListService } from '../transactions-list.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AppSettings } from '../../../../app.settings';
 import { UserService } from '../../../../services/user.service';
 import { RouterExtensions } from 'nativescript-angular/router';
 import { UserTransaction } from '@elys/elys-api';
@@ -18,7 +17,6 @@ export class DetailsTransactionComponent implements OnInit, OnDestroy {
 
   constructor(
     public transactionsListService: TransactionsListService,
-    public readonly settings: AppSettings,
     public userService: UserService,
     private route: ActivatedRoute,
     private router: RouterExtensions
