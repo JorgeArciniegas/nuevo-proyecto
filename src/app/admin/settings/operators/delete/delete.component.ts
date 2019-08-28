@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OperatorsService } from '../operators.service';
-import { AppSettings } from 'src/app/app.settings';
+import { AppSettings } from '../../../../app.settings';
 import { ErrorStatus } from '@elys/elys-api';
 
 @Component({

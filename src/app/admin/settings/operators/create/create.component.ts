@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AppSettings } from '../../../../app.settings';
-import { FormGroup, FormBuilder, Validators, FormControl, NgControlStatus } from '@angular/forms';
-import { OperatorsService } from '../operators.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorStatus } from '@elys/elys-api';
+import { AppSettings } from '../../../../app.settings';
 import { OperatorCreteByForm } from '../operators.model';
+import { OperatorsService } from '../operators.service';
 import { passwordValidator } from '../password-validator';
 
 @Component({

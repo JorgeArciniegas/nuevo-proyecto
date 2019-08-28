@@ -5,7 +5,7 @@ import { DeleteComponent } from './delete/delete.component';
 import { EditComponent } from './edit/edit.component';
 import { OperatorsComponent } from './operators.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     children: [

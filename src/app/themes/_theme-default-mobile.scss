@@ -12,6 +12,7 @@
 @import "./lucky/lucky-race-fight.tns";
 @import "./events-list/events-list.tns";
 @import "./groupings/groupings.tns";
+@import "./operators/operators.tns";
 .app {
 	&.develop {
 		@import "./skins/develop/styles";

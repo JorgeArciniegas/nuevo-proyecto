@@ -16,7 +16,7 @@
           text="{{'BETS_LIST' | translate }}"></Label>
       </StackLayout>
     </GridLayout>
-    <GridLayout class="admin-panel-container radius-5" rows="1*,1*" columns="*">
+    <GridLayout class="admin-panel-container radius-5" rows="*,*,*" columns="*">
       <StackLayout orientation="horizontal" horizontalAlignment="center" row="0" col="0">
         <Image stretch="aspectFit" width="30" col="0"
           src="~/app/themes/skins/{{settings.theme}}/icon/baseline-settings-20px.png" verticalAlignment="center"
@@ -24,11 +24,21 @@
         <Label verticalAlignment="center" class="text-left txt-title" col="1"
           text="{{'SETTINGS' | translate }}"></Label>
       </StackLayout>
-      <StackLayout (tap)="goToLanguageSettings()" width="100%" class="button btn-success" orientation="horizontal"
-        horizontalAlignment="center" row="1" col="0">
+      <StackLayout (tap)="goToOperators()" width="100%" class="m-b-2 button btn-success" orientation="horizontal"
+      horizontalAlignment="center" row="1" col="0">
         <Image stretch="aspectFit" width="30" col="0"
           src="~/app/themes/skins/{{settings.theme}}/icon/baseline-language-24px.png" verticalAlignment="center"
           horizontalAlignment="right"></Image>
+
+        <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"
+          text="{{'OPERATORS' | translate }}"></Label>
+      </StackLayout>
+      <StackLayout (tap)="goToLanguageSettings()" width="100%" class=" button btn-success" orientation="horizontal"
+        horizontalAlignment="center" row="2" col="0">
+        <Image stretch="aspectFit" width="30" col="0"
+          src="~/app/themes/skins/{{settings.theme}}/icon/baseline-language-24px.png" verticalAlignment="center"
+          horizontalAlignment="right"></Image>
+
         <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"
           text="{{'LANGUAGE' | translate }}"></Label>
       </StackLayout>

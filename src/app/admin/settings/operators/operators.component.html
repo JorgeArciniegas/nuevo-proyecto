@@ -1,9 +1,9 @@
-<div fxFlex fxLayout="column" fxLayoutAlign="center space-between"   class="admin-operators" *ngIf="operatorService.listOfOperators">
-  <div fxLayout="column" fxLayoutGap="10px" [style.padding.px]="10">
+<div fxFlex fxLayout="column" fxLayoutAlign="center space-between" class="admin-operators" [style.height.%]="100" *ngIf="operatorService.listOfOperators">
+  <div fxFlex fxLayout="column" fxLayoutGap="10px" [style.padding.px]="10">
     <div class="title">
       <h1>{{ 'LIST_OF_OPERATORS' | translate | uppercase }} </h1>
     </div>
-    <div fxFlex class="padding-20">
+    <div class="padding-20">
       <div fxFlexFill fxLayout="row nowrap" fxLayoutAlign="start center">
         <div fxFlex="30">
           <button class="btn btn-default btn-grey radius-5" [routerLink]="'./create'">{{ 'OPERATOR_CREATE_NEW' | translate }}</button>
@@ -25,7 +25,7 @@
       </div>
     </div>
     <!-- RESULT  -->
-    <div fxFlex class="padding-20 btn-filter radius-5 elevation-z5" fxLayout="column" fxLayoutAlign="flex-start" >
+    <div fxFlex="85" class="padding-20 btn-filter radius-5 elevation-z5" fxLayout="column" fxLayoutAlign="flex-start" >
       <!-- HEADER -->
       <div fxLayout="column" fxFlex="5">
         <div fxFlex fxLayout="row" class="border-bottom-overlay-1px">
@@ -42,7 +42,7 @@
       <!-- ROWS -->
       <div fxLayout="column" fxFlex fxLayoutAlign="start" >
         <div fxFlex fxLayout="column" fxLayoutAlign="flex-start" fxLayoutAlignGap="grid">
-          <div fxFlex fxLayoutAlign="start center" class="border-bottom-overlay-1px" [style.min-height.px]="55"
+          <div fxFlex="10" fxLayoutAlign="start center" class="border-bottom-overlay-1px" [style.min-height.px]="55"
               *ngFor="let rowItem of operatorService.listTempOperators; let i = index">
             <div fxFlex="5"></div>
             <!-- USERNAME -->
