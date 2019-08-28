@@ -18,6 +18,10 @@ export class AdminComponent {
     this.router.navigateByUrl('/admin/reports/betsList');
   }
 
+  goToTransactionsList(): void {
+    this.router.navigateByUrl('/admin/reports/transactionsList');
+  }
+
   goToLanguageSettings(): void {
     this.router.navigateByUrl('/admin/settings/languages');
   }
