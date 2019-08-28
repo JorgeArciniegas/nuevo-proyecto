@@ -1,4 +1,4 @@
-import { VirtualBetCompetitor, BetCouponGroup } from '@elys/elys-api';
+import { VirtualBetCompetitor, BetCouponGroup, VirtualGetRankByEventResponse } from '@elys/elys-api';
 import { BetCouponExtended } from '@elys/elys-coupon';
 import { LAYOUT_TYPE } from '../../../src/environments/environment.models';
 import { TYPINGTYPE } from '../component/btncalc/btncalc.enum';
@@ -122,9 +122,14 @@ export class DialogData {
   betCoupon?: BetCouponExtended;
   statistics?: StatisticDialog;
   groupings?: BetCouponGroup[];
+  ranking?: VirtualGetRankByEventResponse;
   constructor(
-    betOdds?: BetOdds, breakpoint?: number, betCoupon?: BetCouponExtended,
-    title?: string, statistics?: StatisticDialog, groupings?: BetCouponGroup[]
+    betOdds?: BetOdds,
+    breakpoint?: number,
+    betCoupon?: BetCouponExtended,
+    title?: string,
+    statistics?: StatisticDialog,
+    groupings?: BetCouponGroup[]
   ) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;

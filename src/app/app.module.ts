@@ -23,12 +23,13 @@ import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
 import { LabelByGroupingPipe } from './component/pipe/label-by-grouping.pipe';
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
 import { SharedModule } from './shared/shared.module';
+import { RankingComponent } from './products/product-dialog/ranking/ranking.component';
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [componentDeclarations, DigitslimitPipe, GroupByCategoryPipe],
+  declarations: [componentDeclarations, DigitslimitPipe, GroupByCategoryPipe, RankingComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
