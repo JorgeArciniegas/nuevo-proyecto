@@ -614,6 +614,10 @@ $gradient-dark2: #000000;
 	background: url("~/app/themes/skins/develop/icon/icona-pwd.png") center center no-repeat;
 	background-size: contain;
 }
+%warning-icon-mobile {
+  background: url("~/app/themes/skins/develop/icon/warning.png") center center no-repeat;
+  background-size: contain;
+}
 
 %error-icon {
 	background: url("app/themes/skins/develop/icon/alert.svg") center center no-repeat;

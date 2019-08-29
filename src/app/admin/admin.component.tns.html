@@ -1,5 +1,5 @@
-<GridLayout id="admin" rows="6*,*" columns="*,*,*">
-  <StackLayout verticalAlignment="top" class="p-10" orientation="vertical" row="0" col="0">
+<GridLayout id="admin" rows="6*,*,*" columns="*,*,*">
+  <StackLayout verticalAlignment="top" class="p-5" orientation="vertical" row="0" col="0">
     <StackLayout orientation="vertical" class="admin-panel-container radius-5">
       <StackLayout orientation="horizontal" horizontalAlignment="center" row="0" col="0">
         <Image stretch="aspectFit" width="30" col="0"
@@ -51,16 +51,15 @@
           text="{{'LANGUAGE' | translate }}"></Label>
       </StackLayout>
     </StackLayout>
-    <StackLayout orientation="vertical" class="admin-panel-container logout radius-5">
+  </StackLayout>
+  <StackLayout orientation="vertical" class="admin-panel-container logout radius-5" row="1" col="0">
       <StackLayout (tap)="userService.logout()" width="100%" class="button btn-default btn-admin btn-grey-gradient"
         orientation="horizontal" horizontalAlignment="center" row="0" col="0">
         <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"
           text="{{'LOGOUT' | translate }}"></Label>
       </StackLayout>
-    </StackLayout>
   </StackLayout>
-  <GridLayout rows="*" columns="5*,1*" row="1" col="2">
-    <StackLayout col="0" class="logo-with-text-mobile">
-    </StackLayout>
-  </GridLayout>
+  <StackLayout row="2" col="2" class="logo-with-text">
+  </StackLayout>
+
 </GridLayout>

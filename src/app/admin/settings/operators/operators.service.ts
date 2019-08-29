@@ -19,7 +19,7 @@ export class OperatorsService {
 
   listOfOperators: DataListOfOperators;
   listTempOperators: AccountOperator[];
-  rowNumber = 5;
+  rowNumber = 10;
   operatorMarked: AccountOperator;
   constructor(private userService: UserService, private elysApi: ElysApiService) {
     this.initLoad();
