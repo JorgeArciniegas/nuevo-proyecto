@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { BetDataDialog } from '../../products.model';
+import { LAYOUT_TYPE } from 'src/environments/environment.models';
 
 @Component({
   selector: 'app-ranking',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ranking.component.scss']
 })
 export class RankingComponent implements OnInit {
+  @Input()
+  data: BetDataDialog;
+  layout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

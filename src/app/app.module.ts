@@ -20,16 +20,14 @@ import { ConfirmDestroyCouponComponent } from './component/coupon/confirm-destro
 import { PayCancelDialogComponent } from './component/coupon/pay-cancel-dialog/pay-cancel-dialog.component';
 import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
 import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
-import { LabelByGroupingPipe } from './component/pipe/label-by-grouping.pipe';
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
 import { SharedModule } from './shared/shared.module';
-import { RankingComponent } from './products/product-dialog/ranking/ranking.component';
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [componentDeclarations, DigitslimitPipe, GroupByCategoryPipe, RankingComponent],
+  declarations: [componentDeclarations, DigitslimitPipe, GroupByCategoryPipe],
   imports: [
     HttpClientModule,
     BrowserModule,

@@ -113,6 +113,7 @@ export interface BetDataDialog {
   betCoupon?: BetCouponExtended;
   statistics?: StatisticDialog;
   groupings?: BetCouponGroup[];
+  tournamentRanking?: TournamentRanking;
 }
 export class DialogData {
   title: string;
@@ -144,6 +145,13 @@ export interface StatisticDialog {
   virtualBetCompetitor: VirtualBetCompetitor[];
   layoutProducts: LAYOUT_TYPE;
 }
+
+export interface TournamentRanking {
+  codeProduct: string;
+  ranking: VirtualGetRankByEventResponse;
+  layoutProducts: LAYOUT_TYPE;
+}
+
 export enum DialogTypeCoupon {
   DELETE,
   PAY

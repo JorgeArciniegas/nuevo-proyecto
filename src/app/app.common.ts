@@ -29,12 +29,15 @@ import { BetoddsComponent } from './products/product-dialog/betodds/betodds.comp
 import { GroupingsComponent } from './products/product-dialog/groupings/groupings.component';
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
 import { StatisticsComponent } from './products/product-dialog/statistics/statistics.component';
+
 // tslint:disable-next-line:max-line-length
 import { CockFightComponent as CockFightStatisticsComponent } from './products/product-dialog/statistics/templates/cock-fight/cock-fight.component';
 import { RaceComponent as RaceStatisticsComponent } from './products/product-dialog/statistics/templates/race/race.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
 import { LabelByGroupingPipe } from './component/pipe/label-by-grouping.pipe';
+import { RankingComponent } from './products/product-dialog/ranking/ranking.component';
+import { SoccerComponent as SoccerRankingComponent } from './products/product-dialog/ranking/templates/soccer/soccer.component';
 
 // Registration of the languages in use. The English language is registered by default.
 registerLocaleData(localeIt);
@@ -65,6 +68,8 @@ export const componentDeclarations: any[] = [
   RaceStatisticsComponent,
   CockFightStatisticsComponent,
   GroupingsComponent,
+  RankingComponent,
+  SoccerRankingComponent,
   LabelByGroupingPipe
 ];
 
