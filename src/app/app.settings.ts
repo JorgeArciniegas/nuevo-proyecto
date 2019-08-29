@@ -11,6 +11,7 @@ export class AppSettings {
   staging: boolean = environment.staging;
   pageTitle: string = environment.pageTitle;
   theme: string = environment.theme;
+  faviconPath: string = environment.faviconPath;
   supportedLang: string[] = environment.supportedLang;
   products: Products[] = environment.products;
   printSettings: PrintSettings = environment.printSettings;

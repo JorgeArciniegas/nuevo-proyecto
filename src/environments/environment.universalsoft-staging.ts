@@ -9,6 +9,7 @@ export const environment: Environment = {
   baseApiUrl: 'https://qacom-apiuniversalsoft.ody-services.net',
   pageTitle: 'UniversalSoft - VDesk Kiosk',
   theme: 'universalsoft',
+  faviconPath: 'app/themes/skins/universalsoft/image/Logo-header.png',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
   supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],

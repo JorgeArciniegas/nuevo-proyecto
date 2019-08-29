@@ -137,12 +137,12 @@ $color-text-gray: #6b7279;
 }
 
 %logo-with-text {
-	background: url("app/themes/skins/universalsoft/image/UniversalSoft.jpg") center center no-repeat;
+	background: url("app/themes/skins/universalsoft/image/Logo.png") center center no-repeat;
 	background-size: contain;
 }
 
 %logo-with-text-mobile {
-	background: url("~/app/themes/skins/universalsoft/image/UniversalSoft.jpg") center center no-repeat;
+	background: url("~/app/themes/skins/universalsoft/image/Logo.png") center center no-repeat;
 	background-size: contain;
 }
 
@@ -725,11 +725,11 @@ $gradient-dark2: #000000;
 
 // PRINT TEMPLATE
 %logo-header {
-	content: url("app/themes/skins/universalsoft/image/UniversalSoft.jpg");
+	content: url("app/themes/skins/universalsoft/image/Logo-coupon.png");
 }
 
 %logo-header-mobile {
-	background: url("~/app/themes/skins/universalsoft/image/UniversalSoft.jpg") center center no-repeat;
+	background: url("~/app/themes/skins/universalsoft/image/Logo-coupon.png") center center no-repeat;
 	background-size: contain;
 }
 

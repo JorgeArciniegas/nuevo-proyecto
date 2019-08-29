@@ -10,6 +10,7 @@ export const environment: Environment = {
   baseApiUrl: 'https://apidemo.vg-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
+  faviconPath: 'app/themes/skins/develop/image/Logo-header.png',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
   supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
