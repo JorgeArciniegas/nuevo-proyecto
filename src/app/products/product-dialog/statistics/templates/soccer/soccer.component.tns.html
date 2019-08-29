@@ -1,0 +1,52 @@
+<GridLayout rows="*" columns="*" class="dialog">
+  <GridLAyout rows="2*,2*, 8*, 2*">
+
+    <Label row="0" text="{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.STATISTIC' | translate | uppercase }}" class="h3 title"
+      verticalAlignment="center" horizontalAlignment="center" class="p-10"></Label>
+    <GridLayout row="1" rows="10*,2*" columns="*,*,*,*" verticalAlignment="center" class="p-l-10 p-r-10">
+      <Label row="0" col="0" class="text-center" text="{{'TEAM' | translate | uppercase}}"></Label>
+      <Label row="0" col="1" class="text-center" text="{{'COND' | translate | uppercase}}"></Label>
+      <Label row="0" col="2" class="text-center" text="{{'ATT' | translate | uppercase}}"></Label>
+      <Label row="0" col="3" class="text-center" text="{{'DEF' | translate | uppercase}}"></Label>
+
+      <StackLayout row="1" colSpan="4" class="m-t-5 border-bottom-overlay"></StackLayout>
+    </GridLayout>
+
+    <GridLayout row="2" rows="{{rows}}" columns="*,*,*,*" class="p-l-10 statistic-data statistic-data-soccer"
+      *ngIf="data.statistics.virtualBetCompetitor" verticalAlignment="top">
+      <ng-container *ngFor="let stat of data.statistics.virtualBetCompetitor; let i=index">
+        <StackLayout row="{{i}}" col="0" class="p-r-10" verticalAlignment="center">
+          <Label row="0" col="0" text="{{stat.nm}}" horizontalAlignment="center" verticalAlignment="center"></Label>
+        </StackLayout>
+
+        <StackLayout row="{{i}}" col="1" class="p-r-10" verticalAlignment="center">
+          <StackLayout class="fitness-container fitness">
+            <StackLayout class="fitness-content" horizontalAlignment="left" [style.width.%]="(( stat.ff / 10) * 100)">
+            </StackLayout>
+          </StackLayout>
+        </StackLayout>
+        <StackLayout row="{{i}}" col="2" class="p-r-10" verticalAlignment="center">
+          <StackLayout class="fitness-container fitness">
+            <StackLayout class="fitness-content" horizontalAlignment="left"
+              [style.width.%]="(( stat.ac[0] / 10) * 100)"></StackLayout>
+          </StackLayout>
+        </StackLayout>
+        <StackLayout row="{{i}}" col="3" class="p-r-10" verticalAlignment="center">
+          <StackLayout class="fitness-container fitness">
+            <StackLayout class="fitness-content" horizontalAlignment="left"
+              [style.width.%]="(( stat.ac[1] / 10) * 100)"></StackLayout>
+          </StackLayout>
+        </StackLayout>
+      </ng-container>
+    </GridLayout>
+
+    <StackLayout row="3" horizontalAlignment="center" verticalAlignment="center">
+      <GridLayout rows="*" columns="25*, 25*, 25*" class="m-5">
+        <StackLayout col="0"></StackLayout>
+        <Button col="1" text="{{ 'CLOSE' | translate }}" borderRadius="4" class="btn-danger btn-close" (tap)="close()"
+          textTransform="none"></Button>
+        <StackLayout col="2"></StackLayout>
+      </GridLayout>
+    </StackLayout>
+  </GridLAyout>
+</GridLayout>
