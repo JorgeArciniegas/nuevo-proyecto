@@ -123,14 +123,15 @@ export class DialogData {
   betCoupon?: BetCouponExtended;
   statistics?: StatisticDialog;
   groupings?: BetCouponGroup[];
-  ranking?: VirtualGetRankByEventResponse;
+  tournamentRanking?: TournamentRanking;
   constructor(
     betOdds?: BetOdds,
     breakpoint?: number,
     betCoupon?: BetCouponExtended,
     title?: string,
     statistics?: StatisticDialog,
-    groupings?: BetCouponGroup[]
+    groupings?: BetCouponGroup[],
+    tournamentRanking?: TournamentRanking
   ) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;
@@ -138,6 +139,7 @@ export class DialogData {
     this.betCoupon = betCoupon || null;
     this.statistics = statistics || null;
     this.groupings = groupings || null;
+    this.tournamentRanking = tournamentRanking || null;
   }
 }
 export interface StatisticDialog {

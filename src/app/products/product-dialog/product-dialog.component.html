@@ -11,7 +11,7 @@
   <app-statistics *ngIf="dataDialog.statistics" [data]="dataDialog"></app-statistics>
   <app-groupings *ngIf="dataDialog.groupings" [column]="column" [rowNumber]="rowNumber" [maxPage]="maxPage"
     [maxItems]="maxItems" [data]="dataDialog"></app-groupings>
-  <app-ranking *ngIf="dataDialog.ranking" [data]="dataDialog"></app-ranking>
+  <app-ranking *ngIf="dataDialog.tournamentRanking.ranking" [data]="dataDialog"></app-ranking>
 </div>
 
 <div mat-dialog-actions fxLayoutAlign="center center">

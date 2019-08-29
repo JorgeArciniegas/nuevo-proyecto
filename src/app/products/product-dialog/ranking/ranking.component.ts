@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BetDataDialog } from '../../products.model';
 import { LAYOUT_TYPE } from 'src/environments/environment.models';
 
@@ -7,12 +7,12 @@ import { LAYOUT_TYPE } from 'src/environments/environment.models';
   templateUrl: './ranking.component.html',
   styleUrls: ['./ranking.component.scss']
 })
-export class RankingComponent implements OnInit {
+export class RankingComponent {
   @Input()
   data: BetDataDialog;
   layout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
 
-  constructor() {}
-
-  ngOnInit() {}
+  constructor() {
+    console.log(this.data);
+  }
 }
