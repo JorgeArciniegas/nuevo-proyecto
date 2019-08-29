@@ -35,6 +35,7 @@
   "COUPON_RESET": "Reset del coupon",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Coupon accettato e confermato...",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "Controlla la lista scommesse",
+  "OPERATORS": "Operatori",
   "OPERATOR_CREATE_NEW": "Crea nuovo",
   "OPERATOR_CREATE_SUCCESS_MESSAGE":"Operatore creato con successo",
   "OPERATOR_DELETE_MESSAGE": "Sei sicuro di voler rimuovere l'operatore <strong>{{ username }}</strong> ?<br><strong>ATTENZIONE:</strong> La rimozione di un operatore è un'operazione irreversibile",
