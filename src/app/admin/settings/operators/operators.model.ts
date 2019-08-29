@@ -10,8 +10,8 @@ export interface DataListOfOperators {
 
 
 export interface OperatorCreteByForm {
-  password: string;
   username: string;
+  password: string;
   confirmPassword: string;
 }
 

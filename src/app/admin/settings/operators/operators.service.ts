@@ -21,11 +21,14 @@ export class OperatorsService {
   listTempOperators: AccountOperator[];
   rowNumber = 10;
   operatorMarked: AccountOperator;
+
   constructor(private userService: UserService, private elysApi: ElysApiService) {
     this.initLoad();
   }
 
-
+  /**
+   *
+   */
   getListOfOperators(): void {
     this.elysApi.account.getistOfOperators().then(
       resp => {
@@ -34,7 +37,11 @@ export class OperatorsService {
       }
     );
   }
-
+  /**
+   * Create operator
+   * @param operatorForm = {username: 'test1', password: '123456a', confirmPassword:'123456a'}
+   * Notes: the  parameter 'confirmPassword' from 'operatorForm'  is not used but it is required.
+   */
   createNewOperator(operatorForm: OperatorCreteByForm): Promise<CreateShopOperatorResponse>  {
     const operator: ShopOperatorRequest =  {
       Operator: {
@@ -63,12 +70,19 @@ export class OperatorsService {
     return this.elysApi.account.createOperator(operator);
   }
 
+  /**
+   * Delete operator
+   */
   deleteOperator(): Promise<ErrorStatus> {
     const operatorReq:  DeleteShopOperatorRequest = {ClientId: this.operatorMarked.IDClient};
 
     return this.elysApi.account.deleteOperator(operatorReq);
   }
 
+  /**
+   * Update operator
+   * @param password
+   */
   updateOperator(password: string): Promise<ShopOperatorResponse> {
     this.operatorMarked.Password = password;
     const req: ShopOperatorRequest = { Operator: this.operatorMarked };
@@ -83,6 +97,10 @@ export class OperatorsService {
     };
   }
 
+  /**
+   * Paginator
+   * It define the paginator
+   */
   private pagination(): void {
     if (this.listOfOperators.operators) {
       this.listOfOperators.totalPages = (this.listOfOperators.operators.length > 0)
@@ -92,7 +110,9 @@ export class OperatorsService {
     }
   }
 
-
+  /**
+   * Filter and paginate the list of operators
+   */
   filterOperators(): void  {
     const start = this.listOfOperators.actualPages  * this.rowNumber;
     let end = (this.listOfOperators.actualPages + 1) * this.rowNumber;
