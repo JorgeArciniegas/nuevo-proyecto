@@ -138,7 +138,11 @@ export class Smartcode {
   selWinner: number[];
   selPlaced: number[];
   selPodium: number[];
-  constructor(win: number[] = [], placed: number[] = [], podium: number[] = []) {
+  constructor(
+    win: number[] = [],
+    placed: number[] = [],
+    podium: number[] = []
+  ) {
     this.selPlaced = placed;
     this.selPodium = podium;
     this.selWinner = win;

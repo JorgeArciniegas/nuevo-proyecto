@@ -39,6 +39,8 @@ import { LabelByGroupingPipe } from './component/pipe/label-by-grouping.pipe';
 import { RankingComponent } from './products/product-dialog/ranking/ranking.component';
 import { SoccerComponent as SoccerRankingComponent } from './products/product-dialog/ranking/templates/soccer/soccer.component';
 
+import { SoccerComponent as SoccerStatisticsComponent } from './products/product-dialog/statistics/templates/soccer/soccer.component';
+
 // Registration of the languages in use. The English language is registered by default.
 registerLocaleData(localeIt);
 registerLocaleData(localeFr);
@@ -67,6 +69,7 @@ export const componentDeclarations: any[] = [
   StatisticsComponent,
   RaceStatisticsComponent,
   CockFightStatisticsComponent,
+  SoccerStatisticsComponent,
   GroupingsComponent,
   RankingComponent,
   SoccerRankingComponent,

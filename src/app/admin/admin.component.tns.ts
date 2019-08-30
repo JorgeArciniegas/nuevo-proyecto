@@ -25,4 +25,9 @@ export class AdminComponent {
   goToLanguageSettings(): void {
     this.router.navigateByUrl('/admin/settings/languages');
   }
+
+
+  goToOperators(): void {
+    this.router.navigateByUrl('/admin/operators');
+  }
 }

@@ -32,44 +32,53 @@ export const providerDeclarations: any[] = [];
 export const routes: Routes = [
   {
     path: '',
-    component: AdminComponent
-  },
-  {
-    path: 'reports/betsList',
     children: [
       {
         path: '',
-        component: BetsListComponent
+        component: AdminComponent,
       },
       {
-        path: 'summaryCoupons',
-        component: SummaryCouponsComponent
+        path: 'reports/betsList',
+        children: [
+          {
+            path: '',
+            component: BetsListComponent
+          },
+          {
+            path: 'summaryCoupons',
+            component: SummaryCouponsComponent
+          },
+          {
+            path: 'detail/:id',
+            component: DetailsCouponComponent
+          }
+        ]
       },
       {
-        path: 'detail/:id',
-        component: DetailsCouponComponent
+        path: 'reports/transactionsList',
+        children: [
+          {
+            path: '',
+            component: TransactionsListComponent
+          },
+          {
+            path: 'summaryTransactions',
+            component: SummaryTransactionsComponent
+          },
+          {
+            path: 'detail/:id',
+            component: DetailsTransactionComponent
+          }
+        ]
+      },
+      {
+        path: 'settings/languages',
+        component: LanguageComponent
+      },
+      {
+        path: 'operators',
+        loadChildren: './settings/operators/operators.module#OperatorsModule'
       }
     ]
   },
-  {
-    path: 'reports/transactionsList',
-    children: [
-      {
-        path: '',
-        component: TransactionsListComponent
-      },
-      {
-        path: 'summaryTransactions',
-        component: SummaryTransactionsComponent
-      },
-      {
-        path: 'detail/:id',
-        component: DetailsTransactionComponent
-      }
-    ]
-  },
-  {
-    path: 'settings/languages',
-    component: LanguageComponent
-  }
 ];
