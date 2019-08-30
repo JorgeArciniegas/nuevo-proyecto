@@ -1,39 +1,58 @@
 <GridLayout rows="*" columns="*" class="dialog">
-  <GridLAyout rows="*,*, 7*, *">
+  <GridLAyout rows="2*,*,*, 14*,*, 2*">
     <!-- header  -->
     <Label verticalAlignment="center" row="0" text="{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.RANKING' | translate | uppercase }}"
       class="h3 title" horizontalAlignment="center"></Label>
-    <GridLayout row="1" rows="12*,4*" columns="2*,4*,2*,2*,2*,6*,*" verticalAlignment="center" class="p-l-10 p-r-10">
-      <Label row="0" col="0" class="text-center" text="#"></Label>
-      <Label row="0" col="1" class="text-center" text="{{'TEAM' | translate}}"></Label>
-      <Label row="0" col="2" class="text-center" text="{{'POINTS' | translate}}"></Label>
-      <Label row="0" col="3" class="text-center" text="{{'GF' | translate}}"></Label>
-      <Label row="0" col="4" class="text-center" text="{{'GA' | translate}}"></Label>
-      <Label row="0" col="5" class="text-center" text="{{'CONDITION' | translate}}"></Label>
-      <Label row="0" col="6" class="text-center" text="{{'WEEK' | translate}}"></Label>
+    <GridLayout row="1" rows="12*,4*" columns="*,5*,7*,4*,4*,4*,12*,4*,*" verticalAlignment="center">
+      <Label row="0" col="1" horizontalAlignment="center" text="#"></Label>
+      <Label row="0" col="2" horizontalAlignment="left" class="text-center" text="{{'TEAM' | translate}}"></Label>
+      <Label row="0" col="3" horizontalAlignment="center" text="{{'POINTS' | translate}}"></Label>
+      <Label row="0" col="4" horizontalAlignment="center" text="{{'GF' | translate}}"></Label>
+      <Label row="0" col="5" horizontalAlignment="center" text="{{'GA' | translate}}"></Label>
+      <Label row="0" col="6" horizontalAlignment="center" text="{{'CONDITION' | translate}}"></Label>
+      <Label row="0" col="7" horizontalAlignment="center" text="{{'WEEK' | translate}}"></Label>
       <!-- DIVIDER -->
-      <StackLayout row="1" colSpan="7" class="border-bottom-overlay"></StackLayout>
+      <StackLayout row="1" colSpan="9" class="border-bottom-overlay"></StackLayout>
     </GridLayout>
-    <!-- content data -->
-    <!-- <GridLayout row="2" rows="{{rows}}" columns="*,2*,8*" class="p-l-10 statistic-data" *ngIf="data.statistics.virtualBetCompetitor">
-        <ng-container *ngFor="let stat of data.statistics.virtualBetCompetitor; let i=index">
-          <GridLayout row="{{i}}" col="0" rows="*" columns="*" class="m-b-5 bg-playable" verticalAlignment="center">
-            <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{data.statistics.codeProduct}}-{{stat.ito}}">
-              <StackLayout class="label"></StackLayout>
-              <Button text="{{stat.ito}}" class="text-center button-internal" isEnabled="false"></Button>
-            </GridLayout>
-          </GridLayout>
-          <Label verticalAlignment="center" class="text-center" row="{{i}}" col="1" text="{{stat.lrrs}}"></Label>
-          <StackLayout row="{{i}}" col="2" class="p-r-10" verticalAlignment="center">
-            <StackLayout class="fitness-container fitness-race">
-              <StackLayout class="fitness-content" horizontalAlignment="left"
-                [style.width.%]="(( stat.ff / maxDataStatistics) * 100) + 20"></StackLayout>
-            </StackLayout>
+    <!-- Scroll -->
+    <GridLayout row="2" class="card-odd scroll" (tap)="previusTeams()" *ngIf="maxPage > 1"
+      [ngClass]="{'disabled': page <= 0}" [isEnabled]="page > 0">
+      <Image width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Up.png" verticalAlignment="center"></Image>
+    </GridLayout>
+    <GridLayout row="4" class="card-odd scroll" (tap)="nextTeams()" *ngIf="maxPage > 1"
+      [ngClass]="{'disabled': page >= maxPage - 1}" [isEnabled]="page < maxPage - 1">
+      <Image width="20" src="~/app/themes/skins/{{settings.theme}}/icon/Down.png" verticalAlignment="center">
+      </Image>
+    </GridLayout>
+    <!-- Content data -->
+    <GridLayout row="3" rows="*,*,*,*,*,*,*,*,*,*" *ngIf="data.tournamentRanking.ranking">
+      <GridLayout row="{{i}}" columns="*,5*,7*,4*,4*,4*,12*,4*,*" *ngFor="let ranking of teamsData; let i=index">
+        <GridLayout col="1" columns="*,*" horizontalAlignment="center">
+          <Label col="0" text="{{ranking.Competitor.ito}}." verticalAlignment="center"></Label>
+          <Label col="1" verticalAligment="center" class="rank-icon m-l-5"
+            [ngClass]="{'rank-up-icon': (ranking.RankColumns[4].RankColumnValue | number) > 0, 'rank-same-icon': (ranking.RankColumns[4].RankColumnValue | number) == 0, 'rank-down-icon': (ranking.RankColumns[4].RankColumnValue | number) < 0}"></Label>
+        </GridLayout>
+        <Label col="2" text="{{ranking.Competitor.nm }}" verticalAligment="center"></Label>
+        <ng-container *ngFor="let colData of ranking.RankColumns">
+          <Label col="3" text="{{ colData.RankColumnValue}}" *ngIf="colData.RankColumnKey ==='POINTS'"
+            horizontalAlignment="center" verticalAligment="center"></Label>
+          <Label col="4" text="{{ colData.RankColumnValue }}" *ngIf="colData.RankColumnKey ==='GOALS'"
+            horizontalAlignment="center" verticalAligment="center"></Label>
+          <Label col="5" text="{{ colData.RankColumnValue }}" *ngIf="colData.RankColumnKey ==='GOALSCON'"
+            horizontalAlignment="center" verticalAligment="center"></Label>
+          <StackLayout orientation="horizontal" col="6" *ngIf="colData.RankColumnKey ==='LASTRESULTS'"
+            horizontalAlignment="center">
+            <ng-container *ngFor="let result of colData.RankColumnValue | splitString : ','">
+              <Label text="{{ result }}" *ngIf="result" class="last-result last-result-{{result}}"></Label>
+            </ng-container>
           </StackLayout>
+          <Label col="7" text="{{ colData.RankColumnValue }}" *ngIf="colData.RankColumnKey ==='ROUND'"
+            horizontalAlignment="center" verticalAligment="center"></Label>
         </ng-container>
-      </GridLayout> -->
-    <!-- close button -->
-    <StackLayout row="3" horizontalAlignment="center" verticalAlignment="center">
+      </GridLayout>
+    </GridLayout>
+    <!-- Close button -->
+    <StackLayout row="5" horizontalAlignment="center" verticalAlignment="center">
       <GridLayout rows="*" columns="25*, 25*, 25*" class="m-5">
         <StackLayout col="0"></StackLayout>
         <Button col="1" text="{{ 'CLOSE' | translate }}" borderRadius="4" class="btn-danger btn-close" (tap)="close()"

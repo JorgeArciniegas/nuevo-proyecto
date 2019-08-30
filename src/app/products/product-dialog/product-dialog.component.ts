@@ -32,7 +32,6 @@ export class ProductDialogComponent implements OnInit, AfterViewInit {
   ) {
     this.settings = appSettings;
     this.dataDialog = this.data;
-    console.log(this.dataDialog);
     if (data.breakpoint < 6) {
       this.column = 2;
     } else if (data.breakpoint === 6) {
