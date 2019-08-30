@@ -17,10 +17,13 @@ export class SoccerComponent implements OnInit {
   maxItems = 10;
   public teamsData: RankRow[];
 
-  constructor(private dialog: DialogService, public settings: AppSettings) {}
+  constructor(private dialog: DialogService, public settings: AppSettings) { }
 
   ngOnInit() {
-    this.filterRow();
+
+    if (this.data.tournamentRanking.ranking.RankRows) {
+      this.filterRow();
+    }
   }
 
   filterRow(): void {
@@ -29,6 +32,7 @@ export class SoccerComponent implements OnInit {
     if (end > this.data.tournamentRanking.ranking.RankRows.length) {
       end = this.data.tournamentRanking.ranking.RankRows.length;
     }
+
     this.teamsData = this.data.tournamentRanking.ranking.RankRows.slice(start, end);
   }
 

@@ -16,10 +16,12 @@ export class SoccerComponent implements OnInit {
   maxItems = 10;
   public teamsData: RankRow[];
 
-  constructor(public settings: AppSettings) {}
+  constructor(public settings: AppSettings) { }
 
   ngOnInit() {
-    this.filterRow();
+    if (this.data.tournamentRanking.ranking.RankRows) {
+      this.filterRow();
+    }
   }
 
   filterRow(): void {

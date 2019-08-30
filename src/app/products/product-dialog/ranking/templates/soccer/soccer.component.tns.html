@@ -25,7 +25,7 @@
       </Image>
     </GridLayout>
     <!-- Content data -->
-    <GridLayout row="3" rows="*,*,*,*,*,*,*,*,*,*" *ngIf="data.tournamentRanking.ranking">
+    <GridLayout row="3" rows="*,*,*,*,*,*,*,*,*,*" *ngIf="data.tournamentRanking.ranking.RankRows">
       <GridLayout row="{{i}}" columns="*,5*,7*,4*,4*,4*,12*,4*,*" *ngFor="let ranking of teamsData; let i=index"
         verticalAlignment="center">
         <GridLayout col="1" columns="*,*" horizontalAlignment="center" verticalAlignment="center">
