@@ -1,15 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AppSettings } from '../../app.settings';
-import { IconSize } from '../model/iconSize.model';
-import {
-  Products,
-  LAYOUT_TYPE
-} from '../../../../src/environments/environment.models';
-import { ProductsService } from '../../../../src/app/products/products.service';
+import { VirtualBetCompetitor, VirtualGetRankByEventResponse } from '@elys/elys-api/lib/virtual/virtual.models';
 import { BetDataDialog } from '../../../../src/app/products/products.model';
+import { ProductsService } from '../../../../src/app/products/products.service';
+import { LAYOUT_TYPE, Products } from '../../../../src/environments/environment.models';
+import { AppSettings } from '../../app.settings';
 import { MainService } from '../../products/main/main.service';
-import { VirtualBetCompetitor } from '@elys/elys-api/lib/virtual/virtual.models';
 import { UserService } from '../../services/user.service';
+import { IconSize } from '../model/iconSize.model';
 
 @Component({
   selector: 'app-widget',
@@ -50,10 +47,12 @@ export class WidgetComponent implements OnInit {
   async openRouting(typeObject: string): Promise<void> {
     let virtualBetCompetitorStatistics: VirtualBetCompetitor[] = [];
     const data: BetDataDialog = { title: typeObject.toUpperCase() };
+    let ranking: VirtualGetRankByEventResponse = null;
     if (
       this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER
     ) {
       await this.mainService.getCurrentTournament().then(currentEventDetails => {
+        ranking = currentEventDetails.ranking;
         for (const match of currentEventDetails.matches) {
           virtualBetCompetitorStatistics.push(
             match.virtualBetCompetitor[0]
@@ -76,6 +75,14 @@ export class WidgetComponent implements OnInit {
           virtualBetCompetitor: virtualBetCompetitorStatistics,
           layoutProducts: this.productService.product.layoutProducts.type
         };
+        break;
+      case 'ranking':
+        data.tournamentRanking = {
+          codeProduct: this.productService.product.codeProduct,
+          ranking: ranking,
+          layoutProducts: this.productService.product.layoutProducts.type
+        };
+        break;
         break;
       default:
         data.statistics = null;
