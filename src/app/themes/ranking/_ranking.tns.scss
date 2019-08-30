@@ -1,9 +1,9 @@
 .app-ranking-soccer {
 	.last-result {
-		width: 40;
+		width: 24;
 		border-radius: 5;
 		text-align: center;
-
+		margin-right: 2;
 		&.last-result-V {
 			@extend %color-bg-success;
 		}

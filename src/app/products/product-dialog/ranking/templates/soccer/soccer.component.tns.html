@@ -1,5 +1,5 @@
 <GridLayout rows="*" columns="*" class="dialog">
-  <GridLAyout rows="2*,*,*, 14*,*, 2*">
+  <GridLAyout rows="2*, 2*,*,12*,*, 2*">
     <!-- header  -->
     <Label verticalAlignment="center" row="0" text="{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.RANKING' | translate | uppercase }}"
       class="h3 title" horizontalAlignment="center"></Label>
@@ -9,8 +9,8 @@
       <Label row="0" col="3" horizontalAlignment="center" text="{{'POINTS' | translate}}"></Label>
       <Label row="0" col="4" horizontalAlignment="center" text="{{'GF' | translate}}"></Label>
       <Label row="0" col="5" horizontalAlignment="center" text="{{'GA' | translate}}"></Label>
-      <Label row="0" col="6" horizontalAlignment="center" text="{{'CONDITION' | translate}}"></Label>
-      <Label row="0" col="7" horizontalAlignment="center" text="{{'WEEK' | translate}}"></Label>
+      <Label row="0" col="6" horizontalAlignment="center" text="{{'RANKING.CONDITION' | translate}}"></Label>
+      <Label row="0" col="7" horizontalAlignment="center" text="{{'RANKING.WEEK' | translate}}"></Label>
       <!-- DIVIDER -->
       <StackLayout row="1" colSpan="9" class="border-bottom-overlay"></StackLayout>
     </GridLayout>
@@ -26,11 +26,13 @@
     </GridLayout>
     <!-- Content data -->
     <GridLayout row="3" rows="*,*,*,*,*,*,*,*,*,*" *ngIf="data.tournamentRanking.ranking">
-      <GridLayout row="{{i}}" columns="*,5*,7*,4*,4*,4*,12*,4*,*" *ngFor="let ranking of teamsData; let i=index">
-        <GridLayout col="1" columns="*,*" horizontalAlignment="center">
-          <Label col="0" text="{{ranking.Competitor.ito}}." verticalAlignment="center"></Label>
-          <Label col="1" verticalAligment="center" class="rank-icon m-l-5"
-            [ngClass]="{'rank-up-icon': (ranking.RankColumns[4].RankColumnValue | number) > 0, 'rank-same-icon': (ranking.RankColumns[4].RankColumnValue | number) == 0, 'rank-down-icon': (ranking.RankColumns[4].RankColumnValue | number) < 0}"></Label>
+      <GridLayout row="{{i}}" columns="*,5*,7*,4*,4*,4*,12*,4*,*" *ngFor="let ranking of teamsData; let i=index"
+        verticalAlignment="center">
+        <GridLayout col="1" columns="*,*" horizontalAlignment="center" verticalAlignment="center">
+          <Label horizontalAlignment="center" col="0" text="{{ranking.Competitor.ito}}."></Label>
+          <StackLayout horizontalAlignment="center" col="1" verticalAligment="top" class="rank-icon m-l-5"
+            [ngClass]="{'rank-up-icon': (ranking.RankColumns[4].RankColumnValue | number) > 0, 'rank-same-icon': (ranking.RankColumns[4].RankColumnValue | number) == 0, 'rank-down-icon': (ranking.RankColumns[4].RankColumnValue | number) < 0}">
+          </StackLayout>
         </GridLayout>
         <Label col="2" text="{{ranking.Competitor.nm }}" verticalAligment="center"></Label>
         <ng-container *ngFor="let colData of ranking.RankColumns">
