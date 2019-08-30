@@ -19,7 +19,7 @@ export class SoccerComponent implements OnInit {
   constructor(public settings: AppSettings) { }
 
   ngOnInit() {
-    if (this.data.tournamentRanking.ranking.RankRows) {
+    if (this.data.tournamentRanking.ranking && this.data.tournamentRanking.ranking.RankRows) {
       this.filterRow();
     }
   }
