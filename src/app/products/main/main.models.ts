@@ -1,8 +1,4 @@
-import {
-  VirtualBetSelection,
-  VirtualBetTournament,
-  VirtualBetCompetitor
-} from '@elys/elys-api';
+import { VirtualBetSelection, VirtualBetTournament, VirtualBetMarket, VirtualBetEvent, VirtualBetCompetitor } from '@elys/elys-api';
 import { markParentViewsForCheckProjectedViews } from '@angular/core/src/view/util';
 
 export enum TypePlacingEvent {
@@ -109,12 +105,6 @@ export class Player {
   }
 }
 
-export interface VirtualBetSelectionExtended extends VirtualBetSelection {
-  marketId?: number;
-  isLowestOdd?: boolean;
-  isHighestOdd?: boolean;
-}
-
 export class EventTime {
   minute: number;
   second: number;
@@ -157,6 +147,22 @@ export interface VirtualBetTournamentExtended extends VirtualBetTournament {
   matches?: Match[];
   overviewArea?: Area[];
   listDetailAreas?: ListArea[];
+}
+
+export interface VirtualBetEventExtended extends VirtualBetEvent {
+  mk: VirtualBetMarketExtended[];
+}
+
+export interface VirtualBetMarketExtended extends VirtualBetMarket {
+  sls: VirtualBetSelectionExtended[];
+}
+
+export interface VirtualBetSelectionExtended extends VirtualBetSelection {
+  marketId?: number;
+  isLowestOdd?: boolean;
+  isHighestOdd?: boolean;
+  // An odd is valid when its value is greater than 1.05.
+  isValid?: boolean;
 }
 
 export interface ListArea {

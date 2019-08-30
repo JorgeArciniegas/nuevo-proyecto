@@ -10,6 +10,17 @@
 		}
 
 		.column-selections {
+			.btn-soccer-odd {
+				&[disabled] {
+					opacity: 0.5;
+					cursor: auto;
+
+					:focus {
+						background: inherit;
+					}
+				}
+			}
+
 			.btn-soccer-odd,
 			.btn-soccer-area {
 				padding: 5px 10px;

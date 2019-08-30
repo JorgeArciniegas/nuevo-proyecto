@@ -15,7 +15,7 @@ export const environment: Environment = {
   baseApiUrl: 'https://qacom-apidemo.ody-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
-  couponDirectPlace: true,
+  couponDirectPlace: false,
   currencyDefault: 'EUR',
   supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
   defaultAmount: {
