@@ -359,7 +359,8 @@ export class MainService extends MainServiceExtra {
               hasOddsSelected: false,
               isVideoShown: match.ehv,
               isDetailOpened: false,
-              selectedOdds: []
+              selectedOdds: [],
+              virtualBetCompetitor: match.tm
             };
             // Clone temporary areas from default values
             const tmpAreaOverview = clone(overviewAreas);
