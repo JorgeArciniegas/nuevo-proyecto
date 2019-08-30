@@ -1,5 +1,11 @@
-import { VirtualBetSelection, VirtualBetTournament, VirtualBetMarket, VirtualBetEvent } from '@elys/elys-api';
-import { markParentViewsForCheckProjectedViews } from '@angular/core/src/view/util';
+import {
+  VirtualBetCompetitor,
+  VirtualBetEvent,
+  VirtualBetMarket,
+  VirtualBetSelection,
+  VirtualBetTournament,
+  VirtualGetRankByEventResponse
+} from '@elys/elys-api';
 
 export enum TypePlacingEvent {
   ST = 0,
@@ -132,7 +138,11 @@ export class Smartcode {
   selWinner: number[];
   selPlaced: number[];
   selPodium: number[];
-  constructor(win: number[] = [], placed: number[] = [], podium: number[] = []) {
+  constructor(
+    win: number[] = [],
+    placed: number[] = [],
+    podium: number[] = []
+  ) {
     this.selPlaced = placed;
     this.selPodium = podium;
     this.selWinner = win;
@@ -143,6 +153,7 @@ export interface VirtualBetTournamentExtended extends VirtualBetTournament {
   matches?: Match[];
   overviewArea?: Area[];
   listDetailAreas?: ListArea[];
+  ranking?: VirtualGetRankByEventResponse;
 }
 
 export interface VirtualBetEventExtended extends VirtualBetEvent {
@@ -193,6 +204,7 @@ export interface Match {
   hasOddsSelected: boolean;
   isDetailOpened: boolean;
   selectedOdds: number[];
+  virtualBetCompetitor: VirtualBetCompetitor[];
 }
 
 export interface LayoutGridDefinition {

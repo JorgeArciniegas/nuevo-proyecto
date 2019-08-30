@@ -15,6 +15,10 @@
 		width: 24px;
 		height: 24px;
 	}
+	&[class*="-48px"] {
+		width: 48px;
+		height: 48px;
+	}
 }
 
 .icon-baseline-assessment-24px:before {
@@ -60,4 +64,20 @@
 }
 .icon-baseline-arrow_back-24px:before {
 	content: url("assets/icons/baseline-arrow_back-24px.svg");
+}
+.user-icon {
+	background: url("assets/icons/icona-user.png") no-repeat center;
+}
+
+.pwd-icon {
+	background: url("assets/icons/icona-pwd.png") no-repeat center;
+}
+
+.warning-icon {
+	background: url("assets/icons/warning.png") no-repeat center;
+	background-size: contain;
+}
+.success-icon {
+	background: url("assets/icons/checked.png") no-repeat center center;
+	background-size: contain;
 }

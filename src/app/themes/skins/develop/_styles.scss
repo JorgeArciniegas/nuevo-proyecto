@@ -614,6 +614,10 @@ $gradient-dark2: #000000;
 	background: url("~/assets/icons/icona-pwd.png") center center no-repeat;
 	background-size: contain;
 }
+%warning-icon-mobile {
+	background: url("~/assets/icons/warning.png") center center no-repeat;
+	background-size: contain;
+}
 
 %error-icon {
 	background: url("assets/icons/alert.svg") center center no-repeat;
@@ -679,6 +683,36 @@ $gradient-dark2: #000000;
 
 %video-disabled-icon-mobile {
 	background: url("~/assets/icons/video-disabled.png") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-up-icon {
+	background: url("assets/icons/rank-up.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-up-icon-mobile {
+	background: url("~/assets/icons/rank-up.png") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-same-icon {
+	background: url("assets/icons/rank-same.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-same-icon-mobile {
+	background: url("~/assets/icons/rank-same.png") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-down-icon {
+	background: url("assets/icons/rank-down.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-down-icon-mobile {
+	background: url("~/assets/icons/rank-down.png") center center no-repeat;
 	background-size: contain;
 }
 

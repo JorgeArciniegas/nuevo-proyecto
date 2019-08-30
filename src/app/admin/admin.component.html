@@ -13,11 +13,16 @@
             src="assets/icons/baseline-list-24px.svg" alt="" /> <span
             class="-btn-admin-txt">{{'TRANSACTIONS_LIST' | translate }}</span> </button>
       </div>
-      <div class="admin-panel-container radius-15">
+      <div fxFlex="100" class="admin-panel-container radius-15">
         <div class="title-container">
           <img class="img-title" src="assets/icons/baseline-settings-20px.svg" alt=""><span
             class="txt-title">{{'SETTINGS' | translate }}</span>
         </div>
+        <button class="btn-default btn-success btn-admin radius-5" routerLink="./operators">
+          <img src="assets/icons/baseline_supervised_user_circle_white_24px.png" alt="" />
+          <span class="-btn-admin-txt">{{'OPERATORS' | translate }}</span>
+        </button>
+        <div class="padding-5"></div>
         <button class="btn-default btn-success btn-admin radius-5" routerLink="settings/languages"><img
             src="assets/icons/baseline-language-24px.svg" alt="" /> <span
             class="-btn-admin-txt">{{'LANGUAGE' | translate }}</span> </button>

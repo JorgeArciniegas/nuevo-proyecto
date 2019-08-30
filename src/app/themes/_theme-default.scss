@@ -8,11 +8,13 @@
 @import "./playable-board/race";
 @import "./playable-board/cock-fight";
 @import "./playable-board/soccer";
-@import "./statistics/statistics.component";
+@import "./statistics/statistics";
+@import "./ranking/ranking";
 @import "./event-control/event-control-standard";
 @import "./lucky/lucky-race-fight";
 @import "./events-list/events-list";
 @import "./groupings/groupings";
+@import "./operators/operators";
 *,
 *:after,
 *:before {
@@ -31,7 +33,7 @@ html {
 
 .app {
 	app-login,
-	app-admin {
+  app-admin {
 		height: 100%;
 	}
 	&.develop {
@@ -134,7 +136,8 @@ html {
 					}
 				}
 			}
-		}
+    }
+
 
 		.toolbar {
 			@extend %header;
@@ -807,4 +810,17 @@ html {
 			display: block;
 		}
 	}
+}
+
+// RANKING SOCCER
+.rank-up-icon {
+	@extend %rank-up-icon;
+}
+
+.rank-same-icon {
+	@extend %rank-same-icon;
+}
+
+.rank-down-icon {
+	@extend %rank-down-icon;
 }

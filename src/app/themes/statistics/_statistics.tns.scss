@@ -64,3 +64,19 @@
 		opacity: 1;
 	}
 }
+
+.statistic-data-soccer {
+	.fitness-container {
+		height: 80%;
+
+		&.fitness {
+			.fitness-content {
+				background: #02a502;
+			}
+		}
+
+		.fitness-content {
+			height: 25;
+		}
+	}
+}

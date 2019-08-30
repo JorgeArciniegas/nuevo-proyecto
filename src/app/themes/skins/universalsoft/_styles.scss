@@ -682,6 +682,36 @@ $gradient-dark2: #000000;
 	background-size: contain;
 }
 
+%rank-up-icon {
+	background: url("assets/icons/rank-up.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-up-icon-mobile {
+	background: url("~/assets/icons/rank-up.png") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-same-icon {
+	background: url("assets/icons/rank-same.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-same-icon-mobile {
+	background: url("~/assets/icons/rank-same.png") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-down-icon {
+	background: url("assets/icons/rank-down.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-down-icon-mobile {
+	background: url("~/assets/icons/rank-down.png") center center no-repeat;
+	background-size: contain;
+}
+
 %border-input-area {
 	border: 1px solid $border-card-title;
 }

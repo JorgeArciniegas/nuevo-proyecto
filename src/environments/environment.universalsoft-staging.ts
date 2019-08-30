@@ -139,7 +139,20 @@ export const environment: Environment = {
         icon: 'Soccer-ita',
         route: 'products/soccer'
       },
-      widgets: [],
+      widgets: [
+        {
+          name: '',
+          routing: 'ranking',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'ranking-cup' // without extension file
+        },
+        {
+          name: '',
+          routing: 'statistic',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
       typeCoupon: {
         isMultipleStake: false,
         acceptMultiStake: false,
@@ -165,7 +178,20 @@ export const environment: Environment = {
         icon: 'Soccer-eng',
         route: 'products/soccer'
       },
-      widgets: [],
+      widgets: [
+        {
+          name: '',
+          routing: 'ranking',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'ranking-cup' // without extension file
+        },
+        {
+          name: '',
+          routing: 'statistic',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
       typeCoupon: {
         isMultipleStake: false,
         acceptMultiStake: false,

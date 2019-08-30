@@ -63,13 +63,30 @@ app-product-dialog {
 		height: 80%;
 
 		&.fitness-ito-1 {
-			.fitness-content {
+			app/themes/skins/develop/image .fitness-content {
 				background: #ff0000;
 			}
 		}
 		&.fitness-ito-2 {
 			.fitness-content {
 				background: #4472c4;
+			}
+		}
+
+		.fitness-content {
+			height: 25px;
+		}
+	}
+}
+
+.statistic-data-soccer {
+	height: 36px;
+	.fitness-container {
+		height: 80%;
+
+		&.fitness {
+			.fitness-content {
+				background: #02a502;
 			}
 		}
 
