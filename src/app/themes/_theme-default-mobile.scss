@@ -7,7 +7,8 @@
 @import "./playable-board/race.tns";
 @import "./playable-board/cock-fight.tns";
 @import "./playable-board/soccer.tns";
-@import "./statistics/statistics.component.tns";
+@import "./statistics/statistics.tns";
+@import "./ranking/ranking.tns";
 @import "./event-control/event-control-standard.tns";
 @import "./lucky/lucky-race-fight.tns";
 @import "./events-list/events-list.tns";
@@ -111,7 +112,7 @@
 
 				.details {
 					margin-right: 10;
-          font-size: 11;
+					font-size: 11;
 					.operator {
 						margin-left: 10;
 						font-weight: 600;
@@ -647,4 +648,17 @@
 
 .video-enabled-icon {
 	@extend %video-enabled-icon-mobile;
+}
+
+// RANKING SOCCER
+.rank-up-icon {
+	@extend %rank-up-icon-mobile;
+}
+
+.rank-same-icon {
+	@extend %rank-same-icon-mobile;
+}
+
+.rank-down-icon {
+	@extend %rank-down-icon-mobile;
 }

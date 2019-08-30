@@ -9,13 +9,14 @@ import { UserService } from '../services/user.service';
 })
 export class DialogService {
   public showDialog = false;
-  public dialogData: DialogData;
+  // public dialogData: DialogData;
   private dialogProductRef = null;
   constructor(private dialog: MatDialog, private userservice: UserService) {}
 
   openDialog(dialogData: DialogData) {
     this.userservice.isModalOpen = true;
     this.userservice.isBtnCalcEditable = false;
+    console.log('Dialog Service: ', dialogData);
     this.dialogProductRef = this.dialog.open(ProductDialogComponent, {
       data: dialogData
     });

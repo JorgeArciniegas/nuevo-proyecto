@@ -8,7 +8,8 @@
 @import "./playable-board/race";
 @import "./playable-board/cock-fight";
 @import "./playable-board/soccer";
-@import "./statistics/statistics.component";
+@import "./statistics/statistics";
+@import "./ranking/ranking";
 @import "./event-control/event-control-standard";
 @import "./lucky/lucky-race-fight";
 @import "./events-list/events-list";
@@ -804,4 +805,17 @@ html {
 			display: block;
 		}
 	}
+}
+
+// RANKING SOCCER
+.rank-up-icon {
+	@extend %rank-up-icon;
+}
+
+.rank-same-icon {
+	@extend %rank-same-icon;
+}
+
+.rank-down-icon {
+	@extend %rank-down-icon;
 }

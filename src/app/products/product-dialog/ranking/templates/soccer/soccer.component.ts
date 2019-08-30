@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RankRow } from '@elys/elys-api';
-import { AppSettings } from 'src/app/app.settings';
-import { BetDataDialog } from 'src/app/products/products.model';
+import { AppSettings } from '../../../../../app.settings';
+import { BetDataDialog } from '../../../../../products/products.model';
 
 @Component({
   selector: 'app-ranking-soccer',
@@ -16,12 +16,9 @@ export class SoccerComponent implements OnInit {
   maxItems = 10;
   public teamsData: RankRow[];
 
-  constructor(public settings: AppSettings) {
-
-  }
+  constructor(public settings: AppSettings) {}
 
   ngOnInit() {
-
     this.filterRow();
   }
 
@@ -32,7 +29,6 @@ export class SoccerComponent implements OnInit {
       end = this.data.tournamentRanking.ranking.RankRows.length;
     }
     this.teamsData = this.data.tournamentRanking.ranking.RankRows.slice(start, end);
-
   }
 
   previusTeams() {
@@ -41,7 +37,6 @@ export class SoccerComponent implements OnInit {
     }
     this.page--;
     this.filterRow();
-
   }
 
   nextTeams() {
@@ -50,6 +45,5 @@ export class SoccerComponent implements OnInit {
     }
     this.page++;
     this.filterRow();
-
   }
 }
