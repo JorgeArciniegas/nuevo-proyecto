@@ -47,50 +47,40 @@ export class WidgetComponent implements OnInit {
    * create the object and append the values loads from the current selected race.
    * @param typeObject
    */
-  openRouting(typeObject: string): void {
+  async openRouting(typeObject: string): Promise<void> {
+    let virtualBetCompetitorStatistics: VirtualBetCompetitor[] = [];
+    const data: BetDataDialog = { title: typeObject.toUpperCase() };
     if (
       this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER
     ) {
-      this.mainService.getCurrentTournament().then(currentEventDetails => {
-        const data: BetDataDialog = { title: typeObject.toUpperCase() };
-        switch (typeObject) {
-          case 'statistic':
-            const virtualBetCompetitorStatistics: VirtualBetCompetitor[] = [];
-            for (const match of currentEventDetails.matches) {
-              virtualBetCompetitorStatistics.push(
-                match.virtualBetCompetitor[0]
-              );
-              virtualBetCompetitorStatistics.push(
-                match.virtualBetCompetitor[1]
-              );
-            }
-            data.statistics = {
-              codeProduct: this.productService.product.codeProduct,
-              virtualBetCompetitor: virtualBetCompetitorStatistics,
-              layoutProducts: this.productService.product.layoutProducts.type
-            };
-            break;
-          default:
-            data.statistics = null;
+      await this.mainService.getCurrentTournament().then(currentEventDetails => {
+        for (const match of currentEventDetails.matches) {
+          virtualBetCompetitorStatistics.push(
+            match.virtualBetCompetitor[0]
+          );
+          virtualBetCompetitorStatistics.push(
+            match.virtualBetCompetitor[1]
+          );
         }
-        this.productService.openProductDialog(data);
       });
     } else {
-      this.mainService.getCurrentEvent().then(currentEventDetails => {
-        const data: BetDataDialog = { title: typeObject.toUpperCase() };
-        switch (typeObject) {
-          case 'statistic':
-            data.statistics = {
-              codeProduct: this.productService.product.codeProduct,
-              virtualBetCompetitor: currentEventDetails.tm,
-              layoutProducts: this.productService.product.layoutProducts.type
-            };
-            break;
-          default:
-            data.statistics = null;
-        }
-        this.productService.openProductDialog(data);
+      await this.mainService.getCurrentEvent().then(currentEventDetails => {
+        virtualBetCompetitorStatistics = currentEventDetails.tm;
       });
     }
+
+    switch (typeObject) {
+      case 'statistic':
+        data.statistics = {
+          codeProduct: this.productService.product.codeProduct,
+          virtualBetCompetitor: virtualBetCompetitorStatistics,
+          layoutProducts: this.productService.product.layoutProducts.type
+        };
+        break;
+      default:
+        data.statistics = null;
+    }
+
+    this.productService.openProductDialog(data);
   }
 }
