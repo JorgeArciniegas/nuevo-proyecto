@@ -140,6 +140,12 @@ export const environment: Environment = {
       widgets: [
         {
           name: '',
+          routing: 'ranking',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'ranking-cup' // without extension file
+        },
+        {
+          name: '',
           routing: 'statistic',
           typeLink: WidgetTypeLink.MODAL,
           icon: 'baseline-assessment-24px' // without extension file
@@ -171,6 +177,12 @@ export const environment: Environment = {
         route: 'products/soccer'
       },
       widgets: [
+        {
+          name: '',
+          routing: 'ranking',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'ranking-cup' // without extension file
+        },
         {
           name: '',
           routing: 'statistic',

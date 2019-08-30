@@ -28,7 +28,7 @@
     "@angular/platform-browser": "^7.2.13",
     "@angular/platform-browser-dynamic": "^7.2.13",
     "@angular/router": "^7.2.13",
-    "@elys/elys-api": "^0.6.4",
+    "@elys/elys-api": "^0.7.0",
     "@elys/elys-coupon": "^0.2.14",
     "@elys/elys-storage-lib": "^0.4.1",
     "@ngx-translate/core": "^11.0.1",

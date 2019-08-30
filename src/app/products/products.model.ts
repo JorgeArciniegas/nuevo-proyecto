@@ -1,4 +1,4 @@
-import { VirtualBetCompetitor, BetCouponGroup } from '@elys/elys-api';
+import { VirtualBetCompetitor, BetCouponGroup, VirtualGetRankByEventResponse } from '@elys/elys-api';
 import { BetCouponExtended } from '@elys/elys-coupon';
 import { LAYOUT_TYPE } from '../../../src/environments/environment.models';
 import { TYPINGTYPE } from '../component/btncalc/btncalc.enum';
@@ -113,6 +113,7 @@ export interface BetDataDialog {
   betCoupon?: BetCouponExtended;
   statistics?: StatisticDialog;
   groupings?: BetCouponGroup[];
+  tournamentRanking?: TournamentRanking;
 }
 export class DialogData {
   title: string;
@@ -122,9 +123,15 @@ export class DialogData {
   betCoupon?: BetCouponExtended;
   statistics?: StatisticDialog;
   groupings?: BetCouponGroup[];
+  tournamentRanking?: TournamentRanking;
   constructor(
-    betOdds?: BetOdds, breakpoint?: number, betCoupon?: BetCouponExtended,
-    title?: string, statistics?: StatisticDialog, groupings?: BetCouponGroup[]
+    betOdds?: BetOdds,
+    breakpoint?: number,
+    betCoupon?: BetCouponExtended,
+    title?: string,
+    statistics?: StatisticDialog,
+    groupings?: BetCouponGroup[],
+    tournamentRanking?: TournamentRanking
   ) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;
@@ -132,6 +139,7 @@ export class DialogData {
     this.betCoupon = betCoupon || null;
     this.statistics = statistics || null;
     this.groupings = groupings || null;
+    this.tournamentRanking = tournamentRanking || null;
   }
 }
 export interface StatisticDialog {
@@ -139,6 +147,13 @@ export interface StatisticDialog {
   virtualBetCompetitor: VirtualBetCompetitor[];
   layoutProducts: LAYOUT_TYPE;
 }
+
+export interface TournamentRanking {
+  codeProduct: string;
+  ranking: VirtualGetRankByEventResponse;
+  layoutProducts: LAYOUT_TYPE;
+}
+
 export enum DialogTypeCoupon {
   DELETE,
   PAY

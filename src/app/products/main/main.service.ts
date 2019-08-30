@@ -58,7 +58,7 @@ export class MainService extends MainServiceExtra {
   private remainingTime: EventTime = new EventTime();
   placingEvent: PlacingEvent = new PlacingEvent();
   public currentEventDetails: VirtualBetEvent;
-  public currentProductDetails: VirtualBetTournament;
+  public currentProductDetails: VirtualBetTournamentExtended;
 
   private remaingTimeCounter: Subject<EventTime>;
   public remaingTimeCounterObs: Observable<EventTime>;
@@ -459,6 +459,7 @@ export class MainService extends MainServiceExtra {
           tournament.matches = matches;
           tournament.overviewArea = overViewArea;
           tournament.listDetailAreas = listDetailArea;
+
           this.currentProductDetails = tournament;
 
           this.attempts = 0;
@@ -473,6 +474,9 @@ export class MainService extends MainServiceExtra {
             this.attempts = 0;
           }
         }
+
+        // Get ranking data
+        this.elysApi.virtual.getRanking(tournament.pid).then(ranking => (this.currentProductDetails.ranking = ranking));
       });
     }
   }
