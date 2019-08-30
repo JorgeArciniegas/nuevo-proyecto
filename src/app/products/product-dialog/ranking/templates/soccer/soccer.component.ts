@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { BetDataDialog } from 'src/app/products/products.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { RankRow } from '@elys/elys-api';
 import { AppSettings } from 'src/app/app.settings';
+import { BetDataDialog } from 'src/app/products/products.model';
 
 @Component({
   selector: 'app-ranking-soccer',
@@ -12,24 +13,35 @@ export class SoccerComponent implements OnInit {
   data: BetDataDialog;
   public page = 0;
   public maxPage = 2;
-  //public teamsData: BetOdd[];
+  maxItems = 10;
+  public teamsData: RankRow[];
 
   constructor(public settings: AppSettings) {
-    console.log(this.data);
+
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.filterRow();
+  }
+
+  filterRow(): void {
+    const start = this.page * this.maxItems;
+    let end = (this.page + 1) * this.maxItems;
+    if (end > this.data.tournamentRanking.ranking.RankRows.length) {
+      end = this.data.tournamentRanking.ranking.RankRows.length;
+    }
+    this.teamsData = this.data.tournamentRanking.ranking.RankRows.slice(start, end);
+
+  }
 
   previusTeams() {
     if (this.page <= 0) {
       return;
     }
     this.page--;
-    // if (this.betOdds) {
-    //   this.filterOdds();
-    // } else {
-    //   this.filterOddsToCoupon();
-    // }
+    this.filterRow();
+
   }
 
   nextTeams() {
@@ -37,10 +49,7 @@ export class SoccerComponent implements OnInit {
       return;
     }
     this.page++;
-    // if (this.betOdds) {
-    //   this.filterOdds();
-    // } else {
-    //   this.filterOddsToCoupon();
-    // }
+    this.filterRow();
+
   }
 }

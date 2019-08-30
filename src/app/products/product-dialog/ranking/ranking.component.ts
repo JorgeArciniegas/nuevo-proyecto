@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { BetDataDialog } from '../../products.model';
-import { LAYOUT_TYPE } from 'src/environments/environment.models';
 
 @Component({
   selector: 'app-ranking',
@@ -13,6 +13,5 @@ export class RankingComponent {
   layout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
 
   constructor() {
-    console.log(this.data);
   }
 }
