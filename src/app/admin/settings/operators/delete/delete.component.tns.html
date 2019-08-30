@@ -1,23 +1,25 @@
 <GridLayout rows="*,*,12*,*" columns="*" class="operators">
-  <Label row="0" col="0" class="title" text="{{'LIST_OF_OPERATORS' | translate | uppercase}} - {{'NEW' | translate | uppercase }}" textWrap="true"
-  verticalAlignment="center"></Label>
+  <Label row="0" col="0" class="title"
+    text="{{'LIST_OF_OPERATORS' | translate | uppercase}} - {{'NEW' | translate | uppercase }}" textWrap="true"
+    verticalAlignment="center"></Label>
   <Image row="1" stretch="aspectFit" width="35" [nsRouterLink]="['../']"
-    src="~/app/themes/skins/{{settings.theme}}/icon/baseline-arrow_back-24px.png" verticalAlignment="center"
-    horizontalAlignment="left" class="m-l-5" ></Image>
-  <GridLayout row="2" rows="*,*,*,*,*,*,*,*"  columns="*,15*"  class="display" verticalAlignment="center">
+    src="~/assets/icons/baseline-arrow_back-24px.png" verticalAlignment="center" horizontalAlignment="left"
+    class="m-l-5"></Image>
+  <GridLayout row="2" rows="*,*,*,*,*,*,*,*" columns="*,15*" class="display" verticalAlignment="center">
     <GridLayout col="1" row="4" columns="2*,auto" horizontalAlignment="center" *ngIf="isDeleted">
       <Label col="0" class="success-icon" width="24" height="24" verticalAlignment="center"></Label>
-      <HtmlView col="1" html="{{'OPERATOR_DELETE_SUCCESS_MESSAGE' | translate }}" ></HtmlView>
+      <HtmlView col="1" html="{{'OPERATOR_DELETE_SUCCESS_MESSAGE' | translate }}"></HtmlView>
     </GridLayout>
     <GridLayout col="1" row="4" columns="2*,auto" horizontalAlignment="center" *ngIf="!isDeleted">
       <Label col="0" class="warning-icon" width="24" height="24" verticalAlignment="center"></Label>
-      <HtmlView col="1" html="{{ 'OPERATOR_DELETE_MESSAGE' | translate:{'username': operatorService.operatorMarked.UserName} }}"></HtmlView>
+      <HtmlView col="1"
+        html="{{ 'OPERATOR_DELETE_MESSAGE' | translate:{'username': operatorService.operatorMarked.UserName} }}">
+      </HtmlView>
     </GridLayout>
   </GridLayout>
-  <StackLayout row="3" class="m-r-15 m-b-5 p-0" horizontalAlignment="right" >
-    <Button height="36" text="{{ 'CONFIRM' | translate | uppercase }}" class="btn-default p-2 btn-success-no-gradient radius-2"
-      [ngClass]="{'disabled': isDeleted }"
-      (tap)="onSubmit()"
+  <StackLayout row="3" class="m-r-15 m-b-5 p-0" horizontalAlignment="right">
+    <Button height="36" text="{{ 'CONFIRM' | translate | uppercase }}"
+      class="btn-default p-2 btn-success-no-gradient radius-2" [ngClass]="{'disabled': isDeleted }" (tap)="onSubmit()"
       [isEnabled]="!isDeleted">
     </Button>
   </StackLayout>

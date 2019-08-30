@@ -1,6 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AppSettings } from '../../app.settings';
 import { BetDataDialog, PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { TypeBetSlipColTot } from '../../products/main/main.models';
@@ -16,7 +15,6 @@ import { CouponService } from '../coupon/coupon.service';
   styleUrls: ['./display.component.scss']
 })
 export class DisplayComponent implements OnDestroy {
-  // public settings: AppSettings;
   @Input()
   public rowHeight: number;
   @Input()
@@ -40,23 +38,18 @@ export class DisplayComponent implements OnDestroy {
   constructor(
     public productService: ProductsService,
     private btnService: BtncalcService,
-    public readonly settings: AppSettings,
     public userService: UserService,
     private elysCoupon: ElysCouponService,
     private internalServiceCoupon: CouponService
   ) {
     this.amountPresetPlayer = this.btnService.polyfunctionStakePresetPlayer;
-    this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(
-      element => {
-        this.polyfunctionalValue = element;
-      }
-    );
-      // stake coupon change and show to display area
-    this.polyfunctionalStakeCouponSubscribe = this.productService.polyfunctionalStakeCouponObs.subscribe(
-      elem => {
-        this.polyfunctionalStakeCoupon = elem;
-      }
-    );
+    this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(element => {
+      this.polyfunctionalValue = element;
+    });
+    // stake coupon change and show to display area
+    this.polyfunctionalStakeCouponSubscribe = this.productService.polyfunctionalStakeCouponObs.subscribe(elem => {
+      this.polyfunctionalStakeCoupon = elem;
+    });
 
     this.polyfunctionStakePresetPlayerSubscribe = this.btnService.polyfunctionStakePresetPlayerObs.subscribe(
       (item: PolyfunctionStakePresetPlayer) => {
@@ -64,18 +57,16 @@ export class DisplayComponent implements OnDestroy {
       }
     );
 
-    this.couponHasChangedSubscribe = this.elysCoupon.couponHasChanged.subscribe( coupon => {
+    this.couponHasChangedSubscribe = this.elysCoupon.couponHasChanged.subscribe(coupon => {
       if (coupon) {
         this.polyfunctionalValue.grouping = coupon.Groupings;
       }
     });
 
-    this.couponHasBeenPlaced = this.internalServiceCoupon.couponHasBeenPlacedObs.subscribe( () => {
+    this.couponHasBeenPlaced = this.internalServiceCoupon.couponHasBeenPlacedObs.subscribe(() => {
       this.polyfunctionalValue.grouping = null;
     });
-
   }
-
 
   ngOnDestroy() {
     this.polyfunctionalValueSubscribe.unsubscribe();
@@ -89,13 +80,13 @@ export class DisplayComponent implements OnDestroy {
     let data: BetDataDialog;
     if (!isGroupings) {
       data = {
-        title:  this.polyfunctionalValue.selection,
-        betOdds: { odds: this.polyfunctionalValue.odds}
+        title: this.polyfunctionalValue.selection,
+        betOdds: { odds: this.polyfunctionalValue.odds }
       };
     } else {
       data = {
-        title:  'GROUPINGS',
-        groupings:  this.elysCoupon.betCoupon.Groupings
+        title: 'GROUPINGS',
+        groupings: this.elysCoupon.betCoupon.Groupings
       };
     }
     this.productService.openProductDialog(data);

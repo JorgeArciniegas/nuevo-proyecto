@@ -39,6 +39,9 @@ html {
 	&.develop {
 		@import "./skins/develop/styles";
 	}
+	&.universalsoft {
+		@import "./skins/universalsoft/styles";
+	}
 
 	.main-content {
 		@extend %font-family;
@@ -687,7 +690,7 @@ html {
 	position: fixed; /* Sit on top of the page content */
 	z-index: 100; /* Specify a stack order in case you're using a different order for other elements */
 	margin: 1px;
-	background: rgba(0, 0, 0, 0.6) url("app/themes/skins/develop/icon/baseline-lock-24px.svg") center center no-repeat;
+	background: rgba(0, 0, 0, 0.6) url("assets/icons/baseline-lock-24px.svg") center center no-repeat;
 	background-size: 100px;
 }
 .cdk-visually-hidden,

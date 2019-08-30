@@ -9,7 +9,7 @@
 
   <button *ngIf="pageNumber > 1" class="btn-reset card-odd radius-5 scroll" (click)="previousPage()"
     [disabled]="currentPage <= 1">
-    <img class="icon" src="../app/themes/skins/{{appSetting.theme}}/icon/Up.svg">
+    <img class="icon" src="assets/icons/Up.svg">
   </button>
 
   <div *ngIf="data.statistics">
@@ -38,6 +38,6 @@
 
   <button *ngIf="pageNumber > 1" class="btn-reset card-odd radius-5 scroll" (click)="nextPage()"
     [disabled]="currentPage === pageNumber">
-    <img class="icon" src="app/themes/skins/{{appSetting.theme}}/icon/Down.svg">
+    <img class="icon" src="assets/icons/Down.svg">
   </button>
 </div>

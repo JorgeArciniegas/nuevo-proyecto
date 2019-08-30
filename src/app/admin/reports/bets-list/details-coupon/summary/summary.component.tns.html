@@ -25,13 +25,11 @@
     <GridLayout rows="*,*" columns="*,5*" verticalAlignment="center">
       <ng-container [ngSwitch]="data.CouponStatusId">
         <Image row="0" col="0" width="24" horizontalAlignment="left" *ngSwitchDefault
-          src="~/app/themes/skins/{{settings.theme}}/icon/progress-clock.png"></Image>
+          src="~/assets/icons/progress-clock.png"></Image>
         <!-- LOST -->
-        <Image col="0" width="24" horizontalAlignment="left" *ngSwitchCase="2"
-          src="~/app/themes/skins/{{settings.theme}}/icon/cancel.png"></Image>
+        <Image col="0" width="24" horizontalAlignment="left" *ngSwitchCase="2" src="~/assets/icons/cancel.png"></Image>
         <!-- WIN -->
-        <Image col="0" width="24" horizontalAlignment="left" *ngSwitchCase="3"
-          src="~/app/themes/skins/{{settings.theme}}/icon/checked.png"></Image>
+        <Image col="0" width="24" horizontalAlignment="left" *ngSwitchCase="3" src="~/assets/icons/checked.png"></Image>
       </ng-container>
       <Label row="0" col="1" verticalAlignment="center" horizontalAlignment="left"
         text="{{ 'DYNAMIC_KEYS.CouponStatusInternal.' + couponStatus[data.CouponStatusId] | translate }}"

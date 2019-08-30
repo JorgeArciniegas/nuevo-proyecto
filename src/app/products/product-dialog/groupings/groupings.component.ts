@@ -1,18 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { BetCouponGroup } from '@elys/elys-api';
-import { AppSettings } from '../../../app.settings';
 import { CouponService } from '../../../component/coupon/coupon.service';
 import { UserService } from '../../../services/user.service';
 import { BetDataDialog, PolyfunctionStakePresetPlayer } from '../../products.model';
 import { BtncalcService } from '../../../component/btncalc/btncalc.service';
 import { TypeBetSlipColTot } from '../../main/main.models';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-groupings',
   templateUrl: './groupings.component.html',
   styleUrls: ['./groupings.component.scss']
 })
-export class GroupingsComponent implements OnInit {
+export class GroupingsComponent implements OnInit, OnDestroy {
   @Input()
   data: BetDataDialog;
   @Input()
@@ -29,14 +29,11 @@ export class GroupingsComponent implements OnInit {
   groupings: BetCouponGroup[];
   emptyGroupings: string[] = [];
   amountPresetPlayer: PolyfunctionStakePresetPlayer;
-  constructor(
-    public userService: UserService,
-    public readonly settings: AppSettings,
-    public readonly couponService: CouponService,
-    private btnService: BtncalcService
-  ) {
+  couponResponseSubscription: Subscription;
+
+  constructor(public userService: UserService, public readonly couponService: CouponService, private btnService: BtncalcService) {
     this.amountPresetPlayer = this.btnService.polyfunctionStakePresetPlayer;
-    this.couponService.couponResponse.subscribe(coupon => {
+    this.couponResponseSubscription = this.couponService.couponResponse.subscribe(coupon => {
       this.data.groupings = coupon.Groupings;
       if (coupon) {
         this.filterGroupings();
@@ -48,6 +45,10 @@ export class GroupingsComponent implements OnInit {
     this.maxItems = this.rowNumber * this.column;
     this.maxPage = Math.ceil(this.data.groupings.length / this.maxItems);
     this.filterGroupings();
+  }
+
+  ngOnDestroy() {
+    this.couponResponseSubscription.unsubscribe();
   }
 
   filterGroupings() {

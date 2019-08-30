@@ -43,11 +43,11 @@ app-product-dialog {
 			height: 46px;
 
 			&.icon-cock-red {
-				background: url("~/app/themes/skins/develop/image/cockfight/cock-red.png") no-repeat center;
+				background: url("~/assets/images/cockfight/cock-red.png") no-repeat center;
 				background-size: contain;
 			}
 			&.icon-cock-blue {
-				background: url("~/app/themes/skins/develop/image/cockfight/cock-blue.png") no-repeat center;
+				background: url("~/assets/images/cockfight/cock-blue.png") no-repeat center;
 				background-size: contain;
 				-webkit-transform: scaleX(-1);
 				transform: scaleX(-1);
@@ -63,7 +63,7 @@ app-product-dialog {
 		height: 80%;
 
 		&.fitness-ito-1 {
-			.fitness-content {
+			app/themes/skins/develop/image .fitness-content {
 				background: #ff0000;
 			}
 		}

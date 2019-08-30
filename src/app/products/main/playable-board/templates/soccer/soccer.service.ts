@@ -17,7 +17,6 @@ export class SoccerService implements OnDestroy {
   // Index of the areas array of the selected match;
   public selectedArea: number;
   private currentEventSubscription: Subscription;
-  private polyfunctionalAreaSubscription: Subscription;
   // Listen the coupon's change
   couponHasChangedSubscription: Subscription;
   couponHasBeenPlacedSubscription: Subscription;
@@ -37,7 +36,42 @@ export class SoccerService implements OnDestroy {
 
     // Get the event's detail at the access of the section
     this.getTournamentDetails();
+  }
 
+  verifySelectedOdds(coupon: BetCouponExtended): void {
+    if (this.isCheckedCoupon) {
+      this.timerCheckedSelectionSub.unsubscribe();
+      this.isCheckedCoupon = false;
+      this.verifySelectedOdds(coupon);
+    } else {
+      this.isCheckedCoupon = true;
+      this.timerCheckedSelectionSub = timer(1000).subscribe(() => {
+        // There was a change on the coupon.
+        this.tournament.matches.forEach(match => {
+          match.selectedOdds.forEach((oddSelected, idx) => {
+            let matchHasOdd = false;
+            if (coupon.Odds.filter(odd => odd.SelectionId === oddSelected).length > 0) {
+              matchHasOdd = true;
+            }
+
+            if (!matchHasOdd) {
+              match.selectedOdds.splice(idx, 1);
+              if (match.selectedOdds.length === 0) {
+                match.hasOddsSelected = false;
+              }
+            }
+          });
+        });
+        this.isCheckedCoupon = false;
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    this.destroySubscriptions();
+  }
+
+  subscribeToObservables() {
     // Get the event's details.
     this.currentEventSubscription = this.mainService.currentEventObserve.subscribe(() => {
       this.getTournamentDetails();
@@ -58,7 +92,7 @@ export class SoccerService implements OnDestroy {
     // Get the change of the coupon's object.
     this.couponHasChangedSubscription = this.elysCoupon.couponHasChanged.subscribe(coupon => {
       if (coupon) {
-         this.verifySelectedOdds(coupon);
+        this.verifySelectedOdds(coupon);
       } else {
         // The coupon was removed.
         this.tournament.matches.map(match => {
@@ -71,40 +105,8 @@ export class SoccerService implements OnDestroy {
     });
   }
 
-  verifySelectedOdds(coupon: BetCouponExtended): void {
-    if (this.isCheckedCoupon) {
-      this.timerCheckedSelectionSub.unsubscribe();
-      this.isCheckedCoupon = false;
-      this.verifySelectedOdds(coupon);
-
-    } else {
-      this.isCheckedCoupon = true;
-      this.timerCheckedSelectionSub = timer(1000).subscribe( () => {
-          // There was a change on the coupon.
-        this.tournament.matches.forEach(match => {
-          match.selectedOdds.forEach((oddSelected, idx) => {
-            let matchHasOdd = false;
-            if (coupon.Odds.filter(odd => odd.SelectionId === oddSelected).length > 0) {
-              matchHasOdd = true;
-            }
-
-            if (!matchHasOdd) {
-              match.selectedOdds.splice(idx, 1);
-              if (match.selectedOdds.length === 0) {
-                match.hasOddsSelected = false;
-              }
-            }
-          });
-        });
-        this.isCheckedCoupon = false;
-      });
-
-    }
-  }
-
-  ngOnDestroy() {
+  destroySubscriptions() {
     this.currentEventSubscription.unsubscribe();
-    this.polyfunctionalAreaSubscription.unsubscribe();
     this.couponHasChangedSubscription.unsubscribe();
     this.couponHasBeenPlacedSubscription.unsubscribe();
   }

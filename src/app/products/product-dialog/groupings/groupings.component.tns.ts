@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BetCouponGroup } from '@elys/elys-api';
-import { AppSettings } from '../../../app.settings';
 import { BtncalcService } from '../../../component/btncalc/btncalc.service';
 import { CouponService } from '../../../component/coupon/coupon.service';
 import { UserService } from '../../../services/user.service';
@@ -16,7 +15,6 @@ import { Switch } from 'tns-core-modules/ui/switch/switch';
   styleUrls: ['./groupings.component.tns.scss']
 })
 export class GroupingsComponent implements OnInit {
-
   private rowNumber = 3;
   public columnNumber = 3;
 
@@ -36,7 +34,6 @@ export class GroupingsComponent implements OnInit {
   amountPresetPlayer: PolyfunctionStakePresetPlayer;
   constructor(
     public userService: UserService,
-    public readonly settings: AppSettings,
     public readonly couponService: CouponService,
     private btnService: BtncalcService,
     public productService: ProductsService,
@@ -49,11 +46,9 @@ export class GroupingsComponent implements OnInit {
         this.filterGroupings();
       }
     });
-
   }
 
   ngOnInit() {
-
     for (let index = 0; index < this.columnNumber - 1; index++) {
       this.columns += ',*';
     }
@@ -63,12 +58,10 @@ export class GroupingsComponent implements OnInit {
     this.maxItems = this.rowNumber * this.columnNumber;
     this.maxPage = Math.ceil(this.data.groupings.length / this.maxItems);
     this.filterGroupings();
-
   }
 
   filterGroupings() {
     try {
-
       const start = this.page * this.maxItems;
       let end = (this.page + 1) * this.maxItems;
       if (end > this.data.groupings.length) {
@@ -104,7 +97,6 @@ export class GroupingsComponent implements OnInit {
   }
 
   checkedGrouping(grouping: BetCouponGroup): void {
-
     if (!grouping.Selected) {
       grouping.Selected = true;
       grouping.Stake =

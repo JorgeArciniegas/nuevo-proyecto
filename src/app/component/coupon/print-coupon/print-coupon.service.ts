@@ -31,8 +31,8 @@ export class PrintCouponService {
       }
     });
   }
-  reprintCoupon(coupon: SummaryCoupon)  {
-    this.couponPrint = coupon as unknown as StagedCoupon;
+  reprintCoupon(coupon: SummaryCoupon) {
+    this.couponPrint = (coupon as unknown) as StagedCoupon;
     this.isPrintAgainst = true;
     this.reprintDate = new Date();
     this.printWindow();
@@ -43,9 +43,7 @@ export class PrintCouponService {
    */
   printWindow(): void {
     this.printingEnabled = true;
-    this.router
-      .getRouter()
-      .navigate(['/', { outlets: { print: 'print-coupon' } }]);
+    this.router.getRouter().navigate(['/', { outlets: { print: 'print-coupon' } }]);
     document.getElementById('app').classList.add('isPrinting');
     timer(250)
       .take(1)

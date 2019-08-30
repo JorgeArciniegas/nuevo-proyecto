@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AppSettings } from '../app.settings';
 import { CouponService } from '../component/coupon/coupon.service';
 import { ProductsService } from './products.service';
 import { DialogService } from './dialog.service';
@@ -15,21 +14,17 @@ import { UserService } from '../services/user.service';
 })
 export class ProductsComponent {
   public rowHeight: number;
-  public settings: AppSettings;
   public messageSource: typeof MessageSource = MessageSource;
 
   dialogTypeCoupon: typeof DialogTypeCoupon = DialogTypeCoupon;
 
   constructor(
     public service: ProductsService,
-    public readonly appSettings: AppSettings,
     public readonly userService: UserService,
     public readonly couponService: CouponService,
     public dialog: DialogService,
     public couponDialogService: CouponDialogService
   ) {
-    this.settings = appSettings;
-
     this.service.fnWindowsSize();
     this.rowHeight = (this.service.windowSize.columnHeight - 30) / 11;
   }

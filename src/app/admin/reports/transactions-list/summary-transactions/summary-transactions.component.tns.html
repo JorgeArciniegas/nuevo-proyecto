@@ -2,9 +2,8 @@
   <Label row="0" class="title" text="{{'TRANSACTIONS_LIST' | translate | uppercase}}" textWrap="true"
     verticalAlignment="center"></Label>
   <GridLayout row="1" columns="*,2*,2*,2*,4*" class="card header">
-    <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()"
-      src="~/app/themes/skins/{{settings.theme}}/icon/baseline-arrow_back-24px.png" verticalAlignment="center"
-      horizontalAlignment="left"></Image>
+    <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()" src="~/assets/icons/baseline-arrow_back-24px.png"
+      verticalAlignment="center" horizontalAlignment="left"></Image>
     <StackLayout col="1" verticalAlignment="center">
       <Label class="sub-title" text="{{ 'DATE_FROM' | translate }}"></Label>
       <Label text="{{transactionsListService.dateFrom | date:'mediumDate'}}" textWrap="true"></Label>

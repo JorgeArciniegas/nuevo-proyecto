@@ -15,6 +15,7 @@ export const environment: Environment = {
   baseApiUrl: 'https://apidemo.vg-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
+  faviconPath: 'app/themes/skins/develop/image/Logo-header.png',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
   supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
@@ -78,7 +79,14 @@ export const environment: Environment = {
         icon: 'Horse',
         route: 'products/racing'
       },
-      widgets: [],
+      widgets: [
+        {
+          name: '',
+          routing: 'statistic',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
@@ -104,7 +112,14 @@ export const environment: Environment = {
         icon: 'Horse',
         route: 'products/racing'
       },
-      widgets: [],
+      widgets: [
+        {
+          name: '',
+          routing: 'statistic',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
