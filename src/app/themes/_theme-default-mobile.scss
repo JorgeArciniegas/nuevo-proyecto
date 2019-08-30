@@ -12,6 +12,7 @@
 @import "./lucky/lucky-race-fight.tns";
 @import "./events-list/events-list.tns";
 @import "./groupings/groupings.tns";
+@import "./operators/operators.tns";
 .app {
 	&.develop {
 		@import "./skins/develop/styles";
@@ -27,7 +28,7 @@
 		}
 		#admin {
 			@extend %admin-mobile;
-			height: 100%;
+
 			.admin-panel-container {
 				@extend %bg-opacity-dark-variant;
 			}
@@ -62,14 +63,14 @@
 				}
 			}
 
-			.error-message {
-				@extend %error-area;
-
-				.error-icon {
-					@extend %error-icon-mobile;
-				}
-			}
 		}
+    .error-message {
+      @extend %error-area;
+
+      .error-icon {
+        @extend %error-icon-mobile;
+      }
+    }
 
 		.toolbar {
 			@extend %header;
@@ -647,4 +648,21 @@
 
 .video-enabled-icon {
 	@extend %video-enabled-icon-mobile;
+}
+
+
+// icon default
+
+
+.user-icon {
+  @extend %user-icon-mobile;
+}
+.pwd-icon{
+  @extend %pwd-icon-mobile;
+}
+.success-icon {
+  @extend %check-circle-icon-mobile;
+}
+.warning-icon{
+  @extend %warning-icon-mobile;
 }

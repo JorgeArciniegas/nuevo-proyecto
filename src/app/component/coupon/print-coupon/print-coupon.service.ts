@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { StagedCoupon, StagedCouponStatus, SummaryCoupon, CouponStatus } from '@elys/elys-api';
+import { StagedCoupon, StagedCouponStatus, SummaryCoupon } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { timer } from 'rxjs';
-import { RouterService } from '../../../../../src/app/services/utility/router/router.service';
+import { RouterService } from '../../../services/utility/router/router.service';
 
 @Injectable({
   providedIn: 'root'

@@ -142,3 +142,13 @@
 		}
 	}
 }
+.btn-grey {
+  @extend %btn-gray;
+}
+
+.btn-success-no-gradient {
+  @extend  %color-bg-success;
+}
+.btn-danger-no-gradient {
+  @extend  %color-bg-allert;
+}
