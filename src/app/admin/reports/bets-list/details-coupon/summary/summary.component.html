@@ -41,13 +41,11 @@
           <div fxLaoyut="row">
             <div fxFlex="10" fxLayoutAlign="flex-start center">
               <ng-container [ngSwitch]="data.CouponStatusId">
-                <img class="icon icon-24px" *ngSwitchDefault
-                  src="app/themes/skins/{{settings.theme}}/icon/progress-clock.svg">
+                <img class="icon icon-24px" *ngSwitchDefault src="assets/icons/progress-clock.svg">
                 <!-- LOST -->
-                <img class="icon icon-24px" *ngSwitchCase="2" src="app/themes/skins/{{settings.theme}}/icon/cancel.svg">
+                <img class="icon icon-24px" *ngSwitchCase="2" src="assets/icons/cancel.svg">
                 <!-- WIN -->
-                <img class="icon icon-24px" *ngSwitchCase="3"
-                  src="app/themes/skins/{{settings.theme}}/icon/checked.svg">
+                <img class="icon icon-24px" *ngSwitchCase="3" src="assets/icons/checked.svg">
               </ng-container>
             </div>
             <div fxFlex="90">

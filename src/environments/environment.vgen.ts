@@ -1,4 +1,9 @@
-import { Environment, WidgetTypeLink, LAYOUT_TYPE, LICENSE_TYPE } from './environment.models';
+import {
+  Environment,
+  WidgetTypeLink,
+  LAYOUT_TYPE,
+  LICENSE_TYPE
+} from './environment.models';
 import { Market } from '../app/products/products.model';
 
 export const environment: Environment = {
@@ -10,6 +15,7 @@ export const environment: Environment = {
   baseApiUrl: 'https://apidemo.vg-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
+  faviconPath: 'app/themes/skins/develop/image/Logo-header.png',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
   supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
@@ -73,7 +79,14 @@ export const environment: Environment = {
         icon: 'Horse',
         route: 'products/racing'
       },
-      widgets: [],
+      widgets: [
+        {
+          name: '',
+          routing: 'statistic',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
@@ -99,7 +112,14 @@ export const environment: Environment = {
         icon: 'Horse',
         route: 'products/racing'
       },
-      widgets: [],
+      widgets: [
+        {
+          name: '',
+          routing: 'statistic',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
@@ -125,7 +145,20 @@ export const environment: Environment = {
         icon: 'Soccer-ita',
         route: 'products/soccer'
       },
-      widgets: [],
+      widgets: [
+        {
+          name: '',
+          routing: 'ranking',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'ranking-cup' // without extension file
+        },
+        {
+          name: '',
+          routing: 'statistic',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
       typeCoupon: {
         isMultipleStake: false,
         acceptMultiStake: false,
@@ -151,7 +184,20 @@ export const environment: Environment = {
         icon: 'Soccer-eng',
         route: 'products/soccer'
       },
-      widgets: [],
+      widgets: [
+        {
+          name: '',
+          routing: 'ranking',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'ranking-cup' // without extension file
+        },
+        {
+          name: '',
+          routing: 'statistic',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
       typeCoupon: {
         isMultipleStake: false,
         acceptMultiStake: false,
@@ -171,7 +217,13 @@ export const environment: Environment = {
         type: LAYOUT_TYPE.COCK_FIGHT,
         resultItems: 4,
         nextEventItems: 5,
-        shownMarkets: [Market['1X2'], Market['1X2OverUnder'], Market['1X2WinningSector'], Market['WinningSector'], Market['OverUnder']],
+        shownMarkets: [
+          Market['1X2'],
+          Market['1X2OverUnder'],
+          Market['1X2WinningSector'],
+          Market['WinningSector'],
+          Market['OverUnder']
+        ],
         cacheEventsItem: 10
       },
       toolbarButton: {

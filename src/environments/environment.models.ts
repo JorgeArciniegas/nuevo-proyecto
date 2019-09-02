@@ -9,6 +9,8 @@ export interface Environment {
   staging?: boolean;
   pageTitle?: string;
   theme?: string;
+  // URI to get the skin's favicon
+  faviconPath?: string;
   // Array of the supported languages. The first element of the array is the default language.
   supportedLang?: string[];
   currency?: string;
@@ -86,7 +88,6 @@ export enum LAYOUT_TYPE {
 export enum LICENSE_TYPE {
   DEMO_LICENSE
 }
-
 
 export interface TypeCoupon {
   isMultipleStake: boolean;

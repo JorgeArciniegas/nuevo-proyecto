@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SummaryCoupon, CouponStatus, CouponType } from '@elys/elys-api';
-import { AppSettings } from '../../../../../../../src/app/app.settings';
 import { UserService } from '../../../../../services/user.service';
 
 @Component({
@@ -14,5 +13,5 @@ export class SummaryComponent {
   couponType: typeof CouponType = CouponType;
   couponStatus: typeof CouponStatus = CouponStatus;
 
-  constructor(public settings: AppSettings, public userService: UserService) {}
+  constructor(public userService: UserService) {}
 }

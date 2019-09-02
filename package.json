@@ -1,6 +1,6 @@
 {
   "name": "vdesk",
-  "version": "0.18.2",
+  "version": "0.19.0",
   "nativescript": {
     "id": "com.vgen.vdesk",
     "tns-android": {
@@ -9,6 +9,7 @@
   },
   "scripts": {
     "ng": "ng",
+    "start": "ng serve",
     "build": "ng build",
     "vgen": "ng serve -c vgen-prod",
     "android-vgen": "tns run android --bundle --env.environment=\"vgen-prod\"",
@@ -28,7 +29,7 @@
     "@angular/platform-browser": "^7.2.13",
     "@angular/platform-browser-dynamic": "^7.2.13",
     "@angular/router": "^7.2.13",
-    "@elys/elys-api": "^0.5.5",
+    "@elys/elys-api": "^0.7.0",
     "@elys/elys-coupon": "^0.2.14",
     "@elys/elys-storage-lib": "^0.4.1",
     "@ngx-translate/core": "^11.0.1",

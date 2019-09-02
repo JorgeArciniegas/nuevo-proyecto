@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { AppSettings } from '../app.settings';
 
 @Component({
   selector: 'app-admin',
@@ -8,11 +7,7 @@ import { AppSettings } from '../app.settings';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent  {
-  public settings: AppSettings;
   constructor(
-    public readonly appSettings: AppSettings,
     public userService: UserService
-  ) {this.settings = appSettings; }
-
-
+  ) {}
 }

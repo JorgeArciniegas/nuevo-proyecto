@@ -3,15 +3,18 @@
 /**
 * Import layout's component
 **/
+@import "./reports/reports";
 @import "./results-list/results-list";
 @import "./playable-board/race";
 @import "./playable-board/cock-fight";
 @import "./playable-board/soccer";
-@import "./statistics/statistics.component";
+@import "./statistics/statistics";
+@import "./ranking/ranking";
 @import "./event-control/event-control-standard";
 @import "./lucky/lucky-race-fight";
 @import "./events-list/events-list";
 @import "./groupings/groupings";
+@import "./operators/operators";
 *,
 *:after,
 *:before {
@@ -30,11 +33,14 @@ html {
 
 .app {
 	app-login,
-	app-admin {
+  app-admin {
 		height: 100%;
 	}
 	&.develop {
 		@import "./skins/develop/styles";
+	}
+	&.universalsoft {
+		@import "./skins/universalsoft/styles";
 	}
 
 	.main-content {
@@ -130,7 +136,8 @@ html {
 					}
 				}
 			}
-		}
+    }
+
 
 		.toolbar {
 			@extend %header;
@@ -626,11 +633,21 @@ html {
 .padding-5 {
 	padding: 5px;
 }
+
 .padding-10 {
 	padding: 10px;
 }
+
 .padding-20 {
 	padding: 20px;
+}
+
+.padding-left-20 {
+	padding-left: 20px;
+}
+
+.padding-top-30 {
+	padding-top: 30px;
 }
 
 .padding-25 {
@@ -673,7 +690,7 @@ html {
 	position: fixed; /* Sit on top of the page content */
 	z-index: 100; /* Specify a stack order in case you're using a different order for other elements */
 	margin: 1px;
-	background: rgba(0, 0, 0, 0.6) url("app/themes/skins/develop/icon/baseline-lock-24px.svg") center center no-repeat;
+	background: rgba(0, 0, 0, 0.6) url("assets/icons/baseline-lock-24px.svg") center center no-repeat;
 	background-size: 100px;
 }
 .cdk-visually-hidden,
@@ -793,4 +810,17 @@ html {
 			display: block;
 		}
 	}
+}
+
+// RANKING SOCCER
+.rank-up-icon {
+	@extend %rank-up-icon;
+}
+
+.rank-same-icon {
+	@extend %rank-same-icon;
+}
+
+.rank-down-icon {
+	@extend %rank-down-icon;
 }

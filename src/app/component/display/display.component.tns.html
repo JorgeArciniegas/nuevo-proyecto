@@ -6,14 +6,15 @@
       <StackLayout col="0" orientation="horizontal" verticalAlignment="center">
         <Label class="title" *ngIf="polyfunctionalValue && polyfunctionalValue.selection"
           text="{{'DYNAMIC_KEYS.SMARTCODE.'+polyfunctionalValue.selection | translate | uppercase}}"></Label>
-        <Label verticalAlignment="center" class="odd-label m-l-4" *ngIf="polyfunctionalValue && polyfunctionalValue.odds && polyfunctionalValue.odds.length === 1"
+        <Label verticalAlignment="center" class="odd-label m-l-4"
+          *ngIf="polyfunctionalValue && polyfunctionalValue.odds && polyfunctionalValue.odds.length === 1"
           text="( {{ polyfunctionalValue.odds[0].odd | number:'1.2-2'}} )"></Label>
       </StackLayout>
       <Label col="1" *ngIf="polyfunctionalValue" text="{{polyfunctionalValue.value}}" verticalAlignment="center"
         horizontalAlignment="right"></Label>
       <Image col="2" *ngIf="polyfunctionalValue  && polyfunctionalValue.selection" margin="4" (tap)="detailOdds()"
-        src="~/app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png" verticalAlignment="center"
-        [isEnabled]="!timeBlocked"></Image>
+        src="~/assets/icons/baseline-open_in_new-24-white.png" verticalAlignment="center" [isEnabled]="!timeBlocked">
+      </Image>
     </GridLayout>
     <GridLayout rows="*" columns="8*,*"
       *ngIf="polyfunctionalValue && polyfunctionalValue.grouping && !productService.product.typeCoupon.acceptMultiStake"
@@ -25,8 +26,8 @@
         </ng-container>
       </StackLayout>
       <Image col="1" margin="4" (tap)="detailOdds('true')" width="24" height="24"
-        src="~/app/themes/skins/{{settings.theme}}/icon/baseline-open_in_new-24-white.png" verticalAlignment="center"
-        [isEnabled]="!timeBlocked"></Image>
+        src="~/assets/icons/baseline-open_in_new-24-white.png" verticalAlignment="center" [isEnabled]="!timeBlocked">
+      </Image>
     </GridLayout>
   </StackLayout>
   <StackLayout row="1" class="display">

@@ -1,4 +1,4 @@
-@import "icons";
+@import "../../icons";
 
 /**
 * THEME DEFAULT
@@ -113,7 +113,7 @@ $color-text-gray: #6b7279;
 }
 
 %header-notification-img {
-	background-image: url("app/themes/skins/develop/icon/account.svg");
+	background-image: url("assets/icons/account.svg");
 }
 
 %header-btn-menu-selected {
@@ -147,7 +147,7 @@ $color-text-gray: #6b7279;
 }
 
 %remove-image {
-	background: url("app/themes/skins/develop/icon/baseline-delete_outline-white-24px.png") center center no-repeat;
+	background: url("assets/icons/baseline-delete_outline-white-24px.png") center center no-repeat;
 	background-size: contain;
 }
 
@@ -471,70 +471,70 @@ $gradient-dark2: #000000;
 // GAME AREA
 // Dog racing
 %PRODUCT-DOG-BG {
-	background: url("app/themes/skins/develop/image/Dog-Racing.png") left center no-repeat;
+	background: url("assets/images/Dog-Racing.png") left center no-repeat;
 	background-size: contain;
 }
 
 %PRODUCT-DOG-BG-MOBILE {
-	background: url("~/app/themes/skins/develop/image/Dog-Racing.png") left center no-repeat;
+	background: url("~/assets/images/Dog-Racing.png") left center no-repeat;
 	background-size: contain;
 }
 // HORSERACING
 %PRODUCT-HORSE-BG {
-	background: url("app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
+	background: url("assets/images/horse-racing.png") left center no-repeat;
 	background-size: contain;
 }
 %PRODUCT-HORSE-BG-MOBILE {
-	background: url("~/app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
+	background: url("~/assets/images/horse-racing.png") left center no-repeat;
 	background-size: contain;
 }
 // HORSERACING-VIRTUAL
 %PRODUCT-HORSE-V-BG {
-	background: url("app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
+	background: url("assets/images/horse-racing.png") left center no-repeat;
 	background-size: contain;
 }
 %PRODUCT-HORSE-V-BG-MOBILE {
-	background: url("~/app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
+	background: url("~/assets/images/horse-racing.png") left center no-repeat;
 	background-size: contain;
 }
 
 // COCK FIGHT
 %PRODUCT-COCK-BG {
-	background: url("app/themes/skins/develop/image/Cock-fight.png") left center no-repeat;
+	background: url("assets/images/Cock-fight.png") left center no-repeat;
 	background-size: contain;
 }
 %PRODUCT-COCK-BG-MOBILE {
-	background: url("~/app/themes/skins/develop/image/Cock-fight.png") left center no-repeat;
+	background: url("~/assets/images/Cock-fight.png") left center no-repeat;
 	background-size: contain;
 }
 
 %ICON-COCK-RED {
-	background: url("~/app/themes/skins/develop/image/cockfight/cock-red.png") no-repeat center;
+	background: url("~/assets/images/cockfight/cock-red.png") no-repeat center;
 	background-size: contain;
 }
 
 %ICON-COCK-BLUE {
-	background: url("~/app/themes/skins/develop/image/cockfight/cock-blue.png") no-repeat center;
+	background: url("~/assets/images/cockfight/cock-blue.png") no-repeat center;
 	background-size: contain;
 }
 
 // SOCCER FIGHT
 %PRODUCT-ITA-LEAGUE-BG {
-	background: url("app/themes/skins/develop/image/Soccer-IT.png") left center no-repeat;
+	background: url("assets/images/Soccer-IT.png") left center no-repeat;
 	background-size: contain;
 }
 %PRODUCT-ITA-LEAGUE-BG-MOBILE {
-	background: url("~/app/themes/skins/develop/image/Soccer-IT.png") left center no-repeat;
+	background: url("~/assets/images/Soccer-IT.png") left center no-repeat;
 	background-size: contain;
 }
 
 %PRODUCT-ENG-LEAGUE-BG {
-	background: url("app/themes/skins/develop/image/Soccer-EN.png") left center no-repeat;
+	background: url("assets/images/Soccer-EN.png") left center no-repeat;
 	background-size: contain;
 }
 
 %PRODUCT-ENG-LEAGUE-BG-MOBILE {
-	background: url("~/app/themes/skins/develop/image/Soccer-EN.png") left center no-repeat;
+	background: url("~/assets/images/Soccer-EN.png") left center no-repeat;
 	background-size: contain;
 }
 
@@ -598,87 +598,121 @@ $gradient-dark2: #000000;
 }
 
 %user-icon {
-	background: url("app/themes/skins/develop/icon/icona-user.svg") center center no-repeat;
+	background: url("assets/icons/icona-user.svg") center center no-repeat;
 }
 
 %user-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/icona-user.png") center center no-repeat;
+	background: url("~/assets/icons/icona-user.png") center center no-repeat;
 	background-size: contain;
 }
 
 %pwd-icon {
-	background: url("app/themes/skins/develop/icon/icona-pwd.svg") center center no-repeat;
+	background: url("assets/icons/icona-pwd.svg") center center no-repeat;
 }
 
 %pwd-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/icona-pwd.png") center center no-repeat;
+	background: url("~/assets/icons/icona-pwd.png") center center no-repeat;
+	background-size: contain;
+}
+%warning-icon-mobile {
+	background: url("~/assets/icons/warning.png") center center no-repeat;
 	background-size: contain;
 }
 
 %error-icon {
-	background: url("app/themes/skins/develop/icon/alert.svg") center center no-repeat;
+	background: url("assets/icons/alert.svg") center center no-repeat;
 }
 
 %error-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/alert.png") center center no-repeat;
+	background: url("~/assets/icons/alert.png") center center no-repeat;
 	background-size: contain;
 }
 
 %check-circle-icon {
-	background: url("app/themes/skins/develop/icon/baseline-check_circle-24px.svg") center center no-repeat;
+	background: url("assets/icons/baseline-check_circle-24px.svg") center center no-repeat;
 }
 
 %check-circle-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/baseline-check_circle-24px.png") center center no-repeat;
+	background: url("~/assets/icons/baseline-check_circle-24px.png") center center no-repeat;
 	background-size: contain;
 }
 
 %shopping-cart-icon {
-	background: url("app/themes/skins/develop/icon/baseline-shopping_cart-24px.svg") center center no-repeat;
+	background: url("assets/icons/baseline-shopping_cart-24px.svg") center center no-repeat;
 }
 
 %shopping-cart-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/baseline-shopping_cart-24px.png") center center no-repeat;
+	background: url("~/assets/icons/baseline-shopping_cart-24px.png") center center no-repeat;
 	background-size: contain;
 }
 
 %star-yellow-icon {
-	background: url("app/themes/skins/develop/icon/baseline_star_rate_yellow_18px.svg") center center no-repeat;
+	background: url("assets/icons/baseline_star_rate_yellow_18px.svg") center center no-repeat;
 	background-size: contain;
 }
 
 %star-yellow-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/baseline_star_rate_yellow_18dp.png") center center no-repeat;
+	background: url("~/assets/icons/baseline_star_rate_yellow_18dp.png") center center no-repeat;
 	background-size: contain;
 }
 
 %star-red-icon {
-	background: url("app/themes/skins/develop/icon/baseline_star_rate_red_18px.svg") center center no-repeat;
+	background: url("assets/icons/baseline_star_rate_red_18px.svg") center center no-repeat;
 	background-size: contain;
 }
 
 %star-red-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/baseline_star_rate_red_18dp.png") center center no-repeat;
+	background: url("~/assets/icons/baseline_star_rate_red_18dp.png") center center no-repeat;
 	background-size: contain;
 }
 
 %video-enabled-icon {
-	background: url("app/themes/skins/develop/icon/video-enabled.svg") center center no-repeat;
+	background: url("assets/icons/video-enabled.svg") center center no-repeat;
 	background-size: contain;
 }
 
 %video-enabled-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/video-enabled.png") center center no-repeat;
+	background: url("~/assets/icons/video-enabled.png") center center no-repeat;
 	background-size: contain;
 }
 
 %video-disabled-icon {
-	background: url("app/themes/skins/develop/icon/video-disabled.svg") center center no-repeat;
+	background: url("assets/icons/video-disabled.svg") center center no-repeat;
 	background-size: contain;
 }
 
 %video-disabled-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/video-disabled.png") center center no-repeat;
+	background: url("~/assets/icons/video-disabled.png") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-up-icon {
+	background: url("assets/icons/rank-up.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-up-icon-mobile {
+	background: url("~/assets/icons/rank-up.png") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-same-icon {
+	background: url("assets/icons/rank-same.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-same-icon-mobile {
+	background: url("~/assets/icons/rank-same.png") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-down-icon {
+	background: url("assets/icons/rank-down.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-down-icon-mobile {
+	background: url("~/assets/icons/rank-down.png") center center no-repeat;
 	background-size: contain;
 }
 

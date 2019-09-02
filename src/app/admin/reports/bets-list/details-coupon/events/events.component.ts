@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CouponStatus } from '@elys/elys-api';
-import { AppSettings } from '../../../../../../../src/app/app.settings';
 import { OddsEventRows } from '../detail-coupon.model';
 import { UserService } from '../../../../../../../src/app/services/user.service';
 import { OddResult } from '../../bets-list.model';
@@ -11,10 +10,8 @@ import { OddResult } from '../../bets-list.model';
   styleUrls: ['./events.component.scss']
 })
 export class EventsComponent {
-
-
   @Input() data: OddsEventRows;
   couponStatus: typeof CouponStatus = CouponStatus;
   oddResult: typeof OddResult = OddResult;
-  constructor(public settings: AppSettings, public userService: UserService) { }
+  constructor(public userService: UserService) {}
 }

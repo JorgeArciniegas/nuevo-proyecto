@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ElysApiService
-} from '@elys/elys-api';
+import { ElysApiService } from '@elys/elys-api';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Products, LayoutProducts } from '../../../src/environments/environment.models';
 import { AppSettings } from '../app.settings';
@@ -14,12 +12,7 @@ import { WindowSize } from '../services/utility/window-size/window-size.model';
 import { WindowSizeService } from '../services/utility/window-size/window-size.service';
 import { DialogService } from './dialog.service';
 import { ProductsServiceExtra } from './product.service.extra';
-import {
-  BetDataDialog,
-  DialogData,
-  PolyfunctionalArea,
-  PolyfunctionalStakeCoupon
-} from './products.model';
+import { BetDataDialog, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupon } from './products.model';
 
 @Injectable({
   providedIn: 'root'
@@ -81,25 +74,22 @@ export class ProductsService extends ProductsServiceExtra {
 
     // time block
     this.timeBlockedSubscribe = new Subject<boolean>();
-    this.timeBlockedSubscribe
-      .asObservable()
-      .subscribe((timeBlocked: boolean) => {
-        this.timeBlocked = timeBlocked;
-      });
+    this.timeBlockedSubscribe.asObservable().subscribe((timeBlocked: boolean) => {
+      this.timeBlocked = timeBlocked;
+    });
     // Dialog management
     this.dialogProductDataSubject = new Subject<BetDataDialog>();
-    this.dialogProductDataSubject
-      .asObservable()
-      .subscribe((data: BetDataDialog) => {
-        const dialogData: DialogData = new DialogData();
-        dialogData.betOdds = data.betOdds;
-        dialogData.betCoupon = data.betCoupon;
-        dialogData.breakpoint = this.breakpoint;
-        dialogData.title = data.title;
-        dialogData.statistics = data.statistics;
-        dialogData.groupings = data.groupings;
-        this.dialog.openDialog(dialogData);
-      });
+    this.dialogProductDataSubject.asObservable().subscribe((data: BetDataDialog) => {
+      const dialogData: DialogData = new DialogData();
+      dialogData.betOdds = data.betOdds;
+      dialogData.betCoupon = data.betCoupon;
+      dialogData.breakpoint = this.breakpoint;
+      dialogData.title = data.title;
+      dialogData.statistics = data.statistics;
+      dialogData.groupings = data.groupings;
+      dialogData.tournamentRanking = data.tournamentRanking;
+      this.dialog.openDialog(dialogData);
+    });
 
     this.playableBoardResetSubject = new Subject<boolean>();
     this.playableBoardResetObserve = this.playableBoardResetSubject.asObservable();
@@ -124,7 +114,6 @@ export class ProductsService extends ProductsServiceExtra {
         productCodeRequest: v
       };
     });
-
   }
 
   fnWindowsSize(): void {
@@ -145,19 +134,14 @@ export class ProductsService extends ProductsServiceExtra {
     this.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
 
-
-
-   /**
+  /**
    * @returns LayoutProducts from current product selected
    */
   public getCurrentLayoutProducts(): Promise<LayoutProducts> {
-
-    const response: Promise<LayoutProducts> = new Promise<LayoutProducts>(
-      (resolve, reject) => {
-        resolve(this.product.layoutProducts);
-        reject(new Error('LayoutProducts not found'));
-      });
+    const response: Promise<LayoutProducts> = new Promise<LayoutProducts>((resolve, reject) => {
+      resolve(this.product.layoutProducts);
+      reject(new Error('LayoutProducts not found'));
+    });
     return response;
   }
-
 }

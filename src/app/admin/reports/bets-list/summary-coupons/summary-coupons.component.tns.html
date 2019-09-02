@@ -1,11 +1,10 @@
 <GridLayout rows="*,2*,14*,2*" columns="*" class="summary" *ngIf="betsListService.betsCouponList">
-  <Label row="0" class="title" colSpan="2" text="{{'BETS_LIST' | translate}}" textWrap="true"
+  <Label row="0" class="title" colSpan="2" text="{{'BETS_LIST' | translate | uppercase}}" textWrap="true"
     verticalAlignment="center"></Label>
 
   <GridLayout row="1" columns="*,2*,2*,2*,3*,3*,3*,4*" class="card header">
-    <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()"
-      src="~/app/themes/skins/{{settings.theme}}/icon/baseline-arrow_back-24px.png" verticalAlignment="center"
-      horizontalAlignment="left"></Image>
+    <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()" src="~/assets/icons/baseline-arrow_back-24px.png"
+      verticalAlignment="center" horizontalAlignment="left"></Image>
     <StackLayout col="1" verticalAlignment="center">
       <Label class="sub-title" text="{{ 'DATE' | translate }}"></Label>
       <Label text="{{ ((!betsListService.request.dateHasPlaced) ? 'PLACEMENT' : 'PAYMENT') | translate }}"
@@ -71,8 +70,7 @@
       <GridLayout (tap)="showDetails(rowItem.CouponCode)" row="{{i + 1}}" colSpan="8" rows="*"
         columns="5*,20*,20*,20*,7*,7*,9*,12*"
         *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons; let i = index;">
-        <Image col="0" width="24" *ngIf="rowItem.IsAgentSettled"
-          src="~/app/themes/skins/{{settings.theme}}/icon/baseline-check-24px.png"></Image>
+        <Image col="0" width="24" *ngIf="rowItem.IsAgentSettled" src="~/assets/icons/baseline-check-24px.png"></Image>
         <Label col="1" text="{{ rowItem.CouponCode }}" verticalAlignment="center"></Label>
         <Label col="2" text="{{ rowItem.UserId + ' - ' + rowItem.UserName }}" verticalAlignment="center"></Label>
         <Label col="3" text="{{ rowItem.CouponDateOffset | date: 'dd/MM/yy HH:mm:ss' }}"
@@ -80,13 +78,12 @@
         <Label col="4" text="{{ rowItem.Stake | currency : userService.userCurrency : 'symbol-narrow' }}"
           verticalAlignment="center"></Label>
         <ng-container [ngSwitch]="rowItem.CouponStatusId">
-          <Image col="5" width="24" *ngSwitchDefault
-            src="~/app/themes/skins/{{settings.theme}}/icon/progress-clock.png"></Image>
+          <Image col="5" width="24" *ngSwitchDefault src="~/assets/icons/progress-clock.png"></Image>
           <!-- LOST -->
-          <Image col="5" width="24" *ngSwitchCase="2" src="~/app/themes/skins/{{settings.theme}}/icon/cancel.png">
+          <Image col="5" width="24" *ngSwitchCase="2" src="~/assets/icons/cancel.png">
           </Image>
           <!-- WIN -->
-          <Image col="5" width="24" *ngSwitchCase="3" src="~/app/themes/skins/{{settings.theme}}/icon/checked.png">
+          <Image col="5" width="24" *ngSwitchCase="3" src="~/assets/icons/checked.png">
           </Image>
         </ng-container>
         <Label col="6" text="{{ 'DYNAMIC_KEYS.CouponType.' + couponType[rowItem.CouponTypeId] | translate }}"
