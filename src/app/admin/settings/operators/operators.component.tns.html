@@ -4,7 +4,7 @@
 
   <!-- ROW 1 -->
   <GridLayout row="1" col="0" rows="*" columns="*,*,*"  verticalAlignment="top">
-    <Button col="0" class="m-l-5 button-create-new btn-grey" text="{{ 'OPERATOR_CREATE_NEW' | translate }}" [nsRouterLink]="['./create']"></Button>
+    <Button col="0" class="m-l-5 button-create-new btn-grey" text="{{ 'OPERATOR.CREATE_NEW' | translate }}" [nsRouterLink]="['./create']"></Button>
     <GridLayout col="2" rows="*" columns="*,3*,*" class="m-r-10">
         <GridLayout col="0" class="button btn-default btn-filter" verticalAlignment="center"
           [ngClass]="{'disabled': operatorService.listOfOperators?.totalPages === 1 || operatorService.listOfOperators?.actualPages === 0}">

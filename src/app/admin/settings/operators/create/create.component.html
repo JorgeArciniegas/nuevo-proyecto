@@ -1,9 +1,10 @@
-<div fxFlex fxLayout="column" fxLayoutAlign="center space-between" [style.height.%]="100" class="admin-operators">
-  <div fxFlex fxLayout="column" fxLayoutGap="10px" [style.padding.px]="10">
+<!-- <div fxFlex fxLayout="column" fxLayoutAlign="center space-between" [style.height.%]="100" class="admin-operators"> -->
+<div fxFlex="100" fxLayout="row" fxLayoutAlign="center" [style.height.%]="100" class="admin-operators">
+  <div fxFlex="100" fxLayout="column" fxLayoutGap="10px" [style.padding.px]="10">
     <div class="title">
       <h1>{{ 'LIST_OF_OPERATORS' | translate  | uppercase }} - <small>{{'NEW' | translate | uppercase }}</small> </h1>
     </div>
-    <div fxFlex="5" fxLayoutAlign="start center" class="padding-horizontal-6">
+    <div fxFlex="10" fxLayoutAlign="start center">
       <div fxLayout="row nowrap" fxLayoutAlign="start center">
         <div fxFlex="5">
           <button class="btn-default radius-5" routerLink="../">
@@ -13,7 +14,7 @@
       </div>
     </div>
     <!-- FORM NEW OPERATOR -->
-    <div fxFlex="85" class="padding-20 btn-filter radius-5 elevation-z5 " fxLayout="column"
+    <div fxFlex="75" class="padding-20 btn-filter radius-5 elevation-z5 " fxLayout="column"
       fxLayoutAlign="center center">
       <ng-container *ngIf="!isCreated">
         <div fxLayout="row" fxLayoutAlign="center center" fxFill>
@@ -91,15 +92,16 @@
         <div fxLayout="column" fxFlex.xs="90" fxFlex.sm="50" fxFlex="100" fxLayoutAlign="center center">
           <div fxLayout="row" fxLayoutAlign="center center" fxFill fxLayoutGap="20px">
             <i fxFlex="10" class="icon-24px success-icon"></i>
-            <p>{{'OPERATOR_CREATE_SUCCESS_MESSAGE' | translate }}</p>
+            <p>{{'OPERATOR.CREATE_SUCCESS_MESSAGE' | translate }}</p>
           </div>
         </div>
       </ng-container>
     </div>
-    <div fxFlex="10" fxLayoutAlign="end center" class="padding-horizontal-6">
+    <div fxFlex="5" fxLayoutAlign="end center" class="padding-horizontal-6">
       <div fxFlex fxLayout="row nowrap" fxLayoutAlign="end center">
         <button fxFlex="20" *ngIf="!isCreated" (click)="onSubmit(form.value)"
           class="btn btn-default btn-success radius-5">{{'CONFIRM' | translate }}</button>
       </div>
     </div>
   </div>
+</div>
