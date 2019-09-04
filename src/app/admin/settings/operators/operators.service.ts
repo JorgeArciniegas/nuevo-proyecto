@@ -61,7 +61,7 @@ export class OperatorsService {
         Password: operatorForm.password,
         StakeLimit: null,
         StakeLower: null,
-        UserId: this.userService.userDetail.UserId,
+        UserId: this.userService.dataUserDetail.userDetail.UserId,
         UserName: operatorForm.username,
         UserStatusId: UserStatus.Enabled,
         CanFilterBetListByAnotherOperator: false,

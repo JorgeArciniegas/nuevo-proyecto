@@ -7,6 +7,18 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" fxLayout="column" fxFlex.xs="90" fxFlex.sm="50"
           fxFlex="60">
           <div class="input-area">
+            <!-- Business Name SHOW AFTER CED IS LOGGED-->
+            <ng-container *ngIf="showOperatorLogin">
+              <div class="input-item">
+                <div class="input radius-5" fxLayout="row">
+                  <i fxFlex="10" class="icon-area users-icon"></i>
+                  <span fxFlex="80"
+                    fxLayoutAlign="flex-start center">{{userService.getOperatorData('BusinessName')}}</span>
+                  <i fxFlex="10" (click)="removeAdmin()"
+                    class="btn-icon icon-area remove-data-or-close-24px text-right"></i>
+                </div>
+              </div>
+            </ng-container>
             <div class="input-item">
               <div class="input radius-5"
                 [ngClass]="{'error': form.controls.username.invalid && (form.controls.username.dirty || form.controls.username.touched)}">

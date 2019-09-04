@@ -14,7 +14,7 @@
           text="{{'BETS_LIST' | translate }}"></Label>
       </StackLayout>
       <StackLayout (tap)="goToTransactionsList()" width="100%" class="button btn-success btn-admin"
-        orientation="horizontal" horizontalAlignment="center" row="2" col="0">
+        orientation="horizontal" horizontalAlignment="center" row="2" col="0" *ngIf="isAdminLogged">
         <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-list-24px.png"
           verticalAlignment="center" horizontalAlignment="right"></Image>
         <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"
@@ -29,7 +29,7 @@
           text="{{'SETTINGS' | translate }}"></Label>
       </StackLayout>
       <StackLayout (tap)="goToOperators()" width="100%" class="m-b-2 button btn-success btn-admin"
-        orientation="horizontal" horizontalAlignment="center" row="1" col="0">
+        orientation="horizontal" horizontalAlignment="center" row="1" col="0" *ngIf="isAdminLogged">
         <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-language-24px.png"
           verticalAlignment="center" horizontalAlignment="right"></Image>
 

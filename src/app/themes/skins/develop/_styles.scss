@@ -606,6 +606,11 @@ $gradient-dark2: #000000;
 	background-size: contain;
 }
 
+%users-icon-mobile {
+	background: url("~/assets/icons/baseline_supervised_user_circle_white_24px.png") center center no-repeat;
+	background-size: contain;
+}
+
 %pwd-icon {
 	background: url("assets/icons/icona-pwd.svg") center center no-repeat;
 }
@@ -713,6 +718,11 @@ $gradient-dark2: #000000;
 
 %rank-down-icon-mobile {
 	background: url("~/assets/icons/rank-down.png") center center no-repeat;
+	background-size: contain;
+}
+
+%remove-data-or-close {
+	background: url("~/assets/icons/baseline_close_white_36px.png") no-repeat center center;
 	background-size: contain;
 }
 

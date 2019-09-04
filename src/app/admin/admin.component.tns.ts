@@ -8,7 +8,10 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent {
-  constructor(private router: RouterExtensions, public userService: UserService) {}
+  isAdminLogged: boolean;
+  constructor(private router: RouterExtensions, public userService: UserService) {
+    this.isAdminLogged = this.userService.isLoggedOperator();
+  }
 
   goToBetList(): void {
     this.router.navigateByUrl('/admin/reports/betsList');
