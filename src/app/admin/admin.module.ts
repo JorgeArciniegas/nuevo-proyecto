@@ -9,4 +9,4 @@ import { componentDeclarations, routes } from './admin.common';
   declarations: [componentDeclarations],
   imports: [CommonModule, SharedModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, RouterModule.forChild(routes)]
 })
-export class AdminModule {}
+export class AdminModule { }

@@ -11,6 +11,8 @@ import { TransactionsListComponent } from './reports/transactions-list/transacti
 import { SummaryTransactionsComponent } from './reports/transactions-list/summary-transactions/summary-transactions.component';
 import { DetailsTransactionComponent } from './reports/transactions-list/details-transaction/details-transaction.component';
 import { GetTransactionVategoryKeyByEnumValuePipe } from './reports/transactions-list/get-transaction-category-key-by-enum-value.pipe';
+import { OperatorSummaryComponent } from './reports/operator-summary/operator-summary.component';
+import { OperatorSummaryListComponent } from './reports/operator-summary/operator-summary-list/operator-summary-list.component';
 
 export const componentDeclarations: any[] = [
   AdminComponent,
@@ -24,7 +26,9 @@ export const componentDeclarations: any[] = [
   LanguageComponent,
   SummaryTransactionsComponent,
   DetailsTransactionComponent,
-  GetTransactionVategoryKeyByEnumValuePipe
+  GetTransactionVategoryKeyByEnumValuePipe,
+  OperatorSummaryComponent,
+  OperatorSummaryListComponent
 ];
 
 export const providerDeclarations: any[] = [];
@@ -68,6 +72,19 @@ export const routes: Routes = [
           {
             path: 'detail/:id',
             component: DetailsTransactionComponent
+          }
+        ]
+      },
+      {
+        path: 'reports/operatorSummary',
+        children: [
+          {
+            path: '',
+            component: OperatorSummaryComponent
+          },
+          {
+            path: 'operatorSummaryList',
+            component: OperatorSummaryListComponent
           }
         ]
       },

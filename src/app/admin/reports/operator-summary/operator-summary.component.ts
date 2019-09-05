@@ -1,31 +1,22 @@
 import { Component, ViewChild, OnDestroy } from '@angular/core';
-import { TransactionsListService } from './transactions-list.service';
+import { OperatorSummaryService } from './operator-summary.service';
 import { Observable } from 'rxjs';
-import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
+import { TranslateUtilityService } from 'src/app/services/utility/translate-utility.service';
 import { DateAdapter } from '@angular/material';
-import { TransactionCategory } from './transactions-list.model';
-import { UserService } from '../../../services/user.service';
 
 @Component({
-  selector: 'app-transactions-list',
-  templateUrl: './transactions-list.component.html',
-  styleUrls: ['./transactions-list.component.scss']
+  selector: 'app-operator-summary',
+  templateUrl: './operator-summary.component.html',
+  styleUrls: ['./operator-summary.component.scss']
 })
-export class TransactionsListComponent implements OnDestroy {
+export class OperatorSummaryComponent implements OnDestroy {
   @ViewChild('pickerDateFrom') private inputPickerDateFrom;
   @ViewChild('pickerDateTo') private inputPickerDateTo;
 
-  object = Object;
-  transactionCategory: typeof TransactionCategory = TransactionCategory;
-
-  constructor(
-    public transactionsListService: TransactionsListService,
-    public userService: UserService,
-    private translate: TranslateUtilityService,
-    private adapter: DateAdapter<Date>
-  ) {
+  constructor(public operatorSummaryService: OperatorSummaryService,
+    private translate: TranslateUtilityService, private adapter: DateAdapter<Date>) {
     this.adapter.setLocale(this.translate.getCurrentLanguage());
-    document.body.classList.add('transactions-list');
+    document.body.classList.add('operator-summary');
 
     // close the date picker on outside click
     Observable.fromEvent(document, 'click').subscribe((event: any) => {
@@ -53,10 +44,7 @@ export class TransactionsListComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    document.body.classList.remove('bets-list');
+    document.body.classList.remove('operator-summary');
   }
 
-  changeValue(key: string, value: TransactionCategory): void {
-    this.transactionsListService[key] = value;
-  }
 }

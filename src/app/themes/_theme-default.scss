@@ -33,7 +33,7 @@ html {
 
 .app {
 	app-login,
-  app-admin {
+	app-admin {
 		height: 100%;
 	}
 	&.develop {
@@ -136,8 +136,7 @@ html {
 					}
 				}
 			}
-    }
-
+		}
 
 		.toolbar {
 			@extend %header;
@@ -762,7 +761,8 @@ html {
 	}
 }
 
-.bets-list {
+.bets-list,
+.operator-summary {
 	.cdk-global-overlay-wrapper {
 		position: fixed;
 		top: 50%;
