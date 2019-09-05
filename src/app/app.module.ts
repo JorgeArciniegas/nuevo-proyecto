@@ -47,7 +47,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ElysStorageLibModule.forRoot({
       isCrypto: true,
       cryptoString: 'VgenStorage',
-      KeyUnencodedList: ['versionApp'],
+      KeyUnencodedList: ['versionApp', 'operatorData'],
       versionStorage: VERSION.version
     }),
 
@@ -64,4 +64,4 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

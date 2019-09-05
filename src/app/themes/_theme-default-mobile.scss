@@ -671,6 +671,15 @@
 .user-icon {
 	@extend %user-icon-mobile;
 }
+
+.users-icon {
+	@extend %users-icon-mobile;
+}
+
+.remove-data-or-close {
+	@extend %remove-data-or-close;
+}
+
 .pwd-icon {
 	@extend %pwd-icon-mobile;
 }

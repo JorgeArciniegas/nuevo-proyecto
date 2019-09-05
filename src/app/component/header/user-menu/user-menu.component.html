@@ -11,12 +11,17 @@
     </ng-container>
   </div>
   <div fxLayout="column" class="details">
-    <div fxLayout="column">
+    <div fxLayout="column" *ngIf="userService.dataUserDetail?.userDetail">
       {{'BALANCE' | translate }}:
-      {{userService.userDetail?.PlayableBalance | currency : userService.userCurrency : 'symbol-narrow'}}
+      {{userService.dataUserDetail.userDetail?.PlayableBalance | currency : userService.userCurrency : 'symbol-narrow'}}
     </div>
     <div fxLayout="row">
-      {{'OPERATOR' | translate }}:<span class="operator">{{userService.userDetail?.UserName}}</span>
+      {{'OPERATOR' | translate }}:
+      <span class="operator"
+        *ngIf="userService.dataUserDetail?.userDetail">{{userService.dataUserDetail.userDetail?.UserName  }}</span>
+      <span class="operator"
+        *ngIf="userService.dataUserDetail?.operatorDetail">{{userService.dataUserDetail.operatorDetail?.UserName }}</span>
+
     </div>
   </div>
   <div fxLayout="row" class="clock elevation-z5" fxFlexAlign="start" *ngIf="notifyIcon">

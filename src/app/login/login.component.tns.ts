@@ -9,13 +9,20 @@ import { TextField } from "tns-core-modules/ui/text-field";
 })
 export class LoginComponent {
   public errorMessage: string | undefined;
-  public usernameLengthInvalid: boolean = true;
-  public passwordLengthInvalid: boolean = true;
-
-  constructor(private userService: UserService) { }
+  public usernameLengthInvalid = true;
+  public passwordLengthInvalid = true;
+  public showOperatorLogin: boolean;
+  constructor(private userService: UserService) {
+    this.showOperatorLogin = this.userService.isAdminExist();
+  }
 
   public onSubmit(username: string, password: string): void {
-    this.userService.login(username, password).then(message => (this.errorMessage = message));
+    if (!this.showOperatorLogin) {
+      this.userService.login(username, password).then(message => (this.errorMessage = message));
+    } else {
+      this.userService.loginOperator(username, password).then(message => (this.errorMessage = message));
+    }
+
   }
 
   public validateLength(args, name: string, minLength: number): void {
@@ -26,5 +33,11 @@ export class LoginComponent {
     } else if (name === 'password') {
       this.passwordLengthInvalid = textField.text.length < minLength;
     }
+  }
+
+
+  removeAdmin(): void {
+    this.userService.removeDataCtd();
+    this.showOperatorLogin = false;
   }
 }
