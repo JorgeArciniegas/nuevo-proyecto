@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { OperatorSummaryService } from '../operator-summary.service';
 import { ReportsOperatorVolumeResponse } from '@elys/elys-api';
 import { UserService } from 'src/app/services/user.service';
@@ -8,7 +8,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './operator-summary-list.component.html',
   styleUrls: ['./operator-summary-list.component.scss']
 })
-export class OperatorSummaryListComponent implements OnInit {
+export class OperatorSummaryListComponent {
   public TotalPages: number;
   public recordPerPage = 10;
   public currentPage = 1;
@@ -20,9 +20,6 @@ export class OperatorSummaryListComponent implements OnInit {
       this.TotalPages = 1;
     }
     this.currentOperatorVolumes = this.operatorSummaryService.reportsOperatorVolumeResponse.slice(this.currentPage - 1, this.recordPerPage);
-  }
-
-  ngOnInit() {
   }
 
   nextPage() {
