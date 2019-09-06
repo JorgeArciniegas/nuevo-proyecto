@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ElysApiService, ReportsOperatorVolumeRequest, ReportsOperatorVolumeResponse } from '@elys/elys-api';
-import { UserService } from 'src/app/services/user.service';
-import { RouterService } from 'src/app/services/utility/router/router.service';
+import { UserService } from '../../../services/user.service';
+import { RouterService } from '../../../services/utility/router/router.service';
 
 @Injectable({
   providedIn: 'root'

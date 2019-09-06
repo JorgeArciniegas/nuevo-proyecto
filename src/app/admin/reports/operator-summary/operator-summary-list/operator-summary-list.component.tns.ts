@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { UserService } from '../../../../services/user.service';
 import { OperatorSummaryService } from '../operator-summary.service';
 import { ReportsOperatorVolumeResponse } from '@elys/elys-api';
-import { UserService } from '../../../../services/user.service';
+import { RouterExtensions } from 'nativescript-angular/router';
 
 @Component({
   selector: 'app-operator-summary-list',
@@ -9,21 +10,28 @@ import { UserService } from '../../../../services/user.service';
   styleUrls: ['./operator-summary-list.component.scss']
 })
 export class OperatorSummaryListComponent {
-  public TotalPages: number;
+  public totalPages: number;
   public recordPerPage = 10;
   public currentPage = 1;
   public currentOperatorVolumes: ReportsOperatorVolumeResponse[] = [];
 
-  constructor(public operatorSummaryService: OperatorSummaryService, public userService: UserService) {
-    this.TotalPages = Math.ceil(this.operatorSummaryService.reportsOperatorVolumeResponse.length / this.recordPerPage);
-    if (this.TotalPages === 0) {
-      this.TotalPages = 1;
+  constructor(public userService: UserService, public operatorSummaryService: OperatorSummaryService, private router: RouterExtensions) {
+    console.log(this.operatorSummaryService.dateFrom);
+    console.log(this.operatorSummaryService.dateTo);
+
+    this.totalPages = Math.ceil(this.operatorSummaryService.reportsOperatorVolumeResponse.length / this.recordPerPage);
+    if (this.totalPages === 0) {
+      this.totalPages = 1;
     }
     this.currentOperatorVolumes = this.operatorSummaryService.reportsOperatorVolumeResponse.slice(this.currentPage - 1, this.recordPerPage);
   }
 
+  goBack(): void {
+    this.router.back();
+  }
+
   nextPage() {
-    if (this.currentPage < this.TotalPages) {
+    if (this.currentPage < this.totalPages) {
       ++this.currentPage;
       const start = (this.currentPage - 1) * this.recordPerPage;
       let end = this.currentPage * this.recordPerPage;

@@ -92,7 +92,7 @@
         <div fxFlex fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="grid">
           <div fxFlex="15">
             <div class="value">
-              <h2>{{ operatorSummaryService.totalStake | number }} </h2>
+              <h2>{{ operatorSummaryService.totalStake | currency : userService.userCurrency : 'symbol-narrow' }} </h2>
             </div>
             <div><small data='disabled'>{{ 'TOTAL_STAKE' | translate }}</small></div>
           </div>

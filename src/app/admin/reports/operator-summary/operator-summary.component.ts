@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { OperatorSummaryService } from './operator-summary.service';
 import { Observable } from 'rxjs';
-import { TranslateUtilityService } from 'src/app/services/utility/translate-utility.service';
+import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
 import { DateAdapter } from '@angular/material';
 
 @Component({

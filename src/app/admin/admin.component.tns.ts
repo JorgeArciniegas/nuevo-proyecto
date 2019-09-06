@@ -8,7 +8,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent {
-  constructor(private router: RouterExtensions, public userService: UserService) {}
+  constructor(private router: RouterExtensions, public userService: UserService) { }
 
   goToBetList(): void {
     this.router.navigateByUrl('/admin/reports/betsList');
@@ -18,10 +18,13 @@ export class AdminComponent {
     this.router.navigateByUrl('/admin/reports/transactionsList');
   }
 
+  goToOperatorSummary(): void {
+    this.router.navigateByUrl('/admin/reports/operatorSummary');
+  }
+
   goToLanguageSettings(): void {
     this.router.navigateByUrl('/admin/settings/languages');
   }
-
 
   goToOperators(): void {
     this.router.navigateByUrl('/admin/operators');
