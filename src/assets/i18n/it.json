@@ -411,6 +411,18 @@
       "2009": "Commission debit (forced)",
       "2010": "Commission bonus debit (forced)",
       "2011": "Commission startup share"
+    },
+    "VBOX": {
+      "CATEGORIES_SPORT": {
+        "DOG": "Levrieri",
+        "HORSE": "Ippica",
+        "HORSE-VIRT": "Ippica virtuale",
+        "ITA-LEAGUE": "Calcio ITA",
+        "ENG-LEAGUE": "Calcio ENG",
+        "KENO": "Keno",
+        "COCK": "Combattimento di galli",
+        "ARLT": "American roulette"
+      }
     }
   },
   "EDIT": "Modifica",
@@ -508,7 +520,10 @@
     "MANAGEMENT": "Gestione V-Box",
     "MSG_NOBODY": "Nessun V-Box associato a questo utente",
     "TV_SETTING": "Impostazioni TV",
-    "V_BOX": "V-Box"
+    "V_BOX": "Lista V-Box",
+    "EDIT_ONGOING": "Modifiche non salvate",
+    "SUCCESS_MESSAGE_EDIT_TV": "Dati salvati con successo",
+    "ERROR_MESSAGE_EDIT_TV": "Uno o più errori si sono verificati nel salvataggio."
   },
   "WARNING": "Avviso",
   "WON": "Vinto"

@@ -410,6 +410,18 @@
       "2009": "Commission debit (forced)",
       "2010": "Commission bonus debit (forced)",
       "2011": "Commission startup share"
+    },
+    "VBOX": {
+      "CATEGORIES_SPORT": {
+        "DOG": "Galgos",
+        "HORSE": "Caballos",
+        "HORSE-VIRT": "Carrera de caballos virtuales",
+        "ITA-LEAGUE": "Fútbol ITA",
+        "ENG-LEAGUE": "Fútbol ENG",
+        "KENO": "Keno",
+        "COCK": "Pelea de gallos",
+        "ARLT": "American roulette"
+      }
     }
   },
   "ENDURANCE": "Resistencia",

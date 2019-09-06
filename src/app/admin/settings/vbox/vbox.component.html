@@ -1,4 +1,5 @@
-<div fxFlex="100" fxLayout="row" fxLayoutAlign="center stretch" class="vboxs" [style.height.%]="100" *ngIf="listVbox">
+<div fxFlex="100" fxLayout="row" fxLayoutAlign="center stretch" class="vboxs" [style.height.%]="100"
+  *ngIf="vboxService.listVbox">
   <div fxFlex="100" fxLayout="column" fxLayoutAlign="flex-start" fxLayoutGap="10px" [style.padding.px]="10">
     <div class="title">
       <h1>{{ 'VBOX.V_BOX' | translate | uppercase }} </h1>
@@ -12,9 +13,9 @@
             <button (click)="previusPage()" class="btn-filter padding-10 radius-5">&lsaquo;</button>
           </div>
           <div fxFlex="60" fxLayoutAlign="center center">
-            <ng-container *ngIf="listVbox">
-              {{'PAGE' | translate }} {{listVbox.VBoxConfigurations?.actualPages + 1}}
-              {{'PAGE.OF' | translate }} {{operatorService.listOfOperators?.totalPages}}
+            <ng-container *ngIf="vboxService.listVbox">
+              {{'PAGE' | translate }} {{vboxService.listVbox.VBoxConfigurations?.actualPages + 1}}
+              {{'PAGE.OF' | translate }} {{vboxService.listVbox?.totalPages}}
             </ng-container>
           </div>
           <div fxFlex="19">
@@ -30,10 +31,13 @@
         <div fxFlex fxLayout="row" class="border-bottom-overlay-1px">
           <div fxFlex="5"></div>
           <div fxFlex="30">
-            <strong data='disabled'>{{ 'USERNAME' | translate }}</strong>
+            <strong data='disabled'>{{ 'VBOX.V_BOX' | translate }}</strong>
           </div>
           <div fxFlex="20">
-            <strong data='disabled'>{{ 'DATE_OF_CREATION' | translate }}</strong>
+            <strong data='disabled'>{{ 'TV' | translate }}</strong>
+          </div>
+          <div fxFlex="20">
+            <strong data='disabled'>{{ 'LANGUAGE' | translate }}</strong>
           </div>
           <div fxFlex></div>
         </div>
@@ -41,27 +45,30 @@
       <!-- ROWS -->
       <div fxLayout="column" fxFlex="100" fxLayoutAlign="start stretch">
         <div fxFlex="100" fxLayout="column" fxLayoutAlign="flex-start stretch" fxLayoutAlignGap="grid">
-          <div fxFlex="8" fxLayoutAlign="start center" class="border-bottom-overlay-1px" [style.min-height.px]="55"
-            *ngFor="let rowItem of operatorService.listTempOperators; let i = index">
-            <div fxFlex="5"></div>
-            <!-- USERNAME -->
-            <div fxFlex="30">
-              {{ rowItem.UserName }}
-            </div>
-            <!-- DATE OF CREATED -->
-            <div fxFlex="20">
-              {{ rowItem.SubscriptionDate | date: 'd MMMM y' }}
-            </div>
-            <!-- ACTIONS -->
-            <div fxFlex="50">
-              <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="flex-end center">
-                <button class="btn btn-default btn-danger-no-gradient  radius-5"
-                  (click)="deleting(i)">{{'DELETE' | translate | uppercase }}</button>
-                <button class="btn btn-default btn-success-no-gradient radius-5"
-                  (click)="editing(i)">{{'EDIT' | translate| uppercase }}</button>
+          <ng-container *ngIf="vboxService.listVbox.vBoxConfigurations">
+            <div fxFlex="8" fxLayoutAlign="start center" class="border-bottom-overlay-1px v-box-list-table"
+              [style.min-height.px]="55" *ngFor="let rowItem of vboxService.listTempVbox; let i = index">
+              <div fxFlex="5"></div>
+              <!-- USERNAME -->
+              <div fxFlex="30">
+                {{ rowItem.VBoxMachineId }}
+              </div>
+              <!-- DATE OF CREATED -->
+              <div fxFlex="20">
+                {{ rowItem.MonitorConfigurations.length  }}
+              </div>
+              <div fxFlex="20">
+                {{ rowItem.MonitorConfigurations[0].Language  }}
+              </div>
+              <!-- ACTIONS -->
+              <div fxFlex="50">
+                <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="flex-end center">
+                  <button class="btn btn-default btn-success-no-gradient radius-5"
+                    (click)="editing(i)">{{'EDIT' | translate| uppercase }}</button>
+                </div>
               </div>
             </div>
-          </div>
+          </ng-container>
         </div>
       </div>
     </div>

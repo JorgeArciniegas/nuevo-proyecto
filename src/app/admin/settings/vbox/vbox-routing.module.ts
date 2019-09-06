@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VboxComponent } from './vbox.component';
+import { VboxEditComponent } from './vbox-edit/vbox-edit.component';
 
 const routes: Routes = [
   {
@@ -9,7 +10,11 @@ const routes: Routes = [
       {
         path: '',
         component: VboxComponent
-      }
+      },
+      {
+        path: 'edit',
+        component: VboxEditComponent,
+      },
     ]
   }
 ];

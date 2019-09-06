@@ -410,6 +410,18 @@
       "2009": "Commission debit (forced)",
       "2010": "Commission bonus debit (forced)",
       "2011": "Commission startup share"
+    },
+    "VBOX": {
+      "CATEGORIES_SPORT": {
+        "DOG": "Qen",
+        "HORSE": "Kuaj",
+        "HORSE-VIRT": "Virtual horses",
+        "ITA-LEAGUE": "Futboll ITA",
+        "ENG-LEAGUE": "Futboll ENG",
+        "KENO": "Keno",
+        "COCK": "Cock fight",
+        "ARLT": "American roulette"
+      }
     }
   },
   "ENDURANCE": "Durim",

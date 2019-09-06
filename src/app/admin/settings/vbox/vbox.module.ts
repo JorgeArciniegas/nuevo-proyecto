@@ -3,12 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { VboxRoutingModule } from './vbox-routing.module';
 import { VboxComponent } from './vbox.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { VboxEditComponent } from './vbox-edit/vbox-edit.component';
 
 @NgModule({
-  declarations: [VboxComponent],
+  declarations: [VboxComponent, VboxEditComponent],
   imports: [
     CommonModule,
-    VboxRoutingModule
+    VboxRoutingModule,
+    SharedModule
   ]
 })
 export class VboxModule { }
