@@ -206,7 +206,12 @@
     },
     "PRINT_COUPON": {
       "LICENSE_MESSAGE": {
-        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua."
+        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
+        "UNIVERSALSOFT": "Prohibida la venta a menores de edad.Este tiquete se constituye en un documento al portador.El apostador es responsable de la integridad del tiquete, y acepta que la   apuesta impresa en éste representa con certeza su selección"
+      },
+      "HEADER_MESSAGE": {
+        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
+        "UNIVERSALSOFT": ""
       }
     },
     "PRODUCT": {

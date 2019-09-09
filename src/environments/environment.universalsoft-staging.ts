@@ -5,14 +5,14 @@ export const environment: Environment = {
   production: false,
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
-  license: LICENSE_TYPE.DEMO_LICENSE,
+  license: LICENSE_TYPE.UNIVERSALSOFT,
   baseApiUrl: 'https://qacom-apiuniversalsoft.ody-services.net',
   pageTitle: 'UniversalSoft - VDesk Kiosk',
   theme: 'universalsoft',
   faviconPath: 'app/themes/skins/universalsoft/image/Logo-header.png',
   couponDirectPlace: true,
-  currencyDefault: 'EUR',
-  supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
+  currencyDefault: 'COP',
+  supportedLang: ['es', 'en'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
@@ -237,6 +237,7 @@ export const environment: Environment = {
   showEventId: true,
   printSettings: {
     isEnabledReprintCoupon: true,
-    isTrasmitionInfoMessageShown: true
+    isTrasmitionInfoMessageShown: false,
+    isShowHeaderMessage: false
   }
 };

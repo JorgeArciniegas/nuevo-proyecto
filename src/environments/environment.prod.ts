@@ -12,6 +12,7 @@ export const environment: Environment = {
   showEventId: true,
   printSettings: {
     isEnabledReprintCoupon: false,
-    isTrasmitionInfoMessageShown: true
+    isTrasmitionInfoMessageShown: true,
+    isShowHeaderMessage: false
   }
 };
