@@ -10,13 +10,13 @@
   "BALANCE": "Saldo",
   "BASE": "B",
   "BET": "Apuesta",
+  "BET_STATUS": "Estado Apuesta",
+  "BET_TYPE": "Tipo de Apuesta",
+  "BET_UNDER_EVALUATION": "Apuesta bajo aprobación, por favor espera",
   "BETS_LIST": "Lista de apuestas",
   "BETS_LIST.LOST": "Perdidos",
   "BETS_LIST.OPEN": "Abierta",
   "BETS_LIST.WON": "Ganados",
-  "BET_STATUS": "Estado Apuesta",
-  "BET_TYPE": "Tipo de Apuesta",
-  "BET_UNDER_EVALUATION": "Apuesta bajo aprobación, por favor espera",
   "BONUS": "Bonus",
   "BONUS_MAX": "Bonus Max",
   "BTNCALC.COL": "COL",
@@ -31,11 +31,11 @@
   "CONDITION": "Condición",
   "CONFIRM": "Confirmar",
   "CONFIRM_DESTROY_COUPON.MESSAGE": "Esta operación cancelará el cupón actual. ¿Quieres continuar?",
-  "COUPON.BET": "Apuesta",
   "COUPON_CODE": "Código cupón",
   "COUPON_RESET": "Reinicio de cupón",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Apuesta aceptada,",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "comprueba la Lista de Apuestas",
+  "COUPON.BET": "Apuesta",
   "DATE": "Fecha",
   "DATE_FROM": "Fecha de",
   "DATE_OF_PLACEMENT": "Fecha de colocación",
@@ -46,10 +46,19 @@
   "DELETED_ON": "Eliminado el",
   "DETAIL": "Detalle",
   "DYNAMIC_KEYS": {
+    "CockMarket": {
+      "NAME": {
+        "1X2": "Win",
+        "1X2 + OverUnder": "Win+ o/u",
+        "1X2 + Winning Sector": "Win+ sector",
+        "Over/Under": "O/u",
+        "Winning Sector": "Sector"
+      }
+    },
     "COUPON_ERROR": {
-      "API_ERROR": "Error genérico de la API",
       "AccountInsertDataError": "Se produjo un error al agregar la cuenta de usuario [Cód. ES11]",
       "AgentBettorMismatch": "Este usuario no pertenece a la red [Cód. ES18]",
+      "API_ERROR": "Error genérico de la API",
       "BankerNotAllowedOnIntegral": "No se puede añadir un \"banker\" a una apuesta integral [Cód. ES22]",
       "BetAlreadyPaid": "Este cupón ya ha sido pagado [Cód. ES19]",
       "BetLost": "Apuesta perdida [Cód. ES21]",
@@ -156,15 +165,6 @@
       "OverMaxBetStake": "Apuesta máxima superada [Cód. CRS17]",
       "UnderMinBetStake": "Apuesta inferior al mínimo [Cód. CRS18]",
       "Unknown": "Error desconocido. Por favor, intentar de nuevo [Cód. CRS0]"
-    },
-    "CockMarket": {
-      "NAME": {
-        "1X2": "Win",
-        "1X2 + OverUnder": "Win+ o/u",
-        "1X2 + Winning Sector": "Win+ sector",
-        "Over/Under": "O/u",
-        "Winning Sector": "Sector"
-      }
     },
     "CouponStatusInternal": {
       "ALL": "Todos",
@@ -302,10 +302,6 @@
         "1 + NG": "1 + NG",
         "1 + Over": "1 + Alta",
         "1 + Under": "1 + Baja",
-        "12 + GG": "12 + GG",
-        "12 + NG": "12 + NG",
-        "12 + Over": "12 + Alta",
-        "12 + Under": "12 + Baja",
         "1X + GG": "1X + GG",
         "1X + NG": "1X + NG",
         "1X + Over": "1X + Alta",
@@ -314,6 +310,10 @@
         "2 + NG": "2 + NG",
         "2 + Over": "2 + Alta",
         "2 + Under": "2 + Baja",
+        "12 + GG": "12 + GG",
+        "12 + NG": "12 + NG",
+        "12 + Over": "12 + Alta",
+        "12 + Under": "12 + Baja",
         "GG": "GG",
         "NG": "NG",
         "Over": "Alta",
@@ -410,6 +410,18 @@
       "2009": "Commission debit (forced)",
       "2010": "Commission bonus debit (forced)",
       "2011": "Commission startup share"
+    },
+    "VBOX": {
+      "CATEGORIES_SPORT": {
+        "DOG": "Galgos",
+        "HORSE": "Caballos",
+        "HORSE-VIRT": "Carrera de caballos virtuales",
+        "ITA-LEAGUE": "Fútbol ITA",
+        "ENG-LEAGUE": "Fútbol ENG",
+        "KENO": "Keno",
+        "COCK": "Pelea de gallos",
+        "ARLT": "American roulette"
+      }
     }
   },
   "ENDURANCE": "Resistencia",
@@ -434,6 +446,7 @@
   "MIN_PAYOUT": "Ganancias mín.",
   "MIN_POTENTIAL_WIN": "Ganancias potenciales mín.",
   "NO_CONNECTION": "No hay conexión disponible",
+  "NOBODY": "ninguno",
   "ODDS": "Cuota",
   "OPERATOR": "Operador",
   "OUTCOME": "Exito",
@@ -459,10 +472,12 @@
   "REFERENCE_ID": "ID riferimento",
   "REPORTS": "Informes",
   "REPRINT": "Reimprimir",
+  "SAVE": "guardar",
   "SEARCH": "Buscar",
   "SECTION_NOT_AVAILABLE": "Sección no disponible",
   "SETTINGS": "Impostación",
   "SINGLE": "Simple",
+  "SPORT": "deporte",
   "ST": "ST",
   "STAKE": "Jugado",
   "STAKE_AMOUNT": "Importe jugado",
@@ -471,22 +486,29 @@
   "STRENGTH": "Fuerza",
   "SUMMARY": "Resumen",
   "TEAM": "Equipo",
-  "TOTALS": "Totales",
-  "TOTAL_PAYOUT": "Pago total",
-  "TOTAL_STAKE": "Importe total",
   "TOT_BET": "TOT apuesta",
   "TOT_INCOME": "Totale crediti",
   "TOT_LOST": "TOT perdido",
   "TOT_OPEN": "TOT abierto",
   "TOT_OUTCOME": "Totale debiti",
   "TOT_WON": "TOT ganado",
+  "TOTAL_PAYOUT": "Pago total",
+  "TOTAL_STAKE": "Importe total",
+  "TOTALS": "Totales",
+  "TRANSACTION_TYPE": "Tipo transazione",
   "TRANSACTIONS": "Transazioni",
   "TRANSACTIONS_LIST": "Lista transazioni",
-  "TRANSACTION_TYPE": "Tipo transazione",
   "TYPE": "Tipo",
+  "USER_NOT_ENABLE_TO_THE_OPERATION": "Usuario no autorizado para la operación",
   "USERNAME": "Nombre de usuario",
   "USERNAME_TOO_SHORT": "Este nombre de usuario es demasiado corto (minimo 2 caracteres)",
-  "USER_NOT_ENABLE_TO_THE_OPERATION": "Usuario no autorizado para la operación",
+  "VBOX": {
+    "GENERAL_SETTINGS": "Configuración General",
+    "MANAGEMENT": "Gestión V-Box",
+    "MSG_NOBODY": "Ningún V-Box asociado a este usuario",
+    "TV_SETTING": "Configuración TV",
+    "V_BOX": "V-Box"
+  },
   "WARNING": "Aviso",
   "WON": "Ganado"
 }

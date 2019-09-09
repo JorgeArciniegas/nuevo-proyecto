@@ -23,6 +23,11 @@
           <span class="-btn-admin-txt">{{'OPERATORS' | translate }}</span>
         </button>
         <div class="padding-5"></div>
+        <button class="btn-default btn-success btn-admin radius-5" routerLink="./vbox" *ngIf="isAdminLogged">
+          <img src="assets/icons/baseline_tv_white_18px.png" alt="" />
+          <span class="-btn-admin-txt">{{'VBOX.MANAGEMENT' | translate }}</span>
+        </button>
+        <div class="padding-5"></div>
         <button class="btn-default btn-success btn-admin radius-5" routerLink="settings/languages"><img
             src="assets/icons/baseline-language-24px.svg" alt="" /> <span
             class="-btn-admin-txt">{{'LANGUAGE' | translate }}</span> </button>

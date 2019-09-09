@@ -29,4 +29,9 @@ export class AdminComponent {
   goToOperators(): void {
     this.router.navigateByUrl('/admin/operators');
   }
+
+
+  goToVboxes(): void {
+    this.router.navigateByUrl('/admin/vbox');
+  }
 }

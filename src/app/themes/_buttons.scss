@@ -183,12 +183,22 @@ button:active:not([disabled]) {
 	}
 }
 .btn-grey {
-  @extend %btn-gray;
+	@extend %btn-gray;
 }
 
 .btn-success-no-gradient {
-  @extend  %color-bg-success;
+	@extend %color-bg-success;
 }
 .btn-danger-no-gradient {
-  @extend  %color-bg-allert;
+	@extend %color-bg-allert;
+}
+
+// BUTTON ADMIN AND ICONS
+#admin {
+	.btn-default {
+		img {
+			max-width: 24px;
+			margin-right: 5px;
+		}
+	}
 }
