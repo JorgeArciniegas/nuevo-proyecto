@@ -13,6 +13,11 @@
             </button>
           </div>
           <div fxFlex="12">
+            <button class="btn-default btn-grey-gradient radius-5 elevation-z5 btn-filter"
+              (click)="printUserSummary()">{{ 'PRINT' | translate }} </button>
+          </div>
+          <div fxFlex="4"></div>
+          <div fxFlex="12">
             <div><small data='disabled'>{{ 'DATE_FROM' | translate }}</small></div>
             <div class="value"><strong>{{operatorSummaryService.dateFrom | date:'mediumDate'}}</strong></div>
           </div>

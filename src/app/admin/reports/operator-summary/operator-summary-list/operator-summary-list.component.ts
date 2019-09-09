@@ -22,7 +22,7 @@ export class OperatorSummaryListComponent {
     this.currentOperatorVolumes = this.operatorSummaryService.reportsOperatorVolumeResponse.slice(this.currentPage - 1, this.recordPerPage);
   }
 
-  nextPage() {
+  nextPage(): void {
     if (this.currentPage < this.TotalPages) {
       ++this.currentPage;
       const start = (this.currentPage - 1) * this.recordPerPage;
@@ -37,7 +37,7 @@ export class OperatorSummaryListComponent {
     }
   }
 
-  previousPage() {
+  previousPage(): void {
     if (this.currentPage >= 1) {
       --this.currentPage;
       const start = (this.currentPage - 1) * this.recordPerPage;
@@ -50,5 +50,9 @@ export class OperatorSummaryListComponent {
         end
       );
     }
+  }
+
+  printUserSummary(): void {
+
   }
 }

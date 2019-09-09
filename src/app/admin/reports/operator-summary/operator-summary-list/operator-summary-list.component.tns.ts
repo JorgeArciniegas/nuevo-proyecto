@@ -27,7 +27,7 @@ export class OperatorSummaryListComponent {
     this.router.back();
   }
 
-  nextPage() {
+  nextPage(): void {
     if (this.currentPage < this.totalPages) {
       ++this.currentPage;
       const start = (this.currentPage - 1) * this.recordPerPage;
@@ -42,7 +42,7 @@ export class OperatorSummaryListComponent {
     }
   }
 
-  previousPage() {
+  previousPage(): void {
     if (this.currentPage >= 1) {
       --this.currentPage;
       const start = (this.currentPage - 1) * this.recordPerPage;
@@ -55,5 +55,9 @@ export class OperatorSummaryListComponent {
         end
       );
     }
+  }
+
+  printUserSummary(): void {
+
   }
 }

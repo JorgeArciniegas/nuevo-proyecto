@@ -1,18 +1,22 @@
 <GridLayout rows="*,3*,13*,2*" columns="*" class="summary" *ngIf="operatorSummaryService.reportsOperatorVolumeResponse">
   <Label row="0" class="title" text="{{'OPERATOR_SUMMARY' | translate | uppercase}}" textWrap="true"
     verticalAlignment="center"></Label>
-  <GridLayout row="1" columns="*,2*,2*,4*" class="card header">
+  <GridLayout row="1" columns="*,2*,2*,2*,4*" class="card header">
     <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()" src="~/assets/icons/baseline-arrow_back-24px.png"
       verticalAlignment="center" horizontalAlignment="left"></Image>
-    <StackLayout col="1" verticalAlignment="center">
+    <StackLayout class="button btn-default btn-grey-gradient" orientation="horizontal" horizontalAlignment="left"
+      col="1">
+      <Button text="{{'PRINT' | translate}}" class="button-internal" (tap)="printUserSummary()"></Button>
+    </StackLayout>
+    <StackLayout col="2" verticalAlignment="center">
       <Label class="sub-title" text="{{ 'DATE_FROM' | translate }}"></Label>
       <Label text="{{ operatorSummaryService.dateFrom | date:'mediumDate' }}" textWrap="true"></Label>
     </StackLayout>
-    <StackLayout col="2" verticalAlignment="center">
+    <StackLayout col="3" verticalAlignment="center">
       <Label class="sub-title" text="{{ 'DATE_TO' | translate }}"></Label>
       <Label text="{{ operatorSummaryService.dateTo | date:'mediumDate' }}" textWrap="true"></Label>
     </StackLayout>
-    <GridLayout col="3" rows="*" columns="*,3*,*">
+    <GridLayout col="4" rows="*" columns="*,3*,*">
       <GridLayout col="0" class="button btn-default btn-filter" verticalAlignment="center"
         [ngClass]="{'disabled': totalPages === 1 || currentPage === 1}">
         <Button text="‹" class="button-internal paginator" [isEnabled]="totalPages !== 1 && currentPage !== 1"
