@@ -42,19 +42,16 @@
       <div fxLayout="column">
         <div fxFlex fxLayout="row" class="border-bottom-overlay-1px">
           <div fxFlex="2"></div>
-          <div fxFlex="18">
+          <div fxFlex="23">
             <strong data='disabled'>{{ 'USERNAME' | translate }}</strong>
           </div>
-          <div fxFlex="20">
-            <strong data='disabled'>{{ 'OPERATOR_TYPE' | translate }}</strong>
-          </div>
-          <div fxFlex="20">
+          <div fxFlex="25">
             <strong data='disabled'>{{ 'STAKE' | translate }}</strong>
           </div>
-          <div fxFlex="20">
+          <div fxFlex="25">
             <strong data='disabled'>{{ 'VOIDED' | translate }}</strong>
           </div>
-          <div fxFlex="18">
+          <div fxFlex="23">
             <strong data='disabled'>{{ 'PAID' | translate }}</strong>
           </div>
           <div fxFlex="2"></div>
@@ -65,19 +62,16 @@
           <div fxFlex fxLayoutAlign="start center" class="border-bottom-overlay-1px" [style.max-height.px]="55"
             *ngFor="let operatorVolume of currentOperatorVolumes">
             <div fxFlex="2"></div>
-            <div fxFlex="18">
+            <div fxFlex="23">
               <strong>{{ operatorVolume.Username }}</strong>
             </div>
-            <div fxFlex="20">
-              <strong>{{ operatorVolume.IDClient }}</strong>
-            </div>
-            <div fxFlex="20">
+            <div fxFlex="25">
               <strong>{{ operatorVolume.Stake | currency : userService.userCurrency : 'symbol-narrow' }}</strong>
             </div>
-            <div fxFlex="20">
+            <div fxFlex="25">
               <strong>{{ operatorVolume.Voided | currency : userService.userCurrency : 'symbol-narrow' }}</strong>
             </div>
-            <div fxFlex="18">
+            <div fxFlex="23">
               <strong>{{ operatorVolume.Won | currency : userService.userCurrency : 'symbol-narrow' }}</strong>
             </div>
             <div fxFlex="2"></div>

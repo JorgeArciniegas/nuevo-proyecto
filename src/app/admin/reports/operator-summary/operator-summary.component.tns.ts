@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ModalDatetimepicker } from 'nativescript-modal-datetimepicker';
-import { AppSettings } from '../../../app.settings';
 import { UserService } from '../../../services/user.service';
 import { OperatorSummaryService } from './operator-summary.service';
 
@@ -13,7 +12,6 @@ export class OperatorSummaryComponent {
 
   constructor(
     public operatorSummaryService: OperatorSummaryService,
-    public readonly settings: AppSettings,
     public userService: UserService
   ) { }
 

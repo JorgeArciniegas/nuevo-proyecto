@@ -1,4 +1,4 @@
-<GridLayout rows="*,2*,14*,2*" columns="*" class="summary" *ngIf="operatorSummaryService.reportsOperatorVolumeResponse">
+<GridLayout rows="*,3*,13*,2*" columns="*" class="summary" *ngIf="operatorSummaryService.reportsOperatorVolumeResponse">
   <Label row="0" class="title" text="{{'OPERATOR_SUMMARY' | translate | uppercase}}" textWrap="true"
     verticalAlignment="center"></Label>
   <GridLayout row="1" columns="*,2*,2*,4*" class="card header">
@@ -30,25 +30,22 @@
   </GridLayout>
 
   <GridLayout row="2" shadow="3" cornerRadius="6" class="card">
-    <GridLayout class="display" rows="2*,3*,3*,3*,3*,3*,3*,3*,3*,3*,3*" columns="2*,18*,20*,20*,20*,18*,2*">
+    <GridLayout class="display" rows="2*,3*,3*,3*,3*,3*,3*,3*,3*,3*,3*" columns="2*,25*,25*,25*,21*,2*">
       <!-- title -->
       <Label row="0" col="1" class="sub-title" text="{{ 'USERNAME' | translate }}" verticalAlignment="center"></Label>
-      <Label row="0" col="2" class="sub-title" text="{{ 'OPERATOR_TYPE' | translate }}"
-        verticalAlignment="center"></Label>
-      <Label row="0" col="3" class="sub-title" text="{{ 'STAKE' | translate }}" verticalAlignment="center"></Label>
-      <Label row="0" col="4" class="sub-title" text="{{ 'VOIDED' | translate }}" verticalAlignment="center"></Label>
-      <Label row="0" col="5" class="sub-title" text="{{ 'PAID' | translate }}" verticalAlignment="center"></Label>
+      <Label row="0" col="2" class="sub-title" text="{{ 'STAKE' | translate }}" verticalAlignment="center"></Label>
+      <Label row="0" col="3" class="sub-title" text="{{ 'VOIDED' | translate }}" verticalAlignment="center"></Label>
+      <Label row="0" col="4" class="sub-title" text="{{ 'PAID' | translate }}" verticalAlignment="center"></Label>
       <StackLayout row="0" colSpan="6" class="border-bottom-overlay" verticalAlignment="bottom"></StackLayout>
       <!-- rows -->
-      <GridLayout row="{{i + 1}}" colSpan="6" rows="*" columns="2*,18*,20*,20*,20*,18*,2*"
+      <GridLayout row="{{i + 1}}" colSpan="6" rows="*" columns="2*,25*,25*,25*,21*,2*"
         *ngFor="let operatorVolume of currentOperatorVolumes; let i = index;">
         <Label col="1" text="{{ operatorVolume.Username }}" verticalAlignment="center"></Label>
-        <Label col="2" text="{{ operatorVolume.IDClient }}" verticalAlignment="center"></Label>
-        <Label col="3" text="{{ operatorVolume.Stake | currency : userService.userCurrency : 'symbol-narrow' }}"
+        <Label col="2" text="{{ operatorVolume.Stake | currency : userService.userCurrency : 'symbol-narrow' }}"
           verticalAlignment="center"></Label>
-        <Label col="4" text="{{ operatorVolume.Voided | currency : userService.userCurrency : 'symbol-narrow' }}"
+        <Label col="3" text="{{ operatorVolume.Voided | currency : userService.userCurrency : 'symbol-narrow' }}"
           verticalAlignment="center"></Label>
-        <Label col="5" text="{{ operatorVolume.Won | currency : userService.userCurrency : 'symbol-narrow' }}"
+        <Label col="4" text="{{ operatorVolume.Won | currency : userService.userCurrency : 'symbol-narrow' }}"
           verticalAlignment="center"></Label>
         <StackLayout colSpan="6" class="border-bottom-overlay" verticalAlignment="bottom"></StackLayout>
       </GridLayout>

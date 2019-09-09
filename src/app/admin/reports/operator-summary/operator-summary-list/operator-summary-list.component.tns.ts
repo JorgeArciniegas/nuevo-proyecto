@@ -16,9 +16,6 @@ export class OperatorSummaryListComponent {
   public currentOperatorVolumes: ReportsOperatorVolumeResponse[] = [];
 
   constructor(public userService: UserService, public operatorSummaryService: OperatorSummaryService, private router: RouterExtensions) {
-    console.log(this.operatorSummaryService.dateFrom);
-    console.log(this.operatorSummaryService.dateTo);
-
     this.totalPages = Math.ceil(this.operatorSummaryService.reportsOperatorVolumeResponse.length / this.recordPerPage);
     if (this.totalPages === 0) {
       this.totalPages = 1;
