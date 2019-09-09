@@ -107,7 +107,7 @@
         </ng-container>
       </div>
       <div fxFlex fxLayout="row nowrap" fxLayoutAlign="end center">
-        <button fxFlex="20" *ngIf="!isEdited && vboxService.vBoxSelected" (click)="onSaveData()"
+        <button fxFlex="20" *ngIf="changeDataOngoing && vboxService.vBoxSelected" (click)="onSaveData()"
           class="btn btn-default btn-save-data btn-success-no-gradient radius-5">{{'SAVE' | translate }}</button>
       </div>
     </div>

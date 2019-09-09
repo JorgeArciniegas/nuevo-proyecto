@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { VboxService } from '../vbox.service';
 import { Language } from '../../language/language.model';
-import { AppSettings } from 'src/app/app.settings';
+import { AppSettings } from '../../../../app.settings';
 import { VBoxMonitorConfiguration, VBoxAvailableCategoryType, ErrorStatus } from '@elys/elys-api';
-import { RouterService } from 'src/app/services/utility/router/router.service';
+import { RouterService } from '../../../../services/utility/router/router.service';
 import { timer, Subscription } from 'rxjs';
 
 @Component({
@@ -30,7 +30,9 @@ export class VboxEditComponent implements OnInit {
       this.router.getRouter().navigateByUrl('/admin/vbox');
     } else {
       this.languages = this.settings.supportedLang;
+      this.changeDataOngoing = false;
       this.selectTVConfiguration(0, this.vboxService.vBoxSelected.MonitorConfigurations[0]);
+
     }
   }
 

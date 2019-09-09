@@ -1,16 +1,17 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { NativeScriptCommonModule } from 'nativescript-angular/common';
 import { SharedModule } from '../../../shared/shared.module';
 import { VboxEditComponent } from './vbox-edit/vbox-edit.component';
-import { VboxRoutingModule } from './vbox-routing.module';
+import { routes } from './vbox-routing.module';
 import { VboxComponent } from './vbox.component';
+import { NativeScriptRouterModule } from 'nativescript-angular/router';
 
 
 @NgModule({
   declarations: [VboxComponent, VboxEditComponent],
   imports: [
-    CommonModule,
-    VboxRoutingModule,
+    NativeScriptCommonModule,
+    NativeScriptRouterModule.forChild(routes),
     SharedModule
   ]
 })

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { VboxComponent } from './vbox.component';
 import { VboxEditComponent } from './vbox-edit/vbox-edit.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     children: [

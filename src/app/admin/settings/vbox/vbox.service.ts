@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ElysApiService, VBoxConfiguration, VBoxConfigurationRequest, VBoxConfigurationResponse } from '@elys/elys-api';
+import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
 import { ListVbox, LocalVBoxConfiguration } from './vbox.model';
 
 @Injectable({
@@ -11,7 +12,7 @@ export class VboxService {
   listTempVbox: VBoxConfiguration[];
   vBoxSelected: LocalVBoxConfiguration;
   rowNumber = 10;
-  constructor(private elysApi: ElysApiService) {
+  constructor(private elysApi: ElysApiService, private translate: TranslateUtilityService) {
     this.initLoad();
   }
 
@@ -25,7 +26,7 @@ export class VboxService {
             const tmpLanguage = item.MonitorConfigurations.filter((l) => {
               return l.Language !== null;
             });
-            item.language = tmpLanguage.length > 0 ? tmpLanguage[0].Language : null;
+            item.language = tmpLanguage.length > 0 ? tmpLanguage[0].Language : this.translate.getCurrentLanguage();
           }
         });
         this.listVbox.totalVboxs = items.VBoxConfigurations.length;

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OperatorsService } from './operators.service';
-import { Router } from '@angular/router';
-import { RouterService } from 'src/app/services/utility/router/router.service';
+import { RouterService } from '../../../services/utility/router/router.service';
 
 @Component({
   selector: 'app-operators',
