@@ -55,6 +55,7 @@ export interface Widget {
 export interface PrintSettings {
   isEnabledReprintCoupon: boolean;
   isTrasmitionInfoMessageShown: boolean;
+  isShowHeaderMessage: boolean;
 }
 
 export enum WidgetTypeLink {
@@ -86,7 +87,8 @@ export enum LAYOUT_TYPE {
 
 // Bookmaker's identifier
 export enum LICENSE_TYPE {
-  DEMO_LICENSE
+  DEMO_LICENSE,
+  UNIVERSALSOFT
 }
 
 export interface TypeCoupon {
