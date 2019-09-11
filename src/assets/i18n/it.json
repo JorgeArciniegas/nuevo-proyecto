@@ -526,5 +526,12 @@
     "ERROR_MESSAGE_EDIT_TV": "Uno o più errori si sono verificati nel salvataggio."
   },
   "WARNING": "Avviso",
-  "WON": "Vinto"
+  "WON": "Vinto",
+  "STATEMENT_VIRTUAL_SHOP": "Bilancio Virtual Shop",
+  "COUPON_NUMBER": "N. Coupon",
+  "DATE_OF_REFERENCE": "Data di riferimento",
+  "EXPORT_EXCEL": "Esporta in Excel",
+  "JACKPOT_SHOP": "Jackpot di sala",
+  "JACKPOT_MEGA": "Mega Jackpot",
+  "TOT_PROFIT": "Total Profit"
 }

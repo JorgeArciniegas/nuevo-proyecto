@@ -76,6 +76,12 @@ export const routes: Routes = [
         data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       },
       {
+        path: 'reports/statement-vitual-shop',
+        loadChildren: './reports/statements-virtual-shop/statements-virtual-shop.module#StatementsVirtualShopModule',
+        canActivateChild: [AuthorizationGuard],
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
+      },
+      {
         path: 'settings/languages',
         component: LanguageComponent
       },

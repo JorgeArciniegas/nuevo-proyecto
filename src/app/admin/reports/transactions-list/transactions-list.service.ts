@@ -41,6 +41,9 @@ export class TransactionsListService {
 
   set dateTo(date: Date) {
     this.request.dateTo = date;
+    this.request.dateTo.setHours(23);
+    this.request.dateTo.setMinutes(59);
+    this.request.dateTo.setSeconds(59);
   }
 
   get amountFrom() {
@@ -117,6 +120,7 @@ export class TransactionsListService {
       this.request.requestedPage = 1;
     }
     const req: ReportsAccountStatementRequest = this.cloneRequest();
+    console.log(req);
     this.elysApi.reports.getTransactionsHistory(req).then(items => (this.transactionsList = items));
     // this.initResetRequest();
     this.router.getRouter().navigateByUrl('admin/reports/transactionsList/summaryTransactions');
@@ -141,13 +145,11 @@ export class TransactionsListService {
   }
 
   private cloneRequest(): ReportsAccountStatementRequest {
-    const dateTo = new Date();
-    dateTo.setDate(this.request.dateTo.getDate() + 1);
 
     return {
       transactionTypesCsv: this.request.transactionTypesCsv,
       dateFrom: this.request.dateFrom,
-      dateTo: dateTo,
+      dateTo: this.request.dateTo,
       amountFrom: this.request.amountFrom,
       amountTo: this.request.amountTo,
       service: this.request.service,
