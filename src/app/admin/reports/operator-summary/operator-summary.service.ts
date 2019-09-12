@@ -52,7 +52,7 @@ export class OperatorSummaryService {
   private initResetRequest(): void {
     const today = new Date();
     this.reportsOperatorVolumeRequest = {
-      userId: 0,
+      userId: this.userService.dataUserDetail.userDetail.UserId,
       // Set the date from the begin of the day.
       dateFrom: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0),
       // Set the date to the current time of the day.
@@ -61,13 +61,10 @@ export class OperatorSummaryService {
   }
 
   private cloneRequest(): ReportsOperatorVolumeRequest {
-    const dateTo = new Date();
-    dateTo.setDate(this.reportsOperatorVolumeRequest.dateTo.getDate() + 1);
-
     return {
       userId: this.userService.dataUserDetail.userDetail.UserId,
       dateFrom: this.reportsOperatorVolumeRequest.dateFrom,
-      dateTo: dateTo
+      dateTo: this.reportsOperatorVolumeRequest.dateTo
     };
   }
 }
