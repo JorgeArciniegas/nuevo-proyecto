@@ -190,7 +190,7 @@ export class CouponService {
           this.couponIdAdded.filter((item, idx) => {
             if (item === bet.id) {
               addBoolean = false;
-              this.couponIdAdded.slice(idx);
+              this.couponIdAdded.splice(idx, 1);
             }
           });
           // add the id to couponIdAdded
