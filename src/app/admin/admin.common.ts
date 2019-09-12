@@ -13,6 +13,8 @@ import { DetailsTransactionComponent } from './reports/transactions-list/details
 import { GetTransactionVategoryKeyByEnumValuePipe } from './reports/transactions-list/get-transaction-category-key-by-enum-value.pipe';
 import { OperatorSummaryComponent } from './reports/operator-summary/operator-summary.component';
 import { OperatorSummaryListComponent } from './reports/operator-summary/operator-summary-list/operator-summary-list.component';
+import { AuthorizationGuard } from '../app.authorization.guard';
+import { TYPE_ACCOUNT } from '../services/user.models';
 
 export const componentDeclarations: any[] = [
   AdminComponent,
@@ -73,7 +75,9 @@ export const routes: Routes = [
             path: 'detail/:id',
             component: DetailsTransactionComponent
           }
-        ]
+        ],
+        canActivateChild: [AuthorizationGuard],
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       },
       {
         path: 'reports/operatorSummary',
@@ -94,7 +98,15 @@ export const routes: Routes = [
       },
       {
         path: 'operators',
-        loadChildren: './settings/operators/operators.module#OperatorsModule'
+        loadChildren: './settings/operators/operators.module#OperatorsModule',
+        canActivateChild: [AuthorizationGuard],
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
+      },
+      {
+        path: 'vbox',
+        loadChildren: './settings/vbox/vbox.module#VboxModule',
+        canActivateChild: [AuthorizationGuard],
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       }
     ]
   },

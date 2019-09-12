@@ -159,7 +159,7 @@ export class BtncalcService implements OnDestroy {
    */
   checkSeparator(): void {
     // it is used on the DOM and it is put on the CALC BUTTON
-    if (this.userService.userDetail && !this.decimalSeparator) {
+    if (this.userService.dataUserDetail && !this.decimalSeparator) {
       const decimalCheck = 1.2;
       const separator = decimalCheck.toLocaleString(this.translate.getCurrentLanguage()).substring(1, 2);
       // tslint:disable-next-line:max-line-length

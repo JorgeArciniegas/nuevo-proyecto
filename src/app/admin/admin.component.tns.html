@@ -21,7 +21,7 @@
           text="{{'OPERATOR_SUMMARY' | translate }}"></Label>
       </StackLayout>
       <StackLayout (tap)="goToTransactionsList()" width="100%" class="button btn-success btn-admin"
-        orientation="horizontal" horizontalAlignment="center" row="2" col="0">
+        orientation="horizontal" horizontalAlignment="center" row="2" col="0" *ngIf="isAdminLogged">
         <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-list-24px.png"
           verticalAlignment="center" horizontalAlignment="right"></Image>
         <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"
@@ -32,23 +32,31 @@
       <StackLayout orientation="horizontal" horizontalAlignment="center" row="0" col="0">
         <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-settings-20px.png"
           verticalAlignment="center" horizontalAlignment="right"></Image>
-        <Label verticalAlignment="center" class="text-left txt-title" col="1"
-          text="{{'SETTINGS' | translate }}"></Label>
+        <Label verticalAlignment="center" class="text-left txt-title" text="{{'SETTINGS' | translate }}"></Label>
       </StackLayout>
-      <StackLayout (tap)="goToOperators()" width="100%" class="m-b-2 button btn-success btn-admin"
-        orientation="horizontal" horizontalAlignment="center" row="1" col="0">
-        <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-language-24px.png"
-          verticalAlignment="center" horizontalAlignment="right"></Image>
-
-        <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"
+      <!--BUTTON OPERATORS -->
+      <StackLayout (tap)="goToOperators()" width="100%" class="button btn-success btn-admin" orientation="horizontal"
+        horizontalAlignment="center" *ngIf="isAdminLogged">
+        <Image stretch="aspectFit" width="30" col="0"
+          src="~/assets/icons/baseline_supervised_user_circle_white_24px.png" verticalAlignment="center"
+          horizontalAlignment="right"></Image>
+        <Label verticalAlignment="center" class="text-left txt-title txt-title-btn"
           text="{{'OPERATORS' | translate }}"></Label>
       </StackLayout>
-      <StackLayout (tap)="goToLanguageSettings()" width="100%" class="button btn-success" orientation="horizontal"
-        horizontalAlignment="center" row="1" col="0">
+      <!-- BUTTON VBOXES -->
+      <StackLayout (tap)="goToVboxes()" width="100%" class="button btn-success btn-admin" orientation="horizontal"
+        horizontalAlignment="center" *ngIf="isAdminLogged">
+        <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline_tv_white_18px.png"
+          verticalAlignment="center" horizontalAlignment="right"></Image>
+        <Label verticalAlignment="center" class="text-left txt-title txt-title-btn"
+          text="{{ 'VBOX.MANAGEMENT' | translate }}"></Label>
+      </StackLayout>
+      <!-- BUTTON LANGUAGES -->
+      <StackLayout (tap)="goToLanguageSettings()" width="100%" class="button btn-success btn-admin"
+        orientation="horizontal" horizontalAlignment="center">
         <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-language-24px.png"
           verticalAlignment="center" horizontalAlignment="right"></Image>
-
-        <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"
+        <Label verticalAlignment="center" class="text-left txt-title txt-title-btn"
           text="{{'LANGUAGE' | translate }}"></Label>
       </StackLayout>
     </StackLayout>

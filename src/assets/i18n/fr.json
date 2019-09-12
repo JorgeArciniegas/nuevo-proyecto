@@ -410,6 +410,18 @@
       "2009": "Commission debit (forced)",
       "2010": "Commission bonus debit (forced)",
       "2011": "Commission startup share"
+    },
+    "VBOX": {
+      "CATEGORIES_SPORT": {
+        "ARLT": "American roulette",
+        "COCK": "Combat de Coqs",
+        "DOG": "Lévriers",
+        "ENG-LEAGUE": "football ENG",
+        "HORSE": "Chevaux",
+        "HORSE-VIRT": "Chevaux",
+        "ITA-LEAGUE": "football ITA",
+        "KENO": "Keno"
+      }
     }
   },
   "ENDURANCE": "Endurance",
@@ -434,6 +446,7 @@
   "MAX_POTENTIAL_WIN_WITH_BONUS": "Vincita potenziale massima con bonus",
   "MIN_PAYOUT": "Gain min.",
   "MIN_POTENTIAL_WIN": "Gain potentiel min.",
+  "NOBODY": "none",
   "NO_CONNECTION": "Nessuna connessione disponibile",
   "ODDS": "Cote",
   "OPERATOR": "Opérateur",
@@ -463,11 +476,13 @@
   "REFERENCE_ID": "ID riferimento",
   "REPORTS": "Reports",
   "REPRINT": "Ristampa",
+  "SAVE": "Enregistrer",
   "SEARCH": "Cerca",
   "SECTION_NOT_AVAILABLE": "Sezione non disponibile",
   "SETTINGS": "Impostazioni",
   "SHOP_VIRTUAL_BALANCE": "Solde virtuel de la boutique",
   "SINGLE": "Pari simple",
+  "SPORT": "sport",
   "ST": "ST",
   "STAKE": "Mise",
   "STAKE_AMOUNT": "Mise",
@@ -495,6 +510,13 @@
   "USERNAME": "Nom d'Utilisateur",
   "USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
+  "VBOX": {
+    "GENERAL_SETTINGS": "Paramètres Généraux",
+    "MANAGEMENT": "Gestion V-Box",
+    "MSG_NOBODY": "Aucune V-Box associée à cet utilisateur",
+    "TV_SETTING": "Paramètres TV",
+    "V_BOX": "V-Box"
+  },
   "VOIDED": "Annulé",
   "WARNING": "Avviso",
   "WON": "Vinto"

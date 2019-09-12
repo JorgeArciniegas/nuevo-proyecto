@@ -206,7 +206,8 @@
     },
     "PRINT_COUPON": {
       "LICENSE_MESSAGE": {
-        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua."
+        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
+        "UNIVERSALSOFT": "Please check the accuracy of the coupon at the time of issuance, late claims will not be accepted."
       }
     },
     "PRODUCT": {
@@ -410,6 +411,18 @@
       "2009": "Commission debit (forced)",
       "2010": "Commission bonus debit (forced)",
       "2011": "Commission startup share"
+    },
+    "VBOX": {
+      "CATEGORIES_SPORT": {
+        "ARLT": "American roulette",
+        "COCK": "Cock fight",
+        "DOG": "Greyhounds",
+        "ENG-LEAGUE": "Soccer ENG",
+        "HORSE": "Horses",
+        "HORSE-VIRT": "Virtual horses",
+        "ITA-LEAGUE": "Soccer ITA",
+        "KENO": "Keno"
+      }
     }
   },
   "ENDURANCE": "Endurance",
@@ -434,6 +447,7 @@
   "MAX_POTENTIAL_WIN_WITH_BONUS": "Max. potential win with bonus",
   "MIN_PAYOUT": "MIN. PAYOUT",
   "MIN_POTENTIAL_WIN": "Min. potential win",
+  "NOBODY": "none",
   "NO_CONNECTION": "No connection available",
   "ODDS": "Odds",
   "OPERATOR": "Operator",
@@ -463,11 +477,13 @@
   "REFERENCE_ID": "Reference ID",
   "REPORTS": "Reports",
   "REPRINT": "Reprint",
+  "SAVE": "Save",
   "SEARCH": "Search",
   "SECTION_NOT_AVAILABLE": "Section not available",
   "SETTINGS": "Settings",
   "SHOP_VIRTUAL_BALANCE": "Shop virtual balance",
   "SINGLE": "Single",
+  "SPORT": "sport",
   "ST": "ST",
   "STAKE": "Stake",
   "STAKE_AMOUNT": "Stake",
@@ -478,7 +494,6 @@
   "TEAM": "Team",
   "TOTALS": "Totals",
   "TOTAL_PAYOUT": "Total payout",
-  "TOTAL_PLAYED": "Total stake",
   "TOTAL_STAKE": "Total stake",
   "TOT_BET": "TOT bet",
   "TOT_INCOME": "Tot income",
@@ -495,6 +510,13 @@
   "USERNAME": "Username",
   "USERNAME_TOO_SHORT": "The username is too short (minimum 2 digits)",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "User not allowed to execute the operation",
+  "VBOX": {
+    "GENERAL_SETTINGS": "General Settings",
+    "MANAGEMENT": "V-Box management",
+    "MSG_NOBODY": "No V-Box associated to this user",
+    "TV_SETTING": "TV Settings",
+    "V_BOX": "V-Box"
+  },
   "VOIDED": "Voided",
   "WARNING": "Warning",
   "WON": "Won"

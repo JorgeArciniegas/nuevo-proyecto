@@ -410,6 +410,18 @@
       "2009": "Commission debit (forced)",
       "2010": "Commission bonus debit (forced)",
       "2011": "Commission startup share"
+    },
+    "VBOX": {
+      "CATEGORIES_SPORT": {
+        "ARLT": "American roulette",
+        "COCK": "Cock fight",
+        "DOG": "Qen",
+        "ENG-LEAGUE": "Futboll ENG",
+        "HORSE": "Kuaj",
+        "HORSE-VIRT": "Virtual horses",
+        "ITA-LEAGUE": "Futboll ITA",
+        "KENO": "Keno"
+      }
     }
   },
   "ENDURANCE": "Durim",
@@ -434,6 +446,7 @@
   "MAX_POTENTIAL_WIN_WITH_BONUS": "Vincita potenziale massima con bonus",
   "MIN_PAYOUT": "Fitimi min.",
   "MIN_POTENTIAL_WIN": "Min. fitimet e mundshme",
+  "NOBODY": "Asnje",
   "NO_CONNECTION": "Nessuna connessione disponibile",
   "ODDS": "Kuote",
   "OPERATOR": "Operator",
@@ -463,11 +476,13 @@
   "REFERENCE_ID": "ID riferimento",
   "REPORTS": "Reports",
   "REPRINT": "Ristampa",
+  "SAVE": "Ruaj",
   "SEARCH": "Cerca",
   "SECTION_NOT_AVAILABLE": "Sezione non disponibile",
   "SETTINGS": "Impostazioni",
   "SHOP_VIRTUAL_BALANCE": "Balanca virtuale e dyqanit",
   "SINGLE": "Bast Tek",
+  "SPORT": "sport",
   "ST": "ST",
   "STAKE": "Vlera",
   "STAKE_AMOUNT": "Shuma",
@@ -495,6 +510,13 @@
   "USERNAME": "Perdorues",
   "USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
+  "VBOX": {
+    "GENERAL_SETTINGS": "Cilësimet e përgjithshme",
+    "MANAGEMENT": "V-Box menaxhimi",
+    "MSG_NOBODY": "Asnjë V-Box i lidhur me këtë përdorues",
+    "TV_SETTING": "Cilësimet e TV",
+    "V_BOX": "V-Box"
+  },
   "VOIDED": "Anulluar",
   "WARNING": "Avviso",
   "WON": "Vinto"

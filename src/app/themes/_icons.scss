@@ -65,8 +65,14 @@
 .icon-baseline-arrow_back-24px:before {
 	content: url("assets/icons/baseline-arrow_back-24px.svg");
 }
+
 .user-icon {
 	background: url("assets/icons/icona-user.png") no-repeat center;
+}
+
+.users-icon {
+	background: url("assets/icons/baseline_supervised_user_circle_white_24px.png") no-repeat center;
+	background-size: contain;
 }
 
 .pwd-icon {
@@ -79,5 +85,10 @@
 }
 .success-icon {
 	background: url("assets/icons/checked.png") no-repeat center center;
+	background-size: contain;
+}
+
+.remove-data-or-close-24px {
+	background: url("assets/icons/baseline_close_white_36px.png") no-repeat center center;
 	background-size: contain;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OperatorsService } from './operators.service';
-import { Router } from '@angular/router';
+import { RouterService } from '../../../services/utility/router/router.service';
 
 @Component({
   selector: 'app-operators',
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class OperatorsComponent implements OnInit {
 
-  constructor(public operatorService: OperatorsService, private router: Router) { }
+  constructor(public operatorService: OperatorsService, private router: RouterService) { }
 
   ngOnInit() {
     this.operatorService.getListOfOperators();
@@ -21,7 +21,7 @@ export class OperatorsComponent implements OnInit {
     if (this.operatorService.listOfOperators.actualPages <= 0) {
       return;
     }
-    this.operatorService.listOfOperators.actualPages --;
+    this.operatorService.listOfOperators.actualPages--;
     this.operatorService.filterOperators();
   }
 
@@ -37,11 +37,11 @@ export class OperatorsComponent implements OnInit {
 
   deleting(idx: number): void {
     this.operatorService.operatorMarked = this.operatorService.listTempOperators[idx];
-    this.router.navigate(['./admin/operators/delete']);
+    this.router.getRouter().navigate(['./admin/operators/delete']);
   }
 
   editing(idx: number): void {
     this.operatorService.operatorMarked = this.operatorService.listTempOperators[idx];
-    this.router.navigate(['./admin/operators/edit']);
+    this.router.getRouter().navigate(['./admin/operators/edit']);
   }
 }

@@ -411,6 +411,18 @@
       "2009": "Commission debit (forced)",
       "2010": "Commission bonus debit (forced)",
       "2011": "Commission startup share"
+    },
+    "VBOX": {
+      "CATEGORIES_SPORT": {
+        "ARLT": "American roulette",
+        "COCK": "Combattimento di galli",
+        "DOG": "Levrieri",
+        "ENG-LEAGUE": "Calcio ENG",
+        "HORSE": "Ippica",
+        "HORSE-VIRT": "Ippica virtuale",
+        "ITA-LEAGUE": "Calcio ITA",
+        "KENO": "Keno"
+      }
     }
   },
   "EDIT": "Modifica",
@@ -438,6 +450,7 @@
   "MIN_PAYOUT": "Vincita minima",
   "MIN_POTENTIAL_WIN": "Vincita potenziale minima",
   "NEW": "nuovo",
+  "NOBODY": "Nessuno",
   "NO_CONNECTION": "Nessuna connessione disponibile",
   "ODDS": "Quota",
   "OPERATOR": "Operatore",
@@ -476,11 +489,13 @@
   "REPEAT_PASSWORD": "Ripeti password",
   "REPORTS": "Reports",
   "REPRINT": "Ristampa",
+  "SAVE": "Salva",
   "SEARCH": "Cerca",
   "SECTION_NOT_AVAILABLE": "Sezione non disponibile",
   "SETTINGS": "Impostazioni",
   "SHOP_VIRTUAL_BALANCE": "Bilancio shop virtual",
   "SINGLE": "Singola",
+  "SPORT": "Sport",
   "ST": "ST",
   "STAKE": "Giocato",
   "STAKE_AMOUNT": "Imp. giocato",
@@ -508,6 +523,16 @@
   "USERNAME": "Nome utente",
   "USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
+  "VBOX": {
+    "EDIT_ONGOING": "Modifiche non salvate",
+    "ERROR_MESSAGE_EDIT_TV": "Uno o più errori si sono verificati nel salvataggio.",
+    "GENERAL_SETTINGS": "Impostazioni Generali",
+    "MANAGEMENT": "Gestione V-Box",
+    "MSG_NOBODY": "Nessun V-Box associato a questo utente",
+    "SUCCESS_MESSAGE_EDIT_TV": "Dati salvati con successo",
+    "TV_SETTING": "Impostazioni TV",
+    "V_BOX": "Lista V-Box"
+  },
   "VOIDED": "Annullato",
   "WARNING": "Avviso",
   "WON": "Vinto"

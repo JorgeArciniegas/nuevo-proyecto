@@ -72,7 +72,7 @@ export class PayCancelDialogComponent {
     } else if (this.couponDialogService.type === DialogTypeCoupon.DELETE) {
       if (couponCode) {
         this.cancelRequest = {
-          CancellationRequestUserId: this.userService.userDetail.UserId,
+          CancellationRequestUserId: this.userService.dataUserDetail.userDetail.UserId,
           ShopClientId: null,
           CouponId: null,
           TicketCode: couponCode,

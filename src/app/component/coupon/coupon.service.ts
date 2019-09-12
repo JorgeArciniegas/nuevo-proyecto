@@ -78,7 +78,7 @@ export class CouponService {
     this.couponResponseSubject = new Subject<BetCouponExtended>();
     this.couponResponse = this.couponResponseSubject.asObservable();
 
-    this.elysCoupon.couponConfig.userId = userService.userDetail ? userService.userDetail.UserId : undefined;
+    this.elysCoupon.couponConfig.userId = userService.dataUserDetail.userDetail ? userService.dataUserDetail.userDetail.UserId : undefined;
     elysCoupon.couponHasChanged.subscribe(coupon => {
       this.coupon = coupon;
       this.couponResponseSubject.next(coupon);
@@ -176,7 +176,7 @@ export class CouponService {
         };
         this.elysCoupon.manageOddSC(req);
       }
-    } catch (err) {}
+    } catch (err) { }
   }
 
   addRemoveToCoupon(smart: BetOdd[], isMultiStake: boolean = true): void {
@@ -190,7 +190,7 @@ export class CouponService {
           this.couponIdAdded.filter((item, idx) => {
             if (item === bet.id) {
               addBoolean = false;
-              this.couponIdAdded.slice(idx);
+              this.couponIdAdded.splice(idx, 1);
             }
           });
           // add the id to couponIdAdded

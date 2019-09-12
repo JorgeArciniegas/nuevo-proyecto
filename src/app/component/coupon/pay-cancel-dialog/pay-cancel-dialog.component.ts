@@ -37,7 +37,7 @@ export class PayCancelDialogComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   public onSubmit(form: FormGroup): void {
     let couponCode: string;
@@ -73,7 +73,7 @@ export class PayCancelDialogComponent implements OnInit {
         couponCode = this.form.get('couponCode').value;
         if (couponCode) {
           this.cancelRequest = {
-            CancellationRequestUserId: this.userService.userDetail.UserId,
+            CancellationRequestUserId: this.userService.dataUserDetail.userDetail.UserId,
             ShopClientId: null,
             CouponId: null,
             TicketCode: couponCode,

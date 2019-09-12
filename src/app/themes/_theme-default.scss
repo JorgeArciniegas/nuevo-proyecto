@@ -15,6 +15,7 @@
 @import "./events-list/events-list";
 @import "./groupings/groupings";
 @import "./operators/operators";
+@import "./vbox/vbox";
 *,
 *:after,
 *:before {
@@ -33,7 +34,8 @@ html {
 
 .app {
 	app-login,
-	app-admin {
+	app-admin,
+	app-vbox {
 		height: 100%;
 	}
 	&.develop {

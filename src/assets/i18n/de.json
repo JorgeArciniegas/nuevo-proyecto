@@ -410,6 +410,18 @@
       "2009": "Commission debit (forced)",
       "2010": "Commission bonus debit (forced)",
       "2011": "Commission startup share"
+    },
+    "VBOX": {
+      "CATEGORIES_SPORT": {
+        "ARLT": "American roulette",
+        "COCK": "Hahnenkampf",
+        "DOG": "Windhunde",
+        "ENG-LEAGUE": "Calcio ENG",
+        "HORSE": "Pferde",
+        "HORSE-VIRT": "Cavalli virtuale",
+        "ITA-LEAGUE": "Calcio ITA",
+        "KENO": "Keno"
+      }
     }
   },
   "ENDURANCE": "Ausdauer",
@@ -434,6 +446,7 @@
   "MAX_POTENTIAL_WIN_WITH_BONUS": "Vincita potenziale massima con bonus",
   "MIN_PAYOUT": "Min. Auszahlung",
   "MIN_POTENTIAL_WIN": "Min. mögliche Auszahlung",
+  "NOBODY": "Keiner",
   "NO_CONNECTION": "Nessuna connessione disponibile",
   "ODDS": "Quote",
   "OPERATOR": "Betreiber",
@@ -463,11 +476,13 @@
   "REFERENCE_ID": "ID riferimento",
   "REPORTS": "Reports",
   "REPRINT": "Ristampa",
+  "SAVE": "Speichern",
   "SEARCH": "Cerca",
   "SECTION_NOT_AVAILABLE": "Sezione non disponibile",
   "SETTINGS": "Impostazioni",
   "SHOP_VIRTUAL_BALANCE": "Virtuellese Wettbürogut haben",
   "SINGLE": "Einzelwette",
+  "SPORT": "sport",
   "ST": "ST",
   "STAKE": "Wetteinsatz",
   "STAKE_AMOUNT": "Wetteinsatz",
@@ -495,6 +510,13 @@
   "USERNAME": "Benutzername",
   "USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
+  "VBOX": {
+    "GENERAL_SETTINGS": "allgemeine Einstellungen",
+    "MANAGEMENT": "V-Box Verwaltung",
+    "MSG_NOBODY": "Dieser Benutzer hat keine V-Box verbunden",
+    "TV_SETTING": "TV Einstellungen",
+    "V_BOX": "V-Box"
+  },
   "VOIDED": "Annulliert",
   "WARNING": "Avviso",
   "WON": "Vinto"

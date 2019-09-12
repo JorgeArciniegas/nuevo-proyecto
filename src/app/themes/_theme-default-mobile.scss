@@ -14,6 +14,7 @@
 @import "./events-list/events-list.tns";
 @import "./groupings/groupings.tns";
 @import "./operators/operators.tns";
+@import "./vbox/vbox.tns";
 .app {
 	&.develop {
 		@import "./skins/develop/styles";
@@ -671,6 +672,15 @@
 .user-icon {
 	@extend %user-icon-mobile;
 }
+
+.users-icon {
+	@extend %users-icon-mobile;
+}
+
+.remove-data-or-close {
+	@extend %remove-data-or-close;
+}
+
 .pwd-icon {
 	@extend %pwd-icon-mobile;
 }

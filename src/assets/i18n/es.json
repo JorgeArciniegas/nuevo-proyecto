@@ -205,8 +205,13 @@
       "U": "ba"
     },
     "PRINT_COUPON": {
+      "HEADER_MESSAGE": {
+        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
+        "UNIVERSALSOFT": ""
+      },
       "LICENSE_MESSAGE": {
-        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua."
+        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
+        "UNIVERSALSOFT": "Prohibida la venta a menores de edad.Este tiquete se constituye en un documento al portador.El apostador es responsable de la integridad del tiquete, y acepta que la   apuesta impresa en éste representa con certeza su selección"
       }
     },
     "PRODUCT": {
@@ -410,6 +415,18 @@
       "2009": "Commission debit (forced)",
       "2010": "Commission bonus debit (forced)",
       "2011": "Commission startup share"
+    },
+    "VBOX": {
+      "CATEGORIES_SPORT": {
+        "ARLT": "American roulette",
+        "COCK": "Pelea de gallos",
+        "DOG": "Galgos",
+        "ENG-LEAGUE": "Fútbol ENG",
+        "HORSE": "Caballos",
+        "HORSE-VIRT": "Carrera de caballos virtuales",
+        "ITA-LEAGUE": "Fútbol ITA",
+        "KENO": "Keno"
+      }
     }
   },
   "ENDURANCE": "Resistencia",
@@ -434,6 +451,7 @@
   "MAX_POTENTIAL_WIN_WITH_BONUS": "Ganancia maxima potencial con bonus",
   "MIN_PAYOUT": "Ganancias mín.",
   "MIN_POTENTIAL_WIN": "Ganancias potenciales mín.",
+  "NOBODY": "ninguno",
   "NO_CONNECTION": "No hay conexión disponible",
   "ODDS": "Cuota",
   "OPERATOR": "Operador",
@@ -463,11 +481,13 @@
   "REFERENCE_ID": "ID riferimento",
   "REPORTS": "Informes",
   "REPRINT": "Reimprimir",
+  "SAVE": "guardar",
   "SEARCH": "Buscar",
   "SECTION_NOT_AVAILABLE": "Sección no disponible",
   "SETTINGS": "Impostación",
   "SHOP_VIRTUAL_BALANCE": "Saldo virtual de la tienda",
   "SINGLE": "Simple",
+  "SPORT": "deporte",
   "ST": "ST",
   "STAKE": "Jugado",
   "STAKE_AMOUNT": "Importe jugado",
@@ -495,6 +515,13 @@
   "USERNAME": "Nombre de usuario",
   "USERNAME_TOO_SHORT": "Este nombre de usuario es demasiado corto (minimo 2 caracteres)",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "Usuario no autorizado para la operación",
+  "VBOX": {
+    "GENERAL_SETTINGS": "Configuración General",
+    "MANAGEMENT": "Gestión V-Box",
+    "MSG_NOBODY": "Ningún V-Box asociado a este usuario",
+    "TV_SETTING": "Configuración TV",
+    "V_BOX": "V-Box"
+  },
   "VOIDED": "Anulado",
   "WARNING": "Aviso",
   "WON": "Ganado"
