@@ -34,4 +34,8 @@ export class AdminComponent {
   goToVboxes(): void {
     this.router.navigateByUrl('/admin/vbox');
   }
+
+  goToStatementShop(): void {
+    this.router.navigateByUrl('/admin/reports/statement-vitual-shop');
+  }
 }

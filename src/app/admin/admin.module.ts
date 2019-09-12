@@ -7,6 +7,7 @@ import { componentDeclarations, routes } from './admin.common';
 
 @NgModule({
   declarations: [componentDeclarations],
-  imports: [CommonModule, SharedModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, RouterModule.forChild(routes)]
+  imports: [CommonModule, SharedModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, RouterModule.forChild(routes)],
+  exports: [MatDatepickerModule, MatInputModule, MatNativeDateModule]
 })
-export class AdminModule {}
+export class AdminModule { }

@@ -510,5 +510,12 @@
     "V_BOX": "V-Box"
   },
   "WARNING": "Avviso",
-  "WON": "Vinto"
+  "WON": "Vinto",
+  "STATEMENT_VIRTUAL_SHOP": "Saldo virtual de Loja",
+  "COUPON_NUMBER": "Número do cupom",
+  "DATE_OF_REFERENCE": "Data de referência",
+  "EXPORT_EXCEL": "Exportar para o Excel",
+  "JACKPOT_SHOP": "Jackpot de Loja",
+  "JACKPOT_MEGA": "Mega Jackpot",
+  "TOT_PROFIT": "Lucro total"
 }

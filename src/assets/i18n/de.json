@@ -510,5 +510,12 @@
     "V_BOX": "V-Box"
   },
   "WARNING": "Avviso",
-  "WON": "Vinto"
+  "WON": "Vinto",
+  "STATEMENT_VIRTUAL_SHOP": "Virtuellese Wettbürogut haben",
+  "COUPON_NUMBER": "Wettscheinnummer",
+  "DATE_OF_REFERENCE": "Refernzdatum",
+  "EXPORT_EXCEL": "Zu Excel exportieren",
+  "JACKPOT_SHOP": "Wettbüro-Jackpot",
+  "JACKPOT_MEGA": "Mega Jackpot",
+  "TOT_PROFIT": "Gesamtgewinn"
 }

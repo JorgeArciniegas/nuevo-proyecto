@@ -1,0 +1,63 @@
+//statement-virtual-shop
+.statement-virutal-shop {
+	padding: 6;
+	.btn-save-data {
+		font-size: 14;
+		padding: 10;
+		margin: 15 0;
+	}
+	.title {
+		font-size: 20;
+		font-weight: bold;
+		margin-left: 15;
+		vertical-align: center;
+	}
+	.sub-title {
+		opacity: 0.4;
+	}
+	.card {
+		//	margin: 15;
+	}
+
+	.display {
+		margin: 10;
+		padding: 4;
+		background-color: transparent !important;
+
+		.display-content {
+			margin: 5;
+
+			.btn-filter {
+				margin: 4 2;
+			}
+
+			.field-title {
+				font-size: 16;
+			}
+
+			.button-language {
+				font-size: 12;
+			}
+			.button-sport {
+				height: 30;
+				font-size: 12;
+				padding: 0;
+			}
+			.button-small {
+				height: 40 !important;
+				max-width: 140 !important;
+				width: 140 !important;
+				font-size: 12;
+				align-content: center;
+				.small-text {
+					font-size: 10;
+				}
+			}
+		}
+	}
+
+	.label-overlap {
+		margin-left: 25;
+		padding: 0 6;
+	}
+}

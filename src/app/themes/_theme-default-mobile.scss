@@ -15,6 +15,7 @@
 @import "./groupings/groupings.tns";
 @import "./operators/operators.tns";
 @import "./vbox/vbox.tns";
+@import "./reports/reports.tns";
 .app {
 	&.develop {
 		@import "./skins/develop/styles";
