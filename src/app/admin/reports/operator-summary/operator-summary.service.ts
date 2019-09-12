@@ -32,6 +32,9 @@ export class OperatorSummaryService {
 
   set dateTo(date: Date) {
     this.reportsOperatorVolumeRequest.dateTo = date;
+    this.reportsOperatorVolumeRequest.dateTo.setHours(23);
+    this.reportsOperatorVolumeRequest.dateTo.setMinutes(59);
+    this.reportsOperatorVolumeRequest.dateTo.setSeconds(59);
   }
 
   async getList(): Promise<void> {
@@ -53,7 +56,7 @@ export class OperatorSummaryService {
       // Set the date from the begin of the day.
       dateFrom: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0),
       // Set the date to the current time of the day.
-      dateTo: new Date(today.getFullYear(), today.getMonth(), today.getDate())
+      dateTo: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59)
     };
   }
 
