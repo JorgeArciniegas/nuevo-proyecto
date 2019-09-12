@@ -62,7 +62,7 @@ export class OperatorSummaryService {
     dateTo.setDate(this.reportsOperatorVolumeRequest.dateTo.getDate() + 1);
 
     return {
-      userId: this.userService.userDetail.UserId,
+      userId: this.userService.dataUserDetail.userDetail.UserId,
       dateFrom: this.reportsOperatorVolumeRequest.dateFrom,
       dateTo: dateTo
     };

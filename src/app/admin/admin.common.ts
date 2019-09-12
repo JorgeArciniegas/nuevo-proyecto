@@ -90,7 +90,9 @@ export const routes: Routes = [
             path: 'operatorSummaryList',
             component: OperatorSummaryListComponent
           }
-        ]
+        ],
+        canActivateChild: [AuthorizationGuard],
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       },
       {
         path: 'settings/languages',
