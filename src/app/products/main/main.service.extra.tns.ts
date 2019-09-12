@@ -7,7 +7,7 @@ export class MainServiceExtra {
   public currentEventSubscribe: Subject<number>;
   public currentEventObserve: Observable<number>;
   public eventDetails: EventDetail;
-
+  public toResetAllSelections: boolean;
   constructor(public coupon: CouponService, public destroyCouponService: DestroyCouponService) {
     this.destroyCouponService.confirmDestroyObs.subscribe(elem => {
       this.destroyCouponService.showDialog = false;
@@ -29,6 +29,8 @@ export class MainServiceExtra {
   fireCurrentEventChange(selected: number, userSelect = false) {
     // check if the coupon is initialized
     this.coupon.checkHasCoupon();
+    // set to reset all variables
+    this.toResetAllSelections = true;
     // if the coupon isn't empty
     if (this.coupon.productHasCoupon.checked && (this.eventDetails.currentEvent !== selected || userSelect)) {
       // open modal destroy confirm coupon
