@@ -1,0 +1,82 @@
+<StackLayout id="printing" verticalAlignment="top" orientation="horizontal" height="100%">
+
+  <FlexboxLayout flexDirection="column" justifyContent="space-between">
+    <Button (tap)="print()" text="{{ 'PRINT' | translate }}" class="btn btn-primary"></Button>
+    <Button (tap)="printService.resetPrint()" class="btn btn-accent" text="{{ 'DELETE' | translate }}"></Button>
+  </FlexboxLayout>
+
+  <ScrollView>
+    <StackLayout #printing class="p-5" orientation="horizontal">
+      <FlexboxLayout flexDirection="column">
+
+        <FlexboxLayout flexDirection="column" class="header">
+          <StackLayout class="logo-print-coupon" height="50"></StackLayout>
+          <Label class="header-content p-5 text-center " text="{{ appSettings.bookmakerDetails }}"></Label>
+        </FlexboxLayout>
+
+        <StackLayout class="hr-dark header-margin"></StackLayout>
+
+        <!-- Operator summary range date -->
+        <FlexboxLayout flexDirection="row" class="p-r-15 p-l-15 p-b-5" flexWrap="wrap" justifyContent="space-between">
+          <Label class=" p-l-5 font-weight-bold" text="{{'OPERATOR_SUMMARY' | translate }}:"></Label>
+          <Label class="p-r-10 text-right"
+            text="{{ operatorSummary.dateFrom | date:'mediumDate' }} - {{ operatorSummary.dateTo | date:'mediumDate' }}"></Label>
+        </FlexboxLayout>
+
+        <StackLayout class="hr-dark"></StackLayout>
+
+        <FlexboxLayout flexDirection="column" flexWrap="wrap" class="content p-10">
+
+          <GridLayout class="display" rows="{{ rows }},3*" columns="2*,25*,25*,25*,21*,2*">
+
+            <!-- Table header -->
+            <Label row="0" col="0" class="sub-title"></Label>
+            <Label row="0" col="1" class="sub-title" text="{{ 'USERNAME' | translate }}"
+              verticalAlignment="center"></Label>
+            <Label row="0" col="2" class="sub-title" text="{{ 'STAKE' | translate }}"
+              verticalAlignment="center"></Label>
+            <Label row="0" col="3" class="sub-title" text="{{ 'VOIDED' | translate }}"
+              verticalAlignment="center"></Label>
+            <Label row="0" col="4" class="sub-title" text="{{ 'PAID' | translate }}" verticalAlignment="center"></Label>
+            <Label row="0" col="5" class="sub-title"></Label>
+
+            <StackLayout row="0" colSpan="6" class="hr-dark" verticalAlignment="bottom"></StackLayout>
+
+            <!-- Table data -->
+            <GridLayout row="{{i + 1}}" colSpan="6" rows="*" columns="2*,25*,25*,25*,21*,2*"
+              *ngFor="let operatorVolume of operatorSummary.operatorVolumes; let i = index;">
+              <Label col="1" text="{{ operatorVolume.Username }}" verticalAlignment="center"></Label>
+              <Label col="2" text="{{ operatorVolume.Stake | currency : userService.userCurrency : 'symbol-narrow' }}"
+                verticalAlignment="center"></Label>
+              <Label col="3" text="{{ operatorVolume.Voided | currency : userService.userCurrency : 'symbol-narrow' }}"
+                verticalAlignment="center"></Label>
+              <Label col="4" text="{{ operatorVolume.Won | currency : userService.userCurrency : 'symbol-narrow' }}"
+                verticalAlignment="center"></Label>
+              <StackLayout colSpan="6" class="hr-dark" verticalAlignment="bottom"></StackLayout>
+            </GridLayout>
+
+            <!-- Table totals -->
+            <GridLayout columns="2*,25*,25*,25*,21*,2*" rows="*" colSpan="6"
+              row="{{operatorSummary.operatorVolumes.length + 2}}">
+              <Label col="0" class="sub-title"></Label>
+              <Label col="1" class="sub-title" text="{{ 'TOTALS' | translate }}"></Label>
+              <Label col="2" class="value sub-title"
+                text="{{ operatorSummary.totalStake | currency : userService.userCurrency : 'symbol-narrow' }}"
+                textWrap="true"></Label>
+              <Label col="3" class="value sub-title"
+                text="{{ operatorSummary.totalVoided | currency : userService.userCurrency : 'symbol-narrow' }}"
+                textWrap="true"></Label>
+              <Label col="4" class="value sub-title"
+                text="{{ operatorSummary.totalWon | currency : userService.userCurrency : 'symbol-narrow' }}"
+                textWrap="true"></Label>
+              <Label col="5" class="sub-title"></Label>
+            </GridLayout>
+          </GridLayout>
+
+        </FlexboxLayout>
+
+      </FlexboxLayout>
+
+    </StackLayout>
+  </ScrollView>
+</StackLayout>

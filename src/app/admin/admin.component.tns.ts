@@ -21,10 +21,13 @@ export class AdminComponent {
     this.router.navigateByUrl('/admin/reports/transactionsList');
   }
 
+  goToOperatorSummary(): void {
+    this.router.navigateByUrl('/admin/reports/operatorSummary');
+  }
+
   goToLanguageSettings(): void {
     this.router.navigateByUrl('/admin/settings/languages');
   }
-
 
   goToOperators(): void {
     this.router.navigateByUrl('/admin/operators');

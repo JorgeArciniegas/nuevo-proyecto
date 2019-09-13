@@ -11,6 +11,8 @@ import { TransactionsListComponent } from './reports/transactions-list/transacti
 import { SummaryTransactionsComponent } from './reports/transactions-list/summary-transactions/summary-transactions.component';
 import { DetailsTransactionComponent } from './reports/transactions-list/details-transaction/details-transaction.component';
 import { GetTransactionVategoryKeyByEnumValuePipe } from './reports/transactions-list/get-transaction-category-key-by-enum-value.pipe';
+import { OperatorSummaryComponent } from './reports/operator-summary/operator-summary.component';
+import { OperatorSummaryListComponent } from './reports/operator-summary/operator-summary-list/operator-summary-list.component';
 import { AuthorizationGuard } from '../app.authorization.guard';
 import { TYPE_ACCOUNT } from '../services/user.models';
 
@@ -26,7 +28,9 @@ export const componentDeclarations: any[] = [
   LanguageComponent,
   SummaryTransactionsComponent,
   DetailsTransactionComponent,
-  GetTransactionVategoryKeyByEnumValuePipe
+  GetTransactionVategoryKeyByEnumValuePipe,
+  OperatorSummaryComponent,
+  OperatorSummaryListComponent
 ];
 
 export const providerDeclarations: any[] = [];
@@ -70,6 +74,21 @@ export const routes: Routes = [
           {
             path: 'detail/:id',
             component: DetailsTransactionComponent
+          }
+        ],
+        canActivateChild: [AuthorizationGuard],
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
+      },
+      {
+        path: 'reports/operatorSummary',
+        children: [
+          {
+            path: '',
+            component: OperatorSummaryComponent
+          },
+          {
+            path: 'operatorSummaryList',
+            component: OperatorSummaryListComponent
           }
         ],
         canActivateChild: [AuthorizationGuard],

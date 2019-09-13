@@ -763,7 +763,8 @@ html {
 	}
 }
 
-.bets-list {
+.bets-list,
+.operator-summary {
 	.cdk-global-overlay-wrapper {
 		position: fixed;
 		top: 50%;
