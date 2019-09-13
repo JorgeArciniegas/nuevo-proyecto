@@ -17,8 +17,10 @@ export class DialogService {
     this.userservice.isModalOpen = true;
     this.userservice.isBtnCalcEditable = false;
     this.dialogProductRef = this.dialog.open(ProductDialogComponent, {
+      disableClose: true,
       data: dialogData
     });
+
   }
 
   closeDialog(): void {
