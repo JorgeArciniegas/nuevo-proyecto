@@ -519,5 +519,12 @@
   },
   "VOIDED": "Voided",
   "WARNING": "Warning",
-  "WON": "Won"
+  "WON": "Won",
+  "STATEMENT_VIRTUAL_SHOP": "Shop Virtual Balance",
+  "COUPON_NUMBER": "Coupon number",
+  "DATE_OF_REFERENCE": "Reference date",
+  "EXPORT_EXCEL": "Export to excel",
+  "JACKPOT_SHOP": "Shop Jackpot",
+  "JACKPOT_MEGA": "Mega Jackpot",
+  "TOT_PROFIT": "Total Profit"
 }

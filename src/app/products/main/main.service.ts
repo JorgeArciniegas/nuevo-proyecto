@@ -73,6 +73,7 @@ export class MainService extends MainServiceExtra {
   amount: number;
 
   countdownSub: Subscription;
+
   constructor(
     private elysApi: ElysApiService,
     private productService: ProductsService,
@@ -83,7 +84,7 @@ export class MainService extends MainServiceExtra {
     private resultService: ResultsService
   ) {
     super(coupon, destroyCouponService);
-
+    this.toResetAllSelections = true;
     // counter obser
     this.remaingTimeCounter = new Subject<EventTime>();
     this.remaingTimeCounterObs = this.remaingTimeCounter.asObservable();
@@ -105,6 +106,7 @@ export class MainService extends MainServiceExtra {
     this.currentEventObserve = this.currentEventSubscribe.asObservable();
 
     this.currentEventObserve.subscribe((eventIndex: number) => {
+
       this.eventDetails.currentEvent = eventIndex;
       this.remainingEventTime(this.eventDetails.events[eventIndex].number).then((eventTime: EventTime) => {
         this.eventDetails.eventTime = eventTime;
@@ -113,16 +115,20 @@ export class MainService extends MainServiceExtra {
           this.remainingTime.second = eventTime.second;
         }
       });
-      // Reset coupon
-      this.coupon.resetCoupon();
-      // Reset playable board
-      this.resetPlayEvent();
+
+      if (this.toResetAllSelections) {
+        // Reset coupon
+        this.coupon.resetCoupon();
+        // Reset playable board
+        this.resetPlayEvent();
+      }
       // Get event's odds
       this.eventDetailOdds(this.eventDetails.events[eventIndex].number);
     });
 
     this.productService.playableBoardResetObserve.subscribe(reset => {
       if (reset) {
+        this.toResetAllSelections = true;
         this.resetPlayEvent();
       }
     });
@@ -489,10 +495,14 @@ export class MainService extends MainServiceExtra {
         this.resetPlayEvent();
         this.currentEventSubscribe.next(0);
       } else {
+        // set to reset all variables
+        this.toResetAllSelections = false;
         this.currentEventSubscribe.next(this.eventDetails.currentEvent);
       }
     } else if (this.eventDetails.currentEvent === 0) {
-      this.resetPlayEvent();
+      // this.resetPlayEvent();
+      // set to reset all variables
+      this.toResetAllSelections = true;
       this.currentEventSubscribe.next(0);
     }
 
@@ -1062,14 +1072,14 @@ export class MainService extends MainServiceExtra {
         if (this.smartCode.selWinner.length === 2) {
           // Single
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('-');
           return SmartCodeType[SmartCodeType.AS];
         } else if (this.smartCode.selWinner.length > 2) {
           // Multiple
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('');
@@ -1089,10 +1099,10 @@ export class MainService extends MainServiceExtra {
         } else {
           // Combination with base and tail
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
-          this.smartCode.selPlaced.sort(function(a, b) {
+          this.smartCode.selPlaced.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
@@ -1116,7 +1126,7 @@ export class MainService extends MainServiceExtra {
         // Requirements "Trio a girare"
         if (this.smartCode.selWinner.length >= 3) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('');
@@ -1129,7 +1139,7 @@ export class MainService extends MainServiceExtra {
           // Enough selections on the second row to be able to create a trio
           if (this.smartCode.selPlaced.length >= 2) {
             // Sort the displayed values
-            this.smartCode.selPlaced.sort(function(a, b) {
+            this.smartCode.selPlaced.sort(function (a, b) {
               return a - b;
             });
             areaFuncData.value = this.smartCode.selWinner[0] + '/' + this.smartCode.selPlaced.join('');
@@ -1140,12 +1150,12 @@ export class MainService extends MainServiceExtra {
           // Enough selections on the second row to be able to create a trio
           if (this.smartCode.selPlaced.length >= 1) {
             // Sort the displayed values
-            this.smartCode.selWinner.sort(function(a, b) {
+            this.smartCode.selWinner.sort(function (a, b) {
               return a - b;
             });
             if (this.smartCode.selPlaced.length > 1) {
               // Sort the displayed values
-              this.smartCode.selPlaced.sort(function(a, b) {
+              this.smartCode.selPlaced.sort(function (a, b) {
                 return a - b;
               });
             }
@@ -1171,7 +1181,7 @@ export class MainService extends MainServiceExtra {
         // Requirements "Accoppiata in ordine con ritorno"
         if (this.smartCode.selWinner.length === 2) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('');
@@ -1182,14 +1192,14 @@ export class MainService extends MainServiceExtra {
         // Selections in the first row
         if (this.smartCode.selWinner.length > 1) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
         }
         // Selections in the second row
         if (this.smartCode.selPlaced.length > 1) {
           // Sort the displayed values
-          this.smartCode.selPlaced.sort(function(a, b) {
+          this.smartCode.selPlaced.sort(function (a, b) {
             return a - b;
           });
         }
@@ -1200,21 +1210,21 @@ export class MainService extends MainServiceExtra {
         // Selections in the first row
         if (this.smartCode.selWinner.length > 1) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
         }
         // Selections in the second row
         if (this.smartCode.selPlaced.length > 1) {
           // Sort the displayed values
-          this.smartCode.selPlaced.sort(function(a, b) {
+          this.smartCode.selPlaced.sort(function (a, b) {
             return a - b;
           });
         }
         // Selections in the third row
         if (this.smartCode.selPodium.length > 1) {
           // Sort the displayed values
-          this.smartCode.selPodium.sort(function(a, b) {
+          this.smartCode.selPodium.sort(function (a, b) {
             return a - b;
           });
         }

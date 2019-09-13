@@ -519,5 +519,12 @@
   },
   "VOIDED": "Anulluar",
   "WARNING": "Avviso",
-  "WON": "Vinto"
+  "WON": "Vinto",
+  "STATEMENT_VIRTUAL_SHOP": "Balanca virtuale e dyqanit",
+  "COUPON_NUMBER": "Numri i kuponit",
+  "DATE_OF_REFERENCE": "Data de referencës",
+  "EXPORT_EXCEL": "Eksporto në Excel",
+  "JACKPOT_SHOP": "Jackpot-i i dyqanit",
+  "JACKPOT_MEGA": "Mega Jackpot",
+  "TOT_PROFIT": "Fitimi në total "
 }

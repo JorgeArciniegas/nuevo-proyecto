@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { VirtualBetSelection } from '@elys/elys-api';
 import { MainService } from '../../../main.service';
-import { VirtualBetTournamentExtended } from '../../../main.models';
+import { VirtualBetTournamentExtended, Match } from '../../../main.models';
 import { Subscription, timer } from 'rxjs';
 import { BtncalcService } from '../../../../../component/btncalc/btncalc.service';
 import { ElysCouponService, BetCouponExtended } from '@elys/elys-coupon';
@@ -130,6 +130,15 @@ export class SoccerService implements OnDestroy {
       .getCurrentTournament()
       .then(tournamentDetails => {
         this.tournament = tournamentDetails;
+        // check odds selected
+        if (this.couponService.productHasCoupon) {
+          // this.verifySelectedOdds(this.couponService.coupon);
+          this.couponService.coupon.Odds.filter(odd => {
+            const match: Match = this.tournament.matches.filter((item) => item.name === odd.DefaultEventName)[0];
+            match.hasOddsSelected = true;
+            match.selectedOdds.push(odd.SelectionId);
+          });
+        }
       })
       .catch(error => {
         // Limit of attempts is 5 recall.
@@ -139,6 +148,7 @@ export class SoccerService implements OnDestroy {
           console.log(error);
         }
       });
+
   }
 
   // Method to open the details of the selected match

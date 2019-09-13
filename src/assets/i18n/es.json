@@ -524,5 +524,12 @@
   },
   "VOIDED": "Anulado",
   "WARNING": "Aviso",
-  "WON": "Ganado"
+  "WON": "Ganado",
+  "STATEMENT_VIRTUAL_SHOP": "Saldo virtual de la tienda",
+  "COUPON_NUMBER": "Numéro du coupon",
+  "DATE_OF_REFERENCE": "Fecha de referencia",
+  "EXPORT_EXCEL": "Exportar a Excel",
+  "JACKPOT_SHOP": "Jackpot de la tienda",
+  "JACKPOT_MEGA": "Mega Jackpot",
+  "TOT_PROFIT": "Ganacia total"
 }

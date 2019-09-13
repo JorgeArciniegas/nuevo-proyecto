@@ -11,13 +11,14 @@ export class CouponDialogService {
   public dialogRef: MatDialogRef<PayCancelDialogComponent> = null;
   public showDialog = false;
 
-  constructor(private dialog: MatDialog, private userService: UserService) {}
+  constructor(private dialog: MatDialog, private userService: UserService) { }
 
   openPayCancelDialog(type: DialogTypeCoupon): void {
     this.close();
     this.userService.isModalOpen = true;
     this.userService.isBtnCalcEditable = false;
     this.dialogRef = this.dialog.open(PayCancelDialogComponent, {
+      disableClose: true,
       data: type,
       id: 'pay-cancel-dialog'
       // , { hasBackdrop: true }
