@@ -51,8 +51,8 @@ export class WidgetComponent implements OnInit {
     if (
       this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER
     ) {
-      await this.mainService.getCurrentTournament().then(currentEventDetails => {
-        ranking = currentEventDetails.ranking;
+      await this.mainService.getCurrentTournament().then(async currentEventDetails => {
+        ranking = await this.mainService.getRanking(currentEventDetails.pid);
         for (const match of currentEventDetails.matches) {
           virtualBetCompetitorStatistics.push(
             match.virtualBetCompetitor[0]

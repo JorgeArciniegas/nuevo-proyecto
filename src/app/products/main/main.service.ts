@@ -10,7 +10,8 @@ import {
   VirtualEventCountDownRequest,
   VirtualEventCountDownResponse,
   VirtualProgramTreeBySportRequest,
-  VirtualProgramTreeBySportResponse
+  VirtualProgramTreeBySportResponse,
+  VirtualGetRankByEventResponse
 } from '@elys/elys-api';
 import { cloneDeep as clone } from 'lodash';
 import { interval, Observable, Subject, Subscription, timer } from 'rxjs';
@@ -97,9 +98,6 @@ export class MainService extends MainServiceExtra {
       }
     });
 
-    this.eventDetails = new EventDetail(this.productService.product.layoutProducts.nextEventItems);
-    this.eventDetails.currentEvent = 0;
-
     this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
 
     this.currentEventSubscribe = new Subject<number>();
@@ -150,6 +148,10 @@ export class MainService extends MainServiceExtra {
 
   initEvents(): void {
     this.initCurrentEvent = true;
+
+    this.eventDetails = new EventDetail(this.productService.product.layoutProducts.nextEventItems);
+    this.eventDetails.currentEvent = 0;
+
     this.loadEvents();
     this.resultService.loadLastResult(false);
   }
@@ -185,8 +187,9 @@ export class MainService extends MainServiceExtra {
           this.cacheEvents = null;
           this.loadEvents();
           this.resultService.loadLastResult(false);
+          return;
         }
-        if (this.remainingTime.second === 0) {
+        if (this.remainingTime.second === 0 && this.remainingTime.minute > 0) {
           // Remaing time
           this.remainingTime.second = 59;
           this.remainingTime.minute = this.remainingTime.minute - 1;
@@ -196,7 +199,7 @@ export class MainService extends MainServiceExtra {
           // Remaing time
           this.remainingTime.second = this.remainingTime.second - 1;
           // Check time blocked
-          if (this.eventDetails.eventTime.second <= 10 && this.eventDetails.eventTime.minute === 0) {
+          if (this.eventDetails.eventTime.second <= 15 && this.eventDetails.eventTime.minute === 0) {
             this.placingEvent.timeBlocked = true;
             this.productService.closeProductDialog();
           } else {
@@ -218,20 +221,32 @@ export class MainService extends MainServiceExtra {
 
   loadEvents(): void {
     try {
-      if (this.cacheEvents == null || this.cacheEvents.length === 0) {
+
+      if (/*
+        ((this.cacheEvents == null ||
+          this.cacheEvents.length === 0
+        ) && this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) */
+        this.initCurrentEvent
+      ) {
         this.loadEventsFromApi(true);
       } else {
+
         // Delete the first element
-        this.cacheEvents.shift();
-        this.eventDetails.events.shift();
+        if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
+          this.cacheTournaments.shift();
+          this.eventDetails.events.shift();
 
-        // Add the new event
-        this.addNewEvent();
+        } else if (this.cacheEvents != null && this.cacheEvents.length > 0) {
+          this.cacheEvents.shift();
+          this.eventDetails.events.shift();
+          // Add the new event
+          this.addNewEvent();
+          this.currentAndSelectedEventTime();
+        }
 
-        this.currentAndSelectedEventTime();
         this.reload--;
 
-        if (this.reload <= 0) {
+        if (this.reload <= this.productService.product.layoutProducts.nextEventItems) {
           // If remain only 1 new event reload other events
           this.loadEventsFromApi();
         } else {
@@ -257,11 +272,13 @@ export class MainService extends MainServiceExtra {
     if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
       nextEventItems = nextEventItems - 1;
     }
+
     const event: EventInfo = new EventInfo();
     event.number = this.cacheEvents[nextEventItems].id;
     event.label = this.cacheEvents[nextEventItems].nm;
     event.date = new Date(this.cacheEvents[nextEventItems].sdtoffset);
     this.eventDetails.events[nextEventItems] = event;
+
   }
 
   /**
@@ -278,8 +295,10 @@ export class MainService extends MainServiceExtra {
 
     this.elysApi.virtual.getVirtualTree(request).then((sports: VirtualProgramTreeBySportResponse) => {
       // cache all tournaments
-      this.cacheTournaments = sports.Sports[0].ts;
-
+      /* if ( all ) {
+        this.cacheTournaments = sports.Sports[0].ts;
+      }
+ */
       if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
         const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
         if (all) {
@@ -306,7 +325,9 @@ export class MainService extends MainServiceExtra {
         }
         // load markets from PRODUCT SOCCER
       } else {
+        const tournaments: VirtualBetTournamentExtended[] = sports.Sports[0].ts;
         if (all) {
+          this.cacheTournaments = tournaments;
           for (let index = 0; index < this.productService.product.layoutProducts.nextEventItems; index++) {
             const event: EventInfo = new EventInfo();
             event.number = this.cacheTournaments[index].id;
@@ -315,10 +336,9 @@ export class MainService extends MainServiceExtra {
 
             this.eventDetails.events[index] = event;
           }
-          this.currentAndSelectedEventTime();
         } else {
           // Add only new event
-          this.cacheTournaments.forEach((tournament: VirtualBetTournament) => {
+          tournaments.forEach((tournament: VirtualBetTournamentExtended) => {
             // tslint:disable-next-line:max-line-length
             if (
               this.cacheTournaments.filter((cacheTournament: VirtualBetTournament) => cacheTournament.id === tournament.id).length === 0
@@ -326,9 +346,16 @@ export class MainService extends MainServiceExtra {
               this.cacheTournaments.push(tournament);
             }
           });
+          const event: EventInfo = new EventInfo();
+          const idx: number = this.productService.product.layoutProducts.cacheEventsItem - 1;
+          event.number = this.cacheTournaments[idx].id;
+          event.label = this.cacheTournaments[idx].nm;
+          event.date = new Date(this.cacheTournaments[idx].sdtoffset);
+          this.eventDetails.events[idx] = event;
           // Get event's odds
           this.eventDetailOddsByCacheTournament(this.eventDetails.events[0].number);
         }
+        this.currentAndSelectedEventTime();
       }
     });
     this.reload = this.productService.product.layoutProducts.cacheEventsItem;
@@ -480,11 +507,21 @@ export class MainService extends MainServiceExtra {
             this.attempts = 0;
           }
         }
-
-        // Get ranking data
-        this.elysApi.virtual.getRanking(tournament.pid).then(ranking => (this.currentProductDetails.ranking = ranking));
       });
     }
+  }
+
+
+  /**
+   * Get ranking data
+   * @param tournamentId
+   */
+  async getRanking(tournamentId: number): Promise<VirtualGetRankByEventResponse> {
+    // Get ranking data
+    if (!this.currentProductDetails.ranking) {
+      this.currentProductDetails.ranking = await this.elysApi.virtual.getRanking(tournamentId);
+    }
+    return this.currentProductDetails.ranking;
   }
 
   currentAndSelectedEventTime() {
@@ -524,7 +561,7 @@ export class MainService extends MainServiceExtra {
       MatchId: idEvent
     };
     return this.elysApi.virtual.getCountdown(request).then((value: VirtualEventCountDownResponse) => {
-      const sec: number = value.CountDown / 10000000;
+      const sec: number = (value.CountDown / 10000000) + 5;
       const eventTime: EventTime = new EventTime();
       eventTime.minute = Math.floor(sec / 60);
       eventTime.second = Math.floor(sec % 60);

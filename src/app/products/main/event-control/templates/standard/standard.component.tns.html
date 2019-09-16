@@ -22,10 +22,16 @@
       <Image height="24" stretch="aspectFit" class="m-r-4" src="~/assets/icons/baseline-timer-24px.png"
         verticalAlignment="center">
       </Image>
-      <!--  [ngClass]="{'small': eventControlDetails?.isWindowSizeSmall}" -->
-      <Label
-        text="{{ eventControlDetails?.eventTimeMinutes | number: '2.0-0' }}:{{ eventControlDetails?.eventTimeSeconds | number: '2.0-0' }}"
-        verticalAlignment="center"></Label>
+      <Label text="
+          {{
+            (eventControlDetails.eventTimeMinutes !== undefined) ?
+            (eventControlDetails?.eventTimeMinutes | number: '2.0-0') :
+            '00'
+          }}:{{
+            (eventControlDetails.eventTimeSeconds !== undefined) ?
+            (eventControlDetails?.eventTimeSeconds | number: '2.0-0') :
+            '00'
+          }}" verticalAlignment="center"></Label>
     </StackLayout>
   </StackLayout>
   <!-- /TIMER -->

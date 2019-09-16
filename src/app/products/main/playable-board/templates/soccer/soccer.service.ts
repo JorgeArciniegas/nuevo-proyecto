@@ -144,8 +144,6 @@ export class SoccerService implements OnDestroy {
         // Limit of attempts is 5 recall.
         if (attemptsNumber < 5) {
           timer(5000).subscribe(() => this.getTournamentDetails(attemptsNumber + 1));
-        } else {
-          console.log(error);
         }
       });
 
