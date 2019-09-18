@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import { MatDatepickerModule, MatInputModule, MatNativeDateModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
-import { componentDeclarations, routes } from './admin.common';
+import { componentDeclarations, routes, providerDeclarations } from './admin.common';
 
 @NgModule({
   declarations: [componentDeclarations],
   imports: [CommonModule, SharedModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, RouterModule.forChild(routes)],
-  exports: [MatDatepickerModule, MatInputModule, MatNativeDateModule]
+  exports: [MatDatepickerModule, MatInputModule, MatNativeDateModule],
+  providers: [providerDeclarations]
 })
 export class AdminModule { }

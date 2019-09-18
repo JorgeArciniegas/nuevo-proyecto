@@ -13,11 +13,12 @@ export namespace CouponTypeInternal {
   }
 }
 
-export enum CouponStatusInternal  {
+export enum CouponStatusInternal {
   ALL,
   Placed,
   Lost,
-  Win
+  Win,
+  Cancelled = 5
 }
 
 export enum OddResult {
@@ -38,4 +39,4 @@ export enum ShowBetDetailView {
   SUMMARY,
   EVENTS,
   COMBINATIONS
- }
+}

@@ -48,7 +48,7 @@ export class UserService {
     if (this.isUserLogged) {
       interval(300000).subscribe(() => {
         if (this.isUserLogged) {
-          this.loadUserData(this.storageService.getData('tokenData'));
+          this.loadUserData(this.storageService.getData('tokenData'), this.isLoggedOperator());
         }
       });
       this.loadUserData(this.storageService.getData('tokenData'));
@@ -155,7 +155,7 @@ export class UserService {
 
 
   // Method to retrieve the user data
-  async loadUserData(token: string, loginOperator?: boolean): Promise<string | undefined> {
+  async loadUserData(token: string, loginOperator?: Boolean): Promise<string | undefined> {
     let isAdmin: boolean;
     try {
       this.setToken(token);

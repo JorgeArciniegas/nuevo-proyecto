@@ -46,10 +46,12 @@
                 <img class="icon icon-24px" *ngSwitchCase="2" src="assets/icons/cancel.svg">
                 <!-- WIN -->
                 <img class="icon icon-24px" *ngSwitchCase="3" src="assets/icons/checked.svg">
+                <img class="icon icon-24px icon-red-from-other-color" *ngSwitchCase="4"
+                  src="assets/icons/baseline-delete_outline-24px.png">
               </ng-container>
             </div>
             <div fxFlex="90">
-              <h4>{{couponStatus[data.CouponStatusId] }}</h4>
+              <h4>{{'DYNAMIC_KEYS.CouponStatusInternal.'+couponStatus[data.CouponStatusId] | translate }}</h4>
             </div>
 
           </div>

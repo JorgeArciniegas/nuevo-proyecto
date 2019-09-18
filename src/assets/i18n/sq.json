@@ -1,6 +1,7 @@
 {
   "ACCG": "ACCG",
   "AGILITY": "Shkathtësi",
+  "ALL": "Tutti",
   "AMOUNT": "Importo",
   "AMOUNT_FROM": "Importo da",
   "AMOUNT_TO": "Importo a",
@@ -23,6 +24,7 @@
   "BTNCALC.TOT": "TOT",
   "C": "C",
   "CLOSE": "Chiudi",
+  "CLOSING": "Chiusura",
   "CODA": "C",
   "CODE": "Kodi",
   "COMB": "Komb.",
@@ -170,6 +172,7 @@
     },
     "CouponStatusInternal": {
       "ALL": "Tutti",
+      "Cancelled": "Cancellate",
       "Lost": "Perdente",
       "Placed": "Vendosur",
       "Win": "Vincente"
@@ -462,12 +465,14 @@
   "PAGE.OF": " di ",
   "PAID": "Paguar",
   "PAID_AMOUNT": "Importo pagato",
+  "PAID_BY": "Paguar nga",
   "PAID_ON": "Pagata il",
   "PASSWORD": "Password",
   "PASSWORD_TOO_SHORT": "Questa password è troppo corta, minimo 6 caratteri",
   "PAY": "Paga",
   "PAYMENT": "Pagamento",
   "PAYMENT_DATE": "Data pagamento",
+  "PAYMENT_DATE_BY_OPERATOR": "Data e pagesës",
   "PLACEMENT": "Piazzamento",
   "POINTS": "Points",
   "PREVIOUS_CASH_BALANCE": "Saldo alla transazione precedente",

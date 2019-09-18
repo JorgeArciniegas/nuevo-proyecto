@@ -23,6 +23,7 @@
   "BTNCALC.TOT": "TOT",
   "C": "C",
   "CLOSE": "Chiudi",
+  "CLOSING": "Chiusura",
   "CODA": "C",
   "CODE": "Code",
   "COMB": "Comb.",
@@ -169,13 +170,14 @@
       "Unknown": "Erreur inconnue. Veuillez réessayer [Code CRS0]"
     },
     "CouponStatusInternal": {
-      "ALL": "Tutti",
+      "ALL": "Tout le monde",
       "Lost": "Perdu",
       "Placed": "Placé",
-      "Win": "Vincente"
+      "Win": "Vincente",
+      "Cancelled": "Cancellate"
     },
     "CouponType": {
-      "ALL": "Tutti",
+      "ALL": "Tout le monde",
       "CombinationsBet": "Pari système",
       "MultipleBet": "Pari multiple",
       "PRINT_COUPON": {
@@ -526,5 +528,7 @@
   },
   "VOIDED": "Annulé",
   "WARNING": "Avviso",
-  "WON": "Vinto"
+  "WON": "Vinto",
+  "PAYMENT_DATE_BY_OPERATOR": "Date de paiement",
+  "PAID_BY": "Payé par"
 }

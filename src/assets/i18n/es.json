@@ -1,6 +1,7 @@
 {
   "ACCG": "GB",
   "AGILITY": "Agilidad",
+  "ALL": "Todos",
   "AMOUNT": "Importo",
   "AMOUNT_FROM": "Importo da",
   "AMOUNT_TO": "Importo a",
@@ -23,6 +24,7 @@
   "BTNCALC.TOT": "TOT",
   "C": "B",
   "CLOSE": "Cerrar",
+  "CLOSING": "Closing",
   "CODA": "C",
   "CODE": "Código",
   "COMB": "Comb.",
@@ -170,6 +172,7 @@
     },
     "CouponStatusInternal": {
       "ALL": "Todos",
+      "Cancelled": "Cancellate",
       "Lost": "Perdido",
       "Placed": "Colocado",
       "Win": "Ganado"
@@ -467,12 +470,14 @@
   "PAGE.OF": " de ",
   "PAID": "Pagado",
   "PAID_AMOUNT": "Monto de pago",
+  "PAID_BY": "Pagado por",
   "PAID_ON": "Pagado en",
   "PASSWORD": "Contraseña",
   "PASSWORD_TOO_SHORT": "Esta contraseña es demasiado corta, mínimo 6 caracteres",
   "PAY": "Paga",
   "PAYMENT": "Pago",
   "PAYMENT_DATE": "Fecha de pago",
+  "PAYMENT_DATE_BY_OPERATOR": "Fecha de pago",
   "PLACEMENT": "Colocación",
   "POINTS": "Puntos",
   "PREVIOUS_CASH_BALANCE": "Saldo alla transazione precedente",
