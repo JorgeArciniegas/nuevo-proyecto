@@ -694,12 +694,18 @@ html {
 	background: rgba(0, 0, 0, 0.6) url("assets/icons/baseline-lock-24px.svg") center center no-repeat;
 	background-size: 100px;
 }
-.cdk-visually-hidden,
-.cdk-overlay-backdrop,
-.cdk-overlay-dark-backdrop {
+.cdk-visually-hidden {
 	display: none;
 }
 .cdk-overlay-container {
+	.cdk-overlay-backdrop,
+	.cdk-overlay-dark-backdrop {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		z-index: 0;
+		top: 0;
+	}
 	@import "./skins/develop/styles";
 	.cdk-global-overlay-wrapper {
 		@extend %font-family;
@@ -764,6 +770,7 @@ html {
 }
 
 .bets-list,
+.transactions-list,
 .operator-summary {
 	.cdk-global-overlay-wrapper {
 		position: fixed;
