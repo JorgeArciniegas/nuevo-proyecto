@@ -1,6 +1,7 @@
 {
   "ACCG": "QUI",
   "AGILITY": "Agility",
+  "ALL": "All",
   "AMOUNT": "Amount",
   "AMOUNT_FROM": "Amount from",
   "AMOUNT_TO": "Amount to",
@@ -23,6 +24,7 @@
   "BTNCALC.TOT": "TOT",
   "C": "C",
   "CLOSE": "Close",
+  "CLOSING": "Closing",
   "CODA": "F",
   "CODE": "Code",
   "COMB": "Comb.",
@@ -170,6 +172,7 @@
     },
     "CouponStatusInternal": {
       "ALL": "All",
+      "Cancelled": "Cancelled",
       "Lost": "Lost",
       "Placed": "Placed",
       "Win": "Won"
@@ -463,12 +466,14 @@
   "PAGE.OF": " of ",
   "PAID": "Paid",
   "PAID_AMOUNT": "Paid amount",
+  "PAID_BY": "Paid by",
   "PAID_ON": "Paid on",
   "PASSWORD": "Password",
   "PASSWORD_TOO_SHORT": "The password is too short (minimum 6 digits)",
   "PAY": "Pay",
   "PAYMENT": "Payment",
   "PAYMENT_DATE": "Payment date",
+  "PAYMENT_DATE_BY_OPERATOR": "Payment date",
   "PLACEMENT": "Placement",
   "POINTS": "Points",
   "PREVIOUS_CASH_BALANCE": "Previous cash balance",

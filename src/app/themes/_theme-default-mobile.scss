@@ -16,6 +16,7 @@
 @import "./operators/operators.tns";
 @import "./vbox/vbox.tns";
 @import "./reports/reports.tns";
+@import "./bets-list/bet-list.tns";
 .app {
 	&.develop {
 		@import "./skins/develop/styles";

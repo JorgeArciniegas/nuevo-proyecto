@@ -1,20 +1,30 @@
-<GridLayout rows="*,2*,4*,2*" columns="4*,3*,3*" class="bet-list">
+<GridLayout rows="*,2*,3*,2*,*" columns="4*,3*,3*" class="bet-list">
   <Label row="0" col="0" colSpan="3" class="title" text="{{'BETS_LIST' | translate | uppercase}}" textWrap="true"
     verticalAlignment="center"></Label>
 
   <!-- ROW 1 -->
   <!-- DATA SELECTED -->
   <GridLayout row="1" col="0" colSpan="2" rows="*" columns="*,*,*" class="display">
-    <GridLayout col="0" rows="*,*" columns="*" class="display-content">
-      <GridLayout row="0" class="button btn-default btn-filter"
-        [ngClass]="{'btn-filter-success': !betsListService.dateHasPlaced}">
-        <Button text="{{'PLACEMENT' | translate}}" class="button-internal"
-          (tap)="changeValue('dateHasPlaced', false)"></Button>
+    <GridLayout col="0" rows="*" columns="*,*" class="display-content">
+      <GridLayout row="0" col="0" rows="*,*">
+        <GridLayout row="0" class="button btn-default btn-filter"
+          [ngClass]="{'btn-filter-success': !betsListService.dateHasPlaced && !betsListService.carriedOut}">
+          <Button text="{{'PLACEMENT' | translate}}" class="button-internal"
+            (tap)="changeValue('dateHasPlaced', false)"></Button>
+        </GridLayout>
+        <GridLayout row="1" class="button btn-default btn-filter"
+          [ngClass]="{'btn-filter-success': betsListService.dateHasPlaced && !betsListService.carriedOut}"
+          [isEnabled]="betsListService.couponStatus !== couponStatus.Cancelled">
+          <Button text="{{'CLOSING' | translate}}" class="button-internal" (tap)="changeValue('dateHasPlaced', true)"
+            [isEnabled]="betsListService.couponStatus !== couponStatus.Cancelled"></Button>
+        </GridLayout>
       </GridLayout>
-      <GridLayout row="1" class="button btn-default btn-filter"
-        [ngClass]="{'btn-filter-success': betsListService.dateHasPlaced}">
-        <Button text="{{'PAYMENT' | translate}}" class="button-internal"
-          (tap)="changeValue('dateHasPlaced', true)"></Button>
+      <GridLayout row="0" col="1" rows="*,*">
+        <GridLayout row="0" class="button btn-default btn-filter"
+          [ngClass]="{'btn-filter-success': betsListService.carriedOut}">
+          <Button text="{{'PAYMENT' | translate}}" class="button-internal" (tap)="changeValue('carriedOut', true)"
+            [isEnabled]="betsListService.couponStatus !== couponStatus.Cancelled"></Button>
+        </GridLayout>
       </GridLayout>
     </GridLayout>
     <GridLayout col="1" rows="*,2*,*" columns="*" class="display-content">
@@ -97,9 +107,40 @@
   <StackLayout row="2" col="2">
     <Label class="label-overlap" text="{{ 'BET_STATUS' | translate }}" horizontalAlignment="left"></Label>
   </StackLayout>
-
   <!-- ROW 3 -->
-  <GridLayout row="3" col="0" colSpan="3" rows="*,2*,*" columns="*,*,*" class="display-content">
+  <GridLayout row="3" col="0" colSpan="3" class="display">
+    <GridLayout rows="*,2*,*" columns="*" class="display-content">
+      <GridLayout row="0" class="card-odd scroll" (tap)="previusPage()"
+        *ngIf="operatorService.listOfOperators.totalPages > 1"
+        [ngClass]="{'disabled': operatorService.listOfOperators.actualPages <= 0}"
+        [isEnabled]="operatorService.listOfOperators.actualPages > 0">
+        <Image width="20" src="~/assets/icons/Up.png" verticalAlignment="center"></Image>
+      </GridLayout>
+      <ng-container *ngIf="operatorService.listTempOperators && operatorService.listTempOperators.length > 0">
+        <StackLayout row="1" orientation="horizontal">
+          <StackLayout class="button btn-default btn-filter"
+            [ngClass]="{'btn-filter-success': betsListService.operatorSelected === null}">
+            <Button text="{{'ALL' | translate }}" class="button-internal" (tap)="selectOperator()"></Button>
+          </StackLayout>>
+          <StackLayout class="button btn-default btn-filter" *ngFor="let operator of operatorService.listTempOperators"
+            [ngClass]="{'btn-filter-success': betsListService.operatorSelected && betsListService.operatorSelected.IDClient === operator.IDClient}">
+            <Button text="{{operator.UserName }}" class="button-internal" (tap)="selectOperator(operator)"></Button>
+          </StackLayout>
+        </StackLayout>
+      </ng-container>
+      <GridLayout row="2" class="card-odd scroll" (tap)="nextPage()"
+        *ngIf="operatorService.listOfOperators.totalPages > 1" [ngClass]="{'disabled': page >= maxPage - 1}"
+        [isEnabled]="operatorService.listOfOperators.actualPages  < operatorService.listOfOperators.totalPages - 1">
+        <Image width="20" src="~/assets/icons/Down.png" verticalAlignment="center">
+        </Image>
+      </GridLayout>
+    </GridLayout>
+  </GridLayout>
+  <StackLayout row="3" col="0">
+    <Label class="label-overlap" text="{{ 'OPERATOR' | translate }}" horizontalAlignment="left"></Label>
+  </StackLayout>
+  <!-- ROW 4 -->
+  <GridLayout row="4" col="0" colSpan="3" rows="*,2*,*" columns="*,*,*" class="display-content">
     <GridLayout row="1" col="1" class="button btn-default btn-grey-gradient">
       <Button text="{{'SEARCH' | translate}}" class="button-internal" (tap)="betsListService.getList(true)"></Button>
     </GridLayout>

@@ -45,11 +45,12 @@ export class PayCancelDialogComponent implements OnInit {
       if (this.form.valid) {
         couponCode = this.form.get('couponCode').value;
         if (couponCode) {
+
           this.payRequest = {
             CouponId: null,
             TicketCode: couponCode,
             IsPaid: true,
-            SettlingClientId: null,
+            SettlingClientId: !this.userService.isLoggedOperator() ? this.userService.dataUserDetail.operatorDetail.ClientId : null,
             Product: 'V'
           };
         }
@@ -73,8 +74,12 @@ export class PayCancelDialogComponent implements OnInit {
         couponCode = this.form.get('couponCode').value;
         if (couponCode) {
           this.cancelRequest = {
-            CancellationRequestUserId: this.userService.dataUserDetail.userDetail.UserId,
-            ShopClientId: null,
+            CancellationRequestUserId: this.userService.isLoggedOperator() ?
+              this.userService.dataUserDetail.userDetail.UserId :
+              this.userService.dataUserDetail.operatorDetail.UserId,
+            ShopClientId: !this.userService.isLoggedOperator() ?
+              this.userService.dataUserDetail.operatorDetail.ClientId :
+              null,
             CouponId: null,
             TicketCode: couponCode,
             UserWalletTypeId: null,

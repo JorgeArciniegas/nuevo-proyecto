@@ -15,6 +15,7 @@ import { OperatorSummaryComponent } from './reports/operator-summary/operator-su
 import { OperatorSummaryListComponent } from './reports/operator-summary/operator-summary-list/operator-summary-list.component';
 import { AuthorizationGuard } from '../app.authorization.guard';
 import { TYPE_ACCOUNT } from '../services/user.models';
+import { BetsListService } from './reports/bets-list/bets-list.service';
 
 export const componentDeclarations: any[] = [
   AdminComponent,

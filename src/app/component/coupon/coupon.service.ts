@@ -84,6 +84,11 @@ export class CouponService {
       this.couponResponseSubject.next(coupon);
       if (coupon) {
         this.coupon.internal_isReadyToPlace = false;
+
+        if (!this.userService.isLoggedOperator()) {
+          this.coupon.BettorId = this.userService.dataUserDetail.operatorDetail.ClientId;
+          this.coupon.ClientBettorId = this.userService.dataUserDetail.operatorDetail.ClientId;
+        }
         this.calculateAmounts();
       } else {
         this.resetCoupon();
