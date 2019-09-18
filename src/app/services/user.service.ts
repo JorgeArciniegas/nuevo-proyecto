@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CurrencyCodeRequest, CurrencyCodeResponse, ElysApiService, StagedCouponStatus, TokenDataSuccess, UserType } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
-import { interval } from 'rxjs';
+import { interval, Subscription, timer } from 'rxjs';
 import { AppSettings } from '../app.settings';
 import { DataUser, OperatorData } from './user.models';
 import { RouterService } from './utility/router/router.service';
@@ -14,7 +14,7 @@ import { TranslateUtilityService } from './utility/translate-utility.service';
 export class UserService {
 
   private _dataUserDetail: DataUser;
-
+  private loadDataPool: Subscription;
   public get dataUserDetail(): DataUser {
     if (!this._dataUserDetail) {
       this.dataUserDetail = {
@@ -45,14 +45,7 @@ export class UserService {
   ) {
     this.userCurrency = appSetting.currencyDefault;
     // Check if the user is logged
-    if (this.isUserLogged) {
-      interval(300000).subscribe(() => {
-        if (this.isUserLogged) {
-          this.loadUserData(this.storageService.getData('tokenData'), this.isLoggedOperator());
-        }
-      });
-      this.loadUserData(this.storageService.getData('tokenData'));
-    }
+    this.checkLoginData();
 
     /**
      * listening for staged coupons variation then check the status, if = Placed substracts the played stake from playable balance
@@ -68,6 +61,18 @@ export class UserService {
     });
   }
 
+  /**
+   * check login data
+   */
+  checkLoginData(bootStartMsec: number = 0): void {
+    if (this.isUserLogged) {
+      this.loadDataPool = timer(bootStartMsec, 300000).subscribe(() => {
+        if (this.isUserLogged) {
+          this.loadUserData(this.storageService.getData('tokenData'), this.isLoggedOperator());
+        }
+      });
+    }
+  }
 
   /**
    * Method to login and store auth token.
@@ -80,8 +85,7 @@ export class UserService {
         { username, password }
       );
 
-      const userDataResponse = await this.loadUserData(response.access_token);
-
+      const userDataResponse = await this.loadUserData(response.access_token, true);
       // Check that we have gotten the user data.
       if (this.dataUserDetail && this.dataUserDetail.userDetail) {
         /* If there is a previous Url which is different then the admin area.
@@ -113,7 +117,7 @@ export class UserService {
       const response: TokenDataSuccess = await this.api.account.clientLoginRequest(
         { Username, Password, UserId }
       );
-      const userDataResponse = await this.loadUserData(response.access_token, true);
+      const userDataResponse = await this.loadUserData(response.access_token, false);
 
       // Check that we have gotten the user data.
       if (this.dataUserDetail.operatorDetail) {
@@ -142,6 +146,7 @@ export class UserService {
     // this.api.removeToken();
     this.storageService.removeItems('tokenData', 'UserData');
     this.api.tokenBearer = null;
+    this.loadDataPool.unsubscribe();
     this.router.getRouter().navigateByUrl('/login');
 
   }
@@ -155,12 +160,21 @@ export class UserService {
 
 
   // Method to retrieve the user data
-  async loadUserData(token: string, loginOperator?: Boolean): Promise<string | undefined> {
+  async loadUserData(token: string, loginAdmin?: Boolean): Promise<string | undefined> {
     let isAdmin: boolean;
     try {
+      if (
+        (loginAdmin === null || loginAdmin === undefined) &&
+        (this.isLoggedOperator() !== undefined || this.isLoggedOperator() !== null)
+      ) {
+        loginAdmin = this.isLoggedOperator();
+      }
       this.setToken(token);
+
       // check if user is the operator or admin
-      if (loginOperator) {
+      if (
+        !loginAdmin
+      ) {
         this.dataUserDetail.operatorDetail = await this.api.account.getOperatorMe();
         isAdmin = false;
       } else if (!this.isAdminExist() || (this.isLoggedOperator() === null || this.isLoggedOperator())) {
@@ -207,6 +221,13 @@ export class UserService {
         await this.checkAvailableSportAndSetPresetsAmount();
         this.isInitUser = false;
       }
+
+      // check if timer for data login is enabled
+      if (this.loadDataPool.closed) {
+        this.checkLoginData(0);
+      }
+
+
     } catch (err) {
       if (err.status === 401) {
         // if unauthorized call logout
