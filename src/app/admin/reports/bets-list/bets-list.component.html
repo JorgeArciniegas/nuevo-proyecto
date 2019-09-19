@@ -18,18 +18,18 @@
               <button class="btn-filter btn-default radius-5" (click)="changeValue('dateHasPlaced', true)"
                 [class.btn-filter-success]="betsListService.dateHasPlaced && !betsListService.carriedOut"
                 [disabled]="betsListService.couponStatus === couponStatus.Cancelled">
-                {{'CLOSING' | translate}}
+                {{'PAYMENT' | translate}}
               </button>
             </div>
             <div fxFlex="50" fxLayout="column" fxLayoutGap="5px">
               <button class="btn-filter btn-default radius-5" (click)="changeValue('carriedOut', true)"
                 [class.btn-filter-success]="betsListService.carriedOut"
                 [disabled]="betsListService.couponStatus === couponStatus.Cancelled">
-                {{'PAYMENT' | translate}}
+                {{'FILTER_DATE_OF_PAID' | translate}}
               </button>
             </div>
           </div>
-          <div fxFlex="30" fxLayout="column" fxLayoutAlign="flex-start start" fxLayoutGap="5px">
+          <div fxFlex="30" fxLayout="column" fxLayoutGap="5px">
             <h4 [style.margin-top.px]="0">{{ 'DATE_FROM' | translate }}</h4>
             <mat-form-field class="btn-filter btn-default radius-5" (click)="pickerDateFrom.open()">
               <input matInput class="datepicker" [matDatepicker]="pickerDateFrom" disabled

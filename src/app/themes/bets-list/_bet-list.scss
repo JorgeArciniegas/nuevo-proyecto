@@ -1,5 +1,9 @@
 .bet-list {
+	h4 {
+		margin: 0;
+	}
 	height: 100% !important;
+	font-size: 0.8rem;
 	.title {
 		text-transform: uppercase;
 		font-size: 14px;
@@ -23,5 +27,13 @@
 				padding: 0px 10px;
 			}
 		}
+	}
+}
+app-summary-coupons {
+	font-size: 0.8rem;
+}
+app-details-coupon {
+	h4 {
+		margin: 0;
 	}
 }

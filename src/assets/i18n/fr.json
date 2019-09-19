@@ -171,10 +171,10 @@
     },
     "CouponStatusInternal": {
       "ALL": "Tout le monde",
+      "Cancelled": "Cancellate",
       "Lost": "Perdu",
       "Placed": "Placé",
-      "Win": "Vincente",
-      "Cancelled": "Cancellate"
+      "Win": "Vincente"
     },
     "CouponType": {
       "ALL": "Tout le monde",
@@ -432,6 +432,7 @@
   "ERROR": "Erreur",
   "EVENTS": "Événements",
   "EXPORT_EXCEL": "Exporter vers Excel",
+  "FILTER_DATE_OF_PAID": "Paiment",
   "GA": "BC",
   "GF": "BP",
   "GO_TO_HOME": "Vai alla home",
@@ -464,12 +465,14 @@
   "PAGE.OF": " di ",
   "PAID": "Payé",
   "PAID_AMOUNT": "Importo pagato",
+  "PAID_BY": "Payé par",
   "PAID_ON": "Pagata il",
   "PASSWORD": "Mot de passe",
   "PASSWORD_TOO_SHORT": "Questa password è troppo corta, minimo 6 caratteri",
   "PAY": "Paga",
   "PAYMENT": "Pagamento",
   "PAYMENT_DATE": "Data pagamento",
+  "PAYMENT_DATE_BY_OPERATOR": "Date de paiement",
   "PLACEMENT": "Piazzamento",
   "POINTS": "Points",
   "PREVIOUS_CASH_BALANCE": "Saldo alla transazione precedente",
@@ -528,7 +531,5 @@
   },
   "VOIDED": "Annulé",
   "WARNING": "Avviso",
-  "WON": "Vinto",
-  "PAYMENT_DATE_BY_OPERATOR": "Date de paiement",
-  "PAID_BY": "Payé par"
+  "WON": "Vinto"
 }

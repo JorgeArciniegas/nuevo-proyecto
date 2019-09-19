@@ -68,21 +68,21 @@
     </div>
     <div fxFlex class="padding-20 btn-filter radius-5 elevation-z5 " fxLayout="column" fxLayoutAlign="flex-start">
       <div fxLayout="column" fxFlex="5">
-        <div fxFlex fxLayout="row" class="border-bottom-overlay-1px">
-          <div fxFlex="5"></div>
+        <div fxFlex fxLayout="row nowrap" class="border-bottom-overlay-1px">
+          <div fxFlex="3"></div>
           <div fxFlex="15">
             <strong data='disabled'>{{ 'COUPON_CODE' | translate }}</strong>
           </div>
           <div fxFlex="15">
             <strong data='disabled'>{{ 'USERNAME' | translate }}</strong>
           </div>
-          <div fxFlex="10">
+          <div fxFlex="14">
             <strong data='disabled'>{{ 'DATE_OF_PLACEMENT' | translate }}</strong>
           </div>
-          <div fxFlex="7">
+          <div fxFlex="6">
             <strong data='disabled'>{{ 'STAKE' | translate }}</strong>
           </div>
-          <div fxFlex="5" fxLayoutAlign="center">
+          <div fxFlex="6" fxLayoutAlign="center">
             <strong data='disabled'>{{ 'STATUS' | translate }}</strong>
           </div>
           <div fxFlex="7">
@@ -94,7 +94,7 @@
           <div fxFlex="12">
             <strong data='disabled'>{{ 'PAYMENT_DATE_BY_OPERATOR' | translate }}</strong>
           </div>
-          <div fxFlex="12">
+          <div fxFlex="10">
             <strong data='disabled'>{{ 'PAID_BY' | translate }}</strong>
           </div>
         </div>
@@ -104,7 +104,7 @@
           <div fxFlex fxLayoutAlign="start center" class="border-bottom-overlay-1px" [style.max-height.px]="55"
             *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons"
             [routerLink]="['../detail', rowItem.CouponCode ]">
-            <div fxFlex="5">
+            <div fxFlex="3">
               <img class="icon icon-24px" *ngIf="rowItem.IsAgentSettled" src="assets/icons/baseline-check-24px.svg">
             </div>
             <div fxFlex="15">
@@ -115,7 +115,7 @@
                 *ngIf="rowItem && rowItem.ClientName?.length === 0">{{rowItem.UserId + ' - ' + rowItem.UserName }}</strong>
               <strong *ngIf="rowItem && rowItem.ClientName?.length > 0">{{ rowItem.ClientName }}</strong>
             </div>
-            <div fxFlex="10">
+            <div fxFlex="14">
               <strong>{{rowItem.CouponDateOffset | date: 'dd/MM/yy HH:mm:ss' }}</strong>
             </div>
             <div fxFlex="7">
