@@ -33,7 +33,7 @@ export class PayCancelDialogComponent implements OnInit {
   ) {
     this.titleType = this.dialogTypeCoupon[data];
     this.form = this.fb.group({
-      couponCode: [null, Validators.compose([Validators.required, Validators.minLength(2)])]
+      couponCode: [null, Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(18)])]
     });
   }
 
