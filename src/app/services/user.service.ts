@@ -223,7 +223,7 @@ export class UserService {
       }
 
       // check if timer for data login is enabled
-      if (this.loadDataPool.closed) {
+      if (this.loadDataPool && this.loadDataPool.closed) {
         this.checkLoginData(0);
       }
 
