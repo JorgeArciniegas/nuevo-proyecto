@@ -22,7 +22,7 @@
       <GridLayout row="0" col="1" rows="*,*">
         <GridLayout row="0" class="button btn-default btn-filter"
           [ngClass]="{'btn-filter-success': betsListService.carriedOut}">
-          <Button text="{{'PAYMENT' | translate}}" class="button-internal" (tap)="changeValue('carriedOut', true)"
+          <Button text="{{'SETTLEMENT' | translate}}" class="button-internal" (tap)="changeValue('carriedOut', true)"
             [isEnabled]="betsListService.couponStatus !== couponStatus.Cancelled"></Button>
         </GridLayout>
       </GridLayout>

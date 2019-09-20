@@ -18,14 +18,14 @@
               <button class="btn-filter btn-default radius-5" (click)="changeValue('dateHasPlaced', true)"
                 [class.btn-filter-success]="betsListService.dateHasPlaced && !betsListService.carriedOut"
                 [disabled]="betsListService.couponStatus === couponStatus.Cancelled">
-                {{'PAYMENT' | translate}}
+                {{'SETTLEMENT' | translate}}
               </button>
             </div>
             <div fxFlex="50" fxLayout="column" fxLayoutGap="5px">
               <button class="btn-filter btn-default radius-5" (click)="changeValue('carriedOut', true)"
                 [class.btn-filter-success]="betsListService.carriedOut"
                 [disabled]="betsListService.couponStatus === couponStatus.Cancelled">
-                {{'FILTER_DATE_OF_PAID' | translate}}
+                {{'FILTER_DATE_OF_PAYMENT' | translate}}
               </button>
             </div>
           </div>

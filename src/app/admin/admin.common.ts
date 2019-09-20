@@ -114,8 +114,6 @@ export const routes: Routes = [
       {
         path: 'vbox',
         loadChildren: './settings/vbox/vbox.module#VboxModule',
-        canActivateChild: [AuthorizationGuard],
-        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       }
     ]
   },
