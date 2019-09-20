@@ -17,7 +17,8 @@
         *ngIf="receipt.isPayment"></Label>
     </FlexboxLayout>
     <FlexboxLayout flexDirection="row" flexWrap="wrap" class="footer">
-      <Label class="font-weight-bold" fontSize="20" text="{{ 'PAID_AMOUNT' | translate}}: {{receipt.amount}}"></Label>
+      <Label class="font-weight-bold" fontSize="20"
+        text="{{ 'PAID_AMOUNT' | translate}}: {{receipt.amount  | currency : userService.userCurrency : 'symbol-narrow' }}"></Label>
     </FlexboxLayout>
   </StackLayout>
 </StackLayout>
