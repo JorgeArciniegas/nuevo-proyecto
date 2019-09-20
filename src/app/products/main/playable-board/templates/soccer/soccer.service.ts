@@ -133,11 +133,13 @@ export class SoccerService implements OnDestroy {
         // check odds selected
         if (this.couponService.productHasCoupon) {
           // this.verifySelectedOdds(this.couponService.coupon);
-          this.couponService.coupon.Odds.filter(odd => {
-            const match: Match = this.tournament.matches.filter((item) => item.name === odd.DefaultEventName)[0];
-            match.hasOddsSelected = true;
-            match.selectedOdds.push(odd.SelectionId);
-          });
+          if (this.couponService.coupon) {
+            this.couponService.coupon.Odds.filter(odd => {
+              const match: Match = this.tournament.matches.filter((item) => item.name === odd.DefaultEventName)[0];
+              match.hasOddsSelected = true;
+              match.selectedOdds.push(odd.SelectionId);
+            });
+          }
         }
       })
       .catch(error => {
@@ -152,6 +154,7 @@ export class SoccerService implements OnDestroy {
   // Method to open the details of the selected match
   openEventDetails(matchIndex: number): void {
     this.tournament.matches[matchIndex].isDetailOpened = !this.tournament.matches[matchIndex].isDetailOpened;
+
     // Reset the default Area to "Main".
     if (this.selectedArea !== 0) {
       this.changeArea(0);
