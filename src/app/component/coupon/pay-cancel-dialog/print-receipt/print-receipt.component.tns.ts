@@ -3,7 +3,7 @@ import { Printer } from 'nativescript-printer';
 import { Receipt } from './print-receipt.model';
 import { PrintReceiptService } from './print-receipt.service.tns';
 import { AppSettings } from '../../../../app.settings';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-print-receipt',
