@@ -12,8 +12,8 @@ import { UserService } from '../../../services/user.service';
   styleUrls: ['./transactions-list.component.scss']
 })
 export class TransactionsListComponent implements OnDestroy {
-  @ViewChild('pickerDateFrom') private inputPickerDateFrom;
-  @ViewChild('pickerDateTo') private inputPickerDateTo;
+  @ViewChild('pickerDateFrom', { static: false }) private inputPickerDateFrom;
+  @ViewChild('pickerDateTo', { static: false }) private inputPickerDateTo;
 
   object = Object;
   transactionCategory: typeof TransactionCategory = TransactionCategory;

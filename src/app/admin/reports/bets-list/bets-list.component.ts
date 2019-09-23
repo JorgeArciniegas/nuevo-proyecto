@@ -13,8 +13,8 @@ import { OperatorsService } from '../../settings/operators/operators.service';
   styleUrls: ['./bets-list.component.scss']
 })
 export class BetsListComponent implements OnInit, OnDestroy {
-  @ViewChild('pickerDateFrom') private inputPickerDateFrom;
-  @ViewChild('pickerDateTo') private inputPickerDateTo;
+  @ViewChild('pickerDateFrom', { static: false }) private inputPickerDateFrom;
+  @ViewChild('pickerDateTo', { static: false }) private inputPickerDateTo;
 
   couponType: typeof CouponTypeInternal = CouponTypeInternal;
   couponStatus: typeof CouponStatusInternal = CouponStatusInternal;

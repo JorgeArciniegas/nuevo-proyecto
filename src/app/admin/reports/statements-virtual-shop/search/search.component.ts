@@ -5,14 +5,15 @@ import { Observable } from 'rxjs';
 import { StatementVirtualShopService } from '../statement-virtual-shop.service';
 import { RouterService } from '../../../../services/utility/router/router.service';
 
+
 @Component({
   selector: 'app-statement-virtual-shop-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit, OnDestroy {
-  @ViewChild('pickerDateFrom') private inputPickerDateFrom;
-  @ViewChild('pickerDateTo') private inputPickerDateTo;
+  @ViewChild('pickerDateFrom', { static: false }) private inputPickerDateFrom;
+  @ViewChild('pickerDateTo', { static: false }) private inputPickerDateTo;
 
   constructor(
     public service: StatementVirtualShopService,
