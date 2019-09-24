@@ -79,12 +79,12 @@ export class MainService extends MainServiceExtra {
     private elysApi: ElysApiService,
     private productService: ProductsService,
     private btnService: BtncalcService,
-    public coupon: CouponService,
+    public couponService: CouponService,
     private appSettings: AppSettings,
     public destroyCouponService: DestroyCouponService,
     private resultService: ResultsService
   ) {
-    super(coupon, destroyCouponService);
+    super(couponService, destroyCouponService);
     this.toResetAllSelections = true;
     // counter obser
     this.remaingTimeCounter = new Subject<EventTime>();
@@ -92,7 +92,7 @@ export class MainService extends MainServiceExtra {
     this.defaultGameStart();
 
     this.productService.productNameSelectedObserve.subscribe(item => {
-      if (!this.coupon.productHasCoupon.checked) {
+      if (!this.couponService.productHasCoupon.checked) {
         this.cacheEvents = null;
         this.initEvents();
       }
@@ -116,7 +116,7 @@ export class MainService extends MainServiceExtra {
 
       if (this.toResetAllSelections) {
         // Reset coupon
-        this.coupon.resetCoupon();
+        this.couponService.resetCoupon();
         // Reset playable board
         this.resetPlayEvent();
       }
@@ -624,7 +624,7 @@ export class MainService extends MainServiceExtra {
   }
 
   checkIfCouponIsReadyToPlace(): boolean {
-    return this.coupon.checkIfCouponIsReadyToPlace();
+    return this.couponService.checkIfCouponIsReadyToPlace();
   }
 
   /**
@@ -632,7 +632,7 @@ export class MainService extends MainServiceExtra {
    * @param odd Selected odd.
    */
   placingOddByOdd(marketId: number, odd: VirtualBetSelection): void {
-    if (this.coupon.checkIfCouponIsReadyToPlace()) {
+    if (this.couponService.checkIfCouponIsReadyToPlace()) {
       return;
     }
     let removed: boolean;
@@ -665,7 +665,7 @@ export class MainService extends MainServiceExtra {
    * @param player
    */
   placingOdd(player: Player): void {
-    if (this.coupon.checkIfCouponIsReadyToPlace()) {
+    if (this.couponService.checkIfCouponIsReadyToPlace()) {
       return;
     }
     if (this.placingEvent.isSpecialBets) {
@@ -699,7 +699,7 @@ export class MainService extends MainServiceExtra {
   }
 
   placeOdd() {
-    if (this.coupon.checkIfCouponIsReadyToPlace()) {
+    if (this.couponService.checkIfCouponIsReadyToPlace()) {
       return;
     }
     // Extract the event's odds from cache

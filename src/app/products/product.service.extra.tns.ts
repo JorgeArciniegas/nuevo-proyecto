@@ -35,7 +35,9 @@ export class ProductsServiceExtra {
       // check if the product has a temporary coupon
       this.couponInternalService.checkHasCoupon();
       // opening the confirm destroy coupon process
-      if (this.couponInternalService.productHasCoupon.checked) {
+      if (this.couponInternalService.productHasCoupon.checked &&
+        (this.couponInternalService.coupon &&
+          this.couponInternalService.coupon.Odds.length > 0)) {
         // update productCode request for check on the other service
         this.couponInternalService.productHasCoupon.productCodeRequest = codeProduct;
         // open modal destroy confirm coupon
