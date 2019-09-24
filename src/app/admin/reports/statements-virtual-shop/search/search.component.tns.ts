@@ -10,8 +10,8 @@ import { AppSettings } from '../../../../app.settings';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
-  @ViewChild('pickerDateFrom') private inputPickerDateFrom;
-  @ViewChild('pickerDateTo') private inputPickerDateTo;
+  @ViewChild('pickerDateFrom', { static: false }) private inputPickerDateFrom;
+  @ViewChild('pickerDateTo', { static: false }) private inputPickerDateTo;
 
   constructor(
     public service: StatementVirtualShopService,

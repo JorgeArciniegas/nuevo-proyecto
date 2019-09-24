@@ -10,8 +10,8 @@ import { DateAdapter } from '@angular/material';
   styleUrls: ['./operator-summary.component.scss']
 })
 export class OperatorSummaryComponent implements OnDestroy {
-  @ViewChild('pickerDateFrom') private inputPickerDateFrom;
-  @ViewChild('pickerDateTo') private inputPickerDateTo;
+  @ViewChild('pickerDateFrom', { static: false }) private inputPickerDateFrom;
+  @ViewChild('pickerDateTo', { static: false }) private inputPickerDateTo;
 
   constructor(public operatorSummaryService: OperatorSummaryService,
     private translate: TranslateUtilityService, private adapter: DateAdapter<Date>) {

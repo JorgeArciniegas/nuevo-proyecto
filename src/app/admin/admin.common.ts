@@ -97,7 +97,10 @@ export const routes: Routes = [
       },
       {
         path: 'reports/statement-vitual-shop',
-        loadChildren: './reports/statements-virtual-shop/statements-virtual-shop.module#StatementsVirtualShopModule',
+        loadChildren: () =>
+          import('./reports/statements-virtual-shop/statements-virtual-shop.module').then(
+            m => m.StatementsVirtualShopModule
+          ),
         canActivateChild: [AuthorizationGuard],
         data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       },
@@ -107,13 +110,16 @@ export const routes: Routes = [
       },
       {
         path: 'operators',
-        loadChildren: './settings/operators/operators.module#OperatorsModule',
+        loadChildren: () =>
+          import('./settings/operators/operators.module').then(
+            m => m.OperatorsModule
+          ),
         canActivateChild: [AuthorizationGuard],
         data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       },
       {
         path: 'vbox',
-        loadChildren: './settings/vbox/vbox.module#VboxModule',
+        loadChildren: () => import('./settings/vbox/vbox.module').then(m => m.VboxModule)
       }
     ]
   },

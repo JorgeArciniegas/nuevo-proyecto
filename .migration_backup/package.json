@@ -4,7 +4,7 @@
   "nativescript": {
     "id": "com.vgen.vdesk",
     "tns-android": {
-      "version": "6.0.0"
+      "version": "5.1.0"
     }
   },
   "scripts": {
@@ -38,15 +38,14 @@
     "core-js": "^3.2.1",
     "file-saver": "^2.0.2",
     "lodash": "^4.17.11",
-    "natives": "^1.1.6",
     "nativescript": "^6.1.2",
     "nativescript-angular": "~8.2.1",
     "nativescript-modal-datetimepicker": "^1.2.0",
     "nativescript-ng-shadow": "^2.1.0",
     "nativescript-printer": "^1.3.0",
-    "nativescript-theme-core": "^2.0.21",
+    "nativescript-theme-core": "~2.0.21",
     "ngx-barcode": "^0.2.4",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.11.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",
@@ -71,11 +70,11 @@
     "karma-coverage-istanbul-reporter": "^2.1.0",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
+    "nativescript-dev-sass": "^1.7.0",
     "nativescript-dev-webpack": "^1.2.0",
     "protractor": "^5.4.2",
     "ts-node": "~8.4.1",
     "tslint": "~5.20.0",
-    "typescript": "~3.5.3",
-    "uglifyjs-webpack-plugin": "^2.2.0"
+    "typescript": "~3.5.3"
   }
 }

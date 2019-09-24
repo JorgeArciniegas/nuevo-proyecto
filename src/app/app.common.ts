@@ -96,7 +96,8 @@ export const providerDeclarations: any[] = [
 export const routes: Routes = [
   {
     path: 'login',
-    loadChildren: './login/login.module#LoginModule',
+    // loadChildren: './login/login.module#LoginModule',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
     canActivate: [AuthorizationGuard]
   },
   {
@@ -121,7 +122,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'main',
-        loadChildren: './products/main/main.module#MainModule'
+        loadChildren: () => import('./products/main/main.module').then(m => m.MainModule),
       },
       {
         path: '',
@@ -137,15 +138,15 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: './admin/admin.module#AdminModule',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
     canActivate: [AuthorizationGuard]
   },
   {
     path: 'error-page',
-    loadChildren: './error-page/error-page.module#ErrorPageModule'
+    loadChildren: () => import('./error-page/error-page.module').then(m => m.ErrorPageModule),
   },
   {
     path: '**',
-    loadChildren: './error-page/error-page.module#ErrorPageModule'
+    loadChildren: () => import('./error-page/error-page.module').then(m => m.ErrorPageModule),
   }
 ];

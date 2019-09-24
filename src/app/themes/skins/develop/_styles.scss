@@ -538,11 +538,13 @@ $gradient-dark2: #000000;
 	background-size: contain;
 }
 
+%text-primary {
+	color: $color-text-primary;
+}
 // BORDER BOX DEFINITION
 %border-gray {
 	border-color: $color-border-box;
 }
-
 %border-primary {
 	border-color: $color-text-primary;
 }

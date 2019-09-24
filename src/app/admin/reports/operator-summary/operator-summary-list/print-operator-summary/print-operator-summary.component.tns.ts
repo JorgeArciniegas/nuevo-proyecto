@@ -14,7 +14,7 @@ export class PrintOperatorSummaryComponent implements OnInit {
   public operatorSummary: OperatorSummary;
   public printer: Printer = new Printer();
   public rows: string;
-  @ViewChild('printing') view: ElementRef;
+  @ViewChild('printing', { static: false }) view: ElementRef;
 
   constructor(public printService: PrintOperatorSummaryService, public appSettings: AppSettings, public userService: UserService) {
     this.rows = '3*';

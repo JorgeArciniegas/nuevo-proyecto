@@ -1,4 +1,4 @@
-<GridLayout id="admin" rows="6*,*" columns="*,*,*">
+<GridLayout id="admin" rows="9*,*" columns="*,*,*">
   <StackLayout verticalAlignment="top" class="p-5" orientation="vertical" row="0" col="0">
     <StackLayout orientation="vertical" class="admin-panel-container radius-5">
       <StackLayout orientation="horizontal" horizontalAlignment="center" row="0" col="0">
@@ -68,7 +68,7 @@
       </StackLayout>
     </StackLayout>
   </StackLayout>
-  <StackLayout row="0" col="1">
+  <StackLayout verticalAlignment="top" class="p-5" orientation="vertical" row="0" col="1">
 
     <StackLayout orientation="vertical" class="admin-panel-container logout radius-5">
       <StackLayout (tap)="userService.logout()" width="100%" class="button btn-default btn-admin btn-grey-gradient"

@@ -1,9 +1,10 @@
 <GridLayout rows="*,2*,14*,2*" columns="*" class="summary" *ngIf="transactionsListService.transactionsList">
   <Label row="0" class="title" text="{{'TRANSACTIONS_LIST' | translate | uppercase}}" textWrap="true"
     verticalAlignment="center"></Label>
-  <GridLayout row="1" columns="*,2*,2*,2*,4*" class="card header">
-    <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()" src="~/assets/icons/baseline-arrow_back-24px.png"
-      verticalAlignment="center" horizontalAlignment="left"></Image>
+  <GridLayout row="1" columns="*,2*,2*,2*,4*" class="p-l-10 p-r-15">
+    <Image col=" 0" stretch="aspectFit" width="35" (tap)="goBack()" src="~/assets/icons/baseline-arrow_back-24px.png"
+      verticalAlignment="center" horizontalAlignment="left">
+    </Image>
     <StackLayout col="1" verticalAlignment="center">
       <Label class="sub-title" text="{{ 'DATE_FROM' | translate }}"></Label>
       <Label text="{{transactionsListService.dateFrom | date:'mediumDate'}}" textWrap="true"></Label>
@@ -66,19 +67,19 @@
     <StackLayout col="1" horizontalAlignment="center" verticalAlignment="center">
       <Label class="value" text="{{ transactionsListService.transactionsList.NumberOfTransactions | number }}"
         textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'TRANSACTIONS' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'TRANSACTIONS' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="2" horizontalAlignment="center" verticalAlignment="center">
       <Label class="value"
         text="{{ transactionsListService.transactionsList.TotalIncome | currency : userService.userCurrency : 'symbol-narrow' }}"
         textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'TOT_INCOME' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'TOT_INCOME' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="3" horizontalAlignment="center" verticalAlignment="center">
       <Label class="value"
         text="{{ transactionsListService.transactionsList.TotalOutcome | currency : userService.userCurrency : 'symbol-narrow' }}"
         textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'TOT_OUTCOME' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'TOT_OUTCOME' | translate }}"></Label>
     </StackLayout>
   </GridLayout>
 </GridLayout>

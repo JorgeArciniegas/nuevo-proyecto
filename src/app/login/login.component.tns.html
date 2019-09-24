@@ -1,5 +1,5 @@
 <GridLayout id='login' rows="*,4*,*" columns="*,3*,*">
-  <GridLayout rows="*,3*,*,2*,2*,2*,2*,3*" columns="*,10*,*" row="1" col="1" class="login-panel radius-15 padding-25">
+  <GridLayout rows="*,2*,*,2*,3*,3*,3*,3*" columns="*,10*,*" row="1" col="1" class="login-panel radius-15 padding-25">
     <StackLayout class="logo-with-text" row="1" col="1"></StackLayout>
     <!-- ADMIN OF OPERATOR -->
     <GridLayout row="3" col="1" rows="*" columns="*,8*,*" class="input-vdesk radius-2" *ngIf="showOperatorLogin">
@@ -13,7 +13,7 @@
       [ngClass]="{'error': (username.invalid || usernameLengthInvalid) && username.touched }">
       <StackLayout col="1" class="icon-area user-icon"></StackLayout>
       <TextField col="3" hint="{{'USERNAME'|translate}}" (textChange)="validateLength($event, 'username', 2)"
-        returnKeyType="next" autocapitalizationType="none" required ngModel #username="ngModel">
+        autocapitalizationType="none" required ngModel #username="ngModel">
       </TextField>
     </GridLayout>
     <!-- password -->

@@ -61,19 +61,19 @@
       <Label class="value"
         text="{{ operatorSummaryService.totalStake | currency : userService.userCurrency : 'symbol-narrow' }}"
         textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'TOTAL_STAKE' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'TOTAL_STAKE' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="2" horizontalAlignment="center" verticalAlignment="center">
       <Label class="value"
         text="{{ operatorSummaryService.totalVoided | currency : userService.userCurrency : 'symbol-narrow' }}"
         textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'TOT_VOIDED' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'TOT_VOIDED' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="3" horizontalAlignment="center" verticalAlignment="center">
       <Label class="value"
         text="{{ operatorSummaryService.totalWon | currency : userService.userCurrency : 'symbol-narrow' }}"
         textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'TOT_PAID' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'TOT_PAID' | translate }}"></Label>
     </StackLayout>
   </GridLayout>
 </GridLayout>
