@@ -13,7 +13,7 @@ export class MainServiceExtra {
    * */
   public toResetAllSelections: boolean;
   constructor(
-    public coupon: CouponService,
+    public couponService: CouponService,
     public destroyCouponService: DestroyCouponService
   ) { }
 
@@ -27,12 +27,12 @@ export class MainServiceExtra {
    * */
   fireCurrentEventChange(selected: number, userSelect = false) {
     // check if the coupon is initialized
-    this.coupon.checkHasCoupon();
+    this.couponService.checkHasCoupon();
     // set to reset all variables
     this.toResetAllSelections = true;
     // if the coupon isn't empty
     if (
-      this.coupon.productHasCoupon.checked &&
+      this.couponService.productHasCoupon.checked &&
       (this.eventDetails.currentEvent !== selected || userSelect)
     ) {
       // open modal destroy confirm coupon
