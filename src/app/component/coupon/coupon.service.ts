@@ -192,15 +192,24 @@ export class CouponService {
       if (smart) {
         for (const bet of smart.filter(item => item.selected)) {
           let addBoolean = true;
-          this.couponIdAdded.filter((item, idx) => {
-            if (item === bet.id) {
-              addBoolean = false;
-              this.couponIdAdded.splice(idx, 1);
-            }
-          });
-          // add the id to couponIdAdded
+          // check if the coupon is ready
+          if (this.coupon && this.coupon.Odds) {
+            this.coupon.Odds.filter((odd) => {
+              if (odd.SelectionId === bet.id) {
+                addBoolean = false;
+              }
+            });
+          }
+
+          // add or remove the id to couponIdAdded
           if (addBoolean) {
             this.couponIdAdded.push(bet.id);
+          } else {
+            this.couponIdAdded.filter((item, idx) => {
+              if (item === bet.id) {
+                this.couponIdAdded.splice(idx, 0);
+              }
+            });
           }
 
           const addOddRequest: AddOddRequest = this.requestObj(bet, addBoolean, isMultiStake);
