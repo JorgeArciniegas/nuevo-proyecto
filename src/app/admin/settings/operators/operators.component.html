@@ -44,7 +44,7 @@
       <!-- ROWS -->
       <div fxLayout="column" fxFlex="100" fxLayoutAlign="start stretch">
         <div fxFlex="100" fxLayout="column" fxLayoutAlign="flex-start stretch" fxLayoutAlignGap="grid">
-          <div fxFlex="8" fxLayoutAlign="start center" class="border-bottom-overlay-1px" [style.min-height.px]="55"
+          <div fxFlex="5" fxLayoutAlign="start center" class="border-bottom-overlay-1px" [style.min-height.px]="44"
             *ngFor="let rowItem of operatorService.listTempOperators; let i = index">
             <div fxFlex="5"></div>
             <!-- USERNAME -->
@@ -58,9 +58,9 @@
             <!-- ACTIONS -->
             <div fxFlex="50">
               <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="flex-end center">
-                <button class="btn btn-default btn-danger-no-gradient  radius-5"
+                <button class="btn btn-default btn-danger-no-gradient button-small radius-5"
                   (click)="deleting(i)">{{'DELETE' | translate | uppercase }}</button>
-                <button class="btn btn-default btn-success-no-gradient radius-5"
+                <button class="btn btn-default btn-success-no-gradient button-small radius-5"
                   (click)="editing(i)">{{'EDIT' | translate| uppercase }}</button>
               </div>
             </div>
