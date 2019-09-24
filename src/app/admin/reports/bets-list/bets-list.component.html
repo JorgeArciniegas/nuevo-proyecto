@@ -85,6 +85,7 @@
           <div fxFlex fxLayout="column" fxLayoutGap="5px">
             <button *ngFor="let type of couponStatus.values()" class="btn-filter btn-default radius-5"
               [class.btn-filter-success]="betsListService.couponStatus === couponStatus[type]"
+              [disabled]="betsListService.carriedOut"
               (click)="changeValue('couponStatus', couponStatus[type])">{{ 'DYNAMIC_KEYS.CouponStatusInternal.' + type | translate}}</button>
           </div>
         </div>

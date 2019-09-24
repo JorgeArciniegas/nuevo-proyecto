@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DateAdapter } from '@angular/material';
-import { AccountVirtualSport, AccountOperator } from '@elys/elys-api';
+import { AccountOperator, AccountVirtualSport } from '@elys/elys-api';
 import { Observable } from 'rxjs';
 import { TranslateUtilityService } from '../../../../../src/app/services/utility/translate-utility.service';
+import { OperatorsService } from '../../settings/operators/operators.service';
 import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
 import { BetsListService } from './bets-list.service';
-import { OperatorsService } from '../../settings/operators/operators.service';
 
 @Component({
   selector: 'app-bets-list',
@@ -77,6 +77,13 @@ export class BetsListComponent implements OnInit, OnDestroy {
       case 'dateHasPlaced':
         this.betsListService['dateHasPlaced'] = value;
         this.betsListService['carriedOut'] = false;
+        break;
+      case 'carriedOut':
+        this.betsListService[key] = value;
+        if (value === true) {
+          this.betsListService['couponStatus'] = CouponStatusInternal.ALL;
+        }
+
         break;
       default:
         this.betsListService[key] = value;

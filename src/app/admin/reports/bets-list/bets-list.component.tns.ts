@@ -45,6 +45,12 @@ export class BetsListComponent implements OnInit {
         this.betsListService['dateHasPlaced'] = value;
         this.betsListService['carriedOut'] = false;
         break;
+      case 'carriedOut':
+        this.betsListService[key] = value;
+        if (value === true) {
+          this.betsListService['couponStatus'] = CouponStatusInternal.ALL;
+        }
+        break;
       default:
         this.betsListService[key] = value;
         break;

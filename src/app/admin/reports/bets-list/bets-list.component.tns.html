@@ -100,7 +100,7 @@
         class="button btn-default btn-filter"
         [ngClass]="{'btn-filter-success': betsListService.couponStatus === couponStatus[type]}">
         <Button text="{{'DYNAMIC_KEYS.CouponStatusInternal.' + type | translate}}" class="button-internal"
-          (tap)="changeValue('couponStatus', couponStatus[type])"></Button>
+          (tap)="changeValue('couponStatus', couponStatus[type])" [isEnabled]="!betsListService.carriedOut"></Button>
       </GridLayout>
     </GridLayout>
   </GridLayout>
