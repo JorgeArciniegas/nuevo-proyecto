@@ -1,7 +1,7 @@
 <GridLayout rows="2*,2*,20*,2*, *" columns="*" *ngIf="couponDetail">
   <Label row="0" verticalAlignment="center"
     text="{{'BETS_LIST' | translate | uppercase }} - {{'DETAIL' | translate | uppercase }}" class="m-l-20 h3"></Label>
-  <GridLayout class="m-l-20" row="1" rows="*" columns="1*,1*,1*,1*,1*">
+  <GridLayout class="m-l-20" row="1" rows="*" columns="2*,1*,1*,1*,2*">
     <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()" src="~/assets/icons/baseline-arrow_back-24px.png"
       verticalAlignment="center" horizontalAlignment="left"></Image>
     <Button col="1" class="m-r-10 button btn-default radius-10" text="{{ 'SUMMARY' | translate }}"
@@ -61,9 +61,8 @@
     </app-combinations>
   </StackLayout>
   <GridLayout row="3" rows="*" columns="2*,6*" class="p-l-20">
-    <Button col="0" verticalAlignment="center" class="button btn-default btn-success radius-10"
-      text="{{ 'REPRINT' | translate }}" *ngIf="settings.printSettings.isEnabledReprintCoupon"
-      (tap)="printAgainCoupon()"></Button>
+    <Button col="0" class="button btn-default btn-success radius-10" text="{{ 'REPRINT' | translate }}"
+      *ngIf="settings.printSettings.isEnabledReprintCoupon" (tap)="printAgainCoupon()"></Button>
   </GridLayout>
   <StackLayout row="4"></StackLayout>
 </GridLayout>

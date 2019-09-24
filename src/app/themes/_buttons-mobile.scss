@@ -1,3 +1,6 @@
+.button {
+	padding: 0;
+}
 .btn-default-dog-play {
 	border-width: 2;
 	&.actived {
@@ -143,12 +146,12 @@
 	}
 }
 .btn-grey {
-  @extend %btn-gray;
+	@extend %btn-gray;
 }
 
 .btn-success-no-gradient {
-  @extend  %color-bg-success;
+	@extend %color-bg-success;
 }
 .btn-danger-no-gradient {
-  @extend  %color-bg-allert;
+	@extend %color-bg-allert;
 }

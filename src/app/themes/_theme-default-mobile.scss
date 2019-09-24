@@ -17,6 +17,7 @@
 @import "./vbox/vbox.tns";
 @import "./reports/reports.tns";
 @import "./bets-list/bet-list.tns";
+@import "./typography.tns";
 .app {
 	&.develop {
 		@import "./skins/develop/styles";
