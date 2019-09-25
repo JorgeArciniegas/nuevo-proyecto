@@ -15,8 +15,8 @@
             <div><small data='disabled'>{{ 'DATE' | translate }}</small></div>
             <div class="value">
               <strong
-                *ngIf="!betsListService.request.carriedOut">{{ ((!betsListService.request.dateHasPlaced) ? 'PLACEMENT' : 'CLOSING') | translate }}</strong>
-              <strong *ngIf="betsListService.request.carriedOut">{{  'SETTLEMENT' | translate }}</strong>
+                *ngIf="!betsListService.request.carriedOut">{{ ((!betsListService.request.dateHasPlaced) ? 'PLACEMENT' : 'SETTLEMENT') | translate }}</strong>
+              <strong *ngIf="betsListService.request.carriedOut">{{  'FILTER_DATE_OF_PAYMENT' | translate }}</strong>
             </div>
           </div>
           <div fxFlex="12">
