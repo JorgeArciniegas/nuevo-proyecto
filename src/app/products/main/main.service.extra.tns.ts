@@ -8,12 +8,12 @@ export class MainServiceExtra {
   public currentEventObserve: Observable<number>;
   public eventDetails: EventDetail;
   public toResetAllSelections: boolean;
-  constructor(public coupon: CouponService, public destroyCouponService: DestroyCouponService) {
+  constructor(public couponService: CouponService, public destroyCouponService: DestroyCouponService) {
     this.destroyCouponService.confirmDestroyObs.subscribe(elem => {
       this.destroyCouponService.showDialog = false;
-      if (elem && this.coupon.productHasCoupon.isRacing) {
-        this.currentEventSubscribe.next(this.coupon.productHasCoupon.eventNumber);
-        this.coupon.resetProductHasCoupon();
+      if (elem && this.couponService.productHasCoupon.isRacing) {
+        this.currentEventSubscribe.next(this.couponService.productHasCoupon.eventNumber);
+        this.couponService.resetProductHasCoupon();
       }
     });
   }
@@ -28,16 +28,17 @@ export class MainServiceExtra {
    * */
   fireCurrentEventChange(selected: number, userSelect = false) {
     // check if the coupon is initialized
-    this.coupon.checkHasCoupon();
+    this.couponService.checkHasCoupon();
     // set to reset all variables
     this.toResetAllSelections = true;
     // if the coupon isn't empty
-    if (this.coupon.productHasCoupon.checked && (this.eventDetails.currentEvent !== selected || userSelect)) {
+    if (this.couponService.productHasCoupon.checked && (this.eventDetails.currentEvent !== selected || userSelect) &&
+      (this.couponService.coupon && this.couponService.coupon.Odds.length > 0)) {
       // open modal destroy confirm coupon
       this.destroyCouponService.openDestroyCouponDialog();
       this.destroyCouponService.showDialog = true;
-      this.coupon.productHasCoupon.isRacing = true;
-      this.coupon.productHasCoupon.eventNumber = selected;
+      this.couponService.productHasCoupon.isRacing = true;
+      this.couponService.productHasCoupon.eventNumber = selected;
     } else {
       // to continue
       this.currentEventSubscribe.next(selected);

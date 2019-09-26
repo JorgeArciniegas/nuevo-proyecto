@@ -146,7 +146,9 @@ export class UserService {
     // this.api.removeToken();
     this.storageService.removeItems('tokenData', 'UserData');
     this.api.tokenBearer = null;
-    this.loadDataPool.unsubscribe();
+    if (this.loadDataPool) {
+      this.loadDataPool.unsubscribe();
+    }
     this.router.getRouter().navigateByUrl('/login');
 
   }
