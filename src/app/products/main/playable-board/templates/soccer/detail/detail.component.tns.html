@@ -39,7 +39,7 @@
               flexDirection="column" justifyContent="center" alignItems="center" class="btn-soccer-odd radius-5"
               [ngClass]="[soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient', odd.isValid ? '' : 'disabled']"
               [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen && odd.isValid"
-              (tap)="selectOdd(i, market.id, odd)" marginLeft="5" marginBottom="5"
+              (tap)="selectOdd(market.id, odd)" marginLeft="5" marginBottom="5"
               *ngIf="market.layoutGridDefinition.marketPositionOnColArea === i + 1">
               <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
                 <Label text="{{ 'DYNAMIC_KEYS.SOCCER.MARKETS.' + odd.nm | translate | uppercase }}"
@@ -83,7 +83,7 @@
               class="btn-soccer-odd radius-5"
               [ngClass]="[soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient', odd.isValid ? '' : 'disabled']"
               [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen && odd.isValid"
-              (tap)="selectOdd(i, market.id, odd)" marginLeft="5" marginBottom="5">
+              (tap)="selectOdd(market.id, odd)" marginLeft="5" marginBottom="5">
               <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
                 <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
               </StackLayout>
@@ -110,7 +110,7 @@
               class="btn-soccer-odd radius-5"
               [ngClass]="[soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient', odd.isValid ? '' : 'disabled']"
               [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen && odd.isValid"
-              (tap)="selectOdd(i, market.id, odd)" marginLeft="5" marginBottom="5">
+              (tap)="selectOdd(market.id, odd)" marginLeft="5" marginBottom="5">
               <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
                 <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
               </StackLayout>
@@ -137,7 +137,7 @@
               class="btn-soccer-odd radius-5"
               [ngClass]="[soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient', odd.isValid ? '' : 'disabled']"
               [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen && odd.isValid"
-              (tap)="selectOdd(i, market.id, odd)" marginLeft="5" marginBottom="5">
+              (tap)="selectOdd(market.id, odd)" marginLeft="5" marginBottom="5">
               <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
                 <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
               </StackLayout>

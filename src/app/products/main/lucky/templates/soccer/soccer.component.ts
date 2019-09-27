@@ -12,7 +12,7 @@ import { Lucky } from '../../lucky.model';
 })
 export class SoccerComponent {
   lucky: typeof Lucky = Lucky;
-  constructor(private mainService: MainService, public userService: UserService, private soccerService: SoccerService) {}
+  constructor(private mainService: MainService, public userService: UserService, private soccerService: SoccerService) { }
 
   /**
    *
@@ -72,7 +72,6 @@ export class SoccerComponent {
         rngSelection = Math.floor(Math.random() * areas[match].markets[rngMarkets].selectionCount);
       } while (!areas[match].markets[rngMarkets].selections[rngSelection].isValid);
       this.soccerService.selectOdd(
-        match,
         areas[match].markets[rngMarkets].selections[rngSelection].tp,
         areas[match].markets[rngMarkets].selections[rngSelection]
       );

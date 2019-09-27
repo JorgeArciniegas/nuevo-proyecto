@@ -13,9 +13,9 @@ export class OverviewComponent {
   @Input()
   public rowHeight: number;
 
-  constructor(public soccerService: SoccerService, public mainService: MainService, public userService: UserService) {}
+  constructor(public soccerService: SoccerService, public mainService: MainService, public userService: UserService) { }
 
-  selectOdd(matchIndex: number, marketId: number, selection: VirtualBetSelection): void {
-    this.soccerService.selectOdd(matchIndex, marketId, selection);
+  selectOdd(marketId: number, selection: VirtualBetSelection): void {
+    this.soccerService.selectOdd(marketId, selection);
   }
 }

@@ -13,14 +13,14 @@ export class DetailComponent {
   @Input()
   public rowHeight: number;
 
-  constructor(public soccerService: SoccerService, public mainService: MainService, public userService: UserService) {}
+  constructor(public soccerService: SoccerService, public mainService: MainService, public userService: UserService) { }
 
   // Method to show the selected area. In case the button is already selected no operations will be execute.
   changeArea(areaIndex: number): void {
     this.soccerService.changeArea(areaIndex);
   }
 
-  selectOdd(matchIndex: number, marketId: number, selection: VirtualBetSelection): void {
-    this.soccerService.selectOdd(matchIndex, marketId, selection);
+  selectOdd(marketId: number, selection: VirtualBetSelection): void {
+    this.soccerService.selectOdd(marketId, selection);
   }
 }

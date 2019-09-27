@@ -21,6 +21,9 @@ export class SoccerService implements OnDestroy {
   couponHasChangedSubscription: Subscription;
   couponHasBeenPlacedSubscription: Subscription;
 
+  // list of odds currently being elaborated by the coupon library
+  public oddsInProcessing: number[] = [];
+
   isCheckedCoupon: boolean;
   timerCheckedSelectionSub: Subscription;
   constructor(
@@ -39,32 +42,31 @@ export class SoccerService implements OnDestroy {
   }
 
   verifySelectedOdds(coupon: BetCouponExtended): void {
-    if (this.isCheckedCoupon) {
-      this.timerCheckedSelectionSub.unsubscribe();
-      this.isCheckedCoupon = false;
-      this.verifySelectedOdds(coupon);
-    } else {
-      this.isCheckedCoupon = true;
-      this.timerCheckedSelectionSub = timer(1000).subscribe(() => {
-        // There was a change on the coupon.
-        this.tournament.matches.forEach(match => {
-          match.selectedOdds.forEach((oddSelected, idx) => {
-            let matchHasOdd = false;
-            if (coupon.Odds.filter(odd => odd.SelectionId === oddSelected).length > 0) {
-              matchHasOdd = true;
-            }
-
-            if (!matchHasOdd) {
-              match.selectedOdds.splice(idx, 1);
-              if (match.selectedOdds.length === 0) {
-                match.hasOddsSelected = false;
-              }
-            }
-          });
-        });
-        this.isCheckedCoupon = false;
+    const couponOdds: number[] = coupon.Odds.map(x => x.SelectionId);
+    this.tournament.matches.forEach(match => {
+      match.selectedOdds.forEach((x, idx) => {
+        if (!couponOdds.includes(x)) {
+          match.selectedOdds.splice(idx);
+          this.oddsInProcessing.splice(this.oddsInProcessing.indexOf(x));
+        }
       });
-    }
+      if (match.selectedOdds.length === 0) {
+        match.hasOddsSelected = false;
+      }
+    });
+
+    coupon.Odds.forEach(odd => {
+      const match: Match = this.tournament.matches.filter(x => x.id === odd.MatchId)[0];
+      if (!match.selectedOdds.includes(odd.SelectionId)) {
+        match.selectedOdds.push(odd.SelectionId);
+      }
+
+      if (match.selectedOdds.length > 0) {
+        match.hasOddsSelected = true;
+      }
+    });
+    const oddProcessed: number = couponOdds.filter(odd => this.oddsInProcessing.indexOf(odd) < 0)[0];
+    this.oddsInProcessing = this.oddsInProcessing.filter(x => x === oddProcessed);
   }
 
   ngOnDestroy() {
@@ -94,6 +96,7 @@ export class SoccerService implements OnDestroy {
       if (coupon) {
         this.verifySelectedOdds(coupon);
       } else {
+        this.oddsInProcessing = [];
         // The coupon was removed.
         this.tournament.matches.map(match => {
           if (match.hasOddsSelected) {
@@ -132,7 +135,6 @@ export class SoccerService implements OnDestroy {
         this.tournament = tournamentDetails;
         // check odds selected
         if (this.couponService.productHasCoupon) {
-          // this.verifySelectedOdds(this.couponService.coupon);
           if (this.couponService.coupon) {
             this.couponService.coupon.Odds.filter(odd => {
               const match: Match = this.tournament.matches.filter((item) => item.name === odd.DefaultEventName)[0];
@@ -192,30 +194,11 @@ export class SoccerService implements OnDestroy {
     }
   }
 
-  selectOdd(matchIndex: number, marketId: number, selection: VirtualBetSelection): void {
-    const selectedOdds = this.tournament.matches[matchIndex].selectedOdds;
-    // Check if the match has already selected odds.
-    if (selectedOdds.length > 0) {
-      // The market is already present
-      const oddIndex = selectedOdds.indexOf(selection.id);
-      // Insert or delete the selection from the list of selected odds.
-      if (oddIndex !== -1) {
-        // It is a removal
-        selectedOdds.splice(oddIndex, 1);
-        if (selectedOdds.length === 0) {
-          // If the match doesn't have any more selections change its "hasOddsSelected" status.
-          this.tournament.matches[matchIndex].hasOddsSelected = !this.tournament.matches[matchIndex].hasOddsSelected;
-        }
-      } else {
-        // It is an insertion
-        selectedOdds.push(selection.id);
-      }
-    } else {
-      // It is an insertion
-      selectedOdds.push(selection.id);
-      // Set the match as contening a selected odd.
-      this.tournament.matches[matchIndex].hasOddsSelected = !this.tournament.matches[matchIndex].hasOddsSelected;
+  selectOdd(marketId: number, selection: VirtualBetSelection): void {
+    if (this.oddsInProcessing.includes(selection.id)) {
+      return;
     }
+    this.oddsInProcessing.push(selection.id);
     this.mainService.placingOddByOdd(marketId, selection);
     // tap su plus automatico
     this.btnCalcService.tapPlus();
