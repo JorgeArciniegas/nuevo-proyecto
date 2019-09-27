@@ -29,8 +29,10 @@ export class SearchComponent {
 
   selectDate(key: string): void {
     const picker = new ModalDatetimepicker();
+    const today = new Date();
+    today.setDate(today.getDate() - 1);
 
-    picker.pickDate().then(result => {
+    picker.pickDate({ maxDate: today }).then(result => {
       this.service[key] = new Date(result.year, result.month - 1, result.day);
     });
   }

@@ -6,7 +6,8 @@ import { ExcelService } from '../../../services/utility/export/excel.service';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
+  deps: [UserService]
 })
 export class StatementVirtualShopService {
 
@@ -49,6 +50,7 @@ export class StatementVirtualShopService {
 
   set dateTo(date: Date) {
     this.request.ToDate = date;
+
     this.request.ToDate.setHours(23);
     this.request.ToDate.setMinutes(59);
     this.request.ToDate.setSeconds(59);
@@ -59,14 +61,19 @@ export class StatementVirtualShopService {
    * Set the default value
    */
   initData(): void {
-    const today = new Date();
-    this.request = {
-      UserId: this.userService.dataUserDetail.userDetail.UserId,
-      // Set the date from the begin of the day.
-      FromDate: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0),
-      // Set the date at the 23:59:59 to the current day.
-      ToDate: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59)
-    };
+    try {
+      const today = new Date();
+      this.request = {
+        UserId: this.userService.dataUserDetail.userDetail.UserId,
+        // Set the date from the begin of the day.
+        FromDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1, 0, 0, 0),
+        // Set the date at the 23:59:59 to the current day.
+        ToDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1, 23, 59, 59)
+      };
+    } catch (err) {
+      console.error(err);
+    }
+
   }
 
   /**

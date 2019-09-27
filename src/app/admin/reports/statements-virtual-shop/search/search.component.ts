@@ -15,6 +15,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   @ViewChild('pickerDateFrom', { static: false }) private inputPickerDateFrom;
   @ViewChild('pickerDateTo', { static: false }) private inputPickerDateTo;
 
+  myFilter = (d: Date): boolean => {
+    const today = new Date();
+    const day = d.getDate();
+    return d.getDate() < today.getDate();
+  }
   constructor(
     public service: StatementVirtualShopService,
     private translate: TranslateUtilityService,
