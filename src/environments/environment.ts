@@ -16,7 +16,8 @@ export const environment: Environment = {
   couponDirectPlace: false,
   currencyDefault: 'EUR',
   license: LICENSE_TYPE.DEMO_LICENSE,
-  bookmakerDetails: ''
+  bookmakerDetails: '',
+  baseApiUrl: ''
 };
 
 /*

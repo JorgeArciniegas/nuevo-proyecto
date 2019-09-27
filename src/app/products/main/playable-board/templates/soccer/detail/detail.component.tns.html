@@ -37,31 +37,37 @@
               row="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea] | getNumGridElemDetail: 'row': i: i1: i2 }}"
               col="{{ soccerService.tournament.listDetailAreas[soccerService.selectedMatch][soccerService.selectedArea] | getNumGridElemDetail: 'col': i: i1: i2 }}"
               flexDirection="column" justifyContent="center" alignItems="center" class="btn-soccer-odd radius-5"
-              [ngClass]="[soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient', odd.isValid ? '' : 'disabled']"
+              [ngClass]="[soccerService.tournament.matches[soccerService.selectedMatch].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient', odd.isValid ? '' : 'disabled']"
               [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen && odd.isValid"
               (tap)="selectOdd(market.id, odd)" marginLeft="5" marginBottom="5"
               *ngIf="market.layoutGridDefinition.marketPositionOnColArea === i + 1">
-              <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
-                <Label text="{{ 'DYNAMIC_KEYS.SOCCER.MARKETS.' + odd.nm | translate | uppercase }}"
-                  horizontalAlignment="right"
-                  *ngIf="market.id !== 2 && market.id !== 10 && market.id !== 13 && market.id !== 44 && market.id !== 46 && market.id !== 658 && market.id !== 1009 && market.id !== 1018"></Label>
-                <Label text="{{ odd.nm | uppercase }}" horizontalAlignment="right"
-                  *ngIf="market.id === 2 || market.id === 10 || market.id === 13 || market.id === 44 || market.id === 46 || market.id === 658 || market.id === 1009 || market.id === 1018"></Label>
-                <Label text="{{ 'HOME' | translate | uppercase }}" horizontalAlignment="right" *ngIf="market.id === 22"
-                  marginLeft="5"></Label>
-                <Label text="{{ 'AWAY' | translate | uppercase }}" horizontalAlignment="right" *ngIf="market.id === 23"
-                  marginLeft="5"></Label>
-                <Label text="{{ market.specialValueOrSpread }}" horizontalAlignment="left"
-                  *ngIf="market.hasSpecialValue" marginLeft="5"></Label>
+              <StackLayout *ngIf="!soccerService.oddsInProcessing.includes(odd.id)" horizontalAlignment="center">
+                <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name"
+                  horizontalAlignment="center">
+                  <Label text="{{ 'DYNAMIC_KEYS.SOCCER.MARKETS.' + odd.nm | translate | uppercase }}"
+                    horizontalAlignment="right"
+                    *ngIf="market.id !== 2 && market.id !== 10 && market.id !== 13 && market.id !== 44 && market.id !== 46 && market.id !== 658 && market.id !== 1009 && market.id !== 1018"></Label>
+                  <Label text="{{ odd.nm | uppercase }}" horizontalAlignment="right"
+                    *ngIf="market.id === 2 || market.id === 10 || market.id === 13 || market.id === 44 || market.id === 46 || market.id === 658 || market.id === 1009 || market.id === 1018"></Label>
+                  <Label text="{{ 'HOME' | translate | uppercase }}" horizontalAlignment="right"
+                    *ngIf="market.id === 22" marginLeft="5"></Label>
+                  <Label text="{{ 'AWAY' | translate | uppercase }}" horizontalAlignment="right"
+                    *ngIf="market.id === 23" marginLeft="5"></Label>
+                  <Label text="{{ market.specialValueOrSpread }}" horizontalAlignment="left"
+                    *ngIf="market.hasSpecialValue" marginLeft="5"></Label>
+                </StackLayout>
+                <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
+                  horizontalAlignment="center">
+                  <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value" *ngIf="odd.isValid"></Label>
+                  <Label text="-" class="btn-soccer-odd__details--value" horizontalAlignment="center"
+                    *ngIf="!odd.isValid"></Label>
+                  <Label class="btn-soccer-odd__details--icon"
+                    [ngClass]="{'star-red-icon': odd.isHighestOdd, 'star-yellow-icon': odd.isLowestOdd}"
+                    *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
+                </StackLayout>
               </StackLayout>
-              <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
-                horizontalAlignment="center">
-                <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value" *ngIf="odd.isValid"></Label>
-                <Label text="-" class="btn-soccer-odd__details--value" horizontalAlignment="center"
-                  *ngIf="!odd.isValid"></Label>
-                <Label class="btn-soccer-odd__details--icon"
-                  [ngClass]="{'star-red-icon': odd.isHighestOdd, 'star-yellow-icon': odd.isLowestOdd}"
-                  *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
+              <StackLayout *ngIf="soccerService.oddsInProcessing.includes(odd.id)">
+                <ActivityIndicator busy="true" width="35" height="35"></ActivityIndicator>
               </StackLayout>
             </FlexBoxLayout>
           </ng-container>
@@ -81,20 +87,26 @@
           <ng-container *ngFor="let odd of market.selections; let i = index">
             <FlexBoxLayout row="{{i}}" flexDirection="column" justifyContent="center" alignItems="center"
               class="btn-soccer-odd radius-5"
-              [ngClass]="[soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient', odd.isValid ? '' : 'disabled']"
+              [ngClass]="[soccerService.tournament.matches[soccerService.selectedMatch].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient', odd.isValid ? '' : 'disabled']"
               [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen && odd.isValid"
               (tap)="selectOdd(market.id, odd)" marginLeft="5" marginBottom="5">
-              <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
-                <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
+              <StackLayout *ngIf="!soccerService.oddsInProcessing.includes(odd.id)" horizontalAlignment="center">
+                <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name"
+                  horizontalAlignment="center">
+                  <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
+                </StackLayout>
+                <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
+                  horizontalAlignment="center">
+                  <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value" *ngIf="odd.isValid"></Label>
+                  <Label text="-" class="btn-soccer-odd__details--value" horizontalAlignment="center"
+                    *ngIf="!odd.isValid"></Label>
+                  <Label class="btn-soccer-odd__details--icon"
+                    [ngClass]="{'star-red-icon': odd.isHighestOdd, 'star-yellow-icon': odd.isLowestOdd}"
+                    *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
+                </StackLayout>
               </StackLayout>
-              <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
-                horizontalAlignment="center">
-                <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value" *ngIf="odd.isValid"></Label>
-                <Label text="-" class="btn-soccer-odd__details--value" horizontalAlignment="center"
-                  *ngIf="!odd.isValid"></Label>
-                <Label class="btn-soccer-odd__details--icon"
-                  [ngClass]="{'star-red-icon': odd.isHighestOdd, 'star-yellow-icon': odd.isLowestOdd}"
-                  *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
+              <StackLayout *ngIf="soccerService.oddsInProcessing.includes(odd.id)">
+                <ActivityIndicator busy="true" width="100" height="100"></ActivityIndicator>
               </StackLayout>
             </FlexBoxLayout>
           </ng-container>
@@ -111,17 +123,23 @@
               [ngClass]="[soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient', odd.isValid ? '' : 'disabled']"
               [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen && odd.isValid"
               (tap)="selectOdd(market.id, odd)" marginLeft="5" marginBottom="5">
-              <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
-                <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
+              <StackLayout *ngIf="!soccerService.oddsInProcessing.includes(odd.id)" horizontalAlignment="center">
+                <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name"
+                  horizontalAlignment="center">
+                  <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
+                </StackLayout>
+                <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
+                  horizontalAlignment="center">
+                  <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value" *ngIf="odd.isValid"></Label>
+                  <Label text="-" class="btn-soccer-odd__details--value" horizontalAlignment="center"
+                    *ngIf="!odd.isValid"></Label>
+                  <Label class="btn-soccer-odd__details--icon"
+                    [ngClass]="{'star-red-icon': odd.isHighestOdd, 'star-yellow-icon': odd.isLowestOdd}"
+                    *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
+                </StackLayout>
               </StackLayout>
-              <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
-                horizontalAlignment="center">
-                <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value" *ngIf="odd.isValid"></Label>
-                <Label text="-" class="btn-soccer-odd__details--value" horizontalAlignment="center"
-                  *ngIf="!odd.isValid"></Label>
-                <Label class="btn-soccer-odd__details--icon"
-                  [ngClass]="{'star-red-icon': odd.isHighestOdd, 'star-yellow-icon': odd.isLowestOdd}"
-                  *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
+              <StackLayout *ngIf="soccerService.oddsInProcessing.includes(odd.id)">
+                <ActivityIndicator busy="true" width="100" height="100"></ActivityIndicator>
               </StackLayout>
             </FlexBoxLayout>
           </ng-container>
@@ -138,17 +156,25 @@
               [ngClass]="[soccerService.tournament.matches[i].selectedOdds.includes(odd.id) ? 'btn-selected' : 'btn-grey-gradient', odd.isValid ? '' : 'disabled']"
               [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen && odd.isValid"
               (tap)="selectOdd(market.id, odd)" marginLeft="5" marginBottom="5">
-              <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name" horizontalAlignment="center">
-                <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
+
+              <StackLayout *ngIf="!soccerService.oddsInProcessing.includes(odd.id)" horizontalAlignment="center">
+
+                <StackLayout orientation="horizontal" class="btn-soccer-odd__details--name"
+                  horizontalAlignment="center">
+                  <Label text="{{ odd.nm }}" horizontalAlignment="right"></Label>
+                </StackLayout>
+                <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
+                  horizontalAlignment="center">
+                  <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value" *ngIf="odd.isValid"></Label>
+                  <Label text="-" class="btn-soccer-odd__details--value" horizontalAlignment="center"
+                    *ngIf="!odd.isValid"></Label>
+                  <Label class="btn-soccer-odd__details--icon"
+                    [ngClass]="{'star-red-icon': odd.isHighestOdd, 'star-yellow-icon': odd.isLowestOdd}"
+                    *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
+                </StackLayout>
               </StackLayout>
-              <StackLayout class="btn-soccer-odd__details--second_line" orientation='horizontal'
-                horizontalAlignment="center">
-                <Label text="{{ odd.ods[0].vl }}" class="btn-soccer-odd__details--value" *ngIf="odd.isValid"></Label>
-                <Label text="-" class="btn-soccer-odd__details--value" horizontalAlignment="center"
-                  *ngIf="!odd.isValid"></Label>
-                <Label class="btn-soccer-odd__details--icon"
-                  [ngClass]="{'star-red-icon': odd.isHighestOdd, 'star-yellow-icon': odd.isLowestOdd}"
-                  *ngIf="odd.isLowestOdd || odd.isHighestOdd"></Label>
+              <StackLayout *ngIf="soccerService.oddsInProcessing.includes(odd.id)">
+                <ActivityIndicator busy="true" width="100" height="100"></ActivityIndicator>
               </StackLayout>
             </FlexBoxLayout>
           </ng-container>

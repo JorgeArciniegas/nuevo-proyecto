@@ -59,6 +59,7 @@ export class SoccerService implements OnDestroy {
       const match: Match = this.tournament.matches.filter(x => x.id === odd.MatchId)[0];
       if (!match.selectedOdds.includes(odd.SelectionId)) {
         match.selectedOdds.push(odd.SelectionId);
+        match.hasOddsSelected = true;
       }
 
       if (match.selectedOdds.length > 0) {

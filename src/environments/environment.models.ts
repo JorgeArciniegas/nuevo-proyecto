@@ -5,7 +5,7 @@ export interface Environment {
   production: boolean;
   bookmakerDetails: string;
   license: LICENSE_TYPE;
-  baseApiUrl?: string;
+  baseApiUrl: string;
   staging?: boolean;
   pageTitle?: string;
   theme?: string;

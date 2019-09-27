@@ -11,7 +11,6 @@
           (tap)="selectOdd(market.id, odd)" *ngFor="let odd of market.selections; let i2 = index">
           <StackLayout *ngIf="!soccerService.oddsInProcessing.includes(odd.id)" class="btn-soccer-odd__details--name"
             horizontalAlignment="center">
-
             <StackLayout orientation="horizontal" horizontalAlignment="center">
               <Label text="{{ 'DYNAMIC_KEYS.SOCCER.MARKETS.' + odd.nm | translate | uppercase }}"
                 horizontalAlignment="right" *ngIf="market.id !== 10"></Label>
