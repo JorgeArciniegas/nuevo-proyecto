@@ -1,13 +1,25 @@
 <GridLayout id='login' rows="*,4*,*" columns="*,3*,*">
-  <GridLayout rows="*,2*,*,2*,3*,3*,3*,3*" columns="*,10*,*" row="1" col="1" class="login-panel radius-15 padding-25">
+  <GridLayout rows="*,2*,*,6*,4*,4*,3*,*" columns="*,10*,*" row="1" col="1" class="login-panel radius-15 padding-25">
     <StackLayout class="logo-with-text" row="1" col="1"></StackLayout>
     <!-- ADMIN OF OPERATOR -->
-    <GridLayout row="3" col="1" rows="*" columns="*,8*,*" class="input-vdesk radius-2" *ngIf="showOperatorLogin">
-      <StackLayout col="0" class="icon-area users-icon"></StackLayout>
-      <Label col="1" text="{{userService.getOperatorData('BusinessName')}}" horizontalAlignment="left"></Label>
-      <StackLayout col="2" class="icon-area remove-data-or-close" (tap)="removeAdmin()">
+    <ng-container *ngIf="showOperatorLogin">
+      <GridLayout row="3" col="1" rows="*" columns="*" class="display">
+        <GridLayout rows="*" columns="*" class="display-content">
+          <GridLayout rows="*" columns="*,8*,2*" class="input-vdesk radius-2">
+            <StackLayout col="0" class="icon-area users-icon"></StackLayout>
+            <Label col="1" text="{{userService.getOperatorData('BusinessName')}}" verticalAlignment="center"
+              horizontalAlignment="left"></Label>
+            <Switch col="2" (checkedChange)="changeConnectType($event)" [checked]="connectByOperator"></Switch>
+            <!-- <StackLayout col="2" class="icon-area remove-data-or-close" (tap)="removeAdmin()">
+            </StackLayout> -->
+          </GridLayout>
+        </GridLayout>
+      </GridLayout>
+      <StackLayout row="3" col="1">
+        <Label class="label-overlap" text="{{  'DYNAMIC_KEYS.LOGIN.' + typeLogin[typeLoginSelected]  | translate }}"
+          horizontalAlignment="left"></Label>
       </StackLayout>
-    </GridLayout>
+    </ng-container>
     <!-- username -->
     <GridLayout row="4" col="1" rows="*" columns="5,30,10,auto" class="input-vdesk radius-2"
       [ngClass]="{'error': (username.invalid || usernameLengthInvalid) && username.touched }">
