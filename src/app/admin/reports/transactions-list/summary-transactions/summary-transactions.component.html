@@ -1,5 +1,5 @@
 <div fxFlex fxLayout="column" fxLayoutAlign="center space-between" *ngIf="transactionsListService.transactionsList">
-  <div fxFlex="93" fxLayout="column" [style.padding.px]="20">
+  <div fxFlex="90" fxLayout="column" [style.padding.px]="20">
     <div class="title">
       <h3>{{'TRANSACTIONS_LIST' | translate | uppercase}} </h3>
     </div>
@@ -48,20 +48,20 @@
     <div fxFlex class="padding-20 btn-filter radius-5 elevation-z5 " fxLayout="column" fxLayoutAlign="flex-start">
       <div fxLayout="column" fxFlex="5">
         <div fxFlex fxLayout="row" class="border-bottom-overlay-1px">
-          <div fxFlex="2"></div>
-          <div fxFlex="20">
+
+          <div fxFlex="15">
             <strong data='disabled'>{{ 'DATE' | translate }}</strong>
           </div>
-          <div fxFlex="18">
+          <div fxFlex="35">
             <strong data='disabled'>{{ 'TRANSACTION_TYPE' | translate }}</strong>
           </div>
-          <div fxFlex="40">
+          <div fxFlex="35">
             <strong data='disabled'>{{ 'REFERENCE' | translate }}</strong>
           </div>
-          <div fxFlex="18">
+          <div fxFlex="15">
             <strong data='disabled'>{{ 'AMOUNT' | translate }}</strong>
           </div>
-          <div fxFlex="2"></div>
+
         </div>
       </div>
       <div fxLayout="column" fxFlex fxLayoutAlign="start">
@@ -69,26 +69,26 @@
           <div fxFlex fxLayoutAlign="start center" class="border-bottom-overlay-1px" [style.max-height.px]="55"
             *ngFor="let transaction of transactionsListService.transactionsList.Transactions"
             [routerLink]="['../detail', transaction.ReferenceId ]">
-            <div fxFlex="2"></div>
-            <div fxFlex="20">
+
+            <div fxFlex="15">
               <strong>{{transaction.UserTransactionDateOffset | date: 'dd/MM/yy HH:mm:ss' }}</strong>
             </div>
-            <div fxFlex="18">
+            <div fxFlex="35">
               <strong>{{ 'DYNAMIC_KEYS.TransactionType.' + transaction.TransactionType | translate }}</strong>
             </div>
-            <div fxFlex="40">
+            <div fxFlex="35">
               <strong>{{ transaction.TransactionMessage | translate }}</strong>
             </div>
-            <div fxFlex="18">
+            <div fxFlex="15">
               <strong>{{ transaction.Amount | currency : userService.userCurrency : 'symbol-narrow' }}</strong>
             </div>
-            <div fxFlex="2"></div>
+
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div fxFlex="7" fxLayout="column wrap">
+  <div fxFlex="10" fxLayout="column wrap">
     <div fxFlex class="btn-filter" fxLayout="column wrap" fxLayoutAlign="stretch">
       <div fxFlexFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
         <div fxFlex fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="grid">

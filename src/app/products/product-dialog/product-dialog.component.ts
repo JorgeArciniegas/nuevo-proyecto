@@ -21,7 +21,7 @@ export class ProductDialogComponent implements OnInit, AfterViewInit {
   public title: string;
   public dataDialog: DialogData;
 
-  @ViewChild('content', { static: false }) elementView: ElementRef;
+  @ViewChild('content', { static: true }) elementView: ElementRef;
 
   constructor(
     public dialogRef: MatDialogRef<ProductDialogComponent>,

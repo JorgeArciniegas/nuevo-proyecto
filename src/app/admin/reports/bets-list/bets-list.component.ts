@@ -56,9 +56,12 @@ export class BetsListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     document.body.classList.remove('bets-list');
+    this.operatorService.rowNumber = 10;
+    this.operatorService.initLoad();
   }
   ngOnInit() {
-    this.operatorService.rowNumber = 10;
+    this.operatorService.rowNumber = 8;
+    this.operatorService.initLoad();
     this.operatorService.getListOfOperators();
   }
 

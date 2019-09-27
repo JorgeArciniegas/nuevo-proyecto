@@ -146,7 +146,9 @@ export class UserService {
     // this.api.removeToken();
     this.storageService.removeItems('tokenData', 'UserData');
     this.api.tokenBearer = null;
-    this.loadDataPool.unsubscribe();
+    if (this.loadDataPool) {
+      this.loadDataPool.unsubscribe();
+    }
     this.router.getRouter().navigateByUrl('/login');
 
   }
@@ -170,14 +172,13 @@ export class UserService {
         loginAdmin = this.isLoggedOperator();
       }
       this.setToken(token);
-
       // check if user is the operator or admin
       if (
         !loginAdmin
       ) {
         this.dataUserDetail.operatorDetail = await this.api.account.getOperatorMe();
         isAdmin = false;
-      } else if (!this.isAdminExist() || (this.isLoggedOperator() === null || this.isLoggedOperator())) {
+      } else if (loginAdmin || !this.isAdminExist() || (this.isLoggedOperator() === null || this.isLoggedOperator())) {
         this.dataUserDetail.userDetail = await this.api.account.getMe();
         isAdmin = true;
       } else {

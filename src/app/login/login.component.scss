@@ -48,4 +48,18 @@
 			}
 		}
 	}
+	mat-slide-toggle {
+		height: auto;
+	}
+	.display {
+		position: relative;
+		background-color: transparent !important;
+
+		.label-overlap {
+			position: absolute;
+			top: -30px;
+			left: 10px;
+			padding: 0px 10px;
+		}
+	}
 }

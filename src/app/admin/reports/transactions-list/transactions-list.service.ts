@@ -120,7 +120,6 @@ export class TransactionsListService {
       this.request.requestedPage = 1;
     }
     const req: ReportsAccountStatementRequest = this.cloneRequest();
-    console.log(req);
     this.elysApi.reports.getTransactionsHistory(req).then(items => (this.transactionsList = items));
     // this.initResetRequest();
     this.router.getRouter().navigateByUrl('admin/reports/transactionsList/summaryTransactions');

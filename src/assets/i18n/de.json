@@ -50,6 +50,10 @@
   "DELETED_ON": "Annullata il",
   "DETAIL": "Detail",
   "DYNAMIC_KEYS": {
+    "LOGIN": {
+      "OPERATOR": "Login operatore",
+      "ADMIN": "Login amministratore"
+    },
     "CockMarket": {
       "NAME": {
         "1X2": "Win",

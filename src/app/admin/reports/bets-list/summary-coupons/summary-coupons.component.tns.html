@@ -7,7 +7,10 @@
       verticalAlignment="center" horizontalAlignment="left"></Image>
     <StackLayout col="1" verticalAlignment="center">
       <Label class="sub-title" text="{{ 'DATE' | translate }}"></Label>
-      <Label text="{{ ((!betsListService.request.dateHasPlaced) ? 'PLACEMENT' : 'SETTLEMENT') | translate }}"
+      <Label *ngIf="!betsListService.request.carriedOut"
+        text="{{ ((!betsListService.request.dateHasPlaced) ? 'PLACEMENT' : 'SETTLEMENT') | translate }}"
+        textWrap="true"></Label>
+      <Label *ngIf="betsListService.request.carriedOut" text="{{  'FILTER_DATE_OF_PAYMENT' | translate }}"
         textWrap="true"></Label>
     </StackLayout>
     <StackLayout col="2" verticalAlignment="center">

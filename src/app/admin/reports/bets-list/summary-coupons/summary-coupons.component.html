@@ -1,5 +1,5 @@
 <div fxFlex fxLayout="column" fxLayoutAlign="center space-between" *ngIf="betsListService.betsCouponList">
-  <div fxFlex="93" fxLayout="column" [style.padding.px]="20">
+  <div fxFlex="90" fxLayout="column" [style.padding.px]="20">
     <div class="title">
       <h3>{{'BETS_LIST' | translate | uppercase}} </h3>
     </div>
@@ -15,8 +15,8 @@
             <div><small data='disabled'>{{ 'DATE' | translate }}</small></div>
             <div class="value">
               <strong
-                *ngIf="!betsListService.request.carriedOut">{{ ((!betsListService.request.dateHasPlaced) ? 'PLACEMENT' : 'CLOSING') | translate }}</strong>
-              <strong *ngIf="betsListService.request.carriedOut">{{  'SETTLEMENT' | translate }}</strong>
+                *ngIf="!betsListService.request.carriedOut">{{ ((!betsListService.request.dateHasPlaced) ? 'PLACEMENT' : 'SETTLEMENT') | translate }}</strong>
+              <strong *ngIf="betsListService.request.carriedOut">{{  'FILTER_DATE_OF_PAYMENT' | translate }}</strong>
             </div>
           </div>
           <div fxFlex="12">
@@ -150,7 +150,7 @@
       </div>
     </div>
   </div>
-  <div fxFlex="7" fxLayout="column wrap">
+  <div fxFlex="10" fxLayout="column wrap">
     <div fxFlex class="btn-filter" fxLayout="column wrap" fxLayoutAlign="stretch">
       <div fxFlexFill fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="20px">
         <div fxFlex fxLayout="row wrap" fxLayoutGap="grid">
