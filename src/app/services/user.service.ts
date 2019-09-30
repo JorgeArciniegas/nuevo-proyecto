@@ -160,6 +160,14 @@ export class UserService {
     this.dataUserDetail.userDetail.PlayableBalance -= stake;
   }
 
+  /**
+ * Increase the played stake from Playable amount
+ * @param stake :number
+ */
+  increasePlayableBalance(stake: number): void {
+    this.dataUserDetail.userDetail.PlayableBalance += stake;
+  }
+
 
   // Method to retrieve the user data
   async loadUserData(token: string, loginAdmin?: Boolean): Promise<string | undefined> {

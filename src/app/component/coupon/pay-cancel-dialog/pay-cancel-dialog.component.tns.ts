@@ -86,6 +86,7 @@ export class PayCancelDialogComponent {
         this.couponService
           .cancelCoupon(this.cancelRequest)
           .then(message => {
+            this.userService.increasePlayableBalance(message.StakeGross);
             this.errorMessage = this.errorMessage2[message.ErrorStatus];
             this.errorNumberIcon = message.ErrorStatus;
             // In case of successful operation start the print of the receipt
