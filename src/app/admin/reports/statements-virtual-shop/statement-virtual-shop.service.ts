@@ -6,8 +6,7 @@ import { ExcelService } from '../../../services/utility/export/excel.service';
 
 
 @Injectable({
-  providedIn: 'root',
-  deps: [UserService]
+  providedIn: 'root'
 })
 export class StatementVirtualShopService {
 

@@ -11,8 +11,10 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const { NativeScriptWorkerPlugin } = require("nativescript-worker-loader/NativeScriptWorkerPlugin");
-const TerserPlugin = require("terser-webpack-plugin");
-const { getAngularCompilerPlugin } = require("nativescript-dev-webpack/plugins/NativeScriptAngularCompilerPlugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const TerserPlugin = require("terser-webpack-plugin");
+// const { getAngularCompilerPlugin } = require("nativescript-dev-webpack/plugins/NativeScriptAngularCompilerPlugin");
+const { AngularCompilerPlugin } = require('@ngtools/webpack');
 const hashSalt = Date.now().toString();
 
 module.exports = env => {
@@ -27,11 +29,13 @@ module.exports = env => {
     throw new Error("You need to provide a target platform!");
   }
 
-  const AngularCompilerPlugin = getAngularCompilerPlugin(platform);
+  // const AngularCompilerPlugin = getAngularCompilerPlugin(platform);
   const projectRoot = __dirname;
 
   // Default destination inside platforms/<platform>/...
   const dist = resolve(projectRoot, nsWebpack.getAppPath(platform, projectRoot));
+
+  const appResourcesPlatformDir = platform === 'android' ? 'Android' : 'iOS';
 
   const {
     // The 'appPath' and 'appResourcesPath' values are fetched from
@@ -172,26 +176,44 @@ module.exports = env => {
           },
         }
       },
+      /*    minimize: !!uglify,
+         minimizer: [
+           new TerserPlugin({
+             parallel: true,
+             cache: true,
+             sourceMap: isAnySourceMapEnabled,
+             terserOptions: {
+               output: {
+                 comments: false,
+                 semicolons: !isAnySourceMapEnabled
+               },
+               compress: {
+                 // The Android SBG has problems parsing the output
+                 // when these options are enabled
+                 'collapse_vars': platform !== "android",
+                 sequences: platform !== "android",
+               }
+             }
+           })
+         ], */
       minimize: !!uglify,
       minimizer: [
-        new TerserPlugin({
+        new UglifyJsPlugin({
           parallel: true,
           cache: true,
-          sourceMap: isAnySourceMapEnabled,
-          terserOptions: {
+          uglifyOptions: {
             output: {
-              comments: false,
-              semicolons: !isAnySourceMapEnabled
+              comments: false
             },
             compress: {
               // The Android SBG has problems parsing the output
               // when these options are enabled
-              'collapse_vars': platform !== "android",
-              sequences: platform !== "android",
+              collapse_vars: platform !== 'android',
+              sequences: platform !== 'android'
             }
           }
         })
-      ],
+      ]
     },
     module: {
       rules: [
@@ -267,14 +289,23 @@ module.exports = env => {
         }
       }),
       // Remove all files from the out dir.
-      new CleanWebpackPlugin(itemsToClean, { verbose: !!verbose }),
+      new CleanWebpackPlugin([`${dist}/**/*`]),
+      // Copy native app resources to out dir.
+      new CopyWebpackPlugin([
+        {
+          from: `${appResourcesFullPath}/${appResourcesPlatformDir}`,
+          to: `${dist}/App_Resources/${appResourcesPlatformDir}`,
+          context: projectRoot
+        }
+      ]),
       // Copy assets to out dir. Add your own globs as needed.
       new CopyWebpackPlugin([
         { from: { glob: "fonts/**" } },
         { from: { glob: "**/*.jpg" } },
         { from: { glob: "**/*.png" } },
       ], { ignore: [`${relative(appPath, appResourcesFullPath)}/**`] }),
-      new nsWebpack.GenerateNativeScriptEntryPointsPlugin("bundle"),
+      // new nsWebpack.GenerateNativeScriptEntryPointsPlugin("bundle"),
+      new nsWebpack.GenerateBundleStarterPlugin(['./vendor', './bundle']),
       // For instructions on how to set up workers with webpack
       // check out https://github.com/nativescript/worker-loader
       new NativeScriptWorkerPlugin(),

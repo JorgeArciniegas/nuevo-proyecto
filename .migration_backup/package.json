@@ -4,7 +4,7 @@
   "nativescript": {
     "id": "com.vgen.vdesk",
     "tns-android": {
-      "version": "6.0.0"
+      "version": "6.0.0-2019-06-05-002854-01"
     }
   },
   "scripts": {
@@ -50,7 +50,8 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",
-    "tns-core-modules": "6.0.1",
+    "tns-core-modules": "5.4.0-androidx-2019-03-22-160602-06",
+    "tns-platform-declarations": "5.4.0-androidx-2019-03-22-160602-06",
     "xlsx": "^0.15.1",
     "zone.js": "^0.10.2"
   },
@@ -61,6 +62,7 @@
     "@angular/language-service": "^8.2.7",
     "@nativescript/schematics": "^0.7.1",
     "@types/jasmine": "^3.4.0",
+    "@types/jasminewd2": "~2.0.3",
     "@types/node": "~12.7.5",
     "codelyzer": "~5.1.1",
     "jasmine-core": "~3.5.0",
@@ -75,7 +77,6 @@
     "ts-node": "~8.4.1",
     "tslint": "~5.20.0",
     "typescript": "~3.5.3",
-    "uglifyjs-webpack-plugin": "^2.2.0",
-    "tns-platform-declarations": "6.0.1"
+    "uglifyjs-webpack-plugin": "^2.2.0"
   }
 }
