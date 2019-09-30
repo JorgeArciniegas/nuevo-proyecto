@@ -25,7 +25,8 @@
                 <div class="input radius-2"
                   [ngClass]="{'error': form.controls.username.invalid && (form.controls.username.dirty || form.controls.username.touched)}">
                   <i class="icon-area user-icon"></i>
-                  <input placeholder="{{'USERNAME'|translate}}" formControlName="username" class="padding-right-10" />
+                  <input placeholder="{{'USERNAME'|translate}}" formControlName="username" class="padding-right-10"
+                    autocomplete="false" />
                 </div>
               </div>
               <div class="input-item">
@@ -33,7 +34,7 @@
                   [ngClass]="{'error': form.controls.password.invalid && (form.controls.password.dirty || form.controls.password.touched)}">
                   <i class="icon-area pwd-icon"></i>
                   <input placeholder="{{ 'PASSWORD' | translate }}" formControlName="password" type="password"
-                    class="padding-right-10" />
+                    autocomplete="new-password" class="padding-right-10" />
                 </div>
               </div>
               <div class="input-item">
@@ -41,7 +42,7 @@
                   [ngClass]="{'error': form.controls.confirmPassword.invalid && (form.controls.confirmPassword.dirty || form.controls.confirmPassword.touched)}">
                   <i class="icon-area pwd-icon"></i>
                   <input placeholder="{{ 'REPEAT_PASSWORD' | translate }}" formControlName="confirmPassword"
-                    type="password" class="padding-right-10" />
+                    autocomplete="new-password" type="password" class="padding-right-10" />
                 </div>
               </div>
             </div>

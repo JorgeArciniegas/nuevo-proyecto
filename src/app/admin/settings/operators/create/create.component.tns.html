@@ -12,7 +12,7 @@
         [ngClass]="{'error': (username.invalid || usernameLengthInvalid) && username.touched }">
         <StackLayout col="1" class="icon-area user-icon"></StackLayout>
         <TextField col="3" hint="{{'USERNAME'|translate}}" (textChange)="validateLength($event, 'username', 2)"
-          returnKeyType="next" autocapitalizationType="none" required ngModel #username="ngModel">
+          returnKeyType="next" autocapitalizationType="none" required ngModel #username="ngModel" autocomplete="false">
         </TextField>
       </GridLayout>
       <!-- PASSWORD -->
@@ -21,7 +21,7 @@
         <StackLayout col="1" class="icon-area pwd-icon"></StackLayout>
         <TextField col="3" secure="true" hint="{{'PASSWORD'|translate}}"
           (textChange)="validateLength($event, 'password', 6)" returnKeyType="done" autocapitalizationType="none"
-          required ngModel #password="ngModel">
+          required ngModel #password="ngModel" autocomplete="false">
         </TextField>
       </GridLayout>
       <!-- REPEAT PASSWORD -->
@@ -31,7 +31,7 @@
         <TextField col="3" secure="true" hint="{{'REPEAT_PASSWORD'|translate}}"
           (textChange)="validateLength($event, 'retryPassword', 6); samePassword($event, password.value)"
           returnKeyType="done" autocapitalizationType="none" (returnPress)="onSubmit(username.value, password.value)"
-          required ngModel #retryPassword="ngModel">
+          required ngModel #retryPassword="ngModel" autocomplete="false">
         </TextField>
       </GridLayout>
       <Button row="5" col="1" text="{{ 'CONFIRM' | translate | uppercase }}"

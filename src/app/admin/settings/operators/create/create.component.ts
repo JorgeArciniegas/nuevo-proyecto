@@ -27,24 +27,24 @@ export class CreateComponent implements OnInit {
       password: [null, Validators.compose([Validators.required, passwordValidator])],
       confirmPassword: [null, Validators.compose([Validators.required, passwordValidator])],
     },
-    {
-      validator: this.checkPasswords
-    });
-   }
+      {
+        validator: this.checkPasswords
+      });
+  }
 
   ngOnInit() {
   }
 
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
-  if (
-    group.value['password'] !==
-    group.value['confirmPassword']
-  ) {
-    group.controls['confirmPassword'].setErrors({ notSame: true });
-  } else {
-    group.controls['confirmPassword'].setErrors(null);
-  }
-   return group.controls['password'].value === group.controls['confirmPassword'].value ? null : {notSame: true};
+    if (
+      group.value['password'] !==
+      group.value['confirmPassword']
+    ) {
+      group.controls['confirmPassword'].setErrors({ notSame: true });
+    } else {
+      group.controls['confirmPassword'].setErrors(null);
+    }
+    return group.controls['password'].value === group.controls['confirmPassword'].value ? null : { notSame: true };
   }
 
   public onSubmit(form: OperatorCreteByForm): void {
