@@ -51,10 +51,6 @@
   "DELETED_ON": "Deleted on",
   "DETAIL": "Detail",
   "DYNAMIC_KEYS": {
-    "LOGIN": {
-      "OPERATOR": "Login operatore",
-      "ADMIN": "Login amministratore"
-    },
     "COUPON_ERROR": {
       "API_ERROR": "Generic API error",
       "AccountInsertDataError": "An error occurred while adding the user account [Code ES11]",
@@ -148,20 +144,20 @@
       "BankerOnLiveCouponError": "Banker insertion error on live coupon [Code CRS10]",
       "CannotInsertCrossCombinationOnLiveError": "Impossible insert fixed cross combinations on live [Code CRS9]",
       "CannotInsertFixedOddOnCrossCombinationError": "Impossible insert fixed odds on combinations [Code CRS8]",
-      "CannotInsertOddForSameExistingEventWithDifferentProduct": "Cannot insert odd for same existing event with different product [Code CRS20]",
+      "CannotInsertOddForSameExistingEventWithDifferentProduct": "Error [Code CRS20]",
       "CannotInsertUniqueOddError": "This bet cannot be placed. Please, check the odds selected [Code CRS6]",
       "CannotRemoveGroupingError": "The grouping could not be removed [Code CRS15]",
       "CannotRemoveOddError": "An error occurred during the removal of the selection from the coupon [Code CRS14]",
       "CouponContainsUniqueOddError": "You cannot add selections to a 'unique' bet [Code CRS5]",
       "Error": "Error [Code CRS16]",
       "IncompatibleEvents": "The selected events are mutually incompatible [Code CRS11]",
-      "InvalidPlayer": "Invalid player [Code CRS19]",
-      "MaxCouponEventsError": "Max coupon events error [Code CRS21]",
+      "InvalidPlayer": "Error [Code CRS19]",
+      "MaxCouponEventsError": "Error [Code CRS21]",
       "MaxCouponOddsError": "Maximum odd exceeded [Code CRS7]",
       "MinCombinabilityOddsError": "This bet cannot be placed. Please, check the odds selected [Code CRS12]",
       "ODD_SHORTCUT_WARN": "Generic shortcut operation warning",
       "OddNotExists": "Event ID not found [Code CRS13]",
-      "OutrightError": "Outright error [Code CRS4]",
+      "OutrightError": "Error [Code CRS4]",
       "OverMaxBetStake": "Maximum stake exceeded [Code CRS17]",
       "UnderMinBetStake": "Minimum stake not reached [Code CRS18]",
       "Unknown": "Unknown error, please try again  [Code CRS0]"
@@ -204,6 +200,10 @@
       "TRIPLES": "Triples",
       "UPLE": "-upla",
       "UPLES": "-uple"
+    },
+    "LOGIN": {
+      "ADMIN": "Login amministratore",
+      "OPERATOR": "Login operatore"
     },
     "ODDS_RESULT": {
       "LOST": "Lost",
@@ -347,7 +347,7 @@
       "ALL": "All",
       "AWARD": "Award",
       "BET": "Bet",
-      "CANCELATION": "Cancelation",
+      "CANCELATION": "Deleted",
       "COMMISSION": "Commission",
       "CREDIT": "Credit",
       "DEDUCTION": "Deduction",
@@ -442,6 +442,7 @@
   "EDIT": "Edit",
   "ENDURANCE": "Endurance",
   "ERROR": "Error",
+  "EVEN": "EVEN",
   "EVENTS": "Events",
   "EXPORT_EXCEL": "Export to excel",
   "FILTER_DATE_OF_PAYMENT": "Payment",
@@ -470,6 +471,7 @@
   "NEW": "New",
   "NOBODY": "none",
   "NO_CONNECTION": "No connection available",
+  "ODD": "ODD",
   "ODDS": "Odds",
   "OPERATOR": "Operator",
   "OPERATOR.CREATE_NEW": "Create new operator",
@@ -481,6 +483,7 @@
   "OPERATOR_SUMMARY": "Operator summary",
   "OPERATOR_TYPE": "Operator Type",
   "OUTCOME": "Outcome",
+  "OVER": "OVER",
   "PAGE": "Page",
   "PAGE.OF": " of ",
   "PAID": "Paid",
@@ -543,6 +546,7 @@
   "TRANSACTIONS_LIST": "Transactions list",
   "TRANSACTION_TYPE": "Transaction type",
   "TYPE": "Type",
+  "UNDER": "UNDER",
   "USERNAME": "Username",
   "USERNAME_TOO_SHORT": "The username is too short (minimum 2 digits)",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "User not allowed to execute the operation",
