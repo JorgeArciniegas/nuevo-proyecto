@@ -202,8 +202,8 @@
       "UPLES": "-uple"
     },
     "LOGIN": {
-      "ADMIN": "Login amministratore",
-      "OPERATOR": "Login operatore"
+      "ADMIN": "Login as administrator",
+      "OPERATOR": "Login as operator"
     },
     "ODDS_RESULT": {
       "LOST": "Lost",

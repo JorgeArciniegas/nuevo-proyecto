@@ -51,8 +51,8 @@
   "DETAIL": "Detalhe",
   "DYNAMIC_KEYS": {
     "LOGIN": {
-      "OPERATOR": "Login operatore",
-      "ADMIN": "Login amministratore"
+      "ADMIN": "Login as administrator",
+      "OPERATOR": "Login as operator"
     },
     "CockMarket": {
       "NAME": {
