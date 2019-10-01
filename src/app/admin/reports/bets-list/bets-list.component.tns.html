@@ -117,16 +117,19 @@
         <Image width="20" src="~/assets/icons/Up.png" verticalAlignment="center"></Image>
       </GridLayout>
       <ng-container *ngIf="operatorService.listTempOperators && operatorService.listTempOperators.length > 0">
-        <StackLayout row="1" orientation="horizontal">
-          <StackLayout class="button btn-default btn-filter"
+        <GridLayout row="1" rows="*" columns="{{columnOperatorGrid}}">
+          <GridLayout rows="*" columns="*" col="0" class="button btn-default btn-filter"
             [ngClass]="{'btn-filter-success': betsListService.operatorSelected === null}">
-            <Button text="{{'ALL' | translate }}" class="button-internal" (tap)="selectOperator()"></Button>
-          </StackLayout>>
-          <StackLayout class="button btn-default btn-filter" *ngFor="let operator of operatorService.listTempOperators"
+            <Button row="0" col="0" text="{{'ALL' | translate }}" class="button-internal"
+              (tap)="selectOperator()"></Button>
+          </GridLayout>
+          <GridLayout col="{{i+1}}" class="button btn-default btn-filter"
+            *ngFor="let operator of operatorService.listTempOperators; let i = index"
             [ngClass]="{'btn-filter-success': betsListService.operatorSelected && betsListService.operatorSelected.IDClient === operator.IDClient}">
-            <Button text="{{operator.UserName }}" class="button-internal" (tap)="selectOperator(operator)"></Button>
-          </StackLayout>
-        </StackLayout>
+            <Button row="0" col="0" text="{{operator.UserName }}" class="button-internal"
+              (tap)="selectOperator(operator)"></Button>
+          </GridLayout>
+        </GridLayout>
       </ng-container>
       <GridLayout row="2" class="card-odd scroll" (tap)="nextPage()"
         *ngIf="operatorService.listOfOperators.totalPages > 1" [ngClass]="{'disabled': page >= maxPage - 1}"

@@ -790,3 +790,7 @@ $gradient-dark2: #000000;
 %bg-slide-toggle-thumb-label-selected {
 	background: $color-bg-event;
 }
+
+%hr-border-bottom {
+	border-bottom-color: $btn-border-keyboard;
+}

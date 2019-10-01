@@ -1,13 +1,31 @@
-#printing{
-  background: white;
-  color: #000;
-  .border-5{
-    border-width: 1;
-    border-color: #000;
-    border-radius: 5;
-  }
-  .h2, .h3, .h4{
-    color: #000;
-  }
-}
+#printing {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 30;
+	background: white;
+	font-weight: bold;
+	color: #000;
+	.printbox {
+		margin: 150;
+		// padding: 90;
+	}
 
+	.border-5 {
+		border-width: 5;
+		border-color: #000;
+		border-radius: 5;
+	}
+	.h2,
+	.h3,
+	.h4 {
+		font-weight: bold;
+		color: #000;
+	}
+	.h2 {
+		font-size: 43;
+	}
+
+	.h3,
+	.h4 {
+		font-size: 38;
+	}
+}
