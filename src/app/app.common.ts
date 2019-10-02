@@ -40,6 +40,7 @@ import { RaceComponent as RaceStatisticsComponent } from './products/product-dia
 import { SoccerComponent as SoccerStatisticsComponent } from './products/product-dialog/statistics/templates/soccer/soccer.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
+import { CouponService } from './component/coupon/coupon.service';
 
 
 
@@ -81,9 +82,10 @@ export const componentDeclarations: any[] = [
 
 export const providerDeclarations: any[] = [
   AppSettings,
-  ProductsService,
   TranslateService,
+  CouponService,
   BtncalcService,
+  ProductsService,
   CouponDialogService,
   {
     provide: LOCALE_ID,

@@ -17,6 +17,7 @@ export class BetsListComponent implements OnInit {
 
   couponType: typeof CouponTypeInternal = CouponTypeInternal;
   couponStatus: typeof CouponStatusInternal = CouponStatusInternal;
+  columnOperatorGrid: string;
   constructor(
     public betsListService: BetsListService,
     public readonly settings: AppSettings,
@@ -26,6 +27,7 @@ export class BetsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.operatorService.rowNumber = 9;
+    this.columnOperatorGrid = '*,*,*,*,*,*,*,*,*,*';
     this.operatorService.getListOfOperators();
   }
 

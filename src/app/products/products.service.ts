@@ -59,7 +59,11 @@ export class ProductsService extends ProductsServiceExtra {
   ) {
     super(couponInternalService, destroyCouponService, router);
     // Destroy coupon confirmation
-    this.couponInternalService.productHasCoupon = { checked: false };
+
+
+    if (this.couponInternalService) {
+      this.couponInternalService.productHasCoupon = { checked: false };
+    }
 
     this.productNameSelectedSubscribe = new Subject<string>();
     this.productNameSelectedObserve = this.productNameSelectedSubscribe.asObservable();

@@ -170,6 +170,7 @@
       <Button
         [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
         text="{{ 'BTNCALC.TOT' | translate }}" class="button-internal" textTransform="uppercase"
+        [ngClass]="btncalcService.polyfunctionStakePresetPlayer && btncalcService.polyfunctionStakePresetPlayer.typeSlipCol === typeBetSlipColTot.TOT  ? 'btn-selected' : 'btn-grey-gradient'"
         (tap)="btnTotColSet(typeBetSlipColTot.TOT)"></Button>
     </GridLayout>
   </GridLayout>
@@ -178,6 +179,7 @@
       <Button
         [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
         text="{{ 'BTNCALC.COL' | translate }}" class="button-internal" textTransform="uppercase"
+        [ngClass]="btncalcService.polyfunctionStakePresetPlayer && btncalcService.polyfunctionStakePresetPlayer.typeSlipCol === typeBetSlipColTot.COL  ? 'btn-selected' : 'btn-grey-gradient'"
         (tap)="btnTotColSet(typeBetSlipColTot.COL)"></Button>
     </GridLayout>
   </GridLayout>

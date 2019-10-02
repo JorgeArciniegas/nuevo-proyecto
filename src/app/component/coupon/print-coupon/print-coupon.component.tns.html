@@ -5,43 +5,45 @@
     <Button (tap)="printCouponService.resetPrint()" class="btn btn-accent" text="{{ 'DELETE' | translate }}"></Button>
   </FlexboxLayout>
   <ScrollView>
-    <StackLayout #printing orientation="horizontal">
-      <FlexboxLayout flexDirection="column">
-        <StackLayout class="logo-print-coupon" height="50"></StackLayout>
-        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-15" flexWrap="wrap"
+    <StackLayout #printingData orientation="horizontal" class="m-10 p-50">
+      <FlexboxLayout flexDirection="column" class="printbox">
+        <StackLayout class="logo-print-coupon">
+          <Image stretch="aspectFill" src="~/app/themes/skins/{{appSetting.theme}}/image/Logo-coupon.png"></Image>
+        </StackLayout>
+        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-10" flexWrap="wrap"
           *ngIf="appSetting.printSettings.isShowHeaderMessage">
           <Label class="p-l-5 text-center font-weight-bold"
             text="{{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSetting.license] | translate}}"></Label>
-          <Label class="p-r-10 text-center font-weight-bold" text="qrcode"></Label>
-
+          <!--<Label class="p-r-10 text-center font-weight-bold" text="qrcode"></Label> -->
         </FlexboxLayout>
         <StackLayout class="hr-dark m-10"></StackLayout>
-        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-15 p-l-15 p-b-5" flexWrap="wrap">
+        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-10 p-l-10 p-b-5" flexWrap="wrap">
           <Label class="p-l-5 font-weight-bold" text="{{ 'DATE_OF_PLACEMENT' | translate }}"></Label>
           <Label class="p-r-10 text-right"
             text="{{ printCouponService.couponPrint.CouponDateOffset | date:'yyyy-MM-dd HH.mm.ss'}}"></Label>
         </FlexboxLayout>
-        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-15 p-l-15 p-b-5" flexWrap="wrap">
+        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-10 p-l-10 p-b-5" flexWrap="wrap">
           <Label class="p-l-5 font-weight-bold" text="{{ 'CODE' | translate }}"></Label>
           <Label class="p-r-10 text-right" text="{{ printCouponService.couponPrint.CouponCode }}"></Label>
         </FlexboxLayout>
-        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-15 p-l-15 p-b-5" flexWrap="wrap">
+        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-10 p-l-10 p-b-5" flexWrap="wrap">
           <Label class="p-l-5 font-weight-bold" text="{{ 'BET_TYPE' | translate }}"></Label>
           <Label class="p-r-10 text-right"
             text="{{ 'DYNAMIC_KEYS.CouponType.PRINT_COUPON.' + couponType[printCouponService.couponPrint.CouponTypeId] | translate }}"></Label>
         </FlexboxLayout>
         <!-- OTHER INFO REPRINT COUPON-->
-        <StackLayout *ngIf="printCouponService.isPrintAgainst">
+        <ng-container *ngIf="printCouponService.isPrintAgainst">
           <StackLayout class="hr-dark m-10"></StackLayout>
-          <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-15 p-l-15 p-b-5" flexWrap="wrap">
+          <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-5 p-l-5 p-b-5" flexWrap="wrap">
             <Label class="p-l-5 font-weight-bold" text="{{ 'REPRINT' | translate }}"></Label>
+            <Label class="p-r-10 text-right" text=""></Label>
           </FlexboxLayout>
-          <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-15 p-l-15 p-b-5" flexWrap="wrap">
+          <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-5 p-l-5 p-b-5" flexWrap="wrap">
             <Label class="p-l-5 font-weight-bold" text="{{ 'DATE_OF_REPRINT' | translate }}"></Label>
             <Label class="p-r-10 text-right"
               text="{{ printCouponService.reprintDate | date:'yyyy-MM-dd HH.mm.ss' }}"></Label>
           </FlexboxLayout>
-          <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-15 p-l-15 p-b-5" flexWrap="wrap"
+          <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-5 p-l-5 p-b-5" flexWrap="wrap"
             *ngIf="printCouponService.couponPrint.CouponStatusId === couponStatus.Win  ||
             printCouponService.couponPrint.CouponStatusId === couponStatus.Lost ||
             printCouponService.couponPrint.CouponStatusId === couponStatus.Refused ||
@@ -50,11 +52,11 @@
             <Label class="p-r-10 text-right"
               text="{{'DYNAMIC_KEYS.CouponStatusInternal.'+ couponStatus[printCouponService.couponPrint.CouponStatusId] | translate }}"></Label>
           </FlexboxLayout>
-
-        </StackLayout><!-- /OTHER INFO REPRINT COUPON-->
+        </ng-container>
+        <!-- /OTHER INFO REPRINT COUPON-->
         <StackLayout class="hr-dark m-10"></StackLayout>
         <!-- ODDS PARTITION -->
-        <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-r-15 p-l-15" flexWrap="wrap"
+        <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-r-10 p-l-10" flexWrap="wrap"
           *ngFor="let groupCat of printCouponService.couponPrint.Odds | groupByCategory:'Championship'">
           <Label class="font-weight-bold" text="{{ groupCat.key }}"></Label>
           <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-5 p-b-5" flexWrap="wrap"
@@ -64,21 +66,20 @@
               <Label class="separator"></Label>
             </FlexboxLayout>
             <FlexboxLayout flexDirection="row" justifyContent="flex-end" class="p-b-5" flexWrap="wrap">
-              <Label class="p-l-10 p-r-5 text-right" fontWeight="500" text="{{ match.SelectionName }}"></Label>
-              <Label class="p-r-10 text-center font-weight-bold border-5" width="100" *ngIf="match.OddStake > 0"
-                text="{{ match.OddStake }}"></Label>
+              <Label class="p-l-10 p-r-5  text-right" fontWeight="500" text="{{ match.SelectionName }}"></Label>
+              <Label class="p-r-10 text-center font-weight-bold border-5" fontSize="30" textWrap="true" width="100"
+                *ngIf="match.OddStake > 0" text="{{ match.OddStake | number :'1.2-2' }}"></Label>
             </FlexboxLayout>
-
           </FlexboxLayout>
         </FlexboxLayout>
         <!-- FOOTER ELEMENTS-->
         <StackLayout class="hr-dark m-10"></StackLayout>
-        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-15 p-l-15" flexWrap="wrap">
+        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-10 p-l-10" flexWrap="wrap">
           <Label class="p-l-5 text-center font-weight-bold" text="{{'STAKE_AMOUNT' | translate }}"></Label>
           <Label class="p-r-10 text-right"
             text="{{ printCouponService.couponPrint.Stake | currency : userService.userCurrency : 'symbol-narrow' }}"></Label>
         </FlexboxLayout>
-        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-15 p-l-15" flexWrap="wrap"
+        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-10 p-l-10" flexWrap="wrap"
           *ngIf="printCouponService.couponPrint.MaxBonus > 0">
           <Label *ngIf="printCouponService.couponPrint.CouponTypeId !== couponType.CombinationsBet"
             class="p-l-5 text-center font-weight-bold" text="{{'BONUS' | translate }}:"></Label>
@@ -92,31 +93,34 @@
         <!-- GROUPINGS -->
         <ng-container
           *ngIf="printCouponService.couponPrint.Groupings && printCouponService.couponPrint.CouponTypeId === couponType.CombinationsBet">
-          <FlexboxLayout class="row-grouping p-l-15 p-r-15" flexDirection="column" justifyContent="space-between"
+          <FlexboxLayout class="row-grouping p-l-10 p-r-10" flexDirection="column" justifyContent="space-between"
             flexWrap="wrap" *ngFor="let grouping of printCouponService.couponPrint.Groupings; let i = index">
             <ng-container *ngIf="!grouping.IsMultiStake">
-              <GridLayout rows="*" columns="*,*">
+              <GridLayout rows="*" columns="3*,5*">
                 <GridLayout col="0" rows="*" columns="*">
                   <Label col="0" class="label" text="{{'GROUPS' | translate }}: {{ grouping.Grouping}}"></Label>
                 </GridLayout>
-                <GridLayout col="1" rows="*" columns="*,*">
+                <GridLayout col="1" rows="*" columns="*,2*,2*">
                   <Label col="0" class="comb text-right" text="{{'COMB' | translate }}:"></Label>
-                  <Label col="1" class="comb m-r-10 text-right" fontWeight="700"
-                    text="{{ grouping.Combinations + ' x ' + grouping.Stake +' = ' + (grouping.Combinations * grouping.Stake | currency : userService.userCurrency : 'symbol-narrow') }}"></Label>
+                  <Label col="1" class="comb m-r-10 text-right" fontWeight="700" textWrap="true"
+                    text="{{ grouping.Combinations + ' x ' + grouping.Stake +' = '}}"></Label>
+                  <Label col="2" class="comb m-r-10 text-right" fontWeight="700" textWrap="true"
+                    text=" {{ (grouping.Combinations * grouping.Stake  | currency : userService.userCurrency : 'symbol-narrow') }}"></Label>
                 </GridLayout>
               </GridLayout>
             </ng-container>
           </FlexboxLayout>
         </ng-container>
         <!--SINGLE BET-->
-        <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-r-15 p-l-15" flexWrap="wrap"
+        <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-r-10 p-l-10" flexWrap="wrap"
           *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.SingleBet">
-          <Label class="h2 text-center" text="{{'TOTAL_PAYOUT' | translate }}" textTransform="uppercase"></Label>
+          <Label class="h2 text-center" text="{{'TOTAL_PAYOUT' | translate }}" textTransform="uppercase"
+            letterSpacing="5"></Label>
           <Label class="h3 text-center"
             text="{{ printCouponService.couponPrint.MaxWin | currency : userService.userCurrency : 'symbol-narrow' }}"></Label>
           <StackLayout class="hr-dark m-10"></StackLayout>
         </FlexboxLayout>
-        <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-r-15 p-l-15" flexWrap="wrap"
+        <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-r-10 p-l-10" flexWrap="wrap"
           *ngIf="printCouponService.couponPrint.CouponTypeId !== couponType.SingleBet">
           <StackLayout class="hr-dark m-10"
             *ngIf="printCouponService.couponPrint.Groupings && printCouponService.couponPrint.CouponTypeId === couponType.CombinationsBet">
@@ -131,14 +135,15 @@
           <StackLayout class="hr-dark m-10"></StackLayout>
         </FlexboxLayout>
         <!-- FOOTER INFO -->
-        <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-15">
+        <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-10">
           <ng-container *ngIf="appSetting.printSettings.isTrasmitionInfoMessageShown">
-            <Label class="p-10 text-left"
+            <Label class="p-10 text-left" textWrap="true"
               text="{{'PRINT_COUPON.TRANSMISSION_MESSAGE' | translate}} {{ printCouponService.couponPrint.CouponDateOffset | date : 'dd/MM/yyyy HH:mm:ss' }}"></Label>
             <StackLayout class="hr-dark m-10"></StackLayout>
           </ng-container>
-          <Label class="p-10 text-left"
+          <Label class="p-10 text-left" textWrap="true"
             text="{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSetting.license] | translate}}"></Label>
+
         </FlexboxLayout>
       </FlexboxLayout>
     </StackLayout>

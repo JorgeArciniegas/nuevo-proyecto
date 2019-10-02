@@ -250,6 +250,6 @@ export const environment: Environment = {
   printSettings: {
     isEnabledReprintCoupon: true,
     isTrasmitionInfoMessageShown: true,
-    isShowHeaderMessage: false
+    isShowHeaderMessage: true
   }
 };

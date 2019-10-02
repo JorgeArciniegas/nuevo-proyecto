@@ -36,8 +36,8 @@ module.exports = env => {
   const {
     // The 'appPath' and 'appResourcesPath' values are fetched from
     // the nsconfig.json configuration file.
-    appPath = "src",
-    appResourcesPath = "App_Resources",
+    appPath = 'src',
+    appResourcesPath = 'src/App_Resources',
 
     // You can provide the following flags when running 'tns run android|ios'
     aot, // --env.aot

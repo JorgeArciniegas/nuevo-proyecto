@@ -548,7 +548,7 @@
 	}
 
 	.logo-print-coupon {
-		@extend %logo-header-mobile;
+		//	@extend %logo-header-mobile;
 	}
 
 	.border-bottom-overlay {
@@ -692,4 +692,13 @@
 }
 .warning-icon {
 	@extend %warning-icon-mobile;
+}
+
+/* Dividers */
+
+.hr,
+.hr-dark {
+	min-height: 5;
+	border-bottom-width: 5;
+	@extend %hr-border-bottom;
 }

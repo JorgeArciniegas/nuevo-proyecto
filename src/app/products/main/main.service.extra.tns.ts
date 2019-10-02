@@ -32,8 +32,12 @@ export class MainServiceExtra {
     // set to reset all variables
     this.toResetAllSelections = true;
     // if the coupon isn't empty
-    if (this.couponService.productHasCoupon.checked && (this.eventDetails.currentEvent !== selected || userSelect) &&
-      (this.couponService.coupon && this.couponService.coupon.Odds.length > 0)) {
+    if (
+      this.couponService.productHasCoupon &&
+      this.couponService.productHasCoupon.checked &&
+      (this.eventDetails.currentEvent !== selected || userSelect) &&
+      (this.couponService.coupon && this.couponService.coupon.Odds.length > 0)
+    ) {
       // open modal destroy confirm coupon
       this.destroyCouponService.openDestroyCouponDialog();
       this.destroyCouponService.showDialog = true;
