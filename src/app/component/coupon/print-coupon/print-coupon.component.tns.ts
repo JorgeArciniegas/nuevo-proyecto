@@ -23,7 +23,7 @@ export class PrintCouponComponent implements OnInit {
   qrCodeSource: ImageSource;
   barCode128Source: ImageSource;
   @ViewChild('printingData', { static: false }) view: ElementRef;
-  //  @ViewChild('qrcode', { static: true }) qrcode: ElementRef;
+
   constructor(public printCouponService: PrintCouponService, public appSetting: AppSettings, public userService: UserService) {
 
   }
