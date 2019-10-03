@@ -25,22 +25,22 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
   couponOddEvent: OddsEventRows;
   couponGroupingsRow: GroupingsRows;
   constructor(
-     private route: ActivatedRoute,
-     private elysApi: ElysApiService,
-     public readonly settings: AppSettings,
-     private router: RouterExtensions,
-     private printService: PrintCouponService
-     ) {
-      this.showDataViewSelected = ShowBetDetailView.SUMMARY;
-     }
+    private route: ActivatedRoute,
+    private elysApi: ElysApiService,
+    public readonly settings: AppSettings,
+    private router: RouterExtensions,
+    private printService: PrintCouponService
+  ) {
+    this.showDataViewSelected = ShowBetDetailView.SUMMARY;
+  }
 
   ngOnInit() {
-    this.routingSub = this.route.params.subscribe( params => {
+    this.routingSub = this.route.params.subscribe(params => {
       const req: SummaryCouponRequest = {
         CouponCategory: CouponCategory.Virtual,
-        IdOrCode:  params.id
+        IdOrCode: params.id
       };
-      this.elysApi.coupon.getCouponDetail(req).then( items => {
+      this.elysApi.coupon.getCouponDetail(req).then(items => {
         this.couponDetail = items;
         // setting paginator for events
         this.couponOddEvent = {
@@ -48,7 +48,7 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
           pageOdd: 1,
           pageOddRows: this.definedNumberRowForEvents,
           maxPage: this.couponDetail.Odds.length === 1 ? 1 : Math.round(this.couponDetail.Odds.length / this.definedNumberRowForEvents),
-          odd: this.couponDetail.Odds.slice(0, this.definedNumberRowForEvents )
+          odd: this.couponDetail.Odds.slice(0, this.definedNumberRowForEvents)
         };
         // setting paginator for combinations
         this.couponGroupingsRow = {
@@ -60,7 +60,7 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
           couponStake: this.couponDetail.Stake
         };
       });
-   });
+    });
   }
 
 
@@ -69,7 +69,7 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
       if (this.showDataViewSelected === ShowBetDetailView.EVENTS) {
         this.couponOddEvent.odd = this.couponDetail.Odds.slice(
           this.couponOddEvent.pageOdd * this.definedNumberRowForEvents,
-          (this.couponOddEvent.pageOdd + 1 ) * this.definedNumberRowForEvents );
+          (this.couponOddEvent.pageOdd + 1) * this.definedNumberRowForEvents);
         this.couponOddEvent.pageOdd++;
       } else if (
         this.showDataViewSelected === ShowBetDetailView.COMBINATIONS
@@ -82,17 +82,17 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
     } else {
       if (this.showDataViewSelected === ShowBetDetailView.EVENTS) {
         this.couponOddEvent.odd = this.couponDetail.Odds.slice(
-          ((this.couponOddEvent.pageOdd - 1 ) > 1) ? (this.couponOddEvent.pageOdd - 1 ) * this.definedNumberRowForEvents : 0,
-          (this.couponOddEvent.pageOdd - 1 ) * this.definedNumberRowForEvents );
+          ((this.couponOddEvent.pageOdd - 1) > 1) ? (this.couponOddEvent.pageOdd - 1) * this.definedNumberRowForEvents : 0,
+          (this.couponOddEvent.pageOdd - 1) * this.definedNumberRowForEvents);
         this.couponOddEvent.pageOdd--;
       } else if (
         this.showDataViewSelected === ShowBetDetailView.COMBINATIONS
       ) {
         this.couponGroupingsRow.groupings = this.couponDetail.Groupings.slice(
           this.couponGroupingsRow.pageGrouping - 1 > 1 ?
-          (this.couponGroupingsRow.pageGrouping - 1) * this.definedNumberRowForGroupings : 0,
+            (this.couponGroupingsRow.pageGrouping - 1) * this.definedNumberRowForGroupings : 0,
           (this.couponGroupingsRow.pageGrouping - 1) *
-            this.definedNumberRowForGroupings
+          this.definedNumberRowForGroupings
         );
         this.couponGroupingsRow.pageGrouping--;
       }
@@ -104,16 +104,16 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
     this.routingSub.unsubscribe();
   }
 
-  changeView(view:  ShowBetDetailView): void  {
+  changeView(view: ShowBetDetailView): void {
     this.showDataViewSelected = view;
   }
 
   goBack(): void {
-    this.router.back();
+    this.router.navigateByUrl('admin/reports/betsList/summaryCoupons');
   }
 
-  printAgainCoupon( ): void {
-    this.printService.reprintCoupon( this.couponDetail );
+  printAgainCoupon(): void {
+    this.printService.reprintCoupon(this.couponDetail);
   }
 
 }

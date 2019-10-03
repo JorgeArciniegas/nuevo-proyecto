@@ -45,6 +45,7 @@
     "nativescript-ng-shadow": "^2.1.0",
     "nativescript-printer": "^1.3.0",
     "nativescript-theme-core": "^2.0.22",
+    "nativescript-zxing": "^1.5.9",
     "ngx-barcode": "^0.2.4",
     "node-sass": "^4.12.0",
     "reflect-metadata": "^0.1.13",
