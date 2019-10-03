@@ -49,8 +49,8 @@ export class PrintCouponComponent implements OnInit {
     const qrCode = zx.createBarcode(
       {
         encode: this.printCouponService.couponPrint.CouponCode,
-        height: 150,
-        width: 150,
+        height: 300,
+        width: 300,
         format: ZXing.QR_CODE
       }
     );
@@ -65,7 +65,7 @@ export class PrintCouponComponent implements OnInit {
       {
         encode: this.printCouponService.couponPrint.CouponCode,
         height: 200,
-        width: 350,
+        width: 600,
         format: ZXing.CODE_128
       }
     );
