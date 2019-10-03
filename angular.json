@@ -17,8 +17,14 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets", "src/app/themes/skins"],
-            "styles": ["src/styles.scss"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/app/themes/skins"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -58,7 +64,7 @@
               ]
             },
             "universalsoft-prod": {
-              "outputPath": "dist-universal",
+              "outputPath": "dist-universalsoft",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -67,11 +73,29 @@
               ]
             },
             "universalsoft-staging": {
-              "outputPath": "dist-universal",
+              "outputPath": "dist-universalsoft",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.universalsoft-staging.ts"
+                }
+              ]
+            },
+            "mayabet-prod": {
+              "outputPath": "dist-mayabet",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.mayabet.ts"
+                }
+              ]
+            },
+            "mayabet-staging": {
+              "outputPath": "dist-mayabet",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.mayabet-staging.ts"
                 }
               ]
             }
@@ -97,6 +121,12 @@
             },
             "universalsoft-staging": {
               "browserTarget": "vdesk:build:universalsoft-staging"
+            },
+            "mayabet-prod": {
+              "browserTarget": "vdesk:build:mayabet-prod"
+            },
+            "mayabet-staging": {
+              "browserTarget": "vdesk:build:mayabet-staging"
             }
           }
         },
@@ -113,16 +143,26 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": [],
-            "assets": ["src/favicon.ico", "src/assets"]
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -147,7 +187,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
