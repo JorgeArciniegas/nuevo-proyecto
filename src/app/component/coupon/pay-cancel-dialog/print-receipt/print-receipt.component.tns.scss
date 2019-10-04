@@ -1,25 +1,29 @@
 #printing {
 	background: white;
 	color: #000;
-
-	.header {
-		.logo-print-coupon {
-			margin-bottom: 5;
-		}
-
-		.header-content {
-			border-width: 1;
-		}
+	font-family: "Courier New", Courier, monospace;
+	font-size: 30;
+	font-weight: bold;
+	.printbox {
+		margin: 150;
+	}
+	.border-5 {
+		border-width: 5;
+		border-color: #000;
+		border-radius: 5;
+	}
+	.h2,
+	.h3,
+	.h4 {
+		font-weight: bold;
+		color: #000;
+	}
+	.h2 {
+		font-size: 43;
 	}
 
-	.content {
-		.operation-info {
-			text-transform: lowercase;
-			padding-left: 5;
-		}
-	}
-
-	.footer {
-		padding: 0 10 10 10;
+	.h3,
+	.h4 {
+		font-size: 38;
 	}
 }

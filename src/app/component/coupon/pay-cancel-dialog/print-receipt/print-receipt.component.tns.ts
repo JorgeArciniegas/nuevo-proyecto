@@ -14,7 +14,7 @@ export class PrintReceiptComponent implements OnInit {
   public receipt: Receipt;
   public date: Date;
   public printer: Printer = new Printer();
-  @ViewChild('printing', { static: false }) view: ElementRef;
+  @ViewChild('printingData', { static: false }) view: ElementRef;
 
   constructor(
     public printService: PrintReceiptService,
