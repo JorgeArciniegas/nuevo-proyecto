@@ -33,7 +33,7 @@
             <h4 [style.margin-top.px]="0">{{ 'DATE_FROM' | translate }}</h4>
             <mat-form-field class="btn-filter btn-default radius-5" (click)="pickerDateFrom.open()">
               <input matInput class="datepicker" [matDatepicker]="pickerDateFrom" disabled
-                [(ngModel)]="betsListService.dateFrom">
+                [(ngModel)]="betsListService.dateFrom" [matDatepickerFilter]="betsListService.dateFilterFrom">
               <mat-datepicker-toggle matSuffix [for]="pickerDateFrom"></mat-datepicker-toggle>
               <mat-datepicker touchUi #pickerDateFrom disabled="false"></mat-datepicker>
             </mat-form-field>
@@ -43,7 +43,7 @@
             <h4 [style.margin-top.px]="0">{{ 'DATE_TO' | translate }}</h4>
             <mat-form-field class="btn-filter btn-default radius-5" (click)="pickerDateTo.open()">
               <input matInput class="datepicker" [matDatepicker]="pickerDateTo" disabled
-                [(ngModel)]="betsListService.dateTo">
+                [(ngModel)]="betsListService.dateTo" [matDatepickerFilter]="betsListService.dateFilterTo">
               <mat-datepicker-toggle matSuffix [for]="pickerDateTo"></mat-datepicker-toggle>
               <mat-datepicker touchUi #pickerDateTo disabled="false"></mat-datepicker>
             </mat-form-field>

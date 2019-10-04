@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, } from '@angular/core';
 import { ModalDatetimepicker } from 'nativescript-modal-datetimepicker';
 import { RouterService } from '../../../../services/utility/router/router.service';
 import { StatementVirtualShopService } from '../statement-virtual-shop.service';

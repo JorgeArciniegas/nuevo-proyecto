@@ -6,15 +6,15 @@
     <!-- ROW 0 -->
     <div fxLayout="row" fxLayoutGap="20px">
       <!-- DATA SELECTED -->
-      <div fxFlex="70" fxLayout="row" fxLayoutGap="20px" class="display padding-20">
+      <div fxFlex="70" fxLayout="row" fxLayoutGap="20px" class="display padding-20" *ngIf="service.request">
         <h3 class="label-overlap">{{ 'DATE' | translate }}</h3>
         <div fxFlex="50" class="row filter-input" fxLayoutGap="20px">
           <div fxFlex class="row" fxLayoutGap="20px">
             <div fxLayout="column" fxLayoutGap="5px">
               <h4>{{ 'DATE_FROM' | translate }}</h4>
               <mat-form-field class="btn-filter btn-default padding-5 radius-5" (click)="pickerDateFrom.open()">
-                <input matInput class="datepicker" [matDatepicker]="pickerDateFrom" disabled
-                  [(ngModel)]="service.dateFrom">
+                <input matInput class="datepicker" [matDatepickerFilter]="service.dateFilterFrom"
+                  [matDatepicker]="pickerDateFrom" disabled [(ngModel)]="service.dateFrom">
                 <mat-datepicker-toggle matSuffix [for]="pickerDateFrom"></mat-datepicker-toggle>
                 <mat-datepicker touchUi #pickerDateFrom disabled="false"></mat-datepicker>
               </mat-form-field>
@@ -26,8 +26,8 @@
             <div fxLayout="column" fxLayoutGap="5px">
               <h4>{{ 'DATE_TO' | translate }}</h4>
               <mat-form-field class="btn-filter btn-default padding-5 radius-5" (click)="pickerDateTo.open()">
-                <input matInput class="datepicker" [matDatepickerFilter]="myFilter" [matDatepicker]="pickerDateTo"
-                  disabled [(ngModel)]="service.dateTo">
+                <input matInput class="datepicker" [matDatepickerFilter]="service.dateFilterTo"
+                  [matDatepicker]="pickerDateTo" disabled [(ngModel)]="service.dateTo">
                 <mat-datepicker-toggle matSuffix [for]="pickerDateTo"></mat-datepicker-toggle>
                 <mat-datepicker touchUi #pickerDateTo disabled="false"></mat-datepicker>
               </mat-form-field>

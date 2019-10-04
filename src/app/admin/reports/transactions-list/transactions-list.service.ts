@@ -13,6 +13,25 @@ export class TransactionsListService {
   // Result of request list
   transactionsList: ReportsAccountStatementResponse = null;
 
+
+  /**
+   * Filter date
+   */
+  dateFilterTo = (d: Date): boolean => {
+    const today = new Date();
+    // return d.getMonth() <= today.getMonth() && d.getDate() <= today.getDate();
+    const dateToCompare = (this.request.dateFrom) ? this.request.dateFrom : new Date();
+    return d >= dateToCompare && d <= today;
+  }
+  /**
+   * IT isn't possible selected the date <>> of the date from
+   */
+  dateFilterFrom = (d: Date): boolean => {
+    // return d <= new Date();
+    const dateToCompare = (this.request.dateTo) ? this.request.dateTo : new Date();
+    return d <= dateToCompare;
+  }
+
   constructor(public elysApi: ElysApiService, private router: RouterService) {
     // Request default object.
     this.initResetRequest();

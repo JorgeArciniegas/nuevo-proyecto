@@ -14,7 +14,8 @@
               <h4>{{ 'DATE_FROM' | translate }}</h4>
               <mat-form-field class="btn-filter btn-default padding-5 radius-5" (click)="pickerDateFrom.open()">
                 <input matInput class="datepicker" [matDatepicker]="pickerDateFrom" disabled
-                  [(ngModel)]="transactionsListService.dateFrom">
+                  [(ngModel)]="transactionsListService.dateFrom"
+                  [matDatepickerFilter]="transactionsListService.dateFilterFrom">
                 <mat-datepicker-toggle matSuffix [for]="pickerDateFrom"></mat-datepicker-toggle>
                 <mat-datepicker touchUi #pickerDateFrom disabled="false"></mat-datepicker>
               </mat-form-field>
@@ -27,7 +28,8 @@
               <h4>{{ 'DATE_TO' | translate }}</h4>
               <mat-form-field class="btn-filter btn-default padding-5 radius-5" (click)="pickerDateTo.open()">
                 <input matInput class="datepicker" [matDatepicker]="pickerDateTo" disabled
-                  [(ngModel)]="transactionsListService.dateTo">
+                  [(ngModel)]="transactionsListService.dateTo"
+                  [matDatepickerFilter]="transactionsListService.dateFilterTo">
                 <mat-datepicker-toggle matSuffix [for]="pickerDateTo"></mat-datepicker-toggle>
                 <mat-datepicker touchUi #pickerDateTo disabled="false"></mat-datepicker>
               </mat-form-field>
