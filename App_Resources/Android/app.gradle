@@ -20,6 +20,9 @@ android {
   aaptOptions {
     additionalParameters "--no-version-vectors"
   }
+  /**
+  * Added this for exclude the libraries to the compile
+  **/
   configurations {
     compile.exclude group: 'com.google.zxing'
   }

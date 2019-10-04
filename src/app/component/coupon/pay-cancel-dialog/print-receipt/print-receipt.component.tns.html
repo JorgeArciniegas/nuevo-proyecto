@@ -4,21 +4,27 @@
     <Button (tap)="print()" text="{{ 'PRINT' | translate }}" class="btn btn-primary"></Button>
     <Button (tap)="printService.resetPrint()" class="btn btn-accent" text="{{ 'DELETE' | translate }}"></Button>
   </FlexboxLayout>
-  <StackLayout #printing class="p-5">
-    <FlexboxLayout flexDirection="column" class="header">
-      <StackLayout class="logo-print-coupon" height="50"></StackLayout>
-      <Label class="header-content p-5 text-center " text="{{ appSettings.bookmakerDetails }}"></Label>
-    </FlexboxLayout>
-    <FlexboxLayout flexDirection="column" flexWrap="wrap" class="content p-10">
-      <Label class="bet-info" text="{{ 'BET' | translate }} {{receipt.couponCode}}"></Label>
-      <Label class="operation-info" text="{{ 'DELETED_ON' | translate }} {{date | date: 'dd-MM-yyyy HH:mm'}}"
-        *ngIf="!receipt.isPayment"></Label>
-      <Label class="operation-info" text="{{ 'PAID_ON' | translate }} {{date | date: 'dd-MM-yyyy HH:mm'}}"
-        *ngIf="receipt.isPayment"></Label>
-    </FlexboxLayout>
-    <FlexboxLayout flexDirection="row" flexWrap="wrap" class="footer">
-      <Label class="font-weight-bold" fontSize="20"
-        text="{{ 'PAID_AMOUNT' | translate}}: {{receipt.amount  | currency : userService.userCurrency : 'symbol-narrow' }}"></Label>
+
+  <StackLayout #printing orientation="horizontal" class="m-10 p-50">
+    <FlexboxLayout flexDirection="column" class="printbox">
+      <StackLayout class="logo-print-coupon">
+        <Image stretch="aspectFill" src="~/app/themes/skins/{{appSettings.theme}}/image/Logo-coupon.png"></Image>
+      </StackLayout>
+      <FlexboxLayout flexDirection="column" class="header">
+        <StackLayout class="logo-print-coupon" height="50"></StackLayout>
+        <Label class="header-content p-5 text-center " text="{{ appSettings.bookmakerDetails }}"></Label>
+      </FlexboxLayout>
+      <FlexboxLayout flexDirection="column" flexWrap="wrap" class="content p-10">
+        <Label class="bet-info" text="{{ 'BET' | translate }} {{receipt.couponCode}}"></Label>
+        <Label class="operation-info" text="{{ 'DELETED_ON' | translate }} {{date | date: 'dd-MM-yyyy HH:mm'}}"
+          *ngIf="!receipt.isPayment"></Label>
+        <Label class="operation-info" text="{{ 'PAID_ON' | translate }} {{date | date: 'dd-MM-yyyy HH:mm'}}"
+          *ngIf="receipt.isPayment"></Label>
+      </FlexboxLayout>
+      <FlexboxLayout flexDirection="row" flexWrap="wrap" class="footer">
+        <Label class="font-weight-bold" fontSize="20"
+          text="{{ 'PAID_AMOUNT' | translate}}: {{receipt.amount  | currency : userService.userCurrency : 'symbol-narrow' }}"></Label>
+      </FlexboxLayout>
     </FlexboxLayout>
   </StackLayout>
 </StackLayout>
