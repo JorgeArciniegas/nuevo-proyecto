@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ReportsCtdAggregatesRequest, ReportsCtdAggregatesResponse, ElysApiService } from '@elys/elys-api';
+import { ElysApiService, ReportsCtdAggregatesRequest, ReportsCtdAggregatesResponse } from '@elys/elys-api';
+import { timer } from 'rxjs';
 import { UserService } from '../../../services/user.service';
-import { DataListOfCtdAggregate } from './statement-virtual-shop.model';
 import { ExcelService } from '../../../services/utility/export/excel.service';
+import { DataListOfCtdAggregate } from './statement-virtual-shop.model';
 
 
 @Injectable({
@@ -17,12 +18,37 @@ export class StatementVirtualShopService {
   // counter for max row per page
   rowNumber = 10;
 
+
+
+  /**
+   * Filter date
+   */
+  dateFilterTo = (d: Date): boolean => {
+    const today = new Date();
+    today.setDate(today.getDate() - 1);
+    return d <= today;
+  }
+  /**
+   * IT isn't possible selected the date <>> of the date from
+   */
+  dateFilterFrom = (d: Date): boolean => {
+    // return d <= new Date();
+    const dateToCompare = (this.request.ToDate) ? this.request.ToDate : new Date();
+    return d <= dateToCompare;
+  }
+
+
   constructor(
     private userService: UserService,
     private elysApi: ElysApiService,
     private exportService: ExcelService
   ) {
-    this.initData();
+    if (this.userService.dataUserDetail.userDetail === null) {
+      timer(1000).subscribe(() => this.initData());
+    } else {
+      this.initData();
+    }
+
   }
 
   /**

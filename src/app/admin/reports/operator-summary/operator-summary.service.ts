@@ -13,6 +13,25 @@ export class OperatorSummaryService {
   totalVoided = 0;
   totalWon = 0;
 
+  /**
+   * Filter date
+   */
+  dateFilterTo = (d: Date): boolean => {
+    const today = new Date();
+    // return d.getMonth() <= today.getMonth() && d.getDate() <= today.getDate();
+    const dateToCompare = (this.reportsOperatorVolumeRequest.dateFrom) ? this.reportsOperatorVolumeRequest.dateFrom : new Date();
+    return d >= dateToCompare && d <= today;
+  }
+  /**
+   * IT isn't possible selected the date <>> of the date from
+   */
+  dateFilterFrom = (d: Date): boolean => {
+    // return d <= new Date();
+    const dateToCompare = (this.reportsOperatorVolumeRequest.dateTo) ? this.reportsOperatorVolumeRequest.dateTo : new Date();
+    return d <= dateToCompare;
+  }
+
+
   constructor(public elysApi: ElysApiService, private userService: UserService, private router: RouterService) {
     // Request default object.
     this.initResetRequest();

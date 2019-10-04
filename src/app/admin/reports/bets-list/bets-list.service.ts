@@ -26,6 +26,27 @@ export class BetsListService {
   betsCouponList: CouponSummaryCouponListResponse = null;
 
   operatorSelected: AccountOperator;
+
+
+  /**
+   * Filter date
+   */
+  dateFilterTo = (d: Date): boolean => {
+    const today = new Date();
+    // return d.getMonth() <= today.getMonth() && d.getDate() <= today.getDate();
+    const dateToCompare = (this.request.dateFrom) ? this.request.dateFrom : new Date();
+    return d >= dateToCompare && d <= today;
+  }
+  /**
+   * IT isn't possible selected the date <>> of the date from
+   */
+  dateFilterFrom = (d: Date): boolean => {
+    // return d <= new Date();
+    const dateToCompare = (this.request.dateTo) ? this.request.dateTo : new Date();
+    return d <= dateToCompare;
+  }
+
+
   constructor(
     public elysApi: ElysApiService,
     private router: RouterService,
@@ -52,7 +73,7 @@ export class BetsListService {
       dateFrom: new Date(),
       dateTo: new Date(),
       pageSize: this.pageSizeList[0],
-      requestedPage: 1,
+      requestedPage: 0,
       couponType: CouponTypeInternal.ALL,
       sportId: null,
       product: null,
@@ -212,7 +233,7 @@ export class BetsListService {
    */
   paginatorSize(isIncrement: boolean): void {
     let updateBetList = false;
-    if (this.request.requestedPage > 1 && !isIncrement) {
+    if (this.request.requestedPage > 0 && !isIncrement) {
       this.request.requestedPage--;
       updateBetList = true;
     } else if (isIncrement) {
@@ -229,13 +250,18 @@ export class BetsListService {
 
   getList(reset?: boolean): void {
     if (reset) {
-      this.request.requestedPage = 1;
+      this.request.requestedPage = 0;
     }
     const req: VirtualCouponListByAgentRequest = this.cloneRequest();
 
     this.elysApi.reports
       .getVirtualListOfCouponByAgent(req)
-      .then(items => (this.betsCouponList = items));
+      .then(items => {
+        this.betsCouponList = items;
+        if (this.request.requestedPage === 0 && items.TotalPages > 0) {
+          this.request.requestedPage = 1;
+        }
+      });
 
     this.router
       .getRouter()
@@ -258,7 +284,7 @@ export class BetsListService {
       dateFrom: this.request.dateFrom,
       dateTo: dateto,
       pageSize: this.request.pageSize,
-      requestedPage: this.request.requestedPage,
+      requestedPage: (this.request.requestedPage === 0) ? 1 : this.request.requestedPage,
       couponType: this.request.couponType,
       sportId: this.request.sportId === 0 ? null : this.request.sportId,
       product: this.request.product,

@@ -8,9 +8,17 @@ import { UserService } from '../../../../services/user.service';
   templateUrl: './summary-coupons.component.html',
   styleUrls: ['./summary-coupons.component.scss']
 })
+
 export class SummaryCouponsComponent {
   couponType: typeof CouponTypeInternal = CouponTypeInternal;
   couponStatus: typeof CouponStatusInternal = CouponStatusInternal;
 
-  constructor(public userService: UserService, public betsListService: BetsListService) {}
+
+  constructor(public userService: UserService, public betsListService: BetsListService) { }
+
+  myFilter = (d: Date): boolean => {
+    const today = new Date();
+    return d.getDate() < today.getDate();
+  }
+
 }

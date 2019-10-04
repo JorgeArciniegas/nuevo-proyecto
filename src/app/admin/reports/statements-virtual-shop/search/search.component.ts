@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { DateAdapter } from '@angular/material';
 import { TranslateUtilityService } from '../../../../services/utility/translate-utility.service';
 import { Observable } from 'rxjs';
@@ -11,15 +11,10 @@ import { RouterService } from '../../../../services/utility/router/router.servic
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit, OnDestroy {
+export class SearchComponent implements OnDestroy {
   @ViewChild('pickerDateFrom', { static: false }) private inputPickerDateFrom;
   @ViewChild('pickerDateTo', { static: false }) private inputPickerDateTo;
 
-  myFilter = (d: Date): boolean => {
-    const today = new Date();
-    const day = d.getDate();
-    return d.getDate() < today.getDate();
-  }
   constructor(
     public service: StatementVirtualShopService,
     private translate: TranslateUtilityService,
@@ -44,18 +39,16 @@ export class SearchComponent implements OnInit, OnDestroy {
         });
       });
 
-      if (this.inputPickerDateFrom.opened && dismiss) {
+      if (this.inputPickerDateFrom && this.inputPickerDateFrom.opened && dismiss) {
         this.inputPickerDateFrom.close();
       }
 
-      if (this.inputPickerDateTo.opened && dismiss) {
+      if (this.inputPickerDateTo && this.inputPickerDateTo.opened && dismiss) {
         this.inputPickerDateTo.close();
       }
     });
   }
 
-  ngOnInit() {
-  }
 
   ngOnDestroy(): void {
     document.body.classList.remove('bets-list');

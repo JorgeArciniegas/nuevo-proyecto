@@ -751,6 +751,9 @@ html {
 	.mat-calendar-body-selected {
 		@extend %btn-filter-success;
 	}
+	.mat-calendar-body-disabled {
+		opacity: 0.2;
+	}
 }
 
 .modal-center {

@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'result',
     component: SummaryComponent
+  },
+  {
+    path: '**',
+    loadChildren: () => import('../../../error-page/error-page.module').then(m => m.ErrorPageModule),
   }
 ];
 
