@@ -1,6 +1,8 @@
 import { environment as prodEnvironment } from './environment.prod';
 import { environment as vgenEnvironment } from './environment.vgen';
 import { environment as vgenStagingEnvironment } from './environment.vgen-staging';
+import { environment as mayabetEnvironment } from './environment.mayabet';
+import { environment as mayabetStagingEnvironment } from './environment.mayabet-staging';
 import { environment as universalSoftEnvironment } from './environment.universalsoft';
 import { environment as universalSoftStagingEnvironment } from './environment.universalsoft-staging';
 import { environment as devEnvironment } from './environment';
@@ -32,6 +34,12 @@ export const environment: Environment = (() => {
         break;
       case 'universalsoft-staging':
         envVars = universalSoftStagingEnvironment;
+        break;
+      case 'mayabet-prod':
+        envVars = mayabetEnvironment;
+        break;
+      case 'mayabet-staging':
+        envVars = mayabetStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;
