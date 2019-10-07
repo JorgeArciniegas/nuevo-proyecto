@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CancelCouponRequest, ErrorStatus, FlagAsPaidRequest } from '@elys/elys-api';
 import { BarcodeScanner } from 'nativescript-barcodescanner';
 import { TextField } from 'tns-core-modules/ui/text-field';
@@ -32,8 +32,7 @@ export class PayCancelDialogComponent {
     public readonly couponService: CouponService,
     public couponDialogService: CouponDialogService,
     private userService: UserService,
-    private printService: PrintReceiptService,
-    private cdr: ChangeDetectorRef
+    private printService: PrintReceiptService
   ) {
     this.titleType = DialogTypeCoupon[this.couponDialogService.type];
   }
