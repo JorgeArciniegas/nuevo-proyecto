@@ -1,4 +1,4 @@
-import { VirtualBetCompetitor } from '@elys/elys-api';
+import { VirtualBetCompetitor, BetCouponGroup, VirtualGetRankByEventResponse } from '@elys/elys-api';
 import { BetCouponExtended } from '@elys/elys-coupon';
 import { LAYOUT_TYPE } from '../../../src/environments/environment.models';
 import { TYPINGTYPE } from '../component/btncalc/btncalc.enum';
@@ -27,6 +27,7 @@ export class PolyfunctionalArea {
   disableInputCalculator?: boolean;
   shortcut?: SmartCodeType;
   smartBetCode?: number;
+  grouping?: BetCouponGroup[];
   constructor() {
     this.typeSlipCol = TypeBetSlipColTot.COL;
     this.firstTap = false;
@@ -111,6 +112,8 @@ export interface BetDataDialog {
   betOdds?: BetOdds;
   betCoupon?: BetCouponExtended;
   statistics?: StatisticDialog;
+  groupings?: BetCouponGroup[];
+  tournamentRanking?: TournamentRanking;
 }
 export class DialogData {
   title: string;
@@ -119,12 +122,24 @@ export class DialogData {
   opened: boolean;
   betCoupon?: BetCouponExtended;
   statistics?: StatisticDialog;
-  constructor(betOdds?: BetOdds, breakpoint?: number, betCoupon?: BetCouponExtended, title?: string, statistics?: StatisticDialog) {
+  groupings?: BetCouponGroup[];
+  tournamentRanking?: TournamentRanking;
+  constructor(
+    betOdds?: BetOdds,
+    breakpoint?: number,
+    betCoupon?: BetCouponExtended,
+    title?: string,
+    statistics?: StatisticDialog,
+    groupings?: BetCouponGroup[],
+    tournamentRanking?: TournamentRanking
+  ) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;
     this.opened = false;
     this.betCoupon = betCoupon || null;
     this.statistics = statistics || null;
+    this.groupings = groupings || null;
+    this.tournamentRanking = tournamentRanking || null;
   }
 }
 export interface StatisticDialog {
@@ -132,6 +147,13 @@ export interface StatisticDialog {
   virtualBetCompetitor: VirtualBetCompetitor[];
   layoutProducts: LAYOUT_TYPE;
 }
+
+export interface TournamentRanking {
+  codeProduct: string;
+  ranking: VirtualGetRankByEventResponse;
+  layoutProducts: LAYOUT_TYPE;
+}
+
 export enum DialogTypeCoupon {
   DELETE,
   PAY

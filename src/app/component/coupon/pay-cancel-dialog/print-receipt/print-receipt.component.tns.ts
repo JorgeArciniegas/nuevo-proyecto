@@ -3,6 +3,7 @@ import { Printer } from 'nativescript-printer';
 import { Receipt } from './print-receipt.model';
 import { PrintReceiptService } from './print-receipt.service.tns';
 import { AppSettings } from '../../../../app.settings';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-print-receipt',
@@ -13,9 +14,12 @@ export class PrintReceiptComponent implements OnInit {
   public receipt: Receipt;
   public date: Date;
   public printer: Printer = new Printer();
-  @ViewChild('printing') view: ElementRef;
+  @ViewChild('printingData', { static: false }) view: ElementRef;
 
-  constructor(public printService: PrintReceiptService, public appSettings: AppSettings) {}
+  constructor(
+    public printService: PrintReceiptService,
+    public appSettings: AppSettings,
+    public userService: UserService) { }
 
   ngOnInit(): void {
     this.receipt = this.printService.receipt;

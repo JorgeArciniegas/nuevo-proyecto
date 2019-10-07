@@ -1,9 +1,9 @@
 <GridLayout rows="*" columns="*" class="dialog">
   <GridLAyout rows="2*,2*, 8*, 2*">
     <!-- header  -->
-    <Label row="0" text="{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.STATISTIC' | translate | uppercase }}" class="h4 title"
+    <Label row="0" text="{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.STATISTIC' | translate | uppercase }}" class="h3 title"
       verticalAlignment="center" horizontalAlignment="center" class="p-10"></Label>
-    <GridLayout row="1" rows="10*,2*" columns="*,*,*,*" verticalAlignment="top" class="p-l-10">
+    <GridLayout row="1" rows="10*,2*" columns="*,*,*,*" verticalAlignment="center" class="p-l-10 p-r-10">
       <Label row="0" col="0" class="text-center" text="#"></Label>
       <Label row="0" col="1" class="text-center" text="{{'STRENGTH' | translate | uppercase}}"></Label>
       <Label row="0" col="2" class="text-center" text="{{'ENDURANCE' | translate | uppercase}}"></Label>
@@ -12,45 +12,48 @@
       <StackLayout row="1" colSpan="4" class="m-t-5 border-bottom-overlay"></StackLayout>
     </GridLayout>
     <!-- content data -->
-    <GridLayout row="2" rows="{{rows}}" columns="*,*,*,*"
-      class="p-l-10 statistic-data statistic-data-cockfight" *ngIf="data.statistics.virtualBetCompetitor" verticalAlignment="top">
+    <GridLayout row="2" rows="{{rows}}" columns="*,*,*,*" class="p-l-10 statistic-data statistic-data-cockfight"
+      *ngIf="data.statistics.virtualBetCompetitor" verticalAlignment="top">
       <ng-container *ngFor="let stat of data.statistics.virtualBetCompetitor; let i=index">
-        <GridLayout row="{{i}}" col="0" rows="*" columns="*" class="bg-playable" verticalAlignment="center" >
-          <GridLayout rows="2*,*" columns="*" class="button btn-default-statistic-cock btn-cock-{{stat.ito}}" verticalAlignment="center" >
+        <GridLayout row="{{i}}" col="0" rows="*" columns="*" class="bg-playable m-10" verticalAlignment="top">
+          <GridLayout rows="2*,*" columns="*" class="button btn-default-statistic-cock btn-cock-{{stat.ito}}"
+            verticalAlignment="center">
             <ng-container [ngSwitch]="stat.ito">
-              <StackLayout row="0" *ngSwitchCase="1"  class="icon icon-cock-red"></StackLayout>
-              <StackLayout row="0" *ngSwitchCase="2"  class="icon icon-cock-blue"></StackLayout>
+              <StackLayout row="0" *ngSwitchCase="1" class="icon icon-cock-red"></StackLayout>
+              <StackLayout row="0" *ngSwitchCase="2" class="icon icon-cock-blue"></StackLayout>
             </ng-container>
             <Label row="1" text="{{stat.nm}}" class="text-center button-internal" isEnabled="false"></Label>
           </GridLayout>
         </GridLayout>
         <StackLayout row="{{i}}" col="1" class="p-r-10" verticalAlignment="center">
-            <StackLayout class="fitness-container fitness-ito-{{stat.ito}}">
-              <StackLayout class="fitness-content" horizontalAlignment="left"
-                [style.width.%]="((( stat.ac[0] / dataStaticsChart.STRENGTH) * 100)) > 20 ? (( stat.ac[0] / dataStaticsChart.STRENGTH) * 100) : 20">
-              </StackLayout>
+          <StackLayout class="fitness-container fitness-ito-{{stat.ito}}">
+            <StackLayout class="fitness-content" horizontalAlignment="left"
+              [style.width.%]="((( stat.ac[0] / dataStaticsChart.STRENGTH) * 100)) > 20 ? (( stat.ac[0] / dataStaticsChart.STRENGTH) * 100) : 20">
             </StackLayout>
+          </StackLayout>
         </StackLayout>
         <StackLayout row="{{i}}" col="2" class="p-r-10" verticalAlignment="center">
           <StackLayout class="fitness-container fitness-ito-{{stat.ito}}">
             <StackLayout class="fitness-content" horizontalAlignment="left"
-              [style.width.%]="((( stat.ac[1] / dataStaticsChart.ENDURANCE) * 100)) > 20 ? (( stat.ac[0] / dataStaticsChart.ENDURANCE) * 100) : 20"></StackLayout>
+              [style.width.%]="((( stat.ac[1] / dataStaticsChart.ENDURANCE) * 100)) > 20 ? (( stat.ac[0] / dataStaticsChart.ENDURANCE) * 100) : 20">
+            </StackLayout>
           </StackLayout>
         </StackLayout>
         <StackLayout row="{{i}}" col="3" class="p-r-10" verticalAlignment="center">
           <StackLayout class="fitness-container fitness-ito-{{stat.ito}}">
             <StackLayout class="fitness-content" horizontalAlignment="left"
-              [style.width.%]="((( stat.ac[2] / dataStaticsChart.AGILITY) * 100)) > 20 ? (( stat.ac[0] / dataStaticsChart.AGILITY) * 100) : 20"></StackLayout>
+              [style.width.%]="((( stat.ac[2] / dataStaticsChart.AGILITY) * 100)) > 20 ? (( stat.ac[0] / dataStaticsChart.AGILITY) * 100) : 20">
+            </StackLayout>
           </StackLayout>
         </StackLayout>
       </ng-container>
     </GridLayout>
     <!-- close button -->
     <StackLayout row="3" horizontalAlignment="center" verticalAlignment="center">
-      <GridLayout rows="*" columns="25*, 25*, 25*" class="m-10">
+      <GridLayout rows="*" columns="25*, 25*, 25*" class="m-5">
         <StackLayout col="0"></StackLayout>
-        <Button col="1" text="{{ 'CLOSE' | translate }}" borderRadius="15"
-          class="button btn-danger btn-close button-internal" (tap)="close()" textTransform="none"></Button>
+        <Button col="1" text="{{ 'CLOSE' | translate }}" borderRadius="4" class="btn-danger btn-close" (tap)="close()"
+          textTransform="none"></Button>
         <StackLayout col="2"></StackLayout>
       </GridLayout>
     </StackLayout>

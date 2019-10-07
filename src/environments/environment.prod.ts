@@ -10,8 +10,10 @@ export const environment: Environment = {
   couponDirectPlace: false,
   currencyDefault: 'EUR',
   showEventId: true,
+  baseApiUrl: '',
   printSettings: {
     isEnabledReprintCoupon: false,
-    isTrasmitionInfoMessageShown: true
+    isTrasmitionInfoMessageShown: true,
+    isShowHeaderMessage: false
   }
 };

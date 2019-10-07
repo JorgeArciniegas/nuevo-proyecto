@@ -1,14 +1,16 @@
-<GridLayout rows="*,2*,14*,2*" columns="*" class="summary" *ngIf="betsListService.betsCouponList">
-  <Label row="0" class="title" colSpan="2" text="{{'BETS_LIST' | translate}}" textWrap="true"
+<GridLayout rows="*,2*,13*,2*" columns="*" class="summary" *ngIf="betsListService.betsCouponList">
+  <Label row="0" class="title" colSpan="2" text="{{'BETS_LIST' | translate | uppercase}}" textWrap="true"
     verticalAlignment="center"></Label>
 
-  <GridLayout row="1" columns="*,2*,2*,2*,3*,3*,3*,4*" class="card header">
-    <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()"
-      src="~/app/themes/skins/{{settings.theme}}/icon/baseline-arrow_back-24px.png" verticalAlignment="center"
-      horizontalAlignment="left"></Image>
+  <GridLayout row="1" columns="*,2*,2*,2*,3*,3*,3*,4*" class="p-l-10 p-r-15" verticalAlignment="top">
+    <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()" src="~/assets/icons/baseline-arrow_back-24px.png"
+      verticalAlignment="center" horizontalAlignment="left"></Image>
     <StackLayout col="1" verticalAlignment="center">
       <Label class="sub-title" text="{{ 'DATE' | translate }}"></Label>
-      <Label text="{{ ((!betsListService.request.dateHasPlaced) ? 'PLACEMENT' : 'PAYMENT') | translate }}"
+      <Label *ngIf="!betsListService.request.carriedOut"
+        text="{{ ((!betsListService.request.dateHasPlaced) ? 'PLACEMENT' : 'SETTLEMENT') | translate }}"
+        textWrap="true"></Label>
+      <Label *ngIf="betsListService.request.carriedOut" text="{{  'FILTER_DATE_OF_PAYMENT' | translate }}"
         textWrap="true"></Label>
     </StackLayout>
     <StackLayout col="2" verticalAlignment="center">
@@ -55,7 +57,7 @@
   </GridLayout>
 
   <GridLayout row="2" shadow="3" cornerRadius="6" class="card">
-    <GridLayout class="display" rows="2*,3*,3*,3*,3*,3*,3*,3*,3*,3*,3*" columns="5*,20*,20*,20*,7*,7*,9*,12*">
+    <GridLayout class="display" rows="2*,3*,3*,3*,3*,3*,3*,3*,3*,3*,3*" columns="3*,15*,12*,15*,7*,5*,7*,9*,14*,11*">
       <!-- title -->
       <Label row="0" col="1" class="sub-title" text="{{ 'COUPON_CODE' | translate }}"
         verticalAlignment="center"></Label>
@@ -63,16 +65,19 @@
       <Label row="0" col="3" class="sub-title" text="{{ 'DATE_OF_PLACEMENT' | translate }}"
         verticalAlignment="center"></Label>
       <Label row="0" col="4" class="sub-title" text="{{ 'STAKE' | translate }}" verticalAlignment="center"></Label>
-      <Label row="0" col="5" class="sub-title" text="{{ 'STATUS' | translate }}" verticalAlignment="center"></Label>
+      <Label row="0" col="5" class="sub-title" text="{{ 'STATUS' | translate }}" verticalAlignment="center"
+        horizontalAlignment="center"></Label>
       <Label row="0" col="6" class="sub-title" text="{{ 'TYPE' | translate }}" verticalAlignment="center"></Label>
       <Label row="0" col="7" class="sub-title" text="{{ 'TOT_WON' | translate }}" verticalAlignment="center"></Label>
-      <StackLayout row="0" colSpan="8" class="border-bottom-overlay" verticalAlignment="bottom"></StackLayout>
+      <Label row="0" col="8" class="sub-title" text="{{ 'PAYMENT_DATE_BY_OPERATOR' | translate }}"
+        verticalAlignment="center"></Label>
+      <Label row="0" col="9" class="sub-title" text="{{ 'PAID_BY' | translate }}" verticalAlignment="center"></Label>
+      <StackLayout row="0" colSpan="10" class="border-bottom-overlay" verticalAlignment="bottom"></StackLayout>
       <!-- rows -->
-      <GridLayout (tap)="showDetails(rowItem.CouponCode)" row="{{i + 1}}" colSpan="8" rows="*"
-        columns="5*,20*,20*,20*,7*,7*,9*,12*"
+      <GridLayout (tap)="showDetails(rowItem.CouponCode)" row="{{i + 1}}" colSpan="10" rows="*"
+        columns="3*,15*,12*,15*,7*,5*,7*,9*,14*,11*"
         *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons; let i = index;">
-        <Image col="0" width="24" *ngIf="rowItem.IsAgentSettled"
-          src="~/app/themes/skins/{{settings.theme}}/icon/baseline-check-24px.png"></Image>
+        <Image col="0" width="24" *ngIf="rowItem.IsAgentSettled" src="~/assets/icons/baseline-check-24px.png"></Image>
         <Label col="1" text="{{ rowItem.CouponCode }}" verticalAlignment="center"></Label>
         <Label col="2" text="{{ rowItem.UserId + ' - ' + rowItem.UserName }}" verticalAlignment="center"></Label>
         <Label col="3" text="{{ rowItem.CouponDateOffset | date: 'dd/MM/yy HH:mm:ss' }}"
@@ -80,67 +85,75 @@
         <Label col="4" text="{{ rowItem.Stake | currency : userService.userCurrency : 'symbol-narrow' }}"
           verticalAlignment="center"></Label>
         <ng-container [ngSwitch]="rowItem.CouponStatusId">
-          <Image col="5" width="24" *ngSwitchDefault
-            src="~/app/themes/skins/{{settings.theme}}/icon/progress-clock.png"></Image>
+          <Image col="5" width="24" *ngSwitchDefault src="~/assets/icons/progress-clock.png"></Image>
           <!-- LOST -->
-          <Image col="5" width="24" *ngSwitchCase="2" src="~/app/themes/skins/{{settings.theme}}/icon/cancel.png">
+          <Image col="5" width="24" *ngSwitchCase="2" src="~/assets/icons/cancel.png">
           </Image>
           <!-- WIN -->
-          <Image col="5" width="24" *ngSwitchCase="3" src="~/app/themes/skins/{{settings.theme}}/icon/checked.png">
+          <Image col="5" width="24" *ngSwitchCase="3" src="~/assets/icons/checked.png">
           </Image>
+          <!-- CANCELLED -->
+          <Image col="5" width="24" *ngSwitchCase="4" src="~/assets/icons/delete-icon.png">
+          </Image>
+
         </ng-container>
         <Label col="6" text="{{ 'DYNAMIC_KEYS.CouponType.' + couponType[rowItem.CouponTypeId] | translate }}"
           verticalAlignment="center"></Label>
         <Label col="7"
           text="{{ (rowItem.Won > 0 )? (rowItem.Won | currency : userService.userCurrency : 'symbol-narrow') : '-'  }}"
           verticalAlignment="center"></Label>
-        <StackLayout colSpan="8" class="border-bottom-overlay" verticalAlignment="bottom"></StackLayout>
+        <Label col="8"
+          text="{{ rowItem.SettlingClientDateOffset ? (rowItem.SettlingClientDateOffset | date: 'dd/MM/yy HH:mm:ss') : '-'}}"
+          verticalAlignment="center"></Label>
+        <Label col="9" text="{{ rowItem.SettlingAgentClient ? rowItem.SettlingAgentClient : '-'}}"
+          verticalAlignment="center"></Label>
+        <StackLayout row="0" colSpan="10" class="border-bottom-overlay" verticalAlignment="bottom"></StackLayout>
       </GridLayout>
     </GridLayout>
   </GridLayout>
 
   <GridLayout row="3" columns="*,2*,2*,2*,2*,2*,2*,2*,2*,*" class="toolbar display">
-    <StackLayout col="1" verticalAlignment="center">
+    <StackLayout col="1" verticalAlignment="top">
       <Label class="value" text="{{ betsListService.betsCouponList.NumberOfBets | number }}" textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.COUPON' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.COUPON' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="2" verticalAlignment="center">
       <Label class="value"
         text="{{ betsListService.betsCouponList.TotalStake | currency : userService.userCurrency : 'symbol-narrow' }}"
         textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'TOT_BET' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'TOT_BET' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="3" verticalAlignment="center">
       <Label class="value" text="{{ betsListService.betsCouponList.NumberOfPlacedBets | number }}"
         textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'BETS_LIST.OPEN' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'BETS_LIST.OPEN' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="4" verticalAlignment="center">
       <Label class="value"
         text="{{ betsListService.betsCouponList.TotalPlacedBets | currency : userService.userCurrency : 'symbol-narrow' }}"
         textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'TOT_OPEN' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'TOT_OPEN' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="5" verticalAlignment="center">
       <Label class="value" text="{{ betsListService.betsCouponList.NumberOfWonBets | number }}" textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'BETS_LIST.WON' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'BETS_LIST.WON' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="6" verticalAlignment="center">
       <Label class="value"
         text="{{ betsListService.betsCouponList.TotalWon | currency : userService.userCurrency : 'symbol-narrow' }}"
         textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'TOT_WON' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'TOT_WON' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="7" verticalAlignment="center">
       <Label class="value" text="{{ betsListService.betsCouponList.NumberOfLossBets | number }}"
         textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'BETS_LIST.LOST' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'BETS_LIST.LOST' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="8" verticalAlignment="center">
       <Label class="value"
         text="{{ betsListService.betsCouponList.TotalLost | currency : userService.userCurrency : 'symbol-narrow' }}"
         textWrap="true"></Label>
-      <Label class="sub-title" text="{{ 'TOT_LOST' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'TOT_LOST' | translate }}"></Label>
     </StackLayout>
   </GridLayout>
 </GridLayout>

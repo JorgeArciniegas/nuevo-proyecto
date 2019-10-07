@@ -1,8 +1,8 @@
 <GridLayout columns="*" rows="*">
   <FlexboxLayout col="0" flexDirection="row" alignItems="flex-start">
     <!-- MENU -->
-    <Image [isEnabled]="!userService.isModalOpen" class="menu"
-      src="~/app/themes/skins/{{settings.theme}}/icon/baseline-menu-24px.png" stretch="aspectFit" nsRouterLink="/admin">
+    <Image [isEnabled]="!userService.isModalOpen" class="menu" src="~/assets/icons/baseline-menu-24px.png"
+      stretch="aspectFit" nsRouterLink="/admin">
     </Image>
     <!-- LOGO -->
     <Image class="logo" src="~/app/themes/skins/{{settings.theme}}/image/Logo-header.png" stretch="aspectFit"></Image>
@@ -10,14 +10,13 @@
     <ng-container *ngFor="let prod of settings.products">
       <StackLayout [isEnabled]="!userService.isModalOpen" *ngIf="prod.isPlayable" class="prod"
         (tap)="productSelecting(prod)" [ngClass]="{'selected': prod.productSelected}">
-        <Image src="~/app/themes/skins/{{settings.theme}}/icon/{{prod.toolbarButton.icon}}.png" stretch="aspectFit"
-          class="radius-5"></Image>
+        <Image src="~/assets/icons/{{prod.toolbarButton.icon}}.png" stretch="aspectFit" class="radius-5"></Image>
       </StackLayout>
     </ng-container>
   </FlexboxLayout>
   <GridLayout col="0" class="overlay radius-5" marginRight="3" *ngIf="userService.isModalOpen">
-    <Image stretch="aspectFit" width="60" src="~/app/themes/skins/{{settings.theme}}/icon/baseline-lock-24px.png"
-      horizontalAlignment="center" verticalAlignment="center">
+    <Image stretch="aspectFit" width="60" src="~/assets/icons/baseline-lock-24px.png" horizontalAlignment="center"
+      verticalAlignment="center">
     </Image>
   </GridLayout>
 </GridLayout>

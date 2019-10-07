@@ -1,6 +1,10 @@
 import { environment as prodEnvironment } from './environment.prod';
 import { environment as vgenEnvironment } from './environment.vgen';
 import { environment as vgenStagingEnvironment } from './environment.vgen-staging';
+import { environment as mayabetEnvironment } from './environment.mayabet';
+import { environment as mayabetStagingEnvironment } from './environment.mayabet-staging';
+import { environment as universalSoftEnvironment } from './environment.universalsoft';
+import { environment as universalSoftStagingEnvironment } from './environment.universalsoft-staging';
 import { environment as devEnvironment } from './environment';
 import { Environment } from './environment.models';
 
@@ -8,9 +12,12 @@ export const environment: Environment = (() => {
   let envVars;
 
   if (
-    typeof process !== 'undefined' && process &&
-    Object.prototype.hasOwnProperty.call(process, 'env') && process.env &&
-    Object.prototype.hasOwnProperty.call(process.env, 'environment') && process.env.environment
+    typeof process !== 'undefined' &&
+    process &&
+    Object.prototype.hasOwnProperty.call(process, 'env') &&
+    process.env &&
+    Object.prototype.hasOwnProperty.call(process.env, 'environment') &&
+    process.env.environment
   ) {
     switch (process.env.environment) {
       case 'prod':
@@ -21,6 +28,18 @@ export const environment: Environment = (() => {
         break;
       case 'vgen-staging':
         envVars = vgenStagingEnvironment;
+        break;
+      case 'universalsoft-prod':
+        envVars = universalSoftEnvironment;
+        break;
+      case 'universalsoft-staging':
+        envVars = universalSoftStagingEnvironment;
+        break;
+      case 'mayabet-prod':
+        envVars = mayabetEnvironment;
+        break;
+      case 'mayabet-staging':
+        envVars = mayabetStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;

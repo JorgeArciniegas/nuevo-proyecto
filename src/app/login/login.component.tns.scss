@@ -1,8 +1,29 @@
-.input-vdesk, .button {
-  margin: 6;
-  font-size: 15;
-}
+#login {
+	.display {
+		margin: 10;
+		padding: 4;
+		background-color: transparent;
 
-TextField, Button {
-  padding: 0;
+		.display-content {
+			margin: 5;
+		}
+	}
+	.label-overlap {
+		margin-left: 25;
+		padding: 0 6;
+	}
+	.input-vdesk,
+	.button {
+		margin: 6;
+		font-size: 12;
+		.label-overlap {
+			margin-left: 25;
+			padding: 0 6;
+		}
+	}
+
+	TextField,
+	button {
+		// padding: 0;
+	}
 }

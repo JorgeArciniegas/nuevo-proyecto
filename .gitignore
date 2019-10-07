@@ -2,6 +2,9 @@
 platforms/
 hooks/
 src/**/*.js
+.migration_backup/
+.migration_backup/*
+/.migration_backup
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
@@ -42,3 +45,12 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+
+#MIGRATION FILES
+.migration_backup/
+/.migration_backup/*
+!.migration_backup/package-lock.json
+!.migration_backup/package.json
+!.migration_backup/tsconfig.tns.json
+!.migration_backup/webpack.config.js

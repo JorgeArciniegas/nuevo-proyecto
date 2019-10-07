@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Subscription } from 'rxjs';
-import { AppSettings } from '../app.settings';
 import { ProductsService } from './products.service';
 import { CouponService } from '../component/coupon/coupon.service';
 import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
@@ -17,26 +16,20 @@ import { DialogTypeCoupon } from './products.model';
 export class ProductsComponent implements OnDestroy {
   observableMediaSubscribe: Subscription;
   public rowHeight: number;
-  public settings: AppSettings;
   public messageSource: typeof MessageSource = MessageSource;
   dialogTypeCoupon: typeof DialogTypeCoupon = DialogTypeCoupon;
   constructor(
     private observableMedia: MediaObserver,
     public service: ProductsService,
-    public readonly appSettings: AppSettings,
     public readonly userService: UserService,
     public readonly couponService: CouponService,
     public readonly couponDialogService: CouponDialogService
   ) {
-    this.settings = appSettings;
-
-    this.observableMediaSubscribe = this.observableMedia.media$.subscribe(
-      (change: MediaChange) => {
-        this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
-        this.service.fnWindowsSize();
-        this.rowHeight = (this.service.windowSize.columnHeight - 30) / 12;
-      }
-    );
+    this.observableMediaSubscribe = this.observableMedia.media$.subscribe((change: MediaChange) => {
+      this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
+      this.service.fnWindowsSize();
+      this.rowHeight = (this.service.windowSize.columnHeight - 30) / 12;
+    });
   }
 
   ngOnDestroy(): void {

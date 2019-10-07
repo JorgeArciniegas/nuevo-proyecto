@@ -1,3 +1,6 @@
+.button {
+	padding: 0;
+}
 .btn-default-dog-play {
 	border-width: 2;
 	&.actived {
@@ -85,7 +88,7 @@
 		background: #fff;
 		border-radius: 50%;
 		width: 50%;
-		height: 70%;
+		height: 50%;
 		text-align: center;
 	}
 }
@@ -141,4 +144,14 @@
 			border-color: #ffca18;
 		}
 	}
+}
+.btn-grey {
+	@extend %btn-gray;
+}
+
+.btn-success-no-gradient {
+	@extend %color-bg-success;
+}
+.btn-danger-no-gradient {
+	@extend %color-bg-allert;
 }

@@ -47,17 +47,7 @@ export class CockFightComponent implements OnDestroy {
       }
     });
   }
-  /**
-   * When "oddsSelected" does not have the odds contains from "polifunctionalArea", append it.
-   * @param polyfunctional PolyfunctionalArea
-   */
-  private checkOddSelected(polyfunctional: PolyfunctionalArea): void {
-    polyfunctional.odds.filter(item => {
-      if (!this.oddsSelected.includes(item.id)) {
-        this.oddsSelected.push(item.id);
-      }
-    });
-  }
+
   ngOnDestroy() {
     this.currentEventSubscription.unsubscribe();
     this.polyfunctionalAreaSubscription.unsubscribe();
@@ -92,6 +82,18 @@ export class CockFightComponent implements OnDestroy {
       this.oddsSelected.splice(index, 1);
     }
     this.mainService.placingOddByOdd(marketId, selection);
+  }
+
+  /**
+   * When "oddsSelected" does not have the odds contains from "polifunctionalArea", append it.
+   * @param polyfunctional PolyfunctionalArea
+   */
+  private checkOddSelected(polyfunctional: PolyfunctionalArea): void {
+    polyfunctional.odds.filter(item => {
+      if (!this.oddsSelected.includes(item.id)) {
+        this.oddsSelected.push(item.id);
+      }
+    });
   }
 
   // Method used only on native template.

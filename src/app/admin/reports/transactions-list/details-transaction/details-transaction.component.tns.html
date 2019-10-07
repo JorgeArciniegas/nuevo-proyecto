@@ -1,0 +1,48 @@
+<GridLayout rows="2*,2*,20*,*" columns="*" *ngIf="transactionDetails">
+  <Label row="0" verticalAlignment="center"
+    text="{{'TRANSACTIONS_LIST' | translate | uppercase }} - {{'DETAIL' | translate | uppercase }}"
+    class="m-l-20 h3"></Label>
+  <GridLayout class="m-l-20" row="1" rows="*" columns="*">
+    <Image width="35" (tap)="goBack()" src="~/assets/icons/baseline-arrow_back-24px.png" horizontalAlignment="left">
+    </Image>
+  </GridLayout>
+  <StackLayout row="2" class="m-20 display">
+    <GridLayout rows="3*,*,3*,*,12*" columns="*,5*,5*,5*,*">
+      <!-- ROW 1 -->
+      <StackLayout row="0" col="1" verticalAlignment="bottom">
+        <Label text="{{transactionDetails.UserTransactionDateOffset | date: 'dd/MM/yy HH:mm:ss' }}"
+          textWrap="true"></Label>
+        <Label class="sub-title" text="{{ 'DATE' | translate }}"></Label>
+      </StackLayout>
+      <StackLayout row="0" col="2" verticalAlignment="bottom">
+        <Label text="{{ 'DYNAMIC_KEYS.TransactionType.' + transactionDetails.TransactionType | translate }}"
+          textWrap="true"></Label>
+        <Label class="sub-title" text="{{'TRANSACTION_TYPE' | translate }}"></Label>
+      </StackLayout>
+      <StackLayout row="0" col="3" verticalAlignment="bottom">
+        <Label text="{{transactionDetails.TransactionMessage | translate }}" textWrap="true"></Label>
+        <Label class="sub-title" text="{{'REFERENCE' | translate }}"></Label>
+      </StackLayout>
+      <!-- DIVIDER -->
+      <StackLayout class="border-bottom-overlay" row="1" colSpan="5"></StackLayout>
+      <!-- ROW 2 -->
+      <StackLayout row="2" col="1" verticalAlignment="bottom">
+        <Label text="{{ transactionDetails.Amount | currency : userService.userCurrency : 'symbol-narrow' }}"
+          textWrap="true"></Label>
+        <Label class="sub-title" text="{{'AMOUNT' | translate }}"></Label>
+      </StackLayout>
+      <StackLayout row="2" col="2" verticalAlignment="bottom">
+        <Label
+          text="{{ transactionDetails.PreviousCashBalance | currency : userService.userCurrency : 'symbol-narrow' }}"
+          textWrap="true"></Label>
+        <Label class="sub-title" text="{{'PREVIOUS_CASH_BALANCE' | translate }}"></Label>
+      </StackLayout>
+      <StackLayout row="2" col="3" verticalAlignment="bottom">
+        <Label text="{{ transactionDetails.ReferenceId }}" textWrap="true"></Label>
+        <Label class="sub-title" text="{{'REFERENCE_ID' | translate }}"></Label>
+      </StackLayout>
+      <!-- DIVIDER -->
+      <StackLayout class="border-bottom-overlay" row="3" colSpan="5"></StackLayout>
+    </GridLayout>
+  </StackLayout>
+</GridLayout>

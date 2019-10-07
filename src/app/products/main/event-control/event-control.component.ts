@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { EventControlService } from './event-control.service';
 import { EventControl } from './event-control.model';
 import { ProductsService } from '../../products.service';
@@ -9,9 +9,10 @@ import { ProductsService } from '../../products.service';
   styleUrls: ['./event-control.component.scss']
 })
 export class EventControlComponent {
+  @Input()
   public eventControlDetails: EventControl;
   constructor(
-    private eventControlService: EventControlService,
-    private productService: ProductsService
+    public readonly eventControlService: EventControlService,
+    public readonly productService: ProductsService
   ) {}
 }

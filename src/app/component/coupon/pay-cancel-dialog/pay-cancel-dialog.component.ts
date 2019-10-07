@@ -33,11 +33,11 @@ export class PayCancelDialogComponent implements OnInit {
   ) {
     this.titleType = this.dialogTypeCoupon[data];
     this.form = this.fb.group({
-      couponCode: [null, Validators.compose([Validators.required, Validators.minLength(2)])]
+      couponCode: [null, Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(18)])]
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   public onSubmit(form: FormGroup): void {
     let couponCode: string;
@@ -45,11 +45,12 @@ export class PayCancelDialogComponent implements OnInit {
       if (this.form.valid) {
         couponCode = this.form.get('couponCode').value;
         if (couponCode) {
+
           this.payRequest = {
             CouponId: null,
             TicketCode: couponCode,
             IsPaid: true,
-            SettlingClientId: null,
+            SettlingClientId: !this.userService.isLoggedOperator() ? this.userService.dataUserDetail.operatorDetail.ClientId : null,
             Product: 'V'
           };
         }
@@ -73,8 +74,12 @@ export class PayCancelDialogComponent implements OnInit {
         couponCode = this.form.get('couponCode').value;
         if (couponCode) {
           this.cancelRequest = {
-            CancellationRequestUserId: this.userService.userDetail.UserId,
-            ShopClientId: null,
+            CancellationRequestUserId: this.userService.isLoggedOperator() ?
+              this.userService.dataUserDetail.userDetail.UserId :
+              this.userService.dataUserDetail.operatorDetail.UserId,
+            ShopClientId: !this.userService.isLoggedOperator() ?
+              this.userService.dataUserDetail.operatorDetail.ClientId :
+              null,
             CouponId: null,
             TicketCode: couponCode,
             UserWalletTypeId: null,
@@ -84,6 +89,7 @@ export class PayCancelDialogComponent implements OnInit {
         this.couponService
           .cancelCoupon(this.cancelRequest)
           .then(message => {
+            this.userService.increasePlayableBalance(message.StakeGross);
             this.errorMessage = this.errorMessage2[message.ErrorStatus];
             this.errorNumberIcon = message.ErrorStatus;
             // In case of successful operation start the print of the receipt

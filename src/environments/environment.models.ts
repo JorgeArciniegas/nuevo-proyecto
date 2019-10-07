@@ -5,10 +5,12 @@ export interface Environment {
   production: boolean;
   bookmakerDetails: string;
   license: LICENSE_TYPE;
-  baseApiUrl?: string;
+  baseApiUrl: string;
   staging?: boolean;
   pageTitle?: string;
   theme?: string;
+  // URI to get the skin's favicon
+  faviconPath?: string;
   // Array of the supported languages. The first element of the array is the default language.
   supportedLang?: string[];
   currency?: string;
@@ -38,6 +40,7 @@ export interface Products {
   toolbarButton: ToolbarButtons;
   widgets?: Widget[];
   layoutProducts: LayoutProducts; // accept race, fight, soccer, keno
+  typeCoupon?: TypeCoupon; // Experimental
 }
 
 export interface Widget {
@@ -52,6 +55,7 @@ export interface Widget {
 export interface PrintSettings {
   isEnabledReprintCoupon: boolean;
   isTrasmitionInfoMessageShown: boolean;
+  isShowHeaderMessage: boolean;
 }
 
 export enum WidgetTypeLink {
@@ -69,6 +73,7 @@ export interface LayoutProducts {
   type: LAYOUT_TYPE;
   resultItems: number;
   nextEventItems: number;
+  cacheEventsItem: number;
   // List of visible markets on the template. The index of the array is taken to show them on the different rows of the template.
   shownMarkets?: Market[];
 }
@@ -82,5 +87,12 @@ export enum LAYOUT_TYPE {
 
 // Bookmaker's identifier
 export enum LICENSE_TYPE {
-  DEMO_LICENSE
+  DEMO_LICENSE,
+  UNIVERSALSOFT
+}
+
+export interface TypeCoupon {
+  isMultipleStake: boolean;
+  acceptMultiStake: boolean;
+  typeLayout: LAYOUT_TYPE;
 }

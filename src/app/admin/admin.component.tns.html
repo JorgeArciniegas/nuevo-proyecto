@@ -1,52 +1,84 @@
-<GridLayout id="admin" rows="4*,1*" columns="1*,1*,1*">
-  <StackLayout verticalAlignment="top" class="p-20" orientation="vertical" row="0" col="0">
-    <GridLayout class="admin-panel-container radius-15" rows="1*,1*" columns="*">
+<GridLayout id="admin" rows="9*,*" columns="*,*,*">
+  <StackLayout verticalAlignment="top" class="p-5" orientation="vertical" row="0" col="0">
+    <StackLayout orientation="vertical" class="admin-panel-container radius-5">
       <StackLayout orientation="horizontal" horizontalAlignment="center" row="0" col="0">
-        <Image stretch="aspectFit" width="30" col="0"
-          src="~/app/themes/skins/{{settings.theme}}/icon/baseline-history-24px.png" verticalAlignment="center"
-          horizontalAlignment="right"></Image>
+        <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-history-24px.png"
+          verticalAlignment="center" horizontalAlignment="right"></Image>
         <Label verticalAlignment="center" class="text-left txt-title" col="1" text="{{'REPORTS' | translate }}"></Label>
       </StackLayout>
-      <StackLayout (tap)="goToBetList()" width="100%" class="button btn-success" orientation="horizontal"
+      <StackLayout (tap)="goToBetList()" width="100%" class="button btn-success btn-admin" orientation="horizontal"
         horizontalAlignment="center" row="1" col="0">
-        <Image stretch="aspectFit" width="30" col="0"
-          src="~/app/themes/skins/{{settings.theme}}/icon/baseline-list-24px.png" verticalAlignment="center"
-          horizontalAlignment="right"></Image>
+        <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-list-24px.png"
+          verticalAlignment="center" horizontalAlignment="right"></Image>
         <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"
           text="{{'BETS_LIST' | translate }}"></Label>
       </StackLayout>
-    </GridLayout>
-    <GridLayout class="admin-panel-container radius-15" rows="1*,1*" columns="*">
-      <StackLayout orientation="horizontal" horizontalAlignment="center" row="0" col="0">
-        <Image stretch="aspectFit" width="30" col="0"
-          src="~/app/themes/skins/{{settings.theme}}/icon/baseline-settings-20px.png" verticalAlignment="center"
-          horizontalAlignment="right"></Image>
-        <Label verticalAlignment="center" class="text-left txt-title" col="1"
-          text="{{'SETTINGS' | translate }}"></Label>
-      </StackLayout>
-      <StackLayout (tap)="goToLanguageSettings()" width="100%" class="button btn-success" orientation="horizontal"
-        horizontalAlignment="center" row="1" col="0">
-        <Image stretch="aspectFit" width="30" col="0"
-          src="~/app/themes/skins/{{settings.theme}}/icon/baseline-language-24px.png" verticalAlignment="center"
-          horizontalAlignment="right"></Image>
+      <StackLayout (tap)="goToOperatorSummary()" width="100%" class="button btn-success btn-admin"
+        orientation="horizontal" horizontalAlignment="center" row="2" col="0" *ngIf="isAdminLogged">
+        <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-list-24px.png"
+          verticalAlignment="center" horizontalAlignment="right"></Image>
         <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"
+          text="{{'OPERATOR_SUMMARY' | translate }}"></Label>
+      </StackLayout>
+      <StackLayout (tap)="goToTransactionsList()" width="100%" class="button btn-success btn-admin"
+        orientation="horizontal" horizontalAlignment="center" row="2" col="0" *ngIf="isAdminLogged">
+        <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-list-24px.png"
+          verticalAlignment="center" horizontalAlignment="right"></Image>
+        <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"
+          text="{{'TRANSACTIONS_LIST' | translate }}"></Label>
+      </StackLayout>
+      <StackLayout (tap)="goToStatementShop()" width="100%" class="button btn-success btn-admin"
+        orientation="horizontal" horizontalAlignment="center" row="2" col="0" *ngIf="isAdminLogged">
+        <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-list-24px.png"
+          verticalAlignment="center" horizontalAlignment="right"></Image>
+        <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"
+          text="{{'STATEMENT_VIRTUAL_SHOP' | translate }}"></Label>
+      </StackLayout>
+    </StackLayout>
+    <StackLayout orientation="vertical" class="admin-panel-container radius-5">
+      <StackLayout orientation="horizontal" horizontalAlignment="center" row="0" col="0">
+        <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-settings-20px.png"
+          verticalAlignment="center" horizontalAlignment="right"></Image>
+        <Label verticalAlignment="center" class="text-left txt-title" text="{{'SETTINGS' | translate }}"></Label>
+      </StackLayout>
+      <!--BUTTON OPERATORS -->
+      <StackLayout (tap)="goToOperators()" width="100%" class="button btn-success btn-admin" orientation="horizontal"
+        horizontalAlignment="center" *ngIf="isAdminLogged">
+        <Image stretch="aspectFit" width="30" col="0"
+          src="~/assets/icons/baseline_supervised_user_circle_white_24px.png" verticalAlignment="center"
+          horizontalAlignment="right"></Image>
+        <Label verticalAlignment="center" class="text-left txt-title txt-title-btn"
+          text="{{'OPERATORS' | translate }}"></Label>
+      </StackLayout>
+      <!-- BUTTON VBOXES -->
+      <StackLayout (tap)="goToVboxes()" width="100%" class="button btn-success btn-admin" orientation="horizontal"
+        horizontalAlignment="center" *ngIf="isAdminLogged">
+        <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline_tv_white_18px.png"
+          verticalAlignment="center" horizontalAlignment="right"></Image>
+        <Label verticalAlignment="center" class="text-left txt-title txt-title-btn"
+          text="{{ 'VBOX.MANAGEMENT' | translate }}"></Label>
+      </StackLayout>
+      <!-- BUTTON LANGUAGES -->
+      <StackLayout (tap)="goToLanguageSettings()" width="100%" class="button btn-success btn-admin"
+        orientation="horizontal" horizontalAlignment="center">
+        <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-language-24px.png"
+          verticalAlignment="center" horizontalAlignment="right"></Image>
+        <Label verticalAlignment="center" class="text-left txt-title txt-title-btn"
           text="{{'LANGUAGE' | translate }}"></Label>
       </StackLayout>
-    </GridLayout>
-    <GridLayout class="admin-panel-container radius-15">
-      <StackLayout (tap)="userService.logout()" width="100%" height="40%" class="button btn-default btn-grey-gradient"
+    </StackLayout>
+  </StackLayout>
+  <StackLayout verticalAlignment="top" class="p-5" orientation="vertical" row="0" col="1">
+
+    <StackLayout orientation="vertical" class="admin-panel-container logout radius-5">
+      <StackLayout (tap)="userService.logout()" width="100%" class="button btn-default btn-admin btn-grey-gradient"
         orientation="horizontal" horizontalAlignment="center" row="0" col="0">
         <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"
           text="{{'LOGOUT' | translate }}"></Label>
       </StackLayout>
-    </GridLayout>
-  </StackLayout>
-  <StackLayout verticalAlignment="top" class="p-20" orientation="vertical" row="0" col="1">
-  </StackLayout>
-  <StackLayout verticalAlignment="top" class="p-20" orientation="vertical" row="0" col="2">
-  </StackLayout>
-  <GridLayout rows="*" columns="5*,1*" row="1" col="2">
-    <StackLayout col="0" class="logo-with-text-mobile">
     </StackLayout>
-  </GridLayout>
+  </StackLayout>
+  <StackLayout row="1" col="2" class="logo-with-text">
+  </StackLayout>
+
 </GridLayout>

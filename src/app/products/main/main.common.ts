@@ -18,6 +18,15 @@ import { LuckyComponent } from './lucky/lucky.component';
 import { CockFightComponent as ResultsCockFightComponent } from './results/templates/cock-fight/cock-fight.component';
 import { CompetitorItoPipe } from './playable-board/competitor-ito.pipe';
 import { ExtractSignPipe } from './playable-board/extract-sign.pipe';
+import { SoccerComponent as PlayableBoardSoccerComponent } from './playable-board/templates/soccer/soccer.component';
+import { OverviewComponent as PlayableBoardSoccerOverviewComponent } from './playable-board/templates/soccer/overview/overview.component';
+import { DetailComponent as PlayableBoardSoccerDetailComponent } from './playable-board/templates/soccer/detail/detail.component';
+
+import { SoccerComponent as ResultsSoccerComponent } from './results/templates/soccer/soccer.component';
+import { SoccerComponent as LuckySoccerComponent } from './lucky/templates/soccer/soccer.component';
+import { GetArrayFromNumberPipe } from './playable-board/templates/get-array-from-number.pipe';
+import { FilterMarketsByAreaColumnPipe } from './playable-board/filter-markets-by-area-column.pipe';
+import { ExtractCorrectScorePipe } from './playable-board/extract-correct-score.pipe';
 
 export const componentDeclarations: any[] = [
   MainComponent,
@@ -30,6 +39,8 @@ export const componentDeclarations: any[] = [
   PlayableBoardComponent,
   FilterByPositionPipe,
   FilterAndSortByShownMarketsPipe,
+  GetArrayFromNumberPipe,
+  FilterMarketsByAreaColumnPipe,
   CompetitorNamePipe,
   CompetitorItoPipe,
   ExtractSignPipe,
@@ -38,7 +49,13 @@ export const componentDeclarations: any[] = [
   EventsListStandardComponent,
   EventControlStandardComponent,
   ResultsCockFightComponent,
-  PlayableBoardCockFightComponent
+  PlayableBoardCockFightComponent,
+  PlayableBoardSoccerComponent,
+  PlayableBoardSoccerOverviewComponent,
+  PlayableBoardSoccerDetailComponent,
+  ResultsSoccerComponent,
+  LuckySoccerComponent,
+  ExtractCorrectScorePipe
 ];
 
 export const providerDeclarations: any[] = [];

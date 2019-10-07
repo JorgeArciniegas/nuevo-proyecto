@@ -4,20 +4,36 @@
     <Button (tap)="print()" text="{{ 'PRINT' | translate }}" class="btn btn-primary"></Button>
     <Button (tap)="printService.resetPrint()" class="btn btn-accent" text="{{ 'DELETE' | translate }}"></Button>
   </FlexboxLayout>
-  <StackLayout #printing class="p-5">
-    <FlexboxLayout flexDirection="column" class="header">
-      <StackLayout class="logo-print-coupon" height="50"></StackLayout>
-      <Label class="header-content p-5 text-center " text="{{ appSettings.bookmakerDetails }}"></Label>
-    </FlexboxLayout>
-    <FlexboxLayout flexDirection="column" flexWrap="wrap" class="content p-10">
-      <Label class="bet-info" text="{{ 'BET' | translate }} {{receipt.couponCode}}"></Label>
-      <Label class="operation-info" text="{{ 'DELETED_ON' | translate }} {{date | date: 'dd-MM-yyyy HH:mm'}}"
-        *ngIf="!receipt.isPayment"></Label>
-      <Label class="operation-info" text="{{ 'PAID_ON' | translate }} {{date | date: 'dd-MM-yyyy HH:mm'}}"
-        *ngIf="receipt.isPayment"></Label>
-    </FlexboxLayout>
-    <FlexboxLayout flexDirection="row" flexWrap="wrap" class="footer">
-      <Label class="font-weight-bold" fontSize="20" text="{{ 'PAID_AMOUNT' | translate}}: {{receipt.amount}}"></Label>
-    </FlexboxLayout>
-  </StackLayout>
+  <ScrollView>
+    <StackLayout #printingData orientation="horizontal" class="m-10 p-50">
+      <FlexboxLayout flexDirection="column" class="printbox">
+        <StackLayout class="logo-print-coupon">
+          <Image stretch="aspectFill" src="~/app/themes/skins/{{appSettings.theme}}/image/Logo-coupon.png"></Image>
+        </StackLayout>
+        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-b-10" flexWrap="wrap">
+          <Label class="h4 p-10 text-center " text="{{ appSettings.bookmakerDetails }}" textWrap="true"></Label>
+        </FlexboxLayout>
+        <StackLayout class="hr-dark m-10">
+        </StackLayout>
+        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-10 p-l-10 p-b-5" flexWrap="wrap">
+          <Label class="p-l-5 font-weight-bold" text="{{ 'BET' | translate }}"></Label>
+          <Label class="p-r-10 text-right" text="{{receipt.couponCode}}" textWrap="true"></Label>
+        </FlexboxLayout>
+        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-10 p-l-10 p-b-5" flexWrap="wrap">
+          <Label class="p-l-5 font-weight-bold" text="{{ 'DELETED_ON' | translate }}"
+            *ngIf="!receipt.isPayment"></Label>
+          <Label class="p-l-5 font-weight-bold" text="{{ 'PAID_ON' | translate }}" *ngIf="receipt.isPayment"></Label>
+          <Label class="p-r-10 text-right" text="{{date | date: 'dd-MM-yyyy HH:mm'}}"></Label>
+        </FlexboxLayout>
+
+        <StackLayout class="hr-dark m-10">
+        </StackLayout>
+        <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-10">
+          <Label class="h2 text-center" text="{{ 'PAID_AMOUNT' | translate}}"></Label>
+          <Label class="h3 text-center"
+            text="{{receipt.amount  | currency : userService.userCurrency : 'symbol-narrow' }}"></Label>
+        </FlexboxLayout>
+      </FlexboxLayout>
+    </StackLayout>
+  </ScrollView>
 </StackLayout>

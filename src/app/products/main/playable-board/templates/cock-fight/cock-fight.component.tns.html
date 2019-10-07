@@ -4,20 +4,20 @@
     <ng-container *ngIf="market.tp !== marketEnum['OverUnder']">
       <GridLayout row="{{i}}" col="0" shadow="3" cornerRadius="6" class="playable-row-tile display m-4 m-l-5">
         <StackLayout verticalAlignment="center" horizontalAlignment="center">
-          <Label text="{{ 'DYNAMIC_KEYS.CockMarket.NAME.' + market.nm | translate | uppercase}}"
+          <Label class="text-center" text="{{ 'DYNAMIC_KEYS.CockMarket.NAME.' + market.nm | translate | uppercase}}"
             textWrap="true"></Label>
         </StackLayout>
       </GridLayout>
       <GridLayout row="{{i}}" col="1" rows="*" columns="{{getColumnsString(market.sls.length)}}">
         <ng-container *ngFor="let selection of market.sls | rmSelFromMarket: 'X + Over'; let i2 = index">
-          <GridLayout col="{{i2}}" class="btn-default-cock btn-cock-{{ selection.nm | competitorIto }} m-4 radius-5"
+          <GridLayout col="{{i2}}" class="button btn-default-cock btn-cock-{{ selection.nm | competitorIto }} m-4 radius-5"
             [ngClass]="{'btn-actived': oddsSelected?.includes(selection.id)}" (tap)="selectOdd(market.tp, selection)"
             [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen">
             <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
               <StackLayout *ngIf="market.tp === marketEnum['1X2'] && selection.tp === 1" verticalAlignment="center"
                 horizontalAlignment="center" class="icon icon-cock-red" width="40%" height="90%">
               </StackLayout>
-              <StackLayout verticalAlignment="center" horizontalAlignment="center" width="55%">
+              <StackLayout verticalAlignment="center" horizontalAlignment="center" width="60%">
                 <Label text="{{ selection.nm | competitorName: eventDetails.tm }}"
                   *ngIf="market.tp === marketEnum['1X2'] && (selection.tp === 1 || selection.tp === 3)"
                   horizontalAlignment="center" class="selection-name"></Label>

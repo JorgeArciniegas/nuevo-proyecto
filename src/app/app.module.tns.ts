@@ -53,4 +53,4 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 /*
 Pass your application module to the bootstrapModule function located in main.ts to start your app
 */
-export class AppModule {}
+export class AppModule { }

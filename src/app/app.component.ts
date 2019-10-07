@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppSettings } from './app.settings';
 import { Settings } from './app.settings.model';
 import { UserService } from './services/user.service';
@@ -10,8 +10,9 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   settings: Settings;
+  public faviconPath: string;
 
   constructor(
     private appSettings: AppSettings,
@@ -20,7 +21,19 @@ export class AppComponent {
     public userService: UserService
   ) {
     this.settings = this.appSettings;
+    this.faviconPath = this.appSettings.faviconPath;
     // Set the application language passing the browser one.
     this.translateUtilityService.initializeLanguages(this.translateService.getBrowserLang());
+  }
+
+  ngOnInit(): void {
+    // Insert favicon's link of the specific skin
+    const linkElement: HTMLLinkElement = document.createElement('link');
+    linkElement.setAttribute('rel', 'icon');
+    linkElement.setAttribute('type', 'image/x-icon');
+    linkElement.setAttribute('href', this.faviconPath);
+    if (document.head) {
+      document.head.appendChild(linkElement);
+    }
   }
 }

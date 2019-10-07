@@ -1,5 +1,11 @@
-import { VirtualBetSelection } from '@elys/elys-api';
-import { markParentViewsForCheckProjectedViews } from '@angular/core/src/view/util';
+import {
+  VirtualBetCompetitor,
+  VirtualBetEvent,
+  VirtualBetMarket,
+  VirtualBetSelection,
+  VirtualBetTournament,
+  VirtualGetRankByEventResponse
+} from '@elys/elys-api';
 
 export enum TypePlacingEvent {
   ST = 0,
@@ -105,10 +111,6 @@ export class Player {
   }
 }
 
-export interface VirtualBetSelectionExtended extends VirtualBetSelection {
-  marketId?: number;
-}
-
 export class EventTime {
   minute: number;
   second: number;
@@ -136,9 +138,89 @@ export class Smartcode {
   selWinner: number[];
   selPlaced: number[];
   selPodium: number[];
-  constructor(win: number[] = [], placed: number[] = [], podium: number[] = []) {
+  constructor(
+    win: number[] = [],
+    placed: number[] = [],
+    podium: number[] = []
+  ) {
     this.selPlaced = placed;
     this.selPodium = podium;
     this.selWinner = win;
   }
+}
+
+export interface VirtualBetTournamentExtended extends VirtualBetTournament {
+  matches?: Match[];
+  overviewArea?: Area[];
+  listDetailAreas?: ListArea[];
+  ranking?: VirtualGetRankByEventResponse;
+}
+
+export interface VirtualBetEventExtended extends VirtualBetEvent {
+  mk: VirtualBetMarketExtended[];
+}
+
+export interface VirtualBetMarketExtended extends VirtualBetMarket {
+  sls: VirtualBetSelectionExtended[];
+}
+
+export interface VirtualBetSelectionExtended extends VirtualBetSelection {
+  marketId?: number;
+  isLowestOdd?: boolean;
+  isHighestOdd?: boolean;
+  // An odd is valid when its value is greater than 1.05.
+  isValid?: boolean;
+}
+
+export interface ListArea {
+  areas: Area[];
+}
+
+export interface Area {
+  id: number;
+  name: string;
+  markets: MarketArea[];
+  layoutDefinition?: LayoutGridDefinition;
+  isSelected?: boolean;
+  hasLowestOdd?: boolean;
+  hasHighestOdd?: boolean;
+}
+
+export interface MarketArea {
+  id: number;
+  name: string;
+  hasSpecialValue?: boolean;
+  specialValueOrSpread: string;
+  selectionCount: number;
+  selections?: VirtualBetSelectionExtended[];
+  layoutGridDefinition?: LayoutGridDefinition;
+}
+
+export interface Match {
+  id: number;
+  name: string;
+  smartcode: number;
+  isVideoShown: boolean; // when it is true, the camera's icon should be active. The default value is false.
+  hasOddsSelected: boolean;
+  isDetailOpened: boolean;
+  selectedOdds: number[];
+  virtualBetCompetitor: VirtualBetCompetitor[];
+}
+
+export interface LayoutGridDefinition {
+  areaCols?: number;
+  // tslint:disable-next-line:max-line-length
+  areaMaxMarketColsByCol?: number[]; // Max number of market's columns into the area column (mathematical minum common multiple). The array index identify the column for whom is valid the setting.
+  areaRowsByCol?: number[]; // Number of rows per area column. The array index identify the column for whom is valid the setting.
+  marketPositionOnColArea?: number;
+  marketCols?: number;
+  marketRows?: number;
+}
+
+// Interface of the object used to host the data of the lower and higher odd.
+export interface SpecialOddData {
+  areaIndex: number;
+  marketIndex: number;
+  oddIndex: number;
+  val: number;
 }

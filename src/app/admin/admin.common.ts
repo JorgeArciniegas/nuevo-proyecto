@@ -7,16 +7,31 @@ import { SummaryComponent } from './reports/bets-list/details-coupon/summary/sum
 import { EventsComponent } from './reports/bets-list/details-coupon/events/events.component';
 import { CombinationsComponent } from './reports/bets-list/details-coupon/combinations/combinations.component';
 import { LanguageComponent } from './settings/language/language.component';
+import { TransactionsListComponent } from './reports/transactions-list/transactions-list.component';
+import { SummaryTransactionsComponent } from './reports/transactions-list/summary-transactions/summary-transactions.component';
+import { DetailsTransactionComponent } from './reports/transactions-list/details-transaction/details-transaction.component';
+import { GetTransactionVategoryKeyByEnumValuePipe } from './reports/transactions-list/get-transaction-category-key-by-enum-value.pipe';
+import { OperatorSummaryComponent } from './reports/operator-summary/operator-summary.component';
+import { OperatorSummaryListComponent } from './reports/operator-summary/operator-summary-list/operator-summary-list.component';
+import { AuthorizationGuard } from '../app.authorization.guard';
+import { TYPE_ACCOUNT } from '../services/user.models';
+import { BetsListService } from './reports/bets-list/bets-list.service';
 
 export const componentDeclarations: any[] = [
   AdminComponent,
   BetsListComponent,
+  TransactionsListComponent,
   SummaryCouponsComponent,
   DetailsCouponComponent,
   SummaryComponent,
   EventsComponent,
   CombinationsComponent,
-  LanguageComponent
+  LanguageComponent,
+  SummaryTransactionsComponent,
+  DetailsTransactionComponent,
+  GetTransactionVategoryKeyByEnumValuePipe,
+  OperatorSummaryComponent,
+  OperatorSummaryListComponent
 ];
 
 export const providerDeclarations: any[] = [];
@@ -24,22 +39,88 @@ export const providerDeclarations: any[] = [];
 export const routes: Routes = [
   {
     path: '',
-    component: AdminComponent
+    children: [
+      {
+        path: '',
+        component: AdminComponent,
+      },
+      {
+        path: 'reports/betsList',
+        children: [
+          {
+            path: '',
+            component: BetsListComponent
+          },
+          {
+            path: 'summaryCoupons',
+            component: SummaryCouponsComponent
+          },
+          {
+            path: 'detail/:id',
+            component: DetailsCouponComponent
+          }
+        ]
+      },
+      {
+        path: 'reports/transactionsList',
+        children: [
+          {
+            path: '',
+            component: TransactionsListComponent
+          },
+          {
+            path: 'summaryTransactions',
+            component: SummaryTransactionsComponent
+          },
+          {
+            path: 'detail/:id',
+            component: DetailsTransactionComponent
+          }
+        ],
+        canActivateChild: [AuthorizationGuard],
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
+      },
+      {
+        path: 'reports/operatorSummary',
+        children: [
+          {
+            path: '',
+            component: OperatorSummaryComponent
+          },
+          {
+            path: 'operatorSummaryList',
+            component: OperatorSummaryListComponent
+          }
+        ],
+        canActivateChild: [AuthorizationGuard],
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
+      },
+      {
+        path: 'reports/statement-vitual-shop',
+        loadChildren: () =>
+          import('./reports/statements-virtual-shop/statements-virtual-shop.module').then(
+            m => m.StatementsVirtualShopModule
+          ),
+        canActivateChild: [AuthorizationGuard],
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
+      },
+      {
+        path: 'settings/languages',
+        component: LanguageComponent
+      },
+      {
+        path: 'operators',
+        loadChildren: () =>
+          import('./settings/operators/operators.module').then(
+            m => m.OperatorsModule
+          ),
+        canActivateChild: [AuthorizationGuard],
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
+      },
+      {
+        path: 'vbox',
+        loadChildren: () => import('./settings/vbox/vbox.module').then(m => m.VboxModule)
+      }
+    ]
   },
-  {
-    path: 'reports/betsList',
-    component: BetsListComponent
-  },
-  {
-    path: 'reports/betsList/summaryCoupons',
-    component: SummaryCouponsComponent
-  },
-  {
-    path: 'reports/betsList/detail/:id',
-    component: DetailsCouponComponent
-  },
-  {
-    path: 'settings/languages',
-    component: LanguageComponent
-  }
 ];

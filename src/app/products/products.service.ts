@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  ElysApiService,
-  CurrencyCodeResponse,
-  CurrencyCodeRequest
-} from '@elys/elys-api';
-import { Observable, Subject } from 'rxjs';
+import { ElysApiService } from '@elys/elys-api';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Products, LayoutProducts } from '../../../src/environments/environment.models';
 import { AppSettings } from '../app.settings';
 import { DestroyCouponService } from '../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
@@ -16,13 +12,8 @@ import { WindowSize } from '../services/utility/window-size/window-size.model';
 import { WindowSizeService } from '../services/utility/window-size/window-size.service';
 import { DialogService } from './dialog.service';
 import { ProductsServiceExtra } from './product.service.extra';
-import {
-  BetDataDialog,
-  DialogData,
-  PolyfunctionalArea,
-  PolyfunctionalStakeCoupon,
-  PolyfunctionStakePresetPlayer
-} from './products.model';
+import { BetDataDialog, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupon } from './products.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,7 +29,7 @@ export class ProductsService extends ProductsServiceExtra {
   public playableBoardResetObserve: Observable<boolean>;
 
   // polifunctional area object declare
-  polyfunctionalAreaSubject: Subject<PolyfunctionalArea>;
+  polyfunctionalAreaSubject: BehaviorSubject<PolyfunctionalArea>;
   polyfunctionalAreaObservable: Observable<PolyfunctionalArea>;
 
   // polifunctional stake coupon
@@ -68,41 +59,41 @@ export class ProductsService extends ProductsServiceExtra {
   ) {
     super(couponInternalService, destroyCouponService, router);
     // Destroy coupon confirmation
-    this.couponInternalService.productHasCoupon = { checked: false };
+
+
+    if (this.couponInternalService) {
+      this.couponInternalService.productHasCoupon = { checked: false };
+    }
 
     this.productNameSelectedSubscribe = new Subject<string>();
     this.productNameSelectedObserve = this.productNameSelectedSubscribe.asObservable();
 
     // Element for management the display
-    this.polyfunctionalAreaSubject = new Subject<PolyfunctionalArea>();
+    this.polyfunctionalAreaSubject = new BehaviorSubject<PolyfunctionalArea>(new PolyfunctionalArea());
     this.polyfunctionalAreaObservable = this.polyfunctionalAreaSubject.asObservable();
 
     // stake coupon
-    this.polyfunctionalStakeCouponSubject = new Subject<
-      PolyfunctionalStakeCoupon
-    >();
+    this.polyfunctionalStakeCouponSubject = new Subject<PolyfunctionalStakeCoupon>();
     this.polyfunctionalStakeCouponObs = this.polyfunctionalStakeCouponSubject.asObservable();
 
     // time block
     this.timeBlockedSubscribe = new Subject<boolean>();
-    this.timeBlockedSubscribe
-      .asObservable()
-      .subscribe((timeBlocked: boolean) => {
-        this.timeBlocked = timeBlocked;
-      });
+    this.timeBlockedSubscribe.asObservable().subscribe((timeBlocked: boolean) => {
+      this.timeBlocked = timeBlocked;
+    });
     // Dialog management
     this.dialogProductDataSubject = new Subject<BetDataDialog>();
-    this.dialogProductDataSubject
-      .asObservable()
-      .subscribe((data: BetDataDialog) => {
-        const dialogData: DialogData = new DialogData();
-        dialogData.betOdds = data.betOdds;
-        dialogData.betCoupon = data.betCoupon;
-        dialogData.breakpoint = this.breakpoint;
-        dialogData.title = data.title;
-        dialogData.statistics = data.statistics;
-        this.dialog.openDialog(dialogData);
-      });
+    this.dialogProductDataSubject.asObservable().subscribe((data: BetDataDialog) => {
+      const dialogData: DialogData = new DialogData();
+      dialogData.betOdds = data.betOdds;
+      dialogData.betCoupon = data.betCoupon;
+      dialogData.breakpoint = this.breakpoint;
+      dialogData.title = data.title;
+      dialogData.statistics = data.statistics;
+      dialogData.groupings = data.groupings;
+      dialogData.tournamentRanking = data.tournamentRanking;
+      this.dialog.openDialog(dialogData);
+    });
 
     this.playableBoardResetSubject = new Subject<boolean>();
     this.playableBoardResetObserve = this.playableBoardResetSubject.asObservable();
@@ -147,19 +138,14 @@ export class ProductsService extends ProductsServiceExtra {
     this.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
 
-
-
-   /**
+  /**
    * @returns LayoutProducts from current product selected
    */
   public getCurrentLayoutProducts(): Promise<LayoutProducts> {
-
-    const response: Promise<LayoutProducts> = new Promise<LayoutProducts>(
-      (resolve, reject) => {
-        resolve(this.product.layoutProducts);
-        reject(new Error('LayoutProducts not found'));
-      });
+    const response: Promise<LayoutProducts> = new Promise<LayoutProducts>((resolve, reject) => {
+      resolve(this.product.layoutProducts);
+      reject(new Error('LayoutProducts not found'));
+    });
     return response;
   }
-
 }

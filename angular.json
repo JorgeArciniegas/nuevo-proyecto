@@ -62,6 +62,42 @@
                   "with": "src/environments/environment.vgen-staging.ts"
                 }
               ]
+            },
+            "universalsoft-prod": {
+              "outputPath": "dist-universalsoft",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.universalsoft.ts"
+                }
+              ]
+            },
+            "universalsoft-staging": {
+              "outputPath": "dist-universalsoft",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.universalsoft-staging.ts"
+                }
+              ]
+            },
+            "mayabet-prod": {
+              "outputPath": "dist-mayabet",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.mayabet.ts"
+                }
+              ]
+            },
+            "mayabet-staging": {
+              "outputPath": "dist-mayabet",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.mayabet-staging.ts"
+                }
+              ]
             }
           }
         },
@@ -79,6 +115,18 @@
             },
             "vgen-staging": {
               "browserTarget": "vdesk:build:vgen-staging"
+            },
+            "universalsoft-prod": {
+              "browserTarget": "vdesk:build:universalsoft-prod"
+            },
+            "universalsoft-staging": {
+              "browserTarget": "vdesk:build:universalsoft-staging"
+            },
+            "mayabet-prod": {
+              "browserTarget": "vdesk:build:mayabet-prod"
+            },
+            "mayabet-staging": {
+              "browserTarget": "vdesk:build:mayabet-staging"
             }
           }
         },

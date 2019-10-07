@@ -1,6 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i");
-
-@import "icons";
+@import "../../icons";
 
 /**
 * THEME DEFAULT
@@ -28,7 +26,7 @@ $btn-bg-yellow: #ffca18;
 //BORDERS COLOR
 $border-warning: #ffffff;
 $border-success: #02a502;
-$border-cartd-title: #313d4f;
+$border-card-title: #313d4f;
 $border-event: #1fb537;
 $color-border-box: #6b7279;
 $btn-border-keyboard: #03030a;
@@ -115,7 +113,7 @@ $color-text-gray: #6b7279;
 }
 
 %header-notification-img {
-	background-image: url("app/themes/skins/develop/icon/account.svg");
+	background-image: url("assets/icons/account.svg");
 }
 
 %header-btn-menu-selected {
@@ -149,7 +147,7 @@ $color-text-gray: #6b7279;
 }
 
 %remove-image {
-	background: url("app/themes/skins/develop/icon/baseline-delete_outline-white-24px.png") center center no-repeat;
+	background: url("assets/icons/baseline-delete_outline-white-24px.png") center center no-repeat;
 	background-size: contain;
 }
 
@@ -157,16 +155,16 @@ $color-text-gray: #6b7279;
 %card-title {
 	background-color: $color-bg-secodary;
 	color: $color-text-primary;
-	border: 1px solid $border-cartd-title;
+	border: 1px solid $border-card-title;
 	border-radius: 4px;
 }
 
 %card-title-mobile {
 	background-color: $color-bg-secodary;
 	color: $color-text-primary;
-	border-color: $border-cartd-title;
+	border-color: $border-card-title;
 	border-width: 1;
-	border-radius: 5;
+	border-radius: 4;
 }
 
 %card-title-label {
@@ -182,7 +180,7 @@ $color-text-gray: #6b7279;
 %sub-card-title-mobile {
 	background-color: $color-bg-event;
 	color: $color-text-primary;
-	border-radius: 5;
+	border-radius: 4;
 }
 
 %time-card-title {
@@ -196,8 +194,6 @@ $color-text-gray: #6b7279;
 	background-color: $color-bg-event;
 	color: $color-text-primary;
 	border-color: $border-event;
-	border-width: 1;
-	border-radius: 5;
 }
 
 %card-title-noborder {
@@ -265,12 +261,12 @@ $color-text-gray: #6b7279;
 
 %btn-filter-form {
 	background-color: $color-bg-secodary;
-	border: 1px solid $border-cartd-title;
+	border: 1px solid $border-card-title;
 }
 %btn-filter-mobile {
 	background-color: $color-bg-secodary;
 	border-width: 1;
-	border-color: $border-cartd-title;
+	border-color: $border-card-title;
 }
 
 %btn-filter-success {
@@ -303,6 +299,10 @@ $gradient-white2: #e4e4e4;
 $gradient-dark1: #393939;
 $gradient-dark2: #000000;
 
+%color-border-blu-2 {
+	border-color: $gradient-blue2;
+}
+
 %btn-warning {
 	background: $gradient-red1;
 	background: -moz-linear-gradient(top, $gradient-red1 0%, $gradient-red2 100%);
@@ -318,6 +318,10 @@ $gradient-dark2: #000000;
 }
 %btn-warning-mobile {
 	background: linear-gradient(to bottom, $gradient-red1 0%, $gradient-red2 100%);
+	color: $color-text-primary;
+}
+%btn-success {
+	background: $color-bg-success;
 	color: $color-text-primary;
 }
 
@@ -447,61 +451,100 @@ $gradient-dark2: #000000;
 	color: $color-text-primary;
 }
 
+// BADGE
+%badge--off {
+	border: 1px solid $border-card-title;
+	background-color: $border-card-title;
+	color: $color-text-primary;
+}
+
+%badge--on {
+	border: 1px solid $border-card-title;
+	background: $gradient-blue1;
+	background: -moz-linear-gradient(top, $gradient-blue1 34%, $gradient-blue2 100%);
+	background: -webkit-linear-gradient(top, $gradient-blue1 34%, $gradient-blue2 100%);
+	background: linear-gradient(to bottom, $gradient-blue1 34%, $gradient-blue2 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-blue1', endColorstr='$gradient-blue2',GradientType=0 );
+	color: $color-text-primary;
+}
+
 // GAME AREA
 // Dog racing
 %PRODUCT-DOG-BG {
-	background: url("app/themes/skins/develop/image/Dog-Racing.png") left center no-repeat;
-	background-size: 15%;
+	background: url("assets/images/Dog-Racing.png") left center no-repeat;
+	background-size: contain;
 }
 
 %PRODUCT-DOG-BG-MOBILE {
-	background: url("~/app/themes/skins/develop/image/Dog-Racing.png") left center no-repeat;
+	background: url("~/assets/images/Dog-Racing.png") left center no-repeat;
 	background-size: contain;
 }
 // HORSERACING
 %PRODUCT-HORSE-BG {
-	background: url("app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
-	background-size: 15%;
+	background: url("assets/images/horse-racing.png") left center no-repeat;
+	background-size: contain;
 }
 %PRODUCT-HORSE-BG-MOBILE {
-	background: url("~/app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
+	background: url("~/assets/images/horse-racing.png") left center no-repeat;
 	background-size: contain;
 }
 // HORSERACING-VIRTUAL
 %PRODUCT-HORSE-V-BG {
-	background: url("app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
-	background-size: 15%;
+	background: url("assets/images/horse-racing.png") left center no-repeat;
+	background-size: contain;
 }
 %PRODUCT-HORSE-V-BG-MOBILE {
-	background: url("~/app/themes/skins/develop/image/horse-racing.png") left center no-repeat;
+	background: url("~/assets/images/horse-racing.png") left center no-repeat;
 	background-size: contain;
 }
 
 // COCK FIGHT
 %PRODUCT-COCK-BG {
-	background: url("app/themes/skins/develop/image/Cock-fight.png") left center no-repeat;
-	background-size: 20%;
+	background: url("assets/images/Cock-fight.png") left center no-repeat;
+	background-size: contain;
 }
 %PRODUCT-COCK-BG-MOBILE {
-	background: url("~/app/themes/skins/develop/image/Cock-fight.png") left center no-repeat;
+	background: url("~/assets/images/Cock-fight.png") left center no-repeat;
 	background-size: contain;
 }
 
 %ICON-COCK-RED {
-	background: url("~/app/themes/skins/develop/image/cockfight/cock-red.png") no-repeat center;
+	background: url("~/assets/images/cockfight/cock-red.png") no-repeat center;
 	background-size: contain;
 }
 
 %ICON-COCK-BLUE {
-	background: url("~/app/themes/skins/develop/image/cockfight/cock-blue.png") no-repeat center;
+	background: url("~/assets/images/cockfight/cock-blue.png") no-repeat center;
 	background-size: contain;
 }
 
+// SOCCER FIGHT
+%PRODUCT-ITA-LEAGUE-BG {
+	background: url("assets/images/Soccer-IT.png") left center no-repeat;
+	background-size: contain;
+}
+%PRODUCT-ITA-LEAGUE-BG-MOBILE {
+	background: url("~/assets/images/Soccer-IT.png") left center no-repeat;
+	background-size: contain;
+}
+
+%PRODUCT-ENG-LEAGUE-BG {
+	background: url("assets/images/Soccer-EN.png") left center no-repeat;
+	background-size: contain;
+}
+
+%PRODUCT-ENG-LEAGUE-BG-MOBILE {
+	background: url("~/assets/images/Soccer-EN.png") left center no-repeat;
+	background-size: contain;
+}
+
+%text-primary {
+	color: $color-text-primary;
+}
 // BORDER BOX DEFINITION
 %border-gray {
 	border-color: $color-border-box;
 }
-
 %border-primary {
 	border-color: $color-text-primary;
 }
@@ -510,31 +553,29 @@ $gradient-dark2: #000000;
 %dialog {
 	background-color: $color-bg-primary;
 	color: $color-text-primary;
-	border: 1px solid $border-cartd-title;
+	border: 1px solid $border-card-title;
 	border-radius: 5px;
 }
 
 %dialog-mobile {
 	background-color: $color-bg-primary;
 	color: $color-text-primary;
-	border-width: 1;
-	border-color: $border-cartd-title;
-	border-radius: 5;
+	border-color: $border-card-title;
 }
 
 %dialog-card {
 	background-color: $color-bg-secodary;
-	border: 1px solid $border-cartd-title;
+	border: 1px solid $border-card-title;
 }
 
 %dialog-card-mobile {
 	background-color: $color-bg-secodary;
 	border-width: 1;
-	border-color: $border-cartd-title;
+	border-color: $border-card-title;
 }
 
 %dialog-card-header {
-	background-color: $border-cartd-title;
+	background-color: $border-card-title;
 }
 
 %indicator {
@@ -559,52 +600,140 @@ $gradient-dark2: #000000;
 }
 
 %user-icon {
-	background: url("app/themes/skins/develop/icon/icona-user.svg") center center no-repeat;
+	background: url("assets/icons/icona-user.svg") center center no-repeat;
 }
 
 %user-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/icona-user.png") center center no-repeat;
+	background: url("~/assets/icons/icona-user.png") center center no-repeat;
+	background-size: contain;
+}
+
+%users-icon-mobile {
+	background: url("~/assets/icons/baseline_supervised_user_circle_white_24px.png") center center no-repeat;
 	background-size: contain;
 }
 
 %pwd-icon {
-	background: url("app/themes/skins/develop/icon/icona-pwd.svg") center center no-repeat;
+	background: url("assets/icons/icona-pwd.svg") center center no-repeat;
 }
 
 %pwd-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/icona-pwd.png") center center no-repeat;
+	background: url("~/assets/icons/icona-pwd.png") center center no-repeat;
+	background-size: contain;
+}
+%warning-icon-mobile {
+	background: url("~/assets/icons/warning.png") center center no-repeat;
 	background-size: contain;
 }
 
 %error-icon {
-	background: url("app/themes/skins/develop/icon/alert.svg") center center no-repeat;
+	background: url("assets/icons/alert.svg") center center no-repeat;
 }
 
 %error-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/alert.png") center center no-repeat;
+	background: url("~/assets/icons/alert.png") center center no-repeat;
 	background-size: contain;
 }
 
 %check-circle-icon {
-	background: url("app/themes/skins/develop/icon/baseline-check_circle-24px.svg") center center no-repeat;
+	background: url("assets/icons/baseline-check_circle-24px.svg") center center no-repeat;
 }
 
 %check-circle-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/baseline-check_circle-24px.png") center center no-repeat;
+	background: url("~/assets/icons/baseline-check_circle-24px.png") center center no-repeat;
 	background-size: contain;
 }
 
 %shopping-cart-icon {
-	background: url("app/themes/skins/develop/icon/baseline-shopping_cart-24px.svg") center center no-repeat;
+	background: url("assets/icons/baseline-shopping_cart-24px.svg") center center no-repeat;
 }
 
 %shopping-cart-icon-mobile {
-	background: url("~/app/themes/skins/develop/icon/baseline-shopping_cart-24px.png") center center no-repeat;
+	background: url("~/assets/icons/baseline-shopping_cart-24px.png") center center no-repeat;
+	background-size: contain;
+}
+%camera-icon-mobile {
+	background: url("~/assets/icons/baseline_photo_camera_white_18dp.png") center center no-repeat;
+	background-size: contain;
+}
+
+%star-yellow-icon {
+	background: url("assets/icons/baseline_star_rate_yellow_18px.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%star-yellow-icon-mobile {
+	background: url("~/assets/icons/baseline_star_rate_yellow_18dp.png") center center no-repeat;
+	background-size: contain;
+}
+
+%star-red-icon {
+	background: url("assets/icons/baseline_star_rate_red_18px.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%star-red-icon-mobile {
+	background: url("~/assets/icons/baseline_star_rate_red_18dp.png") center center no-repeat;
+	background-size: contain;
+}
+
+%video-enabled-icon {
+	background: url("assets/icons/video-enabled.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%video-enabled-icon-mobile {
+	background: url("~/assets/icons/video-enabled.png") center center no-repeat;
+	background-size: contain;
+}
+
+%video-disabled-icon {
+	background: url("assets/icons/video-disabled.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%video-disabled-icon-mobile {
+	background: url("~/assets/icons/video-disabled.png") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-up-icon {
+	background: url("assets/icons/rank-up.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-up-icon-mobile {
+	background: url("~/assets/icons/rank-up.png") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-same-icon {
+	background: url("assets/icons/rank-same.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-same-icon-mobile {
+	background: url("~/assets/icons/rank-same.png") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-down-icon {
+	background: url("assets/icons/rank-down.svg") center center no-repeat;
+	background-size: contain;
+}
+
+%rank-down-icon-mobile {
+	background: url("~/assets/icons/rank-down.png") center center no-repeat;
+	background-size: contain;
+}
+
+%remove-data-or-close {
+	background: url("~/assets/icons/baseline_close_white_36px.png") no-repeat center center;
 	background-size: contain;
 }
 
 %border-input-area {
-	border: 1px solid $border-cartd-title;
+	border: 1px solid $border-card-title;
 }
 
 %border-input-area-error {
@@ -613,7 +742,7 @@ $gradient-dark2: #000000;
 
 %border-input-area-mobile {
 	border-width: 1;
-	border-color: $border-cartd-title;
+	border-color: $border-card-title;
 }
 
 %border-input-area-error-mobile {
@@ -657,4 +786,21 @@ $gradient-dark2: #000000;
 // STATISTIC
 %bar-fitness-pecentage {
 	background: $border-success;
+}
+
+// GROUPINGS
+
+%bg-slide-toggle-thumb-container-selected {
+	background: $color-bg-event;
+	box-shadow: 0px 0px 3px 0px $color-bg-primary-op-dark;
+}
+%bg-slide-toggle-thumb-label {
+	background: $color-bg-primary;
+}
+%bg-slide-toggle-thumb-label-selected {
+	background: $color-bg-event;
+}
+
+%hr-border-bottom {
+	border-bottom-color: $btn-border-keyboard;
 }

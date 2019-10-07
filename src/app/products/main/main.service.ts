@@ -10,20 +10,26 @@ import {
   VirtualEventCountDownRequest,
   VirtualEventCountDownResponse,
   VirtualProgramTreeBySportRequest,
-  VirtualProgramTreeBySportResponse
+  VirtualProgramTreeBySportResponse,
+  VirtualGetRankByEventResponse
 } from '@elys/elys-api';
-import { interval, Subject } from 'rxjs';
+import { cloneDeep as clone } from 'lodash';
+import { interval, Observable, Subject, Subscription, timer } from 'rxjs';
+import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
-import { BetOdd, PolyfunctionalArea, PolyfunctionalStakeCoupon, Market, SelectionIdentifier } from '../products.model';
+import { BetOdd, Market, PolyfunctionalArea, PolyfunctionalStakeCoupon, SelectionIdentifier } from '../products.model';
 import { ProductsService } from '../products.service';
 import {
+  Area,
   CombinationType,
   EventDetail,
   EventInfo,
   EventTime,
+  ListArea,
+  Match,
   PlacingEvent,
   Player,
   Podium,
@@ -33,21 +39,30 @@ import {
   SpecialBetValue,
   TypeBetSlipColTot,
   TypePlacingEvent,
-  VirtualBetSelectionExtended
+  VirtualBetSelectionExtended,
+  VirtualBetTournamentExtended,
+  SpecialOddData,
+  VirtualBetMarketExtended,
+  VirtualBetEventExtended
 } from './main.models';
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
-
+import { areas, overviewAreas } from './SoccerAreas';
 @Injectable({
   providedIn: 'root'
 })
 export class MainService extends MainServiceExtra {
   private reload: number;
   private cacheEvents: VirtualBetEvent[] = [];
+  private cacheTournaments: VirtualBetTournamentExtended[] = [];
   // Working variable
   private remainingTime: EventTime = new EventTime();
   placingEvent: PlacingEvent = new PlacingEvent();
   public currentEventDetails: VirtualBetEvent;
+  public currentProductDetails: VirtualBetTournamentExtended;
+
+  private remaingTimeCounter: Subject<EventTime>;
+  public remaingTimeCounterObs: Observable<EventTime>;
 
   private attempts = 0;
   private initCurrentEvent = false;
@@ -58,48 +73,60 @@ export class MainService extends MainServiceExtra {
 
   amount: number;
 
+  countdownSub: Subscription;
+
   constructor(
     private elysApi: ElysApiService,
     private productService: ProductsService,
     private btnService: BtncalcService,
-    public coupon: CouponService,
+    public couponService: CouponService,
     private appSettings: AppSettings,
     public destroyCouponService: DestroyCouponService,
     private resultService: ResultsService
   ) {
-    super(coupon, destroyCouponService);
+    super(couponService, destroyCouponService);
+    this.toResetAllSelections = true;
+    // counter obser
+    this.remaingTimeCounter = new Subject<EventTime>();
+    this.remaingTimeCounterObs = this.remaingTimeCounter.asObservable();
     this.defaultGameStart();
 
     this.productService.productNameSelectedObserve.subscribe(item => {
-      if (!this.coupon.productHasCoupon.checked) {
+      if (!this.couponService.productHasCoupon.checked) {
         this.cacheEvents = null;
         this.initEvents();
       }
     });
 
-    this.eventDetails = new EventDetail(this.productService.product.layoutProducts.nextEventItems);
-    this.eventDetails.currentEvent = 0;
-
-    interval(1000).subscribe(() => this.getTime());
+    this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
 
     this.currentEventSubscribe = new Subject<number>();
     this.currentEventObserve = this.currentEventSubscribe.asObservable();
 
     this.currentEventObserve.subscribe((eventIndex: number) => {
+
       this.eventDetails.currentEvent = eventIndex;
       this.remainingEventTime(this.eventDetails.events[eventIndex].number).then((eventTime: EventTime) => {
         this.eventDetails.eventTime = eventTime;
+        if (this.eventDetails.currentEvent === 0) {
+          this.remainingTime.minute = eventTime.minute;
+          this.remainingTime.second = eventTime.second;
+        }
       });
-      // Reset coupon
-      this.coupon.resetCoupon();
-      // Reset playable board
-      this.resetPlayEvent();
+
+      if (this.toResetAllSelections) {
+        // Reset coupon
+        this.couponService.resetCoupon();
+        // Reset playable board
+        this.resetPlayEvent();
+      }
       // Get event's odds
       this.eventDetailOdds(this.eventDetails.events[eventIndex].number);
     });
 
     this.productService.playableBoardResetObserve.subscribe(reset => {
       if (reset) {
+        this.toResetAllSelections = true;
         this.resetPlayEvent();
       }
     });
@@ -121,6 +148,10 @@ export class MainService extends MainServiceExtra {
 
   initEvents(): void {
     this.initCurrentEvent = true;
+
+    this.eventDetails = new EventDetail(this.productService.product.layoutProducts.nextEventItems);
+    this.eventDetails.currentEvent = 0;
+
     this.loadEvents();
     this.resultService.loadLastResult(false);
   }
@@ -139,17 +170,26 @@ export class MainService extends MainServiceExtra {
 
   getTime(): void {
     try {
+      // when countdown is stopped, it doesn't load the new data
+      if (this.countdownSub.closed) {
+        return;
+      }
       if (this.remainingTime.second === 0 && this.remainingTime.minute === 0) {
+        // stop the countdown to prevent multiple calls
+        this.countdownSub.unsubscribe();
         this.loadEvents();
         this.resultService.loadLastResult();
       } else {
         if (this.remainingTime.second < 0 || this.remainingTime.minute < 0) {
+          // stop the countdown to prevent multiple calls
+          this.countdownSub.unsubscribe();
           // If remaining time is negative there is an error, reload all.
           this.cacheEvents = null;
           this.loadEvents();
           this.resultService.loadLastResult(false);
+          return;
         }
-        if (this.remainingTime.second === 0) {
+        if (this.remainingTime.second === 0 && this.remainingTime.minute > 0) {
           // Remaing time
           this.remainingTime.second = 59;
           this.remainingTime.minute = this.remainingTime.minute - 1;
@@ -159,7 +199,7 @@ export class MainService extends MainServiceExtra {
           // Remaing time
           this.remainingTime.second = this.remainingTime.second - 1;
           // Check time blocked
-          if (this.eventDetails.eventTime.second <= 10 && this.eventDetails.eventTime.minute === 0) {
+          if (this.eventDetails.eventTime.second <= 15 && this.eventDetails.eventTime.minute === 0) {
             this.placingEvent.timeBlocked = true;
             this.productService.closeProductDialog();
           } else {
@@ -169,8 +209,10 @@ export class MainService extends MainServiceExtra {
         }
         // Shown seconds
         this.eventDetails.eventTime.second = this.remainingTime.second;
+        this.remaingTimeCounter.next(this.eventDetails.eventTime);
       }
     } catch (err) {
+      console.log('GET TIME ERROR ---> ', err);
       this.cacheEvents = null;
       this.loadEvents();
       this.resultService.loadLastResult(false);
@@ -178,32 +220,65 @@ export class MainService extends MainServiceExtra {
   }
 
   loadEvents(): void {
-    if (this.cacheEvents == null || this.cacheEvents.length === 0) {
-      this.loadEventsFromApi(true);
-    } else {
-      // Delete the first element
-      this.cacheEvents.shift();
-      this.eventDetails.events.shift();
+    try {
 
-      // Add the new event
-      const event: EventInfo = new EventInfo();
-      event.number = this.cacheEvents[4].id;
-      event.label = this.cacheEvents[4].nm;
-      event.date = new Date(this.cacheEvents[4].sdtoffset);
-
-      this.eventDetails.events[4] = event;
-
-      this.currentAndSelectedEventTime();
-      this.reload--;
-
-      if (this.reload <= 0) {
-        // If remain only 1 new event reload other events
-        this.loadEventsFromApi();
+      if (/*
+        ((this.cacheEvents == null ||
+          this.cacheEvents.length === 0
+        ) && this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) */
+        this.initCurrentEvent
+      ) {
+        this.loadEventsFromApi(true);
       } else {
-        // Get event's odds
-        this.eventDetailOdds(this.eventDetails.events[0].number);
+
+        // Delete the first element
+        if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
+          this.cacheTournaments.shift();
+          this.eventDetails.events.shift();
+
+        } else if (this.cacheEvents != null && this.cacheEvents.length > 0) {
+          this.cacheEvents.shift();
+          this.eventDetails.events.shift();
+          // Add the new event
+          this.addNewEvent();
+          this.currentAndSelectedEventTime();
+        }
+
+        this.reload--;
+
+        if (this.reload <= this.productService.product.layoutProducts.nextEventItems) {
+          // If remain only 1 new event reload other events
+          this.loadEventsFromApi();
+        } else {
+          // Get event's odds
+          this.eventDetailOdds(this.eventDetails.events[0].number);
+        }
       }
+      // Resume event's countdown
+      if (this.countdownSub && this.countdownSub.closed) {
+        this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
+      }
+    } catch (err) {
+      console.log('main --> loadEvents : ', err);
     }
+  }
+
+  /**
+   *
+   */
+  private addNewEvent(): void {
+    let nextEventItems: number = this.productService.product.layoutProducts.nextEventItems;
+    // check the exception layout
+    if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
+      nextEventItems = nextEventItems - 1;
+    }
+
+    const event: EventInfo = new EventInfo();
+    event.number = this.cacheEvents[nextEventItems].id;
+    event.label = this.cacheEvents[nextEventItems].nm;
+    event.date = new Date(this.cacheEvents[nextEventItems].sdtoffset);
+    this.eventDetails.events[nextEventItems] = event;
+
   }
 
   /**
@@ -219,32 +294,234 @@ export class MainService extends MainServiceExtra {
     };
 
     this.elysApi.virtual.getVirtualTree(request).then((sports: VirtualProgramTreeBySportResponse) => {
-      const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
+      // cache all tournaments
+      /* if ( all ) {
+        this.cacheTournaments = sports.Sports[0].ts;
+      }
+ */
+      if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
+        const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
+        if (all) {
+          // Load all events
+          this.cacheEvents = tournament.evs;
+          for (let index = 0; index < this.productService.product.layoutProducts.nextEventItems; index++) {
+            const event: EventInfo = new EventInfo();
+            event.number = this.cacheEvents[index].id;
+            event.label = this.cacheEvents[index].nm;
+            event.date = new Date(this.cacheEvents[index].sdtoffset);
 
-      if (all) {
-        // Load all events
-        this.cacheEvents = tournament.evs;
-        for (let index = 0; index < 5; index++) {
+            this.eventDetails.events[index] = event;
+          }
+          this.currentAndSelectedEventTime();
+        } else {
+          // Add only new event
+          tournament.evs.forEach((event: VirtualBetEvent) => {
+            if (this.cacheEvents.filter((cacheEvent: VirtualBetEvent) => cacheEvent.id === event.id).length === 0) {
+              this.cacheEvents.push(event);
+            }
+          });
+          // Get event's odds
+          this.eventDetailOdds(this.eventDetails.events[0].number);
+        }
+        // load markets from PRODUCT SOCCER
+      } else {
+        const tournaments: VirtualBetTournamentExtended[] = sports.Sports[0].ts;
+        if (all) {
+          this.cacheTournaments = tournaments;
+          for (let index = 0; index < this.productService.product.layoutProducts.nextEventItems; index++) {
+            const event: EventInfo = new EventInfo();
+            event.number = this.cacheTournaments[index].id;
+            event.label = this.cacheTournaments[index].nm;
+            event.date = new Date(this.cacheTournaments[index].sdtoffset);
+
+            this.eventDetails.events[index] = event;
+          }
+        } else {
+          // Add only new event
+          tournaments.forEach((tournament: VirtualBetTournamentExtended) => {
+            // tslint:disable-next-line:max-line-length
+            if (
+              this.cacheTournaments.filter((cacheTournament: VirtualBetTournament) => cacheTournament.id === tournament.id).length === 0
+            ) {
+              this.cacheTournaments.push(tournament);
+            }
+          });
           const event: EventInfo = new EventInfo();
-          event.number = this.cacheEvents[index].id;
-          event.label = this.cacheEvents[index].nm;
-          event.date = new Date(this.cacheEvents[index].sdtoffset);
-
-          this.eventDetails.events[index] = event;
+          const idx: number = this.productService.product.layoutProducts.cacheEventsItem - 1;
+          event.number = this.cacheTournaments[idx].id;
+          event.label = this.cacheTournaments[idx].nm;
+          event.date = new Date(this.cacheTournaments[idx].sdtoffset);
+          this.eventDetails.events[idx] = event;
+          // Get event's odds
+          this.eventDetailOddsByCacheTournament(this.eventDetails.events[0].number);
         }
         this.currentAndSelectedEventTime();
-      } else {
-        // Add only new event
-        tournament.evs.forEach((event: VirtualBetEvent) => {
-          if (this.cacheEvents.filter((cacheEvent: VirtualBetEvent) => cacheEvent.id === event.id).length === 0) {
-            this.cacheEvents.push(event);
-          }
-        });
       }
-      // Get event's odds
-      this.eventDetailOdds(this.eventDetails.events[0].number);
-      this.reload = 4;
     });
+    this.reload = this.productService.product.layoutProducts.cacheEventsItem;
+  }
+
+  /**
+   * Method to retrieve the details of the events contained in the tournament.
+   * @param tournamentNumber tournament for which collect the events' details.
+   */
+  private eventDetailOddsByCacheTournament(tournamentNumber: number): void {
+    // Get the tournament information from the cache.
+    const tournament: VirtualBetTournamentExtended = this.cacheTournaments.filter(
+      (cacheTournament: VirtualBetTournament) => cacheTournament.id === tournamentNumber
+    )[0];
+    const request: VirtualDetailOddsOfEventRequest = {
+      sportId: this.productService.product.sportId,
+      matchId: tournamentNumber
+    };
+    // If the tournament doesn't contain yet the events information, load them calling the API.
+    if (!tournament.matches || tournament.matches == null || tournament.matches.length === 0) {
+      this.elysApi.virtual.getVirtualEventDetail(request).then((sportDetail: VirtualDetailOddsOfEventResponse) => {
+        try {
+          const matches: Match[] = [];
+          const overViewArea: Area[] = [];
+          const listDetailArea: ListArea[] = [];
+
+          // cicle the tournament's matches and save their data
+          for (const match of sportDetail.Sport.ts[0].evs) {
+            // created a temporary match object
+            const tmpMatch: Match = {
+              id: match.id,
+              name: match.nm,
+              smartcode: match.smc,
+              hasOddsSelected: false,
+              isVideoShown: match.ehv,
+              isDetailOpened: false,
+              selectedOdds: [],
+              virtualBetCompetitor: match.tm
+            };
+            // Clone temporary areas from default values
+            const tmpAreaOverview = clone(overviewAreas);
+            const tmpDetailArea = clone(areas);
+            const matchExtended: VirtualBetEventExtended = clone(match);
+            const tmpMarkets: VirtualBetMarketExtended[] = matchExtended.mk.map(market => {
+              // Check the validity of the odds. Odd is valid if greater than 1.05.
+              for (const selection of market.sls) {
+                if (selection.ods[0].vl <= 1.05) {
+                  selection.isValid = false;
+                } else {
+                  selection.isValid = true;
+                }
+              }
+              // Sort the selection of each market using their "tp" attribute.
+              market.sls = market.sls.sort((a, b) => a.tp - b.tp);
+              return market;
+            });
+            // Cicle the current match's markets and save on the temporary "tmpAreaOverview"
+            for (const market of tmpMarkets) {
+              // Find the occurrence and append the selections' data
+              tmpAreaOverview.markets.map(marketOverviewFilter => {
+                if (marketOverviewFilter.id === market.tp && market.spv === marketOverviewFilter.specialValueOrSpread) {
+                  marketOverviewFilter.selections = market.sls;
+                }
+              });
+            }
+
+            // Initialize the lowestOdd and highestOdd.
+            let lowestOdd: SpecialOddData;
+            let highestOdd: SpecialOddData;
+            // Cicle the temporary detail's area
+            tmpDetailArea.forEach((detail, areaIndex) => {
+              // Cicle the current match's markets and save on the temporary "tmpDetailArea"
+              detail.markets.forEach((areaMarket, marketIndex) => {
+                // Find the occurrence and append the selections' data
+                const tmpMk: VirtualBetMarketExtended = tmpMarkets.filter(
+                  market => market.tp === areaMarket.id && market.spv === areaMarket.specialValueOrSpread
+                )[0];
+                areaMarket.selections = tmpMk.sls;
+                // Looking for the highest and lowest odd.
+                tmpMk.sls.forEach((odd, oddIndex) => {
+                  // Initialization of "lowestOdd".
+                  if (!lowestOdd && odd.isValid) {
+                    lowestOdd = {
+                      areaIndex: areaIndex,
+                      marketIndex: marketIndex,
+                      oddIndex: oddIndex,
+                      val: odd.ods[0].vl
+                    };
+                  }
+                  // Initialization of "highestOdd".
+                  if (!highestOdd) {
+                    highestOdd = {
+                      areaIndex: areaIndex,
+                      marketIndex: marketIndex,
+                      oddIndex: oddIndex,
+                      val: odd.ods[0].vl
+                    };
+                  }
+                  // Looking for the highest and lowest odd.
+                  if (lowestOdd && odd.ods[0].vl < lowestOdd.val && odd.isValid) {
+                    if (areaIndex !== lowestOdd.areaIndex) {
+                      lowestOdd.areaIndex = areaIndex;
+                    }
+                    if (marketIndex !== lowestOdd.marketIndex) {
+                      lowestOdd.marketIndex = marketIndex;
+                    }
+                    lowestOdd.oddIndex = oddIndex;
+                    lowestOdd.val = odd.ods[0].vl;
+                  }
+                  if (highestOdd && odd.ods[0].vl > highestOdd.val) {
+                    if (areaIndex !== highestOdd.areaIndex) {
+                      highestOdd.areaIndex = areaIndex;
+                    }
+                    if (marketIndex !== highestOdd.marketIndex) {
+                      highestOdd.marketIndex = marketIndex;
+                    }
+                    highestOdd.oddIndex = oddIndex;
+                    highestOdd.val = odd.ods[0].vl;
+                  }
+                });
+              });
+            });
+            // Set lowest and highest odd.
+            tmpDetailArea[lowestOdd.areaIndex].hasLowestOdd = true;
+            tmpDetailArea[lowestOdd.areaIndex].markets[lowestOdd.marketIndex].selections[lowestOdd.oddIndex].isLowestOdd = true;
+            tmpDetailArea[highestOdd.areaIndex].hasHighestOdd = true;
+            tmpDetailArea[highestOdd.areaIndex].markets[highestOdd.marketIndex].selections[highestOdd.oddIndex].isHighestOdd = true;
+            // Save the datas to tournament object
+            matches.push(tmpMatch);
+            overViewArea.push(tmpAreaOverview);
+            listDetailArea.push(tmpDetailArea);
+          }
+
+          tournament.matches = matches;
+          tournament.overviewArea = overViewArea;
+          tournament.listDetailAreas = listDetailArea;
+
+          this.currentProductDetails = tournament;
+
+          this.attempts = 0;
+        } catch (err) {
+          console.log(err);
+          if (this.attempts < 5) {
+            this.attempts++;
+            setTimeout(() => {
+              this.eventDetailOddsByCacheTournament(tournamentNumber);
+            }, 1000);
+          } else {
+            this.attempts = 0;
+          }
+        }
+      });
+    }
+  }
+
+
+  /**
+   * Get ranking data
+   * @param tournamentId
+   */
+  async getRanking(tournamentId: number): Promise<VirtualGetRankByEventResponse> {
+    // Get ranking data
+    if (!this.currentProductDetails.ranking) {
+      this.currentProductDetails.ranking = await this.elysApi.virtual.getRanking(tournamentId);
+    }
+    return this.currentProductDetails.ranking;
   }
 
   currentAndSelectedEventTime() {
@@ -255,26 +532,22 @@ export class MainService extends MainServiceExtra {
         this.resetPlayEvent();
         this.currentEventSubscribe.next(0);
       } else {
+        // set to reset all variables
+        this.toResetAllSelections = false;
         this.currentEventSubscribe.next(this.eventDetails.currentEvent);
       }
     } else if (this.eventDetails.currentEvent === 0) {
-      this.resetPlayEvent();
+      // this.resetPlayEvent();
+      // set to reset all variables
+      this.toResetAllSelections = true;
       this.currentEventSubscribe.next(0);
     }
+
     if (this.initCurrentEvent) {
       this.initCurrentEvent = false;
     }
 
-    // Calculate remaning time for selected event
-    this.remainingEventTime(this.eventDetails.events[this.eventDetails.currentEvent].number).then((eventTime: EventTime) => {
-      this.eventDetails.eventTime = eventTime;
-      if (this.eventDetails.currentEvent === 0) {
-        this.remainingTime.minute = eventTime.minute;
-        this.remainingTime.second = eventTime.second;
-      }
-    });
-
-    // Calculate remaning time
+    // Calculate remaning time for first Event
     if (this.eventDetails.currentEvent > 0) {
       this.remainingEventTime(this.eventDetails.events[0].number).then((eventTime: EventTime) => {
         this.remainingTime = eventTime;
@@ -288,7 +561,7 @@ export class MainService extends MainServiceExtra {
       MatchId: idEvent
     };
     return this.elysApi.virtual.getCountdown(request).then((value: VirtualEventCountDownResponse) => {
-      const sec: number = value.CountDown / 10000000;
+      const sec: number = (value.CountDown / 10000000) + 5;
       const eventTime: EventTime = new EventTime();
       eventTime.minute = Math.floor(sec / 60);
       eventTime.second = Math.floor(sec % 60);
@@ -296,17 +569,33 @@ export class MainService extends MainServiceExtra {
     });
   }
 
+  /**
+   *
+   */
   resetPlayEvent(): void {
     this.placingEvent = new PlacingEvent();
     this.smartCode = new Smartcode();
     this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
     this.createPlayerList();
 
-    this.productService.polyfunctionalAreaSubject.next(new PolyfunctionalArea());
+    // Create a new polyfunctionArea object
+    const polyfunctionalArea: PolyfunctionalArea = new PolyfunctionalArea();
+    // take the last polyfunctionArea's value from Subject
+    const tempPolyfunctionalArea: PolyfunctionalArea = this.productService.polyfunctionalAreaSubject.getValue();
+    // check if global 'PolyfunctionalArea' has the grouping and put it on new object before to replace it
+    if (tempPolyfunctionalArea.hasOwnProperty('grouping')) {
+      polyfunctionalArea.grouping = tempPolyfunctionalArea.grouping;
+    }
+    // updated the new PolyfunctionalArea
+    this.productService.polyfunctionalAreaSubject.next(polyfunctionalArea);
     this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
 
   eventDetailOdds(eventNumber: number): void {
+    if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
+      this.eventDetailOddsByCacheTournament(eventNumber);
+      return;
+    }
     const event: VirtualBetEvent = this.cacheEvents.filter((cacheEvent: VirtualBetEvent) => cacheEvent.id === eventNumber)[0];
     const request: VirtualDetailOddsOfEventRequest = {
       sportId: this.productService.product.sportId,
@@ -335,7 +624,7 @@ export class MainService extends MainServiceExtra {
   }
 
   checkIfCouponIsReadyToPlace(): boolean {
-    return this.coupon.checkIfCouponIsReadyToPlace();
+    return this.couponService.checkIfCouponIsReadyToPlace();
   }
 
   /**
@@ -343,7 +632,7 @@ export class MainService extends MainServiceExtra {
    * @param odd Selected odd.
    */
   placingOddByOdd(marketId: number, odd: VirtualBetSelection): void {
-    if (this.coupon.checkIfCouponIsReadyToPlace()) {
+    if (this.couponService.checkIfCouponIsReadyToPlace()) {
       return;
     }
     let removed: boolean;
@@ -376,7 +665,7 @@ export class MainService extends MainServiceExtra {
    * @param player
    */
   placingOdd(player: Player): void {
-    if (this.coupon.checkIfCouponIsReadyToPlace()) {
+    if (this.couponService.checkIfCouponIsReadyToPlace()) {
       return;
     }
     if (this.placingEvent.isSpecialBets) {
@@ -410,7 +699,7 @@ export class MainService extends MainServiceExtra {
   }
 
   placeOdd() {
-    if (this.coupon.checkIfCouponIsReadyToPlace()) {
+    if (this.couponService.checkIfCouponIsReadyToPlace()) {
       return;
     }
     // Extract the event's odds from cache
@@ -820,14 +1109,14 @@ export class MainService extends MainServiceExtra {
         if (this.smartCode.selWinner.length === 2) {
           // Single
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('-');
           return SmartCodeType[SmartCodeType.AS];
         } else if (this.smartCode.selWinner.length > 2) {
           // Multiple
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('');
@@ -847,10 +1136,10 @@ export class MainService extends MainServiceExtra {
         } else {
           // Combination with base and tail
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
-          this.smartCode.selPlaced.sort(function(a, b) {
+          this.smartCode.selPlaced.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('') + '/' + this.smartCode.selPlaced.join('');
@@ -874,7 +1163,7 @@ export class MainService extends MainServiceExtra {
         // Requirements "Trio a girare"
         if (this.smartCode.selWinner.length >= 3) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('');
@@ -887,7 +1176,7 @@ export class MainService extends MainServiceExtra {
           // Enough selections on the second row to be able to create a trio
           if (this.smartCode.selPlaced.length >= 2) {
             // Sort the displayed values
-            this.smartCode.selPlaced.sort(function(a, b) {
+            this.smartCode.selPlaced.sort(function (a, b) {
               return a - b;
             });
             areaFuncData.value = this.smartCode.selWinner[0] + '/' + this.smartCode.selPlaced.join('');
@@ -898,12 +1187,12 @@ export class MainService extends MainServiceExtra {
           // Enough selections on the second row to be able to create a trio
           if (this.smartCode.selPlaced.length >= 1) {
             // Sort the displayed values
-            this.smartCode.selWinner.sort(function(a, b) {
+            this.smartCode.selWinner.sort(function (a, b) {
               return a - b;
             });
             if (this.smartCode.selPlaced.length > 1) {
               // Sort the displayed values
-              this.smartCode.selPlaced.sort(function(a, b) {
+              this.smartCode.selPlaced.sort(function (a, b) {
                 return a - b;
               });
             }
@@ -929,7 +1218,7 @@ export class MainService extends MainServiceExtra {
         // Requirements "Accoppiata in ordine con ritorno"
         if (this.smartCode.selWinner.length === 2) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
           areaFuncData.value = this.smartCode.selWinner.join('');
@@ -940,14 +1229,14 @@ export class MainService extends MainServiceExtra {
         // Selections in the first row
         if (this.smartCode.selWinner.length > 1) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
         }
         // Selections in the second row
         if (this.smartCode.selPlaced.length > 1) {
           // Sort the displayed values
-          this.smartCode.selPlaced.sort(function(a, b) {
+          this.smartCode.selPlaced.sort(function (a, b) {
             return a - b;
           });
         }
@@ -958,21 +1247,21 @@ export class MainService extends MainServiceExtra {
         // Selections in the first row
         if (this.smartCode.selWinner.length > 1) {
           // Sort the displayed values
-          this.smartCode.selWinner.sort(function(a, b) {
+          this.smartCode.selWinner.sort(function (a, b) {
             return a - b;
           });
         }
         // Selections in the second row
         if (this.smartCode.selPlaced.length > 1) {
           // Sort the displayed values
-          this.smartCode.selPlaced.sort(function(a, b) {
+          this.smartCode.selPlaced.sort(function (a, b) {
             return a - b;
           });
         }
         // Selections in the third row
         if (this.smartCode.selPodium.length > 1) {
           // Sort the displayed values
-          this.smartCode.selPodium.sort(function(a, b) {
+          this.smartCode.selPodium.sort(function (a, b) {
             return a - b;
           });
         }
@@ -1166,6 +1455,17 @@ export class MainService extends MainServiceExtra {
   public getCurrentEvent(): Promise<VirtualBetEvent> {
     const response = new Promise<VirtualBetEvent>((resolve, reject) => {
       resolve(this.cacheEvents.filter((cacheEvent: VirtualBetEvent) => cacheEvent.id === this.placingEvent.eventNumber)[0]);
+    });
+    return response;
+  }
+
+  public getCurrentTournament(): Promise<VirtualBetTournamentExtended> {
+    const tournamentSelected: VirtualBetTournamentExtended = this.cacheTournaments.filter(
+      (cacheTournament: VirtualBetTournamentExtended) => cacheTournament.id === this.placingEvent.eventNumber
+    )[0];
+
+    const response = new Promise<VirtualBetTournamentExtended>((resolve, reject) => {
+      resolve(tournamentSelected);
     });
     return response;
   }

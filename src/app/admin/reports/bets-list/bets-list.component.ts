@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AccountVirtualSport } from '@elys/elys-api';
+import { DateAdapter } from '@angular/material';
+import { AccountOperator, AccountVirtualSport } from '@elys/elys-api';
 import { Observable } from 'rxjs';
+import { TranslateUtilityService } from '../../../../../src/app/services/utility/translate-utility.service';
+import { OperatorsService } from '../../settings/operators/operators.service';
 import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
 import { BetsListService } from './bets-list.service';
-import { DateAdapter } from '@angular/material';
-import { TranslateUtilityService } from '../../../../../src/app/services/utility/translate-utility.service';
 
 @Component({
   selector: 'app-bets-list',
@@ -12,13 +13,19 @@ import { TranslateUtilityService } from '../../../../../src/app/services/utility
   styleUrls: ['./bets-list.component.scss']
 })
 export class BetsListComponent implements OnInit, OnDestroy {
-  @ViewChild('pickerDateFrom') private inputPickerDateFrom;
-  @ViewChild('pickerDateTo') private inputPickerDateTo;
+  @ViewChild('pickerDateFrom', { static: false }) private inputPickerDateFrom;
+  @ViewChild('pickerDateTo', { static: false }) private inputPickerDateTo;
 
   couponType: typeof CouponTypeInternal = CouponTypeInternal;
   couponStatus: typeof CouponStatusInternal = CouponStatusInternal;
 
-  constructor(public betsListService: BetsListService, private translate: TranslateUtilityService, private adapter: DateAdapter<Date>) {
+  constructor(
+    public betsListService: BetsListService,
+    private translate: TranslateUtilityService,
+    private adapter: DateAdapter<Date>,
+    public operatorService: OperatorsService
+  ) {
+
     this.adapter.setLocale(this.translate.getCurrentLanguage());
     document.body.classList.add('bets-list');
 
@@ -49,18 +56,83 @@ export class BetsListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     document.body.classList.remove('bets-list');
+    this.operatorService.rowNumber = 10;
+    this.operatorService.initLoad();
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.operatorService.rowNumber = 8;
+    this.operatorService.initLoad();
+    this.operatorService.getListOfOperators();
+  }
 
   changeValue(key: string, value: any) {
-    this.betsListService[key] = value;
+    switch (key) {
+      case 'couponStatus':
+        if (value === CouponStatusInternal.Cancelled) {
+          this.betsListService['dateHasPlaced'] = false;
+          this.betsListService['carriedOut'] = false;
+          this.betsListService[key] = value;
+        } else {
+          this.betsListService['carriedOut'] = false;
+          this.betsListService[key] = value;
+        }
+        break;
+      case 'dateHasPlaced':
+        this.betsListService['dateHasPlaced'] = value;
+        this.betsListService['carriedOut'] = false;
+        break;
+      case 'carriedOut':
+        this.betsListService[key] = value;
+        if (value === true) {
+          this.betsListService['couponStatus'] = CouponStatusInternal.ALL;
+        }
+
+        break;
+      default:
+        this.betsListService[key] = value;
+        break;
+    }
+
   }
+
+  selectOperator(operator?: AccountOperator): void {
+    if (operator) {
+      this.betsListService.operatorSelected = operator;
+      this.betsListService['idAgentClient'] = operator.IDClient;
+    } else {
+      this.betsListService.operatorSelected = null;
+      this.betsListService['idAgentClient'] = 0;
+    }
+  }
+
 
   checkClassListToDismiss(): boolean {
     return true;
   }
 
+
   trackBySportId(idx: number, request: AccountVirtualSport): number {
     return request.SportId;
   }
+
+
+
+
+  previusPage() {
+    if (this.operatorService.listOfOperators.actualPages <= 0) {
+      return;
+    }
+    this.operatorService.listOfOperators.actualPages--;
+    this.operatorService.filterOperators();
+  }
+
+
+  nextPage() {
+    if (this.operatorService.listOfOperators.actualPages >= this.operatorService.listOfOperators.totalPages - 1) {
+      return;
+    }
+    this.operatorService.listOfOperators.actualPages++;
+    this.operatorService.filterOperators();
+  }
+
 }

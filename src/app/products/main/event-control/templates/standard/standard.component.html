@@ -1,19 +1,21 @@
-<div [ngClass]="eventControlDetails?.productImageClass" fxFill fxLayout="row" class="race-control" fxLayoutAlign="start center" fxLayoutGap="0.2vw">
-    <div fxFlex="15"></div>
-    <div fxFlex>
-        <div fxLayout="column" fxLayoutAlign="center flex-end">
-            <span class="game-name">{{ 'DYNAMIC_KEYS.PRODUCT.LABEL.'+ eventControlDetails?.productName | translate | uppercase}}</span>
-            <div class="current-race">{{ eventControlDetails?.eventLabel }}
-                <span *ngIf="eventControlDetails?.showEventId" class="number">#{{
+<div [ngClass]="eventControlDetails?.productImageClass" fxFill fxLayout="row" class="race-control"
+  fxLayoutAlign="start center" fxLayoutGap="0.2vw">
+  <div fxFlex="15"></div>
+  <div fxFlex>
+    <div fxLayout="column" fxLayoutAlign="center flex-end">
+      <span
+        class="game-name">{{ 'DYNAMIC_KEYS.PRODUCT.LABEL.'+ eventControlDetails?.productName | translate | uppercase}}</span>
+      <div class="current-race">{{ eventControlDetails?.eventLabel }}
+        <span *ngIf="eventControlDetails?.showEventId" class="number">#{{
                   eventControlDetails?.eventNumber }}</span>
-            </div>
-          </div>
-    </div>
-    <div fxFlex="23" *ngIf="eventControlDetails?.currentEvent != null" fxLayout="column" fxLayoutAlign="space-around end">
-      <div class="time elevation-z5" fxLayout="row" fxLayoutAlign="center center">
-          <div class="icon-baseline-timer-24px"></div>
-          {{ eventControlDetails?.eventTimeMinutes | number: '2.0-0' }}:{{
-            eventControlDetails?.eventTimeSeconds | number: '2.0-0' }}
       </div>
     </div>
+  </div>
+  <div fxFlex="23" *ngIf="eventControlDetails?.currentEvent != null" fxLayout="column" fxLayoutAlign="space-around end">
+    <div class="time elevation-z5" fxLayout="row" fxLayoutAlign="center center">
+      <div class="icon-baseline-timer-24px"></div>
+      {{ (eventControlDetails.eventTimeMinutes !== undefined) ? (eventControlDetails?.eventTimeMinutes | number: '2.0-0') : '00' }}:{{
+        (eventControlDetails.eventTimeSeconds !== undefined) ? (eventControlDetails?.eventTimeSeconds | number: '2.0-0') : '00' }}
+    </div>
+  </div>
 </div>

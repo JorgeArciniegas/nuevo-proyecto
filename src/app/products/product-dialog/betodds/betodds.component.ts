@@ -28,6 +28,8 @@ export class BetoddsComponent implements OnInit {
 
   public betCouponOdd: BetCouponOddExtended[];
 
+  // MultiStake
+  multiStake: boolean;
   @Input()
   private data: BetDataDialog;
 
@@ -36,6 +38,7 @@ export class BetoddsComponent implements OnInit {
     public readonly settings: AppSettings,
     public userService: UserService
   ) {
+    this.multiStake = settings.products.filter(prod => prod.productSelected)[0].typeCoupon.acceptMultiStake;
     this.couponService.couponResponse.subscribe(coupon => {
       this.data.betCoupon = coupon;
       if (coupon) {

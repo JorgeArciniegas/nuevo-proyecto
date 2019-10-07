@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AppSettings } from '../../app.settings';
-import { IconSize } from '../model/iconSize.model';
-import { Products } from '../../../../src/environments/environment.models';
-import { ProductsService } from '../../../../src/app/products/products.service';
+import { VirtualBetCompetitor, VirtualGetRankByEventResponse } from '@elys/elys-api/lib/virtual/virtual.models';
 import { BetDataDialog } from '../../../../src/app/products/products.model';
+import { ProductsService } from '../../../../src/app/products/products.service';
+import { LAYOUT_TYPE, Products } from '../../../../src/environments/environment.models';
+import { AppSettings } from '../../app.settings';
 import { MainService } from '../../products/main/main.service';
-import { UserService } from '../../../../src/app/services/user.service';
+import { UserService } from '../../services/user.service';
+import { IconSize } from '../model/iconSize.model';
 
 @Component({
   selector: 'app-widget',
@@ -43,21 +44,50 @@ export class WidgetComponent implements OnInit {
    * create the object and append the values loads from the current selected race.
    * @param typeObject
    */
-  openRouting(typeObject: string): void {
-    this.mainService.getCurrentEvent().then(currentEventDetails => {
-      const data: BetDataDialog = { title: typeObject.toUpperCase() };
-      switch (typeObject) {
-        case 'statistic':
-          data.statistics = {
-            codeProduct: this.productService.product.codeProduct,
-            virtualBetCompetitor: currentEventDetails.tm,
-            layoutProducts: this.productService.product.layoutProducts.type
-          };
-          break;
-        default:
-          data.statistics = null;
-      }
-      this.productService.openProductDialog(data);
-    });
+  async openRouting(typeObject: string): Promise<void> {
+    let virtualBetCompetitorStatistics: VirtualBetCompetitor[] = [];
+    const data: BetDataDialog = { title: typeObject.toUpperCase() };
+    let ranking: VirtualGetRankByEventResponse = null;
+    if (
+      this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER
+    ) {
+      await this.mainService.getCurrentTournament().then(async currentEventDetails => {
+        ranking = await this.mainService.getRanking(currentEventDetails.pid);
+        for (const match of currentEventDetails.matches) {
+          virtualBetCompetitorStatistics.push(
+            match.virtualBetCompetitor[0]
+          );
+          virtualBetCompetitorStatistics.push(
+            match.virtualBetCompetitor[1]
+          );
+        }
+      });
+    } else {
+      await this.mainService.getCurrentEvent().then(currentEventDetails => {
+        virtualBetCompetitorStatistics = currentEventDetails.tm;
+      });
+    }
+
+    switch (typeObject) {
+      case 'statistic':
+        data.statistics = {
+          codeProduct: this.productService.product.codeProduct,
+          virtualBetCompetitor: virtualBetCompetitorStatistics,
+          layoutProducts: this.productService.product.layoutProducts.type
+        };
+        break;
+      case 'ranking':
+        data.tournamentRanking = {
+          codeProduct: this.productService.product.codeProduct,
+          ranking: ranking,
+          layoutProducts: this.productService.product.layoutProducts.type
+        };
+        break;
+        break;
+      default:
+        data.statistics = null;
+    }
+
+    this.productService.openProductDialog(data);
   }
 }

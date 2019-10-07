@@ -16,6 +16,7 @@
 	.btn-default-dog-play,
 	.btn-default-cock {
 		border-width: 2px;
+		overflow: hidden;
 	}
 	.btn-default-cock {
 		.icon {
@@ -23,13 +24,32 @@
 			height: 36px;
 
 			&.icon-cock-red {
-				background: url("~/app/themes/skins/develop/image/cockfight/cock-red.png") no-repeat center;
+				background: url("~/assets/images/cockfight/cock-red.png") no-repeat center;
 				background-size: contain;
 			}
 			&.icon-cock-blue {
-				background: url("~/app/themes/skins/develop/image/cockfight/cock-blue.png") no-repeat center;
+				background: url("~/assets/images/cockfight/cock-blue.png") no-repeat center;
 				background-size: contain;
 			}
 		}
 	}
+}
+// SOCCER
+.results-event {
+	margin-left: 0.5vw;
+	width: calc(100% - 0.5vw);
+	max-width: calc(100% - 0.5vw);
+}
+.card-box-result-soccer {
+	padding: 2px;
+	.header {
+		@extend %card-title-noborder;
+	}
+}
+
+.btn-soccer-result {
+	font-size: 1.3vh !important;
+	width: calc(100% - 5px) !important;
+	min-width: calc(100% - 5px) !important;
+	@extend %card-title-noborder;
 }

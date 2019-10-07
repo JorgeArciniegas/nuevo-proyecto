@@ -1,0 +1,38 @@
+<GridLayout rows="*,4*,8*,2*" columns="10*, 3*" class="statement-virutal-shop">
+  <Label row="0" col="0" class="title" text="{{'STATEMENT_VIRTUAL_SHOP' | translate | uppercase}}" textWrap="true"
+    verticalAlignment="center"></Label>
+  <GridLayout row="1" col="0" rows="*" columns="*" verticalAlignment="top">
+    <!-- DATA SELECTION -->
+    <GridLayout row="1" rows="2*" columns="3*,3*" class="display display-trasparent">
+      <GridLayout row="0" col="0" rows="2*,3*" columns="*" class="display-content">
+        <Label row="0" class="field-title" text="{{ 'DATE_FROM' | translate }}" verticalAlignment="bottom"></Label>
+        <GridLayout row="1" columns="*,6*,*" class="button btn-default btn-filter" (tap)="selectDate('dateFrom')">
+          <Button colSpan="3" text="{{service.dateFrom | date: 'd MMM yyyy'}}" class="button-internal"></Button>
+          <Image col="0" stretch="aspectFit" width="20" src="~/assets/icons/Date.png" verticalAlignment="center"
+            horizontalAlignment="right"></Image>
+          <Image col="2" stretch="aspectFit" width="8" src="~/assets/icons/Down.png" verticalAlignment="center"
+            horizontalAlignment="center"></Image>
+        </GridLayout>
+      </GridLayout>
+      <GridLayout row="0" col="1" rows="2*,3*" columns="*" class="display-content">
+        <Label row="0" class="field-title" text="{{ 'DATE_TO' | translate }}" verticalAlignment="bottom"></Label>
+        <GridLayout row="1" columns="*,6*,*" class="button btn-default btn-filter" (tap)="selectDate('dateTo')">
+          <Button colSpan="3" text="{{service.dateTo | date: 'd MMM yyyy'}}" class="button-internal"></Button>
+          <Image col="0" stretch="aspectFit" width="20" src="~/assets/icons/Date.png" verticalAlignment="center"
+            horizontalAlignment="right"></Image>
+          <Image col="2" stretch="aspectFit" width="8" src="~/assets/icons/Down.png" verticalAlignment="center"
+            horizontalAlignment="center"></Image>
+        </GridLayout>
+      </GridLayout>
+    </GridLayout>
+    <StackLayout row="1" col="0">
+      <Label class="label-overlap" text="{{ 'DATE' | translate }}" horizontalAlignment="left"></Label>
+    </StackLayout>
+  </GridLayout>
+  <!-- ROW 3 -->
+  <GridLayout row="3" col="0" colSpan="2" rows="*,2*,*" columns="*,*,*" class="display-content">
+    <GridLayout row="1" col="1" class="button btn-default btn-grey-gradient">
+      <Button text="{{'SEARCH' | translate}}" class="button-internal" (tap)="getData()"></Button>
+    </GridLayout>
+  </GridLayout>
+</GridLayout>

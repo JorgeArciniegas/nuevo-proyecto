@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Receipt } from './print-receipt.model';
 import { PrintReceiptService } from './print-receipt.service';
 import { AppSettings } from '../../../../app.settings';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-print-receipt',
@@ -12,7 +13,11 @@ export class PrintReceiptComponent implements OnInit {
   public receipt: Receipt;
   public date: Date;
 
-  constructor(private printService: PrintReceiptService, public appSettings: AppSettings) {}
+  constructor(
+    private printService: PrintReceiptService,
+    public appSettings: AppSettings,
+    public userService: UserService
+  ) { }
 
   ngOnInit() {
     this.receipt = this.printService.receipt;

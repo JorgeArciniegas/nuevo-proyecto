@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Inject,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Observable as ObservableIdle } from 'rxjs/Rx';
 import { UserService } from '../../../../src/app/services/user.service';
@@ -28,7 +21,7 @@ export class ProductDialogComponent implements OnInit, AfterViewInit {
   public title: string;
   public dataDialog: DialogData;
 
-  @ViewChild('content') elementView: ElementRef;
+  @ViewChild('content', { static: true }) elementView: ElementRef;
 
   constructor(
     public dialogRef: MatDialogRef<ProductDialogComponent>,
@@ -39,7 +32,6 @@ export class ProductDialogComponent implements OnInit, AfterViewInit {
   ) {
     this.settings = appSettings;
     this.dataDialog = this.data;
-
     if (data.breakpoint < 6) {
       this.column = 2;
     } else if (data.breakpoint === 6) {
@@ -51,12 +43,8 @@ export class ProductDialogComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.title = this.dataDialog.title;
-    this.rowNumber = Math.floor(
-      (this.elementView.nativeElement.offsetHeight - 60) / 105
-    );
-    this.containerPaddingTop = Math.floor(
-      ((this.elementView.nativeElement.offsetHeight - 60) % 105) / 2
-    );
+    this.rowNumber = Math.floor((this.elementView.nativeElement.offsetHeight - 60) / 105);
+    this.containerPaddingTop = Math.floor(((this.elementView.nativeElement.offsetHeight - 60) % 105) / 2);
     this.maxItems = this.rowNumber * this.column;
   }
 

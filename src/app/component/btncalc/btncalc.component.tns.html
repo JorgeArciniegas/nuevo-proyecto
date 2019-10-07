@@ -165,19 +165,21 @@
         (tap)="btnSeparatorSet()"></Button>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="5" col="0" colSpan="2" shadow="3" cornerRadius="7" class="card">
+  <GridLayout row="5" col="0" colSpan="2" shadow="3" cornerRadius="7" class="m-t-4 m-x-4">
     <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
       <Button
         [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
         text="{{ 'BTNCALC.TOT' | translate }}" class="button-internal" textTransform="uppercase"
+        [ngClass]="btncalcService.polyfunctionStakePresetPlayer && btncalcService.polyfunctionStakePresetPlayer.typeSlipCol === typeBetSlipColTot.TOT  ? 'btn-selected' : 'btn-grey-gradient'"
         (tap)="btnTotColSet(typeBetSlipColTot.TOT)"></Button>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="5" col="2" colSpan="2" shadow="3" cornerRadius="7" class="card">
+  <GridLayout row="5" col="2" colSpan="2" shadow="3" cornerRadius="7" class="m-t-4 m-x-4">
     <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
       <Button
         [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
         text="{{ 'BTNCALC.COL' | translate }}" class="button-internal" textTransform="uppercase"
+        [ngClass]="btncalcService.polyfunctionStakePresetPlayer && btncalcService.polyfunctionStakePresetPlayer.typeSlipCol === typeBetSlipColTot.COL  ? 'btn-selected' : 'btn-grey-gradient'"
         (tap)="btnTotColSet(typeBetSlipColTot.COL)"></Button>
     </GridLayout>
   </GridLayout>

@@ -13,6 +13,7 @@
       {{date | date: 'dd/MM/yyyy HH:mm'}}</span>
   </div>
   <div class="footer">
-    <span>{{ "PAID_AMOUNT" | translate}}: {{receipt.amount}}</span>
+    <span>{{ "PAID_AMOUNT" | translate}}:
+      {{receipt.amount  | currency : userService.userCurrency : 'symbol-narrow'}}</span>
   </div>
 </div>

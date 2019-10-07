@@ -6,13 +6,25 @@
 @import "./results-list/results-list.tns";
 @import "./playable-board/race.tns";
 @import "./playable-board/cock-fight.tns";
-@import "./statistics/statistics.component.tns";
+@import "./playable-board/soccer.tns";
+@import "./statistics/statistics.tns";
+@import "./ranking/ranking.tns";
 @import "./event-control/event-control-standard.tns";
 @import "./lucky/lucky-race-fight.tns";
-
+@import "./events-list/events-list.tns";
+@import "./groupings/groupings.tns";
+@import "./operators/operators.tns";
+@import "./vbox/vbox.tns";
+@import "./reports/reports.tns";
+@import "./bets-list/bet-list.tns";
+@import "./typography.tns";
 .app {
 	&.develop {
 		@import "./skins/develop/styles";
+	}
+
+	&.universalsoft {
+		@import "./skins/universalsoft/styles";
 	}
 
 	.main-content {
@@ -25,7 +37,7 @@
 		}
 		#admin {
 			@extend %admin-mobile;
-			height: 100%;
+
 			.admin-panel-container {
 				@extend %bg-opacity-dark-variant;
 			}
@@ -59,13 +71,12 @@
 					}
 				}
 			}
+		}
+		.error-message {
+			@extend %error-area;
 
-			.error-message {
-				@extend %error-area;
-
-				.error-icon {
-					@extend %error-icon-mobile;
-				}
+			.error-icon {
+				@extend %error-icon-mobile;
 			}
 		}
 
@@ -109,7 +120,7 @@
 
 				.details {
 					margin-right: 10;
-
+					font-size: 11;
 					.operator {
 						margin-left: 10;
 						font-weight: 600;
@@ -120,7 +131,7 @@
 
 				.clock {
 					padding: 2 10;
-					border-radius: 5;
+					border-radius: 4;
 					margin: 2 5;
 
 					@extend %card-title-mobile;
@@ -140,7 +151,7 @@
 		.button {
 			font-weight: 700;
 			font-size: 17;
-			border-radius: 5;
+			border-radius: 4;
 			text-transform: none;
 
 			&.small {
@@ -226,7 +237,7 @@
 			.display-amount {
 				@extend %color-bg-white;
 
-				border-radius: 5;
+				border-radius: 4;
 				padding: 2 5;
 
 				.title {
@@ -251,7 +262,7 @@
 			}
 
 			.display-message {
-				border-radius: 5;
+				border-radius: 4;
 
 				.title {
 					font-size: 10;
@@ -308,6 +319,9 @@
 					}
 					&.check-circle-icon {
 						@extend %check-circle-icon-mobile;
+					}
+					&.camera-icon {
+						@extend %camera-icon-mobile;
 					}
 				}
 			}
@@ -401,6 +415,29 @@
 			}
 		}
 
+		// Badge
+		.badge {
+			border-radius: 50;
+			height: 20;
+			width: 20;
+
+			&.badge--on {
+				@extend %badge--on;
+			}
+
+			&.badge--off {
+				@extend %badge--off;
+			}
+		}
+
+		.playable-row-tile {
+			&--active {
+				@extend %color-border-blu-2;
+				border-style: solid !important;
+				border-width: 2 !important;
+			}
+		}
+
 		.product-class {
 			// SET IMAGES HEADER PRODUCT
 			.PRODUCT-DOG-BG {
@@ -427,32 +464,26 @@
 					@extend %PRODUCT-COCK-BG-MOBILE;
 				}
 			}
+
+			.PRODUCT-ITA-LEAGUE-BG {
+				// SOCCER
+				@extend %PRODUCT-ITA-LEAGUE-BG-MOBILE;
+			}
+
+			.PRODUCT-ENG-LEAGUE-BG {
+				// SOCCER
+				@extend %PRODUCT-ENG-LEAGUE-BG-MOBILE;
+			}
+
 			.race-control {
 				.time {
 					.time-panel {
 						@extend %time-card-title-mobile;
+						border-width: 1;
+						border-radius: 4;
 					}
 				}
 			}
-
-			.list-race {
-				.number {
-					@extend %btn-success-gradient-mobile;
-
-					&.selected {
-						@extend %btn-blue-gradient-mobile;
-					}
-				}
-
-				.date {
-					@extend %btn-gray-gradient-mobile;
-
-					&.selected {
-						@extend %btn-dark-gradient-mobile;
-					}
-				}
-			}
-
 			.card-box-result {
 				.header {
 					@extend %card-title-noborder;
@@ -466,7 +497,8 @@
 
 		.dialog {
 			@extend %dialog-mobile;
-
+			border-radius: 4;
+			border-width: 1;
 			.odds-grid {
 				.btn-close {
 					@extend %btn-transparent;
@@ -519,7 +551,7 @@
 	}
 
 	.logo-print-coupon {
-		@extend %logo-header-mobile;
+		//	@extend %logo-header-mobile;
 	}
 
 	.border-bottom-overlay {
@@ -610,4 +642,66 @@
 	.icon-area {
 		margin: 5;
 	}
+}
+
+// PLAYABLE BOARD - SOCCER
+.star-yellow-icon {
+	@extend %star-yellow-icon-mobile;
+}
+
+.star-red-icon {
+	@extend %star-red-icon-mobile;
+}
+
+.video-disabled-icon {
+	@extend %video-disabled-icon-mobile;
+}
+
+.video-enabled-icon {
+	@extend %video-enabled-icon-mobile;
+}
+
+// RANKING SOCCER
+.rank-up-icon {
+	@extend %rank-up-icon-mobile;
+}
+
+.rank-same-icon {
+	@extend %rank-same-icon-mobile;
+}
+
+.rank-down-icon {
+	@extend %rank-down-icon-mobile;
+}
+// icon default
+
+.user-icon {
+	@extend %user-icon-mobile;
+}
+
+.users-icon {
+	@extend %users-icon-mobile;
+}
+
+.remove-data-or-close {
+	@extend %remove-data-or-close;
+}
+
+.pwd-icon {
+	@extend %pwd-icon-mobile;
+}
+.success-icon {
+	@extend %check-circle-icon-mobile;
+}
+.warning-icon {
+	@extend %warning-icon-mobile;
+}
+
+/* Dividers */
+
+.hr,
+.hr-dark {
+	min-height: 5;
+	border-bottom-width: 5;
+	@extend %hr-border-bottom;
 }

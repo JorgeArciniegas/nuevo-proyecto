@@ -1,13 +1,14 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatSlideToggleModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { ElysApiModule, ElysApiService } from '@elys/elys-api';
+import { ElysApiModule } from '@elys/elys-api';
 import { ElysCouponModule } from '@elys/elys-coupon';
 import { ElysStorageLibModule } from '@elys/elys-storage-lib';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { QRCodeModule } from 'angular2-qrcode';
 import { NgxBarcodeModule } from 'ngx-barcode';
@@ -32,6 +33,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     BrowserModule,
     NoopAnimationsModule,
     MatDialogModule,
+    MatSlideToggleModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -45,7 +47,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ElysStorageLibModule.forRoot({
       isCrypto: true,
       cryptoString: 'VgenStorage',
-      KeyUnencodedList: ['versionApp'],
+      KeyUnencodedList: ['versionApp', 'operatorData'],
       versionStorage: VERSION.version
     }),
 
@@ -62,4 +64,4 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

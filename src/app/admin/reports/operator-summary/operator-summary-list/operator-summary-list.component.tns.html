@@ -1,0 +1,79 @@
+<GridLayout rows="*,3*,13*,2*" columns="*" class="summary" *ngIf="operatorSummaryService.reportsOperatorVolumeResponse">
+  <Label row="0" class="title" text="{{'OPERATOR_SUMMARY' | translate | uppercase}}" textWrap="true"
+    verticalAlignment="center"></Label>
+  <GridLayout row="1" columns="*,2*,2*,2*,4*" class="card header">
+    <Image col="0" stretch="aspectFit" width="35" (tap)="goBack()" src="~/assets/icons/baseline-arrow_back-24px.png"
+      verticalAlignment="center" horizontalAlignment="left"></Image>
+    <StackLayout class="button btn-default btn-grey-gradient" orientation="horizontal" horizontalAlignment="left"
+      col="1">
+      <Button text="{{'PRINT' | translate}}" class="button-internal" (tap)="printUserSummary()"></Button>
+    </StackLayout>
+    <StackLayout col="2" verticalAlignment="center">
+      <Label class="sub-title" text="{{ 'DATE_FROM' | translate }}"></Label>
+      <Label text="{{ operatorSummaryService.dateFrom | date:'mediumDate' }}" textWrap="true"></Label>
+    </StackLayout>
+    <StackLayout col="3" verticalAlignment="center">
+      <Label class="sub-title" text="{{ 'DATE_TO' | translate }}"></Label>
+      <Label text="{{ operatorSummaryService.dateTo | date:'mediumDate' }}" textWrap="true"></Label>
+    </StackLayout>
+    <GridLayout col="4" rows="*" columns="*,3*,*">
+      <GridLayout col="0" class="button btn-default btn-filter" verticalAlignment="center"
+        [ngClass]="{'disabled': totalPages === 1 || currentPage === 1}">
+        <Button text="‹" class="button-internal paginator" [isEnabled]="totalPages !== 1 && currentPage !== 1"
+          (tap)="previousPage()"></Button>
+      </GridLayout>
+      <Label col="1" horizontalAlignment="center" verticalAlignment="center"
+        text="{{'PAGE' | translate }}  {{ currentPage }} {{'PAGE.OF' | translate }} {{ totalPages }}"></Label>
+      <GridLayout col="2" class="button btn-default btn-filter" verticalAlignment="center"
+        [ngClass]="{'disabled': totalPages === currentPage}">
+        <Button text="›" class="button-internal paginator" [isEnabled]="totalPages !== currentPage"
+          (tap)="nextPage()"></Button>
+      </GridLayout>
+    </GridLayout>
+
+  </GridLayout>
+
+  <GridLayout row="2" shadow="3" cornerRadius="6" class="card">
+    <GridLayout class="display" rows="2*,3*,3*,3*,3*,3*,3*,3*,3*,3*,3*" columns="2*,25*,25*,25*,21*,2*">
+      <!-- title -->
+      <Label row="0" col="1" class="sub-title" text="{{ 'USERNAME' | translate }}" verticalAlignment="center"></Label>
+      <Label row="0" col="2" class="sub-title" text="{{ 'STAKE' | translate }}" verticalAlignment="center"></Label>
+      <Label row="0" col="3" class="sub-title" text="{{ 'VOIDED' | translate }}" verticalAlignment="center"></Label>
+      <Label row="0" col="4" class="sub-title" text="{{ 'PAID' | translate }}" verticalAlignment="center"></Label>
+      <StackLayout row="0" colSpan="6" class="border-bottom-overlay" verticalAlignment="bottom"></StackLayout>
+      <!-- rows -->
+      <GridLayout row="{{i + 1}}" colSpan="6" rows="*" columns="2*,25*,25*,25*,21*,2*"
+        *ngFor="let operatorVolume of currentOperatorVolumes; let i = index;">
+        <Label col="1" text="{{ operatorVolume.Username }}" verticalAlignment="center"></Label>
+        <Label col="2" text="{{ operatorVolume.Stake | currency : userService.userCurrency : 'symbol-narrow' }}"
+          verticalAlignment="center"></Label>
+        <Label col="3" text="{{ operatorVolume.Voided | currency : userService.userCurrency : 'symbol-narrow' }}"
+          verticalAlignment="center"></Label>
+        <Label col="4" text="{{ operatorVolume.Won | currency : userService.userCurrency : 'symbol-narrow' }}"
+          verticalAlignment="center"></Label>
+        <StackLayout colSpan="6" class="border-bottom-overlay" verticalAlignment="bottom"></StackLayout>
+      </GridLayout>
+    </GridLayout>
+  </GridLayout>
+
+  <GridLayout row="3" columns="5*,2*,2*,2*,5*" class="toolbar display">
+    <StackLayout col="1" horizontalAlignment="center" verticalAlignment="center">
+      <Label class="value"
+        text="{{ operatorSummaryService.totalStake | currency : userService.userCurrency : 'symbol-narrow' }}"
+        textWrap="true"></Label>
+      <Label class="sub-title small" text="{{ 'TOTAL_STAKE' | translate }}"></Label>
+    </StackLayout>
+    <StackLayout col="2" horizontalAlignment="center" verticalAlignment="center">
+      <Label class="value"
+        text="{{ operatorSummaryService.totalVoided | currency : userService.userCurrency : 'symbol-narrow' }}"
+        textWrap="true"></Label>
+      <Label class="sub-title small" text="{{ 'TOT_VOIDED' | translate }}"></Label>
+    </StackLayout>
+    <StackLayout col="3" horizontalAlignment="center" verticalAlignment="center">
+      <Label class="value"
+        text="{{ operatorSummaryService.totalWon | currency : userService.userCurrency : 'symbol-narrow' }}"
+        textWrap="true"></Label>
+      <Label class="sub-title small" text="{{ 'TOT_PAID' | translate }}"></Label>
+    </StackLayout>
+  </GridLayout>
+</GridLayout>

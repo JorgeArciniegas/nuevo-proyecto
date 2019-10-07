@@ -1,25 +1,57 @@
 import { Injectable } from '@angular/core';
-import { AccountVirtualSport, CouponType, ElysApiService } from '@elys/elys-api';
-import { CouponSummaryCouponListResponse, VirtualCouponListRequest } from '@elys/elys-api/lib/reports/reports.models';
-import { AppSettings } from '../../../../../src/app/app.settings';
-import { RouterService } from '../../../../../src/app/services/utility/router/router.service';
+import {
+  AccountVirtualSport,
+  CouponSummaryCouponListResponse,
+  CouponType,
+  ElysApiService,
+  VirtualCouponListByAgentRequest,
+  AccountOperator
+} from '@elys/elys-api';
+import { UserService } from '../../../services/user.service';
+import { AppSettings } from '../../../app.settings';
+import { RouterService } from '../../../services/utility/router/router.service';
 import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BetsListService {
-  request: VirtualCouponListRequest = null;
+  request: VirtualCouponListByAgentRequest = null;
   availableSport: AccountVirtualSport[] = [];
   pageSizeList: number[] = [10, 25, 50, 100];
   labelAvailableSportSelected: string;
   sportIdSelected: number;
   // Result of request list
   betsCouponList: CouponSummaryCouponListResponse = null;
+
+  operatorSelected: AccountOperator;
+
+
+  /**
+   * Filter date
+   */
+  dateFilterTo = (d: Date): boolean => {
+    const today = new Date();
+    // return d.getMonth() <= today.getMonth() && d.getDate() <= today.getDate();
+    const dateToCompare = (this.request.dateFrom) ? this.request.dateFrom : new Date();
+    return d >= dateToCompare && d <= today;
+  }
+  /**
+   * IT isn't possible selected the date <>> of the date from
+   */
+  dateFilterFrom = (d: Date): boolean => {
+    // return d <= new Date();
+    const dateToCompare = (this.request.dateTo) ? this.request.dateTo : new Date();
+    return d <= dateToCompare;
+  }
+
+
   constructor(
     public elysApi: ElysApiService,
     private router: RouterService,
-    private appSettings: AppSettings
+    private appSettings: AppSettings,
+    private userService: UserService
   ) {
     // first element of ALL Sport
     this.availableSport[0] = {
@@ -34,25 +66,32 @@ export class BetsListService {
      * Request default object
      */
 
+    // check a userid by different logged type user
+
     this.request = {
       couponStatus: CouponStatusInternal.ALL,
       dateFrom: new Date(),
       dateTo: new Date(),
       pageSize: this.pageSizeList[0],
-      requestedPage: 1,
+      requestedPage: 0,
       couponType: CouponTypeInternal.ALL,
       sportId: null,
       product: null,
       complianceCode: '',
       ticketCode: '',
-      dateHasPlaced: false
+      dateHasPlaced: false,
+      includeAllTheNetwork: false,
+      userId: 0,
+      idAgentClient: 0,
+      carriedOut: false
     };
-
+    this.operatorSelected = null;
     this.sportId = this.availableSport[0].SportId;
     const today = new Date();
     this.dateFrom = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
     this.dateTo = new Date(today.getFullYear(), today.getMonth(), today.getDate());
   }
+
 
   /**
    * GETTER AND SETTER OBJECT PROPERTY
@@ -63,6 +102,13 @@ export class BetsListService {
   }
   set dateHasPlaced(value: boolean) {
     this.request.dateHasPlaced = value;
+  }
+
+  get carriedOut(): boolean {
+    return this.request.carriedOut;
+  }
+  set carriedOut(value: boolean) {
+    this.request.carriedOut = value;
   }
 
   get couponStatus() {
@@ -144,6 +190,19 @@ export class BetsListService {
     this.request.complianceCode = complianceCode;
   }
 
+
+
+  get idAgentClient() {
+    return this.request.idAgentClient || 0;
+  }
+
+  set idAgentClient(idAgentClient: number) {
+    this.request.idAgentClient = idAgentClient;
+  }
+
+
+
+
   /**
    * getAvailableSport
    * set on the betlists the new  availableSport object
@@ -152,13 +211,13 @@ export class BetsListService {
    */
   getAvailableSport(): void {
     const tempKey = [];
-    this.appSettings.products.map( (item) => {
+    this.appSettings.products.map((item) => {
       // check if the sportId is already exist
       if (tempKey.includes(item.sportId)) {
         return;
       }
       // put on the availableSport
-      this.availableSport.push( {
+      this.availableSport.push({
         SportId: item.sportId,
         SportName: item.name,
         VirtualCategories: []
@@ -174,7 +233,7 @@ export class BetsListService {
    */
   paginatorSize(isIncrement: boolean): void {
     let updateBetList = false;
-    if (this.request.requestedPage > 1 && !isIncrement) {
+    if (this.request.requestedPage > 0 && !isIncrement) {
       this.request.requestedPage--;
       updateBetList = true;
     } else if (isIncrement) {
@@ -191,13 +250,18 @@ export class BetsListService {
 
   getList(reset?: boolean): void {
     if (reset) {
-      this.request.requestedPage = 1;
+      this.request.requestedPage = 0;
     }
-    const req: VirtualCouponListRequest = this.cloneRequest();
+    const req: VirtualCouponListByAgentRequest = this.cloneRequest();
 
     this.elysApi.reports
-      .getVirtualListOfCoupon(req)
-      .then(items => (this.betsCouponList = items));
+      .getVirtualListOfCouponByAgent(req)
+      .then(items => {
+        this.betsCouponList = items;
+        if (this.request.requestedPage === 0 && items.TotalPages > 0) {
+          this.request.requestedPage = 1;
+        }
+      });
 
     this.router
       .getRouter()
@@ -205,24 +269,32 @@ export class BetsListService {
   }
 
 
-  private cloneRequest(): VirtualCouponListRequest {
+  private cloneRequest(): VirtualCouponListByAgentRequest {
 
     const dateto = new Date();
     dateto.setDate(this.request.dateTo.getDate() + 1);
-
+    let tmpUserId = this.request.userId;
+    if (tmpUserId === 0) {
+      tmpUserId = (!this.userService.isLoggedOperator()) ?
+        this.userService.dataUserDetail.operatorDetail.UserId :
+        this.userService.dataUserDetail.userDetail.UserId;
+    }
     return {
       couponStatus: this.request.couponStatus,
       dateFrom: this.request.dateFrom,
       dateTo: dateto,
       pageSize: this.request.pageSize,
-      requestedPage: this.request.requestedPage,
+      requestedPage: (this.request.requestedPage === 0) ? 1 : this.request.requestedPage,
       couponType: this.request.couponType,
       sportId: this.request.sportId === 0 ? null : this.request.sportId,
       product: this.request.product,
       complianceCode: this.request.complianceCode,
       ticketCode: this.request.ticketCode,
-      dateHasPlaced: this.request.dateHasPlaced
+      dateHasPlaced: this.request.dateHasPlaced,
+      carriedOut: this.carriedOut,
+      userId: tmpUserId,
+      idAgentClient: this.request.idAgentClient,
+      includeAllTheNetwork: this.request.includeAllTheNetwork
     };
-
   }
 }

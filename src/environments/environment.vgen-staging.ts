@@ -1,4 +1,9 @@
-import { Environment, WidgetTypeLink, LAYOUT_TYPE, LICENSE_TYPE } from './environment.models';
+import {
+  Environment,
+  WidgetTypeLink,
+  LAYOUT_TYPE,
+  LICENSE_TYPE
+} from './environment.models';
 import { Market } from '../app/products/products.model';
 
 export const environment: Environment = {
@@ -10,7 +15,8 @@ export const environment: Environment = {
   baseApiUrl: 'https://qacom-apidemo.ody-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
-  couponDirectPlace: true,
+  faviconPath: 'app/themes/skins/develop/image/Logo-header.png',
+  couponDirectPlace: false,
   currencyDefault: 'EUR',
   supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
   defaultAmount: {
@@ -32,7 +38,8 @@ export const environment: Environment = {
         // defines the layout type for different product group
         type: LAYOUT_TYPE.RACING,
         resultItems: 4, // items to show for last result
-        nextEventItems: 5 // items to show for next events
+        nextEventItems: 5, // items to show for next events
+        cacheEventsItem: 10
       },
       toolbarButton: {
         name: 'dogracing',
@@ -46,7 +53,12 @@ export const environment: Environment = {
           typeLink: WidgetTypeLink.MODAL,
           icon: 'baseline-assessment-24px' // without extension file
         }
-      ]
+      ],
+      typeCoupon: {
+        isMultipleStake: true,
+        acceptMultiStake: true,
+        typeLayout: LAYOUT_TYPE.RACING
+      }
     },
     {
       sportId: 10,
@@ -59,7 +71,8 @@ export const environment: Environment = {
       layoutProducts: {
         type: LAYOUT_TYPE.RACING,
         resultItems: 4,
-        nextEventItems: 5
+        nextEventItems: 5,
+        cacheEventsItem: 10
       },
       toolbarButton: {
         name: 'horseracing',
@@ -73,7 +86,12 @@ export const environment: Environment = {
           typeLink: WidgetTypeLink.MODAL,
           icon: 'baseline-assessment-24px' // without extension file
         }
-      ]
+      ],
+      typeCoupon: {
+        isMultipleStake: true,
+        acceptMultiStake: true,
+        typeLayout: LAYOUT_TYPE.RACING
+      }
     },
     {
       sportId: 210,
@@ -86,54 +104,105 @@ export const environment: Environment = {
       layoutProducts: {
         type: LAYOUT_TYPE.RACING,
         resultItems: 4,
-        nextEventItems: 5
+        nextEventItems: 5,
+        cacheEventsItem: 10
       },
       toolbarButton: {
         name: 'virtualhorse',
         icon: 'Horse',
         route: 'products/racing'
       },
-      widgets: []
+      widgets: [
+        {
+          name: '',
+          routing: 'statistic',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
+      typeCoupon: {
+        isMultipleStake: true,
+        acceptMultiStake: true,
+        typeLayout: LAYOUT_TYPE.RACING
+      }
     },
     {
       sportId: 1,
       codeProduct: 'ITA-LEAGUE',
       name: 'Soccer',
       label: 'FOOTBALL_ITA',
-      order: 3,
+      order: 4,
       productSelected: false,
-      isPlayable: false,
+      isPlayable: true,
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
-        nextEventItems: 3
+        nextEventItems: 3,
+        cacheEventsItem: 3
       },
       toolbarButton: {
         name: 'Italian League',
         icon: 'Soccer-ita',
         route: 'products/soccer'
       },
-      widgets: []
+      widgets: [
+        {
+          name: '',
+          routing: 'ranking',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'ranking-cup' // without extension file
+        },
+        {
+          name: '',
+          routing: 'statistic',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
+      typeCoupon: {
+        isMultipleStake: false,
+        acceptMultiStake: false,
+        typeLayout: LAYOUT_TYPE.SOCCER
+      }
     },
     {
       sportId: 1,
       codeProduct: 'ENG-LEAGUE',
       name: 'Soccer',
       label: 'FOOTBALL_ENG',
-      order: 3,
+      order: 5,
       productSelected: false,
-      isPlayable: false,
+      isPlayable: true,
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
-        nextEventItems: 3
+        nextEventItems: 3,
+        cacheEventsItem: 3
       },
       toolbarButton: {
         name: 'Italian League',
         icon: 'Soccer-eng',
         route: 'products/soccer'
       },
-      widgets: []
+      widgets: [
+        {
+          name: '',
+          routing: 'ranking',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'ranking-cup' // without extension file
+        },
+        {
+          name: '',
+          routing: 'statistic',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
+      typeCoupon: {
+        isMultipleStake: false,
+        acceptMultiStake: false,
+        typeLayout: LAYOUT_TYPE.SOCCER
+      }
     },
     {
       sportId: 20,
@@ -148,7 +217,14 @@ export const environment: Environment = {
         type: LAYOUT_TYPE.COCK_FIGHT,
         resultItems: 4,
         nextEventItems: 5,
-        shownMarkets: [Market['1X2'], Market['1X2OverUnder'], Market['1X2WinningSector'], Market['WinningSector'], Market['OverUnder']]
+        shownMarkets: [
+          Market['1X2'],
+          Market['1X2OverUnder'],
+          Market['1X2WinningSector'],
+          Market['WinningSector'],
+          Market['OverUnder']
+        ],
+        cacheEventsItem: 10
       },
       toolbarButton: {
         name: 'cockfight',
@@ -162,12 +238,18 @@ export const environment: Environment = {
           typeLink: WidgetTypeLink.MODAL,
           icon: 'baseline-assessment-24px' // without extension file
         }
-      ]
+      ],
+      typeCoupon: {
+        isMultipleStake: true,
+        acceptMultiStake: true,
+        typeLayout: LAYOUT_TYPE.COCK_FIGHT
+      }
     }
   ],
   showEventId: true,
   printSettings: {
     isEnabledReprintCoupon: true,
-    isTrasmitionInfoMessageShown: true
+    isTrasmitionInfoMessageShown: true,
+    isShowHeaderMessage: false
   }
 };

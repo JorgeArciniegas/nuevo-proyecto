@@ -3,15 +3,15 @@
   <StackLayout row="0" col="0"></StackLayout>
   <StackLayout row="0" col="1" verticalAlignment="bottom">
     <Label text="{{data.CouponDateOffset | date: 'dd/MM/yy HH:mm:ss' }}" textWrap="true"></Label>
-    <Label class="sub-title" text="{{ 'DATE_OF_PLACEMENT' | translate }}"></Label>
+    <Label class="sub-title small" text="{{ 'DATE_OF_PLACEMENT' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="0" col="2" verticalAlignment="bottom">
     <Label text="{{data.CouponCode }}" textWrap="true"></Label>
-    <Label class="sub-title" text="{{ 'COUPON_CODE' | translate }}"></Label>
+    <Label class="sub-title small" text="{{ 'COUPON_CODE' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="0" col="3" verticalAlignment="bottom">
     <Label text="{{data.PaymentDateOffset | date: 'dd/MM/yy HH:mm:ss'  || ' - ' }}" textWrap="true"></Label>
-    <Label class="sub-title" text="{{ 'PAYMENT_DATE' | translate }}"></Label>
+    <Label class="sub-title small" text="{{ 'PAYMENT_DATE' | translate }}"></Label>
   </StackLayout>
   <!-- DIVIDER -->
   <StackLayout class="border-bottom-overlay" row="1" colSpan="5"></StackLayout>
@@ -19,30 +19,28 @@
   <StackLayout row="2" col="0"></StackLayout>
   <StackLayout row="2" col="1" verticalAlignment="bottom">
     <Label text="{{'DYNAMIC_KEYS.CouponType.'+ couponType[data.CouponTypeId] | translate }}" textWrap="true"></Label>
-    <Label class="sub-title" text="{{ 'BET_TYPE' | translate }}"></Label>
+    <Label class="sub-title small" text="{{ 'BET_TYPE' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="2" col="2" verticalAlignment="bottom">
     <GridLayout rows="*,*" columns="*,5*" verticalAlignment="center">
       <ng-container [ngSwitch]="data.CouponStatusId">
         <Image row="0" col="0" width="24" horizontalAlignment="left" *ngSwitchDefault
-          src="~/app/themes/skins/{{settings.theme}}/icon/progress-clock.png"></Image>
+          src="~/assets/icons/progress-clock.png"></Image>
         <!-- LOST -->
-        <Image col="0" width="24" horizontalAlignment="left" *ngSwitchCase="2"
-          src="~/app/themes/skins/{{settings.theme}}/icon/cancel.png"></Image>
+        <Image col="0" width="24" horizontalAlignment="left" *ngSwitchCase="2" src="~/assets/icons/cancel.png"></Image>
         <!-- WIN -->
-        <Image col="0" width="24" horizontalAlignment="left" *ngSwitchCase="3"
-          src="~/app/themes/skins/{{settings.theme}}/icon/checked.png"></Image>
+        <Image col="0" width="24" horizontalAlignment="left" *ngSwitchCase="3" src="~/assets/icons/checked.png"></Image>
       </ng-container>
       <Label row="0" col="1" verticalAlignment="center" horizontalAlignment="left"
         text="{{ 'DYNAMIC_KEYS.CouponStatusInternal.' + couponStatus[data.CouponStatusId] | translate }}"
         textWrap="true"></Label>
-      <Label row="1" colSpan="2" class="sub-title" text="{{ 'OUTCOME' | translate }}"></Label>
+      <Label row="1" colSpan="2" class="sub-title small" text="{{ 'OUTCOME' | translate }}"></Label>
     </GridLayout>
   </StackLayout>
   <StackLayout row="2" col="3" verticalAlignment="bottom">
     <Label text="{{(data.Won > 0 )? (data.Won | currency : userService.userCurrency : 'symbol-narrow') : '-'}}"
       textWrap="true"></Label>
-    <Label class="sub-title" text="{{ 'WON' | translate }}"></Label>
+    <Label class="sub-title small" text="{{ 'WON' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="2" col="4"></StackLayout>
   <!-- DIVIDER -->
@@ -52,7 +50,7 @@
   <StackLayout row="4" col="1" colSpan="4" verticalAlignment="bottom">
     <Label text="{{(data.Jackpot > 0 )? (data.Jackpot | currency : userService.userCurrency : 'symbol-narrow') : '-'}}"
       textWrap="true"></Label>
-    <Label class="sub-title" text="{{ 'JACKPOT' | translate }}"></Label>
+    <Label class="sub-title small" text="{{ 'JACKPOT' | translate }}"></Label>
   </StackLayout>
   <!-- DIVIDER -->
   <StackLayout class="border-bottom-overlay" row="5" colSpan="5"></StackLayout>
@@ -65,19 +63,19 @@
   <StackLayout row="7" col="1" verticalAlignment="bottom">
     <Label text="{{(data.MaxWin > 0 )? (data.MaxWin | currency : userService.userCurrency : 'symbol-narrow') : '-'}}"
       textWrap="true"></Label>
-    <Label class="sub-title" text="{{ 'MAX_POTENTIAL_WIN' | translate }}"></Label>
+    <Label class="sub-title small" text="{{ 'MAX_POTENTIAL_WIN' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="7" col="2" verticalAlignment="bottom">
     <Label
       text="{{(data.MaxBonus > 0 )? (data.MaxBonus | currency : userService.userCurrency : 'symbol-narrow') : '-'}}"
       textWrap="true"></Label>
-    <Label class="sub-title" text="{{ 'BONUS' | translate }}"></Label>
+    <Label class="sub-title small" text="{{ 'BONUS' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="7" col="3" verticalAlignment="bottom">
     <Label
       text="{{((data.MaxWin + data.MaxBonus) > 0 )? ((data.MaxWin + data.MaxBonus) | currency : userService.userCurrency : 'symbol-narrow') : '-'}}"
       textWrap="true"></Label>
-    <Label class="sub-title" text="{{ 'MAX_POTENTIAL_WIN_WITH_BONUS' | translate }}"></Label>
+    <Label class="sub-title small" text="{{ 'MAX_POTENTIAL_WIN_WITH_BONUS' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="7" col="4"></StackLayout>
   <!-- DIVIDER -->
@@ -87,15 +85,15 @@
   <StackLayout row="9" col="1" verticalAlignment="bottom">
     <Label text="{{(data.MinWin > 0 )? (data.MinWin | currency : userService.userCurrency : 'symbol-narrow') : '-'}}"
       textWrap="true"></Label>
-    <Label class="sub-title" text="{{ 'MIN_POTENTIAL_WIN' | translate }}"></Label>
+    <Label class="sub-title small" text="{{ 'MIN_POTENTIAL_WIN' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="9" col="2" verticalAlignment="bottom">
     <Label text="{{(data.Stake > 0 )? (data.Stake | currency : userService.userCurrency : 'symbol-narrow') : '-'}}"
       textWrap="true"></Label>
-    <Label class="sub-title" text="{{ 'STAKE' | translate }}"></Label>
+    <Label class="sub-title small" text="{{ 'STAKE' | translate }}"></Label>
   </StackLayout>
   <StackLayout row="9" col="3"></StackLayout>
   <StackLayout row="9" col="4"></StackLayout>
   <!-- DIVIDER -->
-  <StackLayout class="border-bottom-overlay" row="10" colSpan="5"></StackLayout>
+  <!-- <StackLayout class="border-bottom-overlay" row="10" colSpan="5"></StackLayout> -->
 </GridLayout>

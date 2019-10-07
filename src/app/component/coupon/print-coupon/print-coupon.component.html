@@ -3,7 +3,9 @@
     <img class="logo-print-coupon padding-10">
     <div class="header-content">
       <div class="padding-5 font-size-normal">
-        {{appSetting.bookmakerDetails}}
+        <span *ngIf="appSetting.printSettings.isShowHeaderMessage">
+          {{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSetting.license] | translate}}
+        </span>
       </div>
       <div class="qr-code">
         <qr-code [value]="printCouponService.couponPrint.CouponCode" [size]="50"></qr-code>
@@ -73,6 +75,16 @@
         <div class="value" [style.font-size.mm]="4.5" [style.font-weight]="700">
           {{printCouponService.couponPrint.Stake | currency : userService.userCurrency : 'symbol-narrow' }}</div>
       </div>
+      <div class="betslip-stake" *ngIf="printCouponService.couponPrint.MaxBonus > 0">
+        <div class="label" [style.font-size.mm]="4.5" [style.font-weight]="700">
+          <span
+            *ngIf="printCouponService.couponPrint.CouponTypeId !== couponType.CombinationsBet">{{'BONUS' | translate }}:</span>
+          <span
+            *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.CombinationsBet">{{'BONUS_MAX' | translate }}:</span>
+        </div>
+        <div class="value" [style.font-size.mm]="4.5" [style.font-weight]="700">
+          {{printCouponService.couponPrint.MaxBonus | currency : userService.userCurrency : 'symbol-narrow' }}</div>
+      </div>
       <div class="groupings">
         <div class="row-grouping" *ngFor="let grouping of printCouponService.couponPrint.Groupings">
           <ng-container *ngIf="!grouping.IsMultiStake">
@@ -87,7 +99,7 @@
         </div>
       </div>
       <div class="betslip-payout">
-        <div class="min-row" *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.SingleBet">
+        <div class="min-row" *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.CombinationsBet">
           <div class="min">
             <div class="decoration-title"></div>
             <div class="title">{{'MIN_PAYOUT' | translate | uppercase}} </div>

@@ -7,11 +7,15 @@ export class MainServiceExtra {
   public currentEventSubscribe: Subject<number>;
   public currentEventObserve: Observable<number>;
   public eventDetails: EventDetail;
-
+  /**
+   * set to reset all variables
+   * When it is true, clear the polyfunctionalArea, Coupon and playboard
+   * */
+  public toResetAllSelections: boolean;
   constructor(
-    public coupon: CouponService,
+    public couponService: CouponService,
     public destroyCouponService: DestroyCouponService
-  ) {}
+  ) { }
 
   /**
    * Method to fire the current event number change.
@@ -23,11 +27,14 @@ export class MainServiceExtra {
    * */
   fireCurrentEventChange(selected: number, userSelect = false) {
     // check if the coupon is initialized
-    this.coupon.checkHasCoupon();
+    this.couponService.checkHasCoupon();
+    // set to reset all variables
+    this.toResetAllSelections = true;
     // if the coupon isn't empty
     if (
-      this.coupon.productHasCoupon.checked &&
-      (this.eventDetails.currentEvent !== selected || userSelect)
+      this.couponService.productHasCoupon.checked &&
+      (this.eventDetails.currentEvent !== selected || userSelect) &&
+      (this.couponService.coupon && this.couponService.coupon.Odds.length > 0)
     ) {
       // open modal destroy confirm coupon
       this.destroyCouponService.openDestroyCouponDialog();

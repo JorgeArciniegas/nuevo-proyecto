@@ -2,21 +2,24 @@ import { Injectable } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
-  RouterStateSnapshot
+  RouterStateSnapshot,
+  CanActivateChild
 } from '@angular/router';
 import { RouterService } from './services/utility/router/router.service';
 import { UserService } from './services/user.service';
 import { StorageService } from './services/utility/storage/storage.service';
+import { TYPE_ACCOUNT } from './services/user.models';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthorizationGuard implements CanActivate {
+export class AuthorizationGuard implements CanActivate, CanActivateChild {
+
   constructor(
     private router: RouterService,
     private userService: UserService,
     private storageService: StorageService
-  ) {}
+  ) { }
 
   async canActivate(
     state: ActivatedRouteSnapshot,
@@ -51,5 +54,32 @@ export class AuthorizationGuard implements CanActivate {
       this.router.getRouter().navigateByUrl('/error-page');
       return false;
     }
+  }
+
+  /**
+   * Authorization children routes
+   * @param childRoute
+   * @param state
+   */
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    let r = false;
+    try {
+      // check if the route has a restriction
+      if (childRoute.data.expectedRole.includes(TYPE_ACCOUNT.OPERATOR) &&
+        this.userService.isLoggedOperator()) {
+        r = true;
+      }
+    } catch (err) {
+      r = false;
+    } finally {
+
+      if (!r) {
+        this.router.getRouter().navigateByUrl('/error-page');
+      }
+
+      return r;
+    }
+
+
   }
 }
