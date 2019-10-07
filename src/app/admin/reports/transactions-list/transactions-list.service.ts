@@ -119,7 +119,7 @@ export class TransactionsListService {
    */
   paginatorSize(isIncrement: boolean): void {
     let updateTransactionsList = false;
-    if (this.request.requestedPage > 1 && !isIncrement) {
+    if (this.request.requestedPage > 0 && !isIncrement) {
       this.request.requestedPage--;
       updateTransactionsList = true;
     } else if (isIncrement) {
@@ -136,10 +136,15 @@ export class TransactionsListService {
 
   getList(reset?: boolean): void {
     if (reset) {
-      this.request.requestedPage = 1;
+      this.request.requestedPage = 0;
     }
     const req: ReportsAccountStatementRequest = this.cloneRequest();
-    this.elysApi.reports.getTransactionsHistory(req).then(items => (this.transactionsList = items));
+    this.elysApi.reports.getTransactionsHistory(req).then(items => {
+      this.transactionsList = items;
+      if (this.request.requestedPage === 0 && items.TotalPages > 0) {
+        this.request.requestedPage = 1;
+      }
+    });
     // this.initResetRequest();
     this.router.getRouter().navigateByUrl('admin/reports/transactionsList/summaryTransactions');
   }
@@ -157,7 +162,7 @@ export class TransactionsListService {
       amountTo: undefined,
       service: '',
       pageSize: this.pageSizeList[0],
-      requestedPage: 1,
+      requestedPage: 0,
       userWalletType: null
     };
   }
@@ -172,7 +177,7 @@ export class TransactionsListService {
       amountTo: this.request.amountTo,
       service: this.request.service,
       pageSize: this.request.pageSize,
-      requestedPage: this.request.requestedPage,
+      requestedPage: (this.request.requestedPage === 0) ? 1 : this.request.requestedPage,
       userWalletType: this.request.userWalletType
     };
   }

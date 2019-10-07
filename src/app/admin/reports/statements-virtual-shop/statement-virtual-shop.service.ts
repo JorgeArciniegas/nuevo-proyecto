@@ -107,9 +107,10 @@ export class StatementVirtualShopService {
   getData(): void {
     this.elysApi.reports.getCtdAggregates(this.request).then(
       (items) => {
+        this.aggregatesData = new DataListOfCtdAggregate();
+        this.aggregatesTempData = [];
         if (items.length > 0) {
           // create a new aggregates object
-          this.aggregatesData = new DataListOfCtdAggregate();
           this.aggregatesData.aggregates = items;
           // generate the totals
           items.map(item => {
@@ -132,9 +133,14 @@ export class StatementVirtualShopService {
    * It define the paginator
    */
   private pagination(): void {
-    if (this.aggregatesData.aggregates) {
+    if (this.aggregatesData.aggregates.length > 0) {
       this.aggregatesData.totalPages = (this.aggregatesData.aggregates.length > 0)
         ? Math.ceil(this.aggregatesData.aggregates.length / this.rowNumber) : 0;
+
+
+      if (this.aggregatesData.actualPages === 0 && this.aggregatesData.totalPages > 0) {
+        this.aggregatesData.actualPages = 1;
+      }
 
       this.filterOperators();
     }
@@ -144,11 +150,13 @@ export class StatementVirtualShopService {
    * Filter and paginate the list of operators
    */
   filterOperators(): void {
-    const start = this.aggregatesData.actualPages * this.rowNumber;
-    let end = (this.aggregatesData.actualPages + 1) * this.rowNumber;
+    const start = (this.aggregatesData.actualPages - 1) * this.rowNumber;
+    let end = (this.aggregatesData.actualPages) * this.rowNumber;
     if (end > this.aggregatesData.aggregates.length) {
       end = this.aggregatesData.aggregates.length;
     }
+
+    console.log(start, end);
     // save the object temp for pagination
     this.aggregatesTempData = this.aggregatesData.aggregates.slice(start, end);
 

@@ -13,7 +13,7 @@ export class SummaryComponent {
   constructor(public userService: UserService, private router: RouterService, public service: StatementVirtualShopService) { }
 
   previusPage() {
-    if (this.service.aggregatesData.actualPages <= 0) {
+    if (this.service.aggregatesData.actualPages <= 1) {
       return;
     }
     this.service.aggregatesData.actualPages--;
@@ -22,7 +22,7 @@ export class SummaryComponent {
 
 
   nextPage() {
-    if (this.service.aggregatesData.actualPages >= this.service.aggregatesData.totalPages - 1) {
+    if (this.service.aggregatesData.actualPages >= this.service.aggregatesData.totalPages) {
       return;
     }
     this.service.aggregatesData.actualPages++;
