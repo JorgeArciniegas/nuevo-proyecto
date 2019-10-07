@@ -14,7 +14,7 @@
           <Label class="p-l-5 text-center font-weight-bold"
             text="{{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSetting.license] | translate}}"></Label>
           <!--<Label class="p-r-10 text-center font-weight-bold" text="qrcode"></Label> -->
-          <Image width="150" [src]="qrCodeSource" stretch="fill"></Image>
+          <Image width="300" height="300" [src]="qrCodeSource" stretch="fill"></Image>
         </FlexboxLayout>
         <StackLayout class="hr-dark m-10"></StackLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-10 p-l-10 p-b-5" flexWrap="wrap">
@@ -143,7 +143,7 @@
           </ng-container>
           <Label class="p-10 text-left" textWrap="true"
             text="{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSetting.license] | translate}}"></Label>
-          <Image class="m-t-10" [src]="barCode128Source" stretch="fill" height="200"></Image>
+          <Image class="m-t-10" [src]="barCode128Source" stretch="fill" height="200" width="600"></Image>
         </FlexboxLayout>
       </FlexboxLayout>
     </StackLayout>

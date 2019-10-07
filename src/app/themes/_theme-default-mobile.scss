@@ -320,6 +320,9 @@
 					&.check-circle-icon {
 						@extend %check-circle-icon-mobile;
 					}
+					&.camera-icon {
+						@extend %camera-icon-mobile;
+					}
 				}
 			}
 		}

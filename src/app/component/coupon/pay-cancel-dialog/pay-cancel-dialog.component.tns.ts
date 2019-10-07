@@ -1,9 +1,6 @@
 import { Component, Input } from '@angular/core';
-import {
-  CancelCouponRequest,
-  ErrorStatus,
-  FlagAsPaidRequest
-} from '@elys/elys-api';
+import { CancelCouponRequest, ErrorStatus, FlagAsPaidRequest } from '@elys/elys-api';
+import { BarcodeScanner } from 'nativescript-barcodescanner';
 import { TextField } from 'tns-core-modules/ui/text-field';
 import { DialogTypeCoupon } from '../../../../../src/app/products/products.model';
 import { UserService } from '../../../services/user.service';
@@ -27,6 +24,9 @@ export class PayCancelDialogComponent {
   public couponIdPatternInvalid = false;
   cancelRequest: CancelCouponRequest;
   payRequest: FlagAsPaidRequest;
+  regExConvalidCode = /^[a-zA-Z0-9]+\-[a-zA-Z0-9]+\-[a-zA-Z0-9]+$/;
+
+  qcodeScan: string;
 
   constructor(
     public readonly couponService: CouponService,
@@ -110,9 +110,8 @@ export class PayCancelDialogComponent {
 
   public validatePattern(args, name: string): void {
     const textField = <TextField>args.object;
-    const re = /^[a-zA-Z0-9]+\-[a-zA-Z0-9]+\-[a-zA-Z0-9]+$/;
     if (name === 'couponCode') {
-      this.couponIdPatternInvalid = re.test(textField.text);
+      this.couponIdPatternInvalid = this.regExConvalidCode.test(textField.text);
     }
   }
 
@@ -121,4 +120,34 @@ export class PayCancelDialogComponent {
     this.userService.isModalOpen = false;
     this.userService.isBtnCalcEditable = true;
   }
+
+
+  /**
+   * SCANNER QRCODE
+   */
+
+
+
+  loadingQrcodeFromView() {
+    const barcodescanner = new BarcodeScanner();
+    barcodescanner.scan({
+      formats: 'QR_CODE, CODE_128',
+      beepOnScan: true,             // Play or Suppress beep on scan (default true)
+      torchOn: false,               // launch with the flashlight on (default false)
+      closeCallback: () => { /* console.log('Scanner closed') */ }, // invoked when the scanner was closed (success or abort)
+      resultDisplayDuration: 100,   // Android only, default 1500 (ms), set to 0 to disable echoing the scanned text
+      openSettingsIfPermissionWasPreviouslyDenied: true, // On iOS you can send the user to the settings app if access was previously denied
+    }).then((result) => {
+      // Note that this Promise is never invoked when a 'continuousScanCallback' function is provided
+      if (result && result.text.length > 0) {
+        this.onSubmit(result.text);
+      }
+
+    }, (errorMessage) => {
+      console.log('No scan. ' + errorMessage);
+    }
+    );
+
+  }
+
 }
