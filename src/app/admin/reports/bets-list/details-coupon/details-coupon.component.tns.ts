@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CouponCategory, ElysApiService, SummaryCouponRequest, SummaryCoupon } from '@elys/elys-api';
+import { CouponCategory, ElysApiService, SummaryCoupon, SummaryCouponRequest } from '@elys/elys-api';
 import { Subscription } from 'rxjs';
+import { RouterService } from '../../../../services/utility/router/router.service';
+import { PrintCouponService } from '../../../../component/coupon/print-coupon/print-coupon.service';
 import { AppSettings } from '../../../../app.settings';
 import { ShowBetDetailView } from '../bets-list.model';
+import { GroupingsRows, OddsEventRows } from './detail-coupon.model';
 
-import { RouterExtensions } from 'nativescript-angular/router';
-import { OddsEventRows, GroupingsRows } from './detail-coupon.model';
-import { PrintCouponService } from '../../../../../../src/app/component/coupon/print-coupon/print-coupon.service';
 
 @Component({
   selector: 'app-details-coupon',
@@ -28,7 +28,7 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private elysApi: ElysApiService,
     public readonly settings: AppSettings,
-    private router: RouterExtensions,
+    private router: RouterService,
     private printService: PrintCouponService
   ) {
     this.showDataViewSelected = ShowBetDetailView.SUMMARY;
@@ -109,7 +109,7 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
   }
 
   goBack(): void {
-    this.router.navigateByUrl('admin/reports/betsList/summaryCoupons');
+    this.router.getRouter().navigateByUrl('admin/reports/betsList/summaryCoupons');
   }
 
   printAgainCoupon(): void {

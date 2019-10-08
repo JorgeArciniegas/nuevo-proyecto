@@ -8,7 +8,8 @@ import { CouponDialogService } from '../coupon-dialog.service.tns';
 import { CouponService } from '../coupon.service';
 import { Receipt } from './print-receipt/print-receipt.model';
 import { PrintReceiptService } from './print-receipt/print-receipt.service.tns';
-
+import * as Permissions from 'nativescript-permissions';
+declare var android: any;
 @Component({
   selector: 'app-pay-cancel-dialog',
   templateUrl: './pay-cancel-dialog.component.tns.html',
@@ -129,13 +130,14 @@ export class PayCancelDialogComponent {
 
 
   loadingQrcodeFromView() {
+
     const barcodescanner = new BarcodeScanner();
     barcodescanner.scan({
       formats: 'QR_CODE, CODE_128',
       beepOnScan: true,             // Play or Suppress beep on scan (default true)
       torchOn: false,               // launch with the flashlight on (default false)
-      closeCallback: () => { /* console.log('Scanner closed') */ }, // invoked when the scanner was closed (success or abort)
-      resultDisplayDuration: 100,   // Android only, default 1500 (ms), set to 0 to disable echoing the scanned text
+      closeCallback: () => { }, // invoked when the scanner was closed (success or abort)
+      // resultDisplayDuration: 100,   // Android only, default 1500 (ms), set to 0 to disable echoing the scanned text
       openSettingsIfPermissionWasPreviouslyDenied: true, // On iOS you can send the user to the settings app if access was previously denied
     }).then((result) => {
       // Note that this Promise is never invoked when a 'continuousScanCallback' function is provided
