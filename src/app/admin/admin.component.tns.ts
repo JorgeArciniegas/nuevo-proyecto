@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { RouterService } from '../services/utility/router/router.service';
+import { WindowSizeService } from '../services/utility/window-size/window-size.service';
 
 @Component({
   selector: 'app-admin',
@@ -9,8 +10,12 @@ import { RouterService } from '../services/utility/router/router.service';
 })
 export class AdminComponent {
   isAdminLogged: boolean;
-  constructor(private router: RouterService, public userService: UserService) {
+  // layout for grid contains rows and button height
+  layout: any;
+
+  constructor(private router: RouterService, public userService: UserService, private windowService: WindowSizeService) {
     this.isAdminLogged = this.userService.isLoggedOperator();
+    this.layout = this.gridLayoutResponsive();
   }
 
   goToBetList(): void {
@@ -41,4 +46,18 @@ export class AdminComponent {
   goToStatementShop(): void {
     this.router.getRouter().navigateByUrl('/admin/reports/statement-vitual-shop');
   }
+
+  /**
+   * find the screen resolution and
+   * return the dimension of elements rows and buttons
+   *
+   */
+  gridLayoutResponsive() {
+    if (this.windowService.getWindowSize().height < 799) {
+      return { rows: '9*,*', buttonHeight: '30' };
+    } else {
+      return { rows: '9*,*', buttonHeight: '50' };
+    }
+  }
+
 }

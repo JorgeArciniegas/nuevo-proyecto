@@ -1,6 +1,23 @@
 .transaction-list {
 	padding: 6;
 
+	.display {
+		background-color: transparent;
+	}
+	.title {
+		font-size: 30;
+		font-weight: bold;
+		margin-left: 15;
+	}
+
+	.label-overlap {
+		margin-left: 25;
+		padding: 0 6;
+	}
+}
+/* .transaction-list {
+	padding: 6;
+
 	.title {
 		font-size: 30;
 		font-weight: bold;
@@ -16,11 +33,11 @@
 			margin: 5;
 
 			.btn-filter {
-				margin: 4 2;
+				margin: 2 2;
 			}
 
 			.field-title {
-				font-size: 16;
+				font-size: 12;
 			}
 		}
 	}
@@ -30,3 +47,10 @@
 		padding: 0 6;
 	}
 }
+.smallView {
+	.transaction-list {
+		.btn-filter {
+			margin: 0;
+		}
+	}
+} */
