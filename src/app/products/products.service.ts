@@ -20,9 +20,6 @@ import { BetDataDialog, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupo
 export class ProductsService extends ProductsServiceExtra {
   public breakpoint = 1;
 
-  public timeBlocked = false;
-  public timeBlockedSubscribe: Subject<boolean>;
-
   private dialogProductDataSubject: Subject<BetDataDialog>;
 
   private playableBoardResetSubject: Subject<boolean>;
@@ -76,11 +73,6 @@ export class ProductsService extends ProductsServiceExtra {
     this.polyfunctionalStakeCouponSubject = new Subject<PolyfunctionalStakeCoupon>();
     this.polyfunctionalStakeCouponObs = this.polyfunctionalStakeCouponSubject.asObservable();
 
-    // time block
-    this.timeBlockedSubscribe = new Subject<boolean>();
-    this.timeBlockedSubscribe.asObservable().subscribe((timeBlocked: boolean) => {
-      this.timeBlocked = timeBlocked;
-    });
     // Dialog management
     this.dialogProductDataSubject = new Subject<BetDataDialog>();
     this.dialogProductDataSubject.asObservable().subscribe((data: BetDataDialog) => {

@@ -205,7 +205,6 @@ export class MainService extends MainServiceExtra {
           } else {
             this.placingEvent.timeBlocked = false;
           }
-          this.productService.timeBlockedSubscribe.next(this.placingEvent.timeBlocked);
         }
         // Shown seconds
         this.eventDetails.eventTime.second = this.remainingTime.second;
