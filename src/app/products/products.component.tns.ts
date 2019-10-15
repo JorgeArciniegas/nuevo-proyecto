@@ -6,6 +6,7 @@ import { CouponDialogService } from '../component/coupon/coupon-dialog.service.t
 import { DialogTypeCoupon } from './products.model';
 import { MessageSource } from '@elys/elys-coupon';
 import { UserService } from '../services/user.service';
+import { MainService } from './main/main.service';
 
 @Component({
   selector: 'app-products',
@@ -20,6 +21,7 @@ export class ProductsComponent {
 
   constructor(
     public service: ProductsService,
+    public mainService: MainService,
     public readonly userService: UserService,
     public readonly couponService: CouponService,
     public dialog: DialogService,

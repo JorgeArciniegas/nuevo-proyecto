@@ -7,6 +7,7 @@ import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
 import { MessageSource } from '@elys/elys-coupon';
 import { UserService } from '../services/user.service';
 import { DialogTypeCoupon } from './products.model';
+import { MainService } from './main/main.service';
 
 @Component({
   selector: 'app-products',
@@ -21,6 +22,7 @@ export class ProductsComponent implements OnDestroy {
   constructor(
     private observableMedia: MediaObserver,
     public service: ProductsService,
+    public mainService: MainService,
     public readonly userService: UserService,
     public readonly couponService: CouponService,
     public readonly couponDialogService: CouponDialogService
