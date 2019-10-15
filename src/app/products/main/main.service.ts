@@ -199,7 +199,7 @@ export class MainService extends MainServiceExtra {
           // Remaing time
           this.remainingTime.second = this.remainingTime.second - 1;
           // Check time blocked
-          if (this.eventDetails.eventTime.second <= 15 && this.eventDetails.eventTime.minute === 0) {
+          if (this.eventDetails.eventTime.second <= 10 && this.eventDetails.eventTime.minute === 0) {
             this.placingEvent.timeBlocked = true;
             this.productService.closeProductDialog();
           } else {
@@ -560,7 +560,7 @@ export class MainService extends MainServiceExtra {
       MatchId: idEvent
     };
     return this.elysApi.virtual.getCountdown(request).then((value: VirtualEventCountDownResponse) => {
-      const sec: number = (value.CountDown / 10000000) + 5;
+      const sec: number = (value.CountDown / 10000000);
       const eventTime: EventTime = new EventTime();
       eventTime.minute = Math.floor(sec / 60);
       eventTime.second = Math.floor(sec % 60);
