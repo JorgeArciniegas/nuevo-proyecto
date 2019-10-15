@@ -6,7 +6,8 @@
         <StackLayout *ngIf="userService.isUserLogged" row="0" class="toolbar">
           <app-header></app-header>
         </StackLayout>
-        <StackLayout row="{{userService.isUserLogged ? 1 : 0}}">
+        <StackLayout row="{{userService.isUserLogged ? 1 : 0}}"
+          [ngClass]="{'smallView' : smallView, 'normalView' : !smallView}">
           <router-outlet></router-outlet>
         </StackLayout>
       </GridLayout>

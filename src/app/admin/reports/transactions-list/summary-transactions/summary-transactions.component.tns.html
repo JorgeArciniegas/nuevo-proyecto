@@ -50,7 +50,8 @@
       <!-- rows -->
       <GridLayout (tap)="showDetails(transaction.ReferenceId)" row="{{i + 1}}" colSpan="6" rows="*"
         columns="2*,20*,18*,40*,18*,2*"
-        *ngFor="let transaction of transactionsListService.transactionsList.Transactions; let i = index;">
+        *ngFor="let transaction of transactionsListService.transactionsList.Transactions; let i = index;"
+        class="data-row">
         <Label col="1" text="{{ transaction.UserTransactionDateOffset | date: 'dd/MM/yy HH:mm:ss' }}"
           verticalAlignment="center"></Label>
         <Label col="2" text="{{ 'DYNAMIC_KEYS.TransactionType.' + transaction.TransactionType | translate }}"

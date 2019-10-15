@@ -18,11 +18,11 @@
       <GridLayout col="0" class="button btn-default btn-filter" verticalAlignment="center"
         [ngClass]="{'disabled': service.aggregatesData?.totalPages === 1 || service.aggregatesData?.actualPages === 0}">
         <Button text="‹" class="button-internal paginator"
-          [isEnabled]="service.aggregatesData?.totalPages > 1 && service.aggregatesData?.actualPages > 0"
+          [isEnabled]="service.aggregatesData?.totalPages > 1 && service.aggregatesData?.actualPages > 1"
           (tap)="previusPage()"></Button>
       </GridLayout>
       <Label col="1" horizontalAlignment="center" verticalAlignment="center"
-        text="{{'PAGE' | translate }}  {{service.aggregatesData?.actualPages + 1 }} {{'PAGE.OF' | translate }} {{ service.aggregatesData?.totalPages }}"></Label>
+        text="{{'PAGE' | translate }}  {{service.aggregatesData?.actualPages }} {{'PAGE.OF' | translate }} {{ service.aggregatesData?.totalPages }}"></Label>
       <GridLayout col="2" class="button btn-default btn-filter" verticalAlignment="center"
         [ngClass]="{'disabled': service.aggregatesData?.totalPages === service.aggregatesData?.actualPages}">
         <Button text="›" class="button-internal paginator"
