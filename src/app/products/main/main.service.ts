@@ -101,7 +101,6 @@ export class MainService extends MainServiceExtra {
     /**
     * listen for tab focus changes for web environment and update event timer
     * */
-    console.log(this.onTabFocusObs);
     if (this.onTabFocusObs) {
       this.onTabFocusObs.subscribe(() => this.currentAndSelectedEventTime());
     }
