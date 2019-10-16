@@ -9,4 +9,4 @@ import { componentDeclarations, routes } from './main.common';
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class MainModule {}
+export class MainModule { }
