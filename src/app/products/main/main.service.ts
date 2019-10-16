@@ -98,13 +98,6 @@ export class MainService extends MainServiceExtra {
       }
     });
 
-    /**
-    * listen for tab focus changes for web environment and update event timer
-    * */
-    if (this.onTabFocusObs) {
-      this.onTabFocusObs.subscribe(() => this.currentAndSelectedEventTime());
-    }
-
     this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
 
     this.currentEventSubscribe = new Subject<number>();

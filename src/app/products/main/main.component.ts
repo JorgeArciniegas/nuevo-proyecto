@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppSettings } from '../../app.settings';
 import { DialogService } from '../dialog.service';
@@ -17,6 +17,15 @@ export class MainComponent implements OnInit {
 
   // Lucky last random extract
   oldLucky: string;
+
+  /**
+  * listen for tab focus changes for web environment and update event timer
+  * */
+  @HostListener('window:focus', ['$event'])
+  onFocus(event: FocusEvent): void {
+    console.log(event);
+    this.mainService.currentAndSelectedEventTime();
+  }
 
   constructor(
     private route: ActivatedRoute,
