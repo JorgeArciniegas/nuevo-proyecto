@@ -14,7 +14,7 @@ import {
   VirtualGetRankByEventResponse
 } from '@elys/elys-api';
 import { cloneDeep as clone } from 'lodash';
-import { interval, Observable, Subject, Subscription, timer } from 'rxjs';
+import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
@@ -97,6 +97,14 @@ export class MainService extends MainServiceExtra {
         this.initEvents();
       }
     });
+
+    /**
+    * listen for tab focus changes for web environment and update event timer
+    * */
+    console.log(this.onTabFocusObs);
+    if (this.onTabFocusObs) {
+      this.onTabFocusObs.subscribe(() => this.currentAndSelectedEventTime());
+    }
 
     this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
 

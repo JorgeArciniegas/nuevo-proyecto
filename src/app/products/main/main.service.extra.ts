@@ -1,6 +1,6 @@
+import { Observable, Subject } from 'rxjs';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
-import { Subject, Observable } from 'rxjs';
 import { EventDetail } from './main.models';
 
 export class MainServiceExtra {
@@ -12,10 +12,24 @@ export class MainServiceExtra {
    * When it is true, clear the polyfunctionalArea, Coupon and playboard
    * */
   public toResetAllSelections: boolean;
+
+  /**
+   * event listener for tab focus changes
+   * */
+  private onTabFocus: Subject<void>;
+  public onTabFocusObs: Observable<void>;
   constructor(
     public couponService: CouponService,
     public destroyCouponService: DestroyCouponService
-  ) { }
+  ) {
+    // fire tab focus to notify main.service to update event timer
+    window.addEventListener('focus', () => {
+      this.onTabFocus.next();
+    });
+
+    this.onTabFocus = new Subject<void>();
+    this.onTabFocusObs = this.onTabFocus.asObservable();
+  }
 
   /**
    * Method to fire the current event number change.
