@@ -63,6 +63,24 @@
                 }
               ]
             },
+            "shawis-prod": {
+              "outputPath": "dist-shawis",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.shawis.ts"
+                }
+              ]
+            },
+            "shawis-staging": {
+              "outputPath": "dist-shawis",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.shawis-staging.ts"
+                }
+              ]
+            },
             "oneway-prod": {
               "outputPath": "dist-oneway",
               "fileReplacements": [
@@ -117,57 +135,57 @@
                 }
               ]
             },
-            "apigenc01-prod": {
-              "outputPath": "dist-apigenc01",
+            "genc01-prod": {
+              "outputPath": "dist-genc01",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.apigenc01.ts"
+                  "with": "src/environments/environment.genc01.ts"
                 }
               ]
             },
-            "apigenc01-staging": {
-              "outputPath": "dist-apigenc01",
+            "genc01-staging": {
+              "outputPath": "dist-genc01",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.apigenc01-staging.ts"
+                  "with": "src/environments/environment.genc01-staging.ts"
                 }
               ]
             },
-            "apigenc02-prod": {
-              "outputPath": "dist-apigenc02",
+            "genc02-prod": {
+              "outputPath": "dist-genc02",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.apigenc02.ts"
+                  "with": "src/environments/environment.genc02.ts"
                 }
               ]
             },
-            "apigenc02-staging": {
-              "outputPath": "dist-apigenc02",
+            "genc02-staging": {
+              "outputPath": "dist-genc02",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.apigenc02-staging.ts"
+                  "with": "src/environments/environment.genc02-staging.ts"
                 }
               ]
             },
-            "apigenc03-prod": {
-              "outputPath": "dist-apigenc03",
+            "genc03-prod": {
+              "outputPath": "dist-genc03",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.apigenc03.ts"
+                  "with": "src/environments/environment.genc03.ts"
                 }
               ]
             },
-            "apigenc03-staging": {
-              "outputPath": "dist-apigenc03",
+            "genc03-staging": {
+              "outputPath": "dist-genc03",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.apigenc03-staging.ts"
+                  "with": "src/environments/environment.genc03-staging.ts"
                 }
               ]
             }
@@ -188,6 +206,12 @@
             "vgen-staging": {
               "browserTarget": "vdesk:build:vgen-staging"
             },
+            "shawis-prod": {
+              "browserTarget": "vdesk:build:shawis-prod"
+            },
+            "shawis-staging": {
+              "browserTarget": "vdesk:build:shawis-staging"
+            },
             "oneway-prod": {
               "browserTarget": "vdesk:build:oneway-prod"
             },
@@ -206,23 +230,23 @@
             "mayabet-staging": {
               "browserTarget": "vdesk:build:mayabet-staging"
             },
-            "apigenc01-prod": {
-              "browserTarget": "vdesk:build:apigenc01-prod"
+            "genc01-prod": {
+              "browserTarget": "vdesk:build:genc01-prod"
             },
-            "apigenc01-staging": {
-              "browserTarget": "vdesk:build:apigenc01-staging"
+            "genc01-staging": {
+              "browserTarget": "vdesk:build:genc01-staging"
             },
-            "apigenc02-prod": {
-              "browserTarget": "vdesk:build:apigenc02-prod"
+            "genc02-prod": {
+              "browserTarget": "vdesk:build:genc02-prod"
             },
-            "apigenc02-staging": {
-              "browserTarget": "vdesk:build:apigenc02-staging"
+            "genc02-staging": {
+              "browserTarget": "vdesk:build:genc02-staging"
             },
-            "apigenc03-prod": {
-              "browserTarget": "vdesk:build:apigenc03-prod"
+            "genc03-prod": {
+              "browserTarget": "vdesk:build:genc03-prod"
             },
-            "apigenc03-staging": {
-              "browserTarget": "vdesk:build:apigenc03-staging"
+            "genc03-staging": {
+              "browserTarget": "vdesk:build:genc03-staging"
             }
           }
         },

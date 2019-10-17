@@ -214,7 +214,8 @@
     },
     "PRINT_COUPON": {
       "HEADER_MESSAGE": {
-        "DEMO_LICENSE": ""
+        "DEMO_LICENSE": "",
+        "SHAWIS": "Shawis Company Limited"
       },
       "LICENSE_MESSAGE": {
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua."

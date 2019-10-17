@@ -28,6 +28,9 @@
 	&.oneway {
 		@import "./skins/oneway/styles";
 	}
+	&.shawis {
+		@import "./skins/shawis/styles";
+	}
 
 	.main-content {
 		@extend %font-family;
