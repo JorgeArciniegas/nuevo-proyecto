@@ -7,18 +7,17 @@ import {
 import { Market } from '../app/products/products.model';
 
 export const environment: Environment = {
-  production: false,
-  // tslint:disable-next-line:max-line-length
+  production: true,
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
-  license: LICENSE_TYPE.DEMO_LICENSE,
-  baseApiUrl: 'https://qacom-apigenc01.ody-services.net',
-  pageTitle: 'VDESK-KIOSK',
-  theme: 'develop',
-  faviconPath: 'app/themes/skins/develop/image/Logo-header.png',
-  couponDirectPlace: false,
+  license: LICENSE_TYPE.ONEWAY,
+  baseApiUrl: 'https://apioneway.vg-services.net',
+  pageTitle: 'OneWay - VDesk Kiosk',
+  theme: 'oneway',
+  faviconPath: 'app/themes/skins/oneway/image/Logo-header.png',
+  couponDirectPlace: true,
   currencyDefault: 'EUR',
-  supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
+  supportedLang: ['en', 'es', 'pt'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
@@ -137,8 +136,8 @@ export const environment: Environment = {
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
-        nextEventItems: 3,
-        cacheEventsItem: 3
+        nextEventItems: 2,
+        cacheEventsItem: 2
       },
       toolbarButton: {
         name: 'Italian League',
@@ -176,8 +175,8 @@ export const environment: Environment = {
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
-        nextEventItems: 3,
-        cacheEventsItem: 3
+        nextEventItems: 2,
+        cacheEventsItem: 2
       },
       toolbarButton: {
         name: 'Italian League',
@@ -249,7 +248,7 @@ export const environment: Environment = {
   showEventId: true,
   printSettings: {
     isEnabledReprintCoupon: true,
-    isTrasmitionInfoMessageShown: true,
-    isShowHeaderMessage: false
+    isTrasmitionInfoMessageShown: false,
+    isShowHeaderMessage: true
   }
 };

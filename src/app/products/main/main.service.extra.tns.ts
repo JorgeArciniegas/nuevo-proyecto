@@ -4,7 +4,6 @@ import { Subject, Observable } from 'rxjs';
 import { EventDetail } from './main.models';
 
 export class MainServiceExtra {
-  public onTabFocusObs: Observable<void>;
   public currentEventSubscribe: Subject<number>;
   public currentEventObserve: Observable<number>;
   public eventDetails: EventDetail;
@@ -17,8 +16,6 @@ export class MainServiceExtra {
         this.couponService.resetProductHasCoupon();
       }
     });
-    // this object must be initialized even if it's not used for nativescript for architecture purpose
-    this.onTabFocusObs = undefined;
   }
 
   /**

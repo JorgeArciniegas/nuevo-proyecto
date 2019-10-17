@@ -1,18 +1,23 @@
-import { Environment, WidgetTypeLink, LAYOUT_TYPE, LICENSE_TYPE } from './environment.models';
+import {
+  Environment,
+  WidgetTypeLink,
+  LAYOUT_TYPE,
+  LICENSE_TYPE
+} from './environment.models';
 import { Market } from '../app/products/products.model';
 
 export const environment: Environment = {
   production: false,
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
-  license: LICENSE_TYPE.UNIVERSALSOFT,
-  baseApiUrl: 'https://qacom-apiuniversalsoft.ody-services.net',
-  pageTitle: 'UniversalSoft - VDesk Kiosk',
-  theme: 'universalsoft',
-  faviconPath: 'app/themes/skins/universalsoft/image/Logo-header.png',
+  license: LICENSE_TYPE.SHAWIS,
+  baseApiUrl: 'https://qacom-apishawis.ody-services.net',
+  pageTitle: 'Shawis - VDesk Kiosk',
+  theme: 'shawis',
+  faviconPath: 'app/themes/skins/shawis/image/Logo-header.png',
   couponDirectPlace: true,
-  currencyDefault: 'COP',
-  supportedLang: ['es', 'en'],
+  currencyDefault: 'EUR',
+  supportedLang: ['en', 'fr'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
@@ -127,7 +132,7 @@ export const environment: Environment = {
       label: 'FOOTBALL_ITA',
       order: 4,
       productSelected: false,
-      isPlayable: false,
+      isPlayable: true,
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
@@ -211,7 +216,13 @@ export const environment: Environment = {
         type: LAYOUT_TYPE.COCK_FIGHT,
         resultItems: 4,
         nextEventItems: 5,
-        shownMarkets: [Market['1X2'], Market['1X2OverUnder'], Market['1X2WinningSector'], Market['WinningSector'], Market['OverUnder']],
+        shownMarkets: [
+          Market['1X2'],
+          Market['1X2OverUnder'],
+          Market['1X2WinningSector'],
+          Market['WinningSector'],
+          Market['OverUnder']
+        ],
         cacheEventsItem: 10
       },
       toolbarButton: {
@@ -238,6 +249,6 @@ export const environment: Environment = {
   printSettings: {
     isEnabledReprintCoupon: true,
     isTrasmitionInfoMessageShown: false,
-    isShowHeaderMessage: false
+    isShowHeaderMessage: true
   }
 };

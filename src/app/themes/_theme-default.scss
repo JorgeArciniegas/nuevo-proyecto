@@ -45,6 +45,12 @@ html {
 	&.universalsoft {
 		@import "./skins/universalsoft/styles";
 	}
+	&.oneway {
+		@import "./skins/oneway/styles";
+	}
+	&.shawis {
+		@import "./skins/shawis/styles";
+	}
 
 	.main-content {
 		@extend %font-family;

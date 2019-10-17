@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Subscription } from 'rxjs';
 import { ProductsService } from './products.service';
@@ -8,6 +8,7 @@ import { MessageSource } from '@elys/elys-coupon';
 import { UserService } from '../services/user.service';
 import { DialogTypeCoupon } from './products.model';
 import { MainService } from './main/main.service';
+import { EventTime } from './main/main.models';
 
 @Component({
   selector: 'app-products',
@@ -19,6 +20,25 @@ export class ProductsComponent implements OnDestroy {
   public rowHeight: number;
   public messageSource: typeof MessageSource = MessageSource;
   dialogTypeCoupon: typeof DialogTypeCoupon = DialogTypeCoupon;
+
+  /**
+  * listen for tab focus changes and update event timer
+  * */
+  @HostListener('window:focus')
+  onFocus(): void {
+    this.mainService.remainingEventTime(this.mainService.eventDetails.events[this.mainService.eventDetails.currentEvent].number)
+      .then((eventTime: EventTime) => {
+        if (eventTime.minute <= 0 && eventTime.second <= 0) {
+          this.mainService.currentAndSelectedEventTime();
+        } else {
+          this.mainService.eventDetails.eventTime = eventTime;
+          if (this.mainService.eventDetails.currentEvent === 0) {
+            this.mainService.remainingTime.minute = eventTime.minute;
+            this.mainService.remainingTime.second = eventTime.second;
+          }
+        }
+      });
+  }
   constructor(
     private observableMedia: MediaObserver,
     public service: ProductsService,

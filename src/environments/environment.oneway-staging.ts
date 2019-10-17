@@ -8,17 +8,16 @@ import { Market } from '../app/products/products.model';
 
 export const environment: Environment = {
   production: false,
-  // tslint:disable-next-line:max-line-length
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
-  license: LICENSE_TYPE.DEMO_LICENSE,
-  baseApiUrl: 'https://vg-apigenc02.odissea-services.net',
-  pageTitle: 'VDESK-KIOSK',
-  theme: 'develop',
-  faviconPath: 'app/themes/skins/develop/image/Logo-header.png',
+  license: LICENSE_TYPE.ONEWAY,
+  baseApiUrl: 'https://qacom-apioneway.ody-services.net',
+  pageTitle: 'OneWay - VDesk Kiosk',
+  theme: 'oneway',
+  faviconPath: 'app/themes/skins/oneway/image/Logo-header.png',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
-  supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
+  supportedLang: ['en', 'es', 'pt'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
@@ -57,7 +56,7 @@ export const environment: Environment = {
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
-        typeLayout: LAYOUT_TYPE.COCK_FIGHT
+        typeLayout: LAYOUT_TYPE.RACING
       }
     },
     {
@@ -90,7 +89,7 @@ export const environment: Environment = {
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
-        typeLayout: LAYOUT_TYPE.COCK_FIGHT
+        typeLayout: LAYOUT_TYPE.RACING
       }
     },
     {
@@ -123,7 +122,7 @@ export const environment: Environment = {
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
-        typeLayout: LAYOUT_TYPE.COCK_FIGHT
+        typeLayout: LAYOUT_TYPE.RACING
       }
     },
     {
@@ -137,8 +136,8 @@ export const environment: Environment = {
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
-        nextEventItems: 3,
-        cacheEventsItem: 3
+        nextEventItems: 2,
+        cacheEventsItem: 2
       },
       toolbarButton: {
         name: 'Italian League',
@@ -176,8 +175,8 @@ export const environment: Environment = {
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
-        nextEventItems: 3,
-        cacheEventsItem: 3
+        nextEventItems: 2,
+        cacheEventsItem: 2
       },
       toolbarButton: {
         name: 'Italian League',
@@ -249,7 +248,7 @@ export const environment: Environment = {
   showEventId: true,
   printSettings: {
     isEnabledReprintCoupon: true,
-    isTrasmitionInfoMessageShown: true,
+    isTrasmitionInfoMessageShown: false,
     isShowHeaderMessage: true
   }
 };

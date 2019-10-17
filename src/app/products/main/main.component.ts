@@ -17,7 +17,6 @@ export class MainComponent implements OnInit {
 
   // Lucky last random extract
   oldLucky: string;
-
   constructor(
     private route: ActivatedRoute,
     public productService: ProductsService,

@@ -12,7 +12,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.DEMO_LICENSE,
-  baseApiUrl: 'https://vg-apigenc01.odissea-services.net',
+  baseApiUrl: 'https://vg-apigenc02.odissea-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
   faviconPath: 'app/themes/skins/develop/image/Logo-header.png',
@@ -137,8 +137,8 @@ export const environment: Environment = {
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
-        nextEventItems: 3,
-        cacheEventsItem: 3
+        nextEventItems: 2,
+        cacheEventsItem: 2
       },
       toolbarButton: {
         name: 'Italian League',
@@ -176,8 +176,8 @@ export const environment: Environment = {
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
-        nextEventItems: 3,
-        cacheEventsItem: 3
+        nextEventItems: 2,
+        cacheEventsItem: 2
       },
       toolbarButton: {
         name: 'Italian League',

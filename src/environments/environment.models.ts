@@ -88,7 +88,9 @@ export enum LAYOUT_TYPE {
 // Bookmaker's identifier
 export enum LICENSE_TYPE {
   DEMO_LICENSE,
-  UNIVERSALSOFT
+  UNIVERSALSOFT,
+  ONEWAY,
+  SHAWIS
 }
 
 export interface TypeCoupon {
