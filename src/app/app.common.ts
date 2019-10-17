@@ -43,7 +43,7 @@ import { ProductsService } from './products/products.service';
 import { CouponService } from './component/coupon/coupon.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppHttpInterceptor } from './app.httpinterceptor';
-import { LoaderComponent } from './services/utility/loader/loader.component';
+import { LoaderComponent } from './component/loader/loader.component';
 
 
 
