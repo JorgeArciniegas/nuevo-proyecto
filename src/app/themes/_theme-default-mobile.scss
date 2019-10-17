@@ -22,9 +22,11 @@
 	&.develop {
 		@import "./skins/develop/styles";
 	}
-
 	&.universalsoft {
 		@import "./skins/universalsoft/styles";
+	}
+	&.oneway {
+		@import "./skins/oneway/styles";
 	}
 
 	.main-content {

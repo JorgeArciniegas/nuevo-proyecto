@@ -63,6 +63,24 @@
                 }
               ]
             },
+            "oneway-prod": {
+              "outputPath": "dist-oneway",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.oneway.ts"
+                }
+              ]
+            },
+            "oneway-staging": {
+              "outputPath": "dist-oneway",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.oneway-staging.ts"
+                }
+              ]
+            },
             "universalsoft-prod": {
               "outputPath": "dist-universalsoft",
               "fileReplacements": [
@@ -169,6 +187,12 @@
             },
             "vgen-staging": {
               "browserTarget": "vdesk:build:vgen-staging"
+            },
+            "oneway-prod": {
+              "browserTarget": "vdesk:build:oneway-prod"
+            },
+            "oneway-staging": {
+              "browserTarget": "vdesk:build:oneway-staging"
             },
             "universalsoft-prod": {
               "browserTarget": "vdesk:build:universalsoft-prod"

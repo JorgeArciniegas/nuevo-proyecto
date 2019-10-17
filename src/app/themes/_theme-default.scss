@@ -45,6 +45,9 @@ html {
 	&.universalsoft {
 		@import "./skins/universalsoft/styles";
 	}
+	&.oneway {
+		@import "./skins/oneway/styles";
+	}
 
 	.main-content {
 		@extend %font-family;

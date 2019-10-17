@@ -217,10 +217,12 @@
     "PRINT_COUPON": {
       "HEADER_MESSAGE": {
         "DEMO_LICENSE": "",
+        "ONEWAY": "Fairbet S.A.",
         "UNIVERSALSOFT": ""
       },
       "LICENSE_MESSAGE": {
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
+        "ONEWAY": "",
         "UNIVERSALSOFT": "Please check the accuracy of the coupon at the time of issuance, late claims will not be accepted."
       }
     },
