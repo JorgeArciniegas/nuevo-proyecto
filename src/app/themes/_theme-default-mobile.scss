@@ -18,6 +18,8 @@
 @import "./reports/reports.tns";
 @import "./bets-list/bet-list.tns";
 @import "./typography.tns";
+@import "./loader/loader.tns";
+
 .app {
 	&.develop {
 		@import "./skins/develop/styles";

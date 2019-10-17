@@ -12,6 +12,7 @@
         </StackLayout>
       </GridLayout>
     </StackLayout>
+    <app-loader></app-loader>
     <GridLayout class="main-content" *ngIf="!connectionAviable">
       <StackLayout verticalAlignment="center" horizontalAlignment="center">
         <Label text="{{ 'NO_CONNECTION' | translate }}"></Label>
@@ -22,7 +23,7 @@
     </StackLayout>
     <!-- <GridLayout col="0" row="0" class="overlay" *ngIf="userService.isModalOpen">
 
-    </GridLayout> -->
+  </GridLayout> -->
   </GridLayout>
 
 </Page>

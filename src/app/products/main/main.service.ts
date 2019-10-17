@@ -49,7 +49,7 @@ import {
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
 import { areas, overviewAreas } from './SoccerAreas';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../services/user.service';
 @Injectable({
   providedIn: 'root'
 })
