@@ -56,7 +56,7 @@ export class MainService extends MainServiceExtra {
   private cacheEvents: VirtualBetEvent[] = [];
   private cacheTournaments: VirtualBetTournamentExtended[] = [];
   // Working variable
-  private remainingTime: EventTime = new EventTime();
+  public remainingTime: EventTime = new EventTime();
   placingEvent: PlacingEvent = new PlacingEvent();
   public currentEventDetails: VirtualBetEvent;
   public currentProductDetails: VirtualBetTournamentExtended;
