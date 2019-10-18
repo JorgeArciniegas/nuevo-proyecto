@@ -47,6 +47,11 @@
             },
             "vgen-prod": {
               "outputPath": "dist-vgen",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -56,6 +61,11 @@
             },
             "vgen-staging": {
               "outputPath": "dist-vgen",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -65,6 +75,11 @@
             },
             "shawis-prod": {
               "outputPath": "dist-shawis",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/shawis/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -74,6 +89,11 @@
             },
             "shawis-staging": {
               "outputPath": "dist-shawis",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/shawis/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -83,6 +103,11 @@
             },
             "oneway-prod": {
               "outputPath": "dist-oneway",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/oneway/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -92,6 +117,11 @@
             },
             "oneway-staging": {
               "outputPath": "dist-oneway",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/oneway/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -101,6 +131,11 @@
             },
             "universalsoft-prod": {
               "outputPath": "dist-universalsoft",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/universalsoft/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -110,6 +145,11 @@
             },
             "universalsoft-staging": {
               "outputPath": "dist-universalsoft",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/universalsoft/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -119,6 +159,11 @@
             },
             "mayabet-prod": {
               "outputPath": "dist-mayabet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -128,6 +173,11 @@
             },
             "mayabet-staging": {
               "outputPath": "dist-mayabet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -137,6 +187,11 @@
             },
             "genc01-prod": {
               "outputPath": "dist-genc01",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -146,6 +201,11 @@
             },
             "genc01-staging": {
               "outputPath": "dist-genc01",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -155,6 +215,11 @@
             },
             "genc02-prod": {
               "outputPath": "dist-genc02",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -164,6 +229,11 @@
             },
             "genc02-staging": {
               "outputPath": "dist-genc02",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -173,6 +243,11 @@
             },
             "genc03-prod": {
               "outputPath": "dist-genc03",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -182,6 +257,11 @@
             },
             "genc03-staging": {
               "outputPath": "dist-genc03",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
