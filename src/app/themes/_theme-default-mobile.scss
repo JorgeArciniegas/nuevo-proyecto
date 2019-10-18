@@ -1,5 +1,5 @@
+@import "styles";
 @import "./buttons-mobile";
-
 /**
 * Import layout's component
 **/
@@ -19,19 +19,6 @@
 @import "./bets-list/bet-list.tns";
 @import "./typography.tns";
 .app {
-	&.develop {
-		@import "./skins/develop/styles";
-	}
-	&.universalsoft {
-		@import "./skins/universalsoft/styles";
-	}
-	&.oneway {
-		@import "./skins/oneway/styles";
-	}
-	&.shawis {
-		@import "./skins/shawis/styles";
-	}
-
 	.main-content {
 		@extend %font-family;
 
