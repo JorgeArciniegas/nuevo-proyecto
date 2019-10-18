@@ -1,3 +1,4 @@
+@import "styles";
 @import "./buttons";
 @import "./typography";
 /**
@@ -38,18 +39,6 @@ html {
 	app-admin,
 	app-vbox {
 		height: 100%;
-	}
-	&.develop {
-		@import "./skins/develop/styles";
-	}
-	&.universalsoft {
-		@import "./skins/universalsoft/styles";
-	}
-	&.oneway {
-		@import "./skins/oneway/styles";
-	}
-	&.shawis {
-		@import "./skins/shawis/styles";
 	}
 
 	.main-content {
