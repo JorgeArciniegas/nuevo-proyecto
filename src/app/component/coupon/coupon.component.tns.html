@@ -2,7 +2,8 @@
   <GridLayout row="0" cornerRadius="6" class="m-b-2">
     <GridLayout rows="*" columns="4*,*" class="display" verticalAlignment="center">
       <StackLayout col="0" orientation="horizontal" class="title" verticalAlignment="center" horizontalAlignment="left">
-        <Label text="{{ 'coupon' | translate }}" textTransform="uppercase" verticalAlignment="center"></Label>
+        <Label text="{{ 'COUPON' | translate | uppercase }}" textTransform="uppercase"
+          verticalAlignment="center"></Label>
       </StackLayout>
       <StackLayout col="1" class="button btn-warning" [isEnabled]="!userService.isModalOpen" (tap)="clearCoupon()"
         horizontalAlignment="right">

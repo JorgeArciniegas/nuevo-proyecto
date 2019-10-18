@@ -201,10 +201,6 @@
       "UPLE": "-upla",
       "UPLES": "-uple"
     },
-    "LOGIN": {
-      "ADMIN": "Login as administrator",
-      "OPERATOR": "Login as operator"
-    },
     "ODDS_RESULT": {
       "LOST": "Lost",
       "UNSET": "Open",
@@ -224,8 +220,8 @@
       "LICENSE_MESSAGE": {
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
         "ONEWAY": "",
-        "UNIVERSALSOFT": "Please check the accuracy of the coupon at the time of issuance, late claims will not be accepted.",
-        "SHAWIS": "All Bets are Subject to Betpal Betting rules (terms and condition). A Copy is Available on request. Carefully keep the receipt as the document is essential for the winnings collection"
+        "SHAWIS": "All Bets are Subject to Betpal Betting rules (terms and condition). A Copy is Available on request. Carefully keep the receipt as the document is essential for the winnings collection",
+        "UNIVERSALSOFT": "Please check the accuracy of the coupon at the time of issuance, late claims will not be accepted."
       }
     },
     "PRODUCT": {
@@ -541,6 +537,7 @@
   "TOT_INCOME": "Tot income",
   "TOT_LOST": "TOT lost",
   "TOT_OPEN": "TOT open",
+  "LOGOUT": "Logout",
   "TOT_OUTCOME": "Tot outcome",
   "TOT_PAID": "Total paid",
   "TOT_PROFIT": "Total Profit",
