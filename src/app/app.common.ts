@@ -41,6 +41,9 @@ import { SoccerComponent as SoccerStatisticsComponent } from './products/product
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
 import { CouponService } from './component/coupon/coupon.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppHttpInterceptor } from './app.httpinterceptor';
+import { LoaderComponent } from './component/loader/loader.component';
 
 
 
@@ -77,7 +80,8 @@ export const componentDeclarations: any[] = [
   RankingComponent,
   SoccerRankingComponent,
   LabelByGroupingPipe,
-  PrintOperatorSummaryComponent
+  PrintOperatorSummaryComponent,
+  LoaderComponent
 ];
 
 export const providerDeclarations: any[] = [
@@ -92,7 +96,8 @@ export const providerDeclarations: any[] = [
     deps: [TranslateService],
     // tslint:disable-next-line:typedef
     useFactory: (confService: TranslateService) => confService.currentLang
-  }
+  },
+  { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
 ];
 
 export const routes: Routes = [
