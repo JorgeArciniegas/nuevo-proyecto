@@ -29,6 +29,7 @@ export class BetsListComponent implements OnInit {
     this.operatorService.rowNumber = 9;
     this.columnOperatorGrid = '*,*,*,*,*,*,*,*,*,*';
     this.operatorService.getListOfOperators();
+
   }
 
   changeValue(key: string, value: any) {

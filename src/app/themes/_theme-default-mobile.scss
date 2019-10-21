@@ -1,5 +1,4 @@
 @import "./buttons-mobile";
-
 /**
 * Import layout's component
 **/
@@ -22,9 +21,14 @@
 	&.develop {
 		@import "./skins/develop/styles";
 	}
-
 	&.universalsoft {
 		@import "./skins/universalsoft/styles";
+	}
+	&.oneway {
+		@import "./skins/oneway/styles";
+	}
+	&.shawis {
+		@import "./skins/shawis/styles";
 	}
 
 	.main-content {
@@ -704,4 +708,47 @@
 	min-height: 5;
 	border-bottom-width: 5;
 	@extend %hr-border-bottom;
+}
+
+.normalView {
+	.transaction-list {
+		.display {
+			margin: 10;
+			padding: 4;
+			background-color: transparent;
+			.display-content {
+				margin: 5;
+
+				.btn-filter {
+					margin: 4 2;
+				}
+
+				.field-title {
+					font-size: 16;
+				}
+			}
+		}
+	}
+}
+
+.smallView {
+	.transaction-list {
+		.display {
+			margin: 10;
+			padding: 4;
+			background-color: transparent;
+
+			.display-content {
+				margin: 5;
+
+				.btn-filter {
+					margin: 2 2;
+				}
+
+				.field-title {
+					font-size: 12;
+				}
+			}
+		}
+	}
 }

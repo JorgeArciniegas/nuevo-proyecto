@@ -367,4 +367,10 @@ export class UserService {
   removeDataCtd() {
     this.storageService.removeItems('operatorData');
   }
+
+
+  getUserId() {
+    return this.isLoggedOperator() ?
+      this.storageService.getData('UserData').userDetail.UserId : this.getOperatorData('ClientId');
+  }
 }

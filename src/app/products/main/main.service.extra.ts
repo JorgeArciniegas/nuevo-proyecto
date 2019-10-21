@@ -1,6 +1,6 @@
+import { Observable, Subject } from 'rxjs';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
-import { Subject, Observable } from 'rxjs';
 import { EventDetail } from './main.models';
 
 export class MainServiceExtra {

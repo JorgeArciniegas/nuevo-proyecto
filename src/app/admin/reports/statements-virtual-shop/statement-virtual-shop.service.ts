@@ -18,8 +18,6 @@ export class StatementVirtualShopService {
   // counter for max row per page
   rowNumber = 10;
 
-
-
   /**
    * Filter date
    */
@@ -75,7 +73,6 @@ export class StatementVirtualShopService {
 
   set dateTo(date: Date) {
     this.request.ToDate = date;
-
     this.request.ToDate.setHours(23);
     this.request.ToDate.setMinutes(59);
     this.request.ToDate.setSeconds(59);
@@ -98,7 +95,6 @@ export class StatementVirtualShopService {
     } catch (err) {
       console.error(err);
     }
-
   }
 
   /**
@@ -137,7 +133,6 @@ export class StatementVirtualShopService {
       this.aggregatesData.totalPages = (this.aggregatesData.aggregates.length > 0)
         ? Math.ceil(this.aggregatesData.aggregates.length / this.rowNumber) : 0;
 
-
       if (this.aggregatesData.actualPages === 0 && this.aggregatesData.totalPages > 0) {
         this.aggregatesData.actualPages = 1;
       }
@@ -155,8 +150,6 @@ export class StatementVirtualShopService {
     if (end > this.aggregatesData.aggregates.length) {
       end = this.aggregatesData.aggregates.length;
     }
-
-    console.log(start, end);
     // save the object temp for pagination
     this.aggregatesTempData = this.aggregatesData.aggregates.slice(start, end);
 

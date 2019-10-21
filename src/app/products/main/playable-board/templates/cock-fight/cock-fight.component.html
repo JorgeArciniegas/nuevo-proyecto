@@ -10,8 +10,10 @@
           </span>
         </mat-grid-tile>
         <ng-container *ngFor="let selection of market.sls">
-          <mat-grid-tile *ngIf="selection.tp !== 3 || selection.tp === 3 && market.tp !== marketEnum['1X2OverUnder']"
-            colspan="{{market.tp !== marketEnum['1X2OverUnder'] ? 24 / market.sls.length : 24 / (market.sls.length - 1)}}">
+          <mat-grid-tile *ngIf="(selection.tp !== 3 || selection.tp === 3 && market.tp !== marketEnum['1X2OverUnder']) &&
+            (selection.tp !== 5 || selection.tp === 5 && market.tp !== marketEnum['1X2WinningSector']) &&
+            (selection.tp !== 5 || selection.tp === 5 && market.tp !== marketEnum['WinningSector']) "
+            colspan="{{(market.tp !== marketEnum['1X2OverUnder'] && market.tp !== marketEnum['1X2WinningSector'] && market.tp !== marketEnum['WinningSector'] ) ? 24 / market.sls.length : 24 / (market.sls.length - 1)}}">
             <button (click)="selectOdd(market.tp, selection)"
               [ngClass]="{'btn-actived': oddsSelected?.includes(selection.id)}"
               class="btn btn-default btn-default-cock radius-5  btn-cock-{{ selection.nm | competitorIto }}">
@@ -19,8 +21,9 @@
                 [ngClass]="{'icon-cock-red': selection.tp === 1, 'icon-cock-blue': selection.tp === 3}">
               </div>
               <div class="selection-details" fxLayout="column" fxLayoutAlign="center center">
+                <!-- <span>{{selection.tp }} , {{ market.tp }} , {{ marketEnum['1X2WinningSector']}}</span> -->
                 <span class="selection-name"
-                  *ngIf="market.tp === marketEnum['1X2'] && (selection.tp === 1 || selection.tp === 3)">{{ selection.nm | competitorName: eventDetails.tm }}</span>
+                  *ngIf="(market.tp === marketEnum['1X2'] && (selection.tp === 1 || selection.tp === 3)) ">{{ selection.nm | competitorName: eventDetails.tm }}</span>
                 <span class="selection-name"
                   *ngIf="market.tp !== marketEnum['1X2']">{{ selection.nm | extractSign | uppercase }}</span>
                 <span class="selection-value">{{ selection.ods[0].vl | number: '1.2-2'}}</span>

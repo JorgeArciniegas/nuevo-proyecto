@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TransactionsListService } from '../transactions-list.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UserTransaction } from '@elys/elys-api';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../../../services/user.service';
-import { RouterExtensions } from 'nativescript-angular/router';
-import { UserTransaction } from '@elys/elys-api';
+import { RouterService } from '../../../../services/utility/router/router.service';
+import { TransactionsListService } from '../transactions-list.service';
 
 @Component({
   selector: 'app-details-transaction',
@@ -19,8 +19,8 @@ export class DetailsTransactionComponent implements OnInit, OnDestroy {
     public transactionsListService: TransactionsListService,
     public userService: UserService,
     private route: ActivatedRoute,
-    private router: RouterExtensions
-  ) {}
+    private router: RouterService
+  ) { }
 
   ngOnInit(): void {
     this.routingSub = this.route.params.subscribe(param => {
@@ -35,6 +35,6 @@ export class DetailsTransactionComponent implements OnInit, OnDestroy {
   }
 
   goBack(): void {
-    this.router.back();
+    this.router.getBack();
   }
 }

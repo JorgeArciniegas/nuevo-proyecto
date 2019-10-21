@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../../../services/user.service';
 import { StatementVirtualShopService } from '../statement-virtual-shop.service';
-import { RouterService } from '../../../../services/utility/router/router.service.tns';
+import { RouterService } from '../../../../services/utility/router/router.service';
 
 @Component({
   selector: 'app-summary',
@@ -29,6 +29,6 @@ export class SummaryComponent {
     this.service.filterOperators();
   }
   goBack(): void {
-    this.router.getRouter().back();
+    this.router.getBack();
   }
 }

@@ -33,7 +33,6 @@ export class BetsListService {
    */
   dateFilterTo = (d: Date): boolean => {
     const today = new Date();
-    // return d.getMonth() <= today.getMonth() && d.getDate() <= today.getDate();
     const dateToCompare = (this.request.dateFrom) ? this.request.dateFrom : new Date();
     return d >= dateToCompare && d <= today;
   }
@@ -171,7 +170,6 @@ export class BetsListService {
         item => item.SportId === this.request.sportId
       )[0].SportName;
     }
-
   }
 
   get ticketCode() {
@@ -190,8 +188,6 @@ export class BetsListService {
     this.request.complianceCode = complianceCode;
   }
 
-
-
   get idAgentClient() {
     return this.request.idAgentClient || 0;
   }
@@ -199,9 +195,6 @@ export class BetsListService {
   set idAgentClient(idAgentClient: number) {
     this.request.idAgentClient = idAgentClient;
   }
-
-
-
 
   /**
    * getAvailableSport

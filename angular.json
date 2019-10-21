@@ -47,6 +47,11 @@
             },
             "vgen-prod": {
               "outputPath": "dist-vgen",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -56,6 +61,11 @@
             },
             "vgen-staging": {
               "outputPath": "dist-vgen",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -63,8 +73,69 @@
                 }
               ]
             },
+            "shawis-prod": {
+              "outputPath": "dist-shawis",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/shawis/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.shawis.ts"
+                }
+              ]
+            },
+            "shawis-staging": {
+              "outputPath": "dist-shawis",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/shawis/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.shawis-staging.ts"
+                }
+              ]
+            },
+            "oneway-prod": {
+              "outputPath": "dist-oneway",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/oneway/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.oneway.ts"
+                }
+              ]
+            },
+            "oneway-staging": {
+              "outputPath": "dist-oneway",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/oneway/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.oneway-staging.ts"
+                }
+              ]
+            },
             "universalsoft-prod": {
               "outputPath": "dist-universalsoft",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/universalsoft/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -74,6 +145,11 @@
             },
             "universalsoft-staging": {
               "outputPath": "dist-universalsoft",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/universalsoft/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -83,6 +159,11 @@
             },
             "mayabet-prod": {
               "outputPath": "dist-mayabet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -92,10 +173,99 @@
             },
             "mayabet-staging": {
               "outputPath": "dist-mayabet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.mayabet-staging.ts"
+                }
+              ]
+            },
+            "genc01-prod": {
+              "outputPath": "dist-genc01",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc01.ts"
+                }
+              ]
+            },
+            "genc01-staging": {
+              "outputPath": "dist-genc01",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc01-staging.ts"
+                }
+              ]
+            },
+            "genc02-prod": {
+              "outputPath": "dist-genc02",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc02.ts"
+                }
+              ]
+            },
+            "genc02-staging": {
+              "outputPath": "dist-genc02",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc02-staging.ts"
+                }
+              ]
+            },
+            "genc03-prod": {
+              "outputPath": "dist-genc03",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc03.ts"
+                }
+              ]
+            },
+            "genc03-staging": {
+              "outputPath": "dist-genc03",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc03-staging.ts"
                 }
               ]
             }
@@ -116,6 +286,18 @@
             "vgen-staging": {
               "browserTarget": "vdesk:build:vgen-staging"
             },
+            "shawis-prod": {
+              "browserTarget": "vdesk:build:shawis-prod"
+            },
+            "shawis-staging": {
+              "browserTarget": "vdesk:build:shawis-staging"
+            },
+            "oneway-prod": {
+              "browserTarget": "vdesk:build:oneway-prod"
+            },
+            "oneway-staging": {
+              "browserTarget": "vdesk:build:oneway-staging"
+            },
             "universalsoft-prod": {
               "browserTarget": "vdesk:build:universalsoft-prod"
             },
@@ -127,6 +309,24 @@
             },
             "mayabet-staging": {
               "browserTarget": "vdesk:build:mayabet-staging"
+            },
+            "genc01-prod": {
+              "browserTarget": "vdesk:build:genc01-prod"
+            },
+            "genc01-staging": {
+              "browserTarget": "vdesk:build:genc01-staging"
+            },
+            "genc02-prod": {
+              "browserTarget": "vdesk:build:genc02-prod"
+            },
+            "genc02-staging": {
+              "browserTarget": "vdesk:build:genc02-staging"
+            },
+            "genc03-prod": {
+              "browserTarget": "vdesk:build:genc03-prod"
+            },
+            "genc03-staging": {
+              "browserTarget": "vdesk:build:genc03-staging"
             }
           }
         },

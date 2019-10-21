@@ -306,6 +306,7 @@ module.exports = env => {
     config.plugins.push(new nsWebpack.NativeScriptSnapshotPlugin({
       chunk: "vendor",
       angular: true,
+      target: ["arm", "arm64", "ia32"],
       requireModules: [
         "reflect-metadata",
         "@angular/platform-browser",
@@ -317,6 +318,7 @@ module.exports = env => {
       ],
       projectRoot,
       webpackConfig: config,
+
     }));
   }
 

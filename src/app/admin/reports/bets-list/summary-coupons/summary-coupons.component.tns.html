@@ -76,7 +76,7 @@
       <!-- rows -->
       <GridLayout (tap)="showDetails(rowItem.CouponCode)" row="{{i + 1}}" colSpan="10" rows="*"
         columns="3*,15*,12*,15*,7*,5*,7*,9*,14*,11*"
-        *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons; let i = index;">
+        *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons; let i = index;" class="data-row">
         <Image col="0" width="24" *ngIf="rowItem.IsAgentSettled" src="~/assets/icons/baseline-check-24px.png"></Image>
         <Label col="1" text="{{ rowItem.CouponCode }}" verticalAlignment="center"></Label>
         <Label col="2" text="{{ rowItem.UserId + ' - ' + rowItem.UserName }}" verticalAlignment="center"></Label>

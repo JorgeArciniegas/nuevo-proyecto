@@ -1,7 +1,6 @@
 <GridLayout rows="*,2*,3*,2*,*" columns="4*,3*,3*" class="bet-list">
   <Label row="0" col="0" colSpan="3" class="title" text="{{'BETS_LIST' | translate | uppercase}}" textWrap="true"
     verticalAlignment="center"></Label>
-
   <!-- ROW 1 -->
   <!-- DATA SELECTED -->
   <GridLayout row="1" col="0" colSpan="2" rows="*" columns="*,*,*" class="display">
@@ -95,7 +94,7 @@
   </StackLayout>
   <!-- STATUS SELECTED -->
   <GridLayout row="2" col="2" rows="*" columns="*" class="display">
-    <GridLayout rows="*,*,*,*" columns="*" class="display-content">
+    <GridLayout rows="*,*,*,*,*" columns="*" class="display-content">
       <GridLayout row="{{i}}" col="0" *ngFor="let type of couponStatus.values(); let i = index;"
         class="button btn-default btn-filter"
         [ngClass]="{'btn-filter-success': betsListService.couponStatus === couponStatus[type]}">

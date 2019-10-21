@@ -22,7 +22,8 @@
     <GridLayout rows="*,2*,3*,2*,12*,2*" columns="*">
       <!-- Widget area [Variable] -->
       <StackLayout row="0">
-        <app-widget [rowHeight]="rowHeight" [product]="service.product" [timeBlocked]="service.timeBlocked">
+        <app-widget [rowHeight]="rowHeight" [product]="service.product"
+          [timeBlocked]="mainService.placingEvent.timeBlocked">
         </app-widget>
       </StackLayout>
       <!-- Coupon message area -->
@@ -83,35 +84,35 @@
       </GridLayout>
       <!-- Polyfunctional area / Smartcode -->
       <StackLayout row="2">
-        <app-display [timeBlocked]="service.timeBlocked"></app-display>
+        <app-display [timeBlocked]="mainService.placingEvent.timeBlocked"></app-display>
       </StackLayout>
       <!-- Advanced game area [Variable] -->
       <StackLayout row="3">
         <GridLayout rows="*" columns="*" class="card">
-          <app-advance-game [timeBlocked]="service.timeBlocked"></app-advance-game>
+          <app-advance-game [timeBlocked]="mainService.placingEvent.timeBlocked"></app-advance-game>
         </GridLayout>
       </StackLayout>
       <!-- Keyboard -->
       <StackLayout row="4">
-        <app-btncalc [rowHeight]="rowHeight" [timeBlocked]="service.timeBlocked"></app-btncalc>
+        <app-btncalc [rowHeight]="rowHeight" [timeBlocked]="mainService.placingEvent.timeBlocked"></app-btncalc>
       </StackLayout>
       <!-- Payment/cancellation coupon area -->
       <GridLayout row="5" rows="*" columns="*,*" class="card">
         <GridLayout col="0" rows="*" columns="*" class="button left btn-success">
           <Button text="{{'PAY' | translate}}" class="button-internal" textTransform="uppercase"
-            [isEnabled]="!service.timeBlocked && !userService.isModalOpen"
+            [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"
             (tap)="payCancelCoupon(dialogTypeCoupon.PAY)"></Button>
         </GridLayout>
         <GridLayout col="1" rows="*" columns="*" class="button right btn-warning">
           <Button text="{{'DELETE' | translate}}" class="button-internal" textTransform="uppercase"
-            [isEnabled]="!service.timeBlocked && !userService.isModalOpen"
+            [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"
             (tap)="payCancelCoupon(dialogTypeCoupon.DELETE)"></Button>
         </GridLayout>
       </GridLayout>
     </GridLayout>
   </GridLayout>
   <GridLayout col="1" class="overlay radius-5" marginRight="3"
-    *ngIf="service.timeBlocked || (userService.isModalOpen && !userService.isBtnCalcEditable)">
+    *ngIf="mainService.placingEvent.timeBlocked || (userService.isModalOpen && !userService.isBtnCalcEditable)">
     <StackLayout verticalAlignment="center">
       <Image stretch="aspectFit" width="60" src="~/assets/icons/baseline-lock-24px.png" horizontalAlignment="center"
         verticalAlignment="center">
@@ -120,9 +121,10 @@
   </GridLayout>
   <!-- Coupon area -->
   <StackLayout col="2" class="product-coupon padding-right-6">
-    <app-coupon [timeBlocked]="service.timeBlocked"></app-coupon>
+    <app-coupon [timeBlocked]="mainService.placingEvent.timeBlocked"></app-coupon>
   </StackLayout>
-  <GridLayout col="2" class="overlay radius-5" marginRight="6" *ngIf="service.timeBlocked || userService.isModalOpen">
+  <GridLayout col="2" class="overlay radius-5" marginRight="6"
+    *ngIf="mainService.placingEvent.timeBlocked || userService.isModalOpen">
     <StackLayout verticalAlignment="center">
       <Image stretch="aspectFit" width="60" src="~/assets/icons/baseline-lock-24px.png" horizontalAlignment="center"
         verticalAlignment="center">

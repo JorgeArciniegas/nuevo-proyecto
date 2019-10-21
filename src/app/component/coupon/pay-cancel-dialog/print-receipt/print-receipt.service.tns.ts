@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Printer } from 'nativescript-printer';
+import { RouterService } from '../../../../services/utility/router/router.service';
 import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout/stack-layout';
 import { Receipt } from './print-receipt.model';
 
@@ -12,14 +12,14 @@ export class PrintReceiptService {
   printer: Printer = new Printer();
   view: StackLayout;
 
-  constructor(private router: Router) {}
+  constructor(private router: RouterService) { }
 
   printWindow(receipt: Receipt): void {
     this.receipt = receipt;
-    this.router.navigate(['/', { outlets: { print: 'print-receipt' } }]);
+    this.router.getRouter().navigate(['/', { outlets: { print: 'print-receipt' } }]);
   }
 
   resetPrint(): void {
-    this.router.navigate([{ outlets: { print: null } }]);
+    this.router.getRouter().navigate([{ outlets: { print: null } }]);
   }
 }

@@ -13,8 +13,9 @@ import {
   VirtualProgramTreeBySportResponse,
   VirtualGetRankByEventResponse
 } from '@elys/elys-api';
+import { ElysFeedsService } from '@elys/elys-feeds';
 import { cloneDeep as clone } from 'lodash';
-import { interval, Observable, Subject, Subscription, timer } from 'rxjs';
+import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
@@ -48,6 +49,7 @@ import {
 import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
 import { areas, overviewAreas } from './SoccerAreas';
+import { UserService } from '../../services/user.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -56,7 +58,7 @@ export class MainService extends MainServiceExtra {
   private cacheEvents: VirtualBetEvent[] = [];
   private cacheTournaments: VirtualBetTournamentExtended[] = [];
   // Working variable
-  private remainingTime: EventTime = new EventTime();
+  public remainingTime: EventTime = new EventTime();
   placingEvent: PlacingEvent = new PlacingEvent();
   public currentEventDetails: VirtualBetEvent;
   public currentProductDetails: VirtualBetTournamentExtended;
@@ -82,7 +84,9 @@ export class MainService extends MainServiceExtra {
     public couponService: CouponService,
     private appSettings: AppSettings,
     public destroyCouponService: DestroyCouponService,
-    private resultService: ResultsService
+    private resultService: ResultsService,
+    private feedData: ElysFeedsService,
+    private userservice: UserService
   ) {
     super(couponService, destroyCouponService);
     this.toResetAllSelections = true;
@@ -199,13 +203,12 @@ export class MainService extends MainServiceExtra {
           // Remaing time
           this.remainingTime.second = this.remainingTime.second - 1;
           // Check time blocked
-          if (this.eventDetails.eventTime.second <= 15 && this.eventDetails.eventTime.minute === 0) {
+          if (this.eventDetails.eventTime.second <= 10 && this.eventDetails.eventTime.minute === 0) {
             this.placingEvent.timeBlocked = true;
             this.productService.closeProductDialog();
           } else {
             this.placingEvent.timeBlocked = false;
           }
-          this.productService.timeBlockedSubscribe.next(this.placingEvent.timeBlocked);
         }
         // Shown seconds
         this.eventDetails.eventTime.second = this.remainingTime.second;
@@ -376,138 +379,139 @@ export class MainService extends MainServiceExtra {
     };
     // If the tournament doesn't contain yet the events information, load them calling the API.
     if (!tournament.matches || tournament.matches == null || tournament.matches.length === 0) {
-      this.elysApi.virtual.getVirtualEventDetail(request).then((sportDetail: VirtualDetailOddsOfEventResponse) => {
-        try {
-          const matches: Match[] = [];
-          const overViewArea: Area[] = [];
-          const listDetailArea: ListArea[] = [];
+      this.feedData.getEventVirtualDetail(this.userservice.getUserId(), tournamentNumber)
+        .then((sportDetail: VirtualDetailOddsOfEventResponse) => {
+          try {
+            const matches: Match[] = [];
+            const overViewArea: Area[] = [];
+            const listDetailArea: ListArea[] = [];
 
-          // cicle the tournament's matches and save their data
-          for (const match of sportDetail.Sport.ts[0].evs) {
-            // created a temporary match object
-            const tmpMatch: Match = {
-              id: match.id,
-              name: match.nm,
-              smartcode: match.smc,
-              hasOddsSelected: false,
-              isVideoShown: match.ehv,
-              isDetailOpened: false,
-              selectedOdds: [],
-              virtualBetCompetitor: match.tm
-            };
-            // Clone temporary areas from default values
-            const tmpAreaOverview = clone(overviewAreas);
-            const tmpDetailArea = clone(areas);
-            const matchExtended: VirtualBetEventExtended = clone(match);
-            const tmpMarkets: VirtualBetMarketExtended[] = matchExtended.mk.map(market => {
-              // Check the validity of the odds. Odd is valid if greater than 1.05.
-              for (const selection of market.sls) {
-                if (selection.ods[0].vl <= 1.05) {
-                  selection.isValid = false;
-                } else {
-                  selection.isValid = true;
+            // cicle the tournament's matches and save their data
+            for (const match of sportDetail.Sport.ts[0].evs) {
+              // created a temporary match object
+              const tmpMatch: Match = {
+                id: match.id,
+                name: match.nm,
+                smartcode: match.smc,
+                hasOddsSelected: false,
+                isVideoShown: match.ehv,
+                isDetailOpened: false,
+                selectedOdds: [],
+                virtualBetCompetitor: match.tm
+              };
+              // Clone temporary areas from default values
+              const tmpAreaOverview = clone(overviewAreas);
+              const tmpDetailArea = clone(areas);
+              const matchExtended: VirtualBetEventExtended = clone(match);
+              const tmpMarkets: VirtualBetMarketExtended[] = matchExtended.mk.map(market => {
+                // Check the validity of the odds. Odd is valid if greater than 1.05.
+                for (const selection of market.sls) {
+                  if (selection.ods[0].vl <= 1.05) {
+                    selection.isValid = false;
+                  } else {
+                    selection.isValid = true;
+                  }
                 }
-              }
-              // Sort the selection of each market using their "tp" attribute.
-              market.sls = market.sls.sort((a, b) => a.tp - b.tp);
-              return market;
-            });
-            // Cicle the current match's markets and save on the temporary "tmpAreaOverview"
-            for (const market of tmpMarkets) {
-              // Find the occurrence and append the selections' data
-              tmpAreaOverview.markets.map(marketOverviewFilter => {
-                if (marketOverviewFilter.id === market.tp && market.spv === marketOverviewFilter.specialValueOrSpread) {
-                  marketOverviewFilter.selections = market.sls;
-                }
+                // Sort the selection of each market using their "tp" attribute.
+                market.sls = market.sls.sort((a, b) => a.tp - b.tp);
+                return market;
               });
-            }
-
-            // Initialize the lowestOdd and highestOdd.
-            let lowestOdd: SpecialOddData;
-            let highestOdd: SpecialOddData;
-            // Cicle the temporary detail's area
-            tmpDetailArea.forEach((detail, areaIndex) => {
-              // Cicle the current match's markets and save on the temporary "tmpDetailArea"
-              detail.markets.forEach((areaMarket, marketIndex) => {
+              // Cicle the current match's markets and save on the temporary "tmpAreaOverview"
+              for (const market of tmpMarkets) {
                 // Find the occurrence and append the selections' data
-                const tmpMk: VirtualBetMarketExtended = tmpMarkets.filter(
-                  market => market.tp === areaMarket.id && market.spv === areaMarket.specialValueOrSpread
-                )[0];
-                areaMarket.selections = tmpMk.sls;
-                // Looking for the highest and lowest odd.
-                tmpMk.sls.forEach((odd, oddIndex) => {
-                  // Initialization of "lowestOdd".
-                  if (!lowestOdd && odd.isValid) {
-                    lowestOdd = {
-                      areaIndex: areaIndex,
-                      marketIndex: marketIndex,
-                      oddIndex: oddIndex,
-                      val: odd.ods[0].vl
-                    };
-                  }
-                  // Initialization of "highestOdd".
-                  if (!highestOdd) {
-                    highestOdd = {
-                      areaIndex: areaIndex,
-                      marketIndex: marketIndex,
-                      oddIndex: oddIndex,
-                      val: odd.ods[0].vl
-                    };
-                  }
-                  // Looking for the highest and lowest odd.
-                  if (lowestOdd && odd.ods[0].vl < lowestOdd.val && odd.isValid) {
-                    if (areaIndex !== lowestOdd.areaIndex) {
-                      lowestOdd.areaIndex = areaIndex;
-                    }
-                    if (marketIndex !== lowestOdd.marketIndex) {
-                      lowestOdd.marketIndex = marketIndex;
-                    }
-                    lowestOdd.oddIndex = oddIndex;
-                    lowestOdd.val = odd.ods[0].vl;
-                  }
-                  if (highestOdd && odd.ods[0].vl > highestOdd.val) {
-                    if (areaIndex !== highestOdd.areaIndex) {
-                      highestOdd.areaIndex = areaIndex;
-                    }
-                    if (marketIndex !== highestOdd.marketIndex) {
-                      highestOdd.marketIndex = marketIndex;
-                    }
-                    highestOdd.oddIndex = oddIndex;
-                    highestOdd.val = odd.ods[0].vl;
+                tmpAreaOverview.markets.map(marketOverviewFilter => {
+                  if (marketOverviewFilter.id === market.tp && market.spv === marketOverviewFilter.specialValueOrSpread) {
+                    marketOverviewFilter.selections = market.sls;
                   }
                 });
+              }
+
+              // Initialize the lowestOdd and highestOdd.
+              let lowestOdd: SpecialOddData;
+              let highestOdd: SpecialOddData;
+              // Cicle the temporary detail's area
+              tmpDetailArea.forEach((detail, areaIndex) => {
+                // Cicle the current match's markets and save on the temporary "tmpDetailArea"
+                detail.markets.forEach((areaMarket, marketIndex) => {
+                  // Find the occurrence and append the selections' data
+                  const tmpMk: VirtualBetMarketExtended = tmpMarkets.filter(
+                    market => market.tp === areaMarket.id && market.spv === areaMarket.specialValueOrSpread
+                  )[0];
+                  areaMarket.selections = tmpMk.sls;
+                  // Looking for the highest and lowest odd.
+                  tmpMk.sls.forEach((odd, oddIndex) => {
+                    // Initialization of "lowestOdd".
+                    if (!lowestOdd && odd.isValid) {
+                      lowestOdd = {
+                        areaIndex: areaIndex,
+                        marketIndex: marketIndex,
+                        oddIndex: oddIndex,
+                        val: odd.ods[0].vl
+                      };
+                    }
+                    // Initialization of "highestOdd".
+                    if (!highestOdd) {
+                      highestOdd = {
+                        areaIndex: areaIndex,
+                        marketIndex: marketIndex,
+                        oddIndex: oddIndex,
+                        val: odd.ods[0].vl
+                      };
+                    }
+                    // Looking for the highest and lowest odd.
+                    if (lowestOdd && odd.ods[0].vl < lowestOdd.val && odd.isValid) {
+                      if (areaIndex !== lowestOdd.areaIndex) {
+                        lowestOdd.areaIndex = areaIndex;
+                      }
+                      if (marketIndex !== lowestOdd.marketIndex) {
+                        lowestOdd.marketIndex = marketIndex;
+                      }
+                      lowestOdd.oddIndex = oddIndex;
+                      lowestOdd.val = odd.ods[0].vl;
+                    }
+                    if (highestOdd && odd.ods[0].vl > highestOdd.val) {
+                      if (areaIndex !== highestOdd.areaIndex) {
+                        highestOdd.areaIndex = areaIndex;
+                      }
+                      if (marketIndex !== highestOdd.marketIndex) {
+                        highestOdd.marketIndex = marketIndex;
+                      }
+                      highestOdd.oddIndex = oddIndex;
+                      highestOdd.val = odd.ods[0].vl;
+                    }
+                  });
+                });
               });
-            });
-            // Set lowest and highest odd.
-            tmpDetailArea[lowestOdd.areaIndex].hasLowestOdd = true;
-            tmpDetailArea[lowestOdd.areaIndex].markets[lowestOdd.marketIndex].selections[lowestOdd.oddIndex].isLowestOdd = true;
-            tmpDetailArea[highestOdd.areaIndex].hasHighestOdd = true;
-            tmpDetailArea[highestOdd.areaIndex].markets[highestOdd.marketIndex].selections[highestOdd.oddIndex].isHighestOdd = true;
-            // Save the datas to tournament object
-            matches.push(tmpMatch);
-            overViewArea.push(tmpAreaOverview);
-            listDetailArea.push(tmpDetailArea);
-          }
+              // Set lowest and highest odd.
+              tmpDetailArea[lowestOdd.areaIndex].hasLowestOdd = true;
+              tmpDetailArea[lowestOdd.areaIndex].markets[lowestOdd.marketIndex].selections[lowestOdd.oddIndex].isLowestOdd = true;
+              tmpDetailArea[highestOdd.areaIndex].hasHighestOdd = true;
+              tmpDetailArea[highestOdd.areaIndex].markets[highestOdd.marketIndex].selections[highestOdd.oddIndex].isHighestOdd = true;
+              // Save the datas to tournament object
+              matches.push(tmpMatch);
+              overViewArea.push(tmpAreaOverview);
+              listDetailArea.push(tmpDetailArea);
+            }
 
-          tournament.matches = matches;
-          tournament.overviewArea = overViewArea;
-          tournament.listDetailAreas = listDetailArea;
+            tournament.matches = matches;
+            tournament.overviewArea = overViewArea;
+            tournament.listDetailAreas = listDetailArea;
 
-          this.currentProductDetails = tournament;
+            this.currentProductDetails = tournament;
 
-          this.attempts = 0;
-        } catch (err) {
-          console.log(err);
-          if (this.attempts < 5) {
-            this.attempts++;
-            setTimeout(() => {
-              this.eventDetailOddsByCacheTournament(tournamentNumber);
-            }, 1000);
-          } else {
             this.attempts = 0;
+          } catch (err) {
+            console.log(err);
+            if (this.attempts < 5) {
+              this.attempts++;
+              setTimeout(() => {
+                this.eventDetailOddsByCacheTournament(tournamentNumber);
+              }, 1000);
+            } else {
+              this.attempts = 0;
+            }
           }
-        }
-      });
+        });
     }
   }
 
@@ -561,7 +565,7 @@ export class MainService extends MainServiceExtra {
       MatchId: idEvent
     };
     return this.elysApi.virtual.getCountdown(request).then((value: VirtualEventCountDownResponse) => {
-      const sec: number = (value.CountDown / 10000000) + 5;
+      const sec: number = (value.CountDown / 10000000);
       const eventTime: EventTime = new EventTime();
       eventTime.minute = Math.floor(sec / 60);
       eventTime.second = Math.floor(sec % 60);
@@ -603,23 +607,25 @@ export class MainService extends MainServiceExtra {
     };
     // Ceck, if it is empty load from api
     if (event.mk == null || event.mk.length === 0) {
-      this.elysApi.virtual.getVirtualEventDetail(request).then((sportDetail: VirtualDetailOddsOfEventResponse) => {
-        try {
-          event.mk = sportDetail.Sport.ts[0].evs[0].mk;
-          event.tm = sportDetail.Sport.ts[0].evs[0].tm;
-          this.currentEventDetails = event;
-          this.attempts = 0;
-        } catch (err) {
-          if (this.attempts < 5) {
-            this.attempts++;
-            setTimeout(() => {
-              this.eventDetailOdds(eventNumber);
-            }, 1000);
-          } else {
+      // tslint:disable-next-line:max-line-length
+      this.feedData.getEventVirtualDetail(this.userservice.getUserId(), eventNumber).
+        then((sportDetail: VirtualDetailOddsOfEventResponse) => {
+          try {
+            event.mk = sportDetail.Sport.ts[0].evs[0].mk;
+            event.tm = sportDetail.Sport.ts[0].evs[0].tm;
+            this.currentEventDetails = event;
             this.attempts = 0;
+          } catch (err) {
+            if (this.attempts < 5) {
+              this.attempts++;
+              setTimeout(() => {
+                this.eventDetailOdds(eventNumber);
+              }, 1000);
+            } else {
+              this.attempts = 0;
+            }
           }
-        }
-      });
+        });
     }
   }
 

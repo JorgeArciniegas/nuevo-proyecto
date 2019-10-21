@@ -3,7 +3,6 @@ import { Market } from '../app/products/products.model';
 
 export const environment: Environment = {
   production: false,
-  // tslint:disable-next-line:max-line-length
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.UNIVERSALSOFT,
@@ -132,8 +131,8 @@ export const environment: Environment = {
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
-        nextEventItems: 3,
-        cacheEventsItem: 3
+        nextEventItems: 2,
+        cacheEventsItem: 2
       },
       toolbarButton: {
         name: 'Italian League',
@@ -171,8 +170,8 @@ export const environment: Environment = {
       layoutProducts: {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
-        nextEventItems: 3,
-        cacheEventsItem: 3
+        nextEventItems: 2,
+        cacheEventsItem: 2
       },
       toolbarButton: {
         name: 'Italian League',
