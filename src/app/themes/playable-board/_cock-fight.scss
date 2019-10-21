@@ -1,50 +1,52 @@
-.tile-market-name {
-	width: 100%;
-	word-break: break-word;
-	text-align: center;
-
-	span {
+app-playable-board-cock-fight {
+	.tile-market-name {
 		width: 100%;
-	}
-}
+		word-break: break-word;
+		text-align: center;
 
-.btn-default {
-	.icon {
-		width: 40%;
-		height: 100%;
-
-		&.icon-cock-red {
-			@extend %ICON-COCK-RED;
-		}
-		&.icon-cock-blue {
-			@extend %ICON-COCK-BLUE;
+		span {
+			width: 100%;
 		}
 	}
 
-	&.btn-default-cock {
+	.btn-default {
 		.icon {
+			width: 40%;
+			height: 100%;
+
 			&.icon-cock-red {
-				float: left;
+				@extend %ICON-COCK-RED;
 			}
 			&.icon-cock-blue {
-				float: right;
+				@extend %ICON-COCK-BLUE;
 			}
 		}
-	}
 
-	.selection-details {
-		display: block;
-		height: 100%;
-		word-break: break-word;
-	}
+		&.btn-default-cock {
+			.icon {
+				&.icon-cock-red {
+					float: left;
+				}
+				&.icon-cock-blue {
+					float: right;
+				}
+			}
+		}
 
-	.selection-name {
-		font-weight: bold;
-		font-size: 1.4vh;
-	}
+		.selection-details {
+			display: block;
+			height: 100%;
+			word-break: break-word;
+		}
 
-	.selection-value {
-		font-weight: bold;
-		font-size: 1.8vh;
+		.selection-name {
+			font-weight: bold;
+			font-size: 1.4vh;
+		}
+
+		.selection-value {
+			font-weight: bold;
+			font-size: 1.8vh;
+		}
 	}
 }
