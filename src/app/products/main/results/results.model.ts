@@ -5,8 +5,8 @@ export class EventResult {
   racePodium?: RacePodium;
   cockResult?: CockFightingResult;
   soccerResult?: SoccerResult[];
+  kenoResults?: number[];
 }
-
 
 export interface RacePodium {
   firstPlace: number;
