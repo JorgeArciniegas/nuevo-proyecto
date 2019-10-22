@@ -18,7 +18,8 @@ import {
   BetCouponOddExtended,
   CouponServiceMessageType,
   ElysCouponService,
-  MessageSource
+  MessageSource,
+  AddNumberRequest
 } from '@elys/elys-coupon';
 import { Observable, Subject, timer } from 'rxjs';
 import { AppSettings } from '../../../../src/app/app.settings';
@@ -220,6 +221,33 @@ export class CouponService {
       //
       console.log('Error COUPON SERVICE ---> addRemoveToCoupon: ', e);
     }
+  }
+
+  /**
+   * LOTTERY KENO ADD NUMBER TO COUPON
+   * @param eventId
+   * @param selectedNumber
+   */
+  addToRemoveToCouponLottery(eventId: number, selectedNumber: number): void {
+    if (this.coupon && this.coupon.internal_isReadyToPlace) {
+      return;
+    }
+    const req: AddNumberRequest = {
+      id: eventId,
+      number: selectedNumber
+    };
+    const hasNumber = this.coupon.Odds.find(item => item.SelectionName === selectedNumber.toString());
+    if (hasNumber) {
+      req.isDelete = true;
+      this.couponIdAdded.push(selectedNumber);
+    } else {
+      this.couponIdAdded.filter((item, idx) => {
+        if (item === selectedNumber) {
+          this.couponIdAdded.splice(idx, 0);
+        }
+      });
+    }
+    this.elysCoupon.manageOddLottery(req);
   }
 
   private requestObj(bet: BetOdd, isAdd: boolean = true, isMultipleStake): AddOddRequest {

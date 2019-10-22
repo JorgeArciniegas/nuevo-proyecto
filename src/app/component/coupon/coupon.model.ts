@@ -18,6 +18,7 @@ export interface OddsStakeEdit {
 
 export interface InternalCoupon extends BetCouponExtended {
   internal_isReadyToPlace?: boolean;
+  internal_isLottery?: boolean;
 }
 
 /**
