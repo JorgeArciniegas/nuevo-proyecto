@@ -1,17 +1,17 @@
 <div class="results-event">
-  <mat-grid-list fxFill cols="{{ lastResult.kenoResults.length }}" rowHeight="{{rowHeight + 1}}">
-    <mat-grid-tile colspan="{{ lastResult.kenoResults.length }}">
+  <mat-grid-list fxFill cols="{{ results.kenoResults.length }}" rowHeight="{{rowHeight + 1}}">
+    <mat-grid-tile colspan="{{ results.kenoResults.length }}">
       <div fxFill class="card-box-result-keno">
         <!-- header -->
         <div fxFill fxLayoutAlign="center center" class="header radius-5 eventNumber">
-          {{ lastResult.eventLabel }}
+          {{ results.eventLabel }}
         </div>
       </div>
     </mat-grid-tile>
-    <mat-grid-tile colspan="{{ lastResult.kenoResults.length }}">
+    <mat-grid-tile colspan="{{ results.kenoResults.length }}">
       <!--List of draw results -->
-      <mat-grid-list fxFill cols="{{ lastResult.kenoResults.length }}" rowHeight="{{rowHeight + 1}}" class="position">
-        <mat-grid-tile *ngFor="let kenoResult of lastResult.kenoResults">
+      <mat-grid-list fxFill cols="{{ results.kenoResults.length }}" rowHeight="{{rowHeight + 1}}" class="position">
+        <mat-grid-tile *ngFor="let kenoResult of results.kenoResults">
           <div fxLayout="column" fxLayoutAlign="center center" class="radius-5 btn-default btn-keno-result" fxFill>
             <span>{{ kenoResult }}</span>
           </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { EventResult } from '../../results.model';
 
 @Component({
@@ -6,16 +6,10 @@ import { EventResult } from '../../results.model';
   templateUrl: './keno.component.html',
   styleUrls: ['./keno.component.scss']
 })
-export class KenoComponent implements OnInit {
+export class KenoComponent {
   @Input() rowHeight: number;
-  @Input() results: EventResult[];
-  lastResult: EventResult;
+  @Input() results: EventResult;
 
   constructor() { }
-
-  ngOnInit() {
-    // take last draw of the list
-    this.lastResult = this.results[this.results.length - 1];
-  }
 
 }

@@ -23,6 +23,6 @@
   <!-- KENO LAST RESULTS-->
   <app-results-keno
     *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.KENO"
-    rowHeight="{{rowHeight}}" [results]="service.listResult">
+    rowHeight="{{rowHeight}}" [results]="service.listResult[0]">
   </app-results-keno>
 </div>
