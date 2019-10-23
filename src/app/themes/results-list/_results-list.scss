@@ -53,3 +53,17 @@
 	min-width: calc(100% - 5px) !important;
 	@extend %card-title-noborder;
 }
+
+// KENO
+.btn-keno-result {
+	font-size: 2vh !important;
+	width: calc(100% - 5px) !important;
+	min-width: calc(100% - 5px) !important;
+	@extend %card-title-noborder;
+}
+.card-box-result-keno {
+	padding: 2px;
+	.header {
+		@extend %card-title-noborder;
+	}
+}
