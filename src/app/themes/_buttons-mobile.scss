@@ -37,6 +37,17 @@
 	}
 }
 
+.btn-default-keno {
+	font-weight: 700;
+	padding: 0;
+	height: 35;
+	width: 35;
+	@extend %btn-white-gradient;
+	&.selected {
+		@extend %btn-blue-gradient;
+	}
+}
+
 .btn-DOG-1,
 .btn-HORSE-1,
 .btn-HORSE-VIRT-1 {

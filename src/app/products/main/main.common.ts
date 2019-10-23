@@ -18,6 +18,7 @@ import { FilterMarketsByAreaColumnPipe } from './playable-board/filter-markets-b
 import { PlayableBoardComponent } from './playable-board/playable-board.component';
 import { CockFightComponent as PlayableBoardCockFightComponent } from './playable-board/templates/cock-fight/cock-fight.component';
 import { GetArrayFromNumberPipe } from './playable-board/templates/get-array-from-number.pipe';
+import { KenoComponent as PlayableBoardKenoComponentComponent } from './playable-board/templates/keno/keno.component';
 import { RaceComponent as PlayableBoardRaceComponent } from './playable-board/templates/race/race.component';
 import { DetailComponent as PlayableBoardSoccerDetailComponent } from './playable-board/templates/soccer/detail/detail.component';
 import { OverviewComponent as PlayableBoardSoccerOverviewComponent } from './playable-board/templates/soccer/overview/overview.component';
@@ -57,6 +58,7 @@ export const componentDeclarations: any[] = [
   ResultsSoccerComponent,
   LuckySoccerComponent,
   ExtractCorrectScorePipe,
+  PlayableBoardKenoComponentComponent,
   ResultsKenoComponent
 ];
 
