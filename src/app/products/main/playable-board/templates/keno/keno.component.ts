@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { KenoNumber } from './keno-number';
+import { KenoNumber } from './keno.model';
 
 @Component({
   selector: 'app-playable-board-keno',
