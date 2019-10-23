@@ -1,28 +1,28 @@
 <StackLayout>
-  <!-- RACING LAST RESULTS-->
+  <!-- RACING LAST RESULTS -->
   <app-results-race
     *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.RACING"
     [items]="productService.product.layoutProducts.resultItems" windowSize="productService.windowSize"
     rowHeight="{{rowHeight}}" [results]="service.listResult" [codeProduct]="productService.product.codeProduct">
   </app-results-race>
 
-  <!-- COCK FIGHTING LAST RESULTS-->
+  <!-- COCK FIGHTING LAST RESULTS -->
   <app-results-cock-fight
     *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.COCK_FIGHT"
     [items]="productService.product.layoutProducts.resultItems" windowSize="productService.windowSize"
     rowHeight="{{rowHeight}}" [results]="service.listResult" [codeProduct]="productService.product.codeProduct">
   </app-results-cock-fight>
 
-  <!-- SOCCER LAST RESULTS-->
+  <!-- SOCCER LAST RESULTS -->
   <app-results-soccer
     *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.SOCCER"
     [items]="productService.product.layoutProducts.resultItems" rowHeight="{{rowHeight}}" [results]="service.listResult"
     [codeProduct]="productService.product.codeProduct">
   </app-results-soccer>
 
-  <!-- RACING LAST RESULTS-->
+  <!-- RACING LAST RESULTS -->
   <app-results-keno
     *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.KENO"
-    rowHeight="{{rowHeight}}" [results]="service.listResult">
+    rowHeight="{{rowHeight}}" [results]="service.listResult[0]">
   </app-results-keno>
 </StackLayout>
