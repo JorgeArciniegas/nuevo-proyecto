@@ -11,6 +11,10 @@
   <app-playable-board-soccer class="playable-board-soccer" [rowHeight]="rowHeight"
     *ngIf="productService.product.layoutProducts.type === typeLayout.SOCCER">
   </app-playable-board-soccer>
+  <!-- TEMPLATE KENO -->
+  <app-playable-board-keno [rowHeight]="rowHeight"
+    *ngIf="productService.product.layoutProducts.type === typeLayout.KENO">
+  </app-playable-board-keno>
 </StackLayout>
 
 <!-- <GridLayout row="2" class="playable-grid-buttons playable-grid-repeat" rows="*" columns="*,*,*,*,*,*,*,*">

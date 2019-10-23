@@ -57,6 +57,19 @@ button:active:not([disabled]) {
 	}
 }
 
+.btn-default-keno {
+	@media screen and (max-width: 1441px) {
+		height: 45px;
+		width: 45px;
+	}
+	height: 60px;
+	width: 60px;
+	@extend %btn-white-gradient;
+	&.selected {
+		@extend %btn-blue-gradient;
+	}
+}
+
 // BUTTON COCKFIGHT
 .btn-default-cock {
 	border: 4px solid;
