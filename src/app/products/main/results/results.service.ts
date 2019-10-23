@@ -36,6 +36,9 @@ export class ResultsService {
         // results for products
         if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
           for (let i = 0; i < this.productService.product.layoutProducts.resultItems; i++) {
+            if (!eventResults.EventResults[i]) {
+              return;
+            }
             // results for products
             let results: string[] = [];
             // set the default parameters on the temporary EventResult

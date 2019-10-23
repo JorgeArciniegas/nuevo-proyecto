@@ -5,9 +5,9 @@
 	.position {
 		margin: 3;
 	}
-  .header {
-    border-radius: 4;
-  }
+	.header {
+		border-radius: 4;
+	}
 	.position {
 		font-size: 14;
 		font-weight: 700;
@@ -30,22 +30,39 @@
 }
 
 // SOCCER
-.card-box-result-soccer{
-
-  .header {
-    @extend %card-title-noborder;
-    border-radius: 4;
-    .eventNumber {
-      font-size: 11;
-      font-weight: 500;
-    }
-  }
-  .btn-soccer-result {
-    font-size: 9;
-    font-weight: 400;
-    border-radius: 4;
-    @extend %card-title-noborder;
-  }
+.card-box-result-soccer {
+	.header {
+		@extend %card-title-noborder;
+		border-radius: 4;
+		.eventNumber {
+			font-size: 11;
+			font-weight: 500;
+		}
+	}
+	.btn-soccer-result {
+		font-size: 9;
+		font-weight: 400;
+		border-radius: 4;
+		@extend %card-title-noborder;
+	}
 }
 
-
+// KENO
+.card-box-result-keno {
+	.header {
+		@extend %card-title-noborder;
+		border-radius: 4;
+		.eventNumber {
+			font-size: 11;
+			font-weight: 500;
+		}
+	}
+	.btn-keno-result {
+		width: 25;
+		height: 25;
+		font-size: 12;
+		font-weight: 400;
+		border-radius: 4;
+		@extend %card-title-noborder;
+	}
+}
