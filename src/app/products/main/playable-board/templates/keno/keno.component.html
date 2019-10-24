@@ -1,6 +1,6 @@
 <div fxLayoutAlign="center center">
   <div [style.width.%]="82">
-    <mat-grid-list cols="10" rowHeight="{{rowHeight * 1.991181657848325}}">
+    <mat-grid-list cols="10" rowHeight="{{ rowHeight * 16/8 }}">
       <mat-grid-tile *ngFor="let kenoNumber of kenoTable">
         <button class="btn-default elevation-z5 btn-default-keno radius-50"
           [ngClass]="{'selected' : kenoNumber.isSelected}"
