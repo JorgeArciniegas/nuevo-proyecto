@@ -6,6 +6,7 @@ import {
   VirtualBetTournament,
   VirtualGetRankByEventResponse
 } from '@elys/elys-api';
+import { KenoNumber } from './playable-board/templates/keno/keno.model';
 
 export enum TypePlacingEvent {
   ST = 0,
@@ -79,6 +80,7 @@ export class PlacingEvent {
   thirdRowDisabled: boolean;
   players: Player[];
   odds: VirtualBetSelectionExtended[];
+  kenoNumbers?: KenoNumber[];
   amount: number;
   repeat: number;
   isSpecialBets: boolean;

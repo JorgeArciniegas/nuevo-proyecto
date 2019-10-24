@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { KenoNumber } from './keno.model';
+import { MainService } from '../../../main.service';
+import { BtncalcService } from '../../../../../component/btncalc/btncalc.service';
 
 @Component({
   selector: 'app-playable-board-keno',
@@ -11,7 +13,7 @@ export class KenoComponent implements OnInit {
   public rowHeight: number;
   kenoTable: KenoNumber[] = [];
 
-  constructor() { }
+  constructor(private mainService: MainService, private btnCalcService: BtncalcService) { }
 
   ngOnInit(): void {
     this.initKenoNumbers();
@@ -19,6 +21,8 @@ export class KenoComponent implements OnInit {
 
   onNumberClick(kenoNumber: KenoNumber): void {
     kenoNumber.isSelected = !kenoNumber.isSelected;
+    this.mainService.placingNumber(kenoNumber);
+    this.btnCalcService.tapPlus();
   }
 
   private initKenoNumbers(): void {

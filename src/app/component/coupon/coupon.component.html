@@ -49,7 +49,7 @@
           </div>
         </button>
         <div fxFlex="90" fxLayout="column" fxLayoutAlign="start stretch">
-          <ng-container *ngTemplateOutlet="(couponLayout.typeLayout !== layoutProduct.KENO) ? keno : allcoupon">
+          <ng-container *ngTemplateOutlet="(couponLayout.typeLayout === layoutProduct.KENO) ? keno : allcoupon">
           </ng-container>
         </div>
         <button *ngIf="!couponService.coupon.internal_isLottery" fxFlex="5" class="btn-reset card-odd radius-5 scroll"
