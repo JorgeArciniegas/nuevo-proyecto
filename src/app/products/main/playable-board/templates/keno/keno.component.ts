@@ -75,7 +75,6 @@ export class KenoComponent implements OnInit, OnDestroy {
     this.initKenoNumbers();
     // check coupon
     this.couponHasChangedSubscription = this.elysCoupon.couponHasChanged.subscribe(coupon => {
-      console.log(coupon);
       if (coupon) {
         this.verifySelectedOdds(coupon);
       } else {
