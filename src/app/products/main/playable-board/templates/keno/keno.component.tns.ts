@@ -40,9 +40,21 @@ export class KenoComponent implements OnInit, OnDestroy {
       this.couponHasBeenPlacedSubscription.unsubscribe();
     }
   }
-  onNumberClick(kenoNumber: KenoNumber): void {
-    kenoNumber.isSelected = !kenoNumber.isSelected;
+
+  async onNumberClick(kenoNumber: KenoNumber) {
+    // kenoNumber.isSelected = !kenoNumber.isSelected;
+    if (this.numberSelectionQueue.includes(kenoNumber)) {
+      return;
+    }
+    this.numberSelectionQueue.push(kenoNumber);
+    this.mainService.placingNumber(kenoNumber);
+    let eventid;
+    await this.mainService.getCurrentEvent().then(
+      (item) => { eventid = item.mk[0].sls[0].id; }
+    );
+    this.btnCalcService.lotteryPushToCoupon(kenoNumber.number, eventid);
   }
+
 
   private initKenoNumbers(): void {
     let currentNumber = 1;
@@ -103,4 +115,6 @@ export class KenoComponent implements OnInit, OnDestroy {
     );
 
   }
+
+
 }
