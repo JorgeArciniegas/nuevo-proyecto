@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { KenoNumber } from './keno.model';
+import { KenoNumber, KenoNumberNative } from './keno.model';
 import { Subscription } from 'rxjs';
 import { CouponService } from '../../../../../component/coupon/coupon.service';
 import { ElysCouponService, BetCouponExtended } from '@elys/elys-coupon';
@@ -14,8 +14,8 @@ import { MainService } from '../../../main.service';
 export class KenoComponent implements OnInit, OnDestroy {
   @Input()
   public rowHeight: number;
-  kenoTable: KenoNumber[][] = [];
-  numberSelectionQueue: KenoNumber[];
+  kenoTable: KenoNumberNative[] = [];
+  numberSelectionQueue: KenoNumberNative[];
   couponHasChangedSubscription: Subscription;
   couponHasBeenPlacedSubscription: Subscription;
   constructor(
@@ -41,7 +41,7 @@ export class KenoComponent implements OnInit, OnDestroy {
     }
   }
 
-  async onNumberClick(kenoNumber: KenoNumber) {
+  async onNumberClick(kenoNumber: KenoNumberNative) {
     // kenoNumber.isSelected = !kenoNumber.isSelected;
     if (this.numberSelectionQueue.includes(kenoNumber)) {
       return;
@@ -57,64 +57,68 @@ export class KenoComponent implements OnInit, OnDestroy {
 
 
   private initKenoNumbers(): void {
-    let currentNumber = 1;
-    for (let i = 0; i < 8; ++i) {
-      for (let j = 0; j < 10; ++j) {
-        const kenoNumber: KenoNumber = {
-          number: currentNumber,
-          isSelected: false
-        };
-        ++currentNumber;
-        if (!this.kenoTable[i]) {
-          this.kenoTable[i] = [];
-        }
-        this.kenoTable[i][j] = kenoNumber;
+    // let currentNumber = 1;
+    // for (let i = 0; i < 8; ++i) {
+    //   for (let j = 0; j < 10; ++j) {
+    //     const kenoNumber: KenoNumber = {
+    //       number: currentNumber,
+    //       isSelected: false
+    //     };
+    //     ++currentNumber;
+    //     if (!this.kenoTable[i]) {
+    //       this.kenoTable[i] = [];
+    //     }
+    //     this.kenoTable[i][j] = kenoNumber;
+    //   }
+    // }
+    const kenoNumbers: KenoNumberNative[] = [];
+    let row = 0;
+    let col = 0;
+    for (let i = 1; i <= 80; ++i) {
+      if (i % 10 === 0) {
+        ++row;
       }
+      if (i % 8 === 0) {
+        ++col;
+      }
+      const kenoNumber: KenoNumberNative = {
+        number: i,
+        isSelected: false,
+        row,
+        col
+      };
+      kenoNumbers.push(kenoNumber);
     }
+    this.kenoTable = kenoNumbers;
   }
 
-
   /**
-   * Check the Keno number selected
-   * @param coupon
-   */
+  * Check the Keno number selected
+  * @param coupon
+  */
   verifySelectedOdds(coupon: BetCouponExtended): void {
     // extract a temp array that contains
     const tmpRealSel: number[] = coupon.Odds.map(x => Number(x.SelectionName));
-
     // compare with show table and remove the selected when the selection is delete
-    for (let i = 0; i < 8; ++i) {
-      this.kenoTable[i].forEach(item => {
-        const idx = tmpRealSel.find(index => idx === item.number);
-        if (!idx) {
-          item.isSelected = false;
-        }
-      });
-    }
-
-    // update the table selection
-
-    tmpRealSel.forEach(odd => {
-      for (let i = 0; i < 8; ++i) {
-        const kenoSel = this.kenoTable[i].findIndex(obj => obj.number === odd);
-        if (kenoSel !== -1) {
-          this.kenoTable[i][kenoSel].isSelected = true;
-        }
+    this.kenoTable.forEach(item => {
+      const idx = tmpRealSel.find(index => index === item.number);
+      if (!idx) {
+        item.isSelected = false;
       }
     });
-
+    // update the table selection
+    tmpRealSel.forEach(odd => {
+      const kenoSel = this.kenoTable.findIndex(obj => obj.number === odd);
+      if (kenoSel !== -1) {
+        this.kenoTable[kenoSel].isSelected = true;
+      }
+    });
     // update the queue selection
     this.numberSelectionQueue = this.numberSelectionQueue.filter(
-
       item => {
-        for (let i = 0; i < 8; ++i) {
-          return tmpRealSel.indexOf(item.number) < 0 &&
-            this.kenoTable[i].find(idx => idx.number === item.number && idx.isSelected !== item.isSelected);
-        }
+        return tmpRealSel.indexOf(item.number) < 0 &&
+          this.kenoTable.find(idx => idx.number === item.number && idx.isSelected !== item.isSelected);
       }
     );
-
   }
-
-
 }
