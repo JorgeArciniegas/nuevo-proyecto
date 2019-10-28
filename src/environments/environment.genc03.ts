@@ -258,7 +258,7 @@ export const environment: Environment = {
         type: LAYOUT_TYPE.KENO,
         resultItems: 2, // items to show for last result
         nextEventItems: 1, // items to show for next events
-        cacheEventsItem: 1
+        cacheEventsItem: 2
       },
       toolbarButton: {
         name: 'keno',
