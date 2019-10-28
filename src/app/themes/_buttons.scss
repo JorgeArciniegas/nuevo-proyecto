@@ -58,6 +58,7 @@ button:active:not([disabled]) {
 }
 
 .btn-default-keno {
+	cursor: pointer;
 	@media screen and (max-width: 1441px) {
 		height: 45px;
 		width: 45px;

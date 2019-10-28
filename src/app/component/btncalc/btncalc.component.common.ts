@@ -1,21 +1,19 @@
 import { Subscription } from 'rxjs';
-import { AppSettings } from '../../app.settings';
-import {
-  PolyfunctionalArea,
-  PolyfunctionalStakeCoupon,
-  PolyfunctionStakePresetPlayer
-} from '../../products/products.model';
-import { ProductsService } from '../../products/products.service';
-import { TypeBetSlipColTot } from '../../products/main/main.models';
-import { CouponService } from '../coupon/coupon.service';
-import { BtncalcService } from './btncalc.service';
-import { TYPINGTYPE } from './btncalc.enum';
 import { UserService } from '../../../../src/app/services/user.service';
+import { AppSettings } from '../../app.settings';
+import { TypeBetSlipColTot } from '../../products/main/main.models';
+import { PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../../products/products.model';
+import { ProductsService } from '../../products/products.service';
+import { CouponService } from '../coupon/coupon.service';
+import { TYPINGTYPE } from './btncalc.enum';
+import { BtncalcService } from './btncalc.service';
+import { LAYOUT_TYPE } from '../../../environments/environment.models';
 
 export class BtncalcComponentCommon {
   polyfunctionalValueSubscribe: Subscription;
   public polyfunctionalArea: PolyfunctionalArea;
   typeBetSlipColTot: typeof TypeBetSlipColTot = TypeBetSlipColTot;
+  typeLayoutProdct: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   CouponoddStakeEditObs: Subscription;
   couponResponseSubs: Subscription;
   constructor(
@@ -34,7 +32,7 @@ export class BtncalcComponentCommon {
     // management coupon stake changed
     this.CouponoddStakeEditObs = this.couponService.oddStakeEditObs.subscribe(
       oddStakeEdit => {
-        this.productService.polyfunctionalStakeCouponSubject.next( new PolyfunctionalStakeCoupon() );
+        this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
       }
     );
 
@@ -49,11 +47,19 @@ export class BtncalcComponentCommon {
     );
   }
   async plus(): Promise<void> {
-    this.btncalcService.tapPlus();
+    if (
+      this.couponService.coupon &&
+      this.couponService.coupon.hasOwnProperty('internal_isLottery') &&
+      this.couponService.coupon.internal_isLottery
+    ) {
+      this.btncalcService.updateCouponStakeLottery();
+    } else {
+      this.btncalcService.tapPlus();
+    }
   }
 
   clearAll(): void {
-   this.btncalcService.clearAll();
+    this.btncalcService.clearAll();
   }
 
   polyfuncionalAmountReset(): void {
@@ -89,7 +95,7 @@ export class BtncalcComponentCommon {
       this.btncalcService.polyfunctionStakePresetPlayer
         .disableInputCalculator &&
       this.btncalcService.polyfunctionStakePresetPlayer.typingType ===
-        typingType
+      typingType
     ) {
       return;
     }
