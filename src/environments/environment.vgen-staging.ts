@@ -256,7 +256,7 @@ export const environment: Environment = {
       layoutProducts: {
         // defines the layout type for different product group
         type: LAYOUT_TYPE.KENO,
-        resultItems: 2, // items to show for last result
+        resultItems: 1, // items to show for last result
         nextEventItems: 1, // items to show for next events
         cacheEventsItem: 1
       },

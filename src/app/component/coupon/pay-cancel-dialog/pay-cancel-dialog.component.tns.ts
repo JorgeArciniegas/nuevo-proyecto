@@ -8,7 +8,6 @@ import { CouponDialogService } from '../coupon-dialog.service.tns';
 import { CouponService } from '../coupon.service';
 import { Receipt } from './print-receipt/print-receipt.model';
 import { PrintReceiptService } from './print-receipt/print-receipt.service.tns';
-import * as Permissions from 'nativescript-permissions';
 declare var android: any;
 @Component({
   selector: 'app-pay-cancel-dialog',

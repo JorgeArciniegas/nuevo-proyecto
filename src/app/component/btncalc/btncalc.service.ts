@@ -1,6 +1,6 @@
 import { formatCurrency } from '@angular/common';
 import { Injectable, OnDestroy } from '@angular/core';
-import { Observable, Subject, Subscription, timer } from 'rxjs';
+import { Observable, Subject, Subscription, timer, defer } from 'rxjs';
 import { AppSettings } from '../../../../src/app/app.settings';
 import { UserService } from '../../../../src/app/services/user.service';
 import { TranslateUtilityService } from '../../../../src/app/services/utility/translate-utility.service';
@@ -10,6 +10,8 @@ import { TypeBetSlipColTot } from '../../products/main/main.models';
 import { CouponService } from '../coupon/coupon.service';
 import { TYPINGTYPE } from './btncalc.enum';
 import { OddsStakeEdit } from '../coupon/coupon.model';
+import { LAYOUT_TYPE } from '../../../environments/environment.models';
+import { RouterService } from '../../services/utility/router/router.service';
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +42,8 @@ export class BtncalcService implements OnDestroy {
     public productService: ProductsService,
     private translate: TranslateUtilityService,
     private userService: UserService,
-    private couponService: CouponService
+    private couponService: CouponService,
+    private routerService: RouterService
   ) {
     // Listen to the coupon placement and reset the player's preset stake
     this.couponHasBeenPlacedSubscription = couponService.couponHasBeenPlacedObs.subscribe(() => {
@@ -75,6 +78,9 @@ export class BtncalcService implements OnDestroy {
             item.amount = this.polyfunctionalArea.amount;
           });
         }
+        if (this.productService.product && this.productService.product.layoutProducts.type === LAYOUT_TYPE.KENO) {
+          this.polyfunctionalArea.typeSlipCol = TypeBetSlipColTot.GROUP;
+        }
       }
     });
 
@@ -94,6 +100,7 @@ export class BtncalcService implements OnDestroy {
     this.couponHasBeenPlacedSubscription.unsubscribe();
     this.polyfunctionalValueSubscribe.unsubscribe();
   }
+
 
   /**
    *
@@ -126,6 +133,30 @@ export class BtncalcService implements OnDestroy {
     }
   }
 
+  /**
+   * Added or remove the  number selected to coupon
+   * @param selection
+   * @param eventId
+   */
+  lotteryPushToCoupon(selection: number, eventId: number): void {
+    if (this.userService.isModalOpen) {
+      this.userService.isBtnCalcEditable = false;
+    }
+    if (this.couponService.oddStakeEdit) {
+      this.couponService.updateCoupon();
+      return;
+    }
+    if (this.polyfunctionalStakeCoupon.isEnabled) {
+      this.updateCouponStakeLottery();
+      return;
+    }
+    if (!this.polyfunctionalArea || !this.polyfunctionalArea.odds) {
+      return;
+    }
+
+    this.couponService.addToRemoveToCouponLottery(eventId, selection, this.polyfunctionalArea.amount);
+  }
+
   // updated global amount to coupon
   updateCouponStake(): void {
     if (this.couponService.coupon && this.polyfunctionalStakeCoupon.isEnabled) {
@@ -136,6 +167,18 @@ export class BtncalcService implements OnDestroy {
       this.clearAll();
     }
   }
+
+
+  updateCouponStakeLottery(): void {
+    if (this.couponService.coupon) {
+      this.couponService.coupon.Groupings[0].Stake = this.polyfunctionStakePresetPlayer.amount;
+      this.couponService.coupon.Stake = this.polyfunctionStakePresetPlayer.amount;
+    }
+    this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
+    // this.productService.polyfunctionalStakeCouponSubject.next(this.polyfunctionalStakeCoupon);
+    this.couponService.updateCoupon();
+  }
+
 
   /**
    *
@@ -175,12 +218,22 @@ export class BtncalcService implements OnDestroy {
   }
 
   // default presets player
-  settingStakePresetPlayer(): void {
+  settingStakePresetPlayer(recursiveCounter: number = 0): void {
     if (this.setting.defaultAmount.PresetOne !== null) {
-      this.polyfunctionStakePresetPlayer = new PolyfunctionStakePresetPlayer(TypeBetSlipColTot.COL, this.setting.defaultAmount.PresetOne);
+      this.polyfunctionStakePresetPlayer =
+        new PolyfunctionStakePresetPlayer(
+          this.productService.product.layoutProducts.type === LAYOUT_TYPE.KENO ? TypeBetSlipColTot.GROUP : TypeBetSlipColTot.COL,
+          this.setting.defaultAmount.PresetOne
+        );
       this.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
     } else {
-      timer(1000).subscribe(() => this.settingStakePresetPlayer());
+      recursiveCounter++;
+      defer(
+        () => recursiveCounter < 4 ? timer(1000) : this.routerService.getRouter().navigateByUrl('/error')).
+        subscribe(() => this.settingStakePresetPlayer(recursiveCounter));
+      /*  if (recursiveCounter < 4) {
+         timer(1000).subscribe(() => this.settingStakePresetPlayer(recursiveCounter));
+       } */
     }
   }
 
@@ -366,4 +419,5 @@ export class BtncalcService implements OnDestroy {
       this.settingStakePresetPlayer();
     }
   }
+
 }

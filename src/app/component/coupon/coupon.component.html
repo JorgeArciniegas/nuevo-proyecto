@@ -12,12 +12,12 @@
       </div>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile rowspan="1">
+  <mat-grid-tile rowspan="1" *ngIf="couponLayout.typeLayout !== layoutProduct.KENO">
     <div class="btn-coupon-board">
       <div class="display" fxLayoutAlign="space-around center" fxLayout="row layout-wrap">
         <div fxFlex fxLayoutAlign="start center" class="coupon-type-indicator">
           <!-- Type Coupon and Number of odds -->
-          <ng-container *ngIf="couponService.coupon && couponService.coupon.Odds.length > 0">
+          <ng-container *ngIf="(couponService.coupon && couponService.coupon.Odds.length > 0)">
             <span class="btn btn-default" *ngIf="couponLayout.acceptMultiStake">{{'SINGLE' | translate}}</span>
             <span class="btn btn-default"
               *ngIf="!couponLayout.acceptMultiStake">{{ 'DYNAMIC_KEYS.CouponType.'+couponTypeId[couponService.coupon.CouponTypeId] | translate}}</span>
@@ -33,7 +33,7 @@
       </div>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile rowspan="16">
+  <mat-grid-tile rowspan="{{ couponLayout.typeLayout !== layoutProduct.KENO ? 16 : 17 }}">
     <div class="content-row-coupon" fxFill fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="2px">
       <ng-container *ngIf="couponService.coupon">
         <button *ngIf="!couponService.coupon.internal_isLottery" fxFlex="5" class="btn-reset card-odd radius-5 scroll"
@@ -125,11 +125,11 @@
         <div fxFlex="100" class="row" fxLayout="row">
           <div fxFlex="75" fxLayoutAlign="start center">
             <div fxFlex="35" fxLayoutAlign="center center" class="btn-keno-number btn-default btn-selected radius-50">
-              {{odd.LocalizedCompetitorName.substring(0,1)}}
+              {{odd.SelectionName}}
             </div>
           </div>
           <div fxFlex="25" fxLayoutAlign="center">
-            <button class="btn-default btn-warning radius-5 remove" (click)="removeOdd(odd)">
+            <button class="btn-default btn-warning radius-5 remove" (click)="removeOddByLottery(odd)">
               <div class="icon"></div>
             </button>
           </div>

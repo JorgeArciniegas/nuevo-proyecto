@@ -45,9 +45,15 @@ export class CouponComponent implements OnDestroy {
     if (this.productService.windowSize && this.productService.windowSize.small) {
       this.maxItems = 4;
     }
+
     this.couponServiceSubscription = this.couponService.couponResponse.subscribe(coupon => {
       if (coupon === null) {
         return;
+      }
+      if (coupon.internal_isLottery) {
+        this.maxItems = 10;
+      } else {
+        this.maxItems = 5;
       }
       this.maxPage = Math.ceil(coupon.Odds.length / this.maxItems);
       if (!this.remove) {
@@ -96,6 +102,15 @@ export class CouponComponent implements OnDestroy {
   removeOdd(odd: BetCouponOddExtended): void {
     this.remove = true;
     this.couponService.addRemoveToCoupon([new BetOdd(odd.SelectionName, odd.OddValue, odd.OddStake, odd.SelectionId)]);
+  }
+
+  removeOddByLottery(odd: BetCouponOddExtended): void {
+    this.remove = true;
+    if (this.couponService.coupon.Odds.length === 1) {
+      this.clearCoupon();
+      return;
+    }
+    this.couponService.addToRemoveToCouponLottery(odd.SelectionId, Number(odd.SelectionName));
   }
 
   clearCoupon(): void {

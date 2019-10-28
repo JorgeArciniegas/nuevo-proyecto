@@ -1496,14 +1496,12 @@ export class MainService extends MainServiceExtra {
       this.placingEvent.kenoNumbers.push(selected);
     } else {
       const idx = this.placingEvent.kenoNumbers.findIndex(item => item.number === selected.number);
-      console.log('EXTRACT IDX: ', idx);
       if (idx !== -1) {
         this.placingEvent.kenoNumbers.splice(idx, 1);
       } else {
         this.placingEvent.kenoNumbers.push(selected);
       }
     }
-    console.log(this.placingEvent);
     this.populatingPolyfunctionAreaByLottery();
   }
 
@@ -1512,6 +1510,7 @@ export class MainService extends MainServiceExtra {
   // Method to populate the polyfunctional object with the odd of a layout that shows odds.
   populatingPolyfunctionAreaByLottery() {
     let areaFuncData: PolyfunctionalArea = new PolyfunctionalArea();
+    areaFuncData.typeSlipCol = TypeBetSlipColTot.GROUP;
     areaFuncData.activeAssociationCol = false;
     areaFuncData.activeDistributionTot = false;
     try {
@@ -1556,7 +1555,7 @@ export class MainService extends MainServiceExtra {
       areaFuncData.selection = selection;
       areaFuncData.value = value;
       areaFuncData.amount = this.btnService.polyfunctionStakePresetPlayer.amount;
-      areaFuncData.typeSlipCol = TypeBetSlipColTot.TOT;
+      areaFuncData.typeSlipCol = TypeBetSlipColTot.GROUP;
       areaFuncData.odds = kenoSelected;
     } catch (err) {
       console.log(err);
@@ -1566,5 +1565,4 @@ export class MainService extends MainServiceExtra {
       this.productService.polyfunctionalAreaSubject.next(areaFuncData);
     }
   }
-
 }

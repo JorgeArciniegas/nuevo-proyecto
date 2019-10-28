@@ -70,7 +70,8 @@ export enum CombinationType {
 
 export enum TypeBetSlipColTot {
   COL,
-  TOT
+  TOT,
+  GROUP
 }
 
 export class PlacingEvent {

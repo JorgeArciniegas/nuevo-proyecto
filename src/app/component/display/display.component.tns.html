@@ -1,8 +1,10 @@
 <GridLayout rows="5*,4*" class="grid-display-component">
   <StackLayout row="0" class="display m-b-5">
-    <GridLayout rows="*" columns="5*,3*,*"
-      *ngIf="polyfunctionalValue && polyfunctionalValue.selection && productService.product.typeCoupon.acceptMultiStake"
-      class="p-l-5">
+    <GridLayout rows="*" columns="5*,3*,*" *ngIf="polyfunctionalValue &&
+      polyfunctionalValue.selection  &&
+      productService.product &&
+      productService.product.layoutProducts.type !== typeProductCoupon.KENO &&
+      productService.product.typeCoupon.acceptMultiStake" class="p-l-5">
       <StackLayout col="0" orientation="horizontal" verticalAlignment="center">
         <Label class="title" *ngIf="polyfunctionalValue && polyfunctionalValue.selection"
           text="{{'DYNAMIC_KEYS.SMARTCODE.'+polyfunctionalValue.selection | translate | uppercase}}"></Label>
@@ -16,9 +18,11 @@
         src="~/assets/icons/baseline-open_in_new-24-white.png" verticalAlignment="center" [isEnabled]="!timeBlocked">
       </Image>
     </GridLayout>
-    <GridLayout rows="*" columns="8*,*"
-      *ngIf="polyfunctionalValue && polyfunctionalValue.grouping && !productService.product.typeCoupon.acceptMultiStake"
-      class="p-l-5">
+    <GridLayout rows="*" columns="8*,*" *ngIf="polyfunctionalValue &&
+      polyfunctionalValue.grouping &&
+      productService.product &&
+      productService.product.layoutProducts.type !== typeProductCoupon.KENO &&
+      !productService.product.typeCoupon.acceptMultiStake" class="p-l-5">
       <StackLayout col="0" verticalAlignment="center" orientation=horizontal>
         <ng-container *ngFor="let group of polyfunctionalValue.grouping">
           <Label *ngIf="group.Selected" class="group-title" [ngClass]="{'selected' : group.Selected}"
@@ -29,11 +33,28 @@
         src="~/assets/icons/baseline-open_in_new-24-white.png" verticalAlignment="center" [isEnabled]="!timeBlocked">
       </Image>
     </GridLayout>
+    <!-- SHOWING DISPLAY ALL FOR KENO -->
+    <GridLayout rows="*" columns="8*,*" *ngIf="polyfunctionalValue &&
+    polyfunctionalValue.grouping && productService.product &&
+    productService.product.layoutProducts.type === typeProductCoupon.KENO &&
+    !productService.product.typeCoupon.acceptMultiStake" class="p-l-5">
+      <StackLayout col="0" verticalAlignment="center" orientation=horizontal>
+        <Label *ngIf="polyfunctionalValue.odds" class="group-title" text="{{polyfunctionalValue.odds.length }}
+            {{ 'DISPLAY_SELECTION_LENGTH' | translate }}" class="m-r-5"></Label>
+      </StackLayout>
+      <Image col="1" margin="4" (tap)="detailOdds('true')" width="24" height="24"
+        src="~/assets/icons/baseline-open_in_new-24-white.png" verticalAlignment="center" [isEnabled]="!timeBlocked">
+      </Image>
+    </GridLayout>
   </StackLayout>
   <StackLayout row="1" class="display">
     <GridLayout rows="*" columns="*,*" *ngIf="amountPresetPlayer">
-      <Label col="0" verticalAlignment="center" text="{{ typeBetSlipColTot[amountPresetPlayer.typeSlipCol] }}"
-        class="title p-l-5"></Label>
+      <Label col="0" verticalAlignment="center" class="title p-l-5"
+        *ngIf="amountPresetPlayer.typeSlipCol !== typeBetSlipColTot.GROUP"
+        text="{{ typeBetSlipColTot[amountPresetPlayer.typeSlipCol] }}"></Label>
+      <Label col="0" verticalAlignment="center" class="title p-l-5" *ngIf="polyfunctionalValue.grouping &&
+          amountPresetPlayer.typeSlipCol === typeBetSlipColTot.GROUP"
+        text="{{ polyfunctionalValue.grouping.length +'X' }}"></Label>
       <Label col="1" verticalAlignment="center" horizontalAlignment="right"
         text="{{ amountPresetPlayer.amount | currency : userService.userCurrency : 'symbol-narrow'}}"
         class="title p-r-5"></Label>
