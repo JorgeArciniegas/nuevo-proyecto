@@ -164,6 +164,7 @@ export interface Payouts {
   codeProduct: string;
   payouts: LotteryPayoutMarket[];
   layoutProducts: LAYOUT_TYPE;
+  selectionNumber: number;
 }
 
 export enum DialogTypeCoupon {

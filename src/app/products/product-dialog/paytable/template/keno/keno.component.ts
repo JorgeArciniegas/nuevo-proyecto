@@ -9,7 +9,6 @@ import { BetDataDialog } from '../../../../../products/products.model';
 export class KenoComponent {
   @Input()
   data: BetDataDialog;
-  selectedNumbers = 10;
 
   constructor() {
   }

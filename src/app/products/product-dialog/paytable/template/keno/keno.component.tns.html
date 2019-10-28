@@ -16,12 +16,14 @@
     </GridLayout>
 
     <!-- table data -->
-    <GridLayout *ngFor="let selection of data.paytable.payouts[selectedNumbers-1].Selections; let i = index"
+    <GridLayout
+      *ngFor="let selection of data.paytable.payouts[data.paytable.selectionNumber-1].Selections; let i = index"
       row="{{i+1}}" columns="*,2*,2*,*">
       <StackLayout col="0"></StackLayout>
-      <Label text="{{ selection.SelectionTypeName }}" verticalAlignment="center" horizontalAlignment="left"
-        col="1"></Label>
-      <Label text="X {{ selection.Value }}" verticalAlignment="center" horizontalAlignment="right" col="2"></Label>
+      <Label text="{{ selection.SelectionTypeName }}" verticalAlignment="center" horizontalAlignment="left" col="1"
+        [ngClass]="{'disabled' : selection.Value === 0}"></Label>
+      <Label text="X {{ selection.Value }}" verticalAlignment="center" horizontalAlignment="right" col="2"
+        [ngClass]="{'disabled' : selection.Value === 0}"></Label>
       <StackLayout col="3"></StackLayout>
       <StackLayout class="border-bottom-overlay" col="1" colSpan="2"></StackLayout>
     </GridLayout>

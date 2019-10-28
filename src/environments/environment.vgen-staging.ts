@@ -265,14 +265,7 @@ export const environment: Environment = {
         icon: 'Keno',
         route: 'products/keno'
       },
-      widgets: [
-        {
-          name: '',
-          routing: 'paytable',
-          typeLink: WidgetTypeLink.MODAL,
-          icon: 'baseline-assessment-24px' // without extension file
-        }
-      ],
+      widgets: [],
       typeCoupon: {
         isMultipleStake: false,
         acceptMultiStake: false,
