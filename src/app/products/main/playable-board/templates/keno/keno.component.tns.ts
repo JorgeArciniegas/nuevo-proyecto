@@ -29,6 +29,29 @@ export class KenoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initKenoNumbers();
+    this.couponHasChangedSubscription = this.elysCoupon.couponHasChanged.subscribe(coupon => {
+      if (coupon) {
+        this.verifySelectedOdds(coupon);
+      } else {
+        this.numberSelectionQueue = [];
+
+        // The coupon was removed.
+        this.kenoTable.map(item => {
+          if (item.isSelected) {
+            item.isSelected = false;
+          }
+        });
+      }
+    });
+
+    // Reload selection when the coupon has been deleted or has been placed
+    this.couponHasBeenPlacedSubscription = this.couponService.couponHasBeenPlacedObs.subscribe(b => {
+      this.kenoTable.map(item => {
+        if (item.isSelected) {
+          item.isSelected = false;
+        }
+      });
+    });
   }
 
   ngOnDestroy(): void {
