@@ -25,6 +25,7 @@ export class CouponComponent implements OnDestroy {
   public maxPage = 0;
   public listOdds: BetCouponOddExtended[] = [];
   private remove = false;
+  Math = Math;
 
   // number of odds inserted to coupon
   private couponServiceSubscription: Subscription;
