@@ -1,14 +1,13 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { BetCouponOdd, CouponType } from '@elys/elys-api';
-import { ElysCouponService } from '@elys/elys-coupon';
 import { BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Subscription } from 'rxjs';
+import { LAYOUT_TYPE, TypeCoupon } from '../../../../src/environments/environment.models';
 import { AppSettings } from '../../app.settings';
-import { BetOdd } from '../../products/products.model';
+import { BetOdd, PolyfunctionalArea } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
-import { CouponService } from './coupon.service';
 import { UserService } from '../../services/user.service';
-import { TypeCoupon, LAYOUT_TYPE } from '../../../../src/environments/environment.models';
+import { CouponService } from './coupon.service';
 
 @Component({
   selector: 'app-coupon',
@@ -37,7 +36,6 @@ export class CouponComponent implements OnDestroy {
   productChange: Subscription;
   couponTypeId: typeof CouponType = CouponType;
   constructor(
-    private elysCoupon: ElysCouponService,
     public couponService: CouponService,
     public readonly settings: AppSettings,
     public productService: ProductsService,
@@ -53,6 +51,8 @@ export class CouponComponent implements OnDestroy {
       }
       if (coupon.internal_isLottery) {
         this.maxItems = 10;
+        const polyFunc: PolyfunctionalArea = this.productService.polyfunctionalAreaSubject.getValue();
+        polyFunc.oddsCounter = coupon.Odds.length;
       } else {
         this.maxItems = 5;
       }

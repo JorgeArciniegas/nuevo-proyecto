@@ -1,10 +1,8 @@
 <div fxFlexFill fxLayout="column">
   <div fxFlex="70" fxLayout="row" class="display" [style.height.px]="((rowHeight/2))">
-    <ng-container *ngIf="polyfunctionalValue &&
-        polyfunctionalValue.selection &&
-        productService.product &&
-        productService.product.layoutProducts.type !== typeProductCoupon.KENO &&
-        productService.product.typeCoupon.acceptMultiStake">
+    <ng-container *ngIf="polyfunctionalValue?.selection &&
+        productService.product?.layoutProducts?.type !== typeProductCoupon.KENO &&
+        productService.product?.typeCoupon?.acceptMultiStake">
       <div fxLayout="column" fxFlex="88" fxLayoutAlign="center flex-start">
         <div fxLayout="row" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2"
           [style.min-height.px]="(rowHeight - 20) / 2">
@@ -30,11 +28,9 @@
         </button>
       </div>
     </ng-container>
-    <ng-container *ngIf="polyfunctionalValue &&
-      polyfunctionalValue.grouping &&
-      productService.product  &&
-      productService.product.layoutProducts.type !== typeProductCoupon.KENO &&
-      !productService.product.typeCoupon.acceptMultiStake">
+    <ng-container *ngIf="polyfunctionalValue?.grouping &&
+      productService.product?.layoutProducts?.type !== typeProductCoupon.KENO &&
+      !productService.product.typeCoupon?.acceptMultiStake">
       <div fxLayout="column" fxFlex="88" fxLayoutAlign="center flex-start">
         <div fxLayout="row" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2"
           [style.min-height.px]="(rowHeight - 20) / 2">
@@ -45,24 +41,20 @@
         </div>
       </div>
       <div fxLayout="column" fxFlex="10" fxLayoutAlign="center center"
-        *ngIf="polyfunctionalValue  && polyfunctionalValue.grouping.length > 0 ">
+        *ngIf="polyfunctionalValue?.grouping.length > 0 ">
         <button class="btn-reset btn-display" (click)="detailOdds('true')">
           <img class="icon" src="assets/icons/baseline-open_in_new-24-white.png">
         </button>
       </div>
     </ng-container>
     <!-- SHOWING DISPLAY ALL FOR KENO -->
-    <ng-container *ngIf="polyfunctionalValue &&
-      polyfunctionalValue.grouping && productService.product &&
-      productService.product.layoutProducts.type === typeProductCoupon.KENO &&
-      !productService.product.typeCoupon.acceptMultiStake">
+    <ng-container *ngIf="polyfunctionalValue?.grouping && productService.product?.layoutProducts?.type === typeProductCoupon.KENO &&
+      !productService.product?.typeCoupon?.acceptMultiStake">
       <div fxLayout="column" fxFlex="88" fxLayoutAlign="center flex-start">
         <div fxLayout="row" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2"
           [style.min-height.px]="(rowHeight - 20) / 2">
-          <span *ngIf="polyfunctionalValue.odds" class="group-title">{{polyfunctionalValue.odds.length }}
+          <span *ngIf="polyfunctionalValue.oddsCounter > 0" class="group-title">{{ polyfunctionalValue.oddsCounter }}
             {{ 'DISPLAY_SELECTION_LENGTH' | translate }}</span>
-
-
         </div>
       </div>
       <div fxLayout="column" fxFlex="10" fxLayoutAlign="center center"

@@ -96,6 +96,9 @@ export class KenoComponent implements OnInit, OnDestroy {
           item.isSelected = false;
         }
       });
+      if (!this.kenoTable.find(item => item.isSelected === true)) {
+        this.numberSelectionQueue = [];
+      }
     });
   }
 

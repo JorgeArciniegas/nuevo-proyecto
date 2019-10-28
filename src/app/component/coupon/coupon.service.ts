@@ -231,6 +231,10 @@ export class CouponService {
     if (hasNumber) {
       req.isDelete = true;
       this.couponIdAdded.push(selectedNumber);
+      if (this.coupon.Odds.length === 1) {
+        this.resetCoupon();
+        return;
+      }
     } else {
 
       this.couponIdAdded.filter((item, idx) => {

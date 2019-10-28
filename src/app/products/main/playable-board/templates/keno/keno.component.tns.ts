@@ -51,6 +51,9 @@ export class KenoComponent implements OnInit, OnDestroy {
           item.isSelected = false;
         }
       });
+      if (!this.kenoTable.find(item => item.isSelected === true)) {
+        this.numberSelectionQueue = [];
+      }
     });
   }
 
@@ -65,7 +68,6 @@ export class KenoComponent implements OnInit, OnDestroy {
   }
 
   async onNumberClick(kenoNumber: KenoNumberNative) {
-    // kenoNumber.isSelected = !kenoNumber.isSelected;
     if (this.numberSelectionQueue.includes(kenoNumber)) {
       return;
     }
@@ -80,20 +82,6 @@ export class KenoComponent implements OnInit, OnDestroy {
 
 
   private initKenoNumbers(): void {
-    // let currentNumber = 1;
-    // for (let i = 0; i < 8; ++i) {
-    //   for (let j = 0; j < 10; ++j) {
-    //     const kenoNumber: KenoNumber = {
-    //       number: currentNumber,
-    //       isSelected: false
-    //     };
-    //     ++currentNumber;
-    //     if (!this.kenoTable[i]) {
-    //       this.kenoTable[i] = [];
-    //     }
-    //     this.kenoTable[i][j] = kenoNumber;
-    //   }
-    // }
     const kenoNumbers: KenoNumberNative[] = [];
     let row = 0;
     let col = 0;
