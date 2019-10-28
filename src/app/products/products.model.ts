@@ -28,6 +28,7 @@ export class PolyfunctionalArea {
   shortcut?: SmartCodeType;
   smartBetCode?: number;
   grouping?: BetCouponGroup[];
+  oddsCounter?: number; // Used for keno product on display-component
   constructor() {
     this.typeSlipCol = TypeBetSlipColTot.COL;
     this.firstTap = false;
@@ -35,6 +36,7 @@ export class PolyfunctionalArea {
     this.amount = 0;
     this.hasDecimalSeparator = false;
     this.odds = [];
+    this.oddsCounter = 0;
   }
 }
 

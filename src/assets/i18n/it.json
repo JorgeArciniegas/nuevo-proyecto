@@ -51,6 +51,7 @@
   "DELETE": "Cancella",
   "DELETED_ON": "Annullata il",
   "DETAIL": "Dettaglio",
+  "DISPLAY_SELECTION_LENGTH": "Num. Giocati",
   "DYNAMIC_KEYS": {
     "COUPON_ERROR": {
       "API_ERROR": "Errore API generico",

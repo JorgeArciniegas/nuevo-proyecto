@@ -31,7 +31,8 @@
 		opacity: 0.4;
 	}
 }
-.playable-row-tile {
+.playable-row-tile,
+.button-internal {
 	&.disabled {
 		opacity: 0.1;
 	}
