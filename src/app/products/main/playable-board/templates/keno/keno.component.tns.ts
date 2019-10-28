@@ -98,11 +98,11 @@ export class KenoComponent implements OnInit, OnDestroy {
     let row = 0;
     let col = 0;
     for (let i = 1; i <= 80; ++i) {
-      if (i % 10 === 0) {
+      if (i % 10 === 1) {
         ++row;
       }
-      if (i % 8 === 0) {
-        ++col;
+      if (i % 10 === 1) {
+        col = 0;
       }
       const kenoNumber: KenoNumberNative = {
         number: i,
@@ -111,6 +111,7 @@ export class KenoComponent implements OnInit, OnDestroy {
         col
       };
       kenoNumbers.push(kenoNumber);
+      ++col;
     }
     this.kenoTable = kenoNumbers;
   }
