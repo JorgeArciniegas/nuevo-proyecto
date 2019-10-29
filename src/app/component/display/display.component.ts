@@ -8,6 +8,7 @@ import { UserService } from '../../../../src/app/services/user.service';
 import { LAYOUT_TYPE } from '../../../../src/environments/environment.models';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { CouponService } from '../coupon/coupon.service';
+import { ElysApiService } from '@elys/elys-api';
 
 @Component({
   selector: 'app-display',
@@ -40,7 +41,8 @@ export class DisplayComponent implements OnDestroy {
     private btnService: BtncalcService,
     public userService: UserService,
     private elysCoupon: ElysCouponService,
-    private internalServiceCoupon: CouponService
+    private internalServiceCoupon: CouponService,
+    private elysApi: ElysApiService
   ) {
     this.amountPresetPlayer = this.btnService.polyfunctionStakePresetPlayer;
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(element => {
@@ -89,6 +91,19 @@ export class DisplayComponent implements OnDestroy {
         groupings: this.elysCoupon.betCoupon.Groupings
       };
     }
+    this.productService.openProductDialog(data);
+  }
+
+  async kenoPaytable(): Promise<void> {
+    const data: BetDataDialog = {
+      title: 'PAYTABLE',
+      paytable: {
+        codeProduct: this.productService.product.codeProduct,
+        payouts: await this.elysApi.virtual.getPayouts(),
+        layoutProducts: this.productService.product.layoutProducts.type,
+        selectionNumber: this.polyfunctionalValue.oddsCounter
+      }
+    };
     this.productService.openProductDialog(data);
   }
 }

@@ -84,6 +84,7 @@ export class ProductsService extends ProductsServiceExtra {
       dialogData.statistics = data.statistics;
       dialogData.groupings = data.groupings;
       dialogData.tournamentRanking = data.tournamentRanking;
+      dialogData.paytable = data.paytable;
       this.dialog.openDialog(dialogData);
     });
 

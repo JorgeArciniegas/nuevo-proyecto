@@ -1,11 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BetCouponOddExtended } from '@elys/elys-coupon';
 import { AppSettings } from '../../app.settings';
 import { CouponService } from '../../component/coupon/coupon.service';
 import { DialogService } from '../dialog.service';
-import { BetOdd, DialogData } from '../products.model';
+import { DialogData } from '../products.model';
 import { ProductsService } from '../products.service';
-import { UserService } from '../../../../src/app/services/user.service';
 
 @Component({
   selector: 'app-product-dialog',

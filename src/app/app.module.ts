@@ -21,7 +21,6 @@ import { PayCancelDialogComponent } from './component/coupon/pay-cancel-dialog/p
 import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
 import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
-import { LoaderService } from './services/utility/loader/loader.service';
 import { SharedModule } from './shared/shared.module';
 
 // tslint:disable-next-line:only-arrow-functions
