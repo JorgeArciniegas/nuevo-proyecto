@@ -133,8 +133,7 @@
         <!--SINGLE BET-->
         <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-r-10 p-l-10" flexWrap="wrap"
           *ngIf="printCouponService.couponPrint.CouponTypeId === couponType.SingleBet">
-          <Label class="h2 text-center" text="{{'TOTAL_PAYOUT' | translate }}" textTransform="uppercase"
-            letterSpacing="5"></Label>
+          <Label class="h2 text-center" text="{{'TOTAL_PAYOUT' | translate  }}" textTransform="uppercase"></Label>
           <Label class="h3 text-center"
             text="{{ printCouponService.couponPrint.MaxWin | currency : userService.userCurrency : 'symbol-narrow' }}"></Label>
           <StackLayout class="hr-dark m-10"></StackLayout>
