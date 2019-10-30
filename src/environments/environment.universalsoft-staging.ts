@@ -253,7 +253,14 @@ export const environment: Environment = {
         icon: 'Keno',
         route: 'products/keno'
       },
-      widgets: [],
+      widgets: [
+        {
+          name: '',
+          routing: 'hot-and-cold',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
       typeCoupon: {
         isMultipleStake: false,
         acceptMultiStake: false,

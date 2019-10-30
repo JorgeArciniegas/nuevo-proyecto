@@ -44,6 +44,8 @@ import { RaceComponent as RaceStatisticsComponent } from './products/product-dia
 import { SoccerComponent as SoccerStatisticsComponent } from './products/product-dialog/statistics/templates/soccer/soccer.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsService } from './products/products.service';
+import { HotAndColdComponent } from './products/product-dialog/hot-and-cold/hot-and-cold.component';
+import { KenoComponent as KenoHotAndColdComponent } from './products/product-dialog/hot-and-cold/template/keno/keno.component';
 
 
 
@@ -83,7 +85,9 @@ export const componentDeclarations: any[] = [
   PrintOperatorSummaryComponent,
   LoaderComponent,
   PaytableComponent,
-  KenoPaytableComponent
+  KenoPaytableComponent,
+  HotAndColdComponent,
+  KenoHotAndColdComponent
 ];
 
 export const providerDeclarations: any[] = [

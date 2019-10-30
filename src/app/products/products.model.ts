@@ -1,4 +1,4 @@
-import { VirtualBetCompetitor, BetCouponGroup, VirtualGetRankByEventResponse, LotteryPayoutMarket } from '@elys/elys-api';
+import { VirtualBetCompetitor, BetCouponGroup, VirtualGetRankByEventResponse, LotteryPayoutMarket, HotAndColdNumbers } from '@elys/elys-api';
 import { BetCouponExtended } from '@elys/elys-coupon';
 import { LAYOUT_TYPE } from '../../../src/environments/environment.models';
 import { TYPINGTYPE } from '../component/btncalc/btncalc.enum';
@@ -117,6 +117,7 @@ export interface BetDataDialog {
   groupings?: BetCouponGroup[];
   tournamentRanking?: TournamentRanking;
   paytable?: Payouts;
+  hotAndCold?: HotAndCold;
 }
 export class DialogData {
   title: string;
@@ -128,6 +129,7 @@ export class DialogData {
   groupings?: BetCouponGroup[];
   tournamentRanking?: TournamentRanking;
   paytable?: Payouts;
+  hotAndCold?: HotAndCold;
   constructor(
     betOdds?: BetOdds,
     breakpoint?: number,
@@ -136,7 +138,8 @@ export class DialogData {
     statistics?: StatisticDialog,
     groupings?: BetCouponGroup[],
     tournamentRanking?: TournamentRanking,
-    paytable?: Payouts
+    paytable?: Payouts,
+    hotAndCold?: HotAndCold
   ) {
     this.betOdds = betOdds;
     this.breakpoint = breakpoint;
@@ -146,6 +149,7 @@ export class DialogData {
     this.groupings = groupings || null;
     this.tournamentRanking = tournamentRanking || null;
     this.paytable = paytable || null;
+    this.hotAndCold = hotAndCold || null;
   }
 }
 export interface StatisticDialog {
@@ -165,6 +169,12 @@ export interface Payouts {
   payouts: LotteryPayoutMarket[];
   layoutProducts: LAYOUT_TYPE;
   selectionNumber: number;
+}
+
+export interface HotAndCold {
+  codeProduct: string;
+  hotAndColdNumbers: HotAndColdNumbers;
+  layoutProducts: LAYOUT_TYPE;
 }
 
 export enum DialogTypeCoupon {
