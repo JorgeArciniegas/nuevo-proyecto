@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { LAYOUT_TYPE } from 'src/environments/environment.models';
+import { LAYOUT_TYPE } from '../../../../environments/environment.models';
 import { BetDataDialog } from '../../products.model';
 
 @Component({

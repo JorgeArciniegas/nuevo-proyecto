@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { BetDataDialog } from 'src/app/products/products.model';
-import { DialogService } from 'src/app/products/dialog.service';
+import { BetDataDialog } from '../../../../../products/products.model';
+import { DialogService } from '../../../../../products/dialog.service';
 
 @Component({
   selector: 'app-hot-and-cold-keno',

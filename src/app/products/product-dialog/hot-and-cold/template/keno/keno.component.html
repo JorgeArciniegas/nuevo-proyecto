@@ -1,1 +1,27 @@
-<p>keno works!</p>
+<div fxLayout="row" class="btn-hot-and-cold">
+
+  <div fxFlex="50">
+    <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile *ngFor="let hotNumber of data.hotAndCold.hotAndColdNumbers.HotNumbers">
+        <div fxLayoutAlign="center center" class="btn-default elevation-z5 btn-hot radius-50">
+          <div fxLayout="column" fxLayoutAlign="center center">
+            {{ hotNumber }}
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+  <div fxFlex="50">
+    <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile *ngFor="let coldNumber of data.hotAndCold.hotAndColdNumbers.ColdNumbers">
+        <div fxLayoutAlign="center center" class="btn-default elevation-z5 btn-cold radius-50">
+          <div fxLayout="column" fxLayoutAlign="center center">
+            {{ coldNumber }}
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+</div>

@@ -216,3 +216,16 @@ button:active:not([disabled]) {
 		}
 	}
 }
+
+.btn-hot-and-cold {
+	.btn-hot {
+		height: 60px;
+		width: 60px;
+		background: $gradient-red2;
+	}
+	.btn-cold {
+		height: 60px;
+		width: 60px;
+		background: $gradient-green2;
+	}
+}
