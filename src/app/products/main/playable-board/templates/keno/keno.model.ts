@@ -6,4 +6,5 @@ export interface KenoNumber {
 export interface KenoNumberNative extends KenoNumber {
   row: number;
   col: number;
+  isLucky?: boolean;
 }

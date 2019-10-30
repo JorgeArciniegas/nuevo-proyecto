@@ -32,7 +32,7 @@
     "@angular/router": "^8.2.7",
     "@elys/elys-api": "^1.2.7",
     "@elys/elys-channel": "^0.1.2",
-    "@elys/elys-coupon": "^1.1.6",
+    "@elys/elys-coupon": "^1.1.8",
     "@elys/elys-feeds": "^0.1.2",
     "@elys/elys-storage-lib": "^1.0.0",
     "@ngx-translate/core": "^11.0.1",
