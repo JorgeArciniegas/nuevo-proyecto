@@ -1,0 +1,17 @@
+<GridLayout columns="*,8*,*" rows="*">
+  <GridLayout columns="2*,2*,2*,2*,2*,2*,2*,2*,2*,2*" rows="2*,2*,2*,2*,2*,2*,2*,2*" col="1" row="0">
+    <ng-container *ngFor="let kenoNumber of kenoTable">
+      <StackLayout col="{{ kenoNumber.col }}" row="{{ kenoNumber.row }}" class="radius-50 btn-default-keno"
+        [ngClass]="{'selected' : kenoNumber.isSelected}" (tap)="onNumberClick(kenoNumber)" verticalAlignment="center"
+        horizontalAlignment="center">
+        <StackLayout *ngIf="!numberSelectionQueue.includes(kenoNumber)" verticalAlignment="center"
+          horizontalAlignment="center">
+          <Label text="{{ kenoNumber.number }}" verticalAlignment="center" horizontalAlignment="center"></Label>
+        </StackLayout>
+        <StackLayout *ngIf="numberSelectionQueue.includes(kenoNumber)">
+          <ActivityIndicator busy="true" width="35" height="35"></ActivityIndicator>
+        </StackLayout>
+      </StackLayout>
+    </ng-container>
+  </GridLayout>
+</GridLayout>

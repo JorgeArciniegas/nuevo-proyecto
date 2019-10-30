@@ -83,7 +83,6 @@ export class WidgetComponent implements OnInit {
           layoutProducts: this.productService.product.layoutProducts.type
         };
         break;
-        break;
       default:
         data.statistics = null;
     }

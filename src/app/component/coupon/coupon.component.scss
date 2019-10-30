@@ -1,4 +1,4 @@
-.display {
+/* .display {
 	width: 100%;
 	justify-content: center;
 	text-align: center;
@@ -91,6 +91,11 @@
 				opacity: 0.2;
 			}
 		}
+		@media screen and (max-width: 1280px) {
+			.btn-keno-number {
+				height: 30px;
+			}
+		}
 	}
 	.scroll {
 		.icon {
@@ -104,3 +109,4 @@
 		}
 	}
 }
+ */

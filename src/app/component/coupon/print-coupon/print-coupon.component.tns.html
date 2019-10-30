@@ -56,22 +56,41 @@
         <!-- /OTHER INFO REPRINT COUPON-->
         <StackLayout class="hr-dark m-10"></StackLayout>
         <!-- ODDS PARTITION -->
-        <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-r-10 p-l-10" flexWrap="wrap"
-          *ngFor="let groupCat of printCouponService.couponPrint.Odds | groupByCategory:'Championship'">
-          <Label class="font-weight-bold" text="{{ groupCat.key }}"></Label>
-          <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-5 p-b-5" flexWrap="wrap"
-            *ngFor="let match of groupCat.value">
-            <FlexboxLayout flexDirection="row" flexWrap="wrap">
-              <Label class="p-l-5" text="[q {{ match.OddValue }}] {{ match.MarketName }}"></Label>
-              <Label class="separator"></Label>
-            </FlexboxLayout>
-            <FlexboxLayout flexDirection="row" justifyContent="flex-end" class="p-b-5" flexWrap="wrap">
-              <Label class="p-l-10 p-r-5  text-right" fontWeight="500" text="{{ match.SelectionName }}"></Label>
-              <Label class="p-r-10 text-center font-weight-bold border-5" fontSize="30" textWrap="true" width="100"
-                *ngIf="match.OddStake > 0" text="{{ match.OddStake | number :'1.2-2' }}"></Label>
+        <ng-container *ngIf="printCouponService.couponPrint.Product !== 'KENO'">
+          <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-r-10 p-l-10" flexWrap="wrap"
+            *ngFor="let groupCat of printCouponService.couponPrint.Odds | groupByCategory:'Championship'">
+            <Label class="font-weight-bold" text="{{ groupCat.key }}"></Label>
+            <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-5 p-b-5" flexWrap="wrap"
+              *ngFor="let match of groupCat.value">
+              <FlexboxLayout flexDirection="row" flexWrap="wrap">
+                <Label class="p-l-5" text="[q {{ match.OddValue }}] {{ match.MarketName }}"></Label>
+                <Label class="separator"></Label>
+              </FlexboxLayout>
+              <FlexboxLayout flexDirection="row" justifyContent="flex-end" class="p-b-5" flexWrap="wrap">
+                <Label class="p-l-10 p-r-5  text-right" fontWeight="500" text="{{ match.SelectionName }}"></Label>
+                <Label class="p-r-10 text-center font-weight-bold border-5" fontSize="30" textWrap="true" width="100"
+                  *ngIf="match.OddStake > 0" text="{{ match.OddStake | number :'1.2-2' }}"></Label>
+              </FlexboxLayout>
             </FlexboxLayout>
           </FlexboxLayout>
-        </FlexboxLayout>
+        </ng-container>
+        <!-- KENO LAYOUT -->
+        <ng-container *ngIf="printCouponService.couponPrint.Product === 'KENO'">
+          <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-r-10 p-l-10" flexWrap="wrap"
+            *ngFor="let groupCat of printCouponService.couponPrint.Odds | groupByCategory:'MarketName'">
+            <Label class="font-weight-bold" text="{{ groupCat.key }}"></Label>
+            <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-5 p-b-5" flexWrap="wrap">
+              <StackLayout orientation="horizontal">
+                <ng-container *ngFor="let match of groupCat.value; let i = index">
+                  <Label class="p-l-5" *ngIf="i === 0" text="*"></Label>
+                  <Label class="p-l-5"
+                    text="{{ i < groupCat.value.length-1 ? match.SelectionName + ' - ' :  match.SelectionName }}"></Label>
+                  <Label class="p-l-5" *ngIf="i === groupCat.value.length-1" text="*"></Label>
+                </ng-container>
+              </StackLayout>
+            </FlexboxLayout>
+          </FlexboxLayout>
+        </ng-container>
         <!-- FOOTER ELEMENTS-->
         <StackLayout class="hr-dark m-10"></StackLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-10 p-l-10" flexWrap="wrap">

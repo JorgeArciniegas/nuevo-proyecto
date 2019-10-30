@@ -51,6 +51,7 @@
   "DELETE": "Cancella",
   "DELETED_ON": "Annullata il",
   "DETAIL": "Dettaglio",
+  "DISPLAY_SELECTION_LENGTH": "Num. Giocati",
   "DYNAMIC_KEYS": {
     "COUPON_ERROR": {
       "API_ERROR": "Errore API generico",
@@ -232,7 +233,8 @@
         "FOOTBALL_ENG": "Calcio ENG",
         "FOOTBALL_ITA": "Calcio ITA",
         "HORSE": "Corse di cavalli ",
-        "HORSE_VIRTUAL": "Corse di cavalli virtuali"
+        "HORSE_VIRTUAL": "Corse di cavalli virtuali",
+        "KENO": "Keno"
       },
       "NAME": {
         "ALL": "Tutti",
@@ -261,6 +263,7 @@
       "ODD": "Dispari",
       "OU": "Over/Under",
       "OVER": "Over",
+      "PAYTABLE": "Premi",
       "PLACED": "Piazzato",
       "RANKING": "Classifica",
       "S": "Settore",
@@ -446,6 +449,7 @@
   "EVEN": "DISPARI",
   "EVENTS": "Eventi",
   "EXPORT_EXCEL": "Esporta in Excel",
+  "EXTRACTED_NUMBERS": "Num. estratti",
   "FILTER_DATE_OF_PAYMENT": "Evasione",
   "GA": "GS",
   "GF": "GF",
@@ -500,6 +504,7 @@
   "PAYMENT": "Pagamento",
   "PAYMENT_DATE": "Data pagamento",
   "PAYMENT_DATE_BY_OPERATOR": "Data evasione",
+  "PAYOUT": "payout",
   "PLACEMENT": "Piazzamento",
   "POINTS": "Punti",
   "PREVIOUS_CASH_BALANCE": "Saldo alla transazione precedente",
