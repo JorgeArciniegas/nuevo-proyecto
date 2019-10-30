@@ -25,20 +25,20 @@ export class KenoComponent {
     this.couponService.resetCoupon();
     this.mainService.resetPlayEvent();
     const extractedNumbers: number[] = this.extractKenoNumbers(lucky);
-    await this.processLuckyNumbersQueue(extractedNumbers);
+    this.processLuckyNumbersQueue(extractedNumbers);
   }
 
-  private async processLuckyNumbersQueue(extractedNumbers: number[]): Promise<void> {
+  private processLuckyNumbersQueue(extractedNumbers: number[]): void {
     while (extractedNumbers.length > 0) {
       const kenoNumber: KenoNumber = {
         number: extractedNumbers.pop(),
         isSelected: true
       };
-      this.mainService.placingNumber(kenoNumber);
-      let eventid;
-      await this.mainService.getCurrentEvent().then(
-        (item) => { eventid = item.mk[0].sls[0].id; });
-      this.btncalcService.lotteryPushToCoupon(kenoNumber.number, eventid);
+      this.mainService.getCurrentEvent().then(
+        (item) => {
+          this.mainService.placingNumber(kenoNumber);
+          this.btncalcService.lotteryPushToCoupon(kenoNumber.number, item.mk[0].sls[0].id);
+        });
     }
   }
 
