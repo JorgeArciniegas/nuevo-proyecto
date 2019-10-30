@@ -28,6 +28,7 @@ import { CockFightComponent as ResultsCockFightComponent } from './results/templ
 import { KenoComponent as ResultsKenoComponent } from './results/templates/keno/keno.component';
 import { RaceComponent as ResultsRaceComponent } from './results/templates/race/race.component';
 import { SoccerComponent as ResultsSoccerComponent } from './results/templates/soccer/soccer.component';
+import { KenoComponent as LuckyKenoComponent } from './lucky/templates/keno/keno.component';
 
 
 export const componentDeclarations: any[] = [
@@ -59,7 +60,8 @@ export const componentDeclarations: any[] = [
   LuckySoccerComponent,
   ExtractCorrectScorePipe,
   PlayableBoardKenoComponentComponent,
-  ResultsKenoComponent
+  ResultsKenoComponent,
+  LuckyKenoComponent
 ];
 
 export const providerDeclarations: any[] = [];
