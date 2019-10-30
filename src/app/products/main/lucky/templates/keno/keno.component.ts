@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
+import { BtncalcService } from '../../../../../component/btncalc/btncalc.service';
+import { CouponService } from '../../../../../component/coupon/coupon.service';
 import { UserService } from '../../../../../services/user.service';
 import { MainService } from '../../../main.service';
 import { KenoNumber } from '../../../playable-board/templates/keno/keno.model';
 import { Lucky } from '../../lucky.model';
-import { BtncalcService } from '../../../../../component/btncalc/btncalc.service';
-import { CouponService } from '../../../../../component/coupon/coupon.service';
 
 @Component({
   selector: 'app-lucky-keno',
