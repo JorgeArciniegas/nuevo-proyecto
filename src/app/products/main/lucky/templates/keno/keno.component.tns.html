@@ -1,0 +1,10 @@
+<GridLayout row="3">
+  <GridLayout rows="*" columns="*,*,*,*,*,*,*,*,*,*" class="special-box lucky-soccer">
+    <GridLayout row="0" col="{{i}}" shadow="3" cornerRadius="6" class="card" *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">
+      <GridLayout rows="*" columns="*" class="button btn-grey-gradient">
+        <Button text="L{{i+1}}" class="button-internal" (tap)="placeLucky(lucky[lucky[i+1]])" textTransform="none"
+          [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
+      </GridLayout>
+    </GridLayout>
+  </GridLayout>
+</GridLayout>
