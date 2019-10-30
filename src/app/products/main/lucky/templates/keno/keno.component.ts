@@ -20,7 +20,7 @@ export class KenoComponent {
     private btncalcService: BtncalcService,
     private couponService: CouponService) { }
 
-  public async placeLucky(lucky: Lucky): Promise<void> {
+  public placeLucky(lucky: Lucky): void {
     // reset all odds selected
     this.couponService.resetCoupon();
     this.mainService.resetPlayEvent();
