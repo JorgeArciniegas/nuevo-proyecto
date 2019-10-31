@@ -1,6 +1,6 @@
 {
   "name": "vdesk",
-  "version": "0.22.1",
+  "version": "0.22.2",
   "nativescript": {
     "id": "com.vgen.vdesk",
     "tns-android": {
