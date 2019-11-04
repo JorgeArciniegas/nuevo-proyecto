@@ -1,9 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { connectionType, getConnectionType } from 'tns-core-modules/connectivity';
+import { device } from 'tns-core-modules/platform';
 import { AppSettings } from './app.settings';
 import { Settings } from './app.settings.model';
 import { UserService } from './services/user.service';
-import { device } from 'tns-core-modules/platform';
 import { TranslateUtilityService } from './services/utility/translate-utility.service';
 import { WindowSizeService } from './services/utility/window-size/window-size.service';
 @Component({

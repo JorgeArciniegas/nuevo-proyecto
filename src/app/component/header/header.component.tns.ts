@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ProductsService } from '../../../../src/app/products/products.service';
-import { UserService } from '../../../../src/app/services/user.service';
+import { ProductsService } from '../../products/products.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   moduleId: module.id,

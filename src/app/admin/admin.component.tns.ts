@@ -1,22 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, AfterContentInit, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { RouterService } from '../services/utility/router/router.service';
 import { WindowSizeService } from '../services/utility/window-size/window-size.service';
+import { LoaderService } from '../services/utility/loader/loader.service';
+import { timer } from 'rxjs';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent {
+export class AdminComponent implements AfterContentInit {
   isAdminLogged: boolean;
   // layout for grid contains rows and button height
   layout: any;
-
-  constructor(private router: RouterService, public userService: UserService, private windowService: WindowSizeService) {
+  constructor(
+    private router: RouterService,
+    public userService: UserService,
+    private windowService: WindowSizeService,
+    private loaderService: LoaderService
+  ) {
     this.isAdminLogged = this.userService.isLoggedOperator();
     this.layout = this.gridLayoutResponsive();
+
+    // console.log('AdminComponent', this.loaderService.isLoading);
   }
+
+  ngAfterContentInit() {
+    timer(300).subscribe(() =>
+      this.loaderService.isLoading.next(false)
+    );
+  }
+
 
   goToBetList(): void {
     this.router.getRouter().navigateByUrl('/admin/reports/betsList');
