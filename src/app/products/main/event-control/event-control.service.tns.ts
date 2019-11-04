@@ -35,14 +35,12 @@ export class EventControlService {
         /**
          * @eventControlDetails is passed as input to a control template
          */
-        console.log('EventControlService', event);
         this.eventControlDetails = this.getEventControl();
       }
     );
     // when app to start check if the subscription is enabled
     if (!this.eventControlDetails) {
       this.eventControlDetails = this.getEventControl();
-      console.log('EventControlService status: ', this.eventControlDetails, this.mainService.eventDetails);
     }
   }
 
