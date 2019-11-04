@@ -24,14 +24,14 @@
 </mat-grid-list>
 <mat-grid-list class="playable-grid-buttons playable-special-bets" cols="4" rowHeight="{{rowHeight * 3 }}">
   <mat-grid-tile>
-    <button (click)="specialBets('ODD')"
-      [ngClass]="{'actived' : (service.placingEvent.isSpecialBets && service.placingEvent.specialBetValue === specialBet['ODD']) }"
-      class="btn-reset btn-default btn-success radius-5 elevation-z5">{{'ODD' | translate}}</button>
-  </mat-grid-tile>
-  <mat-grid-tile>
     <button (click)="specialBets('EVEN')"
       [ngClass]="{'actived' : (service.placingEvent.isSpecialBets && service.placingEvent.specialBetValue === specialBet['EVEN']) }"
       class="btn-reset btn-default btn-success radius-5 elevation-z5">{{'EVEN' | translate}}</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button (click)="specialBets('ODD')"
+      [ngClass]="{'actived' : (service.placingEvent.isSpecialBets && service.placingEvent.specialBetValue === specialBet['ODD']) }"
+      class="btn-reset btn-default btn-success radius-5 elevation-z5">{{'ODD' | translate}}</button>
   </mat-grid-tile>
   <mat-grid-tile>
     <button (click)="specialBets('UNDER')"
