@@ -52,22 +52,22 @@ export class ResultsService {
               case LAYOUT_TYPE.RACING:
                 results = eventResults.EventResults[i].Result.split('-');
                 tempEventResult.racePodium = {
-                  firstPlace: Number.parseInt(results[0]),
-                  secondPlace: Number.parseInt(results[1]),
-                  thirdPlace: Number.parseInt(results[2])
+                  firstPlace: Number.parseInt(results[0], 0),
+                  secondPlace: Number.parseInt(results[1], 0),
+                  thirdPlace: Number.parseInt(results[2], 0)
                 };
                 break;
               case LAYOUT_TYPE.COCK_FIGHT:
                 results = eventResults.EventResults[i].Result.split('-');
                 tempEventResult.cockResult = {
-                  winner: Number.parseInt(results[0]),
+                  winner: Number.parseInt(results[0], 0),
                   ou: results[1] as OVER_UNDER_COCKFIGHT,
-                  sector: Number.parseInt(results[2]),
+                  sector: Number.parseInt(results[2], 0),
                 };
                 break;
               case LAYOUT_TYPE.KENO:
                 results = eventResults.EventResults[i].Result.split(',');
-                const kenoResults: number[] = results.map(result => Number.parseInt(result));
+                const kenoResults: number[] = results.map(result => Number.parseInt(result, 0));
                 tempEventResult.kenoResults = kenoResults;
                 break;
               default:

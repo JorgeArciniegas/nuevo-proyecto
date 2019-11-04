@@ -6,18 +6,18 @@ import { Environment, LICENSE_TYPE } from './environment.models';
 
 export const environment: Environment = {
   production: false,
+  bookmakerDetails: '',
   products: [],
-  showEventId: false,
+  license: LICENSE_TYPE.DEMO_LICENSE,
+  baseApiUrl: '',
   printSettings: {
     isEnabledReprintCoupon: true,
     isTrasmitionInfoMessageShown: true,
     isShowHeaderMessage: false
   },
+  showEventId: false,
   couponDirectPlace: false,
-  currencyDefault: 'EUR',
-  license: LICENSE_TYPE.DEMO_LICENSE,
-  bookmakerDetails: '',
-  baseApiUrl: ''
+  currencyDefault: 'EUR'
 };
 
 /*

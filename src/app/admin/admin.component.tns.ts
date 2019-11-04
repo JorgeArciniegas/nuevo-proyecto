@@ -1,4 +1,4 @@
-import { Component, AfterContentInit, OnDestroy, OnInit } from '@angular/core';
+import { Component, AfterContentInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { RouterService } from '../services/utility/router/router.service';
 import { WindowSizeService } from '../services/utility/window-size/window-size.service';
@@ -7,7 +7,7 @@ import { timer } from 'rxjs';
 
 @Component({
   moduleId: module.id,
-  selector: 'app-admin',
+  selector: 'app-admin, [app-admin]',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })

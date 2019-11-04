@@ -45,7 +45,6 @@ export class AppHttpInterceptor implements HttpInterceptor {
         };
       });
     } else {
-
       return next.handle(request);
     }
   }
