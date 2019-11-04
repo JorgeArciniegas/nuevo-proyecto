@@ -55,15 +55,15 @@
   <GridLayout row="1" class="playable-grid-buttons playable-special-bets" rows="*" columns="*,*,*,*">
     <GridLayout col="0" rows="*" columns="*" shadow="3" cornerRadius="11" class="special-bet">
       <GridLayout rows="*" columns="*" class="button btn-success"
-        [ngClass]="{'actived' : (service.placingEvent.isSpecialBets && service.placingEvent.specialBetValue === specialBet['ODD']) }">
-        <Button text="{{'ODD' | translate}}" class="button-internal" (tap)="specialBets('ODD')"
+        [ngClass]="{'actived' : (service.placingEvent.isSpecialBets && service.placingEvent.specialBetValue === specialBet['EVEN']) }">
+        <Button text="{{'EVEN' | translate}}" class="button-internal" (tap)="specialBets('EVEN')"
           [isEnabled]="!service.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
       </GridLayout>
     </GridLayout>
     <GridLayout col="1" rows="*" columns="*" shadow="3" cornerRadius="11" class="special-bet">
       <GridLayout rows="*" columns="*" class="button btn-success"
-        [ngClass]="{'actived' : (service.placingEvent.isSpecialBets && service.placingEvent.specialBetValue === specialBet['EVEN']) }">
-        <Button text="{{'EVEN' | translate}}" class="button-internal" (tap)="specialBets('EVEN')"
+        [ngClass]="{'actived' : (service.placingEvent.isSpecialBets && service.placingEvent.specialBetValue === specialBet['ODD']) }">
+        <Button text="{{'ODD' | translate}}" class="button-internal" (tap)="specialBets('ODD')"
           [isEnabled]="!service.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
       </GridLayout>
     </GridLayout>
