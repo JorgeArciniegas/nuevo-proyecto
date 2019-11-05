@@ -7,6 +7,7 @@ import { UserService } from './services/user.service';
 import { TranslateUtilityService } from './services/utility/translate-utility.service';
 import { WindowSizeService } from './services/utility/window-size/window-size.service';
 @Component({
+  moduleId: module.id,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

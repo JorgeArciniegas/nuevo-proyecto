@@ -297,7 +297,7 @@ export class MainService extends MainServiceExtra {
       CategoryTypes: this.productService.product.codeProduct
     };
 
-    this.elysApi.virtual.getVirtualTree(request).then((sports: VirtualProgramTreeBySportResponse) => {
+    this.elysApi.virtual.getVirtualTreeV2(request).then((sports: VirtualProgramTreeBySportResponse) => {
       // cache all tournaments
       /* if ( all ) {
         this.cacheTournaments = sports.Sports[0].ts;
