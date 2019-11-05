@@ -6,7 +6,6 @@ import { DeleteComponent } from './delete/delete.component';
 import { EditComponent } from './edit/edit.component';
 import { OperatorsRoutingModule } from './operators-routing.module';
 import { OperatorsComponent } from './operators.component';
-import { MatInputModule } from '@angular/material';
 
 
 @NgModule({
