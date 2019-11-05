@@ -25,8 +25,6 @@ export const routes: Routes = [
           import('./reports/bets-list/bets-list.module').then(
             m => m.BetsListModule
           ),
-        canActivateChild: [AuthorizationGuard],
-        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR, TYPE_ACCOUNT.ADMIN] }
       },
       {
         path: 'reports/transactionsList',
