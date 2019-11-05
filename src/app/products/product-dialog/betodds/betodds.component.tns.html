@@ -25,11 +25,11 @@
           class="card-odd" [ngClass]="{'notSelected': !odd.selected}" *ngFor="let odd of betOdds; let i = index;">
           <StackLayout row="0" class="top-window"></StackLayout>
           <GridLayout row="1" rows="*" columns="2*,*" class="row">
-            <Label col="0" text="{{odd.label}}" horizontalAlignment="left"></Label>
+            <Label col="0" text="{{odd.label}}" horizontalAlignment="left" verticalAlignment="center"></Label>
             <Label col="1" class="odd" text="{{odd.odd | number: '1.2-2'}}" horizontalAlignment="right"
               verticalAlignment="center"></Label>
           </GridLayout>
-          <GridLayout row="2" columns="*,*" class="row" verticalAlignment="center">
+          <GridLayout row="2" columns="2*,*" class="row" verticalAlignment="center">
             <StackLayout class="stake color radius-5">
               <Label text="{{odd.amount | number: '1.2-2'}}" horizontalAlignment="center"
                 verticalAlignment="center"></Label>
@@ -54,7 +54,7 @@
               <Label class="odd" text="{{odd.OddValue | number: '1.2-2'}}" horizontalAlignment="right"></Label>
             </StackLayout>
           </GridLayout>
-          <GridLayout row="2" columns="*,*" class="row" verticalAlignment="center">
+          <GridLayout row="2" columns="7*,3*" class="row" verticalAlignment="center">
             <StackLayout col="0" class="button" width="100%" *ngIf="multiStake"
               [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
               'btn-selected' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }" (tap)="checkOddToChangeStake(odd)"

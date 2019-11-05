@@ -18,7 +18,7 @@
             {{odd.odd | number: '1.2-2'}}
           </div>
         </div>
-        <div fxFlex="38" class="stake color radius-5">
+        <div fxFlex="60" class="stake color radius-5">
           {{odd.amount | number: '1.2-2'}}
         </div>
       </div>
@@ -35,7 +35,7 @@
           </div>
           <div fxFlex fxLayoutAlign="end center">#{{odd.MatchId}}</div>
         </div>
-        <div fxFlex="38" class="first-row" fxLayout="row">
+        <div fxFlex="60" class="first-row" fxLayout="row">
           <div fxFlex="70" fxLayoutAlign="start center">
             {{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})
           </div>
@@ -44,7 +44,7 @@
           </div>
         </div>
         <div fxFlex="98" fxLayoutAlign="space-between">
-          <div fxFlex="38" class="stake radius-5">
+          <div fxFlex="60" class="stake radius-5">
             <button *ngIf="multiStake" class="btn-reset btn-default color radius-5"
               [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
                       'btn-selected ' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }" (click)="checkOddToChangeStake(odd)">

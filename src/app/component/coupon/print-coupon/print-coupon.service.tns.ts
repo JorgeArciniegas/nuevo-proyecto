@@ -31,11 +31,12 @@ export class PrintCouponService {
     this.couponPrint = (coupon as unknown) as StagedCoupon;
     this.isPrintAgainst = true;
     this.reprintDate = new Date();
-    this.checkProduct();
+
     this.printWindow();
   }
 
   printWindow(): void {
+    this.checkProduct();
     this.router.getRouter().navigate(['/', { outlets: { print: 'print-coupon' } }]);
   }
 

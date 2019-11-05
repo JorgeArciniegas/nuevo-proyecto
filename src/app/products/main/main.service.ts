@@ -51,6 +51,7 @@ import { ResultsService } from './results/results.service';
 import { areas, overviewAreas } from './SoccerAreas';
 import { UserService } from '../../services/user.service';
 import { KenoNumber } from './playable-board/templates/keno/keno.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -91,10 +92,15 @@ export class MainService extends MainServiceExtra {
   ) {
     super(couponService, destroyCouponService);
     this.toResetAllSelections = true;
+
+    this.createPlayerList();
+
     // counter obser
     this.remaingTimeCounter = new Subject<EventTime>();
     this.remaingTimeCounterObs = this.remaingTimeCounter.asObservable();
+
     this.defaultGameStart();
+    // this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
 
     this.productService.productNameSelectedObserve.subscribe(item => {
       if (!this.couponService.productHasCoupon.checked) {
@@ -102,8 +108,6 @@ export class MainService extends MainServiceExtra {
         this.initEvents();
       }
     });
-
-    this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
 
     this.currentEventSubscribe = new Subject<number>();
     this.currentEventObserve = this.currentEventSubscribe.asObservable();
@@ -125,6 +129,7 @@ export class MainService extends MainServiceExtra {
         // Reset playable board
         this.resetPlayEvent();
       }
+
       // Get event's odds
       this.eventDetailOdds(this.eventDetails.events[eventIndex].number);
     });
@@ -136,7 +141,6 @@ export class MainService extends MainServiceExtra {
       }
     });
 
-    this.createPlayerList();
   }
 
   /**
@@ -259,7 +263,7 @@ export class MainService extends MainServiceExtra {
         }
       }
       // Resume event's countdown
-      if (this.countdownSub && this.countdownSub.closed) {
+      if (this.countdownSub && this.countdownSub.closed || !this.countdownSub) {
         this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
       }
     } catch (err) {

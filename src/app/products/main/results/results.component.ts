@@ -3,7 +3,8 @@ import { ProductsService } from '../../products.service';
 import { ResultsService } from './results.service';
 
 @Component({
-  selector: 'app-results',
+  moduleId: module.id,
+  selector: 'app-results, [app-results]',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss']
 })
@@ -14,7 +15,7 @@ export class ResultsComponent implements OnInit {
   constructor(
     public service: ResultsService,
     public productService: ProductsService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }
