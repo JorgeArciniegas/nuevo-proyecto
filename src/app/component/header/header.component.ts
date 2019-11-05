@@ -3,7 +3,8 @@ import { ProductsService } from '../../../../src/app/products/products.service';
 import { UserService } from '../../../../src/app/services/user.service';
 
 @Component({
-  selector: 'app-header',
+  moduleId: module.id,
+  selector: 'app-header, [app-header]',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
@@ -12,7 +13,7 @@ export class HeaderComponent implements OnInit {
     private service: ProductsService,
     public userService: UserService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.service.fnWindowsSize();

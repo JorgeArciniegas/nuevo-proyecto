@@ -7,6 +7,7 @@ import { AppSettings } from '../../app.settings';
 import { MainService } from '../../products/main/main.service';
 import { UserService } from '../../services/user.service';
 import { IconSize } from '../model/iconSize.model';
+import { ElysApiService } from '@elys/elys-api';
 
 @Component({
   selector: 'app-widget',
@@ -30,7 +31,8 @@ export class WidgetComponent implements OnInit {
     public readonly appSettings: AppSettings,
     private productService: ProductsService,
     private mainService: MainService,
-    private userService: UserService
+    private userService: UserService,
+    private elysApi: ElysApiService
   ) {
     this.settings = appSettings;
   }
@@ -83,6 +85,12 @@ export class WidgetComponent implements OnInit {
           layoutProducts: this.productService.product.layoutProducts.type
         };
         break;
+      case 'hot-and-cold':
+        data.hotAndCold = {
+          codeProduct: this.productService.product.codeProduct,
+          hotAndColdNumbers: await this.elysApi.virtual.getHotAndColdNumbers(),
+          layoutProducts: this.productService.product.layoutProducts.type
+        };
         break;
       default:
         data.statistics = null;

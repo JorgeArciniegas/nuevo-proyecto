@@ -1,9 +1,11 @@
 <GridLayout columns="*" rows="*">
   <FlexboxLayout col="0" flexDirection="row" alignItems="flex-start">
     <!-- MENU -->
-    <Image [isEnabled]="!userService.isModalOpen" class="menu" src="~/assets/icons/baseline-menu-24px.png"
-      stretch="aspectFit" nsRouterLink="/admin">
-    </Image>
+    <StackLayout (touch)="goToAdmin()">
+      <Image [isEnabled]="!userService.isModalOpen" class="menu" src="~/assets/icons/baseline-menu-24px.png"
+        stretch="aspectFit">
+      </Image>
+    </StackLayout>
     <!-- LOGO -->
     <Image class="logo" src="~/app/themes/skins/{{settings.theme}}/image/Logo-header.png" stretch="aspectFit"></Image>
     <!-- BUTTONS -->

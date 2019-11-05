@@ -8,7 +8,8 @@ import { BtncalcService } from './btncalc.service';
 import { UserService } from '../../../../src/app/services/user.service';
 
 @Component({
-  selector: 'app-btncalc',
+  moduleId: module.id,
+  selector: 'app-btncalc, [app-btncalc]',
   templateUrl: './btncalc.component.html',
   styleUrls: ['./btncalc.component.scss']
 })

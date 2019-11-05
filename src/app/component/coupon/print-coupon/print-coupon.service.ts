@@ -42,6 +42,7 @@ export class PrintCouponService {
    * Please do not change it because the style of prints is set on it
    */
   printWindow(): void {
+    this.checkProduct();
     this.printingEnabled = true;
     this.router.getRouter().navigate(['/', { outlets: { print: 'print-coupon' } }]);
     document.getElementById('app').classList.add('isPrinting');
@@ -60,5 +61,12 @@ export class PrintCouponService {
       });
   }
 
-  resetPrint(): void {}
+  resetPrint(): void { }
+
+  /**
+   * This function define the different product
+   */
+  checkProduct(): void {
+    this.couponPrint.Product = this.couponPrint.Odds[0].MarketName.indexOf('Keno') > -1 ? 'KENO' : 'VIRT';
+  }
 }

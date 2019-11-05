@@ -9,4 +9,8 @@
   <app-statistics *ngIf="data.statistics" [data]="data"></app-statistics>
   <!-- RANKING MODAL -->
   <app-ranking *ngIf="data.tournamentRanking" [data]="data"></app-ranking>
+  <!-- PAYTABLE MODAL -->
+  <app-paytable *ngIf="data.paytable" [data]="data"></app-paytable>
+  <!-- HOT&COLD MODAL -->
+  <app-hot-and-cold *ngIf="data.hotAndCold" [data]="data"></app-hot-and-cold>
 </GridLayout>

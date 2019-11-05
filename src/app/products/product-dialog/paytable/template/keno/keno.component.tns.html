@@ -1,0 +1,42 @@
+<GridLayout rows="*,12*,2*" columns="*" class="dialog">
+  <!-- dialog header -->
+  <Label verticalAlignment="center" row="0" text="{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.PAYTABLE' | translate | uppercase }}"
+    class="h3 title" horizontalAlignment="center"></Label>
+
+  <!-- table -->
+  <GridLayout rows="*,*,*,*,*,*,*,*,*,*,*" columns="*" row="1">
+    <!-- table header -->
+    <GridLayout columns="*,2*,2*,*" row="0">
+      <StackLayout col="0"></StackLayout>
+      <Label text="{{ 'EXTRACTED_NUMBERS' | translate }}" verticalAlignment="center" horizontalAlignment="left"
+        col="1"></Label>
+      <Label text="{{ 'PAYOUT' | translate }}" verticalAlignment="center" horizontalAlignment="right" col="2"></Label>
+      <StackLayout col="3"></StackLayout>
+      <StackLayout class="border-bottom-overlay" col="1" colSpan="2"></StackLayout>
+    </GridLayout>
+
+    <!-- table data -->
+    <GridLayout
+      *ngFor="let selection of data.paytable.payouts[data.paytable.selectionNumber-1].Selections; let i = index"
+      row="{{i+1}}" columns="*,2*,2*,*">
+      <StackLayout col="0"></StackLayout>
+      <Label text="{{ selection.SelectionTypeName }}" verticalAlignment="center" horizontalAlignment="left" col="1"
+        [ngClass]="{'disabled' : selection.Value === 0}"></Label>
+      <Label text="X {{ selection.Value }}" verticalAlignment="center" horizontalAlignment="right" col="2"
+        [ngClass]="{'disabled' : selection.Value === 0}"></Label>
+      <StackLayout col="3"></StackLayout>
+      <StackLayout class="border-bottom-overlay" col="1" colSpan="2"></StackLayout>
+    </GridLayout>
+  </GridLayout>
+
+  <!-- close button -->
+  <StackLayout row="2" horizontalAlignment="center" verticalAlignment="center">
+    <GridLayout rows="*" columns="25*, 25*, 25*" class="m-5">
+      <StackLayout col="0"></StackLayout>
+      <Button col="1" text="{{ 'CLOSE' | translate }}" borderRadius="4" class="btn-danger btn-close" (tap)="close()"
+        textTransform="none"></Button>
+      <StackLayout col="2"></StackLayout>
+    </GridLayout>
+  </StackLayout>
+
+</GridLayout>

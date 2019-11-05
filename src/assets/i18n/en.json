@@ -27,6 +27,7 @@
   "CLOSING": "Closing",
   "CODA": "F",
   "CODE": "Code",
+  "COLD": "Cold",
   "COMB": "Comb.",
   "COMBINATIONS": "Combinations",
   "COND": "Cond.",
@@ -50,6 +51,7 @@
   "DELETE": "Delete",
   "DELETED_ON": "Deleted on",
   "DETAIL": "Detail",
+  "DISPLAY_SELECTION_LENGTH": "Numbers played",
   "DYNAMIC_KEYS": {
     "COUPON_ERROR": {
       "API_ERROR": "Generic API error",
@@ -201,10 +203,6 @@
       "UPLE": "-upla",
       "UPLES": "-uple"
     },
-    "LOGIN": {
-      "ADMIN": "Login as administrator",
-      "OPERATOR": "Login as operator"
-    },
     "ODDS_RESULT": {
       "LOST": "Lost",
       "UNSET": "Open",
@@ -224,8 +222,8 @@
       "LICENSE_MESSAGE": {
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
         "ONEWAY": "",
-        "UNIVERSALSOFT": "Please check the accuracy of the coupon at the time of issuance, late claims will not be accepted.",
-        "SHAWIS": "All Bets are Subject to Betpal Betting rules (terms and condition). A Copy is Available on request. Carefully keep the receipt as the document is essential for the winnings collection"
+        "SHAWIS": "All Bets are Subject to Betpal Betting rules (terms and condition). A Copy is Available on request. Carefully keep the receipt as the document is essential for the winnings collection",
+        "UNIVERSALSOFT": "Please check the accuracy of the coupon at the time of issuance, late claims will not be accepted."
       }
     },
     "PRODUCT": {
@@ -235,7 +233,8 @@
         "FOOTBALL_ENG": "Soccer ENG",
         "FOOTBALL_ITA": "Soccer ITA",
         "HORSE": "Horse races",
-        "HORSE_VIRTUAL": "Virtual horse racing"
+        "HORSE_VIRTUAL": "Virtual horse racing",
+        "KENO": "Keno"
       },
       "NAME": {
         "ALL": "All",
@@ -260,10 +259,12 @@
       "COUPON": "Coupon",
       "EVEN": "Even",
       "GROUPINGS": "System groupings",
+      "HOT-AND-COLD": "Hot & Cold",
       "MULTI": "Multi",
       "ODD": "Odd",
       "OU": "Over/Under",
       "OVER": "Over",
+      "PAYTABLE": "Paytable",
       "PLACED": "Placed",
       "RANKING": "Ranking",
       "S": "Sector",
@@ -449,6 +450,7 @@
   "EVEN": "EVEN",
   "EVENTS": "Events",
   "EXPORT_EXCEL": "Export to excel",
+  "EXTRACTED_NUMBERS": "Numbers extracted",
   "FILTER_DATE_OF_PAYMENT": "Payment",
   "GA": "GA",
   "GF": "GF",
@@ -456,6 +458,7 @@
   "GROUP": "Group",
   "GROUPS": "Groups",
   "HOME": "Home",
+  "HOT": "Hot",
   "IS_REQUIRED": "Is mandatory",
   "JACKPOT": "Jackpot",
   "JACKPOT_MEGA": "Mega Jackpot",
@@ -465,6 +468,7 @@
   "LEGEND": "Legend",
   "LIMIT": "Limit",
   "LIST_OF_OPERATORS": "List of operators",
+  "LOGOUT": "Logout",
   "LUCKY": "Lucky",
   "MARKETS": "Markets",
   "MAX_PAYOUT": "Max. payout",
@@ -502,6 +506,7 @@
   "PAYMENT": "Payment",
   "PAYMENT_DATE": "Payment date",
   "PAYMENT_DATE_BY_OPERATOR": "Payment date",
+  "PAYOUT": "payout",
   "PLACEMENT": "Placement",
   "POINTS": "Points",
   "PREVIOUS_CASH_BALANCE": "Previous cash balance",

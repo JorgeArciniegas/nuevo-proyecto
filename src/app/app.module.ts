@@ -1,9 +1,9 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { MatSlideToggleModule } from '@angular/material';
+import { MatProgressSpinnerModule, MatSlideToggleModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ElysApiModule } from '@elys/elys-api';
 import { ElysCouponModule } from '@elys/elys-coupon';
@@ -22,6 +22,7 @@ import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
 import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
 import { SharedModule } from './shared/shared.module';
+
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -41,6 +42,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient]
       }
     }),
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
     SharedModule,
     NgxBarcodeModule,
     QRCodeModule,
@@ -60,7 +63,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   entryComponents: [ProductDialogComponent, PayCancelDialogComponent, ConfirmDestroyCouponComponent],
   providers: [
     providerDeclarations
-    // { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
