@@ -2,12 +2,12 @@
 	.hot-number {
 		height: 60px;
 		width: 60px;
-		background: $gradient-red2;
+		@extend %btn-warning;
 	}
 	.cold-number {
 		height: 60px;
 		width: 60px;
-		background: $gradient-green2;
+		@extend %btn-success-gradient;
 	}
 	.hot-and-cold-border {
 		@extend %card-title;

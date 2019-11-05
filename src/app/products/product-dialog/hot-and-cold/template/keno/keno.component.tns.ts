@@ -10,8 +10,10 @@ import { DialogService } from '../../../../../products/dialog.service';
 export class KenoComponent {
   @Input()
   data: BetDataDialog;
+  Math = Math;
 
-  constructor(private dialog: DialogService) { }
+  constructor(private dialog: DialogService) {
+  }
 
   close(): void {
     this.dialog.closeDialog();
