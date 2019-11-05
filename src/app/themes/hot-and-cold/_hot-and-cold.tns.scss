@@ -1,0 +1,24 @@
+.hot-and-cold-dialog {
+	padding: 6;
+	.display {
+		margin: 10;
+		padding: 4;
+		.display-content {
+			margin: 5;
+		}
+		.hot-number {
+			height: 50;
+			width: 50;
+			@extend %btn-warning;
+		}
+		.cold-number {
+			height: 50;
+			width: 50;
+			@extend %btn-success-gradient;
+		}
+	}
+	.label-overlap {
+		margin-left: 25;
+		padding: 0 6;
+	}
+}
