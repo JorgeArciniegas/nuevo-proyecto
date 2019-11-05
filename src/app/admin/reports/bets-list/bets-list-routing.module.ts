@@ -23,6 +23,10 @@ export const routes: Routes = [
       }
     ]
   },
+  {
+    path: '**',
+    loadChildren: () => import('../../../error-page/error-page.module').then(m => m.ErrorPageModule),
+  }
 ];
 
 @NgModule({
