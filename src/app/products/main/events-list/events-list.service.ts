@@ -21,6 +21,10 @@ export class EventsListService {
         this.getEventDetailsList();
       }
     );
+
+    if (!this.eventsDetails) {
+      this.getEventDetailsList();
+    }
   }
   /**
    * @getEventDetailsList thrown on each event change

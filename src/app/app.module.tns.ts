@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
 import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
 import { SharedModule } from './shared/shared.module';
+import { PreloadAllModules } from '@angular/router';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -41,7 +42,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ElysCouponModule.forRoot({}),
     SharedModule,
     NativeScriptRouterModule,
-    NativeScriptRouterModule.forRoot(routes)
+    NativeScriptRouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   providers: [
     providerDeclarations

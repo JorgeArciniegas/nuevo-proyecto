@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { LoaderService } from '../../services/utility/loader/loader.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-loader',
+  moduleId: module.id,
+  selector: 'app-loader, [app-loader]',
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.scss']
 })
 export class LoaderComponent implements OnInit {
 
   loading: boolean;
-  constructor(private loaderService: LoaderService) {
+  constructor(private loaderService: LoaderService, public readonly userService: UserService) {
 
   }
 
