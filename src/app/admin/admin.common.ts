@@ -2,20 +2,11 @@ import { Routes } from '@angular/router';
 import { AuthorizationGuard } from '../app.authorization.guard';
 import { TYPE_ACCOUNT } from '../services/user.models';
 import { AdminComponent } from './admin.component';
-import { DetailsTransactionComponent } from './reports/transactions-list/details-transaction/details-transaction.component';
-import { GetTransactionVategoryKeyByEnumValuePipe } from './reports/transactions-list/get-transaction-category-key-by-enum-value.pipe';
-import { SummaryTransactionsComponent } from './reports/transactions-list/summary-transactions/summary-transactions.component';
-import { TransactionsListComponent } from './reports/transactions-list/transactions-list.component';
 import { LanguageComponent } from './settings/language/language.component';
 
 export const componentDeclarations: any[] = [
   AdminComponent,
-  TransactionsListComponent,
-
   LanguageComponent,
-  SummaryTransactionsComponent,
-  DetailsTransactionComponent,
-  GetTransactionVategoryKeyByEnumValuePipe,
 ];
 
 export const providerDeclarations: any[] = [];
@@ -39,20 +30,10 @@ export const routes: Routes = [
       },
       {
         path: 'reports/transactionsList',
-        children: [
-          {
-            path: '',
-            component: TransactionsListComponent
-          },
-          {
-            path: 'summaryTransactions',
-            component: SummaryTransactionsComponent
-          },
-          {
-            path: 'detail/:id',
-            component: DetailsTransactionComponent
-          }
-        ],
+        loadChildren: () =>
+          import('./reports/transactions-list/transactions-list.module').then(
+            m => m.TransactionsListModule
+          ),
         canActivateChild: [AuthorizationGuard],
         data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       },
