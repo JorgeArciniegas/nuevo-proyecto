@@ -10,13 +10,13 @@
   "BALANCE": "Solde",
   "BASE": "B",
   "BET": "Pari",
-  "BET_STATUS": "Statut Pari",
-  "BET_TYPE": "Type de Pari",
-  "BET_UNDER_EVALUATION": "Pari en cours d'acceptation, veuillez patienter",
   "BETS_LIST": "Liste des paris",
   "BETS_LIST.LOST": "Perdenti",
   "BETS_LIST.OPEN": "En cours",
   "BETS_LIST.WON": "Vincenti",
+  "BET_STATUS": "Statut Pari",
+  "BET_TYPE": "Type de Pari",
+  "BET_UNDER_EVALUATION": "Pari en cours d'acceptation, veuillez patienter",
   "BONUS": "Bonus",
   "BONUS_MAX": "Bonus Max",
   "BTNCALC.COL": "COL",
@@ -32,12 +32,12 @@
   "CONDITION": "Condition",
   "CONFIRM": "Conferma",
   "CONFIRM_DESTROY_COUPON.MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?",
+  "COUPON.BET": "Parie",
   "COUPON_CODE": "Code coupon",
   "COUPON_NUMBER": "Numéro du coupon",
   "COUPON_RESET": "Reset del coupon",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Pari accepté,",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE": "vérifie la Liste des Paris",
-  "COUPON.BET": "Parie",
   "DATE": "Date",
   "DATE_FROM": "Date de début",
   "DATE_OF_PLACEMENT": "Data piazzamento",
@@ -49,19 +49,10 @@
   "DELETED_ON": "Annullata il",
   "DETAIL": "Détail",
   "DYNAMIC_KEYS": {
-    "CockMarket": {
-      "NAME": {
-        "1X2": "Win",
-        "1X2 + OverUnder": "Win+ o/u",
-        "1X2 + Winning Sector": "Win+ sector",
-        "Over/Under": "O/u",
-        "Winning Sector": "Sector"
-      }
-    },
     "COUPON_ERROR": {
+      "API_ERROR": "Errore API generico",
       "AccountInsertDataError": "Une erreur est survenue lors de l'ajout du compte d'utilisateur [Code ES11]",
       "AgentBettorMismatch": "Cet utilisateur n'appartient pas à votre réseau [Code ES18]",
-      "API_ERROR": "Errore API generico",
       "BankerNotAllowedOnIntegral": "Vous ne pouvez pas ajouter un banquier à un pari intégral [Code ES22]",
       "BetAlreadyPaid": "Ce coupon a déjà été payé [Code ES19]",
       "BetLost": "Pari perdu [Code ES21]",
@@ -169,6 +160,15 @@
       "UnderMinBetStake": "Mise minimum non atteinte [Code CRS18]",
       "Unknown": "Erreur inconnue. Veuillez réessayer [Code CRS0]"
     },
+    "CockMarket": {
+      "NAME": {
+        "1X2": "Win",
+        "1X2 + OverUnder": "Win+ o/u",
+        "1X2 + Winning Sector": "Win+ sector",
+        "Over/Under": "O/u",
+        "Winning Sector": "Sector"
+      }
+    },
     "CouponStatusInternal": {
       "ALL": "Tout le monde",
       "Cancelled": "Cancellate",
@@ -215,10 +215,12 @@
     "PRINT_COUPON": {
       "HEADER_MESSAGE": {
         "DEMO_LICENSE": "",
-        "SHAWIS": "Shawis Company Limited"
+        "SHAWIS": "Shawis Company Limited",
+        "UGANBET": ""
       },
       "LICENSE_MESSAGE": {
-        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua."
+        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
+        "UGANBET": "The Customer declares to know and accept the Terms and Conditions available on our web site This coupon is valid only if the transaction took place exclusively via the Internet. Gambling can cause addiction. The game is prohibited for persons under 18 years."
       }
     },
     "PRODUCT": {
@@ -314,6 +316,10 @@
         "1 + NG": "1 + AB",
         "1 + Over": "1 + Plus",
         "1 + Under": "1 + Moins",
+        "12 + GG": "12 + B",
+        "12 + NG": "12 + AB",
+        "12 + Over": "12 + Plus",
+        "12 + Under": "12 + Moins",
         "1X + GG": "1X + B",
         "1X + NG": "1X + AB",
         "1X + Over": "1X + Plus",
@@ -322,10 +328,6 @@
         "2 + NG": "2 + AB",
         "2 + Over": "2 + Plus",
         "2 + Under": "2 + Moins",
-        "12 + GG": "12 + B",
-        "12 + NG": "12 + AB",
-        "12 + Over": "12 + Plus",
-        "12 + Under": "12 + Moins",
         "GG": "B",
         "NG": "AB",
         "Over": "Plus",
@@ -463,8 +465,8 @@
   "MAX_POTENTIAL_WIN_WITH_BONUS": "Vincita potenziale massima con bonus",
   "MIN_PAYOUT": "Gain min.",
   "MIN_POTENTIAL_WIN": "Gain potentiel min.",
-  "NO_CONNECTION": "Nessuna connessione disponibile",
   "NOBODY": "none",
+  "NO_CONNECTION": "Nessuna connessione disponibile",
   "ODD": "IMPAIR",
   "ODDS": "Cote",
   "OPERATOR": "Opérateur",
@@ -514,6 +516,10 @@
   "STRENGTH": "Force",
   "SUMMARY": "Sommario",
   "TEAM": "Équipe",
+  "TOTALS": "Totaux",
+  "TOTAL_PAYOUT": "Gain total",
+  "TOTAL_PLAYED": "Mise totale",
+  "TOTAL_STAKE": "Mise totale",
   "TOT_BET": "Mise total",
   "TOT_INCOME": "Totale crediti",
   "TOT_LOST": "TOT perso",
@@ -523,18 +529,14 @@
   "TOT_PROFIT": "Bénéfice total",
   "TOT_VOIDED": "Total annulé",
   "TOT_WON": "TOT vinto",
-  "TOTAL_PAYOUT": "Gain total",
-  "TOTAL_PLAYED": "Mise totale",
-  "TOTAL_STAKE": "Mise totale",
-  "TOTALS": "Totaux",
-  "TRANSACTION_TYPE": "Tipo transazione",
   "TRANSACTIONS": "Transazioni",
   "TRANSACTIONS_LIST": "Lista transazioni",
+  "TRANSACTION_TYPE": "Tipo transazione",
   "TYPE": "Type",
   "UNDER": "MOINS",
-  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "USERNAME": "Nom d'Utilisateur",
   "USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
+  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "VBOX": {
     "GENERAL_SETTINGS": "Paramètres Généraux",
     "MANAGEMENT": "Gestion V-Box",
