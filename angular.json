@@ -268,7 +268,35 @@
                   "with": "src/environments/environment.genc03-staging.ts"
                 }
               ]
-            }
+            },
+            "betese-prod": {
+              "outputPath": "dist-betese",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betese/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betese.ts"
+                }
+              ]
+            },
+            "betese-staging": {
+              "outputPath": "dist-betese",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betese/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betese-staging.ts"
+                }
+              ]
+            },
           }
         },
         "serve": {
@@ -327,6 +355,12 @@
             },
             "genc03-staging": {
               "browserTarget": "vdesk:build:genc03-staging"
+            },
+            "betese-prod": {
+              "browserTarget": "vdesk:build:betese-prod"
+            },
+            "betese-staging": {
+              "browserTarget": "vdesk:build:betese-staging"
             }
           }
         },

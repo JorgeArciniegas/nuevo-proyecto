@@ -34,6 +34,9 @@
 	&.shawis {
 		@import "./skins/shawis/styles";
 	}
+	&.betese {
+		@import "./skins/betese/styles";
+	}
 
 	.main-content {
 		@extend %font-family;

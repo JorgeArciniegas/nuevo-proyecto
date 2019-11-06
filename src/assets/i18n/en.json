@@ -214,12 +214,14 @@
     },
     "PRINT_COUPON": {
       "HEADER_MESSAGE": {
+        "BETESE": "",
         "DEMO_LICENSE": "",
         "ONEWAY": "Fairbet S.A.",
         "SHAWIS": "Shawis Company Limited",
         "UNIVERSALSOFT": ""
       },
       "LICENSE_MESSAGE": {
+        "BETESE": "",
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
         "ONEWAY": "",
         "SHAWIS": "All Bets are Subject to Betpal Betting rules (terms and condition). A Copy is Available on request. Carefully keep the receipt as the document is essential for the winnings collection",
