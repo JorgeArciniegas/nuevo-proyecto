@@ -11,13 +11,13 @@
   "BALANCE": "Saldo",
   "BASE": "B",
   "BET": "Aposta",
-  "BET_STATUS": "Status Aposta",
-  "BET_TYPE": "Tipo de Aposta",
-  "BET_UNDER_EVALUATION": "Aposta sob aprovação, por favor aguarda",
   "BETS_LIST": "Lista de apostas",
   "BETS_LIST.LOST": "Perdenti",
   "BETS_LIST.OPEN": "Acontecendo",
   "BETS_LIST.WON": "Vincenti",
+  "BET_STATUS": "Status Aposta",
+  "BET_TYPE": "Tipo de Aposta",
+  "BET_UNDER_EVALUATION": "Aposta sob aprovação, por favor aguarda",
   "BONUS": "Bonus",
   "BONUS_MAX": "Bonus Max",
   "BTNCALC.COL": "COL",
@@ -53,19 +53,10 @@
   "DETAIL": "Detalhe",
   "DISPLAY_SELECTION_LENGTH": "Números jogados",
   "DYNAMIC_KEYS": {
-    "CockMarket": {
-      "NAME": {
-        "1X2": "Win",
-        "1X2 + OverUnder": "Win+ o/u",
-        "1X2 + Winning Sector": "Win+ sector",
-        "Over/Under": "O/u",
-        "Winning Sector": "Sector"
-      }
-    },
     "COUPON_ERROR": {
+      "API_ERROR": "Errore API generico",
       "AccountInsertDataError": "Um erro ocorreu na adição de conta do usuário [Cód. ES11]",
       "AgentBettorMismatch": "O usuário não pertence à sua rede [Cód. ES18]",
-      "API_ERROR": "Errore API generico",
       "BankerNotAllowedOnIntegral": "Você não pode adicionar um banker em uma aposta integral [Cód. ES22]",
       "BetAlreadyPaid": "Esse cupom já foi pago [Cód. ES19]",
       "BetLost": "Aposta perdida [Cód. ES21]",
@@ -173,6 +164,15 @@
       "UnderMinBetStake": "A aposta mínima não foi atingida [Cód. CRS18]",
       "Unknown": "Erro desconhecido. Por favor, tente novamente [Cód. CRS0]"
     },
+    "CockMarket": {
+      "NAME": {
+        "1X2": "Win",
+        "1X2 + OverUnder": "Win+ o/u",
+        "1X2 + Winning Sector": "Win+ sector",
+        "Over/Under": "O/u",
+        "Winning Sector": "Sector"
+      }
+    },
     "CouponStatusInternal": {
       "ALL": "Tutti",
       "Cancelled": "Cancellate",
@@ -221,13 +221,15 @@
         "BOLIVARBET": "",
         "DEMO_LICENSE": "",
         "ONEWAY": "Fairbet S.A.",
-        "SPORTRACE": ""
+        "SPORTRACE": "",
+        "UGANBET": ""
       },
       "LICENSE_MESSAGE": {
         "BOLIVARBET": "The Customer declares to know and accept the Terms and Conditions available on our web siteThis coupon is valid only if the transaction took place exclusively via the Internet.Gambling can cause addiction.The game is prohibited for persons under 18 years.",
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
         "ONEWAY": "",
-        "SPORTRACE": "Todas las apuestas están sujetas a las reglas de apuestas de Sport Race (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la re-colección de ganancias."
+        "SPORTRACE": "Todas las apuestas están sujetas a las reglas de apuestas de Sport Race (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la re-colección de ganancias.",
+        "UGANBET": "The Customer declares to know and accept the Terms and Conditions available on our web site This coupon is valid only if the transaction took place exclusively via the Internet. Gambling can cause addiction. The game is prohibited for persons under 18 years."
       }
     },
     "PRODUCT": {
@@ -326,6 +328,10 @@
         "1 + NG": "1 + SG",
         "1 + Over": "1 + Acima",
         "1 + Under": "1 + Abaixo",
+        "12 + GG": "12 + G",
+        "12 + NG": "12 + SG",
+        "12 + Over": "12 + Acima",
+        "12 + Under": "12 + Abaixo",
         "1X + GG": "1X + G",
         "1X + NG": "1X + SG",
         "1X + Over": "1X + Acima",
@@ -334,10 +340,6 @@
         "2 + NG": "2 + SG",
         "2 + Over": "2 + Acima",
         "2 + Under": "2 + Abaixo",
-        "12 + GG": "12 + G",
-        "12 + NG": "12 + SG",
-        "12 + Over": "12 + Acima",
-        "12 + Under": "12 + Abaixo",
         "GG": "G",
         "NG": "SG",
         "Over": "Acima",
@@ -478,8 +480,8 @@
   "MAX_POTENTIAL_WIN_WITH_BONUS": "Vincita potenziale massima con bonus",
   "MIN_PAYOUT": "Pagamento mín.",
   "MIN_POTENTIAL_WIN": "Ganhos potenciales min.",
-  "NO_CONNECTION": "Nessuna connessione disponibile",
   "NOBODY": "Nenhum",
+  "NO_CONNECTION": "Nessuna connessione disponibile",
   "ODD": "ÍMPAR",
   "ODDS": "Cotação",
   "OPERATOR": "Operador",
@@ -530,6 +532,10 @@
   "STRENGTH": "Força",
   "SUMMARY": "Sommario",
   "TEAM": "Time",
+  "TOTALS": "Total",
+  "TOTAL_PAYOUT": "Total payout",
+  "TOTAL_PLAYED": "Aposta total",
+  "TOTAL_STAKE": "Aposta total",
   "TOT_BET": "TOT giocato",
   "TOT_INCOME": "Totale crediti",
   "TOT_LOST": "TOT perso",
@@ -539,18 +545,14 @@
   "TOT_PROFIT": "Lucro total",
   "TOT_VOIDED": "Total anulado",
   "TOT_WON": "TOT vinto",
-  "TOTAL_PAYOUT": "Total payout",
-  "TOTAL_PLAYED": "Aposta total",
-  "TOTAL_STAKE": "Aposta total",
-  "TOTALS": "Total",
-  "TRANSACTION_TYPE": "Tipo transazione",
   "TRANSACTIONS": "Transazioni",
   "TRANSACTIONS_LIST": "Lista transazioni",
+  "TRANSACTION_TYPE": "Tipo transazione",
   "TYPE": "Tipo",
   "UNDER": "ABAIXO",
-  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "USERNAME": "Nome de usuário",
   "USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
+  "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "VBOX": {
     "GENERAL_SETTINGS": "Configurações Geral",
     "MANAGEMENT": "Gerenciamento de V-Box",

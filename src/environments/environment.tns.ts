@@ -25,6 +25,9 @@ import { environment as prodEnvironment } from './environment.prod';
 // shawis
 import { environment as shawisEnvironment } from './environment.shawis';
 import { environment as shawisStagingEnvironment } from './environment.shawis-staging';
+// uganbet
+import { environment as uganbetEnvironment } from './environment.uganbet';
+import { environment as uganbetStagingEnvironment } from './environment.uganbet-staging';
 // universalsoft
 import { environment as universalSoftEnvironment } from './environment.universalsoft';
 import { environment as universalSoftStagingEnvironment } from './environment.universalsoft-staging';
@@ -115,6 +118,12 @@ export const environment: Environment = (() => {
         break;
       case 'bolivarbet-staging':
         envVars = bolivarbetStagingEnvironment;
+        break;
+      case 'uganbet-prod':
+        envVars = uganbetEnvironment;
+        break;
+      case 'uganbet-staging':
+        envVars = uganbetStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;

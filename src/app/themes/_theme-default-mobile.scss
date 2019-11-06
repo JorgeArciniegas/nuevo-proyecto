@@ -39,8 +39,12 @@
 	}
 	&.sportrace {
 		@import "./skins/sportrace/styles";
+	}
 	&.bolivarbet {
 		@import "./skins/bolivarbet/styles";
+	}
+	&.uganbet {
+		@import "./skins/uganbet/styles";
 	}
 
 	.main-content {
