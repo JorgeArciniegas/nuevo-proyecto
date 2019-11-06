@@ -3,14 +3,20 @@
     <ng-container *ngIf="polyfunctionalValue?.selection &&
         productService.product?.layoutProducts?.type !== typeProductCoupon.KENO &&
         productService.product?.typeCoupon?.acceptMultiStake">
+      <!--MULTISTAKE ACCEPTED -->
       <div fxLayout="column" fxFlex="88" fxLayoutAlign="center flex-start">
-        <div fxLayout="row" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2"
+        <div fxLayout="row wrap" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2"
           [style.min-height.px]="(rowHeight - 20) / 2">
-          <div fxLayout="column" fxFlex="70" fxLayoutAlign="center flex-start" *ngIf="polyfunctionalValue.selection">
+          <div fxLayout="column"
+            fxFlex="{{productService.product?.layoutProducts?.type !== typeProductCoupon.COCK_FIGHT ? 70 : 25}}"
+            fxLayoutAlign="center flex-start" *ngIf="polyfunctionalValue.selection">
             {{"DYNAMIC_KEYS.SMARTCODE."+polyfunctionalValue.selection | translate | uppercase}}
           </div>
-          <div fxLayout="column" fxFlex="25" fxLayoutAlign="center flex-end">
-            {{polyfunctionalValue.value}}</div>
+          <div fxLayout="column nowrap"
+            fxFlex="{{productService.product?.layoutProducts?.type !== typeProductCoupon.COCK_FIGHT ?  25 : 70}}"
+            fxLayoutAlign="center flex-end">
+            <span class="display-selection">{{polyfunctionalValue.value}}</span>
+          </div>
         </div>
         <div fxLayout="row" class="second-row" fxFill [style.height.px]="(rowHeight - 20) / 2"
           [style.min-height.px]="(rowHeight - 20) / 2"
