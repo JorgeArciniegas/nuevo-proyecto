@@ -137,12 +137,13 @@ $color-text-gray: #6b7279;
 }
 
 %logo-with-text {
-	background: url("app/themes/skins/betese/image/Logo.png") center center no-repeat;
+	background: url("app/themes/skins/bolivarbet/image/Logo.png") center center no-repeat;
 	background-size: contain;
+	background-position-x: 120px;
 }
 
 %logo-with-text-mobile {
-	background: url("~/app/themes/skins/betese/image/Logo.png") center center no-repeat;
+	background: url("~/app/themes/skins/bolivarbet/image/Logo.png") center center no-repeat;
 	background-size: contain;
 }
 
@@ -581,19 +582,19 @@ $gradient-dark2: #000000;
 }
 //ADMIN (MAIN MENU)
 %admin {
-	background: url("app/themes/skins/betese/image/Bg-login-vdesk.jpg") center center no-repeat;
+	background: url("app/themes/skins/bolivarbet/image/Bg-login-vdesk.jpg") center center no-repeat;
 }
 %admin-mobile {
-	background: url("~/app/themes/skins/betese/image/Bg-login-vdesk.jpg") center center no-repeat;
+	background: url("~/app/themes/skins/bolivarbet/image/Bg-login-vdesk.jpg") center center no-repeat;
 	background-size: cover;
 }
 // LOGIN
 %login {
-	background: url("app/themes/skins/betese/image/Bg-login-vdesk.jpg") center center no-repeat;
+	background: url("app/themes/skins/bolivarbet/image/Bg-login-vdesk.jpg") center center no-repeat;
 }
 
 %login-mobile {
-	background: url("~/app/themes/skins/betese/image/Bg-login-vdesk.jpg") center center no-repeat;
+	background: url("~/app/themes/skins/bolivarbet/image/Bg-login-vdesk.jpg") center center no-repeat;
 	background-size: cover;
 }
 
@@ -770,11 +771,11 @@ $gradient-dark2: #000000;
 
 // PRINT TEMPLATE
 %logo-header {
-	content: url("app/themes/skins/betese/image/Logo-coupon.png");
+	content: url("app/themes/skins/bolivarbet/image/Logo-coupon.png");
 }
 
 %logo-header-mobile {
-	background: url("~/app/themes/skins/betese/image/Logo-coupon.png") center center no-repeat;
+	background: url("~/app/themes/skins/bolivarbet/image/Logo-coupon.png") center center no-repeat;
 	background-size: contain;
 }
 

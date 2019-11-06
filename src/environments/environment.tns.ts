@@ -2,6 +2,9 @@ import { environment as devEnvironment } from './environment';
 // BETESE
 import { environment as beteseEnvironment } from './environment.betese';
 import { environment as beteseStagingEnvironment } from './environment.betese-staging';
+// bolivarbet
+import { environment as bolivarbetEnvironment } from './environment.bolivarbet';
+import { environment as bolivarbetStagingEnvironment } from './environment.bolivarbet-staging';
 // genc01
 import { environment as genc01Environment } from './environment.genc01';
 import { environment as genc01StagingEnvironment } from './environment.genc01-staging';
@@ -22,6 +25,9 @@ import { environment as prodEnvironment } from './environment.prod';
 // shawis
 import { environment as shawisEnvironment } from './environment.shawis';
 import { environment as shawisStagingEnvironment } from './environment.shawis-staging';
+// sportrace
+import { environment as sportraceEnvironment } from './environment.sportrace';
+import { environment as sportraceStagingEnvironment } from './environment.sportrace-staging';
 // uganbet
 import { environment as uganbetEnvironment } from './environment.uganbet';
 import { environment as uganbetStagingEnvironment } from './environment.uganbet-staging';
@@ -31,7 +37,6 @@ import { environment as universalSoftStagingEnvironment } from './environment.un
 // VGEN
 import { environment as vgenEnvironment } from './environment.vgen';
 import { environment as vgenStagingEnvironment } from './environment.vgen-staging';
-
 
 export const environment: Environment = (() => {
   let envVars;
@@ -107,6 +112,18 @@ export const environment: Environment = (() => {
         break;
       case 'uganbet-staging':
         envVars = uganbetStagingEnvironment;
+        break;
+      case 'sportrace-prod':
+        envVars = sportraceEnvironment;
+        break;
+      case 'sportrace-staging':
+        envVars = sportraceStagingEnvironment;
+        break;
+      case 'bolivarbet-prod':
+        envVars = bolivarbetEnvironment;
+        break;
+      case 'bolivarbet-staging':
+        envVars = bolivarbetStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;

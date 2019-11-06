@@ -92,7 +92,9 @@ export enum LICENSE_TYPE {
   ONEWAY,
   SHAWIS,
   BETESE,
-  UGANBET
+  UGANBET,
+  SPORTRACE,
+  BOLIVARBET
 }
 
 export interface TypeCoupon {

@@ -297,6 +297,62 @@
                 }
               ]
             },
+            "sportrace-prod": {
+              "outputPath": "dist-sportrace",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/sportrace/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sportrace.ts"
+                }
+              ]
+            },
+            "sportrace-staging": {
+              "outputPath": "dist-sportrace",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/sportrace/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sportrace-staging.ts"
+                }
+              ]
+            },
+            "bolivarbet-prod": {
+              "outputPath": "dist-bolivarbet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/bolivarbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.bolivarbet.ts"
+                }
+              ]
+            },
+            "bolivarbet-staging": {
+              "outputPath": "dist-bolivarbet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/bolivarbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.bolivarbet-staging.ts"
+                }
+              ]
+            },
             "uganbet-prod": {
               "outputPath": "dist-uganbet",
               "stylePreprocessorOptions": {
@@ -389,6 +445,18 @@
             },
             "betese-staging": {
               "browserTarget": "vdesk:build:betese-staging"
+            },
+            "sportrace-prod": {
+              "browserTarget": "vdesk:build:sportrace-prod"
+            },
+            "sportrace-staging": {
+              "browserTarget": "vdesk:build:sportrace-staging"
+            },
+            "bolivarbet-prod": {
+              "browserTarget": "vdesk:build:bolivarbet-prod"
+            },
+            "bolivarbet-staging": {
+              "browserTarget": "vdesk:build:bolivarbet-staging"
             },
             "uganbet-prod": {
               "browserTarget": "vdesk:build:uganbet-prod"

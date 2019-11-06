@@ -36,6 +36,12 @@
 	&.uganbet {
 		@import "./skins/uganbet/styles";
 	}
+	&.sportrace {
+		@import "./skins/sportrace/styles";
+	}
+	&.bolivarbet {
+		@import "./skins/bolivarbet/styles";
+	}
 
 	.main-content {
 		@extend %font-family;
