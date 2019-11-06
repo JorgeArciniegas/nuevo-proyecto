@@ -1,22 +1,35 @@
 import { environment as devEnvironment } from './environment';
+// BETESE
+import { environment as beteseEnvironment } from './environment.betese';
+import { environment as beteseStagingEnvironment } from './environment.betese-staging';
+// genc01
 import { environment as genc01Environment } from './environment.genc01';
 import { environment as genc01StagingEnvironment } from './environment.genc01-staging';
+// genc02
 import { environment as genc02Environment } from './environment.genc02';
 import { environment as genc02StagingEnvironment } from './environment.genc02-staging';
+// genc03
 import { environment as genc03Environment } from './environment.genc03';
 import { environment as genc03StagingEnvironment } from './environment.genc03-staging';
+// mayabet
 import { environment as mayabetEnvironment } from './environment.mayabet';
 import { environment as mayabetStagingEnvironment } from './environment.mayabet-staging';
 import { Environment } from './environment.models';
+// oneway
 import { environment as onewayEnvironment } from './environment.oneway';
 import { environment as onewayStagingEnvironment } from './environment.oneway-staging';
 import { environment as prodEnvironment } from './environment.prod';
+// shawis
 import { environment as shawisEnvironment } from './environment.shawis';
 import { environment as shawisStagingEnvironment } from './environment.shawis-staging';
+// universalsoft
 import { environment as universalSoftEnvironment } from './environment.universalsoft';
 import { environment as universalSoftStagingEnvironment } from './environment.universalsoft-staging';
+// VGEN
 import { environment as vgenEnvironment } from './environment.vgen';
 import { environment as vgenStagingEnvironment } from './environment.vgen-staging';
+
+
 export const environment: Environment = (() => {
   let envVars;
 
@@ -79,6 +92,12 @@ export const environment: Environment = (() => {
         break;
       case 'genc03-staging':
         envVars = genc03StagingEnvironment;
+        break;
+      case 'betese-prod':
+        envVars = beteseEnvironment;
+        break;
+      case 'betese-staging':
+        envVars = beteseStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;
