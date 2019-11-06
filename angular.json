@@ -297,6 +297,34 @@
                 }
               ]
             },
+            "uganbet-prod": {
+              "outputPath": "dist-uganbet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/uganbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.uganbet.ts"
+                }
+              ]
+            },
+            "uganbet-staging": {
+              "outputPath": "dist-uganbet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/uganbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.uganbet-staging.ts"
+                }
+              ]
+            }
           }
         },
         "serve": {
@@ -361,6 +389,12 @@
             },
             "betese-staging": {
               "browserTarget": "vdesk:build:betese-staging"
+            },
+            "uganbet-prod": {
+              "browserTarget": "vdesk:build:uganbet-prod"
+            },
+            "uganbet-staging": {
+              "browserTarget": "vdesk:build:uganbet-staging"
             }
           }
         },
