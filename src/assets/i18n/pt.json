@@ -216,11 +216,13 @@
     "PRINT_COUPON": {
       "HEADER_MESSAGE": {
         "DEMO_LICENSE": "",
-        "ONEWAY": "Fairbet S.A."
+        "ONEWAY": "Fairbet S.A.",
+        "SPORTRACE": ""
       },
       "LICENSE_MESSAGE": {
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
-        "ONEWAY": ""
+        "ONEWAY": "",
+        "SPORTRACE": "Todas las apuestas están sujetas a las reglas de apuestas de Sport Race (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la re-colección de ganancias."
       }
     },
     "PRODUCT": {
