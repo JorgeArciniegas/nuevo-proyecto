@@ -28,7 +28,9 @@ import { environment as universalSoftStagingEnvironment } from './environment.un
 // VGEN
 import { environment as vgenEnvironment } from './environment.vgen';
 import { environment as vgenStagingEnvironment } from './environment.vgen-staging';
-
+// sportrace
+import { environment as sportraceEnvironment } from './environment.sportrace';
+import { environment as sportraceStagingEnvironment } from './environment.sportrace-staging';
 
 export const environment: Environment = (() => {
   let envVars;
@@ -98,6 +100,12 @@ export const environment: Environment = (() => {
         break;
       case 'betese-staging':
         envVars = beteseStagingEnvironment;
+        break;
+      case 'sportrace-prod':
+        envVars = sportraceEnvironment;
+        break;
+      case 'sportrace-staging':
+        envVars = sportraceStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;

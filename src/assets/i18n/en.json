@@ -218,6 +218,7 @@
         "DEMO_LICENSE": "",
         "ONEWAY": "Fairbet S.A.",
         "SHAWIS": "Shawis Company Limited",
+        "SPORTRACE": "",
         "UNIVERSALSOFT": ""
       },
       "LICENSE_MESSAGE": {
@@ -225,6 +226,7 @@
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
         "ONEWAY": "",
         "SHAWIS": "All Bets are Subject to Betpal Betting rules (terms and condition). A Copy is Available on request. Carefully keep the receipt as the document is essential for the winnings collection",
+        "SPORTRACE": "Todas las apuestas están sujetas a las reglas de apuestas de Sport Race (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la re-colección de ganancias.",
         "UNIVERSALSOFT": "Please check the accuracy of the coupon at the time of issuance, late claims will not be accepted."
       }
     },

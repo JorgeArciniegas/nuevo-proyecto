@@ -37,6 +37,9 @@
 	&.betese {
 		@import "./skins/betese/styles";
 	}
+	&.sportrace {
+		@import "./skins/sportrace/styles";
+	}
 
 	.main-content {
 		@extend %font-family;
