@@ -297,6 +297,34 @@
                 }
               ]
             },
+            "sportrace-prod": {
+              "outputPath": "dist-sportrace",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/sportrace/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sportrace.ts"
+                }
+              ]
+            },
+            "sportrace-staging": {
+              "outputPath": "dist-sportrace",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/sportrace/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sportrace-staging.ts"
+                }
+              ]
+            }
           }
         },
         "serve": {
@@ -361,6 +389,12 @@
             },
             "betese-staging": {
               "browserTarget": "vdesk:build:betese-staging"
+            },
+            "sportrace-prod": {
+              "browserTarget": "vdesk:build:sportrace-prod"
+            },
+            "sportrace-staging": {
+              "browserTarget": "vdesk:build:sportrace-staging"
             }
           }
         },

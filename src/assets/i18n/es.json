@@ -218,12 +218,14 @@
       "HEADER_MESSAGE": {
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
         "ONEWAY": "Fairbet S.A.",
-        "UNIVERSALSOFT": ""
+        "UNIVERSALSOFT": "",
+        "SPORTRACE": ""
       },
       "LICENSE_MESSAGE": {
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
         "ONEWAY": "Todas las apuestas están sujetas a las reglas de apuestas de One Way (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la recolección de ganancias",
-        "UNIVERSALSOFT": "Prohibida la venta a menores de edad.Este tiquete se constituye en un documento al portador.El apostador es responsable de la integridad del tiquete, y acepta que la   apuesta impresa en éste representa con certeza su selección"
+        "UNIVERSALSOFT": "Prohibida la venta a menores de edad.Este tiquete se constituye en un documento al portador.El apostador es responsable de la integridad del tiquete, y acepta que la   apuesta impresa en éste representa con certeza su selección",
+        "SPORTRACE": "Todas las apuestas están sujetas a las reglas de apuestas de Sport Race (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la re-colección de ganancias."
       }
     },
     "PRODUCT": {
