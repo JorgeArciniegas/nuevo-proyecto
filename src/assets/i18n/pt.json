@@ -218,11 +218,13 @@
     },
     "PRINT_COUPON": {
       "HEADER_MESSAGE": {
+        "BOLIVARBET": "",
         "DEMO_LICENSE": "",
         "ONEWAY": "Fairbet S.A.",
         "SPORTRACE": ""
       },
       "LICENSE_MESSAGE": {
+        "BOLIVARBET": "The Customer declares to know and accept the Terms and Conditions available on our web siteThis coupon is valid only if the transaction took place exclusively via the Internet.Gambling can cause addiction.The game is prohibited for persons under 18 years.",
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
         "ONEWAY": "",
         "SPORTRACE": "Todas las apuestas están sujetas a las reglas de apuestas de Sport Race (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la re-colección de ganancias."

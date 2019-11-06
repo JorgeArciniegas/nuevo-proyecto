@@ -2,6 +2,9 @@ import { environment as devEnvironment } from './environment';
 // BETESE
 import { environment as beteseEnvironment } from './environment.betese';
 import { environment as beteseStagingEnvironment } from './environment.betese-staging';
+// bolivarbet
+import { environment as bolivarbetEnvironment } from './environment.bolivarbet';
+import { environment as bolivarbetStagingEnvironment } from './environment.bolivarbet-staging';
 // genc01
 import { environment as genc01Environment } from './environment.genc01';
 import { environment as genc01StagingEnvironment } from './environment.genc01-staging';
@@ -106,6 +109,12 @@ export const environment: Environment = (() => {
         break;
       case 'sportrace-staging':
         envVars = sportraceStagingEnvironment;
+        break;
+      case 'bolivarbet-prod':
+        envVars = bolivarbetEnvironment;
+        break;
+      case 'bolivarbet-staging':
+        envVars = bolivarbetStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;
