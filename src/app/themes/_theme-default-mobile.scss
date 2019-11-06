@@ -33,6 +33,9 @@
 	&.betese {
 		@import "./skins/betese/styles";
 	}
+	&.bolivarbet {
+		@import "./skins/bolivarbet/styles";
+	}
 
 	.main-content {
 		@extend %font-family;

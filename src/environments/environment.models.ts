@@ -91,7 +91,8 @@ export enum LICENSE_TYPE {
   UNIVERSALSOFT,
   ONEWAY,
   SHAWIS,
-  BETESE
+  BETESE,
+  BOLIVARBET
 }
 
 export interface TypeCoupon {
