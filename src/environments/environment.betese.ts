@@ -11,7 +11,7 @@ export const environment: Environment = {
   // tslint:disable-next-line:max-line-length
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
-  license: LICENSE_TYPE.DEMO_LICENSE,
+  license: LICENSE_TYPE.BETESE,
   baseApiUrl: 'https://vg-apibetese.odissea-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'betese',
