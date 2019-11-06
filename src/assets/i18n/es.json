@@ -233,6 +233,16 @@
         "UNIVERSALSOFT": "Prohibida la venta a menores de edad.Este tiquete se constituye en un documento al portador.El apostador es responsable de la integridad del tiquete, y acepta que la   apuesta impresa en éste representa con certeza su selección",
         "SPORTRACE": "Todas las apuestas están sujetas a las reglas de apuestas de Sport Race (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la re-colección de ganancias.",
         "UGANBET": "The Customer declares to know and accept the Terms and Conditions available on our web site This coupon is valid only if the transaction took place exclusively via the Internet. Gambling can cause addiction. The game is prohibited for persons under 18 years."
+      }
+    },
+    "PRODUCT": {
+      "LABEL": {
+        "COCK_FIGHT": "Pelea de gallos",
+        "DOG": "Galgos",
+        "FOOTBALL_ENG": "Fútbol ING",
+        "FOOTBALL_ITA": "Fútbol ITA",
+        "HORSE": "Carreras de caballos",
+        "HORSE_VIRTUAL": "Carrera de caballos virtuales"
       },
       "PRODUCT": {
         "LABEL": {

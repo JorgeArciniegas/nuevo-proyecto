@@ -43,9 +43,6 @@
 	&.bolivarbet {
 		@import "./skins/bolivarbet/styles";
 	}
-	&.uganbet {
-		@import "./skins/uganbet/styles";
-	}
 
 	.main-content {
 		@extend %font-family;
