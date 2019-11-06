@@ -12,7 +12,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.BOLIVARBET,
-  baseApiUrl: 'https://vg-apibolivarbet.odissea-services.net',
+  baseApiUrl: 'vg-apibolivarbet.odissea-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'bolivarbet',
   faviconPath: 'app/themes/skins/bolivarbet/image/Logo-header.png',
