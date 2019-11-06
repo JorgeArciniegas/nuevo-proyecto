@@ -12,10 +12,10 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.BOLIVARBET,
-  baseApiUrl: 'https://qacom-apibetese.ody-services.net',
+  baseApiUrl: 'https://qacom-apibolivarbet.ody-services.net',
   pageTitle: 'VDESK-KIOSK',
-  theme: 'betese',
-  faviconPath: 'app/themes/skins/betese/image/Logo-header.png',
+  theme: 'bolivarbet',
+  faviconPath: 'app/themes/skins/bolivarbet/image/Logo-header.png',
   currencyDefault: 'EUR',
   supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
   defaultAmount: {
