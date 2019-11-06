@@ -25,15 +25,18 @@ import { environment as prodEnvironment } from './environment.prod';
 // shawis
 import { environment as shawisEnvironment } from './environment.shawis';
 import { environment as shawisStagingEnvironment } from './environment.shawis-staging';
+// sportrace
+import { environment as sportraceEnvironment } from './environment.sportrace';
+import { environment as sportraceStagingEnvironment } from './environment.sportrace-staging';
+// uganbet
+import { environment as uganbetEnvironment } from './environment.uganbet';
+import { environment as uganbetStagingEnvironment } from './environment.uganbet-staging';
 // universalsoft
 import { environment as universalSoftEnvironment } from './environment.universalsoft';
 import { environment as universalSoftStagingEnvironment } from './environment.universalsoft-staging';
 // VGEN
 import { environment as vgenEnvironment } from './environment.vgen';
 import { environment as vgenStagingEnvironment } from './environment.vgen-staging';
-// sportrace
-import { environment as sportraceEnvironment } from './environment.sportrace';
-import { environment as sportraceStagingEnvironment } from './environment.sportrace-staging';
 
 export const environment: Environment = (() => {
   let envVars;
@@ -103,6 +106,12 @@ export const environment: Environment = (() => {
         break;
       case 'betese-staging':
         envVars = beteseStagingEnvironment;
+        break;
+      case 'uganbet-prod':
+        envVars = uganbetEnvironment;
+        break;
+      case 'uganbet-staging':
+        envVars = uganbetStagingEnvironment;
         break;
       case 'sportrace-prod':
         envVars = sportraceEnvironment;
