@@ -7,14 +7,14 @@ import {
 import { Market } from '../app/products/products.model';
 
 export const environment: Environment = {
-  production: false,
+  production: true,
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
-  license: LICENSE_TYPE.DEMO_LICENSE,
+  license: LICENSE_TYPE.UGANBET,
   baseApiUrl: 'https://vg-apiuganbet.odissea-services.net',
   pageTitle: 'UganBet - VDesk Kiosk',
-  theme: 'develop',
-  faviconPath: 'app/themes/skins/develop/image/Logo-header.png',
+  theme: 'uganbet',
+  faviconPath: 'app/themes/skins/uganbet/image/Logo-header.png',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
   supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
