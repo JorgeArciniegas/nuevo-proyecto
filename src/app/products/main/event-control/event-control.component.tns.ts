@@ -12,8 +12,7 @@ import { EventControlService } from './event-control.service';
 export class EventControlComponent implements OnDestroy {
 
   constructor(
-    public readonly eventControlService: EventControlService,
-    public readonly productService: ProductsService
+    public readonly eventControlService: EventControlService
   ) {
     this.eventControlService.init();
   }

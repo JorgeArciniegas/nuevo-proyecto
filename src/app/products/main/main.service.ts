@@ -295,7 +295,7 @@ export class MainService extends MainServiceExtra {
    * Inside it, it must be created the request object.
    * The reference values is taken by "ProductService" on object "product".
    */
-  loadEventsFromApi(all: boolean = false) {
+  loadEventsFromApi(all: boolean = false, lastAttemptCall?: number) {
     const request: VirtualProgramTreeBySportRequest = {
       SportIds: this.productService.product.sportId.toString(),
       CategoryTypes: this.productService.product.codeProduct
@@ -364,6 +364,11 @@ export class MainService extends MainServiceExtra {
           this.eventDetailOddsByCacheTournament(this.eventDetails.events[0].number);
         }
         this.currentAndSelectedEventTime();
+      }
+    }, (error) => {
+      if (!lastAttemptCall || lastAttemptCall < 3) {
+        ++lastAttemptCall;
+        timer(1000).subscribe(() => this.loadEventsFromApi(all, lastAttemptCall));
       }
     });
     this.reload = this.productService.product.layoutProducts.cacheEventsItem;
@@ -600,16 +605,12 @@ export class MainService extends MainServiceExtra {
     this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
 
-  eventDetailOdds(eventNumber: number): void {
+  eventDetailOdds(eventNumber: number, attemptRollBack?: number): void {
     if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
       this.eventDetailOddsByCacheTournament(eventNumber);
       return;
     }
     const event: VirtualBetEvent = this.cacheEvents.filter((cacheEvent: VirtualBetEvent) => cacheEvent.id === eventNumber)[0];
-    const request: VirtualDetailOddsOfEventRequest = {
-      sportId: this.productService.product.sportId,
-      matchId: eventNumber
-    };
     // Ceck, if it is empty load from api
     if (event.mk == null || event.mk.length === 0) {
       // tslint:disable-next-line:max-line-length
@@ -629,6 +630,11 @@ export class MainService extends MainServiceExtra {
             } else {
               this.attempts = 0;
             }
+          }
+        }, error => {
+          if (!attemptRollBack || attemptRollBack < 4) {
+            ++attemptRollBack;
+            timer(1000).subscribe(() => this.eventDetailOdds(eventNumber, attemptRollBack));
           }
         });
     }

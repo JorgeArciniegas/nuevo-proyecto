@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
-import { Subscription } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { ProductsService } from './products.service';
 import { CouponService } from '../component/coupon/coupon.service';
 import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
@@ -26,7 +26,15 @@ export class ProductsComponent implements OnDestroy {
   * */
   @HostListener('window:focus')
   onFocus(): void {
-    this.mainService.remainingEventTime(this.mainService.eventDetails.events[this.mainService.eventDetails.currentEvent].number)
+    if (this.mainService.eventDetails.events) {
+      this.callRemainingEventTime();
+    }
+  }
+
+  // Callback fire to onFocus event
+  callRemainingEventTime() {
+    this.mainService.remainingEventTime(
+      this.mainService.eventDetails.events[this.mainService.eventDetails.currentEvent].number)
       .then((eventTime: EventTime) => {
         if (eventTime.minute <= 0 && eventTime.second <= 0) {
           this.mainService.currentAndSelectedEventTime();
