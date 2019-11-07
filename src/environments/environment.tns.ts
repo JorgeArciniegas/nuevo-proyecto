@@ -43,6 +43,9 @@ import { environment as universalSoftStagingEnvironment } from './environment.un
 // VGEN
 import { environment as vgenEnvironment } from './environment.vgen';
 import { environment as vgenStagingEnvironment } from './environment.vgen-staging';
+// soft
+import { environment as softEnvironment } from './environment.soft';
+import { environment as softStagingEnvironment } from './environment.soft-staging';
 
 export const environment: Environment = (() => {
   let envVars;
@@ -136,6 +139,12 @@ export const environment: Environment = (() => {
         break;
       case 'f2o-staging':
         envVars = f2oStagingEnvironment;
+        break;
+      case 'soft-prod':
+        envVars = softEnvironment;
+        break;
+      case 'soft-staging':
+        envVars = softStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;
