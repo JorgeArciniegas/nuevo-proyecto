@@ -408,6 +408,34 @@
                   "with": "src/environments/environment.apuestas-dominicanas-staging.ts"
                 }
               ]
+            },
+            "f2o-prod": {
+              "outputPath": "dist-f2o",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/f2o/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.f2o.ts"
+                }
+              ]
+            },
+            "f2o-staging": {
+              "outputPath": "dist-f2o",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/f2o/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.f2o-staging.ts"
+                }
+              ]
             }
           }
         },
@@ -497,6 +525,12 @@
             },
             "apuestas-dominicanas-staging": {
               "browserTarget": "vdesk:build:apuestas-dominicanas-staging"
+            },
+            "f2o-prod": {
+              "browserTarget": "vdesk:build:f2o-prod"
+            },
+            "f2o-staging": {
+              "browserTarget": "vdesk:build:f2o-staging"
             }
           }
         },

@@ -45,6 +45,9 @@
 	&.apuestas-dominicanas {
 		@import "./skins/apuestas-dominicanas/styles";
 	}
+	&.f2o {
+		@import "./skins/f2o/styles";
+	}
 
 	.main-content {
 		@extend %font-family;
