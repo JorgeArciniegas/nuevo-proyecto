@@ -48,6 +48,9 @@
 	&.f2o {
 		@import "./skins/f2o/styles";
 	}
+	&.soft {
+		@import "./skins/soft/styles";
+	}
 
 	.main-content {
 		@extend %font-family;
