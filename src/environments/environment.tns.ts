@@ -8,6 +8,9 @@ import { environment as beteseStagingEnvironment } from './environment.betese-st
 // bolivarbet
 import { environment as bolivarbetEnvironment } from './environment.bolivarbet';
 import { environment as bolivarbetStagingEnvironment } from './environment.bolivarbet-staging';
+// f2o
+import { environment as f2oEnvironment } from './environment.f2o';
+import { environment as f2oStagingEnvironment } from './environment.f2o-staging';
 // genc01
 import { environment as genc01Environment } from './environment.genc01';
 import { environment as genc01StagingEnvironment } from './environment.genc01-staging';
@@ -133,6 +136,12 @@ export const environment: Environment = (() => {
         break;
       case 'apuestas-dominicanas-staging':
         envVars = apuestasDominicanasStagingEnvironment;
+        break;
+      case 'f2o-prod':
+        envVars = f2oEnvironment;
+        break;
+      case 'f2o-staging':
+        envVars = f2oStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;
