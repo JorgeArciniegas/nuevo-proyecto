@@ -31,7 +31,7 @@ export class ApplicationMenuComponent implements OnInit {
 
   productSelecting(productSelected: Products) {
     this.btnSelected = productSelected.name;
-    this.productService.resetBoard();
+    // this.productService.resetBoard();
     this.productService.changeProduct(productSelected.codeProduct);
     this.router.getRouter().navigateByUrl('/products/main');
   }
