@@ -95,7 +95,8 @@ export enum LICENSE_TYPE {
   SPORTRACE,
   BOLIVARBET,
   UGANBET,
-  APUESTAS_DOMINICANAS
+  APUESTAS_DOMINICANAS,
+  F2O
 }
 
 export interface TypeCoupon {
