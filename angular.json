@@ -380,6 +380,118 @@
                   "with": "src/environments/environment.uganbet-staging.ts"
                 }
               ]
+            },
+            "apuestas-dominicanas-prod": {
+              "outputPath": "dist-apuestas-dominicanas",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/apuestas-dominicanas/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.apuestas-dominicanas.ts"
+                }
+              ]
+            },
+            "apuestas-dominicanas-staging": {
+              "outputPath": "dist-apuestas-dominicanas",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/apuestas-dominicanas/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.apuestas-dominicanas-staging.ts"
+                }
+              ]
+            },
+            "f2o-prod": {
+              "outputPath": "dist-f2o",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/f2o/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.f2o.ts"
+                }
+              ]
+            },
+            "f2o-staging": {
+              "outputPath": "dist-f2o",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/f2o/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.f2o-staging.ts"
+                }
+              ]
+            },
+            "soft-prod": {
+              "outputPath": "dist-soft",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/soft/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.soft.ts"
+                }
+              ]
+            },
+            "soft-staging": {
+              "outputPath": "dist-soft",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/soft/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.soft-staging.ts"
+                }
+              ]
+            },
+            "kyron-prod": {
+              "outputPath": "dist-kyron",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/kyron/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.kyron.ts"
+                }
+              ]
+            },
+            "kyron-staging": {
+              "outputPath": "dist-kyron",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/kyron/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.kyron-staging.ts"
+                }
+              ]
             }
           }
         },
@@ -463,6 +575,30 @@
             },
             "uganbet-staging": {
               "browserTarget": "vdesk:build:uganbet-staging"
+            },
+            "apuestas-dominicanas-prod": {
+              "browserTarget": "vdesk:build:apuestas-dominicanas-prod"
+            },
+            "apuestas-dominicanas-staging": {
+              "browserTarget": "vdesk:build:apuestas-dominicanas-staging"
+            },
+            "f2o-prod": {
+              "browserTarget": "vdesk:build:f2o-prod"
+            },
+            "f2o-staging": {
+              "browserTarget": "vdesk:build:f2o-staging"
+            },
+            "soft-prod": {
+              "browserTarget": "vdesk:build:soft-prod"
+            },
+            "soft-staging": {
+              "browserTarget": "vdesk:build:soft-staging"
+            },
+            "kyron-prod": {
+              "browserTarget": "vdesk:build:kyron-prod"
+            },
+            "kyron-staging": {
+              "browserTarget": "vdesk:build:kyron-staging"
             }
           }
         },

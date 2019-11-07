@@ -94,7 +94,11 @@ export enum LICENSE_TYPE {
   BETESE,
   SPORTRACE,
   BOLIVARBET,
-  UGANBET
+  UGANBET,
+  APUESTAS_DOMINICANAS,
+  F2O,
+  SOFT,
+  KYRON
 }
 
 export interface TypeCoupon {

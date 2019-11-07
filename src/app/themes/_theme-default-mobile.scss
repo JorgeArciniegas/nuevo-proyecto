@@ -43,6 +43,18 @@
 	&.bolivarbet {
 		@import "./skins/bolivarbet/styles";
 	}
+	&.apuestas-dominicanas {
+		@import "./skins/apuestas-dominicanas/styles";
+	}
+	&.f2o {
+		@import "./skins/f2o/styles";
+	}
+	&.soft {
+		@import "./skins/soft/styles";
+	}
+	&.kyron {
+		@import "./skins/kyron/styles";
+	}
 
 	.main-content {
 		@extend %font-family;

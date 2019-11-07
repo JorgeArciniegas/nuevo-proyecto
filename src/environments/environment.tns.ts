@@ -1,10 +1,16 @@
 import { environment as devEnvironment } from './environment';
+// apuestas dominicanas
+import { environment as apuestasDominicanasEnvironment } from './environment.apuestas-dominicanas';
+import { environment as apuestasDominicanasStagingEnvironment } from './environment.apuestas-dominicanas-staging';
 // BETESE
 import { environment as beteseEnvironment } from './environment.betese';
 import { environment as beteseStagingEnvironment } from './environment.betese-staging';
 // bolivarbet
 import { environment as bolivarbetEnvironment } from './environment.bolivarbet';
 import { environment as bolivarbetStagingEnvironment } from './environment.bolivarbet-staging';
+// f2o
+import { environment as f2oEnvironment } from './environment.f2o';
+import { environment as f2oStagingEnvironment } from './environment.f2o-staging';
 // genc01
 import { environment as genc01Environment } from './environment.genc01';
 import { environment as genc01StagingEnvironment } from './environment.genc01-staging';
@@ -14,6 +20,9 @@ import { environment as genc02StagingEnvironment } from './environment.genc02-st
 // genc03
 import { environment as genc03Environment } from './environment.genc03';
 import { environment as genc03StagingEnvironment } from './environment.genc03-staging';
+// kyron
+import { environment as kyronEnvironment } from './environment.kyron';
+import { environment as kyronStagingEnvironment } from './environment.kyron-staging';
 // mayabet
 import { environment as mayabetEnvironment } from './environment.mayabet';
 import { environment as mayabetStagingEnvironment } from './environment.mayabet-staging';
@@ -25,6 +34,9 @@ import { environment as prodEnvironment } from './environment.prod';
 // shawis
 import { environment as shawisEnvironment } from './environment.shawis';
 import { environment as shawisStagingEnvironment } from './environment.shawis-staging';
+// soft
+import { environment as softEnvironment } from './environment.soft';
+import { environment as softStagingEnvironment } from './environment.soft-staging';
 // sportrace
 import { environment as sportraceEnvironment } from './environment.sportrace';
 import { environment as sportraceStagingEnvironment } from './environment.sportrace-staging';
@@ -118,6 +130,30 @@ export const environment: Environment = (() => {
         break;
       case 'bolivarbet-staging':
         envVars = bolivarbetStagingEnvironment;
+        break;
+      case 'apuestas-dominicanas-prod':
+        envVars = apuestasDominicanasEnvironment;
+        break;
+      case 'apuestas-dominicanas-staging':
+        envVars = apuestasDominicanasStagingEnvironment;
+        break;
+      case 'f2o-prod':
+        envVars = f2oEnvironment;
+        break;
+      case 'f2o-staging':
+        envVars = f2oStagingEnvironment;
+        break;
+      case 'soft-prod':
+        envVars = softEnvironment;
+        break;
+      case 'soft-staging':
+        envVars = softStagingEnvironment;
+        break;
+      case 'kyron-prod':
+        envVars = kyronEnvironment;
+        break;
+      case 'kyron-staging':
+        envVars = kyronStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;
