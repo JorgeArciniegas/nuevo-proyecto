@@ -51,6 +51,9 @@
 	&.soft {
 		@import "./skins/soft/styles";
 	}
+	&.kyron {
+		@import "./skins/kyron/styles";
+	}
 
 	.main-content {
 		@extend %font-family;
