@@ -20,6 +20,9 @@ import { environment as genc02StagingEnvironment } from './environment.genc02-st
 // genc03
 import { environment as genc03Environment } from './environment.genc03';
 import { environment as genc03StagingEnvironment } from './environment.genc03-staging';
+// kyron
+import { environment as kyronEnvironment } from './environment.kyron';
+import { environment as kyronStagingEnvironment } from './environment.kyron-staging';
 // mayabet
 import { environment as mayabetEnvironment } from './environment.mayabet';
 import { environment as mayabetStagingEnvironment } from './environment.mayabet-staging';
@@ -31,6 +34,9 @@ import { environment as prodEnvironment } from './environment.prod';
 // shawis
 import { environment as shawisEnvironment } from './environment.shawis';
 import { environment as shawisStagingEnvironment } from './environment.shawis-staging';
+// soft
+import { environment as softEnvironment } from './environment.soft';
+import { environment as softStagingEnvironment } from './environment.soft-staging';
 // sportrace
 import { environment as sportraceEnvironment } from './environment.sportrace';
 import { environment as sportraceStagingEnvironment } from './environment.sportrace-staging';
@@ -43,9 +49,6 @@ import { environment as universalSoftStagingEnvironment } from './environment.un
 // VGEN
 import { environment as vgenEnvironment } from './environment.vgen';
 import { environment as vgenStagingEnvironment } from './environment.vgen-staging';
-// soft
-import { environment as softEnvironment } from './environment.soft';
-import { environment as softStagingEnvironment } from './environment.soft-staging';
 
 export const environment: Environment = (() => {
   let envVars;
@@ -145,6 +148,12 @@ export const environment: Environment = (() => {
         break;
       case 'soft-staging':
         envVars = softStagingEnvironment;
+        break;
+      case 'kyron-prod':
+        envVars = kyronEnvironment;
+        break;
+      case 'kyron-staging':
+        envVars = kyronStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;
