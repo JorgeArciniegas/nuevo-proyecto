@@ -30,7 +30,6 @@ export class ApplicationMenuComponent implements OnInit {
   }
 
   productSelecting(productSelected: Products) {
-    this.loaderService.isLoading.next(true);
     this.btnSelected = productSelected.name;
     this.productService.resetBoard();
     this.productService.changeProduct(productSelected.codeProduct);

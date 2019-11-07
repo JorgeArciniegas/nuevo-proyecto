@@ -1,10 +1,10 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { LAYOUT_TYPE } from '../../../../environments/environment.models';
 import { MainService } from '../main.service';
 import { EventControl } from './event-control.model';
 import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../products.service';
-import { Subscription, timer } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +16,23 @@ export class EventControlService {
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   private settings: AppSettings;
   public eventControlDetails: EventControl;
+
+
+  private _typeProductSelected: LAYOUT_TYPE;
+  public get typeProductSelected(): LAYOUT_TYPE {
+    return this.productService.product.layoutProducts.type;
+  }
+  public set typeProductSelected(value: LAYOUT_TYPE) {
+    this._typeProductSelected = value;
+  }
+
   constructor(
     public mainService: MainService,
     private readonly appSettings: AppSettings,
     public productService: ProductsService
   ) {
     this.settings = this.appSettings;
+    this.eventControlDetails = new EventControl();
   }
 
   init() {
@@ -35,12 +46,16 @@ export class EventControlService {
         /**
          * @eventControlDetails is passed as input to a control template
          */
-        this.eventControlDetails = this.getEventControl();
+        this.eventControlDetails = this.getEventControl(event);
       }
     );
     // when app to start check if the subscription is enabled
-    if (!this.eventControlDetails) {
-      this.eventControlDetails = this.getEventControl();
+    if (!this.eventControlDetails || !this.eventControlDetails.currentEvent) {
+      try {
+        this.eventControlDetails = this.getEventControl();
+      } catch (err) {
+        console.log('ERROR LOAD EventControlService getEventControl() --> ', err);
+      }
     }
   }
 
@@ -51,16 +66,19 @@ export class EventControlService {
    * @getEventControl thrown on each event change
    * @returns event info object
    */
-  public getEventControl(): EventControl {
+  public getEventControl(event?: number): EventControl {
+
+    const currentEventIdx: number = event ? event : this.mainService.eventDetails.currentEvent;
+
     // Create layout object
     this.eventsControlDetails = {
       productImageClass: this.productService.product.productSelected
         ? 'PRODUCT-' + this.productService.product.codeProduct + '-BG'
         : '',
       productName: this.productService.product.label,
-      currentEvent: this.mainService.eventDetails.events[this.mainService.eventDetails.currentEvent],
-      eventLabel: this.mainService.eventDetails.events[this.mainService.eventDetails.currentEvent].label,
-      eventNumber: this.mainService.eventDetails.events[this.mainService.eventDetails.currentEvent].number,
+      currentEvent: this.mainService.eventDetails.events[currentEventIdx],
+      eventLabel: this.mainService.eventDetails.events[currentEventIdx].label,
+      eventNumber: this.mainService.eventDetails.events[currentEventIdx].number,
       showEventId: this.settings.showEventId,
       isWindowSizeSmall: this.productService.windowSize.small,
       theme: this.settings.theme
@@ -72,5 +90,8 @@ export class EventControlService {
 
     return this.eventsControlDetails;
   }
+
+
+
 
 }
