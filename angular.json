@@ -492,6 +492,34 @@
                   "with": "src/environments/environment.kyron-staging.ts"
                 }
               ]
+            },
+            "homerun-prod": {
+              "outputPath": "dist-homerun",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/homerun/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.homerun.ts"
+                }
+              ]
+            },
+            "homerun-staging": {
+              "outputPath": "dist-homerun",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/homerun/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.homerun-staging.ts"
+                }
+              ]
             }
           }
         },
@@ -599,6 +627,12 @@
             },
             "kyron-staging": {
               "browserTarget": "vdesk:build:kyron-staging"
+            },
+            "homerun-prod": {
+              "browserTarget": "vdesk:build:homerun-prod"
+            },
+            "homerun-staging": {
+              "browserTarget": "vdesk:build:homerun-staging"
             }
           }
         },
