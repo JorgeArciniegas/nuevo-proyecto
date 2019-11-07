@@ -49,6 +49,9 @@ import { environment as universalSoftStagingEnvironment } from './environment.un
 // VGEN
 import { environment as vgenEnvironment } from './environment.vgen';
 import { environment as vgenStagingEnvironment } from './environment.vgen-staging';
+// homerun
+import { environment as homerunEnvironment } from './environment.homerun';
+import { environment as homerunStagingEnvironment } from './environment.homerun-staging';
 
 export const environment: Environment = (() => {
   let envVars;
@@ -160,6 +163,12 @@ export const environment: Environment = (() => {
         break;
       case 'kyron-staging':
         envVars = kyronStagingEnvironment;
+        break;
+      case 'homerun-prod':
+        envVars = homerunEnvironment;
+        break;
+      case 'homerun-staging':
+        envVars = homerunStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;
