@@ -1,4 +1,7 @@
 import { environment as devEnvironment } from './environment';
+// apuestas dominicanas
+import { environment as apuestasDominicanasEnvironment } from './environment.apuestas-dominicanas';
+import { environment as apuestasDominicanasStagingEnvironment } from './environment.apuestas-dominicanas-staging';
 // BETESE
 import { environment as beteseEnvironment } from './environment.betese';
 import { environment as beteseStagingEnvironment } from './environment.betese-staging';
@@ -124,6 +127,12 @@ export const environment: Environment = (() => {
         break;
       case 'bolivarbet-staging':
         envVars = bolivarbetStagingEnvironment;
+        break;
+      case 'apuestas-dominicanas-prod':
+        envVars = apuestasDominicanasEnvironment;
+        break;
+      case 'apuestas-dominicanas-staging':
+        envVars = apuestasDominicanasStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;
