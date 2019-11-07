@@ -436,6 +436,34 @@
                   "with": "src/environments/environment.f2o-staging.ts"
                 }
               ]
+            },
+            "soft-prod": {
+              "outputPath": "dist-soft",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/soft/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.soft.ts"
+                }
+              ]
+            },
+            "soft-staging": {
+              "outputPath": "dist-soft",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/soft/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.soft-staging.ts"
+                }
+              ]
             }
           }
         },
@@ -531,6 +559,12 @@
             },
             "f2o-staging": {
               "browserTarget": "vdesk:build:f2o-staging"
+            },
+            "soft-prod": {
+              "browserTarget": "vdesk:build:soft-prod"
+            },
+            "soft-staging": {
+              "browserTarget": "vdesk:build:soft-staging"
             }
           }
         },
