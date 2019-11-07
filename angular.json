@@ -464,6 +464,34 @@
                   "with": "src/environments/environment.soft-staging.ts"
                 }
               ]
+            },
+            "kyron-prod": {
+              "outputPath": "dist-kyron",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/kyron/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.kyron.ts"
+                }
+              ]
+            },
+            "kyron-staging": {
+              "outputPath": "dist-kyron",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/kyron/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.kyron-staging.ts"
+                }
+              ]
             }
           }
         },
@@ -565,6 +593,12 @@
             },
             "soft-staging": {
               "browserTarget": "vdesk:build:soft-staging"
+            },
+            "kyron-prod": {
+              "browserTarget": "vdesk:build:kyron-prod"
+            },
+            "kyron-staging": {
+              "browserTarget": "vdesk:build:kyron-staging"
             }
           }
         },

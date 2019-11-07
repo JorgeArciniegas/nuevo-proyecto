@@ -97,7 +97,8 @@ export enum LICENSE_TYPE {
   BOLIVARBET,
   APUESTAS_DOMINICANAS,
   F2O,
-  SOFT
+  SOFT,
+  KYRON
 }
 
 export interface TypeCoupon {
