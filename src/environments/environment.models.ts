@@ -98,7 +98,8 @@ export enum LICENSE_TYPE {
   APUESTAS_DOMINICANAS,
   F2O,
   SOFT,
-  KYRON
+  KYRON,
+  HOMERUN
 }
 
 export interface TypeCoupon {

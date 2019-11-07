@@ -55,6 +55,9 @@
 	&.kyron {
 		@import "./skins/kyron/styles";
 	}
+	&.homerun {
+		@import "./skins/homerun/styles";
+	}
 
 	.main-content {
 		@extend %font-family;
