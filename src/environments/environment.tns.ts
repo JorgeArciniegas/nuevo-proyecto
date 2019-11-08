@@ -5,6 +5,9 @@ import { environment as apuestasDominicanasStagingEnvironment } from './environm
 // BETESE
 import { environment as beteseEnvironment } from './environment.betese';
 import { environment as beteseStagingEnvironment } from './environment.betese-staging';
+// betlogik
+import { environment as betlogikEnvironment } from './environment.betlogik';
+import { environment as betlogikStagingEnvironment } from './environment.betlogik-staging';
 // bolivarbet
 import { environment as bolivarbetEnvironment } from './environment.bolivarbet';
 import { environment as bolivarbetStagingEnvironment } from './environment.bolivarbet-staging';
@@ -20,6 +23,9 @@ import { environment as genc02StagingEnvironment } from './environment.genc02-st
 // genc03
 import { environment as genc03Environment } from './environment.genc03';
 import { environment as genc03StagingEnvironment } from './environment.genc03-staging';
+// homerun
+import { environment as homerunEnvironment } from './environment.homerun';
+import { environment as homerunStagingEnvironment } from './environment.homerun-staging';
 // kyron
 import { environment as kyronEnvironment } from './environment.kyron';
 import { environment as kyronStagingEnvironment } from './environment.kyron-staging';
@@ -49,9 +55,6 @@ import { environment as universalSoftStagingEnvironment } from './environment.un
 // VGEN
 import { environment as vgenEnvironment } from './environment.vgen';
 import { environment as vgenStagingEnvironment } from './environment.vgen-staging';
-// homerun
-import { environment as homerunEnvironment } from './environment.homerun';
-import { environment as homerunStagingEnvironment } from './environment.homerun-staging';
 
 export const environment: Environment = (() => {
   let envVars;
@@ -169,6 +172,12 @@ export const environment: Environment = (() => {
         break;
       case 'homerun-staging':
         envVars = homerunStagingEnvironment;
+        break;
+      case 'betlogik-prod':
+        envVars = betlogikEnvironment;
+        break;
+      case 'betlogik-staging':
+        envVars = betlogikStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;

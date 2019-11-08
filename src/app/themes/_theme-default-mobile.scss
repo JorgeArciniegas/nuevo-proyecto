@@ -57,6 +57,9 @@
 	&.homerun {
 		@import "./skins/homerun/styles";
 	}
+	&.betlogik {
+		@import "./skins/betlogik/styles";
+	}
 
 	.main-content {
 		@extend %font-family;
