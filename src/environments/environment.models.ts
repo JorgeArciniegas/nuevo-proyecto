@@ -99,7 +99,8 @@ export enum LICENSE_TYPE {
   F2O,
   SOFT,
   KYRON,
-  HOMERUN
+  HOMERUN,
+  BETLOGIK
 }
 
 export interface TypeCoupon {

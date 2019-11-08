@@ -520,6 +520,34 @@
                   "with": "src/environments/environment.homerun-staging.ts"
                 }
               ]
+            },
+            "betlogik-prod": {
+              "outputPath": "dist-betlogik",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betlogik/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betlogik.ts"
+                }
+              ]
+            },
+            "betlogik-staging": {
+              "outputPath": "dist-betlogik",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betlogik/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betlogik-staging.ts"
+                }
+              ]
             }
           }
         },
@@ -633,6 +661,12 @@
             },
             "homerun-staging": {
               "browserTarget": "vdesk:build:homerun-staging"
+            },
+            "betlogik-prod": {
+              "browserTarget": "vdesk:build:betlogik-prod"
+            },
+            "betlogik-staging": {
+              "browserTarget": "vdesk:build:betlogik-staging"
             }
           }
         },
