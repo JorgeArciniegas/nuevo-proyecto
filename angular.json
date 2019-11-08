@@ -548,6 +548,34 @@
                   "with": "src/environments/environment.betlogik-staging.ts"
                 }
               ]
+            },
+            "doradobet-prod": {
+              "outputPath": "dist-doradobet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/doradobet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.doradobet.ts"
+                }
+              ]
+            },
+            "doradobet-staging": {
+              "outputPath": "dist-doradobet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/doradobet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betlogik-staging.ts"
+                }
+              ]
             }
           }
         },
@@ -667,6 +695,12 @@
             },
             "betlogik-staging": {
               "browserTarget": "vdesk:build:betlogik-staging"
+            },
+            "doradobet-prod": {
+              "browserTarget": "vdesk:build:doradobet-prod"
+            },
+            "doradobet-staging": {
+              "browserTarget": "vdesk:build:doradobet-staging"
             }
           }
         },

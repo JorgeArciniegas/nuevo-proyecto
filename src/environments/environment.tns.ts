@@ -11,6 +11,9 @@ import { environment as betlogikStagingEnvironment } from './environment.betlogi
 // bolivarbet
 import { environment as bolivarbetEnvironment } from './environment.bolivarbet';
 import { environment as bolivarbetStagingEnvironment } from './environment.bolivarbet-staging';
+// doradobet
+import { environment as doradobetEnvironment } from './environment.doradobet';
+import { environment as doradobetStagingEnvironment } from './environment.doradobet-staging';
 // f2o
 import { environment as f2oEnvironment } from './environment.f2o';
 import { environment as f2oStagingEnvironment } from './environment.f2o-staging';
@@ -178,6 +181,12 @@ export const environment: Environment = (() => {
         break;
       case 'betlogik-staging':
         envVars = betlogikStagingEnvironment;
+        break;
+      case 'doradobet-prod':
+        envVars = doradobetEnvironment;
+        break;
+      case 'doradobet-staging':
+        envVars = doradobetStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;
