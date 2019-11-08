@@ -60,6 +60,9 @@
 	&.betlogik {
 		@import "./skins/betlogik/styles";
 	}
+	&.doradobet {
+		@import "./skins/doradobet/styles";
+	}
 
 	.main-content {
 		@extend %font-family;
