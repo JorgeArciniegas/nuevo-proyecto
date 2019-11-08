@@ -5,9 +5,11 @@
 
 	.first-row {
 		font-size: 1.4vw;
+		width: 100%;
 	}
 	.second-row {
 		font-size: 1.3vw;
+		width: 100%;
 	}
 	.btn-display:active {
 		box-shadow: none;
@@ -29,6 +31,7 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		text-align: right;
+		white-space: nowrap;
 	}
 }
 .group-title {

@@ -18,13 +18,13 @@
         <div fxFlex="10">
           <div><small data='disabled'>{{ 'DATE_FROM' | translate }}</small></div>
           <div class="value">
-            <strong>{{ service.request.FromDate | date:'d MMM yyyy'}}</strong>
+            <strong>{{ service.request?.FromDate | date:'d MMM yyyy'}}</strong>
           </div>
         </div>
         <div fxFlex="10">
           <div><small data='disabled'>{{ 'DATE_TO' | translate }}</small></div>
           <div class="value">
-            <strong>{{ service.request.ToDate | date:'d MMM yyyy'}}</strong>
+            <strong>{{ service.request?.ToDate | date:'d MMM yyyy'}}</strong>
           </div>
         </div>
         <div fxFlex="19"></div>
@@ -44,30 +44,31 @@
       </div>
     </div>
     <!-- RESULT  -->
-    <div fxFlex="75" class="padding-20 btn-filter radius-5 elevation-z5" fxLayout="column" fxLayoutAlign="flex-start">
+    <div fxFlex="75" class="btn-filter radius-5 elevation-z5" fxLayout="column" fxLayoutGap="grid"
+      fxLayoutAlign="flex-start">
       <!-- HEADER -->
-      <div fxLayout="column" fxFlex="5">
-        <div fxFlex fxLayout="row" class="border-bottom-overlay-1px">
+      <div fxLayout="column" fxFlex="8">
+        <div fxFlex fxLayout="row" fxLayoutAlign="center center" class="table-report-header border-bottom-overlay-1px">
           <div fxFlex="5"></div>
-          <div fxFlex="15">
+          <div fxFlex="15" class="table-report-tile">
             <strong data='disabled'>{{ 'DATE_OF_REFERENCE' | translate }}</strong>
           </div>
-          <div fxFlex="10">
+          <div fxFlex="10" class="table-report-tile">
             <strong data='disabled'>{{ 'COUPON_NUMBER' | translate }}</strong>
           </div>
-          <div fxFlex="10">
+          <div fxFlex="10" class="table-report-tile">
             <strong data='disabled'>{{ 'TOT_BET' | translate }}</strong>
           </div>
-          <div fxFlex="10">
+          <div fxFlex="10" class="table-report-tile">
             <strong data='disabled'>{{ 'TOT_WON' | translate }}</strong>
           </div>
-          <div fxFlex="15">
+          <div fxFlex="15" class="table-report-tile">
             <strong data='disabled'>{{ 'JACKPOT_SHOP' | translate }}</strong>
           </div>
-          <div fxFlex="15">
+          <div fxFlex="15" class="table-report-tile">
             <strong data='disabled'>{{ 'JACKPOT_MEGA' | translate }}</strong>
           </div>
-          <div fxFlex="10">
+          <div fxFlex="10" class="table-report-tile">
             <strong data='disabled'>{{ 'TOT_PROFIT' | translate  }}</strong>
           </div>
           <div fxFlex></div>
@@ -75,8 +76,8 @@
       </div>
       <!-- ROWS -->
       <div fxLayout="column" fxFlex="100" fxLayoutAlign="start stretch">
-        <div fxFlex="100" fxLayout="column" fxLayoutAlign="flex-start stretch" fxLayoutAlignGap="grid">
-          <div fxFlex="8" fxLayoutAlign="start center" class="border-bottom-overlay-1px" [style.min-height.px]="55"
+        <div fxFlex="100" fxLayout="column" fxLayoutAlign="flex-start stretch" fxLayoutGap="grid">
+          <div fxFlex="8" fxLayoutAlign="start center" class="table-report-result-row border-bottom-overlay-1px"
             *ngFor="let rowItem of service.aggregatesTempData; let i = index">
             <div fxFlex="5"></div>
             <div fxFlex="15">
@@ -105,7 +106,7 @@
       </div>
     </div>
     <!--TOTALS PAGE -->
-    <div fxFlex="7" fxLayout="column wrap">
+    <div fxFlex="8" fxLayout="column wrap">
       <div fxFlex class="btn-filter" fxLayout="column wrap" fxLayoutAlign="stretch">
         <div fxFlexFill fxLayout="row" fxLayoutAlign="flex-start">
           <div fxFlex fxLayout=" row wrap" fxLayoutGap="grid">

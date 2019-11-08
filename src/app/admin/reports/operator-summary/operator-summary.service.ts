@@ -3,9 +3,9 @@ import { ElysApiService, ReportsOperatorVolumeRequest, ReportsOperatorVolumeResp
 import { UserService } from '../../../services/user.service';
 import { RouterService } from '../../../services/utility/router/router.service';
 
-@Injectable({
+@Injectable(/* {
   providedIn: 'root'
-})
+} */)
 export class OperatorSummaryService {
   reportsOperatorVolumeRequest: ReportsOperatorVolumeRequest = null;
   reportsOperatorVolumeResponse: ReportsOperatorVolumeResponse[] = [];
@@ -68,7 +68,7 @@ export class OperatorSummaryService {
   }
 
   // Method to init or reset the request object.
-  private initResetRequest(): void {
+  public initResetRequest(): void {
     const today = new Date();
     this.reportsOperatorVolumeRequest = {
       userId: this.userService.dataUserDetail.userDetail.UserId,
