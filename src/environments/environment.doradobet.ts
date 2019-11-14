@@ -12,7 +12,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.DORADOBET,
-  baseApiUrl: 'https://vg-apidoradobet.odissea-services.net/',
+  baseApiUrl: 'https://vg-apidoradobet.odissea-services.net',
   pageTitle: 'Doradobet - KIOSK',
   theme: 'doradobet',
   faviconPath: 'app/themes/skins/doradobet/image/Logo-header.png',

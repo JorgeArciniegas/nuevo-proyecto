@@ -12,7 +12,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.SOFT,
-  baseApiUrl: 'https://vg-apisoft.odissea-services.net/',
+  baseApiUrl: 'https://vg-apisoft.odissea-services.net',
   pageTitle: 'Soft - KIOSK',
   theme: 'soft',
   faviconPath: 'app/themes/skins/soft/image/Logo-header.png',
