@@ -12,7 +12,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.DEMO_LICENSE,
-  baseApiUrl: 'vg-apibetese.odissea-services.net',
+  baseApiUrl: 'https://vg-apibetese.odissea-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'betese',
   faviconPath: 'app/themes/skins/betese/image/Logo-header.png',

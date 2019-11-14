@@ -12,7 +12,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.HOMERUN,
-  baseApiUrl: 'https://vg-apihomerun.odissea-services.net/',
+  baseApiUrl: 'https://vg-apihomerun.odissea-services.net',
   pageTitle: 'Homerun - KIOSK',
   theme: 'homerun',
   faviconPath: 'app/themes/skins/homerun/image/Logo-header.png',
