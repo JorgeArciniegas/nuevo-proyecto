@@ -71,6 +71,7 @@ export class UserService {
           this.loadUserData(this.storageService.getData('tokenData'), this.isLoggedOperator());
         }
       });
+      this.api.tokenBearer = this.storageService.getData('tokenData');
     }
   }
 
