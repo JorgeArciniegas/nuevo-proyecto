@@ -5,9 +5,11 @@ import { Products } from '../../../../environments/environment.models';
 import { UserService } from '../../../services/user.service';
 import { RouterService } from '../../../services/utility/router/router.service';
 import { LoaderService } from '../../../services/utility/loader/loader.service';
+import { timer } from 'rxjs';
 
 @Component({
-  selector: 'app-application-menu',
+  moduleId: module.id,
+  selector: 'app-application-menu, [app-application-menu]',
   templateUrl: './application-menu.component.html',
   styleUrls: ['./application-menu.component.scss']
 })
@@ -31,14 +33,17 @@ export class ApplicationMenuComponent implements OnInit {
 
   productSelecting(productSelected: Products) {
     this.btnSelected = productSelected.name;
-    // this.productService.resetBoard();
-    this.productService.changeProduct(productSelected.codeProduct);
-    this.router.getRouter().navigateByUrl('/products/main');
+    this.loaderService.isLoading.next(true);
+    timer(100).subscribe(() => {
+      // this.productService.resetBoard();
+      this.productService.changeProduct(productSelected.codeProduct);
+      this.router.getRouter().navigateByUrl('/products/main');
+    });
   }
 
   goToAdmin() {
     this.loaderService.isLoading.next(true);
-    this.router.getRouter().navigateByUrl('/admin');
+    timer(100).subscribe(() => this.router.getRouter().navigateByUrl('/admin'));
 
   }
 }
