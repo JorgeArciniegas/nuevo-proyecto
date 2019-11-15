@@ -1,24 +1,32 @@
-import { Component, } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { ModalDatetimepicker } from 'nativescript-modal-datetimepicker';
 import { RouterService } from '../../../../services/utility/router/router.service';
 import { StatementVirtualShopService } from '../statement-virtual-shop.service';
 import { AppSettings } from '../../../../app.settings';
+import { timer } from 'rxjs';
+import { LoaderService } from '../../../../services/utility/loader/loader.service';
 
 @Component({
   selector: 'app-statement-virtual-shop-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
 
   constructor(
     public service: StatementVirtualShopService,
     private router: RouterService,
-    public settings: AppSettings
+    public settings: AppSettings,
+    private loaderService: LoaderService
   ) {
 
   }
 
+  ngOnInit() {
+    timer(300).subscribe(() =>
+      this.loaderService.setLoading(false, 'ChildrenAdmin')
+    );
+  }
 
   getData(): void {
     this.service.getData();

@@ -33,16 +33,16 @@ export class ApplicationMenuComponent implements OnInit {
 
   productSelecting(productSelected: Products) {
     this.btnSelected = productSelected.name;
-    this.loaderService.isLoading.next(true);
+    this.loaderService.setLoading(true, 'ProductView');
     timer(100).subscribe(() => {
-      // this.productService.resetBoard();
+      this.productService.resetBoard();
       this.productService.changeProduct(productSelected.codeProduct);
       this.router.getRouter().navigateByUrl('/products/main');
     });
   }
 
   goToAdmin() {
-    this.loaderService.isLoading.next(true);
+    this.loaderService.setLoading(true, 'AdminPanel');
     timer(100).subscribe(() => this.router.getRouter().navigateByUrl('/admin'));
 
   }

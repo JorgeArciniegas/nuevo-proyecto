@@ -1,6 +1,7 @@
-<app-event-control-standard [eventControlDetails]="eventControlService.eventControlDetails" *ngIf="
+<app-event-control-standard *ngIf="eventControlService.eventControlDetails &&
   (eventControlService.typeProductSelected === eventControlService.typeLayout.RACING
   || eventControlService.typeProductSelected === eventControlService.typeLayout.COCK_FIGHT
   || eventControlService.typeProductSelected === eventControlService.typeLayout.SOCCER
-  || eventControlService.typeProductSelected === eventControlService.typeLayout.KENO)">
+  || eventControlService.typeProductSelected === eventControlService.typeLayout.KENO)"
+  [eventControlDetails]="eventControlService.eventControlDetails">
 </app-event-control-standard>

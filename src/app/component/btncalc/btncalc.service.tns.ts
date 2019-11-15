@@ -1,9 +1,9 @@
 import { formatCurrency } from '@angular/common';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subject, Subscription, timer, defer } from 'rxjs';
-import { AppSettings } from '../../../../src/app/app.settings';
-import { UserService } from '../../../../src/app/services/user.service';
-import { TranslateUtilityService } from '../../../../src/app/services/utility/translate-utility.service';
+import { AppSettings } from '../../app.settings';
+import { UserService } from '../../services/user.service';
+import { TranslateUtilityService } from '../../services/utility/translate-utility.service';
 import { PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { TypeBetSlipColTot } from '../../products/main/main.models';
@@ -12,6 +12,7 @@ import { TYPINGTYPE } from './btncalc.enum';
 import { OddsStakeEdit } from '../coupon/coupon.model';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { RouterService } from '../../services/utility/router/router.service';
+import { LoaderService } from '../../services/utility/loader/loader.service';
 
 @Injectable({
   providedIn: 'root',
@@ -43,7 +44,8 @@ export class BtncalcService implements OnDestroy {
     private translate: TranslateUtilityService,
     private userService: UserService,
     private couponService: CouponService,
-    private routerService: RouterService
+    private routerService: RouterService,
+    private loaderService: LoaderService
   ) {
     this.polyfunctionalDecimalsFlag = true;
     this.polyfunctionalAdditionFlag = true;
@@ -110,7 +112,16 @@ export class BtncalcService implements OnDestroy {
   /**
    *
    */
-  tapPlus(groupingChange?: boolean): void {
+  tapPlus(groupingChange?: boolean) {
+    if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.RACING) {
+
+      this.loaderService.setLoading(true, 'AddCoupon');
+    }
+    timer(50).subscribe(() => this.firePlus(groupingChange));
+  }
+
+
+  private firePlus(groupingChange?: boolean) {
     this.assignStake();
     if (this.userService.isModalOpen) {
       this.userService.isBtnCalcEditable = false;
@@ -133,8 +144,12 @@ export class BtncalcService implements OnDestroy {
       this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds, this.productService.product.typeCoupon.acceptMultiStake);
     }
     if (!groupingChange) {
+      //
       this.productService.closeProductDialog();
       this.productService.resetBoard();
+    }
+    if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.RACING) {
+      this.loaderService.setLoading(false, 'AddCoupon');
     }
   }
 
@@ -163,7 +178,7 @@ export class BtncalcService implements OnDestroy {
   }
 
   // updated global amount to coupon
-  updateCouponStake(): void {
+  async updateCouponStake() {
     if (this.couponService.coupon && this.polyfunctionalStakeCoupon.isEnabled) {
       this.couponService.coupon.Odds.forEach(item => {
         item.OddStake = this.polyfunctionalStakeCoupon.columnAmount;
@@ -174,7 +189,7 @@ export class BtncalcService implements OnDestroy {
   }
 
 
-  updateCouponStakeLottery(): void {
+  async updateCouponStakeLottery() {
     if (this.couponService.coupon) {
       this.couponService.coupon.Groupings[0].Stake = this.polyfunctionStakePresetPlayer.amount;
       this.couponService.coupon.Stake = this.polyfunctionStakePresetPlayer.amount;
@@ -326,7 +341,7 @@ export class BtncalcService implements OnDestroy {
   /**
    * assign Stake To Coupon Or stake in PolyfuncionalArea
    */
-  public assignStake(): void {
+  public assignStake() {
     // check if there is a selection in polyfuncional Area and associate the amount if there is no selection,
     // check for coupon and associate the amount
     if (this.polyfunctionalArea.odds.length > 0 && this.productService.product.typeCoupon.acceptMultiStake) {

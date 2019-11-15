@@ -39,7 +39,7 @@ export class ProductsComponent implements AfterContentInit, OnDestroy {
 
 
   ngAfterContentInit() {
-    this.delaySubscription = timer(1000).subscribe(() => {
+    this.delaySubscription = timer(300).subscribe(() => {
       this.delayRender = true;
     });
   }

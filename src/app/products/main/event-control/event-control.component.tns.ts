@@ -1,6 +1,4 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { Subscription, timer } from 'rxjs';
-import { ProductsService } from '../../products.service';
+import { Component, OnDestroy, AfterViewInit } from '@angular/core';
 import { EventControlService } from './event-control.service';
 
 @Component({
@@ -9,14 +7,18 @@ import { EventControlService } from './event-control.service';
   templateUrl: './event-control.component.html',
   styleUrls: ['./event-control.component.scss']
 })
-export class EventControlComponent implements OnDestroy {
+export class EventControlComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     public readonly eventControlService: EventControlService
   ) {
-    this.eventControlService.init();
+
   }
 
+
+  ngAfterViewInit() {
+    this.eventControlService.init();
+  }
 
   ngOnDestroy() {
     this.eventControlService.destroy();

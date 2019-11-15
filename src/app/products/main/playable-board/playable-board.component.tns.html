@@ -1,19 +1,19 @@
 <StackLayout>
   <!-- TEMPLATE RACE -->
   <app-playable-board-race [rowHeight]="rowHeight"
-    *ngIf="productService.product.layoutProducts.type === typeLayout.RACING">
+    *ngIf="productService.product?.layoutProducts.type === typeLayout.RACING">
   </app-playable-board-race>
   <!-- TEMPLATE COCK FIGHT -->
   <app-playable-board-cock-fight [rowHeight]="rowHeight"
-    *ngIf="productService.product.layoutProducts.type === typeLayout.COCK_FIGHT">
+    *ngIf="productService.product?.layoutProducts.type === typeLayout.COCK_FIGHT">
   </app-playable-board-cock-fight>
   <!-- TEMPLATE SOCCER -->
   <app-playable-board-soccer class="playable-board-soccer" [rowHeight]="rowHeight"
-    *ngIf="productService.product.layoutProducts.type === typeLayout.SOCCER">
+    *ngIf="productService.product?.layoutProducts.type === typeLayout.SOCCER">
   </app-playable-board-soccer>
   <!-- TEMPLATE KENO -->
   <app-playable-board-keno class="playable-board-keno" [rowHeight]="rowHeight"
-    *ngIf="productService.product.layoutProducts.type === typeLayout.KENO">
+    *ngIf="productService.product?.layoutProducts.type === typeLayout.KENO">
   </app-playable-board-keno>
 </StackLayout>
 
