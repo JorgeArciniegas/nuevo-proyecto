@@ -12,7 +12,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.F2O,
-  baseApiUrl: 'https://qacom-apif2o.ody-services.net',
+  baseApiUrl: 'https://vg-apif2o.odissea-services.net',
   pageTitle: 'F2o - KIOSK',
   theme: 'f2o',
   faviconPath: 'app/themes/skins/f2o/image/Logo-header.png',
