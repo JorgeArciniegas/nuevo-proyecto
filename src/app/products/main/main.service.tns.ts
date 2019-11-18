@@ -153,7 +153,6 @@ export class MainService {
     });
 
   }
-
   /**
    * When the first time entry on the application, the system set the the product default.
    * It is called by constructor and it is selected from environment file and
@@ -331,10 +330,7 @@ export class MainService {
 
     this.elysApi.virtual.getVirtualTreeV2(request).then((sports: VirtualProgramTreeBySportResponse) => {
       // cache all tournaments
-      /* if ( all ) {
-        this.cacheTournaments = sports.Sports[0].ts;
-      }
- */
+
       if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
         const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
         if (all) {
@@ -395,7 +391,7 @@ export class MainService {
       }
     }, (error) => {
       if (!lastAttemptCall || lastAttemptCall < 3) {
-        ++lastAttemptCall;
+        lastAttemptCall += 1;
         timer(1000).subscribe(() => this.loadEventsFromApi(all, lastAttemptCall));
       }
     });
@@ -540,11 +536,9 @@ export class MainService {
             this.attempts = 0;
           } catch (err) {
             console.log(err);
-            if (this.attempts < 5) {
-              this.attempts++;
-              setTimeout(() => {
-                this.eventDetailOddsByCacheTournament(tournamentNumber);
-              }, 1000);
+            if (!this.attempts || this.attempts < 3) {
+              this.attempts += 1;
+              timer(1000).subscribe(() => this.eventDetailOddsByCacheTournament(tournamentNumber));
             } else {
               this.attempts = 0;
             }
@@ -675,7 +669,7 @@ export class MainService {
           }
         }, error => {
           if (!attemptRollBack || attemptRollBack < 4) {
-            ++attemptRollBack;
+            attemptRollBack += 1;
             timer(1000).subscribe(() => this.eventDetailOdds(eventNumber, attemptRollBack));
           }
         });

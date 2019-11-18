@@ -77,15 +77,17 @@ export class ResultsService {
             this.listResult.push(tempEventResult);
           }
         } else {
-          // create last Result
-          const tempEventResult: EventResult = {
-            eventLabel: eventResults.EventResults[0].TournamentName,
-            eventNumber: eventResults.EventResults[0].TournamentId
-          };
-
-          // group by last Tournament
-          tempEventResult.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === tempEventResult.eventNumber);
-          this.listResult.push(tempEventResult);
+          console.log('Result SOCCER', eventResults);
+          if (eventResults.EventResults !== null) {
+            // create last Result
+            const tempEventResult: EventResult = {
+              eventLabel: eventResults.EventResults[0].TournamentName,
+              eventNumber: eventResults.EventResults[0].TournamentId
+            };
+            // group by last Tournament
+            tempEventResult.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === tempEventResult.eventNumber);
+            this.listResult.push(tempEventResult);
+          }
         }
       });
   }

@@ -191,7 +191,7 @@ export class MainService {
       if (this.countdownSub.closed) {
         return;
       }
-      if (this.remainingTime.second === 0 && this.remainingTime.minute === 0) {
+      if (this.remainingTime.second === 0 && this.remainingTime.minute === 0 || !this.userservice.isUserLogged) {
         // stop the countdown to prevent multiple calls
         this.countdownSub.unsubscribe();
         this.loadEvents();
@@ -375,7 +375,7 @@ export class MainService {
       }
     }, (error) => {
       if (!lastAttemptCall || lastAttemptCall < 3) {
-        ++lastAttemptCall;
+        lastAttemptCall += 1;
         timer(1000).subscribe(() => this.loadEventsFromApi(all, lastAttemptCall));
       }
     });
@@ -520,11 +520,9 @@ export class MainService {
             this.attempts = 0;
           } catch (err) {
             console.log(err);
-            if (this.attempts < 5) {
-              this.attempts++;
-              setTimeout(() => {
-                this.eventDetailOddsByCacheTournament(tournamentNumber);
-              }, 1000);
+            if (!this.attempts || this.attempts < 3) {
+              this.attempts += 1;
+              timer(1000).subscribe(() => this.eventDetailOddsByCacheTournament(tournamentNumber));
             } else {
               this.attempts = 0;
             }
@@ -656,7 +654,7 @@ export class MainService {
           }
         }, error => {
           if (!attemptRollBack || attemptRollBack < 4) {
-            ++attemptRollBack;
+            attemptRollBack += 1;
             timer(1000).subscribe(() => this.eventDetailOdds(eventNumber, attemptRollBack));
           }
         });
