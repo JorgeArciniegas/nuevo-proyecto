@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { connectionType, getConnectionType } from 'tns-core-modules/connectivity';
 import { device } from 'tns-core-modules/platform';
 import { AppSettings } from './app.settings';
@@ -6,6 +6,7 @@ import { Settings } from './app.settings.model';
 import { UserService } from './services/user.service';
 import { TranslateUtilityService } from './services/utility/translate-utility.service';
 import { WindowSizeService } from './services/utility/window-size/window-size.service';
+
 @Component({
   moduleId: module.id,
   selector: 'app-root',
@@ -20,8 +21,7 @@ export class AppComponent {
     public readonly appSettings: AppSettings,
     public userService: UserService,
     private translateService: TranslateUtilityService,
-    private windowSizeService: WindowSizeService,
-
+    private windowSizeService: WindowSizeService
   ) {
     this.settings = appSettings;
     // Set the application language passing the device one.
@@ -30,5 +30,4 @@ export class AppComponent {
     this.smallView = (this.windowSizeService.getWindowSize().height < 800) ? true : false;
 
   }
-
 }

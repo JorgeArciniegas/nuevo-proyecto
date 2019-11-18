@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoaderService } from '../../services/utility/loader/loader.service';
 import { UserService } from '../../services/user.service';
 import { AppSettings } from '../../app.settings';
@@ -11,7 +11,7 @@ import { MainService } from './main.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
   public rowHeight: number;
   public settings: AppSettings;
 
@@ -31,6 +31,10 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.rowHeight = (this.productService.windowSize.columnHeight - 30 - 12) / 24;
+  }
+
+  ngOnDestroy() {
+    this.mainService.countdownSub.unsubscribe();
   }
 
 }

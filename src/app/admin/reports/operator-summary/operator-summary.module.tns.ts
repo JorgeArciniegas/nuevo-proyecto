@@ -5,6 +5,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { OperatorSummaryListComponent } from './operator-summary-list/operator-summary-list.component';
 import { routes } from './operator-summary-routing.module';
 import { OperatorSummaryComponent } from './operator-summary.component';
+import { OperatorSummaryService } from './operator-summary.service';
 
 
 
@@ -15,6 +16,7 @@ import { OperatorSummaryComponent } from './operator-summary.component';
     SharedModule,
     NativeScriptRouterModule.forChild(routes)
 
-  ]
+  ],
+  providers: [OperatorSummaryService]
 })
 export class OperatorSummaryModule { }

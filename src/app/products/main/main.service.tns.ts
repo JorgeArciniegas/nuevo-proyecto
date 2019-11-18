@@ -9,9 +9,9 @@ import {
   VirtualDetailOddsOfEventResponse,
   VirtualEventCountDownRequest,
   VirtualEventCountDownResponse,
-  VirtualGetRankByEventResponse,
   VirtualProgramTreeBySportRequest,
-  VirtualProgramTreeBySportResponse
+  VirtualProgramTreeBySportResponse,
+  VirtualGetRankByEventResponse
 } from '@elys/elys-api';
 import { ElysFeedsService } from '@elys/elys-feeds';
 import { cloneDeep as clone } from 'lodash';
@@ -21,7 +21,6 @@ import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
-import { UserService } from '../../services/user.service';
 import { BetOdd, Market, PolyfunctionalArea, PolyfunctionalStakeCoupon, SelectionIdentifier } from '../products.model';
 import { ProductsService } from '../products.service';
 import {
@@ -39,17 +38,18 @@ import {
   SmartCodeType,
   SpecialBet,
   SpecialBetValue,
-  SpecialOddData,
   TypeBetSlipColTot,
   TypePlacingEvent,
-  VirtualBetEventExtended,
-  VirtualBetMarketExtended,
   VirtualBetSelectionExtended,
-  VirtualBetTournamentExtended
+  VirtualBetTournamentExtended,
+  SpecialOddData,
+  VirtualBetMarketExtended,
+  VirtualBetEventExtended
 } from './main.models';
-import { KenoNumber } from './playable-board/templates/keno/keno.model';
 import { ResultsService } from './results/results.service';
 import { areas, overviewAreas } from './SoccerAreas';
+import { UserService } from '../../services/user.service';
+import { KenoNumber } from './playable-board/templates/keno/keno.model';
 
 @Injectable({
   providedIn: 'root'
@@ -75,17 +75,13 @@ export class MainService {
   smartCode: Smartcode;
 
   amount: number;
-
+  // countdown
   countdownSub: Subscription;
-
+  checkTimerMaxInterval = 0;
 
   public currentEventSubscribe: Subject<number>;
   public currentEventObserve: Observable<number>;
   public eventDetails: EventDetail;
-  /**
-   * set to reset all variables
-   * When it is true, clear the polyfunctionalArea, Coupon and playboard
-   * */
   public toResetAllSelections: boolean;
 
   constructor(
@@ -97,8 +93,15 @@ export class MainService {
     public destroyCouponService: DestroyCouponService,
     private resultService: ResultsService,
     private feedData: ElysFeedsService,
-    private userservice: UserService
+    private userservice: UserService,
   ) {
+    this.destroyCouponService.confirmDestroyObs.subscribe(elem => {
+      this.destroyCouponService.showDialog = false;
+      if (elem && this.couponService.productHasCoupon.isRacing) {
+        this.currentEventSubscribe.next(this.couponService.productHasCoupon.eventNumber);
+        this.couponService.resetProductHasCoupon();
+      }
+    });
     this.toResetAllSelections = true;
 
     this.createPlayerList();
@@ -150,7 +153,6 @@ export class MainService {
     });
 
   }
-
   /**
    * When the first time entry on the application, the system set the the product default.
    * It is called by constructor and it is selected from environment file and
@@ -187,16 +189,31 @@ export class MainService {
 
   getTime(): void {
     try {
+
       // when countdown is stopped, it doesn't load the new data
       if (this.countdownSub.closed) {
         return;
       }
-      if (this.remainingTime.second === 0 && this.remainingTime.minute === 0 || !this.userservice.isUserLogged) {
+
+      if (this.remainingTime.second === 0 && this.remainingTime.minute === 0) {
         // stop the countdown to prevent multiple calls
         this.countdownSub.unsubscribe();
         this.loadEvents();
         this.resultService.loadLastResult();
       } else {
+        /**
+         * Reload the countdown from the current event.
+         * It's necessary for update the watch
+         * because it freeze sometimes when require's the new view or put on coupons odds.
+         **/
+        if (this.checkTimerMaxInterval === 9) {
+          this.remainingEventTime(this.eventDetails.events[this.eventDetails.currentEvent].number).then((eventTime: EventTime) => {
+            this.remainingTime = eventTime;
+          });
+          this.checkTimerMaxInterval = 0;
+          return;
+        }
+        ++this.checkTimerMaxInterval;
         if (this.remainingTime.second < 0 || this.remainingTime.minute < 0) {
           // stop the countdown to prevent multiple calls
           this.countdownSub.unsubscribe();
@@ -276,6 +293,8 @@ export class MainService {
       }
     } catch (err) {
       console.log('main --> loadEvents : ', err);
+      this.resetPlayEvent();
+      this.initEvents();
     }
   }
 
@@ -311,10 +330,7 @@ export class MainService {
 
     this.elysApi.virtual.getVirtualTreeV2(request).then((sports: VirtualProgramTreeBySportResponse) => {
       // cache all tournaments
-      /* if ( all ) {
-        this.cacheTournaments = sports.Sports[0].ts;
-      }
- */
+
       if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
         const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
         if (all) {
@@ -596,7 +612,6 @@ export class MainService {
     this.placingEvent = new PlacingEvent();
     this.smartCode = new Smartcode();
     this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
-    // this.createPlayerList();
 
     // Create a new polyfunctionArea object
     const polyfunctionalArea: PolyfunctionalArea = new PolyfunctionalArea();
@@ -1597,14 +1612,15 @@ export class MainService {
     }
   }
 
+
   /**
-   * Method to fire the current event number change.
-   * If there is a coupon, it will be asked to delete it.
-   * Otherwise, if there isn't, execute the change.
-   * @param selected number of event
-   * @param userSelect if the event number is change by user  or it is forward by system
-   *
-   * */
+  * Method to fire the current event number change.
+  * If there is a coupon, it will be asked to delete it.
+  * Otherwise, if there isn't, execute the change.
+  * @param selected number of event
+  * @param userSelect if the event number is change by user  or it is forward by system
+  *
+  * */
   fireCurrentEventChange(selected: number, userSelect = false) {
     // check if the coupon is initialized
     this.couponService.checkHasCoupon();
@@ -1612,18 +1628,16 @@ export class MainService {
     this.toResetAllSelections = true;
     // if the coupon isn't empty
     if (
+      this.couponService.productHasCoupon &&
       this.couponService.productHasCoupon.checked &&
       (this.eventDetails.currentEvent !== selected || userSelect) &&
       (this.couponService.coupon && this.couponService.coupon.Odds.length > 0)
     ) {
       // open modal destroy confirm coupon
       this.destroyCouponService.openDestroyCouponDialog();
-      // subscribe to event dialog
-      this.destroyCouponService.dialogRef.afterClosed().subscribe(elem => {
-        if (elem) {
-          this.currentEventSubscribe.next(selected);
-        }
-      });
+      this.destroyCouponService.showDialog = true;
+      this.couponService.productHasCoupon.isRacing = true;
+      this.couponService.productHasCoupon.eventNumber = selected;
     } else {
       // to continue
       this.currentEventSubscribe.next(selected);

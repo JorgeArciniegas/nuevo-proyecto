@@ -1,13 +1,13 @@
 <GridLayout rows="*,2*,14*,2*,3*" columns="*" class="product-class">
   <!-- Event control -->
-  <GridLayout row="0" app-event-control *ngIf="!loaderService.isLoading.getValue()"></GridLayout>
+  <GridLayout row="0" app-event-control></GridLayout>
   <!-- List events -->
-  <GridLayout row="1" app-events-list *ngIf="!loaderService.isLoading.getValue()"></GridLayout>
+  <GridLayout row="1" app-events-list></GridLayout>
   <!-- Playable board -->
-  <GridLayout row="2" verticalAlignment="top" app-playable-board *ngIf="!loaderService.isLoading.getValue()">
+  <GridLayout row="2" verticalAlignment="top" app-playable-board>
   </GridLayout>
   <!-- Special event -->
-  <StackLayout row="3" app-lucky *ngIf="!loaderService.isLoading.getValue()"></StackLayout>
+  <StackLayout row="3" app-lucky></StackLayout>
   <!-- OVERLAY TIMEBLOCKED OR MODAL OPEN-->
   <GridLayout row="2" rowSpan="2" class="overlay radius-5"
     *ngIf="mainService.placingEvent && mainService.placingEvent.timeBlocked == true || userService.isModalOpen">
@@ -17,5 +17,5 @@
     </StackLayout>
   </GridLayout>
   <!-- List of result -->
-  <GridLayout row="4" app-results *ngIf="!loaderService.isLoading.getValue()"></GridLayout>
+  <GridLayout row="4" app-results></GridLayout>
 </GridLayout>

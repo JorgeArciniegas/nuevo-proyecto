@@ -1,12 +1,12 @@
-<GridLayout #gridbtn rows="*,*,*,*,*,*" columns="*,*,*,*" class="grid-btn-calc">
-  <GridLayout row="0" col="0" height="{{amountIcon.height - 1}}" width="{{amountIcon.width - 1}}" shadow="3"
-    cornerRadius="{{amountIcon.height/2}}" class="card">
+<GridLayout #gridbtn rows="*,*,*,*,*,*" columns="*,*,*,*" class="grid-btn-calc" *ngIf="amountIcon">
+  <GridLayout row="0" col="0" height="{{amountIcon?.height - 1}}" width="{{amountIcon?.width - 1}}" shadow="3"
+    cornerRadius="{{amountIcon?.height/2}}" class="card">
     <GridLayout rows="*" columns="*" class="button btn-amount-1" height="{{amountIcon.height}}"
-      width="{{amountIcon.width}}" borderRadius="{{amountIcon.height/2}}">
-      <GridLayout *ngIf="appSetting.defaultAmount.PresetOne > 0">
-        <Button text="{{ appSetting.defaultAmount.PresetOne | digitslimit }}" class="button-internal"
+      width="{{amountIcon?.width}}" borderRadius="{{amountIcon?.height/2}}">
+      <GridLayout *ngIf="appSetting.defaultAmount?.PresetOne > 0">
+        <Button text="{{ appSetting.defaultAmount?.PresetOne | digitslimit }}" class="button-internal"
           [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
-          (tap)="btnDefaultAmountsPreset(appSetting.defaultAmount.PresetOne)"></Button>
+          (tap)="btnDefaultAmountsPreset(appSetting.defaultAmount?.PresetOne)"></Button>
       </GridLayout>
       <GridLayout *ngIf="!appSetting.defaultAmount.PresetOne">
         <Button class="button-internal"
@@ -14,16 +14,16 @@
       </GridLayout>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="0" col="1" height="{{amountIcon.height - 1}}" width="{{amountIcon.width - 1}}" shadow="3"
-    cornerRadius="{{amountIcon.height/2}}" class="card">
-    <GridLayout rows="*" columns="*" class="button btn-amount-2" height="{{amountIcon.height}}"
-      width="{{amountIcon.width}}" borderRadius="{{amountIcon.height/2}}">
-      <GridLayout *ngIf="appSetting.defaultAmount.PresetTwo > 0">
-        <Button text="{{ appSetting.defaultAmount.PresetTwo | digitslimit }}" class="button-internal"
+  <GridLayout row="0" col="1" height="{{amountIcon?.height - 1}}" width="{{amountIcon?.width - 1}}" shadow="3"
+    cornerRadius="{{amountIcon?.height/2}}" class="card">
+    <GridLayout rows="*" columns="*" class="button btn-amount-2" height="{{amountIcon?.height}}"
+      width="{{amountIcon?.width}}" borderRadius="{{amountIcon?.height/2}}">
+      <GridLayout *ngIf="appSetting.defaultAmount?.PresetTwo > 0">
+        <Button text="{{ appSetting.defaultAmount?.PresetTwo | digitslimit }}" class="button-internal"
           [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"
-          (tap)="btnDefaultAmountsPreset(appSetting.defaultAmount.PresetTwo)"></Button>
+          (tap)="btnDefaultAmountsPreset(appSetting.defaultAmount?.PresetTwo)"></Button>
       </GridLayout>
-      <GridLayout *ngIf="!appSetting.defaultAmount.PresetTwo">
+      <GridLayout *ngIf="!appSetting.defaultAmount?.PresetTwo">
         <Button class="button-internal"
           [isEnabled]="(!timeBlocked && !userService.isModalOpen ) || (userService.isBtnCalcEditable && !timeBlocked)"></Button>
       </GridLayout>
