@@ -16,7 +16,7 @@ import { timer } from 'rxjs';
 export class ApplicationMenuComponent implements OnInit {
   public settings: AppSettings;
   public btnSelected: string;
-
+  currentRoute: string;
   constructor(
     public readonly appSettings: AppSettings,
     public productService: ProductsService,
@@ -32,18 +32,29 @@ export class ApplicationMenuComponent implements OnInit {
   }
 
   productSelecting(productSelected: Products) {
+    if (this.currentRoute === '/products/main' + productSelected.name) {
+      return;
+    }
     this.btnSelected = productSelected.name;
-    this.loaderService.setLoading(true, 'ProductView');
+    this.loaderService.setLoading(true, 'ProductView-' + productSelected.name);
+    if (productSelected === this.productService.product) {
+      this.router.productSameReload = true;
+    }
     timer(100).subscribe(() => {
-      this.productService.resetBoard();
+      // this.productService.resetBoard();
       this.productService.changeProduct(productSelected.codeProduct);
       this.router.getRouter().navigateByUrl('/products/main');
     });
+    this.currentRoute = '/products/main' + productSelected.name;
   }
 
   goToAdmin() {
+    if (this.currentRoute === '/admin') {
+      return;
+    }
     this.loaderService.setLoading(true, 'AdminPanel');
     timer(100).subscribe(() => this.router.getRouter().navigateByUrl('/admin'));
+    this.currentRoute = '/admin';
 
   }
 }

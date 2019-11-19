@@ -10,24 +10,21 @@ export class ProductsServiceExtra {
 
   // product selected
   product: Products;
-
+  productSameReload: boolean;
   constructor(
     public couponInternalService: CouponService,
     public destroyCouponService: DestroyCouponService,
-    public router: RouterService) {
-
-
-  }
-
+    public router: RouterService) { }
 
   /**
- *
- * @param codeProduct
- */
+  *
+  * @param codeProduct
+  **/
   changeProduct(codeProduct: string): void {
 
     // Check if the productCode is equal to the current one. if it isn't, mark it as to destroy.
     if (this.product && codeProduct === this.product.codeProduct) {
+      this.productNameSelectedSubscribe.next(codeProduct);
       this.router.getRouter().navigate(['/products/main']);
     } else {
       // check if the product has a temporary coupon

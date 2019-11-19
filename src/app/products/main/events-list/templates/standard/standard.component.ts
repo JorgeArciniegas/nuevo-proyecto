@@ -14,10 +14,14 @@ export class StandardComponent {
   @Input() webColumnDefinition: number;
   @Input() rowHeight: number;
   @Input() eventsList: EventsList;
-  constructor(private mainService: MainService, private userService: UserService, private loaderService: LoaderService) { }
+  constructor(
+    private mainService: MainService,
+    private userService: UserService,
+    private loaderService: LoaderService
+  ) { }
 
   eventSelecting(selected: number) {
-    this.loaderService.isLoading.next(true);
+    this.loaderService.setLoading(true, 'ProductView');
     timer(50).subscribe(() => this.mainService.fireCurrentEventChange(selected, true));
   }
 }

@@ -35,6 +35,7 @@ export class ResultsService {
       .then((eventResults: VirtualSportLastResultsResponse) => {
         // results for products
         if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
+
           for (let i = 0; i < this.productService.product.layoutProducts.resultItems; i++) {
             if (!eventResults.EventResults[i]) {
               return;
@@ -77,7 +78,7 @@ export class ResultsService {
             this.listResult.push(tempEventResult);
           }
         } else {
-          console.log('Result SOCCER', eventResults);
+
           if (eventResults.EventResults !== null) {
             // create last Result
             const tempEventResult: EventResult = {

@@ -146,6 +146,11 @@ export class MainService {
       if (reset) {
         this.toResetAllSelections = true;
         this.resetPlayEvent();
+        // Resume event's countdown
+        if (this.countdownSub && this.countdownSub.closed || !this.countdownSub) {
+          this.currentAndSelectedEventTime();
+          this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
+        }
       }
     });
 

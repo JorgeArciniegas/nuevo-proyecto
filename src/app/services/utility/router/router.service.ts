@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
   providedIn: 'root'
 })
 export class RouterService {
+  productSameReload: boolean;
   constructor(private router: Router, private _location: Location) { }
 
   public getRouter(): Router {

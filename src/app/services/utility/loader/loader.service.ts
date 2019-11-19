@@ -13,20 +13,17 @@ export class LoaderService {
   setLoading(actived: boolean, operation: string) {
     const checkOperationIndex = (op) => op === operation;
     const indexOperationOnQueue = this.queueOperation.findIndex(checkOperationIndex);
-
     if (indexOperationOnQueue !== -1 && actived) {
       return;
     }
-    // console.log('SET LOADING --->', checkOperationIndex, indexOperationOnQueue, actived, operation, this.queueOperation);
     if (!this.isLoading.getValue() && actived) {
-      this.isLoading.next(actived);
+      this.isLoading.next(true);
+      this.queueOperation = [];
       this.queueOperation.push(operation);
     } else {
       this.queueOperation.splice(indexOperationOnQueue);
-      this.isLoading.next(actived);
+      this.isLoading.next(false);
     }
   }
-
-
 
 }
