@@ -224,7 +224,7 @@ export class BtncalcService implements OnDestroy {
 
   // default presets player
   settingStakePresetPlayer(recursiveCounter: number = 0): void {
-    if (this.setting.defaultAmount.PresetOne !== null) {
+    if (this.setting.defaultAmount && this.setting.defaultAmount.PresetOne !== null) {
       this.polyfunctionStakePresetPlayer =
         new PolyfunctionStakePresetPlayer(
           this.productService.product.layoutProducts.type === LAYOUT_TYPE.KENO ? TypeBetSlipColTot.GROUP : TypeBetSlipColTot.COL,
@@ -232,13 +232,19 @@ export class BtncalcService implements OnDestroy {
         );
       this.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
     } else {
+      // increment counter of attempt recall
       recursiveCounter++;
-      defer(
-        () => recursiveCounter < 4 ? timer(1000) : this.routerService.getRouter().navigateByUrl('/error')).
-        subscribe(() => this.settingStakePresetPlayer(recursiveCounter));
-      /*  if (recursiveCounter < 4) {
-         timer(1000).subscribe(() => this.settingStakePresetPlayer(recursiveCounter));
-       } */
+      if (recursiveCounter < 3) {
+        timer(1000).subscribe(() => this.settingStakePresetPlayer(recursiveCounter));
+      } else {
+        // when the max attempt is occured, it set the value of one on presets
+        this.polyfunctionStakePresetPlayer =
+          new PolyfunctionStakePresetPlayer(
+            this.productService.product.layoutProducts.type === LAYOUT_TYPE.KENO ? TypeBetSlipColTot.GROUP : TypeBetSlipColTot.COL,
+            1
+          );
+        this.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
+      }
     }
   }
 
