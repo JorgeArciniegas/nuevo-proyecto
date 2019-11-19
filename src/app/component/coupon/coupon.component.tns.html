@@ -43,8 +43,9 @@
           <Label class="indicator-scroll counter" *ngIf="(page * maxItems) > 0" [text]="page * maxItems"></Label>
         </StackLayout>
       </GridLayout>
-      <GridLayout row="6" columns="*,2*,*" class="card-odd scroll" (tap)="nextOdds()"
-        [ngClass]="{'disabled': page >= maxPage - 1}" [isEnabled]="page < maxPage - 1 && !userService.isModalOpen">
+      <GridLayout row="{{ productService.windowSize.small ? 5 : 6 }}" columns="*,2*,*" class="card-odd scroll"
+        (tap)="nextOdds()" [ngClass]="{'disabled': page >= maxPage - 1}"
+        [isEnabled]="page < maxPage - 1 && !userService.isModalOpen">
         <Image col="1" width="20" src="~/assets/icons/Down.png" verticalAlignment="center">
         </Image>
         <StackLayout col="2" horizontalAlignment="right" verticalAlignment="center">

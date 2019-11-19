@@ -54,7 +54,7 @@ export class CouponComponent implements OnDestroy {
         const polyFunc: PolyfunctionalArea = this.productService.polyfunctionalAreaSubject.getValue();
         polyFunc.oddsCounter = coupon.Odds.length;
       } else {
-        this.maxItems = 5;
+        this.maxItems = this.productService.windowSize.small ? 4 : 5;
       }
       this.maxPage = Math.ceil(coupon.Odds.length / this.maxItems);
       if (!this.remove) {
