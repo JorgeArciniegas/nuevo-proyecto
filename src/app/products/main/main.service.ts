@@ -379,9 +379,19 @@ export class MainService {
         this.currentAndSelectedEventTime();
       }
     }, (error) => {
+      // check the error
+      if (error.status === 401) {
+        this.userservice.logout();
+        this.countdownSub.unsubscribe();
+        return;
+      }
+
+      lastAttemptCall = !lastAttemptCall ? 1 : lastAttemptCall + 1;
       if (!lastAttemptCall || lastAttemptCall < 3) {
-        lastAttemptCall += 1;
         timer(1000).subscribe(() => this.loadEventsFromApi(all, lastAttemptCall));
+      } else {
+        this.countdownSub.unsubscribe();
+
       }
     });
     this.reload = this.productService.product.layoutProducts.cacheEventsItem;
@@ -532,6 +542,20 @@ export class MainService {
               this.attempts = 0;
             }
           }
+        }, (error) => {
+          // check the error
+          if (error.status === 401) {
+            this.userservice.logout();
+            this.countdownSub.unsubscribe();
+            return;
+          }
+
+          this.attempts = this.attempts + 1;
+          if (this.attempts < 2) {
+            timer(1000).subscribe(() => this.eventDetailOddsByCacheTournament(tournamentNumber));
+          } else {
+            this.countdownSub.unsubscribe();
+          }
         });
     }
   }
@@ -657,10 +681,19 @@ export class MainService {
               this.attempts = 0;
             }
           }
-        }, error => {
-          if (!attemptRollBack || attemptRollBack < 4) {
-            attemptRollBack += 1;
-            timer(1000).subscribe(() => this.eventDetailOdds(eventNumber, attemptRollBack));
+        }, (error) => {
+          // check the error
+          if (error.status === 401) {
+            this.userservice.logout();
+            this.countdownSub.unsubscribe();
+            return;
+          }
+
+          this.attempts = this.attempts + 1;
+          if (this.attempts < 2) {
+            timer(1000).subscribe(() => this.eventDetailOdds(eventNumber));
+          } else {
+            this.countdownSub.unsubscribe();
           }
         });
     }

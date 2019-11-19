@@ -49,9 +49,7 @@ export class ApplicationMenuComponent implements OnInit {
   }
 
   goToAdmin() {
-    if (this.currentRoute === '/admin') {
-      return;
-    }
+
     this.loaderService.setLoading(true, 'AdminPanel');
     timer(100).subscribe(() => this.router.getRouter().navigateByUrl('/admin'));
     this.currentRoute = '/admin';

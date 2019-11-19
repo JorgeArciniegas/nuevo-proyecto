@@ -10,11 +10,12 @@ import { Observable } from 'rxjs';
 import { MappingUrls } from './app.mappingurl';
 import { LoaderService } from './services/utility/loader/loader.service';
 import { RouterService } from './services/utility/router/router.service';
+import { UserService } from './services/user.service';
 
 @Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
   private requests: HttpRequest<any>[] = [];
-  constructor(private loaderService: LoaderService, private router: RouterService) { }
+  constructor(private loaderService: LoaderService, private router: RouterService, private user: UserService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
 
@@ -31,7 +32,9 @@ export class AppHttpInterceptor implements HttpInterceptor {
               }
             },
             err => {
-
+              if (err.status === 401) {
+                this.user.logout();
+              }
               console.error('error request', err);
               this.removeRequest(request);
               observer.error(err);
