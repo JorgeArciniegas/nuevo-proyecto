@@ -250,6 +250,14 @@ export class BtncalcService implements OnDestroy {
       recursiveCounter++;
       if (recursiveCounter < 3) {
         timer(1000).subscribe(() => this.settingStakePresetPlayer(recursiveCounter));
+      } else {
+        // when the max attempt is occured, it set the value of one on presets
+        this.polyfunctionStakePresetPlayer =
+          new PolyfunctionStakePresetPlayer(
+            this.productService.product.layoutProducts.type === LAYOUT_TYPE.KENO ? TypeBetSlipColTot.GROUP : TypeBetSlipColTot.COL,
+            1
+          );
+        this.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
       }
     }
   }
