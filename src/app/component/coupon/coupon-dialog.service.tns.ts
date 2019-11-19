@@ -9,7 +9,7 @@ export class CouponDialogService {
   public showDialog = false;
   public type: DialogTypeCoupon;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) { }
 
   openPayCancelDialog(type: DialogTypeCoupon) {
     this.userService.isModalOpen = true;
@@ -24,7 +24,7 @@ export class CouponDialogService {
     this.showDialog = true;
   }
 
-  closeDialog() {
+  close() {
     this.type = null;
     this.showDialog = false;
     this.userService.isModalOpen = false;

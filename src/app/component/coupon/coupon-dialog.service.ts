@@ -10,6 +10,7 @@ import { UserService } from '../../../../src/app/services/user.service';
 export class CouponDialogService {
   public dialogRef: MatDialogRef<PayCancelDialogComponent> = null;
   public showDialog = false;
+  public type: DialogTypeCoupon;
 
   constructor(private dialog: MatDialog, private userService: UserService) { }
 
@@ -32,4 +33,5 @@ export class CouponDialogService {
       this.userService.isBtnCalcEditable = true;
     }
   }
+
 }
