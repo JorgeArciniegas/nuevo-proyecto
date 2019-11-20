@@ -5,7 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { ElysApiModule } from '@elys/elys-api';
+import { ElysApiModule, PlaySource } from '@elys/elys-api';
 import { ElysCouponModule } from '@elys/elys-coupon';
 import { ElysStorageLibModule } from '@elys/elys-storage-lib';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -57,7 +57,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ElysApiModule.forRoot({
       urlApi: environment.baseApiUrl
     }),
-    ElysCouponModule.forRoot({}),
+    ElysCouponModule.forRoot({ deviceLayout: PlaySource.VDeskWeb }),
     RouterModule.forRoot(routes)
   ],
   entryComponents: [ProductDialogComponent, PayCancelDialogComponent, ConfirmDestroyCouponComponent],

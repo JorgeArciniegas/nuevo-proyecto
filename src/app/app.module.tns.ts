@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ElysApiModule } from '@elys/elys-api';
+import { ElysApiModule, PlaySource } from '@elys/elys-api';
 import { ElysCouponModule } from '@elys/elys-coupon';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -39,7 +39,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ElysApiModule.forRoot({
       urlApi: environment.baseApiUrl
     }),
-    ElysCouponModule.forRoot({}),
+    ElysCouponModule.forRoot({ deviceLayout: PlaySource.VDeskAndroid }),
     SharedModule,
     NativeScriptRouterModule,
     NativeScriptRouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
