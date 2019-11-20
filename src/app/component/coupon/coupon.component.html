@@ -71,8 +71,16 @@
   <!-- BUTTONS -->
   <mat-grid-tile rowspan="2"
     *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
-    <div fxFill class="padding-top-10">
-      <button class="btn-default btn-success radius-5 padding-10"
+    <div fxFill class="padding-top-10" fxLayoutGap="10px">
+
+      <button fxFlex="20" class="btn-reset btn-display btn-warning radius-5" (click)="clearCoupon()"
+        fxLayoutAlign="center center">
+        <span class="icon icon-baseline-remove_shopping_cart-24px"></span>
+      </button>
+      <button fxFlex="20" class="btn-reset btn-display btn-dark-gradient radius-5" (click)="openDialog()">
+        <img class="icon" src="assets/icons/baseline-open_in_new-24-white.png">
+      </button>
+      <button fxFlex="60" class="btn-default btn-success radius-5 padding-10"
         [disabled]="couponService.error || couponService.isWaitingConclusionOperation"
         (click)="couponService.preStagedCoupon()">{{'COUPON.BET' | translate | uppercase}}</button>
     </div>

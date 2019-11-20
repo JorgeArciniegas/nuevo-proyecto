@@ -1,37 +1,17 @@
-<GridLayout columns="*" rows="*,*,14*,2*,2*,2*" class="grid-coupon">
+<GridLayout columns="*" rows="*,15*,2*,2*,2*" class="grid-coupon">
   <GridLayout row="0" cornerRadius="6" class="m-b-2">
     <GridLayout rows="*" columns="4*,*" class="display" verticalAlignment="center">
       <StackLayout col="0" orientation="horizontal" class="title" verticalAlignment="center" horizontalAlignment="left">
         <Label text="{{ 'COUPON' | translate | uppercase }}" textTransform="uppercase"
           verticalAlignment="center"></Label>
       </StackLayout>
-      <StackLayout col="1" class="button btn-warning" [isEnabled]="!userService.isModalOpen" (tap)="clearCoupon()"
-        horizontalAlignment="right">
-        <Image stretch="aspectFit" width="26" margin="0 5" src="~/assets/icons/baseline-delete_outline-white-24px.png"
-          verticalAlignment="center" horizontalAlignment="center"></Image>
-      </StackLayout>
+      <Label col="1" class="indicator-odds-number radius-50" [ngClass]="{'small': productService.windowSize.small}"
+        text="{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}" verticalAlignment="center"
+        textAlignment="center"></Label>
     </GridLayout>
   </GridLayout>
-  <GridLayout row="1" rows="*" columns="4*,*" class="m-y-2 display btn-coupon-board"
-    [ngClass]="{'small': productService.windowSize.small}" *ngIf="couponLayout.typeLayout !== layoutProduct.KENO">
-    <StackLayout col="0" orientation="horizontal" horizontalAlignment="left">
-      <ng-container *ngIf="couponService.coupon && couponService.coupon.Odds.length > 0">
-        <Label *ngIf="couponLayout.acceptMultiStake" text="{{'SINGLE' | translate}}" verticalAlignment="center"></Label>
-        <Label *ngIf="!couponLayout.acceptMultiStake"
-          text="{{'DYNAMIC_KEYS.CouponType.' + couponTypeId[couponService.coupon.CouponTypeId] | translate}}"
-          verticalAlignment="center"></Label>
-        <Label class="indicator-odds-number radius-50" [ngClass]="{'small': productService.windowSize.small}"
-          text="{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}" verticalAlignment="center"
-          textAlignment="center"></Label>
-      </ng-container>
-    </StackLayout>
-    <StackLayout col="1" [isEnabled]="!userService.isModalOpen" class="button btn-dark-gradient" (tap)="openDialog()">
-      <Image stretch="aspectFit" width="26" src="~/assets/icons/baseline-open_in_new-24-white.png"
-        verticalAlignment="center">
-      </Image>
-    </StackLayout>
-  </GridLayout>
-  <GridLayout row="2" *ngIf="couponService.coupon && !couponService.coupon.internal_isLottery">
+
+  <GridLayout row="1" *ngIf="couponService.coupon && !couponService.coupon.internal_isLottery">
     <GridLayout rows="2*,6*,6*,6*,6*,{{ productService.windowSize.small ? '' : '6*,' }}2*" columns="*"
       *ngIf="couponService.coupon" [ngClass]="{'small': productService.windowSize.small}">
       <!-- Paginator -->
@@ -120,7 +100,7 @@
     </GridLayout>
   </GridLayout>
   <!--COUPON LOTTERY -->
-  <GridLayout row="2" *ngIf="couponService.coupon?.internal_isLottery">
+  <GridLayout row="1" *ngIf="couponService.coupon?.internal_isLottery">
     <GridLayout columns="*,*" rows="2*,2*,2*,2*,2*,2*" *ngIf="couponService.coupon"
       [ngClass]="{'small': productService.windowSize.small}">
       <!-- Coupon items -->
@@ -145,7 +125,7 @@
   </GridLayout>
   <!-- /COUPON LOTTERY -->
   <!-- Total stake -->
-  <GridLayout row="3" rows="*,3*" columns="*" class="card display-amount">
+  <GridLayout row="2" rows="*,3*" columns="*" class="card display-amount">
     <Label row="0" text="{{'TOTAL_STAKE' | translate}}" class="title"
       [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
     <Label row="1"
@@ -153,19 +133,37 @@
       class="amount" [ngClass]="{'small': productService.windowSize.small}"></Label>
   </GridLayout>
   <!-- Max potential win -->
-  <GridLayout row="4" rows="*,3*" columns="*" class="card display-amount">
+  <GridLayout row="3" rows="*,3*" columns="*" class="card display-amount">
     <Label row="0" text="{{'MAX_POTENTIAL_WIN' | translate}}" class="title"
       [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
     <Label row="1"
       [text]="couponService.stakeDisplay.MaxWinning | currency : userService.userCurrency : 'symbol-narrow'"
       class="amount" [ngClass]="{'small': productService.windowSize.small}"></Label>
   </GridLayout>
-  <GridLayout row="5" rows="*" columns="*" class="card button btn-default btn-success"
+  <!-- BUTTONS -->
+  <GridLayout row="4" rows="*" columns="*,*,3*" class="card"
     [ngClass]="{'disabled': couponService.error || couponService.isWaitingConclusionOperation}"
     *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
-    <Button text="{{'COUPON.BET' | translate}}" class="button-internal" textTransform="uppercase"
+    <!--DELETE COUPON-->
+    <FlexboxLayout col="0" margin="2 2" alignContent="center" justifyContent="center"
+      class="button btn-default button-internal btn-warning" [isEnabled]="!userService.isModalOpen"
+      (tap)="clearCoupon()">
+      <Image stretch="aspectFit" width="24px" height="24px" src="~/assets/icons/baseline-delete_outline-white-24px.png"
+        verticalAlignment="center" horizontalAlignment="center"></Image>
+    </FlexboxLayout>
+    <!--DIALOG INFO COUPON -->
+    <FlexboxLayout col="1" margin="2 2" alignContent="center" justifyContent="center"
+      [isEnabled]="!userService.isModalOpen" class="button btn-dark-gradient" (tap)="openDialog()">
+      <Image stretch="aspectFit" width="24px" height="24px" src="~/assets/icons/baseline-open_in_new-24-white.png"
+        verticalAlignment="center" horizontalAlignment="center">
+      </Image>
+    </FlexboxLayout>
+    <!-- PLACE -->
+    <Button col="2" margin="2 2" text="{{'COUPON.BET' | translate}}"
+      class="button btn-default btn-success button-internal" textTransform="uppercase"
       [isEnabled]="!timeBlocked && !couponService.error && !couponService.isWaitingConclusionOperation && !userService.isModalOpen"
       (tap)="couponService.preStagedCoupon()"></Button>
+
   </GridLayout>
   <GridLayout row="5" rows="*" columns="*,*" class="card"
     *ngIf="couponService.coupon && couponService.coupon.internal_isReadyToPlace">
