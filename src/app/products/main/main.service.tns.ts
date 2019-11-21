@@ -210,14 +210,14 @@ export class MainService {
          * It's necessary for update the watch
          * because it freeze sometimes when require's the new view or put on coupons odds.
          **/
-        if (this.checkTimerMaxInterval === 9) {
-          this.remainingEventTime(this.eventDetails.events[this.eventDetails.currentEvent].number).then((eventTime: EventTime) => {
-            this.remainingTime = eventTime;
-          });
-          this.checkTimerMaxInterval = 0;
-          return;
-        }
-        ++this.checkTimerMaxInterval;
+        /*  if (this.checkTimerMaxInterval === 9) {
+           this.remainingEventTime(this.eventDetails.events[this.eventDetails.currentEvent].number).then((eventTime: EventTime) => {
+             this.remainingTime = eventTime;
+           });
+           this.checkTimerMaxInterval = 0;
+           return;
+         }
+         ++this.checkTimerMaxInterval; */
         if (this.remainingTime.second < 0 || this.remainingTime.minute < 0) {
           // stop the countdown to prevent multiple calls
           this.countdownSub.unsubscribe();

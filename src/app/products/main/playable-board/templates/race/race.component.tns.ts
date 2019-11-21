@@ -1,5 +1,5 @@
-import { Component, Input, OnDestroy, OnInit, ɵConsole, AfterViewInit } from '@angular/core';
-import { Subscription, timer } from 'rxjs';
+import { AfterViewInit, Component, Input } from '@angular/core';
+import { timer } from 'rxjs';
 import { UserService } from '../../../../../services/user.service';
 import { LoaderService } from '../../../../../services/utility/loader/loader.service';
 import { RouterService } from '../../../../../services/utility/router/router.service';
@@ -8,11 +8,12 @@ import { Player, SpecialBet, TypePlacingEvent } from '../../../main.models';
 import { MainService } from '../../../main.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-playable-board-race',
   templateUrl: './race.component.html',
   styleUrls: ['./race.component.scss']
 })
-export class RaceComponent implements OnInit, AfterViewInit, OnDestroy {
+export class RaceComponent implements AfterViewInit {
   @Input()
   public rowHeight: number;
   @Input()
@@ -21,43 +22,42 @@ export class RaceComponent implements OnInit, AfterViewInit, OnDestroy {
   public TypePlacingRace = TypePlacingEvent;
   public specialBet: typeof SpecialBet = SpecialBet;
 
-  // Listen to the race selection
-  private currentEventSubscription: Subscription;
-  private currentProductSelection: Subscription;
+
+
+  // list of players
+  private _playersList: Player[];
+  public get playersList(): Player[] {
+    return this.service.playersList;
+  }
+  public set playersList(value: Player[]) {
+    this._playersList = value;
+  }
   // code of product. it's used for change the layout color to buttons
-  codeProduct: string;
+  private _codeProduct: string;
+  public get codeProduct(): string {
+    return this.productService.product.codeProduct;
+  }
+
+  public set codeProduct(value: string) {
+    this._codeProduct = value;
+  }
   constructor(
     public service: MainService,
     private productService: ProductsService,
     private userService: UserService,
     private loaderService: LoaderService,
     private router: RouterService) {
-    this.currentEventSubscription = this.service.currentEventObserve.subscribe(
-      raceIndex => (this.service.placingEvent.eventNumber = this.service.eventDetails.events[raceIndex].number)
-    );
-    this.currentProductSelection = productService.productNameSelectedObserve.subscribe(() => {
-      this.codeProduct = productService.product.codeProduct;
-    });
-  }
-
-  ngOnInit() {
-    this.codeProduct = this.productService.product.codeProduct;
 
   }
+
 
   ngAfterViewInit() {
     if (this.router.productSameReload) {
-      console.log('RaceComponent', this.router.productSameReload);
       this.router.productSameReload = false;
       // it's required for disable the spinner is loading when the product selected is same to product menu touched.
       timer(500).subscribe(() => this.loaderService.setLoading(false, null));
 
     }
-  }
-
-  ngOnDestroy(): void {
-    this.currentEventSubscription.unsubscribe();
-    this.currentProductSelection.unsubscribe();
   }
 
   /**

@@ -1,13 +1,13 @@
-import { Component, Input, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
-import { MainService } from '../../../main.service';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { VirtualBetEvent, VirtualBetSelection } from '@elys/elys-api';
 import { Subscription, timer } from 'rxjs';
 import { Market, PolyfunctionalArea } from '../../../../../products/products.model';
-import { SpecialBet } from '../../../main.models';
 import { ProductsService } from '../../../../../products/products.service';
 import { UserService } from '../../../../../services/user.service';
 import { LoaderService } from '../../../../../services/utility/loader/loader.service';
 import { RouterService } from '../../../../../services/utility/router/router.service';
+import { SpecialBet } from '../../../main.models';
+import { MainService } from '../../../main.service';
 
 @Component({
   moduleId: module.id,

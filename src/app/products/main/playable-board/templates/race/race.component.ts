@@ -10,7 +10,7 @@ import { UserService } from '../../../../../../../src/app/services/user.service'
   templateUrl: './race.component.html',
   styleUrls: ['./race.component.scss']
 })
-export class RaceComponent implements OnInit, OnDestroy {
+export class RaceComponent {
   @Input()
   public rowHeight: number;
   @Input()
@@ -19,27 +19,28 @@ export class RaceComponent implements OnInit, OnDestroy {
   public TypePlacingRace = TypePlacingEvent;
   public specialBet: typeof SpecialBet = SpecialBet;
 
-  // Listen to the race selection
-  private currentEventSubscription: Subscription;
-  private currentProductSelection: Subscription;
+
+  // list of players
+  private _playersList: Player[];
+  public get playersList(): Player[] {
+    return this.service.playersList;
+  }
+  public set playersList(value: Player[]) {
+    this._playersList = value;
+  }
+
   // code of product. it's used for change the layout color to buttons
-  codeProduct: string;
+  private _codeProduct: string;
+
+  public get codeProduct(): string {
+    return this.productService.product.codeProduct;
+  }
+
+  public set codeProduct(value: string) {
+    this._codeProduct = value;
+  }
   constructor(public service: MainService, private productService: ProductsService, private userService: UserService) {
-    this.currentEventSubscription = this.service.currentEventObserve.subscribe(
-      raceIndex => (this.service.placingEvent.eventNumber = this.service.eventDetails.events[raceIndex].number)
-    );
-    this.currentProductSelection = productService.productNameSelectedObserve.subscribe(() => {
-      this.codeProduct = productService.product.codeProduct;
-    });
-  }
 
-  ngOnInit() {
-    this.codeProduct = this.productService.product.codeProduct;
-  }
-
-  ngOnDestroy(): void {
-    this.currentEventSubscription.unsubscribe();
-    this.currentProductSelection.unsubscribe();
   }
 
   /**

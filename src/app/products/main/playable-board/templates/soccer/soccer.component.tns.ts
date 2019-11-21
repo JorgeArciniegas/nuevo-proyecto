@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { LoaderService } from '../../../../../services/utility/loader/loader.service';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { timer } from 'rxjs';
 import { UserService } from '../../../../../services/user.service';
+import { LoaderService } from '../../../../../services/utility/loader/loader.service';
 import { MainService } from '../../../main.service';
 import { SoccerService } from './soccer.service';
-import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-playable-board-soccer',
