@@ -21,7 +21,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
 
     if (!this.checkHasBearer(request.url)) {
       this.requests.push(request);
-      this.loaderService.isLoading.next(true);
+      this.loaderService.setLoading(true, request.url);
       return Observable.create(observer => {
         const subscription = next.handle(request)
           .subscribe(
@@ -59,7 +59,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
     if (i >= 0) {
       this.requests.splice(i, 1);
     }
-    this.loaderService.isLoading.next(this.requests.length > 0);
+    this.loaderService.setLoading(this.requests.length > 0, req.url);
   }
   /**
    * check if the url request has a bearer token

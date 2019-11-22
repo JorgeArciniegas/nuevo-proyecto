@@ -41,16 +41,16 @@ export class RaceComponent implements AfterViewInit {
     this._codeProduct = value;
   }
 
-
   constructor(
     public service: MainService,
     private productService: ProductsService,
     private userService: UserService,
     private loaderService: LoaderService,
     private router: RouterService) {
-
+    loaderService.isLoading.subscribe(evt =>
+      console.log('loaderService --> ', evt, ' --- OPERATION -->', this.loaderService.operationDataDetailOdds)
+    );
   }
-
 
   ngAfterViewInit() {
     if (this.router.productSameReload) {
@@ -58,8 +58,6 @@ export class RaceComponent implements AfterViewInit {
       // it's required for disable the spinner is loading when the product selected is same to product menu touched.
       timer(500).subscribe(() => this.loaderService.setLoading(false, null));
     }
-
-
   }
 
   /**
