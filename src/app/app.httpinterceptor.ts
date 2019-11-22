@@ -21,6 +21,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
 
     if (!this.checkHasBearer(request.url)) {
       this.requests.push(request);
+      // set the loading spinner
       this.loaderService.setLoading(true, request.url);
       return Observable.create(observer => {
         const subscription = next.handle(request)
@@ -59,6 +60,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
     if (i >= 0) {
       this.requests.splice(i, 1);
     }
+    // remove the loading spinner
     this.loaderService.setLoading(this.requests.length > 0, req.url);
   }
   /**

@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
-import { timer } from 'rxjs';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription, timer } from 'rxjs';
 import { UserService } from '../../../../../services/user.service';
 import { LoaderService } from '../../../../../services/utility/loader/loader.service';
 import { RouterService } from '../../../../../services/utility/router/router.service';
@@ -13,7 +13,7 @@ import { MainService } from '../../../main.service';
   templateUrl: './race.component.html',
   styleUrls: ['./race.component.scss']
 })
-export class RaceComponent implements AfterViewInit {
+export class RaceComponent implements OnInit, OnDestroy {
   @Input()
   public rowHeight: number;
   @Input()
@@ -24,21 +24,18 @@ export class RaceComponent implements AfterViewInit {
 
   // list of players
   private _playersList: Player[];
-
   public get playersList(): Player[] {
-    return this.service.playersList;
+    return this._playersList;
   }
   public set playersList(value: Player[]) {
     this._playersList = value;
   }
-  // code of product. it's used for change the layout color to buttons
-  private _codeProduct: string;
+  // subscription to change the playerlist after response to service
+  playerListSubscription: Subscription;
+
+  // code of product. it's used for change the layout color to buttons.
   public get codeProduct(): string {
     return this.productService.product.codeProduct;
-  }
-
-  public set codeProduct(value: string) {
-    this._codeProduct = value;
   }
 
   constructor(
@@ -47,19 +44,26 @@ export class RaceComponent implements AfterViewInit {
     private userService: UserService,
     private loaderService: LoaderService,
     private router: RouterService) {
-    loaderService.isLoading.subscribe(evt =>
-      console.log('loaderService --> ', evt, ' --- OPERATION -->', this.loaderService.operationDataDetailOdds)
-    );
+    this.playersList = this.service.playersList;
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     if (this.router.productSameReload) {
       this.router.productSameReload = false;
       // it's required for disable the spinner is loading when the product selected is same to product menu touched.
       timer(500).subscribe(() => this.loaderService.setLoading(false, null));
     }
+
+    this.playerListSubscription = this.loaderService.isLoading.subscribe(evt => {
+      if (this.loaderService.operationDataDetailOdds.name.indexOf('detail') !== -1 && !evt) {
+        this.playersList = this.service.playersList;
+      }
+    });
   }
 
+  ngOnDestroy() {
+    this.playerListSubscription.unsubscribe();
+  }
   /**
    *
    * @param runnner

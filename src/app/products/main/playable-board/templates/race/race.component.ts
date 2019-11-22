@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { TypePlacingEvent, Player, SpecialBet } from '../../../main.models';
-import { MainService } from '../../../main.service';
-import { Subscription } from 'rxjs';
-import { ProductsService } from '../../../../products.service';
+import { Component, Input } from '@angular/core';
 import { UserService } from '../../../../../../../src/app/services/user.service';
+import { ProductsService } from '../../../../products.service';
+import { Player, SpecialBet, TypePlacingEvent } from '../../../main.models';
+import { MainService } from '../../../main.service';
 
 @Component({
   selector: 'app-playable-board-race',
@@ -21,23 +20,15 @@ export class RaceComponent {
 
 
   // list of players
-  private _playersList: Player[];
+
   public get playersList(): Player[] {
     return this.service.playersList;
   }
-  public set playersList(value: Player[]) {
-    this._playersList = value;
-  }
 
   // code of product. it's used for change the layout color to buttons
-  private _codeProduct: string;
 
   public get codeProduct(): string {
     return this.productService.product.codeProduct;
-  }
-
-  public set codeProduct(value: string) {
-    this._codeProduct = value;
   }
   constructor(public service: MainService, private productService: ProductsService, private userService: UserService) {
 

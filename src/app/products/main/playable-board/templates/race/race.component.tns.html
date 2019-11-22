@@ -1,4 +1,4 @@
-<GridLayout rows="10*,2*" columns="*" class="playable-race" *ngIf="playersList && !loaderService.isLoading.getValue()">
+<GridLayout rows="10*,2*" columns="*" class="playable-race" *ngIf="playersList">
   <GridLayout class="playable-grid-buttons" rows="*,*,*" columns="*,2*,2*,2*,2*,2*,2*">
     <GridLayout row="{{i}}" col="0" shadow="3" cornerRadius="4" class="card"
       *ngFor="let row of ['I','II','III']; let i = index;">

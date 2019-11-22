@@ -3,16 +3,16 @@ import { BehaviorSubject } from 'rxjs';
 
 export interface OperationData {
   name: string;
-  currentOperation?: string;
   isLoading: boolean;
 }
 @Injectable({
   providedIn: 'root'
 })
 export class LoaderService {
-  queueOperation = [];
+
+  private queueOperation = [];
   public isLoading = new BehaviorSubject(false);
-  // only use this variable on loading odd from playble board
+  // INFO OF OPERATION LOADING
   private _operationDataDetailOdds: OperationData;
   public get operationDataDetailOdds(): OperationData {
     return this._operationDataDetailOdds;
@@ -30,12 +30,8 @@ export class LoaderService {
       return;
     }
 
-    if (this.operationDataDetailOdds) {
-      this.operationDataDetailOdds.currentOperation = operation;
-    }
-    if (operation.indexOf('detail') !== -1) {
-      this.operationDataDetailOdds = { name: 'detail', currentOperation: operation, isLoading: actived };
-    }
+    this.operationDataDetailOdds = { name: operation, isLoading: actived };
+
     if (!this.isLoading.getValue() && actived) {
       this.isLoading.next(true);
       this.queueOperation = [];
