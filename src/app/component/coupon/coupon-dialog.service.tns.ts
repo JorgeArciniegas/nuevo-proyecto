@@ -24,7 +24,7 @@ export class CouponDialogService {
     this.showDialog = true;
   }
 
-  close() {
+  closeDialog() {
     this.type = null;
     this.showDialog = false;
     this.userService.isModalOpen = false;

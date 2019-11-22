@@ -10,7 +10,7 @@ export class PrintReceiptService {
   printingEnabled: boolean;
   receipt: Receipt;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   printWindow(receipt: Receipt): void {
     this.receipt = receipt;
@@ -30,4 +30,5 @@ export class PrintReceiptService {
         this.router.navigate([{ outlets: { print: null } }]);
       });
   }
+  resetPrint(): void { }
 }

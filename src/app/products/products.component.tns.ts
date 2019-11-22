@@ -1,13 +1,13 @@
-import { Component, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
-import { CouponService } from '../component/coupon/coupon.service';
-import { ProductsService } from './products.service';
-import { DialogService } from './dialog.service';
-import { CouponDialogService } from '../component/coupon/coupon-dialog.service.tns';
-import { DialogTypeCoupon } from './products.model';
+import { AfterContentInit, Component, OnDestroy } from '@angular/core';
 import { MessageSource } from '@elys/elys-coupon';
-import { UserService } from '../services/user.service';
-import { MainService } from './main/main.service';
 import { Subscription, timer } from 'rxjs';
+import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
+import { CouponService } from '../component/coupon/coupon.service';
+import { UserService } from '../services/user.service';
+import { DialogService } from './dialog.service';
+import { MainService } from './main/main.service';
+import { DialogTypeCoupon } from './products.model';
+import { ProductsService } from './products.service';
 
 @Component({
   moduleId: module.id,

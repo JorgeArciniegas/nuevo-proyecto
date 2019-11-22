@@ -116,7 +116,7 @@ export class PayCancelDialogComponent {
   }
 
   close(): void {
-    this.couponDialogService.close();
+    this.couponDialogService.closeDialog();
     this.userService.isModalOpen = false;
     this.userService.isBtnCalcEditable = true;
   }

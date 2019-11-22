@@ -27,4 +27,5 @@ export class PrintOperatorSummaryService {
         this.router.navigate([{ outlets: { print: null } }]);
       });
   }
+  resetPrint(): void { }
 }

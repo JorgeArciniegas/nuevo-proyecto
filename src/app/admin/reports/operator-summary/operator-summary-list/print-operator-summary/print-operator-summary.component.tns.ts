@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Printer } from 'nativescript-printer';
 import { OperatorSummary } from './operator-summary.model';
-import { PrintOperatorSummaryService } from './print-operator-summary.service.tns';
+import { PrintOperatorSummaryService } from './print-operator-summary.service';
 import { AppSettings } from '../../../../../app.settings';
 import { UserService } from '../..//../../../services/user.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-print-operator-summary',
   templateUrl: './print-operator-summary.component.html',
   styleUrls: ['./print-operator-summary.component.scss']

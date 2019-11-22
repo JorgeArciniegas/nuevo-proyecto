@@ -1,4 +1,4 @@
-<GridLayout rows="10*,2*" columns="*" class="playable-race" *ngIf="service.playersList">
+<GridLayout rows="10*,2*" columns="*" class="playable-race" *ngIf="playersList">
   <GridLayout class="playable-grid-buttons" rows="*,*,*" columns="*,2*,2*,2*,2*,2*,2*">
     <GridLayout row="{{i}}" col="0" shadow="3" cornerRadius="4" class="card"
       *ngFor="let row of ['I','II','III']; let i = index;">
@@ -18,7 +18,7 @@
       </GridLayout>
     </GridLayout>
     <GridLayout row="0" col="{{i + 1}}" shadow="3" class="card"
-      *ngFor="let runner of service.playersList | filterByPosition: 1; let i = index;">
+      *ngFor="let runner of playersList | filterByPosition: 1; let i = index;">
       <GridLayout rows="*" columns="*" class="bg-playable">
         <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{runner.number}}"
           [ngClass]="{'btn-dog-play-actived': runner.actived, 'disabled': !runner.selectable}">
@@ -29,7 +29,7 @@
       </GridLayout>
     </GridLayout>
     <GridLayout row="1" col="{{i + 1}}" shadow="3" class="card"
-      *ngFor="let runner of service.playersList | filterByPosition: 2; let i = index;">
+      *ngFor="let runner of playersList | filterByPosition: 2; let i = index;">
       <GridLayout rows="*" columns="*" class="bg-playable">
         <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{runner.number}}"
           [ngClass]="{'btn-dog-play-actived': runner.actived, 'disabled': !runner.selectable || service.placingEvent.secondRowDisabled}">
@@ -40,7 +40,7 @@
       </GridLayout>
     </GridLayout>
     <GridLayout row="2" col="{{i + 1}}" shadow="3" cornerRadius="16" class="card"
-      *ngFor="let runner of service.playersList | filterByPosition: 3; let i = index;">
+      *ngFor="let runner of playersList | filterByPosition: 3; let i = index;">
       <GridLayout rows="*" columns="*" class="bg-playable">
         <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{runner.number}}"
           [ngClass]="{'btn-dog-play-actived': runner.actived, 'disabled': !runner.selectable  || service.placingEvent.thirdRowDisabled}">

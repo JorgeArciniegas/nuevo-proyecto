@@ -22,10 +22,9 @@ export class RaceComponent implements AfterViewInit {
   public TypePlacingRace = TypePlacingEvent;
   public specialBet: typeof SpecialBet = SpecialBet;
 
-
-
   // list of players
   private _playersList: Player[];
+
   public get playersList(): Player[] {
     return this.service.playersList;
   }
@@ -41,6 +40,8 @@ export class RaceComponent implements AfterViewInit {
   public set codeProduct(value: string) {
     this._codeProduct = value;
   }
+
+
   constructor(
     public service: MainService,
     private productService: ProductsService,
@@ -56,8 +57,9 @@ export class RaceComponent implements AfterViewInit {
       this.router.productSameReload = false;
       // it's required for disable the spinner is loading when the product selected is same to product menu touched.
       timer(500).subscribe(() => this.loaderService.setLoading(false, null));
-
     }
+
+
   }
 
   /**

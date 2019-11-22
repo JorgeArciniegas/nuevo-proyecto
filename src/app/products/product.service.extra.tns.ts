@@ -1,6 +1,6 @@
 import { Observable, Subject } from 'rxjs';
 import { Products } from '../../environments/environment.models';
-import { DestroyCouponService } from '../component/coupon/confirm-destroy-coupon/destroy-coupon.service.tns';
+import { DestroyCouponService } from '../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../component/coupon/coupon.service';
 import { RouterService } from '../services/utility/router/router.service';
 export class ProductsServiceExtra {
