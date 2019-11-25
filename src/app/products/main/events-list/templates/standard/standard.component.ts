@@ -16,12 +16,11 @@ export class StandardComponent {
   @Input() eventsList: EventsList;
   constructor(
     private mainService: MainService,
-    private userService: UserService,
-    private loaderService: LoaderService
+    private userService: UserService
   ) { }
 
   eventSelecting(selected: number) {
-    this.loaderService.setLoading(true, 'ProductView');
-    timer(50).subscribe(() => this.mainService.fireCurrentEventChange(selected, true));
+    // this.loaderService.setLoading(true, 'eventSelected');
+    this.mainService.fireCurrentEventChange(selected, true);
   }
 }

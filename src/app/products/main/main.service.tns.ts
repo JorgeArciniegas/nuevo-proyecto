@@ -217,7 +217,7 @@ export class MainService {
            this.checkTimerMaxInterval = 0;
            return;
          }
-         ++this.checkTimerMaxInterval; */
+         this.checkTimerMaxInterval++;*/
         if (this.remainingTime.second < 0 || this.remainingTime.minute < 0) {
           // stop the countdown to prevent multiple calls
           this.countdownSub.unsubscribe();
@@ -400,13 +400,13 @@ export class MainService {
         this.countdownSub.unsubscribe();
         return;
       }
-      lastAttemptCall = !lastAttemptCall ? 1 : lastAttemptCall + 1;
+      /* lastAttemptCall = !lastAttemptCall ? 1 : lastAttemptCall + 1;
       if (!lastAttemptCall || lastAttemptCall < 3) {
         timer(1000).subscribe(() => this.loadEventsFromApi(all, lastAttemptCall));
       } else {
         this.countdownSub.unsubscribe();
 
-      }
+      } */
     });
     this.reload = this.productService.product.layoutProducts.cacheEventsItem;
   }
@@ -549,12 +549,12 @@ export class MainService {
             this.attempts = 0;
           } catch (err) {
             console.log(err);
-            if (!this.attempts || this.attempts < 3) {
+            /* if (!this.attempts || this.attempts < 3) {
               this.attempts += 1;
               timer(1000).subscribe(() => this.eventDetailOddsByCacheTournament(tournamentNumber));
             } else {
               this.attempts = 0;
-            }
+            } */
           }
         }, (error) => {
           // check the error
@@ -563,13 +563,13 @@ export class MainService {
             this.countdownSub.unsubscribe();
             return;
           }
-
-          this.attempts = this.attempts + 1;
-          if (this.attempts < 2) {
-            timer(1000).subscribe(() => this.eventDetailOddsByCacheTournament(tournamentNumber));
-          } else {
-            this.countdownSub.unsubscribe();
-          }
+          /*
+                    this.attempts = this.attempts + 1;
+                    if (this.attempts < 2) {
+                      timer(1000).subscribe(() => this.eventDetailOddsByCacheTournament(tournamentNumber));
+                    } else {
+                      this.countdownSub.unsubscribe();
+                    } */
         });
     }
   }
@@ -701,12 +701,12 @@ export class MainService {
             this.countdownSub.unsubscribe();
             return;
           }
-          this.attempts = this.attempts + 1;
-          if (this.attempts < 2) {
-            timer(1000).subscribe(() => this.eventDetailOdds(eventNumber));
-          } else {
-            this.countdownSub.unsubscribe();
-          }
+          /*  this.attempts = this.attempts + 1;
+           if (this.attempts < 2) {
+             timer(1000).subscribe(() => this.eventDetailOdds(eventNumber));
+           } else {
+             this.countdownSub.unsubscribe();
+           } */
         });
     }
   }

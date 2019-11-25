@@ -45,6 +45,6 @@ export class MainComponent implements OnInit, OnDestroy {
     console.log(args);
   }
   ngOnDestroy() {
-    this.mainService.countdownSub.unsubscribe();
+    // this.mainService.countdownSub.unsubscribe();
   }
 }

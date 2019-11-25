@@ -4,6 +4,7 @@ import { Products } from '../../../../../src/environments/environment.models';
 import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../../products/products.service';
 import { IconSize } from '../../model/iconSize.model';
+import { RouterService } from '../../../services/utility/router/router.service';
 
 @Component({
   selector: 'app-application-menu',
@@ -20,7 +21,7 @@ export class ApplicationMenuComponent implements AfterViewInit {
   constructor(
     private readonly appSettings: AppSettings,
     public productService: ProductsService,
-    private router: Router
+    private router: RouterService
   ) {
     this.settings = appSettings;
   }
@@ -46,6 +47,6 @@ export class ApplicationMenuComponent implements AfterViewInit {
   productSelecting(productSelected: Products) {
     /* this.productService.resetBoard(); */
     this.productService.changeProduct(productSelected.codeProduct);
-    this.router.navigateByUrl('/products/main');
+    this.router.getRouter().navigateByUrl('/products/main');
   }
 }

@@ -32,7 +32,8 @@ export class ApplicationMenuComponent implements OnInit {
   }
 
   productSelecting(productSelected: Products) {
-    if (this.currentRoute === '/products/main' + productSelected.name) {
+
+    if (this.currentRoute === '/products/main' + productSelected.codeProduct) {
       return;
     }
     this.btnSelected = productSelected.name;
@@ -45,7 +46,7 @@ export class ApplicationMenuComponent implements OnInit {
       this.productService.changeProduct(productSelected.codeProduct);
       this.router.getRouter().navigateByUrl('/products/main');
     });
-    this.currentRoute = '/products/main' + productSelected.name;
+    this.currentRoute = '/products/main' + productSelected.codeProduct;
   }
 
   goToAdmin() {

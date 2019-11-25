@@ -7,5 +7,5 @@ import { EventControl } from '../../event-control.model';
 })
 export class StandardComponent {
   @Input() eventControlDetails: EventControl;
-  constructor() {}
+  constructor() { }
 }

@@ -51,7 +51,7 @@ export class RaceComponent implements OnInit, OnDestroy {
     if (this.router.productSameReload) {
       this.router.productSameReload = false;
       // it's required for disable the spinner is loading when the product selected is same to product menu touched.
-      timer(500).subscribe(() => this.loaderService.setLoading(false, null));
+      timer(50).subscribe(() => this.loaderService.setLoading(false, null));
     }
 
     this.playerListSubscription = this.loaderService.isLoading.subscribe(evt => {

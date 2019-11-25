@@ -13,7 +13,8 @@ import {
   launchEvent, LaunchEventData,
   on,
   resumeEvent,
-  suspendEvent
+  suspendEvent,
+  android
 } from 'tns-core-modules/application';
 
 
@@ -61,13 +62,18 @@ export class AppComponent {
     // >> Application resume
     resumeListener = (args: ApplicationEventData) => {
       // Compare the time elapsed after the suspend
-      if (this.storageService.checkIfExist('last-suspended') && this.storageService.checkDataIsValid('last-suspended')) {
-        const now = new Date().getTime();
-        const elapsed = Math.round((now - this.storageService.getData('last-suspended')) / (60 * 1000));
-        // if the time elapsed is major of 1 minute, the user is automatically logout
-        if (elapsed > 0) {
-          this.userService.logout();
+      try {
+        if (this.storageService.checkIfExist('last-suspended') && this.storageService.checkDataIsValid('last-suspended')) {
+          const now = new Date().getTime();
+          const elapsed = Math.round((now - this.storageService.getData('last-suspended')) / (60 * 1000));
+          // if the time elapsed is major of 1 minute, the user is automatically logout
+          if (elapsed > 0) {
+            this.userService.logout();
+          }
         }
+      } catch (err) {
+        console.error(err);
+
       }
     };
     on(resumeEvent, resumeListener);
@@ -75,6 +81,8 @@ export class AppComponent {
     exitListener = (args: ApplicationEventData) => {
       // Destroy session player
       this.storageService.removeItems('tokenData', 'UserData');
+      args.android.finishAffinity();
+      android.nativeApp.os.Process.killProcess(android.nativeApp.os.Process.myPid());
     };
     on(exitEvent, exitListener);
   }
