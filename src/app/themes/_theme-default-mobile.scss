@@ -387,18 +387,56 @@
 				.btn-amount-4 {
 					@extend %btn-white-gradient-mobile;
 				}
+				.btn-keyboard {
+					@extend %btn-keyboard;
+
+					&.btn-grey {
+						@extend %btn-gray;
+					}
+
+					&.btn-black {
+						@extend %btn-dark;
+					}
+
+					&.button-internal {
+						margin: 0;
+						border-width: 0;
+						padding: 0;
+					}
+
+					.button-internal:active {
+						@extend %bg-opacity;
+					}
+				}
 			}
-		}
 
-		.btn-keyboard {
-			@extend %btn-keyboard;
-
-			&.btn-grey {
-				@extend %btn-gray;
+			/**
+      * USED TO BUTTONS + / C
+      **/
+			.card-special-button {
+				padding: 1 0;
+				.button {
+					height: 100%;
+					margin-top: 1;
+					&:active {
+						@extend %color-disabled;
+					}
+				}
 			}
+			/**
+      * USED TO BUTTONS TOT / COL
+      **/
+			.card-type-presets-display {
+				padding-top: 1;
+				padding-bottom: 0;
+				margin-bottom: 0;
+				.button {
+					height: 100%;
 
-			&.btn-black {
-				@extend %btn-dark;
+					&:active {
+						@extend %color-disabled;
+					}
+				}
 			}
 		}
 
