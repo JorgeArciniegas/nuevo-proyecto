@@ -387,26 +387,26 @@
 				.btn-amount-4 {
 					@extend %btn-white-gradient-mobile;
 				}
-				.btn-keyboard {
-					@extend %btn-keyboard;
+			}
+			.btn-keyboard {
+				@extend %btn-keyboard;
 
-					&.btn-grey {
-						@extend %btn-gray;
-					}
+				&.btn-grey {
+					@extend %btn-gray;
+				}
 
-					&.btn-black {
-						@extend %btn-dark;
-					}
+				&.btn-black {
+					@extend %btn-dark;
+				}
 
-					&.button-internal {
-						margin: 0;
-						border-width: 0;
-						padding: 0;
-					}
+				&.button-internal {
+					margin: 0;
+					border-width: 0;
+					padding: 0;
+				}
 
-					.button-internal:active {
-						@extend %bg-opacity;
-					}
+				.button-internal:active {
+					@extend %bg-opacity;
 				}
 			}
 
@@ -432,9 +432,11 @@
 				margin-bottom: 0;
 				.button {
 					height: 100%;
-
 					&:active {
 						@extend %color-disabled;
+					}
+					&:disabled {
+						opacity: 0.4;
 					}
 				}
 			}
