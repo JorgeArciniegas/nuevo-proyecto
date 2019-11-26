@@ -1,10 +1,7 @@
 <FlexboxLayout class="advance-game" flexDirection="row">
-  <GridLayout *ngFor="let btn of buttons" flexGrow="1" rows="*" columns="*" class="card button btn-advance-game"
-    [ngClass]="{'actived' : service.placingEvent.typePlace === btn.code,
+  <Button *ngFor="let btn of buttons" flexGrow="1" text="{{ btn.label | translate }}" class="button btn-advance-game"
+    (tap)="setTypePlacing(btn.code)"
+    [isEnabled]="!timeBlocked && !userService.isModalOpen && (layoutProducts?.type === layoutType.RACING)" [ngClass]="{'actived' : service.placingEvent.typePlace === btn.code,
     'inactive': service.placingEvent.typePlace !== undefined && service.placingEvent.typePlace !== btn.code,
-    'disabled': layoutProducts?.type !== layoutType.RACING}">
-    <Button text="{{ btn.label | translate }}" class="button-internal" (tap)="setTypePlacing(btn.code)"
-      [isEnabled]="!timeBlocked && !userService.isModalOpen && (layoutProducts?.type === layoutType.RACING)"
-      ></Button>
-  </GridLayout>
+    'disabled': layoutProducts?.type !== layoutType.RACING}"></Button>
 </FlexboxLayout>
