@@ -17,39 +17,33 @@
       </GridLayout>
     </GridLayout>
     <!-- ROW 1 -->
-    <GridLayout row="0" col="{{i + 1}}" class="card"
+    <GridLayout row="0" col="{{i + 1}}" class="card bg-playable"
       *ngFor="let runner of playersList | filterByPosition: 1; let i = index;">
-      <GridLayout rows="*" columns="*" class="bg-playable">
-        <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{runner.number}}"
-          [ngClass]="{'btn-dog-play-actived': runner.actived, 'disabled': !runner.selectable}">
-          <StackLayout class="label" *ngIf="runner.number === 6"></StackLayout>
-          <Button text="{{runner.number}}" class="button-internal" (tap)="runnerplaced(runner)"
-            [isEnabled]="runner.selectable && !service.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
-        </GridLayout>
+      <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{runner.number}}"
+        [ngClass]="{'btn-dog-play-actived': runner.actived, 'disabled': !runner.selectable}">
+        <StackLayout class="label" *ngIf="runner.number === 6"></StackLayout>
+        <Button text="{{runner.number}}" class="button-internal" (tap)="runnerplaced(runner)"
+          [isEnabled]="runner.selectable && !service.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
       </GridLayout>
     </GridLayout>
     <!-- ROW 2 -->
-    <GridLayout row="1" col="{{i + 1}}" class="card"
+    <GridLayout row="1" col="{{i + 1}}" class="card bg-playable"
       *ngFor="let runner of playersList | filterByPosition: 2; let i = index;">
-      <GridLayout rows="*" columns="*" class="bg-playable">
-        <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{runner.number}}"
-          [ngClass]="{'btn-dog-play-actived': runner.actived, 'disabled': !runner.selectable || service.placingEvent.secondRowDisabled}">
-          <StackLayout class="label" *ngIf="runner.number === 6"></StackLayout>
-          <Button text="{{runner.number}}" class="button-internal" (tap)="runnerplaced(runner)"
-            [isEnabled]="runner.selectable && !service.placingEvent.timeBlocked && !service.placingEvent.secondRowDisabled && !userService.isModalOpen"></Button>
-        </GridLayout>
+      <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{runner.number}}"
+        [ngClass]="{'btn-dog-play-actived': runner.actived, 'disabled': !runner.selectable || service.placingEvent.secondRowDisabled}">
+        <StackLayout class="label" *ngIf="runner.number === 6"></StackLayout>
+        <Button text="{{runner.number}}" class="button-internal" (tap)="runnerplaced(runner)"
+          [isEnabled]="runner.selectable && !service.placingEvent.timeBlocked && !service.placingEvent.secondRowDisabled && !userService.isModalOpen"></Button>
       </GridLayout>
     </GridLayout>
     <!-- ROW 3 -->
-    <GridLayout row="2" col="{{i + 1}}" cornerRadius="16" class="card"
+    <GridLayout row="2" col="{{i + 1}}" cornerRadius="16" class="card bg-playable"
       *ngFor="let runner of playersList | filterByPosition: 3; let i = index;">
-      <GridLayout rows="*" columns="*" class="bg-playable">
-        <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{runner.number}}"
-          [ngClass]="{'btn-dog-play-actived': runner.actived, 'disabled': !runner.selectable  || service.placingEvent.thirdRowDisabled}">
-          <StackLayout class="label" *ngIf="runner.number === 6"></StackLayout>
-          <Button text="{{runner.number}}" class="button-internal" (tap)="runnerplaced(runner)"
-            [isEnabled]="runner.selectable && !service.placingEvent.timeBlocked && !service.placingEvent.thirdRowDisabled && !userService.isModalOpen"></Button>
-        </GridLayout>
+      <GridLayout rows="*" columns="*" class="button btn-default-dog-play btn-{{codeProduct}}-{{runner.number}}"
+        [ngClass]="{'btn-dog-play-actived': runner.actived, 'disabled': !runner.selectable  || service.placingEvent.thirdRowDisabled}">
+        <StackLayout class="label" *ngIf="runner.number === 6"></StackLayout>
+        <Button text="{{runner.number}}" class="button-internal" (tap)="runnerplaced(runner)"
+          [isEnabled]="runner.selectable && !service.placingEvent.timeBlocked && !service.placingEvent.thirdRowDisabled && !userService.isModalOpen"></Button>
       </GridLayout>
     </GridLayout>
   </GridLayout>
