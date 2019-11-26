@@ -12,7 +12,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.DEMO_LICENSE,
-  baseApiUrl: 'https://vg-apigenc02.vg-services.net',
+  baseApiUrl: 'https://qacom-apigenc02.ody-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
   faviconPath: 'app/themes/skins/develop/image/Logo-header.png',
