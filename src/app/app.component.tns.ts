@@ -67,8 +67,8 @@ export class AppComponent {
           const now = new Date().getTime();
           const elapsed = Math.round((now - this.storageService.getData('last-suspended')) / (60 * 1000));
           // if the time elapsed is major of 1 minute, the user is automatically logout
-          if (elapsed > 0) {
-            this.userService.logout();
+          if (elapsed > 2) {
+            // this.userService.logout();
           }
         }
       } catch (err) {
