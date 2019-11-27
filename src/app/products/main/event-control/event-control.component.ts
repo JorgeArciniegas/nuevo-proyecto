@@ -39,7 +39,6 @@ export class EventControlComponent implements OnInit {
     return this.settings.showEventId;
   }
 
-
   public get currentEventDetail(): EventInfo {
     return this.mainService.eventDetails.events[this.mainService.eventDetails.currentEvent];
   }

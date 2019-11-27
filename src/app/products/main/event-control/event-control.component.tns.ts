@@ -4,7 +4,8 @@ import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../products.service';
 import { EventInfo } from '../main.models';
 import { MainService } from '../main.service';
-import { timer } from 'rxjs';
+import { timer, Subscription } from 'rxjs';
+import { LoaderService } from '../../../services/utility/loader/loader.service';
 
 @Component({
   moduleId: module.id,
@@ -46,7 +47,8 @@ export class EventControlComponent implements OnInit {
   constructor(
     private mainService: MainService,
     private productService: ProductsService,
-    private settings: AppSettings
+    private settings: AppSettings,
+    private loaderService: LoaderService
   ) {
   }
 
@@ -54,6 +56,7 @@ export class EventControlComponent implements OnInit {
     timer().subscribe(() => {
       this.productService.resetBoard();
     });
+
   }
 
 }

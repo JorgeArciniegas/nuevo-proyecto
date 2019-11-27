@@ -22,16 +22,9 @@ export class RaceComponent implements OnInit, OnDestroy {
   public TypePlacingRace = TypePlacingEvent;
   public specialBet: typeof SpecialBet = SpecialBet;
 
-  // list of players
-  private _playersList: Player[];
   public get playersList(): Player[] {
-    return this._playersList;
+    return this.service.playersList;
   }
-  public set playersList(value: Player[]) {
-    this._playersList = value;
-  }
-  // subscription to change the playerlist after response to service
-  playerListSubscription: Subscription;
 
   // code of product. it's used for change the layout color to buttons.
   public get codeProduct(): string {
@@ -44,7 +37,7 @@ export class RaceComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private loaderService: LoaderService,
     private router: RouterService) {
-    this.playersList = this.service.playersList;
+
   }
 
   ngOnInit() {
@@ -53,16 +46,9 @@ export class RaceComponent implements OnInit, OnDestroy {
       // it's required for disable the spinner is loading when the product selected is same to product menu touched.
       timer(50).subscribe(() => this.loaderService.setLoading(false, null));
     }
-
-    this.playerListSubscription = this.loaderService.isLoading.subscribe(evt => {
-      if (this.loaderService.operationDataDetailOdds.name.indexOf('detail') !== -1 && !evt) {
-        this.playersList = this.service.playersList;
-      }
-    });
   }
 
   ngOnDestroy() {
-    this.playerListSubscription.unsubscribe();
   }
   /**
    *
