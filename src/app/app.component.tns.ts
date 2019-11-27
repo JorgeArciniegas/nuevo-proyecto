@@ -63,14 +63,14 @@ export class AppComponent {
     resumeListener = (args: ApplicationEventData) => {
       // Compare the time elapsed after the suspend
       try {
-        if (this.storageService.checkIfExist('last-suspended') && this.storageService.checkDataIsValid('last-suspended')) {
-          const now = new Date().getTime();
-          const elapsed = Math.round((now - this.storageService.getData('last-suspended')) / (60 * 1000));
-          // if the time elapsed is major of 1 minute, the user is automatically logout
-          if (elapsed > 2) {
-            // this.userService.logout();
-          }
-        }
+        /*  if (this.storageService.checkIfExist('last-suspended') && this.storageService.checkDataIsValid('last-suspended')) {
+           const now = new Date().getTime();
+           const elapsed = Math.round((now - this.storageService.getData('last-suspended')) / (60 * 1000));
+           // if the time elapsed is major of 1 minute, the user is automatically logout
+           if (elapsed > 2) {
+             // this.userService.logout();
+           }
+         } */
       } catch (err) {
         console.error(err);
 
