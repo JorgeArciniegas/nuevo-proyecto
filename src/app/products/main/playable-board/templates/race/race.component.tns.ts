@@ -1,12 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, timer } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
+import { timer } from 'rxjs';
 import { UserService } from '../../../../../services/user.service';
 import { LoaderService } from '../../../../../services/utility/loader/loader.service';
 import { RouterService } from '../../../../../services/utility/router/router.service';
 import { ProductsService } from '../../../../products.service';
 import { Player, SpecialBet, TypePlacingEvent } from '../../../main.models';
 import { MainService } from '../../../main.service';
-import { global } from '@angular/compiler/src/util';
 
 @Component({
   moduleId: module.id,
