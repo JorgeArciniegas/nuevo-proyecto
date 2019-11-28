@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ErrorStatus } from '@elys/elys-api';
-import { AppSettings } from '../../../../app.settings';
-import { OperatorsService } from '../operators.service';
-import { OperatorEditByForm } from '../operators.model';
 import { TextField } from 'tns-core-modules/ui/text-field/text-field';
+import { AppSettings } from '../../../../app.settings';
+import { OperatorEditByForm } from '../operators.model';
+import { OperatorsService } from '../operators.service';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditComponent implements OnInit {
+export class EditComponent {
 
   public errorMessage: string | undefined;
   public passwordLengthInvalid = true;
   public retryPasswordLengthInvalid = true;
   public passwordNotSame = true;
   isEdited: boolean;
-  operatorEditByForm: OperatorEditByForm =  {password: null, confirmPassword: null };
+  operatorEditByForm: OperatorEditByForm = { password: null, confirmPassword: null };
   constructor(
     public operatorService: OperatorsService,
     public readonly settings: AppSettings
@@ -25,8 +25,6 @@ export class EditComponent implements OnInit {
     this.isEdited = false;
 
   }
-
-  ngOnInit() {}
 
   onSubmit(): void {
     if (!this.passwordLengthInvalid && !this.retryPasswordLengthInvalid && !this.passwordNotSame) {
@@ -56,9 +54,9 @@ export class EditComponent implements OnInit {
   }
 
 
-  samePassword(args, password: string): void  {
+  samePassword(args, password: string): void {
     const textField = <TextField>args.object;
-    if ( !this.retryPasswordLengthInvalid  &&  !this.passwordLengthInvalid)  {
+    if (!this.retryPasswordLengthInvalid && !this.passwordLengthInvalid) {
       this.passwordNotSame = textField.text !== password;
     }
   }

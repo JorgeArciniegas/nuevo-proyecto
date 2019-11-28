@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { VirtualBetEvent } from '@elys/elys-api';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../../../../services/user.service';
@@ -11,7 +11,7 @@ import { Lucky } from '../../lucky.model';
   templateUrl: './cock-fight.component.html',
   styleUrls: ['./cock-fight.component.scss']
 })
-export class CockFightComponent implements OnInit {
+export class CockFightComponent {
   public market: typeof Market = Market;
 
   lucky: typeof Lucky = Lucky;
@@ -46,7 +46,6 @@ export class CockFightComponent implements OnInit {
       this.oldLuckyCock = 0;
     });
   }
-  ngOnInit() { }
 
   async placingLucky(lucky: Lucky): Promise<void> {
     this.mainService.resetPlayEvent();
