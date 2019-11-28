@@ -6,6 +6,7 @@ import { RouterService } from '../../../../../services/utility/router/router.ser
 import { ProductsService } from '../../../../products.service';
 import { Player, SpecialBet, TypePlacingEvent } from '../../../main.models';
 import { MainService } from '../../../main.service';
+import { global } from '@angular/compiler/src/util';
 
 @Component({
   moduleId: module.id,
@@ -13,7 +14,7 @@ import { MainService } from '../../../main.service';
   templateUrl: './race.component.html',
   styleUrls: ['./race.component.scss']
 })
-export class RaceComponent implements OnInit, OnDestroy {
+export class RaceComponent implements OnInit {
   @Input()
   public rowHeight: number;
   @Input()
@@ -22,14 +23,9 @@ export class RaceComponent implements OnInit, OnDestroy {
   public TypePlacingRace = TypePlacingEvent;
   public specialBet: typeof SpecialBet = SpecialBet;
 
-  public get playersList(): Player[] {
-    return this.service.playersList;
-  }
-
   // code of product. it's used for change the layout color to buttons.
-  public get codeProduct(): string {
-    return this.productService.product.codeProduct;
-  }
+  codeProduct: string;
+  players: Player[];
 
   constructor(
     public service: MainService,
@@ -37,7 +33,8 @@ export class RaceComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private loaderService: LoaderService,
     private router: RouterService) {
-
+    this.players = this.service.playersList;
+    this.codeProduct = this.productService.product.codeProduct;
   }
 
   ngOnInit() {
@@ -46,9 +43,6 @@ export class RaceComponent implements OnInit, OnDestroy {
       // it's required for disable the spinner is loading when the product selected is same to product menu touched.
       timer(50).subscribe(() => this.loaderService.setLoading(false, null));
     }
-  }
-
-  ngOnDestroy() {
   }
   /**
    *

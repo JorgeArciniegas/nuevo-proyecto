@@ -1,7 +1,6 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { EventsListService } from './events-list.service';
-import { EventsList } from './event-list.model';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ProductsService } from '../../products.service';
+import { EventsListService } from './events-list.service';
 @Component({
   moduleId: module.id,
   selector: 'app-events-list, [app-events-list]',

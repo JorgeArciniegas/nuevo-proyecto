@@ -1,27 +1,33 @@
 import { Component } from '@angular/core';
-import { connectionType, getConnectionType } from 'tns-core-modules/connectivity';
-import { AppSettings } from './app.settings';
-import { device } from 'tns-core-modules/platform';
-import { UserService } from './services/user.service';
-import { TranslateUtilityService } from './services/utility/translate-utility.service';
-import { WindowSizeService } from './services/utility/window-size/window-size.service';
-import { Settings } from './app.settings.model';
-import { StorageService } from './services/utility/storage/storage.service';
 import {
+  android,
   ApplicationEventData,
+  AndroidApplication,
+  UnhandledErrorEventData,
   exitEvent,
-  launchEvent, LaunchEventData,
+  launchEvent,
+  LaunchEventData,
   on,
   resumeEvent,
   suspendEvent,
-  android
+  discardedErrorEvent
 } from 'tns-core-modules/application';
+import { connectionType, getConnectionType } from 'tns-core-modules/connectivity';
+import { device } from 'tns-core-modules/platform';
+import { AppSettings } from './app.settings';
+import { Settings } from './app.settings.model';
+import { UserService } from './services/user.service';
+import { StorageService } from './services/utility/storage/storage.service';
+import { TranslateUtilityService } from './services/utility/translate-utility.service';
+import { WindowSizeService } from './services/utility/window-size/window-size.service';
 
 
 
 let launchListener,
   suspendListener,
   resumeListener,
+  activityStoppedListener,
+  discardedErrorListener,
   exitListener;
 
 @Component({
@@ -57,7 +63,16 @@ export class AppComponent {
       // Added the time of suspended the app
       this.storageService.setData('last-suspended', new Date().getTime());
     };
+
+
     on(suspendEvent, suspendListener);
+
+
+    discardedErrorListener = (args: UnhandledErrorEventData) => {
+      console.log('activityStoppedListener', args);
+    };
+
+    on(AndroidApplication.activityStoppedEvent, discardedErrorListener);
 
     // >> Application resume
     resumeListener = (args: ApplicationEventData) => {
@@ -85,5 +100,9 @@ export class AppComponent {
       android.nativeApp.os.Process.killProcess(android.nativeApp.os.Process.myPid());
     };
     on(exitEvent, exitListener);
+
+    // timer(1, 10000).subscribe(() => console.log('GLOBAL DATA ', global.playersList));
+
+
   }
 }

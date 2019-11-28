@@ -1,13 +1,12 @@
-import { Component, OnDestroy, OnInit, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { EventData } from 'tns-core-modules/ui/page/page';
 import { AppSettings } from '../../app.settings';
 import { UserService } from '../../services/user.service';
 import { LoaderService } from '../../services/utility/loader/loader.service';
 import { DialogService } from '../dialog.service';
 import { ProductsService } from '../products.service';
 import { MainService } from './main.service';
-import { Observable } from 'rxjs';
-import { Page, EventData } from 'tns-core-modules/ui/page/page';
-import { elementAt } from 'rxjs-compat/operator/elementAt';
+import { global } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -22,7 +21,6 @@ export class MainComponent implements OnInit, OnDestroy {
 
   // Lucky last random extract
   oldLucky: string;
-  loadedComponent: string[];
   constructor(
     public productService: ProductsService,
     public mainService: MainService,
@@ -40,11 +38,8 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   loaded(args: EventData) {
-    /* const page = <Page>this.element.nativeElement;
-    Observable.fromEvent(page, 'load').subscribe((e) => { console.log(e); }); */
-    console.log(args);
+
   }
   ngOnDestroy() {
-    // this.mainService.countdownSub.unsubscribe();
   }
 }

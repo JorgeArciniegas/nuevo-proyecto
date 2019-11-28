@@ -1,7 +1,13 @@
 <StackLayout>
   <!-- TEMPLATE RACE -->
   <app-playable-board-race [rowHeight]="rowHeight"
-    *ngIf="productService.product?.layoutProducts.type === typeLayout.RACING">
+    *ngIf="productService.product?.layoutProducts.type === typeLayout.RACING && productService.product?.codeProduct === 'DOG'">
+  </app-playable-board-race>
+  <app-playable-board-race [rowHeight]="rowHeight"
+    *ngIf="productService.product?.layoutProducts.type === typeLayout.RACING && productService.product?.codeProduct === 'HORSE'">
+  </app-playable-board-race>
+  <app-playable-board-race [rowHeight]="rowHeight"
+    *ngIf="productService.product?.layoutProducts.type === typeLayout.RACING && productService.product?.codeProduct === 'HORSE-VIRT'">
   </app-playable-board-race>
   <!-- TEMPLATE COCK FIGHT -->
   <app-playable-board-cock-fight [rowHeight]="rowHeight"
