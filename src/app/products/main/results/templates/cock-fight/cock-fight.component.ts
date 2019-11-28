@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { EventResult } from '../../results.model';
 
 @Component({
@@ -6,12 +6,10 @@ import { EventResult } from '../../results.model';
   templateUrl: './cock-fight.component.html',
   styleUrls: ['./cock-fight.component.scss']
 })
-export class CockFightComponent implements OnInit {
+export class CockFightComponent {
   @Input() items: number;
   @Input() rowHeight: number;
   @Input() results: EventResult[];
   @Input() codeProduct: string;
-  constructor() {}
-
-  ngOnInit() {}
+  constructor() { }
 }
