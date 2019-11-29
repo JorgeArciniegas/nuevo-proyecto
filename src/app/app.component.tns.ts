@@ -79,7 +79,7 @@ export class AppComponent {
         if (this.storageService.checkIfExist('last-suspended') && this.storageService.checkDataIsValid('last-suspended')) {
           const now = new Date().getTime();
           const elapsed = Math.round((now - this.storageService.getData('last-suspended')) / (60 * 1000));
-          console.log(now, this.storageService.getData('last-suspended'), elapsed);
+          // console.log(now, this.storageService.getData('last-suspended'), elapsed);
           // if the time elapsed is major of 1 minute, the user is automatically logout
           if (elapsed > 1 && elapsed < 5) {
             if (this.userService.isUserLogged) {
