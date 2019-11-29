@@ -18,6 +18,7 @@ import { UserService } from './services/user.service';
 import { StorageService } from './services/utility/storage/storage.service';
 import { TranslateUtilityService } from './services/utility/translate-utility.service';
 import { WindowSizeService } from './services/utility/window-size/window-size.service';
+import { NotificationService } from './notifications/notification.service';
 
 
 
@@ -42,7 +43,8 @@ export class AppComponent {
     public userService: UserService,
     private translateService: TranslateUtilityService,
     private windowSizeService: WindowSizeService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private notification: NotificationService
   ) {
     this.settings = appSettings;
     // Set the application language passing the device one.
@@ -77,16 +79,29 @@ export class AppComponent {
         if (this.storageService.checkIfExist('last-suspended') && this.storageService.checkDataIsValid('last-suspended')) {
           const now = new Date().getTime();
           const elapsed = Math.round((now - this.storageService.getData('last-suspended')) / (60 * 1000));
-          // console.log(now, this.storageService.getData('last-suspended'), elapsed);
+          console.log(now, this.storageService.getData('last-suspended'), elapsed);
           // if the time elapsed is major of 1 minute, the user is automatically logout
           if (elapsed > 1 && elapsed < 5) {
             if (this.userService.isUserLogged) {
               this.userService.logout();
             }
+            notification.pushMessage({
+              title: 'Session terminated',
+              body: 'You\'re session has been destroyed. Login again!',
+              delay: 2,
+              id: 1
+            });
+
           } else if (elapsed >= 5) {
             if (this.userService.isUserLogged) {
               this.userService.logout();
             }
+            notification.pushMessage({
+              title: 'Application closed.',
+              body: 'Vdesk app is closed! Thank you for ',
+              delay: 1,
+              id: 1
+            });
             args.android.finishAffinity();
           }
         }
