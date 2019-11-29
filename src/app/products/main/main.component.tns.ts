@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EventData } from 'tns-core-modules/ui/page/page';
 import { AppSettings } from '../../app.settings';
 import { UserService } from '../../services/user.service';
@@ -6,7 +6,6 @@ import { LoaderService } from '../../services/utility/loader/loader.service';
 import { DialogService } from '../dialog.service';
 import { ProductsService } from '../products.service';
 import { MainService } from './main.service';
-import { global } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -15,7 +14,7 @@ import { global } from '@angular/compiler/src/util';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit, OnDestroy {
+export class MainComponent implements OnInit {
   public rowHeight: number;
   public settings: AppSettings;
 
@@ -27,19 +26,13 @@ export class MainComponent implements OnInit, OnDestroy {
     public dialog: DialogService,
     public userService: UserService,
     public readonly appSettings: AppSettings,
-    public loaderService: LoaderService,
-    private element: ElementRef
+    public loaderService: LoaderService
   ) {
     this.settings = appSettings;
   }
   ngOnInit() {
-
     this.rowHeight = (this.productService.windowSize.columnHeight - 30 - 12) / 24;
   }
 
-  loaded(args: EventData) {
-
-  }
-  ngOnDestroy() {
-  }
+  loaded(args: EventData) { }
 }

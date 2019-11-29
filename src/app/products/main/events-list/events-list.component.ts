@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProductsService } from '../../products.service';
 import { EventsListService } from './events-list.service';
 @Component({
@@ -7,7 +7,7 @@ import { EventsListService } from './events-list.service';
   templateUrl: './events-list.component.html',
   styleUrls: ['./events-list.component.scss']
 })
-export class EventListComponent implements OnInit, OnDestroy {
+export class EventListComponent implements OnInit {
   @Input()
   public rowHeight: number;
   // public eventsDetails: EventsList;
@@ -29,7 +29,5 @@ export class EventListComponent implements OnInit, OnDestroy {
       );
     });
   }
-  ngOnDestroy() {
-    // this.eventService.customUnsubscribe();
-  }
+
 }
