@@ -257,8 +257,8 @@ export const environment: Environment = {
         // defines the layout type for different product group
         type: LAYOUT_TYPE.KENO,
         resultItems: 1, // items to show for last result
-        nextEventItems: 1, // items to show for next events
-        cacheEventsItem: 2
+        nextEventItems: 2, // items to show for next events
+        cacheEventsItem: 3
       },
       toolbarButton: {
         name: 'keno',

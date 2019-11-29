@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { LAYOUT_TYPE, Products } from '../../../../environments/environment.models';
 import { AppSettings } from '../../../app.settings';
-import { LoaderService } from '../../../services/utility/loader/loader.service';
 import { ProductsService } from '../../products.service';
 import { EventInfo } from '../main.models';
 import { MainService } from '../main.service';
@@ -27,7 +26,9 @@ export class EventControlComponent {
     return this.settings.products.find(product => product.productSelected);
   }
 
-  public productImageClass: string;
+  public get productImageClass() {
+    return this.product ? 'PRODUCT-' + this.product.codeProduct + '-BG' : '';
+  }
   public isWindowSizeSmall: boolean;
   public showEventId: boolean;
 
@@ -35,17 +36,14 @@ export class EventControlComponent {
     return this.mainService.eventDetails.events[this.mainService.eventDetails.currentEvent];
   }
 
-
   constructor(
     private mainService: MainService,
     private productService: ProductsService,
-    private settings: AppSettings,
-    private loaderService: LoaderService
+    private settings: AppSettings
   ) {
     this.productService.resetBoard();
     this.isWindowSizeSmall = this.productService.windowSize.small;
     this.showEventId = this.settings.showEventId;
-    this.productImageClass = this.product ? 'PRODUCT-' + this.product.codeProduct + '-BG' : '';
     this.typeProductSelected = this.product.layoutProducts.type;
   }
 
