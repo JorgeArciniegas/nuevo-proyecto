@@ -1,11 +1,11 @@
 <GridLayout rows="*,*" class="result-list m-t-2 card-box-result-keno">
-  <!-- EVENT WEEK -->
   <FlexBoxLayout row="0" class="header m-x-4 m-b-4" justifyContent="space-around">
     <Label text="{{results.eventLabel}}" class="eventNumber"></Label>
   </FlexBoxLayout>
-  <!-- RESULT'S MATHCES -->
-  <FlexBoxLayout row="1" justifyContent="space-around">
-    <Label class="btn-keno-result" *ngFor="let kenoResult of results.kenoResults; let i=index"
-      text="{{kenoResult}}"></Label>
-  </FlexBoxLayout>
+  <GridLayout row="1" rows="*" columns="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*">
+    <StackLayout col="{{i}}" orientation="vertical" horizontalAlignment="center" verticalAlignment="center"
+      *ngFor="let kenoResult of results.kenoResults; let i=index" class="btn-keno-result p-x-5">
+      <Label class="label m-t-2" horizontalAlignment="center" text="{{kenoResult}}"></Label>
+    </StackLayout>
+  </GridLayout>
 </GridLayout>
