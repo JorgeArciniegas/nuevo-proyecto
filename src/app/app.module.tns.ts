@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { PreloadAllModules } from '@angular/router';
 import { ElysApiModule, PlaySource } from '@elys/elys-api';
 import { ElysCouponModule } from '@elys/elys-coupon';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -15,8 +16,8 @@ import { componentDeclarations, providerDeclarations, routes } from './app.commo
 import { AppComponent } from './app.component';
 import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
 import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
+import { NotificationService } from './notifications/notification.service';
 import { SharedModule } from './shared/shared.module';
-import { PreloadAllModules } from '@angular/router';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -45,7 +46,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     NativeScriptRouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   providers: [
-    providerDeclarations
+    providerDeclarations,
+    NotificationService
     /* { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true } */
   ],
   bootstrap: [AppComponent],

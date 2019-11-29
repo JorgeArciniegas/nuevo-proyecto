@@ -44,7 +44,7 @@ export class ApplicationMenuComponent implements OnInit {
     timer(100).subscribe(() => {
       // this.productService.resetBoard();
       this.productService.changeProduct(productSelected.codeProduct);
-      this.router.getRouter().navigateByUrl('/products/main');
+      // this.router.getRouter().navigateByUrl('/products/main');
     });
     this.currentRoute = '/products/main' + productSelected.codeProduct;
   }

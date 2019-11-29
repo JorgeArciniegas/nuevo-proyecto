@@ -1,27 +1,31 @@
 import { Component } from '@angular/core';
-import { connectionType, getConnectionType } from 'tns-core-modules/connectivity';
-import { AppSettings } from './app.settings';
-import { device } from 'tns-core-modules/platform';
-import { UserService } from './services/user.service';
-import { TranslateUtilityService } from './services/utility/translate-utility.service';
-import { WindowSizeService } from './services/utility/window-size/window-size.service';
-import { Settings } from './app.settings.model';
-import { StorageService } from './services/utility/storage/storage.service';
 import {
   ApplicationEventData,
+  UnhandledErrorEventData,
   exitEvent,
-  launchEvent, LaunchEventData,
+  launchEvent,
+  LaunchEventData,
   on,
   resumeEvent,
   suspendEvent,
-  android
+  discardedErrorEvent,
 } from 'tns-core-modules/application';
+import { connectionType, getConnectionType } from 'tns-core-modules/connectivity';
+import { device } from 'tns-core-modules/platform';
+import { AppSettings } from './app.settings';
+import { Settings } from './app.settings.model';
+import { UserService } from './services/user.service';
+import { StorageService } from './services/utility/storage/storage.service';
+import { TranslateUtilityService } from './services/utility/translate-utility.service';
+import { WindowSizeService } from './services/utility/window-size/window-size.service';
+import { NotificationService } from './notifications/notification.service';
 
 
 
 let launchListener,
   suspendListener,
   resumeListener,
+  discardedErrorListener,
   exitListener;
 
 @Component({
@@ -39,7 +43,8 @@ export class AppComponent {
     public userService: UserService,
     private translateService: TranslateUtilityService,
     private windowSizeService: WindowSizeService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private notification: NotificationService
   ) {
     this.settings = appSettings;
     // Set the application language passing the device one.
@@ -57,33 +62,63 @@ export class AppComponent {
       // Added the time of suspended the app
       this.storageService.setData('last-suspended', new Date().getTime());
     };
+
     on(suspendEvent, suspendListener);
+    // Application suspended <<
+
+    discardedErrorListener = (args: UnhandledErrorEventData) => {
+      console.log('discardedErrorListener', args);
+    };
+
+    on(discardedErrorEvent, discardedErrorListener);
 
     // >> Application resume
     resumeListener = (args: ApplicationEventData) => {
       // Compare the time elapsed after the suspend
       try {
-        /*  if (this.storageService.checkIfExist('last-suspended') && this.storageService.checkDataIsValid('last-suspended')) {
-           const now = new Date().getTime();
-           const elapsed = Math.round((now - this.storageService.getData('last-suspended')) / (60 * 1000));
-           // if the time elapsed is major of 1 minute, the user is automatically logout
-           if (elapsed > 2) {
-             // this.userService.logout();
-           }
-         } */
+        if (this.storageService.checkIfExist('last-suspended') && this.storageService.checkDataIsValid('last-suspended')) {
+          const now = new Date().getTime();
+          const elapsed = Math.round((now - this.storageService.getData('last-suspended')) / (60 * 1000));
+          // console.log(now, this.storageService.getData('last-suspended'), elapsed);
+          // if the time elapsed is major of 1 minute, the user is automatically logout
+          if (elapsed > 1 && elapsed < 5) {
+            if (this.userService.isUserLogged) {
+              this.userService.logout();
+            }
+            notification.pushMessage({
+              title: 'Session terminated',
+              body: 'You\'re session has been destroyed. Login again!',
+              delay: 2,
+              id: 1
+            });
+
+          } else if (elapsed >= 5) {
+            if (this.userService.isUserLogged) {
+              this.userService.logout();
+            }
+            notification.pushMessage({
+              title: 'Application closed.',
+              body: 'Vdesk app is closed! Thank you for ',
+              delay: 1,
+              id: 1
+            });
+            args.android.finishAffinity();
+          }
+        }
       } catch (err) {
         console.error(err);
-
       }
     };
+
     on(resumeEvent, resumeListener);
-    // Application Exit
+    // Application resume <<
+    // >> Application Exit
     exitListener = (args: ApplicationEventData) => {
       // Destroy session player
       this.storageService.removeItems('tokenData', 'UserData');
       args.android.finishAffinity();
-      android.nativeApp.os.Process.killProcess(android.nativeApp.os.Process.myPid());
     };
     on(exitEvent, exitListener);
+    // Application Exit <<
   }
 }

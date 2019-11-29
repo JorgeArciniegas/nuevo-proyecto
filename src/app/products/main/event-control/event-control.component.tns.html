@@ -6,7 +6,7 @@
       text="{{ 'DYNAMIC_KEYS.PRODUCT.LABEL.'+ product?.label | translate}}" textTransform="uppercase" textWrap="true"
       verticalAlignment="center"></Label>
     <!-- TITLE EVENT'S SELECTED -->
-    <Label class="m-l-5 current-race" [ngClass]="{'small': isWindowSizeSmall}" text="{{ product?.label }}"
+    <Label class="m-l-5 current-race" [ngClass]="{'small': isWindowSizeSmall}" text="{{ currentEventDetail?.label }}"
       horizontalAlignment="left" verticalAlignment="center"></Label>
     <!-- /TITLE EVENT'S SELECTED -->
     <!-- TITLE EVENT SELECTED ID -->

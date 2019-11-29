@@ -55,14 +55,32 @@ import { KenoNumber } from './playable-board/templates/keno/keno.model';
   providedIn: 'root'
 })
 export class MainService {
+
   private reload: number;
   private cacheEvents: VirtualBetEvent[] = [];
   private cacheTournaments: VirtualBetTournamentExtended[] = [];
   // Working variable
   public remainingTime: EventTime = new EventTime();
   placingEvent: PlacingEvent = new PlacingEvent();
-  public currentEventDetails: VirtualBetEvent;
-  public currentProductDetails: VirtualBetTournamentExtended;
+
+  private _currentEventDetails: VirtualBetEvent;
+
+  public get currentEventDetails(): VirtualBetEvent {
+    return this._currentEventDetails;
+  }
+  public set currentEventDetails(value: VirtualBetEvent) {
+    this._currentEventDetails = value;
+  }
+
+  public _currentProductDetails: VirtualBetTournamentExtended;
+
+  public get currentProductDetails(): VirtualBetTournamentExtended {
+    return this._currentProductDetails;
+  }
+
+  public set currentProductDetails(value: VirtualBetTournamentExtended) {
+    this._currentProductDetails = value;
+  }
 
   private remaingTimeCounter: Subject<EventTime>;
   public remaingTimeCounterObs: Observable<EventTime>;
@@ -71,7 +89,16 @@ export class MainService {
   private initCurrentEvent = false;
 
   playersList: Player[];
+  /* public get playersList(): Player[] {
+    // timer(1000).subscribe(() => console.log('attendere prego'));
+    // console.log('a te la playersList');
+    return global.playersList;
+  }
 
+  public set playersList(value: Player[]) {
+    global.playersList = value;
+  }
+ */
   smartCode: Smartcode;
 
   amount: number;
@@ -82,6 +109,17 @@ export class MainService {
   public currentEventSubscribe: Subject<number>;
   public currentEventObserve: Observable<number>;
   public eventDetails: EventDetail;
+
+  /*   public get eventDetails(): EventDetail {
+      return global.eventDetails;
+    }
+
+    public set eventDetails(value: EventDetail) {
+      global.eventDetails = value;
+    }
+
+   */
+
   public toResetAllSelections: boolean;
 
   constructor(
