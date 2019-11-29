@@ -5,7 +5,8 @@
   </FlexBoxLayout>
   <!-- RESULT'S MATHCES -->
   <FlexBoxLayout row="1" justifyContent="space-around">
-    <Label class="btn-keno-result" *ngFor="let kenoResult of results.kenoResults; let i=index"
-      text="{{kenoResult}}"></Label>
+    <StackLayout class="btn-keno-result" *ngFor="let kenoResult of results.kenoResults" verticalAlignment="center">
+      <Label text="{{kenoResult}}"></Label>
+    </StackLayout>
   </FlexBoxLayout>
 </GridLayout>
