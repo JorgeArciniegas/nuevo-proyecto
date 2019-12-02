@@ -1,5 +1,5 @@
 <!--PRODUCT CONTAINER-->
-<GridLayout columns="60*,20*,20*" rows="*" class="product">
+<GridLayout columns="60*,20*,20*" rows="*" class="product" *ngIf="delayRender">
   <GridLayout col="0" rows="3*,13*" columns="*" class="product-container padding-left-6 padding-right-3">
     <!-- Gameboard area -->
     <StackLayout row="0" rowSpan="3">
@@ -21,10 +21,8 @@
   <GridLayout col="1" class="product-calc padding-right-3">
     <GridLayout rows="*,2*,3*,2*,12*,2*" columns="*">
       <!-- Widget area [Variable] -->
-      <StackLayout row="0">
-        <app-widget [rowHeight]="rowHeight" [product]="service.product"
-          [timeBlocked]="mainService.placingEvent.timeBlocked">
-        </app-widget>
+      <StackLayout row="0" [rowHeight]="rowHeight" [product]="service.product"
+        [timeBlocked]="mainService.placingEvent.timeBlocked" app-widget>
       </StackLayout>
       <!-- Coupon message area -->
       <GridLayout row="1" rows="*,3*" columns="*" cornerRadius="6" class="display m-b-5"
@@ -83,18 +81,17 @@
         </StackLayout>
       </GridLayout>
       <!-- Polyfunctional area / Smartcode -->
-      <StackLayout row="2">
-        <app-display [timeBlocked]="mainService.placingEvent.timeBlocked"></app-display>
+      <StackLayout row="2" [timeBlocked]="mainService.placingEvent.timeBlocked" app-display>
       </StackLayout>
       <!-- Advanced game area [Variable] -->
       <StackLayout row="3">
-        <GridLayout rows="*" columns="*" class="card">
-          <app-advance-game [timeBlocked]="mainService.placingEvent.timeBlocked"></app-advance-game>
+        <GridLayout rows="*" columns="*" class="card" app-advance-game
+          [timeBlocked]="mainService.placingEvent.timeBlocked">
+
         </GridLayout>
       </StackLayout>
       <!-- Keyboard -->
-      <StackLayout row="4">
-        <app-btncalc [rowHeight]="rowHeight" [timeBlocked]="mainService.placingEvent.timeBlocked"></app-btncalc>
+      <StackLayout row="4" app-btncalc [rowHeight]="rowHeight" [timeBlocked]="mainService.placingEvent.timeBlocked">
       </StackLayout>
       <!-- Payment/cancellation coupon area -->
       <GridLayout row="5" rows="*" columns="*,*" class="card">

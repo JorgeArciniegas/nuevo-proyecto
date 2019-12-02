@@ -36,6 +36,8 @@ export class EventControlService {
       }
     );
   }
+  init() { }
+  destroy() { }
   /**
    * @getEventControl thrown on each event change
    * @returns event info object
@@ -60,7 +62,7 @@ export class EventControlService {
       isWindowSizeSmall: this.productService.windowSize.small,
       theme: this.settings.theme
     };
-    this.remaingTimeCounterSubscription = this.mainService.remaingTimeCounterObs.subscribe( timerEvent => {
+    this.remaingTimeCounterSubscription = this.mainService.remaingTimeCounterObs.subscribe(timerEvent => {
       this.eventsControlDetails.eventTimeMinutes = timerEvent.minute;
       this.eventsControlDetails.eventTimeSeconds = timerEvent.second;
     });

@@ -1,5 +1,6 @@
 <div id="app" class="app" [ngClass]="settings.theme">
   <div class="main-content">
+    <app-loader></app-loader>
     <!-- TOOLBAR-->
     <div fxFlex fxLayout="column">
       <div *ngIf="userService.isUserLogged" class="toolbar" fxFlex="7" fxLayout="row">

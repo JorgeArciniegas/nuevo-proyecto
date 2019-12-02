@@ -50,6 +50,8 @@ import { MainServiceExtra } from './main.service.extra';
 import { ResultsService } from './results/results.service';
 import { areas, overviewAreas } from './SoccerAreas';
 import { UserService } from '../../services/user.service';
+import { KenoNumber } from './playable-board/templates/keno/keno.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -90,10 +92,15 @@ export class MainService extends MainServiceExtra {
   ) {
     super(couponService, destroyCouponService);
     this.toResetAllSelections = true;
+
+    this.createPlayerList();
+
     // counter obser
     this.remaingTimeCounter = new Subject<EventTime>();
     this.remaingTimeCounterObs = this.remaingTimeCounter.asObservable();
+
     this.defaultGameStart();
+    // this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
 
     this.productService.productNameSelectedObserve.subscribe(item => {
       if (!this.couponService.productHasCoupon.checked) {
@@ -101,8 +108,6 @@ export class MainService extends MainServiceExtra {
         this.initEvents();
       }
     });
-
-    this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
 
     this.currentEventSubscribe = new Subject<number>();
     this.currentEventObserve = this.currentEventSubscribe.asObservable();
@@ -124,6 +129,7 @@ export class MainService extends MainServiceExtra {
         // Reset playable board
         this.resetPlayEvent();
       }
+
       // Get event's odds
       this.eventDetailOdds(this.eventDetails.events[eventIndex].number);
     });
@@ -135,7 +141,6 @@ export class MainService extends MainServiceExtra {
       }
     });
 
-    this.createPlayerList();
   }
 
   /**
@@ -258,7 +263,7 @@ export class MainService extends MainServiceExtra {
         }
       }
       // Resume event's countdown
-      if (this.countdownSub && this.countdownSub.closed) {
+      if (this.countdownSub && this.countdownSub.closed || !this.countdownSub) {
         this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
       }
     } catch (err) {
@@ -296,7 +301,7 @@ export class MainService extends MainServiceExtra {
       CategoryTypes: this.productService.product.codeProduct
     };
 
-    this.elysApi.virtual.getVirtualTree(request).then((sports: VirtualProgramTreeBySportResponse) => {
+    this.elysApi.virtual.getVirtualTreeV2(request).then((sports: VirtualProgramTreeBySportResponse) => {
       // cache all tournaments
       /* if ( all ) {
         this.cacheTournaments = sports.Sports[0].ts;
@@ -665,6 +670,7 @@ export class MainService extends MainServiceExtra {
     this.smartCode = new Smartcode();
     this.populatingPolyfunctionAreaByOdds();
   }
+
 
   /**
    * Place the player selected inside the polyfunctional area and smartbet.
@@ -1474,5 +1480,93 @@ export class MainService extends MainServiceExtra {
       resolve(tournamentSelected);
     });
     return response;
+  }
+
+
+  /***
+   * KENO
+   */
+
+
+  placingNumber(selected: KenoNumber): void {
+    if (this.couponService.checkIfCouponIsReadyToPlace()) {
+      return;
+    }
+    if (!this.placingEvent) {
+      this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
+    }
+    if (!this.placingEvent.kenoNumbers || this.placingEvent.kenoNumbers && this.placingEvent.kenoNumbers.length === 0) {
+      this.placingEvent.kenoNumbers = [];
+      this.placingEvent.kenoNumbers.push(selected);
+    } else {
+      const idx = this.placingEvent.kenoNumbers.findIndex(item => item.number === selected.number);
+      if (idx !== -1) {
+        this.placingEvent.kenoNumbers.splice(idx, 1);
+      } else {
+        this.placingEvent.kenoNumbers.push(selected);
+      }
+    }
+    this.populatingPolyfunctionAreaByLottery();
+  }
+
+
+
+  // Method to populate the polyfunctional object with the odd of a layout that shows odds.
+  populatingPolyfunctionAreaByLottery() {
+    let areaFuncData: PolyfunctionalArea = new PolyfunctionalArea();
+    areaFuncData.typeSlipCol = TypeBetSlipColTot.GROUP;
+    areaFuncData.activeAssociationCol = false;
+    areaFuncData.activeDistributionTot = false;
+    try {
+      // Set the variables for the message to show on the polyfunctional area.
+      // Variable containing the market identifier.
+      let selection: string;
+      // Variable containing the identifier of the selected odds.
+      let value: string;
+      const kenoSelected: BetOdd[] = [];
+      let eventId: number;
+      // Selection the current marketId
+      this.getCurrentEvent().then(item => eventId = item.mk[0].sls[0].id);
+      if (this.placingEvent.kenoNumbers.length !== 0) {
+        let lastMarket: Market;
+        let marketHasChanged: boolean;
+        for (const n of this.placingEvent.kenoNumbers) {
+          // Check if there are selections on different markets and set the market identifier.
+          if (lastMarket && !marketHasChanged) {
+            if (n.number === lastMarket) {
+              marketHasChanged = false;
+            } else {
+              marketHasChanged = true;
+              selection = SmartCodeType[SmartCodeType.MULTI];
+            }
+          } else if (!lastMarket) {
+            lastMarket = n.number;
+            selection = SmartCodeType[this.getMarketIdentifier(n.number)];
+          }
+          // Get the selection identifier to use on the polyfunctional area.
+          const selectionIdentifier = SelectionIdentifier['Selection: ' + n.number];
+          value = value === undefined ? selectionIdentifier : value + '/' + selectionIdentifier;
+          kenoSelected.push(
+            new BetOdd(
+              selectionIdentifier,
+              1,
+              this.btnService.polyfunctionStakePresetPlayer.amount,
+              eventId
+            )
+          );
+        }
+      }
+      areaFuncData.selection = selection;
+      areaFuncData.value = value;
+      areaFuncData.amount = this.btnService.polyfunctionStakePresetPlayer.amount;
+      areaFuncData.typeSlipCol = TypeBetSlipColTot.GROUP;
+      areaFuncData.odds = kenoSelected;
+    } catch (err) {
+      console.log(err);
+      areaFuncData = {};
+    } finally {
+      areaFuncData.firstTap = true;
+      this.productService.polyfunctionalAreaSubject.next(areaFuncData);
+    }
   }
 }

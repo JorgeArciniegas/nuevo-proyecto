@@ -18,7 +18,7 @@
               <span class="btn-soccer-odd__details--value" *ngIf="odd.isValid">{{ odd.ods[0].vl }}</span>
               <span class="btn-soccer-odd__details--value" *ngIf="!odd.isValid">-</span>
             </div>
-            <div class="loader" *ngIf="soccerService.oddsInProcessing.includes(odd.id)"></div>
+            <div class="vg-loader-spinner" *ngIf="soccerService.oddsInProcessing.includes(odd.id)"></div>
           </div>
         </button>
       </mat-grid-tile>

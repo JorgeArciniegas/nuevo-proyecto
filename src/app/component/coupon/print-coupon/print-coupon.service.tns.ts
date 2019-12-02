@@ -31,15 +31,25 @@ export class PrintCouponService {
     this.couponPrint = (coupon as unknown) as StagedCoupon;
     this.isPrintAgainst = true;
     this.reprintDate = new Date();
+
     this.printWindow();
   }
 
   printWindow(): void {
+    this.checkProduct();
     this.router.getRouter().navigate(['/', { outlets: { print: 'print-coupon' } }]);
   }
 
   resetPrint(): void {
     this.router.getRouter().navigate([{ outlets: { print: null } }]);
     this.isPrintAgainst = false;
+  }
+
+  /**
+   * This function define the different product
+   *
+   */
+  checkProduct(): void {
+    this.couponPrint.Product = this.couponPrint.Odds[0].MarketName.indexOf('Keno') > -1 ? 'KENO' : 'VIRT';
   }
 }

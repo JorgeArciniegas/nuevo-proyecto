@@ -12,6 +12,8 @@
   <app-groupings *ngIf="dataDialog.groupings" [column]="column" [rowNumber]="rowNumber" [maxPage]="maxPage"
     [maxItems]="maxItems" [data]="dataDialog"></app-groupings>
   <app-ranking *ngIf="dataDialog.tournamentRanking" [data]="dataDialog"></app-ranking>
+  <app-paytable *ngIf="dataDialog.paytable" [data]="dataDialog"></app-paytable>
+  <app-hot-and-cold *ngIf="dataDialog.hotAndCold" [data]="dataDialog"></app-hot-and-cold>
 </div>
 
 <div mat-dialog-actions fxLayoutAlign="center center">

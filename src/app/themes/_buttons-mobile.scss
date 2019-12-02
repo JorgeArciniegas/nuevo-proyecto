@@ -31,9 +31,21 @@
 		opacity: 0.4;
 	}
 }
-.playable-row-tile {
+.playable-row-tile,
+.button-internal {
 	&.disabled {
 		opacity: 0.1;
+	}
+}
+
+.btn-default-keno {
+	font-weight: 700;
+	padding: 0;
+	height: 35;
+	width: 35;
+	@extend %btn-white-gradient;
+	&.selected {
+		@extend %btn-blue-gradient;
 	}
 }
 

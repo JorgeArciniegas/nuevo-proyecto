@@ -20,6 +20,7 @@ export class SoccerComponent {
    */
   public async placeLucky(lucky: Lucky): Promise<void> {
     // reset all odds selected
+    this.soccerService.couponService.resetCoupon();
     this.mainService.resetPlayEvent();
     const extractMatchesIdx: number[] = lucky !== Lucky.Lucky10 ? this.rngMatches(lucky) : this.selectAllMatches();
     const tournament = await this.mainService.getCurrentTournament();

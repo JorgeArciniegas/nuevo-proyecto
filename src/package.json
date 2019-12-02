@@ -1,6 +1,10 @@
 {
   "android": {
-    "v8Flags": "--expose_gc"
+    "v8Flags": "--expose_gc",
+    "markingMode": "none",
+    "gcThrottleTime": 500,
+    "memoryCheckInterval": 500,
+    "freeMemoryRatio": 0.50
   },
   "main": "main.js",
   "name": "migration-ng",

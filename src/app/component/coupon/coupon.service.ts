@@ -1,27 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  BetCouponOdd,
-  CancelCouponRequest,
-  CancelCouponResponse,
-  CouponCategory,
-  CouponType,
-  ElysApiService,
-  FlagAsPaidRequest,
-  FlagAsPaidResponse,
-  StagedCouponStatus,
-  BetCouponGroup
-} from '@elys/elys-api';
-import {
-  AddOddRequest,
-  AddOddRequestSC,
-  BetCouponExtended,
-  BetCouponOddExtended,
-  CouponServiceMessageType,
-  ElysCouponService,
-  MessageSource
-} from '@elys/elys-coupon';
+import { BetCouponGroup, BetCouponOdd, CancelCouponRequest, CancelCouponResponse, CouponCategory, CouponType, ElysApiService, FlagAsPaidRequest, FlagAsPaidResponse, StagedCouponStatus } from '@elys/elys-api';
+import { AddNumberRequest, AddOddRequest, AddOddRequestSC, BetCouponOddExtended, CouponServiceMessageType, ElysCouponService, MessageSource } from '@elys/elys-coupon';
 import { Observable, Subject, timer } from 'rxjs';
 import { AppSettings } from '../../../../src/app/app.settings';
+import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { SmartCodeType, TypeBetSlipColTot } from '../../products/main/main.models';
 import { BetOdd, CouponConfirmDelete, PolyfunctionalArea } from '../../products/products.model';
 import { UserService } from '../../services/user.service';
@@ -37,8 +19,8 @@ export class CouponService {
   coupon: InternalCoupon = null;
   couponIdAdded: number[] = [];
 
-  private couponResponseSubject: Subject<BetCouponExtended>;
-  couponResponse: Observable<BetCouponExtended>;
+  private couponResponseSubject: Subject<InternalCoupon>;
+  couponResponse: Observable<InternalCoupon>;
   // calculate stake and winning max
   stakeDisplay: StakesDisplay = { TotalStake: 0, MaxWinning: 0 };
   stakeDisplaySubject: Subject<StakesDisplay>;
@@ -75,24 +57,32 @@ export class CouponService {
     this.couponHasBeenPlacedSub = new Subject<boolean>();
     this.couponHasBeenPlacedObs = this.couponHasBeenPlacedSub.asObservable();
 
-    this.couponResponseSubject = new Subject<BetCouponExtended>();
+    this.couponResponseSubject = new Subject<InternalCoupon>();
     this.couponResponse = this.couponResponseSubject.asObservable();
 
     this.elysCoupon.couponConfig.userId = userService.dataUserDetail.userDetail ? userService.dataUserDetail.userDetail.UserId : undefined;
     elysCoupon.couponHasChanged.subscribe(coupon => {
       this.coupon = coupon;
-      this.couponResponseSubject.next(coupon);
+
       if (coupon) {
+
+        // check If coupon is Lottery
+
+        if (this.appSetting.products.find(prod => prod.layoutProducts.type === LAYOUT_TYPE.KENO && prod.productSelected)) {
+          this.coupon.internal_isLottery = true;
+        }
         this.coupon.internal_isReadyToPlace = false;
 
         if (!this.userService.isLoggedOperator()) {
           this.coupon.BettorId = this.userService.dataUserDetail.operatorDetail.ClientId;
           this.coupon.ClientBettorId = this.userService.dataUserDetail.operatorDetail.ClientId;
         }
+        this.couponResponseSubject.next(coupon);
         this.calculateAmounts();
       } else {
         this.resetCoupon();
       }
+
     });
     // Get the message from the coupon
     elysCoupon.couponServiceMessage.subscribe(message => {
@@ -222,6 +212,41 @@ export class CouponService {
     }
   }
 
+  /**
+   * LOTTERY KENO ADD NUMBER TO COUPON
+   * @param eventId
+   * @param selectedNumber
+   */
+  addToRemoveToCouponLottery(eventId: number, selectedNumber: number, amount?: number): void {
+    if (this.coupon && this.coupon.internal_isReadyToPlace) {
+      return;
+    }
+    const req: AddNumberRequest = {
+      id: eventId,
+      number: selectedNumber,
+      amount: amount
+    };
+    const hasNumber = (this.coupon && this.coupon.Odds) ?
+      this.coupon.Odds.find(item => item.SelectionName === selectedNumber.toString()) : false;
+    if (hasNumber) {
+      req.isDelete = true;
+      this.couponIdAdded.push(selectedNumber);
+      if (this.coupon.Odds.length === 1) {
+        this.resetCoupon();
+        return;
+      }
+    } else {
+
+      this.couponIdAdded.filter((item, idx) => {
+        if (item === selectedNumber) {
+          this.couponIdAdded.splice(idx, 0);
+        }
+      });
+    }
+    this.elysCoupon.manageOddLottery(req);
+
+  }
+
   private requestObj(bet: BetOdd, isAdd: boolean = true, isMultipleStake): AddOddRequest {
     return {
       cCat: CouponCategory.Virtual,
@@ -267,8 +292,7 @@ export class CouponService {
           item.Stake = stake / item.Combinations;
           item.MaxWinCombination = item.Stake * item.MaxWinCombinationUnit;
         }
-        if (item.Selected) {
-        }
+        totalWin += item.Stake * item.MaxWinCombinationUnit;
       });
     } else {
       this.coupon.Groupings.forEach(grouping => {
@@ -289,14 +313,19 @@ export class CouponService {
   }
 
   updateCoupon(): void {
-    if (this.oddStakeEdit) {
+    if (this.oddStakeEdit && this.coupon) {
       if (this.oddStakeEdit.tempStake > 0 && !this.oddStakeEdit.grouping) {
         this.coupon.Odds[this.oddStakeEdit.indexOdd].OddStake = this.oddStakeEdit.tempStake;
-        // this.elysCoupon.updateCoupon(this.coupon);
       }
       this.oddStakeEditSubject.next(null);
     }
-    this.elysCoupon.updateCoupon(this.coupon);
+
+    if (this.coupon.internal_isLottery) {
+      this.elysCoupon.updateCouponLottery(this.coupon);
+    } else {
+
+      this.elysCoupon.updateCoupon(this.coupon);
+    }
   }
 
   checkOddToChangeStake(odd: BetCouponOdd): void {
@@ -510,8 +539,15 @@ export class CouponService {
     if (!this.coupon && this.coupon.Odds.length > 0) {
       return;
     }
-    // call api
-    await this.elysCoupon.updateCoupon(this.coupon);
+
+    // Check type coupon and call the different api
+    if (this.coupon.internal_isLottery) {
+      await this.elysCoupon.updateCouponLottery(this.coupon);
+
+    } else {
+
+      await this.elysCoupon.updateCoupon(this.coupon);
+    }
     // enabled process to staging coupon
     this.coupon.internal_isReadyToPlace = true;
     if (this.appSetting.couponDirectPlace) {
@@ -531,7 +567,12 @@ export class CouponService {
   }
 
   stagedCoupon(): void {
-    this.elysCoupon.placeCoupon(this.coupon);
+    // Check type coupon and call the different api
+    if (this.coupon.internal_isLottery) {
+      this.elysCoupon.placeCouponLottery(this.coupon);
+    } else {
+      this.elysCoupon.placeCoupon(this.coupon);
+    }
   }
 
   /**

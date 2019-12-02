@@ -8,7 +8,8 @@ import { LayoutProducts, LAYOUT_TYPE } from '../../../../src/environments/enviro
 import { ProductsService } from '../products.service';
 
 @Component({
-  selector: 'app-advance-game',
+  moduleId: module.id,
+  selector: 'app-advance-game, [app-advance-game]',
   templateUrl: './advance-game.component.html',
   styleUrls: ['./advance-game.component.scss']
 })
@@ -28,14 +29,14 @@ export class AdvanceGameComponent implements OnInit, OnDestroy {
 
   constructor(public service: MainService, private productService: ProductsService, private userService: UserService) {
 
-    this.productNameSubscription = this.productService.productNameSelectedObserve.subscribe( () => {
+    this.productNameSubscription = this.productService.productNameSelectedObserve.subscribe(() => {
       this.getLayout();
     });
   }
 
   ngOnInit() {
     this.buttons.push({
-      label: TypePlacingEvent[0] ,
+      label: TypePlacingEvent[0],
       code: TypePlacingEvent['ST']
     });
     this.buttons.push({
@@ -60,19 +61,19 @@ export class AdvanceGameComponent implements OnInit, OnDestroy {
 
   getLayout(attemptsNumber: number = 0): void {
     this.productService.getCurrentLayoutProducts()
-    .then(layout => {
-      this.layoutProducts = layout;
-    })
-    .catch(error => {
-      if (attemptsNumber < 5) {
-        timer(1000)
-          .subscribe(() => this.getLayout(attemptsNumber + 1))
-          .unsubscribe();
-      } else {
-        console.log(error);
+      .then(layout => {
+        this.layoutProducts = layout;
+      })
+      .catch(error => {
+        if (attemptsNumber < 5) {
+          timer(1000)
+            .subscribe(() => this.getLayout(attemptsNumber + 1))
+            .unsubscribe();
+        } else {
+          console.log(error);
+        }
       }
-    }
-    );
+      );
   }
 }
 

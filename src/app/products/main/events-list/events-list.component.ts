@@ -3,7 +3,8 @@ import { EventsListService } from './events-list.service';
 import { EventsList } from './event-list.model';
 import { ProductsService } from '../../products.service';
 @Component({
-  selector: 'app-events-list',
+  moduleId: module.id,
+  selector: 'app-events-list, [app-events-list]',
   templateUrl: './events-list.component.html',
   styleUrls: ['./events-list.component.scss']
 })
@@ -15,7 +16,7 @@ export class EventListComponent implements OnInit, OnDestroy {
   constructor(
     private eventService: EventsListService,
     private productService: ProductsService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.nativeNextEventsItems = this.eventService.genColumns(

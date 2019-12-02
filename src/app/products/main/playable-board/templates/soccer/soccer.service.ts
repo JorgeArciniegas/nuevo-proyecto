@@ -30,7 +30,7 @@ export class SoccerService implements OnDestroy {
     private mainService: MainService,
     private btnCalcService: BtncalcService,
     private elysCoupon: ElysCouponService,
-    private couponService: CouponService
+    public couponService: CouponService
   ) {
     // Variables inizialization.
     this.selectedMatch = -1;

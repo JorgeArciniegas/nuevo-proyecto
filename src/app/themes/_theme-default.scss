@@ -18,6 +18,11 @@
 @import "./operators/operators";
 @import "./vbox/vbox";
 @import "./bets-list/bet-list";
+@import "./loader/loader";
+@import "./paytable/paytable";
+@import "./coupon/coupon";
+@import "./spinner";
+@import "./hot-and-cold/hot-and-cold";
 *,
 *:after,
 *:before {
@@ -303,7 +308,7 @@ html {
 					font-weight: 500;
 					font-size: 0.7em;
 					text-transform: uppercase;
-
+					width: 100%;
 					span {
 						// padding: 5px;
 						display: block;

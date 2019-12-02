@@ -39,7 +39,8 @@
             class="-btn-admin-txt">{{'LANGUAGE' | translate }}</span> </button>
       </div>
       <div class="admin-panel-container logout radius-15"> <button
-          class="btn-default btn-grey-gradient btn-admin radius-5" (click)="userService.logout()">Logout</button>
+          class="btn-default btn-grey-gradient btn-admin radius-5"
+          (click)="userService.logout()">{{'LOGOUT' | translate | uppercase }}</button>
       </div>
     </div>
   </div>

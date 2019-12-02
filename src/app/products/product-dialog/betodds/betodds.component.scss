@@ -1,45 +1,43 @@
-
 .odds-grid {
+	.card-odd {
+		padding: 5px;
 
-  .card-odd {
-      padding: 5px;
+		.top-window {
+			height: 20px;
+			font-size: 12px;
+			padding: 2px 6px;
+		}
 
-      .top-window {
-          height: 20px;
-          font-size: 12px;
-          padding: 2px 6px;
-      }
+		.first-row {
+			padding: 5px;
+		}
 
-      .first-row {
-          padding: 5px;
-      }
+		.stake {
+			padding: 2px;
+			width: 60%;
+			margin: 5px;
+			text-align: center;
+		}
+		.odd {
+			padding: 2px;
+		}
 
-      .stake {
-          padding: 2px;
-          width: 40%;
-          margin: 5px;
-          text-align: center;
-      }
-      .odd {
-          padding: 2px;
-      }
-
-      &.notSelected {
-          opacity: 0.2;
-      }
-  }
+		&.notSelected {
+			opacity: 0.2;
+		}
+	}
 }
 .scroll {
-  position: relative;
+	position: relative;
 
-  .indicator {
-      position: absolute;
-      right: 2px;
-      top: 2px;
-      padding: 2px;
-  }
+	.indicator {
+		position: absolute;
+		right: 2px;
+		top: 2px;
+		padding: 2px;
+	}
 
-  .icon {
-      width: 20px;
-  }
+	.icon {
+		width: 20px;
+	}
 }
