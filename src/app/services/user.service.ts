@@ -71,6 +71,7 @@ export class UserService {
           this.loadUserData(this.storageService.getData('tokenData'), this.isLoggedOperator());
         }
       });
+      this.api.tokenBearer = this.storageService.getData('tokenData');
     }
   }
 
@@ -307,7 +308,9 @@ export class UserService {
   async checkAvailableSportAndSetPresetsAmount(): Promise<void> {
     // Set  'defaultAmount'  the "presets value"
     this.getDefaultPreset().then(preset => {
-      this.appSetting.defaultAmount = preset.CouponPreset.CouponPresetValues;
+      if (preset.CouponPreset !== null) {
+        this.appSetting.defaultAmount = preset.CouponPreset.CouponPresetValues;
+      }
     });
     // match products result from api to products on the system
     this.api.virtual.getAvailablevirtualsports().then(items => {

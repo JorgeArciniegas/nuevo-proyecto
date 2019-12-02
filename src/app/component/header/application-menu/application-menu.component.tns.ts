@@ -5,16 +5,18 @@ import { Products } from '../../../../environments/environment.models';
 import { UserService } from '../../../services/user.service';
 import { RouterService } from '../../../services/utility/router/router.service';
 import { LoaderService } from '../../../services/utility/loader/loader.service';
+import { timer } from 'rxjs';
 
 @Component({
-  selector: 'app-application-menu',
+  moduleId: module.id,
+  selector: 'app-application-menu, [app-application-menu]',
   templateUrl: './application-menu.component.html',
   styleUrls: ['./application-menu.component.scss']
 })
 export class ApplicationMenuComponent implements OnInit {
   public settings: AppSettings;
   public btnSelected: string;
-
+  currentRoute: string;
   constructor(
     public readonly appSettings: AppSettings,
     public productService: ProductsService,
@@ -30,16 +32,28 @@ export class ApplicationMenuComponent implements OnInit {
   }
 
   productSelecting(productSelected: Products) {
-    this.loaderService.isLoading.next(true);
+
+    if (this.currentRoute === '/products/main' + productSelected.codeProduct) {
+      return;
+    }
     this.btnSelected = productSelected.name;
-    this.productService.resetBoard();
-    this.productService.changeProduct(productSelected.codeProduct);
-    this.router.getRouter().navigateByUrl('/products/main');
+    this.loaderService.setLoading(true, 'ProductView-' + productSelected.name);
+    if (productSelected === this.productService.product) {
+      this.router.productSameReload = true;
+    }
+    timer(100).subscribe(() => {
+      // this.productService.resetBoard();
+      this.productService.changeProduct(productSelected.codeProduct);
+      // this.router.getRouter().navigateByUrl('/products/main');
+    });
+    this.currentRoute = '/products/main' + productSelected.codeProduct;
   }
 
   goToAdmin() {
-    this.loaderService.isLoading.next(true);
-    this.router.getRouter().navigateByUrl('/admin');
+
+    this.loaderService.setLoading(true, 'AdminPanel');
+    timer(100).subscribe(() => this.router.getRouter().navigateByUrl('/admin'));
+    this.currentRoute = '/admin';
 
   }
 }

@@ -45,4 +45,14 @@ app-statement-virtual-shop-search {
 			margin: 0;
 		}
 	}
+
+	.table-report-result-row {
+		min-height: 55px;
+	}
+
+	@media screen and (max-width: 1280px) {
+		.table-report-result-row {
+			min-height: 40px;
+		}
+	}
 }

@@ -1,13 +1,12 @@
-<div fxFlex="100" fxLayout="column" fxLayoutGap="grid" class="padding-vertical-10">
+<div fxFlex="100" fxLayout="column" fxLayoutAlign="space-around" class="padding-vertical-10">
   <ng-container *ngFor="let odd of data.odd; let i = index;">
     <!-- ROW -->
-    <div fxLayout="column" fxLayoutGap="20px" [ngClass]="{'border-bottom-overlay-1px': i <  data.pageOddRows  - 1}">
+    <div fxLayout="column" class="row-odd" fxLayoutGap="12px">
       <!-- EVENT NAME-->
-      <div fxFlex="30" fxLayoutAlign="center center">
+      <div fxFlex="20" fxLayoutAlign="center start">
         <h4>{{odd.SportName +' | '+ odd.Championship + ' | ' + odd.EventName }}</h4>
       </div>
-      <div fxFlex="40" class="padding-vertical-10 border-bottom-overlay-1px" fxLayout="row nowrap" fxLayoutGap="grid"
-        fxLayoutAlign="center center">
+      <div fxFlex="40" class="border-bottom-overlay-1px" fxLayout="row nowrap" fxLayoutAlign="center center">
         <div fxFlex="10"></div>
         <div fxFlex="30">
           <div>
@@ -29,8 +28,8 @@
         </div>
         <div fxFlex="10"></div>
       </div>
-      <div fxFlex="30" class="padding-vertical-10" fxLayout="row nowrap" fxLayoutGap="grid"
-        fxLayoutAlign="center center" [ngClass]="{'border-bottom-overlay-1px': i < data.pageOddRows - 1}">
+      <div fxFlex="40" fxLayout="row nowrap" fxLayoutGap="grid" fxLayoutAlign="center center"
+        [ngClass]="{'border-bottom-overlay-1px': i < data.pageOddRows - 1}">
         <div fxFlex="10"></div>
         <div fxFlex="30">
           <div>

@@ -1,18 +1,28 @@
 <GridLayout rows="*" columns="*,*,*,*" class="result-list-race">
   <GridLayout col="{{i}}" class="card-box-result" rows="*,*" columns="*" *ngFor="let race of results; let i = index;">
-    <GridLayout row="0" class="header radius-5">
-      <Label text="{{race.eventLabel}}" class="raceNumber" horizontalAlignment="center" verticalAlignment="center"></Label>
-    </GridLayout>
-    <GridLayout row="1" rows="*" columns="*,*,*">
-      <GridLayout row="0" col="0" class="position btn-default-dog-play btn-{{codeProduct}}-{{race.racePodium.firstPlace}}" [ngClass]="{'small': windowSize.small}">
-        <Label text="{{race.racePodium.firstPlace}}" class="label" horizontalAlignment="center" verticalAlignment="center"></Label>
+    <StackLayout row="0" class="header radius-5">
+      <Label text="{{race.eventLabel}}" class="raceNumber" horizontalAlignment="center"
+        verticalAlignment="center"></Label>
+    </StackLayout>
+    <FlexBoxLayout row="1" justifyContent="space-around">
+      <GridLayout row="0" col="0"
+        class="position btn-default-dog-play btn-{{codeProduct}}-{{race.racePodium.firstPlace}}"
+        [ngClass]="{'small': windowSize.small}">
+        <Label text="{{race.racePodium.firstPlace}}" class="label" horizontalAlignment="center"
+          verticalAlignment="center"></Label>
       </GridLayout>
-      <GridLayout row="0" col="1" class="position btn-default-dog-play btn-{{codeProduct}}-{{race.racePodium.secondPlace}}" [ngClass]="{'small': windowSize.small}">
-        <Label text="{{race.racePodium.secondPlace}}" class="label" horizontalAlignment="center" verticalAlignment="center"></Label>
+      <GridLayout row="0" col="1"
+        class="position btn-default-dog-play btn-{{codeProduct}}-{{race.racePodium.secondPlace}}"
+        [ngClass]="{'small': windowSize.small}">
+        <Label text="{{race.racePodium.secondPlace}}" class="label" horizontalAlignment="center"
+          verticalAlignment="center"></Label>
       </GridLayout>
-      <GridLayout row="0" col="2" class="position btn-default-dog-play btn-{{codeProduct}}-{{race.racePodium.thirdPlace}}" [ngClass]="{'small': windowSize.small}">
-        <Label text="{{race.racePodium.thirdPlace}}" class="label" horizontalAlignment="center" verticalAlignment="center"></Label>
+      <GridLayout row="0" col="2"
+        class="position btn-default-dog-play btn-{{codeProduct}}-{{race.racePodium.thirdPlace}}"
+        [ngClass]="{'small': windowSize.small}">
+        <Label text="{{race.racePodium.thirdPlace}}" class="label" horizontalAlignment="center"
+          verticalAlignment="center"></Label>
       </GridLayout>
-    </GridLayout>
+    </FlexBoxLayout>
   </GridLayout>
 </GridLayout>

@@ -9,17 +9,20 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MappingUrls } from './app.mappingurl';
 import { LoaderService } from './services/utility/loader/loader.service';
+import { RouterService } from './services/utility/router/router.service';
+import { UserService } from './services/user.service';
 
 @Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
   private requests: HttpRequest<any>[] = [];
-  constructor(private loaderService: LoaderService) { }
+  constructor(private loaderService: LoaderService, private router: RouterService, private user: UserService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
 
     if (!this.checkHasBearer(request.url)) {
       this.requests.push(request);
-      this.loaderService.isLoading.next(true);
+      // set the loading spinner
+      this.loaderService.setLoading(true, request.url);
       return Observable.create(observer => {
         const subscription = next.handle(request)
           .subscribe(
@@ -30,7 +33,10 @@ export class AppHttpInterceptor implements HttpInterceptor {
               }
             },
             err => {
-              console.error('error request');
+              if (err.status === 401) {
+                this.user.logout();
+              }
+              console.error('error request', err);
               this.removeRequest(request);
               observer.error(err);
             },
@@ -54,7 +60,8 @@ export class AppHttpInterceptor implements HttpInterceptor {
     if (i >= 0) {
       this.requests.splice(i, 1);
     }
-    this.loaderService.isLoading.next(this.requests.length > 0);
+    // remove the loading spinner
+    this.loaderService.setLoading(this.requests.length > 0, req.url);
   }
   /**
    * check if the url request has a bearer token

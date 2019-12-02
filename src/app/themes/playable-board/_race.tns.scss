@@ -11,7 +11,8 @@
 			font-size: 36;
 			&.button {
 				border-radius: 4;
-				padding: -2;
+				padding: 2;
+				margin: 0;
 			}
 		}
 	}
@@ -21,8 +22,8 @@
 			margin: 3 4;
 			.button {
 				border-radius: 4;
-        padding: -2;
-        font-size: 13;
+				padding: -2;
+				font-size: 13;
 			}
 		}
 	}

@@ -217,11 +217,17 @@
     },
     "PRINT_COUPON": {
       "HEADER_MESSAGE": {
+        "BOLIVARBET": "",
         "DEMO_LICENSE": "",
-        "SHAWIS": "Shawis Company Limited"
+        "F2O": "F2o",
+        "SHAWIS": "Shawis Company Limited",
+        "UGANBET": ""
       },
       "LICENSE_MESSAGE": {
-        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua."
+        "BOLIVARBET": "The Customer declares to know and accept the Terms and Conditions available on our web siteThis coupon is valid only if the transaction took place exclusively via the Internet.Gambling can cause addiction.The game is prohibited for persons under 18 years.",
+        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
+        "F2O": "The Customer declares to know and to accept the general terms and conditions available on our website. This coupon is valid only if the transaction took place exclusively via the Internet. According to the Decree Law n. 158/2012 conv. with mod. in Law no. 189/2012 please be informed that: It is possible to verify the winning probabilities on www.aams.gov.it. Gambling can cause addiction. Gambling is forbidden under the age of 18. ",
+        "UGANBET": "The Customer declares to know and accept the Terms and Conditions available on our web site This coupon is valid only if the transaction took place exclusively via the Internet. Gambling can cause addiction. The game is prohibited for persons under 18 years."
       }
     },
     "PRODUCT": {
@@ -316,34 +322,34 @@
         "Scores2HT": "S. exact 2T"
       },
       "MARKETS": {
-        "1 + GG": "1 + B",
-        "1 + NG": "1 + AB",
-        "1 + Over": "1 + Plus",
-        "1 + Under": "1 + Moins",
-        "12 + GG": "12 + B",
-        "12 + NG": "12 + AB",
-        "12 + Over": "12 + Plus",
-        "12 + Under": "12 + Moins",
-        "1X + GG": "1X + B",
-        "1X + NG": "1X + AB",
-        "1X + Over": "1X + Plus",
-        "1X + Under": "1X + Moins",
-        "2 + GG": "2 + B",
-        "2 + NG": "2 + AB",
-        "2 + Over": "2 + Plus",
-        "2 + Under": "2 + Moins",
+        "1 + GG": "1+B",
+        "1 + NG": "1+AB",
+        "1 + Over": "1+Plus",
+        "1 + Under": "1+Moins",
+        "12 + GG": "12+B",
+        "12 + NG": "12+AB",
+        "12 + Over": "12+Plus",
+        "12 + Under": "12+Moins",
+        "1X + GG": "1X+B",
+        "1X + NG": "1X+AB",
+        "1X + Over": "1X+Plus",
+        "1X + Under": "1X+Moins",
+        "2 + GG": "2+B",
+        "2 + NG": "2+AB",
+        "2 + Over": "2+Plus",
+        "2 + Under": "2+Moins",
         "GG": "B",
         "NG": "AB",
         "Over": "Plus",
         "Under": "Moins",
-        "X + GG": "X + B",
-        "X + NG": "X + AB",
-        "X + Over": "X + Plus",
-        "X + Under": "X + Moins",
-        "X2 + GG": "X2 + B",
-        "X2 + NG": "X2 + AB",
-        "X2 + Over": "X2 + Plus",
-        "X2 + Under": "X2 + Moins"
+        "X + GG": "X+B",
+        "X + NG": "X+AB",
+        "X + Over": "X+Plus",
+        "X + Under": "X+Moins",
+        "X2 + GG": "X2+B",
+        "X2 + NG": "X2+AB",
+        "X2 + Over": "X2+Plus",
+        "X2 + Under": "X2+Moins"
       }
     },
     "TransactionCategory": {

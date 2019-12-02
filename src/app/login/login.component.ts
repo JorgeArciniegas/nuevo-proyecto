@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { LoginForm, TYPELOGIN } from './login.model';
-
+import { VERSION } from '../../environments/version';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +13,7 @@ export class LoginComponent {
   public form: FormGroup;
   public errorMessage: string | undefined;
   public showOperatorLogin: boolean;
+  versionSoftware = VERSION;
   /**
    * Select a different type login
    * When connectByOperator = true, typeLoginSelected = "Admin" viceversa is "Operator"

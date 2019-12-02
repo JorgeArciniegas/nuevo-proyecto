@@ -268,6 +268,314 @@
                   "with": "src/environments/environment.genc03-staging.ts"
                 }
               ]
+            },
+            "betese-prod": {
+              "outputPath": "dist-betese",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betese/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betese.ts"
+                }
+              ]
+            },
+            "betese-staging": {
+              "outputPath": "dist-betese",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betese/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betese-staging.ts"
+                }
+              ]
+            },
+            "sportrace-prod": {
+              "outputPath": "dist-sportrace",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/sportrace/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sportrace.ts"
+                }
+              ]
+            },
+            "sportrace-staging": {
+              "outputPath": "dist-sportrace",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/sportrace/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sportrace-staging.ts"
+                }
+              ]
+            },
+            "bolivarbet-prod": {
+              "outputPath": "dist-bolivarbet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/bolivarbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.bolivarbet.ts"
+                }
+              ]
+            },
+            "bolivarbet-staging": {
+              "outputPath": "dist-bolivarbet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/bolivarbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.bolivarbet-staging.ts"
+                }
+              ]
+            },
+            "uganbet-prod": {
+              "outputPath": "dist-uganbet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/uganbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.uganbet.ts"
+                }
+              ]
+            },
+            "uganbet-staging": {
+              "outputPath": "dist-uganbet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/uganbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.uganbet-staging.ts"
+                }
+              ]
+            },
+            "apuestas-dominicanas-prod": {
+              "outputPath": "dist-apuestas-dominicanas",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/apuestas-dominicanas/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.apuestas-dominicanas.ts"
+                }
+              ]
+            },
+            "apuestas-dominicanas-staging": {
+              "outputPath": "dist-apuestas-dominicanas",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/apuestas-dominicanas/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.apuestas-dominicanas-staging.ts"
+                }
+              ]
+            },
+            "f2o-prod": {
+              "outputPath": "dist-f2o",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/f2o/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.f2o.ts"
+                }
+              ]
+            },
+            "f2o-staging": {
+              "outputPath": "dist-f2o",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/f2o/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.f2o-staging.ts"
+                }
+              ]
+            },
+            "soft-prod": {
+              "outputPath": "dist-soft",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/soft/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.soft.ts"
+                }
+              ]
+            },
+            "soft-staging": {
+              "outputPath": "dist-soft",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/soft/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.soft-staging.ts"
+                }
+              ]
+            },
+            "kyron-prod": {
+              "outputPath": "dist-kyron",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/kyron/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.kyron.ts"
+                }
+              ]
+            },
+            "kyron-staging": {
+              "outputPath": "dist-kyron",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/kyron/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.kyron-staging.ts"
+                }
+              ]
+            },
+            "homerun-prod": {
+              "outputPath": "dist-homerun",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/homerun/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.homerun.ts"
+                }
+              ]
+            },
+            "homerun-staging": {
+              "outputPath": "dist-homerun",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/homerun/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.homerun-staging.ts"
+                }
+              ]
+            },
+            "betlogik-prod": {
+              "outputPath": "dist-betlogik",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betlogik/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betlogik.ts"
+                }
+              ]
+            },
+            "betlogik-staging": {
+              "outputPath": "dist-betlogik",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betlogik/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betlogik-staging.ts"
+                }
+              ]
+            },
+            "doradobet-prod": {
+              "outputPath": "dist-doradobet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/doradobet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.doradobet.ts"
+                }
+              ]
+            },
+            "doradobet-staging": {
+              "outputPath": "dist-doradobet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/doradobet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betlogik-staging.ts"
+                }
+              ]
             }
           }
         },
@@ -327,6 +635,72 @@
             },
             "genc03-staging": {
               "browserTarget": "vdesk:build:genc03-staging"
+            },
+            "betese-prod": {
+              "browserTarget": "vdesk:build:betese-prod"
+            },
+            "betese-staging": {
+              "browserTarget": "vdesk:build:betese-staging"
+            },
+            "sportrace-prod": {
+              "browserTarget": "vdesk:build:sportrace-prod"
+            },
+            "sportrace-staging": {
+              "browserTarget": "vdesk:build:sportrace-staging"
+            },
+            "bolivarbet-prod": {
+              "browserTarget": "vdesk:build:bolivarbet-prod"
+            },
+            "bolivarbet-staging": {
+              "browserTarget": "vdesk:build:bolivarbet-staging"
+            },
+            "uganbet-prod": {
+              "browserTarget": "vdesk:build:uganbet-prod"
+            },
+            "uganbet-staging": {
+              "browserTarget": "vdesk:build:uganbet-staging"
+            },
+            "apuestas-dominicanas-prod": {
+              "browserTarget": "vdesk:build:apuestas-dominicanas-prod"
+            },
+            "apuestas-dominicanas-staging": {
+              "browserTarget": "vdesk:build:apuestas-dominicanas-staging"
+            },
+            "f2o-prod": {
+              "browserTarget": "vdesk:build:f2o-prod"
+            },
+            "f2o-staging": {
+              "browserTarget": "vdesk:build:f2o-staging"
+            },
+            "soft-prod": {
+              "browserTarget": "vdesk:build:soft-prod"
+            },
+            "soft-staging": {
+              "browserTarget": "vdesk:build:soft-staging"
+            },
+            "kyron-prod": {
+              "browserTarget": "vdesk:build:kyron-prod"
+            },
+            "kyron-staging": {
+              "browserTarget": "vdesk:build:kyron-staging"
+            },
+            "homerun-prod": {
+              "browserTarget": "vdesk:build:homerun-prod"
+            },
+            "homerun-staging": {
+              "browserTarget": "vdesk:build:homerun-staging"
+            },
+            "betlogik-prod": {
+              "browserTarget": "vdesk:build:betlogik-prod"
+            },
+            "betlogik-staging": {
+              "browserTarget": "vdesk:build:betlogik-staging"
+            },
+            "doradobet-prod": {
+              "browserTarget": "vdesk:build:doradobet-prod"
+            },
+            "doradobet-staging": {
+              "browserTarget": "vdesk:build:doradobet-staging"
             }
           }
         },

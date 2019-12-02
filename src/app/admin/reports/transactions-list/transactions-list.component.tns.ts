@@ -4,21 +4,33 @@ import { TransactionCategory } from './transactions-list.model';
 import { ModalDatetimepicker } from 'nativescript-modal-datetimepicker';
 import { AppSettings } from '../../../app.settings';
 import { UserService } from '../../../services/user.service';
+import { timer } from 'rxjs';
+import { LoaderService } from '../../../services/utility/loader/loader.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-transactions-list',
   templateUrl: './transactions-list.component.html',
   styleUrls: ['./transactions-list.component.scss']
 })
-export class TransactionsListComponent {
+export class TransactionsListComponent implements OnInit {
   object = Object;
   transactionCategory: typeof TransactionCategory = TransactionCategory;
 
   constructor(
     public transactionsListService: TransactionsListService,
     public readonly settings: AppSettings,
-    public userService: UserService
-  ) {}
+    public userService: UserService,
+    private loaderService: LoaderService
+  ) { }
+
+
+  ngOnInit() {
+    timer(300).subscribe(() =>
+      this.loaderService.setLoading(false, 'ChildrenAdmin')
+    );
+  }
+
 
   changeValue(key: string, value: TransactionCategory): void {
     this.transactionsListService[key] = value;

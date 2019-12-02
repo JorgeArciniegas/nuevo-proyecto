@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="center space-between" *ngIf="operatorSummaryService.reportsOperatorVolumeResponse"
   [style.height.%]="100">
-  <div fxFlex="93" fxLayout="column" [style.padding.px]="20">
+  <div fxFlex="90" fxLayout="column" [style.padding.px]="10">
     <div class="title">
       <h3> {{'OPERATOR_SUMMARY' | translate | uppercase}} </h3>
     </div>
@@ -85,10 +85,10 @@
       </div>
     </div>
   </div>
-  <div fxFlex="7" fxLayout="column wrap">
+  <div fxFlex="10" fxLayout="column">
     <div fxFlex class="btn-filter" fxLayout="column wrap" fxLayoutAlign="stretch">
-      <div fxFlexFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-        <div fxFlex fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="grid">
+      <div fxFlexFill fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <div fxFlex fxLayout="row" fxLayoutAlign="center" fxLayoutGap="grid">
           <div fxFlex="15">
             <div class="value">
               <h2>{{ operatorSummaryService.totalStake | currency : userService.userCurrency : 'symbol-narrow' }} </h2>

@@ -7,6 +7,7 @@ import { BtncalcService } from './btncalc.service';
 import { UserService } from '../../../../src/app/services/user.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-btncalc',
   templateUrl: './btncalc.component.html',
   styleUrls: ['./btncalc.component.scss']
@@ -31,7 +32,9 @@ export class BtncalcComponent extends BtncalcComponentCommon
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.btncalcService.initializeSubscriptionAndData();
+  }
 
   ngOnDestroy(): void {
     this.polyfunctionalValueSubscribe.unsubscribe();

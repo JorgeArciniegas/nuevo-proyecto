@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { TextField } from "tns-core-modules/ui/text-field";
+import { TextField } from 'tns-core-modules/ui/text-field';
 import { TYPELOGIN } from './login.model';
 import { Switch } from 'tns-core-modules/ui/switch/switch';
-
+import { VERSION } from '../../environments/version';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +14,7 @@ export class LoginComponent {
   public usernameLengthInvalid = true;
   public passwordLengthInvalid = true;
   public showOperatorLogin: boolean;
-
+  versionSoftware = VERSION;
   /**
    * Select a different type login
    * When connectByOperator = true, typeLoginSelected = "Admin" viceversa is "Operator"

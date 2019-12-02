@@ -5,6 +5,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { OperatorSummaryComponent } from './operator-summary.component';
 import { OperatorSummaryListComponent } from './operator-summary-list/operator-summary-list.component';
 import { MatDatepickerModule, MatInputModule, MatNativeDateModule } from '@angular/material';
+import { OperatorSummaryService } from './operator-summary.service';
 
 
 
@@ -15,6 +16,7 @@ import { MatDatepickerModule, MatInputModule, MatNativeDateModule } from '@angul
     SharedModule,
     OperatorSummaryRoutingModule,
     MatDatepickerModule, MatInputModule, MatNativeDateModule
-  ]
+  ],
+  providers: [OperatorSummaryService]
 })
 export class OperatorSummaryModule { }

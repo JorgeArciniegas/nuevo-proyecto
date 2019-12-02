@@ -35,6 +35,7 @@ export class ResultsService {
       .then((eventResults: VirtualSportLastResultsResponse) => {
         // results for products
         if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
+
           for (let i = 0; i < this.productService.product.layoutProducts.resultItems; i++) {
             if (!eventResults.EventResults[i]) {
               return;
@@ -77,15 +78,17 @@ export class ResultsService {
             this.listResult.push(tempEventResult);
           }
         } else {
-          // create last Result
-          const tempEventResult: EventResult = {
-            eventLabel: eventResults.EventResults[0].TournamentName,
-            eventNumber: eventResults.EventResults[0].TournamentId
-          };
 
-          // group by last Tournament
-          tempEventResult.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === tempEventResult.eventNumber);
-          this.listResult.push(tempEventResult);
+          if (eventResults.EventResults !== null) {
+            // create last Result
+            const tempEventResult: EventResult = {
+              eventLabel: eventResults.EventResults[0].TournamentName,
+              eventNumber: eventResults.EventResults[0].TournamentId
+            };
+            // group by last Tournament
+            tempEventResult.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === tempEventResult.eventNumber);
+            this.listResult.push(tempEventResult);
+          }
         }
       });
   }

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
 import { AppSettings } from '../../app.settings';
 import { ProductsService } from '../../products/products.service';
 import { CouponService } from '../coupon/coupon.service';
@@ -35,9 +35,12 @@ export class BtncalcComponent extends BtncalcComponentCommon
       couponService,
       userService
     );
+
+    this.btncalcService.initializeSubscriptionAndData();
   }
 
   ngOnInit(): void {
+
     this.amountIcon = new IconSize(Math.floor(this.rowHeight - 16));
   }
 

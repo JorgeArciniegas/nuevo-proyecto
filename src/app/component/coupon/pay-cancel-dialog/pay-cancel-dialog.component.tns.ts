@@ -4,10 +4,10 @@ import { BarcodeScanner } from 'nativescript-barcodescanner';
 import { TextField } from 'tns-core-modules/ui/text-field';
 import { DialogTypeCoupon } from '../../../../../src/app/products/products.model';
 import { UserService } from '../../../services/user.service';
-import { CouponDialogService } from '../coupon-dialog.service.tns';
+import { CouponDialogService } from '../coupon-dialog.service';
 import { CouponService } from '../coupon.service';
 import { Receipt } from './print-receipt/print-receipt.model';
-import { PrintReceiptService } from './print-receipt/print-receipt.service.tns';
+import { PrintReceiptService } from './print-receipt/print-receipt.service';
 declare var android: any;
 @Component({
   selector: 'app-pay-cancel-dialog',

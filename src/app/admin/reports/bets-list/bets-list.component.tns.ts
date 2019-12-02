@@ -7,6 +7,8 @@ import { ModalDatetimepicker } from 'nativescript-modal-datetimepicker';
 import { TextField } from 'tns-core-modules/ui/text-field/text-field';
 import { AccountOperator } from '@elys/elys-api';
 import { OperatorsService } from '../../settings/operators/operators.service';
+import { LoaderService } from '../../../services/utility/loader/loader.service';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-bets-list',
@@ -21,7 +23,8 @@ export class BetsListComponent implements OnInit {
   constructor(
     public betsListService: BetsListService,
     public readonly settings: AppSettings,
-    public operatorService: OperatorsService
+    public operatorService: OperatorsService,
+    private loaderService: LoaderService
   ) {
   }
 
@@ -29,7 +32,9 @@ export class BetsListComponent implements OnInit {
     this.operatorService.rowNumber = 9;
     this.columnOperatorGrid = '*,*,*,*,*,*,*,*,*,*';
     this.operatorService.getListOfOperators();
-
+    timer(300).subscribe(() =>
+      this.loaderService.setLoading(false, 'ChildrenAdmin')
+    );
   }
 
   changeValue(key: string, value: any) {

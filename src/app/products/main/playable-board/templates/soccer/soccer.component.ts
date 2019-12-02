@@ -1,8 +1,7 @@
 import { Component, Input, OnDestroy } from '@angular/core';
-import { SoccerService } from './soccer.service';
-import { UserService } from '../../../../../services/user.service';
 import { MainService } from '../../../../../products/main/main.service';
-import { timer } from 'rxjs';
+import { UserService } from '../../../../../services/user.service';
+import { SoccerService } from './soccer.service';
 
 @Component({
   selector: 'app-playable-board-soccer',

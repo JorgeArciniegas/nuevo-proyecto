@@ -128,7 +128,6 @@ export class ProductsService extends ProductsServiceExtra {
 
   resetBoard(): void {
     this.playableBoardResetSubject.next(true);
-    this.playableBoardResetSubject.next(false);
     this.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
 

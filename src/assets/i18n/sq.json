@@ -218,10 +218,18 @@
     },
     "PRINT_COUPON": {
       "HEADER_MESSAGE": {
-        "DEMO_LICENSE": ""
+        "BOLIVARBET": "",
+        "BETLOGIK": "",
+        "DEMO_LICENSE": "",
+        "F2O": "F2o",
+        "UGANBET": ""
       },
       "LICENSE_MESSAGE": {
-        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua."
+        "BETLOGIK": "The Customer declares to know and to accept the general terms and conditions available on our website. This coupon is valid only if the transaction took place exclusively via the Internet. According to the Decree Law n. 158/2012 conv. with mod. in Law no. 189/2012 please be informed that: It is possible to verify the winning probabilities on www.aams.gov.it. Gambling can cause addiction. Gambling is forbidden under the age of 18. (default)",
+        "BOLIVARBET": "The Customer declares to know and accept the Terms and Conditions available on our web siteThis coupon is valid only if the transaction took place exclusively via the Internet.Gambling can cause addiction.The game is prohibited for persons under 18 years.",
+        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
+        "F2O": "The Customer declares to know and to accept the general terms and conditions available on our website. This coupon is valid only if the transaction took place exclusively via the Internet. According to the Decree Law n. 158/2012 conv. with mod. in Law no. 189/2012 please be informed that: It is possible to verify the winning probabilities on www.aams.gov.it. Gambling can cause addiction. Gambling is forbidden under the age of 18. ",
+        "UGANBET": "The Customer declares to know and accept the Terms and Conditions available on our web site This coupon is valid only if the transaction took place exclusively via the Internet. Gambling can cause addiction. The game is prohibited for persons under 18 years."
       }
     },
     "PRODUCT": {
@@ -316,34 +324,34 @@
         "Scores2HT": "Rez. i sakte RF"
       },
       "MARKETS": {
-        "1 + GG": "1 + GG",
-        "1 + NG": "1 + JG",
-        "1 + Over": "1 + Larte",
-        "1 + Under": "1 + Poshte",
-        "12 + GG": "12 + GG",
-        "12 + NG": "12 + JG",
-        "12 + Over": "12 + Larte",
-        "12 + Under": "12 + Poshte",
-        "1X + GG": "1X + GG",
-        "1X + NG": "1X + JG",
-        "1X + Over": "1X + Larte",
-        "1X + Under": "1X + Poshte",
-        "2 + GG": "2 + GG",
-        "2 + NG": "2 + JG",
-        "2 + Over": "2 + Larte",
-        "2 + Under": "2 + Poshte",
+        "1 + GG": "1+GG",
+        "1 + NG": "1+JG",
+        "1 + Over": "1+Larte",
+        "1 + Under": "1+Poshte",
+        "12 + GG": "12+GG",
+        "12 + NG": "12+JG",
+        "12 + Over": "12+Larte",
+        "12 + Under": "12+Poshte",
+        "1X + GG": "1X+GG",
+        "1X + NG": "1X+JG",
+        "1X + Over": "1X+Larte",
+        "1X + Under": "1X+Poshte",
+        "2 + GG": "2+GG",
+        "2 + NG": "2+JG",
+        "2 + Over": "2+Larte",
+        "2 + Under": "2+Poshte",
         "GG": "GG",
         "NG": "JG",
         "Over": "Larte",
         "Under": "Poshte",
-        "X + GG": "X + GG",
-        "X + NG": "X + JG",
-        "X + Over": "X + Larte",
-        "X + Under": "X + Poshte",
-        "X2 + GG": "X2 + GG",
-        "X2 + NG": "X2 + JG",
-        "X2 + Over": "X2 + Larte",
-        "X2 + Under": "X2 + Poshte"
+        "X + GG": "X+GG",
+        "X + NG": "X+JG",
+        "X + Over": "X+Larte",
+        "X + Under": "X+Poshte",
+        "X2 + GG": "X2+GG",
+        "X2 + NG": "X2+JG",
+        "X2 + Over": "X2+Larte",
+        "X2 + Under": "X2+Poshte"
       }
     },
     "TransactionCategory": {

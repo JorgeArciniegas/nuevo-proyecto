@@ -1,7 +1,9 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { Subscription, timer } from 'rxjs';
+import { Component } from '@angular/core';
+import { LAYOUT_TYPE, Products } from '../../../../environments/environment.models';
+import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../products.service';
-import { EventControlService } from './event-control.service';
+import { EventInfo } from '../main.models';
+import { MainService } from '../main.service';
 
 @Component({
   moduleId: module.id,
@@ -9,17 +11,40 @@ import { EventControlService } from './event-control.service';
   templateUrl: './event-control.component.html',
   styleUrls: ['./event-control.component.scss']
 })
-export class EventControlComponent implements OnDestroy {
+export class EventControlComponent {
+  typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
+
+  private _typeProductSelected: LAYOUT_TYPE;
+  public get typeProductSelected(): LAYOUT_TYPE {
+    return this._typeProductSelected;
+  }
+  public set typeProductSelected(value: LAYOUT_TYPE) {
+    this._typeProductSelected = value;
+  }
+
+  public get product(): Products {
+    return this.settings.products.find(product => product.productSelected);
+  }
+
+  public get productImageClass() {
+    return this.product ? 'PRODUCT-' + this.product.codeProduct + '-BG' : '';
+  }
+  public isWindowSizeSmall: boolean;
+  public showEventId: boolean;
+
+  public get currentEventDetail(): EventInfo {
+    return this.mainService.eventDetails.events[this.mainService.eventDetails.currentEvent];
+  }
 
   constructor(
-    public readonly eventControlService: EventControlService,
-    public readonly productService: ProductsService
+    private mainService: MainService,
+    private productService: ProductsService,
+    private settings: AppSettings
   ) {
-    this.eventControlService.init();
+    this.productService.resetBoard();
+    this.isWindowSizeSmall = this.productService.windowSize.small;
+    this.showEventId = this.settings.showEventId;
+    this.typeProductSelected = this.product.layoutProducts.type;
   }
 
-
-  ngOnDestroy() {
-    this.eventControlService.destroy();
-  }
 }

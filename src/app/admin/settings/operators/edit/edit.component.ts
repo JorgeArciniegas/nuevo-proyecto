@@ -1,23 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  ValidatorFn,
-  AbstractControl
-} from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ErrorStatus } from '@elys/elys-api';
 import { AppSettings } from '../../../../app.settings';
 import { OperatorEditByForm } from '../operators.model';
 import { OperatorsService } from '../operators.service';
 import { passwordValidator } from '../password-validator';
-import { ErrorStatus } from '@elys/elys-api';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditComponent implements OnInit {
+export class EditComponent {
 
   form: FormGroup;
   public errorMessage: string | undefined;
@@ -44,8 +38,6 @@ export class EditComponent implements OnInit {
       }
     );
   }
-
-  ngOnInit() {}
 
   checkPasswords(group: FormGroup) {
     // here we have the 'passwords' group

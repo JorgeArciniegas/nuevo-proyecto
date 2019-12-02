@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { EventControlComponent } from './event-control/event-control.component';
-import { StandardComponent as EventControlStandardComponent } from './event-control/templates/standard/standard.component';
 import { EventListComponent } from './events-list/events-list.component';
 import { StandardComponent as EventsListStandardComponent } from './events-list/templates/standard/standard.component';
 import { LuckyComponent } from './lucky/lucky.component';
@@ -50,7 +49,6 @@ export const componentDeclarations: any[] = [
   ResultsRaceComponent,
   PlayableBoardRaceComponent,
   EventsListStandardComponent,
-  EventControlStandardComponent,
   ResultsCockFightComponent,
   PlayableBoardCockFightComponent,
   PlayableBoardSoccerComponent,
