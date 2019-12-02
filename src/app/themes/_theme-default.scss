@@ -501,6 +501,11 @@ html {
 				@extend %PRODUCT-ENG-LEAGUE-BG;
 			}
 
+			.PRODUCT-KENO-BG {
+				// KENO
+				@extend %PRODUCT-KENO-BG;
+			}
+
 			.race-control {
 				.time {
 					@extend %time-card-title;

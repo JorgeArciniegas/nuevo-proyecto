@@ -553,6 +553,11 @@
 				@extend %PRODUCT-ENG-LEAGUE-BG-MOBILE;
 			}
 
+			.PRODUCT-KENO-BG {
+				// KENO
+				@extend %PRODUCT-KENO-BG-MOBILE;
+			}
+
 			.race-control {
 				.time {
 					.time-panel {
