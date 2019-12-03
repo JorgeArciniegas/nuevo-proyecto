@@ -107,7 +107,6 @@ export class CockFightComponent {
         break;
       case 3:
         currentSelection.selection = this.sectorWinModel[this.RNGLuckyCock(8)];
-        console.log(currentSelection.selection);
         currentSelection.tp = this.market['1X2WinningSector'];
         break;
     }
