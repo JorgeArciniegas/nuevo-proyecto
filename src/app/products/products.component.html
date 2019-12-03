@@ -2,7 +2,7 @@
   <!--PRODUCT CONTAINER-->
   <div class="product" fxFlex="93" fxLayout="row">
     <!-- Gameboard area -->
-    <div class="product-container" fxLayout="column" fxFlex>
+    <div class="product-container" fxLayout="column" fxFlex *ngIf="productService.product">
       <router-outlet></router-outlet>
     </div>
     <div class="product-calc" fxLayout="column" fxFlex="21">

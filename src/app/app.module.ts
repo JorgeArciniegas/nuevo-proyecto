@@ -17,9 +17,6 @@ import { VERSION } from '../environments/version';
 import { componentDeclarations, providerDeclarations, routes } from './app.common';
 import { AppComponent } from './app.component';
 import { ConfirmDestroyCouponComponent } from './component/coupon/confirm-destroy-coupon/confirm-destroy-coupon.component';
-import { PayCancelDialogComponent } from './component/coupon/pay-cancel-dialog/pay-cancel-dialog.component';
-import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
-import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
 import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
 import { SharedModule } from './shared/shared.module';
 
@@ -28,7 +25,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [componentDeclarations, DigitslimitPipe, GroupByCategoryPipe],
+  declarations: [componentDeclarations, ProductDialogComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -60,10 +57,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ElysCouponModule.forRoot({ deviceLayout: PlaySource.VDeskWeb }),
     RouterModule.forRoot(routes)
   ],
-  entryComponents: [ProductDialogComponent, PayCancelDialogComponent, ConfirmDestroyCouponComponent],
+  entryComponents: [ProductDialogComponent, ConfirmDestroyCouponComponent],
   providers: [
     providerDeclarations
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

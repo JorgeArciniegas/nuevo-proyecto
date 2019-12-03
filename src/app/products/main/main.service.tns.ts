@@ -89,16 +89,7 @@ export class MainService {
   private initCurrentEvent = false;
 
   playersList: Player[];
-  /* public get playersList(): Player[] {
-    // timer(1000).subscribe(() => console.log('attendere prego'));
-    // console.log('a te la playersList');
-    return global.playersList;
-  }
 
-  public set playersList(value: Player[]) {
-    global.playersList = value;
-  }
- */
   smartCode: Smartcode;
 
   amount: number;
@@ -109,16 +100,6 @@ export class MainService {
   public currentEventSubscribe: Subject<number>;
   public currentEventObserve: Observable<number>;
   public eventDetails: EventDetail;
-
-  /*   public get eventDetails(): EventDetail {
-      return global.eventDetails;
-    }
-
-    public set eventDetails(value: EventDetail) {
-      global.eventDetails = value;
-    }
-
-   */
 
   public toResetAllSelections: boolean;
 
@@ -149,7 +130,6 @@ export class MainService {
     this.remaingTimeCounterObs = this.remaingTimeCounter.asObservable();
 
     this.defaultGameStart();
-    // this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
 
     this.productService.productNameSelectedObserve.subscribe(item => {
       if (!this.couponService.productHasCoupon.checked) {
@@ -186,7 +166,8 @@ export class MainService {
     this.productService.playableBoardResetObserve.subscribe(reset => {
       if (reset) {
         this.toResetAllSelections = true;
-        this.resetPlayEvent();
+        timer(500).subscribe(() => this.resetPlayEvent());
+
         if (this.countdownSub && this.countdownSub.closed || !this.countdownSub) {
           this.currentAndSelectedEventTime();
           this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
@@ -195,6 +176,34 @@ export class MainService {
     });
 
   }
+
+
+  /**
+  *
+  */
+  destroy() {
+    if (this.countdownSub) {
+      this.countdownSub.unsubscribe();
+    }
+  }
+
+  restartService() {
+    this.defaultGameStart();
+    if (this.countdownSub.closed) {
+      this.resumeCountDown();
+    }
+  }
+
+  /**
+   *
+   */
+  resumeCountDown() {
+    if (this.countdownSub && this.countdownSub.closed || !this.countdownSub) {
+      this.currentAndSelectedEventTime();
+      this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
+    }
+  }
+
   /**
    * When the first time entry on the application, the system set the the product default.
    * It is called by constructor and it is selected from environment file and

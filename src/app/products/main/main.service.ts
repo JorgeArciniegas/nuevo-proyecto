@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import {
   ElysApiService,
   VirtualBetEvent,
@@ -68,7 +68,7 @@ export class MainService {
   public remaingTimeCounterObs: Observable<EventTime>;
 
   private attempts = 0;
-  private initCurrentEvent = false;
+  public initCurrentEvent = false;
 
   playersList: Player[];
 
@@ -87,6 +87,7 @@ export class MainService {
    * When it is true, clear the polyfunctionalArea, Coupon and playboard
    * */
   public toResetAllSelections: boolean;
+
 
   constructor(
     private elysApi: ElysApiService,
@@ -145,7 +146,7 @@ export class MainService {
     this.productService.playableBoardResetObserve.subscribe(reset => {
       if (reset) {
         this.toResetAllSelections = true;
-        this.resetPlayEvent();
+        timer(500).subscribe(() => this.resetPlayEvent());
         // Resume event's countdown
         this.resumeCountDown();
       }
@@ -153,6 +154,19 @@ export class MainService {
 
   }
 
+  /**
+   *
+   */
+  destroy() {
+    this.countdownSub.unsubscribe();
+  }
+
+  restartService() {
+    this.defaultGameStart();
+    if (this.countdownSub.closed) {
+      this.resumeCountDown();
+    }
+  }
   /**
    *
    */

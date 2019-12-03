@@ -32,10 +32,12 @@ export class ProductDialogComponent implements OnInit {
     if (this.productService.windowSize && this.productService.windowSize.small) {
       this.rowNumber = 2;
     }
+
   }
 
   ngOnInit(): void {
     this.title = this.data.title;
+    console.log('VIVO SONO', this.data);
   }
 
   close(): void {

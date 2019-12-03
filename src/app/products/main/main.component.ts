@@ -29,11 +29,15 @@ export class MainComponent implements OnInit, OnDestroy {
     this.settings = appSettings;
   }
   ngOnInit() {
+    this.mainService.restartService();
     this.rowHeight = (this.productService.windowSize.columnHeight - 30 - 12) / 24;
   }
 
   ngOnDestroy() {
-    this.mainService.countdownSub.unsubscribe();
+    console.log('DESTROY MAIN');
+    this.mainService.destroy();
+
+
   }
 
 }
