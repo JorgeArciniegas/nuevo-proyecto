@@ -81,7 +81,9 @@ export class CockFightComponent {
             break;
           case this.market['1X2WinningSector']: // winner + sector
             eventMarkets.sls.forEach(marketSelections => {
-              this.sectorWinModel.push(marketSelections);
+              if (marketSelections.nm !== 'X + S0') {
+                this.sectorWinModel.push(marketSelections);
+              }
             });
             break;
         }
@@ -96,7 +98,7 @@ export class CockFightComponent {
     const currentSelection = { tp: 0, selection: null };
     switch (lucky) {
       case 1:
-        currentSelection.selection = this.winModel[this.RNGLuckyCock(2)];
+        currentSelection.selection = this.winModel[this.RNGLuckyCock(3)];
         currentSelection.tp = this.market['1X2'];
         break;
       case 2:
@@ -105,6 +107,7 @@ export class CockFightComponent {
         break;
       case 3:
         currentSelection.selection = this.sectorWinModel[this.RNGLuckyCock(8)];
+        console.log(currentSelection.selection);
         currentSelection.tp = this.market['1X2WinningSector'];
         break;
     }
