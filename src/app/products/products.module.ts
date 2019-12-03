@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AdvanceGameComponent } from './advance-game/advance-game.component';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
+import { ProductDialogComponent } from './product-dialog/product-dialog.component';
 
 
 

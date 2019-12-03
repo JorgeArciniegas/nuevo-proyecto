@@ -37,7 +37,6 @@ export class ProductDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.title = this.data.title;
-    console.log('VIVO SONO', this.data);
   }
 
   close(): void {

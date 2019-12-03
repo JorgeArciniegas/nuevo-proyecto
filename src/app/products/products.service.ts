@@ -87,7 +87,6 @@ export class ProductsService extends ProductsServiceExtra {
       dialogData.paytable = data.paytable;
       dialogData.hotAndCold = data.hotAndCold;
       this.dialog.openDialog(dialogData);
-      console.log('OPEN DATA', dialogData);
     });
 
     this.playableBoardResetSubject = new Subject<boolean>();

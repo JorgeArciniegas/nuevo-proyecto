@@ -10,7 +10,17 @@ import { AdvanceGameComponent } from './advance-game/advance-game.component';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
-
+import { BetoddsComponent } from './product-dialog/betodds/betodds.component';
+import { StatisticsComponent } from './product-dialog/statistics/statistics.component';
+import { CockFightComponent as CockFightStatisticsComponent } from './product-dialog/statistics/templates/cock-fight/cock-fight.component';
+import { RaceComponent as RaceStatisticsComponent } from './product-dialog/statistics/templates/race/race.component';
+import { SoccerComponent as SoccerStatisticsComponent } from './product-dialog/statistics/templates/soccer/soccer.component';
+import { HotAndColdComponent } from './product-dialog/hot-and-cold/hot-and-cold.component';
+import { KenoComponent as KenoHotAndColdComponent } from './product-dialog/hot-and-cold/template/keno/keno.component';
+import { PaytableComponent } from './product-dialog/paytable/paytable.component';
+import { KenoComponent as KenoPaytableComponent } from './product-dialog/paytable/template/keno/keno.component';
+import { RankingComponent } from './product-dialog/ranking/ranking.component';
+import { SoccerComponent as SoccerRankingComponent } from './product-dialog/ranking/templates/soccer/soccer.component';
 
 
 @NgModule({
@@ -22,7 +32,18 @@ import { ProductDialogComponent } from './product-dialog/product-dialog.componen
     AdvanceGameComponent,
     CouponComponent,
     PayCancelDialogComponent,
-    ProductDialogComponent
+    ProductDialogComponent,
+    BetoddsComponent,
+    StatisticsComponent,
+    RaceStatisticsComponent,
+    CockFightStatisticsComponent,
+    SoccerStatisticsComponent,
+    PaytableComponent,
+    RankingComponent,
+    SoccerRankingComponent,
+    KenoPaytableComponent,
+    HotAndColdComponent,
+    KenoHotAndColdComponent
   ],
   imports: [
     CommonModule,

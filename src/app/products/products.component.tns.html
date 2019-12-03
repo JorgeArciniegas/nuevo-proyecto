@@ -6,7 +6,7 @@
       <router-outlet></router-outlet>
     </StackLayout>
     <!-- Dialog polyfunctional area-->
-    <GridLayout row="1" rowSpan="2" *ngIf="dialog.showDialog">
+    <GridLayout row="0" rowSpan="2" *ngIf="dialog.showDialog">
       <app-product-dialog [data]="dialog.dialogData"></app-product-dialog>
     </GridLayout>
     <!-- Dialog pay/cancel-->
