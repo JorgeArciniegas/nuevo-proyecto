@@ -1,11 +1,11 @@
-import { Component, Input, OnDestroy, OnInit, HostListener, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription, timer } from 'rxjs';
+import { UserService } from '../../../../src/app/services/user.service';
 import { AppSettings } from '../../app.settings';
 import { ProductsService } from '../../products/products.service';
 import { CouponService } from '../coupon/coupon.service';
 import { BtncalcComponentCommon } from './btncalc.component.common';
 import { BtncalcService } from './btncalc.service';
-import { UserService } from '../../../../src/app/services/user.service';
-import { timer, Subscription } from 'rxjs';
 
 @Component({
   moduleId: module.id,
