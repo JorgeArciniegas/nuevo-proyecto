@@ -13,8 +13,8 @@ export class EventListComponent implements OnInit {
   // public eventsDetails: EventsList;
   public nativeNextEventsItems: string;
   constructor(
-    private eventService: EventsListService,
-    private productService: ProductsService
+    public eventService: EventsListService,
+    public productService: ProductsService
   ) { }
 
   ngOnInit() {

@@ -32,6 +32,7 @@ export class ProductDialogComponent implements OnInit {
     if (this.productService.windowSize && this.productService.windowSize.small) {
       this.rowNumber = 2;
     }
+
   }
 
   ngOnInit(): void {

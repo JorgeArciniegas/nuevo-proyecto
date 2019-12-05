@@ -14,7 +14,7 @@ import { MainService } from './main.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
   public rowHeight: number;
   public settings: AppSettings;
 
@@ -32,6 +32,11 @@ export class MainComponent implements OnInit {
   }
   ngOnInit() {
     this.rowHeight = (this.productService.windowSize.columnHeight - 30 - 12) / 24;
+    this.mainService.restartService();
+  }
+
+  ngOnDestroy() {
+    this.mainService.destroy();
   }
 
   loaded(args: EventData) { }

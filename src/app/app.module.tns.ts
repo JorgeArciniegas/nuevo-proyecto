@@ -14,8 +14,6 @@ import { NgShadowModule } from 'nativescript-ng-shadow';
 import { environment } from '../environments/environment';
 import { componentDeclarations, providerDeclarations, routes } from './app.common';
 import { AppComponent } from './app.component';
-import { DigitslimitPipe } from './component/pipe/digitslimit.pipe';
-import { GroupByCategoryPipe } from './component/pipe/groupBy.pipe';
 import { NotificationService } from './notifications/notification.service';
 import { SharedModule } from './shared/shared.module';
 
@@ -23,7 +21,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [componentDeclarations, DigitslimitPipe, GroupByCategoryPipe],
+  declarations: [componentDeclarations],
   imports: [
     NativeScriptHttpClientModule,
     NativeScriptModule,
@@ -48,7 +46,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   providers: [
     providerDeclarations,
     NotificationService
-    /* { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true } */
   ],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]

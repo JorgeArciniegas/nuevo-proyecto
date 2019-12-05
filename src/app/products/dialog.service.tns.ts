@@ -8,7 +8,7 @@ export class DialogService {
   public showDialog = false;
   public dialogData: DialogData;
 
-  constructor(private userservice: UserService) {}
+  constructor(private userservice: UserService) { }
 
   openDialog(dialogData: DialogData) {
     this.userservice.isModalOpen = true;
