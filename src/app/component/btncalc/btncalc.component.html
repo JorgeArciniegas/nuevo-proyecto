@@ -74,11 +74,11 @@
   <mat-grid-tile colspan="2">
     <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnTotColSet(typeBetSlipColTot.TOT)"
       [ngClass]="btncalcService.polyfunctionStakePresetPlayer && btncalcService.polyfunctionStakePresetPlayer.typeSlipCol === typeBetSlipColTot.TOT  ? 'btn-selected' : 'btn-grey-gradient'"
-      [disabled]="productService.product.layoutProducts.type === typeLayoutProdct.KENO ? 'disabled' : ''">{{ 'BTNCALC.TOT' | translate }}</button>
+      [disabled]="productService.product?.layoutProducts.type === typeLayoutProdct.KENO ? 'disabled' : ''">{{ 'BTNCALC.TOT' | translate }}</button>
   </mat-grid-tile>
   <mat-grid-tile colspan="2">
     <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnTotColSet(typeBetSlipColTot.COL)"
-      [disabled]="productService.product.layoutProducts.type === typeLayoutProdct.KENO ? 'disabled' : ''"
+      [disabled]="productService.product?.layoutProducts.type === typeLayoutProdct.KENO ? 'disabled' : ''"
       [ngClass]="btncalcService.polyfunctionStakePresetPlayer && btncalcService.polyfunctionStakePresetPlayer.typeSlipCol === typeBetSlipColTot.COL  ? 'btn-selected' : 'btn-grey-gradient'">{{ 'BTNCALC.COL' | translate }}</button>
   </mat-grid-tile>
 </mat-grid-list>

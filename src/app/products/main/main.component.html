@@ -2,11 +2,11 @@
   <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
     <!-- Event control -->
     <mat-grid-tile rowspan="2">
-      <app-event-control fxFill></app-event-control>
+      <app-event-control fxFill *ngIf="mainService.eventDetails"></app-event-control>
     </mat-grid-tile>
     <!-- List events -->
     <mat-grid-tile rowspan="2">
-      <app-events-list fxFill [rowHeight]="rowHeight"></app-events-list>
+      <app-events-list fxFill [rowHeight]="rowHeight" *ngIf="mainService.eventDetails"></app-events-list>
     </mat-grid-tile>
     <!-- Playable board -->
     <mat-grid-tile rowspan="16" fxLayoutAlign="center">

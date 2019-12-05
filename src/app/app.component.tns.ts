@@ -89,6 +89,7 @@ export class AppComponent {
               delay: 1,
               id: 1
             });
+            args.android.finishAffinity();
           }/*  else if (elapsed >= 5) {
             if (this.userService.isUserLogged) {
               this.userService.logout();

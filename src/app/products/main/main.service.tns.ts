@@ -129,11 +129,12 @@ export class MainService {
     this.remaingTimeCounter = new Subject<EventTime>();
     this.remaingTimeCounterObs = this.remaingTimeCounter.asObservable();
 
-    this.defaultGameStart();
+    // this.defaultGameStart();
 
     this.productService.productNameSelectedObserve.subscribe(item => {
       if (!this.couponService.productHasCoupon.checked) {
-        this.cacheEvents = null;
+        this.cacheEvents = [];
+        this.cacheTournaments = [];
         this.initEvents();
       }
     });
@@ -185,6 +186,9 @@ export class MainService {
     if (this.countdownSub) {
       this.countdownSub.unsubscribe();
     }
+    this.initCurrentEvent = true;
+    this.cacheEvents = [];
+    this.cacheTournaments = [];
   }
 
   restartService() {
@@ -210,8 +214,8 @@ export class MainService {
    * it return the product marked to "productSelected"
    */
   defaultGameStart(): void {
-    const gameSelected = this.appSettings.products.filter(item => item.productSelected)[0].codeProduct;
-    this.productService.changeProduct(gameSelected);
+    /* const gameSelected = this.appSettings.products.filter(item => item.productSelected)[0].codeProduct;
+    this.productService.changeProduct(gameSelected); */
     // Init events
     this.initEvents();
   }
@@ -269,7 +273,8 @@ export class MainService {
           // stop the countdown to prevent multiple calls
           this.countdownSub.unsubscribe();
           // If remaining time is negative there is an error, reload all.
-          this.cacheEvents = null;
+          this.cacheEvents = [];
+          this.cacheTournaments = [];
           this.loadEvents();
           this.resultService.loadLastResult(false);
           return;
@@ -297,7 +302,8 @@ export class MainService {
       }
     } catch (err) {
       console.log('GET TIME ERROR ---> ', err);
-      this.cacheEvents = null;
+      this.cacheEvents = [];
+      this.cacheTournaments = [];
       this.loadEvents();
       this.resultService.loadLastResult(false);
     }
@@ -306,10 +312,7 @@ export class MainService {
   loadEvents(): void {
     try {
 
-      if (/*
-        ((this.cacheEvents == null ||
-          this.cacheEvents.length === 0
-        ) && this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) */
+      if (
         this.initCurrentEvent
       ) {
         this.loadEventsFromApi(true);
@@ -685,7 +688,7 @@ export class MainService {
   resetPlayEvent(): void {
     this.placingEvent = new PlacingEvent();
     this.smartCode = new Smartcode();
-    this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
+    this.placingEvent.eventNumber = (this.eventDetails.events[0]) ? this.eventDetails.events[this.eventDetails.currentEvent].number : -1;
 
     // Create a new polyfunctionArea object
     const polyfunctionalArea: PolyfunctionalArea = new PolyfunctionalArea();
@@ -717,10 +720,18 @@ export class MainService {
 
   eventDetailOdds(eventNumber: number, attemptRollBack?: number): void {
     if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
+      if (this.cacheTournaments.length === 0) {
+        return;
+      }
       this.eventDetailOddsByCacheTournament(eventNumber);
       return;
     }
-    const event: VirtualBetEvent = this.cacheEvents.filter((cacheEvent: VirtualBetEvent) => cacheEvent.id === eventNumber)[0];
+
+    if (this.cacheEvents.length === 0) {
+      return;
+    }
+
+    const event: VirtualBetEvent = this.cacheEvents.find((cacheEvent: VirtualBetEvent) => cacheEvent.id === eventNumber);
     // Ceck, if it is empty load from api
     if (event.mk == null || event.mk.length === 0) {
       // tslint:disable-next-line:max-line-length

@@ -2,14 +2,14 @@
   <!--PRODUCT CONTAINER-->
   <div class="product" fxFlex="93" fxLayout="row">
     <!-- Gameboard area -->
-    <div class="product-container" fxLayout="column" fxFlex *ngIf="productService.product">
+    <div class="product-container" fxLayout="column" fxFlex *ngIf="service.product">
       <router-outlet></router-outlet>
     </div>
     <div class="product-calc" fxLayout="column" fxFlex="21">
       <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
         <!-- Widget area [Variable] -->
         <mat-grid-tile rowspan="1">
-          <app-widget fxFlexFill [rowHeight]="rowHeight" [product]="service.product" class="padding-horizontal-6">
+          <app-widget fxFlexFill [rowHeight]="rowHeight" *ngIf="service.product" class="padding-horizontal-6">
           </app-widget>
         </mat-grid-tile>
         <!-- Coupon message area -->

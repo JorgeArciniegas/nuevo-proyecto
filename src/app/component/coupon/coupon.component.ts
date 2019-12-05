@@ -31,10 +31,13 @@ export class CouponComponent implements OnDestroy {
   private couponMessageServiceSubscription: Subscription;
 
   // Type coupon
-  couponLayout: TypeCoupon;
+  public get couponLayout(): TypeCoupon {
+    return this.productService.product.typeCoupon;
+  }
+
   layoutProduct: typeof LAYOUT_TYPE = LAYOUT_TYPE;
-  productChange: Subscription;
   couponTypeId: typeof CouponType = CouponType;
+
   constructor(
     public couponService: CouponService,
     public readonly settings: AppSettings,
@@ -63,13 +66,6 @@ export class CouponComponent implements OnDestroy {
         this.remove = false;
       }
       this.filterOdds();
-    });
-
-    // management coupon layout
-    this.couponLayout = this.productService.product.typeCoupon;
-
-    this.productChange = this.productService.productNameSelectedObserve.subscribe(() => {
-      this.couponLayout = this.productService.product.typeCoupon;
     });
   }
 
@@ -121,8 +117,6 @@ export class CouponComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.clearCoupon();
     this.couponServiceSubscription.unsubscribe();
-    this.productChange.unsubscribe();
-    // this.couponMessageServiceSubscription.unsubscribe();
   }
 
   // change stake from odd's coupon

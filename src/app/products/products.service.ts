@@ -47,17 +47,15 @@ export class ProductsService extends ProductsServiceExtra {
     public dialog: DialogService,
     private windowSizeService: WindowSizeService,
     private appSetting: AppSettings,
-    private elysApi: ElysApiService,
-    private storage: StorageService,
     public couponInternalService: CouponService,
     public destroyCouponService: DestroyCouponService,
     public router: RouterService,
     private userservice: UserService
   ) {
     super(couponInternalService, destroyCouponService, router);
+    // set the product default
+    this.product = appSetting.products.find(prod => prod.productSelected);
     // Destroy coupon confirmation
-
-
     if (this.couponInternalService) {
       this.couponInternalService.productHasCoupon = { checked: false };
     }
@@ -131,14 +129,4 @@ export class ProductsService extends ProductsServiceExtra {
     this.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
 
-  /**
-   * @returns LayoutProducts from current product selected
-   */
-  public getCurrentLayoutProducts(): Promise<LayoutProducts> {
-    const response: Promise<LayoutProducts> = new Promise<LayoutProducts>((resolve, reject) => {
-      resolve(this.product.layoutProducts);
-      reject(new Error('LayoutProducts not found'));
-    });
-    return response;
-  }
 }
