@@ -55,8 +55,8 @@
     <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnKeyboardAmount(9)">9</button>
   </mat-grid-tile>
   <mat-grid-tile [rowspan]="btncalcService.decimalSeparator ? 1 : 2">
-    <button class="btn-default btn-keyboard btn-warning radius-5 elevation-z5" (dblclick)="clearAll()"
-      (click)='polyfuncionalAmountReset()'>{{ 'C' | translate }}</button>
+    <button class="btn-default btn-keyboard btn-warning radius-5 elevation-z5"
+      (click)='onClickCancelButton()'>{{ 'C' | translate }}</button>
   </mat-grid-tile>
   <mat-grid-tile>
     <button class="btn-default btn-keyboard radius-5 elevation-z5" (click)="btnKeyboardAmount(0)">0</button>
