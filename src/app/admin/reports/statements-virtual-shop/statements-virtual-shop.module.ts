@@ -6,6 +6,7 @@ import { SearchComponent } from './search/search.component';
 import { SummaryComponent } from './summary/summary.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { MatDatepickerModule, MatNativeDateModule, MatInputModule } from '@angular/material';
+import { StatementVirtualShopService } from './statement-virtual-shop.service';
 
 @NgModule({
   declarations: [SearchComponent, SummaryComponent],
@@ -16,6 +17,7 @@ import { MatDatepickerModule, MatNativeDateModule, MatInputModule } from '@angul
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule
-  ]
+  ],
+  providers: [StatementVirtualShopService]
 })
 export class StatementsVirtualShopModule { }

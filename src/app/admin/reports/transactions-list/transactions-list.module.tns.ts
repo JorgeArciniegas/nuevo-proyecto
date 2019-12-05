@@ -7,6 +7,7 @@ import { GetTransactionVategoryKeyByEnumValuePipe } from './get-transaction-cate
 import { SummaryTransactionsComponent } from './summary-transactions/summary-transactions.component';
 import { routes } from './transactions-list-routing.module';
 import { TransactionsListComponent } from './transactions-list.component';
+import { TransactionsListService } from './transactions-list.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { TransactionsListComponent } from './transactions-list.component';
     NativeScriptCommonModule,
     SharedModule,
     NativeScriptRouterModule.forChild(routes)
-
-  ]
+  ],
+  providers: [TransactionsListService]
 })
 export class TransactionsListModule { }
