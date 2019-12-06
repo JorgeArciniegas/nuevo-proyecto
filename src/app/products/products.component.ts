@@ -53,8 +53,7 @@ export class ProductsComponent implements OnDestroy {
     public mainService: MainService,
     public readonly userService: UserService,
     public readonly couponService: CouponService,
-    public readonly couponDialogService: CouponDialogService,
-    public readonly productService: ProductsService
+    public readonly couponDialogService: CouponDialogService
   ) {
     this.observableMediaSubscribe = this.observableMedia.media$.subscribe((change: MediaChange) => {
       this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];

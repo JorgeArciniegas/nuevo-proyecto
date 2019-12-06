@@ -21,7 +21,7 @@
   <GridLayout col="1" class="product-calc padding-right-3">
     <GridLayout rows="*,2*,3*,2*,12*,2*" columns="*">
       <!-- Widget area [Variable] -->
-      <StackLayout row="0" [rowHeight]="rowHeight" [product]="service.product"
+      <StackLayout row="0" [rowHeight]="rowHeight" *ngIf="service.product"
         [timeBlocked]="mainService.placingEvent.timeBlocked" app-widget>
       </StackLayout>
       <!-- Coupon message area -->
