@@ -9,8 +9,6 @@ export const componentDeclarations: any[] = [
   LanguageComponent,
 ];
 
-export const providerDeclarations: any[] = [];
-
 export const routes: Routes = [
   {
     path: '',

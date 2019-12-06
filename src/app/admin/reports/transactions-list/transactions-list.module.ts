@@ -7,6 +7,7 @@ import { GetTransactionVategoryKeyByEnumValuePipe } from './get-transaction-cate
 import { SummaryTransactionsComponent } from './summary-transactions/summary-transactions.component';
 import { TransactionsListRoutingModule } from './transactions-list-routing.module';
 import { TransactionsListComponent } from './transactions-list.component';
+import { TransactionsListService } from './transactions-list.service';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { TransactionsListComponent } from './transactions-list.component';
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule
-  ]
+  ],
+  providers: [TransactionsListService]
 })
 export class TransactionsListModule { }

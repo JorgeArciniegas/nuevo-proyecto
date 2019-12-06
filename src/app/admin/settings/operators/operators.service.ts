@@ -12,9 +12,7 @@ import {
 import { UserService } from '../../../services/user.service';
 import { DataListOfOperators, OperatorCreteByForm } from './operators.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class OperatorsService {
 
   listOfOperators: DataListOfOperators;

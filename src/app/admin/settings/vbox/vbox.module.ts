@@ -4,6 +4,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { VboxEditComponent } from './vbox-edit/vbox-edit.component';
 import { VboxRoutingModule } from './vbox-routing.module';
 import { VboxComponent } from './vbox.component';
+import { VboxService } from './vbox.service';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { VboxComponent } from './vbox.component';
     CommonModule,
     VboxRoutingModule,
     SharedModule
-  ]
+  ],
+  providers: [VboxService]
 })
 export class VboxModule { }

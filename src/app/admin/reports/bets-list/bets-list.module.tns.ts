@@ -10,6 +10,7 @@ import { EventsComponent } from './details-coupon/events/events.component';
 import { SummaryComponent } from './details-coupon/summary/summary.component';
 import { SummaryCouponsComponent } from './summary-coupons/summary-coupons.component';
 import { routes } from './bets-list-routing.module';
+import { BetsListService } from './bets-list.service';
 /**
  *
  */
@@ -27,6 +28,7 @@ import { routes } from './bets-list-routing.module';
     SharedModule,
     NativeScriptFormsModule,
     NativeScriptRouterModule.forChild(routes)
-  ]
+  ],
+  providers: [BetsListService]
 })
 export class BetsListModule { }

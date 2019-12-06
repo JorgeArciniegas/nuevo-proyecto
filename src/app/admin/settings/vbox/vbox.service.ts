@@ -3,9 +3,7 @@ import { ElysApiService, VBoxConfiguration, VBoxConfigurationRequest, VBoxConfig
 import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
 import { ListVbox, LocalVBoxConfiguration } from './vbox.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class VboxService {
 
   listVbox: ListVbox;
@@ -20,16 +18,18 @@ export class VboxService {
     this.elysApi.virtual.getVboxConfiguration().then(
       items => {
         this.listVbox.vBoxConfigurations = items.VBoxConfigurations;
-        this.listVbox.vBoxConfigurations.map(item => {
+        if (this.listVbox.vBoxConfigurations) {
+          this.listVbox.vBoxConfigurations.map(item => {
 
-          if (!item.language) {
-            const tmpLanguage = item.MonitorConfigurations.filter((l) => {
-              return l.Language !== null;
-            });
-            item.language = tmpLanguage.length > 0 ? tmpLanguage[0].Language : this.translate.getCurrentLanguage();
-          }
-        });
-        this.listVbox.totalVboxs = items.VBoxConfigurations.length;
+            if (!item.language) {
+              const tmpLanguage = item.MonitorConfigurations.filter((l) => {
+                return l.Language !== null;
+              });
+              item.language = tmpLanguage.length > 0 ? tmpLanguage[0].Language : this.translate.getCurrentLanguage();
+            }
+          });
+          this.listVbox.totalVboxs = items.VBoxConfigurations.length;
+        }
         this.pagination();
       }
     );
