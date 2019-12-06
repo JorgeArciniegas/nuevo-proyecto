@@ -13,7 +13,7 @@ import { ProductsService } from '../products.service';
   templateUrl: './advance-game.component.html',
   styleUrls: ['./advance-game.component.scss']
 })
-export class AdvanceGameComponent implements OnInit, OnDestroy {
+export class AdvanceGameComponent implements OnInit {
 
   @Input()
   public timeBlocked = false;
@@ -21,8 +21,7 @@ export class AdvanceGameComponent implements OnInit, OnDestroy {
   public rowHeight: number;
 
   public buttons: AdvButton[] = [];
-  // change product subscription
-  productNameSubscription: Subscription;
+
   // Layout current product
   public get layoutProducts(): LayoutProducts {
     return this.productService.product.layoutProducts;
@@ -48,10 +47,6 @@ export class AdvanceGameComponent implements OnInit, OnDestroy {
       label: TypePlacingEvent[2],
       code: TypePlacingEvent['R']
     });
-  }
-
-  ngOnDestroy(): void {
-    this.productNameSubscription.unsubscribe();
   }
 
   setTypePlacing(type: TypePlacingEvent): void {

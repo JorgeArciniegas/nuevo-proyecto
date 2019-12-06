@@ -54,7 +54,7 @@
     "nativescript-theme-core": "^2.0.22",
     "nativescript-zxing": "^1.5.9",
     "ngx-barcode": "^0.2.4",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",

@@ -42,8 +42,8 @@
 	font-weight: 700;
 	padding: 0;
 	height: 35;
-	width: 35;
-	@extend %btn-white-gradient;
+	width: 100%;
+	@extend %btn-blue2-gradient;
 	&.selected {
 		@extend %btn-blue-gradient;
 	}
