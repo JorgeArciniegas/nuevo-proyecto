@@ -4,7 +4,8 @@
       <Label row="0" colSpan="4" class="h4 text-center" text="{{'GROUP' | translate }} {{ group.Grouping }}"></Label>
       <StackLayout row="1" col="0"></StackLayout>
       <Label row="1" col="1" text="{{group.Combinations }}" textWrap="true"></Label>
-      <Label row="2" col="1" class="sub-title small" text="{{ 'COMBINATIONS' | translate }}"></Label>
+      <Label row="2" col="1" class="sub-title small"
+        text="{{ (group.Combinations === 1 ? 'COMBINATION' : 'COMBINATIONS' )| translate }}"></Label>
       <Label row="1" col="2"
         text="{{ !group.IsMultiStake ? group.Stake : data.couponStake | currency : userService.userCurrency : 'symbol-narrow' }}"
         textWrap="true"></Label>

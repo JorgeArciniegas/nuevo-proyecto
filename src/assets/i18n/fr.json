@@ -28,6 +28,7 @@
   "CODE": "Code",
   "COLD": "Froid",
   "COMB": "Comb.",
+  "COMBINATION": "Combinaison",
   "COMBINATIONS": "Combinaisons",
   "COND": "Cond.",
   "CONDITION": "Condition",
@@ -243,6 +244,7 @@
       "NAME": {
         "ALL": "Tutti",
         "CockFight": "Combat de Coqs",
+        "CockRacing": "Combat de Coqs",
         "DogRacing": "Lévriers",
         "HorseRacing": "Chevaux",
         "Keno": "Keno",

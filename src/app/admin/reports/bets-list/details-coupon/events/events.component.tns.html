@@ -3,7 +3,7 @@
     <StackLayout row="{{ i }}" *ngFor="let odd of data.odd; let i = index;">
       <GridLayout rows="2*, 2*, 2*,*,2*, 2*,*" columns="*,10*,10*,10*, *" verticalAlignment="top">
         <Label row="0" colSpan="5" class="sub-title text-center"
-          text="{{odd.SportName +' | '+ odd.Championship + ' | ' + odd.EventName }}"></Label>
+          text="{{'DYNAMIC_KEYS.PRODUCT.NAME.'+odd.SportName | translate }} | {{ odd.EventName }}"></Label>
         <StackLayout row="1" col="0"></StackLayout>
         <Label row="1" col="1" text="{{odd.EventDateOffset  | date: 'dd/MM/yy HH:mm:ss' }}" textWrap="true"></Label>
         <Label row="2" col="1" verticalAlignment="bottom" class="sub-title small"
