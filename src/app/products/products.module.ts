@@ -20,8 +20,7 @@ import { ProductDialogComponent } from './product-dialog/product-dialog.componen
     BtncalcComponent,
     DisplayComponent,
     AdvanceGameComponent,
-    CouponComponent,
-    PayCancelDialogComponent
+    CouponComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +30,7 @@ import { ProductDialogComponent } from './product-dialog/product-dialog.componen
   providers: [
 
   ],
-  entryComponents: [PayCancelDialogComponent, WidgetComponent],
+  entryComponents: [WidgetComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ProductsModule { }

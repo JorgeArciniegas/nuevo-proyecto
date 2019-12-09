@@ -9,6 +9,7 @@ import {
   resumeEvent,
   suspendEvent,
   discardedErrorEvent,
+  lowMemoryEvent
 } from 'tns-core-modules/application';
 import { connectionType, getConnectionType } from 'tns-core-modules/connectivity';
 import { device } from 'tns-core-modules/platform';
@@ -26,7 +27,8 @@ let launchListener,
   suspendListener,
   resumeListener,
   discardedErrorListener,
-  exitListener;
+  exitListener,
+  lowMeroryListener;
 
 @Component({
   moduleId: module.id,
@@ -118,5 +120,12 @@ export class AppComponent {
     };
     on(exitEvent, exitListener);
     // Application Exit <<
+
+
+    lowMeroryListener = (args: ApplicationEventData) => {
+      console.log('Activity: ' + args.android);
+    };
+
+    on(lowMemoryEvent, lowMeroryListener);
   }
 }

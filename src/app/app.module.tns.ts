@@ -17,11 +17,14 @@ import { AppComponent } from './app.component';
 import { NotificationService } from './notifications/notification.service';
 import { SharedModule } from './shared/shared.module';
 
+
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [componentDeclarations],
+  declarations: [
+    componentDeclarations
+  ],
   imports: [
     NativeScriptHttpClientModule,
     NativeScriptModule,

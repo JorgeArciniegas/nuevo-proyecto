@@ -8,7 +8,7 @@ import { CouponDialogService } from '../coupon-dialog.service';
 import { CouponService } from '../coupon.service';
 import { Receipt } from './print-receipt/print-receipt.model';
 import { PrintReceiptService } from './print-receipt/print-receipt.service';
-declare var android: any;
+
 @Component({
   selector: 'app-pay-cancel-dialog',
   templateUrl: './pay-cancel-dialog.component.tns.html',
@@ -17,7 +17,9 @@ declare var android: any;
 export class PayCancelDialogComponent {
   @Input()
   private type: DialogTypeCoupon;
+
   public titleType: string;
+
   public errorMessage: string;
   public errorMessage2: typeof ErrorStatus = ErrorStatus;
   public errorNumberIcon: number;
