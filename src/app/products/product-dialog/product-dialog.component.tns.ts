@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppSettings } from '../../app.settings';
 import { CouponService } from '../../component/coupon/coupon.service';
+import { WindowSizeService } from '../../services/utility/window-size/window-size.service';
 import { DialogService } from '../dialog.service';
 import { DialogData } from '../products.model';
-import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-product-dialog',
@@ -24,12 +24,12 @@ export class ProductDialogComponent implements OnInit {
   public title: string;
   constructor(
     private dialog: DialogService,
-    private productService: ProductsService,
+    private windowSizeService: WindowSizeService,
     public readonly appSettings: AppSettings,
     public readonly couponService: CouponService
   ) {
     this.settings = appSettings;
-    if (this.productService.windowSize && this.productService.windowSize.small) {
+    if (this.windowSizeService.windowSize.small) {
       this.rowNumber = 2;
     }
 

@@ -7,11 +7,9 @@ import { DisplayComponent } from '../component/display/display.component';
 import { WidgetComponent } from '../component/widget/widget.component';
 import { SharedModule } from '../shared/shared.module';
 import { AdvanceGameComponent } from './advance-game/advance-game.component';
+import { MainService } from './main/main.service';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
-import { ProductDialogComponent } from './product-dialog/product-dialog.component';
-
-
 
 @NgModule({
   declarations: [
@@ -28,9 +26,7 @@ import { ProductDialogComponent } from './product-dialog/product-dialog.componen
     ProductsRoutingModule,
     SharedModule
   ],
-  providers: [
-
-  ],
+  providers: [MainService],
   entryComponents: [PayCancelDialogComponent, WidgetComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

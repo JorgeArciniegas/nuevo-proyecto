@@ -79,7 +79,7 @@ export class AdminComponent implements AfterContentInit {
    *
    */
   gridLayoutResponsive() {
-    if (this.windowService.getWindowSize().height < 799) {
+    if (this.windowService.windowSize.height < 799) {
       return { rows: '9*,*', buttonHeight: '30' };
     } else {
       return { rows: '9*,*', buttonHeight: '50' };

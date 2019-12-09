@@ -5,7 +5,8 @@ import { EventsListService } from './events-list.service';
   moduleId: module.id,
   selector: 'app-events-list, [app-events-list]',
   templateUrl: './events-list.component.html',
-  styleUrls: ['./events-list.component.scss']
+  styleUrls: ['./events-list.component.scss'],
+  providers: [EventsListService]
 })
 export class EventListComponent implements OnInit {
   @Input()

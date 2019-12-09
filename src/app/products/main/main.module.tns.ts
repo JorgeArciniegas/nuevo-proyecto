@@ -7,10 +7,12 @@ import { RmSelFromMarketPipe } from './playable-board/rm-sel-from-market.pipe';
 import { GetNumColOverviewPipe } from './playable-board/templates/soccer/get-num-col-overview.pipe';
 import { GetGridStringSettingPipe } from './playable-board/get-grid-string-setting.pipe';
 import { GetNumGridElemDetailPipe } from './playable-board/templates/soccer/detail/get-num-grid-elem-detail.pipe';
+import { SoccerService } from './playable-board/templates/soccer/soccer.service';
 
 @NgModule({
   declarations: [componentDeclarations, RmSelFromMarketPipe, GetNumColOverviewPipe, GetGridStringSettingPipe, GetNumGridElemDetailPipe],
   imports: [NativeScriptCommonModule, SharedModule, NativeScriptRouterModule.forChild(routes)],
-  schemas: [NO_ERRORS_SCHEMA]
+  schemas: [NO_ERRORS_SCHEMA],
+  providers: [SoccerService]
 })
-export class MainModule {}
+export class MainModule { }

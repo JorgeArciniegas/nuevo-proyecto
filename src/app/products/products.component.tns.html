@@ -34,8 +34,8 @@
           verticalAlignment="center">
         </Image>
         <Label col="1" text="{{ 'BET_UNDER_EVALUATION' | translate }}" class="message"
-          [ngClass]="{'small': service.windowSize.small}" horizontalAlignment="center" verticalAlignment="center"
-          textWrap="true"></Label>
+          [ngClass]="{'small': windowSizeService.windowSize.small}" horizontalAlignment="center"
+          verticalAlignment="center" textWrap="true"></Label>
       </GridLayout>
       <GridLayout row="1" rows="*" columns="*, 5*" cornerRadius="6" class="display-message display-success m-b-5"
         *ngIf="couponService.isASuccess">
@@ -44,9 +44,9 @@
         </Image>
         <StackLayout col="1" class="p-r-5 p-t-5 p-b-5" horizontalAlignment="center" verticalAlignment="center">
           <Label col="1" text="{{ 'COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION' | translate }}" class="message"
-            [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
+            [ngClass]="{'small': windowSizeService.windowSize.small}" textWrap="true"></Label>
           <Label text="{{ 'COUPON_SUCCESS_PLACEMENT_MESSAGE.MESSAGE' | translate }}" class="message"
-            [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
+            [ngClass]="{'small': windowSizeService.windowSize.small}" textWrap="true"></Label>
         </StackLayout>
       </GridLayout>
       <GridLayout row="1" rows="*" columns="*, 5*" cornerRadius="6" class="display-message display-error m-b-5"
@@ -57,14 +57,14 @@
         <StackLayout col="1" class="p-r-5 p-t-5 p-b-5" horizontalAlignment="center" verticalAlignment="center">
           <Label
             text="{{'DYNAMIC_KEYS.COUPON_ERROR_INTRODUCTION.MessageSource.' + messageSource[couponService.error.source] | translate}}"
-            class="message" [ngClass]="{'small': service.windowSize.small}"></Label>
+            class="message" [ngClass]="{'small': windowSizeService.windowSize.small}"></Label>
           <StackLayout orientation="horizontal">
             <Label *ngIf="!couponService.error.detail"
               text="{{ 'DYNAMIC_KEYS.COUPON_ERROR.' + couponService.error.message | translate }}" class="message"
-              [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
+              [ngClass]="{'small': windowSizeService.windowSize.small}" textWrap="true"></Label>
             <Label *ngIf="couponService.error.detail"
               text="{{ 'DYNAMIC_KEYS.COUPON_ERROR.' + couponService.error.message | translate }} ({{ 'LIMIT' | translate }}: {{ couponService.error.detail | currency : userService.userCurrency : 'symbol-narrow' }})"
-              class="message" [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
+              class="message" [ngClass]="{'small': windowSizeService.windowSize.small}" textWrap="true"></Label>
           </StackLayout>
         </StackLayout>
       </GridLayout>
@@ -74,10 +74,10 @@
           verticalAlignment="center">
         </Image>
         <StackLayout col="1" class="p-r-5 p-t-5 p-b-5" horizontalAlignment="center" verticalAlignment="center">
-          <Label text="{{'WARNING' | translate}}" class="title" [ngClass]="{'small': service.windowSize.small}"
-            textTransform="uppercase"></Label>
+          <Label text="{{'WARNING' | translate}}" class="title"
+            [ngClass]="{'small': windowSizeService.windowSize.small}" textTransform="uppercase"></Label>
           <Label text="{{'DYNAMIC_KEYS.COUPON_WARNING.' + couponService.warningMessage | translate}}" class="amount"
-            [ngClass]="{'small': service.windowSize.small}" textWrap="true"></Label>
+            [ngClass]="{'small': windowSizeService.windowSize.small}" textWrap="true"></Label>
         </StackLayout>
       </GridLayout>
       <!-- Polyfunctional area / Smartcode -->

@@ -3,9 +3,7 @@ import { MainService } from '../main.service';
 import { EventsList } from './event-list.model';
 import { LAYOUT_TYPE } from '../../../../environments/environment.models';
 import { Subscription } from 'rxjs';
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class EventsListService {
   public eventsDetails: EventsList;
   private currentEventSubscription: Subscription;

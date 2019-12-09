@@ -51,9 +51,7 @@ import { KenoNumber } from './playable-board/templates/keno/keno.model';
 import { ResultsService } from './results/results.service';
 import { areas, overviewAreas } from './SoccerAreas';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class MainService {
   private reload: number;
   private cacheEvents: VirtualBetEvent[] = [];

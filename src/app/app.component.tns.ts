@@ -50,7 +50,8 @@ export class AppComponent {
     // Set the application language passing the device one.
     this.translateService.initializeLanguages(device.language);
     this.connectionAviable = getConnectionType() !== connectionType.none;
-    this.smallView = (this.windowSizeService.getWindowSize().height < 800) ? true : false;
+    this.windowSizeService.initWindowSize();
+    this.smallView = (this.windowSizeService.windowSize.height < 800) ? true : false;
 
     launchListener = (args: LaunchEventData) => {
       console.log('The appication was launched!');

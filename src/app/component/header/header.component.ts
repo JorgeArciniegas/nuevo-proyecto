@@ -1,5 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ProductsService } from '../../../../src/app/products/products.service';
+import { Component } from '@angular/core';
 import { UserService } from '../../../../src/app/services/user.service';
 
 @Component({
@@ -8,15 +7,9 @@ import { UserService } from '../../../../src/app/services/user.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   constructor(
-    private service: ProductsService,
-    public userService: UserService,
-    private cdr: ChangeDetectorRef
+    public userService: UserService
   ) { }
 
-  ngOnInit() {
-    this.service.fnWindowsSize();
-    this.cdr.detectChanges();
-  }
 }
