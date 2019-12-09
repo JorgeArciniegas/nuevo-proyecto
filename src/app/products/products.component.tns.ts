@@ -46,10 +46,13 @@ export class ProductsComponent implements AfterContentInit, OnDestroy {
   }
 
   payCancelCoupon(type: DialogTypeCoupon): void {
+    console.log(type);
     this.couponDialogService.openPayCancelDialog(type);
   }
 
   ngOnDestroy() {
-    this.delaySubscription.unsubscribe();
+    if (this.delaySubscription) {
+      this.delaySubscription.unsubscribe();
+    }
   }
 }

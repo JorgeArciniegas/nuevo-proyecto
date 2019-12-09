@@ -151,10 +151,12 @@ export class MainService {
   }
 
   /**
-   *
+   * Used on component
    */
   destroy() {
-    this.countdownSub.unsubscribe();
+    if (!this.countdownSub.closed) {
+      this.countdownSub.unsubscribe();
+    }
     this.initCurrentEvent = true;
     this.cacheEvents = [];
     this.cacheTournaments = [];

@@ -104,8 +104,13 @@ export class BtncalcService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.couponHasBeenPlacedSubscription.unsubscribe();
-    this.polyfunctionalValueSubscribe.unsubscribe();
+    if (this.couponHasBeenPlacedSubscription) {
+      this.couponHasBeenPlacedSubscription.unsubscribe();
+    }
+
+    if (this.polyfunctionalValueSubscribe) {
+      this.polyfunctionalValueSubscribe.unsubscribe();
+    }
   }
 
 
