@@ -57,7 +57,7 @@ export const environment: Environment = {
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
-        typeLayout: LAYOUT_TYPE.COCK_FIGHT
+        typeLayout: LAYOUT_TYPE.RACING
       }
     },
     {
@@ -90,7 +90,7 @@ export const environment: Environment = {
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
-        typeLayout: LAYOUT_TYPE.COCK_FIGHT
+        typeLayout: LAYOUT_TYPE.RACING
       }
     },
     {
@@ -123,7 +123,7 @@ export const environment: Environment = {
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
-        typeLayout: LAYOUT_TYPE.COCK_FIGHT
+        typeLayout: LAYOUT_TYPE.RACING
       }
     },
     {
