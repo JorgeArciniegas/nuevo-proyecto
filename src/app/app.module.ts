@@ -30,6 +30,7 @@ import { PaytableComponent } from './products/product-dialog/paytable/paytable.c
 import { KenoComponent as KenoPaytableComponent } from './products/product-dialog/paytable/template/keno/keno.component';
 import { RankingComponent } from './products/product-dialog/ranking/ranking.component';
 import { SoccerComponent as SoccerRankingComponent } from './products/product-dialog/ranking/templates/soccer/soccer.component';
+import { PayCancelDialogComponent } from './component/coupon/pay-cancel-dialog/pay-cancel-dialog.component';
 
 
 // tslint:disable-next-line:only-arrow-functions
@@ -37,7 +38,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [componentDeclarations,
+  declarations: [
+    componentDeclarations,
     ProductDialogComponent,
     BetoddsComponent,
     StatisticsComponent,
@@ -49,7 +51,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SoccerRankingComponent,
     KenoPaytableComponent,
     HotAndColdComponent,
-    KenoHotAndColdComponent
+    KenoHotAndColdComponent,
+    PayCancelDialogComponent
   ],
   imports: [
     HttpClientModule,
@@ -79,10 +82,16 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ElysApiModule.forRoot({
       urlApi: environment.baseApiUrl
     }),
-    ElysCouponModule.forRoot({ deviceLayout: PlaySource.VDeskWeb }),
+    ElysCouponModule.forRoot(
+      { deviceLayout: PlaySource.VDeskWeb }
+    ),
     RouterModule.forRoot(routes)
   ],
-  entryComponents: [ProductDialogComponent, ConfirmDestroyCouponComponent],
+  entryComponents: [
+    ProductDialogComponent,
+    ConfirmDestroyCouponComponent,
+    PayCancelDialogComponent
+  ],
   providers: [
     providerDeclarations
   ],

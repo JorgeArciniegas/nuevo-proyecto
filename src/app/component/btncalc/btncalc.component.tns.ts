@@ -45,6 +45,9 @@ export class BtncalcComponent extends BtncalcComponentCommon
   }
 
   ngOnDestroy(): void {
-    this.polyfunctionalValueSubscribe.unsubscribe();
+    if (this.polyfunctionalValueSubscribe) {
+
+      this.polyfunctionalValueSubscribe.unsubscribe();
+    }
   }
 }
