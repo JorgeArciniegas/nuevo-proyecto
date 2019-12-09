@@ -56,7 +56,7 @@ export const environment: Environment = {
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
-        typeLayout: LAYOUT_TYPE.COCK_FIGHT
+        typeLayout: LAYOUT_TYPE.RACING
       }
     },
     {
@@ -89,7 +89,7 @@ export const environment: Environment = {
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
-        typeLayout: LAYOUT_TYPE.COCK_FIGHT
+        typeLayout: LAYOUT_TYPE.RACING
       }
     },
     {
@@ -122,7 +122,7 @@ export const environment: Environment = {
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
-        typeLayout: LAYOUT_TYPE.COCK_FIGHT
+        typeLayout: LAYOUT_TYPE.RACING
       }
     },
     {
@@ -242,6 +242,40 @@ export const environment: Environment = {
         isMultipleStake: true,
         acceptMultiStake: true,
         typeLayout: LAYOUT_TYPE.COCK_FIGHT
+      }
+    },
+    {
+      sportId: 18,
+      codeProduct: 'KENO',
+      name: 'Keno',
+      label: 'KENO',
+      order: 6,
+      productSelected: false,
+      isPlayable: true,
+      layoutProducts: {
+        // defines the layout type for different product group
+        type: LAYOUT_TYPE.KENO,
+        resultItems: 2, // items to show for last result
+        nextEventItems: 1, // items to show for next events
+        cacheEventsItem: 2
+      },
+      toolbarButton: {
+        name: 'keno',
+        icon: 'Keno',
+        route: 'products/keno'
+      },
+      widgets: [
+        {
+          name: '',
+          routing: 'hot-and-cold',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
+      typeCoupon: {
+        isMultipleStake: false,
+        acceptMultiStake: false,
+        typeLayout: LAYOUT_TYPE.KENO
       }
     }
   ],

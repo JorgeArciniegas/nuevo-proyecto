@@ -51,7 +51,7 @@ export const environment: Environment = {
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
-        typeLayout: LAYOUT_TYPE.COCK_FIGHT
+        typeLayout: LAYOUT_TYPE.RACING
       }
     },
     {
@@ -84,7 +84,7 @@ export const environment: Environment = {
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
-        typeLayout: LAYOUT_TYPE.COCK_FIGHT
+        typeLayout: LAYOUT_TYPE.RACING
       }
     },
     {
@@ -117,7 +117,7 @@ export const environment: Environment = {
       typeCoupon: {
         isMultipleStake: true,
         acceptMultiStake: true,
-        typeLayout: LAYOUT_TYPE.COCK_FIGHT
+        typeLayout: LAYOUT_TYPE.RACING
       }
     },
     {
@@ -240,7 +240,7 @@ export const environment: Environment = {
       label: 'KENO',
       order: 6,
       productSelected: false,
-      isPlayable: false,
+      isPlayable: true,
       layoutProducts: {
         // defines the layout type for different product group
         type: LAYOUT_TYPE.KENO,
