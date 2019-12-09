@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { UserService } from '../../../../../src/app/services/user.service';
 import { AppSettings } from '../../../app.settings';
@@ -10,7 +10,7 @@ import { IconSize } from '../../model/iconSize.model';
   templateUrl: './user-menu.component.html',
   styleUrls: ['./user-menu.component.scss']
 })
-export class UserMenuComponent implements OnInit, AfterViewInit, OnDestroy {
+export class UserMenuComponent implements OnInit, OnDestroy {
   public settings: AppSettings;
   public myTime: Date = new Date();
   public notifyIcon: IconSize;
@@ -22,9 +22,10 @@ export class UserMenuComponent implements OnInit, AfterViewInit, OnDestroy {
     public windowSizeService: WindowSizeService
   ) {
     this.settings = appSettings;
+    this.initIconsSize();
   }
 
-  ngAfterViewInit(): void {
+  private initIconsSize(): void {
     const barHeight =
       this.windowSizeService.windowSize.height -
       this.windowSizeService.windowSize.columnHeight;

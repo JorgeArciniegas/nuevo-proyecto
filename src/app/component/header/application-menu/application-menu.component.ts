@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Products } from '../../../../../src/environments/environment.models';
 import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../../products/products.service';
@@ -11,7 +11,7 @@ import { IconSize } from '../../model/iconSize.model';
   templateUrl: './application-menu.component.html',
   styleUrls: ['./application-menu.component.scss']
 })
-export class ApplicationMenuComponent implements AfterViewInit {
+export class ApplicationMenuComponent {
   public settings: AppSettings;
   public logoIcon: IconSize;
   public menuIcon: IconSize;
@@ -25,9 +25,10 @@ export class ApplicationMenuComponent implements AfterViewInit {
     private windowSizeService: WindowSizeService
   ) {
     this.settings = appSettings;
+    this.initIconsSize();
   }
 
-  ngAfterViewInit() {
+  private initIconsSize(): void {
     let barHeight =
       this.windowSizeService.windowSize.height -
       this.windowSizeService.windowSize.columnHeight;

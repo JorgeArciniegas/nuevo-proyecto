@@ -9,7 +9,7 @@ import { UserService } from '../../../../src/app/services/user.service';
 })
 export class HeaderComponent {
   constructor(
-    public userService: UserService
+    public userService: UserService,
   ) { }
 
 }
