@@ -29,6 +29,7 @@
   "CODE": "Code",
   "COLD": "Cold",
   "COMB": "Comb.",
+  "COMBINATION": "Combination",
   "COMBINATIONS": "Combinations",
   "COND": "Cond.",
   "CONDITION": "Condition",
@@ -203,6 +204,10 @@
       "UPLE": "-upla",
       "UPLES": "-uple"
     },
+    "LOGIN": {
+      "ADMIN": "Administrator Login",
+      "OPERATOR": "Operator login"
+    },
     "ODDS_RESULT": {
       "LOST": "Lost",
       "UNSET": "Open",
@@ -260,6 +265,7 @@
       "NAME": {
         "ALL": "All",
         "CockFight": "Cock fight",
+        "CockRacing": "Cock fight",
         "DogRacing": "Greyhounds",
         "HorseRacing": "Horse races",
         "Keno": "Keno",
