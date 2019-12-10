@@ -4,6 +4,7 @@ import { Subscription, timer } from 'rxjs';
 import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
 import { CouponService } from '../component/coupon/coupon.service';
 import { UserService } from '../services/user.service';
+import { WindowSizeService } from '../services/utility/window-size/window-size.service';
 import { DialogService } from './dialog.service';
 import { MainService } from './main/main.service';
 import { DialogTypeCoupon } from './products.model';
@@ -31,10 +32,10 @@ export class ProductsComponent implements AfterContentInit, OnDestroy {
     public readonly userService: UserService,
     public readonly couponService: CouponService,
     public dialog: DialogService,
-    public couponDialogService: CouponDialogService
+    public couponDialogService: CouponDialogService,
+    public windowSizeService: WindowSizeService
   ) {
-    this.service.fnWindowsSize();
-    this.rowHeight = (this.service.windowSize.columnHeight - 30) / 11;
+    this.rowHeight = (this.windowSizeService.windowSize.columnHeight - 30) / 11;
   }
 
 

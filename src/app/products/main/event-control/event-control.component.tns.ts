@@ -4,6 +4,7 @@ import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../products.service';
 import { EventInfo } from '../main.models';
 import { MainService } from '../main.service';
+import { WindowSizeService } from '../../../services/utility/window-size/window-size.service';
 
 @Component({
   moduleId: module.id,
@@ -38,11 +39,12 @@ export class EventControlComponent {
 
   constructor(
     private mainService: MainService,
+    private windowSizeService: WindowSizeService,
     private productService: ProductsService,
     private settings: AppSettings
   ) {
     this.productService.resetBoard();
-    this.isWindowSizeSmall = this.productService.windowSize.small;
+    this.isWindowSizeSmall = this.windowSizeService.windowSize.small;
     this.showEventId = this.settings.showEventId;
     this.typeProductSelected = this.product.layoutProducts.type;
   }

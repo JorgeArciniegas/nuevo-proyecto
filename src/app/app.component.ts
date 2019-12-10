@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { AppSettings } from './app.settings';
 import { Settings } from './app.settings.model';
 import { UserService } from './services/user.service';
 import { TranslateUtilityService } from './services/utility/translate-utility.service';
-import { TranslateService } from '@ngx-translate/core';
+import { WindowSizeService } from './services/utility/window-size/window-size.service';
 
 @Component({
   selector: 'app-root',
@@ -18,11 +19,13 @@ export class AppComponent implements OnInit {
     private appSettings: AppSettings,
     private translateService: TranslateService,
     private translateUtilityService: TranslateUtilityService,
-    public userService: UserService
+    public userService: UserService,
+    private windowSizeService: WindowSizeService
   ) {
     this.settings = this.appSettings;
     this.faviconPath = this.appSettings.faviconPath;
     // Set the application language passing the browser one.
+    this.windowSizeService.initWindowSize();
     this.translateUtilityService.initializeLanguages(this.translateService.getBrowserLang());
   }
 

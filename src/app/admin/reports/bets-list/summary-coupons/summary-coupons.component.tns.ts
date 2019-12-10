@@ -19,7 +19,7 @@ export class SummaryCouponsComponent {
     public betsListService: BetsListService,
     private router: RouterService,
     private windowService: WindowSizeService) {
-    this.viewSmall = (this.windowService.getWindowSize().height < 800) ? true : false;
+    this.viewSmall = (this.windowService.windowSize.height < 800) ? true : false;
   }
 
   goBack(): void {

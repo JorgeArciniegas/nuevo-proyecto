@@ -7,6 +7,7 @@ import { AppSettings } from '../../app.settings';
 import { BetOdd, PolyfunctionalArea } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { UserService } from '../../services/user.service';
+import { WindowSizeService } from '../../services/utility/window-size/window-size.service';
 import { CouponService } from './coupon.service';
 
 @Component({
@@ -42,9 +43,10 @@ export class CouponComponent implements OnDestroy {
     public couponService: CouponService,
     public readonly settings: AppSettings,
     public productService: ProductsService,
-    public userService: UserService
+    public userService: UserService,
+    public windowSizeService: WindowSizeService
   ) {
-    if (this.productService.windowSize && this.productService.windowSize.small) {
+    if (this.windowSizeService.windowSize.small) {
       this.maxItems = 4;
     }
 
@@ -57,7 +59,7 @@ export class CouponComponent implements OnDestroy {
         const polyFunc: PolyfunctionalArea = this.productService.polyfunctionalAreaSubject.getValue();
         polyFunc.oddsCounter = coupon.Odds.length;
       } else {
-        this.maxItems = this.productService.windowSize.small ? 4 : 5;
+        this.maxItems = this.windowSizeService.windowSize.small ? 4 : 5;
       }
       this.maxPage = Math.ceil(coupon.Odds.length / this.maxItems);
       if (!this.remove) {

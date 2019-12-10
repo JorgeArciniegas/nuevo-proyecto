@@ -1,17 +1,17 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { Products } from '../../../../../src/environments/environment.models';
 import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../../products/products.service';
-import { IconSize } from '../../model/iconSize.model';
 import { RouterService } from '../../../services/utility/router/router.service';
+import { WindowSizeService } from '../../../services/utility/window-size/window-size.service';
+import { IconSize } from '../../model/iconSize.model';
 
 @Component({
   selector: 'app-application-menu',
   templateUrl: './application-menu.component.html',
   styleUrls: ['./application-menu.component.scss']
 })
-export class ApplicationMenuComponent implements AfterViewInit {
+export class ApplicationMenuComponent {
   public settings: AppSettings;
   public logoIcon: IconSize;
   public menuIcon: IconSize;
@@ -20,16 +20,18 @@ export class ApplicationMenuComponent implements AfterViewInit {
 
   constructor(
     private readonly appSettings: AppSettings,
-    public productService: ProductsService,
-    private router: RouterService
+    private productService: ProductsService,
+    private router: RouterService,
+    private windowSizeService: WindowSizeService
   ) {
     this.settings = appSettings;
+    this.initIconsSize();
   }
 
-  ngAfterViewInit() {
+  private initIconsSize(): void {
     let barHeight =
-      this.productService.windowSize.height -
-      this.productService.windowSize.columnHeight;
+      this.windowSizeService.windowSize.height -
+      this.windowSizeService.windowSize.columnHeight;
     if (barHeight < 10) {
       barHeight = 50;
     }
