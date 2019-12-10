@@ -7,6 +7,7 @@ import { Environment, LICENSE_TYPE } from './environment.models';
 export const environment: Environment = {
   production: false,
   bookmakerDetails: '',
+  loginInteractive: true,
   products: [],
   license: LICENSE_TYPE.DEMO_LICENSE,
   baseApiUrl: '',

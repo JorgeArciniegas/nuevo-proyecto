@@ -75,7 +75,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ElysStorageLibModule.forRoot({
       isCrypto: true,
       cryptoString: 'VgenStorage',
-      KeyUnencodedList: ['versionApp', 'operatorData'],
+      KeyUnencodedList: ['versionApp', 'operatorData', 'callBackURL'],
       versionStorage: VERSION.version
     }),
 
