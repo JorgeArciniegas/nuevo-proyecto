@@ -29,6 +29,7 @@
   "CODE": "Codice",
   "COLD": "Freddi",
   "COMB": "Comb.",
+  "COMBINATION": "Combinazione",
   "COMBINATIONS": "Combinazioni",
   "COND": "Cond.",
   "CONDITION": "Forma fisica",
@@ -248,6 +249,7 @@
       "NAME": {
         "ALL": "Tutti",
         "CockFight": "Combattimento di galli",
+        "CockRacing": "Combattimento di galli",
         "DogRacing": "Levrieri",
         "HorseRacing": "Corse di cavalli ",
         "Keno": "Keno",

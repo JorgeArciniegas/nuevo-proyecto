@@ -29,6 +29,7 @@
   "CODE": "Código",
   "COLD": "Frio",
   "COMB": "Comb.",
+  "COMBINATION": "Combinação",
   "COMBINATIONS": "Combinações",
   "COND": "Cond.",
   "CONDITION": "Condição",
@@ -259,6 +260,7 @@
       "NAME": {
         "ALL": "Tutti",
         "CockFight": "Briga de Galos",
+        "CockRacing": "Briga de Galos",
         "DogRacing": "Galgos",
         "HorseRacing": "Cavalos",
         "Keno": "Keno",
