@@ -14,38 +14,21 @@ import { AuthorizationGuard } from './app.authorization.guard';
 import { AppComponent } from './app.component';
 import { AppHttpInterceptor } from './app.httpinterceptor';
 import { AppSettings } from './app.settings';
-import { BtncalcComponent } from './component/btncalc/btncalc.component';
 import { BtncalcService } from './component/btncalc/btncalc.service';
 import { ConfirmDestroyCouponComponent } from './component/coupon/confirm-destroy-coupon/confirm-destroy-coupon.component';
 import { CouponDialogService } from './component/coupon/coupon-dialog.service';
-import { CouponComponent } from './component/coupon/coupon.component';
 import { CouponService } from './component/coupon/coupon.service';
-import { PayCancelDialogComponent } from './component/coupon/pay-cancel-dialog/pay-cancel-dialog.component';
 import { PrintReceiptComponent } from './component/coupon/pay-cancel-dialog/print-receipt/print-receipt.component';
 import { PrintCouponComponent } from './component/coupon/print-coupon/print-coupon.component';
-import { DisplayComponent } from './component/display/display.component';
 import { ApplicationMenuComponent } from './component/header/application-menu/application-menu.component';
 import { HeaderComponent } from './component/header/header.component';
 import { UserMenuComponent } from './component/header/user-menu/user-menu.component';
 import { LoaderComponent } from './component/loader/loader.component';
 import { LabelByGroupingPipe } from './component/pipe/label-by-grouping.pipe';
-import { WidgetComponent } from './component/widget/widget.component';
-import { AdvanceGameComponent } from './products/advance-game/advance-game.component';
-import { BetoddsComponent } from './products/product-dialog/betodds/betodds.component';
+
 import { GroupingsComponent } from './products/product-dialog/groupings/groupings.component';
-import { PaytableComponent } from './products/product-dialog/paytable/paytable.component';
-import { KenoComponent as KenoPaytableComponent } from './products/product-dialog/paytable/template/keno/keno.component';
-import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
-import { RankingComponent } from './products/product-dialog/ranking/ranking.component';
-import { SoccerComponent as SoccerRankingComponent } from './products/product-dialog/ranking/templates/soccer/soccer.component';
-import { StatisticsComponent } from './products/product-dialog/statistics/statistics.component';
-import { CockFightComponent as CockFightStatisticsComponent } from './products/product-dialog/statistics/templates/cock-fight/cock-fight.component';
-import { RaceComponent as RaceStatisticsComponent } from './products/product-dialog/statistics/templates/race/race.component';
-import { SoccerComponent as SoccerStatisticsComponent } from './products/product-dialog/statistics/templates/soccer/soccer.component';
-import { ProductsComponent } from './products/products.component';
-import { ProductsService } from './products/products.service';
-import { HotAndColdComponent } from './products/product-dialog/hot-and-cold/hot-and-cold.component';
-import { KenoComponent as KenoHotAndColdComponent } from './products/product-dialog/hot-and-cold/template/keno/keno.component';
+
+
 
 
 
@@ -59,57 +42,36 @@ registerLocaleData(localeDe);
 
 export const componentDeclarations: any[] = [
   AppComponent,
-  ProductsComponent,
   HeaderComponent,
   UserMenuComponent,
   ApplicationMenuComponent,
-  WidgetComponent,
-  BtncalcComponent,
-  DisplayComponent,
-  AdvanceGameComponent,
-  CouponComponent,
-  ProductDialogComponent,
-  PayCancelDialogComponent,
   PrintCouponComponent,
   PrintReceiptComponent,
   ConfirmDestroyCouponComponent,
-  BetoddsComponent,
-  StatisticsComponent,
-  RaceStatisticsComponent,
-  CockFightStatisticsComponent,
-  SoccerStatisticsComponent,
   GroupingsComponent,
-  RankingComponent,
-  SoccerRankingComponent,
   LabelByGroupingPipe,
   PrintOperatorSummaryComponent,
   LoaderComponent,
-  PaytableComponent,
-  KenoPaytableComponent,
-  HotAndColdComponent,
-  KenoHotAndColdComponent
 ];
 
 export const providerDeclarations: any[] = [
   AppSettings,
   TranslateService,
-  CouponService,
-  BtncalcService,
-  ProductsService,
-  CouponDialogService,
   {
     provide: LOCALE_ID,
     deps: [TranslateService],
     // tslint:disable-next-line:typedef
     useFactory: (confService: TranslateService) => confService.currentLang
   },
-  { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
+  { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
+  CouponService,
+  BtncalcService,
+  CouponDialogService
 ];
 
 export const routes: Routes = [
   {
     path: 'login',
-    // loadChildren: './login/login.module#LoginModule',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
     canActivate: [AuthorizationGuard]
   },
@@ -130,24 +92,8 @@ export const routes: Routes = [
   },
   {
     path: 'products',
-    component: ProductsComponent,
+    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule),
     canActivate: [AuthorizationGuard],
-    children: [
-      {
-        path: 'main',
-        loadChildren: () => import('./products/main/main.module').then(m => m.MainModule),
-      },
-      {
-        path: '',
-        redirectTo: 'main',
-        pathMatch: 'full'
-      }
-    ]
-  },
-  {
-    path: '',
-    redirectTo: 'products',
-    pathMatch: 'full'
   },
   {
     path: 'admin',
@@ -157,6 +103,11 @@ export const routes: Routes = [
   {
     path: 'error-page',
     loadChildren: () => import('./error-page/error-page.module').then(m => m.ErrorPageModule),
+  },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
   {
     path: '**',

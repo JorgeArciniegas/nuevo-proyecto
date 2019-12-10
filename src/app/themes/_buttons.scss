@@ -57,15 +57,15 @@ button:active:not([disabled]) {
 	}
 }
 
+// KENO
 .btn-default-keno {
 	cursor: pointer;
+	height: 60px;
 	@media screen and (max-width: 1441px) {
 		height: 45px;
-		width: 45px;
 	}
-	height: 60px;
-	width: 60px;
-	@extend %btn-white-gradient;
+	width: 85%;
+	@extend %btn-blue2-gradient;
 	&.selected {
 		@extend %btn-blue-gradient;
 	}

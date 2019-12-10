@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { DialogTypeCoupon } from '../../../../src/app/products/products.model';
 import { UserService } from '../../../../src/app/services/user.service';
 
-@Injectable({
+@Injectable(/* {
   providedIn: 'root'
-})
+} */)
 export class CouponDialogService {
   public showDialog = false;
   public type: DialogTypeCoupon;

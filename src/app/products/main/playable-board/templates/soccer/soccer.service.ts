@@ -7,9 +7,7 @@ import { BtncalcService } from '../../../../../component/btncalc/btncalc.service
 import { ElysCouponService, BetCouponExtended } from '@elys/elys-coupon';
 import { CouponService } from '../../../../../component/coupon/coupon.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SoccerService implements OnDestroy {
   public tournament: VirtualBetTournamentExtended;
   // Index of the match array of the selected match;

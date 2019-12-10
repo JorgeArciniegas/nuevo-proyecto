@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ElysApiService } from '@elys/elys-api';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { Products, LayoutProducts } from '../../../src/environments/environment.models';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Products } from '../../../src/environments/environment.models';
 import { AppSettings } from '../app.settings';
 import { DestroyCouponService } from '../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../component/coupon/coupon.service';
 import { UserService } from '../services/user.service';
 import { RouterService } from '../services/utility/router/router.service';
-import { StorageService } from '../services/utility/storage/storage.service';
-import { WindowSize } from '../services/utility/window-size/window-size.model';
-import { WindowSizeService } from '../services/utility/window-size/window-size.service';
 import { DialogService } from './dialog.service';
 import { ProductsServiceExtra } from './product.service.extra';
 import { BetDataDialog, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupon } from './products.model';
@@ -41,23 +37,21 @@ export class ProductsService extends ProductsServiceExtra {
     sm: 2,
     xs: 1
   };
-  windowSize: WindowSize;
+  // windowSize: WindowSize;
 
   constructor(
     public dialog: DialogService,
-    private windowSizeService: WindowSizeService,
+    // private windowSizeService: WindowSizeService,
     private appSetting: AppSettings,
-    private elysApi: ElysApiService,
-    private storage: StorageService,
     public couponInternalService: CouponService,
     public destroyCouponService: DestroyCouponService,
     public router: RouterService,
     private userservice: UserService
   ) {
     super(couponInternalService, destroyCouponService, router);
+    // set the product default
+    this.product = appSetting.products.find(prod => prod.productSelected);
     // Destroy coupon confirmation
-
-
     if (this.couponInternalService) {
       this.couponInternalService.productHasCoupon = { checked: false };
     }
@@ -114,10 +108,6 @@ export class ProductsService extends ProductsServiceExtra {
     });
   }
 
-  fnWindowsSize(): void {
-    this.windowSize = this.windowSizeService.getWindowSize();
-  }
-
   openProductDialog(data: BetDataDialog): void {
     this.dialogProductDataSubject.next(data);
   }
@@ -131,14 +121,4 @@ export class ProductsService extends ProductsServiceExtra {
     this.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
   }
 
-  /**
-   * @returns LayoutProducts from current product selected
-   */
-  public getCurrentLayoutProducts(): Promise<LayoutProducts> {
-    const response: Promise<LayoutProducts> = new Promise<LayoutProducts>((resolve, reject) => {
-      resolve(this.product.layoutProducts);
-      reject(new Error('LayoutProducts not found'));
-    });
-    return response;
-  }
 }

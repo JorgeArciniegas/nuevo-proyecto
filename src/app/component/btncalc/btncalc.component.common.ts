@@ -92,10 +92,8 @@ export class BtncalcComponentCommon {
    */
   setStakePresetPlayer(amount: number, typingType: TYPINGTYPE): void {
     if (
-      this.btncalcService.polyfunctionStakePresetPlayer
-        .disableInputCalculator &&
-      this.btncalcService.polyfunctionStakePresetPlayer.typingType ===
-      typingType
+      this.btncalcService.polyfunctionStakePresetPlayer.disableInputCalculator &&
+      this.btncalcService.polyfunctionStakePresetPlayer.typingType === typingType
     ) {
       return;
     }

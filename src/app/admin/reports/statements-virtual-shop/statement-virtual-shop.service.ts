@@ -6,9 +6,7 @@ import { ExcelService } from '../../../services/utility/export/excel.service';
 import { DataListOfCtdAggregate } from './statement-virtual-shop.model';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class StatementVirtualShopService {
 
   request: ReportsCtdAggregatesRequest = null;

@@ -1,14 +1,15 @@
-import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener, OnDestroy } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
-import { Subscription, timer } from 'rxjs';
-import { ProductsService } from './products.service';
-import { CouponService } from '../component/coupon/coupon.service';
-import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
 import { MessageSource } from '@elys/elys-coupon';
+import { Subscription } from 'rxjs';
+import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
+import { CouponService } from '../component/coupon/coupon.service';
 import { UserService } from '../services/user.service';
-import { DialogTypeCoupon } from './products.model';
-import { MainService } from './main/main.service';
+import { WindowSizeService } from '../services/utility/window-size/window-size.service';
 import { EventTime } from './main/main.models';
+import { MainService } from './main/main.service';
+import { DialogTypeCoupon } from './products.model';
+import { ProductsService } from './products.service';
 
 @Component({
   selector: 'app-products',
@@ -53,12 +54,13 @@ export class ProductsComponent implements OnDestroy {
     public mainService: MainService,
     public readonly userService: UserService,
     public readonly couponService: CouponService,
-    public readonly couponDialogService: CouponDialogService
+    public readonly couponDialogService: CouponDialogService,
+    public windowSizeService: WindowSizeService
   ) {
     this.observableMediaSubscribe = this.observableMedia.media$.subscribe((change: MediaChange) => {
       this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
-      this.service.fnWindowsSize();
-      this.rowHeight = (this.service.windowSize.columnHeight - 30) / 12;
+      // this.service.fnWindowsSize();
+      this.rowHeight = (this.windowSizeService.windowSize.columnHeight - 30) / 12;
     });
   }
 

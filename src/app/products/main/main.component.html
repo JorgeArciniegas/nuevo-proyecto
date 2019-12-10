@@ -2,11 +2,11 @@
   <mat-grid-list cols="1" rowHeight="{{rowHeight}}">
     <!-- Event control -->
     <mat-grid-tile rowspan="2">
-      <app-event-control fxFill></app-event-control>
+      <app-event-control fxFill *ngIf="mainService.eventDetails"></app-event-control>
     </mat-grid-tile>
     <!-- List events -->
     <mat-grid-tile rowspan="2">
-      <app-events-list fxFill [rowHeight]="rowHeight"></app-events-list>
+      <app-events-list fxFill [rowHeight]="rowHeight" *ngIf="mainService.eventDetails"></app-events-list>
     </mat-grid-tile>
     <!-- Playable board -->
     <mat-grid-tile rowspan="16" fxLayoutAlign="center">
@@ -24,7 +24,7 @@
   </mat-grid-list>
 </div>
 <div *ngIf="mainService.placingEvent.timeBlocked" id="overlayArea1"
-  [style.top.px]="(productService.windowSize.height - productService.windowSize.columnHeight) + 12 + (rowHeight * 4)"
+  [style.top.px]="(windowSizeService.windowSize.height - windowSizeService.windowSize.columnHeight) + 12 + (rowHeight * 4)"
   [style.left.px]="0" [style.width]="'calc(59% - 2px)'" [style.height.px]="rowHeight * 18 + 20"
   class="overlay radius-5">
 </div>

@@ -9,6 +9,7 @@ import {
   resumeEvent,
   suspendEvent,
   discardedErrorEvent,
+  lowMemoryEvent
 } from 'tns-core-modules/application';
 import { connectionType, getConnectionType } from 'tns-core-modules/connectivity';
 import { device } from 'tns-core-modules/platform';
@@ -26,7 +27,8 @@ let launchListener,
   suspendListener,
   resumeListener,
   discardedErrorListener,
-  exitListener;
+  exitListener,
+  lowMeroryListener;
 
 @Component({
   moduleId: module.id,
@@ -50,7 +52,8 @@ export class AppComponent {
     // Set the application language passing the device one.
     this.translateService.initializeLanguages(device.language);
     this.connectionAviable = getConnectionType() !== connectionType.none;
-    this.smallView = (this.windowSizeService.getWindowSize().height < 800) ? true : false;
+    this.windowSizeService.initWindowSize();
+    this.smallView = (this.windowSizeService.windowSize.height < 800) ? true : false;
 
     launchListener = (args: LaunchEventData) => {
       console.log('The appication was launched!');
@@ -65,7 +68,6 @@ export class AppComponent {
 
     on(suspendEvent, suspendListener);
     // Application suspended <<
-
     discardedErrorListener = (args: UnhandledErrorEventData) => {
       console.log('discardedErrorListener', args);
     };
@@ -79,20 +81,19 @@ export class AppComponent {
         if (this.storageService.checkIfExist('last-suspended') && this.storageService.checkDataIsValid('last-suspended')) {
           const now = new Date().getTime();
           const elapsed = Math.round((now - this.storageService.getData('last-suspended')) / (60 * 1000));
-          // console.log(now, this.storageService.getData('last-suspended'), elapsed);
           // if the time elapsed is major of 1 minute, the user is automatically logout
-          if (elapsed > 1 && elapsed < 5) {
+          if (elapsed > 4) {
             if (this.userService.isUserLogged) {
               this.userService.logout();
             }
             notification.pushMessage({
               title: 'Session terminated',
               body: 'You\'re session has been destroyed. Login again!',
-              delay: 2,
+              delay: 1,
               id: 1
             });
-
-          } else if (elapsed >= 5) {
+            args.android.finishAffinity();
+          }/*  else if (elapsed >= 5) {
             if (this.userService.isUserLogged) {
               this.userService.logout();
             }
@@ -103,7 +104,7 @@ export class AppComponent {
               id: 1
             });
             args.android.finishAffinity();
-          }
+          } */
         }
       } catch (err) {
         console.error(err);
@@ -120,5 +121,12 @@ export class AppComponent {
     };
     on(exitEvent, exitListener);
     // Application Exit <<
+
+
+    lowMeroryListener = (args: ApplicationEventData) => {
+      console.log('Activity: ' + args.android);
+    };
+
+    on(lowMemoryEvent, lowMeroryListener);
   }
 }

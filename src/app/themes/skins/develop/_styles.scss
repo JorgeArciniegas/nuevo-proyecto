@@ -41,6 +41,27 @@ $color-text-warn: #ff0000;
 $color-text-operator: #3dab14;
 $color-text-gray: #6b7279;
 
+// BUTTONS GRADIENT
+$gradient-red1: #ff7f7f;
+$gradient-red2: #cb1e1e;
+$gradient-green1: #52e566;
+$gradient-green2: #1fb537;
+$gradient-blue1: #91c8fa;
+$gradient-blue2: #5b9bd5;
+$gradient-orange1: #f88739;
+$gradient-orange2: #c55a11;
+$gradient-light-grey1: #ffffff;
+$gradient-light-grey2: #bebebe;
+$gradient-grey1: #dcdcdc;
+$gradient-grey2: #a5a5a5;
+$gradient-yellow1: #ffdf7f;
+$gradient-yellow2: #ffc000;
+$gradient-white1: #ffffff;
+$gradient-white2: #e4e4e4;
+$gradient-dark1: #393939;
+$gradient-dark2: #000000;
+$gradient-blue3: #2f3a4d;
+
 //EXTENDS
 %color-bg-default {
 	background: $color-bg-primary;
@@ -279,26 +300,6 @@ $color-text-gray: #6b7279;
 	border-color: $border-event;
 }
 
-// BUTTONS GRADIENT
-$gradient-red1: #ff7f7f;
-$gradient-red2: #cb1e1e;
-$gradient-green1: #52e566;
-$gradient-green2: #1fb537;
-$gradient-blue1: #91c8fa;
-$gradient-blue2: #5b9bd5;
-$gradient-orange1: #f88739;
-$gradient-orange2: #c55a11;
-$gradient-light-grey1: #ffffff;
-$gradient-light-grey2: #bebebe;
-$gradient-grey1: #dcdcdc;
-$gradient-grey2: #a5a5a5;
-$gradient-yellow1: #ffdf7f;
-$gradient-yellow2: #ffc000;
-$gradient-white1: #ffffff;
-$gradient-white2: #e4e4e4;
-$gradient-dark1: #393939;
-$gradient-dark2: #000000;
-
 %color-border-blu-2 {
 	border-color: $gradient-blue2;
 }
@@ -350,6 +351,20 @@ $gradient-dark2: #000000;
 
 %btn-blue-gradient-mobile {
 	background: linear-gradient(to bottom, $gradient-blue1 34%, $gradient-blue2 100%);
+	color: $color-text-primary;
+}
+
+%btn-blue2-gradient {
+	background: $btn-bg-keyboard;
+	background: -moz-linear-gradient(top, $gradient-blue3 34%, $btn-bg-keyboard 100%);
+	background: -webkit-linear-gradient(top, $gradient-blue3 34%, $btn-bg-keyboard 100%);
+	background: linear-gradient(to bottom, $gradient-blue3 34%, $btn-bg-keyboard 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$gradient-blue3', endColorstr='$btn-bg-keyboard',GradientType=0 );
+	color: $color-text-primary;
+}
+
+%btn-blue2-gradient-mobile {
+	background: linear-gradient(to bottom, $gradient-blue3 34%, $btn-bg-keyboard 100%);
 	color: $color-text-primary;
 }
 

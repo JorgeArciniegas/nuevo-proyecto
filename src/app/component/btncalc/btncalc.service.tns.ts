@@ -104,8 +104,13 @@ export class BtncalcService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.couponHasBeenPlacedSubscription.unsubscribe();
-    this.polyfunctionalValueSubscribe.unsubscribe();
+    if (this.couponHasBeenPlacedSubscription) {
+      this.couponHasBeenPlacedSubscription.unsubscribe();
+    }
+
+    if (this.polyfunctionalValueSubscribe) {
+      this.polyfunctionalValueSubscribe.unsubscribe();
+    }
   }
 
 
@@ -239,7 +244,7 @@ export class BtncalcService implements OnDestroy {
 
   // default presets player
   settingStakePresetPlayer(recursiveCounter: number = 0): void {
-    if (this.setting.defaultAmount && this.setting.defaultAmount.PresetOne !== null) {
+    if (this.setting.defaultAmount && this.setting.defaultAmount.PresetOne !== null && this.productService.product) {
       this.polyfunctionStakePresetPlayer =
         new PolyfunctionStakePresetPlayer(
           this.productService.product.layoutProducts.type === LAYOUT_TYPE.KENO ? TypeBetSlipColTot.GROUP : TypeBetSlipColTot.COL,

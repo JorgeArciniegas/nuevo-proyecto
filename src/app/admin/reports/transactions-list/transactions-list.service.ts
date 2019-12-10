@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { RouterService } from '../../../services/utility/router/router.service';
 import { ElysApiService, ReportsAccountStatementRequest, ReportsAccountStatementResponse } from '@elys/elys-api';
+import { RouterService } from '../../../services/utility/router/router.service';
 import { TransactionCategory } from './transactions-list.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TransactionsListService {
   request: ReportsAccountStatementRequest = null;
   pageSizeList: number[] = [10, 25, 50];

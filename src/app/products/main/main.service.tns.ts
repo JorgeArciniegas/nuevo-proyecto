@@ -89,16 +89,7 @@ export class MainService {
   private initCurrentEvent = false;
 
   playersList: Player[];
-  /* public get playersList(): Player[] {
-    // timer(1000).subscribe(() => console.log('attendere prego'));
-    // console.log('a te la playersList');
-    return global.playersList;
-  }
 
-  public set playersList(value: Player[]) {
-    global.playersList = value;
-  }
- */
   smartCode: Smartcode;
 
   amount: number;
@@ -109,16 +100,6 @@ export class MainService {
   public currentEventSubscribe: Subject<number>;
   public currentEventObserve: Observable<number>;
   public eventDetails: EventDetail;
-
-  /*   public get eventDetails(): EventDetail {
-      return global.eventDetails;
-    }
-
-    public set eventDetails(value: EventDetail) {
-      global.eventDetails = value;
-    }
-
-   */
 
   public toResetAllSelections: boolean;
 
@@ -148,12 +129,12 @@ export class MainService {
     this.remaingTimeCounter = new Subject<EventTime>();
     this.remaingTimeCounterObs = this.remaingTimeCounter.asObservable();
 
-    this.defaultGameStart();
-    // this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
+    // this.defaultGameStart();
 
     this.productService.productNameSelectedObserve.subscribe(item => {
       if (!this.couponService.productHasCoupon.checked) {
-        this.cacheEvents = null;
+        this.cacheEvents = [];
+        this.cacheTournaments = [];
         this.initEvents();
       }
     });
@@ -186,7 +167,8 @@ export class MainService {
     this.productService.playableBoardResetObserve.subscribe(reset => {
       if (reset) {
         this.toResetAllSelections = true;
-        this.resetPlayEvent();
+        timer(500).subscribe(() => this.resetPlayEvent());
+
         if (this.countdownSub && this.countdownSub.closed || !this.countdownSub) {
           this.currentAndSelectedEventTime();
           this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
@@ -195,14 +177,45 @@ export class MainService {
     });
 
   }
+
+
+  /**
+  *
+  */
+  destroy() {
+    if (this.countdownSub) {
+      this.countdownSub.unsubscribe();
+    }
+    this.initCurrentEvent = true;
+    this.cacheEvents = [];
+    this.cacheTournaments = [];
+  }
+
+  restartService() {
+    this.defaultGameStart();
+    if (this.countdownSub.closed) {
+      this.resumeCountDown();
+    }
+  }
+
+  /**
+   *
+   */
+  resumeCountDown() {
+    if (this.countdownSub && this.countdownSub.closed || !this.countdownSub) {
+      this.currentAndSelectedEventTime();
+      this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
+    }
+  }
+
   /**
    * When the first time entry on the application, the system set the the product default.
    * It is called by constructor and it is selected from environment file and
    * it return the product marked to "productSelected"
    */
   defaultGameStart(): void {
-    const gameSelected = this.appSettings.products.filter(item => item.productSelected)[0].codeProduct;
-    this.productService.changeProduct(gameSelected);
+    /* const gameSelected = this.appSettings.products.filter(item => item.productSelected)[0].codeProduct;
+    this.productService.changeProduct(gameSelected); */
     // Init events
     this.initEvents();
   }
@@ -260,7 +273,8 @@ export class MainService {
           // stop the countdown to prevent multiple calls
           this.countdownSub.unsubscribe();
           // If remaining time is negative there is an error, reload all.
-          this.cacheEvents = null;
+          this.cacheEvents = [];
+          this.cacheTournaments = [];
           this.loadEvents();
           this.resultService.loadLastResult(false);
           return;
@@ -288,7 +302,8 @@ export class MainService {
       }
     } catch (err) {
       console.log('GET TIME ERROR ---> ', err);
-      this.cacheEvents = null;
+      this.cacheEvents = [];
+      this.cacheTournaments = [];
       this.loadEvents();
       this.resultService.loadLastResult(false);
     }
@@ -297,10 +312,7 @@ export class MainService {
   loadEvents(): void {
     try {
 
-      if (/*
-        ((this.cacheEvents == null ||
-          this.cacheEvents.length === 0
-        ) && this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) */
+      if (
         this.initCurrentEvent
       ) {
         this.loadEventsFromApi(true);
@@ -676,7 +688,7 @@ export class MainService {
   resetPlayEvent(): void {
     this.placingEvent = new PlacingEvent();
     this.smartCode = new Smartcode();
-    this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
+    this.placingEvent.eventNumber = (this.eventDetails.events[0]) ? this.eventDetails.events[this.eventDetails.currentEvent].number : -1;
 
     // Create a new polyfunctionArea object
     const polyfunctionalArea: PolyfunctionalArea = new PolyfunctionalArea();
@@ -708,10 +720,18 @@ export class MainService {
 
   eventDetailOdds(eventNumber: number, attemptRollBack?: number): void {
     if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
+      if (this.cacheTournaments.length === 0) {
+        return;
+      }
       this.eventDetailOddsByCacheTournament(eventNumber);
       return;
     }
-    const event: VirtualBetEvent = this.cacheEvents.filter((cacheEvent: VirtualBetEvent) => cacheEvent.id === eventNumber)[0];
+
+    if (this.cacheEvents.length === 0) {
+      return;
+    }
+
+    const event: VirtualBetEvent = this.cacheEvents.find((cacheEvent: VirtualBetEvent) => cacheEvent.id === eventNumber);
     // Ceck, if it is empty load from api
     if (event.mk == null || event.mk.length === 0) {
       // tslint:disable-next-line:max-line-length

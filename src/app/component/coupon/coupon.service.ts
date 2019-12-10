@@ -29,9 +29,7 @@ import { UserService } from '../../services/user.service';
 import { CouponLimit, Error, InternalCoupon, OddsStakeEdit, StakesDisplay } from './coupon.model';
 import { PrintCouponService } from './print-coupon/print-coupon.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CouponService {
   private messageType: typeof CouponServiceMessageType = CouponServiceMessageType;
   // coupon cache

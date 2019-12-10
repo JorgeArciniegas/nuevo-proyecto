@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ProductsService } from '../../products.service';
 import { ResultsService } from './results.service';
+import { WindowSizeService } from '../../../services/utility/window-size/window-size.service';
 
 @Component({
   moduleId: module.id,
@@ -14,6 +15,7 @@ export class ResultsComponent {
 
   constructor(
     public service: ResultsService,
-    public productService: ProductsService
+    public productService: ProductsService,
+    public windowsSizeService: WindowSizeService
   ) { }
 }

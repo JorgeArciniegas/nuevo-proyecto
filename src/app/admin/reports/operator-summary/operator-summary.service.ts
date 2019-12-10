@@ -3,9 +3,7 @@ import { ElysApiService, ReportsOperatorVolumeRequest, ReportsOperatorVolumeResp
 import { UserService } from '../../../services/user.service';
 import { RouterService } from '../../../services/utility/router/router.service';
 
-@Injectable(/* {
-  providedIn: 'root'
-} */)
+@Injectable()
 export class OperatorSummaryService {
   reportsOperatorVolumeRequest: ReportsOperatorVolumeRequest = null;
   reportsOperatorVolumeResponse: ReportsOperatorVolumeResponse[] = [];

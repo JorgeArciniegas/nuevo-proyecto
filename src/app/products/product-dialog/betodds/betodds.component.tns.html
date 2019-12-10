@@ -7,7 +7,7 @@
         horizontalAlignment="right" verticalAlignment="bottom"></Label>
     </GridLayout>
     <GridLayout row="1" rows="2*{{rows}},2*" columns="*{{columns}}"
-      [ngClass]="{'small': productService.windowSize.small}">
+      [ngClass]="{'small': windowSizeService.windowSize.small}">
       <!-- Scroll -->
       <GridLayout row="0" colSpan="{{columnNumber}}" class="card-odd scroll" (tap)="previusOdds()" *ngIf="maxPage > 1"
         [ngClass]="{'disabled': page <= 0}" [isEnabled]="page > 0">

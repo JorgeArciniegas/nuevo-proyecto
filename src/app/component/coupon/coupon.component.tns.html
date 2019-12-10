@@ -5,15 +5,15 @@
         <Label text="{{ 'COUPON' | translate | uppercase }}" textTransform="uppercase"
           verticalAlignment="center"></Label>
       </StackLayout>
-      <Label col="1" class="indicator-odds-number radius-50" [ngClass]="{'small': productService.windowSize.small}"
+      <Label col="1" class="indicator-odds-number radius-50" [ngClass]="{'small': windowSizeService.windowSize.small}"
         text="{{ couponService.coupon ? couponService.coupon.Odds.length : 0 }}" verticalAlignment="center"
         textAlignment="center"></Label>
     </GridLayout>
   </GridLayout>
 
   <GridLayout row="1" *ngIf="couponService.coupon && !couponService.coupon.internal_isLottery">
-    <GridLayout rows="2*,6*,6*,6*,6*,{{ productService.windowSize.small ? '' : '6*,' }}2*" columns="*"
-      *ngIf="couponService.coupon" [ngClass]="{'small': productService.windowSize.small}">
+    <GridLayout rows="2*,6*,6*,6*,6*,{{ windowSizeService.windowSize.small ? '' : '6*,' }}2*" columns="*"
+      *ngIf="couponService.coupon" [ngClass]="{'small': windowSizeService.windowSize.small}">
       <!-- Paginator -->
       <GridLayout row="0" columns="*,2*,*" class="card-odd scroll" (tap)="previusOdds()"
         [ngClass]="{'disabled': page <= 0}" [isEnabled]="page > 0 && !userService.isModalOpen">
@@ -23,7 +23,7 @@
           <Label class="indicator-scroll counter" *ngIf="(page * maxItems) > 0" [text]="page * maxItems"></Label>
         </StackLayout>
       </GridLayout>
-      <GridLayout row="{{ productService.windowSize.small ? 5 : 6 }}" columns="*,2*,*" class="card-odd scroll"
+      <GridLayout row="{{ windowSizeService.windowSize.small ? 5 : 6 }}" columns="*,2*,*" class="card-odd scroll"
         (tap)="nextOdds()" [ngClass]="{'disabled': page >= maxPage - 1}"
         [isEnabled]="page < maxPage - 1 && !userService.isModalOpen">
         <Image col="1" width="20" src="~/assets/icons/Down.png" verticalAlignment="center">
@@ -102,7 +102,7 @@
   <!--COUPON LOTTERY -->
   <GridLayout row="1" *ngIf="couponService.coupon?.internal_isLottery">
     <GridLayout columns="*,*" rows="2*,2*,2*,2*,2*,2*" *ngIf="couponService.coupon"
-      [ngClass]="{'small': productService.windowSize.small}">
+      [ngClass]="{'small': windowSizeService.windowSize.small}">
       <!-- Coupon items -->
       <GridLayout col="{{ i % 2 == 0 ? 0 : 1 }}" row="{{ Math.floor(i/2) }}" rows="*" columns="*"
         class="card-odd card-keno" *ngFor="let odd of listOdds; let i = index;"
@@ -127,18 +127,18 @@
   <!-- Total stake -->
   <GridLayout row="2" rows="*,3*" columns="*" class="card display-amount">
     <Label row="0" text="{{'TOTAL_STAKE' | translate}}" class="title"
-      [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
+      [ngClass]="{'small': windowSizeService.windowSize.small}" textTransform="uppercase"></Label>
     <Label row="1"
       [text]="couponService.stakeDisplay.TotalStake | currency : userService.userCurrency : 'symbol-narrow'"
-      class="amount" [ngClass]="{'small': productService.windowSize.small}"></Label>
+      class="amount" [ngClass]="{'small': windowSizeService.windowSize.small}"></Label>
   </GridLayout>
   <!-- Max potential win -->
   <GridLayout row="3" rows="*,3*" columns="*" class="card display-amount">
     <Label row="0" text="{{'MAX_POTENTIAL_WIN' | translate}}" class="title"
-      [ngClass]="{'small': productService.windowSize.small}" textTransform="uppercase"></Label>
+      [ngClass]="{'small': windowSizeService.windowSize.small}" textTransform="uppercase"></Label>
     <Label row="1"
       [text]="couponService.stakeDisplay.MaxWinning | currency : userService.userCurrency : 'symbol-narrow'"
-      class="amount" [ngClass]="{'small': productService.windowSize.small}"></Label>
+      class="amount" [ngClass]="{'small': windowSizeService.windowSize.small}"></Label>
   </GridLayout>
   <!-- BUTTONS -->
   <GridLayout row="4" rows="*" columns="*,*,3*" class="card"

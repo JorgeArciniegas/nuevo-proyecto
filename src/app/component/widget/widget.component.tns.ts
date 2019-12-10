@@ -23,8 +23,9 @@ export class WidgetComponent implements OnInit {
   @Input()
   public timeBlocked = false;
 
-  @Input()
-  public product: Products;
+  public get product(): Products {
+    return this.productService.product;
+  }
 
   public widgetIcon: IconSize;
 

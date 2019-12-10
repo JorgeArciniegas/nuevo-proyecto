@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BetCouponOdd } from '@elys/elys-api';
 import { BetCouponOddExtended } from '@elys/elys-coupon';
+import { UserService } from '../../../../../src/app/services/user.service';
 import { AppSettings } from '../../../app.settings';
 import { CouponService } from '../../../component/coupon/coupon.service';
+import { WindowSizeService } from '../../../services/utility/window-size/window-size.service';
 import { DialogService } from '../../dialog.service';
 import { BetOdd, DialogData } from '../../products.model';
-import { ProductsService } from '../../products.service';
-import { UserService } from '../../../../../src/app/services/user.service';
 
 @Component({
   selector: 'app-betodds',
@@ -37,14 +37,14 @@ export class BetoddsComponent implements OnInit {
 
   constructor(
     private dialog: DialogService,
-    private productService: ProductsService,
+    private windowSizeService: WindowSizeService,
     public readonly appSettings: AppSettings,
     public readonly couponService: CouponService,
     public userService: UserService
   ) {
     this.settings = appSettings;
     this.multiStake = this.settings.products.filter(prod => prod.productSelected)[0].typeCoupon.acceptMultiStake;
-    if (this.productService.windowSize && this.productService.windowSize.small) {
+    if (this.windowSizeService.windowSize.small) {
       this.rowNumber = 2;
     }
 
