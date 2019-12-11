@@ -25,13 +25,7 @@ import { HeaderComponent } from './component/header/header.component';
 import { UserMenuComponent } from './component/header/user-menu/user-menu.component';
 import { LoaderComponent } from './component/loader/loader.component';
 import { LabelByGroupingPipe } from './component/pipe/label-by-grouping.pipe';
-
 import { GroupingsComponent } from './products/product-dialog/groupings/groupings.component';
-
-
-
-
-
 // Registration of the languages in use. The English language is registered by default.
 registerLocaleData(localeIt);
 registerLocaleData(localeFr);
@@ -73,6 +67,14 @@ export const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
+    canActivate: [AuthorizationGuard]
+  },
+  /**
+   * Routing used without login interactive
+   */
+  {
+    path: 'extclient/:token/:language/:homeURL/:loginType',
+    loadChildren: () => import('./extclient/extclient.module').then(m => m.ExtclientModule),
     canActivate: [AuthorizationGuard]
   },
   {

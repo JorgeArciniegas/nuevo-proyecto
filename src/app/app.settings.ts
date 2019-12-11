@@ -19,4 +19,5 @@ export class AppSettings {
   defaultAmount: CouponPresetValues = environment.defaultAmount;
   couponDirectPlace: boolean = environment.couponDirectPlace;
   currencyDefault: string = environment.currencyDefault;
+  loginInteractive: boolean = environment.loginInteractive;
 }
