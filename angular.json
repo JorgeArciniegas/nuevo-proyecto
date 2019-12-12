@@ -1441,6 +1441,80 @@
                   "with": "src/environments/environment.betlogik-staging.ts"
                 }
               ]
+            },
+            "hbg-peru-prod": {
+              "outputPath": "dist-hbg-peru",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/hbg-peru/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hbg-peru.ts"
+                }
+              ]
+            },
+            "hbg-peru-prod-release": {
+              "outputPath": "dist-hbg-peru",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/hbg-peru/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hbg-peru.ts"
+                }
+              ]
+            },
+            "hbg-peru-staging": {
+              "outputPath": "dist-hbg-peru",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/hbg-peru/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hbg-peru-staging.ts"
+                }
+              ]
+            },
+            "hbg-peru-staging-release": {
+              "outputPath": "dist-hbg-peru",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/hbg-peru/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hbg-peru-staging.ts"
+                }
+              ]
             }
           }
         },
@@ -1680,6 +1754,18 @@
             },
             "doradobet-staging-release": {
               "browserTarget": "vdesk:build:doradobet-staging-release"
+            },
+            "hbg-peru-prod": {
+              "browserTarget": "vdesk:build:hbg-peru-prod"
+            },
+            "hbg-peru-staging": {
+              "browserTarget": "vdesk:build:hbg-peru-staging"
+            },
+            "hbg-peru-prod-release": {
+              "browserTarget": "vdesk:build:hbg-peru-prod-release"
+            },
+            "hbg-peru-staging-release": {
+              "browserTarget": "vdesk:build:hbg-peru-staging-release"
             }
           }
         },
