@@ -24,12 +24,12 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
   ) { }
 
   async canActivate(
-    state: ActivatedRouteSnapshot,
+    route: ActivatedRouteSnapshot,
     next: RouterStateSnapshot
   ): Promise<boolean> {
     try {
       // When router path is "login"
-      if (state.url[0].path.includes('login')) {
+      if (route.url[0].path.includes('login')) {
         // check if the login
         if (!this.appSetting.loginInteractive) {
           this.router.getRouter().navigateByUrl('/error-page');
@@ -43,12 +43,12 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
           return true;
         }
         // login without interactive
-      } else if (state.url[0].path.includes('extclient')) {
+      } else if (route.url[0].path.includes('extclient')) {
         const request: LoginDataDirect = {
-          loginType: LOGIN_TYPE[state.paramMap.get('loginType')],
-          token: state.paramMap.get('token')
+          loginType: LOGIN_TYPE[route.paramMap.get('loginType')],
+          token: route.paramMap.get('token')
         };
-        this.storageService.setData('callBackURL', state.paramMap.get('homeURL'));
+        this.storageService.setData('callBackURL', route.paramMap.get('homeURL'));
         if (await this.userService.loginWithoutInteractive(request)) {
           this.router.getRouter().navigateByUrl('/products');
         } else {
@@ -57,6 +57,7 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
         }
         return false;
       }
+
       this.userService.targetedUrlBeforeLogin = next.url.toString();
       // For all the other routes
       if (this.userService.isUserLogged) {

@@ -151,7 +151,7 @@ export class UserService {
       const isAdmin = request.loginType === LOGIN_TYPE.WEB || request.loginType === LOGIN_TYPE.OPERATOR ? false : true;
       await this.loadUserData(request.token, isAdmin);
       // Check that we have gotten the user data.
-      if (this.dataUserDetail.operatorDetail) {
+      if (this.dataUserDetail.operatorDetail && !isAdmin || this.dataUserDetail.userDetail && isAdmin) {
         return true;
       } else {
         return false;

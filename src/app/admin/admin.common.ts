@@ -23,6 +23,8 @@ export const routes: Routes = [
           import('./reports/bets-list/bets-list.module').then(
             m => m.BetsListModule
           ),
+        canActivateChild: [AuthorizationGuard],
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR], routeId: 'betsList' }
       },
       {
         path: 'reports/transactionsList',
@@ -31,7 +33,7 @@ export const routes: Routes = [
             m => m.TransactionsListModule
           ),
         canActivateChild: [AuthorizationGuard],
-        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR], routeId: 'transactionsList' }
       },
       {
         path: 'reports/operatorSummary',
@@ -40,7 +42,7 @@ export const routes: Routes = [
             m => m.OperatorSummaryModule
           ),
         canActivateChild: [AuthorizationGuard],
-        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR], routeId: 'operatorSummary' }
       },
       {
         path: 'reports/statement-vitual-shop',
@@ -49,7 +51,7 @@ export const routes: Routes = [
             m => m.StatementsVirtualShopModule
           ),
         canActivateChild: [AuthorizationGuard],
-        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR], routeId: 'statement-vitual-shop' }
       },
       {
         path: 'settings/languages',
@@ -62,11 +64,13 @@ export const routes: Routes = [
             m => m.OperatorsModule
           ),
         canActivateChild: [AuthorizationGuard],
-        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR], routeId: 'operators' }
       },
       {
         path: 'vbox',
-        loadChildren: () => import('./settings/vbox/vbox.module').then(m => m.VboxModule)
+        loadChildren: () => import('./settings/vbox/vbox.module').then(m => m.VboxModule),
+        canActivateChild: [AuthorizationGuard],
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR], routeId: 'vbox' }
       }
     ]
   },
