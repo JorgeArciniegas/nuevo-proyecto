@@ -7,7 +7,7 @@ import {
 import { Market } from '../app/products/products.model';
 
 export const environment: Environment = {
-  production: true,
+  production: false,
   loginInteractive: false,
   // tslint:disable-next-line:max-line-length
   bookmakerDetails:
