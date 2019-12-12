@@ -31,7 +31,7 @@
       </StackLayout>
       <StackLayout (tap)="goToStatementShop()" width="100%" class="button btn-success btn-admin"
         height="{{layout.buttonHeight}}" orientation="horizontal" horizontalAlignment="center" row="2" col="0"
-        *ngIf="isAdminLogged">
+        *ngIf="isAdminLogged && appSettings.loginInteractive">
         <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-list-24px.png"
           verticalAlignment="center" horizontalAlignment="right"></Image>
         <Label verticalAlignment="center" class="text-left txt-title txt-title-btn" col="1"
