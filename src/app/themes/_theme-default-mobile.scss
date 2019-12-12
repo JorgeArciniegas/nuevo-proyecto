@@ -64,6 +64,9 @@
 	&.doradobet {
 		@import "./skins/doradobet/styles";
 	}
+	&.hbg-peru {
+		@import "./skins/hbg-peru/styles";
+	}
 
 	.main-content {
 		@extend %font-family;
