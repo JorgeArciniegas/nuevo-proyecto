@@ -103,7 +103,8 @@ export enum LICENSE_TYPE {
   KYRON,
   HOMERUN,
   BETLOGIK,
-  DORADOBET
+  DORADOBET,
+  HBG_PERU
 }
 
 export interface TypeCoupon {
