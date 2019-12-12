@@ -24,7 +24,7 @@ export const routes: Routes = [
             m => m.BetsListModule
           ),
         canActivateChild: [AuthorizationGuard],
-        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR], routeId: 'betsList' }
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       },
       {
         path: 'reports/transactionsList',
@@ -33,7 +33,7 @@ export const routes: Routes = [
             m => m.TransactionsListModule
           ),
         canActivateChild: [AuthorizationGuard],
-        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR], routeId: 'transactionsList' }
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       },
       {
         path: 'reports/operatorSummary',
@@ -42,7 +42,7 @@ export const routes: Routes = [
             m => m.OperatorSummaryModule
           ),
         canActivateChild: [AuthorizationGuard],
-        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR], routeId: 'operatorSummary' }
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       },
       {
         path: 'reports/statement-vitual-shop',
@@ -51,7 +51,7 @@ export const routes: Routes = [
             m => m.StatementsVirtualShopModule
           ),
         canActivateChild: [AuthorizationGuard],
-        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR], routeId: 'statement-vitual-shop' }
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       },
       {
         path: 'settings/languages',
@@ -64,13 +64,13 @@ export const routes: Routes = [
             m => m.OperatorsModule
           ),
         canActivateChild: [AuthorizationGuard],
-        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR], routeId: 'operators' }
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       },
       {
         path: 'vbox',
         loadChildren: () => import('./settings/vbox/vbox.module').then(m => m.VboxModule),
         canActivateChild: [AuthorizationGuard],
-        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR], routeId: 'vbox' }
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       }
     ]
   },
