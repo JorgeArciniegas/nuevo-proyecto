@@ -34,7 +34,24 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ],
+              ]
+            },
+            "vgen-prod": {
+              "outputPath": "dist-vgen",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.vgen.ts"
+                }
+              ]
+            },
+            "vgen-prod-release": {
+              "outputPath": "dist-vgen",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -43,10 +60,7 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
-            },
-            "vgen-prod": {
-              "outputPath": "dist-vgen",
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/develop/"
@@ -73,8 +87,54 @@
                 }
               ]
             },
+            "vgen-staging-release": {
+              "outputPath": "dist-vgen",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.vgen-staging.ts"
+                }
+              ]
+            },
             "shawis-prod": {
               "outputPath": "dist-shawis",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/shawis/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.shawis.ts"
+                }
+              ]
+            },
+            "shawis-prod-release": {
+              "outputPath": "dist-shawis",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/shawis/"
@@ -101,8 +161,54 @@
                 }
               ]
             },
+            "shawis-staging-release": {
+              "outputPath": "dist-shawis",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/shawis/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.shawis-staging.ts"
+                }
+              ]
+            },
             "oneway-prod": {
               "outputPath": "dist-oneway",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/oneway/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.oneway.ts"
+                }
+              ]
+            },
+            "oneway-prod-release": {
+              "outputPath": "dist-oneway",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/oneway/"
@@ -126,6 +232,52 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.oneway-staging.ts"
+                }
+              ]
+            },
+            "oneway-staging-release": {
+              "outputPath": "dist-oneway",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/oneway/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.oneway-staging.ts"
+                }
+              ]
+            },
+            "universalsoft-prod-release": {
+              "outputPath": "dist-universalsoft",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/universalsoft/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.universalsoft.ts"
                 }
               ]
             },
@@ -157,8 +309,54 @@
                 }
               ]
             },
+            "universalsoft-staging-release": {
+              "outputPath": "dist-universalsoft",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/universalsoft/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.universalsoft-staging.ts"
+                }
+              ]
+            },
             "mayabet-prod": {
               "outputPath": "dist-mayabet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.mayabet.ts"
+                }
+              ]
+            },
+            "mayabet-prod-release": {
+              "outputPath": "dist-mayabet",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/develop/"
@@ -185,8 +383,54 @@
                 }
               ]
             },
+            "mayabet-staging-release": {
+              "outputPath": "dist-mayabet",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.mayabet-staging.ts"
+                }
+              ]
+            },
             "genc01-prod": {
               "outputPath": "dist-genc01",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc01.ts"
+                }
+              ]
+            },
+            "genc01-prod-release": {
+              "outputPath": "dist-genc01",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/develop/"
@@ -213,8 +457,54 @@
                 }
               ]
             },
+            "genc01-staging-release": {
+              "outputPath": "dist-genc01",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc01-staging.ts"
+                }
+              ]
+            },
             "genc02-prod": {
               "outputPath": "dist-genc02",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc02.ts"
+                }
+              ]
+            },
+            "genc02-prod-release": {
+              "outputPath": "dist-genc02",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/develop/"
@@ -241,8 +531,54 @@
                 }
               ]
             },
+            "genc02-staging-release": {
+              "outputPath": "dist-genc02",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc02-staging.ts"
+                }
+              ]
+            },
             "genc03-prod": {
               "outputPath": "dist-genc03",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc03.ts"
+                }
+              ]
+            },
+            "genc03-prod-release": {
+              "outputPath": "dist-genc03",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/develop/"
@@ -269,8 +605,54 @@
                 }
               ]
             },
+            "genc03-staging-release": {
+              "outputPath": "dist-genc03",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc03-staging.ts"
+                }
+              ]
+            },
             "betese-prod": {
               "outputPath": "dist-betese",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betese/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betese.ts"
+                }
+              ]
+            },
+            "betese-prod-release": {
+              "outputPath": "dist-betese",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/betese/"
@@ -297,8 +679,54 @@
                 }
               ]
             },
+            "betese-staging-release": {
+              "outputPath": "dist-betese",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betese/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betese-staging.ts"
+                }
+              ]
+            },
             "sportrace-prod": {
               "outputPath": "dist-sportrace",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/sportrace/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sportrace.ts"
+                }
+              ]
+            },
+            "sportrace-prod-release": {
+              "outputPath": "dist-sportrace",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/sportrace/"
@@ -325,8 +753,54 @@
                 }
               ]
             },
+            "sportrace-staging-release": {
+              "outputPath": "dist-sportrace",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/sportrace/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.sportrace-staging.ts"
+                }
+              ]
+            },
             "bolivarbet-prod": {
               "outputPath": "dist-bolivarbet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/bolivarbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.bolivarbet.ts"
+                }
+              ]
+            },
+            "bolivarbet-prod-release": {
+              "outputPath": "dist-bolivarbet",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/bolivarbet/"
@@ -353,8 +827,54 @@
                 }
               ]
             },
+            "bolivarbet-staging-release": {
+              "outputPath": "dist-bolivarbet",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/bolivarbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.bolivarbet-staging.ts"
+                }
+              ]
+            },
             "uganbet-prod": {
               "outputPath": "dist-uganbet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/uganbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.uganbet.ts"
+                }
+              ]
+            },
+            "uganbet-prod-release": {
+              "outputPath": "dist-uganbet",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/uganbet/"
@@ -381,8 +901,54 @@
                 }
               ]
             },
+            "uganbet-staging-release": {
+              "outputPath": "dist-uganbet",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/uganbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.uganbet-staging.ts"
+                }
+              ]
+            },
             "apuestas-dominicanas-prod": {
               "outputPath": "dist-apuestas-dominicanas",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/apuestas-dominicanas/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.apuestas-dominicanas.ts"
+                }
+              ]
+            },
+            "apuestas-dominicanas-prod-release": {
+              "outputPath": "dist-apuestas-dominicanas",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/apuestas-dominicanas/"
@@ -409,8 +975,54 @@
                 }
               ]
             },
+            "apuestas-dominicanas-staging-release": {
+              "outputPath": "dist-apuestas-dominicanas",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/apuestas-dominicanas/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.apuestas-dominicanas-staging.ts"
+                }
+              ]
+            },
             "f2o-prod": {
               "outputPath": "dist-f2o",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/f2o/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.f2o.ts"
+                }
+              ]
+            },
+            "f2o-prod-release": {
+              "outputPath": "dist-f2o",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/f2o/"
@@ -437,8 +1049,54 @@
                 }
               ]
             },
+            "f2o-staging-release": {
+              "outputPath": "dist-f2o",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/f2o/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.f2o-staging.ts"
+                }
+              ]
+            },
             "soft-prod": {
               "outputPath": "dist-soft",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/soft/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.soft.ts"
+                }
+              ]
+            },
+            "soft-prod-release": {
+              "outputPath": "dist-soft",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/soft/"
@@ -465,8 +1123,54 @@
                 }
               ]
             },
+            "soft-staging-release": {
+              "outputPath": "dist-soft",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/soft/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.soft-staging.ts"
+                }
+              ]
+            },
             "kyron-prod": {
               "outputPath": "dist-kyron",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/kyron/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.kyron.ts"
+                }
+              ]
+            },
+            "kyron-prod-release": {
+              "outputPath": "dist-kyron",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/kyron/"
@@ -493,8 +1197,54 @@
                 }
               ]
             },
+            "kyron-staging-release": {
+              "outputPath": "dist-kyron",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/kyron/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.kyron-staging.ts"
+                }
+              ]
+            },
             "homerun-prod": {
               "outputPath": "dist-homerun",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/homerun/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.homerun.ts"
+                }
+              ]
+            },
+            "homerun-prod-release": {
+              "outputPath": "dist-homerun",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/homerun/"
@@ -521,8 +1271,54 @@
                 }
               ]
             },
+            "homerun-staging-release": {
+              "outputPath": "dist-homerun",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/homerun/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.homerun-staging.ts"
+                }
+              ]
+            },
             "betlogik-prod": {
               "outputPath": "dist-betlogik",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betlogik/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betlogik.ts"
+                }
+              ]
+            },
+            "betlogik-prod-release": {
+              "outputPath": "dist-betlogik",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/betlogik/"
@@ -549,6 +1345,29 @@
                 }
               ]
             },
+            "betlogik-staging-release": {
+              "outputPath": "dist-betlogik",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betlogik/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betlogik-staging.ts"
+                }
+              ]
+            },
             "doradobet-prod": {
               "outputPath": "dist-doradobet",
               "stylePreprocessorOptions": {
@@ -563,8 +1382,54 @@
                 }
               ]
             },
+            "doradobet-prod-release": {
+              "outputPath": "dist-doradobet",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/doradobet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.doradobet.ts"
+                }
+              ]
+            },
             "doradobet-staging": {
               "outputPath": "dist-doradobet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/doradobet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betlogik-staging.ts"
+                }
+              ]
+            },
+            "doradobet-staging-release": {
+              "outputPath": "dist-doradobet",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/doradobet/"
@@ -591,50 +1456,98 @@
             "vgen-prod": {
               "browserTarget": "vdesk:build:vgen-prod"
             },
+            "vgen-prod-release": {
+              "browserTarget": "vdesk:build:vgen-prod-release"
+            },
             "vgen-staging": {
               "browserTarget": "vdesk:build:vgen-staging"
+            },
+            "vgen-staging-release": {
+              "browserTarget": "vdesk:build:vgen-staging-release"
             },
             "shawis-prod": {
               "browserTarget": "vdesk:build:shawis-prod"
             },
+            "shawis-prod-release": {
+              "browserTarget": "vdesk:build:shawis-prod-release"
+            },
             "shawis-staging": {
               "browserTarget": "vdesk:build:shawis-staging"
+            },
+            "shawis-staging-release": {
+              "browserTarget": "vdesk:build:shawis-staging-release"
             },
             "oneway-prod": {
               "browserTarget": "vdesk:build:oneway-prod"
             },
+            "oneway-prod-release": {
+              "browserTarget": "vdesk:build:oneway-prod-release"
+            },
             "oneway-staging": {
               "browserTarget": "vdesk:build:oneway-staging"
+            },
+            "oneway-staging-release": {
+              "browserTarget": "vdesk:build:oneway-staging-release"
             },
             "universalsoft-prod": {
               "browserTarget": "vdesk:build:universalsoft-prod"
             },
+            "universalsoft-prod-release": {
+              "browserTarget": "vdesk:build:universalsoft-prod-release"
+            },
             "universalsoft-staging": {
               "browserTarget": "vdesk:build:universalsoft-staging"
+            },
+            "universalsoft-staging-release": {
+              "browserTarget": "vdesk:build:universalsoft-staging-release"
             },
             "mayabet-prod": {
               "browserTarget": "vdesk:build:mayabet-prod"
             },
+            "mayabet-prod-release": {
+              "browserTarget": "vdesk:build:mayabet-prod-release"
+            },
             "mayabet-staging": {
               "browserTarget": "vdesk:build:mayabet-staging"
+            },
+            "mayabet-staging-release": {
+              "browserTarget": "vdesk:build:mayabet-staging-release"
             },
             "genc01-prod": {
               "browserTarget": "vdesk:build:genc01-prod"
             },
+            "genc01-prod-release": {
+              "browserTarget": "vdesk:build:genc01-prod-release"
+            },
             "genc01-staging": {
               "browserTarget": "vdesk:build:genc01-staging"
+            },
+            "genc01-staging-release": {
+              "browserTarget": "vdesk:build:genc01-staging-release"
             },
             "genc02-prod": {
               "browserTarget": "vdesk:build:genc02-prod"
             },
+            "genc02-prod-release": {
+              "browserTarget": "vdesk:build:genc02-prod-release"
+            },
             "genc02-staging": {
               "browserTarget": "vdesk:build:genc02-staging"
+            },
+            "genc02-staging-release": {
+              "browserTarget": "vdesk:build:genc02-staging-release"
             },
             "genc03-prod": {
               "browserTarget": "vdesk:build:genc03-prod"
             },
+            "genc03-prod-release": {
+              "browserTarget": "vdesk:build:genc03-prod-release"
+            },
             "genc03-staging": {
               "browserTarget": "vdesk:build:genc03-staging"
+            },
+            "genc03-staging-release": {
+              "browserTarget": "vdesk:build:genc03-staging-release"
             },
             "betese-prod": {
               "browserTarget": "vdesk:build:betese-prod"
@@ -701,6 +1614,72 @@
             },
             "doradobet-staging": {
               "browserTarget": "vdesk:build:doradobet-staging"
+            },
+            "betese-prod-release": {
+              "browserTarget": "vdesk:build:betese-prod-release"
+            },
+            "betese-staging-release": {
+              "browserTarget": "vdesk:build:betese-staging-release"
+            },
+            "sportrace-prod-release": {
+              "browserTarget": "vdesk:build:sportrace-prod-release"
+            },
+            "sportrace-staging-release": {
+              "browserTarget": "vdesk:build:sportrace-staging-release"
+            },
+            "bolivarbet-prod-release": {
+              "browserTarget": "vdesk:build:bolivarbet-prod-release"
+            },
+            "bolivarbet-staging-release": {
+              "browserTarget": "vdesk:build:bolivarbet-staging-release"
+            },
+            "uganbet-prod-release": {
+              "browserTarget": "vdesk:build:uganbet-prod-release"
+            },
+            "uganbet-staging-release": {
+              "browserTarget": "vdesk:build:uganbet-staging-release"
+            },
+            "apuestas-dominicanas-prod-release": {
+              "browserTarget": "vdesk:build:apuestas-dominicanas-prod-release"
+            },
+            "apuestas-dominicanas-staging-release": {
+              "browserTarget": "vdesk:build:apuestas-dominicanas-staging-release"
+            },
+            "f2o-prod-release": {
+              "browserTarget": "vdesk:build:f2o-prod-release"
+            },
+            "f2o-staging-release": {
+              "browserTarget": "vdesk:build:f2o-staging-release"
+            },
+            "soft-prod-release": {
+              "browserTarget": "vdesk:build:soft-prod-release"
+            },
+            "soft-staging-release": {
+              "browserTarget": "vdesk:build:soft-staging-release"
+            },
+            "kyron-prod-release": {
+              "browserTarget": "vdesk:build:kyron-prod-release"
+            },
+            "kyron-staging-release": {
+              "browserTarget": "vdesk:build:kyron-staging-release"
+            },
+            "homerun-prod-release": {
+              "browserTarget": "vdesk:build:homerun-prod-release"
+            },
+            "homerun-staging-release": {
+              "browserTarget": "vdesk:build:homerun-staging-release"
+            },
+            "betlogik-prod-release": {
+              "browserTarget": "vdesk:build:betlogik-prod-release"
+            },
+            "betlogik-staging-release": {
+              "browserTarget": "vdesk:build:betlogik-staging-release"
+            },
+            "doradobet-prod-release": {
+              "browserTarget": "vdesk:build:doradobet-prod-release"
+            },
+            "doradobet-staging-release": {
+              "browserTarget": "vdesk:build:doradobet-staging-release"
             }
           }
         },
