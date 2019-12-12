@@ -16,6 +16,7 @@ export interface DataUser {
 export interface LoginDataDirect {
   token: string;
   loginType: LOGIN_TYPE;
+  language: string;
 }
 
 

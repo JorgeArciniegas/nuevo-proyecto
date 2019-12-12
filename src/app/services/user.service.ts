@@ -152,6 +152,7 @@ export class UserService {
       await this.loadUserData(request.token, isAdmin);
       // Check that we have gotten the user data.
       if (this.dataUserDetail.operatorDetail && !isAdmin || this.dataUserDetail.userDetail && isAdmin) {
+        this.translateService.changeLanguage(request.language);
         return true;
       } else {
         return false;
