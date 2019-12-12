@@ -44,19 +44,22 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
         }
         // login without interactive
       } else if (route.url[0].path.includes('extclient')) {
-        const request: LoginDataDirect = {
-          loginType: LOGIN_TYPE[route.paramMap.get('loginType')],
-          token: route.paramMap.get('token'),
-          language: route.paramMap.get('language') ? route.paramMap.get('language') : this.appSetting.supportedLang[0]
-        };
-        this.storageService.setData('callBackURL', route.paramMap.get('homeURL'));
-        if (await this.userService.loginWithoutInteractive(request)) {
-          this.router.getRouter().navigateByUrl('/products');
-        } else {
-          this.router.callBackToBrand();
-          return true;
+        try {
+          const request: LoginDataDirect = {
+            loginType: LOGIN_TYPE[route.paramMap.get('loginType').toUpperCase()],
+            token: route.paramMap.get('token'),
+            language: route.paramMap.get('language') ? route.paramMap.get('language') : this.appSetting.supportedLang[0]
+          };
+          this.storageService.setData('callBackURL', route.paramMap.get('homeURL'));
+          if (await this.userService.loginWithoutInteractive(request)) {
+            this.router.getRouter().navigateByUrl('/products');
+          } else {
+            this.router.callBackToBrand();
+            return true;
+          }
+        } catch (err) {
+          return false;
         }
-        return false;
       }
 
       this.userService.targetedUrlBeforeLogin = next.url.toString();
