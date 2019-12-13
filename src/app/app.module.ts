@@ -14,7 +14,7 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { environment } from '../environments/environment';
 import { VERSION } from '../environments/version';
-import { componentDeclarations, providerDeclarations, routes } from './app.common';
+import { componentDeclarations, providerDeclarations, desktopRoutes } from './app.common';
 import { AppComponent } from './app.component';
 import { ConfirmDestroyCouponComponent } from './component/coupon/confirm-destroy-coupon/confirm-destroy-coupon.component';
 import { SharedModule } from './shared/shared.module';
@@ -85,7 +85,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ElysCouponModule.forRoot(
       { deviceLayout: PlaySource.VDeskWeb }
     ),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(desktopRoutes)
   ],
   entryComponents: [
     ProductDialogComponent,

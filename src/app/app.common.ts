@@ -63,20 +63,13 @@ export const providerDeclarations: any[] = [
   CouponDialogService
 ];
 
-export const routes: Routes = [
+const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
     canActivate: [AuthorizationGuard]
   },
-  /**
-   * Routing used without login interactive
-   */
-  {
-    path: 'extclient/:token/:language/:homeURL/:loginType',
-    loadChildren: () => import('./extclient/extclient.module').then(m => m.ExtclientModule),
-    canActivate: [AuthorizationGuard]
-  },
+
   {
     path: 'print-coupon',
     component: PrintCouponComponent,
@@ -116,3 +109,22 @@ export const routes: Routes = [
     loadChildren: () => import('./error-page/error-page.module').then(m => m.ErrorPageModule),
   }
 ];
+
+
+/**
+ * The routes write inside is a fis
+ */
+const onlyDesktop: Routes = [
+  /**
+     * Routing used without login interactive
+  */
+  {
+    path: 'extclient/:token/:language/:homeURL/:loginType',
+    loadChildren: () => import('./extclient/extclient.module').then(m => m.ExtclientModule),
+    canActivate: [AuthorizationGuard]
+  }
+];
+
+export const mobileRoutes: Routes = routes;
+export const desktopRoutes: Routes = onlyDesktop.concat(routes);
+

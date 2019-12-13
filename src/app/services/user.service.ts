@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
-import { CurrencyCodeRequest, CurrencyCodeResponse, ElysApiService, StagedCouponStatus, TokenDataSuccess, UserType } from '@elys/elys-api';
+import {
+  CurrencyCodeRequest,
+  CurrencyCodeResponse,
+  ElysApiService,
+  StagedCouponStatus,
+  TokenDataSuccess,
+  UserType
+} from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
-import { interval, Subscription, timer } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { AppSettings } from '../app.settings';
-import { DataUser, OperatorData, LOGIN_TYPE, LoginDataDirect } from './user.models';
+import { DataUser, LoginDataDirect, LOGIN_TYPE, OperatorData } from './user.models';
 import { RouterService } from './utility/router/router.service';
 import { StorageService } from './utility/storage/storage.service';
 import { TranslateUtilityService } from './utility/translate-utility.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
