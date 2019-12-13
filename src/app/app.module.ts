@@ -31,6 +31,7 @@ import { KenoComponent as KenoPaytableComponent } from './products/product-dialo
 import { RankingComponent } from './products/product-dialog/ranking/ranking.component';
 import { SoccerComponent as SoccerRankingComponent } from './products/product-dialog/ranking/templates/soccer/soccer.component';
 import { PayCancelDialogComponent } from './component/coupon/pay-cancel-dialog/pay-cancel-dialog.component';
+import { routes } from './app-routing.module';
 
 
 // tslint:disable-next-line:only-arrow-functions
@@ -85,7 +86,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ElysCouponModule.forRoot(
       { deviceLayout: PlaySource.VDeskWeb }
     ),
-    RouterModule.forRoot(desktopRoutes)
+    RouterModule.forRoot(routes)
   ],
   entryComponents: [
     ProductDialogComponent,

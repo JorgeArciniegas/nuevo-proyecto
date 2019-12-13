@@ -16,6 +16,7 @@ import { componentDeclarations, providerDeclarations, mobileRoutes } from './app
 import { AppComponent } from './app.component';
 import { NotificationService } from './notifications/notification.service';
 import { SharedModule } from './shared/shared.module';
+import { routes } from './app-routing.module';
 
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -44,7 +45,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ElysCouponModule.forRoot({ deviceLayout: PlaySource.VDeskAndroid }),
     SharedModule,
     NativeScriptRouterModule,
-    NativeScriptRouterModule.forRoot(mobileRoutes, { preloadingStrategy: PreloadAllModules })
+    NativeScriptRouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   providers: [
     providerDeclarations,
