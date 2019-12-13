@@ -3,6 +3,8 @@ import { Market } from '../app/products/products.model';
 
 export interface Environment {
   production: boolean;
+  //login intercative
+  loginInteractive: boolean;
   bookmakerDetails: string;
   license: LICENSE_TYPE;
   baseApiUrl: string;
@@ -101,7 +103,8 @@ export enum LICENSE_TYPE {
   KYRON,
   HOMERUN,
   BETLOGIK,
-  DORADOBET
+  DORADOBET,
+  HBG_PERU
 }
 
 export interface TypeCoupon {

@@ -23,6 +23,8 @@ export const routes: Routes = [
           import('./reports/bets-list/bets-list.module').then(
             m => m.BetsListModule
           ),
+        canActivateChild: [AuthorizationGuard],
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       },
       {
         path: 'reports/transactionsList',
@@ -66,7 +68,9 @@ export const routes: Routes = [
       },
       {
         path: 'vbox',
-        loadChildren: () => import('./settings/vbox/vbox.module').then(m => m.VboxModule)
+        loadChildren: () => import('./settings/vbox/vbox.module').then(m => m.VboxModule),
+        canActivateChild: [AuthorizationGuard],
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
       }
     ]
   },

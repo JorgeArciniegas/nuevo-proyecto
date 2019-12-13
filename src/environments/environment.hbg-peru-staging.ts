@@ -7,30 +7,24 @@ import {
 import { Market } from '../app/products/products.model';
 
 export const environment: Environment = {
-  production: true,
-  loginInteractive: true,
+  production: false,
+  loginInteractive: false,
   // tslint:disable-next-line:max-line-length
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
-  license: LICENSE_TYPE.BETESE,
-  baseApiUrl: 'https://vg-apibetese.odissea-services.net',
-  pageTitle: 'VDESK-KIOSK',
-  theme: 'betese',
-  faviconPath: 'app/themes/skins/betese/image/Logo-header.png',
+  license: LICENSE_TYPE.HBG_PERU,
+  baseApiUrl: 'https://qacom-apigenc01.ody-services.net ',
+  pageTitle: 'HBG-KIOSK',
+  theme: 'hbg-peru',
+  faviconPath: 'app/themes/skins/hbg-peru/image/Logo-header.png',
+  couponDirectPlace: true,
   currencyDefault: 'EUR',
-  supportedLang: ['en'],
+  supportedLang: ['en', 'it', 'es'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
     PresetThree: null,
     PresetFour: null
-  },
-  showEventId: true,
-  couponDirectPlace: true,
-  printSettings: {
-    isEnabledReprintCoupon: true,
-    isTrasmitionInfoMessageShown: false,
-    isShowHeaderMessage: true
   },
   products: [
     {
@@ -218,7 +212,7 @@ export const environment: Environment = {
       label: 'COCK_FIGHT',
       order: 3,
       productSelected: false,
-      isPlayable: true,
+      isPlayable: false,
       layoutProducts: {
         // defines the layout type for last results widget
         type: LAYOUT_TYPE.COCK_FIGHT,
@@ -259,13 +253,13 @@ export const environment: Environment = {
       label: 'KENO',
       order: 6,
       productSelected: false,
-      isPlayable: true,
+      isPlayable: false,
       layoutProducts: {
         // defines the layout type for different product group
         type: LAYOUT_TYPE.KENO,
-        resultItems: 2, // items to show for last result
-        nextEventItems: 1, // items to show for next events
-        cacheEventsItem: 2
+        resultItems: 1, // items to show for last result
+        nextEventItems: 2, // items to show for next events
+        cacheEventsItem: 3
       },
       toolbarButton: {
         name: 'keno',
@@ -286,5 +280,11 @@ export const environment: Environment = {
         typeLayout: LAYOUT_TYPE.KENO
       }
     }
-  ]
+  ],
+  showEventId: false,
+  printSettings: {
+    isEnabledReprintCoupon: true,
+    isTrasmitionInfoMessageShown: false,
+    isShowHeaderMessage: false
+  }
 };
