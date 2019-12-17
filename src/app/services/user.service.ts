@@ -338,9 +338,9 @@ export class UserService {
     });
     // match products result from api to products on the system
     this.api.virtual.getAvailablevirtualsports().then(items => {
-      this.appSetting.products.map(prod => {
-        items.filter(i => i.SportId === prod.sportId);
-      });
+      this.appSetting.products = this.appSetting.products.filter(product =>
+        items.map(x => x.SportId).includes(product.sportId)
+      );
     });
 
     // filter product by sportId enabled to user policies
