@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  CurrencyCodeRequest,
-  CurrencyCodeResponse,
-  ElysApiService,
-  StagedCouponStatus,
-  TokenDataSuccess,
-  UserType
-} from '@elys/elys-api';
+import { CurrencyCodeRequest, CurrencyCodeResponse, ElysApiService, StagedCouponStatus, TokenDataSuccess, UserType } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { Subscription, timer } from 'rxjs';
 import { AppSettings } from '../app.settings';
@@ -269,7 +262,6 @@ export class UserService {
         this.checkLoginData(0);
       }
 
-
     } catch (err) {
       if (err.status === 401) {
         // if unauthorized call logout
@@ -350,6 +342,29 @@ export class UserService {
         items.filter(i => i.SportId === prod.sportId);
       });
     });
+
+    // filter product by sportId enabled to user policies
+    let authorizedVirtualSports: number[] = [];
+    if (this.dataUserDetail.userDetail) {
+      authorizedVirtualSports = this.dataUserDetail.userDetail.UserPolicies.AuthorizedVirtualSports;
+    } else {
+      authorizedVirtualSports = this.dataUserDetail.operatorDetail.UserPolicies.AuthorizedVirtualSports;
+    }
+    this.appSetting.products = this.appSetting.products.filter(product =>
+      authorizedVirtualSports.includes(product.sportId)
+    );
+
+    // filter product by categoryId enabled for user policies
+    let authorizedVirtualCategories: string[] = [];
+    if (this.dataUserDetail.userDetail) {
+      authorizedVirtualCategories = this.dataUserDetail.userDetail.UserPolicies.AuthorizedVirtualCategories;
+    } else {
+      authorizedVirtualCategories = this.dataUserDetail.operatorDetail.UserPolicies.AuthorizedVirtualCategories;
+    }
+    this.appSetting.products = this.appSetting.products.filter(product =>
+      authorizedVirtualCategories.includes(product.codeProduct)
+    );
+
     // Order the result from minor to major
     this.appSetting.products.sort((a, b) => (a.order <= b.order ? -1 : 1));
   }
