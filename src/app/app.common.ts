@@ -17,7 +17,7 @@ import { AppSettings } from './app.settings';
 import { BtncalcComponent } from './component/btncalc/btncalc.component';
 import { BtncalcService } from './component/btncalc/btncalc.service';
 import { ConfirmDestroyCouponComponent } from './component/coupon/confirm-destroy-coupon/confirm-destroy-coupon.component';
-import { CouponDialogService } from './component/coupon/coupon-dialog.service.tns';
+import { CouponDialogService } from './component/coupon/coupon-dialog.service';
 import { CouponComponent } from './component/coupon/coupon.component';
 import { CouponService } from './component/coupon/coupon.service';
 import { PayCancelDialogComponent } from './component/coupon/pay-cancel-dialog/pay-cancel-dialog.component';

@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Printer } from 'nativescript-printer';
 import { Receipt } from './print-receipt.model';
-import { PrintReceiptService } from './print-receipt.service.tns';
+import { PrintReceiptService } from './print-receipt.service';
 import { AppSettings } from '../../../../app.settings';
 import { UserService } from '../../../../services/user.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-print-receipt',
   templateUrl: './print-receipt.component.tns.html',
   styleUrls: ['./print-receipt.component.tns.scss']

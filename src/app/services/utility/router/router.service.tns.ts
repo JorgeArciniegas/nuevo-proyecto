@@ -6,6 +6,7 @@ import { RouterExtensions } from 'nativescript-angular/router';
   providedIn: 'root'
 })
 export class RouterService {
+  productSameReload: boolean;
   constructor(private router: RouterExtensions) { }
 
   public getRouter(): RouterExtensions {

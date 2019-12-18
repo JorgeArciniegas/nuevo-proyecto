@@ -1,6 +1,6 @@
 import { Observable, Subject } from 'rxjs';
 import { Products } from '../../environments/environment.models';
-import { DestroyCouponService } from '../component/coupon/confirm-destroy-coupon/destroy-coupon.service.tns';
+import { DestroyCouponService } from '../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../component/coupon/coupon.service';
 import { RouterService } from '../services/utility/router/router.service';
 export class ProductsServiceExtra {
@@ -30,6 +30,7 @@ export class ProductsServiceExtra {
   changeProduct(codeProduct: string): void {
     // Check if the productCode is equal to the current one. if it isn't, mark it as to destroy.
     if (this.product && codeProduct === this.product.codeProduct) {
+      this.productNameSelectedSubscribe.next(codeProduct);
       this.router.getRouter().navigate(['/products/main']);
     } else {
       // check if the product has a temporary coupon

@@ -1,16 +1,15 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { TypePlacingEvent, Player, SpecialBet } from '../../../main.models';
-import { MainService } from '../../../main.service';
-import { Subscription } from 'rxjs';
-import { ProductsService } from '../../../../products.service';
+import { Component, Input } from '@angular/core';
 import { UserService } from '../../../../../../../src/app/services/user.service';
+import { ProductsService } from '../../../../products.service';
+import { Player, SpecialBet, TypePlacingEvent } from '../../../main.models';
+import { MainService } from '../../../main.service';
 
 @Component({
   selector: 'app-playable-board-race',
   templateUrl: './race.component.html',
   styleUrls: ['./race.component.scss']
 })
-export class RaceComponent implements OnInit, OnDestroy {
+export class RaceComponent {
   @Input()
   public rowHeight: number;
   @Input()
@@ -19,27 +18,20 @@ export class RaceComponent implements OnInit, OnDestroy {
   public TypePlacingRace = TypePlacingEvent;
   public specialBet: typeof SpecialBet = SpecialBet;
 
-  // Listen to the race selection
-  private currentEventSubscription: Subscription;
-  private currentProductSelection: Subscription;
+
+  // list of players
+
+  public get playersList(): Player[] {
+    return this.service.playersList;
+  }
+
   // code of product. it's used for change the layout color to buttons
-  codeProduct: string;
+
+  public get codeProduct(): string {
+    return this.productService.product.codeProduct;
+  }
   constructor(public service: MainService, private productService: ProductsService, private userService: UserService) {
-    this.currentEventSubscription = this.service.currentEventObserve.subscribe(
-      raceIndex => (this.service.placingEvent.eventNumber = this.service.eventDetails.events[raceIndex].number)
-    );
-    this.currentProductSelection = productService.productNameSelectedObserve.subscribe(() => {
-      this.codeProduct = productService.product.codeProduct;
-    });
-  }
 
-  ngOnInit() {
-    this.codeProduct = this.productService.product.codeProduct;
-  }
-
-  ngOnDestroy(): void {
-    this.currentEventSubscription.unsubscribe();
-    this.currentProductSelection.unsubscribe();
   }
 
   /**

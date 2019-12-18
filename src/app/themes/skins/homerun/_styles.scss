@@ -538,6 +538,16 @@ $gradient-dark2: #000000;
 	background-size: contain;
 }
 
+// KENO
+%PRODUCT-KENO-BG {
+	background: url("assets/images/Icon-keno.png") left center no-repeat;
+	background-size: contain;
+}
+%PRODUCT-KENO-BG-MOBILE {
+	background: url("~/assets/images/Icon-keno.png") left center no-repeat;
+	background-size: contain;
+}
+
 // BORDER BOX DEFINITION
 %border-gray {
 	border-color: $color-border-box;

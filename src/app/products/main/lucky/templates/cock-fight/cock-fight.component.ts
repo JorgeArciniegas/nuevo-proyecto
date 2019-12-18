@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Lucky } from '../../lucky.model';
-import { UserService } from '../../../../../services/user.service';
-import { MainService } from '../../../main.service';
+import { Component } from '@angular/core';
+import { VirtualBetEvent } from '@elys/elys-api';
 import { Subscription } from 'rxjs';
-import { VirtualBetEvent, VirtualBetSelection } from '@elys/elys-api';
+import { UserService } from '../../../../../services/user.service';
 import { Market } from '../../../../products.model';
+import { MainService } from '../../../main.service';
+import { Lucky } from '../../lucky.model';
 
 @Component({
   selector: 'app-lucky-cock-fight',
   templateUrl: './cock-fight.component.html',
   styleUrls: ['./cock-fight.component.scss']
 })
-export class CockFightComponent implements OnInit {
+export class CockFightComponent {
   public market: typeof Market = Market;
 
   lucky: typeof Lucky = Lucky;
@@ -46,7 +46,6 @@ export class CockFightComponent implements OnInit {
       this.oldLuckyCock = 0;
     });
   }
-  ngOnInit() {}
 
   async placingLucky(lucky: Lucky): Promise<void> {
     this.mainService.resetPlayEvent();
@@ -97,7 +96,7 @@ export class CockFightComponent implements OnInit {
     const currentSelection = { tp: 0, selection: null };
     switch (lucky) {
       case 1:
-        currentSelection.selection = this.winModel[this.RNGLuckyCock(3)];
+        currentSelection.selection = this.winModel[this.RNGLuckyCock(2)];
         currentSelection.tp = this.market['1X2'];
         break;
       case 2:

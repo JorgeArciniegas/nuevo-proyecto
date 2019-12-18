@@ -1,12 +1,14 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { KenoNumber, KenoNumberNative } from './keno.model';
-import { Subscription } from 'rxjs';
-import { CouponService } from '../../../../../component/coupon/coupon.service';
-import { ElysCouponService, BetCouponExtended } from '@elys/elys-coupon';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { BetCouponExtended, ElysCouponService } from '@elys/elys-coupon';
+import { Subscription, timer } from 'rxjs';
 import { BtncalcService } from '../../../../../component/btncalc/btncalc.service';
+import { CouponService } from '../../../../../component/coupon/coupon.service';
+import { LoaderService } from '../../../../../services/utility/loader/loader.service';
 import { MainService } from '../../../main.service';
+import { KenoNumberNative } from './keno.model';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-playable-board-keno',
   templateUrl: './keno.component.html',
   styleUrls: ['./keno.component.scss']
@@ -22,7 +24,8 @@ export class KenoComponent implements OnInit, OnDestroy {
     private mainService: MainService,
     private btnCalcService: BtncalcService,
     private elysCoupon: ElysCouponService,
-    private couponService: CouponService
+    private couponService: CouponService,
+    private loaderService: LoaderService
   ) {
     this.numberSelectionQueue = [];
   }
@@ -42,6 +45,9 @@ export class KenoComponent implements OnInit, OnDestroy {
           }
         });
       }
+
+      // it's required for disable the spinner is loading when the product selected is same to product menu touched.
+      timer(300).subscribe(() => this.loaderService.setLoading(false, null));
     });
 
     // Reload selection when the coupon has been deleted or has been placed

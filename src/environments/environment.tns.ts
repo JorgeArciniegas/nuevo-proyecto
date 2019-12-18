@@ -128,12 +128,6 @@ export const environment: Environment = (() => {
       case 'betese-staging':
         envVars = beteseStagingEnvironment;
         break;
-      case 'uganbet-prod':
-        envVars = uganbetEnvironment;
-        break;
-      case 'uganbet-staging':
-        envVars = uganbetStagingEnvironment;
-        break;
       case 'sportrace-prod':
         envVars = sportraceEnvironment;
         break;

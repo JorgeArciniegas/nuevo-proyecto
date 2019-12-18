@@ -1,6 +1,25 @@
 import { Injectable } from '@angular/core';
-import { BetCouponGroup, BetCouponOdd, CancelCouponRequest, CancelCouponResponse, CouponCategory, CouponType, ElysApiService, FlagAsPaidRequest, FlagAsPaidResponse, StagedCouponStatus } from '@elys/elys-api';
-import { AddNumberRequest, AddOddRequest, AddOddRequestSC, BetCouponOddExtended, CouponServiceMessageType, ElysCouponService, MessageSource } from '@elys/elys-coupon';
+import {
+  BetCouponGroup,
+  BetCouponOdd,
+  CancelCouponRequest,
+  CancelCouponResponse,
+  CouponCategory,
+  CouponType,
+  ElysApiService,
+  FlagAsPaidRequest,
+  FlagAsPaidResponse,
+  StagedCouponStatus
+} from '@elys/elys-api';
+import {
+  AddNumberRequest,
+  AddOddRequest,
+  AddOddRequestSC,
+  BetCouponOddExtended,
+  CouponServiceMessageType,
+  ElysCouponService,
+  MessageSource
+} from '@elys/elys-coupon';
 import { Observable, Subject, timer } from 'rxjs';
 import { AppSettings } from '../../../../src/app/app.settings';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';

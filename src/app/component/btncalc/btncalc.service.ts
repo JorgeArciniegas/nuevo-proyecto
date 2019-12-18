@@ -45,13 +45,20 @@ export class BtncalcService implements OnDestroy {
     private couponService: CouponService,
     private routerService: RouterService
   ) {
-    // Listen to the coupon placement and reset the player's preset stake
-    this.couponHasBeenPlacedSubscription = couponService.couponHasBeenPlacedObs.subscribe(() => {
-      this.settingStakePresetPlayer();
-    });
-
     this.polyfunctionalDecimalsFlag = true;
     this.polyfunctionalAdditionFlag = true;
+    // stake preset from player insert
+    this.polyfunctionStakePresetPlayerSub = new Subject<PolyfunctionStakePresetPlayer>();
+    this.polyfunctionStakePresetPlayerObs = this.polyfunctionStakePresetPlayerSub.asObservable();
+
+  }
+
+  initializeSubscriptionAndData() {
+
+    // Listen to the coupon placement and reset the player's preset stake
+    this.couponHasBeenPlacedSubscription = this.couponService.couponHasBeenPlacedObs.subscribe(() => {
+      this.settingStakePresetPlayer();
+    });
     // manages data display: amount addition/decimals and amount distribution
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(element => {
       // check if the odds is changed and reset the tap of preset stake
@@ -88,9 +95,7 @@ export class BtncalcService implements OnDestroy {
       this.polyfunctionalStakeCoupon = elem;
     });
 
-    // stake preset from player insert
-    this.polyfunctionStakePresetPlayerSub = new Subject<PolyfunctionStakePresetPlayer>();
-    this.polyfunctionStakePresetPlayerObs = this.polyfunctionStakePresetPlayerSub.asObservable();
+
     // setup the default values
     this.checkSeparator();
     this.settingStakePresetPlayer();
@@ -219,7 +224,7 @@ export class BtncalcService implements OnDestroy {
 
   // default presets player
   settingStakePresetPlayer(recursiveCounter: number = 0): void {
-    if (this.setting.defaultAmount.PresetOne !== null) {
+    if (this.setting.defaultAmount && this.setting.defaultAmount.PresetOne !== null) {
       this.polyfunctionStakePresetPlayer =
         new PolyfunctionStakePresetPlayer(
           this.productService.product.layoutProducts.type === LAYOUT_TYPE.KENO ? TypeBetSlipColTot.GROUP : TypeBetSlipColTot.COL,
@@ -227,13 +232,19 @@ export class BtncalcService implements OnDestroy {
         );
       this.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
     } else {
+      // increment counter of attempt recall
       recursiveCounter++;
-      defer(
-        () => recursiveCounter < 4 ? timer(1000) : this.routerService.getRouter().navigateByUrl('/error')).
-        subscribe(() => this.settingStakePresetPlayer(recursiveCounter));
-      /*  if (recursiveCounter < 4) {
-         timer(1000).subscribe(() => this.settingStakePresetPlayer(recursiveCounter));
-       } */
+      if (recursiveCounter < 3) {
+        timer(1000).subscribe(() => this.settingStakePresetPlayer(recursiveCounter));
+      } else {
+        // when the max attempt is occured, it set the value of one on presets
+        this.polyfunctionStakePresetPlayer =
+          new PolyfunctionStakePresetPlayer(
+            this.productService.product.layoutProducts.type === LAYOUT_TYPE.KENO ? TypeBetSlipColTot.GROUP : TypeBetSlipColTot.COL,
+            1
+          );
+        this.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
+      }
     }
   }
 

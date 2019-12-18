@@ -1,19 +1,19 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CancelCouponRequest, ErrorStatus, FlagAsPaidRequest } from '@elys/elys-api';
+import { DialogTypeCoupon } from '../../../products/products.model';
 import { UserService } from '../../../services/user.service';
 import { CouponService } from '../coupon.service';
-import { PrintReceiptService } from './print-receipt/print-receipt.service';
 import { Receipt } from './print-receipt/print-receipt.model';
-import { DialogTypeCoupon } from '../../../products/products.model';
+import { PrintReceiptService } from './print-receipt/print-receipt.service';
 
 @Component({
   selector: 'app-pay-cancel-dialog',
   templateUrl: './pay-cancel-dialog.component.html',
   styleUrls: ['./pay-cancel-dialog.component.scss']
 })
-export class PayCancelDialogComponent implements OnInit {
+export class PayCancelDialogComponent {
   public titleType: string;
   public form: FormGroup;
   public errorMessage: string;
@@ -36,8 +36,6 @@ export class PayCancelDialogComponent implements OnInit {
       couponCode: [null, Validators.compose([Validators.required, Validators.minLength(15), Validators.maxLength(18)])]
     });
   }
-
-  ngOnInit() { }
 
   public onSubmit(form: FormGroup): void {
     let couponCode: string;

@@ -9,9 +9,9 @@ import {
   VirtualDetailOddsOfEventResponse,
   VirtualEventCountDownRequest,
   VirtualEventCountDownResponse,
+  VirtualGetRankByEventResponse,
   VirtualProgramTreeBySportRequest,
-  VirtualProgramTreeBySportResponse,
-  VirtualGetRankByEventResponse
+  VirtualProgramTreeBySportResponse
 } from '@elys/elys-api';
 import { ElysFeedsService } from '@elys/elys-feeds';
 import { cloneDeep as clone } from 'lodash';
@@ -21,6 +21,7 @@ import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
+import { UserService } from '../../services/user.service';
 import { BetOdd, Market, PolyfunctionalArea, PolyfunctionalStakeCoupon, SelectionIdentifier } from '../products.model';
 import { ProductsService } from '../products.service';
 import {
@@ -38,24 +39,22 @@ import {
   SmartCodeType,
   SpecialBet,
   SpecialBetValue,
+  SpecialOddData,
   TypeBetSlipColTot,
   TypePlacingEvent,
-  VirtualBetSelectionExtended,
-  VirtualBetTournamentExtended,
-  SpecialOddData,
+  VirtualBetEventExtended,
   VirtualBetMarketExtended,
-  VirtualBetEventExtended
+  VirtualBetSelectionExtended,
+  VirtualBetTournamentExtended
 } from './main.models';
-import { MainServiceExtra } from './main.service.extra';
+import { KenoNumber } from './playable-board/templates/keno/keno.model';
 import { ResultsService } from './results/results.service';
 import { areas, overviewAreas } from './SoccerAreas';
-import { UserService } from '../../services/user.service';
-import { KenoNumber } from './playable-board/templates/keno/keno.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MainService extends MainServiceExtra {
+export class MainService {
   private reload: number;
   private cacheEvents: VirtualBetEvent[] = [];
   private cacheTournaments: VirtualBetTournamentExtended[] = [];
@@ -79,6 +78,16 @@ export class MainService extends MainServiceExtra {
 
   countdownSub: Subscription;
 
+
+  public currentEventSubscribe: Subject<number>;
+  public currentEventObserve: Observable<number>;
+  public eventDetails: EventDetail;
+  /**
+   * set to reset all variables
+   * When it is true, clear the polyfunctionalArea, Coupon and playboard
+   * */
+  public toResetAllSelections: boolean;
+
   constructor(
     private elysApi: ElysApiService,
     private productService: ProductsService,
@@ -90,7 +99,6 @@ export class MainService extends MainServiceExtra {
     private feedData: ElysFeedsService,
     private userservice: UserService
   ) {
-    super(couponService, destroyCouponService);
     this.toResetAllSelections = true;
 
     this.createPlayerList();
@@ -138,9 +146,21 @@ export class MainService extends MainServiceExtra {
       if (reset) {
         this.toResetAllSelections = true;
         this.resetPlayEvent();
+        // Resume event's countdown
+        this.resumeCountDown();
       }
     });
 
+  }
+
+  /**
+   *
+   */
+  resumeCountDown() {
+    if (this.countdownSub && this.countdownSub.closed || !this.countdownSub) {
+      this.currentAndSelectedEventTime();
+      this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
+    }
   }
 
   /**
@@ -183,7 +203,7 @@ export class MainService extends MainServiceExtra {
       if (this.countdownSub.closed) {
         return;
       }
-      if (this.remainingTime.second === 0 && this.remainingTime.minute === 0) {
+      if (this.remainingTime.second === 0 && this.remainingTime.minute === 0 || !this.userservice.isUserLogged) {
         // stop the countdown to prevent multiple calls
         this.countdownSub.unsubscribe();
         this.loadEvents();
@@ -295,7 +315,7 @@ export class MainService extends MainServiceExtra {
    * Inside it, it must be created the request object.
    * The reference values is taken by "ProductService" on object "product".
    */
-  loadEventsFromApi(all: boolean = false) {
+  loadEventsFromApi(all: boolean = false, lastAttemptCall?: number) {
     const request: VirtualProgramTreeBySportRequest = {
       SportIds: this.productService.product.sportId.toString(),
       CategoryTypes: this.productService.product.codeProduct
@@ -364,6 +384,21 @@ export class MainService extends MainServiceExtra {
           this.eventDetailOddsByCacheTournament(this.eventDetails.events[0].number);
         }
         this.currentAndSelectedEventTime();
+      }
+    }, (error) => {
+      // check the error
+      if (error.status === 401) {
+        this.userservice.logout();
+        this.countdownSub.unsubscribe();
+        return;
+      }
+
+      lastAttemptCall = !lastAttemptCall ? 1 : lastAttemptCall + 1;
+      if (!lastAttemptCall || lastAttemptCall < 3) {
+        timer(1000).subscribe(() => this.loadEventsFromApi(all, lastAttemptCall));
+      } else {
+        this.countdownSub.unsubscribe();
+
       }
     });
     this.reload = this.productService.product.layoutProducts.cacheEventsItem;
@@ -507,14 +542,26 @@ export class MainService extends MainServiceExtra {
             this.attempts = 0;
           } catch (err) {
             console.log(err);
-            if (this.attempts < 5) {
-              this.attempts++;
-              setTimeout(() => {
-                this.eventDetailOddsByCacheTournament(tournamentNumber);
-              }, 1000);
+            if (!this.attempts || this.attempts < 3) {
+              this.attempts += 1;
+              timer(1000).subscribe(() => this.eventDetailOddsByCacheTournament(tournamentNumber));
             } else {
               this.attempts = 0;
             }
+          }
+        }, (error) => {
+          // check the error
+          if (error.status === 401) {
+            this.userservice.logout();
+            this.countdownSub.unsubscribe();
+            return;
+          }
+
+          this.attempts = this.attempts + 1;
+          if (this.attempts < 2) {
+            timer(1000).subscribe(() => this.eventDetailOddsByCacheTournament(tournamentNumber));
+          } else {
+            this.countdownSub.unsubscribe();
           }
         });
     }
@@ -585,7 +632,7 @@ export class MainService extends MainServiceExtra {
     this.placingEvent = new PlacingEvent();
     this.smartCode = new Smartcode();
     this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
-    this.createPlayerList();
+    // this.createPlayerList();
 
     // Create a new polyfunctionArea object
     const polyfunctionalArea: PolyfunctionalArea = new PolyfunctionalArea();
@@ -598,18 +645,29 @@ export class MainService extends MainServiceExtra {
     // updated the new PolyfunctionalArea
     this.productService.polyfunctionalAreaSubject.next(polyfunctionalArea);
     this.productService.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
+    if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.RACING) {
+      this.clearPlayerListEvents();
+    }
   }
 
-  eventDetailOdds(eventNumber: number): void {
+  clearPlayerListEvents() {
+    if (!this.playersList) {
+      this.createPlayerList();
+      return;
+    }
+
+    this.playersList.forEach((player) => {
+      player.actived = false;
+      player.selectable = true;
+    });
+  }
+
+  eventDetailOdds(eventNumber: number, attemptRollBack?: number): void {
     if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
       this.eventDetailOddsByCacheTournament(eventNumber);
       return;
     }
     const event: VirtualBetEvent = this.cacheEvents.filter((cacheEvent: VirtualBetEvent) => cacheEvent.id === eventNumber)[0];
-    const request: VirtualDetailOddsOfEventRequest = {
-      sportId: this.productService.product.sportId,
-      matchId: eventNumber
-    };
     // Ceck, if it is empty load from api
     if (event.mk == null || event.mk.length === 0) {
       // tslint:disable-next-line:max-line-length
@@ -629,6 +687,20 @@ export class MainService extends MainServiceExtra {
             } else {
               this.attempts = 0;
             }
+          }
+        }, (error) => {
+          // check the error
+          if (error.status === 401) {
+            this.userservice.logout();
+            this.countdownSub.unsubscribe();
+            return;
+          }
+
+          this.attempts = this.attempts + 1;
+          if (this.attempts < 2) {
+            timer(1000).subscribe(() => this.eventDetailOdds(eventNumber));
+          } else {
+            this.countdownSub.unsubscribe();
           }
         });
     }
@@ -1567,6 +1639,39 @@ export class MainService extends MainServiceExtra {
     } finally {
       areaFuncData.firstTap = true;
       this.productService.polyfunctionalAreaSubject.next(areaFuncData);
+    }
+  }
+
+  /**
+   * Method to fire the current event number change.
+   * If there is a coupon, it will be asked to delete it.
+   * Otherwise, if there isn't, execute the change.
+   * @param selected number of event
+   * @param userSelect if the event number is change by user  or it is forward by system
+   *
+   * */
+  fireCurrentEventChange(selected: number, userSelect = false) {
+    // check if the coupon is initialized
+    this.couponService.checkHasCoupon();
+    // set to reset all variables
+    this.toResetAllSelections = true;
+    // if the coupon isn't empty
+    if (
+      this.couponService.productHasCoupon.checked &&
+      (this.eventDetails.currentEvent !== selected || userSelect) &&
+      (this.couponService.coupon && this.couponService.coupon.Odds.length > 0)
+    ) {
+      // open modal destroy confirm coupon
+      this.destroyCouponService.openDestroyCouponDialog();
+      // subscribe to event dialog
+      this.destroyCouponService.dialogRef.afterClosed().subscribe(elem => {
+        if (elem) {
+          this.currentEventSubscribe.next(selected);
+        }
+      });
+    } else {
+      // to continue
+      this.currentEventSubscribe.next(selected);
     }
   }
 }

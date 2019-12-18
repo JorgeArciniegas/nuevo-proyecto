@@ -7,6 +7,7 @@ const { nsReplaceBootstrap } = require("nativescript-dev-webpack/transformers/ns
 const { nsReplaceLazyLoader } = require("nativescript-dev-webpack/transformers/ns-replace-lazy-loader");
 const { nsSupportHmrNg } = require("nativescript-dev-webpack/transformers/ns-support-hmr-ng");
 const { getMainModulePath } = require("nativescript-dev-webpack/utils/ast-utils");
+const { getNoEmitOnErrorFromTSConfig } = require("nativescript-dev-webpack/utils/tsconfig-utils");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
@@ -36,8 +37,8 @@ module.exports = env => {
   const {
     // The 'appPath' and 'appResourcesPath' values are fetched from
     // the nsconfig.json configuration file.
-    appPath = 'src',
-    appResourcesPath = 'src/App_Resources',
+    appPath = "src",
+    appResourcesPath = "App_Resources",
 
     // You can provide the following flags when running 'tns run android|ios'
     aot, // --env.aot
@@ -50,8 +51,12 @@ module.exports = env => {
     hmr, // --env.hmr,
     unitTesting, // --env.unitTesting
     verbose, // --env.verbose
+    snapshotInDocker, // --env.snapshotInDocker
+    skipSnapshotTools, // --env.skipSnapshotTools
+    compileSnapshot // --env.compileSnapshot
   } = env;
 
+  const useLibs = compileSnapshot;
   const isAnySourceMapEnabled = !!sourceMap || !!hiddenSourceMap;
   const externals = nsWebpack.getConvertedExternals(env.externals);
   const appFullPath = resolve(projectRoot, appPath);
@@ -107,6 +112,8 @@ module.exports = env => {
     itemsToClean.push(`${join(projectRoot, "platforms", "android", "app", "build", "configurations", "nativescript-android-snapshot")}`);
   }
 
+  const noEmitOnErrorFromTSConfig = getNoEmitOnErrorFromTSConfig(join(projectRoot, tsConfigName));
+
   nsWebpack.processAppComponents(appComponents, platform);
   const config = {
     mode: production ? "production" : "development",
@@ -158,6 +165,7 @@ module.exports = env => {
     devtool: hiddenSourceMap ? "hidden-source-map" : (sourceMap ? "inline-source-map" : "none"),
     optimization: {
       runtimeChunk: "single",
+      noEmitOnErrors: noEmitOnErrorFromTSConfig,
       splitChunks: {
         cacheGroups: {
           vendor: {
@@ -220,19 +228,24 @@ module.exports = env => {
 
         { test: /\.html$|\.xml$/, use: "raw-loader" },
 
-        // tns-core-modules reads the app.css and its imports using css-loader
         {
           test: /[\/|\\]app\.css$/,
           use: [
             "nativescript-dev-webpack/style-hot-loader",
-            { loader: "css-loader", options: { url: false } }
+            {
+              loader: "nativescript-dev-webpack/css2json-loader",
+              options: { useForImports: true }
+            }
           ]
         },
         {
           test: /[\/|\\]app\.scss$/,
           use: [
             "nativescript-dev-webpack/style-hot-loader",
-            { loader: "css-loader", options: { url: false } },
+            {
+              loader: "nativescript-dev-webpack/css2json-loader",
+              options: { useForImports: true }
+            },
             "sass-loader"
           ]
         },
@@ -256,10 +269,26 @@ module.exports = env => {
           test: /[\/\\]@angular[\/\\]core[\/\\].+\.js$/,
           parser: { system: true },
         },
+        platform !== "android" ? {} : {
+          test: /@nativescript\/core\/ui\/styling\/background\.android\.js$/,
+          use: [{
+            loader: 'string-replace-loader',
+            options: {
+              search: 'defaultDrawable = cachedDrawable.newDrawable(nativeView.getResources());',
+              replace: 'defaultDrawable = null;',
+              strict: true,
+            }
+          }]
+        },
       ],
+
     },
     plugins: [
       // Define useful constants like TNS_WEBPACK
+      /*  new webpack.DefinePlugin({
+           "global.TNS_WEBPACK": "true",
+           "process": "global.process",
+       }), */
       new webpack.DefinePlugin({
         "global.TNS_WEBPACK": "true",
         "process.env": {
@@ -289,6 +318,7 @@ module.exports = env => {
         }
       ])
     ],
+
   };
 
   if (report) {
@@ -306,7 +336,6 @@ module.exports = env => {
     config.plugins.push(new nsWebpack.NativeScriptSnapshotPlugin({
       chunk: "vendor",
       angular: true,
-      target: ["arm", "arm64", "ia32"],
       requireModules: [
         "reflect-metadata",
         "@angular/platform-browser",
@@ -318,7 +347,9 @@ module.exports = env => {
       ],
       projectRoot,
       webpackConfig: config,
-
+      snapshotInDocker,
+      skipSnapshotTools,
+      useLibs
     }));
   }
 

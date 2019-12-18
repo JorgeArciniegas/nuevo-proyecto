@@ -23,45 +23,55 @@ export class AdminComponent implements AfterContentInit {
   ) {
     this.isAdminLogged = this.userService.isLoggedOperator();
     this.layout = this.gridLayoutResponsive();
+  }
 
-    // console.log('AdminComponent', this.loaderService.isLoading);
+  tapNewRouting() {
+    this.loaderService.setLoading(true, 'ChildrenAdmin');
   }
 
   ngAfterContentInit() {
     timer(300).subscribe(() =>
-      this.loaderService.isLoading.next(false)
+      this.loaderService.setLoading(false, 'AdminPanel')
     );
   }
 
 
   goToBetList(): void {
-    this.router.getRouter().navigateByUrl('/admin/reports/betsList');
+    this.tapNewRouting();
+    timer(100).subscribe(() => this.router.getRouter().navigateByUrl('/admin/reports/betsList'));
   }
 
   goToTransactionsList(): void {
-    this.router.getRouter().navigateByUrl('/admin/reports/transactionsList');
+    this.tapNewRouting();
+    timer(100).subscribe(() => this.router.getRouter().navigateByUrl('/admin/reports/transactionsList'));
   }
 
   goToOperatorSummary(): void {
-    this.router.getRouter().navigateByUrl('/admin/reports/operatorSummary');
+    this.tapNewRouting();
+    timer(100).subscribe(() => this.router.getRouter().navigateByUrl('/admin/reports/operatorSummary'));
   }
 
   goToLanguageSettings(): void {
-    this.router.getRouter().navigateByUrl('/admin/settings/languages');
+    this.tapNewRouting();
+    timer(100).subscribe(() => this.router.getRouter().navigateByUrl('/admin/settings/languages'));
   }
 
   goToOperators(): void {
-    this.router.getRouter().navigateByUrl('/admin/operators');
+    this.tapNewRouting();
+    timer(100).subscribe(() => this.router.getRouter().navigateByUrl('/admin/operators'));
   }
 
 
   goToVboxes(): void {
-    this.router.getRouter().navigateByUrl('/admin/vbox');
+    this.tapNewRouting();
+    timer(100).subscribe(() => this.router.getRouter().navigateByUrl('/admin/vbox'));
   }
 
   goToStatementShop(): void {
-    this.router.getRouter().navigateByUrl('/admin/reports/statement-vitual-shop');
+    this.tapNewRouting();
+    timer(100).subscribe(() => this.router.getRouter().navigateByUrl('/admin/reports/statement-vitual-shop'));
   }
+
 
   /**
    * find the screen resolution and

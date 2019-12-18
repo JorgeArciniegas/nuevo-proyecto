@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ProductsService } from '../../products.service';
 import { ResultsService } from './results.service';
 
@@ -8,7 +8,7 @@ import { ResultsService } from './results.service';
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss']
 })
-export class ResultsComponent implements OnInit {
+export class ResultsComponent {
   @Input()
   public rowHeight: number;
 
@@ -16,6 +16,4 @@ export class ResultsComponent implements OnInit {
     public service: ResultsService,
     public productService: ProductsService
   ) { }
-
-  ngOnInit() { }
 }
