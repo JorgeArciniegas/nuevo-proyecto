@@ -125,6 +125,3 @@ const onlyDesktop: Routes = [
   }
 ];
 
-export const mobileRoutes: Routes = routes;
-export const desktopRoutes: Routes = onlyDesktop.concat(routes);
-

@@ -14,7 +14,7 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { environment } from '../environments/environment';
 import { VERSION } from '../environments/version';
-import { componentDeclarations, providerDeclarations, desktopRoutes } from './app.common';
+import { componentDeclarations, providerDeclarations } from './app.common';
 import { AppComponent } from './app.component';
 import { ConfirmDestroyCouponComponent } from './component/coupon/confirm-destroy-coupon/confirm-destroy-coupon.component';
 import { SharedModule } from './shared/shared.module';

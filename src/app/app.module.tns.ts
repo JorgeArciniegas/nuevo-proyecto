@@ -12,7 +12,7 @@ import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { NgShadowModule } from 'nativescript-ng-shadow';
 import { environment } from '../environments/environment';
-import { componentDeclarations, providerDeclarations, mobileRoutes } from './app.common';
+import { componentDeclarations, providerDeclarations } from './app.common';
 import { AppComponent } from './app.component';
 import { NotificationService } from './notifications/notification.service';
 import { SharedModule } from './shared/shared.module';
