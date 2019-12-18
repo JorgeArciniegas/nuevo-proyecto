@@ -50,7 +50,12 @@ export class ProductsService extends ProductsServiceExtra {
   ) {
     super(couponInternalService, destroyCouponService, router);
     // set the product default
-    this.product = appSetting.products.find(prod => prod.productSelected);
+    this.product = appSetting.products.find(item => {
+      console.log("check: ", this.userservice.checkProductIsPlayable(item.codeProduct));
+      return this.userservice.checkProductIsPlayable(item.codeProduct);
+    });
+    console.log(this.product);
+    // this.product = appSetting.products.find(prod => prod.productSelected);
     // Destroy coupon confirmation
     if (this.couponInternalService) {
       this.couponInternalService.productHasCoupon = { checked: false };

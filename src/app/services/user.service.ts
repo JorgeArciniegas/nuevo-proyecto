@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CurrencyCodeRequest, CurrencyCodeResponse, ElysApiService, StagedCouponStatus, TokenDataSuccess, UserType } from '@elys/elys-api';
+import { CurrencyCodeRequest, CurrencyCodeResponse, ElysApiService, StagedCouponStatus, TokenDataSuccess, UserType, UserPolicies } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { Subscription, timer } from 'rxjs';
 import { AppSettings } from '../app.settings';
@@ -35,6 +35,16 @@ export class UserService {
   public isBtnCalcEditable = true;
   public userCurrency: string;
   private isInitUser = true;
+  public get policy(): UserPolicies {
+    if (!this.dataUserDetail || !this.dataUserDetail.operatorDetail && !this.dataUserDetail.userDetail) {
+      console.log("HEEEEEYYY");
+      this.checkLoginData();
+    }
+    console.log("dataUserDetail", this.dataUserDetail);
+    return !this.isLoggedOperator() ?
+      this.dataUserDetail.userDetail.UserPolicies
+      : this.dataUserDetail.operatorDetail.UserPolicies;
+  }
   constructor(
     private router: RouterService,
     private storageService: StorageService,
@@ -61,6 +71,15 @@ export class UserService {
     });
   }
 
+  checkProductIsPlayable(categoryId: string): boolean {
+    try {
+      return this.policy.AuthorizedVirtualCategories.includes(categoryId);
+    } catch (error) {
+      console.log("error: ", error);
+      timer(1000).subscribe(() => this.checkProductIsPlayable(categoryId));
+    }
+  }
+
   /**
    * check login data
    */
@@ -68,6 +87,7 @@ export class UserService {
     if (this.isUserLogged) {
       this.loadDataPool = timer(bootStartMsec, 300000).subscribe(() => {
         if (this.isUserLogged) {
+          console.log("loaduserdata");
           this.loadUserData(this.storageService.getData('tokenData'), this.isLoggedOperator());
         }
       });
@@ -338,9 +358,11 @@ export class UserService {
     });
     // match products result from api to products on the system
     this.api.virtual.getAvailablevirtualsports().then(items => {
-      this.appSetting.products = this.appSetting.products.filter(product =>
-        items.map(x => x.SportId).includes(product.sportId)
-      );
+      this.appSetting.products.map(product => {
+        if (!items.map(x => x.SportId).includes(product.sportId)) {
+          product.isPlayable = false;
+        }
+      });
     });
 
     // filter product by sportId enabled to user policies
@@ -350,8 +372,11 @@ export class UserService {
     } else {
       authorizedVirtualSports = this.dataUserDetail.operatorDetail.UserPolicies.AuthorizedVirtualSports;
     }
-    this.appSetting.products = this.appSetting.products.filter(product =>
-      authorizedVirtualSports.includes(product.sportId)
+    this.appSetting.products.map(product => {
+      if (!authorizedVirtualSports.includes(product.sportId)) {
+        product.isPlayable = false;
+      }
+    }
     );
 
     // filter product by categoryId enabled for user policies
@@ -361,8 +386,11 @@ export class UserService {
     } else {
       authorizedVirtualCategories = this.dataUserDetail.operatorDetail.UserPolicies.AuthorizedVirtualCategories;
     }
-    this.appSetting.products = this.appSetting.products.filter(product =>
-      authorizedVirtualCategories.includes(product.codeProduct)
+    this.appSetting.products.map(product => {
+      if (!authorizedVirtualCategories.includes(product.codeProduct)) {
+        product.isPlayable = false;
+      }
+    }
     );
 
     // Order the result from minor to major
