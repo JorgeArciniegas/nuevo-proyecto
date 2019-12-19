@@ -24,14 +24,12 @@ export class AdvanceGameComponent implements OnInit {
 
   // Layout current product
   public get layoutProducts(): LayoutProducts {
-    return this.productService.product.layoutProducts;
+    return this.productService.product ? this.productService.product.layoutProducts : undefined;
   }
-
-
 
   layoutType: typeof LAYOUT_TYPE = LAYOUT_TYPE;
 
-  constructor(public service: MainService, private productService: ProductsService, private userService: UserService) {
+  constructor(public service: MainService, public productService: ProductsService, private userService: UserService) {
   }
 
   ngOnInit() {

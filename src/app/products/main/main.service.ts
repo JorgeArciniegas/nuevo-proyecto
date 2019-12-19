@@ -592,6 +592,9 @@ export class MainService {
   }
 
   currentAndSelectedEventTime() {
+    if (!this.eventDetails) {
+      return;
+    }
     // Check current event index, if is selected an event, decrease the index because the first event is completed and removed
     if (this.eventDetails.currentEvent > 0) {
       this.eventDetails.currentEvent = this.eventDetails.currentEvent - 1;

@@ -9,6 +9,7 @@ import { RouterService } from '../services/utility/router/router.service';
 import { DialogService } from './dialog.service';
 import { ProductsServiceExtra } from './product.service.extra';
 import { BetDataDialog, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupon } from './products.model';
+import { Product } from './models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -49,13 +50,7 @@ export class ProductsService extends ProductsServiceExtra {
     private userservice: UserService
   ) {
     super(couponInternalService, destroyCouponService, router);
-    // set the product default
-    this.product = appSetting.products.find(item => {
-      console.log("check: ", this.userservice.checkProductIsPlayable(item.codeProduct));
-      return this.userservice.checkProductIsPlayable(item.codeProduct);
-    });
-    console.log(this.product);
-    // this.product = appSetting.products.find(prod => prod.productSelected);
+
     // Destroy coupon confirmation
     if (this.couponInternalService) {
       this.couponInternalService.productHasCoupon = { checked: false };
@@ -124,6 +119,25 @@ export class ProductsService extends ProductsServiceExtra {
   resetBoard(): void {
     this.playableBoardResetSubject.next(true);
     this.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
+  }
+
+
+  checkDefaultProduct() {
+    let tmpProduct: Products;
+    this.appSetting.products.forEach(item => {
+      if (item.isPlayable && !tmpProduct) {
+        tmpProduct = item;
+        return;
+      }
+    });
+
+    if (!tmpProduct) {
+      this.router.getRouter().navigateByUrl('/admin');
+    } else {
+      this.changeProduct(tmpProduct.codeProduct);
+    }
+
+
   }
 
 }

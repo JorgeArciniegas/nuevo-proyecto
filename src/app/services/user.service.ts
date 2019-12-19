@@ -29,6 +29,8 @@ export class UserService {
     this._dataUserDetail = value;
   }
 
+
+
   // URL to which was navigating before to be stopped by the authorization guard.
   public targetedUrlBeforeLogin: string;
   public isModalOpen = false;
@@ -36,12 +38,10 @@ export class UserService {
   public userCurrency: string;
   private isInitUser = true;
   public get policy(): UserPolicies {
-    if (!this.dataUserDetail || !this.dataUserDetail.operatorDetail && !this.dataUserDetail.userDetail) {
-      console.log("HEEEEEYYY");
-      this.checkLoginData();
+    if (!this.dataUserDetail.userDetail && !this.dataUserDetail.operatorDetail) {
+      return;
     }
-    console.log("dataUserDetail", this.dataUserDetail);
-    return !this.isLoggedOperator() ?
+    return this.dataUserDetail.userDetail !== null ?
       this.dataUserDetail.userDetail.UserPolicies
       : this.dataUserDetail.operatorDetail.UserPolicies;
   }
@@ -71,15 +71,6 @@ export class UserService {
     });
   }
 
-  checkProductIsPlayable(categoryId: string): boolean {
-    try {
-      return this.policy.AuthorizedVirtualCategories.includes(categoryId);
-    } catch (error) {
-      console.log("error: ", error);
-      timer(1000).subscribe(() => this.checkProductIsPlayable(categoryId));
-    }
-  }
-
   /**
    * check login data
    */
@@ -87,7 +78,6 @@ export class UserService {
     if (this.isUserLogged) {
       this.loadDataPool = timer(bootStartMsec, 300000).subscribe(() => {
         if (this.isUserLogged) {
-          console.log("loaduserdata");
           this.loadUserData(this.storageService.getData('tokenData'), this.isLoggedOperator());
         }
       });
@@ -360,6 +350,7 @@ export class UserService {
     this.api.virtual.getAvailablevirtualsports().then(items => {
       this.appSetting.products.map(product => {
         if (!items.map(x => x.SportId).includes(product.sportId)) {
+          product.productSelected = false;
           product.isPlayable = false;
         }
       });
@@ -374,6 +365,7 @@ export class UserService {
     }
     this.appSetting.products.map(product => {
       if (!authorizedVirtualSports.includes(product.sportId)) {
+        product.productSelected = false;
         product.isPlayable = false;
       }
     }
@@ -388,6 +380,7 @@ export class UserService {
     }
     this.appSetting.products.map(product => {
       if (!authorizedVirtualCategories.includes(product.codeProduct)) {
+        product.productSelected = false;
         product.isPlayable = false;
       }
     }

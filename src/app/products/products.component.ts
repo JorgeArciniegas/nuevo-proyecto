@@ -1,7 +1,7 @@
-import { Component, HostListener, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { MessageSource } from '@elys/elys-coupon';
-import { Subscription } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
 import { CouponService } from '../component/coupon/coupon.service';
 import { UserService } from '../services/user.service';
@@ -16,7 +16,7 @@ import { ProductsService } from './products.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnDestroy {
+export class ProductsComponent implements AfterViewInit, OnDestroy {
   observableMediaSubscribe: Subscription;
   public rowHeight: number;
   public messageSource: typeof MessageSource = MessageSource;
@@ -55,13 +55,23 @@ export class ProductsComponent implements OnDestroy {
     public readonly userService: UserService,
     public readonly couponService: CouponService,
     public readonly couponDialogService: CouponDialogService,
-    public windowSizeService: WindowSizeService
+    public windowSizeService: WindowSizeService,
+    private cdr: ChangeDetectorRef
   ) {
     this.observableMediaSubscribe = this.observableMedia.media$.subscribe((change: MediaChange) => {
       this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
       // this.service.fnWindowsSize();
       this.rowHeight = (this.windowSizeService.windowSize.columnHeight - 30) / 12;
     });
+  }
+
+  ngAfterViewInit() {
+    if (!this.service.product) {
+      timer(1).subscribe(() => {
+        this.service.checkDefaultProduct();
+        this.cdr.detectChanges();
+      });
+    }
   }
 
   ngOnDestroy(): void {
