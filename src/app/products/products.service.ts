@@ -9,7 +9,6 @@ import { RouterService } from '../services/utility/router/router.service';
 import { DialogService } from './dialog.service';
 import { ProductsServiceExtra } from './product.service.extra';
 import { BetDataDialog, DialogData, PolyfunctionalArea, PolyfunctionalStakeCoupon } from './products.model';
-import { Product } from './models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +41,7 @@ export class ProductsService extends ProductsServiceExtra {
 
   constructor(
     public dialog: DialogService,
-    // private windowSizeService: WindowSizeService,
+    // private windowSizeService: WindowSizeSersvice,
     private appSetting: AppSettings,
     public couponInternalService: CouponService,
     public destroyCouponService: DestroyCouponService,
