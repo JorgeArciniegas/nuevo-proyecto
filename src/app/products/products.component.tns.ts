@@ -41,7 +41,7 @@ export class ProductsComponent implements AfterContentInit, OnDestroy, AfterView
 
   ngAfterViewInit() {
     if (!this.service.product) {
-      timer(1).subscribe(() => {
+      timer().subscribe(() => {
         this.service.checkDefaultProduct();
         this.cdr.detectChanges();
       });
