@@ -95,6 +95,10 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
         this.userService.isLoggedOperator()) {
         r = true;
       }
+      if (childRoute.data.expectedRole.includes(TYPE_ACCOUNT.ADMIN) &&
+        !this.userService.isLoggedOperator()) {
+        r = true;
+      }
     } catch (err) {
       r = false;
     } finally {
