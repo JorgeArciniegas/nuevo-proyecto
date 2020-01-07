@@ -92,7 +92,8 @@ export class AuthorizationGuard implements CanActivate, CanActivateChild {
     try {
       // check if the route has a restriction
       if (childRoute.data.expectedRole.includes(TYPE_ACCOUNT.OPERATOR) &&
-        this.userService.isLoggedOperator()) {
+        this.userService.isLoggedOperator() || childRoute.data.expectedRole.includes(TYPE_ACCOUNT.ADMIN) &&
+        !this.userService.isLoggedOperator()) {
         r = true;
       }
     } catch (err) {

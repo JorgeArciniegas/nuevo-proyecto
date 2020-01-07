@@ -14,14 +14,15 @@
         <GridLayout row="1" class="button btn-default btn-filter"
           [ngClass]="{'btn-filter-success': betsListService.dateHasPlaced && !betsListService.carriedOut}"
           [isEnabled]="betsListService.couponStatus !== couponStatus.Cancelled">
-          <Button text="{{'CLOSING' | translate}}" class="button-internal" (tap)="changeValue('dateHasPlaced', true)"
+          <Button text="{{'SETTLEMENT' | translate}}" class="button-internal" (tap)="changeValue('dateHasPlaced', true)"
             [isEnabled]="betsListService.couponStatus !== couponStatus.Cancelled"></Button>
         </GridLayout>
       </GridLayout>
       <GridLayout row="0" col="1" rows="*,*">
         <GridLayout row="0" class="button btn-default btn-filter"
           [ngClass]="{'btn-filter-success': betsListService.carriedOut}">
-          <Button text="{{'SETTLEMENT' | translate}}" class="button-internal" (tap)="changeValue('carriedOut', true)"
+          <Button text="{{'FILTER_DATE_OF_PAYMENT' | translate}}" class="button-internal"
+            (tap)="changeValue('carriedOut', true)"
             [isEnabled]="betsListService.couponStatus !== couponStatus.Cancelled"></Button>
         </GridLayout>
       </GridLayout>
@@ -98,7 +99,8 @@
       <GridLayout row="{{i}}" col="0" *ngFor="let type of couponStatus.values(); let i = index;"
         class="button btn-default btn-filter"
         [ngClass]="{'btn-filter-success': betsListService.couponStatus === couponStatus[type]}">
-        <Button text="{{'DYNAMIC_KEYS.CouponStatusInternal.' + type | translate}}" class="button-internal"
+        <Button [ngClass]="{'disabled' : betsListService.carriedOut === true}"
+          text="{{'DYNAMIC_KEYS.CouponStatusInternal.' + type | translate}}" class="button-internal"
           (tap)="changeValue('couponStatus', couponStatus[type])" [isEnabled]="!betsListService.carriedOut"></Button>
       </GridLayout>
     </GridLayout>
