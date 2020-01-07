@@ -3,11 +3,11 @@ import { BetCouponGroup } from '@elys/elys-api';
 import { BtncalcService } from '../../../component/btncalc/btncalc.service';
 import { CouponService } from '../../../component/coupon/coupon.service';
 import { UserService } from '../../../services/user.service';
+import { WindowSizeService } from '../../../services/utility/window-size/window-size.service';
 import { DialogService } from '../../dialog.service';
 import { TypeBetSlipColTot } from '../../main/main.models';
 import { DialogData, PolyfunctionStakePresetPlayer } from '../../products.model';
 import { ProductsService } from '../../products.service';
-import { Switch } from 'tns-core-modules/ui/switch/switch';
 
 @Component({
   selector: 'app-groupings',
@@ -37,7 +37,8 @@ export class GroupingsComponent implements OnInit {
     public readonly couponService: CouponService,
     private btnService: BtncalcService,
     public productService: ProductsService,
-    private dialog: DialogService
+    private dialog: DialogService,
+    public windowSizeService: WindowSizeService
   ) {
     this.amountPresetPlayer = this.btnService.polyfunctionStakePresetPlayer;
     this.couponService.couponResponse.subscribe(coupon => {

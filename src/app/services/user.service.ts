@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
-import { CurrencyCodeRequest, CurrencyCodeResponse, ElysApiService, StagedCouponStatus, TokenDataSuccess, UserType } from '@elys/elys-api';
+import {
+  CurrencyCodeRequest,
+  CurrencyCodeResponse,
+  ElysApiService,
+  StagedCouponStatus,
+  TokenDataSuccess,
+  UserType
+} from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
-import { interval, Subscription, timer } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { AppSettings } from '../app.settings';
-import { DataUser, OperatorData } from './user.models';
+import { DataUser, LoginDataDirect, LOGIN_TYPE, OperatorData } from './user.models';
 import { RouterService } from './utility/router/router.service';
 import { StorageService } from './utility/storage/storage.service';
 import { TranslateUtilityService } from './utility/translate-utility.service';
@@ -141,6 +148,27 @@ export class UserService {
     }
   }
 
+  /**
+   * Method for login from url Without interactive mode
+   * @param request
+   */
+  async loginWithoutInteractive(request: LoginDataDirect): Promise<boolean> {
+    try {
+      const isAdmin = request.loginType === LOGIN_TYPE.WEB || request.loginType === LOGIN_TYPE.OPERATOR ? false : true;
+      await this.loadUserData(request.token, isAdmin);
+      // Check that we have gotten the user data.
+      if (this.dataUserDetail.operatorDetail && !isAdmin || this.dataUserDetail.userDetail && isAdmin) {
+        this.translateService.changeLanguage(request.language);
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      console.log('ERRROR loginWithoutInteractive --->', err);
+      return false;
+    }
+  }
+
   logout(): void {
     this.dataUserDetail = undefined;
     // Clear the storage's data and the token from vgen.service
@@ -150,7 +178,11 @@ export class UserService {
     if (this.loadDataPool) {
       this.loadDataPool.unsubscribe();
     }
-    this.router.getRouter().navigateByUrl('/login');
+    if (this.appSetting.loginInteractive) {
+      this.router.getRouter().navigateByUrl('/login');
+    } else {
+      this.router.callBackToBrand();
+    }
 
   }
   /**

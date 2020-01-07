@@ -13,8 +13,21 @@ export interface DataUser {
 }
 
 
+export interface LoginDataDirect {
+  token: string;
+  loginType: LOGIN_TYPE;
+  language: string;
+}
+
 
 export enum TYPE_ACCOUNT {
   ADMIN,
   OPERATOR
+}
+
+export enum LOGIN_TYPE {
+  WEB,
+  RETAIL,
+  OPERATOR,
+  ASKFOROPERATORLOGIN
 }

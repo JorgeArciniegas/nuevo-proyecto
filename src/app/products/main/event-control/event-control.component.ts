@@ -5,6 +5,7 @@ import { AppSettings } from '../../../app.settings';
 import { ProductsService } from '../../products.service';
 import { EventInfo } from '../main.models';
 import { MainService } from '../main.service';
+import { WindowSizeService } from '../../../services/utility/window-size/window-size.service';
 
 @Component({
   selector: 'app-event-control',
@@ -32,7 +33,7 @@ export class EventControlComponent implements OnInit {
   }
 
   public get isWindowSizeSmall(): boolean {
-    return this.productService.windowSize.small;
+    return this.windowSizeService.windowSize.small;
   }
 
   public get showEventId(): boolean {
@@ -46,7 +47,8 @@ export class EventControlComponent implements OnInit {
   constructor(
     public mainService: MainService,
     private productService: ProductsService,
-    private settings: AppSettings
+    private settings: AppSettings,
+    private windowSizeService: WindowSizeService
   ) {
   }
 

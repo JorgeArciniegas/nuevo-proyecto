@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import {
   ElysApiService,
   VirtualBetEvent,
@@ -51,9 +51,7 @@ import { KenoNumber } from './playable-board/templates/keno/keno.model';
 import { ResultsService } from './results/results.service';
 import { areas, overviewAreas } from './SoccerAreas';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class MainService {
   private reload: number;
   private cacheEvents: VirtualBetEvent[] = [];
@@ -68,7 +66,7 @@ export class MainService {
   public remaingTimeCounterObs: Observable<EventTime>;
 
   private attempts = 0;
-  private initCurrentEvent = false;
+  public initCurrentEvent = false;
 
   playersList: Player[];
 
@@ -87,6 +85,7 @@ export class MainService {
    * When it is true, clear the polyfunctionalArea, Coupon and playboard
    * */
   public toResetAllSelections: boolean;
+
 
   constructor(
     private elysApi: ElysApiService,
@@ -107,12 +106,10 @@ export class MainService {
     this.remaingTimeCounter = new Subject<EventTime>();
     this.remaingTimeCounterObs = this.remaingTimeCounter.asObservable();
 
-    this.defaultGameStart();
-    // this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
-
     this.productService.productNameSelectedObserve.subscribe(item => {
       if (!this.couponService.productHasCoupon.checked) {
-        this.cacheEvents = null;
+        this.cacheEvents = [];
+        this.cacheTournaments = [];
         this.initEvents();
       }
     });
@@ -145,7 +142,7 @@ export class MainService {
     this.productService.playableBoardResetObserve.subscribe(reset => {
       if (reset) {
         this.toResetAllSelections = true;
-        this.resetPlayEvent();
+        timer(500).subscribe(() => this.resetPlayEvent());
         // Resume event's countdown
         this.resumeCountDown();
       }
@@ -153,6 +150,24 @@ export class MainService {
 
   }
 
+  /**
+   * Used on component
+   */
+  destroy() {
+    if (!this.countdownSub.closed) {
+      this.countdownSub.unsubscribe();
+    }
+    this.initCurrentEvent = true;
+    this.cacheEvents = [];
+    this.cacheTournaments = [];
+  }
+
+  restartService() {
+    this.defaultGameStart();
+    if (this.countdownSub.closed) {
+      this.resumeCountDown();
+    }
+  }
   /**
    *
    */
@@ -169,8 +184,6 @@ export class MainService {
    * it return the product marked to "productSelected"
    */
   defaultGameStart(): void {
-    const gameSelected = this.appSettings.products.filter(item => item.productSelected)[0].codeProduct;
-    this.productService.changeProduct(gameSelected);
     // Init events
     this.initEvents();
   }
@@ -213,7 +226,8 @@ export class MainService {
           // stop the countdown to prevent multiple calls
           this.countdownSub.unsubscribe();
           // If remaining time is negative there is an error, reload all.
-          this.cacheEvents = null;
+          this.cacheEvents = [];
+          this.cacheTournaments = [];
           this.loadEvents();
           this.resultService.loadLastResult(false);
           return;
@@ -241,7 +255,8 @@ export class MainService {
       }
     } catch (err) {
       console.log('GET TIME ERROR ---> ', err);
-      this.cacheEvents = null;
+      this.cacheEvents = [];
+      this.cacheTournaments = [];
       this.loadEvents();
       this.resultService.loadLastResult(false);
     }
@@ -250,10 +265,7 @@ export class MainService {
   loadEvents(): void {
     try {
 
-      if (/*
-        ((this.cacheEvents == null ||
-          this.cacheEvents.length === 0
-        ) && this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) */
+      if (
         this.initCurrentEvent
       ) {
         this.loadEventsFromApi(true);
@@ -320,7 +332,6 @@ export class MainService {
       SportIds: this.productService.product.sportId.toString(),
       CategoryTypes: this.productService.product.codeProduct
     };
-
     this.elysApi.virtual.getVirtualTreeV2(request).then((sports: VirtualProgramTreeBySportResponse) => {
       // cache all tournaments
       /* if ( all ) {
@@ -631,7 +642,7 @@ export class MainService {
   resetPlayEvent(): void {
     this.placingEvent = new PlacingEvent();
     this.smartCode = new Smartcode();
-    this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
+    this.placingEvent.eventNumber = (this.eventDetails.events[0]) ? this.eventDetails.events[this.eventDetails.currentEvent].number : -1;
     // this.createPlayerList();
 
     // Create a new polyfunctionArea object
@@ -664,10 +675,17 @@ export class MainService {
 
   eventDetailOdds(eventNumber: number, attemptRollBack?: number): void {
     if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
+      if (this.cacheTournaments.length === 0) {
+        return;
+      }
       this.eventDetailOddsByCacheTournament(eventNumber);
       return;
     }
-    const event: VirtualBetEvent = this.cacheEvents.filter((cacheEvent: VirtualBetEvent) => cacheEvent.id === eventNumber)[0];
+    if (this.cacheEvents.length === 0) {
+      return;
+    }
+
+    const event: VirtualBetEvent = this.cacheEvents.find((cacheEvent: VirtualBetEvent) => cacheEvent.id === eventNumber);
     // Ceck, if it is empty load from api
     if (event.mk == null || event.mk.length === 0) {
       // tslint:disable-next-line:max-line-length

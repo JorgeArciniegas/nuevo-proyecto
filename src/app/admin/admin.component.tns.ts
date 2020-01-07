@@ -4,6 +4,7 @@ import { RouterService } from '../services/utility/router/router.service';
 import { WindowSizeService } from '../services/utility/window-size/window-size.service';
 import { LoaderService } from '../services/utility/loader/loader.service';
 import { timer } from 'rxjs';
+import { AppSettings } from '../app.settings';
 
 @Component({
   moduleId: module.id,
@@ -19,7 +20,8 @@ export class AdminComponent implements AfterContentInit {
     private router: RouterService,
     public userService: UserService,
     private windowService: WindowSizeService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    public appSettings: AppSettings
   ) {
     this.isAdminLogged = this.userService.isLoggedOperator();
     this.layout = this.gridLayoutResponsive();
@@ -79,7 +81,7 @@ export class AdminComponent implements AfterContentInit {
    *
    */
   gridLayoutResponsive() {
-    if (this.windowService.getWindowSize().height < 799) {
+    if (this.windowService.windowSize.height < 799) {
       return { rows: '9*,*', buttonHeight: '30' };
     } else {
       return { rows: '9*,*', buttonHeight: '50' };

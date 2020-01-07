@@ -1,14 +1,14 @@
 <!-- RACING LAST RESULTS -->
 <app-results-race
   *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.RACING"
-  [items]="productService.product.layoutProducts.resultItems" windowSize="productService.windowSize"
+  [items]="productService.product.layoutProducts.resultItems" windowSize="windowsSizeService.windowSize"
   rowHeight="{{rowHeight}}" [results]="service.listResult" [codeProduct]="productService.product.codeProduct">
 </app-results-race>
 
 <!-- COCK FIGHTING LAST RESULTS -->
 <app-results-cock-fight
   *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.COCK_FIGHT"
-  [items]="productService.product.layoutProducts.resultItems" windowSize="productService.windowSize"
+  [items]="productService.product.layoutProducts.resultItems" windowSize="windowsSizeService.windowSize"
   rowHeight="{{rowHeight}}" [results]="service.listResult" [codeProduct]="productService.product.codeProduct">
 </app-results-cock-fight>
 

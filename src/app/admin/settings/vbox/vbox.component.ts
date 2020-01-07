@@ -9,7 +9,7 @@ import { VboxService } from './vbox.service';
 })
 export class VboxComponent implements OnInit {
 
-  constructor(private vboxService: VboxService, private router: RouterService) { }
+  constructor(public vboxService: VboxService, private router: RouterService) { }
 
   ngOnInit() {
     this.vboxService.getList();

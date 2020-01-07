@@ -12,10 +12,7 @@ import { AppSettings } from '../../../app.settings';
 import { RouterService } from '../../../services/utility/router/router.service';
 import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
 
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class BetsListService {
   request: VirtualCouponListByAgentRequest = null;
   availableSport: AccountVirtualSport[] = [];

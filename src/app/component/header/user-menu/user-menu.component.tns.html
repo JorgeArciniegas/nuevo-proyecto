@@ -25,7 +25,7 @@
   <GridLayout rows="*,*" columns="auto">
     <StackLayout row="0" orientation="horizontal" class="clock" verticalAlignment="center" *ngIf="notifyIcon">
       <Image stretch="aspectFit" class="clock-icon" src="~/assets/icons/baseline-access_time-24px.png"></Image>
-      <Label [ngClass]="{'small': productService.windowSize.small}" text="{{ myTime | date:'HH:mm' }}"></Label>
+      <Label [ngClass]="{'small': windowSizeService.windowSize.small}" text="{{ myTime | date:'HH:mm' }}"></Label>
     </StackLayout>
   </GridLayout>
 </FlexboxLayout>

@@ -14,7 +14,7 @@ export class NotificationService {
   constructor() {
     LocalNotifications.requestPermission().then(
       (granted) => {
-        console.log('Permission granted? ' + granted);
+        // console.log('Permission granted? ' + granted);
       }
     );
     LocalNotifications.addOnMessageReceivedCallback(notificationData => {

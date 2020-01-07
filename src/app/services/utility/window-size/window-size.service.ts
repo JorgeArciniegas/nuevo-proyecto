@@ -5,22 +5,21 @@ import { WindowSize } from './window-size.model';
   providedIn: 'root'
 })
 export class WindowSizeService {
-  constructor() {}
+  public windowSize: WindowSize;
+  constructor() { }
 
-  getWindowSize(): WindowSize {
+
+  initWindowSize(): void {
     const doc: HTMLElement = document.querySelector('html');
     const h: number = doc.offsetHeight;
     const w: number = doc.offsetWidth;
     const aspectRatio: number = w / h;
     const hgeneral = h - (h * 7) / 100;
-    // tslint:disable-next-line:typedef
-    const dataAtt: WindowSize = {
+    this.windowSize = {
       height: h,
       width: w,
       aspectRatio: aspectRatio,
       columnHeight: hgeneral
     };
-
-    return dataAtt;
   }
 }

@@ -17,4 +17,11 @@ export class RouterService {
   public getBack() {
     return this.router.back();
   }
+
+
+  /**
+   * Use only from desktop app
+   */
+  public callBackToBrand() {
+  }
 }

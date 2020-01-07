@@ -6,7 +6,7 @@
       <GridLayout row="3" col="1" rows="*" columns="*" class="display">
         <GridLayout rows="*" columns="*" class="display-content">
           <GridLayout rows="*" columns="*,8*,2*" class="input-vdesk radius-2">
-            <StackLayout col="0" class="icon-area users-icon"></StackLayout>
+            <Image col="0" src="~/assets/icons/icona-user.png" class="icon-area"></Image>
             <Label col="1" text="{{userService.getOperatorData('BusinessName')}}" verticalAlignment="center"
               horizontalAlignment="left"></Label>
             <Switch col="2" (checkedChange)="changeConnectType($event)" [checked]="connectByOperator"></Switch>
@@ -23,7 +23,7 @@
     <!-- username -->
     <GridLayout row="4" col="1" rows="*" columns="5,30,10,auto" class="input-vdesk radius-2"
       [ngClass]="{'error': (username.invalid || usernameLengthInvalid) && username.touched }">
-      <StackLayout col="1" class="icon-area user-icon"></StackLayout>
+      <Image col="1" src="~/assets/icons/icona-user.png" class="icon-area"></Image>
       <TextField col="3" hint="{{'USERNAME'|translate}}" (textChange)="validateLength($event, 'username', 2)"
         autocapitalizationType="none" required ngModel #username="ngModel">
       </TextField>
@@ -31,7 +31,7 @@
     <!-- password -->
     <GridLayout row="5" col="1" rows="*" columns="5,30,10,auto" class="input-vdesk radius-2"
       [ngClass]="{'error': (password.invalid || passwordLengthInvalid)  && password.touched}">
-      <StackLayout col="1" class="icon-area pwd-icon"></StackLayout>
+      <Image col="1" src="~/assets/icons/icona-pwd.png" class="icon-area"></Image>
       <TextField col="3" secure="true" hint="{{'PASSWORD'|translate}}"
         (textChange)="validateLength($event, 'password', 6)" returnKeyType="done" autocapitalizationType="none"
         (returnPress)="onSubmit(username.value, password.value)" required ngModel #password="ngModel">

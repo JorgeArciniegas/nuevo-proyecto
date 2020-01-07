@@ -28,6 +28,7 @@
   "CODE": "Code",
   "COLD": "Froid",
   "COMB": "Comb.",
+  "COMBINATION": "Combinaison",
   "COMBINATIONS": "Combinaisons",
   "COND": "Cond.",
   "CONDITION": "Condition",
@@ -220,6 +221,7 @@
         "BOLIVARBET": "",
         "DEMO_LICENSE": "",
         "F2O": "F2o",
+        "HBG_PERU": "",
         "SHAWIS": "Shawis Company Limited",
         "UGANBET": ""
       },
@@ -227,6 +229,7 @@
         "BOLIVARBET": "The Customer declares to know and accept the Terms and Conditions available on our web siteThis coupon is valid only if the transaction took place exclusively via the Internet.Gambling can cause addiction.The game is prohibited for persons under 18 years.",
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
         "F2O": "The Customer declares to know and to accept the general terms and conditions available on our website. This coupon is valid only if the transaction took place exclusively via the Internet. According to the Decree Law n. 158/2012 conv. with mod. in Law no. 189/2012 please be informed that: It is possible to verify the winning probabilities on www.aams.gov.it. Gambling can cause addiction. Gambling is forbidden under the age of 18. ",
+        "HBG_PERU": "",
         "UGANBET": "The Customer declares to know and accept the Terms and Conditions available on our web site This coupon is valid only if the transaction took place exclusively via the Internet. Gambling can cause addiction. The game is prohibited for persons under 18 years."
       }
     },
@@ -243,6 +246,7 @@
       "NAME": {
         "ALL": "Tutti",
         "CockFight": "Combat de Coqs",
+        "CockRacing": "Combat de Coqs",
         "DogRacing": "Lévriers",
         "HorseRacing": "Chevaux",
         "Keno": "Keno",
@@ -386,8 +390,8 @@
       "309": "Deduction instalment",
       "310": "Cancel deduction instalments",
       "501": "Insert evaluation bet",
-      "502": "Bet fully accepted",
-      "503": "Bet partially accepted",
+      "502": "Bet",
+      "503": "Bet",
       "504": "Bet cancel",
       "505": "Bet paid",
       "506": "Bet refused",

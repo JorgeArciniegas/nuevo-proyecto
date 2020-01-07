@@ -24,7 +24,8 @@
           <img class="img-title" src="assets/icons/baseline-settings-20px.svg" alt=""><span
             class="txt-title">{{'SETTINGS' | translate }}</span>
         </div>
-        <button class="btn-default btn-success btn-admin radius-5" routerLink="./operators" *ngIf="isAdminLogged">
+        <button class="btn-default btn-success btn-admin radius-5" routerLink="./operators"
+          *ngIf="isAdminLogged && appSettings.loginInteractive">
           <img src="assets/icons/baseline_supervised_user_circle_white_24px.png" alt="" />
           <span class="-btn-admin-txt">{{'OPERATORS' | translate }}</span>
         </button>

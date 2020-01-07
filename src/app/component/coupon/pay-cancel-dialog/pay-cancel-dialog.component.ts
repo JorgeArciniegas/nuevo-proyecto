@@ -25,7 +25,7 @@ export class PayCancelDialogComponent {
   dialogTypeCoupon: typeof DialogTypeCoupon = DialogTypeCoupon;
   constructor(
     public dialogRef: MatDialogRef<PayCancelDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: DialogTypeCoupon,
+    @Inject(MAT_DIALOG_DATA) public data: DialogTypeCoupon,
     public fb: FormBuilder,
     private couponService: CouponService,
     private userService: UserService,

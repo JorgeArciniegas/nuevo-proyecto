@@ -9,6 +9,7 @@ import { DetailsCouponComponent } from './details-coupon/details-coupon.componen
 import { EventsComponent } from './details-coupon/events/events.component';
 import { SummaryComponent } from './details-coupon/summary/summary.component';
 import { SummaryCouponsComponent } from './summary-coupons/summary-coupons.component';
+import { BetsListService } from './bets-list.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SummaryCouponsComponent } from './summary-coupons/summary-coupons.compo
     BetsListRoutingModule,
     SharedModule,
     MatDatepickerModule, MatInputModule, MatNativeDateModule
-  ]
+  ],
+  providers: [BetsListService]
 })
 export class BetsListModule { }

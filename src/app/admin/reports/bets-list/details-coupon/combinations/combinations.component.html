@@ -13,12 +13,14 @@
         <div fxFlex="30">
           <div>
             <h4>{{group.Combinations }}</h4>
-            <div data="disabled">{{'COMBINATIONS' | translate }}</div>
+            <div data="disabled">{{ (group.Combinations === 1 ? 'COMBINATION' : 'COMBINATIONS' )| translate }}</div>
           </div>
         </div>
         <div fxFlex="50">
           <div>
-            <h4>{{ (!group.IsMultiStake ? group.Stake : data.couponStake ) | currency : userService.userCurrency : 'symbol-narrow'}}</h4>
+            <h4>
+              {{ (!group.IsMultiStake ? group.Stake : data.couponStake ) | currency : userService.userCurrency : 'symbol-narrow'}}
+            </h4>
             <div data="disabled">{{ 'STAKE' | translate }}</div>
           </div>
         </div>

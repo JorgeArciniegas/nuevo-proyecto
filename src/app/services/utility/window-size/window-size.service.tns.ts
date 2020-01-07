@@ -6,21 +6,20 @@ import { WindowSize } from './window-size.model';
   providedIn: 'root'
 })
 export class WindowSizeService {
-  constructor() {}
+  public windowSize: WindowSize;
+  constructor() { }
 
-  getWindowSize(): WindowSize {
+  initWindowSize(): void {
     const h: number = screen.mainScreen.heightDIPs;
     const w: number = screen.mainScreen.widthDIPs;
     const aspectRatio: number = w / h;
     const hgeneral = h - h / 13;
-    const dataAtt: WindowSize = {
+    this.windowSize = {
       height: h,
       width: w,
       aspectRatio: aspectRatio,
       columnHeight: hgeneral,
       small: aspectRatio > 1.45 && screen.mainScreen.heightPixels < 1500
     };
-
-    return dataAtt;
   }
 }

@@ -62,8 +62,6 @@ export const componentDeclarations: any[] = [
   LuckyKenoComponent
 ];
 
-export const providerDeclarations: any[] = [];
-
 export const routes: Routes = [
   {
     path: '',

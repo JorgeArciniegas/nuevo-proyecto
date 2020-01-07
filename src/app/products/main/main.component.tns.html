@@ -1,8 +1,8 @@
 <GridLayout rows="*,2*,14*,2*,3*" columns="*" class="product-class">
   <!-- Event control -->
-  <GridLayout row="0" app-event-control></GridLayout>
+  <GridLayout row="0" app-event-control *ngIf="mainService.eventDetails"></GridLayout>
   <!-- List events -->
-  <GridLayout row="1" app-events-list></GridLayout>
+  <GridLayout row="1" app-events-list *ngIf="mainService.eventDetails"></GridLayout>
   <!-- Playable board -->
   <GridLayout row="2" verticalAlignment="top" app-playable-board></GridLayout>
   <!-- Special event -->
