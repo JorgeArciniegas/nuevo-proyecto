@@ -224,6 +224,9 @@ export class BtncalcService implements OnDestroy {
 
   // default presets player
   settingStakePresetPlayer(recursiveCounter: number = 0): void {
+    if (!this.productService.product) {
+      return;
+    }
     if (this.setting.defaultAmount && this.setting.defaultAmount.PresetOne !== null && this.productService.product) {
       this.polyfunctionStakePresetPlayer =
         new PolyfunctionStakePresetPlayer(

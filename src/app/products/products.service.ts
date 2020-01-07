@@ -41,7 +41,7 @@ export class ProductsService extends ProductsServiceExtra {
 
   constructor(
     public dialog: DialogService,
-    // private windowSizeService: WindowSizeService,
+    // private windowSizeService: WindowSizeSersvice,
     private appSetting: AppSettings,
     public couponInternalService: CouponService,
     public destroyCouponService: DestroyCouponService,
@@ -49,8 +49,7 @@ export class ProductsService extends ProductsServiceExtra {
     private userservice: UserService
   ) {
     super(couponInternalService, destroyCouponService, router);
-    // set the product default
-    this.product = appSetting.products.find(prod => prod.productSelected);
+
     // Destroy coupon confirmation
     if (this.couponInternalService) {
       this.couponInternalService.productHasCoupon = { checked: false };
@@ -119,6 +118,25 @@ export class ProductsService extends ProductsServiceExtra {
   resetBoard(): void {
     this.playableBoardResetSubject.next(true);
     this.polyfunctionalStakeCouponSubject.next(new PolyfunctionalStakeCoupon());
+  }
+
+
+  checkDefaultProduct() {
+    let tmpProduct: Products;
+    this.appSetting.products.forEach(item => {
+      if (item.isPlayable && !tmpProduct) {
+        tmpProduct = item;
+        return;
+      }
+    });
+
+    if (!tmpProduct) {
+      this.router.getRouter().navigateByUrl('/admin');
+    } else {
+      this.changeProduct(tmpProduct.codeProduct);
+    }
+
+
   }
 
 }
