@@ -15,7 +15,7 @@ import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
 @Injectable()
 export class BetsListService {
   request: VirtualCouponListByAgentRequest = null;
-  _availableSport: AccountVirtualSport[] = [];
+  availableSport: AccountVirtualSport[] = [];
   pageSizeList: number[] = [10, 25, 50, 100];
   labelAvailableSportSelected: string;
   sportIdSelected: number;
@@ -49,6 +49,14 @@ export class BetsListService {
     private appSettings: AppSettings,
     private userService: UserService
   ) {
+    // first element of ALL Sport
+    this.availableSport[0] = {
+      SportId: 0,
+      SportName: 'ALL',
+      VirtualCategories: []
+    };
+
+    this.getAvailableSport();
 
     /**
      * Request default object
@@ -74,7 +82,7 @@ export class BetsListService {
       carriedOut: false
     };
     this.operatorSelected = null;
-    this.sportId = 0;
+    this.sportId = this.availableSport[0].SportId;
     const today = new Date();
     this.dateFrom = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
     this.dateTo = new Date(today.getFullYear(), today.getMonth(), today.getDate());
@@ -84,11 +92,6 @@ export class BetsListService {
   /**
    * GETTER AND SETTER OBJECT PROPERTY
    */
-
-  get availableSport(): AccountVirtualSport[] {
-    this.getAvailableSport();
-    return this._availableSport;
-  }
 
   get dateHasPlaced(): boolean {
     return this.request.dateHasPlaced;
@@ -197,25 +200,21 @@ export class BetsListService {
    *
    */
   getAvailableSport(): void {
-    const availableSports: AccountVirtualSport[] = [];
-    availableSports[0] = {
-      SportId: 0,
-      SportName: 'ALL',
-      VirtualCategories: []
-    };
+    const tempKey = [];
     this.appSettings.products.map((item) => {
       // check if the sportId is already exist
-      if (availableSports.map(product => product.SportId).includes(item.sportId)) {
+      if (tempKey.includes(item.sportId)) {
         return;
       }
       // put on the availableSport
-      availableSports.push({
+      this.availableSport.push({
         SportId: item.sportId,
         SportName: item.name,
         VirtualCategories: []
       });
+      // update the checkArray with sportId
+      tempKey.push(item.sportId);
     });
-    this._availableSport = availableSports;
   }
 
   /**
