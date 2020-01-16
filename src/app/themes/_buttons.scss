@@ -50,7 +50,10 @@ button:active:not([disabled]) {
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 );
 	}
 	&.btn-dog-play-actived {
-		box-shadow: 0px 0px 5px 3px #ffca18;
+		// box-shadow: 0px 0px 5px 3px #10d661;
+		box-shadow: 0px 0px 3px 3px #91c8fa;
+		border: 2px solid rgba(0, 0, 0, 0.65);
+		border-radius: 75px;
 	}
 	&[disabled] {
 		opacity: 0.1;
@@ -73,16 +76,17 @@ button:active:not([disabled]) {
 
 // BUTTON COCKFIGHT
 .btn-default-cock {
-	border: 4px solid;
+	border: 2px solid;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	&:focus {
-		border: transparent;
+		border: 2px solid transparent;
 	}
 	&.btn-cock-0 {
 		background: #bebebe;
 		border-color: #bebebe;
+		color: #182844;
 	}
 	&.btn-cock-1 {
 		background: #ff0000;
@@ -93,7 +97,9 @@ button:active:not([disabled]) {
 		border-color: #4472c4;
 	}
 	&.btn-actived {
-		box-shadow: 0px 0px 5px 3px #ffca18;
+		// box-shadow: 0px 0px 5px 3px #10d661;
+		box-shadow: 0px 0px 3px 3px #91c8fa;
+		border: 2px solid rgba(0, 0, 0, 0.65);
 	}
 }
 
@@ -183,16 +189,32 @@ button:active:not([disabled]) {
 			opacity: 0.4;
 		}
 		&.actived {
-			box-shadow: 0px 0px 5px 3px #ffca18;
+			// box-shadow: 0px 0px 5px 3px #ffca18;
+			box-shadow: 0px 0px 3px 3px #00ff29;
+			border: 2px solid rgba(0, 0, 0, 0.65);
 		}
 	}
 }
+
+app-playable-board-race {
+	.playable-special-bets {
+		button {
+			&.actived {
+				border-radius: 50px;
+			}
+		}
+	}
+}
+
 .playable-grid-repeat,
 .advance-game {
 	button {
 		font-size: 2.8vh;
+		border: 1px solid rgba(0, 0, 0, 0);
 		&.actived {
-			box-shadow: 0px 0px 5px 3px #ffca18;
+			box-shadow: 0px 0px 2px 2px #91c8fa;
+			border: 1px solid rgba(0, 0, 0, 0.65) !important;
+			border-radius: 25px;
 		}
 	}
 }
