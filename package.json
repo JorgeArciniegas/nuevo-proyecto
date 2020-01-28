@@ -15,7 +15,10 @@
     "android-vgen-debug": "tns debug android --bundle --env.uglify --env.environment=\"vgen-prod\" --no-hmr",
     "vgen-build": "tns build android  --bundle --env.uglify --env.snapshot --env.environment=\"vgen-prod\" --copy-to dist/android/vgen.apk ",
     "postinstall": "node ./version.js",
-    "ns-bundle": "ns-bundle"
+    "ns-bundle": "ns-bundle",
+    "version-patch": "npm version patch --no-git-tag-version && node ./version.js && git commit --all",
+    "version-minor": "npm version minor --no-git-tag-version && node ./version.js && git commit --all",
+    "version": "node ./current-version.js"
   },
   "private": true,
   "dependencies": {
