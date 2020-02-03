@@ -130,7 +130,12 @@ export class BtncalcService implements OnDestroy {
     if (this.polyfunctionalArea.shortcut) {
       this.couponService.addRemoveToCouponSC(this.polyfunctionalArea);
     } else {
-      this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds, this.productService.product.typeCoupon.acceptMultiStake);
+      let listOdds = this.polyfunctionalArea.odds.slice();
+      if (this.productService.product.sportId === 1) {
+        listOdds = this.polyfunctionalArea.odds.slice(-1);
+      }
+      this.couponService.addRemoveToCoupon(listOdds, this.productService.product.typeCoupon.acceptMultiStake);
+      // this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds, this.productService.product.typeCoupon.acceptMultiStake);
     }
     if (!groupingChange) {
       this.productService.closeProductDialog();

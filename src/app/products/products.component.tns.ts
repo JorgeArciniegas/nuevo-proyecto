@@ -26,6 +26,10 @@ export class ProductsComponent implements AfterContentInit, OnDestroy, AfterView
   delayRender = false;
   delaySubscription: Subscription;
 
+  get destroyCouponShowDialog(): boolean {
+    return this.service.destroyCouponService.showDialog;
+  }
+
   constructor(
     public service: ProductsService,
     public mainService: MainService,

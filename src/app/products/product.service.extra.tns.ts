@@ -15,7 +15,9 @@ export class ProductsServiceExtra {
     public destroyCouponService: DestroyCouponService,
     public router: RouterService
   ) {
+    console.log('ProductsServiceExtra', destroyCouponService.showDialog);
     this.destroyCouponService.confirmDestroyObs.subscribe(elem => {
+      console.log('destroyCouponService --->', elem);
       this.destroyCouponService.showDialog = false;
       if (elem && !this.couponInternalService.productHasCoupon.isRacing) {
         this.destroyCouponConfirm();

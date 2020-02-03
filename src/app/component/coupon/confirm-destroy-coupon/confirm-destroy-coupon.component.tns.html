@@ -1,12 +1,11 @@
-<GridLayout rows="*,3*,*" class="dialog">
-  <Label row="0" class="title title-tns text-center" row="0" text="{{ 'COUPON_RESET' | translate }}"></Label>
-  <Label row="1" class="description text-center p-15" row="1"
-    text="{{ 'CONFIRM_DESTROY_COUPON.MESSAGE' | translate }}"></Label>
+<GridLayout rows="*,2*,3*,*,*" class="dialog">
+  <Label row="1" class="title title-tns text-center" text="{{ 'COUPON_RESET' | translate }}"></Label>
+  <Label row="2" class="description text-center p-15" text="{{ 'CONFIRM_DESTROY_COUPON.MESSAGE' | translate }}"></Label>
   <!-- BUTTONS CONTROL -->
-  <GridLayout row="2" rows="*" columns="*,*">
-    <Button margin="2 2" col="0" class="btn btn-default btn-success radius-10" (tap)="destroy.selectedOperation(true)"
+  <GridLayout row="3" rows="*" columns="*,*,2*,2*,*,*">
+    <Button margin="2 2" col="2" class="btn btn-default btn-success radius-10" (tap)="destroy.selectedOperation(true)"
       text="{{'CONFIRM' | translate}}" textTransform="uppercase"></Button>
-    <Button margin="2 2" col="1" class="btn btn-default btn-warning radius-10" (tap)="destroy.selectedOperation(false)"
+    <Button margin="2 2" col="3" class="btn btn-default btn-warning radius-10" (tap)="destroy.selectedOperation(false)"
       text="{{'DELETE' | translate}}" textTransform="uppercase"></Button>
   </GridLayout>
 </GridLayout>

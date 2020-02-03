@@ -22,6 +22,9 @@ import { RaceComponent as RaceStatisticsComponent } from '../products/product-di
 import { SoccerComponent as SoccerStatisticsComponent } from '../products/product-dialog/statistics/templates/soccer/soccer.component';
 import { BetoddsComponent } from '../products/product-dialog/betodds/betodds.component';
 import { ProductDialogComponent } from '../products/product-dialog/product-dialog.component';
+import { MainService } from './main/main.service';
+import { ConfirmDestroyCouponComponent } from '../component/coupon/confirm-destroy-coupon/confirm-destroy-coupon.component';
+import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
 @NgModule({
   declarations: [
     ProductDialogComponent,
@@ -42,7 +45,8 @@ import { ProductDialogComponent } from '../products/product-dialog/product-dialo
     SoccerRankingComponent,
     KenoPaytableComponent,
     HotAndColdComponent,
-    KenoHotAndColdComponent
+    KenoHotAndColdComponent,
+    ConfirmDestroyCouponComponent
   ],
   imports: [
     CommonModule,
@@ -50,6 +54,7 @@ import { ProductDialogComponent } from '../products/product-dialog/product-dialo
     SharedModule,
     NativeScriptFormsModule
   ],
+  providers: [MainService, CouponDialogService],
   schemas: [NO_ERRORS_SCHEMA]
 })
 export class ProductsModule { }

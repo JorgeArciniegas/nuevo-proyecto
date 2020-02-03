@@ -53,7 +53,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     KenoPaytableComponent,
     HotAndColdComponent,
     KenoHotAndColdComponent,
-    PayCancelDialogComponent
+    PayCancelDialogComponent,
+    ConfirmDestroyCouponComponent
   ],
   imports: [
     HttpClientModule,
@@ -90,8 +91,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   ],
   entryComponents: [
     ProductDialogComponent,
-    ConfirmDestroyCouponComponent,
-    PayCancelDialogComponent
+    PayCancelDialogComponent,
+    ConfirmDestroyCouponComponent
   ],
   providers: [
     providerDeclarations

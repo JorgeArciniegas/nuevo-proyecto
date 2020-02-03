@@ -4,9 +4,9 @@ import { PayCancelDialogComponent } from './pay-cancel-dialog/pay-cancel-dialog.
 import { DialogTypeCoupon } from '../../../../src/app/products/products.model';
 import { UserService } from '../../../../src/app/services/user.service';
 
-@Injectable({
+@Injectable(/* {
   providedIn: 'root'
-})
+} */)
 export class CouponDialogService {
   public dialogRef: MatDialogRef<PayCancelDialogComponent> = null;
   public showDialog = false;

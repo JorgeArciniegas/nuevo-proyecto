@@ -18,6 +18,7 @@ export class DestroyCouponService {
     this.userService.isModalOpen = true;
     this.userService.isBtnCalcEditable = false;
     this.showDialog = true;
+    console.log('openDestroyCouponDialog');
   }
 
   closeDialog() {

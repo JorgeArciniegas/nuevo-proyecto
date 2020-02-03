@@ -8,6 +8,8 @@ import { DestroyCouponService } from './destroy-coupon.service';
 })
 export class ConfirmDestroyCouponComponent {
 
-  constructor(public destroy: DestroyCouponService) { }
+  constructor(public destroy: DestroyCouponService) {
+    console.log('ConfirmDestroyCouponComponent');
+  }
 
 }

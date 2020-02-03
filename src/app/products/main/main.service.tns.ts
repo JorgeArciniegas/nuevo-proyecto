@@ -51,9 +51,7 @@ import { areas, overviewAreas } from './SoccerAreas';
 import { UserService } from '../../services/user.service';
 import { KenoNumber } from './playable-board/templates/keno/keno.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class MainService {
 
   private reload: number;
@@ -638,6 +636,9 @@ export class MainService {
   }
 
   currentAndSelectedEventTime() {
+    if (!this.eventDetails) {
+      return;
+    }
     // Check current event index, if is selected an event, decrease the index because the first event is completed and removed
     if (this.eventDetails.currentEvent > 0) {
       this.eventDetails.currentEvent = this.eventDetails.currentEvent - 1;
