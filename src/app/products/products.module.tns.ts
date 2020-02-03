@@ -25,6 +25,8 @@ import { ProductDialogComponent } from '../products/product-dialog/product-dialo
 import { MainService } from './main/main.service';
 import { ConfirmDestroyCouponComponent } from '../component/coupon/confirm-destroy-coupon/confirm-destroy-coupon.component';
 import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
+import { GroupingsComponent } from './product-dialog/groupings/groupings.component';
+import { LabelByGroupingPipe } from '../component/pipe/label-by-grouping.pipe';
 @NgModule({
   declarations: [
     ProductDialogComponent,
@@ -46,7 +48,9 @@ import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
     KenoPaytableComponent,
     HotAndColdComponent,
     KenoHotAndColdComponent,
-    ConfirmDestroyCouponComponent
+    ConfirmDestroyCouponComponent,
+    GroupingsComponent,
+    LabelByGroupingPipe
   ],
   imports: [
     CommonModule,
