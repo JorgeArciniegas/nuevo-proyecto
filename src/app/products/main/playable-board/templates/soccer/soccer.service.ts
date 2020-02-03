@@ -201,7 +201,5 @@ export class SoccerService implements OnDestroy {
     this.mainService.placingOddByOdd(marketId, selection);
     // tap su plus automatico
     this.btnCalcService.tapPlus();
-    timer(500).subscribe(() => this.mainService.resetPlayEvent());
-    // ;
   }
 }
