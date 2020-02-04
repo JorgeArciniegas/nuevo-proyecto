@@ -706,7 +706,7 @@ export class MainService {
 
     const event: VirtualBetEvent = this.cacheEvents.find((cacheEvent: VirtualBetEvent) => cacheEvent.id === eventNumber);
     // Ceck, if it is empty load from api
-    if (event.mk === null || event.mk.length === 0) {
+    if (!event || event && event.mk == null || event && event.mk.length === 0) {
       // tslint:disable-next-line:max-line-length
       this.feedData.getEventVirtualDetail(this.userservice.getUserId(), eventNumber).
         then((sportDetail: VirtualDetailOddsOfEventResponse) => {
