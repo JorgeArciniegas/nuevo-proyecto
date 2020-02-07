@@ -1,0 +1,13 @@
+<GridLayout rows="50,*">
+  <GridLayout row="0" rows="*" columns="*,*,*,*,*,*" class="grid-keyboard-number">
+    <StackLayout margin="3" *ngFor="let colourGame of colourGames; let i = index" col="{{i}}" verticalAlignment="center"
+      orientation="vertical" class="btn-game-selector radius-5 elevation-z5" height="50"
+      [ngClass]="{ 'selected': selectedColourGameId === colourGame.id }" (tap)="changeGame(colourGame.id)">
+      <Label horizontalAlignment="center" text="{{ colourGame.name | translate }}"></Label>
+    </StackLayout>
+  </GridLayout>
+  <StackLayout row="1">
+    <app-playable-board-bet49 *ngIf="selectedColourGameId === ColourGameId.bet49"></app-playable-board-bet49>
+    <app-playable-board-hilo *ngIf="selectedColourGameId === ColourGameId.hilo"></app-playable-board-hilo>
+  </StackLayout>
+</GridLayout>

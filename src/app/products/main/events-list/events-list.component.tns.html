@@ -1,7 +1,8 @@
 <app-events-list-standard *ngIf="productService.product.layoutProducts.type === eventService.typeLayout.RACING ||
       productService.product.layoutProducts.type === eventService.typeLayout.COCK_FIGHT ||
       productService.product.layoutProducts.type === eventService.typeLayout.SOCCER ||
-      productService.product.layoutProducts.type === eventService.typeLayout.KENO"
+      productService.product.layoutProducts.type === eventService.typeLayout.KENO ||
+      productService.product.layoutProducts.type === eventService.typeLayout.COLOURS"
   [webColumnDefinition]="productService.product.layoutProducts.nextEventItems"
   [nativeColumnDefinition]="nativeNextEventsItems" [eventsList]="eventService.eventsDetails" rowHeight="{{rowHeight}}">
 </app-events-list-standard>

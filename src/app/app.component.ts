@@ -25,11 +25,11 @@ export class AppComponent implements OnInit {
     this.settings = this.appSettings;
     this.faviconPath = this.appSettings.faviconPath;
     // Set the application language passing the browser one.
-    this.windowSizeService.initWindowSize();
     this.translateUtilityService.initializeLanguages(this.translateService.getBrowserLang());
   }
 
   ngOnInit(): void {
+    this.windowSizeService.initWindowSize();
     // Insert favicon's link of the specific skin
     const linkElement: HTMLLinkElement = document.createElement('link');
     linkElement.setAttribute('rel', 'icon');

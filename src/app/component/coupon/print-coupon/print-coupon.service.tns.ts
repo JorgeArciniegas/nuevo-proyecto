@@ -50,6 +50,10 @@ export class PrintCouponService {
    *
    */
   checkProduct(): void {
-    this.couponPrint.Product = this.couponPrint.Odds[0].MarketName.indexOf('Keno') > -1 ? 'KENO' : 'VIRT';
+    if (this.couponPrint.Odds[0].SportName.indexOf('Keno') > -1 || this.couponPrint.Odds[0].SportName.indexOf('Colors') > -1) {
+      this.couponPrint.Product = 'NUMBERS';
+    } else {
+      this.couponPrint.Product = 'VIRT';
+    }
   }
 }

@@ -19,7 +19,7 @@ export class DestroyCouponService {
     private userService: UserService
   ) { }
 
-  openDestroyCouponDialog(racing?: string, product?: string): void {
+  openDestroyCouponDialog(racing?: string | boolean, product?: string): void {
     this.close();
     this.userService.isModalOpen = true;
     this.userService.isBtnCalcEditable = false;
@@ -40,5 +40,9 @@ export class DestroyCouponService {
       this.userService.isModalOpen = false;
       this.userService.isBtnCalcEditable = true;
     }
+  }
+
+  getConfirmDestroySubProductObs(): Observable<boolean> {
+    return null;
   }
 }

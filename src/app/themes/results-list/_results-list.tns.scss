@@ -66,3 +66,52 @@
 		@extend %card-title-noborder;
 	}
 }
+
+// COLOURS
+.card-box-result-colours {
+	.header {
+		@extend %card-title-noborder;
+		border-radius: 4;
+		.eventNumber {
+			font-size: 18;
+			font-weight: 500;
+		}
+	}
+	.btn-colours-result {
+		width: 26;
+		height: 30;
+		font-size: 12;
+		font-weight: 400;
+		border-radius: 4;
+		text-align: center;
+		&.btn-colours-RED {
+			background: #ff0000;
+			border-color: #ff0000;
+		}
+
+		&.btn-colours-BLUE {
+			background: #4171b2;
+			border-color: #4171b2;
+		}
+
+		&.btn-colours-GREEN {
+			background: #11a40f;
+			border-color: #11a40f;
+		}
+
+		&.btn-colours-YELLOW {
+			background: #c2f102;
+			border-color: #c2f102;
+			color: #000;
+		}
+
+		&.btn-colours-hilo-selection {
+			width: 54;
+			@extend %card-title-noborder;
+		}
+
+		&.btn-colours-hilo {
+			@extend %card-title-noborder;
+		}
+	}
+}

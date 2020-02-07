@@ -506,6 +506,11 @@ html {
 				@extend %PRODUCT-KENO-BG;
 			}
 
+			.PRODUCT-CLRS-BG {
+				// COLOURS
+				@extend %PRODUCT-CLRS-BG;
+			}
+
 			.race-control {
 				.time {
 					@extend %time-card-title;

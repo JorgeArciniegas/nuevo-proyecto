@@ -11,7 +11,8 @@
     </GridLayout>
   </GridLayout>
 
-  <GridLayout row="1" *ngIf="couponService.coupon && !couponService.coupon.internal_isLottery">
+  <GridLayout row="1"
+    *ngIf="couponService.coupon && !couponService.coupon.internal_isLottery && !couponService.coupon.internal_isColours">
     <GridLayout rows="2*,6*,6*,6*,6*,{{ windowSizeService.windowSize.small ? '' : '6*,' }}2*" columns="*"
       *ngIf="couponService.coupon" [ngClass]="{'small': windowSizeService.windowSize.small}">
       <!-- Paginator -->
@@ -100,27 +101,54 @@
     </GridLayout>
   </GridLayout>
   <!--COUPON LOTTERY -->
-  <GridLayout row="1" *ngIf="couponService.coupon?.internal_isLottery">
+  <GridLayout row="1" *ngIf="couponService.coupon?.internal_isLottery || couponService.coupon?.internal_isColours">
     <GridLayout columns="*,*" rows="2*,2*,2*,2*,2*,2*" *ngIf="couponService.coupon"
       [ngClass]="{'small': windowSizeService.windowSize.small}">
       <!-- Coupon items -->
-      <GridLayout col="{{ i % 2 == 0 ? 0 : 1 }}" row="{{ Math.floor(i/2) }}" rows="*" columns="*"
-        class="card-odd card-keno" *ngFor="let odd of listOdds; let i = index;"
-        [ngClass]="{'card-odd-error': !couponService.warningMessage && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}">
-        <ng-container>
-          <GridLayout row="0" rows="*" columns="10*,*,5*" class="row" verticalAlignment="center">
-            <StackLayout col="0" verticalAlignment="center" class="btn-keno-number btn-default btn-selected radius-50">
-              <Label verticalAlignment="center" text="{{ odd.SelectionName }}" horizontalAlignment="center"
-                textWrap="true"></Label>
-            </StackLayout>
-            <StackLayout col="2" class="btn-warning button" (tap)="removeOddByLottery(odd)"
-              [isEnabled]="!userService.isModalOpen" horizontalAlignment="right" verticalAlignment="center">
-              <Image stretch="aspectFit" width="38" src="~/assets/icons/baseline-delete_outline-white-24px.png"
-                verticalAlignment="center" horizontalAlignment="center"></Image>
-            </StackLayout>
-          </GridLayout>
-        </ng-container>
-      </GridLayout>
+      <ng-container
+        *ngIf="listOdds.length === 1 && listOdds[0].MarketName === colourGameId[colourGameId.hilo]; else elseTemplateNumbers">
+        <!-- single mode selection -->
+        <GridLayout col="0" colspan="2" row="i" rows="*" columns="*" class="card-odd card-keno"
+          *ngFor="let odd of listOdds; let i = index;"
+          [ngClass]="{'card-odd-error': !couponService.warningMessage && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}">
+          <ng-container>
+            <GridLayout row="0" rows="*" columns="*,2*,*" class="row" verticalAlignment="center">
+              <StackLayout col="0" class="btn-game-selector selected btn-default coupon-selection radius-5"
+                verticalAlignment="center">
+                <Label verticalAlignment="center" text="{{listOdds[0].SelectionName | uppercase | translate}}"
+                  horizontalAlignment="center" textWrap="true"></Label>
+              </StackLayout>
+              <StackLayout col="2" class="btn-warning button" (tap)="removeOddByLottery(odd)"
+                [isEnabled]="!userService.isModalOpen" horizontalAlignment="right" verticalAlignment="center">
+                <Image stretch="aspectFit" width="38" src="~/assets/icons/baseline-delete_outline-white-24px.png"
+                  verticalAlignment="center" horizontalAlignment="center"></Image>
+              </StackLayout>
+            </GridLayout>
+          </ng-container>
+        </GridLayout>
+
+      </ng-container>
+      <ng-template #elseTemplateNumbers>
+        <!-- Numbers mode -->
+        <GridLayout col="{{ i % 2 == 0 ? 0 : 1 }}" row="{{ Math.floor(i/2) }}" rows="*" columns="*"
+          class="card-odd card-keno" *ngFor="let odd of listOdds; let i = index;"
+          [ngClass]="{'card-odd-error': !couponService.warningMessage && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}">
+          <ng-container>
+            <GridLayout row="0" rows="*" columns="10*,*,5*" class="row" verticalAlignment="center">
+              <StackLayout col="0" verticalAlignment="center"
+                class="btn-keno-number btn-default btn-selected radius-50">
+                <Label verticalAlignment="center" text="{{ odd.SelectionName }}" horizontalAlignment="center"
+                  textWrap="true"></Label>
+              </StackLayout>
+              <StackLayout col="2" class="btn-warning button" (tap)="removeOddByLottery(odd)"
+                [isEnabled]="!userService.isModalOpen" horizontalAlignment="right" verticalAlignment="center">
+                <Image stretch="aspectFit" width="38" src="~/assets/icons/baseline-delete_outline-white-24px.png"
+                  verticalAlignment="center" horizontalAlignment="center"></Image>
+              </StackLayout>
+            </GridLayout>
+          </ng-container>
+        </GridLayout>
+      </ng-template>
     </GridLayout>
   </GridLayout>
   <!-- /COUPON LOTTERY -->

@@ -279,6 +279,32 @@ export const environment: Environment = {
         acceptMultiStake: false,
         typeLayout: LAYOUT_TYPE.KENO
       }
+    },
+    {
+      sportId: 24,
+      codeProduct: 'CLRS',
+      name: 'Colours',
+      label: 'COLOURS',
+      order: 7,
+      productSelected: false,
+      isPlayable: true,
+      layoutProducts: {
+        type: LAYOUT_TYPE.COLOURS,
+        resultItems: 2,
+        nextEventItems: 2,
+        cacheEventsItem: 3
+      },
+      toolbarButton: {
+        name: 'colours',
+        icon: 'Colours',
+        route: 'products/colours'
+      },
+      widgets: [],
+      typeCoupon: {
+        isMultipleStake: false,
+        acceptMultiStake: false,
+        typeLayout: LAYOUT_TYPE.COLOURS
+      }
     }
   ],
   showEventId: true,

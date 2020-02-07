@@ -15,8 +15,8 @@
   <mat-grid-tile rowspan="17">
     <div class="content-row-coupon" fxFill fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="2px">
       <ng-container *ngIf="couponService.coupon">
-        <button *ngIf="!couponService.coupon.internal_isLottery" fxFlex="5" class="btn-reset card-odd radius-5 scroll"
-          (click)="previusOdds()" [disabled]="page <= 0">
+        <button *ngIf="!couponService.coupon.internal_isLottery && !couponService.coupon.internal_isColours" fxFlex="5"
+          class="btn-reset card-odd radius-5 scroll" (click)="previusOdds()" [disabled]="page <= 0">
           <div fxFlex="30"></div>
           <div fxFlex="40">
             <img class="icon" src="assets/icons/Up.svg">
@@ -28,11 +28,13 @@
           </div>
         </button>
         <div fxFlex="90" fxLayout="column" fxLayoutAlign="start stretch">
-          <ng-container *ngTemplateOutlet="(couponLayout.typeLayout === layoutProduct.KENO) ? keno : allcoupon">
+          <ng-container
+            *ngTemplateOutlet="(couponLayout.typeLayout === layoutProduct.KENO || couponLayout.typeLayout === layoutProduct.COLOURS) ? numbers : allcoupon">
           </ng-container>
         </div>
-        <button *ngIf="!couponService.coupon.internal_isLottery" fxFlex="5" class="btn-reset card-odd radius-5 scroll"
-          (click)="nextOdds()" [disabled]="page >= maxPage - 1" fxLayout="row">
+        <button *ngIf="!couponService.coupon.internal_isLottery && !couponService.coupon.internal_isColours" fxFlex="5"
+          class="btn-reset card-odd radius-5 scroll" (click)="nextOdds()" [disabled]="page >= maxPage - 1"
+          fxLayout="row">
           <div fxFlex="30"></div>
           <div fxFlex="40">
             <img class="icon" src="assets/icons/Down.svg">
@@ -103,28 +105,55 @@
   <img src="/assets/images/separator-coupon.jpg" class="noshow" />
 </mat-grid-list>
 
-<!--TEMPLATE KENO -->
-<ng-template #keno>
+<!--TEMPLATE KENO AND COLOURS -->
+<ng-template #numbers>
   <div fxLayout="row wrap" fxLayoutGap="10px grid">
-    <div *ngFor="let odd of listOdds" class="card-odd-container" fxFlex="50">
-      <div fxFill class="card-odd radius-5" [ngClass]="{'card-odd-error': !couponService.warningMessage &&
-          couponService.error && couponService.error.location.length > 0 &&
-          couponService.error.location.indexOf(odd.SelectionId) !== -1}" fxLayout="column"
-        fxLayoutAlign="space-between stretch">
-        <div fxFlex="100" class="row" fxLayout="row">
-          <div fxFlex="75" fxLayoutAlign="start center">
-            <div fxFlex="35" fxLayoutAlign="center center" class="btn-keno-number btn-default btn-selected radius-50">
-              {{odd.SelectionName}}
+    <ng-container
+      *ngIf="listOdds.length === 1 && listOdds[0].MarketName === colourGameId[colourGameId.hilo]; else elseTemplateNumbers">
+      <!-- Single selection mode -->
+      <div class="card-odd-container" fxFlex="100">
+        <div fxFill class="card-odd radius-5 single-selection" [ngClass]="{'card-odd-error': !couponService.warningMessage &&
+            couponService.error && couponService.error.location.length > 0 &&
+            couponService.error.location.indexOf(listOdds[0].SelectionId) !== -1}" fxLayout="column"
+          fxLayoutAlign="space-between stretch">
+          <div fxFlex="100" class="row" fxLayout="row">
+            <div fxFlex="75" fxLayoutAlign="start center">
+              <div fxFlex="35" fxLayoutAlign="center center"
+                class="btn-game-selector selected btn-default coupon-selection radius-5">
+                {{listOdds[0].SelectionName | uppercase | translate}}
+              </div>
             </div>
-          </div>
-          <div fxFlex="25" fxLayoutAlign="center">
-            <button class="btn-default btn-warning radius-5 remove" (click)="removeOddByLottery(odd)">
-              <div class="icon"></div>
-            </button>
+            <div fxFlex="25" fxLayoutAlign="center">
+              <button class="btn-default btn-warning radius-5 remove" (click)="removeOddByLottery(listOdds[0])">
+                <div class="icon"></div>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ng-container>
+    <ng-template #elseTemplateNumbers>
+      <!-- Numbers mode -->
+      <div *ngFor="let odd of listOdds" class="card-odd-container" fxFlex="50">
+        <div fxFill class="card-odd radius-5" [ngClass]="{'card-odd-error': !couponService.warningMessage &&
+            couponService.error && couponService.error.location.length > 0 &&
+            couponService.error.location.indexOf(odd.SelectionId) !== -1}" fxLayout="column"
+          fxLayoutAlign="space-between stretch">
+          <div fxFlex="100" class="row" fxLayout="row">
+            <div fxFlex="75" fxLayoutAlign="start center">
+              <div fxFlex="35" fxLayoutAlign="center center" class="btn-keno-number btn-default btn-selected radius-50">
+                {{odd.SelectionName}}
+              </div>
+            </div>
+            <div fxFlex="25" fxLayoutAlign="center">
+              <button class="btn-default btn-warning radius-5 remove" (click)="removeOddByLottery(odd)">
+                <div class="icon"></div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </ng-template>
 

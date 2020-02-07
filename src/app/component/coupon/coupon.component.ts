@@ -4,6 +4,7 @@ import { BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Subscription } from 'rxjs';
 import { LAYOUT_TYPE, TypeCoupon } from '../../../../src/environments/environment.models';
 import { AppSettings } from '../../app.settings';
+import { ColourGameId } from '../../products/main/colour-game.enum';
 import { BetOdd, PolyfunctionalArea } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { UserService } from '../../services/user.service';
@@ -38,6 +39,7 @@ export class CouponComponent implements OnDestroy {
 
   layoutProduct: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   couponTypeId: typeof CouponType = CouponType;
+  colourGameId: typeof ColourGameId = ColourGameId;
 
   constructor(
     public couponService: CouponService,
@@ -56,6 +58,9 @@ export class CouponComponent implements OnDestroy {
       }
       if (coupon.internal_isLottery) {
         this.maxItems = 10;
+        const polyFunc: PolyfunctionalArea = this.productService.polyfunctionalAreaSubject.getValue();
+        polyFunc.oddsCounter = coupon.Odds.length;
+      } else if (coupon.internal_isColours) {
         const polyFunc: PolyfunctionalArea = this.productService.polyfunctionalAreaSubject.getValue();
         polyFunc.oddsCounter = coupon.Odds.length;
       } else {

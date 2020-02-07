@@ -19,8 +19,14 @@
   [codeProduct]="productService.product.codeProduct">
 </app-results-soccer>
 
-<!-- RACING LAST RESULTS -->
+<!-- KENO RESULTS -->
 <app-results-keno
   *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.KENO"
   rowHeight="{{rowHeight}}" [results]="service.listResult[0]">
 </app-results-keno>
+
+<!-- COLOURS RESULTS -->
+<app-results-colours
+  *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.COLOURS"
+  rowHeight="{{rowHeight}}" [results]="service.listResult">
+</app-results-colours>

@@ -1,14 +1,15 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { ElysApiService } from '@elys/elys-api';
+import { ElysCouponService } from '@elys/elys-coupon';
 import { Subscription } from 'rxjs';
-import { BetDataDialog, PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from '../../products/products.model';
-import { ProductsService } from '../../products/products.service';
-import { TypeBetSlipColTot } from '../../products/main/main.models';
-import { BtncalcService } from '../btncalc/btncalc.service';
 import { UserService } from '../../../../src/app/services/user.service';
 import { LAYOUT_TYPE } from '../../../../src/environments/environment.models';
-import { ElysCouponService } from '@elys/elys-coupon';
+import { ColourGameId } from '../../products/main/colour-game.enum';
+import { TypeBetSlipColTot } from '../../products/main/main.models';
+import { BetDataDialog, PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from '../../products/products.model';
+import { ProductsService } from '../../products/products.service';
+import { BtncalcService } from '../btncalc/btncalc.service';
 import { CouponService } from '../coupon/coupon.service';
-import { ElysApiService } from '@elys/elys-api';
 
 @Component({
   moduleId: module.id,
@@ -36,6 +37,7 @@ export class DisplayComponent implements OnDestroy {
   // display from layout's coupon
   typeProductCoupon: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   typeBetSlipColTot: typeof TypeBetSlipColTot = TypeBetSlipColTot;
+  colourGameId: typeof ColourGameId = ColourGameId;
 
   constructor(
     public productService: ProductsService,
@@ -103,6 +105,21 @@ export class DisplayComponent implements OnDestroy {
         payouts: await this.elysApi.virtual.getPayouts(),
         layoutProducts: this.productService.product.layoutProducts.type,
         selectionNumber: this.polyfunctionalValue.oddsCounter
+      }
+    };
+    this.productService.openProductDialog(data);
+  }
+
+  async coloursPaytable(): Promise<void> {
+    const data: BetDataDialog = {
+      title: 'PAYTABLE',
+      paytable: {
+        codeProduct: this.productService.product.codeProduct,
+        payouts: await this.elysApi.virtual.getColoursPayouts(),
+        layoutProducts: this.productService.product.layoutProducts.type,
+        selectionNumber: this.polyfunctionalValue.oddsCounter,
+        selectionString: this.polyfunctionalValue.odds[0].label,
+        market: this.polyfunctionalValue.selection
       }
     };
     this.productService.openProductDialog(data);

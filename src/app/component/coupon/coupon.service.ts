@@ -1,25 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  BetCouponGroup,
-  BetCouponOdd,
-  CancelCouponRequest,
-  CancelCouponResponse,
-  CouponCategory,
-  CouponType,
-  ElysApiService,
-  FlagAsPaidRequest,
-  FlagAsPaidResponse,
-  StagedCouponStatus
-} from '@elys/elys-api';
-import {
-  AddNumberRequest,
-  AddOddRequest,
-  AddOddRequestSC,
-  BetCouponOddExtended,
-  CouponServiceMessageType,
-  ElysCouponService,
-  MessageSource
-} from '@elys/elys-coupon';
+import { BetCouponGroup, BetCouponOdd, CancelCouponRequest, CancelCouponResponse, CouponCategory, CouponType, ElysApiService, FlagAsPaidRequest, FlagAsPaidResponse, StagedCouponStatus, ColoursMultiSelectionCouponRequest } from '@elys/elys-api';
+import { AddColoursNumberRequest, AddNumberRequest, AddOddRequest, AddOddRequestSC, BetCouponOddExtended, CouponServiceMessageType, ElysCouponService, MessageSource, ColoursMultiSelection } from '@elys/elys-coupon';
 import { Observable, Subject, timer } from 'rxjs';
 import { AppSettings } from '../../../../src/app/app.settings';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';
@@ -84,9 +65,12 @@ export class CouponService {
       if (coupon) {
 
         // check If coupon is Lottery
-
         if (this.appSetting.products.find(prod => prod.layoutProducts.type === LAYOUT_TYPE.KENO && prod.productSelected)) {
           this.coupon.internal_isLottery = true;
+        }
+        // check If coupon is Colours
+        if (this.appSetting.products.find(prod => prod.layoutProducts.type === LAYOUT_TYPE.COLOURS && prod.productSelected)) {
+          this.coupon.internal_isColours = true;
         }
         this.coupon.internal_isReadyToPlace = false;
 
@@ -261,7 +245,51 @@ export class CouponService {
       });
     }
     this.elysCoupon.manageOddLottery(req);
+  }
 
+  /**
+ * COLOURS ADD NUMBER TO COUPON
+ * @param eventId
+ * @param selectedNumber
+ */
+  addToRemoveToCouponColours(selectionId: number, outcomeType: string, outcome: string, amount: number): void {
+    if (this.coupon && this.coupon.internal_isReadyToPlace) {
+      return;
+    }
+    const req: AddColoursNumberRequest = {
+      id: selectionId,
+      outcomeType: outcomeType,
+      outcome: outcome,
+      amount: amount
+    };
+    const hasNumber = (this.coupon && this.coupon.Odds) ?
+      this.coupon.Odds.find(item => item.SelectionName === outcome) : false;
+    if (hasNumber) {
+      req.isDelete = true;
+      this.couponIdAdded.push(Number(outcome));
+      if (this.coupon.Odds.length === 1) {
+        this.resetCoupon();
+        return;
+      }
+    } else {
+
+      this.couponIdAdded.filter((item, idx) => {
+        if (item === Number(outcome)) {
+          this.couponIdAdded.splice(idx, 0);
+        }
+      });
+    }
+    this.elysCoupon.manageOddColours(req);
+  }
+
+  multiAddToCouponColours(selectionId: number, outcomeType: string, outcomes: string[], amount: number): void {
+    const req: ColoursMultiSelection = {
+      selectionId: selectionId,
+      outcomeType: outcomeType,
+      outcomes: outcomes,
+      amount: amount
+    };
+    this.elysCoupon.manageColoursMultiOddSC(req);
   }
 
   private requestObj(bet: BetOdd, isAdd: boolean = true, isMultipleStake): AddOddRequest {
@@ -339,8 +367,9 @@ export class CouponService {
 
     if (this.coupon.internal_isLottery) {
       this.elysCoupon.updateCouponLottery(this.coupon);
+    } else if (this.coupon.internal_isColours) {
+      this.elysCoupon.updateCouponColours(this.coupon);
     } else {
-
       this.elysCoupon.updateCoupon(this.coupon);
     }
   }
@@ -556,13 +585,12 @@ export class CouponService {
     if (!this.coupon && this.coupon.Odds.length > 0) {
       return;
     }
-
     // Check type coupon and call the different api
     if (this.coupon.internal_isLottery) {
       await this.elysCoupon.updateCouponLottery(this.coupon);
-
+    } else if (this.coupon.internal_isLottery) {
+      await this.elysCoupon.updateCouponColours(this.coupon);
     } else {
-
       await this.elysCoupon.updateCoupon(this.coupon);
     }
     // enabled process to staging coupon
@@ -587,6 +615,8 @@ export class CouponService {
     // Check type coupon and call the different api
     if (this.coupon.internal_isLottery) {
       this.elysCoupon.placeCouponLottery(this.coupon);
+    } else if (this.coupon.internal_isColours) {
+      this.elysCoupon.placeCouponColours(this.coupon);
     } else {
       this.elysCoupon.placeCoupon(this.coupon);
     }

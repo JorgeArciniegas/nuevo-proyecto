@@ -74,6 +74,58 @@ button:active:not([disabled]) {
 	}
 }
 
+// COLOURS
+.btn-colours {
+	font-weight: 700;
+	height: 80px;
+	width: 80px;
+	@media screen and (max-width: 1441px) {
+		height: 55px;
+		width: 55px;
+	}
+	&.btn-colours-RED {
+		background: #ff0000;
+		border-color: #ff0000;
+	}
+
+	&.btn-colours-BLUE {
+		background: #4171b2;
+		border-color: #4171b2;
+	}
+
+	&.btn-colours-GREEN {
+		background: #11a40f;
+		border-color: #11a40f;
+	}
+
+	&.btn-colours-YELLOW {
+		background: #c2f102;
+		border-color: #c2f102;
+		color: #000;
+	}
+
+	&.selected {
+		border-color: #91c8fa;
+		border-width: 5px;
+	}
+
+	&.disabled {
+		opacity: 0.3;
+	}
+}
+
+.btn-game-selector {
+	background: #273142;
+	border-width: 0px;
+	&.selected {
+		border-color: #91c8fa;
+		border-width: 2px;
+	}
+	&.coupon-selection {
+		border-style: solid;
+	}
+}
+
 // BUTTON COCKFIGHT
 .btn-default-cock {
 	border: 2px solid;

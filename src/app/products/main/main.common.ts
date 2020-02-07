@@ -4,6 +4,10 @@ import { EventListComponent } from './events-list/events-list.component';
 import { StandardComponent as EventsListStandardComponent } from './events-list/templates/standard/standard.component';
 import { LuckyComponent } from './lucky/lucky.component';
 import { CockFightComponent as LuckyCockFightComponent } from './lucky/templates/cock-fight/cock-fight.component';
+import { ColoursComponent as LuckyColoursComponent } from './lucky/templates/colours/colours.component';
+import { Bet49Component as LuckyBet49Component } from './lucky/templates/colours/games/bet49/bet49.component';
+import { HiloComponent as LuckyHiloComponent } from './lucky/templates/colours/games/hilo/hilo.component';
+import { KenoComponent as LuckyKenoComponent } from './lucky/templates/keno/keno.component';
 import { RaceComponent as LuckyRaceComponent } from './lucky/templates/race/race.component';
 import { SoccerComponent as LuckySoccerComponent } from './lucky/templates/soccer/soccer.component';
 import { MainComponent } from './main.component';
@@ -16,6 +20,9 @@ import { FilterByPositionPipe } from './playable-board/filter-by-position.pipe';
 import { FilterMarketsByAreaColumnPipe } from './playable-board/filter-markets-by-area-column.pipe';
 import { PlayableBoardComponent } from './playable-board/playable-board.component';
 import { CockFightComponent as PlayableBoardCockFightComponent } from './playable-board/templates/cock-fight/cock-fight.component';
+import { ColoursComponent as PlayableBoardColoursComponent } from './playable-board/templates/colours/colours.component';
+import { Bet49Component as PlayableBoardBet49Component } from './playable-board/templates/colours/games/bet49/bet49.component';
+import { HiLoComponent } from './playable-board/templates/colours/games/hilo/hilo.component';
 import { GetArrayFromNumberPipe } from './playable-board/templates/get-array-from-number.pipe';
 import { KenoComponent as PlayableBoardKenoComponentComponent } from './playable-board/templates/keno/keno.component';
 import { RaceComponent as PlayableBoardRaceComponent } from './playable-board/templates/race/race.component';
@@ -24,10 +31,10 @@ import { OverviewComponent as PlayableBoardSoccerOverviewComponent } from './pla
 import { SoccerComponent as PlayableBoardSoccerComponent } from './playable-board/templates/soccer/soccer.component';
 import { ResultsComponent } from './results/results.component';
 import { CockFightComponent as ResultsCockFightComponent } from './results/templates/cock-fight/cock-fight.component';
+import { ColoursComponent as ResultsColoursComponent } from './results/templates/colours/colours.component';
 import { KenoComponent as ResultsKenoComponent } from './results/templates/keno/keno.component';
 import { RaceComponent as ResultsRaceComponent } from './results/templates/race/race.component';
 import { SoccerComponent as ResultsSoccerComponent } from './results/templates/soccer/soccer.component';
-import { KenoComponent as LuckyKenoComponent } from './lucky/templates/keno/keno.component';
 
 
 export const componentDeclarations: any[] = [
@@ -59,7 +66,14 @@ export const componentDeclarations: any[] = [
   ExtractCorrectScorePipe,
   PlayableBoardKenoComponentComponent,
   ResultsKenoComponent,
-  LuckyKenoComponent
+  LuckyKenoComponent,
+  PlayableBoardColoursComponent,
+  PlayableBoardBet49Component,
+  HiLoComponent,
+  ResultsColoursComponent,
+  LuckyColoursComponent,
+  LuckyBet49Component,
+  LuckyHiloComponent
 ];
 
 export const routes: Routes = [

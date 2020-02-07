@@ -3,7 +3,8 @@ import { ElysApiService, VirtualSportLastResultsRequest, VirtualSportLastResults
 import { timer } from 'rxjs';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { ProductsService } from '../../products.service';
-import { EventResult, OVER_UNDER_COCKFIGHT } from './results.model';
+import { EventResult, OVER_UNDER_COCKFIGHT, ColoursResult, ColoursNumber } from './results.model';
+import { Band, Colour } from '../playable-board/templates/colours/colours.models';
 
 @Injectable({
   providedIn: 'root'
@@ -71,6 +72,33 @@ export class ResultsService {
                 const kenoResults: number[] = results.map(result => Number.parseInt(result, 0));
                 tempEventResult.kenoResults = kenoResults;
                 break;
+              case LAYOUT_TYPE.COLOURS:
+                results = eventResults.EventResults[i].Result.split(',');
+                const coloursNumbers: ColoursNumber[] = [];
+                const numbersExtracted: number[] = results.map(result => Number.parseInt(result, 0));
+                for (const numberExtracted of numbersExtracted) {
+                  const coloursNumber: ColoursNumber = {
+                    number: numberExtracted,
+                    colour: this.checkNumberColour(numberExtracted)
+                  };
+                  coloursNumbers.push(coloursNumber);
+                }
+                const hiloNumber: number = numbersExtracted.reduce((a, b) => a + b, 0);
+                let hiloWinningSelection: Band;
+                if (hiloNumber >= 21 && hiloNumber <= 148) {
+                  hiloWinningSelection = Band.LO;
+                } else if (hiloNumber >= 149 && hiloNumber <= 151) {
+                  hiloWinningSelection = Band.MID;
+                } else {
+                  hiloWinningSelection = Band.HI;
+                }
+                const coloursResult: ColoursResult = {
+                  numbersExtracted: coloursNumbers,
+                  hiloWinningSelection: hiloWinningSelection,
+                  hiloNumber: hiloNumber
+                };
+                tempEventResult.coloursResults = coloursResult;
+                break;
               default:
                 break;
             }
@@ -93,13 +121,26 @@ export class ResultsService {
       });
   }
 
-
-
   loadLastResult(delay: boolean = true): void {
     if (delay) {
       timer(10000).subscribe(() => this.getLastResult());
     } else {
       this.getLastResult();
+    }
+  }
+
+  private checkNumberColour(colourNumber: number): Colour {
+    if (colourNumber === 49) {
+      return Colour.YELLOW;
+    }
+    if (colourNumber % 3 === 1) {
+      return Colour.RED;
+    }
+    if (colourNumber % 3 === 2) {
+      return Colour.BLUE;
+    }
+    if (colourNumber % 3 === 0) {
+      return Colour.GREEN;
     }
   }
 

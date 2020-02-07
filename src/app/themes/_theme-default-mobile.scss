@@ -468,6 +468,10 @@
 			@extend %btn-dark-gradient-mobile;
 		}
 
+		.btn-dark-blue-gradient {
+			@extend %btn-keyboard;
+		}
+
 		// BUTTON FILTER ADMIN
 		.btn-filter {
 			@extend %btn-filter-mobile;
@@ -559,6 +563,11 @@
 			.PRODUCT-KENO-BG {
 				// KENO
 				@extend %PRODUCT-KENO-BG-MOBILE;
+			}
+
+			.PRODUCT-CLRS-BG {
+				// COLOURS
+				@extend %PRODUCT-CLRS-BG-MOBILE;
 			}
 
 			.race-control {

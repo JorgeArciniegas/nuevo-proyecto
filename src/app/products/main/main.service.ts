@@ -1,18 +1,5 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import {
-  ElysApiService,
-  VirtualBetEvent,
-  VirtualBetMarket,
-  VirtualBetSelection,
-  VirtualBetTournament,
-  VirtualDetailOddsOfEventRequest,
-  VirtualDetailOddsOfEventResponse,
-  VirtualEventCountDownRequest,
-  VirtualEventCountDownResponse,
-  VirtualGetRankByEventResponse,
-  VirtualProgramTreeBySportRequest,
-  VirtualProgramTreeBySportResponse
-} from '@elys/elys-api';
+import { Injectable } from '@angular/core';
+import { ElysApiService, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualDetailOddsOfEventRequest, VirtualDetailOddsOfEventResponse, VirtualEventCountDownRequest, VirtualEventCountDownResponse, VirtualGetRankByEventResponse, VirtualProgramTreeBySportRequest, VirtualProgramTreeBySportResponse } from '@elys/elys-api';
 import { ElysFeedsService } from '@elys/elys-feeds';
 import { cloneDeep as clone } from 'lodash';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
@@ -24,29 +11,9 @@ import { CouponService } from '../../component/coupon/coupon.service';
 import { UserService } from '../../services/user.service';
 import { BetOdd, Market, PolyfunctionalArea, PolyfunctionalStakeCoupon, SelectionIdentifier } from '../products.model';
 import { ProductsService } from '../products.service';
-import {
-  Area,
-  CombinationType,
-  EventDetail,
-  EventInfo,
-  EventTime,
-  ListArea,
-  Match,
-  PlacingEvent,
-  Player,
-  Podium,
-  Smartcode,
-  SmartCodeType,
-  SpecialBet,
-  SpecialBetValue,
-  SpecialOddData,
-  TypeBetSlipColTot,
-  TypePlacingEvent,
-  VirtualBetEventExtended,
-  VirtualBetMarketExtended,
-  VirtualBetSelectionExtended,
-  VirtualBetTournamentExtended
-} from './main.models';
+import { ColourGameId } from './colour-game.enum';
+import { Area, CombinationType, EventDetail, EventInfo, EventTime, ListArea, Match, PlacingEvent, Player, Podium, Smartcode, SmartCodeType, SpecialBet, SpecialBetValue, SpecialOddData, TypeBetSlipColTot, TypePlacingEvent, VirtualBetEventExtended, VirtualBetMarketExtended, VirtualBetSelectionExtended, VirtualBetTournamentExtended } from './main.models';
+import { ColoursNumber, ColoursSelection } from './playable-board/templates/colours/colours.models';
 import { KenoNumber } from './playable-board/templates/keno/keno.model';
 import { ResultsService } from './results/results.service';
 import { areas, overviewAreas } from './SoccerAreas';
@@ -61,6 +28,8 @@ export class MainService {
   placingEvent: PlacingEvent = new PlacingEvent();
   public currentEventDetails: VirtualBetEvent;
   public currentProductDetails: VirtualBetTournamentExtended;
+
+  public selectedColourGameId: ColourGameId = ColourGameId.bet49;
 
   private remaingTimeCounter: Subject<EventTime>;
   public remaingTimeCounterObs: Observable<EventTime>;
@@ -190,6 +159,7 @@ export class MainService {
 
   initEvents(): void {
     this.initCurrentEvent = true;
+    this.selectedColourGameId = ColourGameId.bet49;
 
     this.eventDetails = new EventDetail(this.productService.product.layoutProducts.nextEventItems);
     this.eventDetails.currentEvent = 0;
@@ -690,7 +660,7 @@ export class MainService {
 
     const event: VirtualBetEvent = this.cacheEvents.find((cacheEvent: VirtualBetEvent) => cacheEvent.id === eventNumber);
     // Ceck, if it is empty load from api
-    if (event.mk == null || event.mk.length === 0) {
+    if (!event || event && event.mk == null || event && event.mk.length === 0) {
       // tslint:disable-next-line:max-line-length
       this.feedData.getEventVirtualDetail(this.userservice.getUserId(), eventNumber).
         then((sportDetail: VirtualDetailOddsOfEventResponse) => {
@@ -702,9 +672,7 @@ export class MainService {
           } catch (err) {
             if (this.attempts < 5) {
               this.attempts++;
-              setTimeout(() => {
-                this.eventDetailOdds(eventNumber);
-              }, 1000);
+              timer(1000).subscribe(() => this.eventDetailOdds(eventNumber));
             } else {
               this.attempts = 0;
             }
@@ -1579,8 +1547,6 @@ export class MainService {
   /***
    * KENO
    */
-
-
   placingNumber(selected: KenoNumber): void {
     if (this.couponService.checkIfCouponIsReadyToPlace()) {
       return;
@@ -1602,8 +1568,6 @@ export class MainService {
     this.populatingPolyfunctionAreaByLottery();
   }
 
-
-
   // Method to populate the polyfunctional object with the odd of a layout that shows odds.
   populatingPolyfunctionAreaByLottery() {
     let areaFuncData: PolyfunctionalArea = new PolyfunctionalArea();
@@ -1614,8 +1578,6 @@ export class MainService {
       // Set the variables for the message to show on the polyfunctional area.
       // Variable containing the market identifier.
       let selection: string;
-      // Variable containing the identifier of the selected odds.
-      let value: string;
       const kenoSelected: BetOdd[] = [];
       let eventId: number;
       // Selection the current marketId
@@ -1636,12 +1598,9 @@ export class MainService {
             lastMarket = n.number;
             selection = SmartCodeType[this.getMarketIdentifier(n.number)];
           }
-          // Get the selection identifier to use on the polyfunctional area.
-          const selectionIdentifier = SelectionIdentifier['Selection: ' + n.number];
-          value = value === undefined ? selectionIdentifier : value + '/' + selectionIdentifier;
           kenoSelected.push(
             new BetOdd(
-              selectionIdentifier,
+              undefined,
               1,
               this.btnService.polyfunctionStakePresetPlayer.amount,
               eventId
@@ -1650,10 +1609,114 @@ export class MainService {
         }
       }
       areaFuncData.selection = selection;
-      areaFuncData.value = value;
+      areaFuncData.value = 0;
       areaFuncData.amount = this.btnService.polyfunctionStakePresetPlayer.amount;
       areaFuncData.typeSlipCol = TypeBetSlipColTot.GROUP;
       areaFuncData.odds = kenoSelected;
+    } catch (err) {
+      console.log(err);
+      areaFuncData = {};
+    } finally {
+      areaFuncData.firstTap = true;
+      this.productService.polyfunctionalAreaSubject.next(areaFuncData);
+    }
+  }
+
+  /***
+ * COLOURS
+ */
+  placingColoursNumber(selectedNumber: number): void {
+    if (this.couponService.checkIfCouponIsReadyToPlace()) {
+      return;
+    }
+    if (!this.placingEvent) {
+      this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
+    }
+    if (!this.placingEvent.coloursNumbers || this.placingEvent.coloursNumbers && this.placingEvent.coloursNumbers.length === 0) {
+      this.placingEvent.coloursNumbers = [];
+      this.placingEvent.coloursNumbers.push(selectedNumber);
+    } else {
+      const idx = this.placingEvent.coloursNumbers.findIndex(item => item === selectedNumber);
+      if (idx !== -1) {
+        this.placingEvent.coloursNumbers.splice(idx, 1);
+      } else {
+        this.placingEvent.coloursNumbers.push(selectedNumber);
+      }
+    }
+    this.populatingPolyfunctionAreaByColours();
+  }
+
+  placingColoursSelection(selected: ColoursSelection): void {
+    if (this.couponService.checkIfCouponIsReadyToPlace()) {
+      return;
+    }
+    if (!this.placingEvent) {
+      this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
+    }
+    if (!this.placingEvent.coloursSelection) {
+      this.placingEvent.coloursSelection = selected;
+    } else {
+      if (selected.name === this.placingEvent.coloursSelection.name) {
+        this.placingEvent.coloursSelection = undefined;
+      } else {
+        this.placingEvent.coloursSelection = selected;
+      }
+    }
+    this.populatingPolyfunctionAreaByColours();
+  }
+
+  // Method to populate the polyfunctional object with the odd of a layout that shows odds.
+  populatingPolyfunctionAreaByColours() {
+    let areaFuncData: PolyfunctionalArea = new PolyfunctionalArea();
+    areaFuncData.typeSlipCol = TypeBetSlipColTot.GROUP;
+    areaFuncData.activeAssociationCol = false;
+    areaFuncData.activeDistributionTot = false;
+    try {
+      // Set the variables for the message to show on the polyfunctional area.
+      const colourSelected: BetOdd[] = [];
+      let eventId: number;
+      // Selection the current marketId
+      this.getCurrentEvent().then(item => eventId = item.mk[0].sls[0].id);
+      if (this.placingEvent.coloursNumbers && this.placingEvent.coloursNumbers.length !== 0) {
+        let lastMarket: Market;
+        let marketHasChanged: boolean;
+        for (const coloursNumber of this.placingEvent.coloursNumbers) {
+          // Check if there are selections on different markets and set the market identifier.
+          if (lastMarket && !marketHasChanged) {
+            if (coloursNumber === lastMarket) {
+              marketHasChanged = false;
+            } else {
+              marketHasChanged = true;
+            }
+          } else if (!lastMarket) {
+            lastMarket = coloursNumber;
+          }
+          colourSelected.push(
+            new BetOdd(
+              undefined,
+              1,
+              this.btnService.polyfunctionStakePresetPlayer.amount,
+              eventId
+            )
+          );
+        }
+      } else if (this.placingEvent.coloursSelection) {
+        // selection case es. hi-lo
+        colourSelected.push(
+          new BetOdd(
+            this.placingEvent.coloursSelection.name,
+            1,
+            this.btnService.polyfunctionStakePresetPlayer.amount,
+            eventId
+          )
+        );
+
+      }
+      areaFuncData.selection = ColourGameId[this.selectedColourGameId];
+      areaFuncData.value = 0;
+      areaFuncData.amount = this.btnService.polyfunctionStakePresetPlayer.amount;
+      areaFuncData.typeSlipCol = TypeBetSlipColTot.GROUP;
+      areaFuncData.odds = colourSelected;
     } catch (err) {
       console.log(err);
       areaFuncData = {};
@@ -1695,4 +1758,25 @@ export class MainService {
       this.currentEventSubscribe.next(selected);
     }
   }
+
+  fireChangeColoursGame(colourGameId: ColourGameId): void {
+    // if the coupon isn't empty
+    if (
+      this.couponService.coupon && this.couponService.coupon.Odds.length > 0
+    ) {
+      // open modal destroy confirm coupon
+      this.destroyCouponService.openDestroyCouponDialog();
+      // subscribe to event dialog
+      this.destroyCouponService.dialogRef.afterClosed().subscribe(elem => {
+        if (elem) {
+          this.selectedColourGameId = colourGameId;
+        }
+      });
+    } else {
+      // to continue
+      this.selectedColourGameId = colourGameId;
+    }
+    this.resetPlayEvent();
+  }
+
 }
