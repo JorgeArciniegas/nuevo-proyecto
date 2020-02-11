@@ -35,7 +35,11 @@ export class ApplicationMenuComponent {
     if (barHeight < 10) {
       barHeight = 50;
     }
-    this.logoIcon = new IconSize(barHeight * 0.9);
+    if (this.settings.faviconPath === '') {
+      this.logoIcon = undefined;
+    } else {
+      this.logoIcon = new IconSize(barHeight * 0.9);
+    }
     this.menuIcon = new IconSize(barHeight * 0.7);
     this.buttonIcon = new IconSize(barHeight * 0.8 - 4, barHeight * 0.8);
     this.btnSelected = this.settings.products[0].name;
