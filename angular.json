@@ -484,7 +484,7 @@
               "outputPath": "dist-genc02",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/develop/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -507,7 +507,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/develop/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -521,7 +521,7 @@
               "outputPath": "dist-genc02",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/develop/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -544,7 +544,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/develop/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
