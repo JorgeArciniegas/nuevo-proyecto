@@ -10,6 +10,7 @@ import { ProductsService } from '../../products/products.service';
 import { UserService } from '../../services/user.service';
 import { WindowSizeService } from '../../services/utility/window-size/window-size.service';
 import { CouponService } from './coupon.service';
+import { Colour } from '../../products/main/playable-board/templates/colours/colours.models';
 
 @Component({
   selector: 'app-coupon',
@@ -135,6 +136,22 @@ export class CouponComponent implements OnDestroy {
   openDialog(): void {
     if (this.couponService.coupon) {
       this.productService.openProductDialog({ title: 'COUPON', betCoupon: this.couponService.coupon });
+    }
+  }
+
+  public getNumberColour(number: string): string {
+    const colourNumber: number = parseInt(number, 10);
+    if (colourNumber === 49) {
+      return Colour[Colour.YELLOW];
+    }
+    if (colourNumber % 3 === 1) {
+      return Colour[Colour.RED];
+    }
+    if (colourNumber % 3 === 2) {
+      return Colour[Colour.BLUE];
+    }
+    if (colourNumber % 3 === 0) {
+      return Colour[Colour.GREEN];
     }
   }
 }

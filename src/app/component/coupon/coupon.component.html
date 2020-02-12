@@ -141,9 +141,19 @@
           fxLayoutAlign="space-between stretch">
           <div fxFlex="100" class="row" fxLayout="row">
             <div fxFlex="75" fxLayoutAlign="start center">
-              <div fxFlex="35" fxLayoutAlign="center center" class="btn-keno-number btn-default btn-selected radius-50">
-                {{odd.SelectionName}}
-              </div>
+              <ng-container *ngIf="couponLayout.typeLayout === layoutProduct.COLOURS; else simpleNumberTemplate">
+                <!-- Colours template -->
+                <div fxFlex="35" fxLayoutAlign="center center"
+                  class="btn-keno-number btn-colours btn-default radius-50 btn-colours-{{getNumberColour(odd.SelectionName)}}">
+                  {{odd.SelectionName}}
+                </div>
+              </ng-container>
+              <ng-template #simpleNumberTemplate>
+                <div fxFlex="35" fxLayoutAlign="center center"
+                  class="btn-keno-number btn-default btn-selected radius-50">
+                  {{odd.SelectionName}}
+                </div>
+              </ng-template>
             </div>
             <div fxFlex="25" fxLayoutAlign="center">
               <button class="btn-default btn-warning radius-5 remove" (click)="removeOddByLottery(odd)">

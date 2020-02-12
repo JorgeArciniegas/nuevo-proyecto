@@ -36,6 +36,12 @@ export class ColoursComponent implements OnInit {
         );
         this.gameSelections = payouts[0].Selections;
         break;
+      case ColourGameId.betzero:
+        payouts = this.data.paytable.payouts.filter(
+          p => p.MasterMarketName === 'BetZero'
+        );
+        this.gameSelections = payouts.find(p => p.MappingCount === this.data.paytable.selectionNumber).Selections;
+        break;
       default:
         break;
     }

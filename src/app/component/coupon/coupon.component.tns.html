@@ -135,11 +135,21 @@
           [ngClass]="{'card-odd-error': !couponService.warningMessage && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}">
           <ng-container>
             <GridLayout row="0" rows="*" columns="10*,*,5*" class="row" verticalAlignment="center">
-              <StackLayout col="0" verticalAlignment="center"
-                class="btn-keno-number btn-default btn-selected radius-50">
-                <Label verticalAlignment="center" text="{{ odd.SelectionName }}" horizontalAlignment="center"
-                  textWrap="true"></Label>
-              </StackLayout>
+              <ng-container *ngIf="couponLayout.typeLayout === layoutProduct.COLOURS; else simpleNumberTemplate">
+                <StackLayout col="0" verticalAlignment="center"
+                  class="btn-keno-number btn-colours btn-default radius-50 btn-colours-{{getNumberColour(odd.SelectionName)}}">
+                  <Label verticalAlignment="center" text="{{ odd.SelectionName }}" horizontalAlignment="center"
+                    textWrap="true"></Label>
+                </StackLayout>
+              </ng-container>
+              <ng-template #simpleNumberTemplate>
+                <StackLayout col="0" verticalAlignment="center"
+                  class="btn-keno-number btn-default btn-selected radius-50">
+                  <Label verticalAlignment="center" text="{{ odd.SelectionName }}" horizontalAlignment="center"
+                    textWrap="true"></Label>
+                </StackLayout>
+              </ng-template>
+
               <StackLayout col="2" class="btn-warning button" (tap)="removeOddByLottery(odd)"
                 [isEnabled]="!userService.isModalOpen" horizontalAlignment="right" verticalAlignment="center">
                 <Image stretch="aspectFit" width="38" src="~/assets/icons/baseline-delete_outline-white-24px.png"

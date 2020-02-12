@@ -1,22 +1,23 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BetCouponExtended, ElysCouponService } from '@elys/elys-coupon';
 import { Subscription } from 'rxjs';
 import { BtncalcService } from '../../../../../../../component/btncalc/btncalc.service';
 import { CouponService } from '../../../../../../../component/coupon/coupon.service';
 import { ColourGameId } from '../../../../../../../products/main/colour-game.enum';
 import { MainService } from '../../../../../../../products/main/main.service';
-import { Colour, ColoursNumberNative } from '../../colours.models';
+import { Colour, ColoursNumber } from '../../colours.models';
 
 @Component({
-  moduleId: module.id,
-  selector: 'app-playable-board-bet49',
-  templateUrl: './bet49.component.html',
-  styleUrls: ['./bet49.component.scss']
+  selector: 'app-colours-numbers-board',
+  templateUrl: './numbers-board.component.html',
+  styleUrls: ['./numbers-board.component.scss']
 })
-export class Bet49Component implements OnInit, OnDestroy {
-  public coloursNumbers: ColoursNumberNative[] = [];
-  public numberSelectionQueue: ColoursNumberNative[] = [];
+export class NumbersBoardComponent implements OnDestroy, OnInit {
+  public coloursNumbers: ColoursNumber[] = [];
+  public numberSelectionQueue: ColoursNumber[] = [];
   public Colour = Colour;
+  @Input() public rowHeight: number;
+  @Input() public maxNumberOfSelections: number;
 
   private couponHasChangedSubscription: Subscription;
   private couponHasBeenPlacedSubscription: Subscription;
@@ -71,7 +72,7 @@ export class Bet49Component implements OnInit, OnDestroy {
     }
   }
 
-  public async onNumberClick(coloursNumber: ColoursNumberNative) {
+  public async onNumberClick(coloursNumber: ColoursNumber) {
     if (this.numberSelectionQueue.includes(coloursNumber)) {
       return;
     }
@@ -118,7 +119,7 @@ export class Bet49Component implements OnInit, OnDestroy {
     );
 
     // Check maximum number of selections for this game
-    if (tmpRealSel.length >= 4) {
+    if (tmpRealSel.length >= this.maxNumberOfSelections) {
       this.coloursNumbers.forEach(coloursNumber =>
         coloursNumber.isSelected ? coloursNumber.isDisabled = false : coloursNumber.isDisabled = true);
     } else {
@@ -127,32 +128,19 @@ export class Bet49Component implements OnInit, OnDestroy {
   }
 
   private initColoursNumbers(): void {
-    const coloursNumbers: ColoursNumberNative[] = [];
-    let row = 0;
-    let col = 0;
+    const coloursNumbers: ColoursNumber[] = [];
     for (let i = 1; i <= 48; ++i) {
-      if (i % 12 === 1 && i >= 12) {
-        ++row;
-      }
-      if (i % 12 === 1) {
-        col = 0;
-      }
-      const coloursNumber: ColoursNumberNative = {
+      const coloursNumber: ColoursNumber = {
         number: i,
         isSelected: false,
-        row,
-        col,
         colour: this.checkNumberColour(i),
         isDisabled: false
       };
       coloursNumbers.push(coloursNumber);
-      ++col;
     }
-    const lastColoursNumber: ColoursNumberNative = {
+    const lastColoursNumber: ColoursNumber = {
       number: 49,
       isSelected: false,
-      row: 4,
-      col: 5,
       colour: Colour.YELLOW,
       isDisabled: false
     };
