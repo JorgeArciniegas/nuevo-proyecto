@@ -82,7 +82,7 @@
               <div class="content content-keno">
                 <div class="selection-row" *ngFor="let match of groupCat.value">
                   <span *ngIf="match.SelectionName">
-                    {{ match.SelectionName | uppercase | translate }}
+                    {{ getSelectionName(printCouponService.couponPrint.Odds[0].MarketName, match.SelectionName) }}
                   </span>
                 </div>
               </div>

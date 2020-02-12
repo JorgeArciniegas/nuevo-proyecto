@@ -77,7 +77,7 @@ export class PlacingEvent {
   odds: VirtualBetSelectionExtended[];
   kenoNumbers?: KenoNumber[];
   coloursNumbers?: number[];
-  coloursSelection: ColoursSelection;
+  coloursSelection: string;
   amount: number;
   repeat: number;
   isSpecialBets: boolean;

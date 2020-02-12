@@ -79,6 +79,10 @@ button:active:not([disabled]) {
 	font-weight: 700;
 	height: 80px;
 	width: 80px;
+	border-style: solid;
+	&.rainbow {
+		height: unset;
+	}
 	@media screen and (max-width: 1441px) {
 		height: 55px;
 		width: 55px;
@@ -105,8 +109,8 @@ button:active:not([disabled]) {
 	}
 
 	&.selected {
-		border-color: #91c8fa;
-		border-width: 5px;
+		border-color: #ffffff;
+		border-width: 3px;
 	}
 
 	&.disabled {

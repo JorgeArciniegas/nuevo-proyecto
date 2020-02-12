@@ -259,7 +259,7 @@ export class CouponService {
     const req: AddColoursNumberRequest = {
       id: selectionId,
       outcomeType: outcomeType,
-      outcome: outcome,
+      outcome: outcome.replace('+', ''),
       amount: amount
     };
     const hasNumber = (this.coupon && this.coupon.Odds) ?

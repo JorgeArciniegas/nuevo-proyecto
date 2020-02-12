@@ -30,9 +30,10 @@ export class HiloComponent {
 
   public placingLucky(): void {
     this.couponService.resetCoupon();
+    this.mainService.resetPlayEvent();
     const extract: number = Math.floor(Math.random() * 3);
     const selection: ColoursSelection = this.selections[extract];
-    this.mainService.placingColoursSelection(selection);
+    this.mainService.placingColoursSelection(selection.name);
     this.mainService.getCurrentEvent().then(
       (item) => {
         const eventid = item.mk[0].sls[0].id;

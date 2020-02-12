@@ -109,7 +109,7 @@
 <ng-template #numbers>
   <div fxLayout="row wrap" fxLayoutGap="10px grid">
     <ng-container
-      *ngIf="listOdds.length === 1 && listOdds[0].MarketName === colourGameId[colourGameId.hilo]; else elseTemplateNumbers">
+      *ngIf="listOdds.length === 1 && (listOdds[0].MarketName === colourGameId[colourGameId.hilo] || listOdds[0].MarketName.substring(0, listOdds[0].MarketName.length - 1) === colourGameId[colourGameId.rainbow]); else elseTemplateNumbers">
       <!-- Single selection mode -->
       <div class="card-odd-container" fxFlex="100">
         <div fxFill class="card-odd radius-5 single-selection" [ngClass]="{'card-odd-error': !couponService.warningMessage &&
@@ -118,10 +118,19 @@
           fxLayoutAlign="space-between stretch">
           <div fxFlex="100" class="row" fxLayout="row">
             <div fxFlex="75" fxLayoutAlign="start center">
-              <div fxFlex="35" fxLayoutAlign="center center"
-                class="btn-game-selector selected btn-default coupon-selection radius-5">
-                {{listOdds[0].SelectionName | uppercase | translate}}
-              </div>
+              <ng-container
+                *ngIf="listOdds[0].MarketName === colourGameId[colourGameId.hilo]; else elseOtherColoursTemplate">
+                <div fxFlex="35" fxLayoutAlign="center center"
+                  class="btn-game-selector selected btn-default coupon-selection radius-5">
+                  {{listOdds[0].SelectionName | uppercase | translate}}
+                </div>
+              </ng-container>
+              <ng-template #elseOtherColoursTemplate>
+                <div fxFlex="35" fxLayoutAlign="center center"
+                  class="btn-keno-number btn-colours btn-default radius-50 btn-colours-{{getRainbowColour(listOdds[0].MarketName)}}">
+                  {{listOdds[0].SelectionName}}
+                </div>
+              </ng-template>
             </div>
             <div fxFlex="25" fxLayoutAlign="center">
               <button class="btn-default btn-warning radius-5 remove" (click)="removeOddByLottery(listOdds[0])">

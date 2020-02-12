@@ -37,9 +37,10 @@
     !productService.product.typeCoupon?.acceptMultiStake" class="p-l-5">
       <StackLayout col="0" verticalAlignment="center" orientation=horizontal>
         <ng-container
-          *ngIf="polyfunctionalValue.oddsCounter === 1 && polyfunctionalValue.selection === colourGameId[colourGameId.hilo]; else elseTemplate">
-          <Label *ngIf="polyfunctionalValue.oddsCounter > 0" class="group-title"
-            text="{{ polyfunctionalValue.odds[0].label | translate }}" class="m-r-5"></Label>
+          *ngIf="polyfunctionalValue.oddsCounter === 1 && 
+          (polyfunctionalValue.selection === colourGameId[colourGameId.hilo] || polyfunctionalValue.selection === colourGameId[colourGameId.rainbow]); else elseTemplate">
+          <Label *ngIf="polyfunctionalValue.oddsCounter > 0" class="group-title" text="{{ getDisplaySelection() }}"
+            class="m-r-5"></Label>
         </ng-container>
         <ng-template #elseTemplate>
           <Label *ngIf="polyfunctionalValue.oddsCounter > 0" class="group-title" text="{{ polyfunctionalValue.oddsCounter }}

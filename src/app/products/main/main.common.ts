@@ -8,6 +8,7 @@ import { ColoursComponent as LuckyColoursComponent } from './lucky/templates/col
 import { Bet0Component as LuckyBet0Component } from './lucky/templates/colours/games/bet0/bet0.component';
 import { Bet49Component as LuckyBet49Component } from './lucky/templates/colours/games/bet49/bet49.component';
 import { DragonComponent as LuckyDragonComponent } from './lucky/templates/colours/games/dragon/dragon.component';
+import { RainbowComponent as LuckyRainbowComponent } from './lucky/templates/colours/games/rainbow/rainbow.component';
 import { HiloComponent as LuckyHiloComponent } from './lucky/templates/colours/games/hilo/hilo.component';
 import { KenoComponent as LuckyKenoComponent } from './lucky/templates/keno/keno.component';
 import { RaceComponent as LuckyRaceComponent } from './lucky/templates/race/race.component';
@@ -26,6 +27,7 @@ import { ColoursComponent as PlayableBoardColoursComponent } from './playable-bo
 import { Bet0Component as PlayableBoardBet0Component } from './playable-board/templates/colours/games/bet0/bet0.component';
 import { Bet49Component as PlayableBoardBet49Component } from './playable-board/templates/colours/games/bet49/bet49.component';
 import { DragonComponent as PlayableBoardDragonComponent } from './playable-board/templates/colours/games/dragon/dragon.component';
+import { RainbowComponent as PlayableBoardRainbowComponent } from './playable-board/templates/colours/games/rainbow/rainbow.component';
 import { HiLoComponent } from './playable-board/templates/colours/games/hilo/hilo.component';
 import { NumbersBoardComponent } from './playable-board/templates/colours/games/numbers-board/numbers-board.component';
 import { GetArrayFromNumberPipe } from './playable-board/templates/get-array-from-number.pipe';
@@ -76,6 +78,7 @@ export const componentDeclarations: any[] = [
   PlayableBoardBet49Component,
   PlayableBoardBet0Component,
   PlayableBoardDragonComponent,
+  PlayableBoardRainbowComponent,
   HiLoComponent,
   ResultsColoursComponent,
   LuckyColoursComponent,
@@ -83,6 +86,7 @@ export const componentDeclarations: any[] = [
   LuckyBet0Component,
   LuckyHiloComponent,
   LuckyDragonComponent,
+  LuckyRainbowComponent,
   NumbersBoardComponent
 ];
 

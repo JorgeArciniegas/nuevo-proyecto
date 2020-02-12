@@ -19,7 +19,11 @@ export class GroupByCategoryPipe implements PipeTransform {
     const groupedCollection = collection.reduce((previous, current) => {
       let currentProperty: string;
       if (translate) {
-        currentProperty = this.translateUtilityService.getTranslatedString((current[property]).toUpperCase());
+        let marketName: string = current[property];
+        if (marketName.toUpperCase().substring(0, marketName.length - 1) === 'RAINBOW') {
+          marketName = 'RAINBOW';
+        }
+        currentProperty = this.translateUtilityService.getTranslatedString(marketName.toUpperCase());
       } else {
         currentProperty = current[property];
       }

@@ -1,24 +1,27 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { BetCouponExtended, ElysCouponService } from '@elys/elys-coupon';
+import { BetCouponExtended, ElysCouponService, BetCouponOddExtended } from '@elys/elys-coupon';
 import { Subscription } from 'rxjs';
 import { BtncalcService } from '../../../../../../../component/btncalc/btncalc.service';
 import { CouponService } from '../../../../../../../component/coupon/coupon.service';
-import { ColourGameId } from '../../../../../../../products/main/colour-game.enum';
+import { ColourGameId } from '../../../../../colour-game.enum';
 import { UserService } from '../../../../../../../services/user.service';
 import { MainService } from '../../../../../main.service';
-import { Band, ColoursSelection } from '../../colours.models';
+import { Band, ColoursSelection, Colour } from '../../colours.models';
+import { Color } from 'tns-core-modules/color/color';
 
 @Component({
-  selector: 'app-playable-board-hilo',
-  templateUrl: './hilo.component.html',
-  styleUrls: ['./hilo.component.scss']
+  selector: 'app-playable-board-rainbow',
+  templateUrl: './rainbow.component.html',
+  styleUrls: ['./rainbow.component.scss']
 })
-export class HiLoComponent implements OnInit, OnDestroy {
+export class RainbowComponent implements OnInit, OnDestroy {
 
   @Input() public rowHeight: number;
 
   public selections: ColoursSelection[];
   public waitingSelection: ColoursSelection;
+
+  public Colour: typeof Colour = Colour;
 
   // coupon management
   private couponHasChangedSubscription: Subscription;
@@ -34,7 +37,7 @@ export class HiLoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.initColoursBand();
+    this.initColours();
     // check coupon
     this.couponHasChangedSubscription = this.elysCoupon.couponHasChanged.subscribe(coupon => {
       if (coupon) {
@@ -74,30 +77,44 @@ export class HiLoComponent implements OnInit, OnDestroy {
     }
   }
 
-  private initColoursBand(): void {
-    this.selections = [
-      { band: Band.HI, name: 'HI', interval: '152 - 279', isSelected: false },
-      { band: Band.MID, name: 'MID', interval: '149 - 151', isSelected: false },
-      { band: Band.LO, name: 'LO', interval: '21 - 148', isSelected: false }
-    ];
+  private initColours(): void {
+    this.selections = [];
+    for (const colour of [Colour.RED, Colour.BLUE, Colour.GREEN]) {
+      for (let index = 1; index < 7; index++) {
+        const number = index > 1 ? index : 0;
+        this.selections.push({ name: number.toString(), isSelected: false, colour });
+      }
+    }
+  }
+
+  public getColouredRow(colour: Colour): ColoursSelection[] {
+    return this.selections.filter(s => s.colour === colour);
   }
 
   // select band
-  public selectBand(selection: ColoursSelection): void {
+  public selectColourNumber(selection: ColoursSelection): void {
     if (this.waitingSelection && this.waitingSelection.name === selection.name) {
       return;
     }
     // add band to waiting
     this.waitingSelection = selection;
 
+    let colour: string;
+    switch (selection.colour) {
+      case Colour.BLUE: colour = 'b'; break;
+      case Colour.RED: colour = 'r'; break;
+      case Colour.GREEN: colour = 'g'; break;
+      default:
+        break;
+    }
     // add to coupon
-    this.mainService.placingColoursSelection(selection.name);
+    this.mainService.placingColoursSelection(colour + selection.name);
     this.mainService.getCurrentEvent().then(item => {
       const eventid = item.mk[0].sls[0].id;
       this.btnCalcService.coloursPushToCoupon(
         eventid,
-        ColourGameId[this.mainService.selectedColourGameId].toString(),
-        selection.band.toString()
+        ColourGameId[this.mainService.selectedColourGameId].toString() + colour,
+        selection.name !== '0' ? (selection.name + '+') : selection.name
       );
     });
 
@@ -109,11 +126,11 @@ export class HiLoComponent implements OnInit, OnDestroy {
    */
   isDisabled(selection: ColoursSelection): boolean {
     // check if exist waiting selecion
-    if (this.waitingSelection && this.waitingSelection.name !== selection.name) {
+    if (this.waitingSelection && (this.waitingSelection.name !== selection.name || this.waitingSelection.colour !== selection.colour)) {
       return true;
     }
     // check if exist selected selection
-    if (this.selections.filter(s => s.isSelected && s.name !== selection.name).length > 0) {
+    if (this.selections.filter(s => s.isSelected && (s.name !== selection.name || s.colour !== selection.colour)).length > 0) {
       return true;
     }
 
@@ -125,14 +142,21 @@ export class HiLoComponent implements OnInit, OnDestroy {
    * @param coupon
    */
   verifySelectedOdds(coupon: BetCouponExtended): void {
-    // extract a temp array that contains
-    const tmpRealSel: string[] = coupon.Odds.map(x => x.SelectionName);
 
-    const couponSelection: string = tmpRealSel[0];
+    const couponSelection: BetCouponOddExtended = coupon.Odds[0];
+    const name: string = couponSelection.SelectionName.replace('+', '');
+    let colour: Colour;
+    switch (couponSelection.MarketName) {
+      case 'rainbowb': colour = Colour.BLUE; break;
+      case 'rainbowr': colour = Colour.RED; break;
+      case 'rainbowg': colour = Colour.GREEN; break;
+      default:
+        break;
+    }
 
     // compare with show table and remove the selected when the selection is delete
     this.selections.forEach(item => {
-      if (item.band === couponSelection) {
+      if (item.name === name && item.colour === colour) {
         item.isSelected = true;
       } else {
         item.isSelected = false;
@@ -140,7 +164,7 @@ export class HiLoComponent implements OnInit, OnDestroy {
     });
 
     // update the waiting selection
-    if (this.waitingSelection && this.waitingSelection.band === couponSelection) {
+    if (this.waitingSelection && this.waitingSelection.name === name && this.waitingSelection.colour === colour) {
       this.waitingSelection = undefined;
     }
 

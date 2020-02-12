@@ -25,10 +25,11 @@ export enum Colour {
 }
 
 export interface ColoursSelection {
-  band: Band;
+  band?: Band;
   name: string;
-  interval: string;
+  interval?: string;
   isSelected: boolean;
+  colour?: Colour;
 }
 
 export enum Band {

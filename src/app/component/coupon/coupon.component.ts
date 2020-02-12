@@ -156,6 +156,15 @@ export class CouponComponent implements OnDestroy {
     }
   }
 
+  public getRainbowColour(marketName: string): string {
+    switch (marketName) {
+      case 'rainbowb': return Colour[Colour.BLUE];
+      case 'rainbowr': return Colour[Colour.RED];
+      case 'rainbowg': return Colour[Colour.GREEN];
+      default: return Colour[Colour.YELLOW];
+    }
+  }
+
   isBetDisabledForColoursDrangn(): boolean {
 
     if (this.listOdds && this.listOdds.length > 0 && this.listOdds[0].MarketName === ColourGameId[ColourGameId.dragon]) {

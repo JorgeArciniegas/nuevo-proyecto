@@ -6,6 +6,7 @@ import { PrintCouponService } from './print-coupon.service';
 import { UserService } from '../../../services/user.service';
 import { LICENSE_TYPE } from '../../../../environments/environment.models';
 import { ImageSource, fromNativeSource } from 'tns-core-modules/image-source/image-source';
+import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
 
 const ZXing = require('nativescript-zxing');
 @Component({
@@ -24,7 +25,12 @@ export class PrintCouponComponent implements OnInit {
   barCode128Source: ImageSource;
   @ViewChild('printingData', { static: false }) view: ElementRef;
 
-  constructor(public printCouponService: PrintCouponService, public appSetting: AppSettings, public userService: UserService) {
+  constructor(
+    public printCouponService: PrintCouponService,
+    public appSetting: AppSettings,
+    public userService: UserService,
+    private translateUtilityService: TranslateUtilityService
+  ) {
 
   }
 
@@ -71,5 +77,18 @@ export class PrintCouponComponent implements OnInit {
     );
 
     this.barCode128Source = fromNativeSource(code128);
+  }
+
+  getSelectionName(marketName: string, selectionName: string): string {
+    if (marketName.toUpperCase().substring(0, marketName.length - 1) === 'RAINBOW') {
+      switch (selectionName.substring(0, 1).toLowerCase()) {
+        case 'b': return this.translateUtilityService.getTranslatedString('BLUE') + ' ' + selectionName.substring(1);
+        case 'r': return this.translateUtilityService.getTranslatedString('RED') + ' ' + selectionName.substring(1);
+        case 'g': return this.translateUtilityService.getTranslatedString('GREEN') + ' ' + selectionName.substring(1);
+        default:
+          break;
+      }
+    }
+    return this.translateUtilityService.getTranslatedString(selectionName.toUpperCase());
   }
 }

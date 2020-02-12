@@ -65,9 +65,10 @@
         <div fxLayout="row" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2"
           [style.min-height.px]="(rowHeight - 20) / 2">
           <ng-container
-            *ngIf="polyfunctionalValue.oddsCounter === 1 && polyfunctionalValue.selection === colourGameId[colourGameId.hilo]; else elseTemplate">
+            *ngIf="polyfunctionalValue.oddsCounter === 1 && 
+            (polyfunctionalValue.selection === colourGameId[colourGameId.hilo] || polyfunctionalValue.selection === colourGameId[colourGameId.rainbow]); else elseTemplate">
             <span class="group-title">
-              {{ polyfunctionalValue.odds[0].label | translate }}
+              {{ getDisplaySelection() | translate }}
             </span>
           </ng-container>
           <ng-template #elseTemplate>

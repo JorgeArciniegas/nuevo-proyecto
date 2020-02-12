@@ -42,6 +42,17 @@ export class ColoursCommonComponent {
                     p.MarketTypeId === this.getMarketTypeId(ColourGameId.dragon, this.data.paytable.selectionNumber)
                 ).Selections;
                 break;
+            case ColourGameId.rainbow:
+                const colour: string = this.data.paytable.selectionString.substring(0, 1);
+                this.data.paytable.selectionString = this.data.paytable.selectionString.substring(1);
+                if (this.data.paytable.selectionString !== '0') {
+                    this.data.paytable.selectionString += '+';
+                }
+                payouts = this.data.paytable.payouts.filter(
+                    p => p.MasterMarketName === 'Rainbow' + colour.toUpperCase()
+                );
+                this.gameSelections = payouts[0].Selections;
+                break;
             default:
                 break;
         }
@@ -75,7 +86,6 @@ export class ColoursCommonComponent {
                     case 4: return 913;
                     default:
                 } break;
-
             default:
                 break;
         }

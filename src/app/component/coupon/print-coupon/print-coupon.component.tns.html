@@ -83,7 +83,7 @@
               <ng-container *ngFor="let match of groupCat.value; let i = index">
                 <Label class="p-l-5" *ngIf="i === 0" text="*"></Label>
                 <Label class="p-l-5"
-                  text="{{ i < groupCat.value.length-1 ? match.SelectionName + ' - ' :  (match.SelectionName | uppercase | translate) }}"></Label>
+                  text="{{ i < groupCat.value.length-1 ? getSelectionName(printCouponService.couponPrint.Odds[0].MarketName, match.SelectionName) + ' - ' : getSelectionName(printCouponService.couponPrint.Odds[0].MarketName, match.SelectionName) }}"></Label>
                 <Label class="p-l-5" *ngIf="i === groupCat.value.length-1" text="*"></Label>
               </ng-container>
             </FlexboxLayout>

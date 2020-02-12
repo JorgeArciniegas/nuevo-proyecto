@@ -2,14 +2,15 @@ import { Component, Input, OnDestroy } from '@angular/core';
 import { ElysApiService } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { Subscription } from 'rxjs';
-import { UserService } from '../../../../src/app/services/user.service';
-import { LAYOUT_TYPE } from '../../../../src/environments/environment.models';
+import { UserService } from '../../services/user.service';
+import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { ColourGameId } from '../../products/main/colour-game.enum';
 import { TypeBetSlipColTot } from '../../products/main/main.models';
 import { BetDataDialog, PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { BtncalcService } from '../btncalc/btncalc.service';
 import { CouponService } from '../coupon/coupon.service';
+import { TranslateUtilityService } from '../../services/utility/translate-utility.service';
 
 @Component({
   moduleId: module.id,
@@ -45,7 +46,8 @@ export class DisplayComponent implements OnDestroy {
     public userService: UserService,
     private elysCoupon: ElysCouponService,
     private internalServiceCoupon: CouponService,
-    private elysApi: ElysApiService
+    private elysApi: ElysApiService,
+    private translateService: TranslateUtilityService
   ) {
     this.amountPresetPlayer = this.btnService.polyfunctionStakePresetPlayer;
     this.polyfunctionalValueSubscribe = this.productService.polyfunctionalAreaObservable.subscribe(element => {
@@ -134,5 +136,24 @@ export class DisplayComponent implements OnDestroy {
       return false;
     }
     return true;
+  }
+
+  getDisplaySelection(): string {
+    if (this.polyfunctionalValue.selection === ColourGameId[ColourGameId.rainbow]) {
+      let returnValue: string;
+      switch (this.polyfunctionalValue.odds[0].label.substring(0, 1).toLowerCase()) {
+        case 'b': returnValue = this.translateService.getTranslatedString('BLUE'); break;
+        case 'r': returnValue = this.translateService.getTranslatedString('RED'); break;
+        case 'g': returnValue = this.translateService.getTranslatedString('GREEN'); break;
+        default:
+          break;
+      }
+      returnValue += ' ' + this.polyfunctionalValue.odds[0].label.substring(1);
+      if (this.polyfunctionalValue.odds[0].label.substring(1) !== '0' && this.polyfunctionalValue.odds[0].label.substring(1) !== '6') {
+        return returnValue + '+';
+      }
+      return returnValue;
+    }
+    return this.translateService.getTranslatedString(this.polyfunctionalValue.odds[0].label);
   }
 }

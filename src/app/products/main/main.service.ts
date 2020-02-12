@@ -1646,7 +1646,7 @@ export class MainService {
     this.populatingPolyfunctionAreaByColours();
   }
 
-  placingColoursSelection(selected: ColoursSelection): void {
+  placingColoursSelection(coloursSelection: string): void {
     if (this.couponService.checkIfCouponIsReadyToPlace()) {
       return;
     }
@@ -1654,12 +1654,12 @@ export class MainService {
       this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
     }
     if (!this.placingEvent.coloursSelection) {
-      this.placingEvent.coloursSelection = selected;
+      this.placingEvent.coloursSelection = coloursSelection;
     } else {
-      if (selected.name === this.placingEvent.coloursSelection.name) {
+      if (coloursSelection === this.placingEvent.coloursSelection) {
         this.placingEvent.coloursSelection = undefined;
       } else {
-        this.placingEvent.coloursSelection = selected;
+        this.placingEvent.coloursSelection = coloursSelection;
       }
     }
     this.populatingPolyfunctionAreaByColours();
@@ -1704,7 +1704,7 @@ export class MainService {
         // selection case es. hi-lo
         colourSelected.push(
           new BetOdd(
-            this.placingEvent.coloursSelection.name,
+            this.placingEvent.coloursSelection,
             1,
             this.btnService.polyfunctionStakePresetPlayer.amount,
             eventId

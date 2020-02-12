@@ -55,6 +55,9 @@
 	padding: 0;
 	height: 35;
 	width: 100%;
+	&.rainbow {
+		height: 100%;
+	}
 	&.btn-colours-RED {
 		background: #ff0000;
 		border-color: #ff0000;
@@ -77,7 +80,7 @@
 	}
 
 	&.selected {
-		border-color: #91c8fa;
+		border-color: #ffffff;
 		border-width: 3;
 	}
 
