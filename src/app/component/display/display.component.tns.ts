@@ -124,4 +124,15 @@ export class DisplayComponent implements OnDestroy {
     };
     this.productService.openProductDialog(data);
   }
+
+  isColoursPaytableAvailable(): boolean {
+    if (this.polyfunctionalValue.selection === ColourGameId[ColourGameId.dragon]) {
+      if ((this.polyfunctionalValue.oddsCounter >= 6 && this.polyfunctionalValue.oddsCounter <= 10) ||
+        this.polyfunctionalValue.oddsCounter === 15) {
+        return true;
+      }
+      return false;
+    }
+    return true;
+  }
 }

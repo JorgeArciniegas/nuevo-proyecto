@@ -62,6 +62,7 @@ export class CouponComponent implements OnDestroy {
         const polyFunc: PolyfunctionalArea = this.productService.polyfunctionalAreaSubject.getValue();
         polyFunc.oddsCounter = coupon.Odds.length;
       } else if (coupon.internal_isColours) {
+        this.maxItems = 15;
         const polyFunc: PolyfunctionalArea = this.productService.polyfunctionalAreaSubject.getValue();
         polyFunc.oddsCounter = coupon.Odds.length;
       } else {
@@ -153,5 +154,17 @@ export class CouponComponent implements OnDestroy {
     if (colourNumber % 3 === 0) {
       return Colour[Colour.GREEN];
     }
+  }
+
+  isBetDisabledForColoursDrangn(): boolean {
+
+    if (this.listOdds && this.listOdds.length > 0 && this.listOdds[0].MarketName === ColourGameId[ColourGameId.dragon]) {
+      if ((this.listOdds.length >= 6 && this.listOdds.length <= 10) || this.listOdds.length === 15) {
+        return false;
+      }
+      return true;
+    }
+
+    return false;
   }
 }

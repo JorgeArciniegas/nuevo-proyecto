@@ -102,7 +102,7 @@
   </GridLayout>
   <!--COUPON LOTTERY -->
   <GridLayout row="1" *ngIf="couponService.coupon?.internal_isLottery || couponService.coupon?.internal_isColours">
-    <GridLayout columns="*,*" rows="2*,2*,2*,2*,2*,2*" *ngIf="couponService.coupon"
+    <GridLayout columns="*,*" rows="*,*,*,*,*,*,*,*" *ngIf="couponService.coupon"
       [ngClass]="{'small': windowSizeService.windowSize.small}">
       <!-- Coupon items -->
       <ng-container
@@ -199,7 +199,7 @@
     <!-- PLACE -->
     <Button col="2" margin="2 2" text="{{'COUPON.BET' | translate}}"
       class="button btn-default btn-success button-internal" textTransform="uppercase"
-      [isEnabled]="!timeBlocked && !couponService.error && !couponService.isWaitingConclusionOperation && !userService.isModalOpen"
+      [isEnabled]="!timeBlocked && !couponService.error && !couponService.isWaitingConclusionOperation && !userService.isModalOpen && !isBetDisabledForColoursDrangn()"
       (tap)="couponService.preStagedCoupon()"></Button>
 
   </GridLayout>

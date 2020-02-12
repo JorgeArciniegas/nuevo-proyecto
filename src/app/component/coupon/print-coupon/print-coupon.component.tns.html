@@ -79,15 +79,13 @@
           <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-r-10 p-l-10" flexWrap="wrap"
             *ngFor="let groupCat of printCouponService.couponPrint.Odds | groupByCategory:'MarketName':true">
             <Label class="font-weight-bold" text="{{ groupCat.key }}"></Label>
-            <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-5 p-b-5" flexWrap="wrap">
-              <StackLayout orientation="horizontal">
-                <ng-container *ngFor="let match of groupCat.value; let i = index">
-                  <Label class="p-l-5" *ngIf="i === 0" text="*"></Label>
-                  <Label class="p-l-5"
-                    text="{{ i < groupCat.value.length-1 ? match.SelectionName + ' - ' :  (match.SelectionName | uppercase | translate) }}"></Label>
-                  <Label class="p-l-5" *ngIf="i === groupCat.value.length-1" text="*"></Label>
-                </ng-container>
-              </StackLayout>
+            <FlexboxLayout flexDirection="row" justifyContent="center" class="p-r-5 p-b-5" flexWrap="wrap">
+              <ng-container *ngFor="let match of groupCat.value; let i = index">
+                <Label class="p-l-5" *ngIf="i === 0" text="*"></Label>
+                <Label class="p-l-5"
+                  text="{{ i < groupCat.value.length-1 ? match.SelectionName + ' - ' :  (match.SelectionName | uppercase | translate) }}"></Label>
+                <Label class="p-l-5" *ngIf="i === groupCat.value.length-1" text="*"></Label>
+              </ng-container>
             </FlexboxLayout>
           </FlexboxLayout>
         </ng-container>

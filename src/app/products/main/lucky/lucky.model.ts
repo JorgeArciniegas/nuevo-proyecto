@@ -8,5 +8,7 @@ export enum Lucky {
   Lucky7,
   Lucky8,
   Lucky9,
-  Lucky10 = 10
+  Lucky10 = 10,
+  Lucky15 = 15
 }
+

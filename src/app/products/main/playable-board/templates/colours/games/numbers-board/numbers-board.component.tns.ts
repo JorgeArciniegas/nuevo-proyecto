@@ -119,7 +119,7 @@ export class NumbersBoardComponent implements OnDestroy, OnInit {
     );
 
     // Check maximum number of selections for this game
-    if (tmpRealSel.length >= 4) {
+    if (tmpRealSel.length >= this.maxNumberOfSelections) {
       this.coloursNumbers.forEach(coloursNumber =>
         coloursNumber.isSelected ? coloursNumber.isDisabled = false : coloursNumber.isDisabled = true);
     } else {

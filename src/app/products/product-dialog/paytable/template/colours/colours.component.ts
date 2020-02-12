@@ -1,46 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { LotteryPayoutMarket, LotteryPayoutSelection } from '@elys/elys-api';
-import { ColourGameId } from '../../../../main/colour-game.enum';
-import { BetDataDialog } from '../../../../products.model';
+import { Component, OnInit } from '@angular/core';
+import { LotteryPayoutSelection } from '@elys/elys-api';
+import { ColoursCommonComponent } from './colours-common.component';
 
 @Component({
   selector: 'app-paytable-colours',
   templateUrl: './colours.component.html',
   styleUrls: ['./colours.component.scss']
 })
-export class ColoursComponent implements OnInit {
-  @Input()
-  data: BetDataDialog;
+export class ColoursComponent extends ColoursCommonComponent implements OnInit {
 
   public gameSelections: LotteryPayoutSelection[];
-  constructor() { }
+  constructor() {
+    super();
+  }
 
   ngOnInit() {
-    let payouts: LotteryPayoutMarket[];
-    switch (ColourGameId[this.data.paytable.market]) {
-      case ColourGameId.bet49:
-        payouts = this.data.paytable.payouts.filter(
-          p => p.MasterMarketName === 'Bet49'
-        );
-        this.gameSelections = payouts.find(p => p.MappingCount === this.data.paytable.selectionNumber).Selections;
-        break;
-      case ColourGameId.hilo:
-        payouts = this.data.paytable.payouts.filter(
-          p => p.MasterMarketName === 'Hi Mid Lo'
-        );
-        this.gameSelections = payouts[0].Selections;
-        break;
-      case ColourGameId.betzero:
-        payouts = this.data.paytable.payouts.filter(
-          p => p.MasterMarketName === 'BetZero'
-        );
-        this.gameSelections = payouts.find(p => p.MappingCount === this.data.paytable.selectionNumber).Selections;
-        break;
-      default:
-        break;
-    }
-
-
+    this.filterPayout();
   }
 
 }

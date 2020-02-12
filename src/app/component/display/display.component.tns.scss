@@ -19,3 +19,9 @@
     font-size: 11;
   }
 }
+
+.paytable {
+  &.disabled {
+    opacity: 0.3;
+  }
+}

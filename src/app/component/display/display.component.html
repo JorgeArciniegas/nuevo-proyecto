@@ -84,7 +84,8 @@
       </div>
       <div fxLayout="column" fxFlex="10" fxLayoutAlign="center center"
         *ngIf="polyfunctionalValue && polyfunctionalValue.grouping.length > 0 && productService.product?.layoutProducts?.type === typeProductCoupon.COLOURS">
-        <button class="btn-reset btn-display" (click)="coloursPaytable()">
+        <button class="btn-reset btn-display paytable" (click)="coloursPaytable()"
+          [disabled]="!isColoursPaytableAvailable()" [ngClass]="{'disabled': !isColoursPaytableAvailable()}">
           <img class="icon" src="assets/icons/baseline-open_in_new-24-white.png">
         </button>
       </div>

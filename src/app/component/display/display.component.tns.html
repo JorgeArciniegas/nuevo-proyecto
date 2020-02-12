@@ -51,8 +51,9 @@
         verticalAlignment="center" [isEnabled]="!timeBlocked">
       </Image>
       <Image *ngIf="productService.product?.layoutProducts?.type === typeProductCoupon.COLOURS" col="1" margin="4"
-        (tap)="coloursPaytable()" width="24" height="24" src="~/assets/icons/baseline-open_in_new-24-white.png"
-        verticalAlignment="center" [isEnabled]="!timeBlocked">
+        class="paytable" (tap)="coloursPaytable()" width="24" height="24"
+        src="~/assets/icons/baseline-open_in_new-24-white.png" [ngClass]="{'disabled': !isColoursPaytableAvailable()}"
+        verticalAlignment="center" [isEnabled]="!timeBlocked && isColoursPaytableAvailable()">
       </Image>
     </GridLayout>
   </StackLayout>
