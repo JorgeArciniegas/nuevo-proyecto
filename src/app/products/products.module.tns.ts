@@ -12,6 +12,7 @@ import { WidgetComponent } from '../component/widget/widget.component';
 import { BetoddsComponent } from '../products/product-dialog/betodds/betodds.component';
 import { HotAndColdComponent } from '../products/product-dialog/hot-and-cold/hot-and-cold.component';
 import { KenoComponent as KenoHotAndColdComponent } from '../products/product-dialog/hot-and-cold/template/keno/keno.component';
+import { ColorsComponent as ColorsHotAndColdComponent } from '../products/product-dialog/hot-and-cold/template/colors/colors.component';
 import { PaytableComponent } from '../products/product-dialog/paytable/paytable.component';
 import { ColoursComponent as ColoursPaytableComponent } from '../products/product-dialog/paytable/template/colours/colours.component';
 import { KenoComponent as KenoPaytableComponent } from '../products/product-dialog/paytable/template/keno/keno.component';
@@ -52,7 +53,8 @@ import { ProductsComponent } from './products.component';
     KenoHotAndColdComponent,
     ConfirmDestroyCouponComponent,
     GroupingsComponent,
-    LabelByGroupingPipe
+    LabelByGroupingPipe,
+    ColorsHotAndColdComponent
   ],
   imports: [
     CommonModule,

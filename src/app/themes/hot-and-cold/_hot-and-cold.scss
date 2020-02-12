@@ -11,18 +11,20 @@
 	}
 	.hot-and-cold-border {
 		@extend %card-title;
-
+    position: relative;
 		&.display-trasparent {
 			@extend %bg-transparent;
 		}
 
 		.label-overlap {
 			@extend %card-title-label;
-			position: relative;
-			top: -14px;
-			left: 57px;
+			position: absolute;
+			top: -15px;
+			left: 10px;
 			font-weight: bold;
-			width: 0%;
+      padding: 0px 5px;
+      width: 50%;
+      text-align: center;
 			font-size: larger;
 		}
 	}

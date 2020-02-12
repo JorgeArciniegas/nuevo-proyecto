@@ -11,6 +11,7 @@ import { MainService } from './main/main.service';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
 
+
 @NgModule({
   declarations: [
     ProductsComponent,

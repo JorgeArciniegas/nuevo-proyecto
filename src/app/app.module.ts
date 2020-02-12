@@ -35,7 +35,7 @@ import { CockFightComponent as CockFightStatisticsComponent } from './products/p
 import { RaceComponent as RaceStatisticsComponent } from './products/product-dialog/statistics/templates/race/race.component';
 import { SoccerComponent as SoccerStatisticsComponent } from './products/product-dialog/statistics/templates/soccer/soccer.component';
 import { SharedModule } from './shared/shared.module';
-
+import { ColorsComponent as ColorsHotAndColdComponent } from './products/product-dialog/hot-and-cold/template/colors/colors.component';
 
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -55,6 +55,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SoccerRankingComponent,
     KenoPaytableComponent,
     ColoursPaytableComponent,
+    ColorsHotAndColdComponent,
     HotAndColdComponent,
     KenoHotAndColdComponent,
     PayCancelDialogComponent,
