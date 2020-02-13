@@ -87,6 +87,17 @@ button:active:not([disabled]) {
 		height: 55px;
 		width: 55px;
 	}
+
+	&.btn-total-colours {
+		height: 110px;
+		width: 150px;
+	}
+
+	&.btn-no-winning-selection {
+		height: 110px;
+		width: 400px;
+	}
+
 	&.btn-colours-RED {
 		background: #ff0000;
 		border-color: #ff0000;

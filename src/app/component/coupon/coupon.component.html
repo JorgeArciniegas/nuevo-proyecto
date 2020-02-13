@@ -108,8 +108,11 @@
 <!--TEMPLATE KENO AND COLOURS -->
 <ng-template #numbers>
   <div fxLayout="row wrap" fxLayoutGap="10px grid">
-    <ng-container
-      *ngIf="listOdds.length === 1 && (listOdds[0].MarketName === colourGameId[colourGameId.hilo] || listOdds[0].MarketName.substring(0, listOdds[0].MarketName.length - 1) === colourGameId[colourGameId.rainbow]); else elseTemplateNumbers">
+    <ng-container *ngIf="listOdds.length === 1 &&
+      (listOdds[0].MarketName === colourGameId[colourGameId.hilo] ||
+      listOdds[0].MarketName.substring(0, listOdds[0].MarketName.length - 1) === colourGameId[colourGameId.rainbow]) ||
+      listOdds[0].MarketName === colourGameId[colourGameId.totalcolour];
+      else elseTemplateNumbers">
       <!-- Single selection mode -->
       <div class="card-odd-container" fxFlex="100">
         <div fxFill class="card-odd radius-5 single-selection" [ngClass]="{'card-odd-error': !couponService.warningMessage &&
@@ -126,10 +129,19 @@
                 </div>
               </ng-container>
               <ng-template #elseOtherColoursTemplate>
-                <div fxFlex="35" fxLayoutAlign="center center"
-                  class="btn-keno-number btn-colours btn-default radius-50 btn-colours-{{getRainbowColour(listOdds[0].MarketName)}}">
-                  {{listOdds[0].SelectionName}}
-                </div>
+                <ng-container
+                  *ngIf="listOdds[0].MarketName === colourGameId[colourGameId.totalcolour]; else elseTemplate">
+                  <div fxFlex="65" fxLayoutAlign="center center"
+                    class="btn-colours btn-default radius-5 btn-colours-{{getTotalColour(listOdds[0].SelectionName)}}">
+                    {{ getTotalColourSelectionName(listOdds[0].SelectionName) | uppercase }}
+                  </div>
+                </ng-container>
+                <ng-template #elseTemplate>
+                  <div fxFlex="35" fxLayoutAlign="center center"
+                    class="btn-keno-number btn-colours btn-default radius-50 btn-colours-{{getRainbowColour(listOdds[0].MarketName)}}">
+                    {{listOdds[0].SelectionName | translate}}
+                  </div>
+                </ng-template>
               </ng-template>
             </div>
             <div fxFlex="25" fxLayoutAlign="center">

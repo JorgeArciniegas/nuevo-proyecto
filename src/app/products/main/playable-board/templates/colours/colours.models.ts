@@ -18,6 +18,7 @@ export interface ColoursNumberNative extends ColoursNumber {
 }
 
 export enum Colour {
+  NONE,
   RED,
   BLUE,
   GREEN,
@@ -36,4 +37,12 @@ export enum Band {
   LO = 'lo',
   MID = 'mid',
   HI = 'hi'
+}
+
+export interface TotalColourSelection {
+  name: string;
+  colour: Colour;
+  marketSelection: string;
+  isSelected: boolean;
+  isDisabled: boolean;
 }

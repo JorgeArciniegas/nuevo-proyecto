@@ -12,6 +12,8 @@
     </app-playable-board-bet49>
     <app-playable-board-hilo *ngIf="selectedColourGameId === ColourGameId.hilo" [rowHeight]="rowHeight">
     </app-playable-board-hilo>
+    <app-playable-board-total-colour *ngIf="selectedColourGameId === ColourGameId.totalcolour" [rowHeight]="rowHeight">
+    </app-playable-board-total-colour>
     <app-playable-board-bet0 *ngIf="selectedColourGameId === ColourGameId.betzero" [rowHeight]="rowHeight">
     </app-playable-board-bet0>
     <app-playable-board-dragon *ngIf="selectedColourGameId === ColourGameId.dragon" [rowHeight]="rowHeight">

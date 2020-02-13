@@ -21,7 +21,7 @@ export class ColoursComponent {
     { name: ColourGameId[ColourGameId.hilo].toUpperCase(), id: ColourGameId.hilo },
     { name: ColourGameId[ColourGameId.dragon].toUpperCase(), id: ColourGameId.dragon },
     { name: ColourGameId[ColourGameId.rainbow].toUpperCase(), id: ColourGameId.rainbow },
-    { name: ColourGameId[ColourGameId.totalcolor].toUpperCase(), id: ColourGameId.totalcolor },
+    { name: ColourGameId[ColourGameId.totalcolour].toUpperCase(), id: ColourGameId.totalcolour },
     { name: ColourGameId[ColourGameId.betzero].toUpperCase(), id: ColourGameId.betzero },
   ];
 

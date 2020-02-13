@@ -139,17 +139,23 @@ export class DisplayComponent implements OnDestroy {
   }
 
   getDisplaySelection(): string {
-    if (this.polyfunctionalValue.selection === ColourGameId[ColourGameId.rainbow]) {
+    if (this.polyfunctionalValue.selection === ColourGameId[ColourGameId.rainbow] ||
+      this.polyfunctionalValue.selection === ColourGameId[ColourGameId.totalcolour]) {
       let returnValue: string;
-      switch (this.polyfunctionalValue.odds[0].label.substring(0, 1).toLowerCase()) {
-        case 'b': returnValue = this.translateService.getTranslatedString('BLUE'); break;
-        case 'r': returnValue = this.translateService.getTranslatedString('RED'); break;
-        case 'g': returnValue = this.translateService.getTranslatedString('GREEN'); break;
-        default:
-          break;
+      if (this.polyfunctionalValue.odds[0]) {
+        switch (this.polyfunctionalValue.odds[0].label.substring(0, 1).toLowerCase()) {
+          case 'b': returnValue = this.translateService.getTranslatedString('BLUE'); break;
+          case 'r': returnValue = this.translateService.getTranslatedString('RED'); break;
+          case 'g': returnValue = this.translateService.getTranslatedString('GREEN'); break;
+          case 'n': returnValue = this.translateService.getTranslatedString('NO_WINNING_COLOUR'); break;
+          default:
+            break;
+        }
       }
       returnValue += ' ' + this.polyfunctionalValue.odds[0].label.substring(1);
-      if (this.polyfunctionalValue.odds[0].label.substring(1) !== '0' && this.polyfunctionalValue.odds[0].label.substring(1) !== '6') {
+      if (this.polyfunctionalValue.odds[0].label.substring(1) !== '0' &&
+        this.polyfunctionalValue.odds[0].label.substring(1) !== '6' &&
+        this.polyfunctionalValue.selection !== ColourGameId[ColourGameId.totalcolour]) {
         return returnValue + '+';
       }
       return returnValue;

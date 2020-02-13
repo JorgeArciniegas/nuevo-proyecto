@@ -55,6 +55,12 @@
 	padding: 0;
 	height: 35;
 	width: 100%;
+
+	&.btn-total-colours {
+		height: auto;
+		width: auto;
+	}
+
 	&.rainbow {
 		height: 100%;
 	}

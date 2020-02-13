@@ -23,11 +23,13 @@ export class PrintCouponComponent {
   ) { }
 
   getSelectionName(marketName: string, selectionName: string): string {
-    if (marketName.toUpperCase().substring(0, marketName.length - 1) === 'RAINBOW') {
+    if (marketName.toUpperCase().substring(0, marketName.length - 1) === 'RAINBOW' ||
+      marketName.toUpperCase() === 'TOTALCOLOUR') {
       switch (selectionName.substring(0, 1).toLowerCase()) {
         case 'b': return this.translateUtilityService.getTranslatedString('BLUE') + ' ' + selectionName.substring(1);
         case 'r': return this.translateUtilityService.getTranslatedString('RED') + ' ' + selectionName.substring(1);
         case 'g': return this.translateUtilityService.getTranslatedString('GREEN') + ' ' + selectionName.substring(1);
+        case 'n': return this.translateUtilityService.getTranslatedString('NO_WINNING_COLOUR') + ' ' + selectionName.substring(1);
         default:
           break;
       }

@@ -36,15 +36,18 @@
     (productService.product?.layoutProducts?.type === typeProductCoupon.KENO || productService.product?.layoutProducts?.type === typeProductCoupon.COLOURS) &&
     !productService.product.typeCoupon?.acceptMultiStake" class="p-l-5">
       <StackLayout col="0" verticalAlignment="center" orientation=horizontal>
-        <ng-container
-          *ngIf="polyfunctionalValue.oddsCounter === 1 && 
-          (polyfunctionalValue.selection === colourGameId[colourGameId.hilo] || polyfunctionalValue.selection === colourGameId[colourGameId.rainbow]); else elseTemplate">
-          <Label *ngIf="polyfunctionalValue.oddsCounter > 0" class="group-title" text="{{ getDisplaySelection() }}"
-            class="m-r-5"></Label>
+        <ng-container *ngIf="polyfunctionalValue.oddsCounter === 1 &&
+          (polyfunctionalValue.selection === colourGameId[colourGameId.hilo] ||
+          polyfunctionalValue.selection === colourGameId[colourGameId.rainbow]) ||
+          polyfunctionalValue.selection === colourGameId[colourGameId.totalcolour];
+          else elseTemplate">
+          <Label *ngIf="polyfunctionalValue.oddsCounter > 0" class="group-title"
+            text="{{ getDisplaySelection() | uppercase }}" class="m-r-5"></Label>
         </ng-container>
         <ng-template #elseTemplate>
-          <Label *ngIf="polyfunctionalValue.oddsCounter > 0" class="group-title" text="{{ polyfunctionalValue.oddsCounter }}
-              {{ 'DISPLAY_SELECTION_LENGTH' | translate }}" class="m-r-5"></Label>
+          <Label *ngIf="polyfunctionalValue.oddsCounter > 0" class="group-title"
+            text="{{ polyfunctionalValue.oddsCounter }} {{ 'DISPLAY_SELECTION_LENGTH' | translate }}"
+            class="m-r-5"></Label>
         </ng-template>
       </StackLayout>
       <Image *ngIf="productService.product?.layoutProducts?.type === typeProductCoupon.KENO" col="1" margin="4"

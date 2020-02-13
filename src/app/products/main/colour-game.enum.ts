@@ -3,6 +3,6 @@ export enum ColourGameId {
   hilo,
   dragon,
   rainbow,
-  totalcolor,
+  totalcolour,
   betzero
 }

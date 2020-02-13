@@ -5,12 +5,13 @@ import { Subscription } from 'rxjs';
 import { LAYOUT_TYPE, TypeCoupon } from '../../../../src/environments/environment.models';
 import { AppSettings } from '../../app.settings';
 import { ColourGameId } from '../../products/main/colour-game.enum';
+import { Colour } from '../../products/main/playable-board/templates/colours/colours.models';
 import { BetOdd, PolyfunctionalArea } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { UserService } from '../../services/user.service';
+import { TranslateUtilityService } from '../../services/utility/translate-utility.service';
 import { WindowSizeService } from '../../services/utility/window-size/window-size.service';
 import { CouponService } from './coupon.service';
-import { Colour } from '../../products/main/playable-board/templates/colours/colours.models';
 
 @Component({
   selector: 'app-coupon',
@@ -47,7 +48,8 @@ export class CouponComponent implements OnDestroy {
     public readonly settings: AppSettings,
     public productService: ProductsService,
     public userService: UserService,
-    public windowSizeService: WindowSizeService
+    public windowSizeService: WindowSizeService,
+    private translateService: TranslateUtilityService
   ) {
     if (this.windowSizeService.windowSize.small) {
       this.maxItems = 4;
@@ -162,6 +164,25 @@ export class CouponComponent implements OnDestroy {
       case 'rainbowr': return Colour[Colour.RED];
       case 'rainbowg': return Colour[Colour.GREEN];
       default: return Colour[Colour.YELLOW];
+    }
+  }
+
+  public getTotalColour(totalColour: string): string {
+    switch (totalColour) {
+      case 'b': return Colour[Colour.BLUE];
+      case 'r': return Colour[Colour.RED];
+      case 'g': return Colour[Colour.GREEN];
+      default: return 'BLACK';
+    }
+  }
+
+  public getTotalColourSelectionName(totalColour: string): string {
+    switch (totalColour) {
+      case 'b': return this.translateService.getTranslatedString('BLUE');
+      case 'r': return this.translateService.getTranslatedString('RED');
+      case 'g': return this.translateService.getTranslatedString('GREEN');
+      case 'n': return this.translateService.getTranslatedString('NO_WINNING_COLOUR');
+      default: return '';
     }
   }
 

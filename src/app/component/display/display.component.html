@@ -64,11 +64,13 @@
       <div fxLayout="column" fxFlex="88" fxLayoutAlign="center flex-start">
         <div fxLayout="row" class="first-row" fxFill [style.height.px]="(rowHeight - 20) / 2"
           [style.min-height.px]="(rowHeight - 20) / 2">
-          <ng-container
-            *ngIf="polyfunctionalValue.oddsCounter === 1 && 
-            (polyfunctionalValue.selection === colourGameId[colourGameId.hilo] || polyfunctionalValue.selection === colourGameId[colourGameId.rainbow]); else elseTemplate">
+          <ng-container *ngIf="polyfunctionalValue.oddsCounter === 1 &&
+            (polyfunctionalValue.selection === colourGameId[colourGameId.hilo] ||
+            polyfunctionalValue.selection === colourGameId[colourGameId.rainbow]) ||
+            polyfunctionalValue.selection === colourGameId[colourGameId.totalcolour];
+            else elseTemplate">
             <span class="group-title">
-              {{ getDisplaySelection() | translate }}
+              {{ getDisplaySelection() | uppercase }}
             </span>
           </ng-container>
           <ng-template #elseTemplate>
