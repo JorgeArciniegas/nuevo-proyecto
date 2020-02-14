@@ -45,6 +45,10 @@ export class VboxEditComponent implements OnInit {
 
   selectTVConfiguration(idx, tv) {
     this.vboxService.vBoxSelected.vBoxMonitorSelectedIdx = idx;
+    // check if the language TV selected is null
+    if (tv.Language === null || !tv.Language) {
+      tv.Language = this.languages[0];
+    }
     this.configSelected = tv;
   }
 
