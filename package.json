@@ -18,7 +18,8 @@
     "ns-bundle": "ns-bundle",
     "version-patch": "npm version patch --no-git-tag-version && node ./version.js && git commit --all",
     "version-minor": "npm version minor --no-git-tag-version && node ./version.js && git commit --all",
-    "version": "node ./current-version.js"
+    "version": "node ./current-version.js",
+    "tns-build-all": "node ./build-android.js"
   },
   "private": true,
   "dependencies": {
@@ -63,6 +64,7 @@
     "rxjs-compat": "^6.5.3",
     "tns-core-modules": "~6.1.0",
     "xlsx": "^0.15.1",
+    "xml2json": "^0.12.0",
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
