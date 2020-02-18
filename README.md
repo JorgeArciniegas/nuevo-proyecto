@@ -23,8 +23,8 @@ Run `tns build android --release  --env.uglify --env.snapshot --env.environment=
 
 Run `npm run tns-build-all`
 
-When it is launch:
-> delete all file to folder dist/android
-> update the version app to AndroidManifest.xml
-> compile the package android for all brand by  release environment 
-> copy the apk generate to folder dist/android
+> When it is launch:
+> - delete all file to folder dist/android;
+> - update the version app to AndroidManifest.xml
+> - compile the package android for all brand by  release environment 
+> - copy the apk generate to folder dist/android
