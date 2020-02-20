@@ -588,7 +588,7 @@ export class CouponService {
     // Check type coupon and call the different api
     if (this.coupon.internal_isLottery) {
       await this.elysCoupon.updateCouponLottery(this.coupon);
-    } else if (this.coupon.internal_isLottery) {
+    } else if (this.coupon.internal_isColours) {
       await this.elysCoupon.updateCouponColours(this.coupon);
     } else {
       await this.elysCoupon.updateCoupon(this.coupon);
