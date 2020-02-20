@@ -7,6 +7,7 @@ import { DataUser, LoginDataDirect, LOGIN_TYPE, OperatorData } from './user.mode
 import { RouterService } from './utility/router/router.service';
 import { StorageService } from './utility/storage/storage.service';
 import { TranslateUtilityService } from './utility/translate-utility.service';
+import { Products } from '../../environments/environment.models';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class UserService {
     if (!this._dataUserDetail) {
       this.dataUserDetail = {
         userDetail: null,
-        operatorDetail: null
+        operatorDetail: null,
+        productIsLoaded: false
       };
     }
     return this._dataUserDetail;
@@ -45,6 +47,9 @@ export class UserService {
       this.dataUserDetail.userDetail.UserPolicies
       : this.dataUserDetail.operatorDetail.UserPolicies;
   }
+
+  private productsDefault: Products[];
+
   constructor(
     private router: RouterService,
     private storageService: StorageService,
@@ -178,6 +183,7 @@ export class UserService {
     // this.api.removeToken();
     this.storageService.removeItems('tokenData', 'UserData');
     this.api.tokenBearer = null;
+    this.isInitUser = true;
     if (this.loadDataPool) {
       this.loadDataPool.unsubscribe();
     }
@@ -346,9 +352,17 @@ export class UserService {
         this.appSetting.defaultAmount = preset.CouponPreset.CouponPresetValues;
       }
     });
+
+    // check if the productsDefault
+    if (!this.productsDefault) {
+      this.productsDefault = this.appSetting.products;
+    } else {
+      this.appSetting.products = this.productsDefault;
+    }
+    const userPolicies = this.getAuthorization();
     // match products result from api to products on the system
     this.api.virtual.getAvailablevirtualsports().then(items => {
-      this.appSetting.products.map(product => {
+      this.appSetting.products.forEach(product => {
         if (!items.map(x => x.SportId).includes(product.sportId)) {
           product.productSelected = false;
           product.isPlayable = false;
@@ -363,7 +377,7 @@ export class UserService {
     } else {
       authorizedVirtualSports = this.dataUserDetail.operatorDetail.UserPolicies.AuthorizedVirtualSports;
     }
-    this.appSetting.products.map(product => {
+    this.appSetting.products.forEach(product => {
       if (!authorizedVirtualSports.includes(product.sportId)) {
         product.productSelected = false;
         product.isPlayable = false;
@@ -386,8 +400,17 @@ export class UserService {
     }
     );
 
-    // Order the result from minor to major
-    this.appSetting.products.sort((a, b) => (a.order <= b.order ? -1 : 1));
+    // const availableSport = await this.api.virtual.getAvailablevirtualsports();
+    // const tmpFilterProduct = this.appSetting.products.filter(prod => {
+    //   return availableSport.filter(i => i.SportId === prod.sportId);
+    // }).filter(item => userPolicies.AuthorizedVirtualSports.includes(item.sportId));
+
+    // // Order the result from minor to major
+    // tmpFilterProduct.sort((a, b) => (a.order <= b.order ? -1 : 1));
+    // this.appSetting.products = tmpFilterProduct;
+
+    // show the products from app-menu
+    this.dataUserDetail.productIsLoaded = true;
   }
 
   //
@@ -443,5 +466,10 @@ export class UserService {
   getUserId() {
     return this.isLoggedOperator() ?
       this.storageService.getData('UserData').userDetail.UserId : this.getOperatorData('ClientId');
+  }
+
+
+  getAuthorization(): UserPolicies {
+    return this.dataUserDetail.userDetail ? this.dataUserDetail.userDetail.UserPolicies : this.dataUserDetail.operatorDetail.UserPolicies;
   }
 }

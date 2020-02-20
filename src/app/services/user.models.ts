@@ -10,6 +10,7 @@ export interface OperatorData {
 export interface DataUser {
   userDetail?: AccountDetails;
   operatorDetail?: AccountOperatorDetails;
+  productIsLoaded?: boolean;
 }
 
 
