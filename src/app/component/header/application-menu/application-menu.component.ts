@@ -18,6 +18,9 @@ export class ApplicationMenuComponent {
   public buttonIcon: IconSize;
   public btnSelected: string;
 
+  get productsIsLoaded(): boolean {
+    return this.productService.productsIsLoaded;
+  }
   constructor(
     private readonly appSettings: AppSettings,
     private productService: ProductsService,
