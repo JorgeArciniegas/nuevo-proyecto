@@ -8,7 +8,7 @@
   <img *ngIf="logoIcon" class="toolbar logo" [style.height.px]="logoIcon.height"
     src="app/themes/skins/{{settings.theme}}/image/Logo-header.png">
   <!-- BUTTONS -->
-  <ng-container *ngIf="buttonIcon">
+  <ng-container *ngIf="buttonIcon && productsIsLoaded">
     <ng-container *ngFor="let prod of settings.products ">
       <button *ngIf="prod.isPlayable" [style.width.px]="buttonIcon.width" [style.height.px]="buttonIcon.height"
         class="btn-reset toolbar btn icon" [ngClass]="{'selected': prod.productSelected}"

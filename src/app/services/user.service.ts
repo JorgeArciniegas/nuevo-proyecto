@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  CurrencyCodeRequest,
-  CurrencyCodeResponse,
-  ElysApiService,
-  StagedCouponStatus,
-  TokenDataSuccess,
-  UserType
-} from '@elys/elys-api';
+import { CurrencyCodeRequest, CurrencyCodeResponse, ElysApiService, StagedCouponStatus, TokenDataSuccess, UserPolicies, UserType } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { Subscription, timer } from 'rxjs';
 import { AppSettings } from '../app.settings';
@@ -14,6 +7,7 @@ import { DataUser, LoginDataDirect, LOGIN_TYPE, OperatorData } from './user.mode
 import { RouterService } from './utility/router/router.service';
 import { StorageService } from './utility/storage/storage.service';
 import { TranslateUtilityService } from './utility/translate-utility.service';
+import { Products } from 'src/environments/environment.models';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +20,8 @@ export class UserService {
     if (!this._dataUserDetail) {
       this.dataUserDetail = {
         userDetail: null,
-        operatorDetail: null
+        operatorDetail: null,
+        productIsLoaded: false
       };
     }
     return this._dataUserDetail;
@@ -42,6 +37,9 @@ export class UserService {
   public isBtnCalcEditable = true;
   public userCurrency: string;
   private isInitUser = true;
+
+  private productsDefault: Products[];
+
   constructor(
     private router: RouterService,
     private storageService: StorageService,
@@ -175,6 +173,7 @@ export class UserService {
     // this.api.removeToken();
     this.storageService.removeItems('tokenData', 'UserData');
     this.api.tokenBearer = null;
+    this.isInitUser = true;
     if (this.loadDataPool) {
       this.loadDataPool.unsubscribe();
     }
@@ -344,14 +343,25 @@ export class UserService {
         this.appSetting.defaultAmount = preset.CouponPreset.CouponPresetValues;
       }
     });
+
+    // check if the productsDefault
+    if (!this.productsDefault) {
+      this.productsDefault = this.appSetting.products;
+    } else {
+      this.appSetting.products = this.productsDefault;
+    }
+    const userPolicies = this.getAuthorization();
     // match products result from api to products on the system
-    this.api.virtual.getAvailablevirtualsports().then(items => {
-      this.appSetting.products.map(prod => {
-        items.filter(i => i.SportId === prod.sportId);
-      });
-    });
+    const availableSport = await this.api.virtual.getAvailablevirtualsports();
+    const tmpFilterProduct = this.appSetting.products.filter(prod => {
+      return availableSport.filter(i => i.SportId === prod.sportId);
+    }).filter(item => userPolicies.AuthorizedVirtualSports.includes(item.sportId));
+
     // Order the result from minor to major
-    this.appSetting.products.sort((a, b) => (a.order <= b.order ? -1 : 1));
+    tmpFilterProduct.sort((a, b) => (a.order <= b.order ? -1 : 1));
+    this.appSetting.products = tmpFilterProduct;
+    // show the products from app-menu
+    this.dataUserDetail.productIsLoaded = true;
   }
 
   //
@@ -407,5 +417,10 @@ export class UserService {
   getUserId() {
     return this.isLoggedOperator() ?
       this.storageService.getData('UserData').userDetail.UserId : this.getOperatorData('ClientId');
+  }
+
+
+  getAuthorization(): UserPolicies {
+    return this.dataUserDetail.userDetail ? this.dataUserDetail.userDetail.UserPolicies : this.dataUserDetail.operatorDetail.UserPolicies;
   }
 }

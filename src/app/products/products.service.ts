@@ -37,8 +37,10 @@ export class ProductsService extends ProductsServiceExtra {
     sm: 2,
     xs: 1
   };
-  // windowSize: WindowSize;
-
+  // Product list has been loaded
+  get productsIsLoaded(): boolean {
+    return this.userservice.dataUserDetail.productIsLoaded;
+  }
   constructor(
     public dialog: DialogService,
     // private windowSizeService: WindowSizeService,
