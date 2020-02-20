@@ -279,36 +279,38 @@ export class MainService {
 
   loadEvents(): void {
     try {
+      this.loadEventsFromApi(true);
 
-      if (
-        this.initCurrentEvent
-      ) {
-        this.loadEventsFromApi(true);
-      } else {
+      //TODO: RIMOZIONE SISTEMA DI CACHE PER CARICAMENTO EVENTI
+      // if (
+      //   this.initCurrentEvent
+      // ) {
+      //   this.loadEventsFromApi(true);
+      // } else {
 
-        // Delete the first element
-        if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
-          this.cacheTournaments.shift();
-          this.eventDetails.events.shift();
+      //   // Delete the first element
+      //   if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
+      //     this.cacheTournaments.shift();
+      //     this.eventDetails.events.shift();
 
-        } else if (this.cacheEvents != null && this.cacheEvents.length > 0) {
-          this.cacheEvents.shift();
-          this.eventDetails.events.shift();
-          // Add the new event
-          this.addNewEvent();
-          this.currentAndSelectedEventTime();
-        }
+      //   } else if (this.cacheEvents != null && this.cacheEvents.length > 0) {
+      //     this.cacheEvents.shift();
+      //     this.eventDetails.events.shift();
+      //     // Add the new event
+      //     this.addNewEvent();
+      //     this.currentAndSelectedEventTime();
+      //   }
 
-        this.reload--;
+      //   this.reload--;
 
-        if (this.reload <= this.productService.product.layoutProducts.nextEventItems) {
-          // If remain only 1 new event reload other events
-          this.loadEventsFromApi();
-        } else {
-          // Get event's odds
-          this.eventDetailOdds(this.eventDetails.events[0].number);
-        }
-      }
+      //   if (this.reload <= this.productService.product.layoutProducts.nextEventItems) {
+      //     // If remain only 1 new event reload other events
+      //     this.loadEventsFromApi();
+      //   } else {
+      //     // Get event's odds
+      //     this.eventDetailOdds(this.eventDetails.events[0].number);
+      //   }
+      // }
       // Resume event's countdown
       if (this.countdownSub && this.countdownSub.closed || !this.countdownSub) {
         this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
@@ -344,7 +346,7 @@ export class MainService {
    * Inside it, it must be created the request object.
    * The reference values is taken by "ProductService" on object "product".
    */
-  loadEventsFromApi(all: boolean = false, lastAttemptCall?: number) {
+  loadEventsFromApi(all: boolean = true, lastAttemptCall?: number) {
     const request: VirtualProgramTreeBySportRequest = {
       SportIds: this.productService.product.sportId.toString(),
       CategoryTypes: this.productService.product.codeProduct
