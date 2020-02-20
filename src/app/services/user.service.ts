@@ -400,15 +400,6 @@ export class UserService {
     }
     );
 
-    // const availableSport = await this.api.virtual.getAvailablevirtualsports();
-    // const tmpFilterProduct = this.appSetting.products.filter(prod => {
-    //   return availableSport.filter(i => i.SportId === prod.sportId);
-    // }).filter(item => userPolicies.AuthorizedVirtualSports.includes(item.sportId));
-
-    // // Order the result from minor to major
-    // tmpFilterProduct.sort((a, b) => (a.order <= b.order ? -1 : 1));
-    // this.appSetting.products = tmpFilterProduct;
-
     // show the products from app-menu
     this.dataUserDetail.productIsLoaded = true;
   }
