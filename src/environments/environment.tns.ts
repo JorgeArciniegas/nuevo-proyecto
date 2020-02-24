@@ -26,6 +26,9 @@ import { environment as genc02StagingEnvironment } from './environment.genc02-st
 // genc03
 import { environment as genc03Environment } from './environment.genc03';
 import { environment as genc03StagingEnvironment } from './environment.genc03-staging';
+// genc04
+import { environment as genc04Environment } from './environment.genc04';
+import { environment as genc04StagingEnvironment } from './environment.genc04-staging';
 // homerun
 import { environment as homerunEnvironment } from './environment.homerun';
 import { environment as homerunStagingEnvironment } from './environment.homerun-staging';
@@ -121,6 +124,12 @@ export const environment: Environment = (() => {
         break;
       case 'genc03-staging':
         envVars = genc03StagingEnvironment;
+        break;
+      case 'genc04-prod':
+        envVars = genc04Environment;
+        break;
+      case 'genc04-staging':
+        envVars = genc04StagingEnvironment;
         break;
       case 'betese-prod':
         envVars = beteseEnvironment;

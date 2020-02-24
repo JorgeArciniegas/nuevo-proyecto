@@ -628,6 +628,80 @@
                 }
               ]
             },
+            "genc04-prod": {
+              "outputPath": "dist-genc04",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/no-brand/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc04.ts"
+                }
+              ]
+            },
+            "genc04-prod-release": {
+              "outputPath": "dist-genc04",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/no-brand/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc04.ts"
+                }
+              ]
+            },
+            "genc04-staging": {
+              "outputPath": "dist-genc04",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/no-brand/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc04-staging.ts"
+                }
+              ]
+            },
+            "genc04-staging-release": {
+              "outputPath": "dist-genc04",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/no-brand/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.genc04-staging.ts"
+                }
+              ]
+            },
             "betese-prod": {
               "outputPath": "dist-betese",
               "stylePreprocessorOptions": {
@@ -1622,6 +1696,18 @@
             },
             "genc03-staging-release": {
               "browserTarget": "vdesk:build:genc03-staging-release"
+            },
+            "genc04-prod": {
+              "browserTarget": "vdesk:build:genc04-prod"
+            },
+            "genc04-prod-release": {
+              "browserTarget": "vdesk:build:genc04-prod-release"
+            },
+            "genc04-staging": {
+              "browserTarget": "vdesk:build:genc04-staging"
+            },
+            "genc04-staging-release": {
+              "browserTarget": "vdesk:build:genc04-staging-release"
             },
             "betese-prod": {
               "browserTarget": "vdesk:build:betese-prod"
