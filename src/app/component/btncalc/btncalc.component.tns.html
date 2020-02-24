@@ -115,20 +115,22 @@
 
   <StackLayout row="5" col="0" colSpan="2" cornerRadius="5" class="card card-type-presets-display"
     verticalAlignment="center" horizontalAlignment="left">
-    <Button width="100%" [isEnabled]="
+    <Button width="100%"
+      [isEnabled]="
         ((!timeBlocked && !userService.isModalOpen ) ||
         (userService.isBtnCalcEditable && !timeBlocked)) &&
-        (productService.product.layoutProducts.type !== typeLayoutProdct.KENO )"
+        (productService.product.layoutProducts.type !== typeLayoutProdct.KENO && productService.product?.layoutProducts.type !== typeLayoutProdct.COLOURS)"
       text=" {{ 'BTNCALC.TOT' | translate }}" class="button" textTransform="uppercase"
       [ngClass]="btncalcService.polyfunctionStakePresetPlayer && btncalcService.polyfunctionStakePresetPlayer.typeSlipCol === typeBetSlipColTot.TOT  ? 'btn-selected' : 'btn-grey-gradient'"
       (tap)="btnTotColSet(typeBetSlipColTot.TOT)"></Button>
   </StackLayout>
   <StackLayout row="5" col="2" colSpan="2" cornerRadius="5" class="card card-type-presets-display"
     verticalAlignment="center" horizontalAlignment="right">
-    <Button width="100%" [isEnabled]="
+    <Button width="100%"
+      [isEnabled]="
         ((!timeBlocked && !userService.isModalOpen ) ||
         (userService.isBtnCalcEditable && !timeBlocked)) &&
-        (productService.product.layoutProducts.type !== typeLayoutProdct.KENO )"
+        (productService.product.layoutProducts.type !== typeLayoutProdct.KENO && productService.product?.layoutProducts.type !== typeLayoutProdct.COLOURS)"
       text=" {{ 'BTNCALC.COL' | translate }}" class="button" textTransform="uppercase"
       [ngClass]="btncalcService.polyfunctionStakePresetPlayer && btncalcService.polyfunctionStakePresetPlayer.typeSlipCol === typeBetSlipColTot.COL  ? 'btn-selected' : 'btn-grey-gradient'"
       (tap)="btnTotColSet(typeBetSlipColTot.COL)"></Button>

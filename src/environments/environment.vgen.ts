@@ -7,7 +7,7 @@ import {
 import { Market } from '../app/products/products.model';
 
 export const environment: Environment = {
-  production: false,
+  production: true,
   loginInteractive: true,
   // tslint:disable-next-line:max-line-length
   bookmakerDetails:
@@ -278,6 +278,39 @@ export const environment: Environment = {
         isMultipleStake: false,
         acceptMultiStake: false,
         typeLayout: LAYOUT_TYPE.KENO
+      }
+    },
+    {
+      sportId: 24,
+      codeProduct: 'CLRS',
+      name: 'Colours',
+      label: 'COLOURS',
+      order: 7,
+      productSelected: false,
+      isPlayable: true,
+      layoutProducts: {
+        type: LAYOUT_TYPE.COLOURS,
+        resultItems: 2,
+        nextEventItems: 2,
+        cacheEventsItem: 3
+      },
+      toolbarButton: {
+        name: 'colours',
+        icon: 'Colours',
+        route: 'products/colours'
+      },
+      widgets: [
+        {
+          name: '',
+          routing: 'hot-and-cold-colors',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
+      typeCoupon: {
+        isMultipleStake: false,
+        acceptMultiStake: false,
+        typeLayout: LAYOUT_TYPE.COLOURS
       }
     }
   ],

@@ -562,6 +562,16 @@ $gradient-dark2: #000000;
 	background-size: contain;
 }
 
+// COLOURS
+%PRODUCT-CLRS-BG {
+	background: url("assets/images/Icon-colours.png") left center no-repeat;
+	background-size: contain;
+}
+%PRODUCT-CLRS-BG-MOBILE {
+	background: url("~/assets/images/Icon-colours.png") left center no-repeat;
+	background-size: contain;
+}
+
 %text-primary {
 	color: $color-text-primary;
 }

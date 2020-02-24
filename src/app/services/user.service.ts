@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CurrencyCodeRequest, CurrencyCodeResponse, ElysApiService, StagedCouponStatus, TokenDataSuccess, UserPolicies, UserType } from '@elys/elys-api';
+import { CurrencyCodeRequest, CurrencyCodeResponse, ElysApiService, StagedCouponStatus, TokenDataSuccess, UserType, UserPolicies } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { Subscription, timer } from 'rxjs';
 import { AppSettings } from '../app.settings';
@@ -7,7 +7,7 @@ import { DataUser, LoginDataDirect, LOGIN_TYPE, OperatorData } from './user.mode
 import { RouterService } from './utility/router/router.service';
 import { StorageService } from './utility/storage/storage.service';
 import { TranslateUtilityService } from './utility/translate-utility.service';
-import { Products } from 'src/environments/environment.models';
+import { Products } from '../../environments/environment.models';
 
 @Injectable({
   providedIn: 'root'
@@ -31,12 +31,22 @@ export class UserService {
     this._dataUserDetail = value;
   }
 
+
+
   // URL to which was navigating before to be stopped by the authorization guard.
   public targetedUrlBeforeLogin: string;
   public isModalOpen = false;
   public isBtnCalcEditable = true;
   public userCurrency: string;
   private isInitUser = true;
+  public get policy(): UserPolicies {
+    if (!this.dataUserDetail.userDetail && !this.dataUserDetail.operatorDetail) {
+      return;
+    }
+    return this.dataUserDetail.userDetail !== null ?
+      this.dataUserDetail.userDetail.UserPolicies
+      : this.dataUserDetail.operatorDetail.UserPolicies;
+  }
 
   private productsDefault: Products[];
 
@@ -268,7 +278,6 @@ export class UserService {
         this.checkLoginData(0);
       }
 
-
     } catch (err) {
       if (err.status === 401) {
         // if unauthorized call logout
@@ -352,14 +361,45 @@ export class UserService {
     }
     const userPolicies = this.getAuthorization();
     // match products result from api to products on the system
-    const availableSport = await this.api.virtual.getAvailablevirtualsports();
-    const tmpFilterProduct = this.appSetting.products.filter(prod => {
-      return availableSport.filter(i => i.SportId === prod.sportId);
-    }).filter(item => userPolicies.AuthorizedVirtualSports.includes(item.sportId));
+    this.api.virtual.getAvailablevirtualsports().then(items => {
+      this.appSetting.products.forEach(product => {
+        if (!items.map(x => x.SportId).includes(product.sportId)) {
+          product.productSelected = false;
+          product.isPlayable = false;
+        }
+      });
+    });
 
-    // Order the result from minor to major
-    tmpFilterProduct.sort((a, b) => (a.order <= b.order ? -1 : 1));
-    this.appSetting.products = tmpFilterProduct;
+    // filter product by sportId enabled to user policies
+    let authorizedVirtualSports: number[] = [];
+    if (this.dataUserDetail.userDetail) {
+      authorizedVirtualSports = this.dataUserDetail.userDetail.UserPolicies.AuthorizedVirtualSports;
+    } else {
+      authorizedVirtualSports = this.dataUserDetail.operatorDetail.UserPolicies.AuthorizedVirtualSports;
+    }
+    this.appSetting.products.forEach(product => {
+      if (!authorizedVirtualSports.includes(product.sportId)) {
+        product.productSelected = false;
+        product.isPlayable = false;
+      }
+    }
+    );
+
+    // filter product by categoryId enabled for user policies
+    let authorizedVirtualCategories: string[] = [];
+    if (this.dataUserDetail.userDetail) {
+      authorizedVirtualCategories = this.dataUserDetail.userDetail.UserPolicies.AuthorizedVirtualCategories;
+    } else {
+      authorizedVirtualCategories = this.dataUserDetail.operatorDetail.UserPolicies.AuthorizedVirtualCategories;
+    }
+    this.appSetting.products.map(product => {
+      if (!authorizedVirtualCategories.includes(product.codeProduct)) {
+        product.productSelected = false;
+        product.isPlayable = false;
+      }
+    }
+    );
+
     // show the products from app-menu
     this.dataUserDetail.productIsLoaded = true;
   }

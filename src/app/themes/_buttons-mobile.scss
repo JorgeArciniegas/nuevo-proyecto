@@ -49,6 +49,64 @@
 	}
 }
 
+// COLOURS
+.btn-colours {
+	font-weight: 700;
+	padding: 0;
+	height: 35;
+	width: 100%;
+
+	&.btn-total-colours {
+		height: auto;
+		width: auto;
+	}
+
+	&.rainbow {
+		height: 100%;
+	}
+	&.btn-colours-RED {
+		background: #ff0000;
+		border-color: #ff0000;
+	}
+
+	&.btn-colours-BLUE {
+		background: #4171b2;
+		border-color: #4171b2;
+	}
+
+	&.btn-colours-GREEN {
+		background: #11a40f;
+		border-color: #11a40f;
+	}
+
+	&.btn-colours-YELLOW {
+		background: #c2f102;
+		border-color: #c2f102;
+		color: #000;
+	}
+
+	&.selected {
+		border-color: #ffffff;
+		border-width: 3;
+	}
+
+	&.disabled {
+		opacity: 0.3;
+	}
+}
+
+.btn-game-selector {
+	background: #273142;
+	border-color: #03030a;
+	&.selected {
+		border-color: #91c8fa;
+		border-width: 1;
+	}
+	&.coupon-selection {
+		border-style: solid;
+	}
+}
+
 .btn-DOG-1,
 .btn-HORSE-1,
 .btn-HORSE-VIRT-1 {

@@ -84,7 +84,8 @@ export enum LAYOUT_TYPE {
   RACING,
   COCK_FIGHT,
   SOCCER,
-  KENO
+  KENO,
+  COLOURS
 }
 
 // Bookmaker's identifier
@@ -104,7 +105,11 @@ export enum LICENSE_TYPE {
   HOMERUN,
   BETLOGIK,
   DORADOBET,
-  HBG_PERU
+  HBG_PERU,
+  SOCCERBET,
+  BETSAFI,
+  BETSPLUS,
+  TRADABET
 }
 
 export interface TypeCoupon {

@@ -1,11 +1,5 @@
-import {
-  VirtualBetCompetitor,
-  VirtualBetEvent,
-  VirtualBetMarket,
-  VirtualBetSelection,
-  VirtualBetTournament,
-  VirtualGetRankByEventResponse
-} from '@elys/elys-api';
+import { VirtualBetCompetitor, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualGetRankByEventResponse } from '@elys/elys-api';
+import { ColoursNumber, ColoursSelection } from './playable-board/templates/colours/colours.models';
 import { KenoNumber } from './playable-board/templates/keno/keno.model';
 
 export enum TypePlacingEvent {
@@ -82,6 +76,8 @@ export class PlacingEvent {
   players: Player[];
   odds: VirtualBetSelectionExtended[];
   kenoNumbers?: KenoNumber[];
+  coloursNumbers?: number[];
+  coloursSelection: string;
   amount: number;
   repeat: number;
   isSpecialBets: boolean;

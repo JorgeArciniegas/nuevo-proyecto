@@ -8,6 +8,12 @@ import { environment as beteseStagingEnvironment } from './environment.betese-st
 // betlogik
 import { environment as betlogikEnvironment } from './environment.betlogik';
 import { environment as betlogikStagingEnvironment } from './environment.betlogik-staging';
+// betsafi
+import { environment as betsafiEnvironment } from './environment.betsafi';
+import { environment as betsafiStagingEnvironment } from './environment.betsafi-staging';
+// betsplus
+import { environment as betsplusEnvironment } from './environment.betsplus';
+import { environment as betsplusStagingEnvironment } from './environment.betsplus-staging';
 // bolivarbet
 import { environment as bolivarbetEnvironment } from './environment.bolivarbet';
 import { environment as bolivarbetStagingEnvironment } from './environment.bolivarbet-staging';
@@ -26,6 +32,9 @@ import { environment as genc02StagingEnvironment } from './environment.genc02-st
 // genc03
 import { environment as genc03Environment } from './environment.genc03';
 import { environment as genc03StagingEnvironment } from './environment.genc03-staging';
+// genc04
+import { environment as genc04Environment } from './environment.genc04';
+import { environment as genc04StagingEnvironment } from './environment.genc04-staging';
 // homerun
 import { environment as homerunEnvironment } from './environment.homerun';
 import { environment as homerunStagingEnvironment } from './environment.homerun-staging';
@@ -43,12 +52,18 @@ import { environment as prodEnvironment } from './environment.prod';
 // shawis
 import { environment as shawisEnvironment } from './environment.shawis';
 import { environment as shawisStagingEnvironment } from './environment.shawis-staging';
+// soccerbet
+import { environment as soccerbetEnvironment } from './environment.soccerbet';
+import { environment as soccerbetStagingEnvironment } from './environment.soccerbet-staging';
 // soft
 import { environment as softEnvironment } from './environment.soft';
 import { environment as softStagingEnvironment } from './environment.soft-staging';
 // sportrace
 import { environment as sportraceEnvironment } from './environment.sportrace';
 import { environment as sportraceStagingEnvironment } from './environment.sportrace-staging';
+// tradabet
+import { environment as tradabetEnvironment } from './environment.tradabet';
+import { environment as tradabetStagingEnvironment } from './environment.tradabet-staging';
 // uganbet
 import { environment as uganbetEnvironment } from './environment.uganbet';
 import { environment as uganbetStagingEnvironment } from './environment.uganbet-staging';
@@ -122,6 +137,12 @@ export const environment: Environment = (() => {
       case 'genc03-staging':
         envVars = genc03StagingEnvironment;
         break;
+      case 'genc04-prod':
+        envVars = genc04Environment;
+        break;
+      case 'genc04-staging':
+        envVars = genc04StagingEnvironment;
+        break;
       case 'betese-prod':
         envVars = beteseEnvironment;
         break;
@@ -181,6 +202,36 @@ export const environment: Environment = (() => {
         break;
       case 'doradobet-staging':
         envVars = doradobetStagingEnvironment;
+        break;
+      case 'uganbet-prod':
+        envVars = uganbetEnvironment;
+        break;
+      case 'uganbet-staging':
+        envVars = uganbetStagingEnvironment;
+        break;
+      case 'soccerbet-prod':
+        envVars = soccerbetEnvironment;
+        break;
+      case 'soccerbet-staging':
+        envVars = soccerbetStagingEnvironment;
+        break;
+      case 'betsafi-prod':
+        envVars = betsafiEnvironment;
+        break;
+      case 'betsafi-staging':
+        envVars = betsafiStagingEnvironment;
+        break;
+      case 'tradabet-prod':
+        envVars = tradabetEnvironment;
+        break;
+      case 'tradabet-staging':
+        envVars = tradabetStagingEnvironment;
+        break;
+      case 'betsplus-prod':
+        envVars = betsplusEnvironment;
+        break;
+      case 'betsplus-staging':
+        envVars = betsplusStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;

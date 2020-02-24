@@ -93,6 +93,14 @@ export class WidgetComponent implements OnInit {
           layoutProducts: this.productService.product.layoutProducts.type
         };
         break;
+      case 'hot-and-cold-colors':
+        data.hotAndCold = {
+          codeProduct: this.productService.product.codeProduct,
+          hotAndColdNumbers: await this.elysApi.virtual.getHotAndColdColors(),
+          layoutProducts: this.productService.product.layoutProducts.type
+        };
+        break;
+
       default:
         data.statistics = null;
     }

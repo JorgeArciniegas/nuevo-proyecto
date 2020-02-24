@@ -85,7 +85,9 @@ export class BtncalcService implements OnDestroy {
             item.amount = this.polyfunctionalArea.amount;
           });
         }
-        if (this.productService.product && this.productService.product.layoutProducts.type === LAYOUT_TYPE.KENO) {
+        if (this.productService.product &&
+          (this.productService.product.layoutProducts.type === LAYOUT_TYPE.KENO ||
+            this.productService.product.layoutProducts.type === LAYOUT_TYPE.COLOURS)) {
           this.polyfunctionalArea.typeSlipCol = TypeBetSlipColTot.GROUP;
         }
       }
@@ -130,7 +132,12 @@ export class BtncalcService implements OnDestroy {
     if (this.polyfunctionalArea.shortcut) {
       this.couponService.addRemoveToCouponSC(this.polyfunctionalArea);
     } else {
-      this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds, this.productService.product.typeCoupon.acceptMultiStake);
+      let listOdds = this.polyfunctionalArea.odds.slice();
+      if (this.productService.product.sportId === 1) {
+        listOdds = this.polyfunctionalArea.odds.slice(-1);
+      }
+      this.couponService.addRemoveToCoupon(listOdds, this.productService.product.typeCoupon.acceptMultiStake);
+      // this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds, this.productService.product.typeCoupon.acceptMultiStake);
     }
     if (!groupingChange) {
       this.productService.closeProductDialog();
@@ -158,8 +165,43 @@ export class BtncalcService implements OnDestroy {
     if (!this.polyfunctionalArea || !this.polyfunctionalArea.odds) {
       return;
     }
-
     this.couponService.addToRemoveToCouponLottery(eventId, selection, this.polyfunctionalArea.amount);
+  }
+
+  coloursPushToCoupon(selectionId: number, outcomeType: string, outcome: string): void {
+    if (this.userService.isModalOpen) {
+      this.userService.isBtnCalcEditable = false;
+    }
+    if (this.couponService.oddStakeEdit) {
+      this.couponService.updateCoupon();
+      return;
+    }
+    if (this.polyfunctionalStakeCoupon.isEnabled) {
+      this.updateCouponStakeColours();
+      return;
+    }
+    if (!this.polyfunctionalArea || !this.polyfunctionalArea.odds) {
+      return;
+    }
+    this.couponService.addToRemoveToCouponColours(selectionId, outcomeType, outcome, this.polyfunctionStakePresetPlayer.amount);
+  }
+
+  coloursMultiPushToCoupon(selectionId: number, outcomeType: string, outcomes: string[]): void {
+    if (this.userService.isModalOpen) {
+      this.userService.isBtnCalcEditable = false;
+    }
+    if (this.couponService.oddStakeEdit) {
+      this.couponService.updateCoupon();
+      return;
+    }
+    if (this.polyfunctionalStakeCoupon.isEnabled) {
+      this.updateCouponStakeColours();
+      return;
+    }
+    if (!this.polyfunctionalArea || !this.polyfunctionalArea.odds) {
+      return;
+    }
+    this.couponService.multiAddToCouponColours(selectionId, outcomeType, outcomes, this.polyfunctionStakePresetPlayer.amount);
   }
 
   // updated global amount to coupon
@@ -181,6 +223,15 @@ export class BtncalcService implements OnDestroy {
     }
     this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
     // this.productService.polyfunctionalStakeCouponSubject.next(this.polyfunctionalStakeCoupon);
+    this.couponService.updateCoupon();
+  }
+
+  updateCouponStakeColours(): void {
+    if (this.couponService.coupon) {
+      this.couponService.coupon.Groupings[0].Stake = this.polyfunctionStakePresetPlayer.amount;
+      this.couponService.coupon.Stake = this.polyfunctionStakePresetPlayer.amount;
+    }
+    this.productService.polyfunctionalAreaSubject.next(this.polyfunctionalArea);
     this.couponService.updateCoupon();
   }
 
@@ -224,10 +275,15 @@ export class BtncalcService implements OnDestroy {
 
   // default presets player
   settingStakePresetPlayer(recursiveCounter: number = 0): void {
+    if (!this.productService.product) {
+      return;
+    }
     if (this.setting.defaultAmount && this.setting.defaultAmount.PresetOne !== null && this.productService.product) {
       this.polyfunctionStakePresetPlayer =
         new PolyfunctionStakePresetPlayer(
-          this.productService.product.layoutProducts.type === LAYOUT_TYPE.KENO ? TypeBetSlipColTot.GROUP : TypeBetSlipColTot.COL,
+          (this.productService.product.layoutProducts.type === LAYOUT_TYPE.KENO ||
+            this.productService.product.layoutProducts.type === LAYOUT_TYPE.COLOURS) ?
+            TypeBetSlipColTot.GROUP : TypeBetSlipColTot.COL,
           this.setting.defaultAmount.PresetOne
         );
       this.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);
@@ -240,7 +296,9 @@ export class BtncalcService implements OnDestroy {
         // when the max attempt is occured, it set the value of one on presets
         this.polyfunctionStakePresetPlayer =
           new PolyfunctionStakePresetPlayer(
-            this.productService.product.layoutProducts.type === LAYOUT_TYPE.KENO ? TypeBetSlipColTot.GROUP : TypeBetSlipColTot.COL,
+            (this.productService.product.layoutProducts.type === LAYOUT_TYPE.KENO ||
+              this.productService.product.layoutProducts.type === LAYOUT_TYPE.COLOURS) ?
+              TypeBetSlipColTot.GROUP : TypeBetSlipColTot.COL,
             1
           );
         this.polyfunctionStakePresetPlayerSub.next(this.polyfunctionStakePresetPlayer);

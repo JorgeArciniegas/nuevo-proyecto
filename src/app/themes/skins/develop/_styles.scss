@@ -563,6 +563,16 @@ $gradient-blue3: #2f3a4d;
 	background-size: contain;
 }
 
+// COLOURS
+%PRODUCT-CLRS-BG {
+	background: url("assets/images/Icon-colours.png") left center no-repeat;
+	background-size: contain;
+}
+%PRODUCT-CLRS-BG-MOBILE {
+	background: url("~/assets/images/Icon-colours.png") left center no-repeat;
+	background-size: contain;
+}
+
 %text-primary {
 	color: $color-text-primary;
 }

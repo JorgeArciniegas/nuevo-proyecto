@@ -1,11 +1,12 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
-import { CouponType, StagedCoupon, CouponStatus } from '@elys/elys-api';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { CouponStatus, CouponType, StagedCoupon } from '@elys/elys-api';
 import { Printer } from 'nativescript-printer';
-import { AppSettings } from '../../../app.settings';
-import { PrintCouponService } from './print-coupon.service';
-import { UserService } from '../../../services/user.service';
+import { fromNativeSource, ImageSource } from 'tns-core-modules/image-source/image-source';
 import { LICENSE_TYPE } from '../../../../environments/environment.models';
-import { ImageSource, fromNativeSource } from 'tns-core-modules/image-source/image-source';
+import { AppSettings } from '../../../app.settings';
+import { UserService } from '../../../services/user.service';
+import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
+import { PrintCouponService } from './print-coupon.service';
 
 const ZXing = require('nativescript-zxing');
 @Component({
@@ -24,7 +25,12 @@ export class PrintCouponComponent implements OnInit {
   barCode128Source: ImageSource;
   @ViewChild('printingData', { static: false }) view: ElementRef;
 
-  constructor(public printCouponService: PrintCouponService, public appSetting: AppSettings, public userService: UserService) {
+  constructor(
+    public printCouponService: PrintCouponService,
+    public appSetting: AppSettings,
+    public userService: UserService,
+    private translateUtilityService: TranslateUtilityService
+  ) {
 
   }
 
@@ -71,5 +77,20 @@ export class PrintCouponComponent implements OnInit {
     );
 
     this.barCode128Source = fromNativeSource(code128);
+  }
+
+  getSelectionName(marketName: string, selectionName: string): string {
+    if (marketName.toUpperCase().substring(0, marketName.length - 1) === 'RAINBOW' ||
+      marketName.toUpperCase() === 'TOTALCOLOUR') {
+      switch (selectionName.substring(0, 1).toLowerCase()) {
+        case 'b': return this.translateUtilityService.getTranslatedString('BLUE') + ' ' + selectionName.substring(1);
+        case 'r': return this.translateUtilityService.getTranslatedString('RED') + ' ' + selectionName.substring(1);
+        case 'g': return this.translateUtilityService.getTranslatedString('GREEN') + ' ' + selectionName.substring(1);
+        case 'n': return this.translateUtilityService.getTranslatedString('NO_WINNING_COLOUR') + ' ' + selectionName.substring(1);
+        default:
+          break;
+      }
+    }
+    return this.translateUtilityService.getTranslatedString(selectionName.toUpperCase());
   }
 }

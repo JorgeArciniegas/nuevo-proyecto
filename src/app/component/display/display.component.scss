@@ -42,3 +42,9 @@
 		color: yellow;
 	}
 }
+
+.paytable {
+	&.disabled {
+	  opacity: 0.3;
+	}
+  }

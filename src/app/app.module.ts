@@ -14,25 +14,28 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { NgxBarcodeModule } from 'ngx-barcode';
 import { environment } from '../environments/environment';
 import { VERSION } from '../environments/version';
+import { routes } from './app-routing.module';
 import { componentDeclarations, providerDeclarations } from './app.common';
 import { AppComponent } from './app.component';
 import { ConfirmDestroyCouponComponent } from './component/coupon/confirm-destroy-coupon/confirm-destroy-coupon.component';
-import { SharedModule } from './shared/shared.module';
-import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
+import { PayCancelDialogComponent } from './component/coupon/pay-cancel-dialog/pay-cancel-dialog.component';
+import { LabelByGroupingPipe } from './component/pipe/label-by-grouping.pipe';
 import { BetoddsComponent } from './products/product-dialog/betodds/betodds.component';
+import { GroupingsComponent } from './products/product-dialog/groupings/groupings.component';
+import { HotAndColdComponent } from './products/product-dialog/hot-and-cold/hot-and-cold.component';
+import { KenoComponent as KenoHotAndColdComponent } from './products/product-dialog/hot-and-cold/template/keno/keno.component';
+import { PaytableComponent } from './products/product-dialog/paytable/paytable.component';
+import { ColoursComponent as ColoursPaytableComponent } from './products/product-dialog/paytable/template/colours/colours.component';
+import { KenoComponent as KenoPaytableComponent } from './products/product-dialog/paytable/template/keno/keno.component';
+import { ProductDialogComponent } from './products/product-dialog/product-dialog.component';
+import { RankingComponent } from './products/product-dialog/ranking/ranking.component';
+import { SoccerComponent as SoccerRankingComponent } from './products/product-dialog/ranking/templates/soccer/soccer.component';
 import { StatisticsComponent } from './products/product-dialog/statistics/statistics.component';
 import { CockFightComponent as CockFightStatisticsComponent } from './products/product-dialog/statistics/templates/cock-fight/cock-fight.component';
 import { RaceComponent as RaceStatisticsComponent } from './products/product-dialog/statistics/templates/race/race.component';
 import { SoccerComponent as SoccerStatisticsComponent } from './products/product-dialog/statistics/templates/soccer/soccer.component';
-import { HotAndColdComponent } from './products/product-dialog/hot-and-cold/hot-and-cold.component';
-import { KenoComponent as KenoHotAndColdComponent } from './products/product-dialog/hot-and-cold/template/keno/keno.component';
-import { PaytableComponent } from './products/product-dialog/paytable/paytable.component';
-import { KenoComponent as KenoPaytableComponent } from './products/product-dialog/paytable/template/keno/keno.component';
-import { RankingComponent } from './products/product-dialog/ranking/ranking.component';
-import { SoccerComponent as SoccerRankingComponent } from './products/product-dialog/ranking/templates/soccer/soccer.component';
-import { PayCancelDialogComponent } from './component/coupon/pay-cancel-dialog/pay-cancel-dialog.component';
-import { routes } from './app-routing.module';
-
+import { SharedModule } from './shared/shared.module';
+import { ColorsComponent as ColorsHotAndColdComponent } from './products/product-dialog/hot-and-cold/template/colors/colors.component';
 
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -51,9 +54,14 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     RankingComponent,
     SoccerRankingComponent,
     KenoPaytableComponent,
+    ColoursPaytableComponent,
+    ColorsHotAndColdComponent,
     HotAndColdComponent,
     KenoHotAndColdComponent,
-    PayCancelDialogComponent
+    PayCancelDialogComponent,
+    ConfirmDestroyCouponComponent,
+    GroupingsComponent,
+    LabelByGroupingPipe
   ],
   imports: [
     HttpClientModule,
@@ -90,8 +98,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   ],
   entryComponents: [
     ProductDialogComponent,
-    ConfirmDestroyCouponComponent,
-    PayCancelDialogComponent
+    PayCancelDialogComponent,
+    ConfirmDestroyCouponComponent
   ],
   providers: [
     providerDeclarations

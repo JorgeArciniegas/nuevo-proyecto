@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, OnDestroy } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MessageSource } from '@elys/elys-coupon';
 import { Subscription, timer } from 'rxjs';
 import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
@@ -16,7 +16,7 @@ import { ProductsService } from './products.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements AfterContentInit, OnDestroy {
+export class ProductsComponent implements AfterContentInit, OnDestroy, AfterViewInit {
   public rowHeight: number;
   public messageSource: typeof MessageSource = MessageSource;
 
@@ -26,6 +26,10 @@ export class ProductsComponent implements AfterContentInit, OnDestroy {
   delayRender = false;
   delaySubscription: Subscription;
 
+  get destroyCouponShowDialog(): boolean {
+    return this.service.destroyCouponService.showDialog;
+  }
+
   constructor(
     public service: ProductsService,
     public mainService: MainService,
@@ -33,11 +37,20 @@ export class ProductsComponent implements AfterContentInit, OnDestroy {
     public readonly couponService: CouponService,
     public dialog: DialogService,
     public couponDialogService: CouponDialogService,
-    public windowSizeService: WindowSizeService
+    public windowSizeService: WindowSizeService,
+    private cdr: ChangeDetectorRef
   ) {
     this.rowHeight = (this.windowSizeService.windowSize.columnHeight - 30) / 11;
   }
 
+  ngAfterViewInit() {
+    if (!this.service.product) {
+      timer().subscribe(() => {
+        this.service.checkDefaultProduct();
+        this.cdr.detectChanges();
+      });
+    }
+  }
 
   ngAfterContentInit() {
     this.delaySubscription = timer(300).subscribe(() => {
@@ -46,7 +59,6 @@ export class ProductsComponent implements AfterContentInit, OnDestroy {
   }
 
   payCancelCoupon(type: DialogTypeCoupon): void {
-    console.log(type);
     this.couponDialogService.openPayCancelDialog(type);
   }
 

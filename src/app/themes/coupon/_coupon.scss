@@ -91,6 +91,10 @@
 				&.notSelected {
 					opacity: 0.2;
 				}
+
+				&.single-selection {
+					padding: 5px 0 5px 5px;
+				}
 			}
 			@media screen and (max-width: 1280px) {
 				.btn-keno-number {
@@ -102,6 +106,7 @@
 			@media screen and (min-width: 1280px) {
 				.btn-keno-number {
 					min-height: 38px;
+					height: 38px;
 					max-width: 38px !important;
 					width: 38px;
 				}

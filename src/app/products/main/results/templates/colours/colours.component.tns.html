@@ -1,0 +1,24 @@
+<FlexBoxLayout>
+  <StackLayout *ngFor="let result of results" class="m-t-2 card-box-result-colours">
+    <StackLayout class="header m-x-4 m-b-4" horizontalAlignment="stretch">
+      <Label text="{{ result.eventLabel }}" class="eventNumber" horizontalAlignment="center"></Label>
+    </StackLayout>
+    <StackLayout>
+      <GridLayout columns="*,*,*,*,*,*,2*,*">
+        <StackLayout col="{{i}}" class="radius-5 btn-colours-{{Colour[numberExtracted.colour]}} btn-colours-result"
+          *ngFor="let numberExtracted of result.coloursResults.numbersExtracted; let i = index"
+          verticalAlignment="center">
+          <Label text="{{numberExtracted.number}}"></Label>
+        </StackLayout>
+        <StackLayout col="6" class="btn-colours-result btn-colours-hilo-selection radius-5" verticalAlignment="center"
+          orientation="horizontal" horizontalAlignment="center">
+          <Label col="6" text="{{result.coloursResults.hiloWinningSelection | uppercase}}" verticalAlignment="center"
+            horizontalAlignment="stretch"></Label>
+        </StackLayout>
+        <StackLayout col="7" class="btn-colours-result radius-5 btn-colours-hilo" verticalAlignment="center">
+          <Label text="{{result.coloursResults.hiloNumber}}"></Label>
+        </StackLayout>
+      </GridLayout>
+    </StackLayout>
+  </StackLayout>
+</FlexBoxLayout>

@@ -1,0 +1,14 @@
+<GridLayout row="3" columns="*,*,*,*" class="special-box lucky-soccer">
+  <Button margin="3" col="0" cornerRadius="5" text="{{ 'LUCKY' | translate }} {{'RAINBOW' | translate }}"
+    class="button btn-grey-gradient" (tap)="placingColourLucky()"
+    [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
+  <Button margin="3" col="1" cornerRadius="5" text="{{ 'LUCKY' | translate }} {{'RED' | translate }}"
+    class="button btn-grey-gradient" (tap)="placingColourLucky(Colour.RED)"
+    [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
+  <Button margin="3" col="2" cornerRadius="5" text="{{ 'LUCKY' | translate }} {{'BLUE' | translate }}"
+    class="button btn-grey-gradient" (tap)="placingColourLucky(Colour.BLUE)"
+    [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
+  <Button margin="3" col="3" cornerRadius="5" text="{{ 'LUCKY' | translate }} {{'GREEN' | translate }}"
+    class="button btn-grey-gradient" (tap)="placingColourLucky(Colour.GREEN)"
+    [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
+</GridLayout>

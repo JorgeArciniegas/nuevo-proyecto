@@ -1,3 +1,4 @@
+import { Band, Colour } from '../playable-board/templates/colours/colours.models';
 
 export class EventResult {
   eventLabel: string;
@@ -6,6 +7,7 @@ export class EventResult {
   cockResult?: CockFightingResult;
   soccerResult?: SoccerResult[];
   kenoResults?: number[];
+  coloursResults?: ColoursResult;
 }
 
 export interface RacePodium {
@@ -18,6 +20,17 @@ export interface CockFightingResult {
   winner: number; // Winner 1 = RED, 2 = BLUE
   ou: OVER_UNDER_COCKFIGHT; // O / U
   sector: number; // Sector
+}
+
+export interface ColoursResult {
+  numbersExtracted: ColoursNumber[];
+  hiloWinningSelection: Band;
+  hiloNumber: number;
+}
+
+export interface ColoursNumber {
+  number: number;
+  colour: Colour;
 }
 
 export interface SoccerResult {

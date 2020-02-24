@@ -21,4 +21,8 @@
   <app-playable-board-keno class="playable-board-keno" [rowHeight]="rowHeight"
     *ngIf="productService.product?.layoutProducts.type === typeLayout.KENO">
   </app-playable-board-keno>
+  <!-- TEMPLATE COLOURS -->
+  <app-playable-board-colours class="playable-board-colours" [rowHeight]="rowHeight"
+    *ngIf="productService.product?.layoutProducts.type === typeLayout.COLOURS">
+  </app-playable-board-colours>
 </StackLayout>

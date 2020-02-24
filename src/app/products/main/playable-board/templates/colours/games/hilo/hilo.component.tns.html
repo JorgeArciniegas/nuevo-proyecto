@@ -1,0 +1,17 @@
+<GridLayout rows="*,8*,*,8*,*,8*,*" columns="*,2*,*">
+  <ng-container *ngFor="let band of selections; let i = index;">
+    <FlexBoxLayout row="{{ (i * 2) + 1 }}" col="1" flexDirection="column" justifyContent="center" alignItems="center"
+      class="btn-default btn-hilo radius-5"
+      [ngClass]="{'btn-selected': band.isSelected, 'btn-grey-gradient': !band.isSelected, 'disabled': isDisabled(band) }"
+      [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen && !isDisabled(band)"
+      (tap)="selectBand(band)">
+      <StackLayout *ngIf="waitingSelection?.name !== band.name" horizontalAlignment="center">
+        <Label class="btn-hilo-name" horizontalAlignment="center" text="{{ band.name | translate }}"></Label>
+        <Label class="btn-hilo-interval" horizontalAlignment="center" text="{{band.interval}}"></Label>
+      </StackLayout>
+      <StackLayout *ngIf="waitingSelection?.name === band.name">
+        <ActivityIndicator busy="true" width="50" height="50"></ActivityIndicator>
+      </StackLayout>
+    </FlexBoxLayout>
+  </ng-container>
+</GridLayout>

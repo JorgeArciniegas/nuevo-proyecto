@@ -24,7 +24,7 @@ export const routes: Routes = [
             m => m.BetsListModule
           ),
         canActivateChild: [AuthorizationGuard],
-        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR, TYPE_ACCOUNT.ADMIN] }
       },
       {
         path: 'reports/transactionsList',
@@ -70,7 +70,7 @@ export const routes: Routes = [
         path: 'vbox',
         loadChildren: () => import('./settings/vbox/vbox.module').then(m => m.VboxModule),
         canActivateChild: [AuthorizationGuard],
-        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR] }
+        data: { expectedRole: [TYPE_ACCOUNT.OPERATOR, TYPE_ACCOUNT.ADMIN] }
       }
     ]
   },

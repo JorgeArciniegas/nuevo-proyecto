@@ -258,7 +258,7 @@ export const environment: Environment = {
         // defines the layout type for different product group
         type: LAYOUT_TYPE.KENO,
         resultItems: 2, // items to show for last result
-        nextEventItems: 1, // items to show for next events
+        nextEventItems: 2, // items to show for next events
         cacheEventsItem: 2
       },
       toolbarButton: {
@@ -278,6 +278,32 @@ export const environment: Environment = {
         isMultipleStake: false,
         acceptMultiStake: false,
         typeLayout: LAYOUT_TYPE.KENO
+      }
+    },
+    {
+      sportId: 24,
+      codeProduct: 'CLRS',
+      name: 'Colours',
+      label: 'COLOURS',
+      order: 7,
+      productSelected: false,
+      isPlayable: false,
+      layoutProducts: {
+        type: LAYOUT_TYPE.COLOURS,
+        resultItems: 2,
+        nextEventItems: 2,
+        cacheEventsItem: 3
+      },
+      toolbarButton: {
+        name: 'colours',
+        icon: 'Colours',
+        route: 'products/colours'
+      },
+      widgets: [],
+      typeCoupon: {
+        isMultipleStake: false,
+        acceptMultiStake: false,
+        typeLayout: LAYOUT_TYPE.COLOURS
       }
     }
   ],

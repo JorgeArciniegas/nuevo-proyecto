@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="betslip-odds">
-      <ng-container *ngIf="printCouponService.couponPrint.Product !== 'KENO'">
+      <ng-container *ngIf="printCouponService.couponPrint.Product !== 'NUMBERS'">
         <div class="row-group-odd"
           *ngFor="let groupCat of printCouponService.couponPrint.Odds | groupByCategory:'Championship'">
           <div class="category-label font-size-normal" *ngIf="groupCat.key">
@@ -71,9 +71,9 @@
           </div>
         </div>
       </ng-container>
-      <ng-container *ngIf="printCouponService.couponPrint.Product === 'KENO'">
+      <ng-container *ngIf="printCouponService.couponPrint.Product === 'NUMBERS'">
         <div class="row-group-odd row-group-keno"
-          *ngFor="let groupCat of printCouponService.couponPrint.Odds | groupByCategory:'MarketName'">
+          *ngFor="let groupCat of printCouponService.couponPrint.Odds | groupByCategory:'MarketName':true">
           <div class="category-label font-size-normal" *ngIf="groupCat.key">
             <strong>{{ groupCat.key }}</strong>
           </div>
@@ -82,7 +82,7 @@
               <div class="content content-keno">
                 <div class="selection-row" *ngFor="let match of groupCat.value">
                   <span *ngIf="match.SelectionName">
-                    {{ match.SelectionName }}
+                    {{ getSelectionName(printCouponService.couponPrint.Odds[0].MarketName, match.SelectionName) }}
                   </span>
                 </div>
               </div>

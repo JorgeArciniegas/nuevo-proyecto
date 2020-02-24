@@ -25,4 +25,10 @@
     *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.KENO"
     rowHeight="{{rowHeight}}" [results]="service.listResult[0]">
   </app-results-keno>
+
+  <!-- COLOURS LAST RESULTS -->
+  <app-results-colours
+    *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.COLOURS"
+    rowHeight="{{rowHeight}}" [results]="service.listResult">
+  </app-results-colours>
 </div>

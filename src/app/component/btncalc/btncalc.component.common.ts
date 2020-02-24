@@ -53,6 +53,12 @@ export class BtncalcComponentCommon {
       this.couponService.coupon.internal_isLottery
     ) {
       this.btncalcService.updateCouponStakeLottery();
+    } else if (
+      this.couponService.coupon &&
+      this.couponService.coupon.hasOwnProperty('internal_isColours') &&
+      this.couponService.coupon.internal_isColours
+    ) {
+      this.btncalcService.updateCouponStakeColours();
     } else {
       this.btncalcService.tapPlus();
     }

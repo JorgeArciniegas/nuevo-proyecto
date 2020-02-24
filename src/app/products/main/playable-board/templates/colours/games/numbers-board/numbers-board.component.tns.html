@@ -1,0 +1,27 @@
+<GridLayout columns="*,*,*,*,*,*,*,*,*,*,*,*" rows="*,*,*,*,*">
+    <StackLayout margin="3" *ngFor="let coloursNumber of coloursNumbers" col="{{ coloursNumber.col }}"
+        row="{{ coloursNumber.row }}">
+        <StackLayout margin="3" verticalAlignment="center" horizontalAlignment="center"
+            [ngClass]="{'selected': coloursNumber.isSelected, 'disabled': coloursNumber.isDisabled}"
+            class="btn-colours radius-5 btn-colours-{{Colour[coloursNumber.colour]}}"
+            *ngIf="coloursNumber.number !== 49" (tap)="onNumberClick(coloursNumber)">
+            <Label *ngIf="!numberSelectionQueue.includes(coloursNumber)" text="{{ coloursNumber.number }}"
+                verticalAlignment="center" horizontalAlignment="center"></Label>
+            <stackLayout *ngIf="numberSelectionQueue.includes(coloursNumber)">
+                <ActivityIndicator busy="true" width="35" height="35">
+                </ActivityIndicator>
+            </stackLayout>
+        </StackLayout>
+    </StackLayout>
+    <StackLayout margin="3" col="{{coloursNumbers[48].col}}" row="{{coloursNumbers[48].row}}" colSpan="2"
+        [ngClass]="{'selected': coloursNumbers[48].isSelected, 'disabled': coloursNumbers[48].isDisabled }"
+        class="btn-colours radius-5 btn-colours-{{Colour[coloursNumbers[48].colour]}}" verticalAlignment="center"
+        horizontalAlignment="center" (tap)="onNumberClick(coloursNumbers[48])">
+        <Label *ngIf="!numberSelectionQueue.includes(coloursNumbers[48])" text="{{ coloursNumbers[48].number }}"
+            verticalAlignment="center" horizontalAlignment="center"></Label>
+        <stackLayout *ngIf="numberSelectionQueue.includes(coloursNumbers[48])">
+            <ActivityIndicator busy="true" width="35" height="35">
+            </ActivityIndicator>
+        </stackLayout>
+    </StackLayout>
+</GridLayout>
