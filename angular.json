@@ -1589,6 +1589,302 @@
                   "with": "src/environments/environment.hbg-peru-staging.ts"
                 }
               ]
+            },
+            "soccerbet-prod": {
+              "outputPath": "dist-soccerbet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/soccerbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.soccerbet.ts"
+                }
+              ]
+            },
+            "soccerbet-prod-release": {
+              "outputPath": "dist-soccerbet",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/soccerbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.soccerbet.ts"
+                }
+              ]
+            },
+            "soccerbet-staging": {
+              "outputPath": "dist-soccerbet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/soccerbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.soccerbet-staging.ts"
+                }
+              ]
+            },
+            "soccerbet-staging-release": {
+              "outputPath": "dist-soccerbet",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/soccerbet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.soccerbet-staging.ts"
+                }
+              ]
+            },
+            "betsafi-prod": {
+              "outputPath": "dist-betsafi",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betsafi/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betsafi.ts"
+                }
+              ]
+            },
+            "betsafi-prod-release": {
+              "outputPath": "dist-betsafi",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betsafi/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betsafi.ts"
+                }
+              ]
+            },
+            "betsafi-staging": {
+              "outputPath": "dist-betsafi",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betsafi/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betsafi-staging.ts"
+                }
+              ]
+            },
+            "betsafi-staging-release": {
+              "outputPath": "dist-betsafi",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betsafi/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betsafi-staging.ts"
+                }
+              ]
+            },
+            "tradabet-prod": {
+              "outputPath": "dist-tradabet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/tradabet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.tradabet.ts"
+                }
+              ]
+            },
+            "tradabet-prod-release": {
+              "outputPath": "dist-tradabet",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/tradabet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.tradabet.ts"
+                }
+              ]
+            },
+            "tradabet-staging": {
+              "outputPath": "dist-tradabet",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/tradabet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.tradabet-staging.ts"
+                }
+              ]
+            },
+            "tradabet-staging-release": {
+              "outputPath": "dist-v",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/tradabet/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.tradabet-staging.ts"
+                }
+              ]
+            },
+            "betsplus-prod": {
+              "outputPath": "dist-betsplus",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betsplus/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betsplus.ts"
+                }
+              ]
+            },
+            "betsplus-prod-release": {
+              "outputPath": "dist-betsplus",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betsplus/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betsplus.ts"
+                }
+              ]
+            },
+            "betsplus-staging": {
+              "outputPath": "dist-betsplus",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betsplus/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betsplus-staging.ts"
+                }
+              ]
+            },
+            "betsplus-staging-release": {
+              "outputPath": "dist-betsplus",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betsplus/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betsplus-staging.ts"
+                }
+              ]
             }
           }
         },
@@ -1852,6 +2148,54 @@
             },
             "hbg-peru-staging-release": {
               "browserTarget": "vdesk:build:hbg-peru-staging-release"
+            },
+            "soccerbet-prod": {
+              "browserTarget": "vdesk:build:soccerbet-prod"
+            },
+            "soccerbet-staging": {
+              "browserTarget": "vdesk:build:soccerbet-staging"
+            },
+            "soccerbet-prod-release": {
+              "browserTarget": "vdesk:build:soccerbet-prod-release"
+            },
+            "soccerbet-staging-release": {
+              "browserTarget": "vdesk:build:soccerbet-staging-release"
+            },
+            "betsafi-prod": {
+              "browserTarget": "vdesk:build:betsafi-prod"
+            },
+            "betsafi-staging": {
+              "browserTarget": "vdesk:build:betsafi-staging"
+            },
+            "betsafi-prod-release": {
+              "browserTarget": "vdesk:build:betsafi-prod-release"
+            },
+            "betsafi-staging-release": {
+              "browserTarget": "vdesk:build:betsafi-staging-release"
+            },
+            "tradabet-prod": {
+              "browserTarget": "vdesk:build:tradabet-prod"
+            },
+            "tradabet-staging": {
+              "browserTarget": "vdesk:build:tradabet-staging"
+            },
+            "tradabet-prod-release": {
+              "browserTarget": "vdesk:build:tradabet-prod-release"
+            },
+            "tradabet-staging-release": {
+              "browserTarget": "vdesk:build:tradabet-staging-release"
+            },
+            "betsplus-prod": {
+              "browserTarget": "vdesk:build:betsplus-prod"
+            },
+            "betsplus-staging": {
+              "browserTarget": "vdesk:build:betsplus-staging"
+            },
+            "betsplus-prod-release": {
+              "browserTarget": "vdesk:build:betsplus-prod-release"
+            },
+            "betsplus-staging-release": {
+              "browserTarget": "vdesk:build:betsplus-staging-release"
             }
           }
         },
