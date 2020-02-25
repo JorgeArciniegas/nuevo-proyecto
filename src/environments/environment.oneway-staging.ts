@@ -286,7 +286,7 @@ export const environment: Environment = {
       label: 'COLOURS',
       order: 7,
       productSelected: false,
-      isPlayable: false,
+      isPlayable: true,
       layoutProducts: {
         type: LAYOUT_TYPE.COLOURS,
         resultItems: 2,
