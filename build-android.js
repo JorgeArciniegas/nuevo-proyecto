@@ -28,7 +28,7 @@ fs.readFile(manifestAndroid, function (err, file) {
 
 // write data to xml
 setTimeout(() => {
-  fs.writeFileSync(manifestAndroid, xmlData);
+  fs.writeFileSync(manifestAndroid, `<?xml version="1.0" encoding="utf-8"?>${xmlData}`);
   startBuild();
 }, 1000);
 
@@ -47,7 +47,7 @@ function startBuild() {
   });
 
   const folder = resolve(__dirname, 'src', 'environments');
-  const builder_String = "tns build android --release  --env.uglify --env.snapshot ";
+  const builder_String = "tns build android --release --env.uglify --env.snapshot ";
   fs.readdir(folder, (err, files) => {
     files.forEach(file => {
       try {
@@ -57,7 +57,7 @@ function startBuild() {
             console.log(`FILE NAME: ${file}`);
             console.log(`Name environment: ${nameEnv[1]}`);
             let tmpString = builder_String;
-            tmpString += `--env.environment="${nameEnv[1]}-prod-release"  --copy-to dist/android/${nameEnv[1]}-${version}.apk --key-store-path vgen.keystore --key-store-alias vgen --key-store-password 123456a --key-store-alias-password 123456a`;
+            tmpString += `--env.environment="${nameEnv[1]}-prod"  --copy-to dist/android/${nameEnv[1]}-${version}.apk --key-store-path vgen.keystore --key-store-alias vgen --key-store-password 123456a --key-store-alias-password 123456a`;
             console.log('START BUILDER NATIVESCRIPT');
             const e = execSync(tmpString);
             console.log(`finish data ... ${e}`);
