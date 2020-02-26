@@ -8,7 +8,7 @@ import { UserService } from '../../../services/user.service';
 import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
 import { PrintCouponService } from './print-coupon.service';
 
-const ZXing = require('nativescript-zxing');
+const ZXing = require('@elys/nativescript-zxing');
 @Component({
   selector: 'app-print-coupon',
   templateUrl: './print-coupon.component.html',
