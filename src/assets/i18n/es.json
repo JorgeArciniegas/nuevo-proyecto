@@ -271,6 +271,7 @@
         "ALL": "Todos",
         "CockFight": "Pelea de gallos",
         "CockRacing": "Pelea de gallos",
+        "Colours": "Colours",
         "DogRacing": "Galgos",
         "HorseRacing": "Carreras de caballos",
         "Keno": "Keno",
@@ -467,6 +468,7 @@
     "VBOX": {
       "CATEGORIES_SPORT": {
         "ARLT": "Ruleta Americana",
+        "CLRS": "Colours",
         "COCK": "Pelea de gallos",
         "DOG": "Galgos",
         "ENG-LEAGUE": "Fútbol ING",
