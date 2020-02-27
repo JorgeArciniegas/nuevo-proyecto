@@ -298,7 +298,14 @@ export const environment: Environment = {
         icon: 'Colours',
         route: 'products/colours'
       },
-      widgets: [],
+      widgets: [
+        {
+          name: '',
+          routing: 'hot-and-cold-colors',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
       typeCoupon: {
         isMultipleStake: false,
         acceptMultiStake: false,
