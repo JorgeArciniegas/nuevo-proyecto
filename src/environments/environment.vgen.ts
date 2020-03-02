@@ -139,7 +139,7 @@ export const environment: Environment = {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
         nextEventItems: 2,
-        cacheEventsItem: 2
+        cacheEventsItem: 3
       },
       toolbarButton: {
         name: 'Italian League',
@@ -178,7 +178,7 @@ export const environment: Environment = {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
         nextEventItems: 2,
-        cacheEventsItem: 2
+        cacheEventsItem: 3
       },
       toolbarButton: {
         name: 'Italian League',
