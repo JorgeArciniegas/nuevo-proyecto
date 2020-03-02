@@ -273,6 +273,7 @@
         "ALL": "Todas",
         "CockFight": "Briga de Galos",
         "CockRacing": "Briga de Galos",
+        "Colours": "Cores",
         "DogRacing": "Galgos",
         "HorseRacing": "Corridas de cavalos",
         "Keno": "Keno",
@@ -469,6 +470,7 @@
     "VBOX": {
       "CATEGORIES_SPORT": {
         "ARLT": "Roleta Americana",
+        "CLRS": "Cores",
         "COCK": "Briga de Galos",
         "DOG": "Galgos",
         "ENG-LEAGUE": "Futebol ENG",

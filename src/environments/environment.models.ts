@@ -3,7 +3,7 @@ import { Market } from '../app/products/products.model';
 
 export interface Environment {
   production: boolean;
-  //login intercative
+  // login intercative
   loginInteractive: boolean;
   bookmakerDetails: string;
   license: LICENSE_TYPE;

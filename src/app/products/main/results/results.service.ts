@@ -31,7 +31,7 @@ export class ResultsService {
       SportId: this.productService.product.sportId,
       CategoryType: this.productService.product.codeProduct
     };
-    this.listResult = [];
+    const tmpListResult = [];
     this.elysApi.virtual.getLastResult(request)
       .then((eventResults: VirtualSportLastResultsResponse) => {
         // results for products
@@ -103,7 +103,7 @@ export class ResultsService {
                 break;
             }
             // put the new object on the global list results
-            this.listResult.push(tempEventResult);
+            tmpListResult.push(tempEventResult);
           }
         } else {
 
@@ -115,9 +115,10 @@ export class ResultsService {
             };
             // group by last Tournament
             tempEventResult.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === tempEventResult.eventNumber);
-            this.listResult.push(tempEventResult);
+            tmpListResult.push(tempEventResult);
           }
         }
+        this.listResult = tmpListResult;
       });
   }
 

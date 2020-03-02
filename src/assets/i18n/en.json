@@ -247,8 +247,8 @@
         "APUESTAS_DOMINICANAS": "Please check the accuracy of the coupon at the time of issuance, late claims will not be accepted.",
         "BETESE": "",
         "BETLOGIK": "The Customer declares to know and to accept the general terms and conditions available on our website. This coupon is valid only if the transaction took place exclusively via the Internet. According to the Decree Law n. 158/2012 conv. with mod. in Law no. 189/2012 please be informed that: It is possible to verify the winning probabilities on www.aams.gov.it. Gambling can cause addiction. Gambling is forbidden under the age of 18. (default)",
-        "BETSAFI": "All bets are subject to Betsafi rules. A copy is available on request. Carefully keep the receipt as the document is essential for the winnings collection",
-        "BETSPLUS": "All tickets are subject to BetsPlus terms and conditions and betting rules",
+        "BETSAFI": "All bets are subject to Betsafi rules. A copy is available on request. Carefully keep the receipt as the document is essential for the winnings collection.",
+        "BETSPLUS": "All tickets are subject to BetsPlus terms and conditions and betting rules.",
         "BOLIVARBET": "The Customer declares to know and accept the Terms and Conditions available on our web siteThis coupon is valid only if the transaction took place exclusively via the Internet.Gambling can cause addiction.The game is prohibited for persons under 18 years.",
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.",
         "DORADOBET": "Todas las apuestas están sujetas a las reglas de apuestas de DoradoBet (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la recolección de ganancias.",
@@ -258,10 +258,10 @@
         "KYRON": "Todas las apuestas están sujetas a las reglas de apuestas de Kyron (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la recolección de ganancias.",
         "ONEWAY": "",
         "SHAWIS": "All Bets are Subject to Betpal Betting rules (terms and condition). A Copy is Available on request. Carefully keep the receipt as the document is essential for the winnings collection",
-        "SOCCERBET": "All bets are subject to SoccerBet rules (terms and condition). A copy is available on request. Carefully keep the receipt as the document is essential for the winnings collection",
+        "SOCCERBET": "All bets are subject to SoccerBet rules (terms and condition). A copy is available on request. Carefully keep the receipt as the document is essential for the winnings collection.",
         "SOFT": "Todas las apuestas están sujetas a las reglas de apuestas de Soft (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la recolección de ganancias",
         "SPORTRACE": "Todas las apuestas están sujetas a las reglas de apuestas de Sport Race (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la re-colección de ganancias.",
-        "TRADABET": "All bets are subject to Tradabet rules (terms and condition). A copy is available on request. Carefully keep the receipt as the document is essential for the winnings collection",
+        "TRADABET": "All bets are subject to Tradabet rules (terms and condition). A copy is available on request. Carefully keep the receipt as the document is essential for the winnings collection.",
         "UGANBET": "The Customer declares to know and accept the Terms and Conditions available on our web site This coupon is valid only if the transaction took place exclusively via the Internet. Gambling can cause addiction. The game is prohibited for persons under 18 years.",
         "UNIVERSALSOFT": "Please check the accuracy of the coupon at the time of issuance, late claims will not be accepted."
       }
@@ -281,6 +281,7 @@
         "ALL": "All",
         "CockFight": "Cock fight",
         "CockRacing": "Cock fight",
+        "Colours": "Colours",
         "DogRacing": "Greyhounds",
         "HorseRacing": "Horse races",
         "Keno": "Keno",
@@ -477,6 +478,7 @@
     "VBOX": {
       "CATEGORIES_SPORT": {
         "ARLT": "American roulette",
+        "CLRS": "Colours",
         "COCK": "Cock fight",
         "DOG": "Greyhounds",
         "ENG-LEAGUE": "Soccer ENG",

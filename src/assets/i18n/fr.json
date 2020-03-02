@@ -273,6 +273,7 @@
         "ALL": "Tous",
         "CockFight": "Combat de coqs",
         "CockRacing": "Combat de coqs",
+        "Colours": "Couleurs",
         "DogRacing": "Lévriers",
         "HorseRacing": "Courses hippiques",
         "Keno": "Kéno",
@@ -469,6 +470,7 @@
     "VBOX": {
       "CATEGORIES_SPORT": {
         "ARLT": "Roulette américaine",
+        "CLRS": "Colours",
         "COCK": "Combat de coqs",
         "DOG": "Lévriers",
         "ENG-LEAGUE": "Football ENG",

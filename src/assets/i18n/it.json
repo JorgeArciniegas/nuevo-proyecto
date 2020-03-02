@@ -257,6 +257,7 @@
         "ALL": "Tutti",
         "CockFight": "Combattimento di galli",
         "CockRacing": "Combattimento di galli",
+        "Colours": "Colours",
         "DogRacing": "Levrieri",
         "HorseRacing": "Corse di cavalli ",
         "Keno": "Keno",
@@ -453,6 +454,7 @@
     "VBOX": {
       "CATEGORIES_SPORT": {
         "ARLT": "American roulette",
+        "CLRS": "Colours",
         "COCK": "Combattimento di galli",
         "DOG": "Levrieri",
         "ENG-LEAGUE": "Calcio ENG",
