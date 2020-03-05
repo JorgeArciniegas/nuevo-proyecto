@@ -3,6 +3,7 @@ import { Receipt } from './print-receipt.model';
 import { PrintReceiptService } from './print-receipt.service';
 import { AppSettings } from '../../../../app.settings';
 import { UserService } from '../../../../services/user.service';
+import { LICENSE_TYPE } from 'src/environments/environment.models';
 
 @Component({
   selector: 'app-print-receipt',
@@ -12,7 +13,7 @@ import { UserService } from '../../../../services/user.service';
 export class PrintReceiptComponent implements OnInit {
   public receipt: Receipt;
   public date: Date;
-
+  licenseType: typeof LICENSE_TYPE = LICENSE_TYPE;
   constructor(
     private printService: PrintReceiptService,
     public appSettings: AppSettings,

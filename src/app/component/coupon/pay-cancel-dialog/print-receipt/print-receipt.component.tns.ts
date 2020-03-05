@@ -4,6 +4,7 @@ import { Receipt } from './print-receipt.model';
 import { PrintReceiptService } from './print-receipt.service';
 import { AppSettings } from '../../../../app.settings';
 import { UserService } from '../../../../services/user.service';
+import { LICENSE_TYPE } from 'src/environments/environment.models';
 
 @Component({
   moduleId: module.id,
@@ -15,6 +16,7 @@ export class PrintReceiptComponent implements OnInit {
   public receipt: Receipt;
   public date: Date;
   public printer: Printer = new Printer();
+  licenseType: typeof LICENSE_TYPE = LICENSE_TYPE;
   @ViewChild('printingData', { static: false }) view: ElementRef;
 
   constructor(

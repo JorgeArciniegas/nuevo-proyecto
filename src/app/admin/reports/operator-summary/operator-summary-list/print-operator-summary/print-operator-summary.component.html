@@ -3,7 +3,10 @@
     <img class="logo-print-coupon padding-10">
     <div class="header-content">
       <div class="padding-5 font-size-normal">
-        {{appSettings.bookmakerDetails}}
+        <!-- {{appSettings.bookmakerDetails}} -->
+        <span *ngIf="appSettings.printSettings.isShowHeaderMessage">
+          {{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSettings.license] | translate}}
+        </span>
       </div>
     </div>
   </div>

@@ -7,7 +7,7 @@
 
 /* tslint:disable */
 export const VERSION = {
-    "version": "0.28.3",
+    "version": "0.28.4",
     "appName": "vdesk"
 };
 /* tslint:enable */
