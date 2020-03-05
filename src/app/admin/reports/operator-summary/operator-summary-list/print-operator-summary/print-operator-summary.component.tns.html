@@ -11,7 +11,8 @@
 
         <FlexboxLayout flexDirection="column" class="header">
           <StackLayout class="logo-print-coupon" height="50"></StackLayout>
-          <Label class="header-content p-5 text-center " text="{{ appSettings.bookmakerDetails }}"></Label>
+          <Label class="header-content p-5 text-center "
+            text="{{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSettings.license] | translate}}"></Label>
         </FlexboxLayout>
 
         <StackLayout class="hr-dark header-margin"></StackLayout>

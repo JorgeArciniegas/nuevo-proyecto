@@ -11,7 +11,9 @@
           <Image stretch="aspectFill" src="~/app/themes/skins/{{appSettings.theme}}/image/Logo-coupon.png"></Image>
         </StackLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-b-10" flexWrap="wrap">
-          <Label class="h4 p-10 text-center " text="{{ appSettings.bookmakerDetails }}" textWrap="true"></Label>
+          <Label class="h4 p-10 text-center"
+            text="{{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSettings.license] | translate}}"
+            textWrap="true"></Label>
         </FlexboxLayout>
         <StackLayout class="hr-dark m-10">
         </StackLayout>
