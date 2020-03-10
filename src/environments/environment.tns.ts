@@ -62,8 +62,8 @@ import { environment as softStagingEnvironment } from './environment.soft-stagin
 import { environment as sportraceEnvironment } from './environment.sportrace';
 import { environment as sportraceStagingEnvironment } from './environment.sportrace-staging';
 // tradabet
-import { environment as tradabetEnvironment } from './environment.tradabet';
-import { environment as tradabetStagingEnvironment } from './environment.tradabet-staging';
+import { environment as tradabetsEnvironment } from './environment.tradabets';
+import { environment as tradabetsStagingEnvironment } from './environment.tradabets-staging';
 // uganbet
 import { environment as uganbetEnvironment } from './environment.uganbet';
 import { environment as uganbetStagingEnvironment } from './environment.uganbet-staging';
@@ -221,11 +221,11 @@ export const environment: Environment = (() => {
       case 'betsafi-staging':
         envVars = betsafiStagingEnvironment;
         break;
-      case 'tradabet-prod':
-        envVars = tradabetEnvironment;
+      case 'tradabets-prod':
+        envVars = tradabetsEnvironment;
         break;
-      case 'tradabet-staging':
-        envVars = tradabetStagingEnvironment;
+      case 'tradabets-staging':
+        envVars = tradabetsStagingEnvironment;
         break;
       case 'betsplus-prod':
         envVars = betsplusEnvironment;
