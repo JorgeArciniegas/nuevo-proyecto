@@ -1,6 +1,6 @@
 <div class="printCoupon" *ngIf="printCouponService.couponPrint">
   <div class="header">
-    <img class="logo-print-coupon padding-10">
+    <img class="logo-print-coupon">
     <div class="header-content">
       <div class="padding-5 font-size-normal">
         <span *ngIf="appSetting.printSettings.isShowHeaderMessage">
@@ -157,8 +157,8 @@
     </div>
   </div>
   <div class="footer">
-    <div class="barcode">
-      <ngx-barcode [bc-value]="printCouponService.couponPrint?.CouponCode" [bc-width]="1" [bc-height]="80"
+    <div class="barcode-container">
+      <ngx-barcode [bc-value]="printCouponService.couponPrint?.CouponCode" [bc-width]="1" [bc-height]="60"
         [bc-display-value]="false"></ngx-barcode>
     </div>
   </div>

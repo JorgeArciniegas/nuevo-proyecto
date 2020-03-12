@@ -11,7 +11,7 @@
 @media print {
 	.printCoupon {
 		width: 100%;
-		padding: 3mm;
+		padding: 0mm 3mm;
 		-webkit-print-color-adjust: exact;
 		.col {
 			display: inline-block;
@@ -236,8 +236,10 @@
 			}
 		}
 		.footer {
-			page-break-after: avoid;
-			.barcode {
+      page-break-after: avoid;
+      width: 100%;
+      margin:0;
+			.barcode-container {
 				text-align: center;
 			}
 		}
