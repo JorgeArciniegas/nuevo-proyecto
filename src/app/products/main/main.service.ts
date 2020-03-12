@@ -4,7 +4,6 @@ import { ElysFeedsService } from '@elys/elys-feeds';
 import { cloneDeep as clone } from 'lodash';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';
-import { AppSettings } from '../../app.settings';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { CouponService } from '../../component/coupon/coupon.service';
@@ -13,7 +12,6 @@ import { BetOdd, Market, PolyfunctionalArea, PolyfunctionalStakeCoupon, Selectio
 import { ProductsService } from '../products.service';
 import { ColourGameId } from './colour-game.enum';
 import { Area, CombinationType, EventDetail, EventInfo, EventTime, ListArea, Match, PlacingEvent, Player, Podium, Smartcode, SmartCodeType, SpecialBet, SpecialBetValue, SpecialOddData, TypeBetSlipColTot, TypePlacingEvent, VirtualBetEventExtended, VirtualBetMarketExtended, VirtualBetSelectionExtended, VirtualBetTournamentExtended } from './main.models';
-import { ColoursNumber, ColoursSelection } from './playable-board/templates/colours/colours.models';
 import { KenoNumber } from './playable-board/templates/keno/keno.model';
 import { ResultsService } from './results/results.service';
 import { areas, overviewAreas } from './SoccerAreas';
@@ -61,7 +59,6 @@ export class MainService {
     private productService: ProductsService,
     private btnService: BtncalcService,
     public couponService: CouponService,
-    private appSettings: AppSettings,
     public destroyCouponService: DestroyCouponService,
     private resultService: ResultsService,
     private feedData: ElysFeedsService,
@@ -131,12 +128,6 @@ export class MainService {
     this.cacheTournaments = [];
   }
 
-  restartService() {
-    this.defaultGameStart();
-    if (this.countdownSub.closed) {
-      this.resumeCountDown();
-    }
-  }
   /**
    *
    */
@@ -148,15 +139,9 @@ export class MainService {
   }
 
   /**
-   * When the first time entry on the application, the system set the the product default.
-   * It is called by constructor and it is selected from environment file and
-   * it return the product marked to "productSelected"
+   * the system set the the default product first application launch.
+   * it's managed by environment file and it returns the product marked "productSelected"
    */
-  defaultGameStart(): void {
-    // Init events
-    this.initEvents();
-  }
-
   initEvents(): void {
     this.initCurrentEvent = true;
     this.selectedColourGameId = ColourGameId.bet49;
@@ -234,38 +219,30 @@ export class MainService {
 
   loadEvents(): void {
     try {
-      this.loadEventsFromApi(true);
+      if (
+        this.initCurrentEvent
+      ) {
+        this.loadEventsFromApi(true);
+      } else {
+        if ((this.cacheTournaments && this.cacheTournaments.length > 0) ||
+          (this.cacheEvents && this.cacheEvents.length > 0)) {
+          if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
+            this.cacheTournaments.shift();
+          } else {
+            this.cacheEvents.shift();
+          }
+          this.eventDetails.events.shift();
+          this.slideToNextEvent();
+          this.currentAndSelectedEventTime();
+        }
 
-      //TODO: RIMOZIONE SISTEMA DI CACHE PER CARICAMENTO EVENTI
-      // if (
-      //   this.initCurrentEvent
-      // ) {
-      //   this.loadEventsFromApi(true);
-      // } else {
+        this.reload--;
 
-      //   // Delete the first element
-      //   if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
-      //     this.cacheTournaments.shift();
-      //     this.eventDetails.events.shift();
-
-      //   } else if (this.cacheEvents != null && this.cacheEvents.length > 0) {
-      //     this.cacheEvents.shift();
-      //     this.eventDetails.events.shift();
-      //     // Add the new event
-      //     this.addNewEvent();
-      //     this.currentAndSelectedEventTime();
-      //   }
-
-      //   this.reload--;
-
-      //   if (this.reload <= this.productService.product.layoutProducts.nextEventItems) {
-      //     // If remain only 1 new event reload other events
-      //     this.loadEventsFromApi();
-      //   } else {
-      //     // Get event's odds
-      //     this.eventDetailOdds(this.eventDetails.events[0].number);
-      //   }
-      // }
+        if (this.reload <= this.productService.product.layoutProducts.nextEventItems) {
+          // If remain only 1 new event reload other events
+          timer(12000).subscribe(() => this.loadEventsFromApi(false, undefined, false));
+        }
+      }
       // Resume event's countdown
       if (this.countdownSub && this.countdownSub.closed || !this.countdownSub) {
         this.countdownSub = timer(1000, 1000).subscribe(() => this.getTime());
@@ -276,40 +253,36 @@ export class MainService {
   }
 
   /**
-   *
+   *  slide the current event selected to next one available on the event list
    */
-  private addNewEvent(): void {
+  private slideToNextEvent(): void {
     let nextEventItems: number = this.productService.product.layoutProducts.nextEventItems;
     // check the exception layout
-    if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
-      nextEventItems = nextEventItems - 1;
-    }
-
+    nextEventItems = nextEventItems - 1;
     const event: EventInfo = new EventInfo();
-    event.number = this.cacheEvents[nextEventItems].id;
-    event.label = this.cacheEvents[nextEventItems].nm;
-    event.date = new Date(this.cacheEvents[nextEventItems].sdtoffset);
+    if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
+      event.number = this.cacheEvents[nextEventItems].id;
+      event.label = this.cacheEvents[nextEventItems].nm;
+      event.date = new Date(this.cacheEvents[nextEventItems].sdtoffset);
+    } else {
+      event.number = this.cacheTournaments[nextEventItems].id;
+      event.label = this.cacheTournaments[nextEventItems].nm;
+      event.date = new Date(this.cacheTournaments[nextEventItems].sdtoffset);
+    }
     this.eventDetails.events[nextEventItems] = event;
-
   }
 
   /**
-   *
    * @param all = When it is true refresh the cache event.
    * Inside it, it must be created the request object.
    * The reference values is taken by "ProductService" on object "product".
    */
-  loadEventsFromApi(all: boolean = true, lastAttemptCall?: number) {
+  private loadEventsFromApi(all: boolean = true, lastAttemptCall?: number, delayedEventLoad: boolean = true) {
     const request: VirtualProgramTreeBySportRequest = {
       SportIds: this.productService.product.sportId.toString(),
       CategoryTypes: this.productService.product.codeProduct
     };
     this.elysApi.virtual.getVirtualTreeV2(request).then((sports: VirtualProgramTreeBySportResponse) => {
-      // cache all tournaments
-      /* if ( all ) {
-        this.cacheTournaments = sports.Sports[0].ts;
-      }
- */
       if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
         const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
         if (all) {
@@ -323,7 +296,6 @@ export class MainService {
 
             this.eventDetails.events[index] = event;
           }
-          this.currentAndSelectedEventTime();
         } else {
           // Add only new event
           tournament.evs.forEach((event: VirtualBetEvent) => {
@@ -331,8 +303,10 @@ export class MainService {
               this.cacheEvents.push(event);
             }
           });
-          // Get event's odds
-          this.eventDetailOdds(this.eventDetails.events[0].number);
+          if (delayedEventLoad) {
+            // Get event's odds
+            this.eventDetailOdds(this.eventDetails.events[0].number);
+          }
         }
         // load markets from PRODUCT SOCCER
       } else {
@@ -350,7 +324,6 @@ export class MainService {
         } else {
           // Add only new event
           tournaments.forEach((tournament: VirtualBetTournamentExtended) => {
-            // tslint:disable-next-line:max-line-length
             if (
               this.cacheTournaments.filter((cacheTournament: VirtualBetTournament) => cacheTournament.id === tournament.id).length === 0
             ) {
@@ -363,11 +336,13 @@ export class MainService {
           event.label = this.cacheTournaments[idx].nm;
           event.date = new Date(this.cacheTournaments[idx].sdtoffset);
           this.eventDetails.events[idx] = event;
-          // Get event's odds
-          this.eventDetailOddsByCacheTournament(this.eventDetails.events[0].number);
+          if (delayedEventLoad) {
+            // Get event's odds
+            this.eventDetailOddsByCacheTournament(this.eventDetails.events[0].number);
+          }
         }
-        this.currentAndSelectedEventTime();
       }
+      this.currentAndSelectedEventTime(delayedEventLoad);
     }, (error) => {
       // check the error
       if (error.status === 401) {
@@ -396,12 +371,8 @@ export class MainService {
     const tournament: VirtualBetTournamentExtended = this.cacheTournaments.filter(
       (cacheTournament: VirtualBetTournament) => cacheTournament.id === tournamentNumber
     )[0];
-    const request: VirtualDetailOddsOfEventRequest = {
-      sportId: this.productService.product.sportId,
-      matchId: tournamentNumber
-    };
     // If the tournament doesn't contain yet the events information, load them calling the API.
-    if (!tournament.matches || tournament.matches == null || tournament.matches.length === 0) {
+    if (tournament && (!tournament.matches || tournament.matches == null || tournament.matches.length === 0)) {
       this.feedData.getEventVirtualDetail(this.userservice.getUserId(), tournamentNumber)
         .then((sportDetail: VirtualDetailOddsOfEventResponse) => {
           try {
@@ -563,7 +534,7 @@ export class MainService {
     return this.currentProductDetails.ranking;
   }
 
-  currentAndSelectedEventTime() {
+  currentAndSelectedEventTime(resetAllSelections: boolean = true) {
     if (!this.eventDetails) {
       return;
     }
@@ -581,7 +552,9 @@ export class MainService {
     } else if (this.eventDetails.currentEvent === 0) {
       // this.resetPlayEvent();
       // set to reset all variables
-      this.toResetAllSelections = true;
+      if (resetAllSelections) {
+        this.toResetAllSelections = true;
+      }
       this.currentEventSubscribe.next(0);
     }
 
@@ -591,6 +564,7 @@ export class MainService {
 
     // Calculate remaning time for first Event
     if (this.eventDetails.currentEvent > 0) {
+      console.log("3");
       this.remainingEventTime(this.eventDetails.events[0].number).then((eventTime: EventTime) => {
         this.remainingTime = eventTime;
       });
@@ -648,7 +622,7 @@ export class MainService {
     });
   }
 
-  eventDetailOdds(eventNumber: number, attemptRollBack?: number): void {
+  private eventDetailOdds(eventNumber: number, attemptRollBack?: number): void {
     if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
       if (this.cacheTournaments.length === 0) {
         return;

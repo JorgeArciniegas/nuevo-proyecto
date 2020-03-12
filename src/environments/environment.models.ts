@@ -109,7 +109,7 @@ export enum LICENSE_TYPE {
   SOCCERBET,
   BETSAFI,
   BETSPLUS,
-  TRADABET
+  TRADABETS
 }
 
 export interface TypeCoupon {

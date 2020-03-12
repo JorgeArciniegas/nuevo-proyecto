@@ -1738,22 +1738,22 @@
                 }
               ]
             },
-            "tradabet-prod": {
-              "outputPath": "dist-tradabet",
+            "tradabets-prod": {
+              "outputPath": "dist-tradabets",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/tradabet/"
+                  "src/app/themes/skins/tradabets/"
                 ]
               },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.tradabet.ts"
+                  "with": "src/environments/environment.tradabets.ts"
                 }
               ]
             },
-            "tradabet-prod-release": {
-              "outputPath": "dist-tradabet",
+            "tradabets-prod-release": {
+              "outputPath": "dist-tradabets",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1765,31 +1765,31 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/tradabet/"
+                  "src/app/themes/skins/tradabets/"
                 ]
               },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.tradabet.ts"
+                  "with": "src/environments/environment.tradabets.ts"
                 }
               ]
             },
-            "tradabet-staging": {
-              "outputPath": "dist-tradabet",
+            "tradabets-staging": {
+              "outputPath": "dist-tradabets",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/tradabet/"
+                  "src/app/themes/skins/tradabets/"
                 ]
               },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.tradabet-staging.ts"
+                  "with": "src/environments/environment.tradabets-staging.ts"
                 }
               ]
             },
-            "tradabet-staging-release": {
+            "tradabets-staging-release": {
               "outputPath": "dist-v",
               "optimization": true,
               "outputHashing": "all",
@@ -1802,13 +1802,13 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/tradabet/"
+                  "src/app/themes/skins/tradabets/"
                 ]
               },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.tradabet-staging.ts"
+                  "with": "src/environments/environment.tradabets-staging.ts"
                 }
               ]
             },
@@ -2173,17 +2173,17 @@
             "betsafi-staging-release": {
               "browserTarget": "vdesk:build:betsafi-staging-release"
             },
-            "tradabet-prod": {
-              "browserTarget": "vdesk:build:tradabet-prod"
+            "tradabets-prod": {
+              "browserTarget": "vdesk:build:tradabets-prod"
             },
-            "tradabet-staging": {
-              "browserTarget": "vdesk:build:tradabet-staging"
+            "tradabets-staging": {
+              "browserTarget": "vdesk:build:tradabets-staging"
             },
-            "tradabet-prod-release": {
-              "browserTarget": "vdesk:build:tradabet-prod-release"
+            "tradabets-prod-release": {
+              "browserTarget": "vdesk:build:tradabets-prod-release"
             },
-            "tradabet-staging-release": {
-              "browserTarget": "vdesk:build:tradabet-staging-release"
+            "tradabets-staging-release": {
+              "browserTarget": "vdesk:build:tradabets-staging-release"
             },
             "betsplus-prod": {
               "browserTarget": "vdesk:build:betsplus-prod"

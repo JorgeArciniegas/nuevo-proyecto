@@ -11,11 +11,11 @@ export const environment: Environment = {
   loginInteractive: true,
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
-  license: LICENSE_TYPE.TRADABET,
-  baseApiUrl: 'https://qacom-apitradabet.ody-services.net',
-  pageTitle: 'Tradabet - KIOSK',
-  theme: 'tradabet',
-  faviconPath: 'app/themes/skins/tradabet/image/Logo-header.png',
+  license: LICENSE_TYPE.TRADABETS,
+  baseApiUrl: 'https://vg-apitradabet.odissea-services.net',
+  pageTitle: 'Tradabets - KIOSK',
+  theme: 'tradabets',
+  faviconPath: 'app/themes/skins/tradabets/image/Logo-header.png',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
   supportedLang: ['en'],
@@ -138,7 +138,7 @@ export const environment: Environment = {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
         nextEventItems: 2,
-        cacheEventsItem: 2
+        cacheEventsItem: 3
       },
       toolbarButton: {
         name: 'Italian League',
@@ -177,7 +177,7 @@ export const environment: Environment = {
         type: LAYOUT_TYPE.SOCCER,
         resultItems: 10,
         nextEventItems: 2,
-        cacheEventsItem: 2
+        cacheEventsItem: 3
       },
       toolbarButton: {
         name: 'Italian League',
@@ -258,7 +258,7 @@ export const environment: Environment = {
         type: LAYOUT_TYPE.KENO,
         resultItems: 1, // items to show for last result
         nextEventItems: 2, // items to show for next events
-        cacheEventsItem: 2
+        cacheEventsItem: 3
       },
       toolbarButton: {
         name: 'keno',
