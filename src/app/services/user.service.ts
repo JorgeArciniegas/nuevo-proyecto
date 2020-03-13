@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { CurrencyCodeRequest, CurrencyCodeResponse, ElysApiService, StagedCouponStatus, TokenDataSuccess, UserType, UserPolicies } from '@elys/elys-api';
+import { CurrencyCodeRequest, CurrencyCodeResponse, ElysApiService, StagedCouponStatus, TokenDataSuccess, UserPolicies, UserType } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { Subscription, timer } from 'rxjs';
+import { Products } from '../../environments/environment.models';
 import { AppSettings } from '../app.settings';
 import { DataUser, LoginDataDirect, LOGIN_TYPE, OperatorData } from './user.models';
 import { RouterService } from './utility/router/router.service';
 import { StorageService } from './utility/storage/storage.service';
 import { TranslateUtilityService } from './utility/translate-utility.service';
-import { Products } from '../../environments/environment.models';
 
 @Injectable({
   providedIn: 'root'
@@ -207,7 +207,9 @@ export class UserService {
  * @param stake :number
  */
   increasePlayableBalance(stake: number): void {
-    this.dataUserDetail.userDetail.PlayableBalance += stake;
+    if (this.dataUserDetail.userDetail) {
+      this.dataUserDetail.userDetail.PlayableBalance += stake;
+    }
   }
 
 

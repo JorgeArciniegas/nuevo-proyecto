@@ -63,7 +63,10 @@ export class PayCancelDialogComponent {
               this.close();
             }
           })
-          .catch(error => (this.errorMessage = 'operation not possible (' + error.status + ')'));
+          .catch(error => {
+            console.error(error);
+            this.errorMessage = 'operation not possible (' + error.status + ')';
+          });
         this.form.get('couponCode').setValue('');
       }
       this.form.get('couponCode').setValue('');
@@ -96,7 +99,10 @@ export class PayCancelDialogComponent {
               this.close();
             }
           })
-          .catch(error => (this.errorMessage = 'operation not possible (' + error.status + ')'));
+          .catch(error => {
+            console.error(error);
+            this.errorMessage = 'operation not possible (' + error.status + ')';
+          });
         this.form.get('couponCode').setValue('');
       }
     }
