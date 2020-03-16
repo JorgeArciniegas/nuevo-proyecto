@@ -80,12 +80,14 @@ button:active:not([disabled]) {
 	height: 80px;
 	width: 80px;
 	border-style: solid;
+	font-size: 24px;
 	&.rainbow {
 		height: unset;
 	}
 	@media screen and (max-width: 1441px) {
 		height: 55px;
 		width: 55px;
+		font-size: 18px;
 	}
 
 	&.btn-total-colours {
