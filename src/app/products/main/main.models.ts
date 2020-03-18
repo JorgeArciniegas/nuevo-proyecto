@@ -1,6 +1,7 @@
 import { VirtualBetCompetitor, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualGetRankByEventResponse } from '@elys/elys-api';
 import { ColoursNumber, ColoursSelection } from './playable-board/templates/colours/colours.models';
 import { KenoNumber } from './playable-board/templates/keno/keno.model';
+import { RouletteNumber } from './playable-board/templates/american-roulette/american-roulette.models';
 
 export enum TypePlacingEvent {
   ST = 0,
@@ -53,7 +54,10 @@ export enum SmartCodeType {
   AT, // Combined trio
   S, // Sector
   OU, // Over/Under
-  MULTI // Multiple selections
+  MULTI, // Multiple selections
+  R, // AMERICAN ROULETTE NUMBER
+  RC, // AMERICAN ROULETTE COLUMN
+  RD, // AMERICAN ROULETTE DOZEN
 }
 
 // Enum of the type of combinations available.
@@ -84,6 +88,8 @@ export class PlacingEvent {
   specialBetValue: SpecialBet;
   timeBlocked: boolean;
   smartcode?: SmartCodeType;
+  //AmericanRoulette
+  rouletteNumber?: RouletteNumber[];
   constructor() {
     this.eventNumber = 0;
     this.repeat = 1;

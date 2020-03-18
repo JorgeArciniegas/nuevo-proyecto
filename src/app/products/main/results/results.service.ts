@@ -16,7 +16,9 @@ export class ResultsService {
   constructor(
     private productService: ProductsService,
     private elysApi: ElysApiService
-  ) { }
+  ) {
+    this.listResult = [];
+  }
 
   public get listResult(): EventResult[] {
     return this._listResult;

@@ -1,5 +1,5 @@
 <GridLayout rows="*" columns="*" class="dialog">
-  <GridLayout rows="4*,16*,3*" columns="*" class="odds-grid">
+  <GridLayout rows="4*,16*,2*" columns="*" class="odds-grid">
     <GridLayout row="0" rows="*" columns="6*,*">
       <Label col="0" text="{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.' + data.title | translate }}" class="title"
         verticalAlignment="center" horizontalAlignment="left"></Label>
@@ -47,14 +47,30 @@
             <Label col="1" text="#{{odd.MatchId}}" horizontalAlignment="right"></Label>
           </GridLayout>
           <GridLayout row="1" rows="*" columns="7*,3*" class="row">
-            <Label col="0"
-              text="{{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})"
-              horizontalAlignment="left" textWrap="true"></Label>
-            <StackLayout col="1" horizontalAlignment="right">
-              <Label class="odd" text="{{odd.OddValue | number: '1.2-2'}}" horizontalAlignment="right"></Label>
-            </StackLayout>
+            <ng-container *ngIf="layout !== layoutType.AMERICANROULETTE">
+              <Label col="0"
+                text="{{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})"
+                horizontalAlignment="left" textWrap="true"></Label>
+              <StackLayout col="1" horizontalAlignment="right">
+                <Label class="odd" text="{{odd.OddValue | number: '1.2-2'}}" horizontalAlignment="right"></Label>
+              </StackLayout>
+            </ng-container>
+            <ng-container *ngIf="layout === layoutType.AMERICANROULETTE">
+              <Label col="0" text="{{odd.MarketName}}" horizontalAlignment="left" verticalAlignment="center"
+                textWrap="true"></Label>
+              <StackLayout col="1" width="30" height="30" horizontalAlignment="right" verticalAlignment="center"
+                class="btn-keno-number btn-colours btn-default radius-50 btn-colours-{{getNumber(odd.SelectionName)}}"
+                *ngIf="odd.MarketTypeId === market.StraightUp">
+                <Label text="{{odd.SelectionName}}" horizontalAlignment="center" verticalAlignment="center"></Label>
+              </StackLayout>
+              <StackLayout col="1" horizontalAlignment="right" verticalAlignment="center" class="aroulette-values-bold"
+                *ngIf="odd.MarketTypeId !== market.StraightUp">
+                <Label text="{{odd.SelectionName}}" horizontalAlignment="center" verticalAlignment="center"
+                  textWrap="true"></Label>
+              </StackLayout>
+            </ng-container>
           </GridLayout>
-          <GridLayout row="2" columns="7*,3*" class="row" verticalAlignment="center">
+          <GridLayout row="2" columns="4*,2*,3*" class="row" verticalAlignment="center">
             <StackLayout col="0" class="button" width="100%" *ngIf="multiStake"
               [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
               'btn-selected' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }" (tap)="checkOddToChangeStake(odd)"
@@ -68,19 +84,24 @@
                 text="{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}" horizontalAlignment="center"
                 verticalAlignment="center"></Label>
             </StackLayout>
-            <StackLayout col="1" class="btn-warning button" (tap)="removeOdd(odd)" horizontalAlignment="right">
+            <StackLayout col="1" *ngIf="layout === layoutType.AMERICANROULETTE" horizontalAlignment="center"
+              verticalAlignment="center">
+              <Label text="X {{odd.OddValue | number: '1.2-2'}}" horizontalAlignment="center"
+                verticalAlignment="center"></Label>
+            </StackLayout>
+            <StackLayout col="2" class="btn-warning button" (tap)="removeOdd(odd)" horizontalAlignment="right">
               <Image stretch="aspectFit" width="26" src="~/assets/icons/baseline-delete_outline-white-24px.png"
                 verticalAlignment="center" horizontalAlignment="center"></Image>
             </StackLayout>
           </GridLayout>
         </GridLayout>
       </ng-container>
-
-
     </GridLayout>
-    <StackLayout row="3" horizontalAlignment="center">
-      <GridLayout rows="*" columns="*" class="button btn-close">
-        <Button text="{{ 'CLOSE' | translate }}" class="button-internal" (tap)="close()" textTransform="none"></Button>
+    <!-- CLOSE BUTTON -->
+    <StackLayout row="3" horizontalAlignment="center" verticalAlignment="center">
+      <GridLayout rows="*" columns="25*, 25*, 25*" class="m-5">
+        <Button col="1" text="{{ 'CLOSE' | translate }}" borderRadius="4" class="button btn-warning btn-close"
+          (tap)="close()" textTransform="none"></Button>
       </GridLayout>
     </StackLayout>
   </GridLayout>

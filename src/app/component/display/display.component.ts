@@ -162,4 +162,28 @@ export class DisplayComponent implements OnDestroy {
     }
     return this.translateService.getTranslatedString(this.polyfunctionalValue.odds[0].label);
   }
+
+
+  getRouletteValue(): string {
+    const tmp = [];
+    this.polyfunctionalValue.odds.forEach(item => {
+      tmp.push(item.label);
+    });
+    let res = '';
+    tmp.reverse();
+    if (tmp.length > 7) {
+      res = '...';
+    }
+    tmp.forEach((i, idx) => {
+      if (idx < 8) {
+        if (res.length > 0) {
+          res += ',';
+        }
+        res += i;
+      } else {
+        return;
+      }
+    });
+    return res;
+  }
 }

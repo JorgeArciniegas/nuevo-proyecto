@@ -6,21 +6,21 @@
     </StackLayout>
     <FlexBoxLayout row="1" justifyContent="space-around">
       <GridLayout row="0" col="0"
-        class="position btn-default-dog-play btn-{{codeProduct}}-{{race.racePodium.firstPlace}}"
+        class="position btn-default-dog-play btn-{{codeProduct}}-{{race?.racePodium?.firstPlace}}"
         [ngClass]="{'small': windowSize.small}">
-        <Label text="{{race.racePodium.firstPlace}}" class="label" horizontalAlignment="center"
+        <Label text="{{race?.racePodium?.firstPlace}}" class="label" horizontalAlignment="center"
           verticalAlignment="center"></Label>
       </GridLayout>
       <GridLayout row="0" col="1"
-        class="position btn-default-dog-play btn-{{codeProduct}}-{{race.racePodium.secondPlace}}"
+        class="position btn-default-dog-play btn-{{codeProduct}}-{{race?.racePodium?.secondPlace}}"
         [ngClass]="{'small': windowSize.small}">
-        <Label text="{{race.racePodium.secondPlace}}" class="label" horizontalAlignment="center"
+        <Label text="{{race?.racePodium?.secondPlace}}" class="label" horizontalAlignment="center"
           verticalAlignment="center"></Label>
       </GridLayout>
       <GridLayout row="0" col="2"
-        class="position btn-default-dog-play btn-{{codeProduct}}-{{race.racePodium.thirdPlace}}"
+        class="position btn-default-dog-play btn-{{codeProduct}}-{{race?.racePodium?.thirdPlace}}"
         [ngClass]="{'small': windowSize.small}">
-        <Label text="{{race.racePodium.thirdPlace}}" class="label" horizontalAlignment="center"
+        <Label text="{{race?.racePodium?.thirdPlace}}" class="label" horizontalAlignment="center"
           verticalAlignment="center"></Label>
       </GridLayout>
     </FlexBoxLayout>

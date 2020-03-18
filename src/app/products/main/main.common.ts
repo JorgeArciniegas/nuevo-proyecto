@@ -23,6 +23,8 @@ import { FilterAndSortByShownMarketsPipe } from './playable-board/filter-and-sor
 import { FilterByPositionPipe } from './playable-board/filter-by-position.pipe';
 import { FilterMarketsByAreaColumnPipe } from './playable-board/filter-markets-by-area-column.pipe';
 import { PlayableBoardComponent } from './playable-board/playable-board.component';
+import { AmericanRouletteComponent as PlayableBoardAmericanRouletteComponent } from './playable-board/templates/american-roulette/american-roulette.component';
+import { SelectColumnPipe } from './playable-board/templates/american-roulette/select-column.pipe';
 import { CockFightComponent as PlayableBoardCockFightComponent } from './playable-board/templates/cock-fight/cock-fight.component';
 import { ColoursComponent as PlayableBoardColoursComponent } from './playable-board/templates/colours/colours.component';
 import { Bet0Component as PlayableBoardBet0Component } from './playable-board/templates/colours/games/bet0/bet0.component';
@@ -47,6 +49,7 @@ import { SoccerComponent as ResultsSoccerComponent } from './results/templates/s
 
 
 export const componentDeclarations: any[] = [
+
   MainComponent,
   EventControlComponent,
   EventListComponent,
@@ -76,6 +79,7 @@ export const componentDeclarations: any[] = [
   PlayableBoardKenoComponentComponent,
   ResultsKenoComponent,
   LuckyKenoComponent,
+  PlayableBoardAmericanRouletteComponent,
   PlayableBoardColoursComponent,
   PlayableBoardBet49Component,
   PlayableBoardBet0Component,
@@ -91,7 +95,8 @@ export const componentDeclarations: any[] = [
   LuckyRainbowComponent,
   NumbersBoardComponent,
   PlayableBoardTotalColourComponent,
-  LuckyTotalColourComponent
+  LuckyTotalColourComponent,
+  SelectColumnPipe
 ];
 
 export const routes: Routes = [

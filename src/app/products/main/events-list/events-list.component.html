@@ -3,7 +3,8 @@
       productService.product.layoutProducts.type === eventService.typeLayout.COCK_FIGHT ||
       productService.product.layoutProducts.type === eventService.typeLayout.SOCCER ||
       productService.product.layoutProducts.type === eventService.typeLayout.KENO ||
-      productService.product.layoutProducts.type === eventService.typeLayout.COLOURS"
-    [webColumnDefinition]="productService.product.layoutProducts.nextEventItems"
+      productService.product.layoutProducts.type === eventService.typeLayout.COLOURS ||
+      productService.product.layoutProducts.type === eventService.typeLayout.AMERICANROULETTE"
+    [webColumnDefinition]=" productService.product.layoutProducts.nextEventItems"
     [eventsList]="eventService.eventsDetails" rowHeight="{{rowHeight}}"></app-events-list-standard>
 </div>

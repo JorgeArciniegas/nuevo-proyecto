@@ -511,6 +511,11 @@ html {
 				@extend %PRODUCT-CLRS-BG;
 			}
 
+      .PRODUCT-ARLT-BG {
+				// COLOURS
+				@extend %PRODUCT-ARLT-BG;
+      }
+
 			.race-control {
 				.time {
 					@extend %time-card-title;

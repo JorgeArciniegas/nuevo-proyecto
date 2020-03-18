@@ -25,7 +25,13 @@
 		&.notSelected {
 			opacity: 0.2;
 		}
-	}
+  }
+
+
+  .aroulette-values-bold {
+    font-size: 16px;
+    font-weight: bold;
+  }
 }
 .scroll {
 	position: relative;
@@ -39,5 +45,7 @@
 
 	.icon {
 		width: 20px;
-	}
+  }
+
+
 }

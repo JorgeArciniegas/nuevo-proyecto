@@ -7,31 +7,41 @@
       <div fxLayout="column" fxFlex="88" fxLayoutAlign="center flex-start">
         <div fxFlex="100" fxLayout="row wrap" class="first-row" [style.height.px]="(rowHeight - 20) / 2"
           [style.min-height.px]="(rowHeight - 20) / 2">
-          <div fxLayout="column"
-            fxFlex="{{productService.product?.layoutProducts?.type !== typeProductCoupon.COCK_FIGHT ? 70 : 25}}"
-            fxLayoutAlign="center flex-start" *ngIf="polyfunctionalValue.selection">
-            {{"DYNAMIC_KEYS.SMARTCODE."+polyfunctionalValue.selection | translate | uppercase}}
-          </div>
-          <div fxLayout="column nowrap"
-            fxFlex="{{productService.product?.layoutProducts?.type !== typeProductCoupon.COCK_FIGHT ?  25 : 70}}"
-            fxLayoutAlign="center flex-end">
-            <span
-              [ngClass]="{'display-selection' : productService.product?.layoutProducts?.type === typeProductCoupon.COCK_FIGHT}">
-              {{polyfunctionalValue.value}}
-            </span>
-          </div>
+          <ng-container *ngIf="productService.product?.layoutProducts?.type !== typeProductCoupon.AMERICANROULETTE">
+            <div fxLayout="column"
+              fxFlex="{{productService.product?.layoutProducts?.type !== typeProductCoupon.COCK_FIGHT ? 70 : 25}}"
+              fxLayoutAlign="center flex-start" *ngIf="polyfunctionalValue.selection">
+              {{"DYNAMIC_KEYS.SMARTCODE."+polyfunctionalValue.selection | translate | uppercase}}
+            </div>
+            <div fxLayout="column nowrap"
+              fxFlex="{{productService.product?.layoutProducts?.type !== typeProductCoupon.COCK_FIGHT ?  25 : 70}}"
+              fxLayoutAlign="center flex-end">
+              <span
+                [ngClass]="{'display-selection' : productService.product?.layoutProducts?.type === typeProductCoupon.COCK_FIGHT}">
+                {{polyfunctionalValue.value}}
+              </span>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="productService.product?.layoutProducts?.type === typeProductCoupon.AMERICANROULETTE">
+            <div fxLayout="column nowrap" fxFlex="90">
+              <div fxFill class="display-selection-roulette">
+                {{getRouletteValue()}}
+              </div>
+            </div>
+          </ng-container>
         </div>
+
         <div fxLayout="row" class="second-row" [style.height.px]="(rowHeight - 20) / 2"
           [style.min-height.px]="(rowHeight - 20) / 2"
-          *ngIf="polyfunctionalValue.odds && polyfunctionalValue.odds.length === 1 ">
+          *ngIf="polyfunctionalValue?.odds && polyfunctionalValue?.odds.length === 1 ">
           <div fxLayout="column" fxFlex="45" fxLayoutAlign="center flex-start">
             <span>(
-              {{ polyfunctionalValue.odds[0].odd | number:'1.2-2'}} )</span>
+              {{ polyfunctionalValue?.odds[0].odd | number:'1.2-2'}} )</span>
           </div>
         </div>
       </div>
       <div fxLayout="column" fxFlex="10" fxLayoutAlign="center center"
-        *ngIf="polyfunctionalValue  && polyfunctionalValue.selection ">
+        *ngIf="polyfunctionalValue  && polyfunctionalValue?.selection ">
         <button class="btn-reset btn-display" (click)="detailOdds()">
           <img class="icon" src="assets/icons/baseline-open_in_new-24-white.png">
         </button>

@@ -6,7 +6,10 @@ import { AppSettings } from '../../../app.settings';
 import { CouponService } from '../../../component/coupon/coupon.service';
 import { WindowSizeService } from '../../../services/utility/window-size/window-size.service';
 import { DialogService } from '../../dialog.service';
-import { BetOdd, DialogData } from '../../products.model';
+import { BetOdd, DialogData, Market } from '../../products.model';
+import { LAYOUT_TYPE } from '../../../../environments/environment.models';
+import { AmericanRouletteRug } from '../../main/playable-board/templates/american-roulette/american-roulette.models';
+import { Colour } from '../../main/playable-board/templates/colours/colours.models';
 
 @Component({
   selector: 'app-betodds',
@@ -34,6 +37,10 @@ export class BetoddsComponent implements OnInit {
   public emptyOdds: string[] = [];
 
   public betCouponOdd: BetCouponOddExtended[];
+  // American roulette
+  layout: LAYOUT_TYPE;
+  layoutType: typeof LAYOUT_TYPE = LAYOUT_TYPE;
+  market: typeof Market = Market;
 
   constructor(
     private dialog: DialogService,
@@ -54,9 +61,11 @@ export class BetoddsComponent implements OnInit {
         this.filterOddsToCoupon();
       }
     });
+
   }
 
   ngOnInit(): void {
+    this.layout = this.settings.products.filter(prod => prod.productSelected)[0].typeCoupon.typeLayout;
     for (let index = 0; index < this.columnNumber - 1; index++) {
       this.columns += ',*';
     }
@@ -72,6 +81,9 @@ export class BetoddsComponent implements OnInit {
       this.maxPage = Math.ceil(this.data.betCoupon.Odds.length / this.maxItems);
       this.filterOddsToCoupon();
     }
+
+
+
   }
 
   filterOdds() {
@@ -158,5 +170,17 @@ export class BetoddsComponent implements OnInit {
       this.userService.isBtnCalcEditable = false;
     }
     this.couponService.checkOddToChangeStake(odd);
+  }
+
+  // American Roulette
+  getNumber(n: number): string {
+    const americanRoulette: AmericanRouletteRug = new AmericanRouletteRug();
+    if (americanRoulette.red.includes(parseInt(n.toString(), 10))) {
+      return Colour[Colour.RED];
+    } else if (americanRoulette.black.includes(parseInt(n.toString(), 10))) {
+      return Colour[Colour.BLACK];
+    } else {
+      return Colour[Colour.GREEN];
+    }
   }
 }

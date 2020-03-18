@@ -1,34 +1,34 @@
 <div>
   <!-- RACING LAST RESULTS -->
   <app-results-race
-    *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.RACING"
+    *ngIf="service.listResult?.length > 0 && productService.product.layoutProducts.type === service.typeLayout.RACING"
     [items]="productService.product.layoutProducts.resultItems" rowHeight="{{rowHeight}}" [results]="service.listResult"
     [codeProduct]="productService.product.codeProduct">
   </app-results-race>
 
   <!-- COCK FIGHTING LAST RESULTS -->
   <app-results-cock-fight
-    *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.COCK_FIGHT"
+    *ngIf="service.listResult?.length > 0 && productService.product.layoutProducts.type === service.typeLayout.COCK_FIGHT"
     [items]="productService.product.layoutProducts.resultItems" rowHeight="{{rowHeight}}" [results]="service.listResult"
     [codeProduct]="productService.product.codeProduct">
   </app-results-cock-fight>
 
   <!-- SOCCER LAST RESULTS -->
   <app-results-soccer
-    *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.SOCCER"
+    *ngIf="service.listResult?.length > 0 && productService.product.layoutProducts.type === service.typeLayout.SOCCER"
     [items]="productService.product.layoutProducts.resultItems" rowHeight="{{rowHeight}}" [results]="service.listResult"
     [codeProduct]="productService.product.codeProduct">
   </app-results-soccer>
 
   <!-- KENO LAST RESULTS -->
   <app-results-keno
-    *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.KENO"
+    *ngIf="service.listResult?.length > 0 && productService.product.layoutProducts.type === service.typeLayout.KENO"
     rowHeight="{{rowHeight}}" [results]="service.listResult[0]">
   </app-results-keno>
 
   <!-- COLOURS LAST RESULTS -->
   <app-results-colours
-    *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.COLOURS"
+    *ngIf="service.listResult?.length > 0 && productService.product.layoutProducts.type === service.typeLayout.COLOURS"
     rowHeight="{{rowHeight}}" [results]="service.listResult">
   </app-results-colours>
 </div>

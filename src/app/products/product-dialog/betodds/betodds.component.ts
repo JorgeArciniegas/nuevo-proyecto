@@ -2,9 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BetCouponOdd } from '@elys/elys-api';
 import { BetCouponOddExtended } from '@elys/elys-coupon';
 import { CouponService } from '../../../component/coupon/coupon.service';
-import { BetDataDialog, BetOdd } from '../../products.model';
+import { BetDataDialog, BetOdd, Market } from '../../products.model';
 import { AppSettings } from '../../../../../src/app/app.settings';
 import { UserService } from '../../../../../src/app/services/user.service';
+import { LAYOUT_TYPE } from '../../../../environments/environment.models';
+import { AmericanRouletteRug } from '../../main/playable-board/templates/american-roulette/american-roulette.models';
+import { Colour } from '../../main/playable-board/templates/colours/colours.models';
 
 @Component({
   selector: 'app-betodds',
@@ -32,6 +35,10 @@ export class BetoddsComponent implements OnInit {
   multiStake: boolean;
   @Input()
   private data: BetDataDialog;
+  // American roulette
+  layout: LAYOUT_TYPE;
+  layoutType: typeof LAYOUT_TYPE = LAYOUT_TYPE;
+  market: typeof Market = Market;
 
   constructor(
     public readonly couponService: CouponService,
@@ -39,6 +46,7 @@ export class BetoddsComponent implements OnInit {
     public userService: UserService
   ) {
     this.multiStake = settings.products.filter(prod => prod.productSelected)[0].typeCoupon.acceptMultiStake;
+    this.layout = settings.products.filter(prod => prod.productSelected)[0].typeCoupon.typeLayout;
     this.couponService.couponResponse.subscribe(coupon => {
       this.data.betCoupon = coupon;
       if (coupon) {
@@ -154,5 +162,18 @@ export class BetoddsComponent implements OnInit {
     }
 
     this.couponService.checkOddToChangeStake(odd);
+  }
+
+
+  // American Roulette
+  getNumber(n: number): string {
+    const americanRoulette: AmericanRouletteRug = new AmericanRouletteRug();
+    if (americanRoulette.red.includes(parseInt(n.toString(), 10))) {
+      return Colour[Colour.RED];
+    } else if (americanRoulette.black.includes(parseInt(n.toString(), 10))) {
+      return Colour[Colour.BLACK];
+    } else {
+      return Colour[Colour.GREEN];
+    }
   }
 }

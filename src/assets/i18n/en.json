@@ -2,6 +2,12 @@
   "ACCG": "QUI",
   "AGILITY": "Agility",
   "ALL": "All",
+  "AMERICANROULETTE": {
+    "COLUMN": "2to1",
+    "1DOZEN": "1st DOZEN",
+    "2DOZEN": "2st DOZEN",
+    "3DOZEN": "3st DOZEN"
+  },
   "AMOUNT": "Amount",
   "AMOUNT_FROM": "Amount from",
   "AMOUNT_TO": "Amount to",
@@ -20,6 +26,7 @@
   "BET_STATUS": "Bet status",
   "BET_TYPE": "Bet type",
   "BET_UNDER_EVALUATION": "Bet under evaluation, please wait",
+  "BLACK": "black",
   "BLUE": "blue",
   "BONUS": "Bonus",
   "BONUS_MAX": "Bonus Max",
@@ -268,6 +275,7 @@
     },
     "PRODUCT": {
       "LABEL": {
+        "AMERICANROULETTE": "American Roulette",
         "COCK_FIGHT": "Cock fight",
         "COLOURS": "Colours",
         "DOG": "Greyhounds",

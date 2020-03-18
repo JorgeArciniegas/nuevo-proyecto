@@ -13,20 +13,20 @@
             <mat-grid-list fxFill cols="3" rowHeight="{{rowHeight}}" class="position">
               <mat-grid-tile>
                 <div fxFill fxLayoutAlign="center center"
-                  class="radius-5 btn-default-dog-play btn-{{codeProduct}}-{{race.racePodium.firstPlace}}">
-                  <span>{{race.racePodium.firstPlace}}</span>
+                  class="radius-5 btn-default-dog-play btn-{{codeProduct}}-{{race?.racePodium?.firstPlace}}">
+                  <span>{{race?.racePodium?.firstPlace}}</span>
                 </div>
               </mat-grid-tile>
               <mat-grid-tile>
                 <div fxFill fxLayoutAlign="center center"
-                  class="radius-5 btn-default-dog-play btn-{{codeProduct}}-{{race.racePodium.secondPlace}}">
-                  <span>{{race.racePodium.secondPlace}}</span>
+                  class="radius-5 btn-default-dog-play btn-{{codeProduct}}-{{race?.racePodium?.secondPlace}}">
+                  <span>{{race?.racePodium?.secondPlace}}</span>
                 </div>
               </mat-grid-tile>
               <mat-grid-tile>
                 <div fxFill fxLayoutAlign="center center"
-                  class="radius-5 btn-default-dog-play btn-{{codeProduct}}-{{race.racePodium.thirdPlace}}">
-                  <span>{{race.racePodium.thirdPlace}}</span>
+                  class="radius-5 btn-default-dog-play btn-{{codeProduct}}-{{race?.racePodium?.thirdPlace}}">
+                  <span>{{race?.racePodium?.thirdPlace}}</span>
                 </div>
               </mat-grid-tile>
             </mat-grid-list>

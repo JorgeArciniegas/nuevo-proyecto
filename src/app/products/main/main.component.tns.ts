@@ -39,4 +39,10 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   loaded(args: EventData) { }
+
+  // Used to disabled tap when  playtable is blocked
+  dismiss(): void {
+
+    return;
+  }
 }

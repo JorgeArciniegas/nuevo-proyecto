@@ -1,3 +1,4 @@
+// tslint:disable-next-line:max-line-length
 import { BetCouponGroup, HotAndColdNumbers, LotteryPayoutMarket, VirtualBetCompetitor, VirtualGetRankByEventResponse } from '@elys/elys-api';
 import { BetCouponExtended } from '@elys/elys-coupon';
 import { LAYOUT_TYPE } from '../../../src/environments/environment.models';
@@ -197,10 +198,17 @@ export interface CouponConfirmDelete {
 // Enum of the markets
 export enum Market {
   '1X2' = 10,
+  'OddEven' = 45,
   'OverUnder' = 60,
   'WinningSector' = 171,
   '1X2WinningSector' = 172,
-  '1X2OverUnder' = 689
+  '1X2OverUnder' = 689,
+  // AMERICAN ROULETTE
+  'StraightUp' = 725,
+  'DozenBet' = 726,
+  'ColumnBet' = 727,
+  'HighLow' = 728,
+  'RedBlack' = 729,
 }
 
 /**
@@ -230,5 +238,6 @@ export enum SelectionIdentifier {
   'Selection: 1 + Over' = '1o',
   'Selection: 1 + Under' = '1u',
   'Selection: 2 + Over' = '2o',
-  'Selection: 2 + Under' = '1u'
+  'Selection: 2 + Under' = '1u',
+  'ARoulette' = 'AR'
 }

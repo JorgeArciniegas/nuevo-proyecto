@@ -5,6 +5,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { componentDeclarations, routes } from './main.common';
 import { SoccerService } from './playable-board/templates/soccer/soccer.service';
 
+
 @NgModule({
   declarations: [componentDeclarations],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],

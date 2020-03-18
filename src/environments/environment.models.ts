@@ -85,7 +85,8 @@ export enum LAYOUT_TYPE {
   COCK_FIGHT,
   SOCCER,
   KENO,
-  COLOURS
+  COLOURS,
+  AMERICANROULETTE
 }
 
 // Bookmaker's identifier
