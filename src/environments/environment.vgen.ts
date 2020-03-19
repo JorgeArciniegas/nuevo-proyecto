@@ -323,8 +323,8 @@ export const environment: Environment = {
       isPlayable: true,
       layoutProducts: {
         type: LAYOUT_TYPE.AMERICANROULETTE,
-        resultItems: 3,
-        nextEventItems: 4,
+        resultItems: 8,
+        nextEventItems: 2,
         cacheEventsItem: 5
       },
       toolbarButton: {
