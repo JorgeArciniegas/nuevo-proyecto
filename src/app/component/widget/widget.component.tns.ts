@@ -101,7 +101,13 @@ export class WidgetComponent implements OnInit {
           layoutProducts: this.productService.product.layoutProducts.type
         };
         break;
-
+        case 'hot-and-cold-americanRoulette':
+          data.hotAndCold = {
+            codeProduct: this.productService.product.codeProduct,
+            hotAndColdNumbers: await this.elysApi.virtual.getHotAndColdAmericanRoulette(),
+            layoutProducts: this.productService.product.layoutProducts.type
+          };
+          break;
       default:
         data.statistics = null;
     }
