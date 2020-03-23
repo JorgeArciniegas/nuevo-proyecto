@@ -61,6 +61,14 @@
 	min-width: calc(100% - 5px) !important;
 	@extend %card-title-noborder;
 }
+
+.btn-americanroulette-result {
+	font-size: 1.5vh !important;
+	width: calc(100% - 5px) !important;
+	min-width: calc(100% - 5px) !important;
+	@extend %card-title-noborder;
+}
+
 .card-box-result-keno {
 	padding: 2px;
 	.header {

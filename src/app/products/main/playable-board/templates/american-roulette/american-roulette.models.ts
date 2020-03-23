@@ -25,7 +25,14 @@ export class AmericanRouletteRug {
   }
 
 
-  private green = ['0', '00'];
+  private _green = ['0', '00'];
+  public get green() {
+    return this._green;
+  }
+  public set green(value) {
+    this._green = value;
+  }
+
 
   private _columnFirst = [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34];
   public get columnFirst() {

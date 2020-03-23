@@ -30,3 +30,9 @@
   *ngIf="service.listResult.length > 0 && productService.product.layoutProducts.type === service.typeLayout.COLOURS"
   rowHeight="{{rowHeight}}" [results]="service.listResult">
 </app-results-colours>
+
+<!-- ROULET LAST RESULTS -->
+<app-results-americanroulette
+  *ngIf="service.listResult?.length > 0 && productService.product.layoutProducts.type === service.typeLayout.AMERICANROULETTE"
+  rowHeight="{{rowHeight}}" [results]="service.listResult">
+</app-results-americanroulette>

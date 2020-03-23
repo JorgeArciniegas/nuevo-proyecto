@@ -8,6 +8,7 @@ export class EventResult {
   soccerResult?: SoccerResult[];
   kenoResults?: number[];
   coloursResults?: ColoursResult;
+  americanRouletteResults?: string[];
 }
 
 export interface RacePodium {

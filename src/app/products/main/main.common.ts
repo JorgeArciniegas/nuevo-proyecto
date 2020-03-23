@@ -41,12 +41,12 @@ import { DetailComponent as PlayableBoardSoccerDetailComponent } from './playabl
 import { OverviewComponent as PlayableBoardSoccerOverviewComponent } from './playable-board/templates/soccer/overview/overview.component';
 import { SoccerComponent as PlayableBoardSoccerComponent } from './playable-board/templates/soccer/soccer.component';
 import { ResultsComponent } from './results/results.component';
+import { AmericanrouletteComponent as ResultAmericanRouletteComponent } from './results/templates/americanroulette/americanroulette.component';
 import { CockFightComponent as ResultsCockFightComponent } from './results/templates/cock-fight/cock-fight.component';
 import { ColoursComponent as ResultsColoursComponent } from './results/templates/colours/colours.component';
 import { KenoComponent as ResultsKenoComponent } from './results/templates/keno/keno.component';
 import { RaceComponent as ResultsRaceComponent } from './results/templates/race/race.component';
 import { SoccerComponent as ResultsSoccerComponent } from './results/templates/soccer/soccer.component';
-
 
 export const componentDeclarations: any[] = [
 
@@ -96,7 +96,8 @@ export const componentDeclarations: any[] = [
   NumbersBoardComponent,
   PlayableBoardTotalColourComponent,
   LuckyTotalColourComponent,
-  SelectColumnPipe
+  SelectColumnPipe,
+  ResultAmericanRouletteComponent
 ];
 
 export const routes: Routes = [

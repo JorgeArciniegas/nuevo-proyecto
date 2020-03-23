@@ -28,7 +28,7 @@ export class ResultsService {
   }
 
   getLastResult() {
-
+    this.listResult = [];
     const request: VirtualSportLastResultsRequest = {
       SportId: this.productService.product.sportId,
       CategoryType: this.productService.product.codeProduct
@@ -101,6 +101,13 @@ export class ResultsService {
                 };
                 tempEventResult.coloursResults = coloursResult;
                 break;
+               case LAYOUT_TYPE.AMERICANROULETTE:
+                const resultNumber = eventResults.EventResults[i].Result;
+                if (!tempEventResult.americanRouletteResults) {
+                  tempEventResult.americanRouletteResults = [];
+                }
+                tempEventResult.americanRouletteResults.push(resultNumber);
+                break;
               default:
                 break;
             }
@@ -121,6 +128,7 @@ export class ResultsService {
           }
         }
         this.listResult = tmpListResult;
+        console.log(this.listResult);
       });
   }
 
