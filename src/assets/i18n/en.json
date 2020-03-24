@@ -6,7 +6,11 @@
     "COLUMN": "2to1",
     "1DOZEN": "1st DOZEN",
     "2DOZEN": "2st DOZEN",
-    "3DOZEN": "3st DOZEN"
+    "3DOZEN": "3st DOZEN",
+    "SILVER": "SILVER",
+    "GOLD": "GOLD",
+    "AMERICANA": "AMERICANA",
+    "SMALL": "SMALL"
   },
   "AMOUNT": "Amount",
   "AMOUNT_FROM": "Amount from",
@@ -330,7 +334,10 @@
       "UNDER": "Under",
       "V": "V",
       "VT": "Standout trifecta",
-      "WINNER": "Winner"
+      "WINNER": "Winner",
+      "R": "Number",
+      "RC": "Column",
+      "RD": "Dozen"
     },
     "SMARTCODE": {
       "1VA": "S. exacta",

@@ -3,6 +3,7 @@ import { EventControlComponent } from './event-control/event-control.component';
 import { EventListComponent } from './events-list/events-list.component';
 import { StandardComponent as EventsListStandardComponent } from './events-list/templates/standard/standard.component';
 import { LuckyComponent } from './lucky/lucky.component';
+import { AmericanrouletteComponent as LuckyAmericanrouletteComponent } from './lucky/templates/americanroulette/americanroulette.component';
 import { CockFightComponent as LuckyCockFightComponent } from './lucky/templates/cock-fight/cock-fight.component';
 import { ColoursComponent as LuckyColoursComponent } from './lucky/templates/colours/colours.component';
 import { Bet0Component as LuckyBet0Component } from './lucky/templates/colours/games/bet0/bet0.component';
@@ -97,6 +98,7 @@ export const componentDeclarations: any[] = [
   PlayableBoardTotalColourComponent,
   LuckyTotalColourComponent,
   SelectColumnPipe,
+  LuckyAmericanrouletteComponent,
   ResultAmericanRouletteComponent
 ];
 

@@ -806,8 +806,6 @@ export class MainService {
       let value: string;
       const odds: BetOdd[] = [];
       if (this.placingEvent.odds.length !== 0) {
-
-        console.log('populatingPolyfunctionAreaByOdds', this.placingEvent);
         let lastMarket: Market;
         let marketHasChanged: boolean;
         for (const odd of this.placingEvent.odds) {
@@ -835,7 +833,6 @@ export class MainService {
       areaFuncData.amount = this.btnService.polyfunctionStakePresetPlayer.amount;
       areaFuncData.typeSlipCol = this.btnService.polyfunctionStakePresetPlayer.typeSlipCol;
       areaFuncData.odds = odds;
-      // console.log(areaFuncData);
     } catch (err) {
       console.log(err);
       areaFuncData = {};
@@ -1762,28 +1759,24 @@ export class MainService {
       if (this.placingEvent.odds.length !== 0) {
 
         for (const odd of this.placingEvent.odds) {
-
-          selection = SmartCodeType[SmartCodeType.R];
           // Get the selection identifier to use on the polyfunctional area.
           const selectionIdentifier = odd.nm;
-
           value = value === undefined ? selectionIdentifier : selectionIdentifier + ',' + value;
           odds.push(new BetOdd(selectionIdentifier, odd.ods[0].vl, this.btnService.polyfunctionStakePresetPlayer.amount, odd.id));
         }
+        // selection used from modal betOdds
+        selection = odds.length > 1 ? SmartCodeType[SmartCodeType.MULTI] : SmartCodeType[smartBet];
       }
       // Check smartcode and extract composit bets
-      areaFuncData.selection = SmartCodeType[smartBet];
+      areaFuncData.selection = selection;
       if (smartBet && smartCode) {
         areaFuncData.shortcut = smartBet;
         areaFuncData.smartBetCode = smartCode;
       }
-
       areaFuncData.value = value;
       areaFuncData.amount = this.btnService.polyfunctionStakePresetPlayer.amount;
       areaFuncData.typeSlipCol = this.btnService.polyfunctionStakePresetPlayer.typeSlipCol;
       areaFuncData.odds = odds;
-
-      // console.log(areaFuncData);
     } catch (err) {
       console.log(err);
       areaFuncData = {};

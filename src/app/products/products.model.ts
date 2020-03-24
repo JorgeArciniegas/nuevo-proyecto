@@ -208,7 +208,7 @@ export enum Market {
   'DozenBet' = 726,
   'ColumnBet' = 727,
   'HighLow' = 728,
-  'RedBlack' = 729,
+  'RedBlack' = 729
 }
 
 /**

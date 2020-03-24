@@ -6,7 +6,11 @@
     "COLUMN": "2to1",
     "1DOZEN": "1st DOZEN",
     "2DOZEN": "2st DOZEN",
-    "3DOZEN": "3st DOZEN"
+    "3DOZEN": "3st DOZEN",
+    "SILVER": "SILVER",
+    "GOLD": "GOLD",
+    "AMERICANA": "AMERICANA",
+    "SMALL": "SMALL"
   },
   "AMOUNT": "Importo",
   "AMOUNT_FROM": "Importo da",
@@ -306,7 +310,10 @@
       "UNDER": "Under",
       "V": "V",
       "VT": "Vincente trio",
-      "WINNER": "Vincente"
+      "WINNER": "Vincente",
+      "R": "Numero",
+      "RC": "Colonna",
+      "RD": "Dozzina"
     },
     "SMARTCODE": {
       "1VA": "V. accoppiata",

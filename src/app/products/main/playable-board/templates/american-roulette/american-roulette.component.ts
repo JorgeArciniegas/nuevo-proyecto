@@ -78,7 +78,7 @@ export class AmericanRouletteComponent implements OnInit {
     } else {
       this.columnSelected.push(n);
     }
-    console.log(this.columnSelected);
+
     this.service.getCurrentEvent().then(item => {
       const selection: VirtualBetSelection = item.mk.find(i => i.tp === Market.ColumnBet).sls.find(odd => odd.tp === n);
       this.service.placingNumberRoulette(Market.ColumnBet, selection, SmartCodeType.RC);

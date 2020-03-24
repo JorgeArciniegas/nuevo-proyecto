@@ -1,9 +1,9 @@
 <div class="american-roulette">
-  <mat-grid-list cols="14" rowHeight="{{rowHeight * (10 / 6) }}">
+  <mat-grid-list cols="14" rowHeight="{{rowHeight * (10 / 6)+ (rowHeight/3) }}">
     <!-- ROW 0 and 00 out of COLUMN and DOZEN-->
     <mat-grid-tile rowspan="6" col="1" colspan="1">
       <div fxFlex>
-        <mat-grid-list cols="1" rowHeight="{{(rowHeight * (10 / 6)  ) }}">
+        <mat-grid-list cols="1" rowHeight="{{(rowHeight * (10 / 6) + (rowHeight/3) ) }}">
           <mat-grid-tile col="1" rowspan="3">
             <div fxFill fxLayoutAlign="center center" class="green mat-boder-1" (click)="onSelectedNumber('0')">
               <button class="btn-default" [ngClass]="{'btn-roulette-selected' : getNumberSelected(0)}">
@@ -23,7 +23,7 @@
     </mat-grid-tile>
     <mat-grid-tile rowspan="6" colspan="13" col="2">
       <div fxFlex>
-        <mat-grid-list cols="13" rowHeight="{{(rowHeight * (10 / 6)  ) }}">
+        <mat-grid-list cols="13" rowHeight="{{(rowHeight * (10 / 6) + (rowHeight/3) ) }}">
           <!-- RUG -->
           <ng-container *ngFor="let n of americanRouletteRug.NumberOfRoulette | selectColumn:0; let i = index;">
             <mat-grid-tile col="{{i+1}}" rowspan="2">
@@ -109,7 +109,7 @@
     </mat-grid-tile>
 
   </mat-grid-list>
-  <mat-grid-list cols="14" rowHeight="{{rowHeight * (10 / 6) }}">
+  <mat-grid-list cols="14" rowHeight="{{rowHeight * (10 / 6) + (rowHeight/3) }}">
     <div fxFlex>
       <mat-grid-tile col="1"></mat-grid-tile>
       <!-- OTHER PLAY BUTTONS -->
