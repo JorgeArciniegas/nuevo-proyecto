@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ElysApiService, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualDetailOddsOfEventRequest, VirtualDetailOddsOfEventResponse, VirtualEventCountDownRequest, VirtualEventCountDownResponse, VirtualGetRankByEventResponse, VirtualProgramTreeBySportRequest, VirtualProgramTreeBySportResponse } from '@elys/elys-api';
+import { ElysApiService, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualDetailOddsOfEventResponse, VirtualEventCountDownRequest, VirtualEventCountDownResponse, VirtualGetRankByEventResponse, VirtualProgramTreeBySportRequest, VirtualProgramTreeBySportResponse } from '@elys/elys-api';
 import { ElysFeedsService } from '@elys/elys-feeds';
 import { cloneDeep as clone } from 'lodash';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
@@ -15,7 +15,6 @@ import { Area, CombinationType, EventDetail, EventInfo, EventTime, ListArea, Mat
 import { KenoNumber } from './playable-board/templates/keno/keno.model';
 import { ResultsService } from './results/results.service';
 import { areas, overviewAreas } from './SoccerAreas';
-import { RouletteNumber } from './playable-board/templates/american-roulette/american-roulette.models';
 
 @Injectable()
 export class MainService {
@@ -577,6 +576,11 @@ export class MainService {
       MatchId: idEvent
     };
     return this.elysApi.virtual.getCountdown(request).then((value: VirtualEventCountDownResponse) => {
+      if (value.CountDown <= 0) {
+        this.initCurrentEvent = true;
+        this.productService.changeProduct(this.productService.product.codeProduct);
+        return;
+      }
       const sec: number = (value.CountDown / 10000000);
       const eventTime: EventTime = new EventTime();
       eventTime.minute = Math.floor(sec / 60);
@@ -637,7 +641,6 @@ export class MainService {
     const event: VirtualBetEvent = this.cacheEvents.find((cacheEvent: VirtualBetEvent) => cacheEvent.id === eventNumber);
     // Ceck, if it is empty load from api
     if (!event || event && event.mk == null || event && event.mk.length === 0) {
-      // tslint:disable-next-line:max-line-length
       this.feedData.getEventVirtualDetail(this.userservice.getUserId(), eventNumber).
         then((sportDetail: VirtualDetailOddsOfEventResponse) => {
           try {
@@ -646,9 +649,10 @@ export class MainService {
             this.currentEventDetails = event;
             this.attempts = 0;
           } catch (err) {
+            console.log('getEventVirtualDetail ---> error: ', err);
             if (this.attempts < 5) {
               this.attempts++;
-              timer(1000).subscribe(() => this.eventDetailOdds(eventNumber));
+              timer(3000).subscribe(() => this.eventDetailOdds(eventNumber));
             } else {
               this.attempts = 0;
             }
@@ -663,9 +667,11 @@ export class MainService {
 
           this.attempts = this.attempts + 1;
           if (this.attempts < 2) {
-            timer(1000).subscribe(() => this.eventDetailOdds(eventNumber));
+            console.log('resume event attempt: ', this.attempts);
+            timer(3000).subscribe(() => this.eventDetailOdds(eventNumber));
           } else {
             this.countdownSub.unsubscribe();
+            this.productService.changeProduct(this.productService.product.codeProduct);
           }
         });
     }
