@@ -589,6 +589,7 @@ export class CouponService {
     if (!this.coupon && this.coupon.Odds.length > 0) {
       return;
     }
+    this.isWaitingConclusionOperation = true;
     // Check type coupon and call the different api
     if (this.coupon.internal_isLottery) {
       await this.elysCoupon.updateCouponLottery(this.coupon);
