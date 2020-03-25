@@ -101,7 +101,7 @@ export class ResultsService {
                 };
                 tempEventResult.coloursResults = coloursResult;
                 break;
-               case LAYOUT_TYPE.AMERICANROULETTE:
+              case LAYOUT_TYPE.AMERICANROULETTE:
                 const resultNumber = eventResults.EventResults[i].Result;
                 if (!tempEventResult.americanRouletteResults) {
                   tempEventResult.americanRouletteResults = [];
@@ -128,7 +128,6 @@ export class ResultsService {
           }
         }
         this.listResult = tmpListResult;
-        console.log(this.listResult);
       });
   }
 
