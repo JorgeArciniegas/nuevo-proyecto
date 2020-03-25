@@ -216,7 +216,8 @@
 		"ODDS_RESULT": {
 			"LOST": "Perdidas",
 			"UNSET": "Abertas",
-			"WON": "Ganhas"
+			"WON": "Ganhas",
+			"UnknoUNKNOWNwn": "Abertas"
 		},
 		"OVER_UNDER_COCKFIGHT": {
 			"O": "mais",
@@ -275,6 +276,7 @@
 				"CockFight": "Briga de Galos",
 				"CockRacing": "Briga de Galos",
 				"Colours": "Cores",
+				"Colors": "Cores",
 				"DogRacing": "Galgos",
 				"HorseRacing": "Corridas de cavalos",
 				"Keno": "Keno",

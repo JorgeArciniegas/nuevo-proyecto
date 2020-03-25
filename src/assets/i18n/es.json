@@ -216,7 +216,8 @@
 		"ODDS_RESULT": {
 			"LOST": "Perdido",
 			"UNSET": "abierto",
-			"WON": "Ganado"
+			"WON": "Ganado",
+			"UNKNOWN": "abierto"
 		},
 		"OVER_UNDER_COCKFIGHT": {
 			"O": "al",
@@ -271,6 +272,7 @@
 				"CockFight": "Pelea de gallos",
 				"CockRacing": "Pelea de gallos",
 				"Colours": "Colores",
+				"Colors": "Colores",
 				"DogRacing": "Galgos",
 				"HorseRacing": "Carreras de caballos",
 				"Keno": "Keno",

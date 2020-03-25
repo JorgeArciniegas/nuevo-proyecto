@@ -226,7 +226,8 @@
     "ODDS_RESULT": {
       "LOST": "Lost",
       "UNSET": "Open",
-      "WON": "Won"
+      "WON": "Won",
+      "UNKNOWN": "Open"
     },
     "OVER_UNDER_COCKFIGHT": {
       "O": "ov",
@@ -294,6 +295,7 @@
         "CockFight": "Cock fight",
         "CockRacing": "Cock fight",
         "Colours": "Colours",
+        "Colors": "Colours",
         "DogRacing": "Greyhounds",
         "HorseRacing": "Horse races",
         "Keno": "Keno",
