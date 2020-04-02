@@ -37,12 +37,12 @@ function startBuild() {
   // clear dist folder by old version build
   const folder_to_save_build = resolve(__dirname, 'dist', 'android');
   fs.readdir(folder_to_save_build, (err, files) => {
-    if (err) throw err;
-
-    for (const file of files) {
-      fs.unlink(path.join(folder_to_save_build, file), err => {
-        if (err) throw err;
-      });
+    if (!err) {
+      for (const file of files) {
+        fs.unlink(path.join(folder_to_save_build, file), err => {
+          if (err) throw err;
+        });
+      }
     }
   });
 
@@ -57,7 +57,7 @@ function startBuild() {
             console.log(`FILE NAME: ${file}`);
             console.log(`Name environment: ${nameEnv[1]}`);
             let tmpString = builder_String;
-            tmpString += `--env.environment="${nameEnv[1]}-prod"  --copy-to dist/android/${nameEnv[1]}-${version}.apk --key-store-path vgen.keystore --key-store-alias vgen --key-store-password 123456a --key-store-alias-password 123456a`;
+            tmpString += `--env.environment="${nameEnv[1]}-prod" --copy-to dist/android/${nameEnv[1]}-${version}.apk --key-store-path vgen.keystore --key-store-alias vgen --key-store-password 123456a --key-store-alias-password 123456a`;
             console.log('START BUILDER NATIVESCRIPT');
             const e = execSync(tmpString);
             console.log(`finish data ... ${e}`);
