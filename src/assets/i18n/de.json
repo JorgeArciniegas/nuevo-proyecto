@@ -1,6 +1,16 @@
 {
   "ACCG": "ACCG",
   "AGILITY": "Geschicklichkeit",
+  "AMERICANROULETTE": {
+    "COLUMN": "2to1",
+    "1DOZEN": "1st DOZEN",
+    "2DOZEN": "2st DOZEN",
+    "3DOZEN": "3st DOZEN",
+    "SILVER": "SILVER",
+    "GOLD": "GOLD",
+    "AMERICANA": "AMERICANA",
+    "SMALL": "SMALL"
+  },
   "AREAS": "Aree",
   "ATT": "Angr.",
   "AWAY": "Auswärts",
@@ -14,6 +24,7 @@
   "BET_STATUS": "Wettstatus",
   "BET_TYPE": "Wettart",
   "BET_UNDER_EVALUATION": "Wette wird geprüft, bitte warten Sie",
+  "BLACK": "Schwarz",
   "BLUE": "blau",
   "BONUS": "Bonus",
   "C": "C",
@@ -173,7 +184,8 @@
         "COLOURS": "Colours",
         "DOG": "Windhunde",
         "HORSE": "Pferde",
-        "KENO": "Keno"
+        "KENO": "Keno",
+        "AMERICANROULETTE": "American Roulette"
       },
       "NAME": {
         "ALL": "Tutti",
@@ -200,6 +212,9 @@
       "OVER": "Über",
       "PAYTABLE": "Auszahlungstabelle",
       "PLACED": "Platziert",
+      "R": "Straight-up-Wette",
+      "RC": "Kolonnen-wette",
+      "RD": "Dutzend-wette",
       "SHOW": "Zeigen",
       "STATISTIC": "Statistiken",
       "T": "Dreierwette",

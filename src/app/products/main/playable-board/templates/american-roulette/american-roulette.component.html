@@ -6,7 +6,7 @@
         <mat-grid-list cols="1" rowHeight="{{(rowHeight * (10 / 6) + (rowHeight/3) ) }}">
           <mat-grid-tile col="1" rowspan="3">
             <div fxFill fxLayoutAlign="center center" class="green mat-boder-1" (click)="onSelectedNumber('0')">
-              <button class="btn-default" [ngClass]="{'btn-roulette-selected' : getNumberSelected(0)}">
+              <button class="btn-default" [ngClass]="{'btn-roulette-selected' : getNumberSelected('0')}">
                 0
               </button>
             </div>
