@@ -511,6 +511,11 @@ html {
 				@extend %PRODUCT-CLRS-BG;
 			}
 
+      .PRODUCT-ARLT-BG {
+				// COLOURS
+				@extend %PRODUCT-ARLT-BG;
+      }
+
 			.race-control {
 				.time {
 					@extend %time-card-title;
@@ -681,7 +686,9 @@ html {
 .padding-top-25 {
 	padding-top: 25px;
 }
-
+.padding-bottom-5 {
+	padding-bottom: 5px;
+}
 .padding-horizontal-6 {
 	padding: 0px 6px;
 }

@@ -22,7 +22,8 @@ export enum Colour {
   RED,
   BLUE,
   GREEN,
-  YELLOW
+  YELLOW,
+  BLACK
 }
 
 export interface ColoursSelection {

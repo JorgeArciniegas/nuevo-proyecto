@@ -2,6 +2,16 @@
   "ACCG": "QUI",
   "AGILITY": "Agility",
   "ALL": "All",
+  "AMERICANROULETTE": {
+    "COLUMN": "2to1",
+    "1DOZEN": "1st DOZEN",
+    "2DOZEN": "2st DOZEN",
+    "3DOZEN": "3st DOZEN",
+    "SILVER": "SILVER",
+    "GOLD": "GOLD",
+    "AMERICANA": "AMERICANA",
+    "SMALL": "SMALL"
+  },
   "AMOUNT": "Amount",
   "AMOUNT_FROM": "Amount from",
   "AMOUNT_TO": "Amount to",
@@ -20,6 +30,7 @@
   "BET_STATUS": "Bet status",
   "BET_TYPE": "Bet type",
   "BET_UNDER_EVALUATION": "Bet under evaluation, please wait",
+  "BLACK": "black",
   "BLUE": "blue",
   "BONUS": "Bonus",
   "BONUS_MAX": "Bonus Max",
@@ -215,7 +226,8 @@
     "ODDS_RESULT": {
       "LOST": "Lost",
       "UNSET": "Open",
-      "WON": "Won"
+      "WON": "Won",
+      "UNKNOWN": "Open"
     },
     "OVER_UNDER_COCKFIGHT": {
       "O": "ov",
@@ -268,6 +280,7 @@
     },
     "PRODUCT": {
       "LABEL": {
+        "AMERICANROULETTE": "American Roulette",
         "COCK_FIGHT": "Cock fight",
         "COLOURS": "Colours",
         "DOG": "Greyhounds",
@@ -282,6 +295,7 @@
         "CockFight": "Cock fight",
         "CockRacing": "Cock fight",
         "Colours": "Colours",
+        "Colors": "Colours",
         "DogRacing": "Greyhounds",
         "HorseRacing": "Horse races",
         "Keno": "Keno",
@@ -304,12 +318,16 @@
       "GROUPINGS": "System groupings",
       "HOT-AND-COLD": "Hot & Cold",
       "HOT-AND-COLD-COLORS": "Hot & Cold",
+      "HOT-AND-COLD-AMERICANROULETTE": "Hot & Cold",
       "MULTI": "Multi",
       "ODD": "Odd",
       "OU": "Over/Under",
       "OVER": "Over",
       "PAYTABLE": "Paytable",
       "PLACED": "Placed",
+      "R": "Straight up",
+      "RC": "COLUMN BET",
+      "RD": "DOZEN BET",
       "RANKING": "Ranking",
       "S": "Sector",
       "SHOW": "Show",

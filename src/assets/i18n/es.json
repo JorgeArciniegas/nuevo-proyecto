@@ -2,6 +2,16 @@
 	"ACCG": "GB",
 	"AGILITY": "Agilidad",
 	"ALL": "Todos",
+	"AMERICANROULETTE": {
+		"COLUMN": "2to1",
+		"1DOZEN": "1st DOZEN",
+		"2DOZEN": "2st DOZEN",
+		"3DOZEN": "3st DOZEN",
+		"SILVER": "SILVER",
+		"GOLD": "GOLD",
+		"AMERICANA": "AMERICANA",
+		"SMALL": "SMALL"
+	  },
 	"AMOUNT": "Importe",
 	"AMOUNT_FROM": "Importe de",
 	"AMOUNT_TO": "Importe a",
@@ -20,6 +30,7 @@
 	"BET_STATUS": "Estado Apuesta",
 	"BET_TYPE": "Tipo de Apuesta",
 	"BET_UNDER_EVALUATION": "Apuesta bajo aprobación, por favor espera",
+	"BLACK": "NEGRO",
 	"BLUE": "azul",
 	"BONUS": "Bonus",
 	"BONUS_MAX": "Bonus Max",
@@ -216,7 +227,8 @@
 		"ODDS_RESULT": {
 			"LOST": "Perdido",
 			"UNSET": "abierto",
-			"WON": "Ganado"
+			"WON": "Ganado",
+			"UNKNOWN": "abierto"
 		},
 		"OVER_UNDER_COCKFIGHT": {
 			"O": "al",
@@ -264,13 +276,15 @@
 				"FOOTBALL_ITA": "Fútbol ITA",
 				"HORSE": "Carreras de caballos",
 				"HORSE_VIRTUAL": "Carrera de caballos virtuales",
-				"KENO": "Keno"
+				"KENO": "Keno",
+				"AMERICANROULETTE": "American Roulette"
 			},
 			"NAME": {
 				"ALL": "Todos",
 				"CockFight": "Pelea de gallos",
 				"CockRacing": "Pelea de gallos",
 				"Colours": "Colores",
+				"Colors": "Colores",
 				"DogRacing": "Galgos",
 				"HorseRacing": "Carreras de caballos",
 				"Keno": "Keno",
@@ -293,6 +307,7 @@
 			"GROUPINGS": "Agrupaciones de sistema",
 			"HOT-AND-COLD": "Caliente & Frío",
 			"HOT-AND-COLD-COLORS": "Caliente & Frío",
+			"HOT-AND-COLD-AMERICANROULETTE": "Caliente & Frío",
 			"MULTI": "Multi",
 			"ODD": "Impar",
 			"OU": "Alta/Baja",
@@ -300,6 +315,9 @@
 			"PAYTABLE": "Premi",
 			"PLACED": "Place",
 			"RANKING": "Clasificación",
+			"R": "Directo Arriba",
+      		"RC": "COLUMNA",
+      		"RD": "DOCENA",
 			"S": "Sector",
 			"SHOW": "Colocado",
 			"STATISTIC": "Estadísticas",

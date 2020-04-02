@@ -69,6 +69,8 @@ export class PrintCouponService {
   checkProduct(): void {
     if (this.couponPrint.Odds[0].SportName.indexOf('Keno') > -1 || this.couponPrint.Odds[0].SportName.indexOf('Colors') > -1) {
       this.couponPrint.Product = 'NUMBERS';
+    } else if (this.couponPrint.Odds[0].SportName.indexOf('Roulette') !== -1) {
+      this.couponPrint.Product = 'ROULETTE';
     } else {
       this.couponPrint.Product = 'VIRT';
     }

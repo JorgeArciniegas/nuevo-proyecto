@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ElysApiService, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualDetailOddsOfEventRequest, VirtualDetailOddsOfEventResponse, VirtualEventCountDownRequest, VirtualEventCountDownResponse, VirtualGetRankByEventResponse, VirtualProgramTreeBySportRequest, VirtualProgramTreeBySportResponse } from '@elys/elys-api';
+import { ElysApiService, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualDetailOddsOfEventResponse, VirtualEventCountDownRequest, VirtualEventCountDownResponse, VirtualGetRankByEventResponse, VirtualProgramTreeBySportRequest, VirtualProgramTreeBySportResponse } from '@elys/elys-api';
 import { ElysFeedsService } from '@elys/elys-feeds';
 import { cloneDeep as clone } from 'lodash';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
@@ -564,7 +564,6 @@ export class MainService {
 
     // Calculate remaning time for first Event
     if (this.eventDetails.currentEvent > 0) {
-      console.log("3");
       this.remainingEventTime(this.eventDetails.events[0].number).then((eventTime: EventTime) => {
         this.remainingTime = eventTime;
       });
@@ -577,6 +576,11 @@ export class MainService {
       MatchId: idEvent
     };
     return this.elysApi.virtual.getCountdown(request).then((value: VirtualEventCountDownResponse) => {
+      if (value.CountDown <= 0) {
+        this.initCurrentEvent = true;
+        this.productService.changeProduct(this.productService.product.codeProduct);
+        return;
+      }
       const sec: number = (value.CountDown / 10000000);
       const eventTime: EventTime = new EventTime();
       eventTime.minute = Math.floor(sec / 60);
@@ -637,7 +641,6 @@ export class MainService {
     const event: VirtualBetEvent = this.cacheEvents.find((cacheEvent: VirtualBetEvent) => cacheEvent.id === eventNumber);
     // Ceck, if it is empty load from api
     if (!event || event && event.mk == null || event && event.mk.length === 0) {
-      // tslint:disable-next-line:max-line-length
       this.feedData.getEventVirtualDetail(this.userservice.getUserId(), eventNumber).
         then((sportDetail: VirtualDetailOddsOfEventResponse) => {
           try {
@@ -646,9 +649,10 @@ export class MainService {
             this.currentEventDetails = event;
             this.attempts = 0;
           } catch (err) {
+            console.log('getEventVirtualDetail ---> error: ', err);
             if (this.attempts < 5) {
               this.attempts++;
-              timer(1000).subscribe(() => this.eventDetailOdds(eventNumber));
+              timer(3000).subscribe(() => this.eventDetailOdds(eventNumber));
             } else {
               this.attempts = 0;
             }
@@ -663,9 +667,11 @@ export class MainService {
 
           this.attempts = this.attempts + 1;
           if (this.attempts < 2) {
-            timer(1000).subscribe(() => this.eventDetailOdds(eventNumber));
+            console.log('resume event attempt: ', this.attempts);
+            timer(3000).subscribe(() => this.eventDetailOdds(eventNumber));
           } else {
             this.countdownSub.unsubscribe();
+            this.productService.changeProduct(this.productService.product.codeProduct);
           }
         });
     }
@@ -825,6 +831,7 @@ export class MainService {
           const selectionIdentifier = SelectionIdentifier['Selection: ' + odd.nm];
           value = value === undefined ? selectionIdentifier : value + '/' + selectionIdentifier;
           odds.push(new BetOdd(selectionIdentifier, odd.ods[0].vl, this.btnService.polyfunctionStakePresetPlayer.amount, odd.id));
+          console.log(selectionIdentifier, value);
         }
       }
       areaFuncData.selection = selection;
@@ -964,6 +971,15 @@ export class MainService {
       case SmartCodeType[SmartCodeType.TR]: // Multiple selection Trio in order with return
         // Generate combination by 3 of the first, second and third row selections in order with return.
         oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, true, true);
+        isShortCutPlayeable = true;
+        break;
+
+      // AMERICAN ROULETTE
+      case SmartCodeType[SmartCodeType.R]: // Multiple selection Trio in order with return
+        // Generate combination by 3 of the first, second and third row selections in order with return.
+        // oddsToSearch = this.generateOdds(areaFuncData.value.toString(), undefined, false);
+        areaFuncData.shortcut = SmartCodeType.R;
+        isShortCutPlayeable = true;
         break;
     }
 
@@ -1039,6 +1055,8 @@ export class MainService {
         return SmartCodeType.S;
       case Market['OverUnder']:
         return SmartCodeType.OU;
+      case Market['StraightUp']:
+        return SmartCodeType.R;
     }
   }
 
@@ -1702,6 +1720,77 @@ export class MainService {
     }
   }
 
+
+
+  // AMERICAN ROULETTE
+  placingNumberRoulette(marketId: number, odd: VirtualBetSelection, smartBet?: SmartCodeType, smartCode?: number): void {
+    if (this.couponService.checkIfCouponIsReadyToPlace()) {
+      return;
+    }
+    let removed: boolean;
+    if (!this.placingEvent) {
+      this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
+    }
+    const oddSelected: VirtualBetSelectionExtended = odd;
+    oddSelected.marketId = marketId;
+    if (this.placingEvent.odds.length === 0) {
+      this.placingEvent.odds.push(oddSelected);
+    } else {
+      for (let idx = 0; idx < this.placingEvent.odds.length; idx++) {
+        const item = this.placingEvent.odds[idx];
+        if (item.id === odd.id && item.marketId === marketId) {
+          this.placingEvent.odds.splice(idx, 1);
+          removed = true;
+        }
+      }
+      if (!removed) {
+        this.placingEvent.odds.push(oddSelected);
+      }
+    }
+    this.smartCode = new Smartcode();
+    this.populatingPolyfunctionAreaByARoulette(smartBet, smartCode);
+  }
+
+  populatingPolyfunctionAreaByARoulette(smartBet?: SmartCodeType, smartCode?: number) {
+    let areaFuncData: PolyfunctionalArea = new PolyfunctionalArea();
+    areaFuncData.activeAssociationCol = false;
+    areaFuncData.activeDistributionTot = false;
+    try {
+      // Set the variables for the message to show on the polyfunctional area.
+      // Variable containing the market identifier.
+      let selection: string;
+      // Variable containing the identifier of the selected odds.
+      let value: string;
+      const odds: BetOdd[] = [];
+      if (this.placingEvent.odds.length !== 0) {
+
+        for (const odd of this.placingEvent.odds) {
+          // Get the selection identifier to use on the polyfunctional area.
+          const selectionIdentifier = odd.nm;
+          value = value === undefined ? selectionIdentifier : selectionIdentifier + ',' + value;
+          odds.push(new BetOdd(selectionIdentifier, odd.ods[0].vl, this.btnService.polyfunctionStakePresetPlayer.amount, odd.id));
+        }
+        // selection used from modal betOdds
+        selection = odds.length > 1 ? SmartCodeType[SmartCodeType.MULTI] : SmartCodeType[smartBet];
+      }
+      // Check smartcode and extract composit bets
+      areaFuncData.selection = selection;
+      if (smartBet && smartCode) {
+        areaFuncData.shortcut = smartBet;
+        areaFuncData.smartBetCode = smartCode;
+      }
+      areaFuncData.value = value;
+      areaFuncData.amount = this.btnService.polyfunctionStakePresetPlayer.amount;
+      areaFuncData.typeSlipCol = this.btnService.polyfunctionStakePresetPlayer.typeSlipCol;
+      areaFuncData.odds = odds;
+    } catch (err) {
+      console.log(err);
+      areaFuncData = {};
+    } finally {
+      areaFuncData.firstTap = true;
+      this.productService.polyfunctionalAreaSubject.next(areaFuncData);
+    }
+  }
   /**
    * Method to fire the current event number change.
    * If there is a coupon, it will be asked to delete it.

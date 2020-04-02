@@ -16,7 +16,9 @@ export class ResultsService {
   constructor(
     private productService: ProductsService,
     private elysApi: ElysApiService
-  ) { }
+  ) {
+    this.listResult = [];
+  }
 
   public get listResult(): EventResult[] {
     return this._listResult;
@@ -26,7 +28,7 @@ export class ResultsService {
   }
 
   getLastResult() {
-
+    this.listResult = [];
     const request: VirtualSportLastResultsRequest = {
       SportId: this.productService.product.sportId,
       CategoryType: this.productService.product.codeProduct
@@ -98,6 +100,13 @@ export class ResultsService {
                   hiloNumber: hiloNumber
                 };
                 tempEventResult.coloursResults = coloursResult;
+                break;
+              case LAYOUT_TYPE.AMERICANROULETTE:
+                const resultNumber = eventResults.EventResults[i].Result;
+                if (!tempEventResult.americanRouletteResults) {
+                  tempEventResult.americanRouletteResults = [];
+                }
+                tempEventResult.americanRouletteResults.push(resultNumber);
                 break;
               default:
                 break;

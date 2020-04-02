@@ -36,68 +36,136 @@
         </StackLayout>
       </GridLayout>
       <!-- Coupon items -->
-      <GridLayout row="{{ 1 + i }}" rows="3*,8*,6*" columns="*" class="card-odd"
-        *ngFor="let odd of listOdds; let i = index;"
-        [ngClass]="{'card-odd-error': !couponService.warningMessage && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}">
-        <GridLayout row="0" col="*,*" class="top-window">
-          <Label col="0" *ngIf="couponLayout && couponLayout.typeLayout === layoutProduct.SOCCER"
-            horizontalAlignment="left" text="{{ listOdds[0].DefaultTournamentName +' - '+odd.EventName}}"></Label>
-          <Label col="0" *ngIf="couponLayout && couponLayout.typeLayout !== layoutProduct.SOCCER"
-            text="{{odd.EventName}}" horizontalAlignment="left"></Label>
-          <Label col="1" text="#{{odd.MatchId}}" horizontalAlignment="right"></Label>
+      <ng-container *ngIf="couponService?.coupon?.internal_isAmericanRoulette">
+        <!-- ITEMS  AMERICANROULETTE -->
+        <GridLayout row="{{ 1 + i }}" rows="8*,6*" columns="*" class="card-odd"
+          *ngFor="let odd of listOdds; let i = index;"
+          [ngClass]="{'card-odd-error': !couponService.warningMessage && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}">
+          <ng-container *ngIf="couponLayout && couponLayout.acceptMultiStake">
+            <GridLayout row="0" rows="*" columns="*,*" class="row" verticalAlignment="center">
+              <Label col="0" text="{{odd.MarketName}}" verticalAlignment="center" horizontalAlignment="left"
+                textWrap="true"></Label>
+              <StackLayout col="1" width="30" height="30" horizontalAlignment="right" verticalAlignment="center"
+                class="btn-keno-number btn-colours btn-default radius-50 btn-colours-{{getNumber(odd.SelectionName)}}"
+                *ngIf="odd.MarketTypeId === market.StraightUp">
+                <Label text="{{odd.SelectionName}}" horizontalAlignment="center" verticalAlignment="center"></Label>
+              </StackLayout>
+              <StackLayout col="1" horizontalAlignment="right" verticalAlignment="center" class="aroulette-values-bold"
+                *ngIf="odd.MarketTypeId !== market.StraightUp">
+                <Label text="{{odd.SelectionName}}" horizontalAlignment="center" verticalAlignment="center"
+                  textWrap="true"></Label>
+              </StackLayout>
+            </GridLayout>
+            <GridLayout row="1" col="0" columns="*,2*,*" class="row" verticalAlignment="center">
+              <StackLayout col="0" class="button" width="100%"
+                [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
+        'btn-selected' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }" [isEnabled]="!userService.isModalOpen"
+                (tap)="checkOddToChangeStake(odd)" horizontalAlignment="center" verticalAlignment="center">
+                <Label class="stake"
+                  *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId"
+                  text="{{odd.OddStake | number: '1.2-3'}}" horizontalAlignment="center"
+                  verticalAlignment="center"></Label>
+                <Label class="stake"
+                  *ngIf="couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId"
+                  text="{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}" horizontalAlignment="center"
+                  verticalAlignment="center"></Label>
+              </StackLayout>
+              <StackLayout margin="2" col="1" horizontalAlignment="center">
+                <Label text="X {{odd.OddValue | number: '1.2-2'}}" class="aroulette-values-bold"></Label>
+              </StackLayout>
+              <StackLayout col="2" class="button btn-warning" (tap)="removeOdd(odd)"
+                [isEnabled]="!userService.isModalOpen" horizontalAlignment="right">
+                <Image stretch="aspectFit" width="26" src="~/assets/icons/baseline-delete_outline-white-24px.png"
+                  verticalAlignment="center" horizontalAlignment="center"></Image>
+              </StackLayout>
+            </GridLayout>
+          </ng-container>
+          <!-- COUPON NO MULTISTAKE-->
+          <ng-container *ngIf="couponLayout && !couponLayout.acceptMultiStake">
+            <GridLayout rowSpan="2" row="1" rows="*,*" columns="7*,2*" class="row">
+              <StackLayout rowSpan="2" col="0" verticalAlignment="center">
+                <Label verticalAlignment="center"
+                  text="{{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})"
+                  horizontalAlignment="left" textWrap="true"></Label>
+              </StackLayout>
+              <StackLayout row="0" col="1" horizontalAlignment="right" verticalAlignment="center">
+                <Label class="odd" text="{{odd.OddValue | number: '1.2-2'}}" horizontalAlignment="center"
+                  verticalAlignment="center"></Label>
+              </StackLayout>
+              <StackLayout row="1" col="1" class="btn-warning button" (tap)="removeOdd(odd)"
+                [isEnabled]="!userService.isModalOpen" horizontalAlignment="right">
+                <Image stretch="aspectFit" width="26" src="~/assets/icons/baseline-delete_outline-white-24px.png"
+                  verticalAlignment="center" horizontalAlignment="center"></Image>
+              </StackLayout>
+            </GridLayout>
+          </ng-container>
         </GridLayout>
-        <!-- COUPON MULTISTAKE-->
-        <ng-container *ngIf="couponLayout && couponLayout.acceptMultiStake">
-          <GridLayout row="1" rows="*" columns="7*,2*" class="row" verticalAlignment="center">
-            <Label col="0"
-              text="{{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})"
-              horizontalAlignment="left" textWrap="true"></Label>
-            <StackLayout col="1" horizontalAlignment="right">
-              <Label class="odd" text="{{odd.OddValue | number: '1.2-2'}}" horizontalAlignment="center"
-                verticalAlignment="center"></Label>
-            </StackLayout>
+
+      </ng-container>
+      <ng-container *ngIf="!couponService?.coupon?.internal_isAmericanRoulette">
+        <GridLayout row="{{ 1 + i }}" rows="3*,8*,6*" columns="*" class="card-odd"
+          *ngFor="let odd of listOdds; let i = index;"
+          [ngClass]="{'card-odd-error': !couponService.warningMessage && couponService.error && couponService.error.location.length > 0 && couponService.error.location.indexOf(odd.SelectionId) !== -1}">
+          <GridLayout row="0" col="*,*" class="top-window">
+            <Label col="0" *ngIf="couponLayout && couponLayout.typeLayout === layoutProduct.SOCCER"
+              horizontalAlignment="left" text="{{ listOdds[0].DefaultTournamentName +' - '+odd.EventName}}"></Label>
+            <Label col="0" *ngIf="couponLayout && couponLayout.typeLayout !== layoutProduct.SOCCER"
+              text="{{odd.EventName}}" horizontalAlignment="left"></Label>
+            <Label col="1" text="#{{odd.MatchId}}" horizontalAlignment="right"></Label>
           </GridLayout>
-          <GridLayout row="2" col="0" columns="*,*" class="row" verticalAlignment="center">
-            <StackLayout col="0" class="button" width="100%"
-              [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
-          'btn-selected' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }" [isEnabled]="!userService.isModalOpen"
-              (tap)="checkOddToChangeStake(odd)" horizontalAlignment="center" verticalAlignment="center">
-              <Label class="stake"
-                *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId"
-                text="{{odd.OddStake | number: '1.2-3'}}" horizontalAlignment="center"
-                verticalAlignment="center"></Label>
-              <Label class="stake"
-                *ngIf="couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId"
-                text="{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}" horizontalAlignment="center"
-                verticalAlignment="center"></Label>
-            </StackLayout>
-            <StackLayout col="1" class="button btn-warning" (tap)="removeOdd(odd)"
-              [isEnabled]="!userService.isModalOpen" horizontalAlignment="right">
-              <Image stretch="aspectFit" width="26" src="~/assets/icons/baseline-delete_outline-white-24px.png"
-                verticalAlignment="center" horizontalAlignment="center"></Image>
-            </StackLayout>
-          </GridLayout>
-        </ng-container>
-        <!-- COUPON NO MULTISTAKE-->
-        <ng-container *ngIf="couponLayout && !couponLayout.acceptMultiStake">
-          <GridLayout rowSpan="2" row="1" rows="*,*" columns="7*,2*" class="row">
-            <StackLayout rowSpan="2" col="0" verticalAlignment="center">
-              <Label verticalAlignment="center"
+          <!-- COUPON MULTISTAKE-->
+          <ng-container *ngIf="couponLayout && couponLayout.acceptMultiStake">
+            <GridLayout row="1" rows="*" columns="7*,2*" class="row" verticalAlignment="center">
+              <Label col="0"
                 text="{{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})"
                 horizontalAlignment="left" textWrap="true"></Label>
-            </StackLayout>
-            <StackLayout row="0" col="1" horizontalAlignment="right" verticalAlignment="center">
-              <Label class="odd" text="{{odd.OddValue | number: '1.2-2'}}" horizontalAlignment="center"
-                verticalAlignment="center"></Label>
-            </StackLayout>
-            <StackLayout row="1" col="1" class="btn-warning button" (tap)="removeOdd(odd)"
-              [isEnabled]="!userService.isModalOpen" horizontalAlignment="right">
-              <Image stretch="aspectFit" width="26" src="~/assets/icons/baseline-delete_outline-white-24px.png"
-                verticalAlignment="center" horizontalAlignment="center"></Image>
-            </StackLayout>
-          </GridLayout>
-        </ng-container>
-      </GridLayout>
+              <StackLayout col="1" horizontalAlignment="right">
+                <Label class="odd" text="{{odd.OddValue | number: '1.2-2'}}" horizontalAlignment="center"
+                  verticalAlignment="center"></Label>
+              </StackLayout>
+            </GridLayout>
+            <GridLayout row="2" col="0" columns="*,*" class="row" verticalAlignment="center">
+              <StackLayout col="0" class="button" width="100%"
+                [ngClass]="{'btn-success' : !couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId ,
+          'btn-selected' : couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId }" [isEnabled]="!userService.isModalOpen"
+                (tap)="checkOddToChangeStake(odd)" horizontalAlignment="center" verticalAlignment="center">
+                <Label class="stake"
+                  *ngIf="!couponService.oddStakeEdit || couponService.oddStakeEdit.odd.SelectionId !== odd.SelectionId"
+                  text="{{odd.OddStake | number: '1.2-3'}}" horizontalAlignment="center"
+                  verticalAlignment="center"></Label>
+                <Label class="stake"
+                  *ngIf="couponService.oddStakeEdit && couponService.oddStakeEdit.odd.SelectionId === odd.SelectionId"
+                  text="{{couponService.oddStakeEdit.tempStake | number: '1.2-3'}}" horizontalAlignment="center"
+                  verticalAlignment="center"></Label>
+              </StackLayout>
+              <StackLayout col="1" class="button btn-warning" (tap)="removeOdd(odd)"
+                [isEnabled]="!userService.isModalOpen" horizontalAlignment="right">
+                <Image stretch="aspectFit" width="26" src="~/assets/icons/baseline-delete_outline-white-24px.png"
+                  verticalAlignment="center" horizontalAlignment="center"></Image>
+              </StackLayout>
+            </GridLayout>
+          </ng-container>
+          <!-- COUPON NO MULTISTAKE-->
+          <ng-container *ngIf="couponLayout && !couponLayout.acceptMultiStake">
+            <GridLayout rowSpan="2" row="1" rows="*,*" columns="7*,2*" class="row">
+              <StackLayout rowSpan="2" col="0" verticalAlignment="center">
+                <Label verticalAlignment="center"
+                  text="{{odd.MarketName}} - ({{odd.LocalizedCompetitorName ? odd.LocalizedCompetitorName : odd.SelectionName}})"
+                  horizontalAlignment="left" textWrap="true"></Label>
+              </StackLayout>
+              <StackLayout row="0" col="1" horizontalAlignment="right" verticalAlignment="center">
+                <Label class="odd" text="{{odd.OddValue | number: '1.2-2'}}" horizontalAlignment="center"
+                  verticalAlignment="center"></Label>
+              </StackLayout>
+              <StackLayout row="1" col="1" class="btn-warning button" (tap)="removeOdd(odd)"
+                [isEnabled]="!userService.isModalOpen" horizontalAlignment="right">
+                <Image stretch="aspectFit" width="26" src="~/assets/icons/baseline-delete_outline-white-24px.png"
+                  verticalAlignment="center" horizontalAlignment="center"></Image>
+              </StackLayout>
+            </GridLayout>
+          </ng-container>
+        </GridLayout>
+      </ng-container>
     </GridLayout>
   </GridLayout>
   <!--COUPON LOTTERY -->

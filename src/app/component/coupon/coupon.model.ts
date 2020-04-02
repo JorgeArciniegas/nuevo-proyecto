@@ -20,6 +20,7 @@ export interface InternalCoupon extends BetCouponExtended {
   internal_isReadyToPlace?: boolean;
   internal_isLottery?: boolean;
   internal_isColours?: boolean;
+  internal_isAmericanRoulette?: boolean;
 }
 
 /**

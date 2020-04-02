@@ -23,10 +23,12 @@
       <div class="col font-size-normal" [style.width.%]="40">{{ 'CODE' | translate }}</div>
       <div class="col font-size-normal text-right" [style.width.%]="60">{{ printCouponService.couponPrint.CouponCode }}
       </div>
-      <div class="col font-size-normal" [style.width.%]="40">{{ 'BET_TYPE' | translate }}</div>
-      <div class="col font-size-normal text-right" [style.width.%]="60">
-        {{ 'DYNAMIC_KEYS.CouponType.PRINT_COUPON.' + couponType[printCouponService.couponPrint.CouponTypeId] | translate }}
-      </div>
+      <ng-container *ngIf="printCouponService.couponPrint.Product !== 'ROULETTE'">
+        <div class="col font-size-normal" [style.width.%]="40">{{ 'BET_TYPE' | translate }}</div>
+        <div class="col font-size-normal text-right" [style.width.%]="60">
+          {{ 'DYNAMIC_KEYS.CouponType.PRINT_COUPON.' + couponType[printCouponService.couponPrint.CouponTypeId] | translate }}
+        </div>
+      </ng-container>
 
     </div>
     <!-- OTHER INFO REPRINT COUPON-->

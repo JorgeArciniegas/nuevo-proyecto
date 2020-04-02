@@ -29,6 +29,7 @@ import { MainService } from './main/main.service';
 import { GroupingsComponent } from './product-dialog/groupings/groupings.component';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
+import { AmericanrouletteComponent as AmericanrouletteHotAndColdComponent } from '../products/product-dialog/hot-and-cold/template/americanroulette/americanroulette.component';
 @NgModule({
   declarations: [
     ProductDialogComponent,
@@ -54,7 +55,8 @@ import { ProductsComponent } from './products.component';
     ConfirmDestroyCouponComponent,
     GroupingsComponent,
     LabelByGroupingPipe,
-    ColorsHotAndColdComponent
+    ColorsHotAndColdComponent,
+    AmericanrouletteHotAndColdComponent
   ],
   imports: [
     CommonModule,

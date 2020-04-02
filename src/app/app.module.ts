@@ -36,7 +36,7 @@ import { RaceComponent as RaceStatisticsComponent } from './products/product-dia
 import { SoccerComponent as SoccerStatisticsComponent } from './products/product-dialog/statistics/templates/soccer/soccer.component';
 import { SharedModule } from './shared/shared.module';
 import { ColorsComponent as ColorsHotAndColdComponent } from './products/product-dialog/hot-and-cold/template/colors/colors.component';
-
+import { AmericanrouletteComponent as AmericanrouletteHotAndColdComponent } from './products/product-dialog/hot-and-cold/template/americanroulette/americanroulette.component';
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -61,7 +61,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     PayCancelDialogComponent,
     ConfirmDestroyCouponComponent,
     GroupingsComponent,
-    LabelByGroupingPipe
+    LabelByGroupingPipe,
+    AmericanrouletteHotAndColdComponent
   ],
   imports: [
     HttpClientModule,

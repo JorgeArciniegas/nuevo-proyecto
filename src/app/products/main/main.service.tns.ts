@@ -1753,6 +1753,79 @@ export class MainService {
   }
 
 
+  // AMERICAN ROULETTE
+  placingNumberRoulette(marketId: number, odd: VirtualBetSelection, smartBet?: SmartCodeType, smartCode?: number): void {
+    if (this.couponService.checkIfCouponIsReadyToPlace()) {
+      return;
+    }
+    let removed: boolean;
+    if (!this.placingEvent) {
+      this.placingEvent.eventNumber = this.eventDetails.events[this.eventDetails.currentEvent].number;
+    }
+    const oddSelected: VirtualBetSelectionExtended = odd;
+    oddSelected.marketId = marketId;
+    if (this.placingEvent.odds.length === 0) {
+      this.placingEvent.odds.push(oddSelected);
+    } else {
+      for (let idx = 0; idx < this.placingEvent.odds.length; idx++) {
+        const item = this.placingEvent.odds[idx];
+        if (item.id === odd.id && item.marketId === marketId) {
+          this.placingEvent.odds.splice(idx, 1);
+          removed = true;
+        }
+      }
+      if (!removed) {
+        this.placingEvent.odds.push(oddSelected);
+      }
+    }
+    this.smartCode = new Smartcode();
+    this.populatingPolyfunctionAreaByARoulette(smartBet, smartCode);
+  }
+
+  populatingPolyfunctionAreaByARoulette(smartBet?: SmartCodeType, smartCode?: number) {
+    let areaFuncData: PolyfunctionalArea = new PolyfunctionalArea();
+    areaFuncData.activeAssociationCol = false;
+    areaFuncData.activeDistributionTot = false;
+    try {
+      // Set the variables for the message to show on the polyfunctional area.
+      // Variable containing the market identifier.
+      let selection: string;
+      // Variable containing the identifier of the selected odds.
+      let value: string;
+      const odds: BetOdd[] = [];
+      if (this.placingEvent.odds.length !== 0) {
+
+        for (const odd of this.placingEvent.odds) {
+
+          selection = SmartCodeType[SmartCodeType.R];
+          // Get the selection identifier to use on the polyfunctional area.
+          const selectionIdentifier = odd.nm;
+
+          value = value === undefined ? selectionIdentifier : selectionIdentifier + ',' + value;
+          odds.push(new BetOdd(selectionIdentifier, odd.ods[0].vl, this.btnService.polyfunctionStakePresetPlayer.amount, odd.id));
+        }
+      }
+      // Check smartcode and extract composit bets
+      areaFuncData.selection = SmartCodeType[smartBet];
+      if (smartBet && smartCode) {
+        areaFuncData.shortcut = smartBet;
+        areaFuncData.smartBetCode = smartCode;
+      }
+
+      areaFuncData.value = value;
+      areaFuncData.amount = this.btnService.polyfunctionStakePresetPlayer.amount;
+      areaFuncData.typeSlipCol = this.btnService.polyfunctionStakePresetPlayer.typeSlipCol;
+      areaFuncData.odds = odds;
+
+      // console.log(areaFuncData);
+    } catch (err) {
+      console.log(err);
+      areaFuncData = {};
+    } finally {
+      areaFuncData.firstTap = true;
+      this.productService.polyfunctionalAreaSubject.next(areaFuncData);
+    }
+  }
   /**
   * Method to fire the current event number change.
   * If there is a coupon, it will be asked to delete it.
@@ -1804,4 +1877,6 @@ export class MainService {
       this.selectedColourGameId = colourGameId;
     }
   }
+
+
 }

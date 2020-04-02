@@ -1,6 +1,6 @@
 {
   "name": "vdesk",
-  "version": "0.29.2",
+  "version": "0.30.0",
   "nativescript": {
     "id": "com.vgen.vdesk",
     "tns-android": {
@@ -35,7 +35,7 @@
     "@angular/platform-browser": "^8.2.7",
     "@angular/platform-browser-dynamic": "^8.2.7",
     "@angular/router": "^8.2.7",
-    "@elys/elys-api": "^1.7.0",
+    "@elys/elys-api": "^1.7.4",
     "@elys/elys-channel": "^1.1.0",
     "@elys/elys-coupon": "^1.3.3",
     "@elys/elys-feeds": "^0.1.2",

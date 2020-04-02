@@ -25,4 +25,8 @@
   <app-playable-board-colours class="playable-board-colours" [rowHeight]="rowHeight"
     *ngIf="productService.product?.layoutProducts.type === typeLayout.COLOURS">
   </app-playable-board-colours>
+  <!-- TEMPLATE AMERICAN ROULETTE -->
+  <app-playable-board-american-roulette class="playable-board-americanroulette" [rowHeight]="rowHeight"
+    *ngIf="productService.product.layoutProducts.type === typeLayout.AMERICANROULETTE">
+  </app-playable-board-american-roulette>
 </StackLayout>

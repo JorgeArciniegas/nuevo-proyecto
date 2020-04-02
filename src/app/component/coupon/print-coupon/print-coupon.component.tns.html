@@ -26,7 +26,8 @@
           <Label class="p-l-5 font-weight-bold" text="{{ 'CODE' | translate }}"></Label>
           <Label class="p-r-10 text-right" text="{{ printCouponService.couponPrint.CouponCode }}"></Label>
         </FlexboxLayout>
-        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-10 p-l-10 p-b-5" flexWrap="wrap">
+        <FlexboxLayout *ngIf="printCouponService.couponPrint.Product !== 'ROULETTE'" flexDirection="row"
+          justifyContent="space-between" class="p-r-10 p-l-10 p-b-5" flexWrap="wrap">
           <Label class="p-l-5 font-weight-bold" text="{{ 'BET_TYPE' | translate }}"></Label>
           <Label class="p-r-10 text-right"
             text="{{ 'DYNAMIC_KEYS.CouponType.PRINT_COUPON.' + couponType[printCouponService.couponPrint.CouponTypeId] | translate }}"></Label>

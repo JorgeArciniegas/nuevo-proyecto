@@ -54,7 +54,8 @@ button:active:not([disabled]) {
 		box-shadow: 0px 0px 3px 3px #91c8fa;
 		border: 2px solid rgba(0, 0, 0, 0.65);
 		border-radius: 75px;
-	}
+  }
+
 	&[disabled] {
 		opacity: 0.1;
 	}
@@ -73,19 +74,52 @@ button:active:not([disabled]) {
 		@extend %btn-blue-gradient;
 	}
 }
+// AMERICAN ROULETTE
 
+.american-roulette {
+
+  .btn-default {
+    cursor: pointer;
+  }
+  .red{
+    background-color: red;
+  }
+  .black{
+    background-color: black;
+  }
+  .green {
+    background-color: green;
+  }
+
+  .btn-roulette-selected{
+    border-radius: 75px;
+    position: absolute;
+    width: 90%;
+    height: 45%;
+    background: rgba(255, 255, 255, 0.4);
+  }
+}
+.odds-grid{
+  .btn-american-default{
+    clear: both;
+    max-width: 34px !important;
+    max-height: 34px;
+  }
+}
 // COLOURS
 .btn-colours {
 	font-weight: 700;
 	height: 80px;
 	width: 80px;
 	border-style: solid;
+	font-size: 24px;
 	&.rainbow {
 		height: unset;
 	}
 	@media screen and (max-width: 1441px) {
 		height: 55px;
 		width: 55px;
+		font-size: 18px;
 	}
 
 	&.btn-total-colours {
@@ -117,6 +151,11 @@ button:active:not([disabled]) {
 		background: #c2f102;
 		border-color: #c2f102;
 		color: #000;
+	}
+  &.btn-colours-BLACK {
+		background: #000;
+    border-color: #000;
+    color: #fff;
 	}
 
 	&.selected {

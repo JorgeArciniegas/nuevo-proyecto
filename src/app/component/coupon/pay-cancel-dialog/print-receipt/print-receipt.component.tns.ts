@@ -4,7 +4,7 @@ import { Receipt } from './print-receipt.model';
 import { PrintReceiptService } from './print-receipt.service';
 import { AppSettings } from '../../../../app.settings';
 import { UserService } from '../../../../services/user.service';
-import { LICENSE_TYPE } from 'src/environments/environment.models';
+import { LICENSE_TYPE } from '../../../../../environments/environment.models';
 
 @Component({
   moduleId: module.id,

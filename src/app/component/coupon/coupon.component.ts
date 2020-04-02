@@ -6,12 +6,13 @@ import { LAYOUT_TYPE, TypeCoupon } from '../../../../src/environments/environmen
 import { AppSettings } from '../../app.settings';
 import { ColourGameId } from '../../products/main/colour-game.enum';
 import { Colour } from '../../products/main/playable-board/templates/colours/colours.models';
-import { BetOdd, PolyfunctionalArea } from '../../products/products.model';
+import { BetOdd, PolyfunctionalArea, Market } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { UserService } from '../../services/user.service';
 import { TranslateUtilityService } from '../../services/utility/translate-utility.service';
 import { WindowSizeService } from '../../services/utility/window-size/window-size.service';
 import { CouponService } from './coupon.service';
+import { AmericanRouletteRug } from '../../products/main/playable-board/templates/american-roulette/american-roulette.models';
 
 @Component({
   selector: 'app-coupon',
@@ -42,6 +43,8 @@ export class CouponComponent implements OnDestroy {
   layoutProduct: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   couponTypeId: typeof CouponType = CouponType;
   colourGameId: typeof ColourGameId = ColourGameId;
+
+  public market: typeof Market = Market;
 
   constructor(
     public couponService: CouponService,
@@ -197,4 +200,17 @@ export class CouponComponent implements OnDestroy {
 
     return false;
   }
+
+  // American Roulette
+  getNumber(n: number): string {
+    const americanRoulette: AmericanRouletteRug = new AmericanRouletteRug();
+    if (americanRoulette.red.includes(parseInt(n.toString(), 10))) {
+      return Colour[Colour.RED];
+    } else if (americanRoulette.black.includes(parseInt(n.toString(), 10))) {
+      return Colour[Colour.BLACK];
+    } else {
+      return Colour[Colour.GREEN];
+    }
+  }
+
 }

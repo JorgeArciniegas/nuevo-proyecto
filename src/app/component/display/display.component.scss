@@ -32,6 +32,14 @@
 		text-overflow: ellipsis;
 		text-align: right;
 		white-space: nowrap;
+  }
+  .display-selection-roulette {
+		width: 100%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-align: left;
+
+    word-wrap: break-word;
 	}
 }
 .group-title {

@@ -8,7 +8,7 @@
   <!-- Special event -->
   <StackLayout row="3" app-lucky></StackLayout>
   <!-- OVERLAY TIMEBLOCKED OR MODAL OPEN-->
-  <GridLayout row="2" rowSpan="2" class="overlay radius-5"
+  <GridLayout row="2" rowSpan="2" class="overlay radius-5" (tap)="dismiss()"
     *ngIf="mainService.placingEvent && mainService.placingEvent.timeBlocked == true || userService.isModalOpen">
     <StackLayout verticalAlignment="center">
       <Image stretch="aspectFit" width="60" src="~/assets/icons/baseline-lock-24px.png" horizontalAlignment="center"

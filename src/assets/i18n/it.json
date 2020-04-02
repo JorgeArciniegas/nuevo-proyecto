@@ -2,6 +2,16 @@
   "ACCG": "ACCG",
   "AGILITY": "Agilità",
   "ALL": "Tutti",
+  "AMERICANROULETTE": {
+    "COLUMN": "2to1",
+    "1DOZEN": "1st DOZEN",
+    "2DOZEN": "2st DOZEN",
+    "3DOZEN": "3st DOZEN",
+    "SILVER": "SILVER",
+    "GOLD": "GOLD",
+    "AMERICANA": "AMERICANA",
+    "SMALL": "SMALL"
+  },
   "AMOUNT": "Importo",
   "AMOUNT_FROM": "Importo da",
   "AMOUNT_TO": "Importo a",
@@ -20,6 +30,7 @@
   "BET_STATUS": "Stato scommessa",
   "BET_TYPE": "Tipo scommessa",
   "BET_UNDER_EVALUATION": "Coupon in elaborazione... Attendere",
+  "BLACK": "nero",
   "BLUE": "blu",
   "BONUS": "Bonus",
   "BONUS_MAX": "Bonus Max",
@@ -216,7 +227,8 @@
     "ODDS_RESULT": {
       "LOST": "Perdente",
       "UNSET": "In gioco",
-      "WON": "Vinto"
+      "WON": "Vinto",
+      "UNKNOWN": "In gioco"
     },
     "OVER_UNDER_COCKFIGHT": {
       "O": "ov",
@@ -244,6 +256,7 @@
     },
     "PRODUCT": {
       "LABEL": {
+        "AMERICANROULETTE": "American Roulette",
         "COCK_FIGHT": "Combattimento di galli",
         "COLOURS": "Colours",
         "DOG": "Levrieri",
@@ -258,6 +271,7 @@
         "CockFight": "Combattimento di galli",
         "CockRacing": "Combattimento di galli",
         "Colours": "Colours",
+        "Colors": "Colours",
         "DogRacing": "Levrieri",
         "HorseRacing": "Corse di cavalli ",
         "Keno": "Keno",
@@ -280,6 +294,7 @@
       "GROUPINGS": "Raggruppamenti di sistema",
       "HOT-AND-COLD": "Hot & Cold",
       "HOT-AND-COLD-COLORS": "Hot & Cold",
+      "HOT-AND-COLD-AMERICANROULETTE": "Hot & Cold",
       "MULTI": "Multi",
       "ODD": "Dispari",
       "OU": "Over/Under",
@@ -287,6 +302,9 @@
       "PAYTABLE": "Premi",
       "PLACED": "Piazzato",
       "RANKING": "Classifica",
+      "R": "N. Singolo",
+      "RC": "COLONNA",
+      "RD": "DOZZINA",
       "S": "Settore",
       "SHOW": "Podio",
       "STATISTIC": "Statistiche",

@@ -2,6 +2,16 @@
   "ACCG": "QUI",
   "AGILITY": "Agilité",
   "ALL": "Tous",
+  "AMERICANROULETTE": {
+    "COLUMN": "2to1",
+    "1DOZEN": "1st DOZEN",
+    "2DOZEN": "2st DOZEN",
+    "3DOZEN": "3st DOZEN",
+    "SILVER": "SILVER",
+    "GOLD": "GOLD",
+    "AMERICANA": "AMERICANA",
+    "SMALL": "SMALL"
+  },
   "AMOUNT": "Montant",
   "AMOUNT_FROM": "Montant de",
   "AMOUNT_TO": "Montant à",
@@ -20,6 +30,7 @@
   "BET_STATUS": "État du pari",
   "BET_TYPE": "Type de pari",
   "BET_UNDER_EVALUATION": "Pari en cours d’évaluation, veuillez patienter",
+  "BLACK": "Noir",
   "BLUE": "bleu",
   "BONUS": "Bonus",
   "BONUS_MAX": "Bonus Max",
@@ -215,7 +226,8 @@
     "ODDS_RESULT": {
       "LOST": "Perdants",
       "UNSET": "en cours",
-      "WON": "Gagnants"
+      "WON": "Gagnants",
+      "UNKNOWN": "en cours"
     },
     "OVER_UNDER_COCKFIGHT": {
       "O": "plus",
@@ -267,13 +279,15 @@
         "FOOTBALL_ITA": "Football ITA",
         "HORSE": "Courses hippiques",
         "HORSE_VIRTUAL": "Course hippique virtuelle",
-        "KENO": "Kéno"
+        "KENO": "Kéno",
+        "AMERICANROULETTE": "American Roulette"
       },
       "NAME": {
         "ALL": "Tous",
         "CockFight": "Combat de coqs",
         "CockRacing": "Combat de coqs",
         "Colours": "Couleurs",
+        "Colors": "Couleurs",
         "DogRacing": "Lévriers",
         "HorseRacing": "Courses hippiques",
         "Keno": "Kéno",
@@ -296,13 +310,17 @@
       "GROUPINGS": "Regroupements de système",
       "HOT-AND-COLD": "Chaud et froid",
       "HOT-AND-COLD-COLORS": "Chaud et froid",
+      "HOT-AND-COLD-AMERICANROULETTE": "Chaud et froid",
       "MULTI": "Multi",
       "ODD": "Cote",
       "OU": "Plus/Moins",
       "OVER": "Plus",
       "PAYTABLE": "Tableau des gains",
       "PLACED": "Placés",
+      "R": "Numéro",
       "RANKING": "Classement",
+      "RC": "Colonne",
+      "RD": "Douzaine",
       "S": "Secteur",
       "SHOW": "Simple",
       "STATISTIC": "Statistiques",

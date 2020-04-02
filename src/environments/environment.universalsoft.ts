@@ -300,6 +300,39 @@ export const environment: Environment = {
         acceptMultiStake: false,
         typeLayout: LAYOUT_TYPE.COLOURS
       }
+    },
+    {
+      sportId: 21,
+      codeProduct: 'ARLT',
+      name: 'Roulette',
+      label: 'AMERICANROULETTE',
+      order: 7,
+      productSelected: false,
+      isPlayable: true,
+      layoutProducts: {
+        type: LAYOUT_TYPE.AMERICANROULETTE,
+        resultItems: 8,
+        nextEventItems: 2,
+        cacheEventsItem: 5
+      },
+      toolbarButton: {
+        name: 'americanRoulette',
+        icon: 'Roulette',
+        route: 'products/americanRoulette'
+      },
+      widgets: [
+        {
+          name: '',
+          routing: 'hot-and-cold-americanRoulette',
+          typeLink: WidgetTypeLink.MODAL,
+          icon: 'baseline-assessment-24px' // without extension file
+        }
+      ],
+      typeCoupon: {
+        isMultipleStake: true,
+        acceptMultiStake: true,
+        typeLayout: LAYOUT_TYPE.AMERICANROULETTE
+      }
     }
   ],
   showEventId: true,

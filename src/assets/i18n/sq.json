@@ -1,6 +1,16 @@
 {
   "ACCG": "ACCG",
   "AGILITY": "Shkathtësi",
+  "AMERICANROULETTE": {
+    "COLUMN": "2to1",
+    "1DOZEN": "1st DOZEN",
+    "2DOZEN": "2st DOZEN",
+    "3DOZEN": "3st DOZEN",
+    "SILVER": "SILVER",
+    "GOLD": "GOLD",
+    "AMERICANA": "AMERICANA",
+    "SMALL": "SMALL"
+  },
   "AREAS": "Aree",
   "ATT": "Att.",
   "AWAY": "Udhetuesit",
@@ -14,6 +24,7 @@
   "BET_STATUS": "Statusi Bastit",
   "BET_TYPE": "Lloji Bastit",
   "BET_UNDER_EVALUATION": "Koef. Ne vleresim ju lutem prisni",
+  "BLACK": "I zi",
   "BLUE": "blu",
   "BONUS": "Bônus",
   "BONUS_MAX": "Bônus Max",
@@ -167,7 +178,8 @@
         "COLOURS": "Colours",
         "DOG": "Qen",
         "HORSE": "Kuaj",
-        "KENO": "Keno"
+        "KENO": "Keno",
+        "AMERICANROULETTE": "American Roulette"
       },
       "NAME": {
         "Colours": "Colours",
@@ -192,7 +204,10 @@
       "OVER": "Larte",
       "PAYTABLE": "Çmimet",
       "PLACED": "Ze vendin e",
+      "R": "Drejt lart",
       "RANKING": "Classifica",
+      "RC": "basti i kolonës",
+      "RD": "basti dyzinë",
       "S": "Sector",
       "SHOW": "Podium",
       "STATISTIC": "Statistkat",

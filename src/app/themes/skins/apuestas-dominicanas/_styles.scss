@@ -570,6 +570,17 @@ $gradient-dark2: #000000;
 	background: url("~/assets/images/Icon-colours.png") left center no-repeat;
 	background-size: contain;
 }
+// AMERINCAN ROULETTE
+
+%PRODUCT-ARLT-BG{
+	background: url("assets/images/Icon-americanroulette.png") left center no-repeat;
+	background-size: contain;
+}
+
+%PRODUCT-ARLT-BG-MOBILE{
+	background: url("~/assets/images/Icon-americanroulette.png") left center no-repeat;
+	background-size: contain;
+}
 
 %text-primary {
 	color: $color-text-primary;

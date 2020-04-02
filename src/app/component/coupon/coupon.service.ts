@@ -72,6 +72,10 @@ export class CouponService {
         if (this.appSetting.products.find(prod => prod.layoutProducts.type === LAYOUT_TYPE.COLOURS && prod.productSelected)) {
           this.coupon.internal_isColours = true;
         }
+        // check If coupon is Lottery
+        if (this.appSetting.products.find(prod => prod.layoutProducts.type === LAYOUT_TYPE.AMERICANROULETTE && prod.productSelected)) {
+          this.coupon.internal_isAmericanRoulette = true;
+        }
         this.coupon.internal_isReadyToPlace = false;
 
         if (!this.userService.isLoggedOperator()) {
@@ -585,6 +589,7 @@ export class CouponService {
     if (!this.coupon && this.coupon.Odds.length > 0) {
       return;
     }
+    this.isWaitingConclusionOperation = true;
     // Check type coupon and call the different api
     if (this.coupon.internal_isLottery) {
       await this.elysCoupon.updateCouponLottery(this.coupon);
