@@ -4,9 +4,9 @@
   "ALL": "Todas",
   "AMERICANROULETTE": {
     "COLUMN": "2to1",
-    "1DOZEN": "1st DOZEN",
-    "2DOZEN": "2st DOZEN",
-    "3DOZEN": "3st DOZEN",
+    "1DOZEN": "1° DÚZIA",
+    "2DOZEN": "2° DÚZIA",
+    "3DOZEN": "3° DÚZIA",
     "SILVER": "SILVER",
     "GOLD": "GOLD",
     "AMERICANA": "AMERICANA",
@@ -281,7 +281,7 @@
         "HORSE": "Corridas de cavalos",
         "HORSE_VIRTUAL": "Corridas de cavalos virtual",
         "KENO": "Keno",
-        "AMERICANROULETTE": "American Roulette"
+        "AMERICANROULETTE": "Roleta Americana"
       },
       "NAME": {
         "ALL": "Todas",

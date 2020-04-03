@@ -4,9 +4,9 @@
   "ALL": "Tous",
   "AMERICANROULETTE": {
     "COLUMN": "2to1",
-    "1DOZEN": "1st DOZEN",
-    "2DOZEN": "2st DOZEN",
-    "3DOZEN": "3st DOZEN",
+    "1DOZEN": "1° DOUZAINE",
+    "2DOZEN": "2° DOUZAINE",
+    "3DOZEN": "3° DOUZAINE",
     "SILVER": "SILVER",
     "GOLD": "GOLD",
     "AMERICANA": "AMERICANA",
@@ -280,7 +280,7 @@
         "HORSE": "Courses hippiques",
         "HORSE_VIRTUAL": "Course hippique virtuelle",
         "KENO": "Kéno",
-        "AMERICANROULETTE": "American Roulette"
+        "AMERICANROULETTE": "Roulette Américaine"
       },
       "NAME": {
         "ALL": "Tous",

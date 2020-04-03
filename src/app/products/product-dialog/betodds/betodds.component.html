@@ -12,7 +12,7 @@
         <div fxFlex="24" class="top-window"></div>
         <div fxFlex="38" class="first-row" fxLayout="row">
           <div fxFlex="70" fxLayoutAlign="start center">
-            {{odd.label}}
+            {{odd.label | translate | uppercase}}
           </div>
           <div fxFlex="30" fxLayoutAlign="center center" class="odd radius-5">
             {{odd.odd | number: '1.2-2'}}

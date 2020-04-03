@@ -3,9 +3,9 @@
   "AGILITY": "Shkathtësi",
   "AMERICANROULETTE": {
     "COLUMN": "2to1",
-    "1DOZEN": "1st DOZEN",
-    "2DOZEN": "2st DOZEN",
-    "3DOZEN": "3st DOZEN",
+    "1DOZEN": "1-12",
+    "2DOZEN": "13-24",
+    "3DOZEN": "25-36",
     "SILVER": "SILVER",
     "GOLD": "GOLD",
     "AMERICANA": "AMERICANA",
@@ -179,7 +179,7 @@
         "DOG": "Qen",
         "HORSE": "Kuaj",
         "KENO": "Keno",
-        "AMERICANROULETTE": "American Roulette"
+        "AMERICANROULETTE": "Ruletë Amerikane"
       },
       "NAME": {
         "Colours": "Colours",
