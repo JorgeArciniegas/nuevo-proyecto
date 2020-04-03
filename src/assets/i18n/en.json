@@ -10,7 +10,9 @@
     "SILVER": "SILVER",
     "GOLD": "GOLD",
     "AMERICANA": "AMERICANA",
-    "SMALL": "SMALL"
+    "SMALL": "SMALL",
+    "HIGH": "HIGH",
+    "LOW": "LOW"
   },
   "AMOUNT": "Amount",
   "AMOUNT_FROM": "Amount from",
@@ -339,7 +341,10 @@
       "UNDER": "Under",
       "V": "V",
       "VT": "Standout trifecta",
-      "WINNER": "Winner"
+      "WINNER": "Winner",
+      "R": "Number",
+      "RC": "Column",
+      "RD": "Dozen"
     },
     "SMARTCODE": {
       "1VA": "S. exacta",

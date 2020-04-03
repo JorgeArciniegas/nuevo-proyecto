@@ -168,6 +168,8 @@ export class DisplayComponent implements OnDestroy {
     const tmp = [];
     this.polyfunctionalValue.odds.forEach(item => {
       switch (item.label.trim()) {
+        case 'LOW': item.label = 'AMERICANROULETTE.LOW'; break;
+        case 'HIGH': item.label = 'AMERICANROULETTE.HIGH'; break;
         case '1-12': item.label = 'AMERICANROULETTE.1DOZEN'; break;
         case '13 - 24': item.label = 'AMERICANROULETTE.2DOZEN'; break;
         case '25 - 36': item.label = 'AMERICANROULETTE.3DOZEN'; break;

@@ -10,7 +10,9 @@
     "SILVER": "SILVER",
     "GOLD": "GOLD",
     "AMERICANA": "AMERICANA",
-    "SMALL": "SMALL"
+    "SMALL": "SMALL",
+    "HIGH": "Alto",
+    "LOW": "Basso"
   },
   "AMOUNT": "Importo",
   "AMOUNT_FROM": "Importo da",
@@ -315,7 +317,10 @@
       "UNDER": "Under",
       "V": "V",
       "VT": "Vincente trio",
-      "WINNER": "Vincente"
+      "WINNER": "Vincente",
+      "R": "Numero",
+      "RC": "Colonna",
+      "RD": "Dozzina"
     },
     "SMARTCODE": {
       "1VA": "V. accoppiata",
