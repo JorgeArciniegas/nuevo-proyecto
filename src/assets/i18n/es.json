@@ -10,7 +10,9 @@
     "SILVER": "SILVER",
     "GOLD": "GOLD",
     "AMERICANA": "AMERICANA",
-    "SMALL": "SMALL"
+    "SMALL": "SMALL",
+    "HIGH": "Alta",
+    "LOW": "Baja"
   },
   "AMOUNT": "Importe",
   "AMOUNT_FROM": "Importe de",

@@ -9,7 +9,9 @@
     "SILVER": "SILVER",
     "GOLD": "GOLD",
     "AMERICANA": "AMERICANA",
-    "SMALL": "SMALL"
+    "SMALL": "SMALL",
+    "HIGH": "Larte",
+    "LOW": "Poshte"
   },
   "AREAS": "Aree",
   "ATT": "Att.",
