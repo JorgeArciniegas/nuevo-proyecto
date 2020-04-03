@@ -166,7 +166,15 @@ export class DisplayComponent implements OnDestroy {
   getRouletteValue(): string {
     const tmp = [];
     this.polyfunctionalValue.odds.forEach(item => {
-      tmp.push(item.label);
+      switch (item.label.trim()) {
+        case '1-12': item.label = 'AMERICANROULETTE.1DOZEN'; break;
+        case '13 - 24': item.label = 'AMERICANROULETTE.2DOZEN'; break;
+        case '25 - 36': item.label = 'AMERICANROULETTE.3DOZEN'; break;
+        default:
+          item.label = item.label.toUpperCase();
+          break;
+      }
+      tmp.push(this.translateService.getTranslatedString(item.label).toUpperCase());
     });
     let res = '';
     tmp.reverse();

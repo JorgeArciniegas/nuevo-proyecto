@@ -4,8 +4,8 @@
   "AMERICANROULETTE": {
     "COLUMN": "2to1",
     "1DOZEN": "1st DOZEN",
-    "2DOZEN": "2st DOZEN",
-    "3DOZEN": "3st DOZEN",
+    "2DOZEN": "2nd DOZEN",
+    "3DOZEN": "3rd DOZEN",
     "SILVER": "SILVER",
     "GOLD": "GOLD",
     "AMERICANA": "AMERICANA",
@@ -185,7 +185,7 @@
         "DOG": "Windhunde",
         "HORSE": "Pferde",
         "KENO": "Keno",
-        "AMERICANROULETTE": "American Roulette"
+        "AMERICANROULETTE": "Amerikanisches Roulette"
       },
       "NAME": {
         "ALL": "Tutti",

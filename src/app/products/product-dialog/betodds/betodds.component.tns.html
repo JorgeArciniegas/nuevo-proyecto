@@ -25,7 +25,8 @@
           class="card-odd" [ngClass]="{'notSelected': !odd.selected}" *ngFor="let odd of betOdds; let i = index;">
           <StackLayout row="0" class="top-window"></StackLayout>
           <GridLayout row="1" rows="*" columns="2*,*" class="row">
-            <Label col="0" text="{{odd.label}}" horizontalAlignment="left" verticalAlignment="center"></Label>
+            <Label col="0" text="{{odd.label  | translate | uppercase }}" horizontalAlignment="left"
+              verticalAlignment="center"></Label>
             <Label col="1" class="odd" text="{{odd.odd | number: '1.2-2'}}" horizontalAlignment="right"
               verticalAlignment="center"></Label>
           </GridLayout>
