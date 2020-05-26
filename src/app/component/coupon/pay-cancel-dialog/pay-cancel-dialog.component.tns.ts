@@ -143,6 +143,7 @@ export class PayCancelDialogComponent {
     }).then((result) => {
       // Note that this Promise is never invoked when a 'continuousScanCallback' function is provided
       if (result && result.text.length > 0) {
+        result.text = result.text.replace(/[^a-zA-Z0-9\-]/g, '-');
         this.onSubmit(result.text);
       }
 
