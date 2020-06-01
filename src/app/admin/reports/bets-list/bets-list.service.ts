@@ -279,7 +279,7 @@ export class BetsListService {
       sportId: this.request.sportId === 0 ? null : this.request.sportId,
       product: this.request.product,
       complianceCode: this.request.complianceCode,
-      ticketCode: this.request.ticketCode,
+      ticketCode: this.request.ticketCode.replace(/[^a-zA-Z0-9\-]/g, '-'),
       dateHasPlaced: this.request.dateHasPlaced,
       carriedOut: this.carriedOut,
       userId: tmpUserId,

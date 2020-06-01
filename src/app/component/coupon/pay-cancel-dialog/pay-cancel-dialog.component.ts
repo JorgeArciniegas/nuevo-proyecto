@@ -42,6 +42,7 @@ export class PayCancelDialogComponent {
     if (this.data === this.dialogTypeCoupon.PAY) {
       if (this.form.valid) {
         couponCode = this.form.get('couponCode').value;
+        couponCode = couponCode.replace(/[^a-zA-Z0-9\-]/g, '-');
         if (couponCode) {
 
           this.payRequest = {
