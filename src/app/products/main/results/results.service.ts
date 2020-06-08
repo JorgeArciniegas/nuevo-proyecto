@@ -31,7 +31,8 @@ export class ResultsService {
     this.listResult = [];
     const request: VirtualSportLastResultsRequest = {
       SportId: this.productService.product.sportId,
-      CategoryType: this.productService.product.codeProduct
+      CategoryType: this.productService.product.codeProduct,
+      MultiFeedType: this.productService.product.layoutProducts.multiFeedType
     };
     const tmpListResult = [];
     this.elysApi.virtual.getLastResult(request)

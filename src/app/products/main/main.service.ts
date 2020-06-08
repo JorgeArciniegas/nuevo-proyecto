@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ElysApiService, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualDetailOddsOfEventResponse, VirtualEventCountDownRequest, VirtualEventCountDownResponse, VirtualGetRankByEventResponse, VirtualProgramTreeBySportRequest, VirtualProgramTreeBySportResponse } from '@elys/elys-api';
+import { ElysApiService, VirtualProgramTreeBySportRequest, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualDetailOddsOfEventResponse, VirtualEventCountDownRequest, VirtualEventCountDownResponse, VirtualGetRankByEventResponse, VirtualProgramTreeBySportResponse, PlaySource } from '@elys/elys-api';
 import { ElysFeedsService } from '@elys/elys-feeds';
 import { cloneDeep as clone } from 'lodash';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
@@ -150,7 +150,7 @@ export class MainService {
     this.eventDetails.currentEvent = 0;
 
     this.loadEvents();
-    this.resultService.loadLastResult(false);
+    this.resultService.loadLastResult(true);
   }
 
   createPlayerList(): void {
@@ -280,11 +280,14 @@ export class MainService {
   private loadEventsFromApi(all: boolean = true, lastAttemptCall?: number, delayedEventLoad: boolean = true) {
     const request: VirtualProgramTreeBySportRequest = {
       SportIds: this.productService.product.sportId.toString(),
-      CategoryTypes: this.productService.product.codeProduct
+      CategoryTypes: this.productService.product.codeProduct,
+      Source: PlaySource.VDeskWeb,
+      Item: this.userservice.getUserId()
     };
     this.elysApi.virtual.getVirtualTreeV2(request).then((sports: VirtualProgramTreeBySportResponse) => {
       if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
         const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
+        this.productService.product.layoutProducts.multiFeedType = tournament.mft;
         if (all) {
           // Load all events
           this.cacheEvents = tournament.evs;
@@ -293,7 +296,6 @@ export class MainService {
             event.number = this.cacheEvents[index].id;
             event.label = this.cacheEvents[index].nm;
             event.date = new Date(this.cacheEvents[index].sdtoffset);
-
             this.eventDetails.events[index] = event;
           }
         } else {
