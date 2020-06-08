@@ -11,7 +11,7 @@
           <div fxLayoutAlign="center center" fxFlex="60" class="pay-cancel-input input-container input radius-2">
             <i class="icon-baseline-shopping_cart-24px icon"></i>
             <input matInput class="input-field" formControlName="couponCode"
-              pattern="^[A-Z0-9]{6}-[A-Z0-9]{1,4}-[A-Z0-9]{6}$" placeholder="{{ 'COUPON_CODE' | translate}}"
+              pattern="[A-Z0-9]{6}[^A-Za-z0-9]{1}[A-Z0-9]{1,4}[^A-Za-z0-9]{1}[A-Z0-9]{6}$" placeholder="{{ 'COUPON_CODE' | translate}}"
               autocomplete="on" />
           </div>
         </div>
