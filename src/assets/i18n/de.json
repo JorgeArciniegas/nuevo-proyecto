@@ -2,16 +2,16 @@
   "ACCG": "ACCG",
   "AGILITY": "Geschicklichkeit",
   "AMERICANROULETTE": {
-    "COLUMN": "2to1",
     "1DOZEN": "1st DOZEN",
     "2DOZEN": "2nd DOZEN",
     "3DOZEN": "3rd DOZEN",
-    "SILVER": "SILVER",
-    "GOLD": "GOLD",
     "AMERICANA": "AMERICANA",
-    "SMALL": "SMALL",
+    "COLUMN": "2to1",
+    "GOLD": "GOLD",
     "HIGH": "Über",
-    "LOW": "Unter"
+    "LOW": "Unter",
+    "SILVER": "SILVER",
+    "SMALL": "SMALL"
   },
   "AREAS": "Aree",
   "ATT": "Angr.",
@@ -37,6 +37,7 @@
   "COMBINATIONS": "Kombinationen",
   "COND": "Beding.",
   "CONDITION": "Bedingung",
+  "CONFIRM": "Bestätigen",
   "COUPON": "Wette",
   "COUPON.BET": "Wette",
   "COUPON_CODE": "Wettschein-Code",
@@ -182,19 +183,19 @@
     },
     "PRODUCT": {
       "LABEL": {
+        "AMERICANROULETTE": "Amerikanisches Roulette",
         "COCK_FIGHT": "Hahnenkampf",
         "COLOURS": "Colours",
         "DOG": "Windhunde",
         "HORSE": "Pferde",
-        "KENO": "Keno",
-        "AMERICANROULETTE": "Amerikanisches Roulette"
+        "KENO": "Keno"
       },
       "NAME": {
         "ALL": "Tutti",
         "CockFight": "Hahnenkampf",
         "CockRacing": "Hahnenkampf",
-        "Colours": "Colours",
         "Colors": "Colours",
+        "Colours": "Colours",
         "DogRacing": "Windhunde",
         "HorseRacing": "Pferde",
         "Keno": "Keno",
