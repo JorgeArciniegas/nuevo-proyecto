@@ -2,16 +2,16 @@
   "ACCG": "ACCG",
   "AGILITY": "Shkathtësi",
   "AMERICANROULETTE": {
-    "COLUMN": "2to1",
     "1DOZEN": "1-12",
     "2DOZEN": "13-24",
     "3DOZEN": "25-36",
-    "SILVER": "SILVER",
-    "GOLD": "GOLD",
     "AMERICANA": "AMERICANA",
-    "SMALL": "SMALL",
+    "COLUMN": "2to1",
+    "GOLD": "GOLD",
     "HIGH": "Larte",
-    "LOW": "Poshte"
+    "LOW": "Poshte",
+    "SILVER": "SILVER",
+    "SMALL": "SMALL"
   },
   "AREAS": "Aree",
   "ATT": "Att.",
@@ -38,6 +38,7 @@
   "COMBINATION": "Kombinacion",
   "COMBINATIONS": "Kombinacionet",
   "COND": "Cond.",
+  "CONFIRM": "konfirmuar",
   "COUPON.BET": "Bast",
   "COUPON_CODE": "Kodi Biletes",
   "COUPON_NUMBER": "Numri i kuponit",
@@ -177,11 +178,11 @@
     },
     "PRODUCT": {
       "LABEL": {
+        "AMERICANROULETTE": "Ruletë Amerikane",
         "COLOURS": "Colours",
         "DOG": "Qen",
         "HORSE": "Kuaj",
-        "KENO": "Keno",
-        "AMERICANROULETTE": "Ruletë Amerikane"
+        "KENO": "Keno"
       },
       "NAME": {
         "Colours": "Colours",

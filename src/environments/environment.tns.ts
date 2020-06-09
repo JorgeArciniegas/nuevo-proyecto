@@ -8,6 +8,9 @@ import { environment as beteseStagingEnvironment } from './environment.betese-st
 // betlogik
 import { environment as betlogikEnvironment } from './environment.betlogik';
 import { environment as betlogikStagingEnvironment } from './environment.betlogik-staging';
+// betpro
+import { environment as betproEnvironment } from './environment.betpro';
+import { environment as betproStagingEnvironment } from './environment.betpro-staging';
 // betsafi
 import { environment as betsafiEnvironment } from './environment.betsafi';
 import { environment as betsafiStagingEnvironment } from './environment.betsafi-staging';
@@ -232,6 +235,12 @@ export const environment: Environment = (() => {
         break;
       case 'betsplus-staging':
         envVars = betsplusStagingEnvironment;
+        break;
+      case 'betpro-prod':
+        envVars = betproEnvironment;
+        break;
+      case 'betpro-staging':
+        envVars = betproStagingEnvironment;
         break;
       default:
         envVars = devEnvironment;

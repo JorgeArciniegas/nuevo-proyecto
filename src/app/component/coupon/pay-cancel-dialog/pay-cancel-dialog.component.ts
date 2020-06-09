@@ -42,6 +42,7 @@ export class PayCancelDialogComponent {
     if (this.data === this.dialogTypeCoupon.PAY) {
       if (this.form.valid) {
         couponCode = this.form.get('couponCode').value;
+        couponCode = couponCode.replace(/[^a-zA-Z0-9\-]/g, '-');
         if (couponCode) {
 
           this.payRequest = {
@@ -73,6 +74,7 @@ export class PayCancelDialogComponent {
     } else if (this.data === this.dialogTypeCoupon.DELETE) {
       if (this.form.valid) {
         couponCode = this.form.get('couponCode').value;
+        couponCode = couponCode.replace(/[^a-zA-Z0-9\-]/g, '-');
         if (couponCode) {
           this.cancelRequest = {
             CancellationRequestUserId: this.userService.isLoggedOperator() ?

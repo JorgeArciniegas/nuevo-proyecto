@@ -1885,7 +1885,81 @@
                   "with": "src/environments/environment.betsplus-staging.ts"
                 }
               ]
-            }
+            },
+            "betpro-prod": {
+              "outputPath": "dist-betpro",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betpro/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betpro.ts"
+                }
+              ]
+            },
+            "betpro-prod-release": {
+              "outputPath": "dist-betpro",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betpro/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betpro.ts"
+                }
+              ]
+            },
+            "betpro-staging": {
+              "outputPath": "dist-betpro",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betpro/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betpro-staging.ts"
+                }
+              ]
+            },
+            "betpro-staging-release": {
+              "outputPath": "dist-betpro",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betpro/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betpro-staging.ts"
+                }
+              ]
+            },
           }
         },
         "serve": {
@@ -2196,6 +2270,18 @@
             },
             "betsplus-staging-release": {
               "browserTarget": "vdesk:build:betsplus-staging-release"
+            },
+            "betpro-prod": {
+              "browserTarget": "vdesk:build:betpro-prod"
+            },
+            "betpro-staging": {
+              "browserTarget": "vdesk:build:betpro-staging"
+            },
+            "betpro-prod-release": {
+              "browserTarget": "vdesk:build:betpro-prod-release"
+            },
+            "betpro-staging-release": {
+              "browserTarget": "vdesk:build:betpro-staging-release"
             }
           }
         },

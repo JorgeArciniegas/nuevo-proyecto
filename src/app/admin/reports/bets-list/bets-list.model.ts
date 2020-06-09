@@ -14,10 +14,10 @@ export namespace CouponTypeInternal {
 }
 
 export enum CouponStatusInternal {
-  ALL,
+  ALL = 1,
   Placed,
-  Lost,
   Win,
+  Lost,
   Cancelled = 5
 }
 
