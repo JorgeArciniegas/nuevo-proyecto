@@ -26,7 +26,7 @@ export class PayCancelDialogComponent {
   public couponIdPatternInvalid = false;
   cancelRequest: CancelCouponRequest;
   payRequest: FlagAsPaidRequest;
-  regExConvalidCode = /^[a-zA-Z0-9]+\-[a-zA-Z0-9]+\-[a-zA-Z0-9]+$/;
+  regExConvalidCode = /[A-Z0-9]{6}[^A-Za-z0-9]{1}[A-Z0-9]{1,4}[^A-Za-z0-9]{1}[A-Z0-9]{6}$/;
 
   qcodeScan: string;
 

@@ -305,7 +305,7 @@
     </GridLayout>
     <GridLayout col="1" rows="*" columns="*" class="button right btn-default btn-success"
       [ngClass]="{'disabled': couponService.error}">
-      <Button text="{{'conferma' | translate}}" class="button-internal" textTransform="uppercase"
+      <Button text="{{'CONFIRM' | translate}}" class="button-internal" textTransform="uppercase"
         [isEnabled]="!timeBlocked && !couponService.error && !userService.isModalOpen"
         (tap)="couponService.stagedCoupon()"></Button>
     </GridLayout>
