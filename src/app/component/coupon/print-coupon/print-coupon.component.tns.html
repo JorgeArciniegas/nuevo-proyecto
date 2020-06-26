@@ -7,7 +7,8 @@
     <StackLayout #printingData orientation="horizontal" class="m-10 p-50">
       <FlexboxLayout flexDirection="column" class="printbox">
         <StackLayout class="logo-print-coupon">
-          <Image stretch="aspectFill" src="~/app/themes/skins/{{appSetting.theme}}/image/Logo-coupon.png"></Image>
+          <Image *ngIf="appSetting.printSettings.isEnabledPrintLogoCoupon" stretch="aspectFill"
+            src="~/app/themes/skins/{{appSetting.theme}}/image/Logo-coupon.png"></Image>
         </StackLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-b-10" flexWrap="wrap"
           *ngIf="appSetting.printSettings.isShowHeaderMessage">

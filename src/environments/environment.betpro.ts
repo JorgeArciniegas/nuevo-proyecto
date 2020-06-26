@@ -19,7 +19,7 @@ export const environment: Environment = {
   faviconPath: 'app/themes/skins/betpro/image/Logo-header.png',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
-  supportedLang: ['en','fr'],
+  supportedLang: ['en', 'fr'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
@@ -351,6 +351,7 @@ export const environment: Environment = {
   printSettings: {
     isEnabledReprintCoupon: true,
     isTrasmitionInfoMessageShown: true,
-    isShowHeaderMessage: true
+    isShowHeaderMessage: true,
+    isEnabledPrintLogoCoupon: false
   }
 };

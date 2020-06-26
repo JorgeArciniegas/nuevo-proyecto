@@ -339,6 +339,7 @@ export const environment: Environment = {
   printSettings: {
     isEnabledReprintCoupon: true,
     isTrasmitionInfoMessageShown: false,
-    isShowHeaderMessage: false
+    isShowHeaderMessage: false,
+    isEnabledPrintLogoCoupon: false
   }
 };

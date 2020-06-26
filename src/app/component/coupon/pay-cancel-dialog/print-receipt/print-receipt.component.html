@@ -1,6 +1,6 @@
 <div class="printReceipt">
   <div class="header">
-    <img class="logo-print-coupon padding-10">
+    <img *ngIf="appSettings.printSettings.isEnabledPrintLogoCoupon" class="logo-print-coupon padding-10">
     <div class="header-content">
       <!-- {{ appSettings.bookmakerDetails }} -->
       <span *ngIf="appSettings.printSettings.isShowHeaderMessage">
