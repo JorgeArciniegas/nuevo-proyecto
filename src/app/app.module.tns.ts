@@ -42,7 +42,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ElysApiModule.forRoot({
       urlApi: environment.baseApiUrl
     }),
-    ElysCouponModule.forRoot({ deviceLayout: PlaySource.VDeskAndroid }),
+    ElysCouponModule.forRoot({ deviceLayout: PlaySource.VDeskGApp }),
     SharedModule,
     NativeScriptRouterModule,
     NativeScriptRouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })

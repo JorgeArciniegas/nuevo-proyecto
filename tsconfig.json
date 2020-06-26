@@ -16,6 +16,17 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    /* "paths": {
+      "@angular/*": [
+        "./node_modules/@angular/*"
+      ],
+      "@elys/elys-api": [
+        "../../elys-api-lib/projects/elys-api/src"
+      ],
+      "@elys/elys-api/*": [
+        "../../elys-api-lib/projects/elys-api/src/*"
+      ]
+    } */
   }
 }

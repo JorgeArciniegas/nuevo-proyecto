@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ElysApiService, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualDetailOddsOfEventRequest, VirtualDetailOddsOfEventResponse, VirtualEventCountDownRequest, VirtualEventCountDownResponse, VirtualGetRankByEventResponse, VirtualProgramTreeBySportRequest, VirtualProgramTreeBySportResponse } from '@elys/elys-api';
+import { ElysApiService, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualDetailOddsOfEventRequest, VirtualDetailOddsOfEventResponse, VirtualEventCountDownRequest, VirtualEventCountDownResponse, VirtualGetRankByEventResponse, VirtualProgramTreeBySportRequest, VirtualProgramTreeBySportResponse, PlaySource } from '@elys/elys-api';
 import { ElysFeedsService } from '@elys/elys-feeds';
 import { cloneDeep as clone } from 'lodash';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
@@ -322,7 +322,9 @@ export class MainService {
   loadEventsFromApi(all: boolean = true, lastAttemptCall?: number, delayedEventLoad: boolean = true) {
     const request: VirtualProgramTreeBySportRequest = {
       SportIds: this.productService.product.sportId.toString(),
-      CategoryTypes: this.productService.product.codeProduct
+      CategoryTypes: this.productService.product.codeProduct,
+      Source: PlaySource.VDeskGApp,
+      Item: this.userservice.getUserId()
     };
 
     this.elysApi.virtual.getVirtualTreeV2(request).then((sports: VirtualProgramTreeBySportResponse) => {
@@ -330,6 +332,7 @@ export class MainService {
 
       if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
         const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
+        this.productService.product.layoutProducts.multiFeedType = tournament.mft;
         if (all) {
           // Load all events
           this.cacheEvents = tournament.evs;

@@ -78,6 +78,7 @@ export interface LayoutProducts {
   cacheEventsItem: number;
   // List of visible markets on the template. The index of the array is taken to show them on the different rows of the template.
   shownMarkets?: Market[];
+  multiFeedType?: string;
 }
 
 export enum LAYOUT_TYPE {
