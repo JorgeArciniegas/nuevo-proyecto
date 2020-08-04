@@ -1,6 +1,6 @@
 <div class="printCoupon" *ngIf="printCouponService.couponPrint">
   <div class="header">
-    <img class="logo-print-coupon">
+    <img *ngIf="appSetting.printSettings.isEnabledPrintLogoCoupon" class="logo-print-coupon">
     <div class="header-content">
       <div class="padding-5 font-size-normal">
         <span *ngIf="appSetting.printSettings.isShowHeaderMessage">

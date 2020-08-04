@@ -58,6 +58,7 @@ export interface PrintSettings {
   isEnabledReprintCoupon: boolean;
   isTrasmitionInfoMessageShown: boolean;
   isShowHeaderMessage: boolean;
+  isEnabledPrintLogoCoupon: boolean;
 }
 
 export enum WidgetTypeLink {
