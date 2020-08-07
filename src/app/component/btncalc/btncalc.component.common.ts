@@ -84,11 +84,11 @@ export class BtncalcComponentCommon {
   }
 
   // increments amount in display by preset default values
-  btnDefaultAmountsPreset(amount: number): void {
+  btnDefaultAmountsPreset(amount: string): void {
     this.setStakePresetPlayer(amount, TYPINGTYPE.BY_PRESET);
   }
 
-  btnKeyboardAmount(amount: number): void {
+  btnKeyboardAmount(amount: string): void {
     this.setStakePresetPlayer(amount, TYPINGTYPE.BY_KEYBOARD);
   }
 
@@ -96,7 +96,7 @@ export class BtncalcComponentCommon {
    *
    * @param amount
    */
-  setStakePresetPlayer(amount: number, typingType: TYPINGTYPE): void {
+  setStakePresetPlayer(amount: string, typingType: TYPINGTYPE): void {
     if (
       this.btncalcService.polyfunctionStakePresetPlayer.disableInputCalculator &&
       this.btncalcService.polyfunctionStakePresetPlayer.typingType === typingType
@@ -111,7 +111,7 @@ export class BtncalcComponentCommon {
       }
       // this fucntion setting the new value on the oddStake
       this.btncalcService.setAmountToOdd(
-        amount,
+        Number(amount),
         this.couponService.oddStakeEdit
       );
     } else {

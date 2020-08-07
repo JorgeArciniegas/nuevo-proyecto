@@ -343,7 +343,7 @@ export class BtncalcService implements OnDestroy {
    * @param amount
    * @param typingType
    */
-  public returnTempNumberToPolyfuncArea(amount: number, typingType: TYPINGTYPE): number {
+  public returnTempNumberToPolyfuncArea(amount: string, typingType: TYPINGTYPE): number {
     // check if hasDecimalSeparator
     // tslint:disable-next-line:max-line-length
     let tempAmount = this.polyfunctionStakePresetPlayer.hasDecimalSeparator
@@ -359,11 +359,24 @@ export class BtncalcService implements OnDestroy {
 
     // check if it is the first time that the player taps the button on calculator.
     if (!this.polyfunctionStakePresetPlayer.firstTap && this.polyfunctionStakePresetPlayer.typingType === TYPINGTYPE.BY_KEYBOARD) {
-      tempAmount += amount.toString();
+      tempAmount += amount;
     } else if (!this.polyfunctionStakePresetPlayer.firstTap && this.polyfunctionStakePresetPlayer.typingType === TYPINGTYPE.BY_PRESET) {
-      tempAmount = Number(tempAmount) + amount;
+      tempAmount = Number(tempAmount) + Number(amount);
     } else {
-      tempAmount = amount.toString();
+      switch (amount) {
+        case '0':
+          tempAmount = Number(tempAmount) * 10;
+          break;
+        case '00':
+          tempAmount = Number(tempAmount) * 100;
+          break;
+        case '000':
+          tempAmount = Number(tempAmount) * 1000;
+          break;
+        default:
+          tempAmount = amount;
+          break;
+      }
       // set to false "firstTap", so Following  append to current amount value
       this.polyfunctionStakePresetPlayer.firstTap = false;
     }
