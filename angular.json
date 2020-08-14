@@ -110,6 +110,80 @@
                 }
               ]
             },
+            "dngaming-prod": {
+              "outputPath": "dist-dngaming",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/dngaming/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dngaming.ts"
+                }
+              ]
+            },
+            "dngaming-prod-release": {
+              "outputPath": "dist-dngaming",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/dngaming/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dngaming.ts"
+                }
+              ]
+            },
+            "dngaming-staging": {
+              "outputPath": "dist-dngaming",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/dngaming/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dngaming-staging.ts"
+                }
+              ]
+            },
+            "dngaming-staging-release": {
+              "outputPath": "dist-dngaming",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/dngaming/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dngaming-staging.ts"
+                }
+              ]
+            },
             "shawis-prod": {
               "outputPath": "dist-shawis",
               "stylePreprocessorOptions": {
@@ -1982,6 +2056,18 @@
             },
             "vgen-staging-release": {
               "browserTarget": "vdesk:build:vgen-staging-release"
+            },
+            "dngaming-prod": {
+              "browserTarget": "vdesk:build:dngaming-prod"
+            },
+            "dngaming-prod-release": {
+              "browserTarget": "vdesk:build:dngaming-prod-release"
+            },
+            "dngaming-staging": {
+              "browserTarget": "vdesk:build:dngaming-staging"
+            },
+            "dngaming-staging-release": {
+              "browserTarget": "vdesk:build:dngaming-staging-release"
             },
             "shawis-prod": {
               "browserTarget": "vdesk:build:shawis-prod"
