@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CurrencyCodeRequest, CurrencyCodeResponse, ElysApiService, StagedCouponStatus, TokenDataSuccess, UserPolicies, UserType } from '@elys/elys-api';
+// tslint:disable-next-line:max-line-length
+import { CurrencyCodeRequest, CurrencyCodeResponse, ElysApiService, StagedCouponStatus, TokenDataSuccess, UserPolicies, UserType, CouponLimit } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { Subscription, timer } from 'rxjs';
 import { Products } from '../../environments/environment.models';
@@ -21,7 +22,8 @@ export class UserService {
       this.dataUserDetail = {
         userDetail: null,
         operatorDetail: null,
-        productIsLoaded: false
+        productIsLoaded: false,
+        couponLimit: null
       };
     }
     return this._dataUserDetail;
@@ -49,6 +51,12 @@ export class UserService {
   }
 
   private productsDefault: Products[];
+
+  get limitUser(): CouponLimit {
+    return this.dataUserDetail.couponLimit
+      ? this.dataUserDetail.couponLimit
+      : undefined;
+  }
 
   constructor(
     private router: RouterService,
@@ -255,6 +263,8 @@ export class UserService {
         }
 
         this.storageService.setData('UserData', this.dataUserDetail);
+
+
         try {
           this.userCurrency = this.dataUserDetail.userDetail ?
             this.dataUserDetail.userDetail.Currency :
@@ -271,6 +281,7 @@ export class UserService {
         );
       }
       if (this.isInitUser) {
+        this.getlimitsData();
         await this.checkAvailableSportAndSetPresetsAmount();
         this.isInitUser = false;
       }
@@ -291,7 +302,24 @@ export class UserService {
   }
 
 
+  getlimitsData(): void {
+    const currency: number = this.isLoggedOperator()
+      ? this.dataUserDetail.userDetail.UserCurrency.CurrencyId
+      : this.dataUserDetail.operatorDetail.UserCurrency.CurrencyId;
+    const userType: UserType = this.isLoggedOperator()
+      ? this.dataUserDetail.userDetail.UserType
+      : this.dataUserDetail.operatorDetail.UserType;
 
+
+    this.api.coupon.getCouponLimits({ CurrencyId: currency }).then(response => {
+      const limit = response.find(l => l.Product === 'V' && l.UserType === userType);
+      if (limit) {
+        this.dataUserDetail.couponLimit = limit.CouponLimit;
+        this.storageService.setData('UserData', this.dataUserDetail);
+      }
+    }).catch(err => console.log(err));
+
+  }
 
   // Method to check if a user is currently logged.
   get isUserLogged(): boolean {
@@ -465,4 +493,5 @@ export class UserService {
   getAuthorization(): UserPolicies {
     return this.dataUserDetail.userDetail ? this.dataUserDetail.userDetail.UserPolicies : this.dataUserDetail.operatorDetail.UserPolicies;
   }
+
 }

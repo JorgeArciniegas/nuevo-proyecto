@@ -44,6 +44,7 @@ export class CouponService {
   // Information coupon when has been placed
   private couponHasBeenPlacedSub: Subject<boolean>;
   couponHasBeenPlacedObs: Observable<boolean>;
+
   constructor(
     public elysCoupon: ElysCouponService,
     public userService: UserService,
@@ -63,7 +64,6 @@ export class CouponService {
       this.coupon = coupon;
 
       if (coupon) {
-
         // check If coupon is Lottery
         if (this.appSetting.products.find(prod => prod.layoutProducts.type === LAYOUT_TYPE.KENO && prod.productSelected)) {
           this.coupon.internal_isLottery = true;

@@ -155,7 +155,9 @@
         class="message-company-trasmitted font-size-normal">{{'PRINT_COUPON.TRANSMISSION_MESSAGE' | translate}}
         {{ printCouponService.couponPrint?.CouponDateOffset | date : 'dd/MM/yyyy HH:mm:ss' }} </div>
       <div class="message-company-legal font-size-normal">
-        {{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSetting.license] | translate}}</div>
+        {{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSetting.license] | translate}}
+        {{ maxCombinationBetWin | currency : userService.userCurrency : 'symbol-narrow'}}
+      </div>
     </div>
   </div>
   <div class="footer">

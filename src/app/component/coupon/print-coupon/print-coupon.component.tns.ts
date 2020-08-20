@@ -25,13 +25,15 @@ export class PrintCouponComponent implements OnInit {
   barCode128Source: ImageSource;
   @ViewChild('printingData', { static: false }) view: ElementRef;
 
+  maxCombinationBetWin: number;
+
   constructor(
     public printCouponService: PrintCouponService,
     public appSetting: AppSettings,
     public userService: UserService,
     private translateUtilityService: TranslateUtilityService
   ) {
-
+    this.maxCombinationBetWin = userService.limitUser.MaxCombinationBetWin;
   }
 
   ngOnInit(): void {

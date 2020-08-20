@@ -66,7 +66,11 @@ export class OperatorsService {
         IsSmartCodeErrorSoundEnabled: false,
         IsSmartCodeHelperEnabled: false,
         IsSmartCodeShortcutIntellisenseEnabled: false,
-        SubscriptionDate: new Date()
+        SubscriptionDate: new Date(),
+        SubscriptionDateOffset: null,
+        OperatorContact: null,
+        CanManageKiosk: false,
+        IsUserRegistrationBannerEnabled: false
       }
     };
     return this.elysApi.account.createOperator(operator);

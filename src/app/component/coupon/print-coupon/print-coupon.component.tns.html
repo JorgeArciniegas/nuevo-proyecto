@@ -160,7 +160,8 @@
             <StackLayout class="hr-dark m-10"></StackLayout>
           </ng-container>
           <Label class="p-10 text-left" textWrap="true"
-            text="{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSetting.license] | translate}}"></Label>
+            text="{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSetting.license] | translate}} {{ maxCombinationBetWin | currency : userService.userCurrency : 'symbol-narrow'}}">
+          </Label>
           <Image class="m-t-10" [src]="barCode128Source" stretch="fill" height="200" width="600"></Image>
         </FlexboxLayout>
       </FlexboxLayout>
