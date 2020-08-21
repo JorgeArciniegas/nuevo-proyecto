@@ -238,11 +238,15 @@ export class UserService {
       ) {
         this.dataUserDetail.operatorDetail = await this.api.account.getOperatorMe();
         isAdmin = false;
+        if (this.dataUserDetail.operatorDetail.UserType === 0) {
+          await this.api.account.getMe().then(user => this.dataUserDetail.operatorDetail.UserType = user.UserType);
+        }
       } else if (loginAdmin || !this.isAdminExist() || (this.isLoggedOperator() === null || this.isLoggedOperator())) {
         this.dataUserDetail.userDetail = await this.api.account.getMe();
         isAdmin = true;
       } else {
         this.dataUserDetail.operatorDetail = await this.api.account.getOperatorMe();
+
         isAdmin = false;
       }
       // Save the data only if the user is a valid user.
