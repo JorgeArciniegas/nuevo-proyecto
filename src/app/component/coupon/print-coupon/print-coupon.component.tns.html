@@ -7,13 +7,13 @@
     <StackLayout #printingData orientation="horizontal" class="m-10 p-50">
       <FlexboxLayout flexDirection="column" class="printbox">
         <StackLayout class="logo-print-coupon">
-          <Image *ngIf="appSetting.printSettings.isEnabledPrintLogoCoupon" stretch="aspectFill"
-            src="~/app/themes/skins/{{appSetting.theme}}/image/Logo-coupon.png"></Image>
+          <Image *ngIf="appSettings.printSettings.enabledPrintLogo.printLogoCoupon" stretch="aspectFill"
+            src="~/app/themes/skins/{{appSettings.theme}}/image/Logo-coupon.png"></Image>
         </StackLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-b-10" flexWrap="wrap"
-          *ngIf="appSetting.printSettings.isShowHeaderMessage">
+          *ngIf="appSettings.printSettings.isShowHeaderMessage">
           <Label class="p-l-5 text-center font-weight-bold"
-            text="{{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSetting.license] | translate}}"></Label>
+            text="{{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSettings.license] | translate}}"></Label>
           <!--<Label class="p-r-10 text-center font-weight-bold" text="qrcode"></Label> -->
           <Image width="300px" height="300px" [src]="qrCodeSource" stretch="fill"></Image>
         </FlexboxLayout>
@@ -154,13 +154,19 @@
         </FlexboxLayout>
         <!-- FOOTER INFO -->
         <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-10">
-          <ng-container *ngIf="appSetting.printSettings.isTrasmitionInfoMessageShown">
+          <ng-container *ngIf="appSettings.printSettings.isTrasmitionInfoMessageShown">
             <Label class="p-10 text-left" textWrap="true"
               text="{{'PRINT_COUPON.TRANSMISSION_MESSAGE' | translate}} {{ printCouponService.couponPrint.CouponDateOffset | date : 'dd/MM/yyyy HH:mm:ss' }}"></Label>
             <StackLayout class="hr-dark m-10"></StackLayout>
           </ng-container>
-          <Label class="p-10 text-left" textWrap="true"
-            text="{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSetting.license] | translate}} {{ maxCombinationBetWin | currency : userService.userCurrency : 'symbol-narrow'}}">
+          <Label *ngIf="!hideMaxPaymentAmount" class="p-10 text-left" textWrap="true"
+            text="{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSettings.license] | translate}}{{userService.limitUser.MaxCombinationBetWin | currency: userService.userCurrency: 'symbol-narrow'}}">
+          </Label>
+          <Label *ngIf="hideMaxPaymentAmount" class="p-10 text-left" textWrap="true"
+            text="{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSettings.license] | translate}}">
+          </Label>
+          <Label *ngIf="hideMaxPaymentAmount" class="p-10 text-center" textWrap="true"
+            text="{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE_2.'  + licenseType[appSettings.license] | translate }}">
           </Label>
           <Image class="m-t-10" [src]="barCode128Source" stretch="fill" height="200" width="600"></Image>
         </FlexboxLayout>

@@ -175,7 +175,7 @@
         "BETSPLUS": "",
         "BOLIVARBET": "BolívarBet",
         "DEMO_LICENSE": "",
-        "DNGAMING": "",
+        "DNGAMING": "CORRIENDO Y GANANDO!",
         "DORADOBET": "DoradoBet",
         "F2O": "",
         "GENERIC1": "",
@@ -204,7 +204,7 @@
         "BETSPLUS": "The maximum payable amount for a coupon is ",
         "BOLIVARBET": "Ndalohet shitja tek të miturit. Kjo biletë është e përbërë në një dokument bartës. Bastori është përgjegjës për integritetin e biletës, dhe pranon që basti i printuar në të përfaqëson me siguri zgjedhjen e tij. Shuma maksimale e pagueshme për një kupon është ",
         "DEMO_LICENSE": "The maximum payable amount for a coupon is ",
-        "DNGAMING": "The maximum payable amount for a coupon is ",
+        "DNGAMING": "Prohibida la venta a personas menores de 18 años. Revise su ticket, el portador es responsable de la integridad del mismo. Para pagos de premios debe tener ticket en mano. ",
         "DORADOBET": "Ndalohet shitja tek të miturit. Kjo biletë është e përbërë në një dokument bartës. Bastori është përgjegjës për integritetin e biletës, dhe pranon që basti i printuar në të përfaqëson me siguri zgjedhjen e tij. Shuma maksimale e pagueshme për një kupon është ",
         "F2O": "Klienti deklaron të dijë dhe të pranojë afatet dhe kushtet e përgjithshme në dispozicion në faqen tonë të internetit. Ky kupon është i vlefshëm vetëm nëse procesi i transaksionit ka ndodhur ekskluzivisht nëpërmjet internetit. Kumari mund të shkaktojë varësi. Lufta e bixhozit është e ndaluar nën moshën 21 vjeçare. Shuma maksimale e pagueshme për një kupon është ",
         "GENERIC1": "Klienti deklaron të dijë dhe të pranojë afatet dhe kushtet e përgjithshme në dispozicion në faqen tonë të internetit. Ky kupon është i vlefshëm vetëm nëse procesi i transaksionit ka ndodhur ekskluzivisht nëpërmjet internetit. Kumari mund të shkaktojë varësi. Lufta e bixhozit është e ndaluar nën moshën 21 vjeçare. Shuma maksimale e pagueshme për një kupon është ",
@@ -223,6 +223,9 @@
         "TRADABETS": "The maximum payable amount for a coupon is ",
         "UGANBET": "Vendosja bastit është rreptësisht e ndaluar për personat nën moshën 21 vjeç. Luaj me përgjegjësi dhe pa kaluar limitet tuaja financiare. Lexoni Termat dhe Kushtet tona përpara se të bastoni. Shuma maksimale e pagueshme për një kupon është ",
         "UNIVERSALSOFT": "Ju lutemi kontrolloni saktësinë e kuponit në kohën e lëshimit, kërkesat e vonuara nuk do të pranohen. Shuma maksimale e pagueshme për një kupon është "
+      },
+      "LICENSE_MESSAGE_2": {
+        "DNGAMING": "REVISE SU JUGADA!"
       }
     },
     "PRODUCT": {

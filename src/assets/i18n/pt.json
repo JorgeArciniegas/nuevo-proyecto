@@ -246,7 +246,7 @@
         "BETSPLUS": "",
         "BOLIVARBET": "BolívarBet",
         "DEMO_LICENSE": "",
-        "DNGAMING": "",
+        "DNGAMING": "CORRIENDO Y GANANDO!",
         "DORADOBET": "DoradoBet",
         "F2O": "",
         "GENERIC1": "",
@@ -275,7 +275,7 @@
         "BETSPLUS": "The maximum payable amount for a coupon is ",
         "BOLIVARBET": "Proibiu a venda a menores. Este bilhete é constituído em um documento ao portador. O apostador é responsável pela integridade do bilhete e aceita que a aposta impressa sobre ele representa com certeza sua seleção. O valor máximo a pagar de um cupom é ",
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. The maximum payable amount for a coupon is ",
-        "DNGAMING": "The maximum payable amount for a coupon is ",
+        "DNGAMING": "Prohibida la venta a personas menores de 18 años. Revise su ticket, el portador es responsable de la integridad del mismo. Para pagos de premios debe tener ticket en mano. ",
         "DORADOBET": "Proibiu a venda a menores. Este bilhete é constituído em um documento ao portador. O apostador é responsável pela integridade do bilhete e aceita que a aposta impressa sobre ele representa com certeza sua seleção. O valor máximo a pagar de um cupom é ",
         "F2O": "O Cliente declara que conhece e aceita os Termos e Condições disponíveis no nosso website. O cupom só pode ser apresentado e considerado válido se o processo de transação aconteceu exclusivamente pela internet. O jogo PODE causar vício. O jogo é proibido para menores de 18 anos. O valor máximo a pagar de um cupom é ",
         "GENERIC1": "O Cliente declara que conhece e aceita os Termos e Condições disponíveis no nosso website. O cupom só pode ser apresentado e considerado válido se o processo de transação aconteceu exclusivamente pela internet. O jogo PODE causar vício. O jogo é proibido para menores de 18 anos. O valor máximo a pagar de um cupom é ",
@@ -294,6 +294,9 @@
         "TRADABETS": "The maximum payable amount for a coupon is ",
         "UGANBET": "A realização de apostas é totalmente proibida para menores de 18 anos. Jogue com responsabilidade, sem ultrapassar seus limites financeiros. Leia nossos Termos e Condições antes de apostar. O valor máximo a pagar de um cupom é ",
         "UNIVERSALSOFT": "Verifique a precisão do cupom no momento da emissão, não serão aceitas reclamações tardias. O valor máximo a pagar de um cupom é "
+      },
+      "LICENSE_MESSAGE_2": {
+        "DNGAMING": "REVISE SU JUGADA!"
       }
     },
     "PRODUCT": {

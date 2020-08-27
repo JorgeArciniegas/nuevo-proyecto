@@ -245,7 +245,7 @@
         "BETSPLUS": "Address: 54 Rezende street, Harare",
         "BOLIVARBET": "BolívarBet",
         "DEMO_LICENSE": "",
-        "DNGAMING": "",
+        "DNGAMING": "CORRIENDO Y GANANDO!",
         "DORADOBET": "DoradoBet",
         "F2O": "",
         "GENERIC1": "",
@@ -274,7 +274,7 @@
         "BETSPLUS": "All tickets are subject to BetsPlus terms and conditions and betting rules. The maximum payable amount for a coupon is ",
         "BOLIVARBET": "Prohibited the sale to minors. This ticket constitutes a bearer document. The bettor is responsible for the integrity of the ticket, and accepts that the bet printed on it represents with certainty his selection. The maximum payable amount for a coupon is ",
         "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. The maximum payable amount for a coupon is ",
-        "DNGAMING": "The maximum payable amount for a coupon is ",
+        "DNGAMING": "Prohibida la venta a personas menores de 18 años. Revise su ticket, el portador es responsable de la integridad del mismo. Para pagos de premios debe tener ticket en mano. ",
         "DORADOBET": "Prohibited the sale to minors. This ticket constitutes a bearer document. The bettor is responsible for the integrity of the ticket, and accepts that the bet printed on it represents with certainty his selection. The maximum payable amount for a coupon is ",
         "F2O": "The Customer declares to know and accept the Terms and Conditions available on our web site. This coupon is valid only if the transaction took place exclusively via the Internet. Gambling can cause addiction. The game is prohibited for persons under 18 years. The maximum payable amount for a coupon is ",
         "GENERIC1": "The Customer declares to know and accept the Terms and Conditions available on our web site. This coupon is valid only if the transaction took place exclusively via the Internet. Gambling can cause addiction. The game is prohibited for persons under 18 years. The maximum payable amount for a coupon is ",
@@ -293,6 +293,9 @@
         "TRADABETS": "All bets are subject to Tradabets rules (terms and condition). A copy is available on request. Carefully keep the receipt as the document is essential for the winnings collection. The maximum payable amount for a coupon is ",
         "UGANBET": "Betting is strictly prohibited to persons under the age of 18. Play responsibly and without exceeding your financial limits. Read our Terms and Conditions before betting. The maximum payable amount for a coupon is ",
         "UNIVERSALSOFT": "Please check the accuracy of the coupon at the time of issuance, late claims will not be accepted. The maximum payable amount for a coupon is "
+      },
+      "LICENSE_MESSAGE_2": {
+        "DNGAMING": "REVISE SU JUGADA!"
       }
     },
     "PRODUCT": {

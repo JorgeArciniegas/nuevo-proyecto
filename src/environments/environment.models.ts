@@ -58,7 +58,13 @@ export interface PrintSettings {
   isEnabledReprintCoupon: boolean;
   isTrasmitionInfoMessageShown: boolean;
   isShowHeaderMessage: boolean;
-  isEnabledPrintLogoCoupon: boolean;
+  enabledPrintLogo: EnabledPrintLogo;
+  hideMaxPaymentAmount?: boolean;
+}
+
+export interface EnabledPrintLogo {
+  printLogoCoupon: boolean;
+  printLogoPayCancel: boolean;
 }
 
 export enum WidgetTypeLink {

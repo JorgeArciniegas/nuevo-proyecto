@@ -246,7 +246,7 @@
         "BETSPLUS": "",
         "BOLIVARBET": "BolívarBet",
         "DEMO_LICENSE": "",
-        "DNGAMING": "",
+        "DNGAMING": "CORRIENDO Y GANANDO!",
         "DORADOBET": "DoradoBet",
         "F2O": "",
         "GENERIC1": "",
@@ -274,8 +274,8 @@
         "BETSAFI": "The maximum payable amount for a coupon is ",
         "BETSPLUS": "The maximum payable amount for a coupon is ",
         "BOLIVARBET": "Vietata la vendita ai minori. Questo biglietto costituisce un documento al portatore. Lo scommettitore è responsabile dell'integrità del biglietto e accetta che la scommessa stampata su di essa rappresenta con certezza la sua selezione. L'importo massimo pagabile per coupon è di ",
-        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. The maximum payable amount for a coupon is ",
-        "DNGAMING": "The maximum payable amount for a coupon is ",
+        "DEMO_LICENSE": "Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua. ",
+        "DNGAMING": "Prohibida la venta a personas menores de 18 años. Revise su ticket, el portador es responsable de la integridad del mismo. Para pagos de premios debe tener ticket en mano. ",
         "DORADOBET": "Vietata la vendita ai minori. Questo biglietto costituisce un documento al portatore. Lo scommettitore è responsabile dell'integrità del biglietto e accetta che la scommessa stampata su di essa rappresenta con certezza la sua selezione. L'importo massimo pagabile per coupon è di ",
         "F2O": "Il Cliente dichiara di conoscere e di avere accettato i termini e condizioni presenti sul nostro sito web. Il presente coupon è valido solo se il processo della transazione è avvenuto esclusivamente tramite Internet. Il gioco può causare dipendenza patologica. Il gioco è vietato ai minori di 18 anni. L'importo massimo pagabile per coupon è di ",
         "GENERIC1": "Il Cliente dichiara di conoscere e di avere accettato i termini e condizioni presenti sul nostro sito web. Il presente coupon è valido solo se il processo della transazione è avvenuto esclusivamente tramite Internet. Il gioco può causare dipendenza patologica. Il gioco è vietato ai minori di 18 anni. L'importo massimo pagabile per coupon è di ",
@@ -294,6 +294,9 @@
         "TRADABETS": "The maximum payable amount for a coupon is ",
         "UGANBET": "Scommettere è severamente vietato ai minori di 18 anni. Gioca in modo responsabile e senza oltrepassare tuoi limiti finanziari. Calcola sempre le probabilita’ di vincita delle tue scommesse: per imparare a conoscerle leggi la nota informativa disponibile all’interno del regolamento del sito web o presso il ced. L'importo massimo pagabile per coupon è di ",
         "UNIVERSALSOFT": "Si prega di verificare l'esattezza del coupon al momento della consegna, segnalazioni tardive non verranno considerate. L'importo massimo pagabile per coupon è di "
+      },
+      "LICENSE_MESSAGE_2": {
+        "DNGAMING": "REVISE SU JUGADA!"
       }
     },
     "PRODUCT": {

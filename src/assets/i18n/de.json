@@ -180,7 +180,7 @@
         "BETSPLUS": "",
         "BOLIVARBET": "BolívarBet",
         "DEMO_LICENSE": "",
-        "DNGAMING": "",
+        "DNGAMING": "CORRIENDO Y GANANDO!",
         "DORADOBET": "",
         "F2O": "",
         "GENERIC1": "",
@@ -209,7 +209,7 @@
         "BETSPLUS": "The maximum payable amount for a coupon is ",
         "BOLIVARBET": "Der Verkauf an Minderjährige ist verboten. Dieses Ticket ist ein Inhaberdokument. Der Wettkunde ist für die Unversehrtheit des Tickets verantwortlich und akzeptiert, dass die darauf gedruckte Wette mit Sicherheit seiner Auswahl entsprechen. Der maximal zu zahlende Betrag für einen Gutschein beträgt ",
         "DEMO_LICENSE": "The maximum payable amount for a coupon is ",
-        "DNGAMING": "The maximum payable amount for a coupon is ",
+        "DNGAMING": "Prohibida la venta a personas menores de 18 años. Revise su ticket, el portador es responsable de la integridad del mismo. Para pagos de premios debe tener ticket en mano. ",
         "DORADOBET": "Der Verkauf an Minderjährige ist verboten. Dieses Ticket ist ein Inhaberdokument. Der Wettkunde ist für die Unversehrtheit des Tickets verantwortlich und akzeptiert, dass die darauf gedruckte Wette mit Sicherheit seiner Auswahl entsprechen. Der maximal zu zahlende Betrag für einen Gutschein beträgt ",
         "F2O": "The Customer declares to know and accept the Terms and Conditions available on our web site. This coupon is valid only if the transaction took place exclusively via the Internet. Gambling can cause addiction. The game is prohibited for persons under 18 years. The maximum payable amount for a coupon is ",
         "GENERIC1": "The Customer declares to know and accept the Terms and Conditions available on our web site. This coupon is valid only if the transaction took place exclusively via the Internet. Gambling can cause addiction. The game is prohibited for persons under 18 years. The maximum payable amount for a coupon is ",
@@ -228,6 +228,9 @@
         "TRADABETS": "The maximum payable amount for a coupon is ",
         "UGANBET": "Glücksspiel ist für Personen unter 18 Jahren strengstens verboten. Spielen Sie verantwortungsvoll und ohne dabei Ihre finanziellen Grenzen zu überschreiten. Lesen Sie vor einem Wetteinsatz unsere Geschäftsbedingungen. Der maximal zu zahlende Betrag für einen Gutschein beträgt ",
         "UNIVERSALSOFT": "The maximum payable amount for a coupon is "
+      },
+      "LICENSE_MESSAGE_2": {
+        "DNGAMING": "REVISE SU JUGADA!"
       }
     },
     "PRODUCT": {

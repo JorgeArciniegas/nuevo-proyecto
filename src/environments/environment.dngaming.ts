@@ -348,9 +348,13 @@ export const environment: Environment = {
   ],
   showEventId: true,
   printSettings: {
+    hideMaxPaymentAmount: true,
     isEnabledReprintCoupon: true,
-    isTrasmitionInfoMessageShown: true,
+    isTrasmitionInfoMessageShown: false,
     isShowHeaderMessage: true,
-    isEnabledPrintLogoCoupon: false
+    enabledPrintLogo: {
+      printLogoCoupon: true,
+      printLogoPayCancel: false
+    }
   }
 };
