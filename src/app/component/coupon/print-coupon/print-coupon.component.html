@@ -1,10 +1,10 @@
 <div class="printCoupon" *ngIf="printCouponService.couponPrint">
   <div class="header">
-    <img *ngIf="appSetting.printSettings.isEnabledPrintLogoCoupon" class="logo-print-coupon">
+    <img *ngIf="appSettings.printSettings.enabledPrintLogo.printLogoCoupon" class="logo-print-coupon">
     <div class="header-content">
       <div class="padding-5 font-size-normal">
-        <span *ngIf="appSetting.printSettings.isShowHeaderMessage">
-          {{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSetting.license] | translate}}
+        <span *ngIf="appSettings.printSettings.isShowHeaderMessage">
+          {{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSettings.license] | translate}}
 
         </span>
       </div>
@@ -151,11 +151,16 @@
       </div>
     </div>
     <div class="betslip-other-info">
-      <div *ngIf="appSetting.printSettings.isTrasmitionInfoMessageShown"
+      <div *ngIf="appSettings.printSettings.isTrasmitionInfoMessageShown"
         class="message-company-trasmitted font-size-normal">{{'PRINT_COUPON.TRANSMISSION_MESSAGE' | translate}}
         {{ printCouponService.couponPrint?.CouponDateOffset | date : 'dd/MM/yyyy HH:mm:ss' }} </div>
       <div class="message-company-legal font-size-normal">
-        {{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSetting.license] | translate}}</div>
+        <span>{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSettings.license] | translate }}</span>
+        <div *ngIf="hideMaxPaymentAmount" class="text-align-center">
+          {{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE_2.'  + licenseType[appSettings.license] | translate }}</div>
+        <span *ngIf="!hideMaxPaymentAmount">
+          {{userService.limitUser.MaxCombinationBetWin | currency: userService.userCurrency: 'symbol-narrow'}}</span>
+      </div>
     </div>
   </div>
   <div class="footer">

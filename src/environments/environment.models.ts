@@ -58,7 +58,13 @@ export interface PrintSettings {
   isEnabledReprintCoupon: boolean;
   isTrasmitionInfoMessageShown: boolean;
   isShowHeaderMessage: boolean;
-  isEnabledPrintLogoCoupon: boolean;
+  enabledPrintLogo: EnabledPrintLogo;
+  hideMaxPaymentAmount?: boolean;
+}
+
+export interface EnabledPrintLogo {
+  printLogoCoupon: boolean;
+  printLogoPayCancel: boolean;
 }
 
 export enum WidgetTypeLink {
@@ -114,7 +120,12 @@ export enum LICENSE_TYPE {
   BETSPLUS,
   TRADABETS,
   BETPRO,
-  DNGAMING
+  DNGAMING,
+  GENERIC1,
+  GENERIC2,
+  GENERIC3,
+  GENERIC4,
+  MAYABET
 }
 
 export interface TypeCoupon {

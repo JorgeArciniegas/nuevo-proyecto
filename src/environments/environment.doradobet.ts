@@ -27,12 +27,6 @@ export const environment: Environment = {
   },
   showEventId: true,
   couponDirectPlace: true,
-  printSettings: {
-    isEnabledReprintCoupon: true,
-    isTrasmitionInfoMessageShown: false,
-    isShowHeaderMessage: true,
-    isEnabledPrintLogoCoupon: false
-  },
   products: [
     {
       sportId: 8,
@@ -353,5 +347,14 @@ export const environment: Environment = {
         typeLayout: LAYOUT_TYPE.AMERICANROULETTE
       }
     }
-  ]
+  ],
+  printSettings: {
+    isEnabledReprintCoupon: true,
+    isTrasmitionInfoMessageShown: false,
+    isShowHeaderMessage: true,
+    enabledPrintLogo: {
+      printLogoCoupon: true,
+      printLogoPayCancel: false
+    }
+  }
 };

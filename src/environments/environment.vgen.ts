@@ -18,7 +18,7 @@ export const environment: Environment = {
   theme: 'develop',
   faviconPath: 'app/themes/skins/develop/image/Logo-header.png',
   couponDirectPlace: true,
-  currencyDefault: 'EUR',
+  currencyDefault: 'USD',
   supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
   defaultAmount: {
     PresetOne: null,
@@ -350,8 +350,11 @@ export const environment: Environment = {
   showEventId: true,
   printSettings: {
     isEnabledReprintCoupon: true,
-    isTrasmitionInfoMessageShown: true,
+    isTrasmitionInfoMessageShown: false,
     isShowHeaderMessage: true,
-    isEnabledPrintLogoCoupon: false
+    enabledPrintLogo: {
+      printLogoCoupon: true,
+      printLogoPayCancel: false
+    }
   }
 };

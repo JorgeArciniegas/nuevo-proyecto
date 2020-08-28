@@ -1,4 +1,4 @@
-import { AccountDetails, AccountOperatorDetails } from "@elys/elys-api";
+import { AccountDetails, AccountOperatorDetails, CouponLimit } from "@elys/elys-api";
 
 export interface OperatorData {
   ClientId: number;
@@ -11,6 +11,8 @@ export interface DataUser {
   userDetail?: AccountDetails;
   operatorDetail?: AccountOperatorDetails;
   productIsLoaded?: boolean;
+  couponLimit?: CouponLimit;
+
 }
 
 

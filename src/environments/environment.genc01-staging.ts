@@ -12,7 +12,7 @@ export const environment: Environment = {
   // tslint:disable-next-line:max-line-length
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
-  license: LICENSE_TYPE.DEMO_LICENSE,
+  license: LICENSE_TYPE.GENERIC1,
   baseApiUrl: 'https://qacom-apigenc01.ody-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'develop',
@@ -350,8 +350,11 @@ export const environment: Environment = {
   showEventId: true,
   printSettings: {
     isEnabledReprintCoupon: true,
-    isTrasmitionInfoMessageShown: true,
-    isShowHeaderMessage: false,
-    isEnabledPrintLogoCoupon: false
+    isTrasmitionInfoMessageShown: false,
+    isShowHeaderMessage: true,
+    enabledPrintLogo: {
+      printLogoCoupon: false,
+      printLogoPayCancel: false
+    }
   }
 };

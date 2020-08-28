@@ -13,9 +13,12 @@ export const environment: Environment = {
   showEventId: true,
   baseApiUrl: '',
   printSettings: {
-    isEnabledReprintCoupon: false,
-    isTrasmitionInfoMessageShown: true,
-    isShowHeaderMessage: false,
-    isEnabledPrintLogoCoupon: false
+    isEnabledReprintCoupon: true,
+    isTrasmitionInfoMessageShown: false,
+    isShowHeaderMessage: true,
+    enabledPrintLogo: {
+      printLogoCoupon: true,
+      printLogoPayCancel: false
+    }
   }
 };
