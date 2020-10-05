@@ -1,3 +1,4 @@
+// tslint:disable-next-line:max-line-length
 import { VirtualBetCompetitor, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualGetRankByEventResponse } from '@elys/elys-api';
 import { ColoursNumber, ColoursSelection } from './playable-board/templates/colours/colours.models';
 import { KenoNumber } from './playable-board/templates/keno/keno.model';
@@ -92,7 +93,7 @@ export class PlacingEvent {
   specialBetValue: SpecialBet;
   timeBlocked: boolean;
   smartcode?: SmartCodeType;
-  //AmericanRoulette
+  // AmericanRoulette
   rouletteNumber?: RouletteNumber[];
   constructor() {
     this.eventNumber = 0;

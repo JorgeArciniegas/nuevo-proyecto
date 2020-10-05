@@ -80,6 +80,7 @@
       "BetAlreadyPaid": "Este cupón ya ha sido pagado [Cód. ES19]",
       "BetLost": "Apuesta perdida [Cód. ES21]",
       "BetNotPaidBySystem": "Apuesta aún no liquidada por el sistema [Cód. ES17]",
+      "COUPON_CREATION": "Error genérico de las API",
       "CannotCancelHasMarkets": "No se puede cancelar: hay mercados activos [Cód. ES51]",
       "CannotCancelHasSubEvents": "No se puede cancelar: hay subeventos activos [Cód. ES50]",
       "CannotCancelLiveBet": "Las apuestas Live no pueden ser anuladas [Cód. ES37]",

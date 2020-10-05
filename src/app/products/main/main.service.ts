@@ -972,8 +972,8 @@ export class MainService {
         break;
       case SmartCodeType[SmartCodeType.TR]: // Multiple selection Trio in order with return
         // Generate combination by 3 of the first, second and third row selections in order with return.
-        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, true, true);
-        isShortCutPlayeable = true;
+        oddsToSearch = this.generateOdds(areaFuncData.value.toString(), CombinationType.By3, true, true, true);
+        isShortCutPlayeable = false;
         break;
 
       // AMERICAN ROULETTE

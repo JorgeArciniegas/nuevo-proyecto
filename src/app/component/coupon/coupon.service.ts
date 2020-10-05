@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+// tslint:disable-next-line:max-line-length
 import { BetCouponGroup, BetCouponOdd, CancelCouponRequest, CancelCouponResponse, CouponCategory, CouponType, ElysApiService, FlagAsPaidRequest, FlagAsPaidResponse, StagedCouponStatus, ColoursMultiSelectionCouponRequest } from '@elys/elys-api';
+// tslint:disable-next-line:max-line-length
 import { AddColoursNumberRequest, AddNumberRequest, AddOddRequest, AddOddRequestSC, BetCouponOddExtended, CouponServiceMessageType, ElysCouponService, MessageSource, ColoursMultiSelection } from '@elys/elys-coupon';
 import { Observable, Subject, timer } from 'rxjs';
 import { AppSettings } from '../../../../src/app/app.settings';
