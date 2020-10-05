@@ -79,6 +79,7 @@
       "BetAlreadyPaid": "This coupon has already been paid [Code ES19]",
       "BetLost": "Bet lost [Code ES21]",
       "BetNotPaidBySystem": "Bet not yet settled by the system [Code ES17]",
+      "COUPON_CREATION": "Generic API error",
       "CannotCancelHasMarkets": "Impossible to cancel: Active Markets [Code ES51]",
       "CannotCancelHasSubEvents": "Impossible to cancel: Active Subevents [Code ES50]",
       "CannotCancelLiveBet": "Live bets cannot be voided [Code ES37]",

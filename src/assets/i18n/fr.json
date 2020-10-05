@@ -79,6 +79,7 @@
       "BetAlreadyPaid": "Ce coupon a déjà été payé [Code ES19]",
       "BetLost": "Pari perdant [Code ES21]",
       "BetNotPaidBySystem": "Pari non encore réglé par le système [Code ES17]",
+      "COUPON_CREATION": "Erreur API générique",
       "CannotCancelHasMarkets": "Impossible d’annuler : marchés actifs [Code ES51]",
       "CannotCancelHasSubEvents": "Impossible d’annuler : sous événements actifs [Code ES50]",
       "CannotCancelLiveBet": "Les paris en direct ne peuvent pas être annulés [Code ES37]",
