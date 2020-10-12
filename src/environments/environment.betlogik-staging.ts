@@ -16,7 +16,7 @@ export const environment: Environment = {
   baseApiUrl: 'https://qacom-apibetlogik.ody-services.net',
   pageTitle: 'Betlogik - KIOSK',
   theme: 'betlogik',
-  faviconPath: 'app/themes/skins/betlogik/image/Logo-header.png',
+  faviconPath: '',
   currencyDefault: 'EUR',
   supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
   defaultAmount: {
