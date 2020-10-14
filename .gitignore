@@ -57,3 +57,4 @@ Thumbs.db
 .update_backup/package-lock.json
 .update_backup/package.json
 .update_backup/webpack.config.js
+gitversion.exe
