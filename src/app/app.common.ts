@@ -6,6 +6,7 @@ import localeFr from '@angular/common/locales/fr';
 import localeIt from '@angular/common/locales/it';
 import localePt from '@angular/common/locales/pt';
 import localeSq from '@angular/common/locales/sq';
+import localeHt from '@angular/common/locales/fr-HT';
 import { LOCALE_ID } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { PrintOperatorSummaryComponent } from './admin/reports/operator-summary/operator-summary-list/print-operator-summary/print-operator-summary.component';
@@ -27,6 +28,7 @@ registerLocaleData(localeEs);
 registerLocaleData(localePt);
 registerLocaleData(localeSq);
 registerLocaleData(localeDe);
+registerLocaleData(localeHt);
 
 export const componentDeclarations: any[] = [
   AppComponent,
@@ -46,7 +48,7 @@ export const providerDeclarations: any[] = [
     provide: LOCALE_ID,
     deps: [TranslateService],
     // tslint:disable-next-line:typedef
-    useFactory: (confService: TranslateService) => confService.currentLang
+    useFactory: (confService: TranslateService) => (confService.currentLang === 'ht' ? 'fr-HT' : confService.currentLang)
   },
   { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
   CouponService,

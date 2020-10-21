@@ -125,7 +125,8 @@ export enum LICENSE_TYPE {
   GENERIC2,
   GENERIC3,
   GENERIC4,
-  MAYABET
+  MAYABET,
+  GENSOLUTIONS
 }
 
 export interface TypeCoupon {

@@ -69,6 +69,9 @@ export class TranslateUtilityService {
   }
 
   public getCurrentLanguage(): string {
+    if (this.translateService.currentLang === 'ht') {
+      return 'fr-HT';
+    }
     return this.translateService.currentLang;
   }
 
