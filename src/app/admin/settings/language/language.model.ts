@@ -5,5 +5,6 @@ export enum Language {
   fr = 'Français',
   pt = 'Português',
   sq = 'Shqip',
-  de = 'Deutsch'
+  de = 'Deutsch',
+  ht = 'Creole'
 }

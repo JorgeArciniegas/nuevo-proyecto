@@ -160,7 +160,10 @@
             <StackLayout class="hr-dark m-10"></StackLayout>
           </ng-container>
           <Label *ngIf="!hideMaxPaymentAmount" class="p-10 text-left" textWrap="true"
-            text="{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSettings.license] | translate}}{{userService.limitUser.MaxCombinationBetWin | currency: userService.userCurrency: 'symbol-narrow'}}">
+            text="{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSettings.license] | translate}}">
+          </Label>
+          <Label *ngIf="!hideMaxPaymentAmount" class="p-10 text-left" textWrap="true"
+            text="{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE_MAX_PAYABLE.' + licenseType[appSettings.license] | translate}}{{userService.limitUser.MaxCombinationBetWin | currency: userService.userCurrency: 'symbol-narrow'}}">
           </Label>
           <Label *ngIf="hideMaxPaymentAmount" class="p-10 text-left" textWrap="true"
             text="{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSettings.license] | translate}}">

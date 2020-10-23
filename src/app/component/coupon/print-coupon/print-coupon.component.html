@@ -155,7 +155,8 @@
         class="message-company-trasmitted font-size-normal">{{'PRINT_COUPON.TRANSMISSION_MESSAGE' | translate}}
         {{ printCouponService.couponPrint?.CouponDateOffset | date : 'dd/MM/yyyy HH:mm:ss' }} </div>
       <div class="message-company-legal font-size-normal">
-        <span>{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSettings.license] | translate }}</span>
+        <div>{{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE.' + licenseType[appSettings.license] | translate }}</div>
+        <span>{{ 'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE_MAX_PAYABLE.' + licenseType[appSettings.license] | translate }}</span>
         <div *ngIf="hideMaxPaymentAmount" class="text-align-center">
           {{'DYNAMIC_KEYS.PRINT_COUPON.LICENSE_MESSAGE_2.'  + licenseType[appSettings.license] | translate }}</div>
         <span *ngIf="!hideMaxPaymentAmount">
