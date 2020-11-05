@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import { BetCouponOdd, CouponType } from '@elys/elys-api';
 import { BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Subscription } from 'rxjs';
@@ -19,7 +19,7 @@ import { AmericanRouletteRug } from '../../products/main/playable-board/template
   templateUrl: './coupon.component.html',
   styleUrls: ['./coupon.component.scss']
 })
-export class CouponComponent implements OnDestroy {
+export class CouponComponent implements AfterViewInit, OnDestroy {
   @Input()
   public rowHeight: number;
   @Input()
@@ -30,7 +30,7 @@ export class CouponComponent implements OnDestroy {
   public listOdds: BetCouponOddExtended[] = [];
   private remove = false;
   Math = Math;
-
+  @ViewChild('logoForPrint', {static: true}) private logoForPrint: ElementRef;
   // number of odds inserted to coupon
   private couponServiceSubscription: Subscription;
   private couponMessageServiceSubscription: Subscription;
@@ -57,6 +57,7 @@ export class CouponComponent implements OnDestroy {
     if (this.windowSizeService.windowSize.small) {
       this.maxItems = 4;
     }
+  
 
     this.couponServiceSubscription = this.couponService.couponResponse.subscribe(coupon => {
       if (coupon === null) {
@@ -81,6 +82,9 @@ export class CouponComponent implements OnDestroy {
       }
       this.filterOdds();
     });
+  }
+  ngAfterViewInit(): void {
+    this.logoForPrint.nativeElement.classList.add('noshow');
   }
 
   filterOdds(): void {
