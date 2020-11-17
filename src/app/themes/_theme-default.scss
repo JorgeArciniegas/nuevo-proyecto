@@ -37,6 +37,7 @@ html {
 	padding: 0;
 	height: 100vh;
 	width: 100%;
+	@extend %font-family;
 }
 
 .app {
@@ -47,8 +48,6 @@ html {
 	}
 
 	.main-content {
-		@extend %font-family;
-
 		height: 100vh;
 		overflow: hidden;
 
@@ -511,10 +510,10 @@ html {
 				@extend %PRODUCT-CLRS-BG;
 			}
 
-      .PRODUCT-ARLT-BG {
+			.PRODUCT-ARLT-BG {
 				// COLOURS
 				@extend %PRODUCT-ARLT-BG;
-      }
+			}
 
 			.race-control {
 				.time {
