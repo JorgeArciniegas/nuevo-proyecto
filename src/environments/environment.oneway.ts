@@ -18,7 +18,7 @@ export const environment: Environment = {
   faviconPath: 'app/themes/skins/oneway/image/Logo-header.png',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
-  supportedLang: ['en', 'es', 'pt'],
+  supportedLang: ['en', 'es', 'pt', 'ht'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
