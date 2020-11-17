@@ -19,7 +19,7 @@ export const environment: Environment = {
   faviconPath: 'app/themes/skins/develop/image/Logo-header.png',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
-  supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
+  supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de', 'ht'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
