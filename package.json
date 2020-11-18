@@ -1,6 +1,6 @@
 {
   "name": "vdesk",
-  "version": "0.40.0",
+  "version": "0.41.0",
   "nativescript": {
     "id": "com.vgen.vdesk",
     "tns-android": {
@@ -85,6 +85,7 @@
     "karma-jasmine-html-reporter": "^1.4.2",
     "nativescript-dev-webpack": "^1.2.1",
     "protractor": "^5.4.2",
+    "tns-android": "6.3.0-2019-11-05-114730-01",
     "tns-platform-declarations": "6.0.1",
     "ts-node": "~8.4.1",
     "tslint": "~5.20.0",
