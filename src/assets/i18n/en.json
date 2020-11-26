@@ -265,7 +265,7 @@
         "SOFT": "Soft Apuestas Virtuales",
         "SPORTRACE": "Sport Race Apuestas Virtuales",
         "TRADABETS": "TRADABETS",
-        "UGANBET": "UganBet",
+        "UGANBET": "",
         "UNIVERSALSOFT": "UniversalSoft"
       },
       "LICENSE_MESSAGE": {
@@ -295,7 +295,7 @@
         "SOFT": "Todas las apuestas están sujetas a las reglas de apuestas de Soft (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la recolección de ganancias.",
         "SPORTRACE": "Todas las apuestas están sujetas a las reglas de apuestas de Sport Race (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la recolección de ganancias.",
         "TRADABETS": "All bets are subject to Tradabets rules (terms and condition). A copy is available on request. Carefully keep the receipt as the document is essential for the winnings collection.",
-        "UGANBET": "Betting is strictly prohibited to persons under the age of 18. Play responsibly and without exceeding your financial limits. Read our Terms and Conditions before betting.",
+        "UGANBET": "Read our Terms and Conditions before betting. All Bets accepted are subject to SKY BET Rules Displayed in our Shops. CHECK YOUR TICKET(Receipt)FOR ACCURACY",
         "UNIVERSALSOFT": "Please check the accuracy of the coupon at the time of issuance, late claims will not be accepted."
       },
       "LICENSE_MESSAGE_MAX_PAYABLE": {
@@ -325,7 +325,7 @@
         "SOFT": "El importe máximo a pagar por un cupón es ",
         "SPORTRACE": "El importe máximo a pagar por un cupón es ",
         "TRADABETS": "The maximum payable amount for a coupon is ",
-        "UGANBET": "Le montant maximum payable pour un coupon est de ",
+        "UGANBET": "The maximum payable amount for a coupon is ",
         "UNIVERSALSOFT": "Le montant maximum payable pour un coupon est de "
       },
       "LICENSE_MESSAGE_2": {

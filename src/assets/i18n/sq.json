@@ -192,7 +192,7 @@
         "SOFT": "Soft Apuestas Virtuales",
         "SPORTRACE": "Sport Race Apuestas Virtuales",
         "TRADABETS": "",
-        "UGANBET": "UganBet",
+        "UGANBET": "",
         "UNIVERSALSOFT": "UniversalSoft"
       },
       "LICENSE_MESSAGE": {
@@ -221,8 +221,38 @@
         "SOFT": "Todas las apuestas están sujetas a las reglas de apuestas de Soft (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la recolección de ganancias. El importe máximo a pagar por un cupón es ",
         "SPORTRACE": "Todas las apuestas están sujetas a las reglas de apuestas de Sport Race (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la recolección de ganancias. El importe máximo a pagar por un cupón es ",
         "TRADABETS": "The maximum payable amount for a coupon is ",
-        "UGANBET": "Vendosja bastit është rreptësisht e ndaluar për personat nën moshën 21 vjeç. Luaj me përgjegjësi dhe pa kaluar limitet tuaja financiare. Lexoni Termat dhe Kushtet tona përpara se të bastoni. Shuma maksimale e pagueshme për një kupon është ",
+        "UGANBET": "",
         "UNIVERSALSOFT": "Ju lutemi kontrolloni saktësinë e kuponit në kohën e lëshimit, kërkesat e vonuara nuk do të pranohen. Shuma maksimale e pagueshme për një kupon është "
+      },
+      "LICENSE_MESSAGE_MAX_PAYABLE": {
+        "APUESTAS_DOMINICANAS": "",
+        "BETESE": "",
+        "BETLOGIK": "",
+        "BETPRO": "",
+        "BETSAFI": "",
+        "BETSPLUS": "",
+        "BOLIVARBET": "",
+        "DEMO_LICENSE": "",
+        "DNGAMING": "",
+        "DORADOBET": "",
+        "F2O": "",
+        "GENERIC1": "",
+        "GENERIC2": "",
+        "GENERIC3": "",
+        "GENERIC4": "",
+        "GENSOLUTIONS": "",
+        "HBG_PERU": "",
+        "HOMERUN": "",
+        "KYRON": "",
+        "MAYABET": "",
+        "ONEWAY": "",
+        "SHAWIS": "",
+        "SOCCERBET": "",
+        "SOFT": "",
+        "SPORTRACE": "",
+        "TRADABETS": "",
+        "UGANBET": "Shuma maksimale e pagueshme për një kupon është ",
+        "UNIVERSALSOFT": ""
       },
       "LICENSE_MESSAGE_2": {
         "DNGAMING": "REVISE SU JUGADA!"

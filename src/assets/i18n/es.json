@@ -264,7 +264,7 @@
         "SOFT": "Soft Apuestas Virtuales",
         "SPORTRACE": "Sport Race Apuestas Virtuales",
         "TRADABETS": "",
-        "UGANBET": "UganBet",
+        "UGANBET": "",
         "UNIVERSALSOFT": "UniversalSoft"
       },
       "LICENSE_MESSAGE": {
@@ -295,7 +295,7 @@
         "SOFT": "Todas las apuestas están sujetas a las reglas de apuestas de Soft (términos y condiciones).Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la recolección de ganancias.",
         "SPORTRACE": "Todas las apuestas están sujetas a las reglas de apuestas de Sport Race (términos y condiciones). Una copia está disponible a petición. Conserve cuidadosamente el recibo ya que el documento es esencial para la re-colección de ganancias.",
         "TRADABETS": "",
-        "UGANBET": "El juego está prohibido a los menores de edad. Juega responsablemente y sin exceder tus límites financieros. Lee nuestros términos y condiciones antes de apostar.",
+        "UGANBET": "",
         "UNIVERSALSOFT": "Prohibida la venta a menores de edad. Este tiquete se constituye en un documento al portador. El apostador es responsable de la integridad del tiquete, y acepta que la apuesta impresa en éste representa con certeza su selección."
       },
       "LICENSE_MESSAGE_MAX_PAYABLE": {
