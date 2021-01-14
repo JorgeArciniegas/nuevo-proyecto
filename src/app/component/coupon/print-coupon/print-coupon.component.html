@@ -59,7 +59,7 @@
           <div class="row-event font-size-normal" *ngFor="let match of groupCat.value">
             <div class="match-label" *ngIf="match.MarketName">
               <div class="content">
-                [q {{ match.OddValue }}] {{ match.MarketName }}
+                [{{ 'ODDS_INITIAL' | translate }} {{ match.OddValue }}] {{ match.MarketName }}
               </div>
               <div class="separator"></div>
             </div>

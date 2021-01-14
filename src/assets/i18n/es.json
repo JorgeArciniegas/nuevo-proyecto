@@ -606,6 +606,7 @@
   "NO_WINNING_COLOUR": "Ningún color",
   "ODD": "IMPAR",
   "ODDS": "Cuota",
+  "ODDS_INITIAL": "q",
   "OPERATOR": "Operador",
   "OPERATOR.CREATE_NEW": "Crear nuevo operador",
   "OPERATOR.CREATE_SUCCESS_MESSAGE": "Operador creado con éxito",
