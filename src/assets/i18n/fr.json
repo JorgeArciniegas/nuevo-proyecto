@@ -606,6 +606,7 @@
   "NO_WINNING_COLOUR": "Pas de couleur gagnante",
   "ODD": "IMPAIR",
   "ODDS": "Cotes",
+  "ODDS_INITIAL": "q",
   "OPERATOR": "Opérateur",
   "OPERATOR.CREATE_NEW": "Créer un nouveau compte",
   "OPERATOR.CREATE_SUCCESS_MESSAGE": "Opérateur créé correctement",

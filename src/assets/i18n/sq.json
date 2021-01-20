@@ -431,6 +431,7 @@
   "NO_WINNING_COLOUR": "NO_WINNING_COLOUR",
   "ODD": "TEK",
   "ODDS": "Kuote",
+  "ODDS_INITIAL": "q",
   "OPERATOR": "Operator",
   "OPERATOR_SUMMARY": "Përmbledhje Operatorit",
   "OPERATOR_TYPE": "Tipi operatorit",

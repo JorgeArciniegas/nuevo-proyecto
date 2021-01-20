@@ -65,7 +65,7 @@
             <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-5 p-b-5" flexWrap="wrap"
               *ngFor="let match of groupCat.value">
               <FlexboxLayout flexDirection="row" flexWrap="wrap">
-                <Label class="p-l-5" text="[q {{ match.OddValue }}] {{ match.MarketName }}"></Label>
+                <Label class="p-l-5" text="[{{ 'ODDS_INITIAL' | translate }} {{ match.OddValue }}] {{ match.MarketName }}"></Label>
                 <Label class="separator"></Label>
               </FlexboxLayout>
               <FlexboxLayout flexDirection="row" justifyContent="flex-end" class="p-b-5" flexWrap="wrap">

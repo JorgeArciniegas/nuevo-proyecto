@@ -6,12 +6,14 @@
 
 @media print {
 	.printReceipt {
+		font-weight: 600;
+		size: portrait;
 		width: 100%;
 		-webkit-print-color-adjust: exact;
 
 		.header {
 			.header-content {
-				font-size: 2mm;
+				font-size: 3mm;
 				// border: 1px solid;
 				padding: 0.5mm 1mm;
         text-align: center;
@@ -21,9 +23,9 @@
 
 		.content {
 			padding: 0.5mm 1mm;
-			font-size: 2.5mm;
-      width: 100%;
-      text-align: center;
+			font-size: 3mm;
+      		width: 100%;
+      		text-align: center;
 			.bet-info {
 				display: block;
 			}

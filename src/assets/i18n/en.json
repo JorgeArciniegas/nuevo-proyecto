@@ -605,6 +605,7 @@
   "NO_WINNING_COLOUR": "No winning colour",
   "ODD": "ODD",
   "ODDS": "Odds",
+  "ODDS_INITIAL": "q",
   "OPERATOR": "Operator",
   "OPERATOR.CREATE_NEW": "Create new operator",
   "OPERATOR.CREATE_SUCCESS_MESSAGE": "Operator successfully created",
