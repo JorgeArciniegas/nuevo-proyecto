@@ -1,7 +1,8 @@
 #printing {
-	font-size: 20px;
+	font-size: 22px;
 	background: white;
-	font-weight: bold;
+	font-weight: 900;
+	size: portrait;
 	color: #000;
 	.printbox {
 		margin: 150;
@@ -16,15 +17,19 @@
 	.h2,
 	.h3,
 	.h4 {
-		font-weight: bold;
+		font-weight: 900;
 		color: #000;
 	}
 	.h2 {
-		font-size: 26px;
+		font-size: 28px;
 	}
 
 	.h3,
 	.h4 {
-		font-size: 22px;
+		font-size: 26px;
+	}
+
+	.font-weight-bold {
+		font-weight: 900;
 	}
 }
