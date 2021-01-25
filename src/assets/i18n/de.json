@@ -467,5 +467,7 @@
     "TV_SETTING": "TV Einstellungen",
     "V_BOX": "V-Box"
   },
-  "VOIDED": "Annulliert"
+  "VOIDED": "Annulliert",
+  "Over": "ÜBER",
+  "Under": "UNTER"
 }

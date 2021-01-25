@@ -700,5 +700,7 @@
   },
   "VOIDED":"Ki te anile",
   "WARNING":"Avetisman",
-  "WON":"Ki te genyen"
+  "WON":"Ki te genyen",
+  "Over": "Pi Plis",
+  "Under": "Pi Piti"
 }
