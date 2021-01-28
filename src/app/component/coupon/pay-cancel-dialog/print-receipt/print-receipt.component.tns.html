@@ -12,7 +12,7 @@
             src="~/app/themes/skins/{{appSettings.theme}}/image/Logo-coupon.png"></Image>
         </StackLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-b-10" flexWrap="wrap">
-          <Label class="h4 p-10 text-center"
+          <Label class="h4 p-10 text-center" *ngIf="appSettings.printSettings.isShowHeaderMessage"
             text="{{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSettings.license] | translate}}"
             textWrap="true"></Label>
         </FlexboxLayout>
