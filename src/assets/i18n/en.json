@@ -699,5 +699,8 @@
   },
   "VOIDED": "Voided",
   "WARNING": "Warning",
-  "WON": "Won"
+  "WON": "Won",
+  "Over": "OVER",
+  "Under": "UNDER"
+
 }
