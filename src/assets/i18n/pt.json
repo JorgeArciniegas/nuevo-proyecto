@@ -699,5 +699,7 @@
   },
   "VOIDED": "Anulada",
   "WARNING": "Aviso",
-  "WON": "Ganhas"
+  "WON": "Ganhas",
+  "Over": "MAIS",
+  "Under": "MENOS"
 }

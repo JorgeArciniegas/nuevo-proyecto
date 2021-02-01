@@ -25,7 +25,7 @@
                 <span class="selection-name"
                   *ngIf="(market.tp === marketEnum['1X2'] && (selection.tp === 1 || selection.tp === 3)) ">{{ selection.nm | competitorName: eventDetails.tm }}</span>
                 <span class="selection-name"
-                  *ngIf="market.tp !== marketEnum['1X2']">{{ selection.nm | extractSign | uppercase }}</span>
+                  *ngIf="market.tp !== marketEnum['1X2']">{{ selection.nm | extractSign | translate | uppercase }}</span>
                 <span class="selection-value">{{ selection.ods[0].vl | number: '1.2-2'}}</span>
               </div>
             </button>
@@ -43,7 +43,7 @@
             class="btn-reset btn-default btn-success radius-5 elevation-z5"
             [ngClass]="{'actived': oddsSelected?.includes(market.sls[index].id)}" fxLayout="column"
             fxLayoutAlign="center center">
-            <span class="selection-name">{{market.sls[index].nm | translate | uppercase}}</span>
+            <span class="selection-name">{{ market.sls[index].nm | translate | uppercase}}</span>
             <span class="selection-value">{{market.sls[index].ods[0].vl | number: '1.2-2'}}</span>
           </button>
         </mat-grid-tile>

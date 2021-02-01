@@ -700,5 +700,7 @@
   },
   "VOIDED": "Anulado",
   "WARNING": "Aviso",
-  "WON": "Ganado"
+  "WON": "Ganado",
+  "Over": "ALTA",
+  "Under": "BAJA"
 }

@@ -23,7 +23,7 @@
                 <Label text="{{ selection.nm | competitorName: eventDetails.tm }}"
                   *ngIf="market.tp === marketEnum['1X2'] && (selection.tp === 1 || selection.tp === 3)"
                   horizontalAlignment="center" class="selection-name"></Label>
-                <Label text="{{ selection.nm | extractSign | uppercase }}" *ngIf="market.tp !== marketEnum['1X2']"
+                <Label text="{{ selection.nm | extractSign | translate | uppercase }}" *ngIf="market.tp !== marketEnum['1X2']"
                   horizontalAlignment="center" class="selection-name"></Label>
                 <Label text="{{ selection.ods[0].vl | number: '1.2-2' }}" horizontalAlignment="center"
                   class="selection-value"></Label>

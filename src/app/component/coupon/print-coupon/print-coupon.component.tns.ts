@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CouponStatus, CouponType, StagedCoupon } from '@elys/elys-api';
 import { Printer } from 'nativescript-printer';
+import { Subscription, timer } from 'rxjs';
 import { fromNativeSource, ImageSource } from 'tns-core-modules/image-source/image-source';
 import { LICENSE_TYPE } from '../../../../environments/environment.models';
 import { AppSettings } from '../../../app.settings';
@@ -15,7 +16,7 @@ const ZXing = require('@elys/nativescript-zxing');
   styleUrls: ['./print-coupon.component.scss']
 })
 
-export class PrintCouponComponent implements OnInit {
+export class PrintCouponComponent implements OnInit, OnDestroy {
   licenseType: typeof LICENSE_TYPE = LICENSE_TYPE;
   couponPrint: StagedCoupon;
   printer: Printer = new Printer();
@@ -27,6 +28,7 @@ export class PrintCouponComponent implements OnInit {
 
   maxCombinationBetWin: number;
 
+  subscriptions: Subscription = new Subscription();
   get hideMaxPaymentAmount(): boolean {
     return this.appSettings.printSettings.hasOwnProperty('hideMaxPaymentAmount') ?
       this.appSettings.printSettings.hideMaxPaymentAmount : false;
@@ -45,6 +47,12 @@ export class PrintCouponComponent implements OnInit {
 
     this.generateQrCode();
     this.generateBarCode128();
+
+    this.subscriptions.add(timer(100).subscribe(()=>this.print()));
+
+  }
+  ngOnDestroy(): void { 
+    this.subscriptions.unsubscribe();
   }
 
   print(): void {
