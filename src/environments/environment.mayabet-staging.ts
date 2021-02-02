@@ -12,12 +12,11 @@ export const environment: Environment = {
   // tslint:disable-next-line:max-line-length
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
-  license: LICENSE_TYPE.DEMO_LICENSE,
+  license: LICENSE_TYPE.MAYABET,
   baseApiUrl: 'https://qacom-apimayabet.ody-services.net',
-  pageTitle: 'VDESK-KIOSK',
-  theme: 'develop',
-  faviconPath: 'app/themes/skins/develop/image/Logo-header.png',
-  couponDirectPlace: false,
+  pageTitle: 'Mayabet - KIOSK',
+  theme: 'mayabet',
+  faviconPath: 'app/themes/skins/mayabet/image/Logo-header.png',
   currencyDefault: 'EUR',
   supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de', 'ht'],
   defaultAmount: {
@@ -26,6 +25,8 @@ export const environment: Environment = {
     PresetThree: null,
     PresetFour: null
   },
+  showEventId: true,
+  couponDirectPlace: true,
   products: [
     {
       sportId: 8,
@@ -347,7 +348,6 @@ export const environment: Environment = {
       }
     }
   ],
-  showEventId: true,
   printSettings: {
     isEnabledReprintCoupon: true,
     isTrasmitionInfoMessageShown: false,
