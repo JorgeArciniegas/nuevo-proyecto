@@ -5,35 +5,11 @@ const { execSync } = require("child_process");
 const path = require('path');
 const parser = require('xml2json');
 
-// avanzamneto di versione nel manifest android
-let xmlData;
-// xml option
-var options = {
-  object: false,
-  reversible: true,
-  coerce: true,
-  sanitize: true,
-  trim: true,
-  arrayNotation: false
-};
 
-const manifestAndroid = resolve(__dirname, 'App_Resources', 'Android', 'src', 'main', 'AndroidManifest.xml');
-// read file and save the version change to variable
-fs.readFile(manifestAndroid, function (err, file) {
-  const elem = JSON.parse(parser.toJson(file, options));
-  console.log(`ANDROID VERSION CHANGE FROM ${elem.manifest['android:versionName']} to ${version}`);
-  elem.manifest['android:versionName'] = version;
-  xmlData = parser.toXml(JSON.stringify(elem));
-});
-
-// write data to xml
-setTimeout(() => {
-  fs.writeFileSync(manifestAndroid, `<?xml version="1.0" encoding="utf-8"?>${xmlData}`);
-  startBuild();
-}, 1000);
-
+startBuild();
 // Start the builds for all brands - only production
 function startBuild() {
+  const xmlFile = resolve(__dirname, 'App_Resources', 'Android', 'src', 'main', 'res', 'values', 'strings.xml');
   // clear dist folder by old version build
   const folder_to_save_build = resolve(__dirname, 'dist', 'android');
   fs.readdir(folder_to_save_build, (err, files) => {
@@ -52,13 +28,25 @@ function startBuild() {
     files.forEach(file => {
       try {
         if (file) {
+        
           const nameEnv = file.split('.');
           if (nameEnv.length === 3 && !nameEnv[1].includes('staging')) {
+            // CONFIGURAZIONE MANIFEST ANDROID
+            const xmlDataBrand =`<resources>
+            <string name="app_name">${nameEnv[1]}</string>
+            <string name="title_activity_kimera">${nameEnv[1]}-${version}</string>
+            <string name="version">${version}</string>
+            </resources>`;
+            console.log(`WRITE FILE CONFIG FOR  ${nameEnv[1]}`);
+            fs.writeFileSync(xmlFile, `<?xml version="1.0" encoding="utf-8"?>${xmlDataBrand}`);
+            console.log('---------------------------');
+
             console.log(`FILE NAME: ${file}`);
             console.log(`Name environment: ${nameEnv[1]}`);
             let tmpString = builder_String;
             tmpString += `--env.environment="${nameEnv[1]}-prod" --copy-to dist/android/${nameEnv[1]}-${version}.apk --key-store-path vgen.keystore --key-store-alias vgen --key-store-password 123456a --key-store-alias-password 123456a`;
             console.log('START BUILDER NATIVESCRIPT');
+
             const e = execSync(tmpString);
             console.log(`finish data ... ${e}`);
           }

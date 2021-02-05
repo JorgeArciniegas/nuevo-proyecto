@@ -16,35 +16,23 @@ process.argv.forEach(function (val, index, array) {
 });
 
 
-// avanzamneto di versione nel manifest android
-let xmlData;
-// xml option
-var options = {
-  object: false,
-  reversible: true,
-  coerce: true,
-  sanitize: true,
-  trim: true,
-  arrayNotation: false
-};
-
-
 let builder_String = "tns build android --release --env.uglify --env.snapshot ";
 builder_String += `--env.environment="${ItemArgs['env']}" --copy-to dist/android/${ItemArgs['env']}-${version}.apk --key-store-path vgen.keystore --key-store-alias vgen --key-store-password 123456a --key-store-alias-password 123456a`;
 
+const name_brand = ItemArgs['env'].split('-');
 
-const manifestAndroid = resolve(__dirname, 'App_Resources', 'Android', 'src', 'main', 'AndroidManifest.xml');
 // read file and save the version change to variable
-fs.readFile(manifestAndroid, function (err, file) {
-  const elem = JSON.parse(parser.toJson(file, options));
-  console.log(`ANDROID VERSION CHANGE FROM ${elem.manifest['android:versionName']} to ${version}`);
-  elem.manifest['android:versionName'] = version;
-  xmlData = parser.toXml(JSON.stringify(elem));
-});
+const xmlFileconfig = resolve(__dirname, 'App_Resources', 'Android', 'src', 'main', 'res', 'values', 'strings.xml');
+
+const xmlData =`<resources>
+<string name="app_name">${name_brand[0]}</string>
+<string name="title_activity_kimera">${name_brand[0]}-${version}</string>
+<string name="version">${version}</string>
+</resources>`;
 
 // write data to xml
 setTimeout(() => {
-  fs.writeFileSync(manifestAndroid, `<?xml version="1.0" encoding="utf-8"?>${xmlData}`);
+  fs.writeFileSync(xmlFileconfig, `<?xml version="1.0" encoding="utf-8"?>${xmlData}`);
   startBuild();
 }, 1000);
 
