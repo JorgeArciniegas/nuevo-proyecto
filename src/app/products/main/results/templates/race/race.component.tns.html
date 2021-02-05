@@ -1,4 +1,4 @@
-<GridLayout rows="*" columns="*,*,*,*" class="result-list-race">
+<GridLayout rows="*" columns="*,*,*,*" class="result-list-race" *ngIf="results">
   <GridLayout col="{{i}}" class="card-box-result" rows="*,*" columns="*" *ngFor="let race of results; let i = index;">
     <StackLayout row="0" class="header radius-5">
       <Label text="{{race.eventLabel}}" class="raceNumber" horizontalAlignment="center"

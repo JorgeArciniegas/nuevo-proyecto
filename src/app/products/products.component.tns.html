@@ -79,7 +79,7 @@
           <Label text="{{'DYNAMIC_KEYS.COUPON_WARNING.' + couponService.warningMessage | translate}}" class="amount"
             [ngClass]="{'small': windowSizeService.windowSize.small}" textWrap="true"></Label>
         </StackLayout>
-      </GridLayout>
+      </GridLayout> <!-- /Coupon message area -->
       <!-- Polyfunctional area / Smartcode -->
       <StackLayout row="2" [timeBlocked]="mainService.placingEvent.timeBlocked" app-display>
       </StackLayout>
@@ -87,7 +87,6 @@
       <StackLayout row="3">
         <GridLayout rows="*" columns="*" class="card" app-advance-game
           [timeBlocked]="mainService.placingEvent.timeBlocked">
-
         </GridLayout>
       </StackLayout>
       <!-- Keyboard -->
@@ -104,6 +103,7 @@
       </GridLayout>
     </GridLayout>
   </GridLayout>
+  <!-- LOCK AREA COL 1 -->
   <GridLayout col="1" class="overlay radius-5" marginRight="3"
     *ngIf="mainService.placingEvent.timeBlocked || (userService.isModalOpen && !userService.isBtnCalcEditable)">
     <StackLayout verticalAlignment="center">

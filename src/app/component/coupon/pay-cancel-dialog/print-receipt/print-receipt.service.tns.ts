@@ -9,8 +9,6 @@ import { Receipt } from './print-receipt.model';
 })
 export class PrintReceiptService {
   receipt: Receipt;
-  printer: Printer = new Printer();
-  view: StackLayout;
 
   constructor(private router: RouterService) { }
 
