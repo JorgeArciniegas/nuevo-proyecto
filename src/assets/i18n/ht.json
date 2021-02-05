@@ -617,7 +617,7 @@
   "OPERATOR_SUMMARY":"Rezime Operatè",
   "OPERATOR_TYPE":"Tip Operatè",
   "OUTCOME":"Rezilta",
-  "OVER":"FINI",
+  "OVER":"PI PLIS PASE",
   "PAGE":"Paj",
   "PAGE.OF":" nan",
   "PAID":"Peye",
@@ -701,6 +701,6 @@
   "VOIDED":"Ki te anile",
   "WARNING":"Avetisman",
   "WON":"Ki te genyen",
-  "Over": "Pi Plis",
-  "Under": "Pi Piti"
+  "Over": "Plis Pase",
+  "Under": "Pi Piti Pase"
 }
