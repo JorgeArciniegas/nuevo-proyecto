@@ -23,7 +23,7 @@ function startBuild() {
   });
 
   const folder = resolve(__dirname, 'src', 'environments');
-  const builder_String = "tns build android --release --env.uglify --env.snapshot ";
+  const builder_String = "tns build android --release --env.uglify --env.snapshotInDocker ";
   fs.readdir(folder, (err, files) => {
     files.forEach(file => {
       try {
