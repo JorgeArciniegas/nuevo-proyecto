@@ -16,7 +16,7 @@ process.argv.forEach(function (val, index, array) {
 });
 
 
-let builder_String = "tns build android --release --env.uglify --env.snapshot ";
+let builder_String = "tns build android --release --env.uglify --env.snapshotInDocker ";
 builder_String += `--env.environment="${ItemArgs['env']}" --copy-to dist/android/${ItemArgs['env']}-${version}.apk --key-store-path vgen.keystore --key-store-alias vgen --key-store-password 123456a --key-store-alias-password 123456a`;
 
 const name_brand = ItemArgs['env'].split('-');
