@@ -1,21 +1,22 @@
-import { AfterViewChecked, AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import { BetCouponOdd, CouponType } from '@elys/elys-api';
 import { BetCouponOddExtended } from '@elys/elys-coupon/lib/elys-coupon.models';
 import { Subscription } from 'rxjs';
 import { LAYOUT_TYPE, TypeCoupon } from '../../../../src/environments/environment.models';
 import { AppSettings } from '../../app.settings';
 import { ColourGameId } from '../../products/main/colour-game.enum';
+import { AmericanRouletteRug } from '../../products/main/playable-board/templates/american-roulette/american-roulette.models';
 import { Colour } from '../../products/main/playable-board/templates/colours/colours.models';
-import { BetOdd, PolyfunctionalArea, Market } from '../../products/products.model';
+import { BetOdd, Market, PolyfunctionalArea } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { UserService } from '../../services/user.service';
 import { TranslateUtilityService } from '../../services/utility/translate-utility.service';
 import { WindowSizeService } from '../../services/utility/window-size/window-size.service';
 import { CouponService } from './coupon.service';
-import { AmericanRouletteRug } from '../../products/main/playable-board/templates/american-roulette/american-roulette.models';
 
 @Component({
-  selector: 'app-coupon',
+  moduleId: module.id,
+  selector: 'app-coupon, [app-coupon]',
   templateUrl: './coupon.component.html',
   styleUrls: ['./coupon.component.scss']
 })
@@ -33,8 +34,7 @@ export class CouponComponent implements AfterViewInit, OnDestroy {
   @ViewChild('logoForPrint', {static: true}) private logoForPrint: ElementRef;
   // number of odds inserted to coupon
   private couponServiceSubscription: Subscription;
-  private couponMessageServiceSubscription: Subscription;
-
+  
   // Type coupon
   public get couponLayout(): TypeCoupon {
     return this.productService.product.typeCoupon;
@@ -57,7 +57,6 @@ export class CouponComponent implements AfterViewInit, OnDestroy {
     if (this.windowSizeService.windowSize.small) {
       this.maxItems = 4;
     }
-  
 
     this.couponServiceSubscription = this.couponService.couponResponse.subscribe(coupon => {
       if (coupon === null) {
@@ -84,7 +83,9 @@ export class CouponComponent implements AfterViewInit, OnDestroy {
     });
   }
   ngAfterViewInit(): void {
-    this.logoForPrint.nativeElement.classList.add('noshow');
+    if(this.logoForPrint){
+      this.logoForPrint.nativeElement.classList.add('noshow');
+    }
   }
 
   filterOdds(): void {

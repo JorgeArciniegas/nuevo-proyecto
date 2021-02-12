@@ -1,3 +1,4 @@
+import { Environment } from './environment.models';
 import { environment as devEnvironment } from './environment';
 // apuestas dominicanas
 import { environment as apuestasDominicanasEnvironment } from './environment.apuestas-dominicanas';
@@ -47,7 +48,7 @@ import { environment as kyronStagingEnvironment } from './environment.kyron-stag
 // mayabet
 import { environment as mayabetEnvironment } from './environment.mayabet';
 import { environment as mayabetStagingEnvironment } from './environment.mayabet-staging';
-import { Environment } from './environment.models';
+
 // oneway
 import { environment as onewayEnvironment } from './environment.oneway';
 import { environment as onewayStagingEnvironment } from './environment.oneway-staging';

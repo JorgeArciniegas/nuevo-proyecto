@@ -12,7 +12,7 @@ import { ProductsService } from './products.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'app-products, [app-products]',
+  selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })

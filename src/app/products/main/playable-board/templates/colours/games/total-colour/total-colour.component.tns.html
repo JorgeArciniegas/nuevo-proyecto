@@ -8,7 +8,6 @@
       (tap)="onNumberClick(totalColourSelection)">
       <StackLayout *ngIf="!selectionQueue.includes(totalColourSelection)" horizontalAlignment="center">
         <Label horizontalAlignment="center" text="{{ totalColourSelection.name | translate | uppercase }}"></Label>
-        <Label horizontalAlignment="center" text="3.80"></Label>
       </StackLayout>
       <StackLayout *ngIf="selectionQueue.includes(totalColourSelection)">
         <ActivityIndicator busy="true" width="50" height="500"></ActivityIndicator>
@@ -22,7 +21,6 @@
     (tap)="onNumberClick(totalColourSelections[3])">
     <StackLayout *ngIf="!selectionQueue.includes(totalColourSelections[3])" horizontalAlignment="center">
       <Label horizontalAlignment="center" text="{{ totalColourSelections[3].name | translate | uppercase }}"></Label>
-      <Label horizontalAlignment="center" text="4"></Label>
     </StackLayout>
     <StackLayout *ngIf="selectionQueue.includes(totalColourSelections[3])">
       <ActivityIndicator busy="true" width="50" height="500"></ActivityIndicator>

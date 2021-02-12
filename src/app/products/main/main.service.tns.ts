@@ -175,7 +175,7 @@ export class MainService {
     this.eventDetails.currentEvent = 0;
 
     this.loadEvents();
-    this.resultService.loadLastResult(false);
+    this.resultService.loadLastResult();
   }
 
   createPlayerList(): void {
@@ -289,8 +289,10 @@ export class MainService {
       }
     } catch (err) {
       console.log('main --> loadEvents : ', err);
-      this.resetPlayEvent();
-      this.initEvents();
+      timer(5000).subscribe( ()=>{
+        this.resetPlayEvent();
+        this.initEvents();  
+      })
     }
   }
 

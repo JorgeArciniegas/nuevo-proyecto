@@ -5,31 +5,31 @@
     <Button (tap)="printService.resetPrint()" class="btn btn-accent" text="{{ 'DELETE' | translate }}"></Button>
   </FlexboxLayout>
   <ScrollView>
-    <StackLayout #printingData orientation="horizontal" class="m-10 p-50">
-      <FlexboxLayout flexDirection="column" class="printbox">
-        <StackLayout class="logo-print-coupon">
-          <Image *ngIf="appSettings.printSettings.enabledPrintLogo.printLogoPayCancel" stretch="aspectFill"
+    <StackLayout #printingData orientation="vertical" verticalAlignment="top" class="m-10 p-10" width="560">
+      <FlexboxLayout flexDirection="column" class="printbox"  width="560">
+        <StackLayout *ngIf="appSettings.printSettings.enabledPrintLogo.printLogoPayCancel">
+          <Image stretch="aspectFill"
             src="~/app/themes/skins/{{appSettings.theme}}/image/Logo-coupon.png"></Image>
         </StackLayout>
-        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-b-10" flexWrap="wrap">
-          <Label class="h4 p-10 text-center" *ngIf="appSettings.printSettings.isShowHeaderMessage"
+        <FlexboxLayout flexDirection="row" class="p-b-10" *ngIf="appSettings.printSettings.isShowHeaderMessage">
+          <Label class="h4 text-center"
             text="{{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSettings.license] | translate}}"
             textWrap="true"></Label>
         </FlexboxLayout>
-        <StackLayout class="hr-dark m-10">
+        <StackLayout class="hr-dark m-b-10 m-t-10">
         </StackLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-10 p-l-10 p-b-5" flexWrap="wrap">
-          <Label class="p-l-5 font-weight-bold" text="{{ 'BET' | translate }}"></Label>
+          <Label class="font-weight-bold" text="{{ 'BET' | translate }}"></Label>
           <Label class="p-r-10 text-right" text="{{receipt.couponCode}}" textWrap="true"></Label>
         </FlexboxLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-10 p-l-10 p-b-5" flexWrap="wrap">
-          <Label class="p-l-5 font-weight-bold" text="{{ 'DELETED_ON' | translate }}"
+          <Label class="font-weight-bold" text="{{ 'DELETED_ON' | translate }}"
             *ngIf="!receipt.isPayment"></Label>
-          <Label class="p-l-5 font-weight-bold" text="{{ 'PAID_ON' | translate }}" *ngIf="receipt.isPayment"></Label>
+          <Label class="font-weight-bold" text="{{ 'PAID_ON' | translate }}" *ngIf="receipt.isPayment"></Label>
           <Label class="p-r-10 text-right" text="{{date | date: 'dd-MM-yyyy HH:mm'}}"></Label>
         </FlexboxLayout>
 
-        <StackLayout class="hr-dark m-10">
+        <StackLayout class="hr-dark m-b-10 m-t-10">
         </StackLayout>
         <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-10">
           <Label class="h2 text-center" text="{{ 'PAID_AMOUNT' | translate}}"></Label>

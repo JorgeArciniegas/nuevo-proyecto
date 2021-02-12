@@ -1,6 +1,6 @@
 {
   "name": "vdesk",
-  "version": "0.47.0",
+  "version": "0.48.0",
   "nativescript": {
     "id": "com.vgen.vdesk",
     "tns-android": {
@@ -19,7 +19,8 @@
     "version-patch": "npm version patch --no-git-tag-version && node ./version.js && git commit --all",
     "version-minor": "npm version minor --no-git-tag-version && node ./version.js && git commit --all",
     "version": "node ./current-version.js",
-    "tns-build-all": "node ./build-android.js"
+    "tns-build-all": "node ./build-android.js",
+    "tns-build-env": "node ./build-android-by-env.js"
   },
   "private": true,
   "dependencies": {
@@ -55,7 +56,7 @@
     "nativescript-local-notifications": "^4.1.3",
     "nativescript-modal-datetimepicker": "^1.2.0",
     "nativescript-ng-shadow": "^2.1.0",
-    "nativescript-printer": "^1.3.0",
+    "nativescript-printer": "^1.5.0",
     "nativescript-theme-core": "^2.0.22",
     "ngx-barcode": "^0.2.4",
     "node-sass": "^4.13.0",
