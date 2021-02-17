@@ -241,6 +241,7 @@
       "HEADER_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
         "BETESE": "BETESE BETTING TIN 1720088068",
+        "BETCONNECTION": "Virtual King",
         "BETLOGIK": "-",
         "BETPRO": "BETPRO",
         "BETSAFI": "BETSAFI CHEZA KAMA WEWE",
@@ -271,6 +272,7 @@
       "LICENSE_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
         "BETESE": "All Bets are Subject to BetEse Betting rules(terms and condition). A Copy is Available on request. Carefully keep the receipt as the document is essential for the winnings collection.",
+        "BETCONNECTION": "Please check your ticket, refunds are not accepted, check payment tables and regulations before betting. GOOD LUCK",
         "BETLOGIK": "-",
         "BETPRO": "Le client accepte le condition général du jeu disponible. Le présemt cpièpm est valable 7 jours interdit au moins de 18 ans.",
         "BETSAFI": "All bets are subject to Betsafi rules. A copy is available on request. Carefully keep the receipt as the document is essential for the winnings collection.",
@@ -302,6 +304,7 @@
       "LICENSE_MESSAGE_MAX_PAYABLE": {
         "APUESTAS_DOMINICANAS": "The maximum payable amount for a coupon is ",
         "BETESE": "The maximum payable amount for a coupon is ",
+        "BETCONNECTION": "The maximum payable amount for a coupon is ",
         "BETLOGIK": "The maximum payable amount for a coupon is ",
         "BETPRO": "The maximum payable amount for a coupon is ",
         "BETSAFI": "The maximum payable amount for a coupon is ",

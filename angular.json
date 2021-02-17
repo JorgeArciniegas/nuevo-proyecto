@@ -924,6 +924,80 @@
                 }
               ]
             },
+            "betconnection-prod": {
+              "outputPath": "dist-betconnection",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betconnection/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betconnection.ts"
+                }
+              ]
+            },
+            "betconnection-prod-release": {
+              "outputPath": "dist-betconnection",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betconnection/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betconnection.ts"
+                }
+              ]
+            },
+            "betconnection-staging": {
+              "outputPath": "dist-betconnection",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betconnection/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betconnection-staging.ts"
+                }
+              ]
+            },
+            "betconnection-staging-release": {
+              "outputPath": "dist-betconnection",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/betconnection/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.betconnection-staging.ts"
+                }
+              ]
+            },
             "sportrace-prod": {
               "outputPath": "dist-sportrace",
               "stylePreprocessorOptions": {
@@ -2257,6 +2331,12 @@
             "betese-staging": {
               "browserTarget": "vdesk:build:betese-staging"
             },
+            "betconnection-prod": {
+              "browserTarget": "vdesk:build:betconnection-prod"
+            },
+            "betconnection-staging": {
+              "browserTarget": "vdesk:build:betconnection-staging"
+            },
             "sportrace-prod": {
               "browserTarget": "vdesk:build:sportrace-prod"
             },
@@ -2322,6 +2402,12 @@
             },
             "betese-staging-release": {
               "browserTarget": "vdesk:build:betese-staging-release"
+            },
+            "betconnection-prod-release": {
+              "browserTarget": "vdesk:build:betconnection-prod-release"
+            },
+            "betconnection-staging-release": {
+              "browserTarget": "vdesk:build:betconnection-staging-release"
             },
             "sportrace-prod-release": {
               "browserTarget": "vdesk:build:sportrace-prod-release"

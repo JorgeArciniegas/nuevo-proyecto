@@ -241,6 +241,7 @@
       "HEADER_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
         "BETESE": "BETESE BETTING TIN 1720088068",
+        "BETCONNECTION": "Virtual King",
         "BETLOGIK": "-",
         "BETPRO": "-",
         "BETSAFI": "-",
@@ -271,6 +272,7 @@
       "LICENSE_MESSAGE": {
         "APUESTAS_DOMINICANAS": "Por favor compruebe la exactidud del cupón al momento de su emisión, no se aceptarán reclamaciones tardías.",
         "BETESE": "-",
+        "BETCONNECTION": "Verifique o seu bilhete, não são aceites reembolsos, verifique as tabelas de pagamento e regulamentos antes de apostar. MUITA SORTE",
         "BETLOGIK": "-",
         "BETPRO": "-",
         "BETSAFI": "-",
@@ -302,6 +304,7 @@
       "LICENSE_MESSAGE_MAX_PAYABLE": {
         "APUESTAS_DOMINICANAS": "El importe máximo a pagar por un cupón es ",
         "BETESE": "El importe máximo a pagar por un cupón es ",
+        "BETCONNECTION": "El importe máximo a pagar por un cupón es ",
         "BETLOGIK": "El importe máximo a pagar por un cupón es ",
         "BETPRO": "El importe máximo a pagar por un cupón es ",
         "BETSAFI": "El importe máximo a pagar por un cupón es ",
