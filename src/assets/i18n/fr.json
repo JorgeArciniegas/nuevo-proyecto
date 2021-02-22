@@ -241,6 +241,7 @@
       "HEADER_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
         "BETESE": "BETESE BETTING TIN 1720088068",
+        "BETCONNECTION": "Virtual King",
         "BETLOGIK": "-",
         "BETPRO": "BETPRO",
         "BETSAFI": "-",
@@ -271,6 +272,7 @@
       "LICENSE_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
         "BETESE": "-",
+        "BETCONNECTION": "-",
         "BETLOGIK": "-",
         "BETPRO": "Le client accepte le condition général du jeu disponible. Le présemt cpièpm est valable 7 jours interdit au moins de 18 ans.",
         "BETSAFI": "-",
@@ -302,6 +304,7 @@
       "LICENSE_MESSAGE_MAX_PAYABLE": {
         "APUESTAS_DOMINICANAS": "Le montant maximum payable pour un coupon est de ",
         "BETESE": "Le montant maximum payable pour un coupon est de ",
+        "BETCONNECTION": "Le montant maximum payable pour un coupon est de ",
         "BETLOGIK": "Le montant maximum payable pour un coupon est de ",
         "BETPRO": "Le montant maximum payable pour un coupon est de ",
         "BETSAFI": "Le montant maximum payable pour un coupon est de ",

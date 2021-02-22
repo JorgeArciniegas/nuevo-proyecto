@@ -169,6 +169,7 @@
       "HEADER_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
         "BETESE": "BETESE BETTING TIN 1720088068",
+        "BETCONNECTION": "Virtual King",
         "BETLOGIK": "-",
         "BETPRO": "-",
         "BETSAFI": "-",
@@ -198,6 +199,7 @@
       "LICENSE_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
         "BETESE": "-",
+        "BETCONNECTION": "-",
         "BETLOGIK": "-",
         "BETPRO": "-",
         "BETSAFI": "-",
@@ -228,6 +230,7 @@
       "LICENSE_MESSAGE_MAX_PAYABLE": {
         "APUESTAS_DOMINICANAS": "Shuma maksimale e pagueshme për një kupon është ",
         "BETESE": "Shuma maksimale e pagueshme për një kupon është ",
+        "BETCONNECTION": "Shuma maksimale e pagueshme për një kupon është ",
         "BETLOGIK": "Shuma maksimale e pagueshme për një kupon është ",
         "BETPRO": "Shuma maksimale e pagueshme për një kupon është ",
         "BETSAFI": "Shuma maksimale e pagueshme për një kupon është ",

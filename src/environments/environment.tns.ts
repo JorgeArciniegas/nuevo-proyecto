@@ -3,6 +3,9 @@ import { environment as devEnvironment } from './environment';
 // apuestas dominicanas
 import { environment as apuestasDominicanasEnvironment } from './environment.apuestas-dominicanas';
 import { environment as apuestasDominicanasStagingEnvironment } from './environment.apuestas-dominicanas-staging';
+// BETCONNECTION
+import { environment as betconnectionEnvironment } from './environment.betconnection';
+import { environment as betconnectionStagingEnvironment } from './environment.betconnection-staging';
 // BETESE
 import { environment as beteseEnvironment } from './environment.betese';
 import { environment as beteseStagingEnvironment } from './environment.betese-staging';
@@ -147,6 +150,12 @@ export const environment: Environment = (() => {
       case 'genc04-staging':
         envVars = genc04StagingEnvironment;
         break;
+        case 'betconnection-prod':
+          envVars = betconnectionEnvironment;
+          break;
+        case 'betconnection-staging':
+          envVars = betconnectionStagingEnvironment;
+          break;
       case 'betese-prod':
         envVars = beteseEnvironment;
         break;
