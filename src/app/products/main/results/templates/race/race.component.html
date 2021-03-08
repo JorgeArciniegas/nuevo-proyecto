@@ -1,5 +1,5 @@
 <mat-grid-list class="results-race" fxFill cols="{{ items }}" rowHeight="{{rowHeight * 2 + 1}}">
-  <ng-container *ngFor="let race of results; let i = index">
+  <ng-container *ngFor="let race of (results|async); let i = index">
     <mat-grid-tile>
       <div fxFill class="card-box-result">
         <mat-grid-list fxFill cols="1" rowHeight="{{rowHeight}}">

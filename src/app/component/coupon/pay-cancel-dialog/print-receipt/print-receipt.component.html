@@ -1,9 +1,9 @@
 <div class="printReceipt">
   <div class="header">
-    <img *ngIf="appSettings.printSettings.enabledPrintLogo.printLogoPayCancel" class="logo-print-coupon padding-10">
+    <img *ngIf="appSettings.printSettings.enabledPrintReceipt.printLogoPayCancel" class="logo-print-coupon padding-10">
     <div class="header-content">
       <!-- {{ appSettings.bookmakerDetails }} -->
-      <span *ngIf="appSettings.printSettings.isShowHeaderMessage">
+      <span *ngIf="appSettings.printSettings.enabledPrintReceipt.printHeaderMessage">
         {{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSettings.license] | translate}}
       </span>
     </div>

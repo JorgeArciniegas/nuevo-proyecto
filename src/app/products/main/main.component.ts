@@ -7,7 +7,8 @@ import { DialogService } from '../dialog.service';
 import { MainService } from './main.service';
 
 @Component({
-  selector: 'app-main',
+  moduleId: module.id,
+  selector: 'app-main, [app-main]',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
@@ -36,5 +37,10 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.mainService.destroy();
   }
+
+    // Used to disabled tap when  playtable is blocked
+    dismiss(): void {
+      return;
+    }
 
 }

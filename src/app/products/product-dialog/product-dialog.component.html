@@ -6,7 +6,7 @@
 <!-- BETODD OBJECTS-->
 <div mat-dialog-content #content [style.padding-top.px]="containerPaddingTop">
   <app-betodds *ngIf="!dataDialog.groupings && dataDialog.betCoupon || !dataDialog.groupings && dataDialog.betOdds"
-    [column]="column" [rowNumber]="rowNumber" [maxPage]="maxPage" [maxItems]="maxItems" [data]="dataDialog">
+    [columnNumber]="column" [rowNumber]="rowNumber" [maxPage]="maxPage" [maxItems]="maxItems" [data]="dataDialog">
   </app-betodds>
   <app-statistics *ngIf="dataDialog.statistics" [data]="dataDialog"></app-statistics>
   <app-groupings *ngIf="dataDialog.groupings" [column]="column" [rowNumber]="rowNumber" [maxPage]="maxPage"

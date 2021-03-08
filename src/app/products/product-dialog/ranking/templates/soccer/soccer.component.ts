@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RankRow } from '@elys/elys-api';
 import { AppSettings } from '../../../../../app.settings';
 import { BetDataDialog } from '../../../../../products/products.model';
+import { DialogService } from '../../../../../products/dialog.service';
 
 @Component({
   selector: 'app-ranking-soccer',
@@ -16,7 +17,7 @@ export class SoccerComponent implements OnInit {
   maxItems = 10;
   public teamsData: RankRow[];
 
-  constructor(public settings: AppSettings) { }
+  constructor(private dialog: DialogService,public settings: AppSettings) { }
 
   ngOnInit() {
     if (this.data.tournamentRanking.ranking && this.data.tournamentRanking.ranking.RankRows) {
@@ -47,5 +48,9 @@ export class SoccerComponent implements OnInit {
     }
     this.page++;
     this.filterRow();
+  }
+
+  close(): void {
+    this.dialog.closeDialog();
   }
 }

@@ -6,7 +6,7 @@ import { WindowSizeService } from '../../../services/utility/window-size/window-
 import { IconSize } from '../../model/iconSize.model';
 
 @Component({
-  selector: 'app-user-menu',
+  selector: 'app-user-menu,[app-user-menu]',
   templateUrl: './user-menu.component.html',
   styleUrls: ['./user-menu.component.scss']
 })
@@ -15,6 +15,7 @@ export class UserMenuComponent implements OnInit, OnDestroy {
   public myTime: Date = new Date();
   public notifyIcon: IconSize;
   public playableBalance: number;
+  public barHeight : number;
   private myTimeSubscription: Subscription;
   constructor(
     public readonly appSettings: AppSettings,
@@ -26,10 +27,10 @@ export class UserMenuComponent implements OnInit, OnDestroy {
   }
 
   private initIconsSize(): void {
-    const barHeight =
+    this.barHeight =
       this.windowSizeService.windowSize.height -
       this.windowSizeService.windowSize.columnHeight;
-    this.notifyIcon = new IconSize(barHeight, barHeight * 0.7);
+      this.notifyIcon = new IconSize(this.barHeight * 0.6);
   }
 
   ngOnInit() {

@@ -1,6 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { EventResult } from './../../results.model';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { filter, map } from 'rxjs/operators';
+import { Observable } from 'rxjs/Rx';
+import { WindowSize } from '../../../../../../../src/app/products/products.model';
+import { LAYOUT_TYPE } from '../../../../../../environments/environment.models';
+import { ResultsService } from '../../results.service';
+import { EventResult, LastResult } from './../../results.model';
 
+@UntilDestroy()
 @Component({
   selector: 'app-results-race',
   templateUrl: './race.component.html',
@@ -9,8 +16,17 @@ import { EventResult } from './../../results.model';
 export class RaceComponent {
   @Input() items: number;
   @Input() rowHeight: number;
-  @Input() results: EventResult[];
   @Input() codeProduct: string;
-  constructor() { }
+  @Input() windowSize: WindowSize;
+  
+  public results: Observable<EventResult[]>;
+
+  constructor(private resultsService: ResultsService) {
+    this.results = this.resultsService.lastResultsSubject.pipe(
+      untilDestroyed(this),
+      filter(el => el.layoutType === LAYOUT_TYPE.RACING),
+      map((res: LastResult) => res.eventResults)
+    );
+  }
 
 }

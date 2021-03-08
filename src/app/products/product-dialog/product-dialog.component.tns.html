@@ -1,7 +1,7 @@
 <GridLayout rows="*" columns="*" shadow="10" cornerRadius="6" margin="8">
   <!-- ODDS COUPON OR BET DISPLAY -->
-  <app-betodds *ngIf="data.betCoupon || data.betOdds" [column]="column" [maxPage]="maxPage" [maxItems]="maxItems"
-    [data]="data"></app-betodds>
+  <app-betodds *ngIf="data.betCoupon || data.betOdds" [columnNumber]="3" [maxPage]="maxPage" [maxItems]="maxItems"
+    [data]="data" [rowNumber]="3"></app-betodds>
   <!-- GROUPINGS COUPON-->
   <app-groupings *ngIf="data.groupings" [column]="column" [maxPage]="maxPage" [maxItems]="maxItems" [data]="data">
   </app-groupings>

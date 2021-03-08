@@ -13,14 +13,13 @@
     "build": "ng build",
     "vgen": "ng serve -c vgen-prod",
     "android-vgen-debug": "tns debug android --bundle --env.uglify --env.environment=\"vgen-prod\" --no-hmr",
-    "vgen-build": "tns build android  --bundle --env.uglify --env.snapshot --env.environment=\"vgen-prod\" --copy-to dist/android/vgen.apk ",
     "postinstall": "node ./version.js",
     "ns-bundle": "ns-bundle",
     "version-patch": "npm version patch --no-git-tag-version && node ./version.js && git commit --all",
     "version-minor": "npm version minor --no-git-tag-version && node ./version.js && git commit --all",
     "version": "node ./current-version.js",
-    "tns-build-all": "node ./build-android.js",
-    "tns-build-env": "node ./build-android-by-env.js"
+    "tns-build-all": "node ./build-all-environment.js",
+    "tns-build-env": "node ./build-single-env.js"
   },
   "private": true,
   "dependencies": {
@@ -42,6 +41,7 @@
     "@elys/elys-feeds": "^0.1.2",
     "@elys/elys-storage-lib": "^1.0.0",
     "@elys/nativescript-zxing": "^1.6.1",
+    "@ngneat/until-destroy": "^8.0.4",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "angular2-qrcode": "^2.0.3",
@@ -59,14 +59,14 @@
     "nativescript-printer": "^1.5.0",
     "nativescript-theme-core": "^2.0.22",
     "ngx-barcode": "^0.2.4",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.14.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",
     "tns-core-modules": "~6.1.0",
     "xlsx": "^0.15.1",
     "xml2json": "^0.12.0",
-    "zone.js": "^0.10.2"
+    "zone.js": "^0.10.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.5",

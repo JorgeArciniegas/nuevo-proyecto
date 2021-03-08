@@ -1,7 +1,7 @@
 <div class="results-event" fxFlexAlign="row">
-  <div fxFlex="50" *ngFor="let result of results">
-    <mat-grid-list fxFill cols="{{ result.coloursResults.numbersExtracted.length + 3 }}" rowHeight="{{rowHeight + 1}}">
-      <mat-grid-tile colspan="{{ result.coloursResults.numbersExtracted.length + 3 }}">
+  <div fxFlex="50" *ngFor="let result of (results|async)">
+    <mat-grid-list fxFill cols="{{ result.coloursResults?.numbersExtracted.length + 3 }}" rowHeight="{{rowHeight + 1}}">
+      <mat-grid-tile colspan="{{ result.coloursResults?.numbersExtracted.length + 3 }}">
         <div fxFill class="card-box-result-keno">
           <!-- header -->
           <div fxFill fxLayoutAlign="center center" class="header radius-5 eventNumber">
@@ -9,11 +9,11 @@
           </div>
         </div>
       </mat-grid-tile>
-      <mat-grid-tile colspan="{{ result.coloursResults.numbersExtracted.length + 3 }}">
+      <mat-grid-tile colspan="{{ result.coloursResults?.numbersExtracted.length + 3 }}">
         <!--List of draw results -->
-        <mat-grid-list fxFill cols="{{ result.coloursResults.numbersExtracted.length + 3 }}"
+        <mat-grid-list fxFill cols="{{ result.coloursResults?.numbersExtracted.length + 3 }}"
           rowHeight="{{rowHeight + 1}}" class="position">
-          <mat-grid-tile *ngFor="let numberExtracted of result.coloursResults.numbersExtracted">
+          <mat-grid-tile *ngFor="let numberExtracted of result.coloursResults?.numbersExtracted">
             <div fxLayout="column" fxLayoutAlign="center center"
               class="btn-colours radius-5 btn-colours-{{Colour[numberExtracted.colour]}} btn-keno-result" fxFill>
               <span>{{ numberExtracted.number }}</span>

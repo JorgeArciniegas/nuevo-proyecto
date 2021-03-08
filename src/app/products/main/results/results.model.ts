@@ -1,3 +1,4 @@
+import { LAYOUT_TYPE } from '../../../../environments/environment.models';
 import { Band, Colour } from '../playable-board/templates/colours/colours.models';
 
 export class EventResult {
@@ -8,7 +9,7 @@ export class EventResult {
   soccerResult?: SoccerResult[];
   kenoResults?: number[];
   coloursResults?: ColoursResult;
-  americanRouletteResults?: string[];
+  americanRouletteResults?: AmericanRouletteResults;
 }
 
 export interface RacePodium {
@@ -45,4 +46,14 @@ export interface SoccerResult {
 export enum OVER_UNDER_COCKFIGHT {
   O = 'ov',
   U = 'un'
+}
+
+export interface AmericanRouletteResults {
+  result: string;
+  color?: string;
+}
+
+export interface LastResult {
+  eventResults: EventResult[];
+  layoutType: LAYOUT_TYPE;
 }

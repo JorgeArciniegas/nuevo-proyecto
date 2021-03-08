@@ -1,5 +1,5 @@
-<mat-grid-list cols="{{column}}" class="odds-grid" rowHeight="25px" [gutterSize]="'10px'">
-  <mat-grid-tile colspan="{{column}}">
+<mat-grid-list cols="{{columnNumber}}" class="odds-grid" rowHeight="25px" [gutterSize]="'10px'">
+  <mat-grid-tile colspan="{{columnNumber}}">
     <button *ngIf="maxPage > 1" class="btn-reset card-odd radius-5 scroll" (click)="previusOdds()"
       [disabled]="page <= 0">
       <img class="icon" src="/assets/icons/Up.svg">
@@ -119,7 +119,7 @@
     </mat-grid-tile>
   </ng-container>
   <mat-grid-tile rowspan="3" *ngFor="let odd of emptyOdds"></mat-grid-tile>
-  <mat-grid-tile colspan="{{column}}">
+  <mat-grid-tile colspan="{{columnNumber}}">
     <button *ngIf="maxPage > 1" class="btn-reset card-odd radius-5 scroll" (click)="nextOdds()"
       [disabled]="page >= maxPage - 1">
       <img class="icon" src="/assets/icons/Down.svg">

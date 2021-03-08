@@ -349,12 +349,17 @@ export const environment: Environment = {
   ],
   showEventId: true,
   printSettings: {
-    isEnabledReprintCoupon: true,
-    isTrasmitionInfoMessageShown: false,
-    isShowHeaderMessage: true,
-    enabledPrintLogo: {
+    enabledPrintReceipt:{
+      printLogoPayCancel : false,
+      printHeaderMessage : false,
+    },
+    enabledPrintCoupon:{
       printLogoCoupon: false,
-      printLogoPayCancel: false
+      printHeaderMessage : false,
+      printQrCode: true,
+      isEnabledReprintCoupon: true,
+      isTrasmitionInfoMessageShown: false,
+      hideMaxPaymentAmount: false
     }
   }
 };
