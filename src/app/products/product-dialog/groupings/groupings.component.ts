@@ -8,11 +8,16 @@ import { TypeBetSlipColTot } from '../../main/main.models';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-groupings',
+  selector: 'app-groupings,[app-groupings]',
   templateUrl: './groupings.component.html',
   styleUrls: ['./groupings.component.scss']
 })
 export class GroupingsComponent implements OnInit, OnDestroy {
+  
+  public columnNumber = 3;
+  public columns = '';
+  public rows = '';
+
   @Input()
   data: BetDataDialog;
   @Input()
@@ -22,7 +27,7 @@ export class GroupingsComponent implements OnInit, OnDestroy {
   @Input()
   public maxPage = 0;
   @Input()
-  public column: number;
+  public column : number = 0;
   @Input()
   private maxItems = 0;
 
@@ -42,6 +47,7 @@ export class GroupingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.columnsAndRows();
     this.maxItems = this.rowNumber * this.column;
     this.maxPage = Math.ceil(this.data.groupings.length / this.maxItems);
     this.filterGroupings();
@@ -115,6 +121,16 @@ export class GroupingsComponent implements OnInit, OnDestroy {
       this.couponService.checkGroupingToChangeStake(grouping);
     } catch (err) {
       console.log('Error', err);
+    }
+  }
+
+  //Nativescript
+  columnsAndRows(){
+    for (let index = 0; index < this.columnNumber - 1; index++) {
+      this.columns += ',*';
+    }
+    for (let index = 0; index < this.rowNumber; index++) {
+      this.rows += ',5*';
     }
   }
 }

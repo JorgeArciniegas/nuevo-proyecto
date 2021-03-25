@@ -19,7 +19,6 @@ import { areas, overviewAreas } from './SoccerAreas';
 @Injectable()
 export class MainService {
 
-  private reload: number;
   private cacheEvents: VirtualBetEvent[] = [];
   private cacheTournaments: VirtualBetTournamentExtended[] = [];
   // Working variable
@@ -175,7 +174,6 @@ export class MainService {
     this.eventDetails.currentEvent = 0;
 
     this.loadEvents();
-    this.resultService.loadLastResult();
   }
 
   createPlayerList(): void {
@@ -202,7 +200,6 @@ export class MainService {
         // stop the countdown to prevent multiple calls
         this.countdownSub.unsubscribe();
         this.loadEvents();
-        this.resultService.loadLastResult();
       } else {
         /**
          * Reload the countdown from the current event.
@@ -224,7 +221,6 @@ export class MainService {
           this.cacheEvents = [];
           this.cacheTournaments = [];
           this.loadEvents();
-          this.resultService.loadLastResult(false);
           return;
         }
         if (this.remainingTime.second === 0 && this.remainingTime.minute > 0) {
@@ -253,16 +249,13 @@ export class MainService {
       this.cacheEvents = [];
       this.cacheTournaments = [];
       this.loadEvents();
-      this.resultService.loadLastResult(false);
     }
   }
 
   loadEvents(): void {
     try {
-      if (
-        this.initCurrentEvent
-      ) {
-        this.loadEventsFromApi(true);
+      if (this.initCurrentEvent) {
+        this.loadEventsFromApi().then(() => this.resultService.getLastResult());
       } else {
         if ((this.cacheTournaments && this.cacheTournaments.length > 0) ||
           (this.cacheEvents && this.cacheEvents.length > 0)) {
@@ -275,13 +268,7 @@ export class MainService {
           this.slideToNextEvent();
           this.currentAndSelectedEventTime();
         }
-
-        this.reload--;
-
-        if (this.reload <= this.productService.product.layoutProducts.nextEventItems) {
-          // If remain only 1 new event reload other events
-          timer(12000).subscribe(() => this.loadEventsFromApi(false, undefined, false));
-        }
+        this.loadEventsFromApi().then(() => this.resultService.getLastResult());
       }
       // Resume event's countdown
       if (this.countdownSub && this.countdownSub.closed || !this.countdownSub) {
@@ -289,9 +276,9 @@ export class MainService {
       }
     } catch (err) {
       console.log('main --> loadEvents : ', err);
-      timer(5000).subscribe( ()=>{
+      timer(5000).subscribe(() => {
         this.resetPlayEvent();
-        this.initEvents();  
+        this.initEvents();
       })
     }
   }
@@ -317,25 +304,22 @@ export class MainService {
   }
 
   /**
-   * @param all = When it is true refresh the cache event.
    * Inside it, it must be created the request object.
    * The reference values is taken by "ProductService" on object "product".
    */
-  loadEventsFromApi(all: boolean = true, lastAttemptCall?: number, delayedEventLoad: boolean = true) {
-    const request: VirtualProgramTreeBySportRequest = {
-      SportIds: this.productService.product.sportId.toString(),
-      CategoryTypes: this.productService.product.codeProduct,
-      Source: PlaySource.VDeskGApp,
-      Item: this.userservice.getUserId()
-    };
+  async loadEventsFromApi(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const request: VirtualProgramTreeBySportRequest = {
+        SportIds: this.productService.product.sportId.toString(),
+        CategoryTypes: this.productService.product.codeProduct,
+        Source: PlaySource.VDeskGApp,
+        Item: this.userservice.getUserId()
+      };
 
-    this.elysApi.virtual.getVirtualTreeV2(request).then((sports: VirtualProgramTreeBySportResponse) => {
-      // cache all tournaments
-
-      if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
-        const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
-        this.productService.product.layoutProducts.multiFeedType = tournament.mft;
-        if (all) {
+      this.elysApi.virtual.getVirtualTreeV2(request).then((sports: VirtualProgramTreeBySportResponse) => {
+        if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
+          const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
+          this.productService.product.layoutProducts.multiFeedType = tournament.mft;
           // Load all events
           this.cacheEvents = tournament.evs;
           for (let index = 0; index < this.productService.product.layoutProducts.nextEventItems; index++) {
@@ -347,21 +331,7 @@ export class MainService {
             this.eventDetails.events[index] = event;
           }
         } else {
-          // Add only new event
-          tournament.evs.forEach((event: VirtualBetEvent) => {
-            if (this.cacheEvents.filter((cacheEvent: VirtualBetEvent) => cacheEvent.id === event.id).length === 0) {
-              this.cacheEvents.push(event);
-            }
-          });
-          if (delayedEventLoad) {
-            // Get event's odds
-            this.eventDetailOdds(this.eventDetails.events[0].number);
-          }
-        }
-        // load markets from PRODUCT SOCCER
-      } else {
-        const tournaments: VirtualBetTournamentExtended[] = sports.Sports[0].ts;
-        if (all) {
+          const tournaments: VirtualBetTournamentExtended[] = sports.Sports[0].ts;
           this.cacheTournaments = tournaments;
           for (let index = 0; index < this.productService.product.layoutProducts.nextEventItems; index++) {
             const event: EventInfo = new EventInfo();
@@ -371,44 +341,18 @@ export class MainService {
 
             this.eventDetails.events[index] = event;
           }
-        } else {
-          // Add only new event
-          tournaments.forEach((tournament: VirtualBetTournamentExtended) => {
-            if (
-              this.cacheTournaments.filter((cacheTournament: VirtualBetTournament) => cacheTournament.id === tournament.id).length === 0
-            ) {
-              this.cacheTournaments.push(tournament);
-            }
-          });
-          const event: EventInfo = new EventInfo();
-          const idx: number = this.productService.product.layoutProducts.cacheEventsItem - 1;
-          event.number = this.cacheTournaments[idx].id;
-          event.label = this.cacheTournaments[idx].nm;
-          event.date = new Date(this.cacheTournaments[idx].sdtoffset);
-          this.eventDetails.events[idx] = event;
-          if (delayedEventLoad) {
-            // Get event's odds
-            this.eventDetailOddsByCacheTournament(this.eventDetails.events[0].number);
-          }
         }
-      }
-      this.currentAndSelectedEventTime(delayedEventLoad);
-    }, (error) => {
-      // check the error
-      if (error.status === 401) {
-        this.userservice.logout();
-        this.countdownSub.unsubscribe();
-        return;
-      }
-      /* lastAttemptCall = !lastAttemptCall ? 1 : lastAttemptCall + 1;
-      if (!lastAttemptCall || lastAttemptCall < 3) {
-        timer(1000).subscribe(() => this.loadEventsFromApi(all, lastAttemptCall));
-      } else {
-        this.countdownSub.unsubscribe();
-
-      } */
+        this.currentAndSelectedEventTime(false);
+        resolve();
+      }, (error) => {
+        // check the error
+        if (error.status === 401) {
+          this.userservice.logout();
+          this.countdownSub.unsubscribe();
+        }
+        reject(error);
+      });
     });
-    this.reload = this.productService.product.layoutProducts.cacheEventsItem;
   }
 
   /**

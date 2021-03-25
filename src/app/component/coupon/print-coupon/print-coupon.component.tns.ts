@@ -30,8 +30,7 @@ export class PrintCouponComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription = new Subscription();
   get hideMaxPaymentAmount(): boolean {
-    return this.appSettings.printSettings.hasOwnProperty('hideMaxPaymentAmount') ?
-      this.appSettings.printSettings.hideMaxPaymentAmount : false;
+    return this.appSettings.printSettings.enabledPrintCoupon.hideMaxPaymentAmount;
   }
 
   constructor(

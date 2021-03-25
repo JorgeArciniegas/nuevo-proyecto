@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BetCouponOdd } from '@elys/elys-api';
 import { BetCouponOddExtended } from '@elys/elys-coupon';
 import { CouponService } from '../../../component/coupon/coupon.service';
+import { WindowSizeService } from '../../../services/utility/window-size/window-size.service';
+import { DialogService } from '../../dialog.service';
 import { BetDataDialog, BetOdd, Market } from '../../products.model';
 import { AppSettings } from '../../../../../src/app/app.settings';
 import { UserService } from '../../../../../src/app/services/user.service';
@@ -22,7 +24,9 @@ export class BetoddsComponent implements OnInit {
   @Input()
   public maxPage = 0;
   @Input()
-  public column: number;
+  public columnNumber: number;
+  public columns = '';
+  public rows = '';
   @Input()
   private maxItems = 0;
   public betOdds: BetOdd[];
@@ -41,12 +45,21 @@ export class BetoddsComponent implements OnInit {
   market: typeof Market = Market;
 
   constructor(
+    private dialog: DialogService,
+    private windowSizeService: WindowSizeService,
     public readonly couponService: CouponService,
     public readonly settings: AppSettings,
     public userService: UserService
   ) {
+
+   
     this.multiStake = settings.products.filter(prod => prod.productSelected)[0].typeCoupon.acceptMultiStake;
     this.layout = settings.products.filter(prod => prod.productSelected)[0].typeCoupon.typeLayout;
+    //Nativescript
+    if (this.windowSizeService.windowSize.small) {
+      this.rowNumber = 2;
+    }
+    //////////////////////////
     this.couponService.couponResponse.subscribe(coupon => {
       this.data.betCoupon = coupon;
       if (coupon) {
@@ -56,7 +69,8 @@ export class BetoddsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.maxItems = this.rowNumber * this.column;
+    this.columnsAndRows();//Nativescript
+    this.maxItems = this.rowNumber * this.columnNumber;
     if (this.data.betOdds) {
       this.maxPage = Math.ceil(this.data.betOdds.odds.length / this.maxItems);
       this.filterOdds();
@@ -176,4 +190,23 @@ export class BetoddsComponent implements OnInit {
       return Colour[Colour.GREEN];
     }
   }
+
+  //Nativescript
+  close(): void {
+    this.couponService.oddStakeEditSubject.next(null);
+    this.dialog.showDialog = false;
+    this.userService.isBtnCalcEditable = true;
+    this.userService.isModalOpen = false;
+  }
+
+  //Nativescript
+  columnsAndRows(){
+    for (let index = 0; index < this.columnNumber - 1; index++) {
+      this.columns += ',*';
+    }
+    for (let index = 0; index < this.rowNumber; index++) {
+      this.rows += ',5*';
+    }
+  }
+
 }

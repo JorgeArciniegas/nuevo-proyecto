@@ -1,47 +1,40 @@
 import { Injectable } from '@angular/core';
 import { ElysApiService, VirtualSportLastResultsRequest, VirtualSportLastResultsResponse } from '@elys/elys-api';
-import { timer } from 'rxjs';
+import { BehaviorSubject, timer } from 'rxjs';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { ProductsService } from '../../products.service';
-import { EventResult, OVER_UNDER_COCKFIGHT, ColoursResult, ColoursNumber } from './results.model';
 import { Band, Colour } from '../playable-board/templates/colours/colours.models';
+import { ColoursNumber, ColoursResult, EventResult, LastResult, OVER_UNDER_COCKFIGHT } from './results.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResultsService {
 
-  private _listResult: EventResult[];
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   constructor(
     private productService: ProductsService,
     private elysApi: ElysApiService
-  ) {
-    this.listResult = [];
-  }
+  ) { }
 
-  public get listResult(): EventResult[] {
-    return this._listResult;
-  }
-  public set listResult(value: EventResult[]) {
-    this._listResult = value;
-  }
+  private _lastResults: LastResult = { eventResults: [], layoutType: undefined };
+  public lastResultsSubject: BehaviorSubject<LastResult> = new BehaviorSubject<LastResult>(this._lastResults);
 
   getLastResult() {
-    this.listResult = [];
+    // this.lastResultsSubject.next({eventResults: [], layoutType: undefined});
     const request: VirtualSportLastResultsRequest = {
       SportId: this.productService.product.sportId,
       CategoryType: this.productService.product.codeProduct,
       MultiFeedType: this.productService.product.layoutProducts.multiFeedType
     };
-    const tmpListResult = [];
+    const tmpListResult: EventResult[] = [];
     this.elysApi.virtual.getLastResult(request)
       .then((eventResults: VirtualSportLastResultsResponse) => {
         // results for products
         if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
 
           for (let i = 0; i < this.productService.product.layoutProducts.resultItems; i++) {
-            if (!eventResults.EventResults[i]) {
+            if (!eventResults.EventResults || !eventResults.EventResults[i]) {
               return;
             }
             // results for products
@@ -104,10 +97,10 @@ export class ResultsService {
                 break;
               case LAYOUT_TYPE.AMERICANROULETTE:
                 const resultNumber = eventResults.EventResults[i].Result;
-                if (!tempEventResult.americanRouletteResults) {
-                  tempEventResult.americanRouletteResults = [];
-                }
-                tempEventResult.americanRouletteResults.push(resultNumber);
+                  tempEventResult.americanRouletteResults = {
+                    result: resultNumber,
+                    color: ''
+                  }
                 break;
               default:
                 break;
@@ -128,16 +121,10 @@ export class ResultsService {
             tmpListResult.push(tempEventResult);
           }
         }
-        this.listResult = tmpListResult;
+        this._lastResults.layoutType = this.productService.product.layoutProducts.type;
+        this._lastResults.eventResults = tmpListResult;
+        this.lastResultsSubject.next(this._lastResults);
       });
-  }
-
-  loadLastResult(delay: boolean = true): void {
-    if (delay) {
-      timer(10000).subscribe(() => this.getLastResult());
-    } else {
-      this.getLastResult();
-    }
   }
 
   private checkNumberColour(colourNumber: number): Colour {

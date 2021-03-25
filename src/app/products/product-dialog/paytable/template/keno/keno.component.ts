@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BetDataDialog } from '../../../../../products/products.model';
+import { DialogService } from '../../../../../products/dialog.service';
 
 @Component({
   selector: 'app-paytable-keno',
@@ -10,5 +11,10 @@ export class KenoComponent {
   @Input()
   data: BetDataDialog;
 
-  constructor() { }
+  constructor(private dialog: DialogService) { }
+
+  close(): void {
+    this.dialog.closeDialog();
+  }
+
 }

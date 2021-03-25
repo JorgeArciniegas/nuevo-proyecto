@@ -62,7 +62,7 @@
   </StackLayout>
   <GridLayout row="3" rows="*" columns="2*,6*" class="p-l-20">
     <Button col="0" class="button btn-default btn-success radius-10" text="{{ 'REPRINT' | translate }}"
-      *ngIf="settings.printSettings.isEnabledReprintCoupon" (tap)="printAgainCoupon()"></Button>
+      *ngIf="settings.printSettings.enabledPrintCoupon.isEnabledReprintCoupon" (tap)="printAgainCoupon()"></Button>
   </GridLayout>
   <StackLayout row="4"></StackLayout>
 </GridLayout>

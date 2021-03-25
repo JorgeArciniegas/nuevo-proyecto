@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LotteryPayoutSelection } from '@elys/elys-api';
 import { TranslateUtilityService } from '../../../../../services/utility/translate-utility.service';
 import { ColoursCommonComponent } from './colours-common.component';
+import { DialogService } from '../../../../../products/dialog.service';
 
 @Component({
   selector: 'app-paytable-colours',
@@ -11,8 +12,15 @@ import { ColoursCommonComponent } from './colours-common.component';
 export class ColoursComponent extends ColoursCommonComponent implements OnInit {
 
   public gameSelections: LotteryPayoutSelection[];
-  constructor(private translateUtilityService: TranslateUtilityService) {
+  constructor(
+    private dialog: DialogService,
+    private translateUtilityService: TranslateUtilityService
+    ) {
     super();
+  }
+
+  close(): void {
+    this.dialog.closeDialog();
   }
 
   ngOnInit() {

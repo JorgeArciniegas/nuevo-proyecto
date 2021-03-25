@@ -4,7 +4,7 @@
     <div class="header-content">
       <div class="padding-5 font-size-normal">
         <!-- {{appSettings.bookmakerDetails}} -->
-        <span *ngIf="appSettings.printSettings.isShowHeaderMessage">
+        <span *ngIf="appSettings.printSettings.enabledPrintCoupon.printHeaderMessage">
           {{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSettings.license] | translate}}
         </span>
       </div>

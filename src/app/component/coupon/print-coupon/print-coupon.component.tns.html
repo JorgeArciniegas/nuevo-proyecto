@@ -4,18 +4,20 @@
     <Button (tap)="printCouponService.resetPrint()" class="btn btn-accent" text="{{ 'DELETE' | translate }}"></Button>
   </FlexboxLayout>
   <ScrollView>
-    <StackLayout #printingData orientation="horizontal" class="m-10 p-50">
-      <FlexboxLayout flexDirection="column" class="printbox">
+    <StackLayout #printingData orientation="horizontal" class="m-10 p-50" >
+      <FlexboxLayout flexDirection="column" class="printbox" >
         <StackLayout class="logo-print-coupon">
-          <Image *ngIf="appSettings.printSettings.enabledPrintLogo.printLogoCoupon" stretch="aspectFill"
+          <Image *ngIf="appSettings.printSettings.enabledPrintCoupon.printLogoCoupon" stretch="aspectFill"
             src="~/app/themes/skins/{{appSettings.theme}}/image/Logo-coupon.png"></Image>
         </StackLayout>
-        <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-b-10" flexWrap="wrap"
-          *ngIf="appSettings.printSettings.isShowHeaderMessage">
+        <FlexboxLayout flexDirection="row" 
+          justifyContent="{{(appSettings.printSettings.enabledPrintCoupon.printQrCode && appSettings.printSettings.enabledPrintCoupon.printHeaderMessage ) ? 'space-between' : 'flex-end'}}" 
+          class="p-b-10" flexWrap="wrap">
           <Label class="p-l-5 text-center font-weight-bold"
-            text="{{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSettings.license] | translate}}"></Label>
+            text="{{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSettings.license] | translate}}"
+            *ngIf="appSettings.printSettings.enabledPrintCoupon.printHeaderMessage"></Label>
           <!--<Label class="p-r-10 text-center font-weight-bold" text="qrcode"></Label> -->
-          <Image width="300px" height="300px" [src]="qrCodeSource" stretch="fill"></Image>
+          <Image width="300px" height="300px" [src]="qrCodeSource" stretch="fill" *ngIf="appSettings.printSettings.enabledPrintCoupon.printQrCode" justifyContent="flex-end" ></Image>
         </FlexboxLayout>
         <StackLayout class="hr-dark m-10"></StackLayout>
         <FlexboxLayout flexDirection="row" justifyContent="space-between" class="p-r-10 p-l-10 p-b-5" flexWrap="wrap">
@@ -154,7 +156,7 @@
         </FlexboxLayout>
         <!-- FOOTER INFO -->
         <FlexboxLayout flexDirection="column" justifyContent="space-between" class="p-10">
-          <ng-container *ngIf="appSettings.printSettings.isTrasmitionInfoMessageShown">
+          <ng-container *ngIf="appSettings.printSettings.enabledPrintCoupon.isTrasmitionInfoMessageShown">
             <Label class="p-10 text-left" textWrap="true"
               text="{{'PRINT_COUPON.TRANSMISSION_MESSAGE' | translate}} {{ printCouponService.couponPrint.CouponDateOffset | date : 'dd/MM/yyyy HH:mm:ss' }}"></Label>
             <StackLayout class="hr-dark m-10"></StackLayout>

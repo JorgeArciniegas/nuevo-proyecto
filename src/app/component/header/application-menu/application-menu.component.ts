@@ -54,7 +54,6 @@ export class ApplicationMenuComponent {
    * Reset the playboard and changed the product
    */
   productSelecting(productSelected: Products) {
-    /* this.productService.resetBoard(); */
     this.productService.changeProduct(productSelected.codeProduct);
     this.router.getRouter().navigateByUrl('/products/main');
   }

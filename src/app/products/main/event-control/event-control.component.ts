@@ -8,18 +8,22 @@ import { MainService } from '../main.service';
 import { WindowSizeService } from '../../../services/utility/window-size/window-size.service';
 
 @Component({
-  selector: 'app-event-control',
+  moduleId: module.id,
+  selector: 'app-event-control, [app-event-control]',
   templateUrl: './event-control.component.html',
   styleUrls: ['./event-control.component.scss']
 })
 export class EventControlComponent implements OnInit {
-
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
+  public isWindowSizeSmall: boolean;
+  public showEventId: boolean;
 
   private _typeProductSelected: LAYOUT_TYPE;
+
   public get typeProductSelected(): LAYOUT_TYPE {
-    return this.productService.product.layoutProducts.type;
+    return this._typeProductSelected;
   }
+
   public set typeProductSelected(value: LAYOUT_TYPE) {
     this._typeProductSelected = value;
   }
@@ -32,29 +36,23 @@ export class EventControlComponent implements OnInit {
     return this.product ? 'PRODUCT-' + this.product.codeProduct + '-BG' : '';
   }
 
-  public get isWindowSizeSmall(): boolean {
-    return this.windowSizeService.windowSize.small;
-  }
-
-  public get showEventId(): boolean {
-    return this.settings.showEventId;
-  }
-
   public get currentEventDetail(): EventInfo {
     return this.mainService.eventDetails.events[this.mainService.eventDetails.currentEvent];
   }
 
   constructor(
-    public mainService: MainService,
+    private mainService: MainService,
     private productService: ProductsService,
     private settings: AppSettings,
     private windowSizeService: WindowSizeService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     timer(200).subscribe(() => {
       this.productService.resetBoard();
+      this.isWindowSizeSmall = this.windowSizeService.windowSize.small;
+      this.showEventId = this.settings.showEventId;
+      this._typeProductSelected = this.product.layoutProducts.type;
     });
   }
 }

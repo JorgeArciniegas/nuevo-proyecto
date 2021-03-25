@@ -20,15 +20,7 @@ import { StorageService } from './services/utility/storage/storage.service';
 import { TranslateUtilityService } from './services/utility/translate-utility.service';
 import { WindowSizeService } from './services/utility/window-size/window-size.service';
 import { NotificationService } from './notifications/notification.service';
-
-
-
-let launchListener,
-  suspendListener,
-  resumeListener,
-  discardedErrorListener,
-  exitListener,
-  lowMeroryListener;
+import { Subscription, timer } from 'rxjs';
 
 @Component({
   moduleId: module.id,
@@ -40,6 +32,9 @@ export class AppComponent {
   settings: Settings;
   public connectionAviable: boolean;
   smallView = false;
+  private messageId:number = 1;
+  private timer : Subscription = new Subscription() ;
+
   constructor(
     public readonly appSettings: AppSettings,
     public userService: UserService,
@@ -55,78 +50,87 @@ export class AppComponent {
     this.windowSizeService.initWindowSize();
     this.smallView = (this.windowSizeService.windowSize.height < 800) ? true : false;
 
-    launchListener = (args: LaunchEventData) => {
-      console.log('The appication was launched!');
-    };
 
-    on(launchEvent, launchListener);
-    // >> Application suspended
-    suspendListener = (args: ApplicationEventData) => {
-      // Added the time of suspended the app
-      this.storageService.setData('last-suspended', new Date().getTime());
-    };
+    // Application Launched
+    // if there is a notification hanging, it will be deleted
+    on(launchEvent, (args: LaunchEventData) => {
+      console.log('The application was launched!');
+      if(this.notification){
+        this.notification.deleteMessage(this.messageId);
+      }
+    });
 
-    on(suspendEvent, suspendListener);
-    // Application suspended <<
-    discardedErrorListener = (args: UnhandledErrorEventData) => {
-      console.log('discardedErrorListener', args);
-    };
+    // Application suspended
+    // the 'last-suspended' data is used for valutate if the session must be delete( case Overview Button Android) in the resume event
+    on(suspendEvent, (args: ApplicationEventData) => {
+      console.log('Suspended');
+      if (this.userService.isUserLogged) {
+        this.storageService.setData('last-suspended', new Date().getTime());
+        this.timer = timer(240000).subscribe( () => {
+          this.openNotification();
+          args.android.finishAffinity();
+        })
+      }
+    });
 
-    on(discardedErrorEvent, discardedErrorListener);
-
-    // >> Application resume
-    resumeListener = (args: ApplicationEventData) => {
-      // Compare the time elapsed after the suspend
-      try {
+    // Application resumed
+    // if 'last-suspended' time is greater to 4 minute force to login again( like for notification )
+    on(resumeEvent, (args: ApplicationEventData) => {
+      console.log("resumed");
+      this.timer.unsubscribe();
+      if (this.userService.isUserLogged) {
         if (this.storageService.checkIfExist('last-suspended') && this.storageService.checkDataIsValid('last-suspended')) {
           const now = new Date().getTime();
           const elapsed: number = Math.round((now - this.storageService.getData('last-suspended')) / (60 * 1000));
-          // if the time elapsed is major of 1 minute, the user is automatically logout
-          if (elapsed > 4) {
-            if (this.userService.isUserLogged) {
-              this.userService.logout();
-            }
-            notification.pushMessage({
-              title: 'Session terminated',
-              body: 'You\'re session has been destroyed. Login again!',
-              delay: 1,
-              id: 1
-            });
-            args.android.finishAffinity();
-          }/*  else if (elapsed >= 5) {
-            if (this.userService.isUserLogged) {
-              this.userService.logout();
-            }
-            notification.pushMessage({
-              title: 'Application closed.',
-              body: 'Vdesk app is closed! Thank you for ',
-              delay: 1,
-              id: 1
-            });
-            args.android.finishAffinity();
-          } */
+          if (elapsed >= 4) {
+            this.openNotification();
+          }
         }
-      } catch (err) {
-        console.error('e ---> ', err);
       }
-    };
-
-    on(resumeEvent, resumeListener);
-    // Application resume <<
-    // >> Application Exit
-    exitListener = (args: ApplicationEventData) => {
+    });
+    
+    
+    //Application Exit
+    on(exitEvent, (args: ApplicationEventData) => {
+      console.log("destroyed")
       // Destroy session player
-      this.storageService.removeItems('tokenData', 'UserData');
+      if (this.userService.isUserLogged) {
+        if (this.storageService.checkIfExist('last-suspended') && this.storageService.checkDataIsValid('last-suspended')) {
+          const now = new Date().getTime();
+          const elapsed: number = Math.round((now - this.storageService.getData('last-suspended')) / (60 * 1000));
+          if (elapsed >= 4) {
+            this.openNotification();
+          }
+        }
+      }else{
+        this.storageService.removeItems('tokenData', 'UserData');
+      }      
       args.android.finishAffinity();
-    };
-    on(exitEvent, exitListener);
-    // Application Exit <<
+    });
+
+    // Application LowMemory
+    on(lowMemoryEvent, (args: ApplicationEventData) => {
+      console.log('LowMemory');
+    });
 
 
-    lowMeroryListener = (args: ApplicationEventData) => {
-      console.log('Activity: ' + args.android);
-    };
-
-    on(lowMemoryEvent, lowMeroryListener);
+    // Discarded Error
+    on(discardedErrorEvent,(args: UnhandledErrorEventData) => {
+      console.log('discardedErrorListener', args);
+    });
+  
   }
+
+  // push the notification and logout the user
+  openNotification(){
+    this.notification.pushMessage({
+      title: 'Session terminated',
+      body: 'You\'re session has been destroyed. Login again!',
+      delay: 0.1,
+      id: this.messageId
+    });
+    this.userService.logout();
+  }
+  
+ 
 }
