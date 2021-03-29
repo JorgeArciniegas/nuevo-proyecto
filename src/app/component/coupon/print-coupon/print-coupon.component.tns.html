@@ -10,7 +10,7 @@
           <Image *ngIf="appSettings.printSettings.enabledPrintCoupon.printLogoCoupon" stretch="aspectFill"
             src="~/app/themes/skins/{{appSettings.theme}}/image/Logo-coupon.png"></Image>
         </StackLayout>
-        <FlexboxLayout flexDirection="row" 
+        <FlexboxLayout flexDirection="row"  
           justifyContent="{{(appSettings.printSettings.enabledPrintCoupon.printQrCode && appSettings.printSettings.enabledPrintCoupon.printHeaderMessage ) ? 'space-between' : 'space-around'}}" 
           class="p-b-10" flexWrap="wrap">
           <Label class="p-l-5 text-center font-weight-bold"
