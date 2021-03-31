@@ -55,6 +55,7 @@ export class OperatorSummaryService {
   }
 
   async getList(): Promise<void> {
+    this.resetTotals();
     const req: ReportsOperatorVolumeRequest = this.cloneRequest();
     await this.elysApi.reports.getShopClientsAggregates(req).then(items => (this.reportsOperatorVolumeResponse = items));
     this.reportsOperatorVolumeResponse.map(x => {
@@ -83,5 +84,11 @@ export class OperatorSummaryService {
       dateFrom: this.reportsOperatorVolumeRequest.dateFrom,
       dateTo: this.reportsOperatorVolumeRequest.dateTo
     };
+  }
+
+  private resetTotals(): void {
+    this.totalStake = 0;
+    this.totalVoided = 0;
+    this.totalWon = 0;
   }
 }
