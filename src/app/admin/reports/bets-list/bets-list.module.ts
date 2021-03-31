@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatDatepickerModule, MatInputModule, MatNativeDateModule } from '@angular/material';
 import { SharedModule } from '../../../shared/shared.module';
 import { BetsListRoutingModule } from './bets-list-routing.module';
 import { BetsListComponent } from './bets-list.component';
@@ -23,8 +22,7 @@ import { BetsListService } from './bets-list.service';
   imports: [
     CommonModule,
     BetsListRoutingModule,
-    SharedModule,
-    MatDatepickerModule, MatInputModule, MatNativeDateModule
+    SharedModule
   ],
   providers: [BetsListService]
 })
