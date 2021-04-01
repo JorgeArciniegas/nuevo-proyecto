@@ -128,6 +128,11 @@ export class BetsListService {
   }
 
   set dateTo(date: Date) {
+    // set dateTo to get a day worth of data if it's the same as dateFrom
+    date.setHours(date.getHours() + 23 );
+    date.setMinutes(date.getMinutes() + 59 );
+    date.setSeconds(date.getSeconds() + 59 );
+    date.setMilliseconds(date.getMilliseconds() + 99 );
     this.request.dateTo = date;
   }
 
@@ -261,8 +266,6 @@ export class BetsListService {
 
   private cloneRequest(): VirtualCouponListByAgentRequest {
 
-    const dateto = new Date();
-    dateto.setDate(this.request.dateTo.getDate() + 1);
     let tmpUserId = this.request.userId;
     if (tmpUserId === 0) {
       tmpUserId = (!this.userService.isLoggedOperator()) ?
@@ -272,7 +275,7 @@ export class BetsListService {
     return {
       couponStatus: this.request.couponStatus,
       dateFrom: this.request.dateFrom,
-      dateTo: dateto,
+      dateTo: this.request.dateTo,
       pageSize: this.request.pageSize,
       requestedPage: (this.request.requestedPage === 0) ? 1 : this.request.requestedPage,
       couponType: this.request.couponType,

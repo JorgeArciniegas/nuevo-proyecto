@@ -44,8 +44,8 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
           couponStatus: this.couponDetail.CouponStatusId,
           pageOdd: 1,
           pageOddRows: this.definedNumberRowForEvents,
-          maxPage: this.couponDetail.Odds.length === 1 ? 1 : Math.round(this.couponDetail.Odds.length / this.definedNumberRowForEvents),
-
+          maxPage: this.couponDetail.Odds.length === 1 ? 1 : Math.ceil(this.couponDetail.Odds.length / this.definedNumberRowForEvents),
+          
           odd: this.couponDetail.Odds.slice(0, this.definedNumberRowForEvents )
         };
         // setting paginator for combinations
@@ -54,7 +54,7 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
           pageGrouping: 1,
           pageGroupingRows: this.definedNumberRowForGroupings,
           maxPage: this.couponDetail.Groupings.length === 1 ?
-            1 : Math.floor(this.couponDetail.Groupings.length / this.definedNumberRowForGroupings),
+            1 : Math.ceil(this.couponDetail.Groupings.length / this.definedNumberRowForGroupings),
           couponStake: this.couponDetail.Stake
         };
       });
@@ -62,37 +62,42 @@ export class DetailsCouponComponent implements OnInit, OnDestroy {
   }
 
   changePage(page: boolean): void {
-    if (page) {
-      if (this.showDataViewSelected === ShowBetDetailView.EVENTS) {
-        this.couponOddEvent.odd = this.couponDetail.Odds.slice(
-          this.couponOddEvent.pageOdd * this.definedNumberRowForEvents,
-          (this.couponOddEvent.pageOdd + 1 ) * this.definedNumberRowForEvents );
-        this.couponOddEvent.pageOdd++;
-      } else if (
-        this.showDataViewSelected === ShowBetDetailView.COMBINATIONS
-      ) {
-        this.couponGroupingsRow.groupings = this.couponDetail.Groupings.slice(
-          this.couponGroupingsRow.pageGrouping * this.definedNumberRowForGroupings,
-        );
-        this.couponGroupingsRow.pageGrouping++;
+    // manage events tab paging
+    if (this.showDataViewSelected === ShowBetDetailView.EVENTS) {
+      if(page) {
+        // increase page index
+        if(this.couponOddEvent.pageOdd <= this.couponOddEvent.maxPage) {
+          ++this.couponOddEvent.pageOdd;
+        }
+      } else {
+        // decrease page index
+        if(this.couponOddEvent.pageOdd > 0) {
+          --this.couponOddEvent.pageOdd;
+        }
       }
-    } else {
-      if (this.showDataViewSelected === ShowBetDetailView.EVENTS) {
-        this.couponOddEvent.odd = this.couponDetail.Odds.slice(
-          ((this.couponOddEvent.pageOdd - 1 ) > 1) ? (this.couponOddEvent.pageOdd - 1 ) * this.definedNumberRowForEvents : 0,
-          (this.couponOddEvent.pageOdd - 1 ) * this.definedNumberRowForEvents );
-        this.couponOddEvent.pageOdd--;
-      } else if (
-        this.showDataViewSelected === ShowBetDetailView.COMBINATIONS
-      ) {
-        this.couponGroupingsRow.groupings = this.couponDetail.Groupings.slice(
-          this.couponGroupingsRow.pageGrouping - 1 > 1 ?
-          (this.couponGroupingsRow.pageGrouping - 1) * this.definedNumberRowForGroupings : 0,
-          (this.couponGroupingsRow.pageGrouping - 1) *
-            this.definedNumberRowForGroupings
-        );
-        this.couponGroupingsRow.pageGrouping--;
+      // slice coupon odds according to the selected page
+      this.couponOddEvent.odd = this.couponDetail.Odds.slice(
+        this.couponOddEvent.pageOdd === 1 ? 0 : (this.couponOddEvent.pageOdd - 1) * this.definedNumberRowForEvents,
+        ((this.couponOddEvent.pageOdd - 1) * this.definedNumberRowForEvents) + this.definedNumberRowForEvents);
+    }
+
+    // Manage events tab paging
+    if (this.showDataViewSelected === ShowBetDetailView.COMBINATIONS) {
+      if(page) {
+        // Increase page index
+        if(this.couponGroupingsRow.pageGrouping <= this.couponOddEvent.maxPage) {
+          ++this.couponGroupingsRow.pageGrouping;
+        }
+      } else {
+        // Decrease page index
+        if(this.couponGroupingsRow.pageGrouping > 0) {
+          --this.couponGroupingsRow.pageGrouping;
+        }
       }
+      // slice coupon groupings according to the selected page
+      this.couponGroupingsRow.groupings = this.couponDetail.Groupings.slice(
+        this.couponGroupingsRow.pageGrouping === 1 ? 0 : (this.couponGroupingsRow.pageGrouping - 1) * this.definedNumberRowForGroupings,
+        ((this.couponGroupingsRow.pageGrouping - 1) * this.definedNumberRowForGroupings) + this.definedNumberRowForGroupings);
     }
   }
 
