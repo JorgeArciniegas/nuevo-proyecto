@@ -273,11 +273,11 @@ export class MainService {
         Item: this.userservice.getUserId()
       };
       this.elysApi.virtual.getVirtualTreeV2(request).then((sports: VirtualProgramTreeBySportResponse) => {
+        const tournaments: VirtualBetTournamentExtended[] = sports.Sports[0].ts;
+        this.productService.product.layoutProducts.multiFeedType = tournaments[0].mft;
         if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
-          const tournament: VirtualBetTournament = sports.Sports[0].ts[0];
-          this.productService.product.layoutProducts.multiFeedType = tournament.mft;
           // Load all events
-          this.cacheEvents = tournament.evs;
+          this.cacheEvents = tournaments[0].evs;
           for (let index = 0; index < this.productService.product.layoutProducts.nextEventItems; index++) {
             const event: EventInfo = new EventInfo();
             event.number = this.cacheEvents[index].id;
@@ -287,7 +287,6 @@ export class MainService {
           }
           // load markets from PRODUCT SOCCER
         } else {
-          const tournaments: VirtualBetTournamentExtended[] = sports.Sports[0].ts;
           this.cacheTournaments = tournaments;
           for (let index = 0; index < this.productService.product.layoutProducts.nextEventItems; index++) {
             const event: EventInfo = new EventInfo();
