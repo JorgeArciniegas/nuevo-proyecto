@@ -37,13 +37,15 @@ export class ProductsComponent implements AfterViewInit, OnDestroy {
     this.mainService.remainingEventTime(
       this.mainService.eventDetails.events[this.mainService.eventDetails.currentEvent].number)
       .then((eventTime: EventTime) => {
-        if (eventTime.minute <= 0 && eventTime.second <= 0) {
-          this.mainService.currentAndSelectedEventTime();
-        } else {
-          this.mainService.eventDetails.eventTime = eventTime;
-          if (this.mainService.eventDetails.currentEvent === 0) {
-            this.mainService.remainingTime.minute = eventTime.minute;
-            this.mainService.remainingTime.second = eventTime.second;
+        if (eventTime) {
+          if (eventTime.minute <= 0 && eventTime.second <= 0) {
+            this.mainService.currentAndSelectedEventTime();
+          } else {
+            this.mainService.eventDetails.eventTime = eventTime;
+            if (this.mainService.eventDetails.currentEvent === 0) {
+              this.mainService.remainingTime.minute = eventTime.minute;
+              this.mainService.remainingTime.second = eventTime.second;
+            }
           }
         }
       });
