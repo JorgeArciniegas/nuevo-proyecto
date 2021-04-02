@@ -107,10 +107,12 @@ export class MainService {
 
       this.eventDetails.currentEvent = eventIndex;
       this.remainingEventTime(this.eventDetails.events[eventIndex].number).then((eventTime: EventTime) => {
-        this.eventDetails.eventTime = eventTime;
-        if (this.eventDetails.currentEvent === 0) {
-          this.remainingTime.minute = eventTime.minute;
-          this.remainingTime.second = eventTime.second;
+        if (eventTime) {
+          this.eventDetails.eventTime = eventTime;
+          if (this.eventDetails.currentEvent === 0) {
+            this.remainingTime.minute = eventTime.minute;
+            this.remainingTime.second = eventTime.second;
+          }
         }
       });
 
@@ -341,7 +343,10 @@ export class MainService {
             this.eventDetails.events[index] = event;
           }
         }
-        this.currentAndSelectedEventTime(false);
+
+        if (this.initCurrentEvent || this.eventDetails.currentEvent === 0) {
+          this.currentAndSelectedEventTime(false);
+        }
         resolve();
       }, (error) => {
         // check the error
@@ -542,7 +547,6 @@ export class MainService {
         this.currentEventSubscribe.next(this.eventDetails.currentEvent);
       }
     } else if (this.eventDetails.currentEvent === 0) {
-      // this.resetPlayEvent();
       // set to reset all variables
       if (resetAllSelections) {
         this.toResetAllSelections = true;
