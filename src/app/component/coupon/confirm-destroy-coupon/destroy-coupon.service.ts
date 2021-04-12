@@ -25,7 +25,8 @@ export class DestroyCouponService {
     this.userService.isBtnCalcEditable = false;
     this.dialogRef = this.dialog.open(ConfirmDestroyCouponComponent, {
       data: { racing: racing, product: product, confirm: false },
-      id: 'destroy-coupon-dialog'
+      id: 'destroy-coupon-dialog',
+      hasBackdrop: false
     });
     this.dialogRef.afterClosed().subscribe(elem => {
       if (elem) {

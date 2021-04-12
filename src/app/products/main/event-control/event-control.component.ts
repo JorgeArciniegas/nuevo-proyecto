@@ -41,7 +41,7 @@ export class EventControlComponent implements OnInit {
   }
 
   constructor(
-    private mainService: MainService,
+    public mainService: MainService,
     private productService: ProductsService,
     private settings: AppSettings,
     private windowSizeService: WindowSizeService

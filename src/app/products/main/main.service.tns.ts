@@ -256,6 +256,7 @@ export class MainService {
 
   loadEvents(): void {
     try {
+      let eventRemoved : EventInfo;
       if (this.initCurrentEvent) {
         this.loadEventsFromApi().then(() => this.resultService.getLastResult());
       } else {
@@ -266,11 +267,11 @@ export class MainService {
           } else {
             this.cacheEvents.shift();
           }
-          this.eventDetails.events.shift();
+          eventRemoved = this.eventDetails.events.shift();
           this.slideToNextEvent();
           this.currentAndSelectedEventTime();
         }
-        this.loadEventsFromApi().then(() => this.resultService.getLastResult());
+        this.loadEventsFromApi(eventRemoved).then(() => this.resultService.getLastResult());
       }
       // Resume event's countdown
       if (this.countdownSub && this.countdownSub.closed || !this.countdownSub) {
@@ -309,7 +310,7 @@ export class MainService {
    * Inside it, it must be created the request object.
    * The reference values is taken by "ProductService" on object "product".
    */
-  async loadEventsFromApi(): Promise<void> {
+   async loadEventsFromApi(eventRemoved? : EventInfo): Promise<void> {
     return new Promise((resolve, reject) => {
       const request: VirtualProgramTreeBySportRequest = {
         SportIds: this.productService.product.sportId.toString(),
@@ -321,26 +322,36 @@ export class MainService {
       this.elysApi.virtual.getVirtualTreeV2(request).then((sports: VirtualProgramTreeBySportResponse) => {
         const tournaments: VirtualBetTournamentExtended[] = sports.Sports[0].ts;
         this.productService.product.layoutProducts.multiFeedType = tournaments[0].mft;
+
+        // the checkDuplicaIndex prevent the multiload event if the API response is not correct
+        let checkDuplicateIndex = 0;
+        if(eventRemoved !== undefined){
+          if( tournaments[0].evs.findIndex(tournament => tournament.id === eventRemoved.number) !== -1 || 
+            tournaments.findIndex(tournament => tournament.id === eventRemoved.number) !== -1
+          ){ 
+            checkDuplicateIndex = 1 
+          }
+        }
         if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
           // Load all events
           this.cacheEvents = tournaments[0].evs;
-          for (let index = 0; index < this.productService.product.layoutProducts.nextEventItems; index++) {
+          for (let index = checkDuplicateIndex; index < this.productService.product.layoutProducts.nextEventItems; index++) {
             const event: EventInfo = new EventInfo();
             event.number = this.cacheEvents[index].id;
             event.label = this.cacheEvents[index].nm;
             event.date = new Date(this.cacheEvents[index].sdtoffset);
 
-            this.eventDetails.events[index] = event;
+            this.eventDetails.events[index - checkDuplicateIndex] = event;
           }
         } else {
           this.cacheTournaments = tournaments;
-          for (let index = 0; index < this.productService.product.layoutProducts.nextEventItems; index++) {
+          for (let index = checkDuplicateIndex; index < this.productService.product.layoutProducts.nextEventItems; index++) {
             const event: EventInfo = new EventInfo();
             event.number = this.cacheTournaments[index].id;
             event.label = this.cacheTournaments[index].nm;
             event.date = new Date(this.cacheTournaments[index].sdtoffset);
 
-            this.eventDetails.events[index] = event;
+            this.eventDetails.events[index - checkDuplicateIndex] = event;
           }
         }
 

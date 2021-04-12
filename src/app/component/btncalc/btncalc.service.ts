@@ -110,38 +110,40 @@ export class BtncalcService implements OnDestroy {
 
 
   /**
-   *
+   * tap fired only if the new amount is greater then minimum amount
    */
   tapPlus(groupingChange?: boolean): void {
-    this.assignStake();
-    if (this.userService.isModalOpen) {
-      this.userService.isBtnCalcEditable = false;
-    }
-    if (this.couponService.oddStakeEdit) {
-      this.couponService.updateCoupon();
-      return;
-    }
-    if (this.polyfunctionalStakeCoupon.isEnabled) {
-      this.updateCouponStake();
-      return;
-    }
-    if (!this.polyfunctionalArea || !this.polyfunctionalArea.odds) {
-      return;
-    }
-    // Check if the "shortcut method" is available for the selection
-    if (this.polyfunctionalArea.shortcut) {
-      this.couponService.addRemoveToCouponSC(this.polyfunctionalArea);
-    } else {
-      let listOdds = this.polyfunctionalArea.odds.slice();
-      if (this.productService.product.sportId === 1) {
-        listOdds = this.polyfunctionalArea.odds.slice(-1);
+    if (this.polyfunctionStakePresetPlayer.amount >= this.polyfunctionalArea.amount) {
+      this.assignStake();
+      if (this.userService.isModalOpen) {
+        this.userService.isBtnCalcEditable = false;
       }
-      this.couponService.addRemoveToCoupon(listOdds, this.productService.product.typeCoupon.acceptMultiStake);
-      // this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds, this.productService.product.typeCoupon.acceptMultiStake);
-    }
-    if (!groupingChange) {
-      this.productService.closeProductDialog();
-      this.productService.resetBoard();
+      if (this.couponService.oddStakeEdit) {
+        this.couponService.updateCoupon();
+        return;
+      }
+      if (this.polyfunctionalStakeCoupon.isEnabled) {
+        this.updateCouponStake();
+        return;
+      }
+      if (!this.polyfunctionalArea || !this.polyfunctionalArea.odds) {
+        return;
+      }
+      // Check if the "shortcut method" is available for the selection
+      if (this.polyfunctionalArea.shortcut) {
+        this.couponService.addRemoveToCouponSC(this.polyfunctionalArea);
+      } else {
+        let listOdds = this.polyfunctionalArea.odds.slice();
+        if (this.productService.product.sportId === 1) {
+          listOdds = this.polyfunctionalArea.odds.slice(-1);
+        }
+        this.couponService.addRemoveToCoupon(listOdds, this.productService.product.typeCoupon.acceptMultiStake);
+        // this.couponService.addRemoveToCoupon(this.polyfunctionalArea.odds, this.productService.product.typeCoupon.acceptMultiStake);
+      }
+      if (!groupingChange) {
+        this.productService.closeProductDialog();
+        this.productService.resetBoard();
+      }
     }
   }
 
@@ -347,7 +349,7 @@ export class BtncalcService implements OnDestroy {
     } else {
       switch (amount) {
         case '0':
-          tempAmount = Number(tempAmount) * 10;
+          tempAmount = Number(tempAmount) * 0;
           break;
         case '00':
           tempAmount = Number(tempAmount) * 100;
@@ -371,13 +373,13 @@ export class BtncalcService implements OnDestroy {
   }
 
   public setAmountToOdd(amount: number, oddStake: OddsStakeEdit): void {
+
     // check if hasDecimalSeparator
     let tempAmount = oddStake.tempStakeStr;
     // check if it is the first time that the player taps the button on calculator.
     if (oddStake.hasDecimalSeparator && oddStake.tempStakeStr.split('.')[1].length === 2) {
       return;
     }
-
     if (Number(tempAmount) > 0 || oddStake.hasDecimalSeparator) {
       tempAmount += amount.toString();
     } else {
