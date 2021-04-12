@@ -120,13 +120,11 @@ export class BtncalcService implements OnDestroy {
    * firePlus fired only if the new amount is greater then minimum amount
    */
   tapPlus(groupingChange?: boolean) {
-    if (this.polyfunctionStakePresetPlayer.amount >= this.polyfunctionalArea.amount) {
     if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.RACING) {
 
       this.loaderService.setLoading(true, 'AddCoupon');
     }
     this.firePlus(groupingChange);
-  }
   }
 
 
@@ -367,7 +365,7 @@ export class BtncalcService implements OnDestroy {
     } else {
       switch (amount) {
         case '0':
-          tempAmount = Number(tempAmount) * 0;
+          tempAmount = Number(tempAmount) * 10;
           break;
         case '00':
           tempAmount = Number(tempAmount) * 100;

@@ -113,7 +113,6 @@ export class BtncalcService implements OnDestroy {
    * tap fired only if the new amount is greater then minimum amount
    */
   tapPlus(groupingChange?: boolean): void {
-    if (this.polyfunctionStakePresetPlayer.amount >= this.polyfunctionalArea.amount) {
       this.assignStake();
       if (this.userService.isModalOpen) {
         this.userService.isBtnCalcEditable = false;
@@ -144,7 +143,7 @@ export class BtncalcService implements OnDestroy {
         this.productService.closeProductDialog();
         this.productService.resetBoard();
       }
-    }
+    
   }
 
   /**
@@ -349,7 +348,7 @@ export class BtncalcService implements OnDestroy {
     } else {
       switch (amount) {
         case '0':
-          tempAmount = Number(tempAmount) * 0;
+          tempAmount = Number(tempAmount) * 10;
           break;
         case '00':
           tempAmount = Number(tempAmount) * 100;
