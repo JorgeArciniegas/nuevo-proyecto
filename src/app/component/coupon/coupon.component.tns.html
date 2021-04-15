@@ -272,11 +272,11 @@
   </GridLayout>
   <!-- BUTTONS -->
   <GridLayout row="4" rows="*" columns="*,*,3*" class="card"
-    [ngClass]="{'disabled': couponService.error || couponService.isWaitingConclusionOperation}"
     *ngIf="couponService.coupon && !couponService.coupon.internal_isReadyToPlace || !couponService.coupon">
     <!--DELETE COUPON-->
     <FlexboxLayout col="0" margin="2 2" alignContent="center" justifyContent="center"
-      class="button btn-default button-internal btn-warning" [isEnabled]="!userService.isModalOpen"
+      class="button btn-default button-internal btn-warning" [isEnabled]="!userService.isModalOpen && !couponService.processingOddsQueue"
+      [ngClass]="{'disabled': couponService.processingOddsQueue}"
       (tap)="clearCoupon()">
       <Image stretch="aspectFit" width="24px" height="24px" src="~/assets/icons/baseline-delete_outline-white-24px.png"
         verticalAlignment="center" horizontalAlignment="center"></Image>
@@ -291,7 +291,8 @@
     <!-- PLACE -->
     <Button col="2" margin="2 2" text="{{'COUPON.BET' | translate}}"
       class="button btn-default btn-success button-internal" textTransform="uppercase"
-      [isEnabled]="!timeBlocked && !couponService.error && !couponService.isWaitingConclusionOperation && !userService.isModalOpen && !isBetDisabledForColoursDrangn()"
+      [ngClass]="{'disabled': couponService.error || couponService.isWaitingConclusionOperation || couponService.processingOddsQueue}"
+      [isEnabled]="!timeBlocked && !couponService.error && !couponService.isWaitingConclusionOperation && !userService.isModalOpen && !isBetDisabledForColoursDrangn() && !couponService.processingOddsQueue"
       (tap)="couponService.preStagedCoupon()"></Button>
 
   </GridLayout>

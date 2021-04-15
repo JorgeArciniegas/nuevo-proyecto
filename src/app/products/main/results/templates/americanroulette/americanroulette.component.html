@@ -5,7 +5,7 @@
     <mat-grid-tile colspan="{{ (results|async)?.length }}">
       <!--List of draw results -->
       <mat-grid-list fxFill cols="{{ (results|async)?.length }}" rowHeight="{{rowHeight + 1}}" class="position">
-        <mat-grid-tile *ngFor="let result of (results|async).slice().reverse()">
+        <mat-grid-tile *ngFor="let result of (results|async)">
           <div fxLayout="column" fxLayoutAlign="center center" class="padding-bottom-5" fxFill>
             <span fxFlex fxLayoutAlign="center center" class="radius-5 btn-default btn-americanroulette-result">{{ result.eventLabel }}</span>
           </div>
@@ -16,7 +16,7 @@
     <mat-grid-tile colspan="{{ (results|async)?.length }}">
       <!--List of draw results -->
       <mat-grid-list fxFill cols="{{ (results|async)?.length }}" rowHeight="{{rowHeight + 1}}" class="position" rowHeight="100px">
-        <mat-grid-tile *ngFor="let result of (results|async).slice().reverse()">
+        <mat-grid-tile *ngFor="let result of (results|async)">
           <div fxLayout="column" fxLayoutAlign="center center" class="btn-colours radius-5 btn-americanroulette-result" [ngClass]="{'btn-colours-RED' : result?.americanRouletteResults?.color === 'red', 'btn-colours-BLACK' : result?.americanRouletteResults?.color === 'black', 'btn-colours-GREEN' : result?.americanRouletteResults?.color === 'green'}" fxFill>
             <span>{{ result.americanRouletteResults.result }}</span>
           </div>

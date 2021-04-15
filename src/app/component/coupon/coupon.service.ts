@@ -40,6 +40,8 @@ export class CouponService {
   isASuccess: boolean;
   // Duration of the notification of timed messages
   notificationInterval = 1500;
+  // In case of lucky multiple insertion wait till the end before enabling bet button
+  public processingOddsQueue: boolean = false;
 
   productHasCoupon: CouponConfirmDelete;
 
@@ -160,9 +162,14 @@ export class CouponService {
           break;
       }
     });
+
+    // Enable back bet button when the coupon finished processing the odd queue
+    this.elysCoupon.couponBidProcessed.subscribe(() => this.processingOddsQueue = false);
   }
 
   addRemoveToCouponSC(smart: PolyfunctionalArea): void {
+    // Disable bet while the coupon is processing the queue
+    this.processingOddsQueue = true;
     try {
       if (this.coupon && this.coupon.internal_isReadyToPlace) {
         return;
@@ -182,6 +189,8 @@ export class CouponService {
   }
 
   addRemoveToCoupon(smart: BetOdd[], isMultiStake: boolean = true): void {
+    // Disable bet while the coupon is processing the queue
+    this.processingOddsQueue = true;
     try {
       if (this.coupon && this.coupon.internal_isReadyToPlace) {
         return;
@@ -225,6 +234,8 @@ export class CouponService {
    * @param selectedNumber
    */
   addToRemoveToCouponLottery(eventId: number, selectedNumber: number, amount?: number): void {
+    // Disable bet while the coupon is processing the queue
+    this.processingOddsQueue = true;
     if (this.coupon && this.coupon.internal_isReadyToPlace) {
       return;
     }
@@ -259,6 +270,8 @@ export class CouponService {
  * @param selectedNumber
  */
   addToRemoveToCouponColours(selectionId: number, outcomeType: string, outcome: string, amount: number): void {
+    // Disable bet while the coupon is processing the queue
+    this.processingOddsQueue = true;
     if (this.coupon && this.coupon.internal_isReadyToPlace) {
       return;
     }
@@ -289,6 +302,8 @@ export class CouponService {
   }
 
   multiAddToCouponColours(selectionId: number, outcomeType: string, outcomes: string[], amount: number): void {
+    // Disable bet while the coupon is processing the queue
+    this.processingOddsQueue = true;
     const req: ColoursMultiSelection = {
       selectionId: selectionId,
       outcomeType: outcomeType,

@@ -116,8 +116,8 @@ export class BtncalcService implements OnDestroy {
   }
 
 
-  /**
-   *
+ /**
+   * firePlus fired only if the new amount is greater then minimum amount
    */
   tapPlus(groupingChange?: boolean) {
     if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.RACING) {
@@ -129,39 +129,39 @@ export class BtncalcService implements OnDestroy {
 
 
   private firePlus(groupingChange?: boolean) {
-    this.assignStake();
-    if (this.userService.isModalOpen) {
-      this.userService.isBtnCalcEditable = false;
-    }
-    if (this.couponService.oddStakeEdit) {
-      this.couponService.updateCoupon();
-      return;
-    }
-    if (this.polyfunctionalStakeCoupon.isEnabled) {
-      this.updateCouponStake();
-      return;
-    }
-    if (!this.polyfunctionalArea || !this.polyfunctionalArea.odds) {
-      return;
-    }
-    // Check if the "shortcut method" is available for the selection
-    if (this.polyfunctionalArea.shortcut) {
-      this.couponService.addRemoveToCouponSC(this.polyfunctionalArea);
-    } else {
-      let listOdds = this.polyfunctionalArea.odds.slice();
-      if (this.productService.product.sportId === 1) {
-        listOdds = this.polyfunctionalArea.odds.slice(-1);
+      this.assignStake();
+      if (this.userService.isModalOpen) {
+        this.userService.isBtnCalcEditable = false;
       }
-      this.couponService.addRemoveToCoupon(listOdds, this.productService.product.typeCoupon.acceptMultiStake);
-    }
-    if (!groupingChange) {
-      //
-      this.productService.closeProductDialog();
-      this.productService.resetBoard();
-    }
-    if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.RACING) {
-      this.loaderService.setLoading(false, 'AddCoupon');
-    }
+      if (this.couponService.oddStakeEdit) {
+        this.couponService.updateCoupon();
+        return;
+      }
+      if (this.polyfunctionalStakeCoupon.isEnabled) {
+        this.updateCouponStake();
+        return;
+      }
+      if (!this.polyfunctionalArea || !this.polyfunctionalArea.odds) {
+        return;
+      }
+      // Check if the "shortcut method" is available for the selection
+      if (this.polyfunctionalArea.shortcut) {
+        this.couponService.addRemoveToCouponSC(this.polyfunctionalArea);
+      } else {
+        let listOdds = this.polyfunctionalArea.odds.slice();
+        if (this.productService.product.sportId === 1) {
+          listOdds = this.polyfunctionalArea.odds.slice(-1);
+        }
+        this.couponService.addRemoveToCoupon(listOdds, this.productService.product.typeCoupon.acceptMultiStake);
+      }
+      if (!groupingChange) {
+        //
+        this.productService.closeProductDialog();
+        this.productService.resetBoard();
+      }
+      if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.RACING) {
+        this.loaderService.setLoading(false, 'AddCoupon');
+      }
   }
 
   /**
