@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as appSettings from 'tns-core-modules/application-settings';
+import * as appSettings from '@nativescript/core/application-settings';
 import { VERSION } from '../../../../environments/version';
 
 // Service to handle the functions to operate on the device storage.

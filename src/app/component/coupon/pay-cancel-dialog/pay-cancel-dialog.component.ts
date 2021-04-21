@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CancelCouponRequest, ErrorStatus, FlagAsPaidRequest } from '@elys/elys-api';
 import { DialogTypeCoupon } from '../../../products/products.model';
 import { UserService } from '../../../services/user.service';

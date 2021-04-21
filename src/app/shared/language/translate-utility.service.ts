@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { getLanguages, LANGUAGES } from './language.models';
 import { AppSettings } from '../../app.settings';
-import { StorageService } from './storage/storage.service';
+import { StorageService } from '../../services/utility/storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -53,25 +54,24 @@ export class TranslateUtilityService {
     // Set the language to use according to the value of the variable.
     this.translateService.use(this.currentLanguage);
   }
-
+  
   /**
-   * Method to change the language in use from the application. The new language it is also store into the 'lang' data of the storage.
-   * @param lang String of the language's code that will be set.
+   * Switch the curent app language
+   * @param lang - selected language
    */
   public changeLanguage(lang: string): void {
-    // Check that the language to set it isn't already in use
-    if (lang !== this.translateService.currentLang) {
-      // Set the new language.
-      this.translateService.use(lang);
-      // Save the new language to the storage.
-      this.storageService.setData('lang', lang);
+    if (this.appSettings.supportedLang.includes(lang)) {
+      this.currentLanguage = LANGUAGES[lang];
+      this.translateService.use(getLanguages(LANGUAGES[lang], true));
+    } else {
+      // If selected language is not supported select the first
+      this.translateService.use(getLanguages(LANGUAGES[this.appSettings.supportedLang[0]], true));
     }
+    this.storageService.setData('lang', lang);
+
   }
 
   public getCurrentLanguage(): string {
-    if (this.translateService.currentLang === 'ht') {
-      return 'fr-HT';
-    }
     return this.translateService.currentLang;
   }
 

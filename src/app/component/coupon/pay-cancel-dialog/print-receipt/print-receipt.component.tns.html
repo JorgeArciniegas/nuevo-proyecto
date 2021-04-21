@@ -5,9 +5,9 @@
   </FlexboxLayout>
   <ScrollView>
     <StackLayout #printingData orientation="vertical" verticalAlignment="top" class="m-10 p-10" width="560" height="800">
-      <FlexboxLayout flexDirection="column" class="printbox" width="560" >
-        <StackLayout>
-          <Image stretch="aspectFill"
+      <FlexboxLayout flexDirection="column" class="printbox" width="560" heigth="800" >
+        <StackLayout stretch="aspectFill">
+          <Image 
             src="~/app/themes/skins/{{appSettings.theme}}/image/Logo-coupon.png"></Image>
         </StackLayout>
         <FlexboxLayout flexDirection="row" class="p-b-10" justifyContent="space-around" *ngIf="appSettings.printSettings.enabledPrintReceipt.printHeaderMessage" >

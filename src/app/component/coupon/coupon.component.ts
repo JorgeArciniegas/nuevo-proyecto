@@ -10,12 +10,11 @@ import { Colour } from '../../products/main/playable-board/templates/colours/col
 import { BetOdd, Market, PolyfunctionalArea } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { UserService } from '../../services/user.service';
-import { TranslateUtilityService } from '../../services/utility/translate-utility.service';
+import { TranslateUtilityService } from '../../shared/language/translate-utility.service';
 import { WindowSizeService } from '../../services/utility/window-size/window-size.service';
 import { CouponService } from './coupon.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-coupon, [app-coupon]',
   templateUrl: './coupon.component.html',
   styleUrls: ['./coupon.component.scss']

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CancelCouponRequest, ErrorStatus, FlagAsPaidRequest } from '@elys/elys-api';
+import { TextField } from '@nativescript/core';
 import { BarcodeScanner } from 'nativescript-barcodescanner';
-import { TextField } from 'tns-core-modules/ui/text-field';
 import { DialogTypeCoupon } from '../../../../../src/app/products/products.model';
 import { UserService } from '../../../services/user.service';
 import { CouponDialogService } from '../coupon-dialog.service';
@@ -40,7 +40,6 @@ export class PayCancelDialogComponent {
   }
 
   public onSubmit(couponCode: string): void {
-    // console.log(DialogTypeCoupon[DialogTypeCoupon.PAY]);
     couponCode = couponCode.replace(/[^a-zA-Z0-9\-]/g, '-');
     if (this.couponDialogService.type === DialogTypeCoupon.PAY) {
       if (couponCode) {

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ErrorStatus } from '@elys/elys-api';
-import { TextField } from 'tns-core-modules/ui/text-field/text-field';
+import { TextField } from '@nativescript/core';
 import { AppSettings } from '../../../../app.settings';
 import { OperatorCreteByForm } from '../operators.model';
 import { OperatorsService } from '../operators.service';
-import { passwordValidator } from '../password-validator';
 
 @Component({
   selector: 'app-create',

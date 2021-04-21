@@ -8,7 +8,6 @@ import { LoaderService } from '../../../services/utility/loader/loader.service';
 import { timer } from 'rxjs';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-application-menu, [app-application-menu]',
   templateUrl: './application-menu.component.html',
   styleUrls: ['./application-menu.component.scss']

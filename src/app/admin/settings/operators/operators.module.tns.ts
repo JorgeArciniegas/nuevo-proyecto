@@ -1,7 +1,5 @@
-import { NgModule } from '@angular/core';
-import { NativeScriptCommonModule } from 'nativescript-angular/common';
-import { NativeScriptFormsModule } from 'nativescript-angular/forms';
-import { NativeScriptRouterModule } from 'nativescript-angular/router';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NativeScriptCommonModule, NativeScriptFormsModule, NativeScriptRouterModule } from '@nativescript/angular';
 import { SharedModule } from '../../../shared/shared.module';
 import { CreateComponent } from './create/create.component';
 import { DeleteComponent } from './delete/delete.component';
@@ -18,6 +16,7 @@ import { OperatorsComponent } from './operators.component';
     SharedModule,
     NativeScriptFormsModule,
     NativeScriptRouterModule.forChild(routes)
-  ]
+  ],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class OperatorsModule { }

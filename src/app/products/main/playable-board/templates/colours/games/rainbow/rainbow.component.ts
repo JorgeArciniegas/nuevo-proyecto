@@ -1,13 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { BetCouponExtended, ElysCouponService, BetCouponOddExtended } from '@elys/elys-coupon';
+import { BetCouponExtended, BetCouponOddExtended, ElysCouponService } from '@elys/elys-coupon';
 import { Subscription } from 'rxjs';
 import { BtncalcService } from '../../../../../../../component/btncalc/btncalc.service';
 import { CouponService } from '../../../../../../../component/coupon/coupon.service';
-import { ColourGameId } from '../../../../../colour-game.enum';
 import { UserService } from '../../../../../../../services/user.service';
+import { ColourGameId } from '../../../../../colour-game.enum';
 import { MainService } from '../../../../../main.service';
-import { Band, ColoursSelection, Colour } from '../../colours.models';
-import { Color } from 'tns-core-modules/color/color';
+import { Colour, ColoursSelection } from '../../colours.models';
 
 @Component({
   selector: 'app-playable-board-rainbow',

@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
-import { NativeScriptCommonModule } from 'nativescript-angular/common';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NativeScriptCommonModule, NativeScriptRouterModule } from '@nativescript/angular';
 import { SharedModule } from '../../../shared/shared.module';
 import { VboxEditComponent } from './vbox-edit/vbox-edit.component';
 import { routes } from './vbox-routing.module';
 import { VboxComponent } from './vbox.component';
-import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { VboxService } from './vbox.service';
 
 
@@ -15,6 +14,7 @@ import { VboxService } from './vbox.service';
     NativeScriptRouterModule.forChild(routes),
     SharedModule
   ],
-  providers: [VboxService]
+  providers: [VboxService],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class VboxModule { }

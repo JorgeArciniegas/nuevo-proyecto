@@ -1,8 +1,9 @@
-import { Input } from '@angular/core';
+import { Input, Directive } from '@angular/core';
 import { LotteryPayoutMarket, LotteryPayoutSelection } from '@elys/elys-api';
 import { ColourGameId } from '../../../../main/colour-game.enum';
 import { BetDataDialog } from '../../../../products.model';
 
+@Directive()
 export class ColoursCommonComponent {
   @Input()
   data: BetDataDialog;

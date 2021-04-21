@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { ProductsService } from '../../products.service';
 @Component({
-  moduleId: module.id,
   selector: 'app-playable-board, [app-playable-board]',
   templateUrl: './playable-board.component.html',
   styleUrls: ['./playable-board.component.scss']

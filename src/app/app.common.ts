@@ -1,13 +1,4 @@
-import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import localeDe from '@angular/common/locales/de';
-import localeEs from '@angular/common/locales/es';
-import localeFr from '@angular/common/locales/fr';
-import localeIt from '@angular/common/locales/it';
-import localePt from '@angular/common/locales/pt';
-import localeSq from '@angular/common/locales/sq';
-import localeHt from '@angular/common/locales/fr-HT';
-import { LOCALE_ID } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { PrintOperatorSummaryComponent } from './admin/reports/operator-summary/operator-summary-list/print-operator-summary/print-operator-summary.component';
 import { AppComponent } from './app.component';
@@ -21,14 +12,6 @@ import { ApplicationMenuComponent } from './component/header/application-menu/ap
 import { HeaderComponent } from './component/header/header.component';
 import { UserMenuComponent } from './component/header/user-menu/user-menu.component';
 import { LoaderComponent } from './component/loader/loader.component';
-// Registration of the languages in use. The English language is registered by default.
-registerLocaleData(localeIt);
-registerLocaleData(localeFr);
-registerLocaleData(localeEs);
-registerLocaleData(localePt);
-registerLocaleData(localeSq);
-registerLocaleData(localeDe);
-registerLocaleData(localeHt);
 
 export const componentDeclarations: any[] = [
   AppComponent,
@@ -44,12 +27,6 @@ export const componentDeclarations: any[] = [
 export const providerDeclarations: any[] = [
   AppSettings,
   TranslateService,
-  {
-    provide: LOCALE_ID,
-    deps: [TranslateService],
-    // tslint:disable-next-line:typedef
-    useFactory: (confService: TranslateService) => (confService.currentLang === 'ht' ? 'fr-HT' : confService.currentLang)
-  },
   { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
   CouponService,
   BtncalcService

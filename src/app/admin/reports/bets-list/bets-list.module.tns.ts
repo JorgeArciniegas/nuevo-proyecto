@@ -1,7 +1,4 @@
-import { NgModule } from '@angular/core';
-import { NativeScriptCommonModule } from 'nativescript-angular/common';
-import { NativeScriptFormsModule } from 'nativescript-angular/forms';
-import { NativeScriptRouterModule } from 'nativescript-angular/router';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { BetsListComponent } from './bets-list.component';
 import { CombinationsComponent } from './details-coupon/combinations/combinations.component';
@@ -11,6 +8,8 @@ import { SummaryComponent } from './details-coupon/summary/summary.component';
 import { SummaryCouponsComponent } from './summary-coupons/summary-coupons.component';
 import { routes } from './bets-list-routing.module';
 import { BetsListService } from './bets-list.service';
+import { NativeScriptCommonModule, NativeScriptFormsModule, NativeScriptRouterModule } from '@nativescript/angular';
+import { CommonModule } from '@angular/common';
 /**
  *
  */
@@ -24,11 +23,13 @@ import { BetsListService } from './bets-list.service';
     EventsComponent
   ],
   imports: [
+    CommonModule,
     NativeScriptCommonModule,
     SharedModule,
     NativeScriptFormsModule,
     NativeScriptRouterModule.forChild(routes)
   ],
-  providers: [BetsListService]
+  providers: [BetsListService],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class BetsListModule { }

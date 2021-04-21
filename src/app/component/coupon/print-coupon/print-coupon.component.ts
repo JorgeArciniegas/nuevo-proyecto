@@ -3,7 +3,7 @@ import { CouponStatus, CouponType } from '@elys/elys-api';
 import { LICENSE_TYPE } from '../../../../environments/environment.models';
 import { AppSettings } from '../../../app.settings';
 import { UserService } from '../../../services/user.service';
-import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
+import { TranslateUtilityService } from '../../../shared/language/translate-utility.service';
 import { PrintCouponService } from './print-coupon.service';
 
 @Component({

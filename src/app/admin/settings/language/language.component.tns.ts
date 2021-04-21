@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { timer } from 'rxjs';
 import { AppSettings } from '../../../app.settings';
 import { LoaderService } from '../../../services/utility/loader/loader.service';
-import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
+import { TranslateUtilityService } from '../../../shared/language/translate-utility.service';
 import { Language } from './language.model';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-language',
   templateUrl: './language.component.html',
   styleUrls: ['./language.component.scss']

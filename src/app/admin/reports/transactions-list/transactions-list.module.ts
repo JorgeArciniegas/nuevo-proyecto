@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatDatepickerModule, MatInputModule, MatNativeDateModule } from '@angular/material';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from '../../../shared/shared.module';
 import { DetailsTransactionComponent } from './details-transaction/details-transaction.component';
 import { GetTransactionVategoryKeyByEnumValuePipe } from './get-transaction-category-key-by-enum-value.pipe';

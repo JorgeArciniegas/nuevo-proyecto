@@ -4,7 +4,6 @@ import { ResultsService } from './results.service';
 import { WindowSizeService } from '../../../services/utility/window-size/window-size.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-results, [app-results]',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss']

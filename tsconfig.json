@@ -5,28 +5,19 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "esNext",
+    "module": "esnext",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2015",
+    "target": "es2017",
     "typeRoots": [
       "node_modules/@types"
     ],
     "lib": [
       "es2018",
-      "dom"
+      "dom",
+      "es2017"
     ],
-    /* "paths": {
-      "@angular/*": [
-        "./node_modules/@angular/*"
-      ],
-      "@elys/elys-api": [
-        "../../elys-api-lib/projects/elys-api/src"
-      ],
-      "@elys/elys-api/*": [
-        "../../elys-api-lib/projects/elys-api/src/*"
-      ]
-    } */
+    "removeComments": false
   }
 }

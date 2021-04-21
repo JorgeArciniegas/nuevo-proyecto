@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProductsService } from '../../products.service';
 import { EventsListService } from './events-list.service';
 @Component({
-  moduleId: module.id,
   selector: 'app-events-list, [app-events-list]',
   templateUrl: './events-list.component.html',
   styleUrls: ['./events-list.component.scss'],

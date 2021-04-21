@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { componentDeclarations, routes } from './login.common';
-import { MatSlideToggleModule } from '@angular/material';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [componentDeclarations],

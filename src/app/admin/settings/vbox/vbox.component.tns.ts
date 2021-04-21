@@ -11,7 +11,7 @@ import { timer } from 'rxjs';
 })
 export class VboxComponent implements OnInit {
 
-  constructor(private vboxService: VboxService, private router: RouterService, private loaderService: LoaderService) { }
+  constructor(public vboxService: VboxService, private router: RouterService, private loaderService: LoaderService) { }
 
   ngOnInit() {
     this.vboxService.getList();

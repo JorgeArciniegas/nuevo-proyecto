@@ -7,7 +7,6 @@ import { DialogService } from '../dialog.service';
 import { MainService } from './main.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-main, [app-main]',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']

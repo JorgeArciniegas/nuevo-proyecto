@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LotteryPayoutSelection } from '@elys/elys-api';
-import { TranslateUtilityService } from '../../../../../services/utility/translate-utility.service';
+import { TranslateUtilityService } from '../../../../../shared/language/translate-utility.service';
 import { ColoursCommonComponent } from './colours-common.component';
 import { DialogService } from '../../../../../products/dialog.service';
 

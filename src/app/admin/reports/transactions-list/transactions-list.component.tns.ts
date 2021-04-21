@@ -8,7 +8,6 @@ import { timer } from 'rxjs';
 import { LoaderService } from '../../../services/utility/loader/loader.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-transactions-list',
   templateUrl: './transactions-list.component.html',
   styleUrls: ['./transactions-list.component.scss']

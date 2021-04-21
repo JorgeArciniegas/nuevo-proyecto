@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AppSettings } from './app.settings';
 import { Settings } from './app.settings.model';
 import { UserService } from './services/user.service';
-import { TranslateUtilityService } from './services/utility/translate-utility.service';
+import { TranslateUtilityService } from './shared/language/translate-utility.service';
 import { WindowSizeService } from './services/utility/window-size/window-size.service';
 
 @Component({
@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
     this.faviconPath = this.appSettings.faviconPath;
     // Set the application language passing the browser one.
     this.translateUtilityService.initializeLanguages(this.translateService.getBrowserLang());
+
   }
 
   ngOnInit(): void {

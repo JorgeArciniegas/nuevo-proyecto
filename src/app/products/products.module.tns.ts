@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 import { BtncalcComponent } from '../component/btncalc/btncalc.component';
 import { ConfirmDestroyCouponComponent } from '../component/coupon/confirm-destroy-coupon/confirm-destroy-coupon.component';
 import { CouponDialogService } from '../component/coupon/coupon-dialog.service';
@@ -30,6 +29,7 @@ import { GroupingsComponent } from './product-dialog/groupings/groupings.compone
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
 import { AmericanrouletteComponent as AmericanrouletteHotAndColdComponent } from '../products/product-dialog/hot-and-cold/template/americanroulette/americanroulette.component';
+import { NativeScriptFormsModule } from '@nativescript/angular';
 @NgModule({
   declarations: [
     ProductDialogComponent,

@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
-import { NativeScriptCommonModule } from 'nativescript-angular/common';
-import { NativeScriptRouterModule } from 'nativescript-angular/router';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NativeScriptCommonModule, NativeScriptRouterModule } from '@nativescript/angular';
 import { SharedModule } from '../../../shared/shared.module';
 import { OperatorSummaryListComponent } from './operator-summary-list/operator-summary-list.component';
 import { routes } from './operator-summary-routing.module';
@@ -17,6 +16,7 @@ import { OperatorSummaryService } from './operator-summary.service';
     NativeScriptRouterModule.forChild(routes)
 
   ],
-  providers: [OperatorSummaryService]
+  providers: [OperatorSummaryService],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class OperatorSummaryModule { }

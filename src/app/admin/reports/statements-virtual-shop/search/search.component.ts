@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
-import { DateAdapter } from '@angular/material';
-import { TranslateUtilityService } from '../../../../services/utility/translate-utility.service';
+import { DateAdapter } from '@angular/material/core';
+import { TranslateUtilityService } from '../../../../shared/language/translate-utility.service';
 import { Observable } from 'rxjs';
 import { StatementVirtualShopService } from '../statement-virtual-shop.service';
 import { RouterService } from '../../../../services/utility/router/router.service';
@@ -12,8 +12,8 @@ import { RouterService } from '../../../../services/utility/router/router.servic
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnDestroy {
-  @ViewChild('pickerDateFrom', { static: false }) private inputPickerDateFrom;
-  @ViewChild('pickerDateTo', { static: false }) private inputPickerDateTo;
+  @ViewChild('pickerDateFrom') private inputPickerDateFrom;
+  @ViewChild('pickerDateTo') private inputPickerDateTo;
 
   constructor(
     public service: StatementVirtualShopService,

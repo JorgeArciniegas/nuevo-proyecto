@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { MatProgressSpinnerModule, MatSlideToggleModule } from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -37,6 +38,7 @@ import { SoccerComponent as SoccerStatisticsComponent } from './products/product
 import { SharedModule } from './shared/shared.module';
 import { ColorsComponent as ColorsHotAndColdComponent } from './products/product-dialog/hot-and-cold/template/colors/colors.component';
 import { AmericanrouletteComponent as AmericanrouletteHotAndColdComponent } from './products/product-dialog/hot-and-cold/template/americanroulette/americanroulette.component';
+import { LanguageModule } from './shared/language/language.module';
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -70,13 +72,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     NoopAnimationsModule,
     MatDialogModule,
     MatSlideToggleModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     SharedModule,
@@ -95,7 +90,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ElysCouponModule.forRoot(
       { deviceLayout: PlaySource.VDeskWeb }
     ),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    LanguageModule
   ],
   entryComponents: [
     ProductDialogComponent,

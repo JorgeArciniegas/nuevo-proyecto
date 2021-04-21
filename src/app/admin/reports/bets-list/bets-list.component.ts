@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { DateAdapter } from '@angular/material';
+import { DateAdapter } from '@angular/material/core';
 import { AccountOperator, AccountVirtualSport } from '@elys/elys-api';
 import { Observable } from 'rxjs';
-import { TranslateUtilityService } from '../../../../../src/app/services/utility/translate-utility.service';
+import { TranslateUtilityService } from '../../../shared/language/translate-utility.service';
 import { OperatorsService } from '../../settings/operators/operators.service';
 import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
 import { BetsListService } from './bets-list.service';
@@ -13,8 +13,8 @@ import { BetsListService } from './bets-list.service';
   styleUrls: ['./bets-list.component.scss']
 })
 export class BetsListComponent implements OnInit, OnDestroy {
-  @ViewChild('pickerDateFrom', { static: false }) private inputPickerDateFrom;
-  @ViewChild('pickerDateTo', { static: false }) private inputPickerDateTo;
+  @ViewChild('pickerDateFrom') private inputPickerDateFrom;
+  @ViewChild('pickerDateTo') private inputPickerDateTo;
 
   couponType: typeof CouponTypeInternal = CouponTypeInternal;
   couponStatus: typeof CouponStatusInternal = CouponStatusInternal;

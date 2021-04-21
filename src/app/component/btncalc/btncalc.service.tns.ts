@@ -3,7 +3,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subject, Subscription, timer, defer } from 'rxjs';
 import { AppSettings } from '../../app.settings';
 import { UserService } from '../../services/user.service';
-import { TranslateUtilityService } from '../../services/utility/translate-utility.service';
+import { TranslateUtilityService } from '../../shared/language/translate-utility.service';
 import { PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { TypeBetSlipColTot } from '../../products/main/main.models';

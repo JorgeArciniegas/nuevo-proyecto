@@ -12,7 +12,7 @@ import { DialogData } from '../products.model';
 })
 export class ProductDialogComponent implements OnInit {
   @Input()
-  private data: DialogData;
+  public data: DialogData;
 
   public settings: AppSettings;
   public rowNumber = 3;

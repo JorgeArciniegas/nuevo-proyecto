@@ -1,18 +1,17 @@
 import { Component, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { OperatorSummaryService } from './operator-summary.service';
 import { Observable } from 'rxjs';
-import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
-import { DateAdapter } from '@angular/material';
+import { TranslateUtilityService } from '../../../shared/language/translate-utility.service';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-operator-summary',
   templateUrl: './operator-summary.component.html',
   styleUrls: ['./operator-summary.component.scss']
 })
 export class OperatorSummaryComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('pickerDateFrom', { static: false }) private inputPickerDateFrom;
-  @ViewChild('pickerDateTo', { static: false }) private inputPickerDateTo;
+  @ViewChild('pickerDateFrom') private inputPickerDateFrom;
+  @ViewChild('pickerDateTo') private inputPickerDateTo;
 
   constructor(public operatorSummaryService: OperatorSummaryService,
     private translate: TranslateUtilityService, private adapter: DateAdapter<Date>) {

@@ -10,10 +10,9 @@ import { BetDataDialog, PolyfunctionalArea, PolyfunctionalStakeCoupon, Polyfunct
 import { ProductsService } from '../../products/products.service';
 import { BtncalcService } from '../btncalc/btncalc.service';
 import { CouponService } from '../coupon/coupon.service';
-import { TranslateUtilityService } from '../../services/utility/translate-utility.service';
+import { TranslateUtilityService } from '../../shared/language/translate-utility.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-display, [app-display]',
   templateUrl: './display.component.html',
   styleUrls: ['./display.component.scss']

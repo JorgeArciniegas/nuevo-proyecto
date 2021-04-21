@@ -8,7 +8,6 @@ import { LICENSE_TYPE } from '../../../../../environments/environment.models';
 import { Subscription, timer } from 'rxjs';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-print-receipt',
   templateUrl: './print-receipt.component.tns.html',
   styleUrls: ['./print-receipt.component.tns.scss']

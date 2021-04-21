@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StagedCoupon, StagedCouponStatus, SummaryCoupon } from '@elys/elys-api';
+import { StagedCouponDetail, StagedCouponStatus, SummaryCoupon } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { timer } from 'rxjs';
 import { RouterService } from '../../../services/utility/router/router.service';
@@ -13,7 +13,7 @@ import { RouterService } from '../../../services/utility/router/router.service';
  */
 export class PrintCouponService {
   printingEnabled: boolean;
-  couponPrint: StagedCoupon;
+  couponPrint: StagedCouponDetail;
   isPrintAgainst: boolean;
   reprintDate: Date;
 
@@ -32,7 +32,7 @@ export class PrintCouponService {
     });
   }
   reprintCoupon(coupon: SummaryCoupon) {
-    this.couponPrint = (coupon as unknown) as StagedCoupon;
+    this.couponPrint = (coupon as unknown) as StagedCouponDetail;
     this.isPrintAgainst = true;
     this.reprintDate = new Date();
     this.printWindow();
