@@ -1,7 +1,7 @@
-<div fxFlex="100" fxLayout="column" fxLayoutAlign="space-between" class="padding-vertical-10">
+<div fxFlex="100" fxLayout="column" fxLayoutAlign="start" class="padding-vertical-10">
   <ng-container *ngFor="let odd of data.odd; let i = index;">
     <!-- ROW -->
-    <div fxLayout="column" class="row-odd" fxLayoutGap="12px">
+    <div fxLayout="column" class="row-odd" fxLayoutGap="12px" [style.margin-top.%]="3">
       <!-- EVENT NAME-->
       <div fxFlex="20" fxLayoutAlign="center start">
         <h4>{{'DYNAMIC_KEYS.PRODUCT.NAME.'+odd.SportName | translate }} | {{ odd.EventName }}
