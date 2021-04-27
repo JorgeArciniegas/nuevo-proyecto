@@ -256,22 +256,18 @@ export class MainService {
 
   loadEvents(): void {
     try {
-      let eventRemoved : EventInfo;
       if (this.initCurrentEvent) {
         this.loadEventsFromApi().then(() => this.resultService.getLastResult());
       } else {
-        if ((this.cacheTournaments && this.cacheTournaments.length > 0) ||
-          (this.cacheEvents && this.cacheEvents.length > 0)) {
-          if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
-            this.cacheTournaments.shift();
-          } else {
-            this.cacheEvents.shift();
+        let eventRemoved: EventInfo = this.eventDetails.events[0];
+        this.loadEventsFromApi(eventRemoved).then(() => {
+          if ((this.cacheTournaments && this.cacheTournaments.length > 0) ||
+            (this.cacheEvents && this.cacheEvents.length > 0)) {
+            this.slideToNextEvent();
+            this.currentAndSelectedEventTime();
+            this.resultService.getLastResult();
           }
-          eventRemoved = this.eventDetails.events.shift();
-          this.slideToNextEvent();
-          this.currentAndSelectedEventTime();
-        }
-        this.loadEventsFromApi(eventRemoved).then(() => this.resultService.getLastResult());
+        });
       }
       // Resume event's countdown
       if (this.countdownSub && this.countdownSub.closed || !this.countdownSub) {
@@ -282,7 +278,7 @@ export class MainService {
       timer(5000).subscribe(() => {
         this.resetPlayEvent();
         this.initEvents();
-      })
+      })  
     }
   }
 
@@ -310,7 +306,7 @@ export class MainService {
    * Inside it, it must be created the request object.
    * The reference values is taken by "ProductService" on object "product".
    */
-   async loadEventsFromApi(eventRemoved? : EventInfo): Promise<void> {
+  async loadEventsFromApi(eventRemoved?: EventInfo): Promise<void> {
     return new Promise((resolve, reject) => {
       const request: VirtualProgramTreeBySportRequest = {
         SportIds: this.productService.product.sportId.toString(),
@@ -325,11 +321,11 @@ export class MainService {
 
         // the checkDuplicaIndex prevent the multiload event if the API response is not correct
         let checkDuplicateIndex = 0;
-        if(eventRemoved !== undefined){
-          if( tournaments[0].evs.findIndex(tournament => tournament.id === eventRemoved.number) !== -1 || 
+        if (eventRemoved !== undefined) {
+          if (tournaments[0].evs.findIndex(tournament => tournament.id === eventRemoved.number) !== -1 ||
             tournaments.findIndex(tournament => tournament.id === eventRemoved.number) !== -1
-          ){ 
-            checkDuplicateIndex = 1 
+          ) {
+            checkDuplicateIndex = 1;
           }
         }
         if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {

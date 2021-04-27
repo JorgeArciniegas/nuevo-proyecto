@@ -86,13 +86,13 @@ export class MainService {
 
       this.eventDetails.currentEvent = eventIndex;
       this.remainingEventTime(this.eventDetails.events[eventIndex].number).then((eventTime: EventTime) => {
-        if(eventTime) { 
+        if (eventTime) {
           this.eventDetails.eventTime = eventTime;
           if (this.eventDetails.currentEvent === 0) {
             this.remainingTime.minute = eventTime.minute;
             this.remainingTime.second = eventTime.second;
           }
-         }
+        }
       });
 
       if (this.toResetAllSelections) {
@@ -216,23 +216,18 @@ export class MainService {
 
   loadEvents(): void {
     try {
-      let eventRemoved : EventInfo;
       if (this.initCurrentEvent) {
         this.loadEventsFromApi().then(() => this.resultService.getLastResult());
       } else {
-        if ((this.cacheTournaments && this.cacheTournaments.length > 0) ||
-          (this.cacheEvents && this.cacheEvents.length > 0)) {
-          if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
-            this.cacheTournaments.shift();
-          } else {
-            this.cacheEvents.shift();
+        let eventRemoved: EventInfo = this.eventDetails.events[0];
+        this.loadEventsFromApi(eventRemoved).then(() => {
+          if ((this.cacheTournaments && this.cacheTournaments.length > 0) ||
+            (this.cacheEvents && this.cacheEvents.length > 0)) {
+            this.slideToNextEvent();
+            this.currentAndSelectedEventTime();
+            this.resultService.getLastResult();
           }
-          eventRemoved = this.eventDetails.events.shift();
-          this.slideToNextEvent();
-          this.currentAndSelectedEventTime();
-        }
-        this.loadEventsFromApi(eventRemoved).then(() => this.resultService.getLastResult());
-
+        });
       }
       // Resume event's countdown
       if (this.countdownSub && this.countdownSub.closed || !this.countdownSub) {
@@ -268,7 +263,7 @@ export class MainService {
    * Inside it, it must be created the request object.
    * The reference values is taken by "ProductService" on object "product".
    */
-  async loadEventsFromApi(eventRemoved? : EventInfo): Promise<void> {
+  async loadEventsFromApi(eventRemoved?: EventInfo): Promise<void> {
     return new Promise((resolve, reject) => {
       const request: VirtualProgramTreeBySportRequest = {
         SportIds: this.productService.product.sportId.toString(),
@@ -282,18 +277,18 @@ export class MainService {
 
         // the checkDuplicaIndex prevent the multiload event if the API response is not correct
         let checkDuplicateIndex = 0;
-        if(eventRemoved !== undefined){
-          if( tournaments[0].evs.findIndex(tournament => tournament.id === eventRemoved.number) !== -1 || 
+        if (eventRemoved !== undefined) {
+          if (tournaments[0].evs.findIndex(tournament => tournament.id === eventRemoved.number) !== -1 ||
             tournaments.findIndex(tournament => tournament.id === eventRemoved.number) !== -1
-          ){ 
-            checkDuplicateIndex = 1 
+          ) {
+            checkDuplicateIndex = 1;
           }
         }
 
         if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
           // Load all events
           this.cacheEvents = tournaments[0].evs;
-          for (let index = checkDuplicateIndex; index < this.productService.product.layoutProducts.nextEventItems; index++) { 
+          for (let index = checkDuplicateIndex; index < this.productService.product.layoutProducts.nextEventItems; index++) {
             const event: EventInfo = new EventInfo();
             event.number = this.cacheEvents[index].id;
             event.label = this.cacheEvents[index].nm;
@@ -520,7 +515,7 @@ export class MainService {
       if (resetAllSelections) {
         this.toResetAllSelections = true;
       }
-      this.currentEventSubscribe.next(0);      
+      this.currentEventSubscribe.next(0);
     }
 
     if (this.initCurrentEvent) {
@@ -685,7 +680,7 @@ export class MainService {
    * @param player
    */
   placingOdd(player: Player): void {
-    
+
     if (this.couponService.checkIfCouponIsReadyToPlace()) {
       return;
     }
@@ -727,7 +722,7 @@ export class MainService {
     const odds: VirtualBetEvent = this.cacheEvents.filter(
       (cacheEvent: VirtualBetEvent) => cacheEvent.id === this.placingEvent.eventNumber
     )[0];
-    
+
     this.smartCode = new Smartcode();
     this.populatingPolyfunctionArea(odds);
   }
