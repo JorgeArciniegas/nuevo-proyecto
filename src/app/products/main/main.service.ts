@@ -232,6 +232,7 @@ export class MainService {
           this.currentAndSelectedEventTime();
         }
         this.loadEventsFromApi(eventRemoved).then(() => this.resultService.getLastResult());
+
       }
       // Resume event's countdown
       if (this.countdownSub && this.countdownSub.closed || !this.countdownSub) {
@@ -307,11 +308,9 @@ export class MainService {
             event.number = this.cacheTournaments[index].id;
             event.label = this.cacheTournaments[index].nm;
             event.date = new Date(this.cacheTournaments[index].sdtoffset);
-            
             this.eventDetails.events[index - checkDuplicateIndex] = event;
           }
         }
-        
         if (this.initCurrentEvent || this.eventDetails.currentEvent === 0) {
           this.currentAndSelectedEventTime(false);
         }
@@ -521,7 +520,7 @@ export class MainService {
       if (resetAllSelections) {
         this.toResetAllSelections = true;
       }
-      this.currentEventSubscribe.next(0);
+      this.currentEventSubscribe.next(0);      
     }
 
     if (this.initCurrentEvent) {
@@ -686,6 +685,7 @@ export class MainService {
    * @param player
    */
   placingOdd(player: Player): void {
+    
     if (this.couponService.checkIfCouponIsReadyToPlace()) {
       return;
     }
@@ -727,6 +727,7 @@ export class MainService {
     const odds: VirtualBetEvent = this.cacheEvents.filter(
       (cacheEvent: VirtualBetEvent) => cacheEvent.id === this.placingEvent.eventNumber
     )[0];
+    
     this.smartCode = new Smartcode();
     this.populatingPolyfunctionArea(odds);
   }
@@ -829,7 +830,7 @@ export class MainService {
         // Single selection
         areaFuncData.selection = Podium[this.placingEvent.players[0].position];
         areaFuncData.value = this.placingEvent.players[0].number;
-        // Match player from object tm with mk
+        // Match player from object tm with mk        
         playerName = odd.tm.filter(t => t.ito === areaFuncData.value)[0].nm;
       } else if ((this.placingEvent.players.length > 1 && !this.placingEvent.isSpecialBets) || this.placingEvent.typePlace) {
         // Composit selection

@@ -365,7 +365,7 @@ export class BtncalcService implements OnDestroy {
     } else {
       switch (amount) {
         case '0':
-          tempAmount = Number(tempAmount) * 10;
+          tempAmount = Number(tempAmount) * 0;
           break;
         case '00':
           tempAmount = Number(tempAmount) * 100;
