@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 import { TranslateUtilityService } from '../../../../shared/language/translate-utility.service';
-import { Observable } from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { StatementVirtualShopService } from '../statement-virtual-shop.service';
 import { RouterService } from '../../../../services/utility/router/router.service';
 
@@ -25,7 +25,7 @@ export class SearchComponent implements OnDestroy {
     document.body.classList.add('bets-list');
 
     // close the date picker on outside click
-    Observable.fromEvent(document, 'click').subscribe((event: any) => {
+    fromEvent(document, 'click').subscribe((event: any) => {
       const elem: any = event.target;
       let dismiss = true;
       event.path.forEach(htmlElem => {

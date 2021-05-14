@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 import { AccountOperator, AccountVirtualSport } from '@elys/elys-api';
-import { Observable } from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { TranslateUtilityService } from '../../../shared/language/translate-utility.service';
 import { OperatorsService } from '../../settings/operators/operators.service';
 import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
@@ -30,7 +30,7 @@ export class BetsListComponent implements OnInit, OnDestroy {
     document.body.classList.add('bets-list');
 
     // close the date picker on outside click
-    Observable.fromEvent(document, 'click').subscribe((event: any) => {
+    fromEvent(document, 'click').subscribe((event: any) => {
       const elem: any = event.target;
       let dismiss = true;
       event.path.forEach(htmlElem => {
