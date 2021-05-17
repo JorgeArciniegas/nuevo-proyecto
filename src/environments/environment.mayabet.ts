@@ -18,7 +18,7 @@ export const environment: Environment = {
   theme: 'mayabet',
   faviconPath: 'app/themes/skins/mayabet/image/Logo-header.png',
   currencyDefault: 'EUR',
-  supportedLang: ['en', 'es', 'pt'],
+  supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de', 'ht'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
