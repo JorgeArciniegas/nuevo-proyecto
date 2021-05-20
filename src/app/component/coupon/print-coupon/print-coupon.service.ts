@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { StagedCouponDetail, StagedCouponStatus, SummaryCoupon } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { timer } from 'rxjs';
+import { take,takeWhile} from 'rxjs/operators'
 import { RouterService } from '../../../services/utility/router/router.service';
 
 @Injectable({
@@ -46,10 +47,10 @@ export class PrintCouponService {
     this.printingEnabled = true;
     this.router.getRouter().navigate(['/', { outlets: { print: 'print-coupon' } }]);
     document.getElementById('app').classList.add('isPrinting');
-    timer(250)
-      .take(1)
-      .takeWhile(() => this.printingEnabled)
-      .subscribe(valTimer => {
+    timer(250).pipe(
+      take(1),
+      takeWhile(() => this.printingEnabled)
+    ).subscribe(valTimer => {
         window.print();
         // delete class
         document.getElementById('app').classList.remove('isPrinting');
