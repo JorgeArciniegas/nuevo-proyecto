@@ -3,7 +3,6 @@ import { LoaderService } from '../../services/utility/loader/loader.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-loader, [app-loader]',
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.scss']

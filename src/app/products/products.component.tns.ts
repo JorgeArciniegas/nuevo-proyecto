@@ -11,7 +11,6 @@ import { DialogTypeCoupon } from './products.model';
 import { ProductsService } from './products.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']

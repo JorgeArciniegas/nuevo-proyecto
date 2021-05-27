@@ -1,8 +1,8 @@
 import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { TransactionsListService } from './transactions-list.service';
-import { Observable } from 'rxjs';
-import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
-import { DateAdapter } from '@angular/material';
+import { fromEvent } from 'rxjs';
+import { TranslateUtilityService } from '../../../shared/language/translate-utility.service';
+import { DateAdapter } from '@angular/material/core';
 import { TransactionCategory } from './transactions-list.model';
 import { UserService } from '../../../services/user.service';
 
@@ -12,8 +12,8 @@ import { UserService } from '../../../services/user.service';
   styleUrls: ['./transactions-list.component.scss']
 })
 export class TransactionsListComponent implements OnDestroy {
-  @ViewChild('pickerDateFrom', { static: false }) private inputPickerDateFrom;
-  @ViewChild('pickerDateTo', { static: false }) private inputPickerDateTo;
+  @ViewChild('pickerDateFrom') private inputPickerDateFrom;
+  @ViewChild('pickerDateTo') private inputPickerDateTo;
 
   object = Object;
   transactionCategory: typeof TransactionCategory = TransactionCategory;
@@ -28,7 +28,7 @@ export class TransactionsListComponent implements OnDestroy {
     document.body.classList.add('transactions-list');
 
     // close the date picker on outside click
-    Observable.fromEvent(document, 'click').subscribe((event: any) => {
+    fromEvent(document, 'click').subscribe((event: any) => {
       const elem: any = event.target;
       let dismiss = true;
       event.path.forEach(htmlElem => {

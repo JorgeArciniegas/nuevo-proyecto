@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ElysApiService, VBoxConfiguration, VBoxConfigurationRequest, VBoxConfigurationResponse } from '@elys/elys-api';
-import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
+import { TranslateUtilityService } from '../../../shared/language/translate-utility.service';
 import { ListVbox, LocalVBoxConfiguration } from './vbox.model';
 
 @Injectable()

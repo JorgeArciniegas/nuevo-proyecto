@@ -8,7 +8,6 @@ import { MainService } from '../../../main.service';
 import { KenoNumberNative } from './keno.model';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-playable-board-keno',
   templateUrl: './keno.component.html',
   styleUrls: ['./keno.component.scss']

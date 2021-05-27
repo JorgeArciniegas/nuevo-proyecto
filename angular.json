@@ -12,6 +12,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/vdesk",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -29,6 +30,12 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -37,6 +44,12 @@
               ]
             },
             "vgen-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-vgen",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -51,6 +64,12 @@
               ]
             },
             "vgen-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-vgen",
               "optimization": true,
               "outputHashing": "all",
@@ -74,6 +93,12 @@
               ]
             },
             "vgen-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-vgen",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -88,6 +113,12 @@
               ]
             },
             "vgen-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-vgen",
               "optimization": true,
               "outputHashing": "all",
@@ -111,6 +142,12 @@
               ]
             },
             "gensolutions-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-gensolutions",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -125,6 +162,12 @@
               ]
             },
             "gensolutions-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-gensolutions",
               "optimization": true,
               "outputHashing": "all",
@@ -148,6 +191,12 @@
               ]
             },
             "gensolutions-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-gensolutions",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -162,6 +211,12 @@
               ]
             },
             "gensolutions-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-gensolutions",
               "optimization": true,
               "outputHashing": "all",
@@ -185,6 +240,12 @@
               ]
             },
             "dngaming-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-dngaming",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -199,6 +260,12 @@
               ]
             },
             "dngaming-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-dngaming",
               "optimization": true,
               "outputHashing": "all",
@@ -222,6 +289,12 @@
               ]
             },
             "dngaming-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-dngaming",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -236,6 +309,12 @@
               ]
             },
             "dngaming-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-dngaming",
               "optimization": true,
               "outputHashing": "all",
@@ -259,6 +338,12 @@
               ]
             },
             "shawis-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-shawis",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -273,6 +358,12 @@
               ]
             },
             "shawis-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-shawis",
               "optimization": true,
               "outputHashing": "all",
@@ -296,6 +387,12 @@
               ]
             },
             "shawis-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-shawis",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -310,6 +407,12 @@
               ]
             },
             "shawis-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-shawis",
               "optimization": true,
               "outputHashing": "all",
@@ -333,6 +436,12 @@
               ]
             },
             "oneway-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-oneway",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -347,6 +456,12 @@
               ]
             },
             "oneway-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-oneway",
               "optimization": true,
               "outputHashing": "all",
@@ -370,6 +485,12 @@
               ]
             },
             "oneway-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-oneway",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -384,6 +505,12 @@
               ]
             },
             "oneway-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-oneway",
               "optimization": true,
               "outputHashing": "all",
@@ -407,6 +534,12 @@
               ]
             },
             "universalsoft-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-universalsoft",
               "optimization": true,
               "outputHashing": "all",
@@ -430,6 +563,12 @@
               ]
             },
             "universalsoft-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-universalsoft",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -444,6 +583,12 @@
               ]
             },
             "universalsoft-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-universalsoft",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -458,6 +603,12 @@
               ]
             },
             "universalsoft-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-universalsoft",
               "optimization": true,
               "outputHashing": "all",
@@ -481,6 +632,12 @@
               ]
             },
             "mayabet-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-mayabet",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -495,6 +652,12 @@
               ]
             },
             "mayabet-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-mayabet",
               "optimization": true,
               "outputHashing": "all",
@@ -518,6 +681,12 @@
               ]
             },
             "mayabet-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-mayabet",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -532,6 +701,12 @@
               ]
             },
             "mayabet-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-mayabet",
               "optimization": true,
               "outputHashing": "all",
@@ -555,6 +730,12 @@
               ]
             },
             "genc01-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc01",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -569,6 +750,12 @@
               ]
             },
             "genc01-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc01",
               "optimization": true,
               "outputHashing": "all",
@@ -592,6 +779,12 @@
               ]
             },
             "genc01-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc01",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -606,6 +799,12 @@
               ]
             },
             "genc01-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc01",
               "optimization": true,
               "outputHashing": "all",
@@ -629,6 +828,12 @@
               ]
             },
             "genc02-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc02",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -643,6 +848,12 @@
               ]
             },
             "genc02-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc02",
               "optimization": true,
               "outputHashing": "all",
@@ -666,6 +877,12 @@
               ]
             },
             "genc02-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc02",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -680,6 +897,12 @@
               ]
             },
             "genc02-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc02",
               "optimization": true,
               "outputHashing": "all",
@@ -703,6 +926,12 @@
               ]
             },
             "genc03-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc03",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -717,6 +946,12 @@
               ]
             },
             "genc03-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc03",
               "optimization": true,
               "outputHashing": "all",
@@ -740,6 +975,12 @@
               ]
             },
             "genc03-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc03",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -754,6 +995,12 @@
               ]
             },
             "genc03-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc03",
               "optimization": true,
               "outputHashing": "all",
@@ -777,6 +1024,12 @@
               ]
             },
             "genc04-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc04",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -791,6 +1044,12 @@
               ]
             },
             "genc04-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc04",
               "optimization": true,
               "outputHashing": "all",
@@ -814,6 +1073,12 @@
               ]
             },
             "genc04-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc04",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -828,6 +1093,12 @@
               ]
             },
             "genc04-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-genc04",
               "optimization": true,
               "outputHashing": "all",
@@ -851,6 +1122,12 @@
               ]
             },
             "betese-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betese",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -865,6 +1142,12 @@
               ]
             },
             "betese-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betese",
               "optimization": true,
               "outputHashing": "all",
@@ -888,6 +1171,12 @@
               ]
             },
             "betese-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betese",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -902,6 +1191,12 @@
               ]
             },
             "betese-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betese",
               "optimization": true,
               "outputHashing": "all",
@@ -925,6 +1220,12 @@
               ]
             },
             "betconnection-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betconnection",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -939,6 +1240,12 @@
               ]
             },
             "betconnection-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betconnection",
               "optimization": true,
               "outputHashing": "all",
@@ -962,6 +1269,12 @@
               ]
             },
             "betconnection-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betconnection",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -976,6 +1289,12 @@
               ]
             },
             "betconnection-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betconnection",
               "optimization": true,
               "outputHashing": "all",
@@ -999,6 +1318,12 @@
               ]
             },
             "sportrace-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-sportrace",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1013,6 +1338,12 @@
               ]
             },
             "sportrace-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-sportrace",
               "optimization": true,
               "outputHashing": "all",
@@ -1036,6 +1367,12 @@
               ]
             },
             "sportrace-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-sportrace",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1050,6 +1387,12 @@
               ]
             },
             "sportrace-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-sportrace",
               "optimization": true,
               "outputHashing": "all",
@@ -1073,6 +1416,12 @@
               ]
             },
             "bolivarbet-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-bolivarbet",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1087,6 +1436,12 @@
               ]
             },
             "bolivarbet-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-bolivarbet",
               "optimization": true,
               "outputHashing": "all",
@@ -1110,6 +1465,12 @@
               ]
             },
             "bolivarbet-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-bolivarbet",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1124,6 +1485,12 @@
               ]
             },
             "bolivarbet-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-bolivarbet",
               "optimization": true,
               "outputHashing": "all",
@@ -1147,6 +1514,12 @@
               ]
             },
             "uganbet-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-uganbet",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1161,6 +1534,12 @@
               ]
             },
             "uganbet-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-uganbet",
               "optimization": true,
               "outputHashing": "all",
@@ -1184,6 +1563,12 @@
               ]
             },
             "uganbet-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-uganbet",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1198,6 +1583,12 @@
               ]
             },
             "uganbet-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-uganbet",
               "optimization": true,
               "outputHashing": "all",
@@ -1221,6 +1612,12 @@
               ]
             },
             "apuestas-dominicanas-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-apuestas-dominicanas",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1235,6 +1632,12 @@
               ]
             },
             "apuestas-dominicanas-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-apuestas-dominicanas",
               "optimization": true,
               "outputHashing": "all",
@@ -1258,6 +1661,12 @@
               ]
             },
             "apuestas-dominicanas-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-apuestas-dominicanas",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1272,6 +1681,12 @@
               ]
             },
             "apuestas-dominicanas-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-apuestas-dominicanas",
               "optimization": true,
               "outputHashing": "all",
@@ -1295,6 +1710,12 @@
               ]
             },
             "f2o-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-f2o",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1309,6 +1730,12 @@
               ]
             },
             "f2o-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-f2o",
               "optimization": true,
               "outputHashing": "all",
@@ -1332,6 +1759,12 @@
               ]
             },
             "f2o-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-f2o",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1346,6 +1779,12 @@
               ]
             },
             "f2o-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-f2o",
               "optimization": true,
               "outputHashing": "all",
@@ -1369,6 +1808,12 @@
               ]
             },
             "soft-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-soft",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1383,6 +1828,12 @@
               ]
             },
             "soft-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-soft",
               "optimization": true,
               "outputHashing": "all",
@@ -1406,6 +1857,12 @@
               ]
             },
             "soft-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-soft",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1420,6 +1877,12 @@
               ]
             },
             "soft-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-soft",
               "optimization": true,
               "outputHashing": "all",
@@ -1443,6 +1906,12 @@
               ]
             },
             "kyron-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-kyron",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1457,6 +1926,12 @@
               ]
             },
             "kyron-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-kyron",
               "optimization": true,
               "outputHashing": "all",
@@ -1480,6 +1955,12 @@
               ]
             },
             "kyron-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-kyron",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1494,6 +1975,12 @@
               ]
             },
             "kyron-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-kyron",
               "optimization": true,
               "outputHashing": "all",
@@ -1517,6 +2004,12 @@
               ]
             },
             "homerun-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-homerun",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1531,6 +2024,12 @@
               ]
             },
             "homerun-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-homerun",
               "optimization": true,
               "outputHashing": "all",
@@ -1554,6 +2053,12 @@
               ]
             },
             "homerun-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-homerun",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1568,6 +2073,12 @@
               ]
             },
             "homerun-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-homerun",
               "optimization": true,
               "outputHashing": "all",
@@ -1591,6 +2102,12 @@
               ]
             },
             "betlogik-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betlogik",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1605,6 +2122,12 @@
               ]
             },
             "betlogik-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betlogik",
               "optimization": true,
               "outputHashing": "all",
@@ -1628,6 +2151,12 @@
               ]
             },
             "betlogik-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betlogik",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1642,6 +2171,12 @@
               ]
             },
             "betlogik-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betlogik",
               "optimization": true,
               "outputHashing": "all",
@@ -1665,6 +2200,12 @@
               ]
             },
             "doradobet-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-doradobet",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1679,6 +2220,12 @@
               ]
             },
             "doradobet-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-doradobet",
               "optimization": true,
               "outputHashing": "all",
@@ -1702,6 +2249,12 @@
               ]
             },
             "doradobet-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-doradobet",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1716,6 +2269,12 @@
               ]
             },
             "doradobet-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-doradobet",
               "optimization": true,
               "outputHashing": "all",
@@ -1739,6 +2298,12 @@
               ]
             },
             "hbg-peru-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-hbg-peru",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1753,6 +2318,12 @@
               ]
             },
             "hbg-peru-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-hbg-peru",
               "optimization": true,
               "outputHashing": "all",
@@ -1776,6 +2347,12 @@
               ]
             },
             "hbg-peru-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-hbg-peru",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1790,6 +2367,12 @@
               ]
             },
             "hbg-peru-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-hbg-peru",
               "optimization": true,
               "outputHashing": "all",
@@ -1813,6 +2396,12 @@
               ]
             },
             "soccerbet-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-soccerbet",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1827,6 +2416,12 @@
               ]
             },
             "soccerbet-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-soccerbet",
               "optimization": true,
               "outputHashing": "all",
@@ -1850,6 +2445,12 @@
               ]
             },
             "soccerbet-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-soccerbet",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1864,6 +2465,12 @@
               ]
             },
             "soccerbet-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-soccerbet",
               "optimization": true,
               "outputHashing": "all",
@@ -1887,6 +2494,12 @@
               ]
             },
             "betsafi-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betsafi",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1901,6 +2514,12 @@
               ]
             },
             "betsafi-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betsafi",
               "optimization": true,
               "outputHashing": "all",
@@ -1924,6 +2543,12 @@
               ]
             },
             "betsafi-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betsafi",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1938,6 +2563,12 @@
               ]
             },
             "betsafi-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betsafi",
               "optimization": true,
               "outputHashing": "all",
@@ -1961,6 +2592,12 @@
               ]
             },
             "tradabets-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-tradabets",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -1975,6 +2612,12 @@
               ]
             },
             "tradabets-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-tradabets",
               "optimization": true,
               "outputHashing": "all",
@@ -1998,6 +2641,12 @@
               ]
             },
             "tradabets-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-tradabets",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -2012,6 +2661,12 @@
               ]
             },
             "tradabets-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-v",
               "optimization": true,
               "outputHashing": "all",
@@ -2035,6 +2690,12 @@
               ]
             },
             "betsplus-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betsplus",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -2049,6 +2710,12 @@
               ]
             },
             "betsplus-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betsplus",
               "optimization": true,
               "outputHashing": "all",
@@ -2072,6 +2739,12 @@
               ]
             },
             "betsplus-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betsplus",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -2086,6 +2759,12 @@
               ]
             },
             "betsplus-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betsplus",
               "optimization": true,
               "outputHashing": "all",
@@ -2109,6 +2788,12 @@
               ]
             },
             "betpro-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betpro",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -2123,6 +2808,12 @@
               ]
             },
             "betpro-prod-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betpro",
               "optimization": true,
               "outputHashing": "all",
@@ -2146,6 +2837,12 @@
               ]
             },
             "betpro-staging": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betpro",
               "stylePreprocessorOptions": {
                 "includePaths": [
@@ -2160,6 +2857,12 @@
               ]
             },
             "betpro-staging-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "outputPath": "dist-betpro",
               "optimization": true,
               "outputHashing": "all",
@@ -2181,7 +2884,7 @@
                   "with": "src/environments/environment.betpro-staging.ts"
                 }
               ]
-            },
+            }
           }
         },
         "serve": {
@@ -2611,19 +3314,19 @@
   "defaultProject": "vdesk",
   "schematics": {
     "@schematics/angular:component": {
-      "spec": false,
+      "skipTests": true,
       "prefix": "app",
-      "styleext": "scss"
+      "style": "scss"
     },
     "@schematics/angular:directive": {
-      "spec": false,
+      "skipTests": true,
       "prefix": "app"
     },
     "@schematics/angular:pipe": {
-      "spec": false
+      "skipTests": true
     },
     "@schematics/angular:service": {
-      "spec": false
+      "skipTests": true
     }
   }
 }

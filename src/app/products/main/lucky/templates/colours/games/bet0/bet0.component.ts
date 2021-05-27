@@ -6,7 +6,6 @@ import { UserService } from '../../../../../../../services/user.service';
 import { Lucky } from '../../../../lucky.model';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-lucky-bet0',
   templateUrl: './bet0.component.html',
   styleUrls: ['./bet0.component.scss']

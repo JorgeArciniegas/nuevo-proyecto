@@ -36,7 +36,7 @@
   <GridLayout row="1" col="1" rows="*" columns="*,*" class="display">
     <GridLayout col="0" rows="*,2*" columns="*" class="display-content">
       <Label row="0" class="field-title" text="{{ 'AMOUNT_FROM' | translate }}" verticalAlignment="bottom"></Label>
-      <GridLayout row="1" columns="*,6*,*" class="button btn-default btn-filter" (tap)="selectAmount('amountFrom')">
+      <GridLayout row="1" columns="*,6*,*" class="button btn-default btn-filter">
         <TextField colSpan="3" keyboardType="number"
           hint="{{ '0' | currency : userService.userCurrency : 'symbol-narrow'}}"
           text="{{ transactionsListService.amountFrom}}"
@@ -45,7 +45,7 @@
     </GridLayout>
     <GridLayout col="1" rows="*,2*" columns="*" class="display-content">
       <Label row="0" class="field-title" text="{{ 'AMOUNT_TO' | translate }}" verticalAlignment="bottom"></Label>
-      <GridLayout row="1" columns="*,6*,*" class="button btn-default btn-filter" (tap)="selectAmount('amontTo')">
+      <GridLayout row="1" columns="*,6*,*" class="button btn-default btn-filter">
         <TextField colSpan="3" keyboardType="number"
           hint="{{ '0' | currency : userService.userCurrency : 'symbol-narrow'}}"
           text="{{ transactionsListService.amountTo}}"

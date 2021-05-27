@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PayCancelDialogComponent } from './pay-cancel-dialog/pay-cancel-dialog.component';
 import { DialogTypeCoupon } from '../../../../src/app/products/products.model';
 import { UserService } from '../../../../src/app/services/user.service';

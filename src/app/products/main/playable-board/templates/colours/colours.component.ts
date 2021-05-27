@@ -4,7 +4,6 @@ import { MainService } from '../../../main.service';
 import { ColourGame } from './colours.models';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-playable-board-colours',
   templateUrl: './colours.component.html',
   styleUrls: ['./colours.component.scss']

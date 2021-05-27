@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppSettings } from '../../../app.settings';
 import { Language } from './language.model';
-import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
+import { TranslateUtilityService } from '../../../shared/language/translate-utility.service';
 
 @Component({
   selector: 'app-language',

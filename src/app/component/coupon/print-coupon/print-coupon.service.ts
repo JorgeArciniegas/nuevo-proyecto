@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { StagedCoupon, StagedCouponStatus, SummaryCoupon } from '@elys/elys-api';
+import { StagedCouponDetail, StagedCouponStatus, SummaryCoupon } from '@elys/elys-api';
 import { ElysCouponService } from '@elys/elys-coupon';
 import { timer } from 'rxjs';
+import { take,takeWhile} from 'rxjs/operators'
 import { RouterService } from '../../../services/utility/router/router.service';
 
 @Injectable({
@@ -13,7 +14,7 @@ import { RouterService } from '../../../services/utility/router/router.service';
  */
 export class PrintCouponService {
   printingEnabled: boolean;
-  couponPrint: StagedCoupon;
+  couponPrint: StagedCouponDetail;
   isPrintAgainst: boolean;
   reprintDate: Date;
 
@@ -32,7 +33,7 @@ export class PrintCouponService {
     });
   }
   reprintCoupon(coupon: SummaryCoupon) {
-    this.couponPrint = (coupon as unknown) as StagedCoupon;
+    this.couponPrint = (coupon as unknown) as StagedCouponDetail;
     this.isPrintAgainst = true;
     this.reprintDate = new Date();
     this.printWindow();
@@ -46,10 +47,10 @@ export class PrintCouponService {
     this.printingEnabled = true;
     this.router.getRouter().navigate(['/', { outlets: { print: 'print-coupon' } }]);
     document.getElementById('app').classList.add('isPrinting');
-    timer(250)
-      .take(1)
-      .takeWhile(() => this.printingEnabled)
-      .subscribe(valTimer => {
+    timer(250).pipe(
+      take(1),
+      takeWhile(() => this.printingEnabled)
+    ).subscribe(valTimer => {
         window.print();
         // delete class
         document.getElementById('app').classList.remove('isPrinting');

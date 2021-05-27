@@ -8,7 +8,7 @@ import { AppSettings } from '../app.settings';
 import { DataUser, LoginDataDirect, LOGIN_TYPE, OperatorData } from './user.models';
 import { RouterService } from './utility/router/router.service';
 import { StorageService } from './utility/storage/storage.service';
-import { TranslateUtilityService } from './utility/translate-utility.service';
+import { TranslateUtilityService } from '../shared/language/translate-utility.service';
 
 @Injectable({
   providedIn: 'root'

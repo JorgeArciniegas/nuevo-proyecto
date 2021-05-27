@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { screen } from 'tns-core-modules/platform';
+import { Screen } from '@nativescript/core';
 import { WindowSize } from './window-size.model';
 
 @Injectable({
@@ -10,8 +10,8 @@ export class WindowSizeService {
   constructor() { }
 
   initWindowSize(): void {
-    const h: number = screen.mainScreen.heightDIPs;
-    const w: number = screen.mainScreen.widthDIPs;
+    const h: number = Screen.mainScreen.heightDIPs;
+    const w: number = Screen.mainScreen.widthDIPs;
     const aspectRatio: number = w / h;
     const hgeneral = h - h / 13;
     this.windowSize = {
@@ -19,7 +19,7 @@ export class WindowSizeService {
       width: w,
       aspectRatio: aspectRatio,
       columnHeight: hgeneral,
-      small: aspectRatio > 1.45 && screen.mainScreen.heightPixels < 1500
+      small: aspectRatio > 1.45 && Screen.mainScreen.heightPixels < 1500
     };
   }
 }

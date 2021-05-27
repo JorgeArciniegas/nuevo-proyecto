@@ -2,6 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "esNext",
+    "target": "es5",
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
@@ -9,7 +10,7 @@
         "src/*"
       ],
       "*": [
-        "./node_modules/tns-core-modules/*",
+        "./node_modules/@nativescript/*",
         "./node_modules/*"
       ]
     }

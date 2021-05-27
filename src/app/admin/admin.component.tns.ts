@@ -7,7 +7,6 @@ import { timer } from 'rxjs';
 import { AppSettings } from '../app.settings';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-admin, [app-admin]',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']

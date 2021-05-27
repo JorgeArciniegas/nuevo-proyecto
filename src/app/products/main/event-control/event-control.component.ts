@@ -8,7 +8,6 @@ import { MainService } from '../main.service';
 import { WindowSizeService } from '../../../services/utility/window-size/window-size.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-event-control, [app-event-control]',
   templateUrl: './event-control.component.html',
   styleUrls: ['./event-control.component.scss']

@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { CouponOdd } from '@elys/elys-api';
-import { TranslateUtilityService } from '../../services/utility/translate-utility.service';
+import { TranslateUtilityService } from '../../shared/language/translate-utility.service';
 
 @Pipe({ name: 'groupByCategory' })
 export class GroupByCategoryPipe implements PipeTransform {

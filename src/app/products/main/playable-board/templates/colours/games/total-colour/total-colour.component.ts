@@ -24,7 +24,7 @@ export class TotalColourComponent implements OnInit, OnDestroy {
   private couponHasBeenPlacedSubscription: Subscription;
 
   constructor(
-    private mainService: MainService,
+    public mainService: MainService,
     private btnCalcService: BtncalcService,
     private elysCoupon: ElysCouponService,
     private couponService: CouponService,

@@ -1,29 +1,17 @@
 import { Component } from '@angular/core';
-import {
-  ApplicationEventData,
-  UnhandledErrorEventData,
-  exitEvent,
-  launchEvent,
-  LaunchEventData,
-  on,
-  resumeEvent,
-  suspendEvent,
-  discardedErrorEvent,
-  lowMemoryEvent
-} from 'tns-core-modules/application';
-import { connectionType, getConnectionType } from 'tns-core-modules/connectivity';
-import { device } from 'tns-core-modules/platform';
 import { AppSettings } from './app.settings';
 import { Settings } from './app.settings.model';
 import { UserService } from './services/user.service';
 import { StorageService } from './services/utility/storage/storage.service';
-import { TranslateUtilityService } from './services/utility/translate-utility.service';
+import { TranslateUtilityService } from './shared/language/translate-utility.service';
 import { WindowSizeService } from './services/utility/window-size/window-size.service';
 import { NotificationService } from './notifications/notification.service';
 import { Subscription, timer } from 'rxjs';
+import { ApplicationEventData, Device, LaunchEventData, UnhandledErrorEventData } from '@nativescript/core';
+import { launchEvent, suspendEvent, resumeEvent, exitEvent, lowMemoryEvent, discardedErrorEvent, on } from '@nativescript/core/application';
+import { getConnectionType, connectionType } from '@nativescript/core/connectivity';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
@@ -45,7 +33,7 @@ export class AppComponent {
   ) {
     this.settings = appSettings;
     // Set the application language passing the device one.
-    this.translateService.initializeLanguages(device.language);
+    this.translateService.initializeLanguages(Device.language);
     this.connectionAviable = getConnectionType() !== connectionType.none;
     this.windowSizeService.initWindowSize();
     this.smallView = (this.windowSizeService.windowSize.height < 800) ? true : false;

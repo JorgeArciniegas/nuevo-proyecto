@@ -1,12 +1,12 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CouponStatus, CouponType, StagedCoupon } from '@elys/elys-api';
+import { ImageSource } from '@nativescript/core';
 import { Printer } from 'nativescript-printer';
 import { Subscription, timer } from 'rxjs';
-import { fromNativeSource, ImageSource } from 'tns-core-modules/image-source/image-source';
 import { LICENSE_TYPE } from '../../../../environments/environment.models';
 import { AppSettings } from '../../../app.settings';
 import { UserService } from '../../../services/user.service';
-import { TranslateUtilityService } from '../../../services/utility/translate-utility.service';
+import { TranslateUtilityService } from '../../../shared/language/translate-utility.service';
 import { PrintCouponService } from './print-coupon.service';
 
 const ZXing = require('@elys/nativescript-zxing');
@@ -74,7 +74,7 @@ export class PrintCouponComponent implements OnInit, OnDestroy {
         format: ZXing.QR_CODE
       }
     );
-    this.qrCodeSource = fromNativeSource(qrCode);
+    this.qrCodeSource = new ImageSource(qrCode);
   }
   // BARCODE 128EN GENERATOR
 
@@ -90,7 +90,7 @@ export class PrintCouponComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.barCode128Source = fromNativeSource(code128);
+    this.barCode128Source = new ImageSource(code128);
   }
 
   getSelectionName(marketName: string, selectionName: string): string {

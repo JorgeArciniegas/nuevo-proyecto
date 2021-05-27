@@ -1,6 +1,6 @@
 <GridLayout rows="*" [columns]="nativeColumnDefinition" class="list-race m-t-2" [rowHeight]="rowHeight * 2">
   <StackLayout margin="3" *ngFor="let race of eventsList?.events  | slice:0:webColumnDefinition; let i = index" row="0"
-    col="{{i}}" [isEnabled]="!userService.isModalOpen" class="card-box" shadow="3" verticalAlignment="center"
+    col="{{i}}" [isEnabled]="!userService.isModalOpen" class="card-box"  verticalAlignment="center"
     orientation="vertical" class="button btn-tournament-name" [ngClass]="{ 'selected' : eventsList.currentEvent == i }"
     (tap)="eventSelecting(i)">
     <Label class="number" horizontalAlignment="center" text="{{race.eventLabel | uppercase }}"></Label>

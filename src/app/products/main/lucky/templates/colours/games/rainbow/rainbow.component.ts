@@ -7,7 +7,6 @@ import { MainService } from '../../../../../main.service';
 import { Colour, ColoursSelection } from '../../../../../playable-board/templates/colours/colours.models';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-lucky-rainbow',
   templateUrl: './rainbow.component.html',
   styleUrls: ['./rainbow.component.scss']

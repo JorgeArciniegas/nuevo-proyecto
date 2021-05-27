@@ -2,7 +2,7 @@
   <ng-container *ngFor="let market of eventDetails.mk | filterAndSortByShownMarkets: shownMarkets; let i = index;">
     <!-- MARKET'S ROW -->
     <ng-container *ngIf="market.tp !== marketEnum['OverUnder']">
-      <GridLayout row="{{i}}" col="0" shadow="3" cornerRadius="6" class="playable-row-tile display m-4 m-l-5">
+      <GridLayout row="{{i}}" col="0"  cornerRadius="6" class="playable-row-tile display m-4 m-l-5">
         <StackLayout verticalAlignment="center" horizontalAlignment="center">
           <Label class="text-center" text="{{ 'DYNAMIC_KEYS.CockMarket.NAME.' + market.nm | translate | uppercase}}"
             textWrap="true"></Label>

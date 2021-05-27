@@ -42,7 +42,7 @@
                   <div fxLayout="row" fxLayoutAlign="center center" fxFlex>
                     {{'DYNAMIC_KEYS.COUPON_ERROR_INTRODUCTION.MessageSource.' + messageSource[couponService.error.source] | translate}}
                     <br>
-                    {{"DYNAMIC_KEYS.COUPON_ERROR." + messageSource[couponService.error.source] | translate}}
+                    {{"DYNAMIC_KEYS.COUPON_ERROR." + couponService.error.message  | translate}}
                     <ng-container *ngIf="couponService.error.detail">
                       ({{ 'LIMIT' | translate }}:
                       {{couponService.error.detail | currency : userService.userCurrency : 'symbol-narrow'}})

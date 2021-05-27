@@ -38,7 +38,7 @@ export class BetoddsComponent implements OnInit {
   // MultiStake
   multiStake: boolean;
   @Input()
-  private data: BetDataDialog;
+  public data: BetDataDialog;
   // American roulette
   layout: LAYOUT_TYPE;
   layoutType: typeof LAYOUT_TYPE = LAYOUT_TYPE;
@@ -46,7 +46,7 @@ export class BetoddsComponent implements OnInit {
 
   constructor(
     private dialog: DialogService,
-    private windowSizeService: WindowSizeService,
+    public windowSizeService: WindowSizeService,
     public readonly couponService: CouponService,
     public readonly settings: AppSettings,
     public userService: UserService

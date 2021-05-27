@@ -8,7 +8,6 @@ import { Player, SpecialBet, TypePlacingEvent } from '../../../main.models';
 import { MainService } from '../../../main.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-playable-board-race',
   templateUrl: './race.component.html',
   styleUrls: ['./race.component.scss']

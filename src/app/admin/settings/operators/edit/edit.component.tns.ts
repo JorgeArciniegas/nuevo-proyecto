@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ErrorStatus } from '@elys/elys-api';
-import { TextField } from 'tns-core-modules/ui/text-field/text-field';
+import { TextField } from '@nativescript/core';
 import { AppSettings } from '../../../../app.settings';
 import { OperatorEditByForm } from '../operators.model';
 import { OperatorsService } from '../operators.service';

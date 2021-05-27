@@ -9,6 +9,7 @@ android {
   defaultConfig {
     generatedDensities = []
     applicationId = "com.vgen.vdesk"
+    minSdkVersion 17
 
     //override supported platforms
     // ndk {

@@ -10,7 +10,6 @@ import { IconSize } from '../model/iconSize.model';
 import { ElysApiService } from '@elys/elys-api';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-widget, [app-widget]',
   templateUrl: './widget.component.html',
   styleUrls: ['./widget.component.scss']

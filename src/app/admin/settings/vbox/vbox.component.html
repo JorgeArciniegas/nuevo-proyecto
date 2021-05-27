@@ -14,7 +14,7 @@
           </div>
           <div fxFlex="60" fxLayoutAlign="center center">
             <ng-container *ngIf="vboxService.listVbox">
-              {{'PAGE' | translate }} {{vboxService.listVbox.VBoxConfigurations?.actualPages + 1}}
+              {{'PAGE' | translate }} {{vboxService.listVbox.actualPages + 1}}
               {{'PAGE.OF' | translate }} {{vboxService.listVbox?.totalPages}}
             </ng-container>
           </div>

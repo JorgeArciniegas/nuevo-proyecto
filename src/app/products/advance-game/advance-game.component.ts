@@ -8,7 +8,6 @@ import { LayoutProducts, LAYOUT_TYPE } from '../../../../src/environments/enviro
 import { ProductsService } from '../products.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-advance-game, [app-advance-game]',
   templateUrl: './advance-game.component.html',
   styleUrls: ['./advance-game.component.scss']

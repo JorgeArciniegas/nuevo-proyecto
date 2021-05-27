@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { StackLayout } from '@nativescript/core';
 import { Printer } from 'nativescript-printer';
-import { StackLayout } from 'tns-core-modules/ui/layouts/stack-layout/stack-layout';
 import { RouterService } from '../../../../../services/utility/router/router.service';
 import { OperatorSummary } from './operator-summary.model';
 

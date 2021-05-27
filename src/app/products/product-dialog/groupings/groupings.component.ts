@@ -6,6 +6,7 @@ import { BetDataDialog, PolyfunctionStakePresetPlayer } from '../../products.mod
 import { BtncalcService } from '../../../component/btncalc/btncalc.service';
 import { TypeBetSlipColTot } from '../../main/main.models';
 import { Subscription } from 'rxjs';
+import { WindowSizeService } from '../../../services/utility/window-size/window-size.service';
 
 @Component({
   selector: 'app-groupings,[app-groupings]',
@@ -36,7 +37,7 @@ export class GroupingsComponent implements OnInit, OnDestroy {
   amountPresetPlayer: PolyfunctionStakePresetPlayer;
   couponResponseSubscription: Subscription;
 
-  constructor(public userService: UserService, public readonly couponService: CouponService, private btnService: BtncalcService) {
+  constructor(public userService: UserService, public readonly couponService: CouponService, private btnService: BtncalcService, public windowSizeService: WindowSizeService) {
     this.amountPresetPlayer = this.btnService.polyfunctionStakePresetPlayer;
     this.couponResponseSubscription = this.couponService.couponResponse.subscribe(coupon => {
       this.data.groupings = coupon.Groupings;

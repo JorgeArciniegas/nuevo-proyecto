@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RouterExtensions } from 'nativescript-angular/router';
+import { RouterExtensions } from "@nativescript/angular";
 
 // Interface to decoupling the router function and the device.
 @Injectable({

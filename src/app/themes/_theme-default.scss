@@ -708,7 +708,7 @@ html {
 	position: fixed; /* Sit on top of the page content */
 	z-index: 100; /* Specify a stack order in case you're using a different order for other elements */
 	margin: 1px;
-	background: rgba(0, 0, 0, 0.6) url("assets/icons/baseline-lock-24px.svg") center center no-repeat;
+	background: rgba(0, 0, 0, 0.6) url("/assets/icons/baseline-lock-24px.svg") center center no-repeat;
 	background-size: 100px;
 }
 .cdk-visually-hidden {
@@ -723,7 +723,7 @@ html {
 		z-index: 0;
 		top: 0;
 	}
-	@import "./skins/develop/styles";
+	@import "/src/app/themes/skins/develop/styles";
 	.cdk-global-overlay-wrapper {
 		@extend %font-family;
 		@extend %dialog;

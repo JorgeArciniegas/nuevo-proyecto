@@ -4,7 +4,9 @@ import { OperatorSummaryRoutingModule } from './operator-summary-routing.module'
 import { SharedModule } from '../../../shared/shared.module';
 import { OperatorSummaryComponent } from './operator-summary.component';
 import { OperatorSummaryListComponent } from './operator-summary-list/operator-summary-list.component';
-import { MatDatepickerModule, MatInputModule, MatNativeDateModule } from '@angular/material';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
 import { OperatorSummaryService } from './operator-summary.service';
 
 

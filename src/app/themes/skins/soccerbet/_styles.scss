@@ -134,7 +134,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %header-notification-img {
-	background-image: url("assets/icons/account.svg");
+	background-image: url("/assets/icons/account.svg");
 }
 
 %header-btn-menu-selected {
@@ -158,7 +158,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %logo-with-text {
-	background: url("app/themes/skins/soccerbet/image/Logo.png") center center no-repeat;
+	background: url("/app/themes/skins/soccerbet/image/Logo.png") center center no-repeat;
 	background-size: contain;
 }
 
@@ -168,7 +168,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %remove-image {
-	background: url("assets/icons/baseline-delete_outline-white-24px.png") center center no-repeat;
+	background: url("/assets/icons/baseline-delete_outline-white-24px.png") center center no-repeat;
 	background-size: contain;
 }
 
@@ -486,7 +486,7 @@ $gradient-blue3: #2f3a4d;
 // GAME AREA
 // Dog racing
 %PRODUCT-DOG-BG {
-	background: url("assets/images/Dog-Racing.png") left center no-repeat;
+	background: url("/assets/images/Dog-Racing.png") left center no-repeat;
 	background-size: contain;
 }
 
@@ -496,7 +496,7 @@ $gradient-blue3: #2f3a4d;
 }
 // HORSERACING
 %PRODUCT-HORSE-BG {
-	background: url("assets/images/horse-racing.png") left center no-repeat;
+	background: url("/assets/images/horse-racing.png") left center no-repeat;
 	background-size: contain;
 }
 %PRODUCT-HORSE-BG-MOBILE {
@@ -505,7 +505,7 @@ $gradient-blue3: #2f3a4d;
 }
 // HORSERACING-VIRTUAL
 %PRODUCT-HORSE-V-BG {
-	background: url("assets/images/horse-racing.png") left center no-repeat;
+	background: url("/assets/images/horse-racing.png") left center no-repeat;
 	background-size: contain;
 }
 %PRODUCT-HORSE-V-BG-MOBILE {
@@ -515,7 +515,7 @@ $gradient-blue3: #2f3a4d;
 
 // COCK FIGHT
 %PRODUCT-COCK-BG {
-	background: url("assets/images/Cock-fight.png") left center no-repeat;
+	background: url("/assets/images/Cock-fight.png") left center no-repeat;
 	background-size: contain;
 }
 %PRODUCT-COCK-BG-MOBILE {
@@ -535,7 +535,7 @@ $gradient-blue3: #2f3a4d;
 
 // SOCCER FIGHT
 %PRODUCT-ITA-LEAGUE-BG {
-	background: url("assets/images/Soccer-IT.png") left center no-repeat;
+	background: url("/assets/images/Soccer-IT.png") left center no-repeat;
 	background-size: contain;
 }
 %PRODUCT-ITA-LEAGUE-BG-MOBILE {
@@ -544,7 +544,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %PRODUCT-ENG-LEAGUE-BG {
-	background: url("assets/images/Soccer-EN.png") left center no-repeat;
+	background: url("/assets/images/Soccer-EN.png") left center no-repeat;
 	background-size: contain;
 }
 
@@ -555,7 +555,7 @@ $gradient-blue3: #2f3a4d;
 
 // KENO
 %PRODUCT-KENO-BG {
-	background: url("assets/images/Icon-keno.png") left center no-repeat;
+	background: url("/assets/images/Icon-keno.png") left center no-repeat;
 	background-size: contain;
 }
 %PRODUCT-KENO-BG-MOBILE {
@@ -565,7 +565,7 @@ $gradient-blue3: #2f3a4d;
 
 // COLOURS
 %PRODUCT-CLRS-BG {
-	background: url("assets/images/Icon-colours.png") left center no-repeat;
+	background: url("/assets/images/Icon-colours.png") left center no-repeat;
 	background-size: contain;
 }
 %PRODUCT-CLRS-BG-MOBILE {
@@ -575,7 +575,7 @@ $gradient-blue3: #2f3a4d;
 // AMERINCAN ROULETTE
 
 %PRODUCT-ARLT-BG{
-	background: url("assets/images/Icon-americanroulette.png") left center no-repeat;
+	background: url("/assets/images/Icon-americanroulette.png") left center no-repeat;
 	background-size: contain;
 }
 
@@ -629,7 +629,7 @@ $gradient-blue3: #2f3a4d;
 }
 //ADMIN (MAIN MENU)
 %admin {
-	background: url("app/themes/skins/soccerbet/image/Bg-login-vdesk.jpg") center center no-repeat;
+	background: url("/app/themes/skins/soccerbet/image/Bg-login-vdesk.jpg") center center no-repeat;
 }
 %admin-mobile {
 	background: url("~/app/themes/skins/soccerbet/image/Bg-login-vdesk.jpg") center center no-repeat;
@@ -637,7 +637,7 @@ $gradient-blue3: #2f3a4d;
 }
 // LOGIN
 %login {
-	background: url("app/themes/skins/soccerbet/image/Bg-login-vdesk.jpg") center center no-repeat;
+	background: url("/app/themes/skins/soccerbet/image/Bg-login-vdesk.jpg") center center no-repeat;
 }
 
 %login-mobile {
@@ -646,7 +646,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %user-icon {
-	background: url("assets/icons/icona-user.svg") center center no-repeat;
+	background: url("/assets/icons/icona-user.svg") center center no-repeat;
 }
 
 %user-icon-mobile {
@@ -660,7 +660,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %pwd-icon {
-	background: url("assets/icons/icona-pwd.svg") center center no-repeat;
+	background: url("/assets/icons/icona-pwd.svg") center center no-repeat;
 }
 
 %pwd-icon-mobile {
@@ -673,7 +673,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %error-icon {
-	background: url("assets/icons/alert.svg") center center no-repeat;
+	background: url("/assets/icons/alert.svg") center center no-repeat;
 }
 
 %error-icon-mobile {
@@ -682,7 +682,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %check-circle-icon {
-	background: url("assets/icons/baseline-check_circle-24px.svg") center center no-repeat;
+	background: url("/assets/icons/baseline-check_circle-24px.svg") center center no-repeat;
 }
 
 %check-circle-icon-mobile {
@@ -691,7 +691,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %shopping-cart-icon {
-	background: url("assets/icons/baseline-shopping_cart-24px.svg") center center no-repeat;
+	background: url("/assets/icons/baseline-shopping_cart-24px.svg") center center no-repeat;
 }
 
 %shopping-cart-icon-mobile {
@@ -704,7 +704,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %star-yellow-icon {
-	background: url("assets/icons/baseline_star_rate_yellow_18px.svg") center center no-repeat;
+	background: url("/assets/icons/baseline_star_rate_yellow_18px.svg") center center no-repeat;
 	background-size: contain;
 }
 
@@ -714,7 +714,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %star-red-icon {
-	background: url("assets/icons/baseline_star_rate_red_18px.svg") center center no-repeat;
+	background: url("/assets/icons/baseline_star_rate_red_18px.svg") center center no-repeat;
 	background-size: contain;
 }
 
@@ -724,7 +724,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %video-enabled-icon {
-	background: url("assets/icons/video-enabled.svg") center center no-repeat;
+	background: url("/assets/icons/video-enabled.svg") center center no-repeat;
 	background-size: contain;
 }
 
@@ -734,7 +734,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %video-disabled-icon {
-	background: url("assets/icons/video-disabled.svg") center center no-repeat;
+	background: url("/assets/icons/video-disabled.svg") center center no-repeat;
 	background-size: contain;
 }
 
@@ -744,7 +744,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %rank-up-icon {
-	background: url("assets/icons/rank-up.svg") center center no-repeat;
+	background: url("/assets/icons/rank-up.svg") center center no-repeat;
 	background-size: contain;
 }
 
@@ -754,7 +754,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %rank-same-icon {
-	background: url("assets/icons/rank-same.svg") center center no-repeat;
+	background: url("/assets/icons/rank-same.svg") center center no-repeat;
 	background-size: contain;
 }
 
@@ -764,7 +764,7 @@ $gradient-blue3: #2f3a4d;
 }
 
 %rank-down-icon {
-	background: url("assets/icons/rank-down.svg") center center no-repeat;
+	background: url("/assets/icons/rank-down.svg") center center no-repeat;
 	background-size: contain;
 }
 
@@ -821,7 +821,7 @@ $gradient-blue3: #2f3a4d;
 
 // PRINT TEMPLATE
 %logo-header {
-	content: url("app/themes/skins/soccerbet/image/Logo-coupon.png");
+	content: url("/app/themes/skins/soccerbet/image/Logo-coupon.png");
 }
 
 %logo-header-mobile {

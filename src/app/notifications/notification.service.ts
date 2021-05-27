@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LocalNotifications } from 'nativescript-local-notifications';
+import { LocalNotifications } from '@nativescript/local-notifications';
 
 export interface MessageNotification {
   id: number;

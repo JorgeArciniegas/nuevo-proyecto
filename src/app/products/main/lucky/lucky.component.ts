@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ProductsService } from '../../products.service';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 @Component({
-  moduleId: module.id,
   selector: 'app-lucky, [app-lucky]',
   templateUrl: './lucky.component.html',
   styleUrls: ['./lucky.component.scss']

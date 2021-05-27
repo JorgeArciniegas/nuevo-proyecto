@@ -1,7 +1,6 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { NativeScriptCommonModule } from 'nativescript-angular/common';
+import { NativeScriptCommonModule, NativeScriptRouterModule } from '@nativescript/angular';
 import { routes, componentDeclarations } from './error-page.common';
-import { NativeScriptRouterModule } from 'nativescript-angular/router';
 
 @NgModule({
   declarations: [componentDeclarations],

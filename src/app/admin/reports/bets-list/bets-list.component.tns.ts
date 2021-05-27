@@ -1,14 +1,14 @@
 
 import { Component, OnInit } from '@angular/core';
-import { BetsListService } from './bets-list.service';
-import { CouponTypeInternal, CouponStatusInternal } from './bets-list.model';
-import { AppSettings } from '../../../app.settings';
-import { ModalDatetimepicker } from 'nativescript-modal-datetimepicker';
-import { TextField } from 'tns-core-modules/ui/text-field/text-field';
 import { AccountOperator } from '@elys/elys-api';
-import { OperatorsService } from '../../settings/operators/operators.service';
-import { LoaderService } from '../../../services/utility/loader/loader.service';
+import { TextField } from '@nativescript/core';
+import { ModalDatetimepicker } from 'nativescript-modal-datetimepicker';
 import { timer } from 'rxjs';
+import { AppSettings } from '../../../app.settings';
+import { LoaderService } from '../../../services/utility/loader/loader.service';
+import { OperatorsService } from '../../settings/operators/operators.service';
+import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
+import { BetsListService } from './bets-list.service';
 
 @Component({
   selector: 'app-bets-list',

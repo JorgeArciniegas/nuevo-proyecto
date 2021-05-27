@@ -7,7 +7,6 @@ import { UserService } from '../../../../../services/user.service';
 import { LICENSE_TYPE } from '../../../../../../environments/environment.models';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-print-operator-summary',
   templateUrl: './print-operator-summary.component.html',
   styleUrls: ['./print-operator-summary.component.scss']

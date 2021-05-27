@@ -1,12 +1,11 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { NativeScriptCommonModule } from 'nativescript-angular/common';
-import { NativeScriptRouterModule } from 'nativescript-angular/router';
+import { NativeScriptCommonModule, NativeScriptRouterModule } from '@nativescript/angular';
 import { SharedModule } from '../../shared/shared.module';
 import { componentDeclarations, routes } from './main.common';
-import { GetGridStringSettingPipe } from './playable-board/get-grid-string-setting.pipe';
-import { RmSelFromMarketPipe } from './playable-board/rm-sel-from-market.pipe';
-import { GetNumGridElemDetailPipe } from './playable-board/templates/soccer/detail/get-num-grid-elem-detail.pipe';
-import { GetNumColOverviewPipe } from './playable-board/templates/soccer/get-num-col-overview.pipe';
+import { GetGridStringSettingPipe } from './playable-board/get-grid-string-setting.pipe.tns';
+import { RmSelFromMarketPipe } from './playable-board/rm-sel-from-market.pipe.tns';
+import { GetNumGridElemDetailPipe } from './playable-board/templates/soccer/detail/get-num-grid-elem-detail.pipe.tns';
+import { GetNumColOverviewPipe } from './playable-board/templates/soccer/get-num-col-overview.pipe.tns';
 import { SoccerService } from './playable-board/templates/soccer/soccer.service';
 
 @NgModule({

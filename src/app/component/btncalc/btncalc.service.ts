@@ -3,7 +3,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subject, Subscription, timer, defer } from 'rxjs';
 import { AppSettings } from '../../../../src/app/app.settings';
 import { UserService } from '../../../../src/app/services/user.service';
-import { TranslateUtilityService } from '../../../../src/app/services/utility/translate-utility.service';
+import { TranslateUtilityService } from '../../shared/language/translate-utility.service';
 import { PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from '../../products/products.model';
 import { ProductsService } from '../../products/products.service';
 import { TypeBetSlipColTot } from '../../products/main/main.models';
@@ -12,6 +12,7 @@ import { TYPINGTYPE } from './btncalc.enum';
 import { OddsStakeEdit } from '../coupon/coupon.model';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { RouterService } from '../../services/utility/router/router.service';
+import { LANGUAGES } from '../../shared/language/language.models';
 
 @Injectable({
   providedIn: 'root',
@@ -261,10 +262,10 @@ export class BtncalcService implements OnDestroy {
     // it is used on the DOM and it is put on the CALC BUTTON
     if (this.userService.dataUserDetail && !this.decimalSeparator) {
       const decimalCheck = 1.2;
-      const separator = decimalCheck.toLocaleString(this.translate.getCurrentLanguage()).substring(1, 2);
+      const separator = decimalCheck.toLocaleString(LANGUAGES[this.translate.getCurrentLanguage()]).substring(1,2);
       // tslint:disable-next-line:max-line-length
       const currencyHasDecimal = Number(
-        formatCurrency(decimalCheck, this.translate.getCurrentLanguage(), '', this.userService.userCurrency)
+        formatCurrency(decimalCheck, LANGUAGES[this.translate.getCurrentLanguage()], '', this.userService.userCurrency)
       );
       if (!Number.isInteger(currencyHasDecimal)) {
         this.decimalSeparator = separator;

@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
-import { NativeScriptCommonModule } from 'nativescript-angular/common';
-import { NativeScriptRouterModule } from 'nativescript-angular/router';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NativeScriptCommonModule, NativeScriptRouterModule } from '@nativescript/angular';
 import { SharedModule } from '../../../shared/shared.module';
 import { DetailsTransactionComponent } from './details-transaction/details-transaction.component';
 import { GetTransactionVategoryKeyByEnumValuePipe } from './get-transaction-category-key-by-enum-value.pipe';
@@ -21,6 +20,7 @@ import { TransactionsListService } from './transactions-list.service';
     SharedModule,
     NativeScriptRouterModule.forChild(routes)
   ],
-  providers: [TransactionsListService]
+  providers: [TransactionsListService],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class TransactionsListModule { }

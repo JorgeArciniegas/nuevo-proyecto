@@ -10,7 +10,6 @@ import { SpecialBet } from '../../../main.models';
 import { MainService } from '../../../main.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-playable-board-cock-fight',
   templateUrl: './cock-fight.component.html',
   styleUrls: ['./cock-fight.component.scss']
