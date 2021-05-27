@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { timer } from 'rxjs';
+import { take,takeWhile} from 'rxjs/operators'
 import { Receipt } from './print-receipt.model';
 
 @Injectable({
@@ -18,10 +19,10 @@ export class PrintReceiptService {
     this.router.navigate(['/', { outlets: { print: 'print-receipt' } }]);
     document.getElementById('app').classList.add('isPrinting');
     document.getElementsByClassName('cdk-overlay-container')[0].classList.add('isPrinting');
-    timer(250)
-      .take(1)
-      .takeWhile(() => this.printingEnabled)
-      .subscribe(valTimer => {
+    timer(250).pipe(
+      take(1),
+      takeWhile(() => this.printingEnabled)
+    ).subscribe(valTimer => {
         window.print();
         document.getElementById('app').classList.remove('isPrinting');
         document.getElementsByClassName('cdk-overlay-container')[0].classList.remove('isPrinting');

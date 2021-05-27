@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { OperatorSummaryService } from './operator-summary.service';
-import { Observable } from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { TranslateUtilityService } from '../../../shared/language/translate-utility.service';
 import { DateAdapter } from '@angular/material/core';
 
@@ -24,7 +24,7 @@ export class OperatorSummaryComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
 
     // close the date picker on outside click
-    Observable.fromEvent(document, 'click').subscribe((event: any) => {
+    fromEvent(document, 'click').subscribe((event: any) => {
       const elem: any = event.target;
       let dismiss = true;
       if (event.path) {

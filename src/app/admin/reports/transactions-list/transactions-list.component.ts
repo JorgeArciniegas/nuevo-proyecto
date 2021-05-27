@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { TransactionsListService } from './transactions-list.service';
-import { Observable } from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { TranslateUtilityService } from '../../../shared/language/translate-utility.service';
 import { DateAdapter } from '@angular/material/core';
 import { TransactionCategory } from './transactions-list.model';
@@ -28,7 +28,7 @@ export class TransactionsListComponent implements OnDestroy {
     document.body.classList.add('transactions-list');
 
     // close the date picker on outside click
-    Observable.fromEvent(document, 'click').subscribe((event: any) => {
+    fromEvent(document, 'click').subscribe((event: any) => {
       const elem: any = event.target;
       let dismiss = true;
       event.path.forEach(htmlElem => {

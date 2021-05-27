@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Observable as ObservableIdle } from 'rxjs/Rx';
+import { timer } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { UserService } from '../../../../src/app/services/user.service';
 import { AppSettings } from '../../app.settings';
 import { CouponService } from '../../component/coupon/coupon.service';
@@ -49,9 +50,9 @@ export class ProductDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    ObservableIdle.timer(150)
-      .take(1)
-      .subscribe(() => {
+    timer(150).pipe(
+      take(1)
+    ).subscribe(() => {
         this.data.opened = true;
       });
   }

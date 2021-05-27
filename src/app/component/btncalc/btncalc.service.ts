@@ -262,7 +262,7 @@ export class BtncalcService implements OnDestroy {
     // it is used on the DOM and it is put on the CALC BUTTON
     if (this.userService.dataUserDetail && !this.decimalSeparator) {
       const decimalCheck = 1.2;
-      const separator = decimalCheck.toLocaleString(LANGUAGES[this.translate.getCurrentLanguage()]);
+      const separator = decimalCheck.toLocaleString(LANGUAGES[this.translate.getCurrentLanguage()]).substring(1,2);
       // tslint:disable-next-line:max-line-length
       const currencyHasDecimal = Number(
         formatCurrency(decimalCheck, LANGUAGES[this.translate.getCurrentLanguage()], '', this.userService.userCurrency)
