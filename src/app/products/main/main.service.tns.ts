@@ -256,6 +256,7 @@ export class MainService {
 
   loadEvents(): void {
     try {
+      let eventRemoved : EventInfo;
       if (this.initCurrentEvent) {
         this.loadEventsFromApi().then(() => this.resultService.getLastResult());
       } else {
