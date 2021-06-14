@@ -24,8 +24,13 @@ export interface Environment {
   defaultAmount?: CouponPresetValues;
   couponDirectPlace: boolean;
   currencyDefault: string;
+  deploymentAppSync?: DeploymentAppSync;
 }
 
+export interface DeploymentAppSync{
+  android: string;
+  ios?: string;
+}
 export interface ToolbarButtons {
   name?: string;
   icon: string;

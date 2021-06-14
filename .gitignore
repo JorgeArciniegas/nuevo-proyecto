@@ -58,3 +58,4 @@ Thumbs.db
 .update_backup/package.json
 .update_backup/webpack.config.js
 gitversion.exe
+app/App_Resources
