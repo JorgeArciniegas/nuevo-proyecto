@@ -184,6 +184,7 @@ export class CouponService {
           shortcut: SmartCodeType[smart.shortcut] + val
         };
         this.elysCoupon.manageOddSC(req);
+        this.processingOddsQueue = false;
       }
     } catch (err) { }
   }
@@ -220,6 +221,7 @@ export class CouponService {
 
           const addOddRequest: AddOddRequest = this.requestObj(bet, addBoolean, isMultiStake);
           this.elysCoupon.manageOdd(addOddRequest);
+          this.processingOddsQueue = false;
         }
       }
     } catch (e) {
