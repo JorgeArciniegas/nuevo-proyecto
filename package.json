@@ -16,7 +16,7 @@
     "tns-build-env": "node ./build-single-env.js"
   },
   "nativescript": {
-    "id": "org.vgen.vdesk",
+    "id": "com.vgen.vdesk",
     "tns-android": {
       "version": "7.0.1"
     },

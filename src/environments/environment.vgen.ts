@@ -7,9 +7,7 @@ import {
 import { Market } from '../app/products/products.model';
 
 export const environment: Environment = {
-  deploymentAppSync: {
-      android: 'mDfvOv17gIrmxBAwoqKGSmMzOYyFhGy7TQReC'
-  },
+  
   production: true,
   loginInteractive: true,
   // tslint:disable-next-line:max-line-length

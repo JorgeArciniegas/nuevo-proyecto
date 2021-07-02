@@ -4,15 +4,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { PreloadAllModules } from '@angular/router';
 import { ElysApiModule, PlaySource } from '@elys/elys-api';
 import { ElysCouponModule } from '@elys/elys-coupon';
+import { NativeScriptFormsModule, NativeScriptHttpClientModule, NativeScriptModule, NativeScriptRouterModule } from '@nativescript/angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '../environments/environment';
+import { routes } from './app-routing.module';
 import { componentDeclarations, providerDeclarations } from './app.common';
 import { AppComponent } from './app.component';
 import { NotificationService } from './notifications/notification.service';
 import { SharedModule } from './shared/shared.module';
-import { routes } from './app-routing.module';
-import { NativeScriptHttpClientModule, NativeScriptModule, NativeScriptFormsModule, NativeScriptRouterModule } from '@nativescript/angular';
 
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {

@@ -22,7 +22,7 @@
           text="{{'OPERATOR_SUMMARY' | translate }}"></Label>
       </StackLayout>
       <StackLayout (tap)="goToTransactionsList()" width="100%" class="button btn-success btn-admin"
-        height="{{layout.buttonHeight}}" orientation="horizontal" horizontalAlignment="center" row="2" col="0"
+        height="{{layout.buttonHeight}}" orientation="horizontal" horizontalAlignment="center" row="3" col="0"
         *ngIf="isAdminLogged">
         <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-list-24px.png"
           verticalAlignment="center" horizontalAlignment="right"></Image>
@@ -30,7 +30,7 @@
           text="{{'TRANSACTIONS_LIST' | translate }}"></Label>
       </StackLayout>
       <StackLayout (tap)="goToStatementShop()" width="100%" class="button btn-success btn-admin"
-        height="{{layout.buttonHeight}}" orientation="horizontal" horizontalAlignment="center" row="2" col="0"
+        height="{{layout.buttonHeight}}" orientation="horizontal" horizontalAlignment="center" row="4" col="0"
         *ngIf="isAdminLogged && appSettings.loginInteractive">
         <Image stretch="aspectFit" width="30" col="0" src="~/assets/icons/baseline-list-24px.png"
           verticalAlignment="center" horizontalAlignment="right"></Image>
