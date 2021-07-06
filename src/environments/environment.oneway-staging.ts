@@ -355,7 +355,7 @@ export const environment: Environment = {
     enabledPrintCoupon:{
       printLogoCoupon: true,
       printHeaderMessage : true,
-      printQrCode: true,
+      printQrCode: false,
       isEnabledReprintCoupon: true,
       isTrasmitionInfoMessageShown: false,
       hideMaxPaymentAmount: false
