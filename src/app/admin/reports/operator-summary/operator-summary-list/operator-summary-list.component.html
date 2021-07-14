@@ -54,10 +54,10 @@
             <strong data='disabled'>{{ 'STAKE' | translate }}</strong>
           </div>
           <div fxFlex="25">
-            <strong data='disabled'>{{ 'VOIDED' | translate }}</strong>
+            <strong data='disabled'>{{ 'PAID' | translate }}</strong>
           </div>
           <div fxFlex="23">
-            <strong data='disabled'>{{ 'PAID' | translate }}</strong>
+            <strong data='disabled'>{{ 'PROFIT' | translate }}</strong>
           </div>
           <div fxFlex="2"></div>
         </div>
@@ -74,10 +74,10 @@
               <strong>{{ operatorVolume.Stake | currency : userService.userCurrency : 'symbol-narrow' }}</strong>
             </div>
             <div fxFlex="25">
-              <strong>{{ operatorVolume.Voided | currency : userService.userCurrency : 'symbol-narrow' }}</strong>
+              <strong>{{ operatorVolume.Won | currency : userService.userCurrency : 'symbol-narrow' }}</strong>
             </div>
             <div fxFlex="23">
-              <strong>{{ operatorVolume.Won | currency : userService.userCurrency : 'symbol-narrow' }}</strong>
+              <strong>{{ operatorVolume.Stake - operatorVolume.Won | currency : userService.userCurrency : 'symbol-narrow' }}</strong>
             </div>
             <div fxFlex="2"></div>
           </div>
@@ -98,18 +98,18 @@
           <div fxFlex="15">
             <div class="value">
               <h2>
-                {{ operatorSummaryService.totalVoided | currency : userService.userCurrency : 'symbol-narrow' }}
+                {{ operatorSummaryService.totalWon | currency : userService.userCurrency : 'symbol-narrow' }}
               </h2>
             </div>
-            <div><small data='disabled'>{{ 'TOT_VOIDED' | translate }}</small></div>
+            <div><small data='disabled'>{{ 'TOT_PAID' | translate }}</small></div>
           </div>
           <div fxFlex="15">
             <div class="value">
               <h2>
-                {{ operatorSummaryService.totalWon | currency : userService.userCurrency : 'symbol-narrow' }}
+                {{ operatorSummaryService.totalStake - operatorSummaryService.totalWon | currency : userService.userCurrency : 'symbol-narrow' }}
               </h2>
             </div>
-            <div><small data='disabled'> {{ 'TOT_PAID' | translate }}</small></div>
+            <div><small data='disabled'> {{ 'PROFIT' | translate }}</small></div>
           </div>
         </div>
       </div>

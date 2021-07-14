@@ -67,7 +67,8 @@ export class OperatorSummaryListComponent {
       totalVoided: this.operatorSummaryService.totalVoided,
       totalWon: this.operatorSummaryService.totalWon,
       dateFrom: this.operatorSummaryService.dateFrom,
-      dateTo: this.operatorSummaryService.dateTo
+      dateTo: this.operatorSummaryService.dateTo,
+      dateStamp: new Date()
     };
     this.printOperatorSummary.printWindow(operatorSummary);
   }

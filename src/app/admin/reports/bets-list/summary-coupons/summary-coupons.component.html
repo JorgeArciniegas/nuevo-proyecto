@@ -204,10 +204,10 @@
           </div>
           <div fxFlex="10">
             <div class="value">
-              <h2>{{ betsListService.betsCouponList.TotalLost | currency : userService.userCurrency : 'symbol-narrow' }}
+              <h2>{{ betsListService.betsCouponList.TotalStake - betsListService.betsCouponList.TotalWon | currency : userService.userCurrency : 'symbol-narrow' }}
               </h2>
             </div>
-            <div><small data='disabled'>{{ 'TOT_LOST' | translate }}</small></div>
+            <div><small data='disabled'>{{ 'PROFIT' | translate }}</small></div>
           </div>
           <div fxFlex="5"></div>
         </div>
