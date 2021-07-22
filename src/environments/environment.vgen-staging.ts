@@ -7,6 +7,9 @@ import {
 import { Market } from '../app/products/products.model';
 
 export const environment: Environment = {
+  deploymentAppSync: {
+    android: 'meWMxfvi6LE2ylCzr8xHoFCXz1fphGy7TQReC'
+  },
   production: false,
   loginInteractive: true,
   // tslint:disable-next-line:max-line-length
@@ -355,8 +358,8 @@ export const environment: Environment = {
     },
     enabledPrintCoupon:{
       printLogoCoupon: true,
-      printHeaderMessage : true,
-      printQrCode: true,
+      printHeaderMessage : false,
+      printQrCode: false,
       isEnabledReprintCoupon: true,
       isTrasmitionInfoMessageShown: false,
       hideMaxPaymentAmount: false,

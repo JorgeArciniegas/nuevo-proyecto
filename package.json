@@ -1,6 +1,6 @@
 {
   "name": "vdesk",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -14,6 +14,15 @@
     "version": "node ./current-version.js",
     "tns-build-all": "node ./build-all-environment.js",
     "tns-build-env": "node ./build-single-env.js"
+  },
+  "nativescript": {
+    "id": "com.vgen.vdesk",
+    "tns-android": {
+      "version": "7.0.1"
+    },
+    "tns-ios": {
+      "version": "7.0.0"
+    }
   },
   "private": true,
   "dependencies": {
@@ -30,7 +39,7 @@
     "@angular/platform-browser": "^10.2.4",
     "@angular/platform-browser-dynamic": "^10.2.4",
     "@angular/router": "^10.2.4",
-    "@elys/elys-api": "^1.15.3",
+    "@elys/elys-api": "^1.15.6",
     "@elys/elys-channel": "^0.1.2",
     "@elys/elys-coupon": "1.4.17",
     "@elys/elys-feeds": "^0.1.2",
@@ -49,6 +58,7 @@
     "lodash": "^4.17.21",
     "natives": "^1.1.6",
     "nativescript": "^7.2.1",
+    "nativescript-app-sync": "^2.0.0",
     "nativescript-barcodescanner": "^3.4.0",
     "nativescript-imagepicker": "^7.1.0",
     "nativescript-modal-datetimepicker": "^1.2.0",
@@ -84,6 +94,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
+    "tns-android": "7.0.1",
     "ts-node": "~8.4.1",
     "tslint": "~6.1.0",
     "typescript": "^3.9.7",

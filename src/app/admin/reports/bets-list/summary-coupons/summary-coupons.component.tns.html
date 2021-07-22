@@ -112,7 +112,7 @@
     </GridLayout>
   </GridLayout>
 
-  <GridLayout row="3" columns="*,2*,2*,2*,2*,2*,2*,2*,2*,*" class="toolbar display">
+  <GridLayout row="3" columns="*,2*,2*,2*,2*,2*,2*,2*,*" class="toolbar display">
     <StackLayout col="1" verticalAlignment="top">
       <Label class="value" text="{{ betsListService.betsCouponList.NumberOfBets | number }}" textWrap="true"></Label>
       <Label class="sub-title small" text="{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.COUPON' | translate }}"></Label>
@@ -145,15 +145,10 @@
       <Label class="sub-title small" text="{{ 'TOT_WON' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="7" verticalAlignment="center">
-      <Label class="value" text="{{ betsListService.betsCouponList.NumberOfLossBets | number }}"
-        textWrap="true"></Label>
-      <Label class="sub-title small" text="{{ 'BETS_LIST.LOST' | translate }}"></Label>
-    </StackLayout>
-    <StackLayout col="8" verticalAlignment="center">
       <Label class="value"
-        text="{{ betsListService.betsCouponList.TotalLost | currency : userService.userCurrency : 'symbol-narrow' }}"
+        text="{{ betsListService.betsCouponList.TotalStake - betsListService.betsCouponList.TotalWon | currency : userService.userCurrency : 'symbol-narrow' }}"
         textWrap="true"></Label>
-      <Label class="sub-title small" text="{{ 'TOT_LOST' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'PROFIT' | translate }}"></Label>
     </StackLayout>
   </GridLayout>
 </GridLayout>

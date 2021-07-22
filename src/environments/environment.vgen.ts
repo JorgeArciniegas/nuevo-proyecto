@@ -7,6 +7,7 @@ import {
 import { Market } from '../app/products/products.model';
 
 export const environment: Environment = {
+  
   production: true,
   loginInteractive: true,
   // tslint:disable-next-line:max-line-length
@@ -355,8 +356,8 @@ export const environment: Environment = {
     },
     enabledPrintCoupon:{
       printLogoCoupon: true,
-      printHeaderMessage : true,
-      printQrCode: true,
+      printHeaderMessage : false,
+      printQrCode: false,
       isEnabledReprintCoupon: true,
       isTrasmitionInfoMessageShown: false,
       hideMaxPaymentAmount: false,

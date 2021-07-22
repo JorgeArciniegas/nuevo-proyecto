@@ -153,7 +153,7 @@
   <div fxFlex="10" fxLayout="column wrap">
     <div fxFlex class="btn-filter" fxLayout="column wrap" fxLayoutAlign="stretch">
       <div fxFlexFill fxLayout="row" fxLayoutAlign="flex-start center" fxLayoutGap="20px">
-        <div fxFlex fxLayout="row wrap" fxLayoutGap="grid">
+        <div fxFlex fxLayout="row wrap" fxLayoutGap="grid" fxLayoutAlign="space-around center">
           <div fxFlex="5"></div>
           <div fxFlex="10">
             <div class="value">
@@ -198,16 +198,10 @@
           </div>
           <div fxFlex="10">
             <div class="value">
-              <h2>{{ betsListService.betsCouponList.NumberOfLossBets | number }} </h2>
-            </div>
-            <div><small data='disabled'>{{ 'BETS_LIST.LOST' | translate }}</small></div>
-          </div>
-          <div fxFlex="10">
-            <div class="value">
-              <h2>{{ betsListService.betsCouponList.TotalLost | currency : userService.userCurrency : 'symbol-narrow' }}
+              <h2>{{ betsListService.betsCouponList.TotalStake - betsListService.betsCouponList.TotalWon | currency : userService.userCurrency : 'symbol-narrow' }}
               </h2>
             </div>
-            <div><small data='disabled'>{{ 'TOT_LOST' | translate }}</small></div>
+            <div><small data='disabled'>{{ 'PROFIT' | translate }}</small></div>
           </div>
           <div fxFlex="5"></div>
         </div>

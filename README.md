@@ -26,5 +26,15 @@ for debug run `tns debug android --clean --bundle --env.uglify --env.environment
   Run `npm run tns-build-env env=xxxxxx`
 ---------------------------------------------------------------------------------
 
+  If you're not all in, please read the wiki from devops.
+---------------------------------------------------------------------------------
 ### @deprecated Specify a brand 
 Run `tns build android --release  --env.uglify --env.snapshot --env.environment="vgen-prod" --copy-to dist/android/vgen-release-x.x.x.apk  --key-store-path vgen.keystore --key-store-alias vgen --key-store-password 123456a --key-store-alias-password 123456a`
+
+----
+----
+
+
+### Nativescript APPSYNC 
+
+ Run `nativescript-app-sync release vdesk-android android -d Production --mandatory --description "YOUR DESCRIPTION" -t {last_version_released}`
