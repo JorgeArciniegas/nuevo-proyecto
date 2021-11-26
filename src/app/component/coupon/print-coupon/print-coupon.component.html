@@ -5,7 +5,6 @@
       <div class="padding-5 font-size-normal">
         <span *ngIf="appSettings.printSettings.enabledPrintCoupon.printHeaderMessage">
           {{'DYNAMIC_KEYS.PRINT_COUPON.HEADER_MESSAGE.' + licenseType[appSettings.license] | translate}}
-
         </span>
       </div>
       <div class="qr-code" *ngIf="appSettings.printSettings.enabledPrintCoupon.printQrCode">
