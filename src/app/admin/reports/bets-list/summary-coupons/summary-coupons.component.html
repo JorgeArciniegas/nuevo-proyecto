@@ -198,6 +198,12 @@
           </div>
           <div fxFlex="10">
             <div class="value">
+              <h2>{{ betsListService.betsCouponList.NumberOfLossBets | number }} </h2>
+            </div>
+            <div><small data='disabled'>{{ 'BETS_LIST.LOST' | translate }}</small></div>
+          </div>
+          <div fxFlex="10">
+            <div class="value">
               <h2>{{ betsListService.betsCouponList.TotalStake - betsListService.betsCouponList.TotalWon | currency : userService.userCurrency : 'symbol-narrow' }}
               </h2>
             </div>
