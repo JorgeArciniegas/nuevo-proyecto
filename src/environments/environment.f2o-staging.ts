@@ -15,10 +15,10 @@ export const environment: Environment = {
   license: LICENSE_TYPE.F2O,
   baseApiUrl: 'https://qacom-apif2o.ody-services.net',
   pageTitle: 'F2o - KIOSK',
-  theme: 'f2o',
-  faviconPath: 'app/themes/skins/f2o/image/Logo-header.png',
+  theme: 'no-brand',
+  faviconPath: '',
   currencyDefault: 'EUR',
-  supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
+  supportedLang: ['it', 'en', 'es', 'fr', 'pt'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
@@ -349,13 +349,13 @@ export const environment: Environment = {
     }
   ],
   printSettings: {
-    enabledPrintReceipt:{
-      printLogoPayCancel : false,
-      printHeaderMessage : true,
+    enabledPrintReceipt: {
+      printLogoPayCancel: false,
+      printHeaderMessage: true,
     },
-    enabledPrintCoupon:{
+    enabledPrintCoupon: {
       printLogoCoupon: true,
-      printHeaderMessage : true,
+      printHeaderMessage: true,
       printQrCode: false,
       isEnabledReprintCoupon: true,
       isTrasmitionInfoMessageShown: false,

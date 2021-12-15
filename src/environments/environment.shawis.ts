@@ -14,11 +14,11 @@ export const environment: Environment = {
   license: LICENSE_TYPE.SHAWIS,
   baseApiUrl: 'https://vg-apishawis.odissea-services.net',
   pageTitle: 'Shawis - VDesk Kiosk',
-  theme: 'shawis',
-  faviconPath: 'app/themes/skins/shawis/image/Logo-header.png',
+  theme: 'no-brand',
+  faviconPath: '',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
-  supportedLang: ['en', 'fr'],
+  supportedLang: ['it', 'en', 'es', 'fr', 'pt'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
@@ -348,13 +348,13 @@ export const environment: Environment = {
   ],
   showEventId: true,
   printSettings: {
-    enabledPrintReceipt:{
-      printLogoPayCancel : false,
-      printHeaderMessage : true,
+    enabledPrintReceipt: {
+      printLogoPayCancel: false,
+      printHeaderMessage: true,
     },
-    enabledPrintCoupon:{
+    enabledPrintCoupon: {
       printLogoCoupon: true,
-      printHeaderMessage : true,
+      printHeaderMessage: true,
       printQrCode: false,
       isEnabledReprintCoupon: true,
       isTrasmitionInfoMessageShown: false,

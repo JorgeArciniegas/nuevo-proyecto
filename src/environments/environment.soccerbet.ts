@@ -14,11 +14,11 @@ export const environment: Environment = {
   license: LICENSE_TYPE.SOCCERBET,
   baseApiUrl: 'https://vg-apisoccerbet.odissea-services.net',
   pageTitle: 'SoccerBet - KIOSK',
-  theme: 'soccerbet',
-  faviconPath: 'app/themes/skins/soccerbet/image/Logo-header.png',
+  theme: 'no-brand',
+  faviconPath: '',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
-  supportedLang: ['en'],
+  supportedLang: ['it', 'en', 'es', 'fr', 'pt'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
@@ -348,13 +348,13 @@ export const environment: Environment = {
   ],
   showEventId: true,
   printSettings: {
-    enabledPrintReceipt:{
-      printLogoPayCancel : false,
-      printHeaderMessage : false,
+    enabledPrintReceipt: {
+      printLogoPayCancel: false,
+      printHeaderMessage: false,
     },
-    enabledPrintCoupon:{
+    enabledPrintCoupon: {
       printLogoCoupon: true,
-      printHeaderMessage : false,
+      printHeaderMessage: false,
       printQrCode: false,
       isEnabledReprintCoupon: true,
       isTrasmitionInfoMessageShown: false,

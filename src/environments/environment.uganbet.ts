@@ -14,11 +14,11 @@ export const environment: Environment = {
   license: LICENSE_TYPE.UGANBET,
   baseApiUrl: 'https://vg-apiuganbet.odissea-services.net',
   pageTitle: 'UganBet - VDesk Kiosk',
-  theme: 'uganbet',
-  faviconPath: 'app/themes/skins/uganbet/image/Logo-header.png',
+  theme: 'no-brand',
+  faviconPath: '',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
-  supportedLang: ['en', 'it', 'es', 'fr', 'pt', 'sq', 'de'],
+  supportedLang: ['it', 'en', 'es', 'fr', 'pt'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
@@ -348,13 +348,13 @@ export const environment: Environment = {
   ],
   showEventId: true,
   printSettings: {
-    enabledPrintReceipt:{
-      printLogoPayCancel : false,
-      printHeaderMessage : false,
+    enabledPrintReceipt: {
+      printLogoPayCancel: false,
+      printHeaderMessage: false,
     },
-    enabledPrintCoupon:{
+    enabledPrintCoupon: {
       printLogoCoupon: true,
-      printHeaderMessage : false,
+      printHeaderMessage: false,
       printQrCode: false,
       isEnabledReprintCoupon: true,
       isTrasmitionInfoMessageShown: false,

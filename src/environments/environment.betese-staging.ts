@@ -15,10 +15,10 @@ export const environment: Environment = {
   license: LICENSE_TYPE.BETESE,
   baseApiUrl: 'https://qacom-apibetese.ody-services.net',
   pageTitle: 'VDESK-KIOSK',
-  theme: 'betese',
-  faviconPath: 'app/themes/skins/betese/image/Logo-header.png',
+  theme: 'universalsoft',
+  faviconPath: 'app/themes/skins/universalsoft/image/Logo-header.png',
   currencyDefault: 'EUR',
-  supportedLang: ['en'],
+  supportedLang: ['it', 'en', 'es', 'fr', 'pt'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
@@ -349,13 +349,13 @@ export const environment: Environment = {
     }
   ],
   printSettings: {
-    enabledPrintReceipt:{
-      printLogoPayCancel : false,
-      printHeaderMessage : true,
+    enabledPrintReceipt: {
+      printLogoPayCancel: false,
+      printHeaderMessage: true,
     },
-    enabledPrintCoupon:{
+    enabledPrintCoupon: {
       printLogoCoupon: true,
-      printHeaderMessage : true,
+      printHeaderMessage: true,
       printQrCode: false,
       isEnabledReprintCoupon: true,
       isTrasmitionInfoMessageShown: false,
