@@ -12,9 +12,9 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.UGANBET,
-  baseApiUrl: 'https://qacom-apiuganbet.ody-services.net',
+  baseApiUrl: 'https://qacom-apidemo.ody-services.net',
   pageTitle: 'VDESK-KIOSK',
-  theme: 'no-brand',
+  theme: 'uganbet',
   faviconPath: '',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
@@ -353,7 +353,7 @@ export const environment: Environment = {
       printHeaderMessage: false,
     },
     enabledPrintCoupon: {
-      printLogoCoupon: true,
+      printLogoCoupon: false,
       printHeaderMessage: false,
       printQrCode: false,
       isEnabledReprintCoupon: true,
