@@ -151,7 +151,7 @@
               "outputPath": "dist-gensolutions",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/gensolutions/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -180,7 +180,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/gensolutions/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -200,7 +200,7 @@
               "outputPath": "dist-gensolutions",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/gensolutions/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -229,7 +229,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/gensolutions/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -249,7 +249,7 @@
               "outputPath": "dist-dngaming",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/dngaming/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -278,7 +278,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/dngaming/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -298,7 +298,7 @@
               "outputPath": "dist-dngaming",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/dngaming/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -327,7 +327,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/dngaming/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -347,7 +347,7 @@
               "outputPath": "dist-shawis",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/shawis/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -376,7 +376,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/shawis/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -396,7 +396,7 @@
               "outputPath": "dist-shawis",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/shawis/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -425,7 +425,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/shawis/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -1131,7 +1131,7 @@
               "outputPath": "dist-betese",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/betese/"
+                  "src/app/themes/skins/universalsoft/"
                 ]
               },
               "fileReplacements": [
@@ -1160,7 +1160,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/betese/"
+                  "src/app/themes/skins/universalsoft/"
                 ]
               },
               "fileReplacements": [
@@ -1180,7 +1180,7 @@
               "outputPath": "dist-betese",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/betese/"
+                  "src/app/themes/skins/universalsoft/"
                 ]
               },
               "fileReplacements": [
@@ -1209,7 +1209,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/betese/"
+                  "src/app/themes/skins/universalsoft/"
                 ]
               },
               "fileReplacements": [
@@ -1523,7 +1523,7 @@
               "outputPath": "dist-uganbet",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/uganbet/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -1552,7 +1552,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/uganbet/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -1572,7 +1572,7 @@
               "outputPath": "dist-uganbet",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/uganbet/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -1601,7 +1601,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/uganbet/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -1719,7 +1719,7 @@
               "outputPath": "dist-f2o",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/f2o/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -1748,7 +1748,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/f2o/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -1768,7 +1768,7 @@
               "outputPath": "dist-f2o",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/f2o/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -1797,7 +1797,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/f2o/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2405,7 +2405,7 @@
               "outputPath": "dist-soccerbet",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/soccerbet/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2434,7 +2434,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/soccerbet/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2454,7 +2454,7 @@
               "outputPath": "dist-soccerbet",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/soccerbet/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2483,7 +2483,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/soccerbet/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2503,7 +2503,7 @@
               "outputPath": "dist-betsafi",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/betsafi/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2532,7 +2532,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/betsafi/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2552,7 +2552,7 @@
               "outputPath": "dist-betsafi",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/betsafi/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2581,7 +2581,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/betsafi/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2601,7 +2601,7 @@
               "outputPath": "dist-tradabets",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/tradabets/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2630,7 +2630,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/tradabets/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2650,7 +2650,7 @@
               "outputPath": "dist-tradabets",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/tradabets/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2679,7 +2679,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/tradabets/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2699,7 +2699,7 @@
               "outputPath": "dist-betsplus",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/betsplus/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2728,7 +2728,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/betsplus/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2748,7 +2748,7 @@
               "outputPath": "dist-betsplus",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/betsplus/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
@@ -2777,7 +2777,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/betsplus/"
+                  "src/app/themes/skins/no-brand/"
                 ]
               },
               "fileReplacements": [
