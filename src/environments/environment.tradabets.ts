@@ -13,12 +13,12 @@ export const environment: Environment = {
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.TRADABETS,
   baseApiUrl: 'https://vg-apitradabet.odissea-services.net',
-  pageTitle: 'Tradabets - KIOSK',
-  theme: 'tradabets',
-  faviconPath: 'app/themes/skins/tradabets/image/Logo-header.png',
+  pageTitle: 'VDESK-KIOSK',
+  theme: 'no-brand',
+  faviconPath: '',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
-  supportedLang: ['en'],
+  supportedLang: ['it', 'en', 'es', 'fr', 'pt'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
@@ -348,13 +348,13 @@ export const environment: Environment = {
   ],
   showEventId: true,
   printSettings: {
-    enabledPrintReceipt:{
-      printLogoPayCancel : false,
-      printHeaderMessage : false,
+    enabledPrintReceipt: {
+      printLogoPayCancel: false,
+      printHeaderMessage: false,
     },
-    enabledPrintCoupon:{
-      printLogoCoupon: true,
-      printHeaderMessage : false,
+    enabledPrintCoupon: {
+      printLogoCoupon: false,
+      printHeaderMessage: false,
       printQrCode: false,
       isEnabledReprintCoupon: true,
       isTrasmitionInfoMessageShown: false,

@@ -13,12 +13,12 @@ export const environment: Environment = {
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.DNGAMING,
   baseApiUrl: 'https://vg-apidngaming.odissea-services.net',
-  pageTitle: 'DnGaming - KIOSK',
-  theme: 'dngaming',
-  faviconPath: 'app/themes/skins/dngaming/image/Logo-header.png',
+  pageTitle: 'VDESK-KIOSK',
+  theme: 'no-brand',
+  faviconPath: '',
   couponDirectPlace: true,
   currencyDefault: 'EUR',
-  supportedLang: ['es'],
+  supportedLang: ['it', 'en', 'es', 'fr', 'pt'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
@@ -348,13 +348,13 @@ export const environment: Environment = {
   ],
   showEventId: true,
   printSettings: {
-    enabledPrintReceipt:{
-      printLogoPayCancel : false,
-      printHeaderMessage : true,
+    enabledPrintReceipt: {
+      printLogoPayCancel: false,
+      printHeaderMessage: true,
     },
-    enabledPrintCoupon:{
-      printLogoCoupon: true,
-      printHeaderMessage : true,
+    enabledPrintCoupon: {
+      printLogoCoupon: false,
+      printHeaderMessage: false,
       printQrCode: false,
       isEnabledReprintCoupon: true,
       isTrasmitionInfoMessageShown: false,

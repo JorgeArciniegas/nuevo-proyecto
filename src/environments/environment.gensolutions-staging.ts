@@ -15,11 +15,11 @@ export const environment: Environment = {
   license: LICENSE_TYPE.GENSOLUTIONS,
   baseApiUrl: 'https://qacom-apigensolutions.ody-services.net',
   pageTitle: 'VDESK-KIOSK',
-  theme: 'gensolutions',
-  faviconPath: 'app/themes/skins/develop/image/Logo-header.png',
+  theme: 'no-brand',
+  faviconPath: '',
   couponDirectPlace: false,
   currencyDefault: 'EUR',
-  supportedLang: ['ht', 'en'],
+  supportedLang: ['it', 'en', 'es', 'fr', 'pt'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
@@ -349,13 +349,13 @@ export const environment: Environment = {
   ],
   showEventId: true,
   printSettings: {
-    enabledPrintReceipt:{
-      printLogoPayCancel : false,
-      printHeaderMessage : false,
+    enabledPrintReceipt: {
+      printLogoPayCancel: false,
+      printHeaderMessage: false,
     },
-    enabledPrintCoupon:{
+    enabledPrintCoupon: {
       printLogoCoupon: false,
-      printHeaderMessage : false,
+      printHeaderMessage: false,
       printQrCode: false,
       isEnabledReprintCoupon: true,
       isTrasmitionInfoMessageShown: false,

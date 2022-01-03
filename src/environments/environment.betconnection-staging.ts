@@ -18,7 +18,7 @@ export const environment: Environment = {
   theme: 'betconnection',
   faviconPath: 'app/themes/skins/betconnection/image/Logo-header.png',
   currencyDefault: 'EUR',
-  supportedLang: ['es', 'en', 'pt'],
+  supportedLang: ['es', 'en', 'pt', 'ht'],
   defaultAmount: {
     PresetOne: null,
     PresetTwo: null,
@@ -349,13 +349,13 @@ export const environment: Environment = {
     }
   ],
   printSettings: {
-    enabledPrintReceipt:{
-      printLogoPayCancel : false,
-      printHeaderMessage : true,
+    enabledPrintReceipt: {
+      printLogoPayCancel: false,
+      printHeaderMessage: true,
     },
-    enabledPrintCoupon:{
+    enabledPrintCoupon: {
       printLogoCoupon: true,
-      printHeaderMessage : true,
+      printHeaderMessage: true,
       printQrCode: false,
       isEnabledReprintCoupon: true,
       isTrasmitionInfoMessageShown: false,
