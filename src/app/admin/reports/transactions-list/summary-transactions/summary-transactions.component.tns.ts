@@ -22,4 +22,7 @@ export class SummaryTransactionsComponent {
   showDetails(item: string) {
     this.router.getRouter().navigate(['admin/reports/transactionsList/detail', item]);
   }
+  totalBalance(income: number, outcome: number): number {
+    return income - Math.abs(outcome);
+  }
 }
