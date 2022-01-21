@@ -15,7 +15,13 @@ export class SummaryTransactionsComponent {
 
   constructor(public userService: UserService, public transactionsListService: TransactionsListService) { }
 
+  /**
+   *  @param income credit
+   *  @param income debit
+   *  Return profit
+   */
   totalBalance(income: number, outcome: number): number {
+    //Math.abs to convert to a positive number
     return income - Math.abs(outcome);
   }
 }
