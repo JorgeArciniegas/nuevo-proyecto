@@ -38,7 +38,7 @@
 
   </GridLayout>
 
-  <GridLayout row="2"  cornerRadius="6" class="card">
+  <GridLayout row="2" cornerRadius="6" class="card">
     <GridLayout class="display" rows="2*,3*,3*,3*,3*,3*,3*,3*,3*,3*,3*" columns="2*,20*,18*,40*,18*,2*">
       <!-- title -->
       <Label row="0" col="1" class="sub-title" text="{{ 'DATE' | translate }}" verticalAlignment="center"></Label>
@@ -64,7 +64,7 @@
     </GridLayout>
   </GridLayout>
 
-  <GridLayout row="3" columns="5*,2*,2*,2*,5*" class="toolbar display">
+  <GridLayout row="3" columns="4*,2*,2*,2*,2*,4*" class="toolbar display">
     <StackLayout col="1" horizontalAlignment="center" verticalAlignment="center">
       <Label class="value" text="{{ transactionsListService.transactionsList.NumberOfTransactions | number }}"
         textWrap="true"></Label>
@@ -81,6 +81,12 @@
         text="{{ transactionsListService.transactionsList.TotalOutcome | currency : userService.userCurrency : 'symbol-narrow' }}"
         textWrap="true"></Label>
       <Label class="sub-title small" text="{{ 'TOT_OUTCOME' | translate }}"></Label>
+    </StackLayout>
+    <StackLayout col="4" horizontalAlignment="center" verticalAlignment="center">
+      <Label class="value"
+        text="{{ totalBalance(transactionsListService.transactionsList.TotalIncome, transactionsListService.transactionsList.TotalOutcome) | currency : userService.userCurrency : 'symbol-narrow' }}"
+        textWrap="true"></Label>
+      <Label class="sub-title small" text="{{ 'PROFIT' | translate }}"></Label>
     </StackLayout>
   </GridLayout>
 </GridLayout>

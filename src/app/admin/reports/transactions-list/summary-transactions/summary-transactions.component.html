@@ -22,7 +22,8 @@
           <div fxFlex="12">
             <div><small data='disabled'>{{ 'TRANSACTION_TYPE' | translate }}</small></div>
             <div class="value">
-              <strong>{{ 'DYNAMIC_KEYS.TransactionCategory.' + (transactionsListService.transactionTypesCsv | getTransactionCategoryKeyByEnumValue) | translate }}</strong>
+              <strong>{{ 'DYNAMIC_KEYS.TransactionCategory.' + (transactionsListService.transactionTypesCsv |
+                getTransactionCategoryKeyByEnumValue) | translate }}</strong>
             </div>
           </div>
           <!-- PAGINATOR -->
@@ -101,7 +102,8 @@
           <div fxFlex="15">
             <div class="value">
               <h2>
-                {{ transactionsListService.transactionsList.TotalIncome | currency : userService.userCurrency : 'symbol-narrow' }}
+                {{ transactionsListService.transactionsList.TotalIncome | currency : userService.userCurrency :
+                'symbol-narrow' }}
               </h2>
             </div>
             <div><small data='disabled'>{{ 'TOT_INCOME' | translate }}</small></div>
@@ -109,10 +111,21 @@
           <div fxFlex="15">
             <div class="value">
               <h2>
-                {{ transactionsListService.transactionsList.TotalOutcome | currency : userService.userCurrency : 'symbol-narrow' }}
+                {{ transactionsListService.transactionsList.TotalOutcome | currency : userService.userCurrency :
+                'symbol-narrow' }}
               </h2>
             </div>
             <div><small data='disabled'>{{ 'TOT_OUTCOME' | translate }}</small></div>
+          </div>
+          <div fxFlex="15">
+            <div class="value">
+              <h2>
+                {{ totalBalance(transactionsListService.transactionsList.TotalIncome,
+                transactionsListService.transactionsList.TotalOutcome) | currency : userService.userCurrency :
+                'symbol-narrow' }}
+              </h2>
+            </div>
+            <div><small data='disabled'>{{ 'PROFIT' | translate }}</small></div>
           </div>
         </div>
       </div>
