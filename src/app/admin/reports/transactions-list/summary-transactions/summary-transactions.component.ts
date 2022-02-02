@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { TransactionCategory } from '../transactions-list.model';
 import { TransactionsListService } from '../transactions-list.service';
 import { UserService } from '../../../../services/user.service';
+import { booleanConverter } from '@nativescript/core';
 
 @Component({
   selector: 'app-summary-transactions',
@@ -12,5 +13,15 @@ export class SummaryTransactionsComponent {
   object = Object;
   transactionType: typeof TransactionCategory = TransactionCategory;
 
-  constructor(public userService: UserService, public transactionsListService: TransactionsListService) {}
+  constructor(public userService: UserService, public transactionsListService: TransactionsListService) { }
+
+  /**
+   *  @param income credit
+   *  @param income debit
+   *  Return profit
+   */
+  totalBalance(income: number, outcome: number): number {
+    //Math.abs to convert to a positive number
+    return income - Math.abs(outcome);
+  }
 }
