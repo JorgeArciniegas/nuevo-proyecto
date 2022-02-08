@@ -1,4 +1,12 @@
 {
+  "COUPONS": "Coupons",
+  "TOTAL_BETS": "Total des paris",
+  "TOTAL_WON": "Total gagné",
+  "BETLIST": {
+    "TOTAL_VOID": "Total void",
+    "VOID_BETS": "Void bets"
+  },
+  "BETS_LIST.WON": "Gagnants",
   "ACCG": "QUI",
   "AGILITY": "Agilité",
   "ALL": "Tous",
@@ -24,14 +32,9 @@
   "BASE": "B",
   "BET": "Parier",
   "BET49": "Bet49",
-  "BETLIST": {
-    "TOTAL_VOID": "Total void",
-    "VOID_BETS": "Void bets"
-  },
   "BETS_LIST": "Liste des paris",
   "BETS_LIST.LOST": "Perdants",
   "BETS_LIST.OPEN": "en cours",
-  "BETS_LIST.WON": "Gagnants",
   "BETZERO": "Bet Zero",
   "BET_STATUS": "État du pari",
   "BET_TYPE": "Type de pari",

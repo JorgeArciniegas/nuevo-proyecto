@@ -1,8 +1,12 @@
 {
+  "COUPONS": "Coupons",
+  "TOTAL_BETS": "Totali scommesse",
+  "TOTAL_WON": "Totale Vinto",
   "BETLIST": {
     "VOID_BETS": "Cancellati",
     "TOTAL_VOID": "Totale cancellato"
   },
+  "BETS_LIST.WON": "Vincenti",
   "VOIDED": "Annullato",
   "WARNING": "Avviso",
   "VBOX": {
@@ -704,7 +708,6 @@
   "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
   "GO_TO_HOME": "Vai alla home",
   "GREEN": "verde",
-  "BETS_LIST.WON": "Vincenti",
   "MAX_PAYOUT": "Vincita massima",
   "MIN_PAYOUT": "Vincita minima",
   "MAX_POTENTIAL_WIN": "Vincita potenziale massima",

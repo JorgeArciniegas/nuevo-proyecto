@@ -1,4 +1,12 @@
 {
+  "COUPONS": "Cupones",
+  "TOTAL_BETS": "Reporte de apuestas",
+  "TOTAL_WON": "Total ganado",
+  "BETLIST": {
+    "TOTAL_VOID": "Total anulado",
+    "VOID_BETS": "Apuestas anuladas"
+  },
+  "BETS_LIST.WON": "Ganados",
   "ACCG": "GB",
   "AGILITY": "Agilidad",
   "ALL": "Todos",
@@ -24,14 +32,9 @@
   "BASE": "B",
   "BET": "Apuesta",
   "BET49": "Bet49",
-  "BETLIST": {
-    "TOTAL_VOID": "Total anulado",
-    "VOID_BETS": "Apuestas anuladas"
-  },
   "BETS_LIST": "Lista de apuestas",
   "BETS_LIST.LOST": "Perdidos",
   "BETS_LIST.OPEN": "Abierta",
-  "BETS_LIST.WON": "Ganados",
   "BETZERO": "Bet Zero",
   "BET_STATUS": "Estado Apuesta",
   "BET_TYPE": "Tipo de Apuesta",

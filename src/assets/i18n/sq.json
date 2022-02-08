@@ -1,4 +1,12 @@
 {
+  "COUPONS": "Kuponët",
+  "TOTAL_BETS": "Bastet në total",
+  "TOTAL_WON": "Total won",
+  "BETLIST": {
+    "TOTAL_VOID": "Totali i pavlefshëm",
+    "VOID_BETS": "Bastet e pavlefshme"
+  },
+  "BETS_LIST.WON": "Fituar",
   "ACCG": "ACCG",
   "AGILITY": "Shkathtësi",
   "AMERICANROULETTE": {
@@ -20,10 +28,6 @@
   "BASE": "B",
   "BET": "Bastit",
   "BET49": "Bet49",
-  "BETLIST": {
-    "TOTAL_VOID": "Totali i pavlefshëm",
-    "VOID_BETS": "Bastet e pavlefshme"
-  },
   "BETS_LIST": "Lista basteve",
   "BETS_LIST.OPEN": "Hapur",
   "BETZERO": "Bet Zero",

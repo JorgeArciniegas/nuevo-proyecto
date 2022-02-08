@@ -1,4 +1,12 @@
 {
+  "COUPONS": "Coupons",
+  "TOTAL_BETS": "Total bets",
+  "BETS_LIST.WON": "Won bets",
+  "TOTAL_WON": "Total won",
+  "BETLIST": {
+    "VOID_BETS": "Void bets",
+    "TOTAL_VOID": "Total void"
+  },
   "WON": "Won",
   "WARNING": "Warning",
   "VOIDED": "Voided",
@@ -34,7 +42,7 @@
   "TOT_OPEN": "TOT open",
   "TOT_LOST": "TOT lost",
   "TOT_INCOME": "Tot income",
-  "TOT_BET": "TOT bet",
+  "TOT_BET": "TOT bets",
   "TEAM": "Team",
   "SUMMARY": "Summary",
   "STRENGTH": "Strength",
@@ -674,14 +682,9 @@
   "BLUE": "blue",
   "BLACK": "black",
   "BETZERO": "Bet Zero",
-  "BETS_LIST.WON": "Won",
   "BETS_LIST.OPEN": "Open",
   "BETS_LIST.LOST": "Lost",
   "BETS_LIST": "Bets List",
-  "BETLIST": {
-    "VOID_BETS": "Void bets",
-    "TOTAL_VOID": "Total void"
-  },
   "BET49": "Bet49",
   "BET_UNDER_EVALUATION": "Bet under evaluation, please wait",
   "BET_TYPE": "Bet type",
