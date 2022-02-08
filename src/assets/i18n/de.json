@@ -1,12 +1,4 @@
 {
-  "COUPONS": "Wettscheine",
-  "TOTAL_BETS": "Wetten gesamt",
-  "BETS_LIST.WON": "Gewonnen",
-  "TOTAL_WON": "Gesamtgewinn",
-  "BETLIST": {
-    "TOTAL_VOID": "Alle Ungültigen",
-    "VOID_BETS": "Annullierte Wetten"
-  },
   "ACCG": "ACCG",
   "AGILITY": "Geschicklichkeit",
   "AMERICANROULETTE": {
@@ -28,8 +20,13 @@
   "BASE": "B",
   "BET": "Wett",
   "BET49": "Bet49",
+  "BETLIST": {
+    "TOTAL_VOID": "Alle Ungültigen",
+    "VOID_BETS": "Annullierte Wetten"
+  },
   "BETS_LIST": "Wettliste",
   "BETS_LIST.OPEN": "Offen",
+  "BETS_LIST.WON": "Gewonnen",
   "BETZERO": "Bet Zero",
   "BET_STATUS": "Wettstatus",
   "BET_TYPE": "Wettart",
@@ -48,6 +45,7 @@
   "CONFIRM": "Bestätigen",
   "COUPON": "Wette",
   "COUPON.BET": "Wette",
+  "COUPONS": "Wettscheine",
   "COUPON_CODE": "Wettschein-Code",
   "COUPON_NUMBER": "Wettscheinnummer",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Wette angenommen,",
@@ -465,8 +463,10 @@
   "STATUS": "Status",
   "STRENGTH": "Stärke",
   "TOTALS": "Summen",
+  "TOTAL_BETS": "Wetten gesamt",
   "TOTAL_PLAYED": "Summe Wetteinsatz",
   "TOTAL_STAKE": "Summe wetteinsatz",
+  "TOTAL_WON": "Gesamtgewinn",
   "TOT_PAID": "Insgesamt bezahlt",
   "TOT_PROFIT": "Gesamtgewinn",
   "TOT_VOIDED": "Summe annulliert",

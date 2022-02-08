@@ -1,12 +1,4 @@
 {
-  "COUPONS": "Cupones",
-  "TOTAL_BETS": "Reporte de apuestas",
-  "TOTAL_WON": "Total ganado",
-  "BETLIST": {
-    "TOTAL_VOID": "Total anulado",
-    "VOID_BETS": "Apuestas anuladas"
-  },
-  "BETS_LIST.WON": "Ganados",
   "ACCG": "GB",
   "AGILITY": "Agilidad",
   "ALL": "Todos",
@@ -32,9 +24,14 @@
   "BASE": "B",
   "BET": "Apuesta",
   "BET49": "Bet49",
+  "BETLIST": {
+    "TOTAL_VOID": "Total anulado",
+    "VOID_BETS": "Apuestas anuladas"
+  },
   "BETS_LIST": "Lista de apuestas",
   "BETS_LIST.LOST": "Perdidos",
   "BETS_LIST.OPEN": "Abierta",
+  "BETS_LIST.WON": "Ganados",
   "BETZERO": "Bet Zero",
   "BET_STATUS": "Estado Apuesta",
   "BET_TYPE": "Tipo de Apuesta",
@@ -60,6 +57,7 @@
   "CONFIRM_DESTROY_COUPON.MESSAGE": "Esta operación cancelará el cupón actual. ¿Quieres continuar?",
   "COUPON": "Cupón",
   "COUPON.BET": "Apuesta",
+  "COUPONS": "Cupones",
   "COUPON_CODE": "Código cupón",
   "COUPON_NUMBER": "Número cupón",
   "COUPON_RESET": "Reinicio de cupón",
@@ -680,9 +678,11 @@
   "TEAM": "Equipo",
   "TOTALCOLOUR": "Color total",
   "TOTALS": "Totales",
+  "TOTAL_BETS": "Reporte de apuestas",
   "TOTAL_PAYOUT": "Pago total",
   "TOTAL_PLAYED": "Total jugado",
   "TOTAL_STAKE": "Importe total",
+  "TOTAL_WON": "Total ganado",
   "TOT_BET": "TOT apuesta",
   "TOT_INCOME": "Créditos totales",
   "TOT_LOST": "TOT perdido",

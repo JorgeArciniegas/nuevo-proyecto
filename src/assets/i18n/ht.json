@@ -1,12 +1,4 @@
 {
-  "COUPONS": "Fich yo",
-  "TOTAL_BETS": "Li nesesè",
-  "TOTAL_WON": "Li nesesè",
-  "BETLIST": {
-    "TOTAL_VOID": "Total ki anile",
-    "VOID_BETS": "Paryaj ki anile"
-  },
-  "BETS_LIST.WON": "Ki genyen",
   "ACCG": "KIN",
   "AGILITY": "Ajilite",
   "ALL": "Tout",
@@ -32,9 +24,14 @@
   "BASE": "S",
   "BET": "Paryaj",
   "BET49": "Bet49",
+  "BETLIST": {
+    "TOTAL_VOID": "Total ki anile",
+    "VOID_BETS": "Paryaj ki anile"
+  },
   "BETS_LIST": "Lis Paryaj",
   "BETS_LIST.LOST": "Pèdi",
   "BETS_LIST.OPEN": "Ouvri",
+  "BETS_LIST.WON": "Ki genyen",
   "BETZERO": "Parye Zero",
   "BET_STATUS": "Estati paryaj",
   "BET_TYPE": "Tip paryaj",
@@ -60,6 +57,7 @@
   "CONFIRM_DESTROY_COUPON.MESSAGE": "Oporasyon sa a ap anile tikè sa a. Ou vle kontinye?",
   "COUPON": "Tikè",
   "COUPON.BET": "Paryaj",
+  "COUPONS": "Fich yo",
   "COUPON_CODE": "Kòd fich",
   "COUPON_NUMBER": "Nimewo fich",
   "COUPON_RESET": "Rekomanse tikè",
@@ -680,9 +678,11 @@
   "TEAM": "Ekip",
   "TOTALCOLOUR": "Tout Koulè yo",
   "TOTALS": "Total",
+  "TOTAL_BETS": "Li nesesè",
   "TOTAL_PAYOUT": "Total peman",
   "TOTAL_PLAYED": "Total jwèt",
   "TOTAL_STAKE": "Total miz",
+  "TOTAL_WON": "Li nesesè",
   "TOT_BET": "TOT paryaj",
   "TOT_INCOME": "Tout antre lajan",
   "TOT_LOST": "TOT pèdi",
