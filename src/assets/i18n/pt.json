@@ -24,6 +24,10 @@
   "BASE": "A",
   "BET": "Aposta",
   "BET49": "Bet49",
+  "BETLIST": {
+    "TOTAL_VOID": "Anulação total",
+    "VOID_BETS": "Apostas anuladas"
+  },
   "BETS_LIST": "Lista de Apostas",
   "BETS_LIST.LOST": "Perdidas",
   "BETS_LIST.OPEN": "Abertas",
@@ -53,6 +57,7 @@
   "CONFIRM_DESTROY_COUPON.MESSAGE": "Essa operação cancelará o cupom atual. Deseja continuar?",
   "COUPON": "Cupom",
   "COUPON.BET": "Aposta",
+  "COUPONS": "Coupons",
   "COUPON_CODE": "Código do cupom",
   "COUPON_NUMBER": "Número do cupom",
   "COUPON_RESET": "Reiniciar cupom",
@@ -240,8 +245,8 @@
     "PRINT_COUPON": {
       "HEADER_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
-        "BETESE": "BETESE BETTING TIN 1720088068",
         "BETCONNECTION": "Virtual King",
+        "BETESE": "BETESE BETTING TIN 1720088068",
         "BETLOGIK": "-",
         "BETPRO": "-",
         "BETSAFI": "-",
@@ -271,8 +276,8 @@
       },
       "LICENSE_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
-        "BETESE": "-",
         "BETCONNECTION": "Verifique o seu bilhete, não são aceites reembolsos, verifique as tabelas de pagamento e regulamentos antes de apostar. MUITA SORTE",
+        "BETESE": "-",
         "BETLOGIK": "-",
         "BETPRO": "-",
         "BETSAFI": "-",
@@ -301,10 +306,13 @@
         "UGANBET": "-",
         "UNIVERSALSOFT": "-"
       },
+      "LICENSE_MESSAGE_2": {
+        "DNGAMING": "REVISE SU JUGADA!"
+      },
       "LICENSE_MESSAGE_MAX_PAYABLE": {
         "APUESTAS_DOMINICANAS": "O valor máximo a pagar de um cupom é ",
-        "BETESE": "O valor máximo a pagar de um cupom é ",
         "BETCONNECTION": "O valor máximo a pagar de um cupom é ",
+        "BETESE": "O valor máximo a pagar de um cupom é ",
         "BETLOGIK": "O valor máximo a pagar de um cupom é ",
         "BETPRO": "O valor máximo a pagar de um cupom é ",
         "BETSAFI": "O valor máximo a pagar de um cupom é ",
@@ -331,9 +339,6 @@
         "TRADABETS": "O valor máximo a pagar de um cupom é ",
         "UGANBET": "O valor máximo a pagar de um cupom é ",
         "UNIVERSALSOFT": "O valor máximo a pagar de um cupom é "
-      },
-      "LICENSE_MESSAGE_2": {
-        "DNGAMING": "REVISE SU JUGADA!"
       }
     },
     "PRODUCT": {
@@ -620,6 +625,7 @@
   "OPERATOR_TYPE": "Tipo do operador",
   "OUTCOME": "Resultado",
   "OVER": "MAIS",
+  "Over": "MAIS",
   "PAGE": "Página",
   "PAGE.OF": " de ",
   "PAID": "Pago",
@@ -641,6 +647,7 @@
   "PRINT": "Imprimir",
   "PRINT_COUPON.TRANSMISSION_MESSAGE": "Atribuições transmitidas pela internet e aceitas em",
   "PRODUCT_FILTER": "Filtro de produto",
+  "PROFIT": "Benefício",
   "R": "R",
   "RAINBOW": "Arco-íris",
   "RANKING.CONDITION": "Condição",
@@ -670,9 +677,11 @@
   "TEAM": "Time",
   "TOTALCOLOUR": "Cor total",
   "TOTALS": "Total",
+  "TOTAL_BETS": "Apostas totais",
   "TOTAL_PAYOUT": "Pagamento total",
   "TOTAL_PLAYED": "Total jogado",
   "TOTAL_STAKE": "Aposta total",
+  "TOTAL_WON": "Pagamento total",
   "TOT_BET": "Aposta TOT",
   "TOT_INCOME": "Resultado tot",
   "TOT_LOST": "TOT perdido",
@@ -690,6 +699,7 @@
   "USERNAME": "Nome de usuário",
   "USERNAME_TOO_SHORT": "O nome de usuário é muito curto (mínimo 2 dígitos)",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "O usuário não tem permissão para realizar a operação",
+  "Under": "MENOS",
   "VBOX": {
     "EDIT_ONGOING": "Alterações não salvas",
     "ERROR_MESSAGE_EDIT_TV": "Erro ao salvar",
@@ -702,8 +712,5 @@
   },
   "VOIDED": "Anulada",
   "WARNING": "Aviso",
-  "WON": "Ganhas",
-  "Over": "MAIS",
-  "Under": "MENOS",
-  "PROFIT": "Benefício"
+  "WON": "Ganhas"
 }

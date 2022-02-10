@@ -24,10 +24,14 @@
   "BASE": "B",
   "BET": "Bet",
   "BET49": "Bet49",
+  "BETLIST": {
+    "TOTAL_VOID": "Total void",
+    "VOID_BETS": "Void bets"
+  },
   "BETS_LIST": "Bets List",
   "BETS_LIST.LOST": "Lost",
   "BETS_LIST.OPEN": "Open",
-  "BETS_LIST.WON": "Won",
+  "BETS_LIST.WON": "Won bets",
   "BETZERO": "Bet Zero",
   "BET_STATUS": "Bet status",
   "BET_TYPE": "Bet type",
@@ -53,6 +57,7 @@
   "CONFIRM_DESTROY_COUPON.MESSAGE": "This operation will cancel the current coupon. Do you want to continue?",
   "COUPON": "COUPON",
   "COUPON.BET": "Bet",
+  "COUPONS": "Coupons",
   "COUPON_CODE": "Coupon code",
   "COUPON_NUMBER": "Coupon number",
   "COUPON_RESET": "Coupon reset",
@@ -240,8 +245,8 @@
     "PRINT_COUPON": {
       "HEADER_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
-        "BETESE": "UniversalSoft",
         "BETCONNECTION": "Virtual King",
+        "BETESE": "UniversalSoft",
         "BETLOGIK": "-",
         "BETPRO": "BETPRO",
         "BETSAFI": "-",
@@ -271,8 +276,8 @@
       },
       "LICENSE_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
-        "BETESE": "-",
         "BETCONNECTION": "Please check your ticket, refunds are not accepted, check payment tables and regulations before betting. GOOD LUCK",
+        "BETESE": "-",
         "BETLOGIK": "-",
         "BETPRO": "Le client accepte le condition général du jeu disponible. Le présemt cpièpm est valable 7 jours interdit au moins de 18 ans.",
         "BETSAFI": "-",
@@ -301,10 +306,13 @@
         "UGANBET": "-",
         "UNIVERSALSOFT": "-"
       },
+      "LICENSE_MESSAGE_2": {
+        "DNGAMING": "REVISE SU JUGADA!"
+      },
       "LICENSE_MESSAGE_MAX_PAYABLE": {
         "APUESTAS_DOMINICANAS": "The maximum payable amount for a coupon is ",
-        "BETESE": "The maximum payable amount for a coupon is ",
         "BETCONNECTION": "The maximum payable amount for a coupon is ",
+        "BETESE": "The maximum payable amount for a coupon is ",
         "BETLOGIK": "The maximum payable amount for a coupon is ",
         "BETPRO": "The maximum payable amount for a coupon is ",
         "BETSAFI": "The maximum payable amount for a coupon is ",
@@ -331,9 +339,6 @@
         "TRADABETS": "The maximum payable amount for a coupon is ",
         "UGANBET": "The maximum payable amount for a coupon is ",
         "UNIVERSALSOFT": "The maximum payable amount for a coupon is "
-      },
-      "LICENSE_MESSAGE_2": {
-        "DNGAMING": "REVISE SU JUGADA!"
       }
     },
     "PRODUCT": {
@@ -620,6 +625,7 @@
   "OPERATOR_TYPE": "Operator Type",
   "OUTCOME": "Outcome",
   "OVER": "OVER",
+  "Over": "OVER",
   "PAGE": "Page",
   "PAGE.OF": " of ",
   "PAID": "Paid",
@@ -641,6 +647,7 @@
   "PRINT": "Print",
   "PRINT_COUPON.TRANSMISSION_MESSAGE": "Mandate transmitted via the Internet and accepted on the",
   "PRODUCT_FILTER": "Product filter",
+  "PROFIT": "Profit",
   "R": "R",
   "RAINBOW": "Rainbow",
   "RANKING.CONDITION": "Condition",
@@ -670,10 +677,12 @@
   "TEAM": "Team",
   "TOTALCOLOUR": "Total Colour",
   "TOTALS": "Totals",
+  "TOTAL_BETS": "Total bets",
   "TOTAL_PAYOUT": "Total payout",
   "TOTAL_PLAYED": "Total played",
   "TOTAL_STAKE": "Total stake",
-  "TOT_BET": "TOT bet",
+  "TOTAL_WON": "Total won",
+  "TOT_BET": "TOT bets",
   "TOT_INCOME": "Tot income",
   "TOT_LOST": "TOT lost",
   "TOT_OPEN": "TOT open",
@@ -690,6 +699,7 @@
   "USERNAME": "Username",
   "USERNAME_TOO_SHORT": "The username is too short (minimum 2 digits)",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "User not allowed to execute the operation",
+  "Under": "UNDER",
   "VBOX": {
     "EDIT_ONGOING": "Unsaved changes",
     "ERROR_MESSAGE_EDIT_TV": "Error in saving",
@@ -702,8 +712,5 @@
   },
   "VOIDED": "Voided",
   "WARNING": "Warning",
-  "WON": "Won",
-  "Over": "OVER",
-  "Under": "UNDER",
-  "PROFIT": "Profit"
+  "WON": "Won"
 }

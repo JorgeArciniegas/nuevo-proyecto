@@ -20,8 +20,13 @@
   "BASE": "B",
   "BET": "Wett",
   "BET49": "Bet49",
+  "BETLIST": {
+    "TOTAL_VOID": "Alle Ungültigen",
+    "VOID_BETS": "Annullierte Wetten"
+  },
   "BETS_LIST": "Wettliste",
   "BETS_LIST.OPEN": "Offen",
+  "BETS_LIST.WON": "Gewonnen",
   "BETZERO": "Bet Zero",
   "BET_STATUS": "Wettstatus",
   "BET_TYPE": "Wettart",
@@ -40,6 +45,7 @@
   "CONFIRM": "Bestätigen",
   "COUPON": "Wette",
   "COUPON.BET": "Wette",
+  "COUPONS": "Wettscheine",
   "COUPON_CODE": "Wettschein-Code",
   "COUPON_NUMBER": "Wettscheinnummer",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Wette angenommen,",
@@ -173,8 +179,8 @@
     "PRINT_COUPON": {
       "HEADER_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
-        "BETESE": "BETESE BETTING TIN 1720088068",
         "BETCONNECTION": "Virtual King",
+        "BETESE": "BETESE BETTING TIN 1720088068",
         "BETLOGIK": "-",
         "BETPRO": "-",
         "BETSAFI": "-",
@@ -203,8 +209,8 @@
       },
       "LICENSE_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
-        "BETESE": "-",
         "BETCONNECTION": "-",
+        "BETESE": "-",
         "BETLOGIK": "-",
         "BETPRO": "-",
         "BETSAFI": "-",
@@ -233,10 +239,13 @@
         "UGANBET": "-",
         "UNIVERSALSOFT": "-"
       },
+      "LICENSE_MESSAGE_2": {
+        "DNGAMING": "REVISE SU JUGADA!"
+      },
       "LICENSE_MESSAGE_MAX_PAYABLE": {
         "APUESTAS_DOMINICANAS": "Der maximal zu zahlende Betrag für einen Gutschein beträgt ",
-        "BETESE": "Der maximal zu zahlende Betrag für einen Gutschein beträgt ",
         "BETCONNECTION": "Der maximal zu zahlende Betrag für einen Gutschein beträgt ",
+        "BETESE": "Der maximal zu zahlende Betrag für einen Gutschein beträgt ",
         "BETLOGIK": "Der maximal zu zahlende Betrag für einen Gutschein beträgt ",
         "BETPRO": "Der maximal zu zahlende Betrag für einen Gutschein beträgt ",
         "BETSAFI": "Der maximal zu zahlende Betrag für einen Gutschein beträgt ",
@@ -263,9 +272,6 @@
         "TRADABETS": "Der maximal zu zahlende Betrag für einen Gutschein beträgt ",
         "UGANBET": "Der maximal zu zahlende Betrag für einen Gutschein beträgt ",
         "UNIVERSALSOFT": "Der maximal zu zahlende Betrag für einen Gutschein beträgt "
-      },
-      "LICENSE_MESSAGE_2": {
-        "DNGAMING": "REVISE SU JUGADA!"
       }
     },
     "PRODUCT": {
@@ -429,6 +435,7 @@
   "OPERATOR_SUMMARY": "Überblick betreiber",
   "OPERATOR_TYPE": "Betreibertyp",
   "OVER": "ÜBER",
+  "Over": "ÜBER",
   "PAID": "Bezahlt",
   "PAID_BY": "Bezalht mit",
   "PASSWORD": "Passwort",
@@ -439,6 +446,7 @@
   "PLACEMENT": "Platzierung",
   "POINTS": "Punkte",
   "PRINT_COUPON.TRANSMISSION_MESSAGE": "Mandate transmitted via the Internet and accepted on the",
+  "PROFIT": "Profit",
   "R": "R",
   "RAINBOW": "Rainbow",
   "RANKING.CONDITION": "Bedingung",
@@ -455,14 +463,17 @@
   "STATUS": "Status",
   "STRENGTH": "Stärke",
   "TOTALS": "Summen",
+  "TOTAL_BETS": "Wetten gesamt",
   "TOTAL_PLAYED": "Summe Wetteinsatz",
   "TOTAL_STAKE": "Summe wetteinsatz",
+  "TOTAL_WON": "Gesamtgewinn",
   "TOT_PAID": "Insgesamt bezahlt",
   "TOT_PROFIT": "Gesamtgewinn",
   "TOT_VOIDED": "Summe annulliert",
   "TYPE": "Art",
   "UNDER": "UNTER",
   "USERNAME": "Benutzername",
+  "Under": "UNTER",
   "VBOX": {
     "GENERAL_SETTINGS": "allgemeine Einstellungen",
     "MANAGEMENT": "V-Box Verwaltung",
@@ -470,8 +481,5 @@
     "TV_SETTING": "TV Einstellungen",
     "V_BOX": "V-Box"
   },
-  "VOIDED": "Annulliert",
-  "Over": "ÜBER",
-  "Under": "UNTER",
-  "PROFIT": "Profit"
+  "VOIDED": "Annulliert"
 }

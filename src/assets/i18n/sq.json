@@ -20,8 +20,13 @@
   "BASE": "B",
   "BET": "Bastit",
   "BET49": "Bet49",
+  "BETLIST": {
+    "TOTAL_VOID": "Totali i pavlefshëm",
+    "VOID_BETS": "Bastet e pavlefshme"
+  },
   "BETS_LIST": "Lista basteve",
   "BETS_LIST.OPEN": "Hapur",
+  "BETS_LIST.WON": "Fituar",
   "BETZERO": "Bet Zero",
   "BET_STATUS": "Statusi Bastit",
   "BET_TYPE": "Lloji Bastit",
@@ -40,6 +45,7 @@
   "COND": "Cond.",
   "CONFIRM": "konfirmuar",
   "COUPON.BET": "Bast",
+  "COUPONS": "Kuponët",
   "COUPON_CODE": "Kodi Biletes",
   "COUPON_NUMBER": "Numri i kuponit",
   "COUPON_SUCCESS_PLACEMENT_MESSAGE.INTRODUCTION": "Basti u pranua,",
@@ -168,8 +174,8 @@
     "PRINT_COUPON": {
       "HEADER_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
-        "BETESE": "BETESE BETTING TIN 1720088068",
         "BETCONNECTION": "Virtual King",
+        "BETESE": "BETESE BETTING TIN 1720088068",
         "BETLOGIK": "-",
         "BETPRO": "-",
         "BETSAFI": "-",
@@ -198,8 +204,8 @@
       },
       "LICENSE_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
-        "BETESE": "-",
         "BETCONNECTION": "-",
+        "BETESE": "-",
         "BETLOGIK": "-",
         "BETPRO": "-",
         "BETSAFI": "-",
@@ -227,10 +233,13 @@
         "UGANBET": "-",
         "UNIVERSALSOFT": "Ju lutemi kontrolloni saktësinë e kuponit në kohën e lëshimit, kërkesat e vonuara nuk do të pranohen. "
       },
+      "LICENSE_MESSAGE_2": {
+        "DNGAMING": "REVISE SU JUGADA!"
+      },
       "LICENSE_MESSAGE_MAX_PAYABLE": {
         "APUESTAS_DOMINICANAS": "Shuma maksimale e pagueshme për një kupon është ",
-        "BETESE": "Shuma maksimale e pagueshme për një kupon është ",
         "BETCONNECTION": "Shuma maksimale e pagueshme për një kupon është ",
+        "BETESE": "Shuma maksimale e pagueshme për një kupon është ",
         "BETLOGIK": "Shuma maksimale e pagueshme për një kupon është ",
         "BETPRO": "Shuma maksimale e pagueshme për një kupon është ",
         "BETSAFI": "Shuma maksimale e pagueshme për një kupon është ",
@@ -257,9 +266,6 @@
         "TRADABETS": "Shuma maksimale e pagueshme për një kupon është ",
         "UGANBET": "Shuma maksimale e pagueshme për një kupon është ",
         "UNIVERSALSOFT": "-"
-      },
-      "LICENSE_MESSAGE_2": {
-        "DNGAMING": "REVISE SU JUGADA!"
       }
     },
     "PRODUCT": {
@@ -458,6 +464,7 @@
   "PRINT": "Stampa",
   "PRINT_COUPON.TRANSMISSION_MESSAGE": "Mandate transmitted via the Internet and accepted on the",
   "PRODUCT_FILTER": "Filtro prodotto",
+  "PROFIT": "Fitimi",
   "R": "R",
   "RAINBOW": "Rainbow",
   "RANKING.CONDITION": "Forma",
@@ -486,9 +493,11 @@
   "TEAM": "Skuadra",
   "TOTALCOLOUR": "Total Colour",
   "TOTALS": "Totalet",
+  "TOTAL_BETS": "Bastet në total",
   "TOTAL_PAYOUT": "Total payout",
   "TOTAL_PLAYED": "Vlera totale",
   "TOTAL_STAKE": "Shuma totale",
+  "TOTAL_WON": "Total won",
   "TOT_BET": "TOT giocato",
   "TOT_INCOME": "Totale crediti",
   "TOT_LOST": "TOT perso",
@@ -514,6 +523,5 @@
   },
   "VOIDED": "Anulluar",
   "WARNING": "Avviso",
-  "WON": "Vinto",
-  "PROFIT": "Fitimi"
+  "WON": "Vinto"
 }

@@ -24,6 +24,10 @@
   "BASE": "B",
   "BET": "Apuesta",
   "BET49": "Bet49",
+  "BETLIST": {
+    "TOTAL_VOID": "Total anulado",
+    "VOID_BETS": "Apuestas anuladas"
+  },
   "BETS_LIST": "Lista de apuestas",
   "BETS_LIST.LOST": "Perdidos",
   "BETS_LIST.OPEN": "Abierta",
@@ -53,6 +57,7 @@
   "CONFIRM_DESTROY_COUPON.MESSAGE": "Esta operación cancelará el cupón actual. ¿Quieres continuar?",
   "COUPON": "Cupón",
   "COUPON.BET": "Apuesta",
+  "COUPONS": "Cupones",
   "COUPON_CODE": "Código cupón",
   "COUPON_NUMBER": "Número cupón",
   "COUPON_RESET": "Reinicio de cupón",
@@ -240,8 +245,8 @@
     "PRINT_COUPON": {
       "HEADER_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
-        "BETESE": "UniversalSoft",
         "BETCONNECTION": "Virtual King",
+        "BETESE": "UniversalSoft",
         "BETLOGIK": "-",
         "BETPRO": "-",
         "BETSAFI": "-",
@@ -271,8 +276,8 @@
       },
       "LICENSE_MESSAGE": {
         "APUESTAS_DOMINICANAS": "Por favor compruebe la exactidud del cupón al momento de su emisión, no se aceptarán reclamaciones tardías.",
-        "BETESE": "Prohibida la venta a menores de edad. Este tiquete se constituye en un documento al portador. El apostador es responsable de la integridad del tiquete, y acepta que la apuesta impresa en éste representa con certeza su selección.",
         "BETCONNECTION": "Por Favor revise su boleto, no se aceptan devoluciones, consultar tablas de pago y reglamento antes de apostar. MUCHA SUERTE",
+        "BETESE": "Prohibida la venta a menores de edad. Este tiquete se constituye en un documento al portador. El apostador es responsable de la integridad del tiquete, y acepta que la apuesta impresa en éste representa con certeza su selección.",
         "BETLOGIK": "-",
         "BETPRO": "-",
         "BETSAFI": "-",
@@ -301,10 +306,13 @@
         "UGANBET": "-",
         "UNIVERSALSOFT": "Prohibida la venta a menores de edad. Este tiquete se constituye en un documento al portador. El apostador es responsable de la integridad del tiquete, y acepta que la apuesta impresa en éste representa con certeza su selección."
       },
+      "LICENSE_MESSAGE_2": {
+        "DNGAMING": "REVISE SU JUGADA!"
+      },
       "LICENSE_MESSAGE_MAX_PAYABLE": {
         "APUESTAS_DOMINICANAS": "El importe máximo a pagar por un cupón es ",
-        "BETESE": "El importe máximo a pagar por un cupón es ",
         "BETCONNECTION": "El importe máximo a pagar por un cupón es ",
+        "BETESE": "El importe máximo a pagar por un cupón es ",
         "BETLOGIK": "El importe máximo a pagar por un cupón es ",
         "BETPRO": "El importe máximo a pagar por un cupón es ",
         "BETSAFI": "El importe máximo a pagar por un cupón es ",
@@ -332,9 +340,6 @@
         "TRADABETS": "El importe máximo a pagar por un cupón es ",
         "UGANBET": "El importe máximo a pagar por un cupón es ",
         "UNIVERSALSOFT": "El importe máximo a pagar por un cupón es "
-      },
-      "LICENSE_MESSAGE_2": {
-        "DNGAMING": "REVISE SU JUGADA!"
       }
     },
     "PRODUCT": {
@@ -621,6 +626,7 @@
   "OPERATOR_TYPE": "Tipo de operador",
   "OUTCOME": "Éxito",
   "OVER": "ALTA",
+  "Over": "ALTA",
   "PAGE": "Página",
   "PAGE.OF": " de ",
   "PAID": "Pagado",
@@ -642,6 +648,7 @@
   "PRINT": "Impresión",
   "PRINT_COUPON.TRANSMISSION_MESSAGE": "Mandato transmitido a través de Internet y aceptado en el",
   "PRODUCT_FILTER": "Filtro producto",
+  "PROFIT": "Beneficio",
   "R": "R",
   "RAINBOW": "Arcoíris",
   "RANKING.CONDITION": "Condición",
@@ -671,9 +678,11 @@
   "TEAM": "Equipo",
   "TOTALCOLOUR": "Color total",
   "TOTALS": "Totales",
+  "TOTAL_BETS": "Reporte de apuestas",
   "TOTAL_PAYOUT": "Pago total",
   "TOTAL_PLAYED": "Total jugado",
   "TOTAL_STAKE": "Importe total",
+  "TOTAL_WON": "Total ganado",
   "TOT_BET": "TOT apuesta",
   "TOT_INCOME": "Créditos totales",
   "TOT_LOST": "TOT perdido",
@@ -691,6 +700,7 @@
   "USERNAME": "Nombre de usuario",
   "USERNAME_TOO_SHORT": "Este nombre de usuario es demasiado corto (minimo 2 caracteres)",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "Usuario no autorizado para la operación",
+  "Under": "BAJA",
   "VBOX": {
     "EDIT_ONGOING": "Cambios no guardados",
     "ERROR_MESSAGE_EDIT_TV": "Error al guardar",
@@ -703,8 +713,5 @@
   },
   "VOIDED": "Anulado",
   "WARNING": "Aviso",
-  "WON": "Ganado",
-  "Over": "ALTA",
-  "Under": "BAJA",
-  "PROFIT": "Beneficio"
+  "WON": "Ganado"
 }

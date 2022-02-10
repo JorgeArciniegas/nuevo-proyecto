@@ -14,9 +14,9 @@
           <div fxFlex="10">
             <div><small data='disabled'>{{ 'DATE' | translate }}</small></div>
             <div class="value">
-              <strong
-                *ngIf="!betsListService.request.carriedOut">{{ ((!betsListService.request.dateHasPlaced) ? 'PLACEMENT' : 'SETTLEMENT') | translate }}</strong>
-              <strong *ngIf="betsListService.request.carriedOut">{{  'FILTER_DATE_OF_PAYMENT' | translate }}</strong>
+              <strong *ngIf="!betsListService.request.carriedOut">{{ ((!betsListService.request.dateHasPlaced) ?
+                'PLACEMENT' : 'SETTLEMENT') | translate }}</strong>
+              <strong *ngIf="betsListService.request.carriedOut">{{ 'FILTER_DATE_OF_PAYMENT' | translate }}</strong>
             </div>
           </div>
           <div fxFlex="12">
@@ -30,13 +30,15 @@
           <div fxFlex="12">
             <div><small data='disabled'>{{ 'BET_TYPE' | translate }}</small></div>
             <div class="value">
-              <strong>{{ 'DYNAMIC_KEYS.CouponType.' + couponType[betsListService.request.couponType] | translate}}</strong>
+              <strong>{{ 'DYNAMIC_KEYS.CouponType.' + couponType[betsListService.request.couponType] |
+                translate}}</strong>
             </div>
           </div>
           <div fxFlex="10">
             <div><small data='disabled'>{{ 'BET_STATUS' | translate }}</small></div>
             <div class="value">
-              <strong>{{ 'DYNAMIC_KEYS.CouponStatusInternal.' + couponStatus[betsListService.request.couponStatus] | translate}}</strong>
+              <strong>{{ 'DYNAMIC_KEYS.CouponStatusInternal.' + couponStatus[betsListService.request.couponStatus] |
+                translate}}</strong>
             </div>
           </div>
           <div fxFlex="12">
@@ -111,8 +113,8 @@
               <strong>{{ rowItem.CouponCode }}</strong>
             </div>
             <div fxFlex="15">
-              <strong
-                *ngIf="rowItem && rowItem.ClientName?.length === 0">{{rowItem.UserId + ' - ' + rowItem.UserName }}</strong>
+              <strong *ngIf="rowItem && rowItem.ClientName?.length === 0">{{rowItem.UserId + ' - ' + rowItem.UserName
+                }}</strong>
               <strong *ngIf="rowItem && rowItem.ClientName?.length > 0">{{ rowItem.ClientName }}</strong>
             </div>
             <div fxFlex="14">
@@ -137,10 +139,12 @@
               <strong>{{ 'DYNAMIC_KEYS.CouponType.'+couponType[rowItem.CouponTypeId] | translate }}</strong>
             </div>
             <div fxFlex="10">
-              <strong>{{ (rowItem.Won > 0 )? (rowItem.Won | currency : userService.userCurrency : 'symbol-narrow') : '-'  }}</strong>
+              <strong>{{ (rowItem.Won > 0 )? (rowItem.Won | currency : userService.userCurrency : 'symbol-narrow') : '-'
+                }}</strong>
             </div>
             <div fxFlex="12">
-              <strong>{{ rowItem.SettlingClientDateOffset ? (rowItem.SettlingClientDateOffset | date: 'dd/MM/yy HH:mm:ss') : '-'}}</strong>
+              <strong>{{ rowItem.SettlingClientDateOffset ?
+                (rowItem.SettlingClientDateOffset | date: 'dd/MM/yy HH:mm:ss') : '-'}}</strong>
             </div>
             <div fxFlex="12">
               <strong>{{ rowItem.SettlingAgentClient ? rowItem.SettlingAgentClient : '-'}}</strong>
@@ -159,7 +163,7 @@
             <div class="value">
               <h2>{{ betsListService.betsCouponList.NumberOfBets | number }} </h2>
             </div>
-            <div><small data='disabled'>{{ 'DYNAMIC_KEYS.PRODUCT_DIALOG.COUPON' | translate }}</small></div>
+            <div><small data='disabled'>{{ 'COUPONS' | translate }}</small></div>
           </div>
           <div fxFlex="10">
             <div class="value">
@@ -167,21 +171,22 @@
                 {{ betsListService.betsCouponList.TotalStake | currency : userService.userCurrency : 'symbol-narrow' }}
               </h2>
             </div>
-            <div><small data='disabled'>{{ 'TOT_BET' | translate }}</small></div>
+            <div><small data='disabled'>{{ 'TOTAL_BETS' | translate }}</small></div>
           </div>
           <div fxFlex="10">
             <div class="value">
-              <h2>{{ betsListService.betsCouponList.NumberOfPlacedBets | number }} </h2>
+              <h2>{{ betsListService.betsCouponList.NumberOfCancelledBets | number }} </h2>
             </div>
-            <div><small data='disabled'>{{ 'BETS_LIST.OPEN' | translate }}</small></div>
+            <div><small data='disabled'>{{ 'BETLIST.VOID_BETS' | translate }}</small></div>
           </div>
           <div fxFlex="10">
             <div class="value">
               <h2>
-                {{ betsListService.betsCouponList.TotalPlacedBets | currency : userService.userCurrency : 'symbol-narrow' }}
+                {{ betsListService.betsCouponList.TotalCancelledBets | currency : userService.userCurrency :
+                'symbol-narrow' }}
               </h2>
             </div>
-            <div><small data='disabled'>{{ 'TOT_OPEN' | translate }}</small></div>
+            <div><small data='disabled'>{{ 'BETLIST.TOTAL_VOID' | translate }}</small></div>
           </div>
           <div fxFlex="10">
             <div class="value">
@@ -194,17 +199,18 @@
               <h2>{{ betsListService.betsCouponList.TotalWon | currency : userService.userCurrency : 'symbol-narrow' }}
               </h2>
             </div>
-            <div><small data='disabled'>{{ 'TOT_WON' | translate }}</small></div>
+            <div><small data='disabled'>{{ 'TOTAL_WON' | translate }}</small></div>
           </div>
           <div fxFlex="10">
             <div class="value">
-              <h2>{{ betsListService.betsCouponList.NumberOfLossBets | number }} </h2>
+              <h2>{{ betsListService.betsCouponList.WonTotalJackpot | number }} </h2>
             </div>
-            <div><small data='disabled'>{{ 'BETS_LIST.LOST' | translate }}</small></div>
+            <div><small data='disabled'>{{ 'JACKPOT' | translate }}</small></div>
           </div>
           <div fxFlex="10">
             <div class="value">
-              <h2>{{ betsListService.betsCouponList.TotalStake - betsListService.betsCouponList.TotalWon | currency : userService.userCurrency : 'symbol-narrow' }}
+              <h2>{{ betsListService.betsCouponList.TotalStake - betsListService.betsCouponList.TotalWon | currency :
+                userService.userCurrency : 'symbol-narrow' }}
               </h2>
             </div>
             <div><small data='disabled'>{{ 'PROFIT' | translate }}</small></div>

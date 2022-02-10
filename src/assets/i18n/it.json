@@ -24,6 +24,10 @@
   "BASE": "B",
   "BET": "Scommessa",
   "BET49": "Bet49",
+  "BETLIST": {
+    "TOTAL_VOID": "Totale cancellato",
+    "VOID_BETS": "Cancellati"
+  },
   "BETS_LIST": "Lista scommesse",
   "BETS_LIST.LOST": "Perdenti",
   "BETS_LIST.OPEN": "In corso",
@@ -53,6 +57,7 @@
   "CONFIRM_DESTROY_COUPON.MESSAGE": "A seguito di questa azione il coupon verrà svuotato, vuoi procedere?",
   "COUPON": "COUPON",
   "COUPON.BET": "Scommetti",
+  "COUPONS": "Coupons",
   "COUPON_CODE": "Codice coupon",
   "COUPON_NUMBER": "N. Coupon",
   "COUPON_RESET": "Reset del coupon",
@@ -240,8 +245,8 @@
     "PRINT_COUPON": {
       "HEADER_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
-        "BETESE": "UniversalSoft",
         "BETCONNECTION": "Virtual King",
+        "BETESE": "UniversalSoft",
         "BETLOGIK": "-",
         "BETPRO": "-",
         "BETSAFI": "-",
@@ -271,8 +276,8 @@
       },
       "LICENSE_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
-        "BETESE": "-",
         "BETCONNECTION": "-",
+        "BETESE": "-",
         "BETLOGIK": "-",
         "BETPRO": "-",
         "BETSAFI": "-",
@@ -301,10 +306,13 @@
         "UGANBET": "-",
         "UNIVERSALSOFT": "-"
       },
+      "LICENSE_MESSAGE_2": {
+        "DNGAMING": "REVISE SU JUGADA!"
+      },
       "LICENSE_MESSAGE_MAX_PAYABLE": {
         "APUESTAS_DOMINICANAS": "L'importo massimo pagabile per coupon è di ",
-        "BETESE": "L'importo massimo pagabile per coupon è di ",
         "BETCONNECTION": "L'importo massimo pagabile per coupon è di ",
+        "BETESE": "L'importo massimo pagabile per coupon è di ",
         "BETLOGIK": "L'importo massimo pagabile per coupon è di ",
         "BETPRO": "L'importo massimo pagabile per coupon è di ",
         "BETSAFI": "L'importo massimo pagabile per coupon è di ",
@@ -331,9 +339,6 @@
         "TRADABETS": "L'importo massimo pagabile per coupon è di ",
         "UGANBET": "L'importo massimo pagabile per coupon è di ",
         "UNIVERSALSOFT": "L'importo massimo pagabile per coupon è di "
-      },
-      "LICENSE_MESSAGE_2": {
-        "DNGAMING": "REVISE SU JUGADA!"
       }
     },
     "PRODUCT": {
@@ -620,6 +625,7 @@
   "OPERATOR_TYPE": "Tipo operatore",
   "OUTCOME": "Esito",
   "OVER": "OVER",
+  "Over": "OVER",
   "PAGE": "Pagina",
   "PAGE.OF": " di ",
   "PAID": "Evaso",
@@ -641,6 +647,7 @@
   "PRINT": "Stampa",
   "PRINT_COUPON.TRANSMISSION_MESSAGE": "Mandato trasmesso via Internet e accettato ",
   "PRODUCT_FILTER": "Filtro prodotto",
+  "PROFIT": "Profit",
   "R": "R",
   "RAINBOW": "Rainbow",
   "RANKING.CONDITION": "Forma",
@@ -671,9 +678,11 @@
   "TEAM": "Squadra",
   "TOTALCOLOUR": "Total Colour",
   "TOTALS": "Totali",
+  "TOTAL_BETS": "Totali scommesse",
   "TOTAL_PAYOUT": "Totale pagamento",
   "TOTAL_PLAYED": "Totale giocato",
   "TOTAL_STAKE": "Importo totale",
+  "TOTAL_WON": "Totale Vinto",
   "TOT_BET": "TOT giocato",
   "TOT_INCOME": "Totale crediti",
   "TOT_LOST": "TOT perso",
@@ -691,6 +700,7 @@
   "USERNAME": "Nome utente",
   "USERNAME_TOO_SHORT": "Questa username è troppo corto, minimo 2 caratteri",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "Utente non abilitato all'operazione",
+  "Under": "UNDER",
   "VBOX": {
     "EDIT_ONGOING": "Modifiche non salvate",
     "ERROR_MESSAGE_EDIT_TV": "Errore nel salvataggio",
@@ -703,8 +713,5 @@
   },
   "VOIDED": "Annullato",
   "WARNING": "Avviso",
-  "WON": "Vinto",
-  "Over": "OVER",
-  "Under": "UNDER",
-  "PROFIT": "Profit"
+  "WON": "Vinto"
 }
