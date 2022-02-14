@@ -25,13 +25,13 @@
   "BET": "Parier",
   "BET49": "Bet49",
   "BETLIST": {
-    "TOTAL_VOID": "Total void",
-    "VOID_BETS": "Void bets"
+    "TOTAL_VOID": "Total annulé",
+    "VOID_BETS": "Paris annulés"
   },
   "BETS_LIST": "Liste des paris",
   "BETS_LIST.LOST": "Perdants",
   "BETS_LIST.OPEN": "en cours",
-  "BETS_LIST.WON": "Gagnants",
+  "BETS_LIST.WON": "Paris gagnés",
   "BETZERO": "Bet Zero",
   "BET_STATUS": "État du pari",
   "BET_TYPE": "Type de pari",
@@ -679,6 +679,7 @@
   "TOTALCOLOUR": "Total couleur",
   "TOTALS": "Totaux",
   "TOTAL_BETS": "Total des paris",
+  "TOTAL_BETTED": "Total parié",
   "TOTAL_PAYOUT": "Paiement total",
   "TOTAL_PLAYED": "Total joué",
   "TOTAL_STAKE": "Mise totale",

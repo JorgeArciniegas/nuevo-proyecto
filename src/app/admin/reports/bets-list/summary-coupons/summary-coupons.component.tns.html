@@ -120,7 +120,7 @@
       <Label class="value"
         text="{{ betsListService.betsCouponList.TotalStake | currency : userService.userCurrency : 'symbol-narrow' }}"
         textWrap="true"></Label>
-      <Label class="sub-title small" text="{{ 'TOTAL_BETS' | translate }}"></Label>
+      <Label class="sub-title small" text="{{ 'TOTAL_BETTED' | translate }}"></Label>
     </StackLayout>
     <StackLayout col="3" verticalAlignment="center">
       <Label class="value" text="{{ betsListService.betsCouponList.NumberOfCancelledBets | number }}"
