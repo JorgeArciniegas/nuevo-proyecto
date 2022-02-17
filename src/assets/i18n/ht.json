@@ -24,10 +24,14 @@
   "BASE": "S",
   "BET": "Paryaj",
   "BET49": "Bet49",
+  "BETLIST": {
+    "TOTAL_VOID": "Total ki anile",
+    "VOID_BETS": "Paryaj ki anile"
+  },
   "BETS_LIST": "Lis Paryaj",
   "BETS_LIST.LOST": "Pèdi",
   "BETS_LIST.OPEN": "Ouvri",
-  "BETS_LIST.WON": "Ki genyen",
+  "BETS_LIST.WON": "Paryaj ki genyen yo",
   "BETZERO": "Parye Zero",
   "BET_STATUS": "Estati paryaj",
   "BET_TYPE": "Tip paryaj",
@@ -53,6 +57,7 @@
   "CONFIRM_DESTROY_COUPON.MESSAGE": "Oporasyon sa a ap anile tikè sa a. Ou vle kontinye?",
   "COUPON": "Tikè",
   "COUPON.BET": "Paryaj",
+  "COUPONS": "Fich yo",
   "COUPON_CODE": "Kòd fich",
   "COUPON_NUMBER": "Nimewo fich",
   "COUPON_RESET": "Rekomanse tikè",
@@ -240,8 +245,8 @@
     "PRINT_COUPON": {
       "HEADER_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
-        "BETESE": "BETESE BETTING TIN 1720088068",
         "BETCONNECTION": "Virtual King",
+        "BETESE": "BETESE BETTING TIN 1720088068",
         "BETLOGIK": "-",
         "BETPRO": "BETPRO",
         "BETSAFI": "-",
@@ -271,8 +276,8 @@
       },
       "LICENSE_MESSAGE": {
         "APUESTAS_DOMINICANAS": "-",
-        "BETESE": "-",
         "BETCONNECTION": "Tcheke tikè ou pa gen ranbousman yo asepte. Tcheke paytab ak règleman avan ou parye. Bón chans.",
+        "BETESE": "-",
         "BETLOGIK": "-",
         "BETPRO": "Le client accepte le condition général du jeu disponible. Le présemt cpièpm est valable 7 jours interdit au moins de 18 ans.",
         "BETSAFI": "-",
@@ -301,10 +306,13 @@
         "UGANBET": "-",
         "UNIVERSALSOFT": "-"
       },
+      "LICENSE_MESSAGE_2": {
+        "DNGAMING": "REVISE SU JUGADA!"
+      },
       "LICENSE_MESSAGE_MAX_PAYABLE": {
         "APUESTAS_DOMINICANAS": "Kantite lajan maksimòm peyab pou yon fich se ",
-        "BETESE": "Kantite lajan maksimòm peyab pou yon fich se ",
         "BETCONNECTION": "Kantite lajan maksimòm peyab pou yon fich se ",
+        "BETESE": "Kantite lajan maksimòm peyab pou yon fich se ",
         "BETLOGIK": "Kantite lajan maksimòm peyab pou yon fich se ",
         "BETPRO": "Kantite lajan maksimòm peyab pou yon fich se ",
         "BETSAFI": "Kantite lajan maksimòm peyab pou yon fich se ",
@@ -332,9 +340,6 @@
         "TRADABETS": "Kantite lajan maksimòm peyab pou yon fich se ",
         "UGANBET": "Kantite lajan maksimòm peyab pou yon fich se ",
         "UNIVERSALSOFT": "Le montant maximum payable pour un coupon est de "
-      },
-      "LICENSE_MESSAGE_2": {
-        "DNGAMING": "REVISE SU JUGADA!"
       }
     },
     "PRODUCT": {
@@ -490,18 +495,7 @@
       "105": "Jenerik erè Anile",
       "106": "Ranbousman depans anile",
       "107": "Ranbousman kantite lajan parye anile",
-      "1101": "Jackpot peye",
-      "2001": "Kredi",
-      "2002": "Anile kredi",
-      "2003": "Mete parye evalyasyon",
-      "2004": "Parye",
-      "2005": "Parye",
-      "2006": "Parye anile",
-      "2007": "Parye peye",
-      "2009": "Parye refize",
       "201": "Kredi",
-      "2010": "Anile kredi",
-      "2011": "Mete parye evalyasyon",
       "202": "Kredi anile",
       "301": "Parye",
       "302": "Parye anile",
@@ -550,7 +544,18 @@
       "902": "",
       "903": "",
       "904": "",
-      "905": ""
+      "905": "",
+      "1101": "Jackpot peye",
+      "2001": "Kredi",
+      "2002": "Anile kredi",
+      "2003": "Mete parye evalyasyon",
+      "2004": "Parye",
+      "2005": "Parye",
+      "2006": "Parye anile",
+      "2007": "Parye peye",
+      "2009": "Parye refize",
+      "2010": "Anile kredi",
+      "2011": "Mete parye evalyasyon"
     },
     "VBOX": {
       "CATEGORIES_SPORT": {
@@ -585,7 +590,7 @@
   "HOME": "Lakay",
   "HOT": "Cho",
   "IS_REQUIRED": "Li obligatwa",
-  "JACKPOT": "Jakpot",
+  "JACKPOT": "Jackman",
   "JACKPOT_MEGA": "Mega Jakpot",
   "JACKPOT_SHOP": "Achte Jakpot",
   "LANGUAGE": "Lang",
@@ -621,6 +626,7 @@
   "OPERATOR_TYPE": "Tip Operatè",
   "OUTCOME": "Rezilta",
   "OVER": "PI PLIS PASE",
+  "Over": "Plis Pase",
   "PAGE": "Paj",
   "PAGE.OF": " nan",
   "PAID": "Peye",
@@ -642,6 +648,7 @@
   "PRINT": "Emprime",
   "PRINT_COUPON.TRANSMISSION_MESSAGE": "Manda transmèt pa entènèt e yo aksepte li sou",
   "PRODUCT_FILTER": "Pwodwi",
+  "PROFIT": "Profit",
   "R": "R",
   "RAINBOW": "Lakansyèl",
   "RANKING.CONDITION": "Kondisyon",
@@ -671,9 +678,12 @@
   "TEAM": "Ekip",
   "TOTALCOLOUR": "Tout Koulè yo",
   "TOTALS": "Total",
+  "TOTAL_BETS": "Li nesesè",
+  "TOTAL_BETTED": "Total ki parye",
   "TOTAL_PAYOUT": "Total peman",
   "TOTAL_PLAYED": "Total jwèt",
   "TOTAL_STAKE": "Total miz",
+  "TOTAL_WON": "Li nesesè",
   "TOT_BET": "TOT paryaj",
   "TOT_INCOME": "Tout antre lajan",
   "TOT_LOST": "TOT pèdi",
@@ -691,6 +701,7 @@
   "USERNAME": "Non itilizatè",
   "USERNAME_TOO_SHORT": "Non itilizate a two kout(minimum 2 chif)",
   "USER_NOT_ENABLE_TO_THE_OPERATION": "Itilizate pa otorize pou egzekite operasyon sa a",
+  "Under": "Pi Piti Pase",
   "VBOX": {
     "EDIT_ONGOING": "Chanjman ki pa anrejistre",
     "ERROR_MESSAGE_EDIT_TV": "Ere nan anrejistreman",
@@ -703,8 +714,5 @@
   },
   "VOIDED": "Ki te anile",
   "WARNING": "Avetisman",
-  "WON": "Ki te genyen",
-  "Over": "Plis Pase",
-  "Under": "Pi Piti Pase",
-  "PROFIT": "Profit"
+  "WON": "Ki te genyen"
 }
