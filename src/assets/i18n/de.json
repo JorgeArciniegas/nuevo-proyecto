@@ -21,12 +21,12 @@
   "BET": "Wett",
   "BET49": "Bet49",
   "BETLIST": {
-    "TOTAL_VOID": "Alle Ungültigen",
-    "VOID_BETS": "Annullierte Wetten"
+    "TOTAL_VOID": "Alle ungültigen",
+    "VOID_BETS": "Annullierte wetten"
   },
   "BETS_LIST": "Wettliste",
   "BETS_LIST.OPEN": "Offen",
-  "BETS_LIST.WON": "Gewonnen",
+  "BETS_LIST.WON": "Gewonnene wetten",
   "BETZERO": "Bet Zero",
   "BET_STATUS": "Wettstatus",
   "BET_TYPE": "Wettart",
@@ -446,7 +446,7 @@
   "PLACEMENT": "Platzierung",
   "POINTS": "Punkte",
   "PRINT_COUPON.TRANSMISSION_MESSAGE": "Mandate transmitted via the Internet and accepted on the",
-  "PROFIT": "Profit",
+  "PROFIT": "Gewinn",
   "R": "R",
   "RAINBOW": "Rainbow",
   "RANKING.CONDITION": "Bedingung",
@@ -464,6 +464,7 @@
   "STRENGTH": "Stärke",
   "TOTALS": "Summen",
   "TOTAL_BETS": "Wetten gesamt",
+  "TOTAL_BETTED": "Gesamt gewettet",
   "TOTAL_PLAYED": "Summe Wetteinsatz",
   "TOTAL_STAKE": "Summe wetteinsatz",
   "TOTAL_WON": "Gesamtgewinn",
