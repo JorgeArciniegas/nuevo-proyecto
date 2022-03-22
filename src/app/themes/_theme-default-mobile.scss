@@ -72,7 +72,26 @@
 	}
 	&.hbg-peru {
 		@import "./skins/hbg-peru/styles";
+	}&.betpro {
+		@import "./skins/betpro/styles";
+	}&.betsafi {
+		@import "./skins/betsafi/styles";
 	}
+	&.betsplus {
+		@import "./skins/betsplus/styles";
+	}&.dngaming {
+		@import "./skins/dngaming/styles";
+	}&.gensolutions {
+		@import "./skins/gensolutions/styles";
+	}&.soccerbet {
+		@import "./skins/soccerbet/styles";
+	}&.tradabets {
+		@import "./skins/tradabets/styles";
+	}&.uganbet {
+		@import "./skins/uganbet/styles";
+	}
+
+
 
 	.main-content {
 		@extend %font-family;
