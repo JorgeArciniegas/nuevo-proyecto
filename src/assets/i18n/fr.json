@@ -714,5 +714,18 @@
   },
   "VOIDED": "Annulé",
   "WARNING": "Attention",
-  "WON": "Gagnants"
+  "WON": "Gagnants",
+  "LOGIN_MESSAGES": {
+    "The number of failed login attempts is reached": "Nombre d’échecs de connexion atteint",
+    "The user is blocked.": "Utilisateur bloqué",
+    "The user is closed.": "Le compte utilisateur a été clôturé",
+    "The user is globally self excluded on Aams": "L’utilisateur est globalement auto-exclu sur Adm",
+    "The user is not enabled": "L’utilisateur est désactivé",
+    "The user name or password is incorrect": "Le nom d’utilisateur ou le mot de passe est incorrect",
+    "The user name or password is incorrect. Number of Login attempt  is 1": "Le nom d’utilisateur ou le mot de passe est incorrect Nombre de tentatives de connexion : 1",
+    "The user name or password is incorrect. Number of Login attempt  is 2": "Le nom d’utilisateur ou le mot de passe est incorrect Nombre de tentatives de connexion : 2",
+    "The user name or password is incorrect. Number of Login attempt  is 3": "Le nom d’utilisateur ou le mot de passe est incorrect Nombre de tentatives de connexion : 3",
+    "The user name or password is incorrect. Number of Login attempt  is 4": "Le nom d’utilisateur ou le mot de passe est incorrect Nombre de tentatives de connexion : 4",
+    "The user name or password is incorrect. Number of Login attempt  is 5": "Le nom d’utilisateur ou le mot de passe est incorrect Nombre de tentatives de connexion : 5"
+  }
 }

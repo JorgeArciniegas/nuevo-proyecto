@@ -713,5 +713,18 @@
   },
   "VOIDED": "Voided",
   "WARNING": "Warning",
-  "WON": "Won"
+  "WON": "Won",
+  "LOGIN_MESSAGES":{
+    "The number of failed login attempts is reached": "The number of failed login attempts is reached",
+    "The user is blocked.": "The user is blocked",
+    "The user is closed.": "The user account is closed",
+    "The user is globally self excluded on Aams": "The user is globally self excluded on Adm",
+    "The user is not enabled": "The user is not enabled",
+    "The user name or password is incorrect": "The user name or password is incorrect.",
+    "The user name or password is incorrect. Number of Login attempt  is 1": "The user name or password is incorrect. Number of Login attempt is 1",
+    "The user name or password is incorrect. Number of Login attempt  is 2": "The user name or password is incorrect. Number of Login attempt is 2",
+    "The user name or password is incorrect. Number of Login attempt  is 3": "The user name or password is incorrect. Number of Login attempt is 3",
+    "The user name or password is incorrect. Number of Login attempt  is 4": "The user name or password is incorrect. Number of Login attempt is 4",
+    "The user name or password is incorrect. Number of Login attempt  is 5": "The user name or password is incorrect. Number of Login attempt is 5"
+  }
 }

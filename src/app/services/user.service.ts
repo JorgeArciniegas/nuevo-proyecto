@@ -127,7 +127,12 @@ export class UserService {
       }
     } catch (err) {
       console.log(err);
-      return err.error.error_description;
+      //Check if error description exsists, if so, check for trailing dot and remove it
+      //Login and login operator error messages responses have same messages but different trailing dots
+      let errDesc: string = err && err.error_description ? err.error_description : '';
+      return errDesc.length > 0 ? 
+      'LOGIN_MESSAGES.' + this.removeTrailingDot(errDesc) : 
+      err.error;
     }
   }
   /**
@@ -160,8 +165,22 @@ export class UserService {
       }
     } catch (err) {
       console.log(err);
-      return err.error && err.error.error_description ? err.error.error_description : err.error;
+      //Check if error description exsists, if so, check for trailing dot and remove it
+      //Login and login operator error messages responses have same messages but different trailing dots
+      let errDesc: string = err && err.error_description ? err.error_description : '';
+      return errDesc.length > 0 ? 
+      'LOGIN_MESSAGES.' + this.removeTrailingDot(errDesc) : 
+      err.error;
     }
+  }
+
+  /**
+   * 
+   * @param message string where remove trailing dot
+   * @returns string without trailing dot
+   */
+  removeTrailingDot(message: string): string{
+    return message.slice( -1 ) === '.' ? message.slice( 0, -1 ) : message;
   }
 
   /**
