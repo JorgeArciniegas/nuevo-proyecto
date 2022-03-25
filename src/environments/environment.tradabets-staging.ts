@@ -353,7 +353,7 @@ export const environment: Environment = {
       printHeaderMessage: false,
     },
     enabledPrintCoupon: {
-      printLogoCoupon: false,
+      printLogoCoupon: true,
       printHeaderMessage: false,
       printQrCode: false,
       isEnabledReprintCoupon: true,
