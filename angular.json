@@ -2264,7 +2264,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.betlogik-staging.ts"
+                  "with": "src/environments/environment.doradobet-staging.ts"
                 }
               ]
             },
@@ -2293,7 +2293,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.betlogik-staging.ts"
+                  "with": "src/environments/environment.doradobet-staging.ts"
                 }
               ]
             },
