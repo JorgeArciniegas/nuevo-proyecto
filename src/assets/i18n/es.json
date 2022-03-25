@@ -599,6 +599,18 @@
   "LIMIT": "Límite",
   "LIST_OF_OPERATORS": "Listado de operadores",
   "LO": "BA",
+  "LOGIN_MESSAGES": {
+    "The number of failed login attempts is reached": "Alcanzado el número máximo de intentos. Cuenta bloqueada",
+    "The user is closed.": "La cuenta del usuario ha sido cerrada",
+    "The user is globally self excluded on Aams": "El usuario se ha autoexcluido completamente de Aams",
+    "The user is not enabled": "El usuario no está habilitado",
+    "The user name or password is incorrect": "El nombre de usuario o la contraseña son incorrectos.",
+    "The user name or password is incorrect. Number of Login attempt  is 1": "El nombre de usuario o la contraseña son incorrectos. El número de intento de inicio de sesión es 1",
+    "The user name or password is incorrect. Number of Login attempt  is 2": "El nombre de usuario o la contraseña son incorrectos. El número de intento de inicio de sesión es 2",
+    "The user name or password is incorrect. Number of Login attempt  is 3": "El nombre de usuario o la contraseña son incorrectos. El número de intento de inicio de sesión es 3",
+    "The user name or password is incorrect. Number of Login attempt  is 4": "El nombre de usuario o la contraseña son incorrectos. El número de intento de inicio de sesión es 4",
+    "The user name or password is incorrect. Number of Login attempt  is 5": "El nombre de usuario o la contraseña son incorrectos. El número de intento de inicio de sesión es 5"
+  },
   "LOGOUT": "Cerrar sesión",
   "LUCKY": "Suerte",
   "MARKETS": "Mercados",
@@ -714,17 +726,5 @@
   },
   "VOIDED": "Anulado",
   "WARNING": "Aviso",
-  "WON": "Ganado",
-  "LOGIN_MESSAGES":{
-    "The number of failed login attempts is reached": "Se alcanzó la cantidad máxima de intentos de inicio de sesión fallidos",
-    "The user is closed.": "La cuenta del usuario ha sido cerrada",
-    "The user is globally self excluded on Aams": "El usuario se ha autoexcluido completamente de Aams",
-    "The user is not enabled": "El usuario no está habilitado",
-    "The user name or password is incorrect": "El nombre de usuario o la contraseña son incorrectos.",
-    "The user name or password is incorrect. Number of Login attempt  is 1": "El nombre de usuario o la contraseña son incorrectos. El número de intento de inicio de sesión es 1",
-    "The user name or password is incorrect. Number of Login attempt  is 2": "El nombre de usuario o la contraseña son incorrectos. El número de intento de inicio de sesión es 2",
-    "The user name or password is incorrect. Number of Login attempt  is 3": "El nombre de usuario o la contraseña son incorrectos. El número de intento de inicio de sesión es 3",
-    "The user name or password is incorrect. Number of Login attempt  is 4": "El nombre de usuario o la contraseña son incorrectos. El número de intento de inicio de sesión es 4",
-    "The user name or password is incorrect. Number of Login attempt  is 5": "El nombre de usuario o la contraseña son incorrectos. El número de intento de inicio de sesión es 5"
-    }
+  "WON": "Ganado"
 }
