@@ -2264,7 +2264,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.betlogik-staging.ts"
+                  "with": "src/environments/environment.doradobet-staging.ts"
                 }
               ]
             },
@@ -2293,7 +2293,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.betlogik-staging.ts"
+                  "with": "src/environments/environment.doradobet-staging.ts"
                 }
               ]
             },
@@ -2601,7 +2601,7 @@
               "outputPath": "dist-tradabets",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/no-brand/"
+                  "src/app/themes/skins/tradabets/"
                 ]
               },
               "fileReplacements": [
@@ -2630,7 +2630,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/no-brand/"
+                  "src/app/themes/skins/tradabets/"
                 ]
               },
               "fileReplacements": [
@@ -2650,7 +2650,7 @@
               "outputPath": "dist-tradabets",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/no-brand/"
+                  "src/app/themes/skins/tradabets/"
                 ]
               },
               "fileReplacements": [
@@ -2679,7 +2679,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/no-brand/"
+                  "src/app/themes/skins/tradabets/"
                 ]
               },
               "fileReplacements": [
