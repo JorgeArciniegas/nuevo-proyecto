@@ -9,7 +9,7 @@
               {{race.eventLabel}}
             </div>
           </mat-grid-tile>
-          <mat-grid-tile>
+          <mat-grid-tile *ngIf="(!resultsService.hideResult(typeLayout.RACING, coundDown) && i === 0) || i !== 0">
             <mat-grid-list fxFill cols="3" rowHeight="{{rowHeight}}" class="position">
               <mat-grid-tile>
                 <div fxFill fxLayoutAlign="center center"

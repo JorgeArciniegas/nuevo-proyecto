@@ -1,24 +1,47 @@
 import { Injectable } from '@angular/core';
 import { ElysApiService, VirtualSportLastResultsRequest, VirtualSportLastResultsResponse } from '@elys/elys-api';
-import { BehaviorSubject, timer } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { ProductsService } from '../../products.service';
+import { EventTime } from '../main.models';
 import { Band, Colour } from '../playable-board/templates/colours/colours.models';
-import { ColoursNumber, ColoursResult, EventResult, LastResult, OVER_UNDER_COCKFIGHT } from './results.model';
+import { ColoursNumber, ColoursResult, EventResult, LastResult, layoutTypeWithDelay, OVER_UNDER_COCKFIGHT } from './results.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResultsService {
-
+  private _countDown: EventTime;
+  public get countDown() {
+    return this._countDown;
+  }
+  public set countDown(evtTime: EventTime) {
+    this._countDown = evtTime;
+  } 
+  private _nextEventDuration: number;
+public get nextEventDuration() {
+  return this._nextEventDuration;
+}
+public set nextEventDuration(duration: number) {
+  this._nextEventDuration = duration;
+}
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
+
+
+
   constructor(
     private productService: ProductsService,
-    private elysApi: ElysApiService
-  ) { }
+    private elysApi: ElysApiService,
+  ) {}
 
   private _lastResults: LastResult = { eventResults: [], layoutType: undefined };
   public lastResultsSubject: BehaviorSubject<LastResult> = new BehaviorSubject<LastResult>(this._lastResults);
+
+  hideResult(type: LAYOUT_TYPE, currentCountDown: number,): boolean {
+    const sportDelay: number = layoutTypeWithDelay[type];
+    const timeSpanDelay: number = this.nextEventDuration - sportDelay;
+    return (currentCountDown > timeSpanDelay);
+  }
 
   getLastResult() {
     // this.lastResultsSubject.next({eventResults: [], layoutType: undefined});

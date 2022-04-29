@@ -33,7 +33,6 @@ export class MainService {
 
   private attempts = 0;
   public initCurrentEvent = false;
-
   playersList: Player[];
 
   smartCode: Smartcode;
@@ -63,6 +62,7 @@ export class MainService {
     private feedData: ElysFeedsService,
     private userservice: UserService
   ) {
+    
     this.toResetAllSelections = true;
 
     this.createPlayerList();
@@ -78,12 +78,13 @@ export class MainService {
         this.initEvents();
       }
     });
+  
+
 
     this.currentEventSubscribe = new Subject<number>();
     this.currentEventObserve = this.currentEventSubscribe.asObservable();
 
     this.currentEventObserve.subscribe((eventIndex: number) => {
-
       this.eventDetails.currentEvent = eventIndex;
       this.remainingEventTime(this.eventDetails.events[eventIndex].number).then((eventTime: EventTime) => {
         if (eventTime) {
@@ -205,6 +206,11 @@ export class MainService {
         // Shown seconds
         this.eventDetails.eventTime.second = this.remainingTime.second;
         this.remaingTimeCounter.next(this.eventDetails.eventTime);
+        
+        this.resultService.countDown = this.remainingTime;
+
+
+        //this.handleHiddenResultByCoundDown(this.resultService.countDown);
       }
     } catch (err) {
       console.log('GET TIME ERROR ---> ', err);
@@ -273,6 +279,9 @@ export class MainService {
         Item: this.userservice.getUserId()
       };
       this.elysApi.virtual.getVirtualTreeV2(request).then((sports: VirtualProgramTreeBySportResponse) => {
+        
+        console.log('sports', sports);
+        this.resultService.nextEventDuration = sports.Sports[0].ts[0].evs[0].duration;
         const tournaments: VirtualBetTournamentExtended[] = sports.Sports[0].ts;
         this.productService.product.layoutProducts.multiFeedType = tournaments[0].mft;
 

@@ -57,3 +57,14 @@ export interface LastResult {
   eventResults: EventResult[];
   layoutType: LAYOUT_TYPE;
 }
+export interface DelayLayoutDictonary{
+  [key: number]:number;
+}
+export const layoutTypeWithDelay : DelayLayoutDictonary = {
+  [LAYOUT_TYPE.AMERICANROULETTE] : 50,
+  [LAYOUT_TYPE.COCK_FIGHT] : 60,
+  [LAYOUT_TYPE.COLOURS]: 50,
+  [LAYOUT_TYPE.KENO]: 50,
+  [LAYOUT_TYPE.RACING]: 30,
+  [LAYOUT_TYPE.SOCCER]: 140
+}
