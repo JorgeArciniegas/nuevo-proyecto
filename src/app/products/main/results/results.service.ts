@@ -6,7 +6,7 @@ import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models'
 import { ProductsService } from '../../products.service';
 import { EventTime } from '../main.models';
 import { Band, Colour } from '../playable-board/templates/colours/colours.models';
-import { ColoursNumber, ColoursResult, EventResult, LastResult, layoutTypeWithDelay, OVER_UNDER_COCKFIGHT } from './results.model';
+import { ColoursNumber, ColoursResult, EventResultWithSport, LastResult, layoutTypeWithDelay, OVER_UNDER_COCKFIGHT } from './results.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +33,12 @@ export class ResultsService {
     return 0;
   }
 
+  
+  eventsResultsDuringDelay : EventResultWithSport[] = null;
+
+
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
-public itemToShowDuringDelay: EventResult;
+  public itemToShowDuringDelay: EventResultWithSport;
 
 
   constructor(
@@ -53,18 +57,20 @@ public itemToShowDuringDelay: EventResult;
       CategoryType: this.productService.product.codeProduct,
       MultiFeedType: this.productService.product.layoutProducts.multiFeedType
     };
-    const tmpListResult: EventResult[] = [];
+    const tmpListResult: EventResultWithSport[] = [];
     this.elysApi.virtual.getLastResult(request)
       .then((eventResults: VirtualSportLastResultsResponse) => {
+        
         // results for products
         const resultItemsLength = this.productService.product.layoutProducts.resultItems;
         //Difference between last result length form api e last result length defined in env
-        const itemsExceeded: number = eventResults.EventResults.length - resultItemsLength;
+        /* const itemsExceeded: number = eventResults.EventResults.length - resultItemsLength; */
         if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
           //If  
-          this.itemToShowDuringDelay = itemsExceeded > 0 ?
+       /*    this.itemToShowDuringDelay = itemsExceeded > 0 ?
           this.setResultByLayoutType(eventResults, resultItemsLength + 1) :
           null;
+           */
 
           // const eventsResultsDuringDelay: EventResult[] = Object.assign([], eventResults);
           // eventsResultsDuringDelay.shift();
@@ -76,11 +82,12 @@ public itemToShowDuringDelay: EventResult;
             }
             // set the default parameters on the temporary EventResult
             tmpListResult.push(this.setResultByLayoutType(eventResults, i));
+          
           }
         } else {
           if (eventResults.EventResults !== null) {
             // create last Result
-            const tempEventResult: EventResult = {
+            const tempEventResult: EventResultWithSport = {
               eventLabel: eventResults.EventResults[0].TournamentName,
               eventNumber: eventResults.EventResults[0].TournamentId
             };
@@ -91,11 +98,12 @@ public itemToShowDuringDelay: EventResult;
         }
         this._lastResults.layoutType = this.productService.product.layoutProducts.type;
         this._lastResults.eventResults = tmpListResult;
+        this.eventsResultsDuringDelay = this.hideLastResult(tmpListResult, eventResults);
         this.lastResultsSubject.next(this._lastResults);
       });
   }
-  setResultByLayoutType(eventResults: VirtualSportLastResultsResponse, i: number): EventResult{
-    const tempEventResult: EventResult = {
+  setResultByLayoutType(eventResults: VirtualSportLastResultsResponse, i: number): EventResultWithSport{
+    const tempEventResult: EventResultWithSport = {
       eventLabel: eventResults.EventResults[i].EventName,
       eventNumber: eventResults.EventResults[i].EventId
     };
@@ -174,6 +182,23 @@ return tempEventResult;
     if (colourNumber % 3 === 0) {
       return Colour.GREEN;
     }
+  }
+
+/**
+ * TODO DA FARE COMMENTO 
+ * @returns 
+ */
+  hideLastResult(tmpListResult : EventResultWithSport[], eventResults : any) : EventResultWithSport[]{
+    let test = [...tmpListResult]
+    let test2 = this.setResultByLayoutType(eventResults, this.productService.product.layoutProducts.resultItems )
+    console.log("hideLastResult :" , test2);
+    
+    test.splice(0,1)
+    console.log("splice :", test);
+    
+    test.push(test2)
+    console.log("push :", test);
+    return test
   }
 
 }

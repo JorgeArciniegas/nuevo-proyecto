@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { EventResult, layoutTypeWithDelay } from 'src/app/products/main/results/results.model';
+import { EventResultWithSport, layoutTypeWithDelay } from 'src/app/products/main/results/results.model';
 import { ResultsService } from 'src/app/products/main/results/results.service';
 import { LAYOUT_TYPE } from 'src/environments/environment.models';
 
@@ -8,26 +8,18 @@ import { LAYOUT_TYPE } from 'src/environments/environment.models';
 })
 export class HideLastResultPipe implements PipeTransform {
     constructor(private resultsService: ResultsService) { }
-    /**
-     * Hide last result event  
-     * @param value : EventResult[] all last results from api
-     * @param layoutType : RACING, FIGHT, SOCCER ...
-     * @param countDownInSeconds : Contdown for the next event in selected sport
-     * @returns 
-     */
-    transform(value: EventResult[], layoutType: LAYOUT_TYPE, countDownInSeconds: number): EventResult[] {
-        if (value) {
-            const eventsResultsDuringDelay: EventResult[] = Object.assign([], value);
-            const isDelayActive: boolean = this.isDelayExpired(countDownInSeconds, layoutType);
-            if (isDelayActive) {
-                eventsResultsDuringDelay.shift();
-                eventsResultsDuringDelay.push(this.resultsService.itemToShowDuringDelay)
-            }
-            console.log('eventsResultsDuringDelay',eventsResultsDuringDelay);
-            console.log('eventsResults',value);
-            return isDelayActive ? eventsResultsDuringDelay : value;
-        }
-        return null;
+ /**
+  * TODO DA FARE COMMENTO
+  * @param value 
+  * @param layoutType 
+  * @param countDownInSeconds 
+  * @returns 
+  */
+    transform(value: EventResultWithSport[], layoutType: LAYOUT_TYPE, countDownInSeconds: number): EventResultWithSport[] {
+        const isDelayActive: boolean = this.isDelayExpired(countDownInSeconds, layoutType);
+        console.log("HideLastResultPipe : ",isDelayActive , " - valueLength :", value.length," - eventResultsLength : ",this.resultsService.eventsResultsDuringDelay.length  );
+        
+        return isDelayActive ? this.resultsService.eventsResultsDuringDelay : value;
     }
 
 

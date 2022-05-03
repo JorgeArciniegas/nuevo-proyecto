@@ -1,7 +1,7 @@
 import { LAYOUT_TYPE } from '../../../../environments/environment.models';
 import { Band, Colour } from '../playable-board/templates/colours/colours.models';
 
-export class EventResult {
+export class EventResultWithSport {
   eventLabel: string;
   eventNumber: number;
   racePodium?: RacePodium;
@@ -54,7 +54,7 @@ export interface AmericanRouletteResults {
 }
 
 export interface LastResult {
-  eventResults: EventResult[];
+  eventResults: EventResultWithSport[];
   layoutType: LAYOUT_TYPE;
 }
 export interface DelayLayoutDictonary{

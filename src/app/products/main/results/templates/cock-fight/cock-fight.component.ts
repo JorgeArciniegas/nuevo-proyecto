@@ -4,7 +4,7 @@ import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Rx';
 import { LAYOUT_TYPE } from '../../../../../../environments/environment.models';
 import { WindowSize } from '../../../../products.model';
-import { EventResult, LastResult } from '../../results.model';
+import { EventResultWithSport, LastResult } from '../../results.model';
 import { ResultsService } from '../../results.service';
 
 @UntilDestroy()
@@ -19,7 +19,7 @@ export class CockFightComponent {
   @Input() codeProduct: string;
   @Input() windowSize: WindowSize;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
-  public results: Observable<EventResult[]>;
+  public results: Observable<EventResultWithSport[]>;
 
   constructor(private resultsService: ResultsService) {
     this.results = this.resultsService.lastResultsSubject.pipe(
