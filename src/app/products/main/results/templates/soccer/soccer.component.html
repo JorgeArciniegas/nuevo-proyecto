@@ -1,7 +1,8 @@
 <div class="results-event">
   <mat-grid-list fxFill cols="{{ items }}" rowHeight="{{rowHeight + 1}}">
-    <ng-container *ngFor="let event of (results|async)">
-      <mat-grid-tile colspan="{{ items }}">
+    <ng-container *ngFor="let event of (results|async) | hideLastResult: typeLayout.SOCCER : resultsService?.countDownInSeconds">
+     <ng-container *ngIf="event; else noEvent">
+   <mat-grid-tile colspan="{{ items }}">
         <div fxFill class="card-box-result-soccer">
           <!-- header -->
           <div fxFill fxLayoutAlign="center center" class="header radius-5 eventNumber">
@@ -9,7 +10,10 @@
           </div>
         </div>
       </mat-grid-tile>
-      <mat-grid-tile colspan="{{ items }}">
+      <mat-grid-tile colspan="{{ items }}" 
+      [ngClass]="(resultsService?.countDownInSeconds | hideLastResult: 0 : typeLayout.SOCCER) ?
+      'hide-result' :
+      'show-result'">
         <!--List of result's matches -->
         <mat-grid-list fxFill cols="{{ items }}" rowHeight="{{rowHeight}}" class="position padding-5">
           <mat-grid-tile *ngFor="let matches of event.soccerResult; let i=index">
@@ -20,6 +24,10 @@
           </mat-grid-tile>
         </mat-grid-list>
       </mat-grid-tile>
+     </ng-container>
+     <ng-template #noEvent>
+      <mat-spinner></mat-spinner>
+    </ng-template>
     </ng-container>
   </mat-grid-list>
 </div>

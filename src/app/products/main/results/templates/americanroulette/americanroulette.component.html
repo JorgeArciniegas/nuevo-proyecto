@@ -16,7 +16,10 @@
     <mat-grid-tile colspan="{{ (results|async)?.length }}">
       <!--List of draw results -->
       <mat-grid-list fxFill cols="{{ (results|async)?.length }}" rowHeight="{{rowHeight + 1}}" class="position" rowHeight="100px">
-        <mat-grid-tile *ngFor="let result of (results|async)">
+        <mat-grid-tile *ngFor="let result of (results|async); let i = index"
+         [ngClass]="(resultsService?.countDownInSeconds | hideLastResult: i : typeLayout.AMERICANROULETTE) ?
+        'hide-result' :
+        'show-result'">
           <div fxLayout="column" fxLayoutAlign="center center" class="btn-colours radius-5 btn-americanroulette-result" [ngClass]="{'btn-colours-RED' : result?.americanRouletteResults?.color === 'red', 'btn-colours-BLACK' : result?.americanRouletteResults?.color === 'black', 'btn-colours-GREEN' : result?.americanRouletteResults?.color === 'green'}" fxFill>
             <span>{{ result.americanRouletteResults.result }}</span>
           </div>

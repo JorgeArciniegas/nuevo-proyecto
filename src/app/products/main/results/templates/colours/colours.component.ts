@@ -11,14 +11,13 @@ import { ResultsService } from '../../results.service';
 @Component({
   selector: 'app-results-colours',
   templateUrl: './colours.component.html',
-  styleUrls: ['./colours.component.scss']
+  styleUrls: ['./colours.component.scss', '../../results.component.scss']
 })
 export class ColoursComponent {
   @Input() rowHeight: number;
+  typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   public Colour = Colour;
-
   public results: Observable<EventResult[]>;
-
   constructor(private resultsService: ResultsService) {
     this.results = this.resultsService.lastResultsSubject.pipe(
       untilDestroyed(this),

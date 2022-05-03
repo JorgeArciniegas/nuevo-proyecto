@@ -11,10 +11,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DigitslimitPipe } from '../component/pipe/digitslimit.pipe';
 import { FloorPipe } from '../component/pipe/floor.pipe';
 import { GroupByCategoryPipe } from '../component/pipe/groupBy.pipe';
+import { HideLastResultPipe } from './pipes/hide-last-result.pipe';
 import { SplitStringPipe } from './pipes/split-string.pipe';
 
 @NgModule({
-  declarations: [FloorPipe, SplitStringPipe, DigitslimitPipe, GroupByCategoryPipe],
+  declarations: [FloorPipe, SplitStringPipe, DigitslimitPipe, GroupByCategoryPipe, HideLastResultPipe],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, FlexLayoutModule, MatGridListModule, TranslateModule, MatFormFieldModule, MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule],
@@ -29,6 +30,7 @@ import { SplitStringPipe } from './pipes/split-string.pipe';
     SplitStringPipe,
     DigitslimitPipe,
     GroupByCategoryPipe,
+    HideLastResultPipe,
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule]

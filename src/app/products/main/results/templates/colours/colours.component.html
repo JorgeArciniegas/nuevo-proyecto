@@ -1,5 +1,5 @@
 <div class="results-event" fxFlexAlign="row">
-  <div fxFlex="50" *ngFor="let result of (results|async)">
+  <div fxFlex="50" *ngFor="let result of (results|async) let i = index">
     <mat-grid-list fxFill cols="{{ result.coloursResults?.numbersExtracted.length + 3 }}" rowHeight="{{rowHeight + 1}}">
       <mat-grid-tile colspan="{{ result.coloursResults?.numbersExtracted.length + 3 }}">
         <div fxFill class="card-box-result-keno">
@@ -9,7 +9,10 @@
           </div>
         </div>
       </mat-grid-tile>
-      <mat-grid-tile colspan="{{ result.coloursResults?.numbersExtracted.length + 3 }}">
+      <mat-grid-tile colspan="{{ result.coloursResults?.numbersExtracted.length + 3 }}" 
+      [ngClass]="(resultsService?.countDownInSeconds | hideLastResult: i : typeLayout.COLOURS) ?
+      'hide-result' :
+      'show-result'">
         <!--List of draw results -->
         <mat-grid-list fxFill cols="{{ result.coloursResults?.numbersExtracted.length + 3 }}"
           rowHeight="{{rowHeight + 1}}" class="position">

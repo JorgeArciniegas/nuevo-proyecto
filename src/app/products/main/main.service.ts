@@ -279,10 +279,7 @@ export class MainService {
         Item: this.userservice.getUserId()
       };
       this.elysApi.virtual.getVirtualTreeV2(request).then((sports: VirtualProgramTreeBySportResponse) => {
-        
-        console.log('sports', sports);
-        this.resultService.nextEventDuration = sports.Sports[0].ts[0].evs[0].duration;
-        const tournaments: VirtualBetTournamentExtended[] = sports.Sports[0].ts;
+       const tournaments: VirtualBetTournamentExtended[] = sports.Sports[0].ts;
         this.productService.product.layoutProducts.multiFeedType = tournaments[0].mft;
 
         // the checkDuplicaIndex prevent the multiload event if the API response is not correct
@@ -298,6 +295,7 @@ export class MainService {
         if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
           // Load all events
           this.cacheEvents = tournaments[0].evs;
+          this.resultService.nextEventDuration = sports.Sports[0].ts[0].evs[0].duration;
           for (let index = checkDuplicateIndex; index < this.productService.product.layoutProducts.nextEventItems; index++) {
             const event: EventInfo = new EventInfo();
             event.number = this.cacheEvents[index].id;
@@ -308,6 +306,7 @@ export class MainService {
           // load markets from PRODUCT SOCCER
         } else {
           this.cacheTournaments = tournaments;
+          this.resultService.nextEventDuration = sports.Sports[0].ts[0].duration;
           for (let index = checkDuplicateIndex; index < this.productService.product.layoutProducts.nextEventItems; index++) {
             const event: EventInfo = new EventInfo();
             event.number = this.cacheTournaments[index].id;

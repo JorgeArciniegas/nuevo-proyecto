@@ -10,7 +10,10 @@
             </div>
           </mat-grid-tile>
           <mat-grid-tile>
-            <mat-grid-list fxFill cols="3" rowHeight="{{rowHeight}}" class="position">
+            <mat-grid-list fxFill cols="3" rowHeight="{{rowHeight}}" class="position" 
+            [ngClass]="(resultsService?.countDownInSeconds | hideLastResult: i : typeLayout.COCK_FIGHT) ?
+            'hide-result' :
+            'show-result'">
               <mat-grid-tile>
                 <div fxFill fxLayoutAlign="center center"
                   class="radius-5 btn-default-cock btn-cock-{{event.cockResult.winner}}">

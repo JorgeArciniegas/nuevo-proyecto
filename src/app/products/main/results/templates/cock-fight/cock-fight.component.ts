@@ -11,14 +11,14 @@ import { ResultsService } from '../../results.service';
 @Component({
   selector: 'app-results-cock-fight',
   templateUrl: './cock-fight.component.html',
-  styleUrls: ['./cock-fight.component.scss']
+  styleUrls: ['./cock-fight.component.scss', '../../results.component.scss']
 })
 export class CockFightComponent {
   @Input() items: number;
   @Input() rowHeight: number;
   @Input() codeProduct: string;
   @Input() windowSize: WindowSize;
-
+  typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   public results: Observable<EventResult[]>;
 
   constructor(private resultsService: ResultsService) {

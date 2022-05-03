@@ -11,12 +11,12 @@ import { EventResult, LastResult } from './../../results.model';
 @Component({
   selector: 'app-results-americanroulette',
   templateUrl: './americanroulette.component.html',
-  styleUrls: ['./americanroulette.component.scss']
+  styleUrls: ['./americanroulette.component.scss', '../../results.component.scss']
 })
 export class AmericanrouletteComponent {
 
   @Input() rowHeight: number;
-
+  typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   americanRouletteRug: AmericanRouletteRug;
 
   public results: Observable<EventResult[]>;

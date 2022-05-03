@@ -10,16 +10,16 @@ import { ResultsService } from '../../results.service';
 @Component({
   selector: 'app-results-soccer',
   templateUrl: './soccer.component.html',
-  styleUrls: ['./soccer.component.scss']
+  styleUrls: ['./soccer.component.scss', '../../results.component.scss']
 })
 export class SoccerComponent {
   @Input() items: number;
   @Input() rowHeight: number;
   @Input() codeProduct: string;
-
+  typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   public results: Observable<EventResult[]>;
 
-  constructor(private resultsService: ResultsService) {
+  constructor(public resultsService: ResultsService) {
     this.results = this.resultsService.lastResultsSubject.pipe(
       untilDestroyed(this),
       filter(el => el.layoutType && el.layoutType === LAYOUT_TYPE.SOCCER),

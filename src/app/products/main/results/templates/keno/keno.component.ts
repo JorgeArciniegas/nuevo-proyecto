@@ -10,11 +10,11 @@ import { ResultsService } from '../../results.service';
 @Component({
   selector: 'app-results-keno',
   templateUrl: './keno.component.html',
-  styleUrls: ['./keno.component.scss']
+  styleUrls: ['./keno.component.scss', '../../results.component.scss']
 })
 export class KenoComponent {
   @Input() rowHeight: number;
-
+  typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   public results: Observable<EventResult[]>;
 
   constructor(private resultsService: ResultsService) {
