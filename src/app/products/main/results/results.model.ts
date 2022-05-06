@@ -1,7 +1,7 @@
 import { LAYOUT_TYPE } from '../../../../environments/environment.models';
 import { Band, Colour } from '../playable-board/templates/colours/colours.models';
 
-export class EventResultWithSport {
+export class EventsResultsWithDetails {
   eventLabel: string;
   eventNumber: number;
   racePodium?: RacePodium;
@@ -54,7 +54,7 @@ export interface AmericanRouletteResults {
 }
 
 export interface LastResult {
-  eventResults: EventResultWithSport[];
+  eventResults: EventsResultsWithDetails[];
   layoutType: LAYOUT_TYPE;
 }
 export interface DelayLayoutDictonary{
@@ -65,6 +65,6 @@ export const layoutTypeWithDelay : DelayLayoutDictonary = {
   [LAYOUT_TYPE.COCK_FIGHT] : 60,
   [LAYOUT_TYPE.COLOURS]: 50,
   [LAYOUT_TYPE.KENO]: 50,
-  [LAYOUT_TYPE.RACING]: 30,
+  [LAYOUT_TYPE.RACING]: 65,
   [LAYOUT_TYPE.SOCCER]: 140
 }

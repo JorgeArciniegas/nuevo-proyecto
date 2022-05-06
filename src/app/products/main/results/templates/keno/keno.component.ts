@@ -3,9 +3,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Rx';
 import { LAYOUT_TYPE } from '../../../../../../environments/environment.models';
-import { EventResultWithSport, LastResult } from '../../results.model';
+import { EventsResultsWithDetails, LastResult } from '../../results.model';
 import { ResultsService } from '../../results.service';
-
 @UntilDestroy()
 @Component({
   selector: 'app-results-keno',
@@ -15,9 +14,9 @@ import { ResultsService } from '../../results.service';
 export class KenoComponent {
   @Input() rowHeight: number;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
-  public results: Observable<EventResultWithSport[]>;
+  public results: Observable<EventsResultsWithDetails[]>;
 
-  constructor(private resultsService: ResultsService) {
+  constructor(public resultsService: ResultsService) {
     this.results = this.resultsService.lastResultsSubject.pipe(
       untilDestroyed(this),
       filter(el => el.layoutType && el.layoutType === LAYOUT_TYPE.KENO),

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { WindowSize } from '../../../../../../../src/app/products/products.model';
 import { LAYOUT_TYPE } from '../../../../../../environments/environment.models';
 import { ResultsService } from '../../results.service';
-import { EventResultWithSport, LastResult } from './../../results.model';
+import { EventsResultsWithDetails, LastResult } from './../../results.model';
 
 @UntilDestroy()
 @Component({
@@ -19,7 +19,7 @@ export class RaceComponent {
   @Input() codeProduct: string;
   @Input() windowSize: WindowSize;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
-  public results: Observable<EventResultWithSport[]>;
+  public results: Observable<EventsResultsWithDetails[]>;
  constructor(public resultsService: ResultsService) {
     this.results = this.resultsService.lastResultsSubject.pipe(
       untilDestroyed(this),

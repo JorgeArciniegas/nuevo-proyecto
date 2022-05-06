@@ -5,7 +5,7 @@ import { filter, map, tap } from 'rxjs/operators';
 import { LAYOUT_TYPE } from '../../../../../../environments/environment.models';
 import { ResultsService } from '../../results.service';
 import { AmericanRouletteRug } from './../../../playable-board/templates/american-roulette/american-roulette.models';
-import { EventResultWithSport, LastResult } from './../../results.model';
+import { EventsResultsWithDetails, LastResult } from './../../results.model';
 
 @UntilDestroy()
 @Component({
@@ -19,14 +19,15 @@ export class AmericanrouletteComponent {
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   americanRouletteRug: AmericanRouletteRug;
 
-  public results: Observable<EventResultWithSport[]>;
+  public results: Observable<EventsResultsWithDetails[]>;
 
-  constructor(private resultsService: ResultsService) {
+  constructor(public resultsService: ResultsService) {
     this.results = this.resultsService.lastResultsSubject.pipe(
       untilDestroyed(this),
       filter(el => el.layoutType && el.layoutType === LAYOUT_TYPE.AMERICANROULETTE),
       map((res: LastResult) => res.eventResults),
-      tap((results: EventResultWithSport[]) => {
+      tap((results: EventsResultsWithDetails[]) => {
+        console.log(results);
         results.forEach(
           res => { res.americanRouletteResults.color = this.getColorClass(res.americanRouletteResults.result) }
         );

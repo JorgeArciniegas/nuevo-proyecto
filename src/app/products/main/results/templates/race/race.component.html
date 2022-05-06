@@ -1,10 +1,12 @@
 <mat-grid-list class="results-race" fxFill cols="{{ items }}" rowHeight="{{rowHeight * 2 + 1}}">
-  <ng-container *ngFor="let race of (results|async) | hideLastResult: typeLayout.RACING : resultsService?.countDownInSeconds">
-    <mat-grid-tile *ngIf="race; else noEvent">
-      <div fxFill class="card-box-result">
-        <mat-grid-list fxFill cols="1" rowHeight="{{rowHeight}}">
+  <ng-container *ngFor="let race of (results|async) 
+  | hideLastResult: typeLayout.RACING : resultsService?.countDownInSeconds">
+    <mat-grid-tile *ngIf="race">
+      <div fxFill class="card-box-result" fxLayoutAlign="center center">
+         <mat-spinner *ngIf="true" [diameter]="25"></mat-spinner>
+         <mat-grid-list fxFill cols="1" rowHeight="{{rowHeight}}" *ngIf="false">
           <mat-grid-tile class="header">
-            <!-- header -->
+           
             <div fxFill fxLayoutAlign="center center" class="radius-5 raceNumber">
               {{race.eventLabel}}
             </div>
@@ -31,11 +33,8 @@
               </mat-grid-tile>
             </mat-grid-list>
           </mat-grid-tile>
-        </mat-grid-list>
+        </mat-grid-list> 
       </div>
     </mat-grid-tile>
-    <ng-template #noEvent>
-      <mat-spinner></mat-spinner>
-    </ng-template>
   </ng-container>
 </mat-grid-list>

@@ -1,33 +1,39 @@
 <div class="results-event">
   <mat-grid-list fxFill cols="{{ items }}" rowHeight="{{rowHeight + 1}}">
-    <ng-container *ngFor="let event of (results|async) | hideLastResult: typeLayout.SOCCER : resultsService?.countDownInSeconds">
-     <ng-container *ngIf="event; else noEvent">
-   <mat-grid-tile colspan="{{ items }}">
-        <div fxFill class="card-box-result-soccer">
-          <!-- header -->
-          <div fxFill fxLayoutAlign="center center" class="header radius-5 eventNumber">
-            {{event.eventLabel}}
-          </div>
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile colspan="{{ items }}" 
-      [ngClass]="(resultsService?.countDownInSeconds | hideLastResult: 0 : typeLayout.SOCCER) ?
-      'hide-result' :
-      'show-result'">
-        <!--List of result's matches -->
-        <mat-grid-list fxFill cols="{{ items }}" rowHeight="{{rowHeight}}" class="position padding-5">
-          <mat-grid-tile *ngFor="let matches of event.soccerResult; let i=index">
-            <div fxLayout="column" fxLayoutAlign="center center" class="radius-5 btn-default btn-soccer-result">
-              <span>{{ matches.EventName }}</span>
-              <span>{{ matches.Result }}</span>
+    <ng-container *ngFor="let event of (results|async)
+     | hideLastResult: typeLayout.SOCCER : resultsService?.countDownInSeconds">
+      <ng-container *ngIf="event; else noEvent">
+        <mat-grid-tile colspan="{{ items }}">
+          <div fxFill class="card-box-result-soccer">
+            <!-- header -->
+            <div fxFill fxLayoutAlign="center center" class="header radius-5 eventNumber">
+              {{event.eventLabel}}
             </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </mat-grid-tile>
-     </ng-container>
-     <ng-template #noEvent>
-      <mat-spinner></mat-spinner>
-    </ng-template>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="{{ items }}">
+          <!--List of result's matches -->
+          <mat-grid-list fxFill cols="{{ items }}" rowHeight="{{rowHeight}}" class="position padding-5">
+            <mat-grid-tile *ngFor="let matches of event.soccerResult; let i=index">
+              <div fxLayout="column" fxLayoutAlign="center center" class="radius-5 btn-default btn-soccer-result">
+                <span>{{ matches.EventName }}</span>
+                <span>{{ matches.Result }}</span>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </mat-grid-tile>
+      </ng-container>
+      <ng-template #noEvent>
+        <mat-grid-tile colspan="{{ items }}">
+          <div fxFill class="card-box-result-soccer">
+            <!-- header -->
+            <div fxFill fxLayoutAlign="center center" class="header radius-5 eventNumber">
+              <mat-spinner></mat-spinner>
+            </div>
+          </div>
+        </mat-grid-tile>
+       
+      </ng-template>
     </ng-container>
   </mat-grid-list>
 </div>
