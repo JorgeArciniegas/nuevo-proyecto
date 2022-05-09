@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ElysApiService, VirtualProgramTreeBySportRequest, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualDetailOddsOfEventResponse, VirtualEventCountDownRequest, VirtualEventCountDownResponse, VirtualGetRankByEventResponse, VirtualProgramTreeBySportResponse, PlaySource } from '@elys/elys-api';
+import { MessageSource } from '@elys/elys-coupon';
 import { ElysFeedsService } from '@elys/elys-feeds';
 import { cloneDeep as clone } from 'lodash';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
@@ -15,6 +16,7 @@ import { Area, CombinationType, EventDetail, EventInfo, EventTime, ListArea, Mat
 import { KenoNumber } from './playable-board/templates/keno/keno.model';
 import { ResultsService } from './results/results.service';
 import { areas, overviewAreas } from './SoccerAreas';
+import { Error } from '../../component/coupon/coupon.model';
 
 @Injectable()
 export class MainService {
@@ -337,6 +339,7 @@ export class MainService {
     if (tournament && (!tournament.matches || tournament.matches == null || tournament.matches.length === 0)) {
       this.feedData.getEventVirtualDetail(this.userservice.getUserId(), tournamentNumber)
         .then((sportDetail: VirtualDetailOddsOfEventResponse) => {
+          this.setNegativeOdds(sportDetail);
           try {
             const matches: Match[] = [];
             const overViewArea: Area[] = [];
@@ -587,6 +590,84 @@ export class MainService {
     });
   }
 
+  private setNegativeOdds(sportDetail: VirtualDetailOddsOfEventResponse): void {
+    console.log('sportDetail: ', sportDetail);
+    if(!sportDetail.Sport) return;
+    const mockData = [
+      {
+        sportName: 'DogRacing',
+        markets: [
+          {
+            nm: 'Trifecta',
+            sls: [
+              {
+                nm: '1-2-3',
+                oddVal: -1
+              },
+              {
+                nm: '2-3-4',
+                oddVal: -2
+              },
+            ]
+          }
+        ]
+      },
+      {
+        sportName: 'CockRacing',
+        markets: [
+          {
+            nm: '1X2',
+            sls: [
+              {
+                nm: '1',
+                oddVal: -1
+              },
+              {
+                nm: 'X',
+                oddVal: -2
+              },
+            ]
+          }
+        ]
+      },
+      {
+        sportName: 'Soccer',
+        markets: [
+          {
+            nm: '1X2',
+            sls: [
+              {
+                nm: '1',
+                oddVal: -1
+              },
+              {
+                nm: 'X',
+                oddVal: -3
+              },
+            ]
+          }
+        ]
+      }
+    ];
+    const sportName: string = sportDetail.Sport.nm;
+    const market: VirtualBetMarket[] = sportDetail.Sport.ts[0].evs[0].mk;
+    mockData.forEach(data => {
+      if(data.sportName === sportName){
+        data.markets.forEach(marketEl => {
+          const marketIndex = market.findIndex(el => el.nm === marketEl.nm);
+          if(marketIndex !== -1){
+            marketEl.sls.forEach(slsEl => {
+              const slsIndex = market[marketIndex].sls.findIndex(el => el.nm === slsEl.nm);
+              if(slsIndex !== -1) {
+                market[marketIndex].sls[slsIndex].ods[0].vl = slsEl.oddVal;
+              }
+            })
+          }
+        })
+      }
+    })
+  }
+
   private eventDetailOdds(eventNumber: number, attemptRollBack?: number): void {
     if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
       if (this.cacheTournaments.length === 0) {
@@ -604,6 +685,7 @@ export class MainService {
     if (!event || event && event.mk == null || event && event.mk.length === 0) {
       this.feedData.getEventVirtualDetail(this.userservice.getUserId(), eventNumber).
         then((sportDetail: VirtualDetailOddsOfEventResponse) => {
+          this.setNegativeOdds(sportDetail);
           try {
             event.mk = sportDetail.Sport.ts[0].evs[0].mk;
             event.tm = sportDetail.Sport.ts[0].evs[0].tm;
@@ -806,6 +888,11 @@ export class MainService {
       console.log(err);
       areaFuncData = {};
     } finally {
+      // console.log('plasingOdds: ', areaFuncData.odds);
+      // if(areaFuncData.odds.some(el => el.odd < 0)){
+      //   this.couponService.error = new Error('OperationNotAllowed', MessageSource.COUPON_PLACEMENT)
+      // }
+      // else this.couponService.error = undefined;
       areaFuncData.firstTap = true;
       this.productService.polyfunctionalAreaSubject.next(areaFuncData);
     }
@@ -870,6 +957,11 @@ export class MainService {
       console.log(err);
       areaFuncData = {};
     } finally {
+      // console.log('plasingOdds: ', areaFuncData.odds);
+      // if(areaFuncData.odds.some(el => el.odd < 0)){
+      //   this.couponService.error = new Error('OperationNotAllowed', MessageSource.COUPON_PLACEMENT)
+      // }
+      // else this.couponService.error = undefined;
       areaFuncData.firstTap = true;
       this.productService.polyfunctionalAreaSubject.next(areaFuncData);
     }

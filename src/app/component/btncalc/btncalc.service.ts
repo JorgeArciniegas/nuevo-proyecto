@@ -118,6 +118,15 @@ export class BtncalcService implements OnDestroy {
       if (this.userService.isModalOpen) {
         this.userService.isBtnCalcEditable = false;
       }
+
+      // if(this.couponService.error){
+      //   console.log('!!!reset');
+      //   this.couponService.error = undefined;
+      //   this.productService.closeProductDialog();
+      //   this.productService.resetBoard();
+      //   return
+      // }
+
       if (this.couponService.oddStakeEdit) {
         this.couponService.updateCoupon();
         return;
