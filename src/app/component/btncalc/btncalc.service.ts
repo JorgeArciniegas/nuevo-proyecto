@@ -13,7 +13,8 @@ import { OddsStakeEdit } from '../coupon/coupon.model';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { RouterService } from '../../services/utility/router/router.service';
 import { LANGUAGES } from '../../shared/language/language.models';
-
+import { Error } from '../../component/coupon/coupon.model';
+import { MessageSource } from '@elys/elys-coupon';
 @Injectable({
   providedIn: 'root',
   deps: [UserService]
@@ -119,13 +120,15 @@ export class BtncalcService implements OnDestroy {
         this.userService.isBtnCalcEditable = false;
       }
 
-      // if(this.couponService.error){
-      //   console.log('!!!reset');
-      //   this.couponService.error = undefined;
-      //   this.productService.closeProductDialog();
-      //   this.productService.resetBoard();
-      //   return
-      // }
+      if(this.polyfunctionalArea.odds.some(el => el.odd < 0)){
+        this.couponService.error = new Error('OperationForbidden', MessageSource.COUPON_PLACEMENT);
+        setTimeout(() => {
+          this.couponService.error = undefined;
+        }, 5000);
+        this.productService.closeProductDialog();
+        this.productService.resetBoard();
+        return
+      }
 
       if (this.couponService.oddStakeEdit) {
         this.couponService.updateCoupon();

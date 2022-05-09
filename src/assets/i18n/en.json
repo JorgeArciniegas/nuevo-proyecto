@@ -139,6 +139,7 @@
       "RoleAlreadyExists": "This role already exists [Code ES41]",
       "SelfExclusionActive": "A self-exclusion is active",
       "SingleBetMaxLimitByUser": "Max. number of single bets by user [Code ES26]",
+      "OperationForbidden": "Operation forbidden presence of non-playable odds",
       "StagedCouponStatus": {
         "Canceled": "",
         "Refunded": "",

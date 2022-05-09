@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ElysApiService, VirtualProgramTreeBySportRequest, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualDetailOddsOfEventResponse, VirtualEventCountDownRequest, VirtualEventCountDownResponse, VirtualGetRankByEventResponse, VirtualProgramTreeBySportResponse, PlaySource } from '@elys/elys-api';
-import { MessageSource } from '@elys/elys-coupon';
 import { ElysFeedsService } from '@elys/elys-feeds';
 import { cloneDeep as clone } from 'lodash';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
@@ -16,7 +15,6 @@ import { Area, CombinationType, EventDetail, EventInfo, EventTime, ListArea, Mat
 import { KenoNumber } from './playable-board/templates/keno/keno.model';
 import { ResultsService } from './results/results.service';
 import { areas, overviewAreas } from './SoccerAreas';
-import { Error } from '../../component/coupon/coupon.model';
 
 @Injectable()
 export class MainService {
@@ -591,7 +589,6 @@ export class MainService {
   }
 
   private setNegativeOdds(sportDetail: VirtualDetailOddsOfEventResponse): void {
-    console.log('sportDetail: ', sportDetail);
     if(!sportDetail.Sport) return;
     const mockData = [
       {
@@ -888,11 +885,6 @@ export class MainService {
       console.log(err);
       areaFuncData = {};
     } finally {
-      // console.log('plasingOdds: ', areaFuncData.odds);
-      // if(areaFuncData.odds.some(el => el.odd < 0)){
-      //   this.couponService.error = new Error('OperationNotAllowed', MessageSource.COUPON_PLACEMENT)
-      // }
-      // else this.couponService.error = undefined;
       areaFuncData.firstTap = true;
       this.productService.polyfunctionalAreaSubject.next(areaFuncData);
     }
@@ -957,11 +949,6 @@ export class MainService {
       console.log(err);
       areaFuncData = {};
     } finally {
-      // console.log('plasingOdds: ', areaFuncData.odds);
-      // if(areaFuncData.odds.some(el => el.odd < 0)){
-      //   this.couponService.error = new Error('OperationNotAllowed', MessageSource.COUPON_PLACEMENT)
-      // }
-      // else this.couponService.error = undefined;
       areaFuncData.firstTap = true;
       this.productService.polyfunctionalAreaSubject.next(areaFuncData);
     }

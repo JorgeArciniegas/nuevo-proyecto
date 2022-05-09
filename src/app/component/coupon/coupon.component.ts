@@ -217,4 +217,9 @@ export class CouponComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  couponServiceError(): boolean {
+    if(this.couponService.error?.message === 'OperationForbidden') return false
+    return !!this.couponService.error
+  }
+
 }
