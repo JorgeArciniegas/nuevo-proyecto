@@ -127,6 +127,7 @@
       "MissingMappings": "Correspondance manquante [Code ES34]",
       "MultipleBetMaxLimitByUser": "Nombre maximum de paris multiples par utilisateur [Code ES27]",
       "NightshiftLimitsExceeded": "Limite de paris nocturnes dépassée [Code ES42]",
+      "NonPlayableOdds": "Opération non autorisée, cotes non disponibles",
       "ODD_ERROR": "Une erreur générique s’est produite sur l’opération des cotes",
       "ODD_SHORTCUT_ERROR": "Erreur générique de raccourci",
       "OddChanged": "Cote modifiée [Code ES4]",

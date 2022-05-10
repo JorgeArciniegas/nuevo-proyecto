@@ -13,6 +13,7 @@ import { UserService } from '../../services/user.service';
 import { TranslateUtilityService } from '../../shared/language/translate-utility.service';
 import { WindowSizeService } from '../../services/utility/window-size/window-size.service';
 import { CouponService } from './coupon.service';
+import { BtncalcService } from '../btncalc/btncalc.service';
 
 @Component({
   selector: 'app-coupon, [app-coupon]',
@@ -51,7 +52,8 @@ export class CouponComponent implements AfterViewInit, OnDestroy {
     public productService: ProductsService,
     public userService: UserService,
     public windowSizeService: WindowSizeService,
-    private translateService: TranslateUtilityService
+    private translateService: TranslateUtilityService,
+    public btncalcService: BtncalcService,
   ) {
     if (this.windowSizeService.windowSize.small) {
       this.maxItems = 4;
@@ -217,8 +219,8 @@ export class CouponComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  couponServiceError(): boolean {
-    if(this.couponService.error?.message === 'OperationForbidden') return false
+  get couponServiceError(): boolean {
+    if(this.couponService.error?.message === 'NonPlayableOdds' && !this.btncalcService.prevCouponError) return false
     return !!this.couponService.error
   }
 
