@@ -39,6 +39,9 @@ export class BtncalcService implements OnDestroy {
   // coupon placement
   couponHasBeenPlacedSubscription: Subscription;
 
+  // Duration of the error of timed messages
+  errorMessageInterval = 5000;
+
   constructor(
     private setting: AppSettings,
     public productService: ProductsService,
@@ -121,10 +124,8 @@ export class BtncalcService implements OnDestroy {
       }
 
       if(this.polyfunctionalArea.odds.some(el => el.odd < 0)){
-        this.couponService.error = new Error('OperationForbidden', MessageSource.COUPON_PLACEMENT);
-        setTimeout(() => {
-          this.couponService.error = undefined;
-        }, 5000);
+        this.couponService.error = new Error('NonPlayableOdds', MessageSource.COUPON_PLACEMENT);
+        timer(this.errorMessageInterval).subscribe(() => {(this.couponService.error = undefined)});
         this.productService.closeProductDialog();
         this.productService.resetBoard();
         return

@@ -3,6 +3,7 @@ import { ElysApiService, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection,
 import { ElysFeedsService } from '@elys/elys-feeds';
 import { cloneDeep as clone } from 'lodash';
 import { Observable, Subject, Subscription, timer } from 'rxjs';
+import { setNegativeOdds } from 'src/app/shared/helpers/set-negative-odds.helper';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { BtncalcService } from '../../component/btncalc/btncalc.service';
 import { DestroyCouponService } from '../../component/coupon/confirm-destroy-coupon/destroy-coupon.service';
@@ -380,6 +381,7 @@ export class MainService {
     if (!tournament.matches || tournament.matches == null || tournament.matches.length === 0) {
       this.feedData.getEventVirtualDetail(this.userservice.getUserId(), tournamentNumber)
         .then((sportDetail: VirtualDetailOddsOfEventResponse) => {
+          setNegativeOdds(sportDetail);
           try {
             const matches: Match[] = [];
             const overViewArea: Area[] = [];
@@ -643,6 +645,7 @@ export class MainService {
       // tslint:disable-next-line:max-line-length
       this.feedData.getEventVirtualDetail(this.userservice.getUserId(), eventNumber).
         then((sportDetail: VirtualDetailOddsOfEventResponse) => {
+          setNegativeOdds(sportDetail);
           try {
             event.mk = sportDetail.Sport.ts[0].evs[0].mk;
             event.tm = sportDetail.Sport.ts[0].evs[0].tm;
