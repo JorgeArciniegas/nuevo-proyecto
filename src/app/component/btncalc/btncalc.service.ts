@@ -40,7 +40,9 @@ export class BtncalcService implements OnDestroy {
   couponHasBeenPlacedSubscription: Subscription;
 
   // Duration of the error of timed messages
-  errorMessageInterval = 5000;
+  errorMessageInterval = 4000;
+  // previous coupon error for using in "BET" button
+  prevCouponError: string;
 
   constructor(
     private setting: AppSettings,
@@ -113,6 +115,28 @@ export class BtncalcService implements OnDestroy {
     this.polyfunctionalValueSubscribe.unsubscribe();
   }
 
+  private manageNegativeOdds(): void {
+    // check coupon error and cache error message
+    if(this.couponService.error && this.couponService.error?.message !== 'NonPlayableOdds') {
+      this.prevCouponError = JSON.parse(JSON.stringify(this.couponService.error?.message));
+    }
+    // set new coupon error
+    this.couponService.error = new Error('NonPlayableOdds', MessageSource.COUPON_PLACEMENT);
+
+    this.productService.closeProductDialog();
+    this.productService.resetBoard();
+
+    // if there isn't new coupon error then remove coupon error and update coupon by the timer
+    timer(this.errorMessageInterval).subscribe(() => {
+      this.prevCouponError = '';
+      if(this.couponService.error?.message === 'NonPlayableOdds') {
+        this.couponService.error = undefined;
+        if(this.couponService.coupon) {
+          this.couponService.updateCoupon();
+        }
+      }
+    });
+  }
 
   /**
    * tap fired only if the new amount is greater then minimum amount
@@ -124,10 +148,7 @@ export class BtncalcService implements OnDestroy {
       }
 
       if(this.polyfunctionalArea.odds.some(el => el.odd < 0)){
-        this.couponService.error = new Error('NonPlayableOdds', MessageSource.COUPON_PLACEMENT);
-        timer(this.errorMessageInterval).subscribe(() => {(this.couponService.error = undefined)});
-        this.productService.closeProductDialog();
-        this.productService.resetBoard();
+        this.manageNegativeOdds();
         return
       }
 

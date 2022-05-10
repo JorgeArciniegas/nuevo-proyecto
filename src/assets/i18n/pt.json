@@ -127,6 +127,7 @@
       "MissingMappings": "Mapeamento incompleto [Code ES34]",
       "MultipleBetMaxLimitByUser": "Número máximo de apostas múltiplas feitas pelo usuário [Code ES27]",
       "NightshiftLimitsExceeded": "Limite noturno excedido [Code ES42]",
+      "NonPlayableOdds": "Operação não permitida, probabilidades não disponíveis",
       "ODD_ERROR": "Erro genérico na operação de odd",
       "ODD_SHORTCUT_ERROR": "Erro genérico no atalho",
       "OddChanged": "Odd alterada [Code ES4]",

@@ -84,7 +84,7 @@
         <img class="icon" src="assets/icons/baseline-open_in_new-24-white.png">
       </button>
       <button fxFlex="60" class="btn-default btn-success radius-5 padding-10"
-        [disabled]="couponServiceError() || couponService.isWaitingConclusionOperation || isBetDisabledForColoursDrangn() || couponService.processingOddsQueue"
+        [disabled]="couponServiceError || couponService.isWaitingConclusionOperation || isBetDisabledForColoursDrangn() || couponService.processingOddsQueue"
         (click)="couponService.preStagedCoupon()">{{'COUPON.BET' | translate | uppercase}}</button>
     </div>
   </mat-grid-tile>

@@ -127,6 +127,7 @@
       "MissingMappings": "Lokalizasyon pa la [Code ES34]",
       "MultipleBetMaxLimitByUser": "Kantite max paryaj miltip itilizatè a rive [Code ES27]",
       "NightshiftLimitsExceeded": "Limit Nightshift depase [Code ES42]",
+      "NonPlayableOdds": "Operation not allowed, odds not available",
       "ODD_ERROR": "Erè jenerik sou operasyon enpè",
       "ODD_SHORTCUT_ERROR": "Erè jenerik sou rakousi",
       "OddChanged": "Kòt la chanje [Code ES4]",

@@ -291,7 +291,7 @@
     <!-- PLACE -->
     <Button col="2" margin="2 2" text="{{'COUPON.BET' | translate}}"
       class="button btn-default btn-success button-internal" textTransform="uppercase"
-      [ngClass]="{'disabled': couponService.error || couponService.isWaitingConclusionOperation || couponService.processingOddsQueue}"
+      [ngClass]="{'disabled': couponServiceError || couponService.isWaitingConclusionOperation || couponService.processingOddsQueue}"
       [isEnabled]="!timeBlocked && !couponService.error && !couponService.isWaitingConclusionOperation && !userService.isModalOpen && !isBetDisabledForColoursDrangn() && !couponService.processingOddsQueue"
       (tap)="couponService.preStagedCoupon()"></Button>
 

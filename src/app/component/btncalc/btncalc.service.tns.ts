@@ -13,6 +13,8 @@ import { OddsStakeEdit } from '../coupon/coupon.model';
 import { LAYOUT_TYPE } from '../../../environments/environment.models';
 import { RouterService } from '../../services/utility/router/router.service';
 import { LoaderService } from '../../services/utility/loader/loader.service';
+import { Error } from '../../component/coupon/coupon.model';
+import { MessageSource } from '@elys/elys-coupon';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +39,11 @@ export class BtncalcService implements OnDestroy {
 
   // coupon placement
   couponHasBeenPlacedSubscription: Subscription;
+
+  // Duration of the error of timed messages
+  errorMessageInterval = 4000;
+  // previous coupon error for using in "BET" button
+  prevCouponError: string;
 
   constructor(
     private setting: AppSettings,
@@ -115,6 +122,31 @@ export class BtncalcService implements OnDestroy {
     }
   }
 
+  private manageNegativeOdds(): void {
+    // check coupon error and cache error message
+    if(this.couponService.error && this.couponService.error?.message !== 'NonPlayableOdds') {
+      this.prevCouponError = JSON.parse(JSON.stringify(this.couponService.error?.message));
+    }
+    // set new coupon error
+    this.couponService.error = new Error('NonPlayableOdds', MessageSource.COUPON_PLACEMENT);
+
+    this.productService.closeProductDialog();
+    this.productService.resetBoard();
+
+    if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.RACING) {
+      this.loaderService.setLoading(false, 'AddCoupon');
+    }
+    // if there isn't new coupon error then remove coupon error and update coupon by the timer
+    timer(this.errorMessageInterval).subscribe(() => {
+      this.prevCouponError = '';
+      if(this.couponService.error?.message === 'NonPlayableOdds') {
+        this.couponService.error = undefined;
+        if(this.couponService.coupon) {
+          this.couponService.updateCoupon();
+        }
+      }
+    });
+  }
 
  /**
    * firePlus fired only if the new amount is greater then minimum amount
@@ -132,6 +164,10 @@ export class BtncalcService implements OnDestroy {
       this.assignStake();
       if (this.userService.isModalOpen) {
         this.userService.isBtnCalcEditable = false;
+      }
+      if(this.polyfunctionalArea.odds.some(el => el.odd < 0)){
+        this.manageNegativeOdds();
+        return
       }
       if (this.couponService.oddStakeEdit) {
         this.couponService.updateCoupon();
