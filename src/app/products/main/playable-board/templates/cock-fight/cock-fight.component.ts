@@ -104,4 +104,9 @@ export class CockFightComponent implements OnDestroy {
     }
     return colDefiner;
   }
+
+  // check whether odd is valid
+  public isValidOdd(oddValue: number) {
+    return oddValue > 0;
+  }
 }
