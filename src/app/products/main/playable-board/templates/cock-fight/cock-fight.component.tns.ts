@@ -118,4 +118,9 @@ export class CockFightComponent implements OnInit, OnDestroy {
     }
     return colDefiner;
   }
+
+  // check whether odd is valid
+  public isValidOdd(oddValue: number) {
+    return oddValue > 0;
+  }
 }
