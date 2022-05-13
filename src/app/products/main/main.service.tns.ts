@@ -654,12 +654,26 @@ export class MainService {
             sls: [
               {
                 nm: '1',
-                oddVal: -1
-              },
+                oddVal: 0
+              }
+            ]
+          },
+          {
+            nm: '1X2 + OverUnder',
+            sls: [
               {
-                nm: 'X',
-                oddVal: -2
-              },
+                nm: '1 + Over',
+                oddVal: -1
+              }
+            ]
+          },
+          {
+            nm: 'Over/Under',
+            sls: [
+              {
+                nm: 'Over',
+                oddVal: -1
+              }
             ]
           }
         ]

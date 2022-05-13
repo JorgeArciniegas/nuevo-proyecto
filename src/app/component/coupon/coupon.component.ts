@@ -14,6 +14,7 @@ import { TranslateUtilityService } from '../../shared/language/translate-utility
 import { WindowSizeService } from '../../services/utility/window-size/window-size.service';
 import { CouponService } from './coupon.service';
 import { BtncalcService } from '../btncalc/btncalc.service';
+import { COUPON_INTERNAL_ERROR } from '../btncalc/btncalc.enum';
 
 @Component({
   selector: 'app-coupon, [app-coupon]',
@@ -220,8 +221,12 @@ export class CouponComponent implements AfterViewInit, OnDestroy {
   }
 
   get couponServiceError(): boolean {
-    if(this.couponService.error?.message === 'NonPlayableOdds' && !this.btncalcService.prevCouponError) return false
+    if(this.couponService.error?.message === COUPON_INTERNAL_ERROR.NON_PLAYABLE_ODDS && !this.btncalcService.prevCouponError) return false
     return !!this.couponService.error
+  }
+
+  get isBetBtnDisabled(): boolean {
+    return this.couponServiceError || this.couponService.isWaitingConclusionOperation || this.isBetDisabledForColoursDrangn() || this.couponService.processingOddsQueue
   }
 
 }
