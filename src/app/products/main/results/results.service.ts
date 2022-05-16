@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ElysApiService, EventResult, VirtualSportLastResultsRequest, VirtualSportLastResultsResponse } from '@elys/elys-api';
-import { BehaviorSubject } from 'rxjs';
+import { ElysApiService, EventResult, VideoMetadataVirtualVideoInfoResponse, VirtualSportLastResultsRequest, VirtualSportLastResultsResponse } from '@elys/elys-api';
+import { BehaviorSubject, timer } from 'rxjs';
 import { HideLastResultPipe } from 'src/app/shared/pipes/hide-last-result.pipe';
+import { environment } from 'src/environments/environment';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { ProductsService } from '../../products.service';
 import { EventTime } from '../main.models';
@@ -32,12 +34,18 @@ export class ResultsService {
     }
     return 0;
   }
+  private _currentEventVideoDuration: number;
+  public get currentEventVideoDuration(): number {
+    return this._currentEventVideoDuration;
+  }
+
   eventsResultsDuringDelay: EventsResultsWithDetails[] = null;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
 
   constructor(
     private productService: ProductsService,
     private elysApi: ElysApiService,
+    private http: HttpClient
     //private _hideLastResult: HideLastResultPipe
   ) { }
 
@@ -52,7 +60,7 @@ export class ResultsService {
     const tmpListResult: EventsResultsWithDetails[] = [];
     this.elysApi.virtual.getLastResult(request)
       .then((eventResults: VirtualSportLastResultsResponse) => {
-
+        this.getVideoInfo(eventResults.EventResults[0].EventId);
         // results for products
         const resultItemsLength = this.productService.product.layoutProducts.resultItems;
         if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
@@ -77,14 +85,10 @@ export class ResultsService {
           }
         }
 
-        // this.eventsResultsDuringDelay =  this._lastResults.eventResults.length > 0
-        // ? [...this._lastResults.eventResults] :
-        // tmpListResult
-        
         this._lastResults.layoutType = this.productService.product.layoutProducts.type;
         this._lastResults.eventResults = tmpListResult;
         this.eventsResultsDuringDelay = this.hideLastResult(eventResults);
-        console.log('delayed results',this.eventsResultsDuringDelay);
+        console.log('delayed results', this.eventsResultsDuringDelay);
         this.lastResultsSubject.next(this._lastResults);
       });
   }
@@ -155,6 +159,66 @@ export class ResultsService {
     }
     return tempEventResult;
   }
+
+
+  /**
+     * try to get video information, if api doesn't respond, it start to retry to call
+     */
+  private getVideoInfo(eventId: number, retryNumber: number = 0): void {
+
+    this.getVideoInfoApi(
+      this.productService.product.sportId,
+      this.productService.product.codeProduct,
+      eventId
+    )
+      .then(
+        (videoMetadataVirtualVideoInfoResponse: VideoMetadataVirtualVideoInfoResponse) => {
+          // check error from API response
+          this.checkVideoInfo(videoMetadataVirtualVideoInfoResponse)
+            ? this._currentEventVideoDuration = videoMetadataVirtualVideoInfoResponse.VideoInfo.Video.Duration
+            : this.retryGetVideoInfo(eventId, retryNumber);
+        }
+      )
+      .catch(() => {
+        this.retryGetVideoInfo(eventId, retryNumber);
+      });
+  }
+
+  private retryGetVideoInfo(id: number, retryNumber: number = 0): void {
+    // fallback
+    if (retryNumber < 4) {
+      // retry 5 times
+      timer(800).subscribe(() => {
+        this.getVideoInfo(id, retryNumber + 1);
+      });
+    }
+  }
+
+  private checkVideoInfo(videoMetadataVirtualVideoInfoResponse: VideoMetadataVirtualVideoInfoResponse): boolean {
+    if (
+      !videoMetadataVirtualVideoInfoResponse ||
+      !videoMetadataVirtualVideoInfoResponse.VideoInfo ||
+      !videoMetadataVirtualVideoInfoResponse.VideoUrls ||
+      videoMetadataVirtualVideoInfoResponse.VideoUrls.length === 0
+    ) return false;
+    return true;
+  }
+
+  getVideoInfoApi(
+    sportId: number,
+    categoryType: string,
+    eventId: number,
+  ): Promise<VideoMetadataVirtualVideoInfoResponse> {
+    const url: string =
+      environment.baseApiUrl +
+      '/api/virtual/videoinfo/' +
+      encodeURIComponent(sportId.toString()) +
+      '/categorytype/' +
+      encodeURIComponent(categoryType) +
+      '/itemId/' + encodeURIComponent(eventId.toString());
+    return this.http.get<VideoMetadataVirtualVideoInfoResponse>(url).toPromise();
+  }
+
   private checkNumberColour(colourNumber: number): Colour {
     if (colourNumber === 49) {
       return Colour.YELLOW;
@@ -192,13 +256,13 @@ export class ResultsService {
     currentEventsResults.push(eventDuringDelay);
     return currentEventsResults;
   }
-/**
- * 
- * @param itemsToShow number of item to show as last results defined in environment
- * @param itemsExceeded difference between items returned from api and itemsToShow
- * @param eventResults  all results from api
- * @returns EventsResultsWithDetails
- */
+  /**
+   * 
+   * @param itemsToShow number of item to show as last results defined in environment
+   * @param itemsExceeded difference between items returned from api and itemsToShow
+   * @param eventResults  all results from api
+   * @returns EventsResultsWithDetails
+   */
   soccerResultAvailableForDelay(itemsToShow: number, itemsExceeded: number, eventResults: VirtualSportLastResultsResponse): EventsResultsWithDetails {
     let eventDuringDelay: EventsResultsWithDetails;
     if (itemsExceeded > 0 && itemsExceeded % itemsToShow === 0) {
