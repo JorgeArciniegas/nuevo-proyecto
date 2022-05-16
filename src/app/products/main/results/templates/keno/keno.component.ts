@@ -9,7 +9,7 @@ import { ResultsService } from '../../results.service';
 @Component({
   selector: 'app-results-keno',
   templateUrl: './keno.component.html',
-  styleUrls: ['./keno.component.scss', '../../results.component.scss']
+  styleUrls: ['./keno.component.scss']
 })
 export class KenoComponent {
   @Input() rowHeight: number;

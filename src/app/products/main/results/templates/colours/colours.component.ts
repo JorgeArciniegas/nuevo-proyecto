@@ -11,7 +11,7 @@ import { ResultsService } from '../../results.service';
 @Component({
   selector: 'app-results-colours',
   templateUrl: './colours.component.html',
-  styleUrls: ['./colours.component.scss', '../../results.component.scss']
+  styleUrls: ['./colours.component.scss']
 })
 export class ColoursComponent {
   @Input() rowHeight: number;

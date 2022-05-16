@@ -11,7 +11,7 @@ import { ResultsService } from '../../results.service';
 @Component({
   selector: 'app-results-cock-fight',
   templateUrl: './cock-fight.component.html',
-  styleUrls: ['./cock-fight.component.scss', '../../results.component.scss']
+  styleUrls: ['./cock-fight.component.scss']
 })
 export class CockFightComponent {
   @Input() items: number;

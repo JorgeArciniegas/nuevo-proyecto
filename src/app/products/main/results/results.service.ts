@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ElysApiService, EventResult, VideoMetadataVirtualVideoInfoResponse, VirtualSportLastResultsRequest, VirtualSportLastResultsResponse } from '@elys/elys-api';
+import { ElysApiService, EventResult, VideoMetadataVirtualVideoInfoRequest, VideoMetadataVirtualVideoInfoResponse, VirtualSportLastResultsRequest, VirtualSportLastResultsResponse } from '@elys/elys-api';
+import { IVideoInfo } from '@elys/elys-api/lib/virtual-v2/interfaces/video-info.interface';
 import { BehaviorSubject, timer } from 'rxjs';
 import { HideLastResultPipe } from 'src/app/shared/pipes/hide-last-result.pipe';
 import { environment } from 'src/environments/environment';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { ProductsService } from '../../products.service';
 import { EventTime } from '../main.models';
+import { AmericanRouletteRug } from '../playable-board/templates/american-roulette/american-roulette.models';
 import { Band, Colour } from '../playable-board/templates/colours/colours.models';
 import { ColoursNumber, ColoursResult, EventsResultsWithDetails, LastResult, OVER_UNDER_COCKFIGHT } from './results.model';
 
@@ -38,7 +40,7 @@ export class ResultsService {
   public get currentEventVideoDuration(): number {
     return this._currentEventVideoDuration;
   }
-
+  private _americanRouletteRug: AmericanRouletteRug;
   eventsResultsDuringDelay: EventsResultsWithDetails[] = null;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
 
@@ -46,8 +48,9 @@ export class ResultsService {
     private productService: ProductsService,
     private elysApi: ElysApiService,
     private http: HttpClient
-    //private _hideLastResult: HideLastResultPipe
-  ) { }
+    ) { 
+      this._americanRouletteRug = new AmericanRouletteRug();
+    }
 
   private _lastResults: LastResult = { eventResults: [], layoutType: undefined };
   public lastResultsSubject: BehaviorSubject<LastResult> = new BehaviorSubject<LastResult>(this._lastResults);
@@ -72,8 +75,7 @@ export class ResultsService {
             tmpListResult.push(this.setResultByLayoutType(eventResults.EventResults[i]));
           }
         } else {
-
-          if (eventResults.EventResults !== null) {
+            if (eventResults.EventResults !== null) {
             // create last Result
             const tempEventResult: EventsResultsWithDetails = {
               eventLabel: eventResults.EventResults[0].TournamentName,
@@ -88,7 +90,6 @@ export class ResultsService {
         this._lastResults.layoutType = this.productService.product.layoutProducts.type;
         this._lastResults.eventResults = tmpListResult;
         this.eventsResultsDuringDelay = this.hideLastResult(eventResults);
-        console.log('delayed results', this.eventsResultsDuringDelay);
         this.lastResultsSubject.next(this._lastResults);
       });
   }
@@ -151,7 +152,7 @@ export class ResultsService {
         const resultNumber = eventResults.Result;
         tempEventResult.americanRouletteResults = {
           result: resultNumber,
-          color: ''
+          color: this.getAmericanRouletteColorClass(resultNumber)
         }
         break;
       default:
@@ -165,23 +166,23 @@ export class ResultsService {
      * try to get video information, if api doesn't respond, it start to retry to call
      */
   private getVideoInfo(eventId: number, retryNumber: number = 0): void {
-
-    this.getVideoInfoApi(
+    const request: VideoMetadataVirtualVideoInfoRequest = {
+      CategoryType:  this.productService.product.codeProduct,
+      SportId: this.productService.product.sportId,
+    }
+    this.elysApi.virtualV2.getVideoInfo(
       this.productService.product.sportId,
       this.productService.product.codeProduct,
       eventId
     )
-      .then(
-        (videoMetadataVirtualVideoInfoResponse: VideoMetadataVirtualVideoInfoResponse) => {
+    .subscribe(
+        (videoMetadataVirtualVideoInfoResponse: IVideoInfo) => {
           // check error from API response
           this.checkVideoInfo(videoMetadataVirtualVideoInfoResponse)
             ? this._currentEventVideoDuration = videoMetadataVirtualVideoInfoResponse.VideoInfo.Video.Duration
             : this.retryGetVideoInfo(eventId, retryNumber);
         }
-      )
-      .catch(() => {
-        this.retryGetVideoInfo(eventId, retryNumber);
-      });
+      );
   }
 
   private retryGetVideoInfo(id: number, retryNumber: number = 0): void {
@@ -194,7 +195,7 @@ export class ResultsService {
     }
   }
 
-  private checkVideoInfo(videoMetadataVirtualVideoInfoResponse: VideoMetadataVirtualVideoInfoResponse): boolean {
+  private checkVideoInfo(videoMetadataVirtualVideoInfoResponse: IVideoInfo): boolean {
     if (
       !videoMetadataVirtualVideoInfoResponse ||
       !videoMetadataVirtualVideoInfoResponse.VideoInfo ||
@@ -202,21 +203,6 @@ export class ResultsService {
       videoMetadataVirtualVideoInfoResponse.VideoUrls.length === 0
     ) return false;
     return true;
-  }
-
-  getVideoInfoApi(
-    sportId: number,
-    categoryType: string,
-    eventId: number,
-  ): Promise<VideoMetadataVirtualVideoInfoResponse> {
-    const url: string =
-      environment.baseApiUrl +
-      '/api/virtual/videoinfo/' +
-      encodeURIComponent(sportId.toString()) +
-      '/categorytype/' +
-      encodeURIComponent(categoryType) +
-      '/itemId/' + encodeURIComponent(eventId.toString());
-    return this.http.get<VideoMetadataVirtualVideoInfoResponse>(url).toPromise();
   }
 
   private checkNumberColour(colourNumber: number): Colour {
@@ -239,9 +225,9 @@ export class ResultsService {
    * @returns EventsResultsWithDetails[] array of las results to show during delay period
    */
   hideLastResult(eventResults: VirtualSportLastResultsResponse): EventsResultsWithDetails[] {
-    //number of item to show as last result defined in environment
+    //Number of item to show as last result defined in environment
     const itemsToShow: number = this.productService.product.layoutProducts.resultItems;
-    //difference between items returned from api and itemsToShow
+    //Difference between items returned from api and itemsToShow
     const itemsExceeded = eventResults.EventResults.length - itemsToShow;
     const layoutType: LAYOUT_TYPE = this._lastResults.layoutType
     let currentEventsResults: EventsResultsWithDetails[] = [...this._lastResults.eventResults];
@@ -251,7 +237,7 @@ export class ResultsService {
     } else {
       eventDuringDelay = this.soccerResultAvailableForDelay(itemsExceeded, itemsToShow, eventResults)
     }
-    //results array during delay is made by removing the actual last result and pushing the first available in the itemsExceeded
+    //Results array during delay is made by removing the actual last result and pushing the first available in the itemsExceeded
     currentEventsResults.splice(0, 1);
     currentEventsResults.push(eventDuringDelay);
     return currentEventsResults;
@@ -265,6 +251,8 @@ export class ResultsService {
    */
   soccerResultAvailableForDelay(itemsToShow: number, itemsExceeded: number, eventResults: VirtualSportLastResultsResponse): EventsResultsWithDetails {
     let eventDuringDelay: EventsResultsWithDetails;
+    //Check if the items returned for soccer are a multiple of itemsToShow. 
+    //That means there are more than 1 week as last results
     if (itemsExceeded > 0 && itemsExceeded % itemsToShow === 0) {
       eventDuringDelay = {
         eventLabel: eventResults.EventResults[itemsToShow].TournamentName,
@@ -275,5 +263,12 @@ export class ResultsService {
       eventDuringDelay = null;
     }
     return eventDuringDelay;
+  }
+
+  public getAmericanRouletteColorClass(n: number | string): string {
+    return this._americanRouletteRug.red.includes(parseInt(n.toString(), 10))
+     ? 'red'
+     : (this._americanRouletteRug.black.includes(parseInt(n.toString(), 10)) 
+     ? 'black' : 'green');
   }
 }

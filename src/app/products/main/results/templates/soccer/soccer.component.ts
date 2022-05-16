@@ -10,7 +10,7 @@ import { ResultsService } from '../../results.service';
 @Component({
   selector: 'app-results-soccer',
   templateUrl: './soccer.component.html',
-  styleUrls: ['./soccer.component.scss', '../../results.component.scss']
+  styleUrls: ['./soccer.component.scss']
 })
 export class SoccerComponent {
   @Input() items: number;

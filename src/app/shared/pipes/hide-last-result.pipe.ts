@@ -8,10 +8,8 @@ import { LAYOUT_TYPE } from 'src/environments/environment.models';
     name: 'hideLastResult'
 })
 export class HideLastResultPipe implements PipeTransform {
-    private _americanRouletteRug: AmericanRouletteRug;
-    constructor(private resultsService: ResultsService) {
-        this._americanRouletteRug = new AmericanRouletteRug();
-     }
+  
+    constructor(private resultsService: ResultsService) {}
     /**
      * TODO DA FARE COMMENTO
      * @param value  
@@ -22,11 +20,6 @@ export class HideLastResultPipe implements PipeTransform {
     transform(value: EventsResultsWithDetails[], layoutType: LAYOUT_TYPE, countDownInSeconds: number): EventsResultsWithDetails[] {
         if (value) {
             const isDelayActive: boolean = this.isDelayExpired(countDownInSeconds, layoutType);
-            if (layoutType === LAYOUT_TYPE.AMERICANROULETTE && isDelayActive) {
-                this.resultsService.eventsResultsDuringDelay.forEach(
-                    res => { res.americanRouletteResults.color = this.getColorClass(res.americanRouletteResults.result) }
-                );
-            }
             return isDelayActive ? this.resultsService.eventsResultsDuringDelay : value;
         }
         return null;
@@ -41,8 +34,5 @@ export class HideLastResultPipe implements PipeTransform {
         console.log('timeSpanDelay', timeSpanDelay)
         return (countDown > timeSpanDelay);
     }
-    private getColorClass(n: number | string): string {
-        // tslint:disable-next-line:max-line-length
-        return this._americanRouletteRug.red.includes(parseInt(n.toString(), 10)) ? 'red' : (this._americanRouletteRug.black.includes(parseInt(n.toString(), 10)) ? 'black' : 'green');
-    }
+    
 }

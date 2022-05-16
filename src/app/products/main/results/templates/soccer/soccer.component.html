@@ -2,7 +2,7 @@
   <mat-grid-list fxFill cols="{{ items }}" rowHeight="{{rowHeight + 1}}">
     <ng-container *ngFor="let event of (results|async)
      | hideLastResult: typeLayout.SOCCER : resultsService?.countDownInSeconds">
-      <ng-container *ngIf="event; else noEvent">
+      <ng-container *ngIf="event">
         <mat-grid-tile colspan="{{ items }}">
           <div fxFill class="card-box-result-soccer">
             <!-- header -->
@@ -23,17 +23,6 @@
           </mat-grid-list>
         </mat-grid-tile>
       </ng-container>
-      <ng-template #noEvent>
-        <mat-grid-tile colspan="{{ items }}">
-          <div fxFill class="card-box-result-soccer">
-            <!-- header -->
-            <div fxFill fxLayoutAlign="center center" class="header radius-5 eventNumber">
-              <mat-spinner></mat-spinner>
-            </div>
-          </div>
-        </mat-grid-tile>
-       
-      </ng-template>
     </ng-container>
   </mat-grid-list>
 </div>
