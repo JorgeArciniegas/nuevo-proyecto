@@ -15,7 +15,7 @@ import { WindowSizeService } from '../../services/utility/window-size/window-siz
 import { CouponService } from './coupon.service';
 import { BtncalcService } from '../btncalc/btncalc.service';
 import { COUPON_INTERNAL_ERROR } from '../btncalc/btncalc.enum';
-
+import { PlaySource } from '@elys/elys-api';
 @Component({
   selector: 'app-coupon, [app-coupon]',
   templateUrl: './coupon.component.html',
@@ -46,6 +46,7 @@ export class CouponComponent implements AfterViewInit, OnDestroy {
   colourGameId: typeof ColourGameId = ColourGameId;
 
   public market: typeof Market = Market;
+  public playSource: typeof PlaySource = PlaySource;
 
   constructor(
     public couponService: CouponService,
@@ -220,13 +221,18 @@ export class CouponComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  get couponServiceError(): boolean {
+  getCouponServiceError(): boolean {
     if(this.couponService.error?.message === COUPON_INTERNAL_ERROR.NON_PLAYABLE_ODDS && !this.btncalcService.prevCouponError) return false
     return !!this.couponService.error
   }
 
-  get isBetBtnDisabled(): boolean {
-    return this.couponServiceError || this.couponService.isWaitingConclusionOperation || this.isBetDisabledForColoursDrangn() || this.couponService.processingOddsQueue
+  betBtnStatus(source: PlaySource): boolean {
+    const isCouponError: boolean = this.getCouponServiceError() 
+    || this.couponService.isWaitingConclusionOperation 
+    || this.isBetDisabledForColoursDrangn() 
+    || this.couponService.processingOddsQueue;
+    const isCouponErrorAndroid: boolean = this.timeBlocked || this.userService.isModalOpen || isCouponError;
+    return source ===  PlaySource.VDeskGApp ? isCouponErrorAndroid : isCouponError;
   }
 
 }
