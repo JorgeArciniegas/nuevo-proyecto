@@ -380,7 +380,6 @@ export class MainService {
     if (!tournament.matches || tournament.matches == null || tournament.matches.length === 0) {
       this.feedData.getEventVirtualDetail(this.userservice.getUserId(), tournamentNumber)
         .then((sportDetail: VirtualDetailOddsOfEventResponse) => {
-          this.setNegativeOdds(sportDetail);
           try {
             const matches: Match[] = [];
             const overViewArea: Area[] = [];
@@ -625,97 +624,6 @@ export class MainService {
     });
   }
 
-  private setNegativeOdds(sportDetail: VirtualDetailOddsOfEventResponse): void {
-    if(!sportDetail.Sport) return;
-    const mockData = [
-      {
-        sportName: 'DogRacing',
-        markets: [
-          {
-            nm: 'Trifecta',
-            sls: [
-              {
-                nm: '1-2-3',
-                oddVal: -1
-              },
-              {
-                nm: '2-3-4',
-                oddVal: -2
-              },
-            ]
-          }
-        ]
-      },
-      {
-        sportName: 'CockRacing',
-        markets: [
-          {
-            nm: '1X2',
-            sls: [
-              {
-                nm: '1',
-                oddVal: 0
-              }
-            ]
-          },
-          {
-            nm: '1X2 + OverUnder',
-            sls: [
-              {
-                nm: '1 + Over',
-                oddVal: -1
-              }
-            ]
-          },
-          {
-            nm: 'Over/Under',
-            sls: [
-              {
-                nm: 'Over',
-                oddVal: -1
-              }
-            ]
-          }
-        ]
-      },
-      {
-        sportName: 'Soccer',
-        markets: [
-          {
-            nm: '1X2',
-            sls: [
-              {
-                nm: '1',
-                oddVal: -1
-              },
-              {
-                nm: 'X',
-                oddVal: -3
-              },
-            ]
-          }
-        ]
-      }
-    ];
-    const sportName: string = sportDetail.Sport.nm;
-    const market: VirtualBetMarket[] = sportDetail.Sport.ts[0].evs[0].mk;
-    mockData.forEach(data => {
-      if(data.sportName === sportName){
-        data.markets.forEach(marketEl => {
-          const marketIndex = market.findIndex(el => el.nm === marketEl.nm);
-          if(marketIndex !== -1){
-            marketEl.sls.forEach(slsEl => {
-              const slsIndex = market[marketIndex].sls.findIndex(el => el.nm === slsEl.nm);
-              if(slsIndex !== -1) {
-                market[marketIndex].sls[slsIndex].ods[0].vl = slsEl.oddVal;
-              }
-            })
-          }
-        })
-      }
-    })
-  }
-
   private eventDetailOdds(eventNumber: number, attemptRollBack?: number): void {
     if (this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER) {
       if (this.cacheTournaments.length === 0) {
@@ -735,7 +643,6 @@ export class MainService {
       // tslint:disable-next-line:max-line-length
       this.feedData.getEventVirtualDetail(this.userservice.getUserId(), eventNumber).
         then((sportDetail: VirtualDetailOddsOfEventResponse) => {
-          this.setNegativeOdds(sportDetail);
           try {
             event.mk = sportDetail.Sport.ts[0].evs[0].mk;
             event.tm = sportDetail.Sport.ts[0].evs[0].tm;

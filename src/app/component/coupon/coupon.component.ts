@@ -226,7 +226,7 @@ export class CouponComponent implements AfterViewInit, OnDestroy {
     return !!this.couponService.error
   }
 
-  betBtnStatus(source: PlaySource): boolean {
+  isBetBtnDisabled(source: PlaySource): boolean {
     const isCouponError: boolean = this.getCouponServiceError() 
     || this.couponService.isWaitingConclusionOperation 
     || this.isBetDisabledForColoursDrangn() 

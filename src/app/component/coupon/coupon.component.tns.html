@@ -291,8 +291,8 @@
     <!-- PLACE -->
     <Button col="2" margin="2 2" text="{{'COUPON.BET' | translate}}"
       class="button btn-default btn-success button-internal" textTransform="uppercase"
-      [ngClass]="{'disabled': betBtnStatus(playSource.VDeskGApp)}"
-      [isEnabled]="!betBtnStatus(playSource.VDeskGApp)"
+      [ngClass]="{'disabled': isBetBtnDisabled(playSource.VDeskGApp)}"
+      [isEnabled]="!isBetBtnDisabled(playSource.VDeskGApp)"
       (tap)="couponService.preStagedCoupon()"></Button>
 
   </GridLayout>
