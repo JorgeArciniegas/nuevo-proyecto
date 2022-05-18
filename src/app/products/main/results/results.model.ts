@@ -68,3 +68,4 @@ export const layoutTypeWithDelay : DelayLayoutDictonary = {
   [LAYOUT_TYPE.RACING]: 65,
   [LAYOUT_TYPE.SOCCER]: 140
 }
+export const videoInfoDelay : number = 5000;

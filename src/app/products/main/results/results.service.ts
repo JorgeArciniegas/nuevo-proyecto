@@ -10,7 +10,7 @@ import { ProductsService } from '../../products.service';
 import { EventTime } from '../main.models';
 import { AmericanRouletteRug } from '../playable-board/templates/american-roulette/american-roulette.models';
 import { Band, Colour } from '../playable-board/templates/colours/colours.models';
-import { ColoursNumber, ColoursResult, EventsResultsWithDetails, LastResult, OVER_UNDER_COCKFIGHT } from './results.model';
+import { ColoursNumber, ColoursResult, EventsResultsWithDetails, LastResult, OVER_UNDER_COCKFIGHT, videoInfoDelay } from './results.model';
 
 @Injectable({
   providedIn: 'root'
@@ -63,7 +63,9 @@ export class ResultsService {
     const tmpListResult: EventsResultsWithDetails[] = [];
     this.elysApi.virtual.getLastResult(request)
       .then((eventResults: VirtualSportLastResultsResponse) => {
-        this.getVideoInfo(eventResults.EventResults[0].EventId);
+        timer(videoInfoDelay).subscribe(()=>{
+          this.getVideoInfo(eventResults.EventResults[0].EventId);
+        })
         // results for products
         const resultItemsLength = this.productService.product.layoutProducts.resultItems;
         if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
@@ -178,23 +180,18 @@ export class ResultsService {
     .subscribe(
         (videoMetadataVirtualVideoInfoResponse: IVideoInfo) => {
           // check error from API response
-          this.checkVideoInfo(videoMetadataVirtualVideoInfoResponse)
-            ? this._currentEventVideoDuration = videoMetadataVirtualVideoInfoResponse.VideoInfo.Video.Duration
-            : this.retryGetVideoInfo(eventId, retryNumber);
+          this._currentEventVideoDuration = this.checkVideoInfo(videoMetadataVirtualVideoInfoResponse) 
+          ? videoMetadataVirtualVideoInfoResponse.VideoInfo.Video.Duration 
+          : 0;
         }
       );
   }
 
-  private retryGetVideoInfo(id: number, retryNumber: number = 0): void {
-    // fallback
-    if (retryNumber < 4) {
-      // retry 5 times
-      timer(800).subscribe(() => {
-        this.getVideoInfo(id, retryNumber + 1);
-      });
-    }
-  }
-
+  /**
+   * checkVideoInfo check if video info response is empty due its server generation time
+   * @param videoMetadataVirtualVideoInfoResponse video info response
+   * @returns 
+   */
   private checkVideoInfo(videoMetadataVirtualVideoInfoResponse: IVideoInfo): boolean {
     if (
       !videoMetadataVirtualVideoInfoResponse ||
