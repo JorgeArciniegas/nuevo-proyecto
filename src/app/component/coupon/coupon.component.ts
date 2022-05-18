@@ -13,8 +13,6 @@ import { UserService } from '../../services/user.service';
 import { TranslateUtilityService } from '../../shared/language/translate-utility.service';
 import { WindowSizeService } from '../../services/utility/window-size/window-size.service';
 import { CouponService } from './coupon.service';
-import { BtncalcService } from '../btncalc/btncalc.service';
-import { COUPON_INTERNAL_ERROR } from '../btncalc/btncalc.enum';
 import { PlaySource } from '@elys/elys-api';
 @Component({
   selector: 'app-coupon, [app-coupon]',
@@ -55,7 +53,6 @@ export class CouponComponent implements AfterViewInit, OnDestroy {
     public userService: UserService,
     public windowSizeService: WindowSizeService,
     private translateService: TranslateUtilityService,
-    public btncalcService: BtncalcService,
   ) {
     if (this.windowSizeService.windowSize.small) {
       this.maxItems = 4;
@@ -221,13 +218,8 @@ export class CouponComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  getCouponServiceError(): boolean {
-    if(this.couponService.error?.message === COUPON_INTERNAL_ERROR.NON_PLAYABLE_ODDS && !this.btncalcService.prevCouponError) return false
-    return !!this.couponService.error
-  }
-
   isBetBtnDisabled(source: PlaySource): boolean {
-    const isCouponError: boolean = this.getCouponServiceError() 
+    const isCouponError: boolean = !!this.couponService.error 
     || this.couponService.isWaitingConclusionOperation 
     || this.isBetDisabledForColoursDrangn() 
     || this.couponService.processingOddsQueue;
