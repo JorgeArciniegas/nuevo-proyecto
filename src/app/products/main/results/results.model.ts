@@ -57,15 +57,21 @@ export interface LastResult {
   eventResults: EventsResultsWithDetails[];
   layoutType: LAYOUT_TYPE;
 }
-export interface DelayLayoutDictonary{
-  [key: number]:number;
-}
-export const layoutTypeWithDelay : DelayLayoutDictonary = {
-  [LAYOUT_TYPE.AMERICANROULETTE] : 50,
-  [LAYOUT_TYPE.COCK_FIGHT] : 60,
-  [LAYOUT_TYPE.COLOURS]: 50,
-  [LAYOUT_TYPE.KENO]: 50,
-  [LAYOUT_TYPE.RACING]: 65,
-  [LAYOUT_TYPE.SOCCER]: 140
-}
+
 export const videoInfoDelay : number = 5000;
+export interface VideoLenght{
+  videoIntroLength: number;
+  videoLength: number;
+}
+export interface DelayLayoutDictonary{
+  [key: number]:VideoLenght;
+}
+
+export const defaultLayoutTypeDelay : DelayLayoutDictonary = {
+  [LAYOUT_TYPE.AMERICANROULETTE] : {videoIntroLength: 5, videoLength: 50},
+  [LAYOUT_TYPE.COCK_FIGHT] : {videoIntroLength: 5, videoLength: 60},
+  [LAYOUT_TYPE.COLOURS]: {videoIntroLength: 5, videoLength: 50},
+  [LAYOUT_TYPE.KENO]: {videoIntroLength: 5, videoLength: 50},
+  [LAYOUT_TYPE.RACING]: {videoIntroLength: 5, videoLength: 65},
+  [LAYOUT_TYPE.SOCCER]: {videoIntroLength: 5, videoLength: 140},
+}

@@ -296,6 +296,8 @@ export class MainService {
           // Load all events
           this.cacheEvents = tournaments[0].evs;
           this.resultService.nextEventDuration = sports.Sports[0].ts[0].evs[0].duration;
+          console.log('next event id',sports.Sports[0].ts[0].evs[0].nm)
+          console.log('next event duration',sports.Sports[0].ts[0].evs[0].duration)
           for (let index = checkDuplicateIndex; index < this.productService.product.layoutProducts.nextEventItems; index++) {
             const event: EventInfo = new EventInfo();
             event.number = this.cacheEvents[index].id;

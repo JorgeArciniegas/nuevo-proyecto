@@ -10,7 +10,7 @@ import { ProductsService } from '../../products.service';
 import { EventTime } from '../main.models';
 import { AmericanRouletteRug } from '../playable-board/templates/american-roulette/american-roulette.models';
 import { Band, Colour } from '../playable-board/templates/colours/colours.models';
-import { ColoursNumber, ColoursResult, EventsResultsWithDetails, LastResult, OVER_UNDER_COCKFIGHT, videoInfoDelay } from './results.model';
+import { ColoursNumber, ColoursResult, defaultLayoutTypeDelay, EventsResultsWithDetails, LastResult, OVER_UNDER_COCKFIGHT, videoInfoDelay } from './results.model';
 
 @Injectable({
   providedIn: 'root'
@@ -48,53 +48,62 @@ export class ResultsService {
     private productService: ProductsService,
     private elysApi: ElysApiService,
     private http: HttpClient
-    ) { 
-      this._americanRouletteRug = new AmericanRouletteRug();
-    }
+  ) {
+    this._americanRouletteRug = new AmericanRouletteRug();
+  }
 
   private _lastResults: LastResult = { eventResults: [], layoutType: undefined };
   public lastResultsSubject: BehaviorSubject<LastResult> = new BehaviorSubject<LastResult>(this._lastResults);
-  getLastResult() {
+  async getLastResult() {
+    const layoutType: LAYOUT_TYPE = this.productService.product.layoutProducts.type;
     const request: VirtualSportLastResultsRequest = {
       SportId: this.productService.product.sportId,
       CategoryType: this.productService.product.codeProduct,
       MultiFeedType: this.productService.product.layoutProducts.multiFeedType
     };
     const tmpListResult: EventsResultsWithDetails[] = [];
-    this.elysApi.virtual.getLastResult(request)
-      .then((eventResults: VirtualSportLastResultsResponse) => {
-        timer(videoInfoDelay).subscribe(()=>{
-          this.getVideoInfo(eventResults.EventResults[0].EventId);
-        })
-        // results for products
-        const resultItemsLength = this.productService.product.layoutProducts.resultItems;
-        if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
-          for (let i = 0; i < resultItemsLength; i++) {
-            if (!eventResults.EventResults || !eventResults.EventResults[i]) {
-              return;
-            }
-            // set the default parameters on the temporary EventResult
-            tmpListResult.push(this.setResultByLayoutType(eventResults.EventResults[i]));
-          }
-        } else {
-            if (eventResults.EventResults !== null) {
-            // create last Result
-            const tempEventResult: EventsResultsWithDetails = {
-              eventLabel: eventResults.EventResults[0].TournamentName,
-              eventNumber: eventResults.EventResults[0].TournamentId
-            };
-            // group by last Tournament
-            tempEventResult.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === tempEventResult.eventNumber);
-            tmpListResult.push(tempEventResult);
-          }
-        }
+    const eventResults: VirtualSportLastResultsResponse = await this.elysApi.virtual.getLastResult(request);
 
-        this._lastResults.layoutType = this.productService.product.layoutProducts.type;
-        this._lastResults.eventResults = tmpListResult;
-        this.eventsResultsDuringDelay = this.hideLastResult(eventResults);
-        this.lastResultsSubject.next(this._lastResults);
-      });
-  }
+    this._currentEventVideoDuration = 0;
+    // Color and Keno doesn't need to call video info. 
+    // Default client delay is used instead
+    if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.COLOURS
+      && this.productService.product.layoutProducts.type !== LAYOUT_TYPE.KENO) {
+      // Debounce few seconds video info api call. 
+      // Waits for the server generates results, hopefully in the defined delay
+      timer(videoInfoDelay).subscribe(() => {
+        this.getVideoInfo(eventResults.EventResults[0].EventId, layoutType);
+      })
+    }
+
+    // results for products
+    const resultItemsLength = this.productService.product.layoutProducts.resultItems;
+    if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
+      for (let i = 0; i < resultItemsLength; i++) {
+        if (!eventResults.EventResults || !eventResults.EventResults[i]) {
+          return;
+        }
+        // set the default parameters on the temporary EventResult
+        tmpListResult.push(this.setResultByLayoutType(eventResults.EventResults[i]));
+      }
+    } else {
+      if (eventResults.EventResults !== null) {
+        // create last Result
+        const tempEventResult: EventsResultsWithDetails = {
+          eventLabel: eventResults.EventResults[0].TournamentName,
+          eventNumber: eventResults.EventResults[0].TournamentId
+        };
+        // group by last Tournament
+        tempEventResult.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === tempEventResult.eventNumber);
+        tmpListResult.push(tempEventResult);
+      }
+    }
+ this._lastResults.layoutType = layoutType;
+    this._lastResults.eventResults = tmpListResult;
+    this.eventsResultsDuringDelay = this.hideLastResult(eventResults);
+    this.lastResultsSubject.next(this._lastResults);
+ }
+
   setResultByLayoutType(eventResults: EventResult,): EventsResultsWithDetails {
     const tempEventResult: EventsResultsWithDetails = {
       eventLabel: eventResults.EventName,
@@ -164,25 +173,22 @@ export class ResultsService {
   }
 
 
-  /**
-     * try to get video information, if api doesn't respond, it start to retry to call
-     */
-  private getVideoInfo(eventId: number, retryNumber: number = 0): void {
-    const request: VideoMetadataVirtualVideoInfoRequest = {
-      CategoryType:  this.productService.product.codeProduct,
-      SportId: this.productService.product.sportId,
-    }
+  private getVideoInfo(eventId: number, layoutType: LAYOUT_TYPE): void {
     this.elysApi.virtualV2.getVideoInfo(
       this.productService.product.sportId,
       this.productService.product.codeProduct,
       eventId
     )
-    .subscribe(
+      .subscribe(
         (videoMetadataVirtualVideoInfoResponse: IVideoInfo) => {
-          // check error from API response
-          this._currentEventVideoDuration = this.checkVideoInfo(videoMetadataVirtualVideoInfoResponse) 
-          ? videoMetadataVirtualVideoInfoResponse.VideoInfo.Video.Duration 
-          : 0;
+          // Sets the video duration
+          this._currentEventVideoDuration = this.checkVideoInfo(videoMetadataVirtualVideoInfoResponse)
+            ? (videoMetadataVirtualVideoInfoResponse.VideoInfo.Video.Duration
+              // Substract the delay used for the video info api call
+              - (videoInfoDelay/1000))
+              // Add static video intro length
+              + defaultLayoutTypeDelay[layoutType].videoIntroLength
+            : 0;
         }
       );
   }
@@ -248,7 +254,7 @@ export class ResultsService {
    */
   soccerResultAvailableForDelay(itemsToShow: number, itemsExceeded: number, eventResults: VirtualSportLastResultsResponse): EventsResultsWithDetails {
     let eventDuringDelay: EventsResultsWithDetails;
-    //Check if the items returned for soccer are a multiple of itemsToShow. 
+    //Check if the number of items returned for soccer are a multiple of itemsToShow. 
     //That means there are more than 1 week as last results
     if (itemsExceeded > 0 && itemsExceeded % itemsToShow === 0) {
       eventDuringDelay = {
@@ -264,8 +270,8 @@ export class ResultsService {
 
   public getAmericanRouletteColorClass(n: number | string): string {
     return this._americanRouletteRug.red.includes(parseInt(n.toString(), 10))
-     ? 'red'
-     : (this._americanRouletteRug.black.includes(parseInt(n.toString(), 10)) 
-     ? 'black' : 'green');
+      ? 'red'
+      : (this._americanRouletteRug.black.includes(parseInt(n.toString(), 10))
+        ? 'black' : 'green');
   }
 }

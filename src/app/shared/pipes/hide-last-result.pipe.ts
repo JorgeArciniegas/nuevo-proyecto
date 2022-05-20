@@ -1,6 +1,5 @@
-import { ComponentFactoryResolver, Pipe, PipeTransform } from '@angular/core';
-import { AmericanRouletteRug } from 'src/app/products/main/playable-board/templates/american-roulette/american-roulette.models';
-import { EventsResultsWithDetails, layoutTypeWithDelay } from 'src/app/products/main/results/results.model';
+import { Pipe, PipeTransform } from '@angular/core';
+import { defaultLayoutTypeDelay, EventsResultsWithDetails } from 'src/app/products/main/results/results.model';
 import { ResultsService } from 'src/app/products/main/results/results.service';
 import { LAYOUT_TYPE } from 'src/environments/environment.models';
 
@@ -26,13 +25,17 @@ export class HideLastResultPipe implements PipeTransform {
     }
 
     isDelayExpired(countDown: number, layoutType: LAYOUT_TYPE): boolean {
-        //sportDelay: fallback if not videoinfo is provided
-        const sportDelay: number = layoutTypeWithDelay[layoutType];
+        //defaultDelay: fallback if not videoinfo from api is provided or if video duration is <= 0
+        const defaultDelay: number = defaultLayoutTypeDelay[layoutType].videoLength;
+        // Video duration retrieved from video info api
+        // Video duration is always 0 with Keno and Colours
         const videoDuration: number = this.resultsService.currentEventVideoDuration;
-        const eventDuration: number = (videoDuration && videoDuration > 0) ? videoDuration : sportDelay;
-        const timeSpanDelay: number = this.resultsService.nextEventDuration - eventDuration;
-        console.log('timeSpanDelay', timeSpanDelay)
-        return (countDown > timeSpanDelay);
+        let currentEventDuration: number = (videoDuration && videoDuration > 0) ? videoDuration : defaultDelay;
+        // Calculate the time remaining between the end of current event and start of next event 
+        const remainingTime: number = this.resultsService.nextEventDuration - currentEventDuration;
+        console.log('remainingTime', remainingTime);
+        // If countdown is grater than remainingTime, means that current event is not finished yet and its results must be hidden
+        return (countDown > remainingTime);
     }
     
 }
