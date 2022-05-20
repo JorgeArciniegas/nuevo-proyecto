@@ -1,10 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ElysApiService, EventResult, VideoMetadataVirtualVideoInfoRequest, VideoMetadataVirtualVideoInfoResponse, VirtualSportLastResultsRequest, VirtualSportLastResultsResponse } from '@elys/elys-api';
+import { ElysApiService, EventResult, VirtualSportLastResultsRequest, VirtualSportLastResultsResponse } from '@elys/elys-api';
 import { IVideoInfo } from '@elys/elys-api/lib/virtual-v2/interfaces/video-info.interface';
 import { BehaviorSubject, Subscription, timer } from 'rxjs';
-import { HideLastResultPipe } from 'src/app/shared/pipes/hide-last-result.pipe';
-import { environment } from 'src/environments/environment';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { ProductsService } from '../../products.service';
 import { EventTime } from '../main.models';
@@ -47,7 +44,6 @@ private _timerSubscription: Subscription;
   constructor(
     private productService: ProductsService,
     private elysApi: ElysApiService,
-    private http: HttpClient
   ) {
     this._americanRouletteRug = new AmericanRouletteRug();
   }
@@ -242,9 +238,10 @@ private _timerSubscription: Subscription;
     let currentEventsResults: EventsResultsWithDetails[] = [...this._lastResults.eventResults];
     let eventDuringDelay: EventsResultsWithDetails = null;
     if (itemsExceeded > 0 && layoutType !== LAYOUT_TYPE.SOCCER) {
+      // itemsToShow is used as index to get the first item in itemsExceeded
       eventDuringDelay = this.setResultByLayoutType(eventResults.EventResults[itemsToShow]);
     } else {
-      eventDuringDelay = this.soccerResultAvailableForDelay(itemsExceeded, itemsToShow, eventResults)
+      eventDuringDelay = this.soccerResultAvailableForDelay(itemsToShow, itemsExceeded, eventResults)
     }
     //Results array during delay is made by removing the actual last result and pushing the first available in the itemsExceeded
     currentEventsResults.splice(0, 1);
@@ -263,6 +260,7 @@ private _timerSubscription: Subscription;
     //Check if the number of items returned for soccer are a multiple of itemsToShow. 
     //That means there are more than 1 week as last results
     if (itemsExceeded > 0 && itemsExceeded % itemsToShow === 0) {
+       // itemsToShow is used as index to get the first item in itemsExceeded
       eventDuringDelay = {
         eventLabel: eventResults.EventResults[itemsToShow].TournamentName,
         eventNumber: eventResults.EventResults[itemsToShow].TournamentId
