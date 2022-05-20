@@ -60,18 +60,25 @@ export interface LastResult {
 
 export const videoInfoDelay : number = 5000;
 export interface VideoLenght{
-  videoIntroLength: number;
-  videoLength: number;
+  // Includes video intro + loading time for each video + video outro
+  videoExtraDurartion: number;
+  // videoLengthFallBack should be higher than average video lenght
+  // to avoid to display the wrong result during the first 5 second 
+  // after sport is selected, if the actual duration from api is higher
+  videoLengthDurartion: number;
 }
 export interface DelayLayoutDictonary{
   [key: number]:VideoLenght;
 }
 
 export const defaultLayoutTypeDelay : DelayLayoutDictonary = {
-  [LAYOUT_TYPE.AMERICANROULETTE] : {videoIntroLength: 5, videoLength: 50},
-  [LAYOUT_TYPE.COCK_FIGHT] : {videoIntroLength: 5, videoLength: 60},
-  [LAYOUT_TYPE.COLOURS]: {videoIntroLength: 5, videoLength: 50},
-  [LAYOUT_TYPE.KENO]: {videoIntroLength: 5, videoLength: 50},
-  [LAYOUT_TYPE.RACING]: {videoIntroLength: 5, videoLength: 65},
-  [LAYOUT_TYPE.SOCCER]: {videoIntroLength: 5, videoLength: 140},
+  // videoExtraDurartion: 5 sec intro + 5 sec video loading + 5 sec outro
+  [LAYOUT_TYPE.AMERICANROULETTE] : {videoExtraDurartion: 15, videoLengthDurartion: 50},
+  [LAYOUT_TYPE.COCK_FIGHT] : {videoExtraDurartion: 20, videoLengthDurartion: 160},
+  [LAYOUT_TYPE.COLOURS]: {videoExtraDurartion: 5, videoLengthDurartion: 15},
+  [LAYOUT_TYPE.KENO]: {videoExtraDurartion: 5, videoLengthDurartion: 40},
+   // videoExtraDurartion: 10 sec intro + 5 sec video loading + 5 sec outro
+  [LAYOUT_TYPE.RACING]: {videoExtraDurartion: 20, videoLengthDurartion: 90},
+  // videoExtraDurartion 20 sec intro + 25 sec video loading (3 sec * 8 video ) + 5 sec outro
+  [LAYOUT_TYPE.SOCCER]: {videoExtraDurartion: 50, videoLengthDurartion: 140},
 }

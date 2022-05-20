@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ElysApiService, EventResult, VideoMetadataVirtualVideoInfoRequest, VideoMetadataVirtualVideoInfoResponse, VirtualSportLastResultsRequest, VirtualSportLastResultsResponse } from '@elys/elys-api';
 import { IVideoInfo } from '@elys/elys-api/lib/virtual-v2/interfaces/video-info.interface';
-import { BehaviorSubject, timer } from 'rxjs';
+import { BehaviorSubject, Subscription, timer } from 'rxjs';
 import { HideLastResultPipe } from 'src/app/shared/pipes/hide-last-result.pipe';
 import { environment } from 'src/environments/environment';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
@@ -43,7 +43,7 @@ export class ResultsService {
   private _americanRouletteRug: AmericanRouletteRug;
   eventsResultsDuringDelay: EventsResultsWithDetails[] = null;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
-
+private _timerSubscription: Subscription;
   constructor(
     private productService: ProductsService,
     private elysApi: ElysApiService,
@@ -55,6 +55,9 @@ export class ResultsService {
   private _lastResults: LastResult = { eventResults: [], layoutType: undefined };
   public lastResultsSubject: BehaviorSubject<LastResult> = new BehaviorSubject<LastResult>(this._lastResults);
   async getLastResult() {
+    // Reset previous/pending timer subsc. to avoid unuseful api call to video info.
+    // This happens when changing sport before timer expiration
+    if(this._timerSubscription) this._timerSubscription.unsubscribe();
     const layoutType: LAYOUT_TYPE = this.productService.product.layoutProducts.type;
     const request: VirtualSportLastResultsRequest = {
       SportId: this.productService.product.sportId,
@@ -71,8 +74,10 @@ export class ResultsService {
       && this.productService.product.layoutProducts.type !== LAYOUT_TYPE.KENO) {
       // Debounce few seconds video info api call. 
       // Waits for the server generates results, hopefully in the defined delay
-      timer(videoInfoDelay).subscribe(() => {
-        this.getVideoInfo(eventResults.EventResults[0].EventId, layoutType);
+      this._timerSubscription = timer(videoInfoDelay).subscribe(() => {
+        const id: number = this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER
+        ? eventResults.EventResults[0].TournamentId : eventResults.EventResults[0].EventId
+        this.getVideoInfo(id, layoutType);
       })
     }
 
@@ -186,8 +191,8 @@ export class ResultsService {
             ? (videoMetadataVirtualVideoInfoResponse.VideoInfo.Video.Duration
               // Substract the delay used for the video info api call
               - (videoInfoDelay/1000))
-              // Add static video intro length
-              + defaultLayoutTypeDelay[layoutType].videoIntroLength
+              // Add static video extra length
+              + defaultLayoutTypeDelay[layoutType].videoExtraDurartion
             : 0;
         }
       );
@@ -203,7 +208,8 @@ export class ResultsService {
       !videoMetadataVirtualVideoInfoResponse ||
       !videoMetadataVirtualVideoInfoResponse.VideoInfo ||
       !videoMetadataVirtualVideoInfoResponse.VideoUrls ||
-      videoMetadataVirtualVideoInfoResponse.VideoUrls.length === 0
+      videoMetadataVirtualVideoInfoResponse.VideoUrls.length === 0 ||
+      videoMetadataVirtualVideoInfoResponse.VideoInfo.Video.Duration <= 0
     ) return false;
     return true;
   }
