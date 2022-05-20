@@ -10,7 +10,7 @@ import { ProductsService } from '../../products.service';
 import { EventTime } from '../main.models';
 import { AmericanRouletteRug } from '../playable-board/templates/american-roulette/american-roulette.models';
 import { Band, Colour } from '../playable-board/templates/colours/colours.models';
-import { ColoursNumber, ColoursResult, defaultLayoutTypeDelay, EventsResultsWithDetails, LastResult, OVER_UNDER_COCKFIGHT, videoInfoDelay } from './results.model';
+import { ColoursNumber, ColoursResult, defaultEventDurationByLayoutType, EventsResultsWithDetails, LastResult, OVER_UNDER_COCKFIGHT, videoInfoDelay } from './results.model';
 
 @Injectable({
   providedIn: 'root'
@@ -81,7 +81,7 @@ private _timerSubscription: Subscription;
       })
     }
 
-    // results for products
+    // N. results to show for selected sport
     const resultItemsLength = this.productService.product.layoutProducts.resultItems;
     if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
       for (let i = 0; i < resultItemsLength; i++) {
@@ -192,7 +192,7 @@ private _timerSubscription: Subscription;
               // Substract the delay used for the video info api call
               - (videoInfoDelay/1000))
               // Add static video extra length
-              + defaultLayoutTypeDelay[layoutType].videoExtraDurartion
+              + defaultEventDurationByLayoutType[layoutType].videoExtraDurartion
             : 0;
         }
       );

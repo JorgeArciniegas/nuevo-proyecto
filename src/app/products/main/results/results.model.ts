@@ -71,14 +71,14 @@ export interface DelayLayoutDictonary{
   [key: number]:VideoLenght;
 }
 
-export const defaultLayoutTypeDelay : DelayLayoutDictonary = {
+export const defaultEventDurationByLayoutType : DelayLayoutDictonary = {
   // videoExtraDurartion: 5 sec intro + 5 sec video loading + 5 sec outro
   [LAYOUT_TYPE.AMERICANROULETTE] : {videoExtraDurartion: 15, videoLengthDurartion: 50},
   [LAYOUT_TYPE.COCK_FIGHT] : {videoExtraDurartion: 20, videoLengthDurartion: 160},
   [LAYOUT_TYPE.COLOURS]: {videoExtraDurartion: 5, videoLengthDurartion: 15},
   [LAYOUT_TYPE.KENO]: {videoExtraDurartion: 5, videoLengthDurartion: 40},
    // videoExtraDurartion: 10 sec intro + 5 sec video loading + 5 sec outro
-  [LAYOUT_TYPE.RACING]: {videoExtraDurartion: 20, videoLengthDurartion: 90},
+  [LAYOUT_TYPE.RACING]: {videoExtraDurartion: 20, videoLengthDurartion: 105},
   // videoExtraDurartion 20 sec intro + 25 sec video loading (3 sec * 8 video ) + 5 sec outro
   [LAYOUT_TYPE.SOCCER]: {videoExtraDurartion: 50, videoLengthDurartion: 140},
 }
