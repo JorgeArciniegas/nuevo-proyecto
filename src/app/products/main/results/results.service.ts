@@ -256,7 +256,7 @@ private _timerSubscription: Subscription;
    * @returns EventsResultsWithDetails
    */
   soccerResultAvailableForDelay(itemsToShow: number, itemsExceeded: number, eventResults: VirtualSportLastResultsResponse): EventsResultsWithDetails {
-    let eventDuringDelay: EventsResultsWithDetails;
+    let eventDuringDelay: EventsResultsWithDetails = null;
     //Check if the number of items returned for soccer are a multiple of itemsToShow. 
     //That means there are more than 1 week as last results
     if (itemsExceeded > 0 && itemsExceeded % itemsToShow === 0) {
@@ -266,9 +266,7 @@ private _timerSubscription: Subscription;
         eventNumber: eventResults.EventResults[itemsToShow].TournamentId
       };
       eventDuringDelay.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === eventDuringDelay.eventNumber);
-    } else {
-      eventDuringDelay = null;
-    }
+    } 
     return eventDuringDelay;
   }
 
