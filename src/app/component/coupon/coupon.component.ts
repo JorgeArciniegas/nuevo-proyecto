@@ -13,7 +13,7 @@ import { UserService } from '../../services/user.service';
 import { TranslateUtilityService } from '../../shared/language/translate-utility.service';
 import { WindowSizeService } from '../../services/utility/window-size/window-size.service';
 import { CouponService } from './coupon.service';
-
+import { PlaySource } from '@elys/elys-api';
 @Component({
   selector: 'app-coupon, [app-coupon]',
   templateUrl: './coupon.component.html',
@@ -44,6 +44,7 @@ export class CouponComponent implements AfterViewInit, OnDestroy {
   colourGameId: typeof ColourGameId = ColourGameId;
 
   public market: typeof Market = Market;
+  public playSource: typeof PlaySource = PlaySource;
 
   constructor(
     public couponService: CouponService,
@@ -51,7 +52,7 @@ export class CouponComponent implements AfterViewInit, OnDestroy {
     public productService: ProductsService,
     public userService: UserService,
     public windowSizeService: WindowSizeService,
-    private translateService: TranslateUtilityService
+    private translateService: TranslateUtilityService,
   ) {
     if (this.windowSizeService.windowSize.small) {
       this.maxItems = 4;
@@ -215,6 +216,15 @@ export class CouponComponent implements AfterViewInit, OnDestroy {
     } else {
       return Colour[Colour.GREEN];
     }
+  }
+
+  isBetBtnDisabled(source: PlaySource): boolean {
+    const isCouponError: boolean = !!this.couponService.error 
+    || this.couponService.isWaitingConclusionOperation 
+    || this.isBetDisabledForColoursDrangn() 
+    || this.couponService.processingOddsQueue;
+    const isCouponErrorAndroid: boolean = this.timeBlocked || this.userService.isModalOpen || isCouponError;
+    return source ===  PlaySource.VDeskGApp ? isCouponErrorAndroid : isCouponError;
   }
 
 }
