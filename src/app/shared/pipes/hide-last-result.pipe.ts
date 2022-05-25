@@ -26,7 +26,7 @@ export class HideLastResultPipe implements PipeTransform {
 
     isEventExpired(countDown: number, layoutType: LAYOUT_TYPE): boolean {
         //defaultDelay: fallback if not videoinfo from api is provided or if video duration is <= 0
-        const defaultEventDuration: number = defaultEventDurationByLayoutType[layoutType].videoLengthDurartion;
+        const defaultEventDuration: number = defaultEventDurationByLayoutType[layoutType].videoLengthDuration;
         // Video duration retrieved from video info api
         // Video duration is always 0 with Keno and Colours
         const eventDuration: number = this.resultsService.currentEventVideoDuration;

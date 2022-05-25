@@ -188,7 +188,7 @@ private _timerSubscription: Subscription;
               // Substract the delay used for the video info api call
               - (videoInfoDelay/1000))
               // Add static video extra length
-              + defaultEventDurationByLayoutType[layoutType].videoExtraDurartion
+              + defaultEventDurationByLayoutType[layoutType].videoExtraDuration
             : 0;
         }
       );
