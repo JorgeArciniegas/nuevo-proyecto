@@ -33,7 +33,7 @@ export class HideLastResultPipe implements PipeTransform {
         console.log('video info manupulated duration', eventDuration);
         let currentEventDuration: number = (eventDuration && eventDuration > 0) ? eventDuration : defaultEventDuration;
         console.log('current event duration', currentEventDuration);
-        // Calculate the time remaining between the end of current event and start of next event 
+        // Calculate the time remaining between the nextEvent duration (total cd from the beginning) and current event duration
         const timeToShowResult: number = this.resultsService.nextEventDuration - currentEventDuration;
         console.log('show at second:', timeToShowResult);
         // If countdown is grater than remainingTime, means that current event is not finished yet and its results must be hidden
