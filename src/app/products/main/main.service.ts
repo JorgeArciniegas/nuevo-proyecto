@@ -208,9 +208,6 @@ export class MainService {
         this.remaingTimeCounter.next(this.eventDetails.eventTime);
         
         this.resultService.countDown = this.remainingTime;
-
-
-        //this.handleHiddenResultByCoundDown(this.resultService.countDown);
       }
     } catch (err) {
       console.log('GET TIME ERROR ---> ', err);
