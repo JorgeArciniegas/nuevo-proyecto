@@ -90,7 +90,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ElysCouponModule.forRoot(
       { deviceLayout: PlaySource.VDeskWeb }
     ),
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
     LanguageModule
   ],
   entryComponents: [
