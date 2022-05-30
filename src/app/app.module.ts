@@ -44,64 +44,55 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [
-    componentDeclarations,
-    ProductDialogComponent,
-    BetoddsComponent,
-    StatisticsComponent,
-    RaceStatisticsComponent,
-    CockFightStatisticsComponent,
-    SoccerStatisticsComponent,
-    PaytableComponent,
-    RankingComponent,
-    SoccerRankingComponent,
-    KenoPaytableComponent,
-    ColoursPaytableComponent,
-    ColorsHotAndColdComponent,
-    HotAndColdComponent,
-    KenoHotAndColdComponent,
-    PayCancelDialogComponent,
-    ConfirmDestroyCouponComponent,
-    GroupingsComponent,
-    LabelByGroupingPipe,
-    AmericanrouletteHotAndColdComponent
-  ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    NoopAnimationsModule,
-    MatDialogModule,
-    MatSlideToggleModule,
-    BrowserAnimationsModule,
-    MatProgressSpinnerModule,
-    SharedModule,
-    NgxBarcodeModule,
-    QRCodeModule,
-    ElysStorageLibModule.forRoot({
-      isCrypto: true,
-      cryptoString: 'VgenStorage',
-      KeyUnencodedList: ['versionApp', 'operatorData', 'callBackURL'],
-      versionStorage: VERSION.version
-    }),
-
-    ElysApiModule.forRoot({
-      urlApi: environment.baseApiUrl
-    }),
-    ElysCouponModule.forRoot(
-      { deviceLayout: PlaySource.VDeskWeb }
-    ),
-    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
-    LanguageModule
-  ],
-  entryComponents: [
-    ProductDialogComponent,
-    PayCancelDialogComponent,
-    ConfirmDestroyCouponComponent
-  ],
-  providers: [
-    providerDeclarations
-  ],
-
-  bootstrap: [AppComponent]
+    declarations: [
+        componentDeclarations,
+        ProductDialogComponent,
+        BetoddsComponent,
+        StatisticsComponent,
+        RaceStatisticsComponent,
+        CockFightStatisticsComponent,
+        SoccerStatisticsComponent,
+        PaytableComponent,
+        RankingComponent,
+        SoccerRankingComponent,
+        KenoPaytableComponent,
+        ColoursPaytableComponent,
+        ColorsHotAndColdComponent,
+        HotAndColdComponent,
+        KenoHotAndColdComponent,
+        PayCancelDialogComponent,
+        ConfirmDestroyCouponComponent,
+        GroupingsComponent,
+        LabelByGroupingPipe,
+        AmericanrouletteHotAndColdComponent
+    ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        NoopAnimationsModule,
+        MatDialogModule,
+        MatSlideToggleModule,
+        BrowserAnimationsModule,
+        MatProgressSpinnerModule,
+        SharedModule,
+        NgxBarcodeModule,
+        QRCodeModule,
+        ElysStorageLibModule.forRoot({
+            isCrypto: true,
+            cryptoString: 'VgenStorage',
+            KeyUnencodedList: ['versionApp', 'operatorData', 'callBackURL'],
+            versionStorage: VERSION.version
+        }),
+        ElysApiModule.forRoot({
+            urlApi: environment.baseApiUrl
+        }),
+        ElysCouponModule.forRoot({ deviceLayout: PlaySource.VDeskWeb }),
+        RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
+        LanguageModule
+    ],
+    providers: [
+        providerDeclarations
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
