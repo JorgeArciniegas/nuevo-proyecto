@@ -45,7 +45,7 @@
     "@elys/elys-feeds": "^0.1.2",
     "@elys/elys-storage-lib": "^1.0.0",
     "@elys/nativescript-zxing": "^1.6.1",
-    "@nativescript/angular": "12.2.0",
+    "@nativescript/angular": "13.0.3",
     "@nativescript/core": "7.0.0",
     "@nativescript/local-notifications": "^5.1.0",
     "@nativescript/webpack": "3.0.0",
