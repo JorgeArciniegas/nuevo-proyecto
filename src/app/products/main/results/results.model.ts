@@ -10,6 +10,7 @@ export class EventsResultsWithDetails {
   kenoResults?: number[];
   coloursResults?: ColoursResult;
   americanRouletteResults?: AmericanRouletteResults;
+  show?: boolean;
 }
 
 export interface RacePodium {

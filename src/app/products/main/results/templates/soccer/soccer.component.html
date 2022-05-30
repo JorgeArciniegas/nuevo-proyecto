@@ -1,7 +1,8 @@
 <div class="results-event">
   <mat-grid-list fxFill cols="{{ items }}" rowHeight="{{rowHeight + 1}}">
     <ng-container *ngFor="let event of (results|async)
-     | hideLastResult: typeLayout.SOCCER : resultsService?.countDownInSeconds">
+     | hideLastResult: typeLayout.SOCCER : resultsService?.countDownInSeconds
+     | slice:0:resultsService?.resultItemsLength">
       <ng-container *ngIf="event">
         <mat-grid-tile colspan="{{ items }}">
           <div fxFill class="card-box-result-soccer">

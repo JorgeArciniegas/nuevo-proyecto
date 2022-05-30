@@ -31,16 +31,23 @@ export class ResultsService {
     if (this.countDown) {
       return this.countDown.minute * 60 + this.countDown.second;
     }
-    return 0;
+    // On app init, countDown could be not instantly retrieved
+    // In that case nextEventDuration is used in place
+    return this.nextEventDuration;
   }
+
   private _currentEventVideoDuration: number;
   public get currentEventVideoDuration(): number {
     return this._currentEventVideoDuration;
   }
+  private _resultItemsLength: number;
+  public get resultItemsLength(): number {
+    return this._resultItemsLength;
+  }
   private _americanRouletteRug: AmericanRouletteRug;
   eventsResultsDuringDelay: EventsResultsWithDetails[] = null;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
-private _timerSubscription: Subscription;
+  private _timerSubscription: Subscription;
   constructor(
     private productService: ProductsService,
     private elysApi: ElysApiService,
@@ -53,8 +60,10 @@ private _timerSubscription: Subscription;
   async getLastResult() {
     // Reset previous/pending timer subsc. to avoid unuseful api call to video info.
     // This happens when changing sport before timer expiration
-    if(this._timerSubscription) this._timerSubscription.unsubscribe();
+    if (this._timerSubscription) this._timerSubscription.unsubscribe();
     const layoutType: LAYOUT_TYPE = this.productService.product.layoutProducts.type;
+        //Number of item to show as last result defined in environment
+        this._resultItemsLength = this.productService.product.layoutProducts.resultItems;
     const request: VirtualSportLastResultsRequest = {
       SportId: this.productService.product.sportId,
       CategoryType: this.productService.product.codeProduct,
@@ -62,6 +71,8 @@ private _timerSubscription: Subscription;
     };
     const tmpListResult: EventsResultsWithDetails[] = [];
     const eventResults: VirtualSportLastResultsResponse = await this.elysApi.virtual.getLastResult(request);
+    // Items exceeded over items to show in template
+    const itemsExceeded = eventResults.EventResults.length - this._resultItemsLength;
 
     this._currentEventVideoDuration = 0;
     // Color and Keno doesn't need to call video info. 
@@ -72,15 +83,15 @@ private _timerSubscription: Subscription;
       // Waits for the server generates results, hopefully in the defined delay
       this._timerSubscription = timer(videoInfoDelay).subscribe(() => {
         const id: number = this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER
-        ? eventResults.EventResults[0].TournamentId : eventResults.EventResults[0].EventId
+          ? eventResults.EventResults[0].TournamentId
+          : eventResults.EventResults[0].EventId
         this.getVideoInfo(id, layoutType);
       })
     }
-
-    // N. results to show for selected sport
-    const resultItemsLength = this.productService.product.layoutProducts.resultItems;
     if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
-      for (let i = 0; i < resultItemsLength; i++) {
+      // Loop for the items defined in environment + 1 instead the whole api result
+      const forLength: number = (itemsExceeded > 0) ? this._resultItemsLength + 1 : this._resultItemsLength;
+      for (let i = 0; i < forLength; i++) {
         if (!eventResults.EventResults || !eventResults.EventResults[i]) {
           return;
         }
@@ -92,23 +103,65 @@ private _timerSubscription: Subscription;
         // create last Result
         const tempEventResult: EventsResultsWithDetails = {
           eventLabel: eventResults.EventResults[0].TournamentName,
-          eventNumber: eventResults.EventResults[0].TournamentId
+          eventNumber: eventResults.EventResults[0].TournamentId,
+          show: true
         };
         // group by last Tournament
         tempEventResult.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === tempEventResult.eventNumber);
         tmpListResult.push(tempEventResult);
+        let exceededSoccerResults: EventsResultsWithDetails = null;
+        //Check if the number of items returned for soccer are a multiple of itemsToShow. 
+        //That means there are more than 1 week as last results
+        if (itemsExceeded > 0 && itemsExceeded % this._resultItemsLength === 0) {
+          exceededSoccerResults = {
+            eventLabel: eventResults.EventResults[this._resultItemsLength].TournamentName,
+            eventNumber: eventResults.EventResults[this._resultItemsLength].TournamentId,
+            show: true
+          };
+          exceededSoccerResults.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === exceededSoccerResults.eventNumber);
+          tmpListResult.push(exceededSoccerResults);
+        }
       }
     }
- this._lastResults.layoutType = layoutType;
+    this._lastResults.layoutType = layoutType;
     this._lastResults.eventResults = tmpListResult;
-    this.eventsResultsDuringDelay = this.hideLastResult(eventResults);
     this.lastResultsSubject.next(this._lastResults);
- }
+  }
+
+  /**
+     * 
+     * @param itemsToShow number of item to show as last results defined in environment
+     * @param itemsExceeded difference between items returned from api and itemsToShow
+     * @param eventResults  all results from api
+     * @returns EventsResultsWithDetails
+     */
+  // soccerResultAvailableForDelay(eventResults: VirtualSportLastResultsResponse): EventsResultsWithDetails {
+  //   const itemsToShow: number = this.productService.product.layoutProducts.resultItems;
+  //   //Difference between items returned from api and itemsToShow
+  //   const itemsExceeded = eventResults.EventResults.length - itemsToShow;
+
+  //   let exceededSoccerResults: EventsResultsWithDetails = null;
+  //   //Check if the number of items returned for soccer are a multiple of itemsToShow. 
+  //   //That means there are more than 1 week as last results
+  //   if (itemsExceeded > 0 && itemsExceeded % itemsToShow === 0) {
+  //     // itemsToShow is used as index to get the first item in itemsExceeded
+  //     exceededSoccerResults = {
+  //       eventLabel: eventResults.EventResults[itemsToShow].TournamentName,
+  //       eventNumber: eventResults.EventResults[itemsToShow].TournamentId,
+  //       show: true
+  //     };
+  //     exceededSoccerResults.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === exceededSoccerResults.eventNumber);
+  //   }
+  //   return exceededSoccerResults;
+  // }
+
+
 
   setResultByLayoutType(eventResults: EventResult,): EventsResultsWithDetails {
     const tempEventResult: EventsResultsWithDetails = {
       eventLabel: eventResults.EventName,
-      eventNumber: eventResults.EventId
+      eventNumber: eventResults.EventId,
+      show: true
     };
     let results: string[] = [];
     switch (this.productService.product.layoutProducts.type) {
@@ -186,9 +239,9 @@ private _timerSubscription: Subscription;
           this._currentEventVideoDuration = this.checkVideoInfo(videoMetadataVirtualVideoInfoResponse)
             ? (videoMetadataVirtualVideoInfoResponse.VideoInfo.Video.Duration
               // Substract the delay used for the video info api call
-              - (videoInfoDelay/1000))
-              // Add static video extra length
-              + defaultEventDurationByLayoutType[layoutType].videoExtraDuration
+              - (videoInfoDelay / 1000))
+            // Add static video extra length
+            + defaultEventDurationByLayoutType[layoutType].videoExtraDuration
             : 0;
         }
       );
@@ -229,46 +282,24 @@ private _timerSubscription: Subscription;
    * @param eventResults  all results from api
    * @returns EventsResultsWithDetails[] array of las results to show during delay period
    */
-  hideLastResult(eventResults: VirtualSportLastResultsResponse): EventsResultsWithDetails[] {
-    //Number of item to show as last result defined in environment
-    const itemsToShow: number = this.productService.product.layoutProducts.resultItems;
-    //Difference between items returned from api and itemsToShow
-    const itemsExceeded = eventResults.EventResults.length - itemsToShow;
-    const layoutType: LAYOUT_TYPE = this._lastResults.layoutType
-    let currentEventsResults: EventsResultsWithDetails[] = [...this._lastResults.eventResults];
-    let eventDuringDelay: EventsResultsWithDetails = null;
-    if (itemsExceeded > 0 && layoutType !== LAYOUT_TYPE.SOCCER) {
-      // itemsToShow is used as index to get the first item in itemsExceeded
-      eventDuringDelay = this.setResultByLayoutType(eventResults.EventResults[itemsToShow]);
-    } else {
-      eventDuringDelay = this.soccerResultAvailableForDelay(itemsToShow, itemsExceeded, eventResults)
-    }
-    //Results array during delay is made by removing the actual last result and pushing the first available in the itemsExceeded
-    currentEventsResults.splice(0, 1);
-    currentEventsResults.push(eventDuringDelay);
-    return currentEventsResults;
-  }
-  /**
-   * 
-   * @param itemsToShow number of item to show as last results defined in environment
-   * @param itemsExceeded difference between items returned from api and itemsToShow
-   * @param eventResults  all results from api
-   * @returns EventsResultsWithDetails
-   */
-  soccerResultAvailableForDelay(itemsToShow: number, itemsExceeded: number, eventResults: VirtualSportLastResultsResponse): EventsResultsWithDetails {
-    let eventDuringDelay: EventsResultsWithDetails = null;
-    //Check if the number of items returned for soccer are a multiple of itemsToShow. 
-    //That means there are more than 1 week as last results
-    if (itemsExceeded > 0 && itemsExceeded % itemsToShow === 0) {
-       // itemsToShow is used as index to get the first item in itemsExceeded
-      eventDuringDelay = {
-        eventLabel: eventResults.EventResults[itemsToShow].TournamentName,
-        eventNumber: eventResults.EventResults[itemsToShow].TournamentId
-      };
-      eventDuringDelay.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === eventDuringDelay.eventNumber);
-    } 
-    return eventDuringDelay;
-  }
+  // setDelayedResult(eventResults: VirtualSportLastResultsResponse): EventsResultsWithDetails[] {
+  //   //Number of item to show as last result defined in environment
+  //   const itemsToShow: number = this.productService.product.layoutProducts.resultItems;
+  //   //Difference between items returned from api and itemsToShow
+  //   const itemsExceeded = eventResults.EventResults.length - itemsToShow;
+  //   const layoutType: LAYOUT_TYPE = this._lastResults.layoutType
+  //   let currentEventsResults: EventsResultsWithDetails[] = [...this._lastResults.eventResults];
+  //   let eventDuringDelay: EventsResultsWithDetails = null;
+  //   if (itemsExceeded > 0 && layoutType !== LAYOUT_TYPE.SOCCER) {
+  //     // itemsToShow is used as index to get the first item in itemsExceeded
+  //     eventDuringDelay = this.setResultByLayoutType(eventResults.EventResults[itemsToShow]);
+  //   }
+  //   //Results array during delay is made by removing the actual last result and pushing the first available in the itemsExceeded
+  //   currentEventsResults.splice(0, 1);
+  //   currentEventsResults.push(eventDuringDelay);
+  //   return currentEventsResults;
+  // }
+
 
   public getAmericanRouletteColorClass(n: number | string): string {
     return this._americanRouletteRug.red.includes(parseInt(n.toString(), 10))

@@ -206,7 +206,6 @@ export class MainService {
         // Shown seconds
         this.eventDetails.eventTime.second = this.remainingTime.second;
         this.remaingTimeCounter.next(this.eventDetails.eventTime);
-        
         this.resultService.countDown = this.remainingTime;
       }
     } catch (err) {
