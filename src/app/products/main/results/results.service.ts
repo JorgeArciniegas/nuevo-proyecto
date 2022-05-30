@@ -128,35 +128,6 @@ export class ResultsService {
     this.lastResultsSubject.next(this._lastResults);
   }
 
-  /**
-     * 
-     * @param itemsToShow number of item to show as last results defined in environment
-     * @param itemsExceeded difference between items returned from api and itemsToShow
-     * @param eventResults  all results from api
-     * @returns EventsResultsWithDetails
-     */
-  // soccerResultAvailableForDelay(eventResults: VirtualSportLastResultsResponse): EventsResultsWithDetails {
-  //   const itemsToShow: number = this.productService.product.layoutProducts.resultItems;
-  //   //Difference between items returned from api and itemsToShow
-  //   const itemsExceeded = eventResults.EventResults.length - itemsToShow;
-
-  //   let exceededSoccerResults: EventsResultsWithDetails = null;
-  //   //Check if the number of items returned for soccer are a multiple of itemsToShow. 
-  //   //That means there are more than 1 week as last results
-  //   if (itemsExceeded > 0 && itemsExceeded % itemsToShow === 0) {
-  //     // itemsToShow is used as index to get the first item in itemsExceeded
-  //     exceededSoccerResults = {
-  //       eventLabel: eventResults.EventResults[itemsToShow].TournamentName,
-  //       eventNumber: eventResults.EventResults[itemsToShow].TournamentId,
-  //       show: true
-  //     };
-  //     exceededSoccerResults.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === exceededSoccerResults.eventNumber);
-  //   }
-  //   return exceededSoccerResults;
-  // }
-
-
-
   setResultByLayoutType(eventResults: EventResult,): EventsResultsWithDetails {
     const tempEventResult: EventsResultsWithDetails = {
       eventLabel: eventResults.EventName,
@@ -277,29 +248,6 @@ export class ResultsService {
       return Colour.GREEN;
     }
   }
-
-  /**
-   * @param eventResults  all results from api
-   * @returns EventsResultsWithDetails[] array of las results to show during delay period
-   */
-  // setDelayedResult(eventResults: VirtualSportLastResultsResponse): EventsResultsWithDetails[] {
-  //   //Number of item to show as last result defined in environment
-  //   const itemsToShow: number = this.productService.product.layoutProducts.resultItems;
-  //   //Difference between items returned from api and itemsToShow
-  //   const itemsExceeded = eventResults.EventResults.length - itemsToShow;
-  //   const layoutType: LAYOUT_TYPE = this._lastResults.layoutType
-  //   let currentEventsResults: EventsResultsWithDetails[] = [...this._lastResults.eventResults];
-  //   let eventDuringDelay: EventsResultsWithDetails = null;
-  //   if (itemsExceeded > 0 && layoutType !== LAYOUT_TYPE.SOCCER) {
-  //     // itemsToShow is used as index to get the first item in itemsExceeded
-  //     eventDuringDelay = this.setResultByLayoutType(eventResults.EventResults[itemsToShow]);
-  //   }
-  //   //Results array during delay is made by removing the actual last result and pushing the first available in the itemsExceeded
-  //   currentEventsResults.splice(0, 1);
-  //   currentEventsResults.push(eventDuringDelay);
-  //   return currentEventsResults;
-  // }
-
 
   public getAmericanRouletteColorClass(n: number | string): string {
     return this._americanRouletteRug.red.includes(parseInt(n.toString(), 10))
