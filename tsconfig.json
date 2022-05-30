@@ -17,6 +17,9 @@
       "dom",
       "es2017"
     ],
-    "removeComments": false
+    "removeComments": false,
+
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
   }
 }

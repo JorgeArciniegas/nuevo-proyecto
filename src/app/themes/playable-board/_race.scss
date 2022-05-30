@@ -1,6 +1,6 @@
 .playable-grid-buttons{
   .mat-grid-tile{
-      .mat-figure{
+      .mat-grid-tile-content{
           padding: 5px;
           .playable-row-tile{
               padding: 5px;
@@ -21,7 +21,7 @@
 }
 /* .playable-special-bets{
   .mat-grid-tile{
-      .mat-figure{
+      .mat-grid-tile-content{
         // padding: 0px 10px;
       }
   }

@@ -347,13 +347,13 @@ html {
 
 		mat-grid-tile {
 			&.tile-p-t-5 {
-				figure {
+				.mat-grid-tile-content {
 					padding-top: 5px;
 				}
 			}
 
 			&.tile-p-b-5 {
-				figure {
+				.mat-grid-tile-content {
 					padding-bottom: 5px;
 				}
 			}
@@ -380,7 +380,7 @@ html {
 
 		.grid-keyboard-number {
 			.mat-grid-tile {
-				.mat-figure {
+				.mat-grid-tile-content {
 					padding: 5px;
 				}
 			}
@@ -466,7 +466,7 @@ html {
 		}
 
 		.polifuctional-area {
-			.mat-figure {
+			.mat-grid-tile-content {
 				padding-top: 10px;
 				margin: 0 6px;
 			}
