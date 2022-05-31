@@ -1,5 +1,5 @@
 <div class="results-event" fxFlexAlign="row">
-  <div fxFlex="50" *ngFor="let result of (results|async) | hideLastResult: typeLayout.COLOURS : resultsService?.countDownInSeconds">
+  <div fxFlex="50" *ngFor="let result of (results|async) | hideLastResult: resultsService?.countDownInSeconds">
     <mat-grid-list fxFill cols="{{ result.coloursResults?.numbersExtracted.length + 3 }}" rowHeight="{{rowHeight + 1}}">
       <mat-grid-tile colspan="{{ result.coloursResults?.numbersExtracted.length + 3 }}">
         <div fxFill class="card-box-result-keno">

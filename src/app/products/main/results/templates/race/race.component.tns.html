@@ -1,5 +1,11 @@
-<GridLayout rows="*" columns="*,*,*,*" class="result-list-race" *ngIf="(results|async)">
-  <GridLayout col="{{i}}" class="card-box-result" rows="*,*" columns="*" *ngFor="let race of (results|async); let i = index;">
+<GridLayout rows="*" columns="*,*,*,*" class="result-list-race" *ngIf="(results|async) | hideLastResult: resultsService?.countDownInSeconds as results ">
+  <GridLayout 
+  *ngFor="let race of results let i = index;"
+  col="{{i}}" 
+  class="card-box-result" 
+  rows="*,*" 
+  columns="*" 
+ >
     <StackLayout row="0" class="header radius-5">
       <Label text="{{race.eventLabel}}" class="raceNumber" horizontalAlignment="center"
         verticalAlignment="center"></Label>

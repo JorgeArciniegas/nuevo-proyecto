@@ -1,5 +1,10 @@
 <GridLayout rows="*" columns="*,*,*,*" class="result-list-race">
-  <GridLayout col="{{i}}" class="card-box-result" rows="*,*" columns="*" *ngFor="let event of (results|async); let i = index;">
+  <GridLayout
+  col="{{i}}"
+  class="card-box-result"
+  rows="*,*"
+  columns="*"
+  *ngFor="let event of (results|async) | hideLastResult: resultsService?.countDownInSeconds; let i = index;">
     <GridLayout row="0" class="header">
       <Label text="{{event.eventLabel}}" class="raceNumber" horizontalAlignment="center"
         verticalAlignment="center"></Label>

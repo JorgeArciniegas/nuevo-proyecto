@@ -33,17 +33,29 @@ export class ResultsService {
     }
     // On app init, countDown could be not instantly retrieved
     // In that case nextEventDuration is used in place
-    return this.nextEventDuration;
+    return (this.nextEventDuration && this.nextEventDuration > 0) ? this.nextEventDuration : 120;
   }
 
   private _currentEventVideoDuration: number;
   public get currentEventVideoDuration(): number {
     return this._currentEventVideoDuration;
   }
+
+  /**
+   * Number of item to show as last result defined in environment
+   */
   private _resultItemsLength: number;
   public get resultItemsLength(): number {
-    return this._resultItemsLength;
+    return this.productService.product.layoutProducts.resultItems
   }
+
+
+  public get layoutType() : LAYOUT_TYPE {
+    return this.productService.product.layoutProducts.type;
+  }
+
+
+
   private _americanRouletteRug: AmericanRouletteRug;
   eventsResultsDuringDelay: EventsResultsWithDetails[] = null;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
@@ -61,43 +73,38 @@ export class ResultsService {
     // Reset previous/pending timer subsc. to avoid unuseful api call to video info.
     // This happens when changing sport before timer expiration
     if (this._timerSubscription) this._timerSubscription.unsubscribe();
-    const layoutType: LAYOUT_TYPE = this.productService.product.layoutProducts.type;
-        //Number of item to show as last result defined in environment
-        this._resultItemsLength = this.productService.product.layoutProducts.resultItems;
+
+
     const request: VirtualSportLastResultsRequest = {
       SportId: this.productService.product.sportId,
       CategoryType: this.productService.product.codeProduct,
       MultiFeedType: this.productService.product.layoutProducts.multiFeedType
     };
-    const tmpListResult: EventsResultsWithDetails[] = [];
+
+    let tmpListResult: EventsResultsWithDetails[] = [];
     const eventResults: VirtualSportLastResultsResponse = await this.elysApi.virtual.getLastResult(request);
     // Items exceeded over items to show in template
-    const itemsExceeded = eventResults.EventResults.length - this._resultItemsLength;
+    const itemsExceeded = eventResults.EventResults.length - this.resultItemsLength;
 
     this._currentEventVideoDuration = 0;
-    // Color and Keno doesn't need to call video info. 
+    // Color and Keno doesn't need to call video info.
     // Default client delay is used instead
-    if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.COLOURS
-      && this.productService.product.layoutProducts.type !== LAYOUT_TYPE.KENO) {
-      // Debounce few seconds video info api call. 
+    if (this.layoutType !== LAYOUT_TYPE.COLOURS
+      && this.layoutType !== LAYOUT_TYPE.KENO) {
+      // Debounce few seconds video info api call.
       // Waits for the server generates results, hopefully in the defined delay
       this._timerSubscription = timer(videoInfoDelay).subscribe(() => {
-        const id: number = this.productService.product.layoutProducts.type === LAYOUT_TYPE.SOCCER
+        const id: number = this.layoutType === LAYOUT_TYPE.SOCCER
           ? eventResults.EventResults[0].TournamentId
           : eventResults.EventResults[0].EventId
-        this.getVideoInfo(id, layoutType);
+        this.getVideoInfo(id, this.layoutType);
       })
     }
-    if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
-      // Loop for the items defined in environment + 1 instead the whole api result
-      const forLength: number = (itemsExceeded > 0) ? this._resultItemsLength + 1 : this._resultItemsLength;
-      for (let i = 0; i < forLength; i++) {
-        if (!eventResults.EventResults || !eventResults.EventResults[i]) {
-          return;
-        }
-        // set the default parameters on the temporary EventResult
-        tmpListResult.push(this.setResultByLayoutType(eventResults.EventResults[i]));
-      }
+    //TODO: inserire switch e metodi all'interno
+    if (this.layoutType !== LAYOUT_TYPE.SOCCER) {
+      console.log('eventResults', eventResults.EventResults.slice(0, this.resultItemsLength +1 ));
+      tmpListResult = this.setResultByLayoutType( eventResults.EventResults.slice(0, this.resultItemsLength +1 ));
+      console.log('tmpListResult', tmpListResult)
     } else {
       if (eventResults.EventResults !== null) {
         // create last Result
@@ -110,12 +117,12 @@ export class ResultsService {
         tempEventResult.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === tempEventResult.eventNumber);
         tmpListResult.push(tempEventResult);
         let exceededSoccerResults: EventsResultsWithDetails = null;
-        //Check if the number of items returned for soccer are a multiple of itemsToShow. 
+        //Check if the number of items returned for soccer are a multiple of itemsToShow.
         //That means there are more than 1 week as last results
-        if (itemsExceeded > 0 && itemsExceeded % this._resultItemsLength === 0) {
+        if (itemsExceeded > 0 && itemsExceeded % this.resultItemsLength === 0) {
           exceededSoccerResults = {
-            eventLabel: eventResults.EventResults[this._resultItemsLength].TournamentName,
-            eventNumber: eventResults.EventResults[this._resultItemsLength].TournamentId,
+            eventLabel: eventResults.EventResults[this.resultItemsLength].TournamentName,
+            eventNumber: eventResults.EventResults[this.resultItemsLength].TournamentId,
             show: true
           };
           exceededSoccerResults.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === exceededSoccerResults.eventNumber);
@@ -123,80 +130,95 @@ export class ResultsService {
         }
       }
     }
-    this._lastResults.layoutType = layoutType;
+    this._lastResults.layoutType = this.layoutType;
     this._lastResults.eventResults = tmpListResult;
     this.lastResultsSubject.next(this._lastResults);
   }
 
-  setResultByLayoutType(eventResults: EventResult,): EventsResultsWithDetails {
-    const tempEventResult: EventsResultsWithDetails = {
-      eventLabel: eventResults.EventName,
-      eventNumber: eventResults.EventId,
-      show: true
-    };
-    let results: string[] = [];
-    switch (this.productService.product.layoutProducts.type) {
-      case LAYOUT_TYPE.RACING:
-        results = eventResults.Result.split('-');
-        tempEventResult.racePodium = {
-          firstPlace: Number.parseInt(results[0], 0),
-          secondPlace: Number.parseInt(results[1], 0),
-          thirdPlace: Number.parseInt(results[2], 0)
-        };
-        break;
-      case LAYOUT_TYPE.COCK_FIGHT:
-        results = eventResults.Result.split('-');
-        tempEventResult.cockResult = {
-          winner: Number.parseInt(results[0], 0),
-          ou: results[1] as OVER_UNDER_COCKFIGHT,
-          sector: Number.parseInt(results[2], 0),
-        };
-        break;
-      case LAYOUT_TYPE.KENO:
-        results = eventResults.Result.split(',');
-        const kenoResults: number[] = results.map(result => Number.parseInt(result, 0));
-        tempEventResult.kenoResults = kenoResults;
-        break;
-      case LAYOUT_TYPE.COLOURS:
-        results = eventResults.Result.split(',');
-        const coloursNumbers: ColoursNumber[] = [];
-        const numbersExtracted: number[] = results.map(result => Number.parseInt(result, 0));
-        for (const numberExtracted of numbersExtracted) {
-          const coloursNumber: ColoursNumber = {
-            number: numberExtracted,
-            colour: this.checkNumberColour(numberExtracted)
-          };
-          coloursNumbers.push(coloursNumber);
-        }
-        const hiloNumber: number = numbersExtracted.reduce((a, b) => a + b, 0);
-        let hiloWinningSelection: Band;
-        if (hiloNumber >= 21 && hiloNumber <= 148) {
-          hiloWinningSelection = Band.LO;
-        } else if (hiloNumber >= 149 && hiloNumber <= 151) {
-          hiloWinningSelection = Band.MID;
-        } else {
-          hiloWinningSelection = Band.HI;
-        }
-        const coloursResult: ColoursResult = {
-          numbersExtracted: coloursNumbers,
-          hiloWinningSelection: hiloWinningSelection,
-          hiloNumber: hiloNumber
-        };
-        tempEventResult.coloursResults = coloursResult;
-        break;
-      case LAYOUT_TYPE.AMERICANROULETTE:
-        const resultNumber = eventResults.Result;
-        tempEventResult.americanRouletteResults = {
-          result: resultNumber,
-          color: this.getAmericanRouletteColorClass(resultNumber)
-        }
-        break;
-      default:
-        break;
-    }
-    return tempEventResult;
-  }
 
+
+  setResultByLayoutType(eventResults: EventResult[]): EventsResultsWithDetails[] {
+    let eventsResultsWithDetails: EventsResultsWithDetails[] = []
+    eventResults.forEach( event =>{
+      let eventResultWithDetails: EventsResultsWithDetails = {
+        eventLabel: event.EventName,
+        eventNumber: event.EventId,
+        show: true
+      };
+      let results: string[] = [];
+      switch (this.productService.product.layoutProducts.type) {
+        case LAYOUT_TYPE.RACING:
+          results = event.Result.split('-');
+          eventResultWithDetails = {
+            ...eventResultWithDetails,
+            racePodium : {
+              firstPlace: Number.parseInt(results[0], 0),
+              secondPlace: Number.parseInt(results[1], 0),
+              thirdPlace: Number.parseInt(results[2], 0)
+            }
+          }
+          break;
+        case LAYOUT_TYPE.COCK_FIGHT:
+          results = event.Result.split('-');
+          eventResultWithDetails = {
+            ...eventResultWithDetails,
+              cockResult : {
+              winner: Number.parseInt(results[0], 0),
+              ou: results[1] as OVER_UNDER_COCKFIGHT,
+              sector: Number.parseInt(results[2], 0),
+            }
+          }
+          break;
+        case LAYOUT_TYPE.KENO:
+          results = event.Result.split(',');
+          eventResultWithDetails = {
+            ...eventResultWithDetails,
+            kenoResults : results.map(result => Number.parseInt(result, 0))
+          }
+          break;
+        case LAYOUT_TYPE.COLOURS:
+          results = event.Result.split(',');
+          const coloursNumbers: ColoursNumber[] = [];
+          const numbersExtracted: number[] = results.map(result => Number.parseInt(result, 0));
+          for (const numberExtracted of numbersExtracted) {
+            const coloursNumber: ColoursNumber = {
+              number: numberExtracted,
+              colour: this.checkNumberColour(numberExtracted)
+            };
+            coloursNumbers.push(coloursNumber);
+          }
+          const hiloNumber: number = numbersExtracted.reduce((a, b) => a + b, 0);
+          let hiloWinningSelection: Band;
+          if (hiloNumber >= 21 && hiloNumber <= 148) {
+            hiloWinningSelection = Band.LO;
+          } else if (hiloNumber >= 149 && hiloNumber <= 151) {
+            hiloWinningSelection = Band.MID;
+          } else {
+            hiloWinningSelection = Band.HI;
+          }
+          const coloursResult: ColoursResult = {
+            numbersExtracted: coloursNumbers,
+            hiloWinningSelection: hiloWinningSelection,
+            hiloNumber: hiloNumber
+          };
+          eventResultWithDetails.coloursResults = coloursResult;
+          break;
+        case LAYOUT_TYPE.AMERICANROULETTE:
+          eventResultWithDetails = {
+            ...eventResultWithDetails,
+            americanRouletteResults : {
+              result: event.Result,
+              color: this.getAmericanRouletteColorClass(event.Result)
+            }
+          }
+          break;
+        default:
+          break;
+      }
+      eventsResultsWithDetails.push(eventResultWithDetails);
+    })
+    return eventsResultsWithDetails;
+  }
 
   private getVideoInfo(eventId: number, layoutType: LAYOUT_TYPE): void {
     this.elysApi.virtualV2.getVideoInfo(
@@ -221,7 +243,7 @@ export class ResultsService {
   /**
    * checkVideoInfo check if video info response is empty due its server generation time
    * @param videoMetadataVirtualVideoInfoResponse video info response
-   * @returns 
+   * @returns
    */
   private checkVideoInfo(videoMetadataVirtualVideoInfoResponse: IVideoInfo): boolean {
     if (

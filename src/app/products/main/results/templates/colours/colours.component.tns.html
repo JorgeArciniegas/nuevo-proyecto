@@ -1,12 +1,13 @@
-<FlexBoxLayout>
-  <StackLayout *ngFor="let result of (results|async)" class="m-t-2 card-box-result-colours">
+<FlexBoxLayout *ngIf="(results|async) | hideLastResult: resultsService?.countDownInSeconds as results">
+  <StackLayout *ngFor="let result of results" class="m-t-2 card-box-result-colours">
     <StackLayout class="header m-x-4 m-b-4" horizontalAlignment="stretch">
       <Label text="{{ result.eventLabel }}" class="eventNumber" horizontalAlignment="center"></Label>
     </StackLayout>
     <StackLayout>
       <GridLayout columns="*,*,*,*,*,*,2*,*">
-        <StackLayout col="{{i}}" class="radius-5 btn-colours-{{Colour[numberExtracted.colour]}} btn-colours-result"
+        <StackLayout class="radius-5 btn-colours-{{Colour[numberExtracted.colour]}} btn-colours-result"
           *ngFor="let numberExtracted of result.coloursResults?.numbersExtracted; let i = index"
+          col="{{i}}"
           verticalAlignment="center">
           <Label text="{{numberExtracted.number}}"></Label>
         </StackLayout>
