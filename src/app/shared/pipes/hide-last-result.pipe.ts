@@ -36,7 +36,6 @@ export class HideLastResultPipe implements PipeTransform {
     let currentEventDuration: number = (eventDuration && eventDuration > 0) ? eventDuration : defaultEventDuration;
     // Calculate the time remaining between the nextEvent duration (total cd from the beginning) and current event duration
     const timeToShowResult: number = this.resultsService.nextEventDuration - currentEventDuration;
-    console.log('time to go', countDown+'/'+timeToShowResult+ '<=')
     return (countDown > timeToShowResult);
   }
 
