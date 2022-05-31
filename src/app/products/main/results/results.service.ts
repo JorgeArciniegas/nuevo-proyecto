@@ -45,7 +45,7 @@ export class ResultsService {
    * Number of item to show as last result defined in environment
    */
   public get resultItemsLength(): number {
-    return this.productService.product.layoutProducts.resultItems
+    return this.productService.product.layoutProducts.resultItems;
   }
 
   public get layoutType(): LAYOUT_TYPE {
@@ -94,7 +94,9 @@ export class ResultsService {
         break;
       default:
         this.setVideoInfoTiming(eventResults);
-    } tmpListResult = this.setResultByLayoutType(eventResults.EventResults.slice(0, this.resultItemsLength + 1));
+        tmpListResult = this.setResultByLayoutType(eventResults.EventResults.slice(0, this.resultItemsLength + 1));
+    } 
+    
     this._lastResults.layoutType = this.layoutType;
     this._lastResults.eventResults = tmpListResult;
     this.lastResultsSubject.next(this._lastResults);
@@ -139,7 +141,7 @@ export class ResultsService {
         tmpListResult.push(exceededSoccerResults);
       }
     }
-    return tmpListResult;
+   return tmpListResult;
   }
 
   setResultByLayoutType(eventResults: EventResult[]): EventsResultsWithDetails[] {
