@@ -1,20 +1,19 @@
 
-<ng-container *ngIf="(results|async) | hideLastResult: resultsService?.countDownInSeconds as arResults">
-  <GridLayout rows="*,*" class="result-list m-t-2" class="card-box-result-american-roulette">
+  <GridLayout *ngIf="(results|async) | hideLastResult: resultsService?.countDownInSeconds as arResults" rows="*,*" class="result-list m-t-2" class="card-box-result-american-roulette">
     <!-- EVENT WEEK -->
     <FlexBoxLayout row="0" justifyContent="space-around">
-      <StackLayout horizontalAlignment="center" verticalAlignment="center" class="header m-r-4 m-b-4" *ngFor="let result of arResults">
+      <StackLayout horizontalAlignment="center" verticalAlignment="center" class="header m-r-4 m-b-4" *ngFor="let result of arResults; let i = index;" order="{{i}}">
         <Label horizontalAlignment="center" verticalAlignment="center" text="{{ result?.eventLabel }}"></Label>
       </StackLayout>
     </FlexBoxLayout>
     <!-- RESULT'S MATHCES -->
     <FlexBoxLayout row="1" justifyContent="space-around">
       <StackLayout
-      *ngFor="let result of arResults"
+      *ngFor="let result of arResults; let i = index;" order="{{i}}"
       class="m-r-4 btn-colours-result btn-colours-{{ result?.americanRouletteResults?.color | uppercase }} radius-5"
       verticalAlignment="center">
         <Label text="{{result?.americanRouletteResults?.result}}"></Label>
       </StackLayout>
     </FlexBoxLayout>
   </GridLayout>
-</ng-container>
+

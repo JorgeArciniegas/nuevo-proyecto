@@ -1,4 +1,5 @@
-<GridLayout rows="*" columns="*,*,*,*" class="result-list-race" *ngIf="(results|async) | hideLastResult: resultsService?.countDownInSeconds as results ">
+<GridLayout rows="*" columns="*,*,*,*" class="result-list-race" 
+*ngIf="(results|async) | hideLastResult: resultsService?.countDownInSeconds as results ">
   <GridLayout 
   *ngFor="let race of results let i = index;"
   col="{{i}}" 
