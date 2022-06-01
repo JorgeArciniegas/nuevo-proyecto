@@ -15,10 +15,11 @@ export class HideLastResultPipe implements PipeTransform {
   constructor(private resultsService: ResultsService) { }
   transform(eventResultsWithDetails: EventsResultsWithDetails[], countDownInSeconds: number): EventsResultsWithDetails[] {
     if (eventResultsWithDetails?.length > 0) {
-      const isDelayActive: boolean = this.isEventExpired(countDownInSeconds, this.resultsService.layoutType);
-      eventResultsWithDetails[0].show = isDelayActive ? false : true;
-      eventResultsWithDetails[eventResultsWithDetails.length - 1].show = !eventResultsWithDetails[0].show;
-      return eventResultsWithDetails.filter((v) => v.show);
+        const isDelayActive: boolean = this.isDelayActive(countDownInSeconds, this.resultsService.layoutType, eventResultsWithDetails[0].eventNumber);
+        eventResultsWithDetails[0].show = isDelayActive ? false : true;
+        eventResultsWithDetails[eventResultsWithDetails.length - 1].show = !eventResultsWithDetails[0].show;
+        // console.log(countDownInSeconds, eventResultsWithDetails)
+        return eventResultsWithDetails.filter((v) => v.show);
     }
     return null;
   }
@@ -29,15 +30,18 @@ export class HideLastResultPipe implements PipeTransform {
   * @param layoutType
   * @returns
   */
-  isEventExpired(countDown: number, layoutType: LAYOUT_TYPE): boolean {
+  isDelayActive(countDown: number, layoutType: LAYOUT_TYPE, eventNumber: number): boolean {
     const defaultEventDuration: number = defaultEventDurationByLayoutType[layoutType].videoLengthDuration; //security fallback
     // Video duration retrieved from video info api (always 0 with Keno and Colours )
     const eventDuration: number = this.resultsService.currentEventVideoDuration;
     let currentEventDuration: number = (eventDuration && eventDuration > 0) ? eventDuration : defaultEventDuration;
     // Calculate the time remaining between the nextEvent duration (total cd from the beginning) and current event duration
     const timeToShowResult: number = this.resultsService.nextEventDuration - currentEventDuration + 1;
-   // console.log('time to go', countDown +'/'+ timeToShowResult)
-    return (countDown > timeToShowResult);
+    // Check if the first last-result id is equal to next event id.
+    let isNewResultBeforeCountDownExpiration: boolean = this.resultsService.nextEventNumber === eventNumber;
+    // Last result's api is available with fresh result few seconds before CD expiration,
+    // for this reason we need to check it when current event is over and CD is not expired (when changing product few seconds from CD expiration)
+    return (countDown > timeToShowResult || (countDown < timeToShowResult) && isNewResultBeforeCountDownExpiration);
   }
 
 }

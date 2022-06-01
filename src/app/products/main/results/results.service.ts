@@ -27,6 +27,13 @@ export class ResultsService {
   public set nextEventDuration(duration: number) {
     this._nextEventDuration = duration;
   }
+  private _nextEventNumber: number;
+  public get nextEventNumber() {
+    return this._nextEventNumber;
+  }
+  public set nextEventNumber(id: number) {
+    this._nextEventNumber = id;
+  }
   /**
    * On app init, countDown could be not instantly retrieved
    * In that case nextEventDuration is used in place
