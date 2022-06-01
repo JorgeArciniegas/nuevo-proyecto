@@ -62,7 +62,7 @@ export class MainService {
     private feedData: ElysFeedsService,
     private userservice: UserService
   ) {
-    
+
     this.toResetAllSelections = true;
 
     this.createPlayerList();
@@ -78,7 +78,7 @@ export class MainService {
         this.initEvents();
       }
     });
-  
+
 
 
     this.currentEventSubscribe = new Subject<number>();
@@ -221,7 +221,7 @@ export class MainService {
       let eventRemoved : EventInfo;
       if (this.initCurrentEvent) {
         this.loadEventsFromApi().then(() => this.resultService.getLastResult());
-      } else {
+      } else { 
         let eventRemoved: EventInfo = this.eventDetails.events[0];
         this.loadEventsFromApi(eventRemoved).then(() => {
           if ((this.cacheTournaments && this.cacheTournaments.length > 0) ||
@@ -275,7 +275,7 @@ export class MainService {
         Item: this.userservice.getUserId()
       };
       this.elysApi.virtual.getVirtualTreeV2(request).then((sports: VirtualProgramTreeBySportResponse) => {
-       const tournaments: VirtualBetTournamentExtended[] = sports.Sports[0].ts;
+        const tournaments: VirtualBetTournamentExtended[] = sports.Sports[0].ts;
         this.productService.product.layoutProducts.multiFeedType = tournaments[0].mft;
 
         // the checkDuplicaIndex prevent the multiload event if the API response is not correct
@@ -292,8 +292,6 @@ export class MainService {
           // Load all events
           this.cacheEvents = tournaments[0].evs;
           this.resultService.nextEventDuration = sports.Sports[0].ts[0].evs[0].duration;
-          console.log('next event id',sports.Sports[0].ts[0].evs[0].nm)
-          console.log('next event duration',sports.Sports[0].ts[0].evs[0].duration)
           for (let index = checkDuplicateIndex; index < this.productService.product.layoutProducts.nextEventItems; index++) {
             const event: EventInfo = new EventInfo();
             event.number = this.cacheEvents[index].id;

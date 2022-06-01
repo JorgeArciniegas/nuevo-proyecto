@@ -12,7 +12,6 @@ import { ApplicationMenuComponent } from './component/header/application-menu/ap
 import { HeaderComponent } from './component/header/header.component';
 import { UserMenuComponent } from './component/header/user-menu/user-menu.component';
 import { LoaderComponent } from './component/loader/loader.component';
-import { HideLastResultPipe } from './shared/pipes/hide-last-result.pipe';
 
 export const componentDeclarations: any[] = [
   AppComponent,
@@ -31,5 +30,4 @@ export const providerDeclarations: any[] = [
   { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
   CouponService,
   BtncalcService,
-  HideLastResultPipe
 ];

@@ -27,12 +27,14 @@ export class ResultsService {
   public set nextEventDuration(duration: number) {
     this._nextEventDuration = duration;
   }
+  /**
+   * On app init, countDown could be not instantly retrieved
+   * In that case nextEventDuration is used in place
+   */
   public get countDownInSeconds(): number {
     if (this.countDown) {
       return this.countDown.minute * 60 + this.countDown.second;
     }
-    // On app init, countDown could be not instantly retrieved
-    // In that case nextEventDuration is used in place
     return (this.nextEventDuration && this.nextEventDuration > 0) ? this.nextEventDuration : 120;
   }
 
@@ -123,14 +125,14 @@ export class ResultsService {
       const tempEventResult: EventsResultsWithDetails = {
         eventLabel: eventResults.EventResults[0].TournamentName,
         eventNumber: eventResults.EventResults[0].TournamentId,
-        show: true
+        show: false
       };
-      // group by last Tournament
+        //group by last Tournament
       tempEventResult.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === tempEventResult.eventNumber);
       tmpListResult.push(tempEventResult);
       let exceededSoccerResults: EventsResultsWithDetails = null;
-      //Check if the number of items returned for soccer are a multiple of itemsToShow.
-      //That means there are more than 1 week as last results
+        //Check if the number of items returned for soccer are a multiple of resultItemsLength.
+        //That means there are more than 1 week as last results
       if (itemsExceeded > 0 && itemsExceeded % this.resultItemsLength === 0) {
         exceededSoccerResults = {
           eventLabel: eventResults.EventResults[this.resultItemsLength].TournamentName,
@@ -146,11 +148,11 @@ export class ResultsService {
 
   setResultByLayoutType(eventResults: EventResult[]): EventsResultsWithDetails[] {
     let eventsResultsWithDetails: EventsResultsWithDetails[] = []
-    eventResults.forEach(event => {
+    eventResults.forEach((event, index) => {
       let eventResultWithDetails: EventsResultsWithDetails = {
         eventLabel: event.EventName,
         eventNumber: event.EventId,
-        show: true
+        show: (index === 0) ? false : ((index === eventResults.length - 1) ? true : true)
       };
       let results: string[] = [];
       switch (this.productService.product.layoutProducts.type) {
@@ -250,7 +252,7 @@ export class ResultsService {
   /**
    * checkVideoInfo check if video info response is empty due its server generation time
    * @param videoMetadataVirtualVideoInfoResponse video info response
-   * @returns
+   * 
    */
   private checkVideoInfo(videoMetadataVirtualVideoInfoResponse: IVideoInfo): boolean {
     if (
