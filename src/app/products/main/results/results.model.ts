@@ -80,7 +80,7 @@ export interface DelayLayoutDictonary{
 export const defaultEventDurationByLayoutType : DelayLayoutDictonary = {
   [LAYOUT_TYPE.AMERICANROULETTE] : {videoExtraDuration: 15, videoLengthDuration: 50},
   [LAYOUT_TYPE.COCK_FIGHT] : {videoExtraDuration: 20, videoLengthDuration: 160},
-  [LAYOUT_TYPE.COLOURS]: {videoExtraDuration: 5, videoLengthDuration: 15},
+  [LAYOUT_TYPE.COLOURS]: {videoExtraDuration: 5, videoLengthDuration: 17},
   [LAYOUT_TYPE.KENO]: {videoExtraDuration: 5, videoLengthDuration: 40},
   [LAYOUT_TYPE.RACING]: {videoExtraDuration: 20, videoLengthDuration: 105},
   [LAYOUT_TYPE.SOCCER]: {videoExtraDuration: 50, videoLengthDuration: 140},
