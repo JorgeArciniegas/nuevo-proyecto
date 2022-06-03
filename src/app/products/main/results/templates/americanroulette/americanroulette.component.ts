@@ -33,7 +33,7 @@ export class AmericanrouletteComponent {
     );
     this.americanRouletteRug = new AmericanRouletteRug();
   }
-  public getColorClass(n: number | string): string {
+  private getColorClass(n: number | string): string {
     return this.americanRouletteRug.red.includes(parseInt(n.toString(), 10))
       ? 'red'
       : (this.americanRouletteRug.black.includes(parseInt(n.toString(), 10))
