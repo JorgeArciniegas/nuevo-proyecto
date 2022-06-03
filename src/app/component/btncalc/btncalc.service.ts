@@ -109,7 +109,6 @@ export class BtncalcService implements OnDestroy {
     this.polyfunctionalValueSubscribe.unsubscribe();
   }
 
-
   /**
    * tap fired only if the new amount is greater then minimum amount
    */
@@ -118,6 +117,7 @@ export class BtncalcService implements OnDestroy {
       if (this.userService.isModalOpen) {
         this.userService.isBtnCalcEditable = false;
       }
+
       if (this.couponService.oddStakeEdit) {
         this.couponService.updateCoupon();
         return;

@@ -127,6 +127,7 @@
       "MissingMappings": "Mappatura mancante [Cod. ES34]",
       "MultipleBetMaxLimitByUser": "Limite massimo di scommesse multiple per utente [Cod. ES27]",
       "NightshiftLimitsExceeded": "Limite di scommessa notturno superato [Cod. ES42]",
+      "NonPlayableOdds": "Operazione non consentita, quota non disponibile",
       "ODD_ERROR": "Errore generico di operazione su quote",
       "ODD_SHORTCUT_ERROR": "Errore generico su operazione con shortcut",
       "OddChanged": "Quota cambiata [Cod. ES4]",

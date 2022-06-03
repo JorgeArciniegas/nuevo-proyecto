@@ -62,17 +62,19 @@ export class CockFightComponent {
       this.sectorWinModel = [];
       this.currentEvent = await this.mainService.getCurrentEvent();
       this.currentEvent.mk.forEach(eventMarkets => {
+        const correctSelections = eventMarkets.sls.filter(item => item.ods[0].vl > 0);
+
         /**
          * populates market selection containers by market type
          */
         switch (eventMarkets.tp) {
           case this.market['1X2']: // winner
-            eventMarkets.sls.forEach(marketSelections => {
+            correctSelections.forEach(marketSelections => {
               this.winModel.push(marketSelections);
             });
             break;
           case this.market['1X2OverUnder']: // winner + o/u
-            eventMarkets.sls.forEach(marketSelections => {
+            correctSelections.forEach(marketSelections => {
               // exclude X + O/U
               if (marketSelections.tp !== 3) {
                 this.ouWinModel.push(marketSelections);
@@ -80,7 +82,7 @@ export class CockFightComponent {
             });
             break;
           case this.market['1X2WinningSector']: // winner + sector
-            eventMarkets.sls.forEach(marketSelections => {
+            correctSelections.forEach(marketSelections => {
               if (marketSelections.nm !== 'X + S0') {
                 this.sectorWinModel.push(marketSelections);
               }
@@ -96,24 +98,36 @@ export class CockFightComponent {
      * and pick up the lucky selection depending on the RNG
      */
     const currentSelection = { tp: 0, selection: null };
+    let limit = 0;
     switch (lucky) {
       case 1:
-        currentSelection.selection = this.winModel[this.RNGLuckyCock(3)];
+        limit = this.winModel.length;
+        currentSelection.selection = this.winModel[this.RNGLuckyCock(limit)];
         currentSelection.tp = this.market['1X2'];
         break;
       case 2:
-        currentSelection.selection = this.ouWinModel[this.RNGLuckyCock(4)];
+        limit = this.ouWinModel.length;
+        currentSelection.selection = this.ouWinModel[this.RNGLuckyCock(limit)];
         currentSelection.tp = this.market['1X2OverUnder'];
         break;
       case 3:
-        currentSelection.selection = this.sectorWinModel[this.RNGLuckyCock(8)];
+        limit = this.sectorWinModel.length;
+        currentSelection.selection = this.sectorWinModel[this.RNGLuckyCock(limit)];
         currentSelection.tp = this.market['1X2WinningSector'];
         break;
     }
+
+    /**
+     * check whether there is available odds
+     */
+    if(limit === 0) {
+      return;
+    }
+
     /**
      * check if the current selection is equal to the previous
      */
-    if (this.oldLuckyCock === 0 || this.oldLuckyCock !== currentSelection.selection.id) {
+    if (this.oldLuckyCock === 0 || this.oldLuckyCock !== currentSelection.selection.id || limit === 1) {
       this.oldLuckyCock = currentSelection.selection.id;
       /**
        * places the selection on the main service

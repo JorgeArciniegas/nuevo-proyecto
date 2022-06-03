@@ -127,6 +127,7 @@
       "MissingMappings": "Mapping missing [Code ES34]",
       "MultipleBetMaxLimitByUser": "Max. number of multiple bets by user [Code ES27]",
       "NightshiftLimitsExceeded": "Nightshift limits exceeded [Code ES42]",
+      "NonPlayableOdds": "Operation not allowed, odds not available",
       "ODD_ERROR": "Generic error on odd operation",
       "ODD_SHORTCUT_ERROR": "Generic error on shortcut",
       "OddChanged": "Odd changed [Code ES4]",
