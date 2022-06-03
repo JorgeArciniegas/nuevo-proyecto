@@ -10,9 +10,9 @@
     <FlexBoxLayout row="1" justifyContent="space-around">
       <StackLayout
       *ngFor="let result of arResults; let i = index;" order="{{i}}"
-      class="m-r-4 btn-colours-result btn-colours-{{ result?.americanRouletteResults?.color | uppercase }} radius-5"
+      class="m-r-4 btn-colours-result btn-colours-{{ result.americanRouletteResults.color | uppercase }} radius-5"
       verticalAlignment="center">
-        <Label text="{{result?.americanRouletteResults?.result}}"></Label>
+        <Label text="{{result.americanRouletteResults.result}}"></Label>
       </StackLayout>
     </FlexBoxLayout>
   </GridLayout>

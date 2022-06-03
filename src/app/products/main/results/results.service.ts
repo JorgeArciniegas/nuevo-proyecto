@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { ElysApiService, EventResult, VirtualSportLastResultsRequest, VirtualSportLastResultsResponse } from '@elys/elys-api';
 import { IVideoInfo } from '@elys/elys-api/lib/virtual-v2/interfaces/video-info.interface';
 import { BehaviorSubject, Subscription, timer } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { ProductsService } from '../../products.service';
 import { EventTime } from '../main.models';
-import { AmericanRouletteRug } from '../playable-board/templates/american-roulette/american-roulette.models';
 import { Band, Colour } from '../playable-board/templates/colours/colours.models';
 import { ColoursNumber, ColoursResult, defaultEventDurationByLayoutType, EventsResultsWithDetails, LastResult, OVER_UNDER_COCKFIGHT, videoInfoDelay } from './results.model';
 
@@ -35,8 +35,7 @@ export class ResultsService {
     this._nextEventNumber = id;
   }
   /**
-   * On app init, countDown could be not instantly retrieved
-   * In that case nextEventDuration is used in place
+   * If countDown is not instantly retrieved use nextEventDuration in place
    */
   public get countDownInSeconds(): number {
     if (this.countDown) {
@@ -61,24 +60,19 @@ export class ResultsService {
     return this.productService.product.layoutProducts.type;
   }
 
-  private _americanRouletteRug: AmericanRouletteRug;
   eventsResultsDuringDelay: EventsResultsWithDetails[] = null;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   private _timerSubscription: Subscription;
   constructor(
     private productService: ProductsService,
     private elysApi: ElysApiService,
-  ) {
-    this._americanRouletteRug = new AmericanRouletteRug();
-  }
+  ) { }
 
   private _lastResults: LastResult = { eventResults: [], layoutType: undefined };
   public lastResultsSubject: BehaviorSubject<LastResult> = new BehaviorSubject<LastResult>(this._lastResults);
   async getLastResult() {
-    // Reset previous/pending timer subsc. to avoid unuseful api call to video info.
-    // This happens when changing sport before timer expiration
+    // Reset previous/pending timer subsc. to avoid unuseful api call to video info (when changing sport before timer expiration)
     if (this._timerSubscription) this._timerSubscription.unsubscribe();
-
     const request: VirtualSportLastResultsRequest = {
       SportId: this.productService.product.sportId,
       CategoryType: this.productService.product.codeProduct,
@@ -87,25 +81,23 @@ export class ResultsService {
 
     let tmpListResult: EventsResultsWithDetails[] = [];
     const eventResults: VirtualSportLastResultsResponse = await this.elysApi.virtual.getLastResult(request);
-    // Items exceeded over items to show in template
-    const itemsExceeded = eventResults.EventResults.length - this.resultItemsLength;
     this._currentEventVideoDuration = 0;
     switch (this.layoutType) {
       case LAYOUT_TYPE.COLOURS:
       case LAYOUT_TYPE.KENO:
         // Color and Keno doesn't need to call video info.
         // Default client delay is used instead
-        tmpListResult = this.setResultByLayoutType(eventResults.EventResults.slice(0, this.resultItemsLength + 1));
+        tmpListResult = this.setResultByLayoutType(eventResults.EventResults.slice(0, this.resultItemsLength + 1), ',');
         break;
       case LAYOUT_TYPE.SOCCER:
         this.setVideoInfoTiming(eventResults);
-        tmpListResult = this.populateSoccerResult(eventResults, itemsExceeded);
+        tmpListResult = this.populateSoccerResult(eventResults);
         break;
       default:
         this.setVideoInfoTiming(eventResults);
-        tmpListResult = this.setResultByLayoutType(eventResults.EventResults.slice(0, this.resultItemsLength + 1));
-    } 
-    
+        tmpListResult = this.setResultByLayoutType(eventResults.EventResults.slice(0, this.resultItemsLength + 1), '-');
+    }
+
     this._lastResults.layoutType = this.layoutType;
     this._lastResults.eventResults = tmpListResult;
     this.lastResultsSubject.next(this._lastResults);
@@ -125,46 +117,49 @@ export class ResultsService {
     })
   }
 
-  populateSoccerResult(eventResults: VirtualSportLastResultsResponse, itemsExceeded: number): EventsResultsWithDetails[] {
+  populateSoccerResult(eventResults: VirtualSportLastResultsResponse): EventsResultsWithDetails[] {
     let tmpListResult: EventsResultsWithDetails[] = [];
     if (eventResults.EventResults !== null) {
-      // create last Result
+      // create last Result 
       const tempEventResult: EventsResultsWithDetails = {
         eventLabel: eventResults.EventResults[0].TournamentName,
         eventNumber: eventResults.EventResults[0].TournamentId,
         show: false
       };
-        //group by last Tournament
+      // group by last Tournament
       tempEventResult.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === tempEventResult.eventNumber);
       tmpListResult.push(tempEventResult);
+      // Create last but one result
       let exceededSoccerResults: EventsResultsWithDetails = null;
-        //Check if the number of items returned for soccer are a multiple of resultItemsLength.
-        //That means there are more than 1 week as last results
-      if (itemsExceeded > 0 && itemsExceeded % this.resultItemsLength === 0) {
-        exceededSoccerResults = {
-          eventLabel: eventResults.EventResults[this.resultItemsLength].TournamentName,
-          eventNumber: eventResults.EventResults[this.resultItemsLength].TournamentId,
-          show: true
-        };
-        exceededSoccerResults.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === exceededSoccerResults.eventNumber);
-        tmpListResult.push(exceededSoccerResults);
-      }
+      exceededSoccerResults = {
+        eventLabel: eventResults.EventResults[this.resultItemsLength].TournamentName,
+        eventNumber: eventResults.EventResults[this.resultItemsLength].TournamentId,
+        show: true
+      };
+       // Group by last but one result
+      exceededSoccerResults.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === exceededSoccerResults.eventNumber);
+      tmpListResult.push(exceededSoccerResults);
     }
-   return tmpListResult;
+    return tmpListResult;
   }
 
-  setResultByLayoutType(eventResults: EventResult[]): EventsResultsWithDetails[] {
+  /**
+   * 
+   * @param eventResults results from api
+   * @param splitChar char where to split results. Depends on product (Racing and Cock split on '-', Keno and Colours split on ',').
+   * @returns 
+   */
+  setResultByLayoutType(eventResults: EventResult[], splitChar: string): EventsResultsWithDetails[] {
     let eventsResultsWithDetails: EventsResultsWithDetails[] = []
     eventResults.forEach((event, index) => {
       let eventResultWithDetails: EventsResultsWithDetails = {
         eventLabel: event.EventName,
         eventNumber: event.EventId,
-        show: (index === 0) ? false : ((index === eventResults.length - 1) ? true : true)
+        show: (index === 0) ? false : true
       };
-      let results: string[] = [];
-      switch (this.productService.product.layoutProducts.type) {
+      let results: string[] = event.Result.split(splitChar);
+      switch (this.layoutType) {
         case LAYOUT_TYPE.RACING:
-          results = event.Result.split('-');
           eventResultWithDetails = {
             ...eventResultWithDetails,
             racePodium: {
@@ -175,7 +170,6 @@ export class ResultsService {
           }
           break;
         case LAYOUT_TYPE.COCK_FIGHT:
-          results = event.Result.split('-');
           eventResultWithDetails = {
             ...eventResultWithDetails,
             cockResult: {
@@ -186,14 +180,12 @@ export class ResultsService {
           }
           break;
         case LAYOUT_TYPE.KENO:
-          results = event.Result.split(',');
           eventResultWithDetails = {
             ...eventResultWithDetails,
             kenoResults: results.map(result => Number.parseInt(result, 0))
           }
           break;
         case LAYOUT_TYPE.COLOURS:
-          results = event.Result.split(',');
           const coloursNumbers: ColoursNumber[] = [];
           const numbersExtracted: number[] = results.map(result => Number.parseInt(result, 0));
           for (const numberExtracted of numbersExtracted) {
@@ -224,7 +216,6 @@ export class ResultsService {
             ...eventResultWithDetails,
             americanRouletteResults: {
               result: event.Result,
-              color: this.getAmericanRouletteColorClass(event.Result)
             }
           }
           break;
@@ -241,14 +232,14 @@ export class ResultsService {
       this.productService.product.sportId,
       this.productService.product.codeProduct,
       eventId
-    )
+    ).pipe(take(1))
       .subscribe(
         (videoMetadataVirtualVideoInfoResponse: IVideoInfo) => {
           // Sets the video duration
           this._currentEventVideoDuration = this.checkVideoInfo(videoMetadataVirtualVideoInfoResponse)
             ? (videoMetadataVirtualVideoInfoResponse.VideoInfo.Video.Duration
-              // Substract the delay used for the video info api call
-              - (videoInfoDelay / 1000))
+            // Substract the delay used for the video info api call
+            - (videoInfoDelay / 1000))
             // Add static video extra length
             + defaultEventDurationByLayoutType[layoutType].videoExtraDuration
             : 0;
@@ -285,12 +276,5 @@ export class ResultsService {
     if (colourNumber % 3 === 0) {
       return Colour.GREEN;
     }
-  }
-
-  public getAmericanRouletteColorClass(n: number | string): string {
-    return this._americanRouletteRug.red.includes(parseInt(n.toString(), 10))
-      ? 'red'
-      : (this._americanRouletteRug.black.includes(parseInt(n.toString(), 10))
-        ? 'black' : 'green');
   }
 }
