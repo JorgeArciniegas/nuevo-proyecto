@@ -344,7 +344,7 @@ export class MainService {
             this.eventDetails.events[index - checkDuplicateIndex] = event;
           }
         } else {
-          this.resultService.nextEventNumber = sports.Sports[0].ts[0].evs[0].id
+          this.resultService.nextEventNumber = sports.Sports[0].ts[0].id
           this.cacheTournaments = tournaments;
           this.resultService.nextEventDuration = sports.Sports[0].ts[0].duration;
           for (let index = checkDuplicateIndex; index < this.productService.product.layoutProducts.nextEventItems; index++) {
