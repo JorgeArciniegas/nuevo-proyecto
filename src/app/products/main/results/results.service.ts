@@ -5,50 +5,14 @@ import { BehaviorSubject, Subscription, timer } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { LAYOUT_TYPE } from '../../../../../src/environments/environment.models';
 import { ProductsService } from '../../products.service';
-import { EventTime } from '../main.models';
 import { Band, Colour } from '../playable-board/templates/colours/colours.models';
+import { Results } from './results';
 import { ColoursNumber, ColoursResult, defaultEventDurationByLayoutType, EventsResultsWithDetails, LastResult, OVER_UNDER_COCKFIGHT, videoInfoDelay } from './results.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResultsService {
-  private _countDown: EventTime;
-  public get countDown() {
-    return this._countDown;
-  }
-  public set countDown(evtTime: EventTime) {
-    this._countDown = evtTime;
-  }
-  private _nextEventDuration: number;
-  public get nextEventDuration() {
-    return this._nextEventDuration;
-  }
-  public set nextEventDuration(duration: number) {
-    this._nextEventDuration = duration;
-  }
-  private _nextEventNumber: number;
-  public get nextEventNumber() {
-    return this._nextEventNumber;
-  }
-  public set nextEventNumber(id: number) {
-    this._nextEventNumber = id;
-  }
-  /**
-   * If countDown is not instantly retrieved use nextEventDuration in place
-   */
-  public get countDownInSeconds(): number {
-    if (this.countDown) {
-      return this.countDown.minute * 60 + this.countDown.second;
-    }
-    return (this.nextEventDuration && this.nextEventDuration > 0) ? this.nextEventDuration : 120;
-  }
-
-  private _currentEventVideoDuration: number;
-  public get currentEventVideoDuration(): number {
-    return this._currentEventVideoDuration;
-  }
-
   /**
    * Number of item to show as last result defined in environment
    */
@@ -59,14 +23,16 @@ export class ResultsService {
   public get layoutType(): LAYOUT_TYPE {
     return this.productService.product.layoutProducts.type;
   }
-
+  public resultsUtils: Results;
   eventsResultsDuringDelay: EventsResultsWithDetails[] = null;
   typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   private _timerSubscription: Subscription;
   constructor(
     private productService: ProductsService,
     private elysApi: ElysApiService,
-  ) { }
+  ) {
+    this.resultsUtils = new Results();
+  }
 
   private _lastResults: LastResult = { eventResults: [], layoutType: undefined };
   public lastResultsSubject: BehaviorSubject<LastResult> = new BehaviorSubject<LastResult>(this._lastResults);
@@ -81,7 +47,7 @@ export class ResultsService {
 
     let tmpListResult: EventsResultsWithDetails[] = [];
     const eventResults: VirtualSportLastResultsResponse = await this.elysApi.virtual.getLastResult(request);
-    this._currentEventVideoDuration = 0;
+    this.resultsUtils.currentEventVideoDuration = 0;
     switch (this.layoutType) {
       case LAYOUT_TYPE.COLOURS:
       case LAYOUT_TYPE.KENO:
@@ -124,20 +90,20 @@ export class ResultsService {
       const tempEventResult: EventsResultsWithDetails = {
         eventLabel: eventResults.EventResults[0].TournamentName,
         eventNumber: eventResults.EventResults[0].TournamentId,
-        show: false
+        show: false,
+         // group by last Tournament
+        soccerResult: eventResults.EventResults.filter(item => item.TournamentId === eventResults.EventResults[0].TournamentId)
       };
-      // group by last Tournament
-      tempEventResult.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === tempEventResult.eventNumber);
       tmpListResult.push(tempEventResult);
       // Create last but one result
       let exceededSoccerResults: EventsResultsWithDetails = null;
       exceededSoccerResults = {
         eventLabel: eventResults.EventResults[this.resultItemsLength].TournamentName,
         eventNumber: eventResults.EventResults[this.resultItemsLength].TournamentId,
-        show: true
+        show: true,
+        // Group by last but one result
+        soccerResult: eventResults.EventResults.filter(item => item.TournamentId === eventResults.EventResults[this.resultItemsLength].TournamentId)
       };
-       // Group by last but one result
-      exceededSoccerResults.soccerResult = eventResults.EventResults.filter(item => item.TournamentId === exceededSoccerResults.eventNumber);
       tmpListResult.push(exceededSoccerResults);
     }
     return tmpListResult;
@@ -236,10 +202,10 @@ export class ResultsService {
       .subscribe(
         (videoMetadataVirtualVideoInfoResponse: IVideoInfo) => {
           // Sets the video duration
-          this._currentEventVideoDuration = this.checkVideoInfo(videoMetadataVirtualVideoInfoResponse)
+          this.resultsUtils.currentEventVideoDuration = this.checkVideoInfo(videoMetadataVirtualVideoInfoResponse)
             ? (videoMetadataVirtualVideoInfoResponse.VideoInfo.Video.Duration
-            // Substract the delay used for the video info api call
-            - (videoInfoDelay / 1000))
+              // Substract the delay used for the video info api call
+              - (videoInfoDelay / 1000))
             // Add static video extra length
             + defaultEventDurationByLayoutType[layoutType].videoExtraDuration
             : 0;

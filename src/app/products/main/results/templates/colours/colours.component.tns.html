@@ -1,4 +1,4 @@
-<FlexBoxLayout *ngIf="(results|async) | hideLastResult: resultsService?.countDownInSeconds as results">
+<FlexBoxLayout *ngIf="(results$|async) | hideLastResult: resultsService?.resultsUtils?.countDownInSeconds as results">
   <StackLayout *ngFor="let result of results; let i = index;" order="{{i}}" class="m-t-2 card-box-result-colours">
     <StackLayout class="header m-x-4 m-b-4" horizontalAlignment="stretch">
       <Label text="{{ result.eventLabel }}" class="eventNumber" horizontalAlignment="center"></Label>

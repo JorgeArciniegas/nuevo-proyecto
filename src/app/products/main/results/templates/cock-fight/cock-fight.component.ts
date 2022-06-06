@@ -18,11 +18,9 @@ export class CockFightComponent {
   @Input() rowHeight: number;
   @Input() codeProduct: string;
   @Input() windowSize: WindowSize;
-  typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
-  public results: Observable<EventsResultsWithDetails[]>;
-
+  public results$: Observable<EventsResultsWithDetails[]>;
   constructor(public resultsService: ResultsService) {
-    this.results = this.resultsService.lastResultsSubject.pipe(
+    this.results$ = this.resultsService.lastResultsSubject.pipe(
       untilDestroyed(this),
       filter(el => el.layoutType && el.layoutType === LAYOUT_TYPE.COCK_FIGHT),
       map((res: LastResult) => res.eventResults)

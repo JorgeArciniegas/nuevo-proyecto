@@ -1,5 +1,5 @@
-<ng-container *ngIf="(results|async) && (results|async).length > 0">
-  <GridLayout *ngFor="let event of (results|async) | hideLastResult: resultsService?.countDownInSeconds" rows="*,*" class="result-list m-t-2 card-box-result-keno" >
+<ng-container *ngIf="(results$|async) && (results$|async).length > 0">
+  <GridLayout *ngFor="let event of (results$|async) | hideLastResult: resultsService?.resultsUtils?.countDownInSeconds" rows="*,*" class="result-list m-t-2 card-box-result-keno" >
     <!-- EVENT WEEK -->
     <FlexBoxLayout row="0" class="header m-x-4 m-b-4" justifyContent="space-around">
       <Label text="{{event.eventLabel}}" class="eventNumber"></Label>

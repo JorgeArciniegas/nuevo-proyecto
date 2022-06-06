@@ -13,11 +13,10 @@ import { ResultsService } from '../../results.service';
 })
 export class KenoComponent {
   @Input() rowHeight: number;
-  typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
-  public results: Observable<EventsResultsWithDetails[]>;
+  public results$: Observable<EventsResultsWithDetails[]>;
 
   constructor(public resultsService: ResultsService) {
-    this.results = this.resultsService.lastResultsSubject.pipe(
+    this.results$ = this.resultsService.lastResultsSubject.pipe(
       untilDestroyed(this),
       filter(el => el.layoutType && el.layoutType === LAYOUT_TYPE.KENO),
       map((res: LastResult) => res.eventResults)

@@ -1,4 +1,4 @@
-<ng-container *ngFor="let kenoResultContainer of (results|async) | hideLastResult: resultsService?.countDownInSeconds">
+<ng-container *ngFor="let kenoResultContainer of (results$|async) | hideLastResult: resultsService?.resultsUtils?.countDownInSeconds">
   <div class="results-event" *ngIf="kenoResultContainer?.kenoResults?.length > 0">
   <mat-grid-list fxFill cols="{{ kenoResultContainer.kenoResults.length }}" rowHeight="{{rowHeight + 1}}">
     <mat-grid-tile colspan="{{ kenoResultContainer.kenoResults.length }}">

@@ -15,11 +15,10 @@ import { ResultsService } from '../../results.service';
 })
 export class ColoursComponent {
   @Input() rowHeight: number;
-  typeLayout: typeof LAYOUT_TYPE = LAYOUT_TYPE;
   public Colour = Colour;
-  public results: Observable<EventsResultsWithDetails[]>;
+  public results$: Observable<EventsResultsWithDetails[]>;
   constructor(public resultsService: ResultsService) {
-    this.results = this.resultsService.lastResultsSubject.pipe(
+    this.results$ = this.resultsService.lastResultsSubject.pipe(
       untilDestroyed(this),
       filter(el => el.layoutType && el.layoutType === LAYOUT_TYPE.COLOURS),
       map((res: LastResult) => res.eventResults)

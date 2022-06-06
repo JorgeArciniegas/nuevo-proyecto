@@ -1,5 +1,5 @@
 <StackLayout class="result-list m-t-2">
-  <ng-container *ngFor="let event of (results|async) | hideLastResult: resultsService?.countDownInSeconds">
+  <ng-container *ngFor="let event of (results$|async) | hideLastResult: resultsService?.resultsUtils?.countDownInSeconds">
     <GridLayout rows="*,*" columns="*" class="card-box-result-soccer">
       <!-- EVENT WEEK -->
       <GridLayout row="0" class="header m-x-4 m-b-4">
