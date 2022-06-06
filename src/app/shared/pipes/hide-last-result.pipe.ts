@@ -24,22 +24,18 @@ export class HideLastResultPipe implements PipeTransform {
   }
 
   /**
-  * Used for manage rematingTime countdown
+  * Used for manage rematingTime countdown.
+  * Calculate remaining time between the nextEvent duration and current event duration
   * @param countDown
   * @param layoutType
-  * @returns
+  * @returns true if currentEvent is not over or if currentEvent is over and new results are available before cd expiration
   */
   isDelayActive(countDown: number, layoutType: LAYOUT_TYPE, eventNumber: number): boolean {
     const defaultEventDuration: number = defaultEventDurationByLayoutType[layoutType].videoLengthDuration; //security fallback
-    // Video duration retrieved from video info api (always 0 with Keno and Colours )
     const eventDuration: number = this.resultsService.resultsUtils.currentEventVideoDuration;
     let currentEventDuration: number = (eventDuration && eventDuration > 0) ? eventDuration : defaultEventDuration;
-    // Calculate the time remaining between the nextEvent duration (total cd from the beginning) and current event duration
-    const timeToShowResult: number = this.resultsService.resultsUtils.nextEventDuration - currentEventDuration;
-    // Check if the first last-result id is equal to next event id.
+     const timeToShowResult: number = this.resultsService.resultsUtils.nextEventDuration - currentEventDuration;
     let isNewResultBeforeCountDownExpiration: boolean = this.resultsService.resultsUtils.nextEventNumber === eventNumber;
-    // Last result's api is available with fresh result few seconds before CD expiration,
-    // so we need to check it when current event is over and CD is not expired (when landing on a product few seconds from CD expiration)
     return (countDown > timeToShowResult || (countDown < timeToShowResult) && isNewResultBeforeCountDownExpiration);
   }
 
