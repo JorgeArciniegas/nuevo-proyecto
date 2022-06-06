@@ -1,12 +1,16 @@
-<GridLayout rows="*,*" class="result-list m-t-2 card-box-result-keno" *ngIf="(results|async) && (results|async).length > 0">
-  <!-- EVENT WEEK -->
-  <FlexBoxLayout row="0" class="header m-x-4 m-b-4" justifyContent="space-around">
-    <Label text="{{(results|async)[0].eventLabel}}" class="eventNumber"></Label>
-  </FlexBoxLayout>
-  <!-- RESULT'S MATHCES -->
-  <FlexBoxLayout row="1" justifyContent="space-around">
-    <StackLayout class="btn-keno-result" *ngFor="let kenoResult of (results|async)[0].kenoResults" verticalAlignment="center">
-      <Label text="{{kenoResult}}"></Label>
-    </StackLayout>
-  </FlexBoxLayout>
-</GridLayout>
+<ng-container *ngIf="(results$|async) && (results$|async).length > 0">
+  <GridLayout *ngFor="let event of (results$|async) | hideLastResult: resultsService?.resultsUtils?.countDownInSeconds" rows="*,*" class="result-list m-t-2 card-box-result-keno" >
+    <!-- EVENT WEEK -->
+    <FlexBoxLayout row="0" class="header m-x-4 m-b-4" justifyContent="space-around">
+      <Label text="{{event.eventLabel}}" class="eventNumber"></Label>
+    </FlexBoxLayout>
+    <!-- RESULT'S MATHCES -->
+    <FlexBoxLayout row="1" justifyContent="space-around">
+      <StackLayout 
+      class="btn-keno-result" 
+      *ngFor="let kenoResult of event.kenoResults" verticalAlignment="center">
+        <Label text="{{kenoResult}}"></Label>
+      </StackLayout>
+    </FlexBoxLayout>
+  </GridLayout>
+  </ng-container>

@@ -3,7 +3,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Rx';
 import { LAYOUT_TYPE } from '../../../../../../environments/environment.models';
-import { EventResult, LastResult } from '../../results.model';
+import { EventsResultsWithDetails, LastResult } from '../../results.model';
 import { ResultsService } from '../../results.service';
 
 @UntilDestroy()
@@ -16,11 +16,10 @@ export class SoccerComponent {
   @Input() items: number;
   @Input() rowHeight: number;
   @Input() codeProduct: string;
+  public results$: Observable<EventsResultsWithDetails[]>;
 
-  public results: Observable<EventResult[]>;
-
-  constructor(private resultsService: ResultsService) {
-    this.results = this.resultsService.lastResultsSubject.pipe(
+  constructor(public resultsService: ResultsService) {
+    this.results$ = this.resultsService.lastResultsSubject.pipe(
       untilDestroyed(this),
       filter(el => el.layoutType && el.layoutType === LAYOUT_TYPE.SOCCER),
       map((res: LastResult) => res.eventResults)

@@ -1,6 +1,7 @@
 <div class="results-event">
   <mat-grid-list fxFill cols="{{ items }}" rowHeight="{{rowHeight + 1}}">
-    <ng-container *ngFor="let event of (results|async)">
+    <ng-container *ngFor="let event of (results$|async)
+     | hideLastResult: resultsService?.resultsUtils?.countDownInSeconds">
       <mat-grid-tile colspan="{{ items }}">
         <div fxFill class="card-box-result-soccer">
           <!-- header -->

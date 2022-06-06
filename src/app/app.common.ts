@@ -29,5 +29,5 @@ export const providerDeclarations: any[] = [
   TranslateService,
   { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
   CouponService,
-  BtncalcService
+  BtncalcService,
 ];

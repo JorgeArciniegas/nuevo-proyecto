@@ -4,7 +4,7 @@ import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Rx';
 import { LAYOUT_TYPE } from '../../../../../../environments/environment.models';
 import { Colour } from '../../../playable-board/templates/colours/colours.models';
-import { EventResult, LastResult } from '../../results.model';
+import { EventsResultsWithDetails, LastResult } from '../../results.model';
 import { ResultsService } from '../../results.service';
 
 @UntilDestroy()
@@ -16,11 +16,9 @@ import { ResultsService } from '../../results.service';
 export class ColoursComponent {
   @Input() rowHeight: number;
   public Colour = Colour;
-
-  public results: Observable<EventResult[]>;
-
-  constructor(private resultsService: ResultsService) {
-    this.results = this.resultsService.lastResultsSubject.pipe(
+  public results$: Observable<EventsResultsWithDetails[]>;
+  constructor(public resultsService: ResultsService) {
+    this.results$ = this.resultsService.lastResultsSubject.pipe(
       untilDestroyed(this),
       filter(el => el.layoutType && el.layoutType === LAYOUT_TYPE.COLOURS),
       map((res: LastResult) => res.eventResults)
