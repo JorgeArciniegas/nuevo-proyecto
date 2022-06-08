@@ -130,8 +130,8 @@ export class UserService {
       //Check if error description exsists, if so, check for trailing dot and remove it
       //Login and login operator error messages responses have same messages but different trailing dots
       let errDesc: string = err && err.error_description ? err.error_description : '';
-      return errDesc.length > 0 ? 
-      'LOGIN_MESSAGES.' + this.removeTrailingDot(errDesc) : 
+      return errDesc.length > 0 ?
+      'LOGIN_MESSAGES.' + this.removeTrailingDot(errDesc) :
       err.error;
     }
   }
@@ -168,14 +168,14 @@ export class UserService {
       //Check if error description exsists, if so, check for trailing dot and remove it
       //Login and login operator error messages responses have same messages but different trailing dots
       let errDesc: string = err && err.error_description ? err.error_description : '';
-      return errDesc.length > 0 ? 
-      'LOGIN_MESSAGES.' + this.removeTrailingDot(errDesc) : 
+      return errDesc.length > 0 ?
+      'LOGIN_MESSAGES.' + this.removeTrailingDot(errDesc) :
       err.error;
     }
   }
 
   /**
-   * 
+   *
    * @param message string where remove trailing dot
    * @returns string without trailing dot
    */
@@ -257,7 +257,7 @@ export class UserService {
       ) {
         this.dataUserDetail.operatorDetail = await this.api.account.getOperatorMe();
         isAdmin = false;
-        if (this.dataUserDetail.operatorDetail.UserType === 0) {
+        if (this.dataUserDetail.operatorDetail.UserType as number === 0) {
           await this.api.account.getMe().then(user => this.dataUserDetail.operatorDetail.UserType = user.UserType);
         }
       } else if (loginAdmin || !this.isAdminExist() || (this.isLoggedOperator() === null || this.isLoggedOperator())) {
