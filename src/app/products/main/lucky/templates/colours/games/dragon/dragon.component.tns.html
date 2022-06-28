@@ -1,5 +1,0 @@
-<GridLayout row="3" columns="*,*,*,*,*,*" class="special-box lucky-soccer">
-  <Button margin="3" col="{{i}}" cornerRadius="5" *ngFor="let l of [6,7,8,9,10,15]; let i = index"
-    text="{{ 'LUCKY' | translate }} {{l}}" class="button btn-grey-gradient" (tap)="placingColourLucky(lucky[lucky[l]])"
-    [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
-</GridLayout>
