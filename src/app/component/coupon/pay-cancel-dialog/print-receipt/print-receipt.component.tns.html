@@ -8,7 +8,7 @@
       <FlexboxLayout flexDirection="column" class="printbox" width="560" heigth="800" >
         <StackLayout stretch="aspectFill">
           <Image 
-            src="~/app/themes/skins/{{appSettings.theme}}/image/Logo-coupon.png"></Image>
+            src="~/assets/theme/image/{{appSettings.theme}}/image/Logo-coupon.png"></Image>
         </StackLayout>
         <FlexboxLayout flexDirection="row" class="p-b-10" justifyContent="space-around" *ngIf="appSettings.printSettings.enabledPrintReceipt.printHeaderMessage" >
           <Label class="h4 text-center"

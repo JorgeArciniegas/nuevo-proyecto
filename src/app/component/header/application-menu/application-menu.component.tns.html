@@ -8,7 +8,7 @@
     </StackLayout>
     <!-- LOGO -->
     <Image *ngIf="settings.faviconPath !== ''" class="logo"
-      src="~/app/themes/skins/{{settings.theme}}/image/Logo-header.png" stretch="aspectFit"></Image>
+      src="~/assets/theme/image/{{settings.theme}}/image/Logo-header.png" stretch="aspectFit"></Image>
     <!-- BUTTONS -->
     <ng-container *ngFor="let prod of settings.products">
       <StackLayout [isEnabled]="!userService.isModalOpen" *ngIf="prod.isPlayable" class="prod"

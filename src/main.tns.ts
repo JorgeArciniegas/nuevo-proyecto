@@ -6,7 +6,7 @@ import { AppModule } from './app/app.module';
 import { AppSync, InstallMode, SyncStatus } from "nativescript-app-sync";
 import { environment } from './environments/environment';
 
-import  * as application from '@nativescript/core/application';
+import * as application from '@nativescript/core/application';
 if(environment.deploymentAppSync){
   application.on(application.resumeEvent, ()=>{
     AppSync.sync({

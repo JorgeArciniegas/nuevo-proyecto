@@ -15,15 +15,6 @@
     "tns-build-all": "node ./build-all-environment.js",
     "tns-build-env": "node ./build-single-env.js"
   },
-  "nativescript": {
-    "id": "com.vgen.vdesk",
-    "tns-android": {
-      "version": "7.0.1"
-    },
-    "tns-ios": {
-      "version": "7.0.0"
-    }
-  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^13.3.10",
@@ -39,6 +30,7 @@
     "@angular/platform-browser": "^13.3.10",
     "@angular/platform-browser-dynamic": "^13.3.10",
     "@angular/router": "^13.3.10",
+    "@angular/service-worker": "^13.3.11",
     "@elys/elys-api": "^1.21.13",
     "@elys/elys-channel": "^1.2.0",
     "@elys/elys-coupon": "1.4.26",
@@ -46,9 +38,8 @@
     "@elys/elys-storage-lib": "^1.0.0",
     "@elys/nativescript-zxing": "^1.6.1",
     "@nativescript/angular": "13.0.3",
-    "@nativescript/core": "7.0.0",
+    "@nativescript/core": "~8.2.0",
     "@nativescript/local-notifications": "^5.1.0",
-    "@nativescript/webpack": "3.0.0",
     "@ngneat/until-destroy": "^8.0.4",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
@@ -65,7 +56,6 @@
     "nativescript-printer": "^1.5.0",
     "nativescript-theme-core": "^2.0.22",
     "ngx-barcode": "^0.3.0",
-    "node-sass": "^4.14.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",
@@ -80,12 +70,16 @@
     "@angular/cli": "^13.3.7",
     "@angular/compiler-cli": "^13.3.10",
     "@angular/language-service": "^13.3.10",
-    "@nativescript/android": "8.0.0",
+    "@nativescript/android": "~8.2.0",
     "@nativescript/schematics": "^0.7.1",
-    "@nativescript/types": "7.0.0",
+    "@nativescript/types": "~8.2.0",
+    "@nativescript/webpack": "^5.0.6",
+    "@ngtools/webpack": "^14.0.0",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
+    "clean-webpack-plugin": "^4.0.0",
     "codelyzer": "^6.0.0",
+    "copy-webpack-plugin": "^11.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.3.20",
@@ -93,12 +87,16 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "nativescript-worker-loader": "^0.12.1",
     "protractor": "~7.0.0",
+    "sass": "~1.49.9",
+    "terser-webpack-plugin": "^5.3.3",
     "tns-android": "7.0.1",
     "ts-node": "~8.4.1",
     "tslint": "~6.1.0",
     "typescript": "~4.5.5",
-    "uglifyjs-webpack-plugin": "^2.2.0"
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^5.73.0"
   },
-  "main": "main.js"
+  "main": "./src/main.tns.ts"
 }
