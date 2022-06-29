@@ -43,7 +43,8 @@ html {
 .app {
 	app-login,
 	app-admin,
-	app-vbox {
+	app-vbox,
+	app-products {
 		height: 100%;
 	}
 
@@ -829,8 +830,7 @@ html {
 .video-enabled-icon {
 	@extend %video-enabled-icon;
 }
-
-@media print {
+/* @media print {
 	.isPrinting {
 		.main-content {
 			display: none !important;
@@ -838,5 +838,15 @@ html {
 		app-print-coupon {
 			display: block;
 		}
+	}
+}
+ */
+
+.isPrinting {
+	.main-content {
+		display: none !important;
+	}
+	app-print-coupon {
+		display: block;
 	}
 }

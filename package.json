@@ -37,6 +37,7 @@
     "@nativescript/core": "~8.2.0",
     "@nativescript/local-notifications": "^5.1.0",
     "@ngneat/until-destroy": "^8.0.4",
+    "@ngx-pwa/offline": "^13.0.2",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "angular2-qrcode": "^2.0.3",
