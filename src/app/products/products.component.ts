@@ -64,15 +64,12 @@ export class ProductsComponent implements AfterViewInit, OnDestroy {
       this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
       // this.windowSizeService.initWindowSize();
 
-      //this.rowHeight = (this.windowSizeService.windowSize.columnHeight - 30) / 12;
-      this.windowSizeService.windowSize$.subscribe(windowSize => {
-        this.rowHeight = (windowSize.columnHeight - 30) / 12;
-      })
+      this.rowHeight = (this.windowSizeService.windowSize.columnHeight - 30) / 12;
     });
   }
 
   ngAfterViewInit() {
-    this.windowSizeService.initWindowSize();
+    //this.windowSizeService.initWindowSize();
     if (!this.service.product) {
       
       timer(1).subscribe(() => {

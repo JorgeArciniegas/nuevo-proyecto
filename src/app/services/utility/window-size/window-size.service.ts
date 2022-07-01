@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
 import { WindowSize } from './window-size.model';
 
 @Injectable({
@@ -8,12 +7,11 @@ import { WindowSize } from './window-size.model';
 export class WindowSizeService {
   public windowSize: WindowSize;
 
-  public windowSize$: BehaviorSubject<WindowSize> = new BehaviorSubject(null);
   constructor() { }
 
 
   initWindowSize(): void {
-    console.log('initWindowSize_v3');
+    console.log('initWindowSize');
     const doc: HTMLElement = document.querySelector('html');
     const h: number = doc.offsetHeight;
     const w: number = doc.offsetWidth;
@@ -25,7 +23,6 @@ export class WindowSizeService {
       aspectRatio: aspectRatio,
       columnHeight: hgeneral
     };
-    this.windowSize$.next(this.windowSize);
     console.log('this.windowSize: ', JSON.parse(JSON.stringify(this.windowSize)))
   }
 }

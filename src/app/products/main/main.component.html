@@ -23,15 +23,8 @@
     </mat-grid-tile>
   </mat-grid-list>
 </div>
-<!-- <div *ngIf="mainService.placingEvent.timeBlocked" id="overlayArea1"
+<div *ngIf="mainService.placingEvent.timeBlocked" id="overlayArea1"
   [style.top.px]="(windowSizeService.windowSize.height - windowSizeService.windowSize.columnHeight) + 12 + (rowHeight * 4)"
   [style.left.px]="0" [style.width]="'calc(59% - 2px)'" [style.height.px]="rowHeight * 18 + 20"
   class="overlay radius-5">
-</div> -->
-<ng-container *ngIf="windowSizeService.windowSize$ | async as windowSize">
-  <div *ngIf="mainService.placingEvent.timeBlocked" id="overlayArea1"
-    [style.top.px]="(windowSize.height - windowSize.columnHeight) + 12 + (rowHeight * 4)"
-    [style.left.px]="0" [style.width]="'calc(59% - 2px)'" [style.height.px]="rowHeight * 18 + 20"
-    class="overlay radius-5">
-  </div>
-</ng-container>
+</div>

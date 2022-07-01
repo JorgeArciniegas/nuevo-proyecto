@@ -31,41 +31,21 @@ export class ApplicationMenuComponent {
     this.initIconsSize();
   }
 
-  // private initIconsSize(): void {
-  //   let barHeight =
-  //     this.windowSizeService.windowSize.height -
-  //     this.windowSizeService.windowSize.columnHeight;
-  //   if (barHeight < 10) {
-  //     barHeight = 50;
-  //   }
-  //   if (this.settings.faviconPath === '') {
-  //     this.logoIcon = undefined;
-  //   } else {
-  //     this.logoIcon = new IconSize(barHeight * 0.9);
-  //   }
-  //   this.menuIcon = new IconSize(barHeight * 0.7);
-  //   this.buttonIcon = new IconSize(barHeight * 0.8 - 4, barHeight * 0.8);
-  //   this.btnSelected = this.settings.products[0].name;
-  // }
-
   private initIconsSize(): void {
-    this.windowSizeService.windowSize$.subscribe(windowSize => {
-      let barHeight =
-      windowSize.height -
-      windowSize.columnHeight;
-      if (barHeight < 10) {
-        barHeight = 50;
-      }
-      if (this.settings.faviconPath === '') {
-        this.logoIcon = undefined;
-      } else {
-        this.logoIcon = new IconSize(barHeight * 0.9);
-      }
-      this.menuIcon = new IconSize(barHeight * 0.7);
-      this.buttonIcon = new IconSize(barHeight * 0.8 - 4, barHeight * 0.8);
-      this.btnSelected = this.settings.products[0].name;
-    })
-    
+    let barHeight =
+      this.windowSizeService.windowSize.height -
+      this.windowSizeService.windowSize.columnHeight;
+    if (barHeight < 10) {
+      barHeight = 50;
+    }
+    if (this.settings.faviconPath === '') {
+      this.logoIcon = undefined;
+    } else {
+      this.logoIcon = new IconSize(barHeight * 0.9);
+    }
+    this.menuIcon = new IconSize(barHeight * 0.7);
+    this.buttonIcon = new IconSize(barHeight * 0.8 - 4, barHeight * 0.8);
+    this.btnSelected = this.settings.products[0].name;
   }
 
   /**

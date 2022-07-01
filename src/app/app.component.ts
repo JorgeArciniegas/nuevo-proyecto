@@ -26,13 +26,6 @@ export class AppComponent implements OnInit {
     this.faviconPath = this.appSettings.faviconPath;
     // Set the application language passing the browser one.
     this.translateUtilityService.initializeLanguages(this.translateService.getBrowserLang());
-    console.log('window resize init...');
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-      console.log('window:resize');
-      this.windowSizeService.initWindowSize();
   }
 
   ngOnInit(): void {
