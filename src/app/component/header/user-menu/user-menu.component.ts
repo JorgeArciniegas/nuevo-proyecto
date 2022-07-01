@@ -26,11 +26,20 @@ export class UserMenuComponent implements OnInit, OnDestroy {
     this.initIconsSize();
   }
 
+  // private initIconsSize(): void {
+  //   this.barHeight =
+  //     this.windowSizeService.windowSize.height -
+  //     this.windowSizeService.windowSize.columnHeight;
+  //     this.notifyIcon = new IconSize(this.barHeight * 0.6);
+  // }
+
   private initIconsSize(): void {
-    this.barHeight =
-      this.windowSizeService.windowSize.height -
-      this.windowSizeService.windowSize.columnHeight;
+    this.windowSizeService.windowSize$.subscribe(windowSize => {
+      this.barHeight =
+      windowSize.height -
+      windowSize.columnHeight;
       this.notifyIcon = new IconSize(this.barHeight * 0.6);
+    })
   }
 
   ngOnInit() {

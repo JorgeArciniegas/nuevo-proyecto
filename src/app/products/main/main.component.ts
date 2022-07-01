@@ -30,7 +30,10 @@ export class MainComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.mainService.initEvents();
-    this.rowHeight = (this.windowSizeService.windowSize.columnHeight - 30 - 12) / 24;
+    //this.rowHeight = (this.windowSizeService.windowSize.columnHeight - 30 - 12) / 24;
+    this.windowSizeService.windowSize$.subscribe(windowSize => {
+      this.rowHeight = (windowSize.columnHeight - 30 - 12) / 24;
+    })
   }
 
   ngOnDestroy() {

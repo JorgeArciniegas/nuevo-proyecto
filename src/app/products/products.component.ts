@@ -63,7 +63,11 @@ export class ProductsComponent implements AfterViewInit, OnDestroy {
     this.observableMediaSubscribe = this.observableMedia.media$.subscribe((change: MediaChange) => {
       this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
       // this.windowSizeService.initWindowSize();
-      this.rowHeight = (this.windowSizeService.windowSize.columnHeight - 30) / 12;
+
+      //this.rowHeight = (this.windowSizeService.windowSize.columnHeight - 30) / 12;
+      this.windowSizeService.windowSize$.subscribe(windowSize => {
+        this.rowHeight = (windowSize.columnHeight - 30) / 12;
+      })
     });
   }
 
