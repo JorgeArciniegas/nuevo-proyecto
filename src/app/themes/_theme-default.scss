@@ -37,7 +37,12 @@ html {
 	padding: 0;
 	height: 100vh;
 	width: 100%;
+  position: relative;
 	@extend %font-family;
+}
+
+app-header {
+  position: relative;
 }
 
 .app {
@@ -50,6 +55,7 @@ html {
 
 	.main-content {
 		height: 100vh;
+    position: relative;
 		overflow: hidden;
 
 		@extend %color-bg-default;
@@ -706,7 +712,7 @@ html {
 	z-index: 0 !important;
 }
 .overlay {
-	position: fixed; /* Sit on top of the page content */
+	position: absolute; /* Sit on top of the page content */
 	z-index: 100; /* Specify a stack order in case you're using a different order for other elements */
 	margin: 1px;
 	background: rgba(0, 0, 0, 0.6) url("/assets/icons/baseline-lock-24px.svg") center center no-repeat;
@@ -790,6 +796,13 @@ html {
 	}
 }
 
+@media screen and (max-height: 650px) {
+  .modal-center .cdk-overlay-container .cdk-global-overlay-wrapper {
+    min-height: 200px;
+    min-width: 480px;
+  }
+}
+
 .bets-list,
 .transactions-list,
 .operator-summary {
@@ -806,6 +819,10 @@ html {
 			margin: auto;
 			min-width: 100%;
 			min-height: 100%;
+
+      .mat-datepicker-content-container {
+        width: 100%;
+      }
 		}
 		mat-calendar {
 			width: 100% !important;
