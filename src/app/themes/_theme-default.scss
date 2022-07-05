@@ -563,6 +563,10 @@ app-header {
 	@extend %border-bottom-overlay;
 }
 
+.max-height-55px {
+	max-height: 55px;
+}
+
 .card-odd {
 	@extend %dialog-card;
 
