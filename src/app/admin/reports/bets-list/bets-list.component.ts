@@ -31,12 +31,6 @@ export class BetsListComponent implements OnInit, OnDestroy {
     this.adapter.setLocale(this.translate.getCurrentLanguage());
     document.body.classList.add('bets-list');
 
-    // this.betsListService.availableSport.pop();
-    // this.betsListService.availableSport.pop();
-    // this.betsListService.availableSport.pop();
-    // this.betsListService.availableSport.pop();
-    // this.betsListService.availableSport.pop();
-
     // close the date picker on outside click
     fromEvent(document, 'click').subscribe((event: any) => {
       const elem: any = event.target;

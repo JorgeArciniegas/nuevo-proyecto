@@ -11,7 +11,6 @@ export class WindowSizeService {
 
 
   initWindowSize(): void {
-    console.log('initWindowSize');
     const doc: HTMLElement = document.querySelector('html');
     const h: number = doc.offsetHeight;
     const w: number = doc.offsetWidth;
@@ -23,6 +22,5 @@ export class WindowSizeService {
       aspectRatio: aspectRatio,
       columnHeight: hgeneral
     };
-    console.log('this.windowSize: ', JSON.parse(JSON.stringify(this.windowSize)))
   }
 }
