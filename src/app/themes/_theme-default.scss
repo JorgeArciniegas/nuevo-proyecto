@@ -563,9 +563,26 @@ app-header {
 	@extend %border-bottom-overlay;
 }
 
-.max-height-55px {
-	max-height: 55px;
+// maxHeight related selectors.
+@mixin max-height($maxValue) {
+	@if type-of($maxValue) != number or not unitless($maxValue) {
+	  @error '$cornerValue must be a unitless number';
+	}
+	@if $maxValue < 10 or $maxValue > 100 {
+	  @error '$cornerValue must be between 10 and 100';
+	}
+	max-height: $maxValue + px !important;
 }
+
+// Prefix max-height selector
+$_max-height-prefix: "max-height-";
+
+@for $maxValue from 10 through 100 {
+	.#{$_max-height-prefix}#{$maxValue} {
+	  @include max-height($maxValue);
+	}
+}
+
 
 .card-odd {
 	@extend %dialog-card;

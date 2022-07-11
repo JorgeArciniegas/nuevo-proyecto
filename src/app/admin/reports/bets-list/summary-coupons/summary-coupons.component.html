@@ -103,7 +103,7 @@
       </div>
       <div fxLayout="column" fxLayoutAlign="start" [style.height.%]="100">
         <div fxLayout="column" fxLayoutAlign="flex-start" fxLayoutAlignGap="25px grid" [style.height.%]="100">
-          <div fxLayoutAlign="start center" class="border-bottom-overlay-1px max-height-55px" fxFlex="1 1 0"
+          <div fxLayoutAlign="start center" class="border-bottom-overlay-1px max-height-55" fxFlex="1 1 0"
             *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons"
             [routerLink]="['../detail', rowItem.CouponCode ]">
             <div fxFlex="3">
