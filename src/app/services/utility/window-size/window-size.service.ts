@@ -6,6 +6,7 @@ import { WindowSize } from './window-size.model';
 })
 export class WindowSizeService {
   public windowSize: WindowSize;
+
   constructor() { }
 
 

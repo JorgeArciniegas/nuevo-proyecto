@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "c6fe5705-6c71-4159-84f6-a81817958d24"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -20,7 +23,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/app/themes/skins"
+              "src/app/themes/skins",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss"
@@ -46,7 +50,31 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "vgen-android-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "outputPath": "dist-vgen",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.vgen.ts"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             },
             "vgen-prod": {
               "budgets": [
@@ -75,6 +103,29 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/develop",
+                  "output": "assets"
+                }
+              ],
               "outputPath": "dist-vgen",
               "optimization": true,
               "outputHashing": "all",
@@ -83,17 +134,15 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/app/themes/skins/develop/"
-                ]
-              },
+              
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.vgen.ts"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             },
             "vgen-staging": {
               "budgets": [
@@ -3155,7 +3204,8 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ]
           }
         }

@@ -54,7 +54,8 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    loadChildren: () => import('./error-page/error-page.module').then(m => m.ErrorPageModule),
+    redirectTo: 'error-page'
+    // loadChildren: () => import('./error-page/error-page.module').then(m => m.ErrorPageModule),
   }
 ];
 

@@ -1,4 +1,4 @@
-<div fxFlex fxLayout="column" fxLayoutAlign="center space-between" *ngIf="betsListService.betsCouponList">
+<div fxFlex fxLayout="column" fxLayoutAlign="space-between" *ngIf="betsListService.betsCouponList">
   <div fxFlex="90" fxLayout="column" [style.padding.px]="20">
     <div class="title">
       <h3>{{'BETS_LIST' | translate | uppercase}} </h3>
@@ -101,9 +101,9 @@
           </div>
         </div>
       </div>
-      <div fxLayout="column" fxFlex fxLayoutAlign="start">
-        <div fxFlex fxLayout="column" fxLayoutAlign="flex-start" fxLayoutAlignGap="grid">
-          <div fxFlex fxLayoutAlign="start center" class="border-bottom-overlay-1px" [style.max-height.px]="55"
+      <div fxLayout="column" fxLayoutAlign="start" [style.height.%]="100">
+        <div fxLayout="column" fxLayoutAlign="flex-start" fxLayoutAlignGap="25px grid" [style.height.%]="100">
+          <div fxLayoutAlign="start center" class="border-bottom-overlay-1px max-height-55" fxFlex="1 1 0"
             *ngFor="let rowItem of betsListService.betsCouponList.SummaryCoupons"
             [routerLink]="['../detail', rowItem.CouponCode ]">
             <div fxFlex="3">

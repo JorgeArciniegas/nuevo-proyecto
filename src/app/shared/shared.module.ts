@@ -31,6 +31,7 @@ import { SplitStringPipe } from './pipes/split-string.pipe';
     GroupByCategoryPipe,
     MatDatepickerModule,
     MatInputModule,
-    MatNativeDateModule]
+    MatNativeDateModule
+  ]
 })
 export class SharedModule { }

@@ -37,18 +37,25 @@ html {
 	padding: 0;
 	height: 100vh;
 	width: 100%;
+  position: relative;
 	@extend %font-family;
+}
+
+app-header {
+  position: relative;
 }
 
 .app {
 	app-login,
 	app-admin,
-	app-vbox {
+	app-vbox,
+	app-products {
 		height: 100%;
 	}
 
 	.main-content {
 		height: 100vh;
+    position: relative;
 		overflow: hidden;
 
 		@extend %color-bg-default;
@@ -556,6 +563,27 @@ html {
 	@extend %border-bottom-overlay;
 }
 
+// maxHeight related selectors.
+@mixin max-height($maxValue) {
+	@if type-of($maxValue) != number or not unitless($maxValue) {
+	  @error '$cornerValue must be a unitless number';
+	}
+	@if $maxValue < 10 or $maxValue > 100 {
+	  @error '$cornerValue must be between 10 and 100';
+	}
+	max-height: $maxValue + px !important;
+}
+
+// Prefix max-height selector
+$_max-height-prefix: "max-height-";
+
+@for $maxValue from 10 through 100 {
+	.#{$_max-height-prefix}#{$maxValue} {
+	  @include max-height($maxValue);
+	}
+}
+
+
 .card-odd {
 	@extend %dialog-card;
 
@@ -692,6 +720,10 @@ html {
 	padding: 0px 6px;
 }
 
+.padding-horizontal-20 {
+	padding: 0px 20px;
+}
+
 .padding-vertical-10 {
 	padding: 10px 0px;
 }
@@ -705,7 +737,7 @@ html {
 	z-index: 0 !important;
 }
 .overlay {
-	position: fixed; /* Sit on top of the page content */
+	position: absolute; /* Sit on top of the page content */
 	z-index: 100; /* Specify a stack order in case you're using a different order for other elements */
 	margin: 1px;
 	background: rgba(0, 0, 0, 0.6) url("/assets/icons/baseline-lock-24px.svg") center center no-repeat;
@@ -789,6 +821,13 @@ html {
 	}
 }
 
+@media screen and (max-height: 650px) {
+  .modal-center .cdk-overlay-container .cdk-global-overlay-wrapper {
+    min-height: 200px;
+    min-width: 480px;
+  }
+}
+
 .bets-list,
 .transactions-list,
 .operator-summary {
@@ -805,6 +844,10 @@ html {
 			margin: auto;
 			min-width: 100%;
 			min-height: 100%;
+
+      .mat-datepicker-content-container {
+        width: 100%;
+      }
 		}
 		mat-calendar {
 			width: 100% !important;
@@ -829,8 +872,7 @@ html {
 .video-enabled-icon {
 	@extend %video-enabled-icon;
 }
-
-@media print {
+/* @media print {
 	.isPrinting {
 		.main-content {
 			display: none !important;
@@ -840,16 +882,13 @@ html {
 		}
 	}
 }
+ */
 
-// RANKING SOCCER
-.rank-up-icon {
-	@extend %rank-up-icon;
-}
-
-.rank-same-icon {
-	@extend %rank-same-icon;
-}
-
-.rank-down-icon {
-	@extend %rank-down-icon;
+.isPrinting {
+	.main-content {
+		display: none !important;
+	}
+	app-print-coupon {
+		display: block;
+	}
 }

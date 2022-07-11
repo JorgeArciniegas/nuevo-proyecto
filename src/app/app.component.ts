@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AppSettings } from './app.settings';
 import { Settings } from './app.settings.model';
@@ -26,7 +26,6 @@ export class AppComponent implements OnInit {
     this.faviconPath = this.appSettings.faviconPath;
     // Set the application language passing the browser one.
     this.translateUtilityService.initializeLanguages(this.translateService.getBrowserLang());
-
   }
 
   ngOnInit(): void {
@@ -40,4 +39,7 @@ export class AppComponent implements OnInit {
       document.head.appendChild(linkElement);
     }
   }
+
+  componentHeight: number;
+  
 }

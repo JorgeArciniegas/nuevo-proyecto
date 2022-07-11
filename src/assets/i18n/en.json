@@ -2,6 +2,18 @@
   "ACCG": "QUI",
   "AGILITY": "Agility",
   "ALL": "All",
+  "PROMPT_INSTALLATION": {
+    "BROWSER_MESSAGE": "New version available. Load New Version?",
+    "BTN_LABEL": "Install",
+    "DESCRIPTION_ANDROID": "To install this web app on your device tap the Menu button and then 'Add to Home screen' button",
+    "IOS": {
+      "DESCRIPTION": "Install the APP on your iOS device with three simple steps!",
+      "FIRST_STEP": "1. Press the \"share\" button",
+      "SECOND_STEP": "2. Select \"Add to Home Screen\"",
+      "THIRD_STEP": "3. Press the <strong>Add</strong> button"
+    },
+    "TITLE": "Add to Home screen"
+  },
   "AMERICANROULETTE": {
     "1DOZEN": "1st DOZEN",
     "2DOZEN": "2nd DOZEN",
