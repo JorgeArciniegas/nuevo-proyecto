@@ -23,6 +23,14 @@ export class Results {
     public set nextEventNumber(id: number) {
         this._nextEventNumber = id;
     }
+    private _isDuplicatedEvent: boolean;
+    public get isDuplicatedEvent() {
+        return this._isDuplicatedEvent;
+    }
+    public set isDuplicatedEvent(isDuplicated: boolean) {
+        this._isDuplicatedEvent = isDuplicated;
+    }
+    
     /**
      * If countDown is not instantly retrieved use nextEventDuration in place
      */

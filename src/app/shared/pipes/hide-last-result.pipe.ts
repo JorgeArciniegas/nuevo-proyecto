@@ -28,7 +28,7 @@ export class HideLastResultPipe implements PipeTransform {
   * Calculate remaining time between the nextEvent duration and current event duration
   * @param countDown
   * @param layoutType
-  * @returns true if currentEvent is not over or if currentEvent is over and new results are available before cd expiration
+  * @returns true if currentEvent is not over or if currentEvent is over and new results are available before cd expiration and it's not a duplicated event
   */
   isDelayActive(countDown: number, layoutType: LAYOUT_TYPE, eventNumber: number): boolean {
     const defaultEventDuration: number = defaultEventDurationByLayoutType[layoutType].videoLengthDuration; //security fallback
@@ -36,7 +36,7 @@ export class HideLastResultPipe implements PipeTransform {
     let currentEventDuration: number = (eventDuration && eventDuration > 0) ? eventDuration : defaultEventDuration;
      const timeToShowResult: number = this.resultsService.resultsUtils.nextEventDuration - currentEventDuration;
     let isNewResultBeforeCountDownExpiration: boolean = this.resultsService.resultsUtils.nextEventNumber === eventNumber;
-    return (countDown > timeToShowResult || (countDown < timeToShowResult) && isNewResultBeforeCountDownExpiration);
+    return (countDown >= timeToShowResult || ((countDown < timeToShowResult) && (isNewResultBeforeCountDownExpiration && !this.resultsService.resultsUtils.isDuplicatedEvent)))
   }
 
 }
