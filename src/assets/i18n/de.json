@@ -92,6 +92,7 @@
       "MissingMappings": "Zuordnung fehlt [Code ES34]",
       "MultipleBetMaxLimitByUser": "Max. Anzahl mehrerer Wetten durch Benutzer [Code ES27]",
       "NightshiftLimitsExceeded": "Nachtschichtlimits überschritten [Code ES42]",
+      "NonPlayableOdds": "Operation nicht erlaubt, Quoten nicht verfügbar",
       "OddChanged": "Quote geändert [Code ES4]",
       "OperationAlreadyDone": "Vorgang bereits ausgeführt [Code ES36]",
       "OperationNotAllowed": "Vorgang nicht erlaubt. [Code ES201]",

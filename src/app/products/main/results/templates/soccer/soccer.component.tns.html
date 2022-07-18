@@ -1,22 +1,21 @@
 <StackLayout class="result-list m-t-2">
-<ng-container *ngFor="let event of (results|async)">
-  <GridLayout rows="*,*" columns="*" class="card-box-result-soccer">
-    <!-- EVENT WEEK -->
-    <GridLayout row="0" class="header m-x-4 m-b-4">
-        <Label textWrap="true" text="{{event.eventLabel}}" class="eventNumber" horizontalAlignment="center"
-        verticalAlignment="center"></Label>
+  <ng-container *ngFor="let event of (results$|async) | hideLastResult: resultsService?.resultsUtils?.countDownInSeconds">
+    <GridLayout rows="*,*" columns="*" class="card-box-result-soccer">
+      <!-- EVENT WEEK -->
+      <GridLayout row="0" class="header m-x-4 m-b-4">
+          <Label textWrap="true" text="{{event.eventLabel}}" class="eventNumber" horizontalAlignment="center"
+          verticalAlignment="center"></Label>
+      </GridLayout>
+      <!-- RESULT'S MATHCES -->
+      <GridLayout row="1" rows="*" columns="*,*,*,*,*,*,*,*,*,*">
+        <StackLayout col="{{i}}" orientation="vertical" horizontalAlignment="center" verticalAlignment="center"
+          *ngFor="let matches of event.soccerResult; let i=index"
+          class="btn-soccer-result p-x-5">
+            <Label class="label m-t-2" horizontalAlignment="center" text="{{matches.EventName}}"></Label>
+            <Label class="label"  horizontalAlignment="center" verticalAlignment="bottom" text="{{matches.Result}}"></Label>
+        </StackLayout>
+      </GridLayout>
     </GridLayout>
-    <!-- RESULT'S MATHCES -->
-    <GridLayout row="1" rows="*" columns="*,*,*,*,*,*,*,*,*,*">
-      <StackLayout col="{{i}}" orientation="vertical" horizontalAlignment="center" verticalAlignment="center"
-        *ngFor="let matches of event.soccerResult; let i=index"
-        class="btn-soccer-result p-x-5">
-          <Label class="label m-t-2" horizontalAlignment="center" text="{{matches.EventName}}"></Label>
-          <Label class="label"  horizontalAlignment="center" verticalAlignment="bottom" text="{{matches.Result}}"></Label>
-      </StackLayout>
-    </GridLayout>
-  </GridLayout>
-</ng-container>
-
-
+  </ng-container>
 </StackLayout>
+  

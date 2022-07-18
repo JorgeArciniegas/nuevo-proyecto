@@ -115,7 +115,6 @@ export class BtncalcService implements OnDestroy {
     }
   }
 
-
  /**
    * firePlus fired only if the new amount is greater then minimum amount
    */

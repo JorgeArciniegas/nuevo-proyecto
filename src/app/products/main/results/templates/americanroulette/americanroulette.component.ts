@@ -3,9 +3,9 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { LAYOUT_TYPE } from '../../../../../../environments/environment.models';
+import { AmericanRouletteRug } from '../../../playable-board/templates/american-roulette/american-roulette.models';
 import { ResultsService } from '../../results.service';
-import { AmericanRouletteRug } from './../../../playable-board/templates/american-roulette/american-roulette.models';
-import { EventResult, LastResult } from './../../results.model';
+import { EventsResultsWithDetails, LastResult } from './../../results.model';
 
 @UntilDestroy()
 @Component({
@@ -16,17 +16,14 @@ import { EventResult, LastResult } from './../../results.model';
 export class AmericanrouletteComponent {
 
   @Input() rowHeight: number;
-
   americanRouletteRug: AmericanRouletteRug;
-
-  public results: Observable<EventResult[]>;
-
-  constructor(private resultsService: ResultsService) {
-    this.results = this.resultsService.lastResultsSubject.pipe(
+  public results$: Observable<EventsResultsWithDetails[]>;
+  constructor(public resultsService: ResultsService) {
+    this.results$ = this.resultsService.lastResultsSubject.pipe(
       untilDestroyed(this),
       filter(el => el.layoutType && el.layoutType === LAYOUT_TYPE.AMERICANROULETTE),
       map((res: LastResult) => res.eventResults),
-      tap((results: EventResult[]) => {
+      tap((results: EventsResultsWithDetails[]) => {
         results.forEach(
           res => { res.americanRouletteResults.color = this.getColorClass(res.americanRouletteResults.result) }
         );
@@ -34,11 +31,10 @@ export class AmericanrouletteComponent {
     );
     this.americanRouletteRug = new AmericanRouletteRug();
   }
-
   private getColorClass(n: number | string): string {
-    // tslint:disable-next-line:max-line-length
-    return this.americanRouletteRug.red.includes(parseInt(n.toString(), 10)) ? 'red' : (this.americanRouletteRug.black.includes(parseInt(n.toString(), 10)) ? 'black' : 'green');
+    return this.americanRouletteRug.red.includes(parseInt(n.toString(), 10))
+      ? 'red'
+      : (this.americanRouletteRug.black.includes(parseInt(n.toString(), 10))
+        ? 'black' : 'green');
   }
-
-
 }

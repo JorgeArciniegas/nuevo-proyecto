@@ -33,7 +33,6 @@ export class MainService {
 
   private attempts = 0;
   public initCurrentEvent = false;
-
   playersList: Player[];
 
   smartCode: Smartcode;
@@ -63,6 +62,7 @@ export class MainService {
     private feedData: ElysFeedsService,
     private userservice: UserService
   ) {
+
     this.toResetAllSelections = true;
 
     this.createPlayerList();
@@ -79,11 +79,12 @@ export class MainService {
       }
     });
 
+
+
     this.currentEventSubscribe = new Subject<number>();
     this.currentEventObserve = this.currentEventSubscribe.asObservable();
 
     this.currentEventObserve.subscribe((eventIndex: number) => {
-
       this.eventDetails.currentEvent = eventIndex;
       this.remainingEventTime(this.eventDetails.events[eventIndex].number).then((eventTime: EventTime) => {
         if (eventTime) {
@@ -205,6 +206,7 @@ export class MainService {
         // Shown seconds
         this.eventDetails.eventTime.second = this.remainingTime.second;
         this.remaingTimeCounter.next(this.eventDetails.eventTime);
+        this.resultService.resultsUtils.countDown = this.remainingTime;
       }
     } catch (err) {
       console.log('GET TIME ERROR ---> ', err);
@@ -219,7 +221,7 @@ export class MainService {
       let eventRemoved : EventInfo;
       if (this.initCurrentEvent) {
         this.loadEventsFromApi().then(() => this.resultService.getLastResult());
-      } else {
+      } else { 
         let eventRemoved: EventInfo = this.eventDetails.events[0];
         this.loadEventsFromApi(eventRemoved).then(() => {
           if ((this.cacheTournaments && this.cacheTournaments.length > 0) ||
@@ -285,10 +287,12 @@ export class MainService {
             checkDuplicateIndex = 1;
           }
         }
-
+        this.resultService.resultsUtils.isDuplicatedEvent = checkDuplicateIndex > 0;
         if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
           // Load all events
+          this.resultService.resultsUtils.nextEventNumber = sports.Sports[0].ts[0].evs[0].id
           this.cacheEvents = tournaments[0].evs;
+          this.resultService.resultsUtils.nextEventDuration = sports.Sports[0].ts[0].evs[0].duration;
           for (let index = checkDuplicateIndex; index < this.productService.product.layoutProducts.nextEventItems; index++) {
             const event: EventInfo = new EventInfo();
             event.number = this.cacheEvents[index].id;
@@ -298,7 +302,9 @@ export class MainService {
           }
           // load markets from PRODUCT SOCCER
         } else {
+          this.resultService.resultsUtils.nextEventNumber = sports.Sports[0].ts[0].id;
           this.cacheTournaments = tournaments;
+          this.resultService.resultsUtils.nextEventDuration = sports.Sports[0].ts[0].duration;
           for (let index = checkDuplicateIndex; index < this.productService.product.layoutProducts.nextEventItems; index++) {
             const event: EventInfo = new EventInfo();
             event.number = this.cacheTournaments[index].id;

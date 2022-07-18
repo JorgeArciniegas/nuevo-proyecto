@@ -31,6 +31,15 @@ app-playable-board-cock-fight {
 					float: right;
 				}
 			}
+
+      &[disabled] {
+        opacity: 0.5;
+        cursor: auto;
+
+        :focus {
+          background: inherit;
+        }
+      }
 		}
 
 		.selection-details {

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { WindowSize } from '../../../../../../../src/app/products/products.model';
 import { LAYOUT_TYPE } from '../../../../../../environments/environment.models';
 import { ResultsService } from '../../results.service';
-import { EventResult, LastResult } from './../../results.model';
+import { EventsResultsWithDetails, LastResult } from './../../results.model';
 
 @UntilDestroy()
 @Component({
@@ -18,11 +18,9 @@ export class RaceComponent {
   @Input() rowHeight: number;
   @Input() codeProduct: string;
   @Input() windowSize: WindowSize;
-  
-  public results: Observable<EventResult[]>;
-
-  constructor(private resultsService: ResultsService) {
-    this.results = this.resultsService.lastResultsSubject.pipe(
+  public results$: Observable<EventsResultsWithDetails[]>;
+  constructor(public resultsService: ResultsService) {
+    this.results$ = this.resultsService.lastResultsSubject.pipe(
       untilDestroyed(this),
       filter(el => el.layoutType === LAYOUT_TYPE.RACING),
       map((res: LastResult) => res.eventResults)
