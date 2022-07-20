@@ -287,7 +287,7 @@ export class MainService {
             checkDuplicateIndex = 1;
           }
         }
-        
+        this.resultService.resultsUtils.isDuplicatedEvent = checkDuplicateIndex > 0;
         if (this.productService.product.layoutProducts.type !== LAYOUT_TYPE.SOCCER) {
           // Load all events
           this.resultService.resultsUtils.nextEventNumber = sports.Sports[0].ts[0].evs[0].id
