@@ -1,8 +1,7 @@
 // tslint:disable-next-line:max-line-length
 import { VirtualBetCompetitor, VirtualBetEvent, VirtualBetMarket, VirtualBetSelection, VirtualBetTournament, VirtualGetRankByEventResponse } from '@elys/elys-api';
-import { ColoursNumber, ColoursSelection } from './playable-board/templates/colours/colours.models';
-import { KenoNumber } from './playable-board/templates/keno/keno.model';
 import { RouletteNumber } from './playable-board/templates/american-roulette/american-roulette.models';
+import { KenoNumber } from './playable-board/templates/keno/keno.model';
 
 export enum TypePlacingEvent {
   ST = 0,

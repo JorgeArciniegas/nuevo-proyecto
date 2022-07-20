@@ -324,7 +324,7 @@ export const environment: Environment = {
       isPlayable: true,
       layoutProducts: {
         type: LAYOUT_TYPE.AMERICANROULETTE,
-        resultItems: 8,
+        resultItems: 7,
         nextEventItems: 2,
         cacheEventsItem: 5
       },
