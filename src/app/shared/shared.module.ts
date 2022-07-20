@@ -33,6 +33,7 @@ import { SplitStringPipe } from './pipes/split-string.pipe';
     HideLastResultPipe,
     MatDatepickerModule,
     MatInputModule,
-    MatNativeDateModule]
+    MatNativeDateModule
+  ]
 })
 export class SharedModule { }

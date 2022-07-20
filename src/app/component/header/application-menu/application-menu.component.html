@@ -6,7 +6,7 @@
   </button>
   <!-- LOGO -->
   <img *ngIf="logoIcon" class="toolbar logo" [style.height.px]="logoIcon.height"
-    src="app/themes/skins/{{settings.theme}}/image/Logo-header.png">
+    src="assets/theme/image/Logo-header.png">
   <!-- BUTTONS -->
   <ng-container *ngIf="buttonIcon && productsIsLoaded">
     <ng-container *ngFor="let prod of settings.products ">

@@ -1,5 +1,0 @@
-<GridLayout columns="3*,2*,3*" class="special-box lucky-soccer">
-  <Button col="1" cornerRadius="5" text="{{ 'LUCKY' | translate }}" class="button btn-grey-gradient"
-    (tap)="placingColourLucky()"
-    [isEnabled]="!mainService.placingEvent.timeBlocked && !userService.isModalOpen"></Button>
-</GridLayout>

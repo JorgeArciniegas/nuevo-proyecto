@@ -1,15 +1,15 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { ElysApiModule, PlaySource } from '@elys/elys-api';
 import { ElysCouponModule } from '@elys/elys-coupon';
 import { ElysStorageLibModule } from '@elys/elys-storage-lib';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { QRCodeModule } from 'angular2-qrcode';
 import { NgxBarcodeModule } from 'ngx-barcode';
@@ -24,6 +24,8 @@ import { LabelByGroupingPipe } from './component/pipe/label-by-grouping.pipe';
 import { BetoddsComponent } from './products/product-dialog/betodds/betodds.component';
 import { GroupingsComponent } from './products/product-dialog/groupings/groupings.component';
 import { HotAndColdComponent } from './products/product-dialog/hot-and-cold/hot-and-cold.component';
+import { AmericanrouletteComponent as AmericanrouletteHotAndColdComponent } from './products/product-dialog/hot-and-cold/template/americanroulette/americanroulette.component';
+import { ColorsComponent as ColorsHotAndColdComponent } from './products/product-dialog/hot-and-cold/template/colors/colors.component';
 import { KenoComponent as KenoHotAndColdComponent } from './products/product-dialog/hot-and-cold/template/keno/keno.component';
 import { PaytableComponent } from './products/product-dialog/paytable/paytable.component';
 import { ColoursComponent as ColoursPaytableComponent } from './products/product-dialog/paytable/template/colours/colours.component';
@@ -35,73 +37,68 @@ import { StatisticsComponent } from './products/product-dialog/statistics/statis
 import { CockFightComponent as CockFightStatisticsComponent } from './products/product-dialog/statistics/templates/cock-fight/cock-fight.component';
 import { RaceComponent as RaceStatisticsComponent } from './products/product-dialog/statistics/templates/race/race.component';
 import { SoccerComponent as SoccerStatisticsComponent } from './products/product-dialog/statistics/templates/soccer/soccer.component';
-import { SharedModule } from './shared/shared.module';
-import { ColorsComponent as ColorsHotAndColdComponent } from './products/product-dialog/hot-and-cold/template/colors/colors.component';
-import { AmericanrouletteComponent as AmericanrouletteHotAndColdComponent } from './products/product-dialog/hot-and-cold/template/americanroulette/americanroulette.component';
 import { LanguageModule } from './shared/language/language.module';
+import { SharedModule } from './shared/shared.module';
 // tslint:disable-next-line:only-arrow-functions
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
-  declarations: [
-    componentDeclarations,
-    ProductDialogComponent,
-    BetoddsComponent,
-    StatisticsComponent,
-    RaceStatisticsComponent,
-    CockFightStatisticsComponent,
-    SoccerStatisticsComponent,
-    PaytableComponent,
-    RankingComponent,
-    SoccerRankingComponent,
-    KenoPaytableComponent,
-    ColoursPaytableComponent,
-    ColorsHotAndColdComponent,
-    HotAndColdComponent,
-    KenoHotAndColdComponent,
-    PayCancelDialogComponent,
-    ConfirmDestroyCouponComponent,
-    GroupingsComponent,
-    LabelByGroupingPipe,
-    AmericanrouletteHotAndColdComponent
-  ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    NoopAnimationsModule,
-    MatDialogModule,
-    MatSlideToggleModule,
-    BrowserAnimationsModule,
-    MatProgressSpinnerModule,
-    SharedModule,
-    NgxBarcodeModule,
-    QRCodeModule,
-    ElysStorageLibModule.forRoot({
-      isCrypto: true,
-      cryptoString: 'VgenStorage',
-      KeyUnencodedList: ['versionApp', 'operatorData', 'callBackURL'],
-      versionStorage: VERSION.version
-    }),
-
-    ElysApiModule.forRoot({
-      urlApi: environment.baseApiUrl
-    }),
-    ElysCouponModule.forRoot(
-      { deviceLayout: PlaySource.VDeskWeb }
-    ),
-    RouterModule.forRoot(routes),
-    LanguageModule
-  ],
-  entryComponents: [
-    ProductDialogComponent,
-    PayCancelDialogComponent,
-    ConfirmDestroyCouponComponent
-  ],
-  providers: [
-    providerDeclarations
-  ],
-
-  bootstrap: [AppComponent]
+    declarations: [
+        componentDeclarations,
+        ProductDialogComponent,
+        BetoddsComponent,
+        StatisticsComponent,
+        RaceStatisticsComponent,
+        CockFightStatisticsComponent,
+        SoccerStatisticsComponent,
+        PaytableComponent,
+        RankingComponent,
+        SoccerRankingComponent,
+        KenoPaytableComponent,
+        ColoursPaytableComponent,
+        ColorsHotAndColdComponent,
+        HotAndColdComponent,
+        KenoHotAndColdComponent,
+        PayCancelDialogComponent,
+        ConfirmDestroyCouponComponent,
+        GroupingsComponent,
+        LabelByGroupingPipe,
+        AmericanrouletteHotAndColdComponent
+    ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        NoopAnimationsModule,
+        MatDialogModule,
+        MatSlideToggleModule,
+        BrowserAnimationsModule,
+        MatProgressSpinnerModule,
+        SharedModule,
+        NgxBarcodeModule,
+        QRCodeModule,
+        ElysStorageLibModule.forRoot({
+            isCrypto: true,
+            cryptoString: 'VgenStorage',
+            KeyUnencodedList: ['versionApp', 'operatorData', 'callBackURL'],
+            versionStorage: VERSION.version
+        }),
+        ElysApiModule.forRoot({
+            urlApi: environment.baseApiUrl
+        }),
+        ElysCouponModule.forRoot({ deviceLayout: PlaySource.VDeskWeb }),
+        RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
+        LanguageModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+          enabled: environment.production,
+          // Register the ServiceWorker as soon as the application is stable
+          // or after 30 seconds (whichever comes first).
+          registrationStrategy: 'registerWhenStable:10000'
+        })
+    ],
+    providers: [
+        providerDeclarations
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,0 @@
-<GridLayout rows="*" columns="*">
-  <StackLayout orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" *ngIf="product">
-    <Image (tap)="openRouting( icon.routing )" *ngFor="let icon of product.widgets" stretch="aspectFit"
-      [width]="widgetIcon.width" [height]="widgetIcon.height" src="~/assets/icons/{{ icon.icon }}.png"
-      [isEnabled]="!timeBlocked && !userService.isModalOpen"></Image>
-  </StackLayout>
-</GridLayout>

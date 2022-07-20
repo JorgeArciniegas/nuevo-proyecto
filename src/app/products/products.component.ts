@@ -62,14 +62,17 @@ export class ProductsComponent implements AfterViewInit, OnDestroy {
   ) {
     this.observableMediaSubscribe = this.observableMedia.media$.subscribe((change: MediaChange) => {
       this.service.breakpoint = this.service.gridByBreakpoint[change.mqAlias];
-      this.windowSizeService.initWindowSize();
+      // this.windowSizeService.initWindowSize();
+
       this.rowHeight = (this.windowSizeService.windowSize.columnHeight - 30) / 12;
     });
   }
 
   ngAfterViewInit() {
+    //this.windowSizeService.initWindowSize();
     if (!this.service.product) {
-      timer().subscribe(() => {
+      
+      timer(1).subscribe(() => {
         this.service.checkDefaultProduct();
         this.cdr.detectChanges();
       });

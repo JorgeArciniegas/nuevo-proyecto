@@ -8,11 +8,11 @@ Run `ng serve -c vgen-prod`
     Now your browser is enabled to print in the kiosk mode.
     
     
-## Mobile Environment
+## Mobile Environment @DEPRECATED
 Run `tns run android --clean --bundle --env.environment="vgen-prod"`
 for debug run `tns debug android --clean --bundle --env.uglify --env.environment="xxxxxx-prod" --no-hmr`(replace xxxxx with a specific environment)
 
-## RELEASE APK
+## RELEASE APK  @DEPRECATED
 > When it is launch:
 > - delete all file to folder dist based on `build` parameter;
 > - update the version app to AndroidManifest.xml(Android Version)
@@ -35,6 +35,6 @@ Run `tns build android --release  --env.uglify --env.snapshot --env.environment=
 ----
 
 
-### Nativescript APPSYNC 
+### Nativescript APPSYNC   @DEPRECATED
 
  Run `nativescript-app-sync release vdesk-android android -d Production --mandatory --description "YOUR DESCRIPTION" -t {last_version_released}`
