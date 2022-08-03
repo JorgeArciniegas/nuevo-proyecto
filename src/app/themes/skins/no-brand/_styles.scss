@@ -608,19 +608,19 @@ $gradient-blue3: #2f3a4d;
 }
 //ADMIN (MAIN MENU)
 %admin {
-	background: url("/app/themes/skins/no-brand/image/Bg-login-vdesk.jpg") center center no-repeat;
+	background: url("/assets/theme/image/Bg-login-vdesk.jpg") center center no-repeat;
 }
 %admin-mobile {
-	background: url("~/app/themes/skins/no-brand/image/Bg-login-vdesk.jpg") center center no-repeat;
+	background: url("~/assets/theme/image/Bg-login-vdesk.jpg") center center no-repeat;
 	background-size: cover;
 }
 // LOGIN
 %login {
-	background: url("/app/themes/skins/no-brand/image/Bg-login-vdesk.jpg") center center no-repeat;
+	background: url("/assets/theme/image/Bg-login-vdesk.jpg") center center no-repeat;
 }
 
 %login-mobile {
-	background: url("~/app/themes/skins/no-brand/image/Bg-login-vdesk.jpg") center center no-repeat;
+	background: url("~/assets/theme/image/Bg-login-vdesk.jpg") center center no-repeat;
 	background-size: cover;
 }
 
