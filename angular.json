@@ -242,17 +242,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/gensolutions/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/gensolutions/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/gensolutions",
                   "output": "assets"
                 }
               ],
@@ -309,17 +309,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/gensolutions/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/gensolutions/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/gensolutions",
                   "output": "assets"
                 }
               ],
@@ -376,17 +376,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/dngaming/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/dngaming/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/dngaming",
                   "output": "assets"
                 }
               ],
@@ -443,17 +443,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/dngaming/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/dngaming/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/dngaming",
                   "output": "assets"
                 }
               ],
@@ -510,17 +510,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/shawis/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/shawis/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/shawis",
                   "output": "assets"
                 }
               ],
@@ -577,17 +577,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/shawis/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/shawis/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/shawis",
                   "output": "assets"
                 }
               ],
@@ -1582,17 +1582,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/universalsoft/image/",
+                  "input": "src/app/themes/skins/betese/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/universalsoft/icons/pwa/",
+                  "input": "src/app/themes/skins/betese/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/universalsoft",
+                  "input": "src/app/themes/skins/betese",
                   "output": "assets"
                 }
               ],
@@ -1649,17 +1649,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/universalsoft/image/",
+                  "input": "src/app/themes/skins/betese/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/universalsoft/icons/pwa/",
+                  "input": "src/app/themes/skins/betese/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/universalsoft",
+                  "input": "src/app/themes/skins/betese",
                   "output": "assets"
                 }
               ],
@@ -2118,17 +2118,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/uganbet/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/uganbet/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/uganbet",
                   "output": "assets"
                 }
               ],
@@ -2185,17 +2185,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/uganbet/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/uganbet/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/uganbet",
                   "output": "assets"
                 }
               ],
@@ -2386,17 +2386,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/f2o/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/f2o/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/f2o",
                   "output": "assets"
                 }
               ],
@@ -2453,17 +2453,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/f2o/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/f2o/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/f2o",
                   "output": "assets"
                 }
               ],
@@ -3324,17 +3324,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/soccerbet/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/soccerbet/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/soccerbet",
                   "output": "assets"
                 }
               ],
@@ -3391,17 +3391,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/soccerbet/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/soccerbet/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/soccerbet",
                   "output": "assets"
                 }
               ],
@@ -3458,17 +3458,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/betsafi/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/betsafi/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/betsafi",
                   "output": "assets"
                 }
               ],
@@ -3525,17 +3525,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/betsafi/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/betsafi/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/betsafi",
                   "output": "assets"
                 }
               ],
@@ -3726,17 +3726,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/betsplus/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/betsplus/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/betsplus",
                   "output": "assets"
                 }
               ],
@@ -3793,17 +3793,17 @@
                 "src/assets",
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/image/",
+                  "input": "src/app/themes/skins/betsplus/image/",
                   "output": "assets/theme/image/"
                 },
                 {
                   "glob": "**/*",
-                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "input": "src/app/themes/skins/betsplus/icons/pwa/",
                   "output": "assets/icons/pwa/"
                 },
                 {
                   "glob": "manifest.webmanifest",
-                  "input": "src/app/themes/skins/no-brand",
+                  "input": "src/app/themes/skins/betsplus",
                   "output": "assets"
                 }
               ],
