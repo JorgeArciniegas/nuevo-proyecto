@@ -1,4 +1,24 @@
-import { AccountDetails, AccountOperatorDetails, RegulationRules } from '@elys/elys-api';
+import { AccountDetails, AccountOperatorDetails, AuthenticationShopClientAgentLoginRequest, RegulationRules, TokenDataRequest, TokenDataSuccess } from '@elys/elys-api';
+
+export const mockToken: string = 'MOCK_TOKEN';
+
+export const mockUsername: string = 'user';
+
+export const mockPassword: string = '123456';
+
+export const mockUserId: number = 123;
+
+export const mockTokenDataRequest: TokenDataRequest = {
+  username: mockUsername,
+  password: mockPassword,
+  //grant_type: 'password'
+}
+
+export const mockAuthenticationShopClientAgentLoginRequest: AuthenticationShopClientAgentLoginRequest = {
+  Username: mockUsername,
+  Password: mockPassword,
+  UserId: mockUserId
+}
 
 export const mockUserData: AccountDetails = {
   AreSecurityCredentialsSet: false,
@@ -224,4 +244,15 @@ export const mockOperatorData: AccountOperatorDetails = {
   MaxMinutesToAllowBetCancel: 5,
   ClientMustChangePasswordNextLogon: false,
   ClientPolicies: null,
+}
+
+export const mockTokenDataSuccess: TokenDataSuccess = {
+	access_token: mockToken,
+	token_type: 'Bearer',
+	expires_in: 172800,
+	userName: 'MTestDev1',
+	clientId: null,
+	agentName: null,
+	'.issued': new Date('2022-07-11T11:42:17.93'),
+	'.expires': new Date('2022-07-13T11:42:17.93')
 }
