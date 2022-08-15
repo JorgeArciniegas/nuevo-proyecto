@@ -4346,7 +4346,12 @@
               "src/favicon.ico",
               "src/assets",
               "src/manifest.webmanifest"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app/themes/skins/develop/"
+              ]
+            }
           }
         }
       }
