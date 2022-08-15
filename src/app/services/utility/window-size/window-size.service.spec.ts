@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-import { WindowSize } from './window-size.model';
 import { WindowSizeService } from './window-size.service';
 
 describe('WindowSizeService', () => {
@@ -24,15 +23,10 @@ describe('WindowSizeService', () => {
       'width',
       'aspectRatio',
       'columnHeight',
-    ].sort()
+    ].sort();
     service.initWindowSize();
     expect(service.windowSize).toBeTruthy();
     expect(Object.keys(service.windowSize).sort()).toEqual(expected);
   });
 
 });
-
-
-
-
-
