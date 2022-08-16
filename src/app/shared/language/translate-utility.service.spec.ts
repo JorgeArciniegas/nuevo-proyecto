@@ -5,7 +5,6 @@ import { ElysStorageLibService } from "@elys/elys-storage-lib";
 import { TranslateLoader, TranslateModule, TranslateService } from "@ngx-translate/core";
 import { Observable, of } from "rxjs";
 import { AppSettings } from "src/app/app.settings";
-import { AppSettingsStub } from "src/app/mock/app-settings.mock";
 import { ElysStorageLibServiceStub } from "src/app/mock/elys-storage.mock";
 import { StorageService } from "src/app/services/utility/storage/storage.service";
 import { getLanguages, LANGUAGES } from "./language.models";
@@ -43,7 +42,7 @@ describe('TranslateUtilityService', () => {
         TranslateService,
         StorageService,
         { provide: ElysStorageLibService, useClass: ElysStorageLibServiceStub },
-        { provide: AppSettings, useClass: AppSettingsStub }
+        AppSettings
       ],
     });
 
