@@ -16,7 +16,7 @@ export const mockCouponLimit: CouponLimitHierarchy[] = [
 		UserType: 2,
 		CouponLimit: {
 			MinBetStake: 0.5,
-			MaxBetStake: 100,
+			MaxBetStake: 200,
 			MaxSingleBetWin: 5000,
 			MaxMultipleBetWin: 5000,
 			MaxCombinationBetWin: 5000,

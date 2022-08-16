@@ -6,7 +6,7 @@ export const mockUsername: string = 'user';
 
 export const mockPassword: string = '123456';
 
-export const mockUserId: number = 123;
+export const mockUserId: number = 569673;
 
 export const mockTokenDataRequest: TokenDataRequest = {
   username: mockUsername,
@@ -44,7 +44,7 @@ export const mockUserData: AccountDetails = {
   Overdraft: 200000,
   ParentId: 1804,
   PhoneNumber: null,
-  PlayableBalance: 209999.17,
+  PlayableBalance: 21000,
   SportPromoBonusBalance: 0,
   StateOrProvince: 'ghi',
   StreetAddress: 'via gianni',
@@ -57,11 +57,11 @@ export const mockUserData: AccountDetails = {
     CurrencyCode: 'EUR',
     CurrencySymbol: '€'
   },
-  UserId: 569673,
+  UserId: mockUserId,
   UserName: 'MTestDev1',
   UserPolicies: {
-    AuthorizedVirtualCategories: ['DOG', 'HORSE', 'HORSE-VIRT', 'ITA-LEAGUE', 'ENG-LEAGUE', 'KENO', 'ARLT', 'CLRS', 'COCK'],
-    AuthorizedVirtualSports: [8, 10, 210, 1, 18, 21, 24, 20],
+    AuthorizedVirtualCategories: ['DOG', 'HORSE', 'HORSE-VIRT', 'ITA-LEAGUE', 'ENG-LEAGUE', 'ARLT', 'CLRS'],
+    AuthorizedVirtualSports: [8, 10, 210, 1, 18, 21, 20],
     CanAcceptWithdrawalReservations: false,
     CanCreateEndUserChildren: false,
     CanExecuteClearances: true,
@@ -106,7 +106,7 @@ export const mockUserData: AccountDetails = {
 }
 
 export const mockOperatorData: AccountOperatorDetails = {
-  UserId: 569673,
+  UserId: mockUserId,
   OperatorType: {
     OperatorTypeId: 1,
     Description: 'agentclient_type_operator'

@@ -65,16 +65,16 @@ export const mockAccountVirtualSport: AccountVirtualSport[] = [
 			}
 		]
 	},
-	{
-		SportId: 21,
-		SportName: 'Roulette',
-		VirtualCategories: [
-			{
-				Name: 'American Roulette',
-				Code: 'ARLT'
-			}
-		]
-	},
+	// {
+	// 	SportId: 21,
+	// 	SportName: 'Roulette',
+	// 	VirtualCategories: [
+	// 		{
+	// 			Name: 'American Roulette',
+	// 			Code: 'ARLT'
+	// 		}
+	// 	]
+	// },
 	{
 		SportId: 24,
 		SportName: 'Colors',
