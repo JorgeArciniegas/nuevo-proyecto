@@ -1,28 +1,42 @@
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { Location } from '@angular/common';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { timer } from 'rxjs';
 
 import { ElysStorageLibModule } from '@elys/elys-storage-lib';
-import { AccountDetails, AccountOperatorDetails, AccountVirtualSport, AuthenticationShopClientAgentLoginRequest, CouponLimitHierarchy, CouponLimitHierarchyRequest, CurrencyCodeRequest, CurrencyCodeResponse, ElysApiService, PlaySource, TokenDataRequest, TokenDataSuccess } from '@elys/elys-api';
+import { 
+  AccountDetails, 
+  AccountOperatorDetails, 
+  AccountVirtualSport, 
+  AuthenticationShopClientAgentLoginRequest, 
+  CouponLimitHierarchy, 
+  CouponLimitHierarchyRequest, 
+  CurrencyCodeRequest, 
+  CurrencyCodeResponse, 
+  ElysApiService, 
+  PlaySource, 
+  TokenDataRequest, 
+  TokenDataSuccess } from '@elys/elys-api';
 import { ElysCouponModule } from '@elys/elys-coupon';
 
 import { UserService } from './user.service';
 import { VERSION } from '../../environments/version';
 import { AppSettings } from '../app.settings';
-import { HttpLoaderFactory } from '../app.module';
 import { StorageService } from './utility/storage/storage.service';
-import { mockOperatorData, mockPassword, mockToken, mockTokenDataSuccess, mockUserData, mockUserId, mockUsername } from '../mock/user.mock';
+import { 
+  mockOperatorData, 
+  mockPassword, 
+  mockToken, 
+  mockTokenDataSuccess, 
+  mockUserData, 
+  mockUserId, 
+  mockUsername } from '../mock/user.mock';
 import { mockCouponLimit, mockCurrencyCodeResponse } from '../mock/coupon.mock';
 import { mockAccountVirtualSport } from '../mock/sports.mock';
-import { timer } from 'rxjs';
 import { routes } from '../app-routing.module';
 import { RouterService } from './utility/router/router.service';
-import { NavigationEnd, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { OperatorData } from './user.models';
+import { TranslateUtilityService } from '../shared/language/translate-utility.service';
 
 class ElysApiServiceStub {
   public tokenBearer: string;
@@ -81,25 +95,23 @@ class ElysApiServiceStub {
   }
 }
 
-// class MockRouter {
-//   navigateByUrl(url: string): void { }
-// }
+class TranslateUtilityServiceStub {
+  changeLanguage(lang: string): void {}
+  getTranslatedString(value: string): string {
+    return ''
+  }
+}
 
 describe('UserService', () => {
   let service: UserService;
   let storageService: StorageService;
   let api: ElysApiService;
-  //let location: Location;
   let routerService: RouterService;
   let appSettings: AppSettings;
-  //let router: Router;
-
-  //const mockToken = 'MOCK_TOKEN';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
         imports: [
-          HttpClientTestingModule,
           RouterTestingModule.withRoutes(routes),
           ElysStorageLibModule.forRoot({
             isCrypto: true,
@@ -107,28 +119,18 @@ describe('UserService', () => {
             KeyUnencodedList: ['versionApp', 'operatorData', 'callBackURL'],
             versionStorage: VERSION.version
           }),
-          TranslateModule.forRoot({
-            loader: {
-              provide: TranslateLoader,
-              useFactory: HttpLoaderFactory,
-              deps: [HttpClient]
-            }
-          }),
           ElysCouponModule.forRoot({ deviceLayout: PlaySource.VDeskWeb }),
         ],
         providers: [
-          StorageService,
           AppSettings,
-          StorageService,
-          //{ provide: Router, useClass: MockRouter },
           { provide: ElysApiService, useClass: ElysApiServiceStub},
+          { provide: TranslateUtilityService, useClass: TranslateUtilityServiceStub},
         ],
     });
 
-    //service = TestBed.inject(UserService);
     storageService = TestBed.inject(StorageService);
-    storageService.removeItems();
-    //location = TestBed.inject(Location);
+    storageService.destroy();
+
   });
 
   it('should be created', () => {
@@ -150,8 +152,11 @@ describe('UserService', () => {
   it('checkLoginData() should be called method loadUserData() and set token in ElysApiService', (done) => {
     service = TestBed.inject(UserService);
     api = TestBed.inject(ElysApiService);
+
     storageService.setData('tokenData', mockToken);
+
     spyOn(service, 'loadUserData');
+
     service.checkLoginData();
     timer(0).subscribe(() => {
       expect(service.loadUserData).toHaveBeenCalled();
@@ -460,17 +465,127 @@ describe('UserService', () => {
 
   it('getOperatorData() should be check operatorData by key', () => {
     service = TestBed.inject(UserService);
+
     const mockBusinessName = 'AdminName';
     const operator: OperatorData = {
       ClientId: mockUserId,
       BusinessName: mockBusinessName,
       isAdminLogged: true
     };
+
     storageService.setData('operatorData', operator);
 
     expect(service.getOperatorData('ClientId')).toEqual(mockUserId);
     expect(service.getOperatorData('BusinessName')).toEqual(mockBusinessName);
     expect(service.getOperatorData('FakeKey')).not.toBeDefined();
+  });
+
+  it('setOperatorData() should be set OperatorData in localStorage', () => {
+    service = TestBed.inject(UserService);
+
+    const mockBusinessName = 'AdminName';
+    const mockOperatorData: OperatorData = {
+      ClientId: mockUserId,
+      BusinessName: mockBusinessName,
+      isAdminLogged: true
+    };
+    const mockReq = {
+      clientId: mockOperatorData.ClientId,
+      businessName: mockOperatorData.BusinessName,
+      adminLogged: mockOperatorData.isAdminLogged
+    };
+
+    spyOn(storageService, 'setData').and.callThrough();
+    service.setOperatorData(mockReq);
+
+    expect(localStorage.getItem('operatorData')).toEqual(JSON.stringify(mockOperatorData));
+    expect(storageService.setData).toHaveBeenCalledWith('operatorData', mockOperatorData);
+  });
+
+  it('removeDataCtd() should be delete OperatorData from localStorage', () => {
+    service = TestBed.inject(UserService);
+
+    const mockBusinessName = 'AdminName';
+    const mockReq = {
+      clientId: mockUserId,
+      businessName: mockBusinessName,
+      adminLogged: true
+    };
+
+    spyOn(storageService, 'removeItems').and.callThrough();
+    service.setOperatorData(mockReq);
+    service.removeDataCtd();
+
+    expect(localStorage.getItem('operatorData')).toBeFalsy();
+    expect(storageService.removeItems).toHaveBeenCalledWith('operatorData');
+  });
+
+  it('getUserId() should be get userId from UserData', () => {
+    service = TestBed.inject(UserService);
+    const changedMockUserId = 123;
+    const mockBusinessName = 'AdminName';
+
+    const mockReq = {
+      clientId: changedMockUserId,
+      businessName: mockBusinessName,
+      adminLogged: true
+    };
+
+    const mockDataUserDetail = {
+      userDetail: mockUserData
+    }
+
+    service.setOperatorData(mockReq); //set operatorData with adminLogged
+    storageService.setData('UserData', mockDataUserDetail); //set UserData
+
+    expect(service.getUserId()).toEqual(mockUserId);
+  });
+
+  it('getUserId() should be get userId from operatorData', () => {
+    service = TestBed.inject(UserService);
+    const changedMockUserId = 123;
+    const mockBusinessName = 'AdminName';
+
+    const mockReq = {
+      clientId: changedMockUserId,
+      businessName: mockBusinessName,
+      adminLogged: false
+    };
+
+    const mockDataUserDetail = {
+      userDetail: mockUserData
+    }
+
+    service.setOperatorData(mockReq); //set operatorData without adminLogged
+    storageService.setData('UserData', mockDataUserDetail); //set dataUserDetail
+
+    expect(service.getUserId()).toEqual(changedMockUserId);
+  });
+
+  it('getAuthorization() should be get UserPolicies from userDetail', () => {
+    service = TestBed.inject(UserService);
+
+    // dataUserDetail with userDetail
+    const mockDataUserDetail = {
+      userDetail: mockUserData
+    }
+
+    service.dataUserDetail = mockDataUserDetail; //set dataUserDetail
+
+    expect(service.getAuthorization()).toEqual(mockUserData.UserPolicies);
+  });
+
+  it('getAuthorization() should be get UserPolicies from operatorDetail', () => {
+    service = TestBed.inject(UserService);
+
+    // dataUserDetail with operatorDetail
+    const mockDataUserDetail = {
+      operatorDetail: mockOperatorData
+    }
+
+    service.dataUserDetail = mockDataUserDetail; //set dataUserDetail
+
+    expect(service.getAuthorization()).toEqual(mockOperatorData.UserPolicies);
   });
 
 });
