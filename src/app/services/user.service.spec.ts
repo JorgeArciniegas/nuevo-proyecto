@@ -36,11 +36,12 @@ class TranslateUtilityServiceStub {
 describe('UserService', () => {
   let service: UserService;
   let storageService: StorageService;
-  let api: ElysApiService;
+  let api: ElysApiServiceStub;
   let routerService: RouterService;
   let appSettings: AppSettings;
 
   beforeEach(() => {
+    api = new ElysApiServiceStub();
     TestBed.configureTestingModule({
         imports: [
           RouterTestingModule.withRoutes(routes),
@@ -48,7 +49,7 @@ describe('UserService', () => {
         ],
         providers: [
           AppSettings,
-          { provide: ElysApiService, useClass: ElysApiServiceStub},
+          { provide: ElysApiService, useValue: api},
           { provide: TranslateUtilityService, useClass: TranslateUtilityServiceStub},
           { provide: ElysStorageLibService, useClass: ElysStorageLibServiceStub},
         ],
@@ -77,7 +78,6 @@ describe('UserService', () => {
 
   it('checkLoginData() should be called method loadUserData() and set token in ElysApiService', (done) => {
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     storageService.setData('tokenData', mockToken);
 
@@ -93,7 +93,6 @@ describe('UserService', () => {
 
   it('login() should be called method postAccessToken() with username and password', async () => {
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     spyOn(api.account, 'postAccessToken').and.callThrough();
     spyOn(service, 'loadUserData').and.callFake((token: string, loginAdmin?: Boolean) => Promise.resolve(''));
@@ -104,7 +103,6 @@ describe('UserService', () => {
 
   it('login() should be called method loadUserData() with access_token and loginAdmin == true', async () => {
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     spyOn(service, 'loadUserData').and.callFake((token: string, loginAdmin?: Boolean) => Promise.resolve(''));
 
@@ -119,7 +117,6 @@ describe('UserService', () => {
 
   it('loginOperator() should be called method clientLoginRequest() with username, password and userId', async () => {
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     spyOn(api.account, 'clientLoginRequest').and.callThrough();
     spyOn(service, 'getOperatorData').and.returnValue(mockUserId);
@@ -131,7 +128,6 @@ describe('UserService', () => {
 
   it('loginOperator() should be called method loadUserData() with access_token and loginAdmin == false', async () => {
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     spyOn(service, 'getOperatorData').and.returnValue(mockUserId);
     spyOn(service, 'loadUserData').and.callFake((token: string, loginAdmin?: Boolean) => Promise.resolve(''));
@@ -155,7 +151,6 @@ describe('UserService', () => {
   it('logout() should be clear the storage data and the token from vgen.service', () => {
     const mockDataUser = {userDetail: mockUserData};
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     service.dataUserDetail = mockDataUser;
     storageService.setData('tokenData', mockToken);
@@ -267,7 +262,6 @@ describe('UserService', () => {
   it('loadUserData() should be return error string when incorect login and password', async () => {
     const mockErrorMessage = 'unauthorized user';
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     spyOn(service, 'logout');
     spyOn(api.account, 'getOperatorMe').and.callFake(() => Promise.reject({
@@ -292,7 +286,6 @@ describe('UserService', () => {
     storageService.setData('operatorData', operator);
 
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     service.dataUserDetail.userDetail = mockUserDataClone;
 

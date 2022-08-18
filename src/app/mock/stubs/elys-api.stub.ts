@@ -8,9 +8,15 @@ import {
   CurrencyCodeRequest, 
   CurrencyCodeResponse, 
   TokenDataRequest, 
-  TokenDataSuccess } from "@elys/elys-api";
+  TokenDataSuccess, 
+  VirtualEventCountDownRequest, 
+  VirtualEventCountDownResponse, 
+  VirtualProgramTreeBySportRequest,
+  VirtualProgramTreeBySportResponse,
+  VirtualSportLastResultsRequest,
+  VirtualSportLastResultsResponse} from "@elys/elys-api";
 import { mockCouponLimit, mockCurrencyCodeResponse } from "../coupon.mock";
-import { mockAccountVirtualSport } from "../sports.mock";
+import { mockAccountVirtualSport, mockVirtualProgramTreeBySportResponse, mockVirtualSportLastResultsResponse } from "../sports.mock";
 import { 
   mockOperatorData, 
   mockPassword, 
@@ -71,6 +77,21 @@ export class ElysApiServiceStub {
     getAvailablevirtualsports(): Promise<AccountVirtualSport[]> {
       return new Promise((resolve, reject) => {
         resolve(mockAccountVirtualSport)
+      })
+    },
+    getVirtualTreeV2(request: VirtualProgramTreeBySportRequest): Promise<VirtualProgramTreeBySportResponse> {
+      return new Promise((resolve, reject) => {
+        resolve(mockVirtualProgramTreeBySportResponse)
+      })
+    },
+    getLastResult(request: VirtualSportLastResultsRequest): Promise<VirtualSportLastResultsResponse> {
+      return new Promise((resolve, reject) => {
+        resolve(mockVirtualSportLastResultsResponse)
+      })
+    },
+    getCountdown(request: VirtualEventCountDownRequest): Promise<VirtualEventCountDownResponse> {
+      return new Promise((resolve, reject) => {
+        resolve({CountDown: 1193579691})
       })
     }
   };

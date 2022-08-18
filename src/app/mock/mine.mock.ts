@@ -28,38 +28,3 @@ export const mockEventDetail: EventDetail = {
 	events: mockEventInfo,
 	currentEvent: 0
 }
-
-// export const mockProduct = {
-// 	"sportId": 8,
-// 	"codeProduct": "DOG",
-// 	"name": "DogRacing",
-// 	"label": "DOG",
-// 	"order": 0,
-// 	"productSelected": true,
-// 	"isPlayable": true,
-// 	"layoutProducts": {
-// 	  "type": 0,
-// 	  "resultItems": 4,
-// 	  "nextEventItems": 5,
-// 	  "cacheEventsItem": 10,
-// 	  "multiFeedType": "F2"
-// 	},
-// 	"toolbarButton": {
-// 	  "name": "dogracing",
-// 	  "icon": "Dog",
-// 	  "route": "products/racing"
-// 	},
-// 	"widgets": [
-// 	  {
-// 		"name": "",
-// 		"routing": "statistic",
-// 		"typeLink": 0,
-// 		"icon": "baseline-assessment-24px"
-// 	  }
-// 	],
-// 	"typeCoupon": {
-// 	  "isMultipleStake": true,
-// 	  "acceptMultiStake": true,
-// 	  "typeLayout": 0
-// 	}
-// }
