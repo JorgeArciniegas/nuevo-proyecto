@@ -73,7 +73,7 @@ class ElysApiServiceStub {
         })
       })
     }
-  }
+  };
   public coupon = {
     getCouponLimits(request: CouponLimitHierarchyRequest): Promise<CouponLimitHierarchy[]> {
       return new Promise((resolve, reject) => {
@@ -96,7 +96,7 @@ class ElysApiServiceStub {
 }
 
 class TranslateUtilityServiceStub {
-  changeLanguage(lang: string): void {}
+  changeLanguage(lang: string): void {};
   getTranslatedString(value: string): string {
     return ''
   }
