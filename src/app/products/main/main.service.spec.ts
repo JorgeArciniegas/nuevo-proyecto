@@ -1,84 +1,21 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AccountDetails, AccountOperatorDetails, AccountVirtualSport, AuthenticationShopClientAgentLoginRequest, CouponLimitHierarchy, CouponLimitHierarchyRequest, CurrencyCodeRequest, CurrencyCodeResponse, ElysApiService, PlaySource, TokenDataRequest, TokenDataSuccess } from '@elys/elys-api';
-import { mockCouponLimit, mockCurrencyCodeResponse } from 'src/app/mock/coupon.mock';
-import { mockAccountVirtualSport } from 'src/app/mock/sports.mock';
-import { mockOperatorData, mockPassword, mockTokenDataSuccess, mockUserData, mockUserId, mockUsername } from 'src/app/mock/user.mock';
+import { Observable, Subject } from 'rxjs';
+
+import { ElysApiService } from '@elys/elys-api';
+import { ElysFeedsService } from '@elys/elys-feeds';
+
 import { MainService } from './main.service';
-import { routes } from '../../app-routing.module';
-import { ElysStorageLibModule } from '@elys/elys-storage-lib';
-import { VERSION } from '../../../environments/version';
-import { ElysCouponModule } from '@elys/elys-coupon';
-import { AppSettings } from 'src/app/app.settings';
-import { TranslateUtilityService } from 'src/app/shared/language/translate-utility.service';
 import { ProductsService } from '../products.service';
 import { BtncalcService } from 'src/app/component/btncalc/btncalc.service';
 import { CouponService } from 'src/app/component/coupon/coupon.service';
 import { DestroyCouponService } from 'src/app/component/coupon/confirm-destroy-coupon/destroy-coupon.service';
-import { ElysFeedsService } from '@elys/elys-feeds';
 import { UserService } from 'src/app/services/user.service';
-import { Observable, Subject } from 'rxjs';
 import { CouponConfirmDelete } from '../products.model';
-import { EventDetail, EventTime } from './main.models';
-import { mockEventDetail, mockEventTime, mockProduct } from 'src/app/mock/mine.mock';
+import { mockEventDetail } from 'src/app/mock/mine.mock';
 import { Products } from 'src/environments/environment.models';
-
-class ElysApiServiceStub {
-  public tokenBearer: string;
-  public account = {
-    getMe(): Promise<AccountDetails> {
-      return new Promise((resolve, reject) => {
-        resolve(mockUserData)
-      })
-    },
-    getOperatorMe(): Promise<AccountOperatorDetails> {
-      return new Promise((resolve, reject) => {
-        resolve(mockOperatorData)
-      })
-    },
-    postAccessToken(request: TokenDataRequest): Promise<TokenDataSuccess> {
-      return new Promise((resolve, reject) => {
-        if(request.username === mockUsername && request.password === mockPassword) {
-          resolve(mockTokenDataSuccess)
-        } else reject({
-          error: 400,
-          error_description: 'The user name or password is incorrect',
-          message: 'The user name or password is incorrect'
-        })
-      })
-    },
-    clientLoginRequest(request: AuthenticationShopClientAgentLoginRequest): Promise<TokenDataSuccess> {
-      return new Promise((resolve, reject) => {
-        if(request.Username === mockUsername && request.Password === mockPassword && request.UserId === mockUserId) {
-          resolve(mockTokenDataSuccess)
-        } else reject({
-          error: 400,
-          error_description: 'The user name or password is incorrect',
-          message: 'The user name or password is incorrect'
-        })
-      })
-    }
-  }
-  public coupon = {
-    getCouponLimits(request: CouponLimitHierarchyRequest): Promise<CouponLimitHierarchy[]> {
-      return new Promise((resolve, reject) => {
-        resolve(mockCouponLimit)
-      })
-    },
-    getCouponRelatedCurrency(request: CurrencyCodeRequest): Promise<CurrencyCodeResponse> {
-      return new Promise((resolve, reject) => {
-        resolve(mockCurrencyCodeResponse)
-      })
-    }
-  }
-  public virtual = {
-    getAvailablevirtualsports(): Promise<AccountVirtualSport[]> {
-      return new Promise((resolve, reject) => {
-        resolve(mockAccountVirtualSport)
-      })
-    }
-  }
-}
+import { mockProduct } from 'src/app/mock/product.mock';
+import { ElysApiServiceStub } from 'src/app/mock/stubs/elys-api.stub';
+import { EventTime } from './main.models';
 
 class ProductsServiceStub {
   productNameSelectedSubscribe: Subject<string>;
@@ -124,19 +61,9 @@ describe('MainService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-        imports: [
-          // RouterTestingModule.withRoutes(routes),
-          // ElysStorageLibModule.forRoot({
-          //   isCrypto: true,
-          //   cryptoString: 'VgenStorage',
-          //   KeyUnencodedList: ['versionApp', 'operatorData', 'callBackURL'],
-          //   versionStorage: VERSION.version
-          // }),
-          // ElysCouponModule.forRoot({ deviceLayout: PlaySource.VDeskWeb }),
-        ],
+        imports: [],
         providers: [
           MainService,
-          // AppSettings,
           { provide: ElysApiService, useClass: ElysApiServiceStub},
           { provide: ElysFeedsService, useClass: ElysFeedsServiceStub},
           { provide: ProductsService, useClass: ProductsServiceStub},

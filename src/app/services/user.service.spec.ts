@@ -2,24 +2,11 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { timer } from 'rxjs';
 
-import { ElysStorageLibModule } from '@elys/elys-storage-lib';
-import { 
-  AccountDetails, 
-  AccountOperatorDetails, 
-  AccountVirtualSport, 
-  AuthenticationShopClientAgentLoginRequest, 
-  CouponLimitHierarchy, 
-  CouponLimitHierarchyRequest, 
-  CurrencyCodeRequest, 
-  CurrencyCodeResponse, 
-  ElysApiService, 
-  PlaySource, 
-  TokenDataRequest, 
-  TokenDataSuccess } from '@elys/elys-api';
+import { ElysStorageLibService } from '@elys/elys-storage-lib';
+import { ElysApiService, PlaySource } from '@elys/elys-api';
 import { ElysCouponModule } from '@elys/elys-coupon';
 
 import { UserService } from './user.service';
-import { VERSION } from '../../environments/version';
 import { AppSettings } from '../app.settings';
 import { StorageService } from './utility/storage/storage.service';
 import { 
@@ -31,69 +18,13 @@ import {
   mockUserId, 
   mockUsername } from '../mock/user.mock';
 import { mockCouponLimit, mockCurrencyCodeResponse } from '../mock/coupon.mock';
-import { mockAccountVirtualSport } from '../mock/sports.mock';
 import { routes } from '../app-routing.module';
 import { RouterService } from './utility/router/router.service';
 import { environment } from 'src/environments/environment';
 import { OperatorData } from './user.models';
 import { TranslateUtilityService } from '../shared/language/translate-utility.service';
-
-class ElysApiServiceStub {
-  public tokenBearer: string;
-  public account = {
-    getMe(): Promise<AccountDetails> {
-      return new Promise((resolve, reject) => {
-        resolve(mockUserData)
-      })
-    },
-    getOperatorMe(): Promise<AccountOperatorDetails> {
-      return new Promise((resolve, reject) => {
-        resolve(mockOperatorData)
-      })
-    },
-    postAccessToken(request: TokenDataRequest): Promise<TokenDataSuccess> {
-      return new Promise((resolve, reject) => {
-        if(request.username === mockUsername && request.password === mockPassword) {
-          resolve(mockTokenDataSuccess)
-        } else reject({
-          error: 400,
-          error_description: 'The user name or password is incorrect',
-          message: 'The user name or password is incorrect'
-        })
-      })
-    },
-    clientLoginRequest(request: AuthenticationShopClientAgentLoginRequest): Promise<TokenDataSuccess> {
-      return new Promise((resolve, reject) => {
-        if(request.Username === mockUsername && request.Password === mockPassword && request.UserId === mockUserId) {
-          resolve(mockTokenDataSuccess)
-        } else reject({
-          error: 400,
-          error_description: 'The user name or password is incorrect',
-          message: 'The user name or password is incorrect'
-        })
-      })
-    }
-  };
-  public coupon = {
-    getCouponLimits(request: CouponLimitHierarchyRequest): Promise<CouponLimitHierarchy[]> {
-      return new Promise((resolve, reject) => {
-        resolve(mockCouponLimit)
-      })
-    },
-    getCouponRelatedCurrency(request: CurrencyCodeRequest): Promise<CurrencyCodeResponse> {
-      return new Promise((resolve, reject) => {
-        resolve(mockCurrencyCodeResponse)
-      })
-    }
-  }
-  public virtual = {
-    getAvailablevirtualsports(): Promise<AccountVirtualSport[]> {
-      return new Promise((resolve, reject) => {
-        resolve(mockAccountVirtualSport)
-      })
-    }
-  }
-}
+import { ElysStorageLibServiceStub } from '../mock/stubs/elys-storage.stub';
+import { ElysApiServiceStub } from '../mock/stubs/elys-api.stub';
 
 class TranslateUtilityServiceStub {
   changeLanguage(lang: string): void {};
@@ -113,18 +44,13 @@ describe('UserService', () => {
     TestBed.configureTestingModule({
         imports: [
           RouterTestingModule.withRoutes(routes),
-          ElysStorageLibModule.forRoot({
-            isCrypto: true,
-            cryptoString: 'VgenStorage',
-            KeyUnencodedList: ['versionApp', 'operatorData', 'callBackURL'],
-            versionStorage: VERSION.version
-          }),
           ElysCouponModule.forRoot({ deviceLayout: PlaySource.VDeskWeb }),
         ],
         providers: [
           AppSettings,
           { provide: ElysApiService, useClass: ElysApiServiceStub},
           { provide: TranslateUtilityService, useClass: TranslateUtilityServiceStub},
+          { provide: ElysStorageLibService, useClass: ElysStorageLibServiceStub},
         ],
     });
 
@@ -498,7 +424,7 @@ describe('UserService', () => {
     spyOn(storageService, 'setData').and.callThrough();
     service.setOperatorData(mockReq);
 
-    expect(localStorage.getItem('operatorData')).toEqual(JSON.stringify(mockOperatorData));
+    expect(storageService.getData('operatorData')).toEqual(mockOperatorData);
     expect(storageService.setData).toHaveBeenCalledWith('operatorData', mockOperatorData);
   });
 
@@ -516,7 +442,7 @@ describe('UserService', () => {
     service.setOperatorData(mockReq);
     service.removeDataCtd();
 
-    expect(localStorage.getItem('operatorData')).toBeFalsy();
+    expect(storageService.getData('operatorData')).toBeFalsy();
     expect(storageService.removeItems).toHaveBeenCalledWith('operatorData');
   });
 
