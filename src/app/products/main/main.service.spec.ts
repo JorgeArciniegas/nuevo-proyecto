@@ -1,5 +1,5 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, timer } from 'rxjs';
 
 import { ElysApiService } from '@elys/elys-api';
 import { ElysFeedsService } from '@elys/elys-feeds';
@@ -11,12 +11,13 @@ import { CouponService } from 'src/app/component/coupon/coupon.service';
 import { DestroyCouponService } from 'src/app/component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { UserService } from 'src/app/services/user.service';
 import { CouponConfirmDelete } from '../products.model';
-import { mockEventDetail } from 'src/app/mock/mine.mock';
+import { mockEventDetail, mockPlayerList } from 'src/app/mock/mine.mock';
 import { Products } from 'src/environments/environment.models';
 import { mockProduct } from 'src/app/mock/product.mock';
 import { ElysApiServiceStub } from 'src/app/mock/stubs/elys-api.stub';
-import { EventTime } from './main.models';
+import { EventDetail, EventTime } from './main.models';
 import { mockUserId } from 'src/app/mock/user.mock';
+import { ColourGameId } from './colour-game.enum';
 
 class ProductServiceStub {
   productNameSelectedSubscribe: Subject<string>;
@@ -60,30 +61,36 @@ class UserServiceStub {
   getUserId(): number {
     return mockUserId
   }
+  get isUserLogged(): boolean {
+    return true
+  }
 }
 
 describe('MainService', () => {
   let service: MainService;
   let spyCreatePlayerList: jasmine.Spy<() => void>;
   let productService: ProductServiceStub;
-  let couponService: CouponServiceStub
+  let couponService: CouponServiceStub;
+  let userService: UserServiceStub;
   beforeEach(() => {
     productService = new ProductServiceStub();
-    couponService = new CouponServiceStub()
+    couponService = new CouponServiceStub();
+    userService = new UserServiceStub();
     TestBed.configureTestingModule({
         imports: [],
         providers: [
           MainService,
+          { provide: ProductsService, useValue: productService},
+          { provide: CouponService, useValue: couponService},
+          { provide: UserService, useValue: userService},
           { provide: ElysApiService, useClass: ElysApiServiceStub},
           { provide: ElysFeedsService, useClass: ElysFeedsServiceStub},
-          { provide: ProductsService, useValue: productService},
           { provide: BtncalcService, useClass: BtncalcServiceStub},
-          { provide: CouponService, useValue: couponService},
           { provide: DestroyCouponService, useClass: DestroyCouponServiceStub},
-          { provide: UserService, useClass: UserServiceStub},
+          
         ],
     });
-    spyCreatePlayerList = spyOn(MainService.prototype, 'createPlayerList');
+    spyCreatePlayerList = spyOn(MainService.prototype, 'createPlayerList').and.callThrough();
     service = TestBed.inject(MainService);
   });
 
@@ -94,6 +101,7 @@ describe('MainService', () => {
   it('should be call createPlayerList and set toResetAllSelections as true', () => {
     expect(spyCreatePlayerList).toHaveBeenCalled();
     expect(service.toResetAllSelections).toBeTrue();
+    expect(JSON.stringify(service.playersList)).toEqual(JSON.stringify(mockPlayerList))
   });
 
   it('should be call initEvents', () => {
@@ -108,7 +116,7 @@ describe('MainService', () => {
   it('should be set eventDetails, remainingTime and call resetPlayEvent and resetCoupon', async () => {
     const mockEventTime: EventTime = {
       minute: 1,
-      second: 45,
+      second: 3,
     }
     const mockEventIndex = 0;
 
@@ -119,6 +127,7 @@ describe('MainService', () => {
     const spyremainingEventTime = spyOn(service, 'remainingEventTime').and.returnValue(Promise.resolve(mockEventTime));
 
     service.eventDetails = JSON.parse(JSON.stringify(mockEventDetail));
+
     service.currentEventSubscribe.next(mockEventIndex);
 
     await spyremainingEventTime.calls.mostRecent().returnValue.then(() => {
@@ -136,8 +145,6 @@ describe('MainService', () => {
     spyOn(service, 'resumeCountDown');
     spyOn(service, 'resetPlayEvent');
 
-    service.eventDetails = JSON.parse(JSON.stringify(mockEventDetail));
-    productService.product = JSON.parse(JSON.stringify(mockProduct));
     service.toResetAllSelections = false;
 
     productService.playableBoardResetSubject.next(true);
@@ -147,5 +154,84 @@ describe('MainService', () => {
     tick(500);
     expect(service.resetPlayEvent).toHaveBeenCalled();
   }));
+
+  it('resumeCountDown() should be call currentAndSelectedEventTime and call getTime every 1 sec', fakeAsync(() => {
+    spyOn(service, 'currentAndSelectedEventTime');
+    spyOn(service, 'getTime');
+
+    service.resumeCountDown();
+
+    expect(service.currentAndSelectedEventTime).toHaveBeenCalled();
+    tick(1000);
+    expect(service.getTime).toHaveBeenCalled();
+    service.countdownSub.unsubscribe();
+  }));
+
+  it('destroy() should be unsubscribed from countdownSub', () => {
+    spyOn(service, 'getTime');
+
+    service.resumeCountDown();
+    spyOn(service.countdownSub, 'unsubscribe').and.callThrough();
+
+    service.destroy();
+
+    expect(service.countdownSub.unsubscribe).toHaveBeenCalled();
+    expect(service.initCurrentEvent).toBeTrue();
+  });
+
+  it('initEvents() should be call loadEvents and set initCurrentEvent, selectedColourGameId, eventDetails', () => {
+    spyOn(service, 'loadEvents');
+
+    productService.product = mockProduct;
+
+    service.initEvents();
+
+    expect(service.loadEvents).toHaveBeenCalled();
+    expect(service.initCurrentEvent).toBeTrue();
+    expect(service.selectedColourGameId).toEqual(ColourGameId.bet49);
+    expect(service.eventDetails).toEqual(new EventDetail(mockProduct.layoutProducts.nextEventItems))
+  });
+
+  it('getTime() should be stop the countdown and call loadEvents (case 1)', () => {
+    spyOn(service, 'loadEvents');
+    service.countdownSub = timer(0, 1000).subscribe();
+    spyOn(service.countdownSub, 'unsubscribe').and.callThrough();
+
+    spyOnProperty(userService, 'isUserLogged').and.returnValue(true);
+    service.remainingTime.second = 0;
+    service.remainingTime.minute = 0;
+
+    service.getTime();
+    expect(service.loadEvents).toHaveBeenCalled();
+    expect(service.countdownSub.unsubscribe).toHaveBeenCalled();
+  });
+
+  it('getTime() should be stop the countdown and call loadEvents (case 2)', () => {
+    spyOn(service, 'loadEvents');
+    service.countdownSub = timer(0, 1000).subscribe();
+    spyOn(service.countdownSub, 'unsubscribe').and.callThrough();
+
+    spyOnProperty(userService, 'isUserLogged').and.returnValue(false);
+    service.remainingTime.second = 1;
+    service.remainingTime.minute = 0;
+
+    service.getTime();
+    expect(service.loadEvents).toHaveBeenCalled();
+    expect(service.countdownSub.unsubscribe).toHaveBeenCalled();
+  });
+
+  it('getTime() should be stop the countdown and call loadEvents (case 3)', () => {
+    spyOn(service, 'loadEvents');
+    service.countdownSub = timer(0, 1000).subscribe();
+    spyOn(service.countdownSub, 'unsubscribe').and.callThrough();
+
+    spyOnProperty(userService, 'isUserLogged').and.returnValue(true);
+    service.remainingTime.second = -1;
+    service.remainingTime.minute = 0;
+
+    service.getTime();
+    expect(service.loadEvents).toHaveBeenCalled();
+    expect(service.countdownSub.unsubscribe).toHaveBeenCalled();
+  });
 
 });
