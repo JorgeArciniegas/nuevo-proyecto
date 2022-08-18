@@ -4,7 +4,7 @@ import { StorageService } from "../storage/storage.service";
 import { RouterService } from "./router.service";
 import { Location } from '@angular/common';
 import { ElysStorageLibService } from "@elys/elys-storage-lib";
-import { ElysStorageLibServiceStub } from "src/app/mock/elys-storage.mock";
+import { ElysStorageLibServiceStub } from "src/app/mock/stubs/elys-storage.stub";
 
 class RouterStub {
   navigateByUrl = jasmine.createSpy('navigateByUrl');

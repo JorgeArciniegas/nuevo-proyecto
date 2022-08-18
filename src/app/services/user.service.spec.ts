@@ -2,24 +2,11 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { timer } from 'rxjs';
 
-import { ElysStorageLibModule } from '@elys/elys-storage-lib';
-import { 
-  AccountDetails, 
-  AccountOperatorDetails, 
-  AccountVirtualSport, 
-  AuthenticationShopClientAgentLoginRequest, 
-  CouponLimitHierarchy, 
-  CouponLimitHierarchyRequest, 
-  CurrencyCodeRequest, 
-  CurrencyCodeResponse, 
-  ElysApiService, 
-  PlaySource, 
-  TokenDataRequest, 
-  TokenDataSuccess } from '@elys/elys-api';
+import { ElysStorageLibService } from '@elys/elys-storage-lib';
+import { ElysApiService, PlaySource } from '@elys/elys-api';
 import { ElysCouponModule } from '@elys/elys-coupon';
 
 import { UserService } from './user.service';
-import { VERSION } from '../../environments/version';
 import { AppSettings } from '../app.settings';
 import { StorageService } from './utility/storage/storage.service';
 import { 
@@ -31,72 +18,16 @@ import {
   mockUserId, 
   mockUsername } from '../mock/user.mock';
 import { mockCouponLimit, mockCurrencyCodeResponse } from '../mock/coupon.mock';
-import { mockAccountVirtualSport } from '../mock/sports.mock';
 import { routes } from '../app-routing.module';
 import { RouterService } from './utility/router/router.service';
 import { environment } from 'src/environments/environment';
 import { OperatorData } from './user.models';
 import { TranslateUtilityService } from '../shared/language/translate-utility.service';
-
-class ElysApiServiceStub {
-  public tokenBearer: string;
-  public account = {
-    getMe(): Promise<AccountDetails> {
-      return new Promise((resolve, reject) => {
-        resolve(mockUserData)
-      })
-    },
-    getOperatorMe(): Promise<AccountOperatorDetails> {
-      return new Promise((resolve, reject) => {
-        resolve(mockOperatorData)
-      })
-    },
-    postAccessToken(request: TokenDataRequest): Promise<TokenDataSuccess> {
-      return new Promise((resolve, reject) => {
-        if(request.username === mockUsername && request.password === mockPassword) {
-          resolve(mockTokenDataSuccess)
-        } else reject({
-          error: 400,
-          error_description: 'The user name or password is incorrect',
-          message: 'The user name or password is incorrect'
-        })
-      })
-    },
-    clientLoginRequest(request: AuthenticationShopClientAgentLoginRequest): Promise<TokenDataSuccess> {
-      return new Promise((resolve, reject) => {
-        if(request.Username === mockUsername && request.Password === mockPassword && request.UserId === mockUserId) {
-          resolve(mockTokenDataSuccess)
-        } else reject({
-          error: 400,
-          error_description: 'The user name or password is incorrect',
-          message: 'The user name or password is incorrect'
-        })
-      })
-    }
-  }
-  public coupon = {
-    getCouponLimits(request: CouponLimitHierarchyRequest): Promise<CouponLimitHierarchy[]> {
-      return new Promise((resolve, reject) => {
-        resolve(mockCouponLimit)
-      })
-    },
-    getCouponRelatedCurrency(request: CurrencyCodeRequest): Promise<CurrencyCodeResponse> {
-      return new Promise((resolve, reject) => {
-        resolve(mockCurrencyCodeResponse)
-      })
-    }
-  }
-  public virtual = {
-    getAvailablevirtualsports(): Promise<AccountVirtualSport[]> {
-      return new Promise((resolve, reject) => {
-        resolve(mockAccountVirtualSport)
-      })
-    }
-  }
-}
+import { ElysStorageLibServiceStub } from '../mock/stubs/elys-storage.stub';
+import { ElysApiServiceStub } from '../mock/stubs/elys-api.stub';
 
 class TranslateUtilityServiceStub {
-  changeLanguage(lang: string): void {}
+  changeLanguage(lang: string): void {};
   getTranslatedString(value: string): string {
     return ''
   }
@@ -105,26 +36,22 @@ class TranslateUtilityServiceStub {
 describe('UserService', () => {
   let service: UserService;
   let storageService: StorageService;
-  let api: ElysApiService;
+  let api: ElysApiServiceStub;
   let routerService: RouterService;
   let appSettings: AppSettings;
 
   beforeEach(() => {
+    api = new ElysApiServiceStub();
     TestBed.configureTestingModule({
         imports: [
           RouterTestingModule.withRoutes(routes),
-          ElysStorageLibModule.forRoot({
-            isCrypto: true,
-            cryptoString: 'VgenStorage',
-            KeyUnencodedList: ['versionApp', 'operatorData', 'callBackURL'],
-            versionStorage: VERSION.version
-          }),
           ElysCouponModule.forRoot({ deviceLayout: PlaySource.VDeskWeb }),
         ],
         providers: [
           AppSettings,
-          { provide: ElysApiService, useClass: ElysApiServiceStub},
+          { provide: ElysApiService, useValue: api},
           { provide: TranslateUtilityService, useClass: TranslateUtilityServiceStub},
+          { provide: ElysStorageLibService, useClass: ElysStorageLibServiceStub},
         ],
     });
 
@@ -151,7 +78,6 @@ describe('UserService', () => {
 
   it('checkLoginData() should be called method loadUserData() and set token in ElysApiService', (done) => {
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     storageService.setData('tokenData', mockToken);
 
@@ -167,7 +93,6 @@ describe('UserService', () => {
 
   it('login() should be called method postAccessToken() with username and password', async () => {
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     spyOn(api.account, 'postAccessToken').and.callThrough();
     spyOn(service, 'loadUserData').and.callFake((token: string, loginAdmin?: Boolean) => Promise.resolve(''));
@@ -178,7 +103,6 @@ describe('UserService', () => {
 
   it('login() should be called method loadUserData() with access_token and loginAdmin == true', async () => {
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     spyOn(service, 'loadUserData').and.callFake((token: string, loginAdmin?: Boolean) => Promise.resolve(''));
 
@@ -193,7 +117,6 @@ describe('UserService', () => {
 
   it('loginOperator() should be called method clientLoginRequest() with username, password and userId', async () => {
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     spyOn(api.account, 'clientLoginRequest').and.callThrough();
     spyOn(service, 'getOperatorData').and.returnValue(mockUserId);
@@ -205,7 +128,6 @@ describe('UserService', () => {
 
   it('loginOperator() should be called method loadUserData() with access_token and loginAdmin == false', async () => {
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     spyOn(service, 'getOperatorData').and.returnValue(mockUserId);
     spyOn(service, 'loadUserData').and.callFake((token: string, loginAdmin?: Boolean) => Promise.resolve(''));
@@ -229,7 +151,6 @@ describe('UserService', () => {
   it('logout() should be clear the storage data and the token from vgen.service', () => {
     const mockDataUser = {userDetail: mockUserData};
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     service.dataUserDetail = mockDataUser;
     storageService.setData('tokenData', mockToken);
@@ -341,7 +262,6 @@ describe('UserService', () => {
   it('loadUserData() should be return error string when incorect login and password', async () => {
     const mockErrorMessage = 'unauthorized user';
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     spyOn(service, 'logout');
     spyOn(api.account, 'getOperatorMe').and.callFake(() => Promise.reject({
@@ -366,7 +286,6 @@ describe('UserService', () => {
     storageService.setData('operatorData', operator);
 
     service = TestBed.inject(UserService);
-    api = TestBed.inject(ElysApiService);
 
     service.dataUserDetail.userDetail = mockUserDataClone;
 
@@ -498,7 +417,7 @@ describe('UserService', () => {
     spyOn(storageService, 'setData').and.callThrough();
     service.setOperatorData(mockReq);
 
-    expect(localStorage.getItem('operatorData')).toEqual(JSON.stringify(mockOperatorData));
+    expect(storageService.getData('operatorData')).toEqual(mockOperatorData);
     expect(storageService.setData).toHaveBeenCalledWith('operatorData', mockOperatorData);
   });
 
@@ -516,7 +435,7 @@ describe('UserService', () => {
     service.setOperatorData(mockReq);
     service.removeDataCtd();
 
-    expect(localStorage.getItem('operatorData')).toBeFalsy();
+    expect(storageService.getData('operatorData')).toBeFalsy();
     expect(storageService.removeItems).toHaveBeenCalledWith('operatorData');
   });
 

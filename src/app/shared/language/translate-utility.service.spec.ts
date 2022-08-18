@@ -5,7 +5,7 @@ import { ElysStorageLibService } from "@elys/elys-storage-lib";
 import { TranslateLoader, TranslateModule, TranslateService } from "@ngx-translate/core";
 import { Observable, of } from "rxjs";
 import { AppSettings } from "src/app/app.settings";
-import { ElysStorageLibServiceStub } from "src/app/mock/elys-storage.mock";
+import { ElysStorageLibServiceStub } from "src/app/mock/stubs/elys-storage.stub";
 import { StorageService } from "src/app/services/utility/storage/storage.service";
 import { getLanguages, LANGUAGES } from "./language.models";
 import { HttpLoaderFactory } from "./language.module";

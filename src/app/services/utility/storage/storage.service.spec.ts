@@ -1,7 +1,7 @@
 import { TestBed } from "@angular/core/testing";
 import { ElysStorageLibService } from "@elys/elys-storage-lib";
 import { StorageService } from "./storage.service";
-import { ElysStorageLibServiceStub } from '../../../mock/elys-storage.mock';
+import { ElysStorageLibServiceStub } from '../../../mock/stubs/elys-storage.stub';
 
 describe('StorageService', () => {
   let service: StorageService;
