@@ -1,7 +1,7 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { Observable, Subject, timer } from 'rxjs';
 
-import { ElysApiService } from '@elys/elys-api';
+import { ElysApiService, PlaySource } from '@elys/elys-api';
 import { ElysFeedsService } from '@elys/elys-feeds';
 
 import { MainService } from './main.service';
@@ -11,13 +11,16 @@ import { CouponService } from 'src/app/component/coupon/coupon.service';
 import { DestroyCouponService } from 'src/app/component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { UserService } from 'src/app/services/user.service';
 import { CouponConfirmDelete } from '../products.model';
-import { mockEventDetail, mockPlayerList } from 'src/app/mock/mine.mock';
+import { mockEventDetail, mockEventInfo, mockPlayerList } from 'src/app/mock/mine.mock';
 import { Products } from 'src/environments/environment.models';
 import { mockProduct } from 'src/app/mock/product.mock';
 import { ElysApiServiceStub } from 'src/app/mock/stubs/elys-api.stub';
 import { EventDetail, EventTime } from './main.models';
 import { mockUserId } from 'src/app/mock/user.mock';
 import { ColourGameId } from './colour-game.enum';
+import { ResultsService } from './results/results.service';
+import { Results } from './results/results';
+import { mockFirstEvDuration, mockFirstEvId, mockTsMft } from 'src/app/mock/sports.mock';
 
 class ProductServiceStub {
   productNameSelectedSubscribe: Subject<string>;
@@ -35,6 +38,8 @@ class ProductServiceStub {
     this.playableBoardResetSubject = new Subject<boolean>();
     this.playableBoardResetObserve = this.playableBoardResetSubject.asObservable();
   }
+
+  closeProductDialog(): void {}
 }
 
 class BtncalcServiceStub {
@@ -57,6 +62,11 @@ class ElysFeedsServiceStub {
   
 }
 
+class ResultsServiceStub {
+  resultsUtils = new Results();
+  getLastResult() {};
+}
+
 class UserServiceStub {
   getUserId(): number {
     return mockUserId
@@ -72,10 +82,14 @@ describe('MainService', () => {
   let productService: ProductServiceStub;
   let couponService: CouponServiceStub;
   let userService: UserServiceStub;
+  let resultService: ResultsServiceStub;
+  let elysApiService: ElysApiServiceStub;
   beforeEach(() => {
     productService = new ProductServiceStub();
     couponService = new CouponServiceStub();
     userService = new UserServiceStub();
+    resultService = new ResultsServiceStub();
+    elysApiService = new ElysApiServiceStub();
     TestBed.configureTestingModule({
         imports: [],
         providers: [
@@ -83,11 +97,11 @@ describe('MainService', () => {
           { provide: ProductsService, useValue: productService},
           { provide: CouponService, useValue: couponService},
           { provide: UserService, useValue: userService},
-          { provide: ElysApiService, useClass: ElysApiServiceStub},
+          { provide: ResultsService, useValue: resultService},
+          { provide: ElysApiService, useValue: elysApiService},
           { provide: ElysFeedsService, useClass: ElysFeedsServiceStub},
           { provide: BtncalcService, useClass: BtncalcServiceStub},
           { provide: DestroyCouponService, useClass: DestroyCouponServiceStub},
-          
         ],
     });
     spyCreatePlayerList = spyOn(MainService.prototype, 'createPlayerList').and.callThrough();
@@ -232,6 +246,166 @@ describe('MainService', () => {
     service.getTime();
     expect(service.loadEvents).toHaveBeenCalled();
     expect(service.countdownSub.unsubscribe).toHaveBeenCalled();
+  });
+
+  it('getTime() should be set second=59 and decrement minute by 1', () => {
+    const mockMinute = 3;
+    const mockSecond = 59;
+
+    spyOn(service, 'loadEvents');
+    service.countdownSub = timer(0, 1000).subscribe();
+    service.eventDetails = new EventDetail(mockProduct.layoutProducts.nextEventItems);
+    service.remainingTime.second = 0;
+    service.remainingTime.minute = mockMinute;
+    service.eventDetails.eventTime.minute = mockMinute;
+
+    service.getTime();
+
+    expect(service.remainingTime.second).toBe(mockSecond);
+    expect(service.remainingTime.minute).toBe(mockMinute - 1);
+    expect(service.eventDetails.eventTime.second).toBe(mockSecond);
+    expect(service.eventDetails.eventTime.minute).toBe(mockMinute - 1);
+
+    expect(resultService.resultsUtils.countDown).toEqual(service.remainingTime);
+
+    service.countdownSub.unsubscribe();
+  });
+
+  it('getTime() should be decrement second by 1', () => {
+    const mockMinute = 3;
+    const mockSecond = 15;
+
+    spyOn(service, 'loadEvents');
+    service.countdownSub = timer(0, 1000).subscribe();
+    service.eventDetails = new EventDetail(mockProduct.layoutProducts.nextEventItems);
+    service.remainingTime.second = mockSecond;
+    service.remainingTime.minute = mockMinute;
+    service.eventDetails.eventTime.minute = mockMinute;
+
+    service.getTime();
+
+    expect(service.remainingTime.second).toBe(mockSecond - 1);
+    expect(service.remainingTime.minute).toBe(mockMinute);
+    expect(service.eventDetails.eventTime.second).toBe(mockSecond - 1);
+    expect(service.eventDetails.eventTime.minute).toBe(mockMinute);
+    
+    expect(resultService.resultsUtils.countDown).toEqual(service.remainingTime);
+    expect(service.placingEvent.timeBlocked).toBeFalse();
+
+    service.countdownSub.unsubscribe();
+  });
+
+  it('getTime() should be call closeProductDialog', () => {
+    const mockMinute = 0;
+    const mockSecond = 5;
+
+    spyOn(service, 'loadEvents');
+    spyOn(productService, 'closeProductDialog');
+    service.countdownSub = timer(0, 1000).subscribe();
+    service.eventDetails = new EventDetail(mockProduct.layoutProducts.nextEventItems);
+    service.remainingTime.second = mockSecond;
+    service.remainingTime.minute = mockMinute;
+    service.eventDetails.eventTime.minute = mockMinute;
+    service.eventDetails.eventTime.second = mockSecond;
+
+    service.getTime();
+    
+    expect(resultService.resultsUtils.countDown).toEqual(service.remainingTime);
+    expect(service.placingEvent.timeBlocked).toBeTrue();
+    expect(productService.closeProductDialog).toHaveBeenCalled();
+
+    service.countdownSub.unsubscribe();
+  });
+
+  it('loadEvents() should be call loadEventsFromApi, getLastResult, getTime', fakeAsync(() => {
+    spyOn(resultService, 'getLastResult');
+
+    spyOn(service, 'loadEventsFromApi').and.returnValue(Promise.resolve());
+    spyOn(service, 'getTime');
+    service.initCurrentEvent = true;
+
+    service.loadEvents();
+
+    expect(service.loadEventsFromApi).toHaveBeenCalled();
+    tick(1000);
+    expect(resultService.getLastResult).toHaveBeenCalled();
+    expect(service.getTime).toHaveBeenCalled();
+
+    service.countdownSub.unsubscribe();
+  }));
+
+  it('loadEvents() should be call loadEventsFromApi, getLastResult, slideToNextEvent, currentAndSelectedEventTime, getTime', fakeAsync(() => {
+    spyOn(resultService, 'getLastResult');
+    spyOn(service, 'loadEventsFromApi').and.callThrough();
+    spyOn(service, 'getTime');
+    spyOn(service, 'currentAndSelectedEventTime');
+
+    service.initCurrentEvent = false;
+    service.eventDetails = new EventDetail(mockProduct.layoutProducts.nextEventItems);
+    productService.product = mockProduct;
+
+    service.loadEvents();
+
+    expect(service.loadEventsFromApi).toHaveBeenCalledWith(service.eventDetails.events[0]);
+    tick(1000);
+    expect(resultService.getLastResult).toHaveBeenCalled();
+    expect(service.getTime).toHaveBeenCalled();
+    expect(service.currentAndSelectedEventTime).toHaveBeenCalled();
+
+    service.countdownSub.unsubscribe();
+  }));
+
+  it('loadEventsFromApi() should be ', async () => {
+    const mockRequest = {
+      SportIds: mockProduct.sportId.toString(),
+      CategoryTypes: mockProduct.codeProduct,
+      Source: PlaySource.VDeskWeb,
+      Item: mockUserId
+    };
+    const mockEvents = [
+      {
+        number: 21254738, 
+        label: 'Race n. 232', 
+        date: new Date('2022-08-18T09:51:00+02:00')
+      }, 
+      {
+        number: 21254748, 
+        label: 'Race n. 234', 
+        date: new Date('2022-08-18T09:53:00+02:00')
+      }, 
+      {
+        number: 21254750, 
+        label: 'Race n. 236', 
+        date: new Date('2022-08-18T09:55:00+02:00')
+      }, 
+      {
+        number: 21254752, 
+        label: 'Race n. 238', 
+        date: new Date('2022-08-18T09:57:00+02:00')
+      }, 
+      {
+        number: 21254754, 
+        label: 'Race n. 240', 
+        date: new Date('2022-08-18T09:59:00+02:00')
+      }
+    ]
+
+    spyOn(service, 'getTime');
+    spyOn(service, 'currentAndSelectedEventTime');
+    spyOn(elysApiService.virtual, 'getVirtualTreeV2').and.callThrough();
+
+    service.initCurrentEvent = true;
+    service.eventDetails = new EventDetail(mockProduct.layoutProducts.nextEventItems);
+    productService.product = mockProduct;
+
+    await service.loadEventsFromApi();
+
+    expect(elysApiService.virtual.getVirtualTreeV2).toHaveBeenCalledWith(mockRequest);
+    expect(service.currentAndSelectedEventTime).toHaveBeenCalledWith(false);
+    expect(productService.product.layoutProducts.multiFeedType).toBe(mockTsMft);
+    expect(JSON.stringify(service.eventDetails.events)).toEqual(JSON.stringify(mockEvents));
+    expect(resultService.resultsUtils.nextEventNumber).toBe(mockFirstEvId);
+    expect(resultService.resultsUtils.nextEventDuration).toBe(mockFirstEvDuration);
   });
 
 });

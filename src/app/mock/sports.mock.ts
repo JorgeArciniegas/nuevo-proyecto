@@ -1,5 +1,11 @@
 import { AccountVirtualSport, VirtualProgramTreeBySportResponse, VirtualSportLastResultsResponse } from '@elys/elys-api';
 
+export const mockTsMft: string = 'F2';
+
+export const mockFirstEvId: number = 21254738;
+
+export const mockFirstEvDuration: number = 120;
+
 export const mockAccountVirtualSport: AccountVirtualSport[] = [
 	{
 		SportId: 8,
@@ -106,10 +112,10 @@ export const mockVirtualProgramTreeBySportResponse: VirtualProgramTreeBySportRes
 					'cdt': -138302951981,
 					'ec': 12,
 					'duration': 120,
-					'mft': 'F2',
+					'mft': mockTsMft,
 					'evs': [
 						{
-							'id': 21254738,
+							'id': mockFirstEvId,
 							'nm': 'Race n. 232',
 							'mk': [],
 							'sdt': '2022-08-18T09:51:00',
@@ -121,7 +127,7 @@ export const mockVirtualProgramTreeBySportResponse: VirtualProgramTreeBySportRes
 							'st': 1,
 							'ehv': false,
 							//'mft': 'F1:F2:F4:',
-							'duration': 120
+							'duration': mockFirstEvDuration
 						},
 						{
 							'id': 21254748,
