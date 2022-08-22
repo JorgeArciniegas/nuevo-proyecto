@@ -1,7 +1,7 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { Observable, Subject, timer } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, timer } from 'rxjs';
 
-import { ElysApiService, PlaySource } from '@elys/elys-api';
+import { ElysApiService, PlaySource, VirtualEventCountDownRequest } from '@elys/elys-api';
 import { ElysFeedsService } from '@elys/elys-feeds';
 
 import { MainService } from './main.service';
@@ -10,17 +10,18 @@ import { BtncalcService } from 'src/app/component/btncalc/btncalc.service';
 import { CouponService } from 'src/app/component/coupon/coupon.service';
 import { DestroyCouponService } from 'src/app/component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { UserService } from 'src/app/services/user.service';
-import { CouponConfirmDelete } from '../products.model';
-import { mockEventDetail, mockEventInfo, mockPlayerList, mockVirtualGetRankByEventResponse } from 'src/app/mock/mine.mock';
+import { CouponConfirmDelete, PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../products.model';
+import { mockEventDetail, mockEventInfo, mockEventTime, mockPlayerList, mockVirtualGetRankByEventResponse } from 'src/app/mock/mine.mock';
 import { Products } from 'src/environments/environment.models';
-import { mockProduct } from 'src/app/mock/product.mock';
+import { mockProduct, mockProductSoccer } from 'src/app/mock/product.mock';
 import { ElysApiServiceStub } from 'src/app/mock/stubs/elys-api.stub';
 import { EventDetail, EventTime } from './main.models';
 import { mockUserId } from 'src/app/mock/user.mock';
 import { ColourGameId } from './colour-game.enum';
 import { ResultsService } from './results/results.service';
 import { Results } from './results/results';
-import { mockFirstEvDuration, mockFirstEvId, mockTsMft, mockVirtualBetTournamentExtended } from 'src/app/mock/sports.mock';
+import { mockFirstDurationSoccer, mockFirstEvDuration, mockFirstEvId, mockFirstEvIdSoccer, mockTsMft, mockTsMftSoccer, mockVirtualBetTournamentExtended, mockVirtualProgramTreeBySportResponseSoccer } from 'src/app/mock/sports.mock';
+import { resolve } from 'dns';
 
 class ProductServiceStub {
   productNameSelectedSubscribe: Subject<string>;
@@ -28,6 +29,12 @@ class ProductServiceStub {
 
   playableBoardResetSubject: Subject<boolean>;
   playableBoardResetObserve: Observable<boolean>;
+
+  polyfunctionalAreaSubject: BehaviorSubject<PolyfunctionalArea>;
+  polyfunctionalAreaObservable: Observable<PolyfunctionalArea>;
+
+  polyfunctionalStakeCouponSubject: Subject<PolyfunctionalStakeCoupon>;
+  polyfunctionalStakeCouponObs: Observable<PolyfunctionalStakeCoupon>;
 
   product: Products;
 
@@ -37,9 +44,16 @@ class ProductServiceStub {
 
     this.playableBoardResetSubject = new Subject<boolean>();
     this.playableBoardResetObserve = this.playableBoardResetSubject.asObservable();
+
+    this.polyfunctionalAreaSubject = new BehaviorSubject<PolyfunctionalArea>(new PolyfunctionalArea());
+    this.polyfunctionalAreaObservable = this.polyfunctionalAreaSubject.asObservable();
+
+    this.polyfunctionalStakeCouponSubject = new Subject<PolyfunctionalStakeCoupon>();
+    this.polyfunctionalStakeCouponObs = this.polyfunctionalStakeCouponSubject.asObservable();
   }
 
-  closeProductDialog(): void {}
+  closeProductDialog(): void {};
+  changeProduct(codeProduct: string): void {}
 }
 
 class BtncalcServiceStub {
@@ -355,7 +369,7 @@ describe('MainService', () => {
     service.countdownSub.unsubscribe();
   }));
 
-  it('loadEventsFromApi() should be ', async () => {
+  it('loadEventsFromApi() should be load and set events', async () => {
     const mockRequest = {
       SportIds: mockProduct.sportId.toString(),
       CategoryTypes: mockProduct.codeProduct,
@@ -408,6 +422,40 @@ describe('MainService', () => {
     expect(resultService.resultsUtils.nextEventDuration).toBe(mockFirstEvDuration);
   });
 
+  it('loadEventsFromApi() should be load and set events for soccer', async () => {
+    const mockRequest = {
+      SportIds: '1',
+      CategoryTypes: mockProductSoccer.codeProduct,
+      Source: PlaySource.VDeskWeb,
+      Item: mockUserId
+    };
+    const mockEvents = [
+      {
+        number: 21270764, 
+        label: 'Week #36', 
+        date: new Date('2022-08-19T07:46:00.000Z')
+      }
+    ]
+
+    spyOn(service, 'getTime');
+    spyOn(service, 'currentAndSelectedEventTime');
+    spyOn(elysApiService.virtual, 'getVirtualTreeV2').and.returnValue(Promise.resolve(mockVirtualProgramTreeBySportResponseSoccer));
+
+    service.initCurrentEvent = true;
+    service.eventDetails = new EventDetail(mockProductSoccer.layoutProducts.nextEventItems);
+    productService.product = mockProductSoccer;
+
+    await service.loadEventsFromApi();
+
+    expect(elysApiService.virtual.getVirtualTreeV2).toHaveBeenCalledWith(mockRequest);
+    expect(service.currentAndSelectedEventTime).toHaveBeenCalledWith(false);
+
+    expect(productService.product.layoutProducts.multiFeedType).toBe(mockTsMftSoccer);
+    expect(JSON.stringify(service.eventDetails.events)).toEqual(JSON.stringify(mockEvents));
+    expect(resultService.resultsUtils.nextEventNumber).toBe(mockFirstEvIdSoccer);
+    expect(resultService.resultsUtils.nextEventDuration).toBe(mockFirstDurationSoccer);
+  });
+
   it('getRanking() should be get ranking data', async () => {
     const mockTournamentId = 123;
     spyOn(elysApiService.virtual, 'getRanking').and.callThrough();
@@ -416,6 +464,114 @@ describe('MainService', () => {
       expect(data).toEqual(mockVirtualGetRankByEventResponse)
     });
     expect(elysApiService.virtual.getRanking).toHaveBeenCalledWith(mockTournamentId)
+  });
+
+  it('currentAndSelectedEventTime() should be decrease currentEvent by 1 (case 1)', async () => {
+    const mockCurrentEvent = 2;
+
+    const spyRemainingEventTime = spyOn(service, 'remainingEventTime').and.returnValue(Promise.resolve(mockEventTime));
+    spyOn(service.currentEventSubscribe, 'next');
+    spyOn(service, 'resetPlayEvent');
+
+    service.initCurrentEvent = true; //case 1
+
+    service.eventDetails = JSON.parse(JSON.stringify(mockEventDetail));
+    service.eventDetails.currentEvent = mockCurrentEvent;
+    service.currentAndSelectedEventTime();
+
+    expect(service.eventDetails.currentEvent).toBe(mockCurrentEvent - 1);
+
+    expect(service.initCurrentEvent).toBeFalse();
+    expect(service.currentEventSubscribe.next).toHaveBeenCalledWith(0);
+    expect(service.resetPlayEvent).toHaveBeenCalled();
+
+    await spyRemainingEventTime.calls.mostRecent().returnValue.then((eventTime) => {
+      expect(service.remainingTime).toEqual(eventTime);
+    });
+  });
+
+  it('currentAndSelectedEventTime() should be decrease currentEvent by 1 (case 2)', async () => {
+    const mockCurrentEvent = 2;
+
+    const spyRemainingEventTime = spyOn(service, 'remainingEventTime').and.returnValue(Promise.resolve(mockEventTime));
+    spyOn(service.currentEventSubscribe, 'next');
+
+    service.initCurrentEvent = false; //case 2
+
+    service.eventDetails = JSON.parse(JSON.stringify(mockEventDetail));
+    service.eventDetails.currentEvent = mockCurrentEvent;
+    service.currentAndSelectedEventTime();
+
+    expect(service.eventDetails.currentEvent).toBe(mockCurrentEvent - 1);
+
+    expect(service.toResetAllSelections).toBeFalse();
+    expect(service.currentEventSubscribe.next).toHaveBeenCalledWith(mockCurrentEvent - 1);
+
+    await spyRemainingEventTime.calls.mostRecent().returnValue.then((eventTime) => {
+      expect(service.remainingTime).toEqual(eventTime);
+    });
+  });
+
+  it('currentAndSelectedEventTime() should be emmit 0 to currentEventSubscribe', () => {
+    const mockCurrentEvent = 0;
+
+    spyOn(service.currentEventSubscribe, 'next');
+
+    service.eventDetails = JSON.parse(JSON.stringify(mockEventDetail));
+    service.eventDetails.currentEvent = mockCurrentEvent;
+    service.currentAndSelectedEventTime();
+
+    expect(service.toResetAllSelections).toBeTrue();
+    expect(service.currentEventSubscribe.next).toHaveBeenCalledWith(0);
+  });
+
+  it('currentAndSelectedEventTime() should be return eventTime', async () => {
+    spyOn(elysApiService.virtual, 'getCountdown').and.callThrough();
+    const mockEventTime: EventTime = {
+      minute: 1,
+      second: 40,
+    };
+    const mockIdEvent = 123;
+    const mockRequest: VirtualEventCountDownRequest = {
+      SportId: mockProduct.sportId.toString(),
+      MatchId: mockIdEvent
+    };
+
+    productService.product = mockProduct;
+
+    await service.remainingEventTime(mockIdEvent).then((eventTime) => {
+      expect(eventTime.minute).toEqual(mockEventTime.minute);
+      expect(eventTime.second).toEqual(mockEventTime.second);
+    });
+
+    expect(elysApiService.virtual.getCountdown).toHaveBeenCalledWith(mockRequest);
+  });
+
+  it('currentAndSelectedEventTime() should be call changeProduct', async () => {
+    spyOn(elysApiService.virtual, 'getCountdown').and.returnValue(Promise.resolve({CountDown: -1}));
+    spyOn(productService, 'changeProduct');
+
+    const mockIdEvent = 123;
+    const mockRequest: VirtualEventCountDownRequest = {
+      SportId: mockProduct.sportId.toString(),
+      MatchId: mockIdEvent
+    };
+
+    productService.product = mockProduct;
+
+    await service.remainingEventTime(mockIdEvent);
+
+    expect(elysApiService.virtual.getCountdown).toHaveBeenCalledWith(mockRequest);
+    expect(productService.changeProduct).toHaveBeenCalledWith(mockProduct.codeProduct);
+    expect(service.initCurrentEvent).toBeTrue();
+  });
+
+  it('resetPlayEvent() should be create and set new objects (PlacingEvent, Smartcode, PolyfunctionalArea, PolyfunctionalStakeCoupon)', async () => {
+    spyOn(service, 'clearPlayerListEvents');
+    service.eventDetails = JSON.parse(JSON.stringify(mockEventDetail));
+    productService.product = mockProduct;
+    service.resetPlayEvent();
+    expect(service.clearPlayerListEvents).toHaveBeenCalled();
   });
 
 });

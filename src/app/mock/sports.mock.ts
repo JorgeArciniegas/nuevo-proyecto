@@ -3,9 +3,15 @@ import { VirtualBetTournamentExtended } from '../products/main/main.models';
 
 export const mockTsMft: string = 'F2';
 
+export const mockTsMftSoccer: string = 'F6';
+
 export const mockFirstEvId: number = 21254738;
 
+export const mockFirstEvIdSoccer: number = 21270764;
+
 export const mockFirstEvDuration: number = 120;
+
+export const mockFirstDurationSoccer: number = 360;
 
 export const mockAccountVirtualSport: AccountVirtualSport[] = [
 	{
@@ -290,6 +296,607 @@ export const mockVirtualBetTournamentExtended: VirtualBetTournamentExtended = {
 	]
 }
 
+export const mockTournamentDetails: VirtualBetTournamentExtended = {
+	cdt: 3491804152,
+	duration: mockFirstDurationSoccer,
+	ec: 0,
+	edt: "2022-08-19T09:52:00" as any,
+	evs: [],
+	id: mockFirstEvIdSoccer,
+	listDetailAreas: [
+	  [
+	   {
+		id: 1,
+		isSelected: false,
+		layoutDefinition: {areaCols: 1, areaMaxMarketColsByCol: [6], areaRowsByCol: [4]},
+		markets: [
+		  {
+			hasSpecialValue: false,
+			id: 10,
+			layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 3, marketRows: 1},
+			name: "1X2",
+			selectionCount: 3,
+			selections: [
+			  {id: 578585731, nm: '1', tp: 1, ods: [{vl: 1.35, st: 1}], isValid: true},
+			  {id: 578585732, nm: 'X', tp: 2, ods: [{vl: 4.19, st: 1}], isValid: true},
+			  {id: 578585733, nm: '2', tp: 3, ods: [{vl: 5.78, st: 1}], isValid: true}
+			],
+			specialValueOrSpread: ""
+		  },
+		  {
+			hasSpecialValue: true,
+			id: 60,
+			layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			name: "Over/Under",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585799, nm: 'Over', tp: 1, ods: [{vl: 1.57, st: 1}], isValid: true},
+			  {id: 578585800, nm: 'Under', tp: 2, ods: [{vl: 1.94, st: 1}], isValid: true}
+			],
+			specialValueOrSpread: "2.5"
+		  },
+		  {
+			hasSpecialValue: false,
+			id: 46,
+			layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 3, marketRows: 1},
+			name: "DoubleChance",
+			selectionCount: 3,
+			selections: [
+			  {id: 578585794, nm: '1X', tp: 1, ods: [{vl: 1.02, st: 1}], isValid: false},
+			  {id: 578585795, nm: '12', tp: 2, ods: [{vl: 1.1, st: 1}], isValid: true},
+			  {id: 578585796, nm: 'X2', tp: 3, ods: [{vl: 2.43, st: 1}], isValid: true}
+			],
+			specialValueOrSpread: ""
+		  },
+		  {
+			hasSpecialValue: false,
+			id: 43,
+			layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			name: "Goal/NoGoal",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585783, nm: 'GG', tp: 1, ods: [{vl: 1.69, st: 1}], isValid: true},
+			  {id: 578585784, nm: 'NG', tp: 2, ods: [{vl: 1.79, st: 1}], isValid: true}
+			],
+			specialValueOrSpread: ""
+		  }
+		],
+		name: "Main"
+	   },
+	   {
+		hasLowestOdd: true,
+		id: 2,
+		isSelected: false,
+		layoutDefinition: {
+		  areaCols: 2,
+		  areaMaxMarketColsByCol: [2, 2],
+		  areaRowsByCol: [4, 8],
+		},
+		markets: [
+		  {
+			hasSpecialValue: true,
+			id: 60,
+			layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			name: "Over/Under",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585797, nm: 'Over', tp: 1, ods: [{vl: 1.07, st: 1}], isValid: true, isLowestOdd: true},
+			  {id: 578585798, nm: 'Under', tp: 2, ods: [{vl: 4.61, st: 1}], isValid: true}
+			],
+			specialValueOrSpread: "1.5"
+		  },
+		  {
+			hasSpecialValue: true,
+			id: 60,
+			layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			name: "Over/Under",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585799, nm: 'Over', tp: 1, ods: [{vl: 1.57, st: 1}], isValid: true},
+			  {id: 578585800, nm: 'Under', tp: 2, ods: [{vl: 1.94, st: 1}], isValid: true}
+			],
+			specialValueOrSpread: "2.5"
+		  },
+		  {
+			hasSpecialValue: true,
+			id: 60,
+			layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			name: "Over/Under",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585801, nm: 'Over', tp: 1, ods: [{vl: 3.01, st: 1}], isValid: true},
+			  {id: 578585802, nm: 'Under', tp: 2, ods: [{vl: 1.22, st: 1}], isValid: true}
+			],
+			specialValueOrSpread: "3.5"
+		  },
+		  {
+			hasSpecialValue: true,
+			id: 60,
+			layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			name: "Over/Under",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585803, nm: 'Over', tp: 1, ods: [{vl: 7.65, st: 1}], isValid: true},
+			  {id: 578585804, nm: 'Under', tp: 2, ods: [{vl: 0.98, st: 1}], isValid: false}
+			],
+			specialValueOrSpread: "4.5"
+		  },
+		  {
+			hasSpecialValue: true,
+			id: 22,
+			layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			name: "HomeO/U",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585743, nm: 'Over', tp: 1, ods: [{vl: 0.96, st: 1}], isValid: false},
+			  {id: 578585744, nm: 'Under', tp: 2, ods: [{vl: 9.67, st: 1}], isValid: true}
+			],
+			specialValueOrSpread: "0.5"
+		  },
+		  {
+			hasSpecialValue: true,
+			id: 22,
+			layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			name: "HomeO/U",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585745, nm: 'Over', tp: 1, ods: [{vl: 1.38, st: 1}], isValid: true},
+			  {id: 578585746, nm: 'Under', tp: 2, ods: [{vl: 2.34, st: 1}], isValid: true}
+			],
+			specialValueOrSpread: "1.5"
+		  },
+		  {
+			hasSpecialValue: true,
+			id: 22,
+			layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			name: "HomeO/U",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585747, nm: 'Over', tp: 1, ods: [{vl: 3.22, st: 1}], isValid: true},
+			  {id: 578585748, nm: 'Under', tp: 2, ods: [{vl: 1.19, st: 1}], isValid: true}
+			],
+			specialValueOrSpread: "2.5"
+		  },
+		  {
+			hasSpecialValue: true,
+			id: 22,
+			layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			name: "HomeO/U",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585749, nm: 'Over', tp: 1, ods: [{vl: 16.3, st: 1}], isValid: true},
+			  {id: 578585750, nm: 'Under', tp: 2, ods: [{vl: 0.92, st: 1}], isValid: false}
+			],
+			specialValueOrSpread: "3.5"
+		  },
+		  {
+			hasSpecialValue: true,
+			id: 23,
+			layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			name: "AwayO/U",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585751, nm: 'Over', tp: 1, ods: [{vl: 1.54, st: 1}], isValid: true},
+			  {id: 578585752, nm: 'Under', tp: 2, ods: [{vl: 2, st: 1}], isValid: true}
+			],
+			specialValueOrSpread: "0.5"
+		  },
+		  {
+			hasSpecialValue: true,
+			id: 23,
+			layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			name: "AwayO/U",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585753, nm: 'Over', tp: 1, ods: [{vl: 3.3, st: 1}], isValid: true},
+			  {id: 578585754, nm: 'Under', tp: 2, ods: [{vl: 1.18, st: 1}], isValid: true}
+			],
+			specialValueOrSpread: "1.5"
+		  },
+		  {
+			hasSpecialValue: true,
+			id: 23,
+			layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			name: "AwayO/U",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585755, nm: 'Over', tp: 1, ods: [{vl: 13.66, st: 1}], isValid: true},
+			  {id: 578585756, nm: 'Under', tp: 2, ods: [{vl: 0.93, st: 1}], isValid: false}
+			],
+			specialValueOrSpread: "2.5"
+		  },
+		  {
+			hasSpecialValue: true,
+			id: 23,
+			layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			name: "AwayO/U",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585757, nm: 'Over', tp: 1, ods: [{vl: 69.13, st: 1}], isValid: true},
+			  {id: 578585758, nm: 'Under', tp: 2, ods: [{vl: 0.88, st: 1}], isValid: false}
+			],
+			specialValueOrSpread: "3.5"
+		  }
+		],
+		name: "Over/Under"
+	   }
+	  ],
+	  [
+		{
+		 id: 1,
+		 isSelected: false,
+		 layoutDefinition: {areaCols: 1, areaMaxMarketColsByCol: [6], areaRowsByCol: [4]},
+		 markets: [
+		   {
+			 hasSpecialValue: false,
+			 id: 10,
+			 layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 3, marketRows: 1},
+			 name: "1X2",
+			 selectionCount: 3,
+			 selections: [
+			   {id: 578585731, nm: '1', tp: 1, ods: [{vl: 1.35, st: 1}], isValid: true},
+			   {id: 578585732, nm: 'X', tp: 2, ods: [{vl: 4.19, st: 1}], isValid: true},
+			   {id: 578585733, nm: '2', tp: 3, ods: [{vl: 5.78, st: 1}], isValid: true}
+			 ],
+			 specialValueOrSpread: ""
+		   },
+		   {
+			 hasSpecialValue: true,
+			 id: 60,
+			 layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			 name: "Over/Under",
+			 selectionCount: 2,
+			 selections: [
+			   {id: 578585799, nm: 'Over', tp: 1, ods: [{vl: 1.57, st: 1}], isValid: true},
+			   {id: 578585800, nm: 'Under', tp: 2, ods: [{vl: 1.94, st: 1}], isValid: true}
+			 ],
+			 specialValueOrSpread: "2.5"
+		   },
+		   {
+			 hasSpecialValue: false,
+			 id: 46,
+			 layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 3, marketRows: 1},
+			 name: "DoubleChance",
+			 selectionCount: 3,
+			 selections: [
+			   {id: 578585794, nm: '1X', tp: 1, ods: [{vl: 1.02, st: 1}], isValid: false},
+			   {id: 578585795, nm: '12', tp: 2, ods: [{vl: 1.1, st: 1}], isValid: true},
+			   {id: 578585796, nm: 'X2', tp: 3, ods: [{vl: 2.43, st: 1}], isValid: true}
+			 ],
+			 specialValueOrSpread: ""
+		   },
+		   {
+			 hasSpecialValue: false,
+			 id: 43,
+			 layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			 name: "Goal/NoGoal",
+			 selectionCount: 2,
+			 selections: [
+			   {id: 578585783, nm: 'GG', tp: 1, ods: [{vl: 1.69, st: 1}], isValid: true},
+			   {id: 578585784, nm: 'NG', tp: 2, ods: [{vl: 1.79, st: 1}], isValid: true}
+			 ],
+			 specialValueOrSpread: ""
+		   }
+		 ],
+		 name: "Main"
+		},
+		{
+		 hasLowestOdd: true,
+		 id: 2,
+		 isSelected: false,
+		 layoutDefinition: {
+		   areaCols: 2,
+		   areaMaxMarketColsByCol: [2, 2],
+		   areaRowsByCol: [4, 8],
+		 },
+		 markets: [
+		   {
+			 hasSpecialValue: true,
+			 id: 60,
+			 layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			 name: "Over/Under",
+			 selectionCount: 2,
+			 selections: [
+			   {id: 578585797, nm: 'Over', tp: 1, ods: [{vl: 1.07, st: 1}], isValid: true, isLowestOdd: true},
+			   {id: 578585798, nm: 'Under', tp: 2, ods: [{vl: 4.61, st: 1}], isValid: true}
+			 ],
+			 specialValueOrSpread: "1.5"
+		   },
+		   {
+			 hasSpecialValue: true,
+			 id: 60,
+			 layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			 name: "Over/Under",
+			 selectionCount: 2,
+			 selections: [
+			   {id: 578585799, nm: 'Over', tp: 1, ods: [{vl: 1.57, st: 1}], isValid: true},
+			   {id: 578585800, nm: 'Under', tp: 2, ods: [{vl: 1.94, st: 1}], isValid: true}
+			 ],
+			 specialValueOrSpread: "2.5"
+		   },
+		   {
+			 hasSpecialValue: true,
+			 id: 60,
+			 layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			 name: "Over/Under",
+			 selectionCount: 2,
+			 selections: [
+			   {id: 578585801, nm: 'Over', tp: 1, ods: [{vl: 3.01, st: 1}], isValid: true},
+			   {id: 578585802, nm: 'Under', tp: 2, ods: [{vl: 1.22, st: 1}], isValid: true}
+			 ],
+			 specialValueOrSpread: "3.5"
+		   },
+		   {
+			 hasSpecialValue: true,
+			 id: 60,
+			 layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			 name: "Over/Under",
+			 selectionCount: 2,
+			 selections: [
+			   {id: 578585803, nm: 'Over', tp: 1, ods: [{vl: 7.65, st: 1}], isValid: true},
+			   {id: 578585804, nm: 'Under', tp: 2, ods: [{vl: 0.98, st: 1}], isValid: false}
+			 ],
+			 specialValueOrSpread: "4.5"
+		   },
+		   {
+			 hasSpecialValue: true,
+			 id: 22,
+			 layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			 name: "HomeO/U",
+			 selectionCount: 2,
+			 selections: [
+			   {id: 578585743, nm: 'Over', tp: 1, ods: [{vl: 0.96, st: 1}], isValid: false},
+			   {id: 578585744, nm: 'Under', tp: 2, ods: [{vl: 9.67, st: 1}], isValid: true}
+			 ],
+			 specialValueOrSpread: "0.5"
+		   },
+		   {
+			 hasSpecialValue: true,
+			 id: 22,
+			 layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			 name: "HomeO/U",
+			 selectionCount: 2,
+			 selections: [
+			   {id: 578585745, nm: 'Over', tp: 1, ods: [{vl: 1.38, st: 1}], isValid: true},
+			   {id: 578585746, nm: 'Under', tp: 2, ods: [{vl: 2.34, st: 1}], isValid: true}
+			 ],
+			 specialValueOrSpread: "1.5"
+		   },
+		   {
+			 hasSpecialValue: true,
+			 id: 22,
+			 layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			 name: "HomeO/U",
+			 selectionCount: 2,
+			 selections: [
+			   {id: 578585747, nm: 'Over', tp: 1, ods: [{vl: 3.22, st: 1}], isValid: true},
+			   {id: 578585748, nm: 'Under', tp: 2, ods: [{vl: 1.19, st: 1}], isValid: true}
+			 ],
+			 specialValueOrSpread: "2.5"
+		   },
+		   {
+			 hasSpecialValue: true,
+			 id: 22,
+			 layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			 name: "HomeO/U",
+			 selectionCount: 2,
+			 selections: [
+			   {id: 578585749, nm: 'Over', tp: 1, ods: [{vl: 16.3, st: 1}], isValid: true},
+			   {id: 578585750, nm: 'Under', tp: 2, ods: [{vl: 0.92, st: 1}], isValid: false}
+			 ],
+			 specialValueOrSpread: "3.5"
+		   },
+		   {
+			 hasSpecialValue: true,
+			 id: 23,
+			 layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			 name: "AwayO/U",
+			 selectionCount: 2,
+			 selections: [
+			   {id: 578585751, nm: 'Over', tp: 1, ods: [{vl: 1.54, st: 1}], isValid: true},
+			   {id: 578585752, nm: 'Under', tp: 2, ods: [{vl: 2, st: 1}], isValid: true}
+			 ],
+			 specialValueOrSpread: "0.5"
+		   },
+		   {
+			 hasSpecialValue: true,
+			 id: 23,
+			 layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			 name: "AwayO/U",
+			 selectionCount: 2,
+			 selections: [
+			   {id: 578585753, nm: 'Over', tp: 1, ods: [{vl: 3.3, st: 1}], isValid: true},
+			   {id: 578585754, nm: 'Under', tp: 2, ods: [{vl: 1.18, st: 1}], isValid: true}
+			 ],
+			 specialValueOrSpread: "1.5"
+		   },
+		   {
+			 hasSpecialValue: true,
+			 id: 23,
+			 layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			 name: "AwayO/U",
+			 selectionCount: 2,
+			 selections: [
+			   {id: 578585755, nm: 'Over', tp: 1, ods: [{vl: 13.66, st: 1}], isValid: true},
+			   {id: 578585756, nm: 'Under', tp: 2, ods: [{vl: 0.93, st: 1}], isValid: false}
+			 ],
+			 specialValueOrSpread: "2.5"
+		   },
+		   {
+			 hasSpecialValue: true,
+			 id: 23,
+			 layoutGridDefinition: {marketPositionOnColArea: 2, marketCols: 2, marketRows: 1},
+			 name: "AwayO/U",
+			 selectionCount: 2,
+			 selections: [
+			   {id: 578585757, nm: 'Over', tp: 1, ods: [{vl: 69.13, st: 1}], isValid: true},
+			   {id: 578585758, nm: 'Under', tp: 2, ods: [{vl: 0.88, st: 1}], isValid: false}
+			 ],
+			 specialValueOrSpread: "3.5"
+		   }
+		 ],
+		 name: "Over/Under"
+		}
+	  ],
+	] as any,
+	matches: [
+	  {
+		hasOddsSelected: false,
+		id: 21270765,
+		isDetailOpened: false,
+		isVideoShown: false,
+		name: "WHU - LEE",
+		selectedOdds: [],
+		smartcode: 7941,
+		virtualBetCompetitor: [
+		  {
+			ac: [4, 3],
+			ff: 10,
+			id: 3577,
+			ito: 1,
+			lrrs: "",
+			nm: "WHU",
+			smc: 7942
+		  },
+		  {
+			ac: [2, 1],
+			ff: 7,
+			id: 4885,
+			ito: 2,
+			lrrs: "",
+			nm: "LEE",
+			smc: 7943
+		  }
+		]
+	  },
+	  {
+		hasOddsSelected: false,
+		id: 21270766,
+		isDetailOpened: false,
+		isVideoShown: false,
+		name: "CPL - ASV",
+		selectedOdds: [],
+		smartcode: 7944,
+		virtualBetCompetitor: [
+		  {
+			ac: [2, 3],
+			ff: 2,
+			id: 3585,
+			ito: 1,
+			lrrs: "",
+			nm: "CPL",
+			smc: 7945
+		  },
+		  {
+			ac: [2, 2],
+			ff: 1,
+			id: 4879,
+			ito: 2,
+			lrrs: "",
+			nm: "ASV",
+			smc: 7946
+		  }
+		]
+	  }
+	],
+	mft: mockTsMftSoccer,
+	nm: "Week #36",
+	overviewArea: [
+	  {
+		id: 0,
+		layoutDefinition: { areaCols: 1, areaMaxMarketColsByCol: [7] },
+		markets: [
+		  {
+			hasSpecialValue: false,
+			id: 10,
+			layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 3, marketRows: 1},
+			name: "1X2",
+			selectionCount: 3,
+			selections: [
+			  {id: 578585731, nm: '1', tp: 1, ods: Array(1), isValid: true},
+			  {id: 578585732, nm: 'X', tp: 2, ods: Array(1), isValid: true},
+			  {id: 578585733, nm: '2', tp: 3, ods: Array(1), isValid: true}
+			],
+			specialValueOrSpread: ""
+		  },
+		  {
+			hasSpecialValue: true,
+			id: 60,
+			layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			name: "Over/Under",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585799, nm: 'Over', tp: 1, ods: Array(1), isValid: true},
+			  {id: 578585800, nm: 'Under', tp: 2, ods: Array(1), isValid: true}
+			],
+			specialValueOrSpread: "2.5"
+		  },
+		  {
+			hasSpecialValue: false,
+			id: 43,
+			layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			name: "Goal/NoGoal",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585783, nm: 'GG', tp: 1, ods: Array(1), isValid: true},
+			  {id: 578585784, nm: 'NG', tp: 2, ods: Array(1), isValid: true}
+			],
+			specialValueOrSpread: ""
+		  }
+		],
+		name: "Overview"
+	  },
+	  {
+		id: 0,
+		layoutDefinition: {areaCols: 1, areaMaxMarketColsByCol: [7]},
+		markets: [
+		  {
+			hasSpecialValue: false,
+			id: 10,
+			layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 3, marketRows: 1},
+			name: "1X2",
+			selectionCount: 3,
+			selections: [
+			  {id: 578585890, nm: '1', tp: 1, ods: Array(1), isValid: true},
+			  {id: 578585891, nm: 'X', tp: 2, ods: Array(1), isValid: true},
+			  {id: 578585892, nm: '2', tp: 3, ods: Array(1), isValid: true}
+			],
+			specialValueOrSpread: ""
+		  },
+		  {
+			hasSpecialValue: true,
+			id: 60,
+			layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			name: "Over/Under",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585958, nm: 'Over', tp: 1, ods: Array(1), isValid: true},
+			  {id: 578585959, nm: 'Under', tp: 2, ods: Array(1), isValid: true}
+			],
+			specialValueOrSpread: "2.5"
+		  },
+		  {
+			hasSpecialValue: false,
+			id: 43,
+			layoutGridDefinition: {marketPositionOnColArea: 1, marketCols: 2, marketRows: 1},
+			name: "Goal/NoGoal",
+			selectionCount: 2,
+			selections: [
+			  {id: 578585942, nm: 'GG', tp: 1, ods: Array(1), isValid: true},
+			  {id: 578585943, nm: 'NG', tp: 2, ods: Array(1), isValid: true}
+			],
+			specialValueOrSpread: ""
+		  }
+		],
+		name: "Overview"
+	  }
+	],
+	pid: 21268808,
+	pn: "English League 6",
+	sdt: "2022-08-19T09:46:00",
+	sdtoffset: "2022-08-19T09:46:00+02:00" as any
+  }
+
 export const mockVirtualProgramTreeBySportResponse: VirtualProgramTreeBySportResponse = {
 	'Sports': [
 		{
@@ -299,6 +906,20 @@ export const mockVirtualProgramTreeBySportResponse: VirtualProgramTreeBySportRes
 			'stc': 'DOG',
 			'ts': [
 				mockVirtualBetTournamentExtended
+			]
+		}
+	]
+}
+
+export const mockVirtualProgramTreeBySportResponseSoccer: VirtualProgramTreeBySportResponse = {
+	'Sports': [
+		{
+			'id': 1,
+			'nm': 'Soccer',
+			'ec': 4,
+			'stc': 'ITA-LEAGUE',
+			'ts': [
+				mockTournamentDetails
 			]
 		}
 	]
@@ -392,3 +1013,5 @@ export const mockVirtualSportLastResultsResponse: VirtualSportLastResultsRespons
 		}
 	]
 }
+
+

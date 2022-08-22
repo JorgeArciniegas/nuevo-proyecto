@@ -1,6 +1,8 @@
 import { VirtualGetRankByEventResponse } from '@elys/elys-api';
 import { EventDetail, EventInfo, EventTime } from '../products/main/main.models';
 
+export const mockCountDown: number = 1000000000;
+
 export const mockEventTime: EventTime = {
 	minute: 1,
   	second: 2,

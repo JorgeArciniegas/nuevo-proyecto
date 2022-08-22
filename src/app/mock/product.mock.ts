@@ -20,7 +20,7 @@ export const mockProductSoccer: Products = {
   codeProduct: 'ITA-LEAGUE',
   isPlayable: true,
   label: 'FOOTBALL_ITA',
-  layoutProducts: {type: 2, resultItems: 10, nextEventItems: 2, cacheEventsItem: 3, multiFeedType: 'F6'},
+  layoutProducts: {type: 2, resultItems: 10, nextEventItems: 1, cacheEventsItem: 3, multiFeedType: 'F6'},
   name: 'Soccer',
   order: 4,
   productSelected: true,
