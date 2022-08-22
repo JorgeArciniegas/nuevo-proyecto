@@ -1,5 +1,6 @@
 import { AccountVirtualSport, VirtualProgramTreeBySportResponse, VirtualSportLastResultsResponse } from '@elys/elys-api';
-import { VirtualBetTournamentExtended } from "../products/main/main.models";
+import { EventsList } from '../products/main/events-list/event-list.model';
+import { EventDetail, VirtualBetTournamentExtended } from "../products/main/main.models";
 
 export const mockTsMft: string = 'F2';
 
@@ -990,4 +991,27 @@ export const mockTournamentDetails: VirtualBetTournamentExtended = {
   pn: "English League 6",
   sdt: "2022-08-19T09:46:00",
   sdtoffset: "2022-08-19T09:46:00+02:00" as any
+}
+
+export const mockEventDetails: EventDetail = {
+  currentEvent: 0,
+  eventTime: {minute: 1, second: 37},
+  events: [
+    {number: 21322905, label: 'Race n. 856', date: new Date('Mon Aug 22 2022 21:15:00 GMT+0300 (Eastern European Summer Time)')},
+    {number: 21322907, label: 'Race n. 858', date: new Date('Mon Aug 22 2022 21:17:00 GMT+0300 (Eastern European Summer Time)')},
+    {number: 21322909, label: 'Race n. 860', date: new Date('Mon Aug 22 2022 21:19:00 GMT+0300 (Eastern European Summer Time)')},
+    {number: 21323015, label: 'Race n. 862', date: new Date('Mon Aug 22 2022 21:21:00 GMT+0300 (Eastern European Summer Time)')},
+    {number: 21323017, label: 'Race n. 864', date: new Date('Mon Aug 22 2022 21:23:00 GMT+0300 (Eastern European Summer Time)')}
+  ]
+}
+
+export const mockEventList: EventsList = {
+  currentEvent: 0,
+  events: [
+    {eventLabel: 'Race n. 856', eventStart: new Date('Mon Aug 22 2022 21:15:00 GMT+0300 (за східноєвропейським літнім часом)'), eventNumber: 21322905},
+    {eventLabel: 'Race n. 858', eventStart: new Date('Mon Aug 22 2022 21:17:00 GMT+0300 (за східноєвропейським літнім часом)'), eventNumber: 21322907},
+    {eventLabel: 'Race n. 860', eventStart: new Date('Mon Aug 22 2022 21:19:00 GMT+0300 (за східноєвропейським літнім часом)'), eventNumber: 21322909},
+    {eventLabel: 'Race n. 862', eventStart: new Date('Mon Aug 22 2022 21:21:00 GMT+0300 (за східноєвропейським літнім часом)'), eventNumber: 21323015},
+    {eventLabel: 'Race n. 864', eventStart: new Date('Mon Aug 22 2022 21:23:00 GMT+0300 (за східноєвропейським літнім часом)'), eventNumber: 21323017}
+  ]
 }
