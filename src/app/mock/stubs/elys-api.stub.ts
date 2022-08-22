@@ -11,11 +11,13 @@ import {
   TokenDataSuccess, 
   VirtualEventCountDownRequest, 
   VirtualEventCountDownResponse, 
+  VirtualGetRankByEventResponse, 
   VirtualProgramTreeBySportRequest,
   VirtualProgramTreeBySportResponse,
   VirtualSportLastResultsRequest,
   VirtualSportLastResultsResponse} from "@elys/elys-api";
 import { mockCouponLimit, mockCurrencyCodeResponse } from "../coupon.mock";
+import { mockVirtualGetRankByEventResponse } from "../mine.mock";
 import { mockAccountVirtualSport, mockVirtualProgramTreeBySportResponse, mockVirtualSportLastResultsResponse } from "../sports.mock";
 import { 
   mockOperatorData, 
@@ -92,6 +94,11 @@ export class ElysApiServiceStub {
     getCountdown(request: VirtualEventCountDownRequest): Promise<VirtualEventCountDownResponse> {
       return new Promise((resolve, reject) => {
         resolve({CountDown: 1193579691})
+      })
+    },
+    getRanking(eventId: number): Promise<VirtualGetRankByEventResponse> {
+      return new Promise((resolve, reject) => {
+        resolve(mockVirtualGetRankByEventResponse)
       })
     }
   };

@@ -11,7 +11,7 @@ import { CouponService } from 'src/app/component/coupon/coupon.service';
 import { DestroyCouponService } from 'src/app/component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { UserService } from 'src/app/services/user.service';
 import { CouponConfirmDelete } from '../products.model';
-import { mockEventDetail, mockEventInfo, mockPlayerList } from 'src/app/mock/mine.mock';
+import { mockEventDetail, mockEventInfo, mockPlayerList, mockVirtualGetRankByEventResponse } from 'src/app/mock/mine.mock';
 import { Products } from 'src/environments/environment.models';
 import { mockProduct } from 'src/app/mock/product.mock';
 import { ElysApiServiceStub } from 'src/app/mock/stubs/elys-api.stub';
@@ -20,7 +20,7 @@ import { mockUserId } from 'src/app/mock/user.mock';
 import { ColourGameId } from './colour-game.enum';
 import { ResultsService } from './results/results.service';
 import { Results } from './results/results';
-import { mockFirstEvDuration, mockFirstEvId, mockTsMft } from 'src/app/mock/sports.mock';
+import { mockFirstEvDuration, mockFirstEvId, mockTsMft, mockVirtualBetTournamentExtended } from 'src/app/mock/sports.mock';
 
 class ProductServiceStub {
   productNameSelectedSubscribe: Subject<string>;
@@ -406,6 +406,16 @@ describe('MainService', () => {
     expect(JSON.stringify(service.eventDetails.events)).toEqual(JSON.stringify(mockEvents));
     expect(resultService.resultsUtils.nextEventNumber).toBe(mockFirstEvId);
     expect(resultService.resultsUtils.nextEventDuration).toBe(mockFirstEvDuration);
+  });
+
+  it('getRanking() should be get ranking data', async () => {
+    const mockTournamentId = 123;
+    spyOn(elysApiService.virtual, 'getRanking').and.callThrough();
+    service.currentProductDetails = mockVirtualBetTournamentExtended;
+    await service.getRanking(mockTournamentId).then((data) => {
+      expect(data).toEqual(mockVirtualGetRankByEventResponse)
+    });
+    expect(elysApiService.virtual.getRanking).toHaveBeenCalledWith(mockTournamentId)
   });
 
 });

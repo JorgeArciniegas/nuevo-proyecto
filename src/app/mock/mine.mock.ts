@@ -1,3 +1,4 @@
+import { VirtualGetRankByEventResponse } from '@elys/elys-api';
 import { EventDetail, EventInfo, EventTime } from '../products/main/main.models';
 
 export const mockEventTime: EventTime = {
@@ -139,3 +140,41 @@ export const mockPlayerList = [
 	  position: 3
 	}
 ]
+
+export const mockVirtualGetRankByEventResponse: VirtualGetRankByEventResponse = {
+	RankRows: [
+		{
+			Competitor: {
+				id: 3553,
+				nm: 'INT',
+				ito: 1
+			},
+			RankColumns: [
+				{
+					RankColumnKey: 'GOALS',
+					RankColumnValue: '55'
+				},
+				{
+					RankColumnKey: 'GOALSCON',
+					RankColumnValue: '24'
+				},
+				{
+					RankColumnKey: 'LASTRESULTS',
+					RankColumnValue: 'P,V,V,N,V',
+				},
+				{
+					RankColumnKey: 'POINTS',
+					RankColumnValue: '55'
+				},
+				{
+					RankColumnKey: 'POSTREND',
+					RankColumnValue: '0'
+				},
+				{
+					RankColumnKey: 'ROUND',
+					RankColumnValue: '26'
+				}
+			]
+		}
+	]
+}
