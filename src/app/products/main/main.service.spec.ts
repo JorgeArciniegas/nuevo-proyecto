@@ -1,7 +1,7 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { BehaviorSubject, Observable, Subject, timer } from 'rxjs';
 
-import { ElysApiService, PlaySource, VirtualBetSelection, VirtualEventCountDownRequest } from '@elys/elys-api';
+import { ElysApiService, PlaySource, VirtualEventCountDownRequest } from '@elys/elys-api';
 import { ElysFeedsService } from '@elys/elys-feeds';
 
 import { MainService } from './main.service';
@@ -11,7 +11,16 @@ import { CouponService } from 'src/app/component/coupon/coupon.service';
 import { DestroyCouponService } from 'src/app/component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { UserService } from 'src/app/services/user.service';
 import { CouponConfirmDelete, PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../products.model';
-import { mockEventDetail, mockEventInfo, mockEventTime, mockPlacingEvent, mockPlayerList, mockPlayerListCleared, mockPolyfunctionalArea, mockPolyfunctionalStakeCoupon, mockSmartCode, mockVirtualGetRankByEventResponse } from 'src/app/mock/mine.mock';
+import { 
+  mockEventDetail, 
+  mockEventTime, 
+  mockPlacingEvent, 
+  mockPlayerList, 
+  mockPlayerListCleared, 
+  mockPolyfunctionalArea, 
+  mockPolyfunctionalStakeCoupon, 
+  mockSmartCode, 
+  mockVirtualGetRankByEventResponse } from 'src/app/mock/mine.mock';
 import { Products } from 'src/environments/environment.models';
 import { mockProduct, mockProductSoccer } from 'src/app/mock/product.mock';
 import { ElysApiServiceStub } from 'src/app/mock/stubs/elys-api.stub';
@@ -20,8 +29,15 @@ import { mockUserId } from 'src/app/mock/user.mock';
 import { ColourGameId } from './colour-game.enum';
 import { ResultsService } from './results/results.service';
 import { Results } from './results/results';
-import { mockFirstDurationSoccer, mockFirstEvDuration, mockFirstEvId, mockFirstEvIdSoccer, mockTsMft, mockTsMftSoccer, mockVirtualBetTournamentExtended, mockVirtualProgramTreeBySportResponseSoccer } from 'src/app/mock/sports.mock';
-import { resolve } from 'dns';
+import { 
+  mockFirstDurationSoccer, 
+  mockFirstEvDuration, 
+  mockFirstEvId, 
+  mockFirstEvIdSoccer, 
+  mockTsMft, 
+  mockTsMftSoccer, 
+  mockVirtualBetTournamentExtended, 
+  mockVirtualProgramTreeBySportResponseSoccer } from 'src/app/mock/sports.mock';
 
 class ProductServiceStub {
   productNameSelectedSubscribe: Subject<string>;
