@@ -1,5 +1,6 @@
 import { VirtualGetRankByEventResponse } from '@elys/elys-api';
-import { EventDetail, EventInfo, EventTime } from '../products/main/main.models';
+import { EventDetail, EventInfo, EventTime, PlacingEvent } from '../products/main/main.models';
+import { PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../products/products.model';
 
 export const mockCountDown: number = 1000000000;
 
@@ -8,9 +9,11 @@ export const mockEventTime: EventTime = {
   	second: 2,
 }
 
+export const mockFirstEventNumber: number = 1
+
 export const mockEventInfo: EventInfo[] = [
 	{
-		number: 1,
+		number: mockFirstEventNumber,
 		label: 'event1',
 		date: new Date('2022-07-11T11:42:17.93')
 	},
@@ -32,7 +35,7 @@ export const mockEventDetail: EventDetail = {
 	currentEvent: 0
 }
 
-export const mockPlayerList = [
+export const mockPlayerListCleared = [
 	{
 	  number: 1,
 	  selectable: true,
@@ -143,6 +146,117 @@ export const mockPlayerList = [
 	}
 ]
 
+export const mockPlayerList = [
+	{
+	  number: 1,
+	  selectable: false,
+	  actived: true,
+	  position: 1
+	},
+	{
+	  number: 2,
+	  selectable: false,
+	  actived: true,
+	  position: 1
+	},
+	{
+	  number: 3,
+	  selectable: false,
+	  actived: true,
+	  position: 1
+	},
+	{
+	  number: 4,
+	  selectable: false,
+	  actived: true,
+	  position: 1
+	},
+	{
+	  number: 5,
+	  selectable: false,
+	  actived: true,
+	  position: 1
+	},
+	{
+	  number: 6,
+	  selectable: false,
+	  actived: true,
+	  position: 1
+	},
+	{
+	  number: 1,
+	  selectable: false,
+	  actived: true,
+	  position: 2
+	},
+	{
+	  number: 2,
+	  selectable: false,
+	  actived: true,
+	  position: 2
+	},
+	{
+	  number: 3,
+	  selectable: false,
+	  actived: true,
+	  position: 2
+	},
+	{
+	  number: 4,
+	  selectable: false,
+	  actived: true,
+	  position: 2
+	},
+	{
+	  number: 5,
+	  selectable: false,
+	  actived: true,
+	  position: 2
+	},
+	{
+	  number: 6,
+	  selectable: false,
+	  actived: true,
+	  position: 2
+	},
+	{
+	  number: 1,
+	  selectable: false,
+	  actived: true,
+	  position: 3
+	},
+	{
+	  number: 2,
+	  selectable: false,
+	  actived: true,
+	  position: 3
+	},
+	{
+	  number: 3,
+	  selectable: false,
+	  actived: true,
+	  position: 3
+	},
+	{
+	  number: 4,
+	  selectable: false,
+	  actived: true,
+	  position: 3
+	},
+	{
+	  number: 5,
+	  selectable: false,
+	  actived: true,
+	  position: 3
+	},
+	{
+	  number: 6,
+	  selectable: false,
+	  actived: true,
+	  position: 3
+	}
+]
+
 export const mockVirtualGetRankByEventResponse: VirtualGetRankByEventResponse = {
 	RankRows: [
 		{
@@ -180,3 +294,26 @@ export const mockVirtualGetRankByEventResponse: VirtualGetRankByEventResponse = 
 		}
 	]
 }
+
+export const mockPlacingEvent = {
+	eventNumber: mockFirstEventNumber,
+	repeat: 1,
+	amount: 0,
+	isSpecialBets: false,
+	players: [],
+	odds: [],
+	secondRowDisabled: false,
+	thirdRowDisabled: false
+}
+
+export const mockSmartCode = {
+	selPlaced: [],
+	selPodium: [],
+	selWinner: []
+}
+
+export const mockPolyfunctionalArea = new PolyfunctionalArea();
+
+export const mockPolyfunctionalStakeCoupon = new PolyfunctionalStakeCoupon();
+
+
