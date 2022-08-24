@@ -11,7 +11,16 @@ import { CouponService } from 'src/app/component/coupon/coupon.service';
 import { DestroyCouponService } from 'src/app/component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { UserService } from 'src/app/services/user.service';
 import { CouponConfirmDelete, PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../products.model';
-import { mockEventDetail, mockEventInfo, mockEventTime, mockPlayerList, mockVirtualGetRankByEventResponse } from 'src/app/mock/mine.mock';
+import { 
+  mockEventDetail, 
+  mockEventTime, 
+  mockPlacingEvent, 
+  mockPlayerList, 
+  mockPlayerListCleared, 
+  mockPolyfunctionalArea, 
+  mockPolyfunctionalStakeCoupon, 
+  mockSmartCode, 
+  mockVirtualGetRankByEventResponse } from 'src/app/mock/mine.mock';
 import { Products } from 'src/environments/environment.models';
 import { mockProduct, mockProductSoccer } from 'src/app/mock/product.mock';
 import { ElysApiServiceStub } from 'src/app/mock/stubs/elys-api.stub';
@@ -20,8 +29,15 @@ import { mockUserId } from 'src/app/mock/user.mock';
 import { ColourGameId } from './colour-game.enum';
 import { ResultsService } from './results/results.service';
 import { Results } from './results/results';
-import { mockFirstDurationSoccer, mockFirstEvDuration, mockFirstEvId, mockFirstEvIdSoccer, mockTsMft, mockTsMftSoccer, mockVirtualBetTournamentExtended, mockVirtualProgramTreeBySportResponseSoccer } from 'src/app/mock/sports.mock';
-import { resolve } from 'dns';
+import { 
+  mockFirstDurationSoccer, 
+  mockFirstEvDuration, 
+  mockFirstEvId, 
+  mockFirstEvIdSoccer, 
+  mockTsMft, 
+  mockTsMftSoccer, 
+  mockVirtualBetTournamentExtended, 
+  mockVirtualProgramTreeBySportResponseSoccer } from 'src/app/mock/sports.mock';
 
 class ProductServiceStub {
   productNameSelectedSubscribe: Subject<string>;
@@ -65,7 +81,10 @@ class CouponServiceStub {
   constructor(){
     this.productHasCoupon = { checked: false };
   }
-  resetCoupon(): void {}
+  resetCoupon(): void {};
+  checkIfCouponIsReadyToPlace(): boolean {
+    return false
+  }
 }
 
 class DestroyCouponServiceStub {
@@ -129,7 +148,7 @@ describe('MainService', () => {
   it('should be call createPlayerList and set toResetAllSelections as true', () => {
     expect(spyCreatePlayerList).toHaveBeenCalled();
     expect(service.toResetAllSelections).toBeTrue();
-    expect(JSON.stringify(service.playersList)).toEqual(JSON.stringify(mockPlayerList))
+    expect(JSON.stringify(service.playersList)).toEqual(JSON.stringify(mockPlayerListCleared))
   });
 
   it('should be call initEvents', () => {
@@ -566,12 +585,215 @@ describe('MainService', () => {
     expect(service.initCurrentEvent).toBeTrue();
   });
 
-  it('resetPlayEvent() should be create and set new objects (PlacingEvent, Smartcode, PolyfunctionalArea, PolyfunctionalStakeCoupon)', async () => {
+  it('resetPlayEvent() should be create and set new objects (PlacingEvent, Smartcode, PolyfunctionalArea, PolyfunctionalStakeCoupon)', () => {
     spyOn(service, 'clearPlayerListEvents');
+    spyOn(productService.polyfunctionalAreaSubject, 'next');
+    spyOn(productService.polyfunctionalStakeCouponSubject, 'next');
     service.eventDetails = JSON.parse(JSON.stringify(mockEventDetail));
     productService.product = mockProduct;
+
     service.resetPlayEvent();
+
     expect(service.clearPlayerListEvents).toHaveBeenCalled();
+    expect(JSON.stringify(service.placingEvent)).toBe(JSON.stringify(mockPlacingEvent));
+    expect(JSON.stringify(service.smartCode)).toBe(JSON.stringify(mockSmartCode));
+
+    expect(productService.polyfunctionalAreaSubject.next).toHaveBeenCalledOnceWith(mockPolyfunctionalArea);
+    expect(productService.polyfunctionalStakeCouponSubject.next).toHaveBeenCalledOnceWith(mockPolyfunctionalStakeCoupon);
+  });
+
+  it('clearPlayerListEvents() should be call createPlayerList', () => {
+    spyCreatePlayerList.calls.reset();
+    service.playersList = null;
+    service.clearPlayerListEvents();
+    expect(spyCreatePlayerList).toHaveBeenCalled();
+  });
+
+  it('clearPlayerListEvents() should be set all actived as false and selectable as true', () => {
+    service.playersList = mockPlayerList;
+    service.clearPlayerListEvents();
+    expect(service.playersList).toEqual(mockPlayerListCleared);
+  });
+
+  it('checkIfCouponIsReadyToPlace() should be call couponService.checkIfCouponIsReadyToPlace', () => {
+    spyOn(couponService, 'checkIfCouponIsReadyToPlace');
+    service.checkIfCouponIsReadyToPlace();
+    expect(couponService.checkIfCouponIsReadyToPlace).toHaveBeenCalled()
+  });
+
+  it('placingOddByOdd() should be add odd to placingEvent', () => {
+    const mockMarketId = 10;
+    const mockOdd = {
+      id: 585416362,
+      nm: '1',
+      tp: 1,
+      ods: [
+        {
+          vl: 3.86,
+          st: 1
+        }
+      ]
+    };
+    const expectedOdd = {
+      id: 585416362,
+      nm: '1',
+      tp: 1,
+      ods: [
+        {
+          vl: 3.86,
+          st: 1
+        }
+      ],
+      marketId: mockMarketId
+    }
+    spyOn(service, 'populatingPolyfunctionAreaByOdds');
+
+    service.placingOddByOdd(mockMarketId, mockOdd);
+
+    expect(service.placingEvent.odds).toEqual([expectedOdd]);
+
+    expect(service.populatingPolyfunctionAreaByOdds).toHaveBeenCalled();
+    expect(JSON.stringify(service.smartCode)).toBe(JSON.stringify(mockSmartCode));
+  });
+
+  it('placingOddByOdd() should be removed odd from placingEvent', () => {
+    const mockMarketId = 10;
+    const mockOdd = {
+      id: 585416362,
+      nm: '1',
+      tp: 1,
+      ods: [
+        {
+          vl: 3.86,
+          st: 1
+        }
+      ]
+    };
+    const expectedOdd = {
+      id: 585416362,
+      nm: '1',
+      tp: 1,
+      ods: [
+        {
+          vl: 3.86,
+          st: 1
+        }
+      ],
+      marketId: mockMarketId
+    };
+    service.placingEvent.odds = [expectedOdd];
+    spyOn(service, 'populatingPolyfunctionAreaByOdds');
+
+    service.placingOddByOdd(mockMarketId, mockOdd);
+
+    expect(service.placingEvent.odds).toEqual([]);
+
+    expect(service.populatingPolyfunctionAreaByOdds).toHaveBeenCalled();
+    expect(JSON.stringify(service.smartCode)).toBe(JSON.stringify(mockSmartCode));
+  });
+
+  it('placingOdd() should be add player to placingEvent', () => {
+    const mockPlayer = {
+      number: 1,
+      selectable: true,
+      actived: false,
+      position: 1
+    };
+    const expectedPlayer = {
+      number: 1,
+      selectable: true,
+      actived: true,
+      position: 1
+    }
+    spyOn(service, 'placeOdd');
+
+    service.placingOdd(mockPlayer);
+
+    expect(service.placingEvent.players).toEqual([expectedPlayer]);
+
+    expect(service.placeOdd).toHaveBeenCalled();
+  });
+
+  it('placingOdd() should be remove player from placingEvent', () => {
+    const mockPlayer = {
+      number: 1,
+      selectable: true,
+      actived: false,
+      position: 1
+    };
+    const expectedPlayer = {
+      number: 1,
+      selectable: true,
+      actived: true,
+      position: 1
+    }
+    spyOn(service, 'placeOdd');
+    service.placingEvent.players = [expectedPlayer];
+
+    service.placingOdd(mockPlayer);
+
+    expect(service.placingEvent.players).toEqual([]);
+
+    expect(service.placeOdd).toHaveBeenCalled();
+  });
+
+  it('placeOdd() should be call populatingPolyfunctionArea', async () => {
+    spyOn(service, 'populatingPolyfunctionArea');
+    spyOn(service, 'currentAndSelectedEventTime');
+
+    service.placingEvent.eventNumber = mockFirstEvId;
+    service.eventDetails = new EventDetail(mockProduct.layoutProducts.nextEventItems);
+    productService.product = mockProduct;
+
+    await service.loadEventsFromApi(); // set cacheEvents
+
+    service.placeOdd();
+
+    expect(JSON.stringify(service.smartCode)).toBe(JSON.stringify(mockSmartCode));
+    expect(service.populatingPolyfunctionArea).toHaveBeenCalledWith(mockVirtualBetTournamentExtended.evs.find(ev => ev.id === mockFirstEvId));
+  });
+
+  it('typePlacing() should be unset typePlace and set thirdRowDisabled as false', () => {
+    const mockTypePlace = 0;
+
+    spyOn(service, 'placeOdd');
+
+    service.placingEvent = JSON.parse(JSON.stringify(mockPlacingEvent));
+    service.placingEvent.typePlace = mockTypePlace;
+
+    service.typePlacing(mockTypePlace);
+
+    expect(service.placingEvent.typePlace).not.toBeDefined();
+    expect(service.placingEvent.thirdRowDisabled).toBeFalse();
+    expect(service.placeOdd).toHaveBeenCalled();
+  });
+
+  it('typePlacing() should be set typePlace=0 and set thirdRowDisabled as true', () => {
+    const mockTypePlace = 0;
+
+    spyOn(service, 'placeOdd');
+
+    service.placingEvent = JSON.parse(JSON.stringify(mockPlacingEvent));
+
+    service.typePlacing(mockTypePlace);
+
+    expect(service.placingEvent.typePlace).toBe(mockTypePlace);
+    expect(service.placingEvent.thirdRowDisabled).toBeTrue();
+    expect(service.placeOdd).toHaveBeenCalled();
+  });
+
+  it('typePlacing() should be set typePlace=2 and set thirdRowDisabled as false', () => {
+    const mockTypePlace = 2;
+
+    spyOn(service, 'placeOdd');
+
+    service.placingEvent = JSON.parse(JSON.stringify(mockPlacingEvent));
+
+    service.typePlacing(mockTypePlace);
+
+    expect(service.placingEvent.typePlace).toBe(mockTypePlace);
+    expect(service.placingEvent.thirdRowDisabled).toBeFalse();
+    expect(service.placeOdd).toHaveBeenCalled();
   });
 
 });
