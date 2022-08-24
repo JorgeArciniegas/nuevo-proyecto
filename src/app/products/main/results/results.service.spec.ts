@@ -1,9 +1,9 @@
-import { TestBed } from "@angular/core/testing";
+import { fakeAsync, TestBed, tick } from "@angular/core/testing";
 import { ElysApiService, EventResult, VirtualSportLastResultsRequest, VirtualSportLastResultsResponse } from "@elys/elys-api";
 import * as mockService from "src/app/mock/event-results.mock";
 import { LAYOUT_TYPE } from "src/environments/environment.models";
 import { ProductsService } from "../../products.service";
-import { EventsResultsWithDetails, LastResult } from "./results.model";
+import { EventsResultsWithDetails, LastResult, videoInfoDelay } from "./results.model";
 import { ResultsService } from "./results.service";
 
 const productsService = {
@@ -199,5 +199,25 @@ describe('ResultsService', () => {
     expect(service.setResultByLayoutType).toHaveBeenCalledWith(eventResults.EventResults, '-')
     expect(service.lastResultsSubject.value).toEqual(expectedLastResult);
   });
+
+  it('should set video info timing', fakeAsync(() => {
+    spyOnProperty(service, 'layoutType', 'get').and.returnValue(LAYOUT_TYPE.RACING);
+
+    const spyGetVideoInfo = spyOn<any>(service, 'getVideoInfo');
+    const eventResults: VirtualSportLastResultsResponse = {
+      EventResults: [{
+        EventId: 20995881,
+        EventName: 'Race n. 504',
+        TournamentId: 20990631,
+        TournamentName: 'Tournament DogRacing',
+        Result: '3-4-5'
+      }]
+    };
+
+    service.setVideoInfoTiming(eventResults);
+    tick(videoInfoDelay);
+
+    expect(spyGetVideoInfo).toHaveBeenCalledTimes(1);
+  }));
 
 });
