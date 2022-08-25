@@ -1013,14 +1013,14 @@ export const mockEventDetails: EventDetail = {
 	  {number: 21323017, label: 'Race n. 864', date: new Date('Mon Aug 22 2022 21:23:00 GMT+0300 (Eastern European Summer Time)')}
 	]
 }
-  
+
 export const mockEventList: EventsList = {
-	currentEvent: 0,
-	events: [
-		{eventLabel: 'Race n. 856', eventStart: new Date('Mon Aug 22 2022 21:15:00 GMT+0300 (за східноєвропейським літнім часом)'), eventNumber: 21322905},
-		{eventLabel: 'Race n. 858', eventStart: new Date('Mon Aug 22 2022 21:17:00 GMT+0300 (за східноєвропейським літнім часом)'), eventNumber: 21322907},
-		{eventLabel: 'Race n. 860', eventStart: new Date('Mon Aug 22 2022 21:19:00 GMT+0300 (за східноєвропейським літнім часом)'), eventNumber: 21322909},
-		{eventLabel: 'Race n. 862', eventStart: new Date('Mon Aug 22 2022 21:21:00 GMT+0300 (за східноєвропейським літнім часом)'), eventNumber: 21323015},
-		{eventLabel: 'Race n. 864', eventStart: new Date('Mon Aug 22 2022 21:23:00 GMT+0300 (за східноєвропейським літнім часом)'), eventNumber: 21323017}
-	]
+  currentEvent: 0,
+  events: [
+    {eventLabel: 'Race n. 856', eventStart: new Date('Mon Aug 22 2022 21:15:00 GMT+0300 (за східноєвропейським літнім часом)'), eventNumber: 21322905},
+    {eventLabel: 'Race n. 858', eventStart: new Date('Mon Aug 22 2022 21:17:00 GMT+0300 (за східноєвропейським літнім часом)'), eventNumber: 21322907},
+    {eventLabel: 'Race n. 860', eventStart: new Date('Mon Aug 22 2022 21:19:00 GMT+0300 (за східноєвропейським літнім часом)'), eventNumber: 21322909},
+    {eventLabel: 'Race n. 862', eventStart: new Date('Mon Aug 22 2022 21:21:00 GMT+0300 (за східноєвропейським літнім часом)'), eventNumber: 21323015},
+    {eventLabel: 'Race n. 864', eventStart: new Date('Mon Aug 22 2022 21:23:00 GMT+0300 (за східноєвропейським літнім часом)'), eventNumber: 21323017}
+  ]
 }

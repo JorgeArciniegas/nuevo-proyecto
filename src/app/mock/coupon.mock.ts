@@ -1,6 +1,7 @@
 import { CouponLimitHierarchy, CurrencyCodeResponse } from '@elys/elys-api';
 import { BetCouponOddExtended } from '@elys/elys-coupon';
 import { InternalCoupon } from '../component/coupon/coupon.model';
+import { BetOdd, PolyfunctionalArea } from '../products/products.model';
 
 export const mockCouponLimit: CouponLimitHierarchy[] = [
 	{
@@ -327,4 +328,35 @@ export const mockCouponSoccer: InternalCoupon = {
   UserId: 569673,
   internal_ResponseStatus: 2,
   internal_isReadyToPlace: false
+};
+
+export const mockPolyfunctionalArea: PolyfunctionalArea = {
+  activeAssociationCol: true,
+  activeDistributionTot: true,
+  amount: 1,
+  disableInputCalculator: false,
+  firstTap: true,
+  hasDecimalSeparator: false,
+  odds: [
+    {id: 585265428, label: '1-2-3', odd: 550.57, amount: 1, selected: true},
+    {id: 585265432, label: '1-3-2', odd: 423.1, amount: 1, selected: true},
+    {id: 585265448, label: '2-1-3', odd: 609.28, amount: 1, selected: true},
+    {id: 585265452, label: '2-3-1', odd: 535.75, amount: 1, selected: true},
+    {id: 585265468, label: '3-1-2', odd: 373.97, amount: 1, selected: true},
+    {id: 585265472, label: '3-2-1', odd: 427.91, amount: 1, selected: true}
+  ],
+  oddsCounter: 0,
+  selection: "TNX",
+  shortcut: 12,
+  smartBetCode: 6233,
+  typeSlipCol: 0,
+  value: "123"
+};
+
+export const mockBetOdd: BetOdd = {
+  amount: 1,
+  id: 585288530,
+  label: "Twist",
+  odd: 6.31,
+  selected: true
 };
