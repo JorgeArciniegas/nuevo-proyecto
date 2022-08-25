@@ -10,7 +10,12 @@ import { BtncalcService } from 'src/app/component/btncalc/btncalc.service';
 import { CouponService } from 'src/app/component/coupon/coupon.service';
 import { DestroyCouponService } from 'src/app/component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { UserService } from 'src/app/services/user.service';
-import { BetOdd, CouponConfirmDelete, Market, PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from '../products.model';
+import { 
+  BetOdd, 
+  CouponConfirmDelete, 
+  PolyfunctionalArea, 
+  PolyfunctionalStakeCoupon, 
+  PolyfunctionStakePresetPlayer } from '../products.model';
 import { 
   mockDataGenerateOdds,
   mockDataGenerateOddsRow,
@@ -28,7 +33,7 @@ import {
 import { Products } from 'src/environments/environment.models';
 import { mockProduct, mockProductSoccer } from 'src/app/mock/product.mock';
 import { ElysApiServiceStub } from 'src/app/mock/stubs/elys-api.stub';
-import { EventDetail, EventTime, SmartCodeType, TypeBetSlipColTot } from './main.models';
+import { EventDetail, EventTime, TypeBetSlipColTot } from './main.models';
 import { mockUserId } from 'src/app/mock/user.mock';
 import { ColourGameId } from './colour-game.enum';
 import { ResultsService } from './results/results.service';
@@ -405,12 +410,7 @@ describe('MainService', () => {
       Source: PlaySource.VDeskWeb,
       Item: mockUserId
     };
-    const mockEvents = [
-      // {
-      //   number: 21254738, 
-      //   label: 'Race n. 232', 
-      //   date: new Date('2022-08-18T09:51:00+02:00')
-      // }, 
+    const mockEvents = [ 
       {
         number: 21347600, 
         label: 'Race n. 288', 
