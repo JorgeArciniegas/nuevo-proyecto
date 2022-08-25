@@ -1,12 +1,13 @@
 import { AccountVirtualSport, VirtualProgramTreeBySportResponse, VirtualSportLastResultsResponse } from '@elys/elys-api';
 import { EventsList } from '../products/main/events-list/event-list.model';
-import { EventDetail, VirtualBetTournamentExtended } from "../products/main/main.models";
+import { EventDetail, VirtualBetTournamentExtended } from '../products/main/main.models';
+import { mockEvId, mockVirtualBetEvent } from './virtual-bet-event.mock';
 
 export const mockTsMft: string = 'F2';
 
 export const mockTsMftSoccer: string = 'F6';
 
-export const mockFirstEvId: number = 21254738;
+export const mockFirstEvId: number = mockEvId;
 
 export const mockFirstEvIdSoccer: number = 21270764;
 
@@ -114,21 +115,7 @@ export const mockVirtualBetTournamentExtended: VirtualBetTournamentExtended = {
 	'duration': 120,
 	'mft': mockTsMft,
 	'evs': [
-		{
-			'id': mockFirstEvId,
-			'nm': 'Race n. 232',
-			'mk': [],
-			'sdt': '2022-08-18T09:51:00',
-			'edt': new Date('2022-08-18T09:51:00'),
-			'sdtoffset': new Date('2022-08-18T09:51:00+02:00'),
-			'cdt': 297048009,
-			'tm': [],
-			'smc': 5746,
-			'st': 1,
-			'ehv': false,
-			//'mft': 'F1:F2:F4:',
-			'duration': mockFirstEvDuration
-		},
+		mockVirtualBetEvent,
 		{
 			'id': 21254748,
 			'nm': 'Race n. 234',
