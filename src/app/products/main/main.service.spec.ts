@@ -10,8 +10,12 @@ import { BtncalcService } from 'src/app/component/btncalc/btncalc.service';
 import { CouponService } from 'src/app/component/coupon/coupon.service';
 import { DestroyCouponService } from 'src/app/component/coupon/confirm-destroy-coupon/destroy-coupon.service';
 import { UserService } from 'src/app/services/user.service';
-import { CouponConfirmDelete, PolyfunctionalArea, PolyfunctionalStakeCoupon } from '../products.model';
+import { BetOdd, CouponConfirmDelete, Market, PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from '../products.model';
 import { 
+  mockDataGenerateOdds,
+  mockDataGenerateOddsRow,
+  mockDataMarketIdentifier,
+  mockDataTypeSelection,
   mockEventDetail, 
   mockEventTime, 
   mockPlacingEvent, 
@@ -24,7 +28,7 @@ import {
 import { Products } from 'src/environments/environment.models';
 import { mockProduct, mockProductSoccer } from 'src/app/mock/product.mock';
 import { ElysApiServiceStub } from 'src/app/mock/stubs/elys-api.stub';
-import { EventDetail, EventTime } from './main.models';
+import { EventDetail, EventTime, SmartCodeType, TypeBetSlipColTot } from './main.models';
 import { mockUserId } from 'src/app/mock/user.mock';
 import { ColourGameId } from './colour-game.enum';
 import { ResultsService } from './results/results.service';
@@ -34,10 +38,12 @@ import {
   mockFirstEvDuration, 
   mockFirstEvId, 
   mockFirstEvIdSoccer, 
+  mockTournamentDetails, 
   mockTsMft, 
   mockTsMftSoccer, 
   mockVirtualBetTournamentExtended, 
   mockVirtualProgramTreeBySportResponseSoccer } from 'src/app/mock/sports.mock';
+import { mockVirtualBetEvent } from 'src/app/mock/virtual-bet-event.mock';
 
 class ProductServiceStub {
   productNameSelectedSubscribe: Subject<string>;
@@ -73,7 +79,9 @@ class ProductServiceStub {
 }
 
 class BtncalcServiceStub {
-  
+  get polyfunctionStakePresetPlayer(): PolyfunctionStakePresetPlayer {
+    return new PolyfunctionStakePresetPlayer(0, 1)
+  };
 }
 
 class CouponServiceStub {
@@ -117,12 +125,14 @@ describe('MainService', () => {
   let userService: UserServiceStub;
   let resultService: ResultsServiceStub;
   let elysApiService: ElysApiServiceStub;
+  let btncalcService: BtncalcServiceStub;
   beforeEach(() => {
     productService = new ProductServiceStub();
     couponService = new CouponServiceStub();
     userService = new UserServiceStub();
     resultService = new ResultsServiceStub();
     elysApiService = new ElysApiServiceStub();
+    btncalcService = new BtncalcServiceStub();
     TestBed.configureTestingModule({
         imports: [],
         providers: [
@@ -133,7 +143,7 @@ describe('MainService', () => {
           { provide: ResultsService, useValue: resultService},
           { provide: ElysApiService, useValue: elysApiService},
           { provide: ElysFeedsService, useClass: ElysFeedsServiceStub},
-          { provide: BtncalcService, useClass: BtncalcServiceStub},
+          { provide: BtncalcService, useValue: btncalcService},
           { provide: DestroyCouponService, useClass: DestroyCouponServiceStub},
         ],
     });
@@ -396,11 +406,16 @@ describe('MainService', () => {
       Item: mockUserId
     };
     const mockEvents = [
+      // {
+      //   number: 21254738, 
+      //   label: 'Race n. 232', 
+      //   date: new Date('2022-08-18T09:51:00+02:00')
+      // }, 
       {
-        number: 21254738, 
-        label: 'Race n. 232', 
-        date: new Date('2022-08-18T09:51:00+02:00')
-      }, 
+        number: 21347600, 
+        label: 'Race n. 288', 
+        date: new Date('2022-08-24T10:47:00+02:00')
+      },
       {
         number: 21254748, 
         label: 'Race n. 234', 
@@ -794,6 +809,303 @@ describe('MainService', () => {
     expect(service.placingEvent.typePlace).toBe(mockTypePlace);
     expect(service.placingEvent.thirdRowDisabled).toBeFalse();
     expect(service.placeOdd).toHaveBeenCalled();
+  });
+
+  it('populatingPolyfunctionAreaByOdds() should be emmit areaFuncData to productService.polyfunctionalAreaSubject', () => {
+    const mockMarketId = 10;
+    const mockAmaunt = 1;
+    const mockTypeBetSlipColTot = TypeBetSlipColTot.COL;
+    const mockOddLable = '1';
+    const mockOddVl = 3.86;
+    const mockOddId = 585416362;
+    const mockOdd = {
+      id: mockOddId,
+      nm: mockOddLable,
+      tp: 1,
+      ods: [
+        {
+          vl: mockOddVl,
+          st: mockAmaunt
+        }
+      ],
+      marketId: mockMarketId
+    };
+
+    const mockBetOdd = new BetOdd(mockOddLable, mockOddVl, mockAmaunt, mockOddId)
+    const expectedAreaFuncData = new PolyfunctionalArea();
+
+    expectedAreaFuncData.activeAssociationCol = false;
+    expectedAreaFuncData.activeDistributionTot = false;
+    expectedAreaFuncData.selection = 'V';
+    expectedAreaFuncData.value = '1';
+    expectedAreaFuncData.amount = mockAmaunt;
+    expectedAreaFuncData.typeSlipCol = mockTypeBetSlipColTot;
+    expectedAreaFuncData.odds = [mockBetOdd];
+    expectedAreaFuncData.firstTap = true;
+
+    service.placingEvent.odds = [mockOdd];
+
+    spyOn(productService.polyfunctionalAreaSubject, 'next');
+    spyOnProperty(btncalcService, 'polyfunctionStakePresetPlayer')
+      .and.returnValue(new PolyfunctionStakePresetPlayer(mockTypeBetSlipColTot, mockAmaunt));
+
+    service.populatingPolyfunctionAreaByOdds();
+
+    expect(productService.polyfunctionalAreaSubject.next).toHaveBeenCalledWith(expectedAreaFuncData)
+  });
+
+  it('populatingPolyfunctionArea() should be emmit areaFuncData to productService.polyfunctionalAreaSubject (case 1)', () => {
+    const mockAmaunt = 1;
+    const mockTypeBetSlipColTot = TypeBetSlipColTot.COL;
+    const mockOddLable = 'Samurai';
+    const mockOddVl = 3.72;
+    const mockOddId = 586983464;
+
+    const mockPlayer = {
+      number: 1,
+      selectable: true,
+      actived: true,
+      position: 1
+    };
+
+    const mockBetOdd = new BetOdd(mockOddLable, mockOddVl, mockAmaunt, mockOddId);
+    const expectedAreaFuncData = new PolyfunctionalArea();
+
+    const smartCode = JSON.parse(JSON.stringify(mockSmartCode));
+
+    expectedAreaFuncData.activeAssociationCol = false;
+    expectedAreaFuncData.activeDistributionTot = false;
+    expectedAreaFuncData.selection = 'WINNER';
+    expectedAreaFuncData.value = 1;
+    expectedAreaFuncData.amount = mockAmaunt;
+    expectedAreaFuncData.typeSlipCol = mockTypeBetSlipColTot;
+    expectedAreaFuncData.odds = [mockBetOdd];
+    expectedAreaFuncData.firstTap = true;
+
+    service.placingEvent.players = [mockPlayer];
+    service.smartCode = smartCode;
+
+    spyOn(productService.polyfunctionalAreaSubject, 'next');
+    spyOnProperty(btncalcService, 'polyfunctionStakePresetPlayer')
+      .and.returnValue(new PolyfunctionStakePresetPlayer(mockTypeBetSlipColTot, mockAmaunt));
+
+    service.populatingPolyfunctionArea(mockVirtualBetEvent);
+
+    expect(productService.polyfunctionalAreaSubject.next).toHaveBeenCalledWith(expectedAreaFuncData)
+  });
+
+  it('populatingPolyfunctionArea() should be emmit areaFuncData to productService.polyfunctionalAreaSubject (case 2)', () => {
+    const mockAmaunt = 1;
+    const mockTypeBetSlipColTot = TypeBetSlipColTot.COL;
+    const mockOddLable = '1-2';
+    const mockOddVl = 72.67;
+    const mockOddId = 586983474;
+
+    const mockPlayers = [
+      {
+        number: 1,
+        selectable: true,
+        actived: true,
+        position: 1
+      },
+      {
+        number: 2,
+        selectable: true,
+        actived: true,
+        position: 2
+      }
+    ];
+
+    const mockBetOdd = new BetOdd(mockOddLable, mockOddVl, mockAmaunt, mockOddId);
+    const expectedAreaFuncData = new PolyfunctionalArea();
+
+    const smartCode = JSON.parse(JSON.stringify(mockSmartCode));
+
+    expectedAreaFuncData.activeAssociationCol = false;
+    expectedAreaFuncData.activeDistributionTot = false;
+    expectedAreaFuncData.selection = 'AO';
+    expectedAreaFuncData.value = '1-2';
+    expectedAreaFuncData.amount = mockAmaunt;
+    expectedAreaFuncData.typeSlipCol = mockTypeBetSlipColTot;
+    expectedAreaFuncData.odds = [mockBetOdd];
+    expectedAreaFuncData.firstTap = true;
+
+    service.placingEvent.players = mockPlayers;
+    service.smartCode = smartCode;
+
+    spyOn(productService.polyfunctionalAreaSubject, 'next');
+    spyOnProperty(btncalcService, 'polyfunctionStakePresetPlayer')
+      .and.returnValue(new PolyfunctionStakePresetPlayer(mockTypeBetSlipColTot, mockAmaunt));
+
+    service.populatingPolyfunctionArea(mockVirtualBetEvent);
+
+    expect(productService.polyfunctionalAreaSubject.next).toHaveBeenCalledWith(expectedAreaFuncData)
+  });
+
+  it('extractOdd() should be extract odds (case 1)', () => {
+    const mockAmaunt = 1;
+    const mockOddLable = 'EVEN';
+    const mockOddVl = 1.58;
+    const mockOddId = 586983473;
+
+    const mockBetOdd = new BetOdd(mockOddLable, mockOddVl, mockAmaunt, mockOddId);
+
+    const smartCode = JSON.parse(JSON.stringify(mockSmartCode));
+
+    const mockAreaFuncData = new PolyfunctionalArea();
+    mockAreaFuncData.selection = mockOddLable;
+    mockAreaFuncData.amount = mockAmaunt;
+
+    service.smartCode = smartCode;
+
+    const result = service.extractOdd(mockVirtualBetEvent, mockAreaFuncData);
+
+    expect(result.odds).toEqual([mockBetOdd]);
+  });
+
+  it('extractOdd() should be extract odds (case 2)', () => {
+    const mockAmaunt = 1;
+    const mockFuncDataValue = '1-2';
+    const mockOddLable = 'AO';
+    const mockOddVl = 72.67;
+    const mockOddId = 586983474;
+
+    const mockBetOdd = new BetOdd(mockFuncDataValue, mockOddVl, mockAmaunt, mockOddId);
+
+    const smartCode = JSON.parse(JSON.stringify(mockSmartCode));
+    smartCode.code = mockOddLable;
+
+    const mockAreaFuncData = new PolyfunctionalArea();
+    mockAreaFuncData.selection = mockOddLable;
+    mockAreaFuncData.value = mockFuncDataValue;
+    mockAreaFuncData.amount = mockAmaunt;
+
+    service.smartCode = smartCode;
+
+    const result = service.extractOdd(mockVirtualBetEvent, mockAreaFuncData);
+
+    expect(result.odds).toEqual([mockBetOdd]);
+  });
+
+  it('extractOdd() should be extract odds (case 3)', () => {
+    const mockAmaunt = 1;
+    const mockOddLable = 'WINNER';
+    const mockOddVl = 4.73;
+    const mockOddId = 586983469;
+    const mockPlayerName = 'Lobo';
+
+    const mockBetOdd = new BetOdd(mockPlayerName, mockOddVl, mockAmaunt, mockOddId);
+
+    const smartCode = JSON.parse(JSON.stringify(mockSmartCode));
+
+    const mockAreaFuncData = new PolyfunctionalArea();
+    mockAreaFuncData.selection = mockOddLable;
+    mockAreaFuncData.amount = mockAmaunt;
+
+    service.smartCode = smartCode;
+
+    const result = service.extractOdd(mockVirtualBetEvent, mockAreaFuncData, mockPlayerName);
+
+    expect(result.odds).toEqual([mockBetOdd]);
+  });
+
+  it('extractOdd() should be extract odds (case 4)', () => {
+    const mockAmaunt = 1;
+    const mockFuncDataValue = '1/23';
+    const mockLable = 'VT';
+
+    const mockOddLable1 = '1-2-3';
+    const mockOddLable2 = '1-3-2';
+
+    const mockOddVl1 = 505.52;
+    const mockOddVl2 = 469.31;
+
+    const mockOddId1 = 586983519;
+    const mockOddId2 = 586983523;
+
+    const mockBetOdds = [
+      new BetOdd(mockOddLable1, mockOddVl1, mockAmaunt, mockOddId1),
+      new BetOdd(mockOddLable2, mockOddVl2, mockAmaunt, mockOddId2),
+    ];
+
+    const smartCode = JSON.parse(JSON.stringify(mockSmartCode));
+    smartCode.code = mockLable;
+
+    const mockAreaFuncData = new PolyfunctionalArea();
+    mockAreaFuncData.selection = mockLable;
+    mockAreaFuncData.value = mockFuncDataValue;
+    mockAreaFuncData.amount = mockAmaunt;
+
+    service.smartCode = smartCode;
+
+    const result = service.extractOdd(mockVirtualBetEvent, mockAreaFuncData);
+
+    expect(result.odds).toEqual(mockBetOdds);
+  });
+
+  it('getMarketIdentifier() should be get the market identifier', () => {
+    mockDataMarketIdentifier.forEach(data => {
+      expect(service.getMarketIdentifier(data.marketId)).toBe(data.result);
+    })
+  });
+
+  it('typeSelection() should be return a tp correspondence value for map it on feed', () => {
+    mockDataTypeSelection.forEach(data => {
+      expect(service.typeSelection(data.selection)).toBe(data.result);
+    })
+  });
+
+  it('generateOdds() should be generate all combinations of bets from all the rows selections', () => {
+    mockDataGenerateOdds.forEach(data => {
+      expect(service.generateOdds(
+        data.args.value, 
+        data.args.combinationType, 
+        data.args.ordered, 
+        data.args.withReturn, 
+        data.args.isFirstRowFixed
+      )).toEqual(data.result);
+    })
+  });
+
+  it('generateOddsRow() should be generate all combinations of bets from a single row selections', () => {
+    mockDataGenerateOddsRow.forEach(data => {
+      expect(service.generateOddsRow(
+        data.args.value, 
+        data.args.combinationType, 
+        data.args.ordered, 
+        data.args.withReturn, 
+      )).toEqual(data.result);
+    })
+  });
+
+  it('extractOddFromString() should be extract the selection form the smarcode', () => {
+    expect(service.extractOddFromString('TOX')).toEqual(['T', 'O', 'X']);
+  });
+
+  it('getCurrentEvent() should be extract the current event selected', async () => {
+    spyOn(service, 'currentAndSelectedEventTime');
+    service.eventDetails = new EventDetail(mockProduct.layoutProducts.nextEventItems);
+    service.placingEvent = JSON.parse(JSON.stringify(mockPlacingEvent));
+    productService.product = mockProduct;
+    await service.loadEventsFromApi(); // set cacheEvents
+    
+    await service.getCurrentEvent().then(response => {
+      expect(response).toEqual(mockVirtualBetEvent)
+    })
+  });
+
+  it('getCurrentTournament() should be extract the current tournament selected', async () => {
+    spyOn(service, 'currentAndSelectedEventTime');
+    spyOn(elysApiService.virtual, 'getVirtualTreeV2').and.returnValue(Promise.resolve(mockVirtualProgramTreeBySportResponseSoccer))
+    service.eventDetails = new EventDetail(mockProductSoccer.layoutProducts.nextEventItems);
+    service.placingEvent = JSON.parse(JSON.stringify(mockPlacingEvent));
+    service.placingEvent.eventNumber = mockFirstEvIdSoccer;
+    productService.product = mockProductSoccer;
+    await service.loadEventsFromApi(); // set cacheTournaments
+    
+    await service.getCurrentTournament().then(response => {
+      expect(response).toEqual(mockTournamentDetails)
+    })
   });
 
 });
