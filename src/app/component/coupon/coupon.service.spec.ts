@@ -1,9 +1,9 @@
 import { TestBed } from "@angular/core/testing";
-import { BetCouponGroup, BetCouponOdd, CancelCouponRequest, CouponCategory, CouponType, ElysApiService, FlagAsPaidRequest, StagedCouponDetail } from "@elys/elys-api";
-import { AddColoursNumberRequest, AddNumberRequest, AddOddRequest, AddOddRequestSC, BetCouponExtended, BetCouponOddExtended, ColoursMultiSelection, CouponDataConfig, CouponServiceMessage, CouponServiceMessageType, ElysCouponService, MessageSource, QueueBidResponse } from "@elys/elys-coupon";
-import { Observable, Subject } from "rxjs";
+import { BetCouponGroup, BetCouponOdd, CancelCouponRequest, CouponCategory, CouponType, ElysApiService, FlagAsPaidRequest } from "@elys/elys-api";
+import { AddColoursNumberRequest, AddNumberRequest, AddOddRequest, AddOddRequestSC, BetCouponOddExtended, ColoursMultiSelection, CouponServiceMessage, CouponServiceMessageType, ElysCouponService, MessageSource } from "@elys/elys-coupon";
 import { AppSettings } from "src/app/app.settings";
 import { mockBetOdd, mockCoupon, mockPolyfunctionalArea } from "src/app/mock/coupon.mock";
+import { ElysCouponServiceStub } from "src/app/mock/stubs/elys-coupon-service.stub";
 import { mockUserData } from "src/app/mock/user.mock";
 import { SmartCodeType, TypeBetSlipColTot } from "src/app/products/main/main.models";
 import { BetOdd, CouponConfirmDelete, PolyfunctionalArea } from "src/app/products/products.model";
@@ -23,55 +23,6 @@ class UserServiceStub {
   isLoggedOperator(): boolean {
     return false;
   }
-}
-
-class ElysCouponServiceStub {
-  private couponHasChangedSubject: Subject<BetCouponExtended>;
-  couponHasChanged: Observable<BetCouponExtended>;
-
-  couponServiceMessageSubject: Subject<CouponServiceMessage>;
-  couponServiceMessage: Observable<CouponServiceMessage>;
-
-  private stagedCouponSubject: Subject<StagedCouponDetail[]>;
-  stagedCouponObs: Observable<StagedCouponDetail[]>;
-
-  private couponBidProcessedSubject: Subject<QueueBidResponse[]>;
-  couponBidProcessed: Observable<QueueBidResponse[]>;
-
-  couponConfig: CouponDataConfig;
-
-  constructor() {
-    this.couponHasChangedSubject = new Subject<BetCouponExtended>();
-    this.couponHasChanged = this.couponHasChangedSubject.asObservable();
-
-    this.couponServiceMessageSubject = new Subject<CouponServiceMessage>();
-    this.couponServiceMessage = this.couponServiceMessageSubject.asObservable();
-
-    this.stagedCouponSubject = new Subject<StagedCouponDetail[]>();
-    this.stagedCouponObs = this.stagedCouponSubject.asObservable();
-
-    this.couponBidProcessedSubject = new Subject<QueueBidResponse[]>();
-    this.couponBidProcessed = this.couponBidProcessedSubject.asObservable();
-
-    this.couponConfig = {
-      deviceLayout: 8,
-      userId: undefined
-    }
-  }
-
-  manageOdd = jasmine.createSpy('manageOdd');
-  manageOddSC = jasmine.createSpy('manageOddSC');
-  manageOddLottery = jasmine.createSpy('manageOddLottery');
-  manageOddColours = jasmine.createSpy('manageOddColours');
-  manageColoursMultiOddSC = jasmine.createSpy('manageColoursMultiOddSC');
-
-  placeCouponLottery = jasmine.createSpy('placeCouponLottery');
-  placeCouponColours = jasmine.createSpy('placeCouponColours');
-  placeCoupon = jasmine.createSpy('placeCoupon');
-
-  updateCouponLottery = jasmine.createSpy('updateCouponLottery');
-  updateCouponColours = jasmine.createSpy('updateCouponColours');
-  updateCoupon = jasmine.createSpy('updateCoupon');
 }
 
 class ElysApiCouponServiceStub {
