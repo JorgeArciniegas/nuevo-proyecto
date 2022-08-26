@@ -1,17 +1,19 @@
 import { TestBed } from "@angular/core/testing";
-import { BetCouponGroup, BetCouponOdd, CancelCouponRequest, CouponCategory, CouponType, ElysApiService, FlagAsPaidRequest } from "@elys/elys-api";
+import { BetCouponGroup, BetCouponOdd, CancelCouponRequest, CouponCategory, CouponType, ElysApiService, FlagAsPaidRequest, StagedCouponStatus } from "@elys/elys-api";
 import { AddColoursNumberRequest, AddNumberRequest, AddOddRequest, AddOddRequestSC, BetCouponOddExtended, ColoursMultiSelection, CouponServiceMessage, CouponServiceMessageType, ElysCouponService, MessageSource } from "@elys/elys-coupon";
 import { AppSettings } from "src/app/app.settings";
-import { mockBetOdd, mockCoupon, mockPolyfunctionalArea } from "src/app/mock/coupon.mock";
+import { mockBetOdd, mockCoupon, mockPolyfunctionalArea, mockStagedCoupon } from "src/app/mock/coupon.mock";
 import { ElysCouponServiceStub } from "src/app/mock/stubs/elys-coupon-service.stub";
-import { mockUserData } from "src/app/mock/user.mock";
+import { mockOperatorData, mockUserData } from "src/app/mock/user.mock";
 import { SmartCodeType, TypeBetSlipColTot } from "src/app/products/main/main.models";
 import { BetOdd, CouponConfirmDelete, PolyfunctionalArea } from "src/app/products/products.model";
 import { DataUser } from "src/app/services/user.models";
 import { UserService } from "src/app/services/user.service";
-import { CouponLimit, OddsStakeEdit, StakesDisplay, Error } from "./coupon.model";
+import { LAYOUT_TYPE } from "src/environments/environment.models";
+import { CouponLimit, OddsStakeEdit, StakesDisplay, Error, InternalCoupon } from "./coupon.model";
 import { CouponService } from "./coupon.service";
 import { PrintCouponService } from "./print-coupon/print-coupon.service";
+import { take } from 'rxjs/operators';
 
 class UserServiceStub {
   dataUserDetail: DataUser;
@@ -44,16 +46,19 @@ function cloneData(data: any): any {
 
 describe('CouponService', () => {
   let service: CouponService;
-  let elysCouponService: ElysCouponService;
+  let elysCouponService: ElysCouponServiceStub;
   let elysApiService: ElysApiService;
   let appSettings: AppSettings;
+  let userService: UserService;
 
   beforeEach(() => {
+    elysCouponService = new ElysCouponServiceStub();
+
     TestBed.configureTestingModule({
       providers: [
         CouponService,
         AppSettings,
-        { provide: ElysCouponService, useClass: ElysCouponServiceStub},
+        { provide: ElysCouponService, useValue: elysCouponService},
         { provide: UserService, useClass: UserServiceStub},
         { provide: PrintCouponService, useValue: {}},
         { provide: ElysApiService, useClass: ElysApiServiceStub},
@@ -61,13 +66,76 @@ describe('CouponService', () => {
     });
 
     service = TestBed.inject(CouponService);
-    elysCouponService = TestBed.inject(ElysCouponService);
     elysApiService = TestBed.inject(ElysApiService);
     appSettings = TestBed.inject(AppSettings);
+    userService = TestBed.inject(UserService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('should change coupon type when coupon was changed', () => {
+    // if coupon is not exist
+    let coupon: InternalCoupon = null;
+    spyOn(service, 'resetCoupon');
+
+    elysCouponService.couponHasChangedSubject.next(coupon);
+    expect(service.resetCoupon).toHaveBeenCalled();
+
+    // if Lottery coupon exist and operator is not logged
+    coupon = cloneData(mockCoupon);
+    userService.isLoggedOperator = jasmine.createSpy('isLoggedOperator').and.returnValue(false);
+    spyOn(service, 'calculateAmounts');
+    userService.dataUserDetail = {operatorDetail: cloneData(mockOperatorData)};
+
+    const expectedCoupon: InternalCoupon = {
+      ...cloneData(coupon),
+      internal_isReadyToPlace: false,
+      BettorId: userService.dataUserDetail.operatorDetail.ClientId,
+      ClientBettorId: userService.dataUserDetail.operatorDetail.ClientId,
+      internal_isLottery: true
+    };
+
+    appSettings.products.map(prod => {
+      prod.productSelected = prod.layoutProducts.type === LAYOUT_TYPE.KENO;
+    });
+
+    service.couponResponse
+    .pipe(take(1))
+    .subscribe(result => {
+      expect(result).toEqual(expectedCoupon);
+    });
+
+    elysCouponService.couponHasChangedSubject.next(coupon);
+
+    expect(service.coupon.internal_isLottery).toBeTrue();
+    expect(service.coupon.internal_isReadyToPlace).toBeFalse();
+    expect(service.calculateAmounts).toHaveBeenCalled();
+
+
+    // if Colors coupon exist and operator is not logged
+    coupon = cloneData(mockCoupon);
+    userService.isLoggedOperator = jasmine.createSpy('isLoggedOperator').and.returnValue(true);
+
+    appSettings.products.map(prod => {
+      prod.productSelected = prod.layoutProducts.type === LAYOUT_TYPE.COLOURS;
+    });
+
+    elysCouponService.couponHasChangedSubject.next(coupon);
+    expect(service.coupon.internal_isColours).toBeTrue();
+    expect(service.coupon.internal_isReadyToPlace).toBeFalse();
+
+
+    // if AmericanRoulette coupon exist and operator is not logged
+    coupon = cloneData(mockCoupon);
+    appSettings.products.map(prod => {
+      prod.productSelected = prod.layoutProducts.type === LAYOUT_TYPE.AMERICANROULETTE;
+    });
+
+    elysCouponService.couponHasChangedSubject.next(coupon);
+    expect(service.coupon.internal_isAmericanRoulette).toBeTrue();
+    expect(service.coupon.internal_isReadyToPlace).toBeFalse();
   });
 
   it('should process different types of messages from the coupon', () => {
@@ -106,6 +174,25 @@ describe('CouponService', () => {
 
     service.oddStakeEditSubject.next(oddStakeEdit);
     expect(service.oddStakeEdit).toEqual(oddStakeEdit);
+  });
+
+  it('should check the placement status of the coupon', () => {
+    // staged coupon type is Placed
+    const stagedCoupon = cloneData(mockStagedCoupon);
+    stagedCoupon.CouponStatusId = StagedCouponStatus.Placed;
+
+    elysCouponService.stagedCouponSubject.next([stagedCoupon]);
+
+    expect(service.isWaitingConclusionOperation).toBeFalse();
+    expect(service.isASuccess).toBeTrue();
+
+    // staged coupon type is not Placed
+    stagedCoupon.CouponStatusId = StagedCouponStatus.Canceled;
+    elysCouponService.stagedCouponSubject.next([stagedCoupon]);
+
+    expect(service.isWaitingConclusionOperation).toBeFalse();
+    expect(service.error).toEqual(new Error('StagedCouponStatus.' + StagedCouponStatus[stagedCoupon.CouponStatusId], MessageSource.COUPON_PLACEMENT));
+
   });
 
   it('should add/remove to coupon SC', () => {
@@ -504,8 +591,6 @@ describe('CouponService', () => {
 
     service.checkGroupingToChangeStake(grouping);
   });
-
-  //----
 
   it('should check limits for single bet and show MaxBetWin error', () => {
     service.coupon = cloneData(mockCoupon);

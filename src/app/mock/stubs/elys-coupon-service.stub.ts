@@ -3,19 +3,20 @@ import { BetCouponExtended, CouponDataConfig, CouponServiceMessage, QueueBidResp
 import { Observable, Subject } from "rxjs";
 
 export class ElysCouponServiceStub {
-  private couponHasChangedSubject: Subject<BetCouponExtended>;
+  couponHasChangedSubject: Subject<BetCouponExtended>;
   couponHasChanged: Observable<BetCouponExtended>;
 
   couponServiceMessageSubject: Subject<CouponServiceMessage>;
   couponServiceMessage: Observable<CouponServiceMessage>;
 
-  private stagedCouponSubject: Subject<StagedCouponDetail[]>;
+  stagedCouponSubject: Subject<StagedCouponDetail[]>;
   stagedCouponObs: Observable<StagedCouponDetail[]>;
 
   private couponBidProcessedSubject: Subject<QueueBidResponse[]>;
   couponBidProcessed: Observable<QueueBidResponse[]>;
 
   couponConfig: CouponDataConfig;
+  betCoupon: BetCouponExtended;
 
   constructor() {
     this.couponHasChangedSubject = new Subject<BetCouponExtended>();
