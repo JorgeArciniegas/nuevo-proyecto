@@ -4,20 +4,11 @@ import { UserService } from "../services/user.service";
 import { DialogService } from "./dialog.service";
 import { DialogData } from "./products.model";
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
+import { MatDialogRefStub, MatDialogStub } from "../mock/stubs/mat-dialog.stub";
 
 class UserServiceStub {
   isModalOpen: boolean;
   isBtnCalcEditable: boolean;
-}
-
-class MatDialogStub {
-  open(component: any, config?: any): MatDialogRefStub {
-    return new MatDialogRefStub();
-  }
-}
-
-class MatDialogRefStub {
-  close = jasmine.createSpy('close');
 }
 
 describe('DialogService', () => {
@@ -48,7 +39,6 @@ describe('DialogService', () => {
 
   it('should open dialog', () => {
     const dialogData: DialogData = new DialogData();
-    spyOn(dialog, 'open');
 
     service.openDialog(dialogData);
     expect(dialog.open).toHaveBeenCalledWith(ProductDialogComponent, {
@@ -60,7 +50,7 @@ describe('DialogService', () => {
   });
 
   it('should close dialog', () => {
-    spyOn(dialog, 'open').and.returnValue(dialogRef);
+    dialog.open = jasmine.createSpy('open').and.returnValue(dialogRef);
     service.openDialog(new DialogData());
 
     service.closeDialog();
