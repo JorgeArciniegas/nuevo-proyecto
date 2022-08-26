@@ -1,5 +1,5 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { BehaviorSubject, Observable, Subject, timer } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, timer } from 'rxjs';
 
 import { ElysApiService, PlaySource, VirtualEventCountDownRequest } from '@elys/elys-api';
 import { ElysFeedsService } from '@elys/elys-feeds';
@@ -48,7 +48,9 @@ import {
   mockTsMftSoccer, 
   mockVirtualBetTournamentExtended, 
   mockVirtualProgramTreeBySportResponseSoccer } from 'src/app/mock/sports.mock';
-import { mockVirtualBetEvent } from 'src/app/mock/virtual-bet-event.mock';
+import { mockFirstSlsId, mockVirtualBetEvent } from 'src/app/mock/virtual-bet-event.mock';
+import { InternalCoupon } from 'src/app/component/coupon/coupon.model';
+import { mockCoupon } from 'src/app/mock/coupon.mock';
 
 class ProductServiceStub {
   productNameSelectedSubscribe: Subject<string>;
@@ -91,22 +93,31 @@ class BtncalcServiceStub {
 
 class CouponServiceStub {
   productHasCoupon: CouponConfirmDelete;
+  get coupon(): InternalCoupon {return null};
   constructor(){
     this.productHasCoupon = { checked: false };
   }
   resetCoupon(): void {};
   checkIfCouponIsReadyToPlace(): boolean {
     return false
+  };
+  checkHasCoupon(): void {
+    this.productHasCoupon.checked = true;
   }
 }
 
 class DestroyCouponServiceStub {
-  
+  openDestroyCouponDialog = jasmine.createSpy('openDestroyCouponDialog');
+  dialogRef = new MatDialogRefStub();
 }
 
-class ElysFeedsServiceStub {
-  
+class MatDialogRefStub {
+  afterClosed(): Observable<any> {
+    return of(true);
+  }
 }
+
+class ElysFeedsServiceStub {}
 
 class ResultsServiceStub {
   resultsUtils = new Results();
@@ -131,6 +142,7 @@ describe('MainService', () => {
   let resultService: ResultsServiceStub;
   let elysApiService: ElysApiServiceStub;
   let btncalcService: BtncalcServiceStub;
+  let destroyCouponService: DestroyCouponServiceStub;
   beforeEach(() => {
     productService = new ProductServiceStub();
     couponService = new CouponServiceStub();
@@ -138,6 +150,7 @@ describe('MainService', () => {
     resultService = new ResultsServiceStub();
     elysApiService = new ElysApiServiceStub();
     btncalcService = new BtncalcServiceStub();
+    destroyCouponService = new DestroyCouponServiceStub();
     TestBed.configureTestingModule({
         imports: [],
         providers: [
@@ -149,7 +162,7 @@ describe('MainService', () => {
           { provide: ElysApiService, useValue: elysApiService},
           { provide: ElysFeedsService, useClass: ElysFeedsServiceStub},
           { provide: BtncalcService, useValue: btncalcService},
-          { provide: DestroyCouponService, useClass: DestroyCouponServiceStub},
+          { provide: DestroyCouponService, useValue: destroyCouponService},
         ],
     });
     spyCreatePlayerList = spyOn(MainService.prototype, 'createPlayerList').and.callThrough();
@@ -831,7 +844,8 @@ describe('MainService', () => {
       marketId: mockMarketId
     };
 
-    const mockBetOdd = new BetOdd(mockOddLable, mockOddVl, mockAmaunt, mockOddId)
+    const mockBetOdd = new BetOdd(mockOddLable, mockOddVl, mockAmaunt, mockOddId);
+
     const expectedAreaFuncData = new PolyfunctionalArea();
 
     expectedAreaFuncData.activeAssociationCol = false;
@@ -1106,6 +1120,336 @@ describe('MainService', () => {
     await service.getCurrentTournament().then(response => {
       expect(response).toEqual(mockTournamentDetails)
     })
+  });
+
+  it('placingNumber() should be push selected KenoNumber to placingEvent and call populatingPolyfunctionAreaByLottery', () => {
+    spyOn(service, 'populatingPolyfunctionAreaByLottery');
+    const mockKenoNumber = {
+      number: 10,
+      isSelected: true,
+    }
+    service.placingNumber(mockKenoNumber);
+
+    expect(service.placingEvent.kenoNumbers[0]).toEqual(mockKenoNumber);
+    expect(service.populatingPolyfunctionAreaByLottery).toHaveBeenCalled();
+  });
+
+  it('placingNumber() should be remove selected KenoNumber from placingEvent and call populatingPolyfunctionAreaByLottery', () => {
+    spyOn(service, 'populatingPolyfunctionAreaByLottery');
+    const mockKenoNumber = {
+      number: 10,
+      isSelected: true,
+    };
+    const mockKenoNumbers = [
+      mockKenoNumber
+    ];
+
+    service.placingEvent.kenoNumbers = mockKenoNumbers; //set KenoNumbers
+
+    service.placingNumber(mockKenoNumber);
+    // check if mockKenoNumber exists
+    expect(service.placingEvent.kenoNumbers.findIndex(item => item.number === mockKenoNumber.number)).toBe(-1);
+    expect(service.populatingPolyfunctionAreaByLottery).toHaveBeenCalled();
+  });
+
+  it('populatingPolyfunctionAreaByLottery() should be emmit areaFuncData to productService.polyfunctionalAreaSubject', () => {
+    const mockAmaunt = 1;
+    const mockTypeBetSlipColTot = TypeBetSlipColTot.GROUP;
+    const mockEvId = mockFirstSlsId;
+    const mockKenoNumber = {
+      number: 10,
+      isSelected: true,
+    };
+    const mockKenoNumbers = [
+      mockKenoNumber
+    ];
+    // to do: 
+    // set mockEvId instead of 4th argument(undefined) of new BetOdd when will fixed async call in original function
+    const mockBetOdd = new BetOdd(undefined, 1, mockAmaunt, undefined);
+    const expectedAreaFuncData = new PolyfunctionalArea();
+    expectedAreaFuncData.activeAssociationCol = false;
+    expectedAreaFuncData.activeDistributionTot = false;
+    expectedAreaFuncData.selection = 'V';
+    expectedAreaFuncData.value = 0;
+    expectedAreaFuncData.amount = mockAmaunt;
+    expectedAreaFuncData.typeSlipCol = mockTypeBetSlipColTot;
+    expectedAreaFuncData.odds = [mockBetOdd];
+    expectedAreaFuncData.firstTap = true;
+
+    spyOn(productService.polyfunctionalAreaSubject, 'next');
+    spyOn(service, 'getCurrentEvent').and.returnValue(Promise.resolve(mockVirtualBetEvent));
+    spyOnProperty(btncalcService, 'polyfunctionStakePresetPlayer')
+      .and.returnValue(new PolyfunctionStakePresetPlayer(mockTypeBetSlipColTot, mockAmaunt));
+
+    service.placingEvent.kenoNumbers = mockKenoNumbers; //set KenoNumbers
+
+    service.populatingPolyfunctionAreaByLottery();
+
+    expect(productService.polyfunctionalAreaSubject.next).toHaveBeenCalledWith(expectedAreaFuncData);
+  });
+
+  it('placingColoursNumber() should be push selected number to placingEvent and call populatingPolyfunctionAreaByColours', () => {
+    spyOn(service, 'populatingPolyfunctionAreaByColours');
+    const mockColorNumber = 1;
+
+    service.placingColoursNumber(mockColorNumber);
+
+    expect(service.placingEvent.coloursNumbers[0]).toEqual(mockColorNumber);
+    expect(service.populatingPolyfunctionAreaByColours).toHaveBeenCalled();
+  });
+
+  it('placingColoursNumber() should be removed selected number from placingEvent and call populatingPolyfunctionAreaByColours', () => {
+    spyOn(service, 'populatingPolyfunctionAreaByColours');
+    const mockColorNumber = 1;
+
+    service.placingEvent.coloursNumbers = [mockColorNumber]; //set ColorNumber
+
+    service.placingColoursNumber(mockColorNumber);
+
+    // check if mockColorNumber exists
+    expect(service.placingEvent.coloursNumbers.findIndex(item => item === mockColorNumber)).toBe(-1);
+    expect(service.populatingPolyfunctionAreaByColours).toHaveBeenCalled();
+  });
+
+  it('placingColoursSelection() should set selection to placingEvent and call populatingPolyfunctionAreaByColours', () => {
+    spyOn(service, 'populatingPolyfunctionAreaByColours');
+    const mockColorSelected = 'LO';
+
+    service.placingColoursSelection(mockColorSelected);
+
+    expect(service.placingEvent.coloursSelection).toEqual(mockColorSelected);
+    expect(service.populatingPolyfunctionAreaByColours).toHaveBeenCalled();
+  });
+
+  it('placingColoursSelection() should unset selection from placingEvent and call populatingPolyfunctionAreaByColours', () => {
+    spyOn(service, 'populatingPolyfunctionAreaByColours');
+    const mockColorSelected = 'LO';
+
+    service.placingEvent.coloursSelection = mockColorSelected; //set ColorSelection
+
+    service.placingColoursSelection(mockColorSelected);
+
+    expect(service.placingEvent.coloursSelection).not.toBeDefined();
+    expect(service.populatingPolyfunctionAreaByColours).toHaveBeenCalled();
+  });
+
+  it('placingColoursSelection() should change selection from placingEvent and call populatingPolyfunctionAreaByColours', () => {
+    spyOn(service, 'populatingPolyfunctionAreaByColours');
+    const mockColorSelected = 'LO';
+    const expectedColorSelected = 'HI';
+    service.placingEvent.coloursSelection = mockColorSelected; //set ColorSelection
+
+    service.placingColoursSelection(expectedColorSelected);
+
+    expect(service.placingEvent.coloursSelection).toEqual(expectedColorSelected);
+    expect(service.populatingPolyfunctionAreaByColours).toHaveBeenCalled();
+  });
+
+  it('populatingPolyfunctionAreaByColours() should be emmit areaFuncData to productService.polyfunctionalAreaSubject (case 1)', () => {
+    const mockAmaunt = 1;
+    const mockTypeBetSlipColTot = TypeBetSlipColTot.GROUP;
+    const mockEvId = mockFirstSlsId;
+    const mockColorNumber = 1;
+
+    // to do: 
+    // set mockEvId instead of 4th argument(undefined) of new BetOdd when will fixed async call in original function
+    const mockBetOdd = new BetOdd(undefined, 1, mockAmaunt, undefined);
+    const expectedAreaFuncData = new PolyfunctionalArea();
+    expectedAreaFuncData.activeAssociationCol = false;
+    expectedAreaFuncData.activeDistributionTot = false;
+    expectedAreaFuncData.selection = 'bet49';
+    expectedAreaFuncData.value = 0;
+    expectedAreaFuncData.amount = mockAmaunt;
+    expectedAreaFuncData.typeSlipCol = mockTypeBetSlipColTot;
+    expectedAreaFuncData.odds = [mockBetOdd];
+    expectedAreaFuncData.firstTap = true;
+
+    spyOn(productService.polyfunctionalAreaSubject, 'next');
+    spyOn(service, 'getCurrentEvent').and.returnValue(Promise.resolve(mockVirtualBetEvent));
+    spyOnProperty(btncalcService, 'polyfunctionStakePresetPlayer')
+      .and.returnValue(new PolyfunctionStakePresetPlayer(mockTypeBetSlipColTot, mockAmaunt));
+
+    service.placingEvent.coloursNumbers = [mockColorNumber]; //set ColoursNumbers
+
+    service.populatingPolyfunctionAreaByColours();
+
+    expect(productService.polyfunctionalAreaSubject.next).toHaveBeenCalledWith(expectedAreaFuncData);
+  });
+
+  it('populatingPolyfunctionAreaByColours() should be emmit areaFuncData to productService.polyfunctionalAreaSubject (case 2)', () => {
+    const mockAmaunt = 1;
+    const mockTypeBetSlipColTot = TypeBetSlipColTot.GROUP;
+    const mockEvId = mockFirstSlsId;
+    const mockSelection = 'hilo';
+    const mockColorSelection = 'HI';
+
+    // to do: 
+    // set mockEvId instead of 4th argument(undefined) of new BetOdd when will fixed async call in original function
+    const mockBetOdd = new BetOdd(mockColorSelection, 1, mockAmaunt, undefined);
+    const expectedAreaFuncData = new PolyfunctionalArea();
+    expectedAreaFuncData.activeAssociationCol = false;
+    expectedAreaFuncData.activeDistributionTot = false;
+    expectedAreaFuncData.selection = mockSelection;
+    expectedAreaFuncData.value = 0;
+    expectedAreaFuncData.amount = mockAmaunt;
+    expectedAreaFuncData.typeSlipCol = mockTypeBetSlipColTot;
+    expectedAreaFuncData.odds = [mockBetOdd];
+    expectedAreaFuncData.firstTap = true;
+
+    spyOn(productService.polyfunctionalAreaSubject, 'next');
+    spyOn(service, 'getCurrentEvent').and.returnValue(Promise.resolve(mockVirtualBetEvent));
+    spyOnProperty(btncalcService, 'polyfunctionStakePresetPlayer')
+      .and.returnValue(new PolyfunctionStakePresetPlayer(mockTypeBetSlipColTot, mockAmaunt));
+
+    service.selectedColourGameId = ColourGameId[mockSelection]; //set color game
+    service.placingEvent.coloursSelection = mockColorSelection; //set ColoursSelection
+
+    service.populatingPolyfunctionAreaByColours();
+
+    expect(productService.polyfunctionalAreaSubject.next).toHaveBeenCalledWith(expectedAreaFuncData);
+  });
+
+  it('placingNumberRoulette() should set odd to placingEvent and call populatingPolyfunctionAreaByARoulette', () => {
+    spyOn(service, 'populatingPolyfunctionAreaByARoulette');
+    const mockMarketId = 725;
+    const mockOdd = {
+      id: 590467734,
+      nm: '1',
+      tp: 3,
+      ods: [
+        {
+          vl: 36,
+          st: 1
+        }
+      ],
+    };
+    const mockSmartBet = 27;
+    const mockSmartCode = undefined;
+    const expectedOdd = JSON.parse(JSON.stringify(mockOdd));
+    expectedOdd.marketId = mockMarketId;
+
+    service.placingNumberRoulette(mockMarketId, mockOdd, mockSmartBet, mockSmartCode);
+
+    expect(service.placingEvent.odds).toEqual([expectedOdd]);
+    expect(service.populatingPolyfunctionAreaByARoulette).toHaveBeenCalledWith(mockSmartBet, mockSmartCode);
+  });
+
+  it('placingNumberRoulette() should remove odd from placingEvent and call populatingPolyfunctionAreaByARoulette', () => {
+    spyOn(service, 'populatingPolyfunctionAreaByARoulette');
+    const mockMarketId = 725;
+    const mockOdd = {
+      id: 590467734,
+      nm: '1',
+      tp: 3,
+      ods: [
+        {
+          vl: 36,
+          st: 1
+        }
+      ],
+    };
+    const mockSmartBet = 27;
+    const mockSmartCode = undefined;
+    const expectedOdd = JSON.parse(JSON.stringify(mockOdd));
+    expectedOdd.marketId = mockMarketId;
+
+    service.placingEvent.odds = [expectedOdd];
+
+    service.placingNumberRoulette(mockMarketId, mockOdd, mockSmartBet, mockSmartCode);
+
+    // check if mockOdd exists
+    expect(service.placingEvent.odds.findIndex(item => item.id === mockOdd.id)).toBe(-1);
+    expect(service.populatingPolyfunctionAreaByARoulette).toHaveBeenCalledWith(mockSmartBet, mockSmartCode);
+  });
+
+  it('populatingPolyfunctionAreaByARoulette() should be emmit areaFuncData to productService.polyfunctionalAreaSubject', () => {
+    const mockSmartBet = 27;
+    const mockAmaunt = 1;
+    const mockTypeBetSlipColTot = TypeBetSlipColTot.COL;
+    const mockOddId = 590503279;
+    const mockSelection = 'R';
+    const mockSelectionIdentifier = '10';
+    const mockOddValue = 36;
+    const mockOdd = {
+      id: mockOddId,
+      nm: mockSelectionIdentifier,
+      tp: 12,
+      ods: [
+        {
+          vl: mockOddValue,
+          st: 1
+        }
+      ],
+      marketId: 725
+    };
+    const mockBetOdd = new BetOdd(mockSelectionIdentifier, mockOddValue, mockAmaunt, mockOddId);
+    const expectedAreaFuncData = new PolyfunctionalArea();
+    expectedAreaFuncData.activeAssociationCol = false;
+    expectedAreaFuncData.activeDistributionTot = false;
+    expectedAreaFuncData.selection = mockSelection;
+    expectedAreaFuncData.value = mockSelectionIdentifier;
+    expectedAreaFuncData.amount = mockAmaunt;
+    expectedAreaFuncData.typeSlipCol = mockTypeBetSlipColTot;
+    expectedAreaFuncData.odds = [mockBetOdd];
+    expectedAreaFuncData.firstTap = true;
+
+    spyOn(productService.polyfunctionalAreaSubject, 'next');
+    spyOnProperty(btncalcService, 'polyfunctionStakePresetPlayer')
+      .and.returnValue(new PolyfunctionStakePresetPlayer(mockTypeBetSlipColTot, mockAmaunt));
+
+    service.placingEvent.odds = [mockOdd];
+
+    service.populatingPolyfunctionAreaByARoulette(mockSmartBet);
+
+    expect(productService.polyfunctionalAreaSubject.next).toHaveBeenCalledWith(expectedAreaFuncData);
+  });
+
+  it('fireCurrentEventChange() should be emmit selected to currentEventSubscribe', () => {
+    const mockSelected = 10;
+    spyOn(service.currentEventSubscribe, 'next');
+
+    service.eventDetails = mockEventDetail;
+
+    service.fireCurrentEventChange(mockSelected);
+
+    expect(service.currentEventSubscribe.next).toHaveBeenCalledWith(mockSelected);
+    expect(service.toResetAllSelections).toBeTrue();
+  });
+
+  it('fireCurrentEventChange() should be call openDestroyCouponDialog', () => {
+    const mockSelected = 10;
+    spyOn(service.currentEventSubscribe, 'next');
+    spyOnProperty(couponService, 'coupon').and.returnValue(mockCoupon);
+
+    service.eventDetails = mockEventDetail;
+
+    service.fireCurrentEventChange(mockSelected);
+
+    expect(service.currentEventSubscribe.next).toHaveBeenCalledWith(mockSelected);
+    expect(destroyCouponService.openDestroyCouponDialog).toHaveBeenCalled();
+    expect(service.toResetAllSelections).toBeTrue();
+  });
+
+  it('fireChangeColoursGame() should be set selectedColourGameId and call resetPlayEvent', () => {
+    const mockcolourGameId = ColourGameId.betzero;
+    spyOn(service, 'resetPlayEvent');
+
+    service.fireChangeColoursGame(mockcolourGameId);
+
+    expect(service.selectedColourGameId).toBe(mockcolourGameId);
+    expect(service.resetPlayEvent).toHaveBeenCalled();
+  });
+
+  it('fireChangeColoursGame() should be set selectedColourGameId and call openDestroyCouponDialog', () => {
+    const mockcolourGameId = ColourGameId.betzero;
+    spyOn(service, 'resetPlayEvent');
+    spyOnProperty(couponService, 'coupon').and.returnValue(mockCoupon);
+
+    service.fireChangeColoursGame(mockcolourGameId);
+
+    expect(service.selectedColourGameId).toBe(mockcolourGameId);
+    expect(service.resetPlayEvent).toHaveBeenCalled();
+    expect(destroyCouponService.openDestroyCouponDialog).toHaveBeenCalled();
   });
 
 });

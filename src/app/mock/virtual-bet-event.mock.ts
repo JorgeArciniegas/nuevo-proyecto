@@ -2,6 +2,8 @@ import { VirtualBetEvent } from "@elys/elys-api";
 
 export const mockEvId: number = 21347600;
 
+export const mockFirstSlsId: number = 586983463;
+
 export const mockVirtualBetEvent: VirtualBetEvent = {
   "id": mockEvId,
   "nm": "Race n. 288",
@@ -12,7 +14,7 @@ export const mockVirtualBetEvent: VirtualBetEvent = {
       "tp": 6,
       "sls": [
         {
-          "id": 586983463,
+          "id": mockFirstSlsId,
           "nm": "Lobo",
           "tp": 1,
           "ods": [
