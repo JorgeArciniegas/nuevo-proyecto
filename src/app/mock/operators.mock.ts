@@ -1,4 +1,4 @@
-import { AccountGetListOperatorsResponse, AccountOperator } from '@elys/elys-api';
+import { AccountGetListOperatorsResponse, AccountOperator, ReportsOperatorVolumeResponse } from '@elys/elys-api';
 
 export const mockAccountOperator: AccountOperator = {
   IDClient: 10948,
@@ -146,4 +146,35 @@ export const mockAccountGetListOperatorsResponse: AccountGetListOperatorsRespons
 		}
 	]
 }
+
+export const mockReportsOperatorVolumeResponse: ReportsOperatorVolumeResponse[] = [
+	{
+		IDClient: 10948,
+		Username: 'testalex1',
+		Stake: 6,
+		Voided: 0,
+		Won: 0
+	},
+	{
+		IDClient: 11062,
+		Username: 'testalex2',
+		Stake: 1,
+		Voided: 0,
+		Won: 0
+	},
+	{
+		IDClient: 10872,
+		Username: 'testferro1',
+		Stake: 0,
+		Voided: 0,
+		Won: 0
+	},
+	{
+		IDClient: 10886,
+		Username: 'TestUser',
+		Stake: 2,
+		Voided: 0,
+		Won: 0
+	}
+]
 

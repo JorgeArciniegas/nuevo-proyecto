@@ -9,6 +9,8 @@ import {
   CurrencyCodeRequest, 
   CurrencyCodeResponse, 
   DeleteShopOperatorRequest, 
+  ReportsOperatorVolumeRequest, 
+  ReportsOperatorVolumeResponse, 
   ShopOperatorRequest, 
   TokenDataRequest, 
   TokenDataSuccess, 
@@ -21,7 +23,7 @@ import {
   VirtualSportLastResultsResponse} from "@elys/elys-api";
 import { mockCouponLimit, mockCurrencyCodeResponse } from "../coupon.mock";
 import { mockCountDown, mockVirtualGetRankByEventResponse } from "../mine.mock";
-import { mockAccountGetListOperatorsResponse } from "../operators.mock";
+import { mockAccountGetListOperatorsResponse, mockReportsOperatorVolumeResponse } from "../operators.mock";
 import { 
   mockAccountVirtualSport, 
   mockVirtualProgramTreeBySportResponse, 
@@ -129,4 +131,11 @@ export class ElysApiServiceStub {
       })
     }
   };
+  public reports = {
+    getShopClientsAggregates(request: ReportsOperatorVolumeRequest): Promise<ReportsOperatorVolumeResponse[]> {
+      return new Promise((resolve, reject) => {
+        resolve(mockReportsOperatorVolumeResponse)
+      })
+    }
+  }
 }

@@ -352,7 +352,7 @@ describe('BtncalcService', () => {
 
     service.coloursPushToCoupon(selectionId, outcomeType, outcome);
 
-    console.log("service.polyfunctionalArea", service.polyfunctionalArea)
+    //console.log("service.polyfunctionalArea", service.polyfunctionalArea)
 
     expect(couponService.addToRemoveToCouponColours).toHaveBeenCalledWith(
       selectionId,
