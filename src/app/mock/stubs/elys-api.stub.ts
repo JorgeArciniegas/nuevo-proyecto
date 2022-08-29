@@ -1,5 +1,6 @@
 import { 
   AccountDetails, 
+  AccountGetListOperatorsResponse, 
   AccountOperatorDetails, 
   AccountVirtualSport, 
   AuthenticationShopClientAgentLoginRequest, 
@@ -7,6 +8,8 @@ import {
   CouponLimitHierarchyRequest, 
   CurrencyCodeRequest, 
   CurrencyCodeResponse, 
+  DeleteShopOperatorRequest, 
+  ShopOperatorRequest, 
   TokenDataRequest, 
   TokenDataSuccess, 
   VirtualEventCountDownRequest, 
@@ -18,7 +21,11 @@ import {
   VirtualSportLastResultsResponse} from "@elys/elys-api";
 import { mockCouponLimit, mockCurrencyCodeResponse } from "../coupon.mock";
 import { mockCountDown, mockVirtualGetRankByEventResponse } from "../mine.mock";
-import { mockAccountVirtualSport, mockVirtualProgramTreeBySportResponse, mockVirtualSportLastResultsResponse } from "../sports.mock";
+import { mockAccountGetListOperatorsResponse } from "../operators.mock";
+import { 
+  mockAccountVirtualSport, 
+  mockVirtualProgramTreeBySportResponse, 
+  mockVirtualSportLastResultsResponse } from "../sports.mock";
 import { 
   mockOperatorData, 
   mockPassword, 
@@ -61,7 +68,27 @@ export class ElysApiServiceStub {
           message: 'The user name or password is incorrect'
         })
       })
-    }
+    },
+    getistOfOperators(username?: string): Promise<AccountGetListOperatorsResponse> {
+      return new Promise((resolve, reject) => {
+        resolve(JSON.parse(JSON.stringify(mockAccountGetListOperatorsResponse)))
+      })
+    },
+    createOperator(request: ShopOperatorRequest): Promise<any> {
+      return new Promise((resolve, reject) => {
+        resolve('')
+      })
+    },
+    deleteOperator(deleteOperatorRequest: DeleteShopOperatorRequest): Promise<any> {
+      return new Promise((resolve, reject) => {
+        resolve('')
+      })
+    },
+    updateOperator(request: ShopOperatorRequest): Promise<any> {
+      return new Promise((resolve, reject) => {
+        resolve('')
+      })
+    },
   };
   public coupon = {
     getCouponLimits(request: CouponLimitHierarchyRequest): Promise<CouponLimitHierarchy[]> {
