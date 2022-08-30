@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { ElysApiService } from '@elys/elys-api';
 import { ElysApiServiceStub } from 'src/app/mock/stubs/elys-api.stub';
-import { mockUserData, mockUserId } from 'src/app/mock/user.mock';
+import { RouterServiceStub } from 'src/app/mock/stubs/router.stub';
+import { mockUserData } from 'src/app/mock/user.mock';
 import { DataUser } from 'src/app/services/user.models';
 import { UserService } from 'src/app/services/user.service';
 import { RouterService } from 'src/app/services/utility/router/router.service';
@@ -20,22 +21,6 @@ class UserServiceStub {
 
 class AppSettingsStub {
   products: Products[] = [mockProduct];
-};
-
-class RouterStub {
-  navigateByUrl = jasmine.createSpy('navigateByUrl').and.returnValue(Promise.resolve());
-};
-
-class RouterServiceStub {
-  router: RouterStub;
-
-  constructor() {
-    this.router = new RouterStub();
-  }
-
-  getRouter() {
-    return this.router;
-  }
 };
 
 describe('BetsListService', () => {

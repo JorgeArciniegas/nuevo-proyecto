@@ -3,24 +3,9 @@ import { StagedCouponDetail, SummaryCoupon } from "@elys/elys-api";
 import { ElysCouponService } from "@elys/elys-coupon";
 import { mockSummuryCoupon } from "src/app/mock/coupon.mock";
 import { ElysCouponServiceStub } from "src/app/mock/stubs/elys-coupon-service.stub";
+import { RouterServiceStub } from "src/app/mock/stubs/router.stub";
 import { RouterService } from "src/app/services/utility/router/router.service";
 import { PrintCouponService } from "./print-coupon.service";
-
-class RouterStub {
-  navigate = jasmine.createSpy('navigate').and.returnValue(Promise.resolve());
-}
-
-class RouterServiceStub {
-  router: RouterStub;
-
-  constructor() {
-    this.router = new RouterStub();
-  }
-
-  getRouter() {
-    return this.router;
-  }
-}
 
 function cloneData(data: any): any {
   return JSON.parse(JSON.stringify(data));

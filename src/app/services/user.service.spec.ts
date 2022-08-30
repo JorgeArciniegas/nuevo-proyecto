@@ -1,10 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { timer } from 'rxjs';
 
 import { ElysStorageLibService } from '@elys/elys-storage-lib';
-import { ElysApiService, PlaySource } from '@elys/elys-api';
-import { ElysCouponModule } from '@elys/elys-coupon';
+import { ElysApiService } from '@elys/elys-api';
+import { ElysCouponService } from '@elys/elys-coupon';
 
 import { UserService } from './user.service';
 import { AppSettings } from '../app.settings';
@@ -18,13 +17,14 @@ import {
   mockUserId, 
   mockUsername } from '../mock/user.mock';
 import { mockCouponLimit, mockCurrencyCodeResponse } from '../mock/coupon.mock';
-import { routes } from '../app-routing.module';
 import { RouterService } from './utility/router/router.service';
 import { environment } from 'src/environments/environment';
 import { OperatorData } from './user.models';
 import { TranslateUtilityService } from '../shared/language/translate-utility.service';
 import { ElysStorageLibServiceStub } from '../mock/stubs/elys-storage.stub';
 import { ElysApiServiceStub } from '../mock/stubs/elys-api.stub';
+import { RouterServiceStub } from '../mock/stubs/router.stub';
+import { ElysCouponServiceStub } from '../mock/stubs/elys-coupon-service.stub';
 
 class TranslateUtilityServiceStub {
   changeLanguage(lang: string): void {};
@@ -37,19 +37,19 @@ describe('UserService', () => {
   let service: UserService;
   let storageService: StorageService;
   let api: ElysApiServiceStub;
-  let routerService: RouterService;
+  let routerService: RouterServiceStub;
   let appSettings: AppSettings;
 
   beforeEach(() => {
     api = new ElysApiServiceStub();
+    routerService = new RouterServiceStub()
     TestBed.configureTestingModule({
-        imports: [
-          RouterTestingModule.withRoutes(routes),
-          ElysCouponModule.forRoot({ deviceLayout: PlaySource.VDeskWeb }),
-        ],
+        imports: [],
         providers: [
           AppSettings,
           { provide: ElysApiService, useValue: api},
+          { provide: RouterService, useValue: routerService},
+          { provide: ElysCouponService, useClass: ElysCouponServiceStub},
           { provide: TranslateUtilityService, useClass: TranslateUtilityServiceStub},
           { provide: ElysStorageLibService, useClass: ElysStorageLibServiceStub},
         ],
@@ -167,11 +167,9 @@ describe('UserService', () => {
 
   it('logout() should be navigated to login page', () => {
     service = TestBed.inject(UserService);
-    routerService = TestBed.inject(RouterService);
     appSettings = TestBed.inject(AppSettings);
 
     appSettings.loginInteractive = true;
-    spyOn(routerService.getRouter(), 'navigateByUrl');
 
     service.logout();
 
@@ -182,7 +180,6 @@ describe('UserService', () => {
 
   it('logout() should be call router.callBackToBrand()', () => {
     service = TestBed.inject(UserService);
-    routerService = TestBed.inject(RouterService);
     appSettings = TestBed.inject(AppSettings);
     
     appSettings.loginInteractive = false;

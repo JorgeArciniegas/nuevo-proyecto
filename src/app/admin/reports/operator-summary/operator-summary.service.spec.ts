@@ -7,25 +7,10 @@ import { UserService } from 'src/app/services/user.service';
 import { OperatorSummaryService } from './operator-summary.service';
 import { RouterService } from 'src/app/services/utility/router/router.service';
 import { mockReportsOperatorVolumeResponse } from 'src/app/mock/operators.mock';
+import { RouterServiceStub } from 'src/app/mock/stubs/router.stub';
 
 class UserServiceStub {
   dataUserDetail: DataUser = {userDetail: JSON.parse(JSON.stringify(mockUserData))};
-};
-
-class RouterStub {
-  navigateByUrl = jasmine.createSpy('navigateByUrl').and.returnValue(Promise.resolve());
-};
-
-class RouterServiceStub {
-  router: RouterStub;
-
-  constructor() {
-    this.router = new RouterStub();
-  }
-
-  getRouter() {
-    return this.router;
-  }
 };
 
 describe('OperatorsService', () => {

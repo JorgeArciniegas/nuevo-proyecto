@@ -51,6 +51,7 @@ import {
 import { mockFirstSlsId, mockVirtualBetEvent } from 'src/app/mock/virtual-bet-event.mock';
 import { InternalCoupon } from 'src/app/component/coupon/coupon.model';
 import { mockCoupon } from 'src/app/mock/coupon.mock';
+import { MatDialogRefStub } from 'src/app/mock/stubs/mat-dialog.stub';
 
 class ProductServiceStub {
   productNameSelectedSubscribe: Subject<string>;
@@ -109,12 +110,6 @@ class CouponServiceStub {
 class DestroyCouponServiceStub {
   openDestroyCouponDialog = jasmine.createSpy('openDestroyCouponDialog');
   dialogRef = new MatDialogRefStub();
-}
-
-class MatDialogRefStub {
-  afterClosed(): Observable<any> {
-    return of(true);
-  }
 }
 
 class ElysFeedsServiceStub {}
