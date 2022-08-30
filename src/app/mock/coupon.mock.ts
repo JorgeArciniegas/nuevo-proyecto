@@ -1,4 +1,4 @@
-import { CouponLimitHierarchy, CurrencyCodeResponse, StagedCoupon, StagedCouponDetail, SummaryCoupon } from '@elys/elys-api';
+import { CouponLimitHierarchy, CouponSummaryCouponListResponse, CurrencyCodeResponse, StagedCoupon, StagedCouponDetail, SummaryCoupon } from '@elys/elys-api';
 import { BetCouponOddExtended } from '@elys/elys-coupon';
 import { InternalCoupon } from '../component/coupon/coupon.model';
 import { BetOdd, PolyfunctionalArea } from '../products/products.model';
@@ -511,3 +511,28 @@ export const mockStagedCoupon: StagedCouponDetail = {
   UserType: 0,
   WaitStatus: null
 } as any;
+
+export const mockCouponSummaryCouponListResponse: CouponSummaryCouponListResponse = {
+	SummaryCoupons: [
+		mockSummuryCoupon
+	],
+	TotalPages: 1,
+	TotalStake: 1,
+	TotalStakeGross: 1,
+	TotalWon: 0,
+	TotalLost: 1,
+	TotalCancelledBets: 0,
+	TotalPlacedBets: 0,
+	NumberOfBets: 1,
+	NumberOfWonBets: 0,
+	NumberOfLossBets: 1,
+	NumberOfCancelledBets: 0,
+	NumberOfPlacedBets: 0,
+	WonTotalJackpot: 0,
+	NumberOfClientPaidBets: 0,
+	TotalClientPaidBets: 0,
+	NumberOfRefundableBets: 0,
+	TotalRefundableBets: 0,
+	NumberOfWonOnlyBets: 0,
+	TotalWonOnlyBets: 0
+}

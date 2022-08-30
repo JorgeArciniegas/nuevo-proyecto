@@ -6,6 +6,7 @@ import {
   AuthenticationShopClientAgentLoginRequest, 
   CouponLimitHierarchy, 
   CouponLimitHierarchyRequest, 
+  CouponSummaryCouponListResponse, 
   CurrencyCodeRequest, 
   CurrencyCodeResponse, 
   DeleteShopOperatorRequest, 
@@ -14,6 +15,7 @@ import {
   ShopOperatorRequest, 
   TokenDataRequest, 
   TokenDataSuccess, 
+  VirtualCouponListByAgentRequest, 
   VirtualEventCountDownRequest, 
   VirtualEventCountDownResponse, 
   VirtualGetRankByEventResponse, 
@@ -21,7 +23,7 @@ import {
   VirtualProgramTreeBySportResponse,
   VirtualSportLastResultsRequest,
   VirtualSportLastResultsResponse} from "@elys/elys-api";
-import { mockCouponLimit, mockCurrencyCodeResponse } from "../coupon.mock";
+import { mockCouponLimit, mockCouponSummaryCouponListResponse, mockCurrencyCodeResponse } from "../coupon.mock";
 import { mockCountDown, mockVirtualGetRankByEventResponse } from "../mine.mock";
 import { mockAccountGetListOperatorsResponse, mockReportsOperatorVolumeResponse } from "../operators.mock";
 import { 
@@ -135,6 +137,11 @@ export class ElysApiServiceStub {
     getShopClientsAggregates(request: ReportsOperatorVolumeRequest): Promise<ReportsOperatorVolumeResponse[]> {
       return new Promise((resolve, reject) => {
         resolve(mockReportsOperatorVolumeResponse)
+      })
+    },
+    getVirtualListOfCouponByAgent(request: VirtualCouponListByAgentRequest): Promise<CouponSummaryCouponListResponse> {
+      return new Promise((resolve, reject) => {
+        resolve(mockCouponSummaryCouponListResponse)
       })
     }
   }
