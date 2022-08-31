@@ -10,6 +10,8 @@ import {
   CurrencyCodeRequest,
   CurrencyCodeResponse,
   DeleteShopOperatorRequest,
+  ReportsAccountStatementRequest,
+  ReportsAccountStatementResponse,
   ReportsOperatorVolumeRequest,
   ReportsOperatorVolumeResponse,
   ShopOperatorRequest,
@@ -31,6 +33,7 @@ import {
   mockAccountVirtualSport,
   mockVirtualProgramTreeBySportResponse,
   mockVirtualSportLastResultsResponse } from "../sports.mock";
+import { mockReportsAccountStatementResponse } from "../transaction.mock";
 import {
   mockOperatorData,
   mockPassword,
@@ -150,6 +153,11 @@ export class ElysApiServiceStub {
     getVirtualListOfCouponByAgent(request: VirtualCouponListByAgentRequest): Promise<CouponSummaryCouponListResponse> {
       return new Promise((resolve, reject) => {
         resolve(mockCouponSummaryCouponListResponse)
+      })
+    },
+    getTransactionsHistory(request: ReportsAccountStatementRequest): Promise<ReportsAccountStatementResponse> {
+      return new Promise((resolve, reject) => {
+        resolve(mockReportsAccountStatementResponse)
       })
     }
   }

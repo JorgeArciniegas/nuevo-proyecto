@@ -38,6 +38,11 @@ describe('OperatorsService', () => {
     });
     spyInitLoad = spyOn(OperatorsService.prototype, 'initLoad').and.callThrough();
     service = TestBed.inject(OperatorsService);
+
+    jasmine.clock().install();
+  });
+  afterEach(() => {
+    jasmine.clock().uninstall();
   });
 
   it('should be created', () => {
@@ -64,7 +69,11 @@ describe('OperatorsService', () => {
   });
 
   it('createNewOperator() should be call createOperator with mockOperator', async () => {
+    const fakeDate: Date = new Date('2022-04-25T00:00:00');
     const mockOperatorForm = {username: 'test1', password: '123456a', confirmPassword:'123456a'};
+
+    jasmine.clock().mockDate(fakeDate);
+
     const mockOperator: ShopOperatorRequest = {
       Operator: {
         IDClient: 0,
