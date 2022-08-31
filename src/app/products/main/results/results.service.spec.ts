@@ -1,6 +1,7 @@
 import { fakeAsync, TestBed, tick } from "@angular/core/testing";
-import { ElysApiService, EventResult, VirtualSportLastResultsRequest, VirtualSportLastResultsResponse } from "@elys/elys-api";
+import { ElysApiService, EventResult, VirtualSportLastResultsResponse } from "@elys/elys-api";
 import * as mockService from "src/app/mock/event-results.mock";
+import { ElysApiServiceStub } from "src/app/mock/stubs/elys-api.stub";
 import { LAYOUT_TYPE } from "src/environments/environment.models";
 import { ProductsService } from "../../products.service";
 import { EventsResultsWithDetails, LastResult, videoInfoDelay } from "./results.model";
@@ -12,23 +13,6 @@ const productsService = {
       type: LAYOUT_TYPE.SOCCER,
       resultItems: 0
     }
-  }
-}
-
-class VirtualServiceStub {
-  getLastResult(request: VirtualSportLastResultsRequest): Promise<VirtualSportLastResultsResponse> {
-    const eventResults: VirtualSportLastResultsResponse = {
-      EventResults: mockService.mockEventResults
-    };
-    return new Promise((resolve, reject) => {  resolve(eventResults) });
-  }
-}
-
-class ElysApiServiceStub {
-  virtual: VirtualServiceStub;
-
-  constructor() {
-    this.virtual = new VirtualServiceStub();
   }
 }
 
@@ -140,7 +124,7 @@ describe('ResultsService', () => {
       eventResults: mockService.eventsResultsWithDetailsKeno
     };
 
-    spyOn(elysApi.virtual, 'getLastResult').and.returnValue(new Promise((resolve) => resolve(eventResults)));
+    spyOn(elysApi.virtual, 'getLastResult').and.returnValue(Promise.resolve(eventResults));
     spyOn(service, 'setResultByLayoutType').and.returnValue(mockService.eventsResultsWithDetailsKeno);
 
     spyOnProperty(service, 'layoutType').and.returnValue(layoutType);
@@ -164,7 +148,7 @@ describe('ResultsService', () => {
     };
 
     spyOn(service, 'setVideoInfoTiming');
-    spyOn(elysApi.virtual, 'getLastResult').and.returnValue(new Promise((resolve) => resolve(eventResults)));
+    spyOn(elysApi.virtual, 'getLastResult').and.returnValue(Promise.resolve(eventResults));
     spyOn(service, 'populateSoccerResult').and.returnValue(mockService.eventsResultsWithDetailsSoccer);
 
     spyOnProperty(service, 'layoutType').and.returnValue(layoutType);
@@ -188,7 +172,7 @@ describe('ResultsService', () => {
     };
 
     spyOn(service, 'setVideoInfoTiming');
-    spyOn(elysApi.virtual, 'getLastResult').and.returnValue(new Promise((resolve) => resolve(eventResults)));
+    spyOn(elysApi.virtual, 'getLastResult').and.returnValue(Promise.resolve(eventResults));
     spyOn(service, 'setResultByLayoutType').and.returnValue(mockService.eventsResultsWithDetailsCock);
 
     spyOnProperty(service, 'layoutType').and.returnValue(layoutType);

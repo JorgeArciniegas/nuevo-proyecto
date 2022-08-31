@@ -109,7 +109,9 @@ export class ElysApiServiceStub {
       return new Promise((resolve, reject) => {
         resolve(mockCurrencyCodeResponse)
       })
-    }
+    },
+    cancelCoupon: jasmine.createSpy('cancelCoupon'),
+    flagAsPaidCoupon: jasmine.createSpy('flagAsPaidCoupon')
   };
   public virtual = {
     getAvailablevirtualsports(): Promise<AccountVirtualSport[]> {

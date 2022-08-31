@@ -1,5 +1,6 @@
 import { TestBed } from "@angular/core/testing";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { CouponServiceStub } from "src/app/mock/stubs/coupon-service.stub";
 import { MatDialogRefStub, MatDialogStub } from "src/app/mock/stubs/mat-dialog.stub";
 import { UserService } from "src/app/services/user.service";
 import { CouponService } from "../coupon.service";
@@ -9,10 +10,6 @@ import { DestroyCouponService } from "./destroy-coupon.service";
 class UserServiceStub {
   isModalOpen: boolean;
   isBtnCalcEditable: boolean;
-}
-
-class CouponServiceStub {
-  resetCoupon = jasmine.createSpy('resetCoupon');
 }
 
 describe('DestroyCouponService', () => {

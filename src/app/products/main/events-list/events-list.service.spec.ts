@@ -12,8 +12,12 @@ class MainServiceStub {
 
   constructor() {
     this.currentEventSubscribe = new Subject<number>();
-    this.eventDetails = JSON.parse(JSON.stringify(mockEventDetails));
+    this.eventDetails = cloneData(mockEventDetails);
   }
+}
+
+function cloneData(data: any): any {
+  return JSON.parse(JSON.stringify(data));
 }
 
 describe('EventsListService', () => {
