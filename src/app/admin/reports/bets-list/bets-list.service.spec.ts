@@ -102,7 +102,7 @@ describe('BetsListService', () => {
     expect(service.availableSport).toEqual(expectedAvailableSport)
   });
 
-  it('getAvailableSport() should be decrement request.requestedPage and call getList', () => {
+  it('paginatorSize() should be decrement request.requestedPage and call getList', () => {
     const mockRequestedPage = 2;
 
     spyOn(service, 'getList');
@@ -114,12 +114,12 @@ describe('BetsListService', () => {
     expect(service.getList).toHaveBeenCalled();
   });
 
-  it('getAvailableSport() should be increment request.requestedPage and call getList', () => {
+  it('paginatorSize() should be increment request.requestedPage and call getList', () => {
     const mockRequestedPage = 2;
 
     spyOn(service, 'getList');
     service.request.requestedPage = mockRequestedPage;
-    service.betsCouponList = mockCouponSummaryCouponListResponse;
+    service.betsCouponList = JSON.parse(JSON.stringify(mockCouponSummaryCouponListResponse));
     service.betsCouponList.TotalPages = mockRequestedPage + 1;
 
     service.paginatorSize(true);
