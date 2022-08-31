@@ -14,7 +14,6 @@ function cloneData(data: any): any {
 describe('PrintCouponService', () => {
   let service: PrintCouponService;
   let routerService: RouterService;
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -60,7 +59,7 @@ describe('PrintCouponService', () => {
     service.couponPrint = cloneData(mockSummuryCoupon) as StagedCouponDetail;
 
     spyOn(service, 'checkProduct');
-    spyOn(window, 'print');
+    //spyOn(window, 'print');
 
     service.printWindow();
     // tick(1250) because printWindow function has timer(250) and constructor has timer(1000)

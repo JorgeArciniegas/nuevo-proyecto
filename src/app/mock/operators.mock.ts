@@ -178,3 +178,42 @@ export const mockReportsOperatorVolumeResponse: ReportsOperatorVolumeResponse[] 
 	}
 ]
 
+export const mockOperatorSummary = {
+	operatorVolumes: [
+	  {
+		IDClient: 10948,
+		Username: 'testalex1',
+		Stake: 6,
+		Voided: 0,
+		Won: 0
+	  },
+	  {
+		IDClient: 11062,
+		Username: 'testalex2',
+		Stake: 1,
+		Voided: 0,
+		Won: 0
+	  },
+	  {
+		IDClient: 10872,
+		Username: 'testferro1',
+		Stake: 0,
+		Voided: 0,
+		Won: 0
+	  },
+	  {
+		IDClient: 10886,
+		Username: 'TestUser',
+		Stake: 2,
+		Voided: 0,
+		Won: 0
+	  }
+	],
+	totalStake: 9,
+	totalVoided: 0,
+	totalWon: 0,
+	dateFrom: new Date('2022-07-31T21:00:00.000Z'),
+	dateTo: new Date('2022-08-31T20:59:59.000Z'),
+	dateStamp: new Date('2022-08-31T07:48:56.866Z')
+};
+
