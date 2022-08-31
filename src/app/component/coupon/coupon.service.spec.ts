@@ -14,6 +14,7 @@ import { CouponLimit, OddsStakeEdit, StakesDisplay, Error, InternalCoupon } from
 import { CouponService } from "./coupon.service";
 import { PrintCouponService } from "./print-coupon/print-coupon.service";
 import { take } from 'rxjs/operators';
+import { ElysApiServiceStub } from "src/app/mock/stubs/elys-api.stub";
 
 class UserServiceStub {
   dataUserDetail: DataUser;
@@ -24,19 +25,6 @@ class UserServiceStub {
 
   isLoggedOperator(): boolean {
     return false;
-  }
-}
-
-class ElysApiCouponServiceStub {
-  cancelCoupon(req: CancelCouponRequest) {}
-  flagAsPaidCoupon(req: FlagAsPaidRequest) {}
-}
-
-class ElysApiServiceStub {
-  coupon: CouponService;
-
-  constructor() {
-    this.coupon = new ElysApiCouponServiceStub() as CouponService;
   }
 }
 
@@ -939,9 +927,7 @@ describe('CouponService', () => {
       Product: 'DOG'
     };
 
-    spyOn(elysApiService.coupon, 'flagAsPaidCoupon');
     service.flagAsPaidCoupon(request);
-
     expect(elysApiService.coupon.flagAsPaidCoupon).toHaveBeenCalledWith(request);
   });
 
@@ -954,9 +940,7 @@ describe('CouponService', () => {
       Product: 'DOG'
     };
 
-    spyOn(elysApiService.coupon, 'cancelCoupon');
     service.cancelCoupon(request);
-
     expect(elysApiService.coupon.cancelCoupon).toHaveBeenCalledWith(request);
   });
 

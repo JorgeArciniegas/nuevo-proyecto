@@ -3,37 +3,15 @@ import { DestroyCouponService } from "src/app/component/coupon/confirm-destroy-c
 import { CouponService } from "src/app/component/coupon/coupon.service";
 import { RouterService } from "src/app/services/utility/router/router.service";
 import { ProductsServiceExtra } from "src/app/products/product.service.extra";
-import { CouponConfirmDelete } from "./products.model";
-import { InternalCoupon } from "../component/coupon/coupon.model";
-import { mockCoupon } from "../mock/coupon.mock";
-import { Observable, of, Subject } from "rxjs";
-import { Router } from "@angular/router";
-import { StorageService } from "../services/utility/storage/storage.service";
+import { Subject } from "rxjs";
 import { mockProduct } from "../mock/product.mock";
-
-class CouponServiceStub {
-  coupon: InternalCoupon = mockCoupon;
-  productHasCoupon: CouponConfirmDelete = {
-    productCodeRequest: 'DOG',
-    checked: false
-  };
-
-  checkHasCoupon = jasmine.createSpy('checkHasCoupon');
-}
+import { RouterServiceStub } from "../mock/stubs/router.stub";
+import { MatDialogRefStub } from "../mock/stubs/mat-dialog.stub";
+import { CouponServiceStub } from "../mock/stubs/coupon-service.stub";
 
 class DestroyCouponServiceStub {
   openDestroyCouponDialog = jasmine.createSpy('openDestroyCouponDialog');
   dialogRef = new MatDialogRefStub();
-}
-
-class MatDialogRefStub {
-  afterClosed(): Observable<any> {
-    return of(true);
-  }
-}
-
-class RouterStub {
-  navigate = jasmine.createSpy('navigate');
 }
 
 describe('ProductsServiceExtra', () => {
@@ -47,10 +25,7 @@ describe('ProductsServiceExtra', () => {
       providers: [
         { provide: CouponService, useClass: CouponServiceStub },
         { provide: DestroyCouponService, useClass: DestroyCouponServiceStub },
-        RouterService,
-        Location,
-        { provide: Router, useClass: RouterStub },
-        { provide: StorageService, useValue: {} }
+        { provide: RouterService, useClass: RouterServiceStub }
       ],
     });
 

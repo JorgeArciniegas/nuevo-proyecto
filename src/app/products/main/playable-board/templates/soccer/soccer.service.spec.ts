@@ -1,6 +1,6 @@
 import { fakeAsync, TestBed, tick } from "@angular/core/testing";
 import { CouponService } from "src/app/component/coupon/coupon.service";
-import { AddOddRequestSC, BetCouponExtended, BetCouponOddExtended, ElysCouponService } from "@elys/elys-coupon";
+import { BetCouponExtended, BetCouponOddExtended, ElysCouponService } from "@elys/elys-coupon";
 import { BtncalcService } from "src/app/component/btncalc/btncalc.service";
 import { MainService } from "../../../main.service";
 import { SoccerService } from "./soccer.service";
@@ -11,6 +11,7 @@ import { CouponConfirmDelete } from "src/app/products/products.model";
 import { VirtualBetSelection } from "@elys/elys-api";
 import { mockTournamentDetails } from "src/app/mock/sports.mock";
 import { Observable, Subject } from "rxjs";
+import { ElysCouponServiceStub } from "src/app/mock/stubs/elys-coupon-service.stub";
 
 class CouponServiceStub {
   private couponHasBeenPlacedSub: Subject<boolean>;
@@ -51,20 +52,6 @@ class BtncalcServiceStub {
   tapPlus = jasmine.createSpy('tapPlus');
 }
 
-class ElysCouponServiceStub {
-  private couponHasChangedSubject: Subject<BetCouponExtended>;
-  couponHasChanged: Observable<BetCouponExtended>;
-
-  constructor() {
-    this.couponHasChangedSubject = new Subject<BetCouponExtended>();
-    this.couponHasChanged = this.couponHasChangedSubject.asObservable();
-  }
-
-  manageOdd(req: AddOddRequestSC): void {
-    this.couponHasChangedSubject.next(mockCouponSoccer);
-  }
-}
-
 function cloneData(data: any): any {
   return JSON.parse(JSON.stringify(data));
 }
@@ -74,16 +61,17 @@ describe('SoccerService', () => {
   let mainService: MainService;
   let btnCalcService: BtncalcService;
   let couponService: CouponService;
-  let elysCouponService: ElysCouponService;
+  let elysCouponService: ElysCouponServiceStub;
 
   beforeEach(() => {
+    elysCouponService = new ElysCouponServiceStub();
 
     TestBed.configureTestingModule({
       providers: [
         SoccerService,
         { provide: MainService, useClass: MainServiceStub },
         { provide: BtncalcService, useClass: BtncalcServiceStub },
-        { provide: ElysCouponService, useClass: ElysCouponServiceStub },
+        { provide: ElysCouponService, useValue: elysCouponService },
         { provide: CouponService, useClass: CouponServiceStub }
       ],
     });
@@ -92,7 +80,6 @@ describe('SoccerService', () => {
     mainService = TestBed.inject(MainService);
     btnCalcService = TestBed.inject(BtncalcService);
     couponService = TestBed.inject(CouponService);
-    elysCouponService = TestBed.inject(ElysCouponService);
   });
 
   it('should be created', () => {
@@ -164,7 +151,7 @@ describe('SoccerService', () => {
     expect(service.couponHasBeenPlacedSubscription.closed).toBeFalse();
     expect(match.hasOddsSelected).toBeFalse();
 
-    elysCouponService.manageOdd(null);
+    elysCouponService.couponHasChangedSubject.next(mockCouponSoccer);
     expect(service.couponHasChangedSubscription.closed).toBeFalse();
     expect(service.verifySelectedOdds).toHaveBeenCalled();
   }));

@@ -1,26 +1,27 @@
-import { 
-  AccountDetails, 
-  AccountGetListOperatorsResponse, 
-  AccountOperatorDetails, 
-  AccountVirtualSport, 
-  AuthenticationShopClientAgentLoginRequest, 
-  CouponLimitHierarchy, 
-  CouponLimitHierarchyRequest, 
-  CouponSummaryCouponListResponse, 
-  CurrencyCodeRequest, 
-  CurrencyCodeResponse, 
-  DeleteShopOperatorRequest, 
-  ReportsAccountStatementRequest, 
-  ReportsAccountStatementResponse, 
-  ReportsOperatorVolumeRequest, 
-  ReportsOperatorVolumeResponse, 
-  ShopOperatorRequest, 
-  TokenDataRequest, 
-  TokenDataSuccess, 
-  VirtualCouponListByAgentRequest, 
-  VirtualEventCountDownRequest, 
-  VirtualEventCountDownResponse, 
-  VirtualGetRankByEventResponse, 
+import {
+  AccountDetails,
+  AccountGetListOperatorsResponse,
+  AccountOperatorDetails,
+  AccountVirtualSport,
+  AuthenticationShopClientAgentLoginRequest,
+  CouponLimitHierarchy,
+  CouponLimitHierarchyRequest,
+  CouponSummaryCouponListResponse,
+  CurrencyCodeRequest,
+  CurrencyCodeResponse,
+  DeleteShopOperatorRequest,
+  ReportsAccountStatementRequest,
+  ReportsAccountStatementResponse,
+  ReportsOperatorVolumeRequest,
+  ReportsOperatorVolumeResponse,
+  ShopOperatorRequest,
+  TokenDataRequest,
+  TokenDataSuccess,
+  VBoxConfigurations,
+  VirtualCouponListByAgentRequest,
+  VirtualEventCountDownRequest,
+  VirtualEventCountDownResponse,
+  VirtualGetRankByEventResponse,
   VirtualProgramTreeBySportRequest,
   VirtualProgramTreeBySportResponse,
   VirtualSportLastResultsRequest,
@@ -28,18 +29,19 @@ import {
 import { mockCouponLimit, mockCouponSummaryCouponListResponse, mockCurrencyCodeResponse } from "../coupon.mock";
 import { mockCountDown, mockVirtualGetRankByEventResponse } from "../mine.mock";
 import { mockAccountGetListOperatorsResponse, mockReportsOperatorVolumeResponse } from "../operators.mock";
-import { 
-  mockAccountVirtualSport, 
-  mockVirtualProgramTreeBySportResponse, 
+import {
+  mockAccountVirtualSport,
+  mockVirtualProgramTreeBySportResponse,
   mockVirtualSportLastResultsResponse } from "../sports.mock";
 import { mockReportsAccountStatementResponse } from "../transaction.mock";
-import { 
-  mockOperatorData, 
-  mockPassword, 
-  mockTokenDataSuccess, 
-  mockUserData, 
-  mockUserId, 
+import {
+  mockOperatorData,
+  mockPassword,
+  mockTokenDataSuccess,
+  mockUserData,
+  mockUserId,
   mockUsername } from "../user.mock";
+import { mockVBoxConfigurations } from "../vbox.mock";
 
 export class ElysApiServiceStub {
   public tokenBearer: string;
@@ -107,7 +109,9 @@ export class ElysApiServiceStub {
       return new Promise((resolve, reject) => {
         resolve(mockCurrencyCodeResponse)
       })
-    }
+    },
+    cancelCoupon: jasmine.createSpy('cancelCoupon'),
+    flagAsPaidCoupon: jasmine.createSpy('flagAsPaidCoupon')
   };
   public virtual = {
     getAvailablevirtualsports(): Promise<AccountVirtualSport[]> {
@@ -134,7 +138,13 @@ export class ElysApiServiceStub {
       return new Promise((resolve, reject) => {
         resolve(mockVirtualGetRankByEventResponse)
       })
-    }
+    },
+    getVboxConfiguration(): Promise<VBoxConfigurations> {
+      return new Promise((resolve, reject) => {
+        resolve(mockVBoxConfigurations)
+      });
+    },
+    postVboxConfiguration: jasmine.createSpy('postVboxConfiguration')
   };
   public reports = {
     getShopClientsAggregates(request: ReportsOperatorVolumeRequest): Promise<ReportsOperatorVolumeResponse[]> {

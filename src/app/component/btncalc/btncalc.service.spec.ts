@@ -4,6 +4,7 @@ import { skip } from "rxjs/operators";
 import { AppSettings } from "src/app/app.settings";
 import { mockCoupon, mockPolyfunctionalArea } from "src/app/mock/coupon.mock";
 import { mockProduct } from "src/app/mock/product.mock";
+import { CouponServiceStub } from "src/app/mock/stubs/coupon-service.stub";
 import { mockUserData } from "src/app/mock/user.mock";
 import { SmartCodeType, TypeBetSlipColTot } from "src/app/products/main/main.models";
 import { PolyfunctionalArea, PolyfunctionalStakeCoupon, PolyfunctionStakePresetPlayer } from "src/app/products/products.model";
@@ -13,7 +14,7 @@ import { UserService } from "src/app/services/user.service";
 import { RouterService } from "src/app/services/utility/router/router.service";
 import { TranslateUtilityService } from "src/app/shared/language/translate-utility.service";
 import { LAYOUT_TYPE, Products } from "src/environments/environment.models";
-import { InternalCoupon, OddsStakeEdit } from "../coupon/coupon.model";
+import { OddsStakeEdit } from "../coupon/coupon.model";
 import { CouponService } from "../coupon/coupon.service";
 import { TYPINGTYPE } from "./btncalc.enum";
 import { BtncalcService } from "./btncalc.service";
@@ -67,27 +68,6 @@ class UserServiceStub {
 
   dataUserDetail: DataUser;
   userCurrency: string;
-}
-
-class CouponServiceStub {
-  couponHasBeenPlacedSub: Subject<boolean>;
-  couponHasBeenPlacedObs: Observable<boolean>;
-
-  oddStakeEdit: OddsStakeEdit;
-  coupon: InternalCoupon;
-
-  constructor() {
-    this.couponHasBeenPlacedSub = new Subject<boolean>();
-    this.couponHasBeenPlacedObs = this.couponHasBeenPlacedSub.asObservable();
-  }
-
-  updateCoupon = jasmine.createSpy('updateCoupon');
-  addRemoveToCouponSC = jasmine.createSpy('addRemoveToCouponSC');
-  addRemoveToCoupon = jasmine.createSpy('addRemoveToCoupon');
-  addToRemoveToCouponLottery = jasmine.createSpy('addToRemoveToCouponLottery');
-  addToRemoveToCouponColours = jasmine.createSpy('addToRemoveToCouponColours');
-  multiAddToCouponColours = jasmine.createSpy('multiAddToCouponColours');
-
 }
 
 function cloneData(data: any): any {

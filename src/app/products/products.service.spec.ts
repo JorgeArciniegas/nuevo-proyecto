@@ -1,12 +1,11 @@
 import { TestBed } from "@angular/core/testing";
-import { Router } from "@angular/router";
 import { AppSettings } from "../app.settings";
 import { DestroyCouponService } from "../component/coupon/confirm-destroy-coupon/destroy-coupon.service";
 import { CouponService } from "../component/coupon/coupon.service";
 import { mockProduct } from "../mock/product.mock";
+import { RouterServiceStub } from "../mock/stubs/router.stub";
 import { UserService } from "../services/user.service";
 import { RouterService } from "../services/utility/router/router.service";
-import { StorageService } from "../services/utility/storage/storage.service";
 import { DialogService } from "./dialog.service";
 import { BetDataDialog, DialogData, PolyfunctionalStakeCoupon } from "./products.model";
 import { ProductsService } from "./products.service";
@@ -14,10 +13,6 @@ import { ProductsService } from "./products.service";
 class DialogServiceStub {
   openDialog = jasmine.createSpy('openDialog');
   closeDialog = jasmine.createSpy('closeDialog');
-}
-
-class RouterStub {
-  navigateByUrl = jasmine.createSpy('navigateByUrl');
 }
 
 describe('ProductsService', () => {
@@ -35,10 +30,7 @@ describe('ProductsService', () => {
         { provide: CouponService, useValue: {} },
         { provide: DestroyCouponService, useValue: {} },
         { provide: UserService, useValue: {} },
-        RouterService,
-        Location,
-        { provide: Router, useClass: RouterStub },
-        { provide: StorageService, useValue: {} }
+        { provide: RouterService, useClass: RouterServiceStub }
       ],
     });
 
