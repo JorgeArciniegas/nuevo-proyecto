@@ -12,6 +12,8 @@ import {
   DeleteShopOperatorRequest,
   ReportsAccountStatementRequest,
   ReportsAccountStatementResponse,
+  ReportsCtdAggregatesRequest,
+  ReportsCtdAggregatesResponse,
   ReportsOperatorVolumeRequest,
   ReportsOperatorVolumeResponse,
   ShopOperatorRequest,
@@ -33,6 +35,7 @@ import {
   mockAccountVirtualSport,
   mockVirtualProgramTreeBySportResponse,
   mockVirtualSportLastResultsResponse } from "../sports.mock";
+import { mockReportsCtdAggregatesRequest } from "../statement-virtual.mock";
 import { mockReportsAccountStatementResponse } from "../transaction.mock";
 import {
   mockOperatorData,
@@ -160,6 +163,11 @@ export class ElysApiServiceStub {
     getTransactionsHistory(request: ReportsAccountStatementRequest): Promise<ReportsAccountStatementResponse> {
       return new Promise((resolve, reject) => {
         resolve(mockReportsAccountStatementResponse)
+      })
+    },
+    getCtdAggregates(request: ReportsCtdAggregatesRequest): Promise<ReportsCtdAggregatesResponse[]> {
+      return new Promise((resolve, reject) => {
+        resolve(mockReportsCtdAggregatesRequest)
       })
     }
   }
