@@ -17,10 +17,7 @@ describe('PrintOperatorSummaryService', () => {
     }
     return HTMLElements[ID];
   });
-
-  window.print = jasmine.createSpy('WindowPrint').and.callFake(() => {
-    return true;
-  });
+  window.print = jasmine.createSpy('print');
 
   beforeEach(() => {
     router = new RouterStub();

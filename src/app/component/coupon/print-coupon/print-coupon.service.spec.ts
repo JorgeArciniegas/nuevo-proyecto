@@ -25,6 +25,7 @@ describe('PrintCouponService', () => {
 
     var dummyElement = document.createElement('div');
     document.getElementById = jasmine.createSpy('HTML Element').and.returnValue(dummyElement);
+    window.print = jasmine.createSpy('print');
 
     service = TestBed.inject(PrintCouponService);
     routerService = TestBed.inject(RouterService);
@@ -59,7 +60,6 @@ describe('PrintCouponService', () => {
     service.couponPrint = cloneData(mockSummuryCoupon) as StagedCouponDetail;
 
     spyOn(service, 'checkProduct');
-    //spyOn(window, 'print');
 
     service.printWindow();
     // tick(1250) because printWindow function has timer(250) and constructor has timer(1000)
