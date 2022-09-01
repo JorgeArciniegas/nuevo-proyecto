@@ -8,9 +8,10 @@ import { OperatorSummaryService } from './operator-summary.service';
 import { RouterService } from 'src/app/services/utility/router/router.service';
 import { mockReportsOperatorVolumeResponse } from 'src/app/mock/operators.mock';
 import { RouterServiceStub } from 'src/app/mock/stubs/router.stub';
+import { cloneData } from 'src/app/mock/helpers/clone-mock.helper';
 
 class UserServiceStub {
-  dataUserDetail: DataUser = {userDetail: JSON.parse(JSON.stringify(mockUserData))};
+  dataUserDetail: DataUser = {userDetail: cloneData(mockUserData)};
 };
 
 describe('OperatorsService', () => {
@@ -34,6 +35,12 @@ describe('OperatorsService', () => {
     });
     spyInitResetRequest = spyOn(OperatorSummaryService.prototype, 'initResetRequest').and.callThrough();
     service = TestBed.inject(OperatorSummaryService);
+
+    jasmine.clock().install();
+  });
+
+  afterEach(() => {
+    jasmine.clock().uninstall();
   });
 
   it('should be created', () => {
@@ -42,8 +49,10 @@ describe('OperatorsService', () => {
   });
 
   it('should be get dateFrom', () => {
-    const today = new Date();
-    expect(service.dateFrom).toEqual(new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0));
+    const fakeDate: Date = new Date();
+    jasmine.clock().mockDate(fakeDate);
+    //const today = new Date();
+    expect(service.dateFrom).toEqual(new Date(fakeDate.getFullYear(), fakeDate.getMonth(), fakeDate.getDate(), 0, 0, 0));
   });
 
   it('should be set dateFrom', () => {
@@ -52,8 +61,10 @@ describe('OperatorsService', () => {
   });
 
   it('should be get dateTo', () => {
-    const today = new Date();
-    expect(service.dateTo).toEqual(new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59));
+    const fakeDate: Date = new Date();
+    jasmine.clock().mockDate(fakeDate);
+    //const today = new Date();
+    expect(service.dateTo).toEqual(new Date(fakeDate.getFullYear(), fakeDate.getMonth(), fakeDate.getDate(), 23, 59, 59));
   });
 
   it('should be set dateTo', () => {
@@ -72,6 +83,8 @@ describe('OperatorsService', () => {
   });
 
   it('initResetRequest() should be set reportsOperatorVolumeRequest', () => {
+    const fakeDate: Date = new Date('2022-04-25T10:00:00');
+    jasmine.clock().mockDate(fakeDate);
     const today = new Date();
     const expectedReport = {
       userId: mockUserId,

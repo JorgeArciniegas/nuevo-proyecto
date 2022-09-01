@@ -8,6 +8,7 @@ import { mockProduct } from "../mock/product.mock";
 import { RouterServiceStub } from "../mock/stubs/router.stub";
 import { MatDialogRefStub } from "../mock/stubs/mat-dialog.stub";
 import { CouponServiceStub } from "../mock/stubs/coupon-service.stub";
+import { cloneData } from "../mock/helpers/clone-mock.helper";
 
 class DestroyCouponServiceStub {
   openDestroyCouponDialog = jasmine.createSpy('openDestroyCouponDialog');
@@ -72,7 +73,7 @@ describe('ProductsServiceExtra', () => {
 
   it('should change product when the productCode is equal to the current one', () => {
     const codeProduct: string = 'DOG';
-    service.product = JSON.parse(JSON.stringify(mockProduct));
+    service.product = cloneData(mockProduct);
     service.product.codeProduct = codeProduct;
 
     service.productNameSelectedSubscribe.subscribe(result => {

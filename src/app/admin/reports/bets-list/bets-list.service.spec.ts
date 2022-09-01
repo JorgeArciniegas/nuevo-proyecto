@@ -11,9 +11,10 @@ import { AppSettings } from 'src/app/app.settings';
 import { Products } from 'src/environments/environment.models';
 import { mockProduct } from 'src/app/mock/product.mock';
 import { mockCouponSummaryCouponListResponse } from 'src/app/mock/coupon.mock';
+import { cloneData } from 'src/app/mock/helpers/clone-mock.helper';
 
 class UserServiceStub {
-  dataUserDetail: DataUser = {userDetail: JSON.parse(JSON.stringify(mockUserData))};
+  dataUserDetail: DataUser = {userDetail: cloneData(mockUserData)};
   isLoggedOperator(): boolean {
     return true;
   }
@@ -119,7 +120,7 @@ describe('BetsListService', () => {
 
     spyOn(service, 'getList');
     service.request.requestedPage = mockRequestedPage;
-    service.betsCouponList = JSON.parse(JSON.stringify(mockCouponSummaryCouponListResponse));
+    service.betsCouponList = cloneData(mockCouponSummaryCouponListResponse);
     service.betsCouponList.TotalPages = mockRequestedPage + 1;
 
     service.paginatorSize(true);

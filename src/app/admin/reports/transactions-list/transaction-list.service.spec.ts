@@ -6,6 +6,7 @@ import { RouterService } from 'src/app/services/utility/router/router.service';
 import { TransactionsListService } from './transactions-list.service';
 import { TransactionCategory } from './transactions-list.model';
 import { mockReportsAccountStatementResponse } from 'src/app/mock/transaction.mock';
+import { cloneData } from 'src/app/mock/helpers/clone-mock.helper';
 
 describe('TransactionsListService', () => {
   let service: TransactionsListService;
@@ -67,7 +68,7 @@ describe('TransactionsListService', () => {
 
     spyOn(service, 'getList');
     service.request.requestedPage = mockRequestedPage;
-    service.transactionsList = JSON.parse(JSON.stringify(mockReportsAccountStatementResponse));
+    service.transactionsList = cloneData(mockReportsAccountStatementResponse);
     service.transactionsList.TotalPages = mockRequestedPage + 1;
 
     service.paginatorSize(true);

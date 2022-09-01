@@ -12,6 +12,7 @@ import { VirtualBetSelection } from "@elys/elys-api";
 import { mockTournamentDetails } from "src/app/mock/sports.mock";
 import { Observable, Subject } from "rxjs";
 import { ElysCouponServiceStub } from "src/app/mock/stubs/elys-coupon-service.stub";
+import { cloneData } from "src/app/mock/helpers/clone-mock.helper";
 
 class CouponServiceStub {
   private couponHasBeenPlacedSub: Subject<boolean>;
@@ -50,10 +51,6 @@ class MainServiceStub {
 
 class BtncalcServiceStub {
   tapPlus = jasmine.createSpy('tapPlus');
-}
-
-function cloneData(data: any): any {
-  return JSON.parse(JSON.stringify(data));
 }
 
 describe('SoccerService', () => {

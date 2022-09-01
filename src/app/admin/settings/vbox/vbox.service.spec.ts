@@ -1,5 +1,6 @@
 import { fakeAsync, TestBed, tick } from "@angular/core/testing";
 import { ElysApiService, VBoxConfiguration, VBoxConfigurationRequest, VBoxConfigurations } from "@elys/elys-api";
+import { cloneData } from "src/app/mock/helpers/clone-mock.helper";
 import { ElysApiServiceStub } from "src/app/mock/stubs/elys-api.stub";
 import { mockVBoxConfigurations } from "src/app/mock/vbox.mock";
 import { TranslateUtilityService } from "src/app/shared/language/translate-utility.service";
@@ -8,10 +9,6 @@ import { VboxService } from "./vbox.service";
 
 class TranslateUtilityServiceStub {
   getCurrentLanguage = jasmine.createSpy('getCurrentLanguage').and.returnValue('it');
-}
-
-function cloneData(data: any): any {
-  return JSON.parse(JSON.stringify(data));
 }
 
 describe('VboxService', () => {

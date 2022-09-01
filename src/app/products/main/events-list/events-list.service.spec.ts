@@ -1,5 +1,6 @@
 import { TestBed } from "@angular/core/testing";
 import { Subject } from "rxjs";
+import { cloneData } from "src/app/mock/helpers/clone-mock.helper";
 import { mockEventDetails, mockEventList } from "src/app/mock/sports.mock";
 import { EventDetail } from "../main.models";
 import { MainService } from "../main.service";
@@ -14,10 +15,6 @@ class MainServiceStub {
     this.currentEventSubscribe = new Subject<number>();
     this.eventDetails = cloneData(mockEventDetails);
   }
-}
-
-function cloneData(data: any): any {
-  return JSON.parse(JSON.stringify(data));
 }
 
 describe('EventsListService', () => {
@@ -42,7 +39,7 @@ describe('EventsListService', () => {
 
   it('should get events details list', () => {
     service.eventsDetails = null;
-    const expected: EventsList = JSON.parse(JSON.stringify(mockEventList));
+    const expected: EventsList = cloneData(mockEventList);
 
     service.getEventDetailsList();
 

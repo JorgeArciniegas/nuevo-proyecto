@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { skip } from "rxjs/operators";
 import { AppSettings } from "src/app/app.settings";
 import { mockCoupon, mockPolyfunctionalArea } from "src/app/mock/coupon.mock";
+import { cloneData } from "src/app/mock/helpers/clone-mock.helper";
 import { mockProduct } from "src/app/mock/product.mock";
 import { CouponServiceStub } from "src/app/mock/stubs/coupon-service.stub";
 import { mockUserData } from "src/app/mock/user.mock";
@@ -68,10 +69,6 @@ class UserServiceStub {
 
   dataUserDetail: DataUser;
   userCurrency: string;
-}
-
-function cloneData(data: any): any {
-  return JSON.parse(JSON.stringify(data));
 }
 
 describe('BtncalcService', () => {
@@ -867,7 +864,7 @@ describe('BtncalcService', () => {
 
     couponService.coupon = cloneData(mockCoupon);
     couponService.oddStakeEdit = cloneData(mockOddStakeEdit);
-    couponService.oddStakeEdit.grouping = cloneData(mockCoupon.Groupings);
+    couponService.oddStakeEdit.grouping = cloneData(mockCoupon.Groupings[0]);
 
     productService.product = cloneData(mockProduct);
     productService.product.typeCoupon.acceptMultiStake = false;
@@ -908,7 +905,7 @@ describe('BtncalcService', () => {
 
     couponService.coupon = cloneData(mockCoupon);
     couponService.oddStakeEdit = cloneData(mockOddStakeEdit);
-    couponService.oddStakeEdit.grouping = cloneData(mockCoupon.Groupings);
+    couponService.oddStakeEdit.grouping = cloneData(mockCoupon.Groupings[0]);
 
     productService.product = cloneData(mockProduct);
     productService.product.typeCoupon.acceptMultiStake = false;

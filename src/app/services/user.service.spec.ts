@@ -25,6 +25,7 @@ import { ElysStorageLibServiceStub } from '../mock/stubs/elys-storage.stub';
 import { ElysApiServiceStub } from '../mock/stubs/elys-api.stub';
 import { RouterServiceStub } from '../mock/stubs/router.stub';
 import { ElysCouponServiceStub } from '../mock/stubs/elys-coupon-service.stub';
+import { cloneData } from '../mock/helpers/clone-mock.helper';
 
 class TranslateUtilityServiceStub {
   changeLanguage(lang: string): void {};
@@ -193,7 +194,7 @@ describe('UserService', () => {
   });
 
   it('decreasePlayableBalance() should decrease the played stake from Playable amount', () => {
-    const mockUserDataClone = JSON.parse(JSON.stringify(mockUserData));
+    const mockUserDataClone = cloneData(mockUserData);
     service = TestBed.inject(UserService);
 
     service.dataUserDetail.userDetail = mockUserDataClone;
@@ -204,7 +205,7 @@ describe('UserService', () => {
   });
 
   it('increasePlayableBalance() should increase the played stake from Playable amount', () => {
-    const mockUserDataClone = JSON.parse(JSON.stringify(mockUserData));
+    const mockUserDataClone = cloneData(mockUserData);
     service = TestBed.inject(UserService);
 
     service.dataUserDetail.userDetail = mockUserDataClone;
@@ -274,7 +275,7 @@ describe('UserService', () => {
   });
 
   it('getlimitsData() should be retrieved and set coupon limit', async () => {
-    const mockUserDataClone = JSON.parse(JSON.stringify(mockUserData));
+    const mockUserDataClone = cloneData(mockUserData);
     const operator: OperatorData = {
       ClientId: mockUserId,
       BusinessName: 'AdminName',
@@ -312,7 +313,7 @@ describe('UserService', () => {
   });
 
   it('checkAvailableSportAndSetPresetsAmount() should be set defaultAmount on products from CouponPresetValues', async () => {
-    const mockUserDataClone = JSON.parse(JSON.stringify(mockUserData));
+    const mockUserDataClone = cloneData(mockUserData);
 
     service = TestBed.inject(UserService);
     appSettings = TestBed.inject(AppSettings);
@@ -326,7 +327,7 @@ describe('UserService', () => {
   });
 
   it('checkAvailableSportAndSetPresetsAmount() should be match products result from api to products on the system', async () => {
-    const mockUserDataClone = JSON.parse(JSON.stringify(mockUserData));
+    const mockUserDataClone = cloneData(mockUserData);
 
     service = TestBed.inject(UserService);
     appSettings = TestBed.inject(AppSettings);

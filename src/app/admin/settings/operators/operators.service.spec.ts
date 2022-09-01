@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AccountOperator, ElysApiService, ShopOperatorRequest, UserStatus } from '@elys/elys-api';
+import { cloneData } from 'src/app/mock/helpers/clone-mock.helper';
 import { mockAccountGetListOperatorsResponse, mockAccountOperator } from 'src/app/mock/operators.mock';
 import { ElysApiServiceStub } from 'src/app/mock/stubs/elys-api.stub';
 import { mockUserData, mockUserId } from 'src/app/mock/user.mock';
@@ -9,7 +10,7 @@ import { OperatorsService } from './operators.service';
 
 
 class UserServiceStub {
-  dataUserDetail: DataUser = {userDetail: JSON.parse(JSON.stringify(mockUserData))};
+  dataUserDetail: DataUser = {userDetail: cloneData(mockUserData)};
 };
 
 export function createOperators(quantity: number): AccountOperator[] {
@@ -51,7 +52,7 @@ describe('OperatorsService', () => {
   });
 
   it('getListOfOperators() should be retrieved sorted operators', async () => {
-    const expectedOperators = JSON.parse(JSON.stringify(mockAccountGetListOperatorsResponse)).Operators.sort(
+    const expectedOperators = cloneData(mockAccountGetListOperatorsResponse).Operators.sort(
       (itemA: AccountOperator, itemB: AccountOperator) => {
         if (itemA.SubscriptionDate === itemB.SubscriptionDate) { return 0; }
         return itemA.SubscriptionDate > itemB.SubscriptionDate ? -1 : 1;

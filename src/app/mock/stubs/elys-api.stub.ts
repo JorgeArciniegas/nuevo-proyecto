@@ -29,6 +29,7 @@ import {
   VirtualSportLastResultsRequest,
   VirtualSportLastResultsResponse} from "@elys/elys-api";
 import { mockCouponLimit, mockCouponSummaryCouponListResponse, mockCurrencyCodeResponse } from "../coupon.mock";
+import { cloneData } from "../helpers/clone-mock.helper";
 import { mockCountDown, mockVirtualGetRankByEventResponse } from "../mine.mock";
 import { mockAccountGetListOperatorsResponse, mockReportsOperatorVolumeResponse } from "../operators.mock";
 import {
@@ -83,7 +84,7 @@ export class ElysApiServiceStub {
     },
     getistOfOperators(username?: string): Promise<AccountGetListOperatorsResponse> {
       return new Promise((resolve, reject) => {
-        resolve(JSON.parse(JSON.stringify(mockAccountGetListOperatorsResponse)))
+        resolve(cloneData(mockAccountGetListOperatorsResponse))
       })
     },
     createOperator(request: ShopOperatorRequest): Promise<any> {

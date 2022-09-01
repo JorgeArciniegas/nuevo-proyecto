@@ -15,6 +15,7 @@ import { CouponService } from "./coupon.service";
 import { PrintCouponService } from "./print-coupon/print-coupon.service";
 import { take } from 'rxjs/operators';
 import { ElysApiServiceStub } from "src/app/mock/stubs/elys-api.stub";
+import { cloneData } from "src/app/mock/helpers/clone-mock.helper";
 
 class UserServiceStub {
   dataUserDetail: DataUser;
@@ -26,10 +27,6 @@ class UserServiceStub {
   isLoggedOperator(): boolean {
     return false;
   }
-}
-
-function cloneData(data: any): any {
-  return JSON.parse(JSON.stringify(data));
 }
 
 describe('CouponService', () => {

@@ -1,5 +1,6 @@
 import { fakeAsync, TestBed, tick } from "@angular/core/testing";
 import { ElysApiService, ReportsCtdAggregatesRequest } from "@elys/elys-api";
+import { cloneData } from "src/app/mock/helpers/clone-mock.helper";
 import { mockReportsCtdAggregatesRequest } from "src/app/mock/statement-virtual.mock";
 import { ElysApiServiceStub } from "src/app/mock/stubs/elys-api.stub";
 import { mockUserData } from "src/app/mock/user.mock";
@@ -15,10 +16,6 @@ class UserServiceStub {
 
 class ExcelServiceStub {
   exportAsExcelFile = jasmine.createSpy('exportAsExcelFile');
-}
-
-function cloneData(data: any): any {
-  return JSON.parse(JSON.stringify(data));
 }
 
 describe('StatementVirtualShopService', () => {
@@ -109,8 +106,6 @@ describe('StatementVirtualShopService', () => {
     service.getData();
     tick(100);
 
-    console.log(service.aggregatesData)
-    console.log(aggregatesData)
     expect(service.aggregatesData).toEqual(aggregatesData);
   }));
 

@@ -33,7 +33,7 @@ import {
 import { Products } from 'src/environments/environment.models';
 import { mockProduct, mockProductSoccer } from 'src/app/mock/product.mock';
 import { ElysApiServiceStub } from 'src/app/mock/stubs/elys-api.stub';
-import { EventDetail, EventTime, TypeBetSlipColTot } from './main.models';
+import { EventDetail, EventTime, PlacingEvent, Smartcode, TypeBetSlipColTot, VirtualBetSelectionExtended } from './main.models';
 import { mockUserId } from 'src/app/mock/user.mock';
 import { ColourGameId } from './colour-game.enum';
 import { ResultsService } from './results/results.service';
@@ -52,6 +52,7 @@ import { mockFirstSlsId, mockVirtualBetEvent } from 'src/app/mock/virtual-bet-ev
 import { InternalCoupon } from 'src/app/component/coupon/coupon.model';
 import { mockCoupon } from 'src/app/mock/coupon.mock';
 import { MatDialogRefStub } from 'src/app/mock/stubs/mat-dialog.stub';
+import { cloneData } from 'src/app/mock/helpers/clone-mock.helper';
 
 class ProductServiceStub {
   productNameSelectedSubscribe: Subject<string>;
@@ -196,7 +197,7 @@ describe('MainService', () => {
     spyOn(couponService, 'resetCoupon');
     const spyremainingEventTime = spyOn(service, 'remainingEventTime').and.returnValue(Promise.resolve(mockEventTime));
 
-    service.eventDetails = JSON.parse(JSON.stringify(mockEventDetail));
+    service.eventDetails = cloneData(mockEventDetail);
 
     service.currentEventSubscribe.next(mockEventIndex);
 
@@ -517,7 +518,7 @@ describe('MainService', () => {
 
     service.initCurrentEvent = true; //case 1
 
-    service.eventDetails = JSON.parse(JSON.stringify(mockEventDetail));
+    service.eventDetails = cloneData(mockEventDetail);
     service.eventDetails.currentEvent = mockCurrentEvent;
     service.currentAndSelectedEventTime();
 
@@ -540,7 +541,7 @@ describe('MainService', () => {
 
     service.initCurrentEvent = false; //case 2
 
-    service.eventDetails = JSON.parse(JSON.stringify(mockEventDetail));
+    service.eventDetails = cloneData(mockEventDetail);
     service.eventDetails.currentEvent = mockCurrentEvent;
     service.currentAndSelectedEventTime();
 
@@ -559,7 +560,7 @@ describe('MainService', () => {
 
     spyOn(service.currentEventSubscribe, 'next');
 
-    service.eventDetails = JSON.parse(JSON.stringify(mockEventDetail));
+    service.eventDetails = cloneData(mockEventDetail);
     service.eventDetails.currentEvent = mockCurrentEvent;
     service.currentAndSelectedEventTime();
 
@@ -612,7 +613,7 @@ describe('MainService', () => {
     spyOn(service, 'clearPlayerListEvents');
     spyOn(productService.polyfunctionalAreaSubject, 'next');
     spyOn(productService.polyfunctionalStakeCouponSubject, 'next');
-    service.eventDetails = JSON.parse(JSON.stringify(mockEventDetail));
+    service.eventDetails = cloneData(mockEventDetail);
     productService.product = mockProduct;
 
     service.resetPlayEvent();
@@ -781,7 +782,7 @@ describe('MainService', () => {
 
     spyOn(service, 'placeOdd');
 
-    service.placingEvent = JSON.parse(JSON.stringify(mockPlacingEvent));
+    service.placingEvent = cloneData(mockPlacingEvent) as undefined as PlacingEvent;
     service.placingEvent.typePlace = mockTypePlace;
 
     service.typePlacing(mockTypePlace);
@@ -796,7 +797,7 @@ describe('MainService', () => {
 
     spyOn(service, 'placeOdd');
 
-    service.placingEvent = JSON.parse(JSON.stringify(mockPlacingEvent));
+    service.placingEvent = cloneData(mockPlacingEvent) as undefined as PlacingEvent;
 
     service.typePlacing(mockTypePlace);
 
@@ -810,7 +811,7 @@ describe('MainService', () => {
 
     spyOn(service, 'placeOdd');
 
-    service.placingEvent = JSON.parse(JSON.stringify(mockPlacingEvent));
+    service.placingEvent = cloneData(mockPlacingEvent) as undefined as PlacingEvent;
 
     service.typePlacing(mockTypePlace);
 
@@ -880,7 +881,7 @@ describe('MainService', () => {
     const mockBetOdd = new BetOdd(mockOddLable, mockOddVl, mockAmaunt, mockOddId);
     const expectedAreaFuncData = new PolyfunctionalArea();
 
-    const smartCode = JSON.parse(JSON.stringify(mockSmartCode));
+    const smartCode = cloneData(mockSmartCode) as undefined as Smartcode;
 
     expectedAreaFuncData.activeAssociationCol = false;
     expectedAreaFuncData.activeDistributionTot = false;
@@ -928,7 +929,7 @@ describe('MainService', () => {
     const mockBetOdd = new BetOdd(mockOddLable, mockOddVl, mockAmaunt, mockOddId);
     const expectedAreaFuncData = new PolyfunctionalArea();
 
-    const smartCode = JSON.parse(JSON.stringify(mockSmartCode));
+    const smartCode = cloneData(mockSmartCode) as undefined as Smartcode;
 
     expectedAreaFuncData.activeAssociationCol = false;
     expectedAreaFuncData.activeDistributionTot = false;
@@ -959,7 +960,7 @@ describe('MainService', () => {
 
     const mockBetOdd = new BetOdd(mockOddLable, mockOddVl, mockAmaunt, mockOddId);
 
-    const smartCode = JSON.parse(JSON.stringify(mockSmartCode));
+    const smartCode = cloneData(mockSmartCode) as undefined as Smartcode;
 
     const mockAreaFuncData = new PolyfunctionalArea();
     mockAreaFuncData.selection = mockOddLable;
@@ -981,7 +982,7 @@ describe('MainService', () => {
 
     const mockBetOdd = new BetOdd(mockFuncDataValue, mockOddVl, mockAmaunt, mockOddId);
 
-    const smartCode = JSON.parse(JSON.stringify(mockSmartCode));
+    const smartCode = cloneData(mockSmartCode) as undefined as Smartcode;
     smartCode.code = mockOddLable;
 
     const mockAreaFuncData = new PolyfunctionalArea();
@@ -1005,7 +1006,7 @@ describe('MainService', () => {
 
     const mockBetOdd = new BetOdd(mockPlayerName, mockOddVl, mockAmaunt, mockOddId);
 
-    const smartCode = JSON.parse(JSON.stringify(mockSmartCode));
+    const smartCode = cloneData(mockSmartCode) as undefined as Smartcode;
 
     const mockAreaFuncData = new PolyfunctionalArea();
     mockAreaFuncData.selection = mockOddLable;
@@ -1037,7 +1038,7 @@ describe('MainService', () => {
       new BetOdd(mockOddLable2, mockOddVl2, mockAmaunt, mockOddId2),
     ];
 
-    const smartCode = JSON.parse(JSON.stringify(mockSmartCode));
+    const smartCode = cloneData(mockSmartCode) as undefined as Smartcode;
     smartCode.code = mockLable;
 
     const mockAreaFuncData = new PolyfunctionalArea();
@@ -1094,7 +1095,7 @@ describe('MainService', () => {
   it('getCurrentEvent() should be extract the current event selected', async () => {
     spyOn(service, 'currentAndSelectedEventTime');
     service.eventDetails = new EventDetail(mockProduct.layoutProducts.nextEventItems);
-    service.placingEvent = JSON.parse(JSON.stringify(mockPlacingEvent));
+    service.placingEvent = cloneData(mockPlacingEvent) as undefined as PlacingEvent;
     productService.product = mockProduct;
     await service.loadEventsFromApi(); // set cacheEvents
     
@@ -1107,7 +1108,7 @@ describe('MainService', () => {
     spyOn(service, 'currentAndSelectedEventTime');
     spyOn(elysApiService.virtual, 'getVirtualTreeV2').and.returnValue(Promise.resolve(mockVirtualProgramTreeBySportResponseSoccer))
     service.eventDetails = new EventDetail(mockProductSoccer.layoutProducts.nextEventItems);
-    service.placingEvent = JSON.parse(JSON.stringify(mockPlacingEvent));
+    service.placingEvent = cloneData(mockPlacingEvent) as undefined as PlacingEvent;
     service.placingEvent.eventNumber = mockFirstEvIdSoccer;
     productService.product = mockProductSoccer;
     await service.loadEventsFromApi(); // set cacheTournaments
@@ -1320,7 +1321,7 @@ describe('MainService', () => {
     };
     const mockSmartBet = 27;
     const mockSmartCode = undefined;
-    const expectedOdd = JSON.parse(JSON.stringify(mockOdd));
+    const expectedOdd = cloneData(mockOdd) as undefined as VirtualBetSelectionExtended;
     expectedOdd.marketId = mockMarketId;
 
     service.placingNumberRoulette(mockMarketId, mockOdd, mockSmartBet, mockSmartCode);
@@ -1345,7 +1346,7 @@ describe('MainService', () => {
     };
     const mockSmartBet = 27;
     const mockSmartCode = undefined;
-    const expectedOdd = JSON.parse(JSON.stringify(mockOdd));
+    const expectedOdd = cloneData(mockOdd) as undefined as VirtualBetSelectionExtended;
     expectedOdd.marketId = mockMarketId;
 
     service.placingEvent.odds = [expectedOdd];

@@ -2,6 +2,7 @@ import { Observable, Subject } from "rxjs";
 import { InternalCoupon, OddsStakeEdit } from "src/app/component/coupon/coupon.model";
 import { CouponConfirmDelete } from "src/app/products/products.model";
 import { mockCoupon } from "../coupon.mock";
+import { cloneData } from "../helpers/clone-mock.helper";
 
 export class CouponServiceStub {
   couponHasBeenPlacedSub: Subject<boolean>;
@@ -12,7 +13,7 @@ export class CouponServiceStub {
   productHasCoupon: CouponConfirmDelete;
 
   constructor() {
-    this.coupon = JSON.parse(JSON.stringify(mockCoupon));
+    this.coupon = cloneData(mockCoupon);
     this.productHasCoupon = {
       productCodeRequest: 'DOG',
       checked: false
