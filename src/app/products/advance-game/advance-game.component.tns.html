@@ -1,7 +1,0 @@
-<FlexboxLayout class="advance-game" flexDirection="row">
-  <Button *ngFor="let btn of buttons" flexGrow="1" text="{{ btn.label | translate }}" class="button btn-advance-game"
-    (tap)="setTypePlacing(btn.code)"
-    [isEnabled]="!timeBlocked && !userService.isModalOpen && (layoutProducts?.type === layoutType.RACING)" [ngClass]="{'actived' : service.placingEvent.typePlace === btn.code,
-    'inactive': service.placingEvent.typePlace !== undefined && service.placingEvent.typePlace !== btn.code,
-    'disabled': layoutProducts?.type !== layoutType.RACING}"></Button>
-</FlexboxLayout>

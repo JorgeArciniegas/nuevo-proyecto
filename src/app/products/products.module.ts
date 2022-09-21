@@ -13,21 +13,20 @@ import { ProductsComponent } from './products.component';
 
 
 @NgModule({
-  declarations: [
-    ProductsComponent,
-    WidgetComponent,
-    BtncalcComponent,
-    DisplayComponent,
-    AdvanceGameComponent,
-    CouponComponent
-  ],
-  imports: [
-    CommonModule,
-    ProductsRoutingModule,
-    SharedModule
-  ],
-  providers: [MainService, CouponDialogService],
-  entryComponents: [WidgetComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    declarations: [
+        ProductsComponent,
+        WidgetComponent,
+        BtncalcComponent,
+        DisplayComponent,
+        AdvanceGameComponent,
+        CouponComponent
+    ],
+    imports: [
+        CommonModule,
+        ProductsRoutingModule,
+        SharedModule
+    ],
+    providers: [MainService, CouponDialogService],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ProductsModule { }

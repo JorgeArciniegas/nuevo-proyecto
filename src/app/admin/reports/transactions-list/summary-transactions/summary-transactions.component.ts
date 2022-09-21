@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TransactionCategory } from '../transactions-list.model';
 import { TransactionsListService } from '../transactions-list.service';
 import { UserService } from '../../../../services/user.service';
-import { booleanConverter } from '@nativescript/core';
+
 
 @Component({
   selector: 'app-summary-transactions',

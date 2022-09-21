@@ -662,6 +662,18 @@
   "PRINT_COUPON.TRANSMISSION_MESSAGE": "Mandato trasmesso via Internet e accettato ",
   "PRODUCT_FILTER": "Filtro prodotto",
   "PROFIT": "Profit",
+  "PROMPT_INSTALLATION": {
+    "BROWSER_MESSAGE": "Nuova versione disponibile, vuoi caricarla?",
+    "BTN_LABEL": "Installa",
+    "DESCRIPTION_ANDROID": "Per aggiungere l'applicazione alla Home del tuo dispositivo, fai click sull'icona sottostante e successivamente fai click sul bottone 'Installa'",
+    "IOS": {
+      "DESCRIPTION": "Installa l'APP sul tuo telefono con tre semplici passaggi!",
+      "FIRST_STEP": "1. Premi il pulsante \"condividi\"",
+      "SECOND_STEP": "2. Seleziona la voce \"Aggiungi alla schermata Home\"",
+      "THIRD_STEP": "3. Premi il pulsante <strong>Aggiungi</strong>"
+    },
+    "TITLE": "Aggiungi alla home"
+  },
   "R": "R",
   "RAINBOW": "Rainbow",
   "RANKING.CONDITION": "Forma",

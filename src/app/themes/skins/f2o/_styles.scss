@@ -157,12 +157,12 @@ $gradient-dark2: #000000;
 }
 
 %logo-with-text {
-	background: url("/app/themes/skins/f2o/image/Logo.png") center center no-repeat;
+	background: url("/assets/theme/image/Logo.png") center center no-repeat;
 	background-size: contain;
 }
 
 %logo-with-text-mobile {
-	background: url("~/app/themes/skins/f2o/image/Logo.png") center center no-repeat;
+	background: url("~/assets/theme/image/Logo.png") center center no-repeat;
 	background-size: contain;
 }
 
@@ -626,19 +626,19 @@ $gradient-dark2: #000000;
 }
 //ADMIN (MAIN MENU)
 %admin {
-	background: url("/app/themes/skins/f2o/image/Bg-login-vdesk.jpg") center center no-repeat;
+	background: url("/assets/theme/image/Bg-login-vdesk.jpg") center center no-repeat;
 }
 %admin-mobile {
-	background: url("~/app/themes/skins/f2o/image/Bg-login-vdesk.jpg") center center no-repeat;
+	background: url("~/assets/theme/image/Bg-login-vdesk.jpg") center center no-repeat;
 	background-size: cover;
 }
 // LOGIN
 %login {
-	background: url("/app/themes/skins/f2o/image/Bg-login-vdesk.jpg") center center no-repeat;
+	background: url("/assets/theme/image/Bg-login-vdesk.jpg") center center no-repeat;
 }
 
 %login-mobile {
-	background: url("~/app/themes/skins/f2o/image/Bg-login-vdesk.jpg") center center no-repeat;
+	background: url("~/assets/theme/image/Bg-login-vdesk.jpg") center center no-repeat;
 	background-size: cover;
 }
 
@@ -815,11 +815,11 @@ $gradient-dark2: #000000;
 
 // PRINT TEMPLATE
 %logo-header {
-	content: url("/app/themes/skins/f2o/image/Logo-coupon.png");
+	content: url("/assets/theme/image/Logo-coupon.png");
 }
 
 %logo-header-mobile {
-	background: url("~/app/themes/skins/f2o/image/Logo-coupon.png") center center no-repeat;
+	background: url("~/assets/theme/image/Logo-coupon.png") center center no-repeat;
 	background-size: contain;
 }
 

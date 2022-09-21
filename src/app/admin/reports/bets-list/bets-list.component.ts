@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 import { AccountOperator, AccountVirtualSport } from '@elys/elys-api';
 import { fromEvent } from 'rxjs';
+import { WindowSizeService } from 'src/app/services/utility/window-size/window-size.service';
 import { TranslateUtilityService } from '../../../shared/language/translate-utility.service';
 import { OperatorsService } from '../../settings/operators/operators.service';
 import { CouponStatusInternal, CouponTypeInternal } from './bets-list.model';
@@ -23,7 +24,8 @@ export class BetsListComponent implements OnInit, OnDestroy {
     public betsListService: BetsListService,
     private translate: TranslateUtilityService,
     private adapter: DateAdapter<Date>,
-    public operatorService: OperatorsService
+    public operatorService: OperatorsService,
+    public windowSizeService: WindowSizeService,
   ) {
 
     this.adapter.setLocale(this.translate.getCurrentLanguage());

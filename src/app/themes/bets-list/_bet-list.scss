@@ -1,8 +1,11 @@
+app-bets-list{
+	height: 100% !important;
+}
 .bet-list {
+	// height: 100% !important;
 	h4 {
 		margin: 0;
 	}
-	height: 100% !important;
 	font-size: 0.8rem;
 	.title {
 		text-transform: uppercase;
@@ -10,7 +13,7 @@
 	}
 
 	.form {
-		height: 100%;
+		// height: 100%;
 		.btn-filter {
 			height: 35px;
 			font-size: unset;

@@ -1,34 +1,32 @@
-<div fxLayout="column" [style.padding.px]="10" class="bet-list">
-  <div class="title">
+<div fxLayout="column" [style.padding.px]="10" class="bet-list" [style.height.px]="windowSizeService.windowSize.columnHeight">
+  <div class="title" fxFlex="auto">
     <h1>{{'BETS_LIST' | translate}} </h1>
   </div>
-  <div fxFlexFill class="form" fxLayout="column" fxLayoutALign="flex-start">
+  <div fxFlexFill fxFlex="90" class="form" fxLayout="column" fxLayoutGap="5px" fxLayoutALign="flex-start">
     <div fxFlex="80" fxLayout="column" fxLayoutGap="25px">
       <!-- ROW 0 -->
       <div fxFlex="20" fxLayout="row" fxLayoutGap="20px">
         <!-- DATA SELECTED -->
         <div fxFlex="70" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px" class="display padding-20">
           <h3 class="label-overlap">{{ 'DATE' | translate }}</h3>
-          <div fxFlex="40" class="row" fxLayoutGap="10px">
-            <div fxFlex="50" fxLayout="column" fxLayoutGap="5px">
-              <button class="btn-filter btn-default radius-5" (click)="changeValue('dateHasPlaced', false)"
-                [class.btn-filter-success]="!betsListService.dateHasPlaced && !betsListService.carriedOut">
-                {{'PLACEMENT' | translate}}
-              </button>
-              <button class="btn-filter btn-default radius-5" (click)="changeValue('dateHasPlaced', true)"
-                [class.btn-filter-success]="betsListService.dateHasPlaced && !betsListService.carriedOut"
-                [disabled]="betsListService.couponStatus === couponStatus.Cancelled">
-                {{'SETTLEMENT' | translate}}
-              </button>
-            </div>
-            <div fxFlex="50" fxLayout="column" fxLayoutGap="5px">
-              <button class="btn-filter btn-default radius-5" (click)="changeValue('carriedOut', true)"
-                [class.btn-filter-success]="betsListService.carriedOut"
-                [disabled]="betsListService.couponStatus === couponStatus.Cancelled">
-                {{'FILTER_DATE_OF_PAYMENT' | translate}}
-              </button>
-            </div>
+          
+          <div class="two-column-grid">
+            <button class="btn-filter btn-default radius-5 btn-flex-height" (click)="changeValue('dateHasPlaced', false)"
+              [class.btn-filter-success]="!betsListService.dateHasPlaced && !betsListService.carriedOut">
+              {{'PLACEMENT' | translate}}
+            </button>
+            <button class="btn-filter btn-default radius-5 btn-flex-height" (click)="changeValue('carriedOut', true)"
+              [class.btn-filter-success]="betsListService.carriedOut"
+              [disabled]="betsListService.couponStatus === couponStatus.Cancelled">
+              {{'FILTER_DATE_OF_PAYMENT' | translate}}
+            </button>
+            <button class="btn-filter btn-default radius-5 btn-flex-height" (click)="changeValue('dateHasPlaced', true)"
+              [class.btn-filter-success]="betsListService.dateHasPlaced && !betsListService.carriedOut"
+              [disabled]="betsListService.couponStatus === couponStatus.Cancelled">
+              {{'SETTLEMENT' | translate}}
+            </button>
           </div>
+
           <div fxFlex="30" fxLayout="column" fxLayoutGap="5px">
             <h4 [style.margin-top.px]="0">{{ 'DATE_FROM' | translate }}</h4>
             <mat-form-field class="btn-filter btn-default radius-5" (click)="pickerDateFrom.open()">
@@ -47,8 +45,8 @@
               <mat-datepicker-toggle matSuffix [for]="pickerDateTo"></mat-datepicker-toggle>
               <mat-datepicker touchUi #pickerDateTo disabled="false"></mat-datepicker>
             </mat-form-field>
-
           </div>
+
         </div>
         <!-- BETSLIP CODE -->
         <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center" class="display padding-20">
@@ -59,13 +57,12 @@
         </div>
       </div>
       <!-- ROW 1 -->
-      <div fxFlex="45" fxLayout="row" fxLayoutGap="20px">
+      <div fxFlex="50" fxLayout="row" fxLayoutGap="20px">
         <div fxFlex="40" fxLayout="row" fxLayoutGap="20px" class="display padding-20">
           <h3 class="label-overlap">{{ 'PRODUCT_FILTER' | translate }}</h3>
-          <div fxFlex fxLayout="row wrap" fxLayoutAlign="flex-start flex-start" fxLayoutGap="10px grid">
-            <div fxFlex="50" fxLayout="column"
-              *ngFor="let type of betsListService.availableSport; trackBy: trackBySportId">
-              <button class="btn-filter btn-default radius-5"
+          <div class="two-column-grid">
+            <div *ngFor="let type of betsListService.availableSport; trackBy: trackBySportId">
+              <button class="btn-filter btn-default radius-5 btn-flex-height"
                 [class.btn-filter-success]="betsListService.sportIdSelected === type.SportId"
                 (click)="changeValue('sportId', type.SportId)">{{ 'DYNAMIC_KEYS.PRODUCT.NAME.'+ type.SportName | translate }}
               </button>
@@ -92,7 +89,7 @@
       </div>
       <!-- ROW 2 -->
       <div fxFlex="30" fxLayout="row">
-        <div fxFlex="100" fxLayout="row" fxLayoutGap="10px" class="display padding-20">
+        <div fxFlex="100" fxLayout="row" fxLayoutGap="10px" class="display padding-horizontal-20">
           <h3 class="label-overlap">{{ 'OPERATOR' | translate }} </h3>
           <div fxFlex="100" fxLayout="column" fxLayoutGap="10px">
             <div fxFlex="20" fxLayout="row" fxLayoutGap="10px">
@@ -131,7 +128,7 @@
         </div>
       </div>
     </div>
-    <div fxFlex="3" fxLayout="column" fxLayoutAlign="center">
+    <div fxFlex="10" fxLayout="column" fxLayoutAlign="center">
       <!-- ROW 3 -->
       <div fxFlex="5" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="5px">
         <div fxFlex="33"></div>

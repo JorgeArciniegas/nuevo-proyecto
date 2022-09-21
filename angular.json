@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "c6fe5705-6c71-4159-84f6-a81817958d24"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -12,7 +15,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "aot": true,
             "outputPath": "dist/vdesk",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -21,12 +23,19 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/app/themes/skins"
+              "src/app/themes/skins",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -41,7 +50,31 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "vgen-android-prod": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "outputPath": "dist-vgen",
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.vgen.ts"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             },
             "vgen-prod": {
               "budgets": [
@@ -70,27 +103,46 @@
                   "maximumWarning": "6kb"
                 }
               ],
-              "outputPath": "dist-vgen",
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/app/themes/skins/develop/"
                 ]
               },
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/develop",
+                  "output": "assets"
+                }
+              ],
+              "outputPath": "dist-vgen",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.vgen.ts"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             },
             "vgen-staging": {
               "budgets": [
@@ -119,13 +171,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/develop",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-vgen",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -168,13 +238,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/gensolutions/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/gensolutions/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/gensolutions",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-gensolutions",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -217,13 +305,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/gensolutions/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/gensolutions/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/gensolutions",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-gensolutions",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -266,13 +372,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/dngaming/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/dngaming/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/dngaming",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-dngaming",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -315,13 +439,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/dngaming/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/dngaming/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/dngaming",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-dngaming",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -364,13 +506,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/shawis/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/shawis/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/shawis",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-shawis",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -413,13 +573,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/shawis/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/shawis/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/shawis",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-shawis",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -462,13 +640,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/oneway/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/oneway/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/oneway",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-oneway",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -511,13 +707,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/oneway/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/oneway/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/oneway",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-oneway",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -540,13 +754,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/universalsoft/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/universalsoft/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/universalsoft",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-universalsoft",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -609,13 +841,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/universalsoft/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/universalsoft/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/universalsoft",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-universalsoft",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -658,13 +908,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/mayabet/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/mayabet/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/mayabet",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-mayabet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -707,13 +975,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/mayabet/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/mayabet/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/mayabet",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-mayabet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -756,13 +1042,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/develop",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-genc01",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -805,13 +1109,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/develop",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-genc01",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -854,13 +1176,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/no-brand/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/no-brand",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-genc02",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -903,13 +1243,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/no-brand/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/no-brand",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-genc02",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -952,13 +1310,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/develop",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-genc03",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1001,13 +1377,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/develop",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-genc03",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1050,13 +1444,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/no-brand/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/no-brand",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-genc04",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1099,13 +1511,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/no-brand/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/no-brand/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/no-brand",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-genc04",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1148,13 +1578,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betese/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betese/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/betese",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-betese",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1197,13 +1645,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betese/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betese/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/betese",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-betese",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1246,13 +1712,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betconnection/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betconnection/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/betconnection",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-betconnection",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1295,13 +1779,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betconnection/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betconnection/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/betconnection",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-betconnection",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1344,13 +1846,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/sportrace/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/sportrace/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/sportrace",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-sportrace",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1393,13 +1913,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/sportrace/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/sportrace/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/sportrace",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-sportrace",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1442,13 +1980,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/bolivarbet/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/bolivarbet/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/bolivarbet",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-bolivarbet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1491,13 +2047,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/bolivarbet/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/bolivarbet/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/bolivarbet",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-bolivarbet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1540,13 +2114,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/uganbet/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/uganbet/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/uganbet",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-uganbet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1589,13 +2181,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/uganbet/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/uganbet/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/uganbet",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-uganbet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1638,13 +2248,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/apuestas-dominicanas/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/apuestas-dominicanas/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/apuestas-dominicanas",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-apuestas-dominicanas",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1687,13 +2315,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/apuestas-dominicanas/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/apuestas-dominicanas/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/apuestas-dominicanas",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-apuestas-dominicanas",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1736,13 +2382,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/f2o/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/f2o/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/f2o",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-f2o",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1785,13 +2449,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/f2o/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/f2o/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/f2o",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-f2o",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1834,13 +2516,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/soft/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/soft/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/soft",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-soft",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1883,13 +2583,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/soft/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/soft/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/soft",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-soft",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1932,13 +2650,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/kyron/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/kyron/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/kyron",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-kyron",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -1981,13 +2717,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/kyron/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/kyron/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/kyron",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-kyron",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2030,13 +2784,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/homerun/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/homerun/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/homerun",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-homerun",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2079,13 +2851,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/homerun/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/homerun/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/homerun",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-homerun",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2128,13 +2918,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betlogik/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betlogik/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/betlogik",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-betlogik",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2177,13 +2985,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betlogik/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betlogik/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/betlogik",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-betlogik",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2226,13 +3052,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/doradobet/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/doradobet/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/doradobet",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-doradobet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2275,13 +3119,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/doradobet/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/doradobet/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/doradobet",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-doradobet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2324,13 +3186,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/hbg-peru/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/hbg-peru/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/hbg-peru",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-hbg-peru",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2373,13 +3253,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/hbg-peru/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/hbg-peru/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/hbg-peru",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-hbg-peru",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2422,13 +3320,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/soccerbet/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/soccerbet/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/soccerbet",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-soccerbet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2471,13 +3387,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/soccerbet/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/soccerbet/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/soccerbet",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-soccerbet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2520,13 +3454,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betsafi/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betsafi/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/betsafi",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-betsafi",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2569,13 +3521,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betsafi/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betsafi/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/betsafi",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-betsafi",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2618,13 +3588,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/tradabets/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/tradabets/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/tradabets",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-tradabets",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2667,13 +3655,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/tradabets/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/tradabets/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/tradabets",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-v",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2716,13 +3722,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betsplus/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betsplus/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/betsplus",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-betsplus",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2765,13 +3789,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betsplus/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betsplus/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/betsplus",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-betsplus",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2814,13 +3856,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betpro/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betpro/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/betpro",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-betpro",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2863,13 +3923,31 @@
                   "maximumWarning": "6kb"
                 }
               ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betpro/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/betpro/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/betpro",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
               "outputPath": "dist-betpro",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -2885,7 +3963,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -3265,19 +4344,8 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
-              "src/assets"
-            ]
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+              "src/assets",
+              "src/manifest.webmanifest"
             ]
           }
         }
@@ -3297,15 +4365,6 @@
             "production": {
               "devServerTarget": "vdesk:serve:production"
             }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }

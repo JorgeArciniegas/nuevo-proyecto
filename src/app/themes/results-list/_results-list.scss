@@ -3,12 +3,12 @@
 }
 
 .card-box-result {
-	.header .mat-figure,
-	.position .mat-figure {
+	.header .mat-grid-tile-content,
+	.position .mat-grid-tile-content {
 		padding: 0.4vh;
 	}
 
-	.position .mat-figure {
+	.position .mat-grid-tile-content {
 		font-size: 1.2em;
 		font-weight: 700;
 	}
