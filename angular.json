@@ -3303,7 +3303,7 @@
               "outputPath": "dist-soccerbet",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/no-brand/"
+                  "src/app/themes/skins/soccerbet/"
                 ]
               },
               "fileReplacements": [
@@ -3350,7 +3350,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/no-brand/"
+                  "src/app/themes/skins/soccerbet/"
                 ]
               },
               "fileReplacements": [
@@ -3370,7 +3370,7 @@
               "outputPath": "dist-soccerbet",
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/no-brand/"
+                  "src/app/themes/skins/soccerbet/"
                 ]
               },
               "fileReplacements": [
@@ -3417,7 +3417,7 @@
               "buildOptimizer": true,
               "stylePreprocessorOptions": {
                 "includePaths": [
-                  "src/app/themes/skins/no-brand/"
+                  "src/app/themes/skins/soccerbet/"
                 ]
               },
               "fileReplacements": [
@@ -4346,6 +4346,17 @@
               "src/favicon.ico",
               "src/assets",
               "src/manifest.webmanifest"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app/themes/skins/develop/"
+              ]
+            },
+            "fileReplacements": [
+              {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.vgen.ts"
+              }
             ]
           }
         }
