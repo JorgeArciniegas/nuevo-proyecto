@@ -1,0 +1,12 @@
+mode: ContinuousDeployment
+branches:
+  master:
+    tag: beta
+    increment: Minor
+  pull-request:
+    tag: alpha-pr
+  support:
+    tag: beta
+ignore:
+  sha: []
+merge-message-formats: {}

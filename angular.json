@@ -3964,7 +3964,7 @@
               ]
             }
           },
-          "defaultConfiguration": ""
+          "defaultConfiguration": "vgen-prod-release"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",

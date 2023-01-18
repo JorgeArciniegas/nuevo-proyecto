@@ -1,0 +1,98 @@
+trigger:
+  branches:
+    include:
+      - master
+  tags:
+    include:
+      - v*
+
+resources:
+  repositories:
+    - repository: azdo-pipeline-templates
+      type: git
+      name: azdo-pipeline-templates
+      ref: master
+
+variables:
+  buildConfiguration: Release
+  appsPackageFeed: Elys-Deploy
+  appPackageId: Elys.Vdesk.Web
+  octopusProjectName: VDesk Web Client
+
+stages:
+  - stage: Build
+    pool: 
+        vmImage: ubuntu-latest
+    jobs:
+      # Whitesource
+      - job: whitesourceJob
+        displayName: WhiteSource
+        steps:
+          - task: WhiteSource@21
+            enabled: false
+            inputs:
+              cwd: $(System.DefaultWorkingDirectory)
+              projectName: $(Build.Repository.Name)
+
+      # Build
+      - job: Build
+        displayName: Build
+        steps:
+          - checkout: self
+            fetchDepth: 0 # disable git shallow  
+
+          - template: build/dotnet-build-versioning.yml@azdo-pipeline-templates
+
+          # ANGULAR APP
+
+          - task: NodeTool@0
+            displayName: Install nodejs
+            inputs:
+              versionSpec: 14.x
+
+          - script: npm install -g @angular/cli
+            displayName: Install @angular/cli
+
+          - task: Npm@1
+            displayName: Install dependencies
+            inputs:
+              command: install
+
+          - script: npm run pipeline-build
+            displayName: Build release
+
+          - task: OctopusPack@4
+            displayName: Package Vdesk application
+            inputs:
+              PackageId: $(appPackageId)
+              PackageFormat: NuPkg
+              PackageVersion: $(GitVersion.NuGetVersion)
+              SourcePath: $(Build.SourcesDirectory)/dist-vgen
+              OutputPath: $(Build.ArtifactStagingDirectory)/nupkg/apps
+              NuGetAuthor: Odissea
+              NuGetTitle: $(appPackageId)
+              NuGetDescription: VDesk application
+              NuGetReleaseNotes: $(Build.Repository.Uri)/commit/$(Build.SourceVersion)
+
+          # PIPELINE ARTIFACTS
+          - template: release/push-pipeline-artifacts.yml@azdo-pipeline-templates
+            parameters:
+              pushLibraries: false
+
+  - stage: Release
+    variables:
+      NuGetVersion: $[stageDependencies.Build.Build.outputs['SetVarGitVersion.NuGetVersion']]
+      PreReleaseTag: $[stageDependencies.Build.Build.outputs['SetVarGitVersion.PreReleaseTag']]
+    jobs:
+      - job: CreateOctopusRelease
+        displayName: Create release on Octopus
+        pool: Default
+        workspace:
+          clean: all
+        steps:
+
+          # PUSH ARTIFACTS AND CREATE RELEASE ON OCTOPUS
+          - template: release/octopus-release.yml@azdo-pipeline-templates
+            parameters:
+              packageIds:
+                - $(appPackageId)

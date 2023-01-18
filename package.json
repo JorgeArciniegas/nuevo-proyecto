@@ -9,7 +9,8 @@
     "postinstall": "node ./version.js",
     "version-patch": "npm version patch --no-git-tag-version && node ./version.js && git commit --all",
     "version-minor": "npm version minor --no-git-tag-version && node ./version.js && git commit --all",
-    "version": "node ./current-version.js"
+    "version": "node ./current-version.js",
+    "pipeline-build": "ng build -c"
   },
   "private": true,
   "dependencies": {
@@ -27,7 +28,7 @@
     "@angular/platform-browser-dynamic": "^13.3.10",
     "@angular/router": "^13.3.10",
     "@angular/service-worker": "^13.3.11",
-    "@elys/elys-api": "^1.21.13",
+    "@elys/elys-api": "^1.22.9",
     "@elys/elys-channel": "^1.2.0",
     "@elys/elys-coupon": "1.4.26",
     "@elys/elys-feeds": "^0.1.2",
@@ -46,13 +47,13 @@
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",
     "tslib": "^2.0.0",
-    "xlsx": "^0.15.1",
+    "xlsx": "^0.18.5",
     "xml2json": "^0.12.0",
     "xregexp": "^4.2.4",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~13.3.7",
+    "@angular-devkit/build-angular": "^13.3.7",
     "@angular/cli": "^13.3.7",
     "@angular/compiler-cli": "^13.3.10",
     "@angular/language-service": "^13.3.10",
