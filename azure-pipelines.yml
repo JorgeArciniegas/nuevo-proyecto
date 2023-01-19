@@ -80,6 +80,14 @@ stages:
               pushLibraries: false
 
   - stage: Release
+    condition: 
+        and(
+          succeeded(),
+          or(
+            startsWith(variables['Build.SourceBranch'], 'refs/tags/v'),
+            eq(variables['Build.SourceBranch'], 'refs/heads/master')
+          )
+        )
     variables:
       NuGetVersion: $[stageDependencies.Build.Build.outputs['SetVarGitVersion.NuGetVersion']]
       PreReleaseTag: $[stageDependencies.Build.Build.outputs['SetVarGitVersion.PreReleaseTag']]
