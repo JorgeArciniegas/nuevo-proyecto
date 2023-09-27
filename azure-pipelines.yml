@@ -21,18 +21,17 @@ variables:
 
 stages:
   - stage: Build
-    pool: 
-        vmImage: ubuntu-latest
+    pool: LinuxPool01
     jobs:
       # Whitesource
-      - job: whitesourceJob
-        displayName: WhiteSource
-        steps:
-          - task: WhiteSource@21
-            enabled: false
-            inputs:
-              cwd: $(System.DefaultWorkingDirectory)
-              projectName: $(Build.Repository.Name)
+      # - job: whitesourceJob
+      #   displayName: WhiteSource
+      #   steps:
+      #     - task: WhiteSource@21
+      #       enabled: false
+      #       inputs:
+      #         cwd: $(System.DefaultWorkingDirectory)
+      #         projectName: $(Build.Repository.Name)
 
       # Build
       - job: Build
