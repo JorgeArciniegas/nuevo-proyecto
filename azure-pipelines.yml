@@ -35,6 +35,7 @@ stages:
 
       # Build
       - job: Build
+        timeoutInMinutes: 120 # how long to run the job before automatically cancelling
         displayName: Build
         steps:
           - checkout: self
@@ -57,8 +58,27 @@ stages:
             inputs:
               command: install
 
+          - script: npm run pipeline-build-all
+            displayName: Build All Companies
+            condition: 
+              and(
+                succeeded(),
+                or(
+                  startsWith(variables['Build.SourceBranch'], 'refs/tags/v'),
+                  eq(variables['Build.SourceBranch'], 'refs/heads/master')
+                )
+              )
+
           - script: npm run pipeline-build
-            displayName: Build release
+            displayName: CI Build
+            condition: 
+              and(
+                succeeded(),
+                or(
+                  not(startsWith(variables['Build.SourceBranch'], 'refs/tags/v')),
+                  not(eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+                )
+              )
 
           - task: OctopusPack@4
             displayName: Package Vdesk application
@@ -66,7 +86,7 @@ stages:
               PackageId: $(appPackageId)
               PackageFormat: NuPkg
               PackageVersion: $(GitVersion.NuGetVersion)
-              SourcePath: $(Build.SourcesDirectory)/dist-vgen
+              SourcePath: $(Build.SourcesDirectory)/dist
               OutputPath: $(Build.ArtifactStagingDirectory)/nupkg/apps
               NuGetAuthor: Odissea
               NuGetTitle: $(appPackageId)

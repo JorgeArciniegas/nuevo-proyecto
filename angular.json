@@ -54,7 +54,7 @@
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
             },
-            "vgen-android-prod": {
+            "vgen-android-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -76,7 +76,7 @@
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
             },
-            "vgen-prod": {
+            "vgen-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -126,7 +126,7 @@
                   "output": "assets"
                 }
               ],
-              "outputPath": "dist-vgen",
+              "outputPath": "dist/vg-vgen",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -144,7 +144,7 @@
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
             },
-            "vgen-staging": {
+            "vgen-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -164,7 +164,7 @@
                 }
               ]
             },
-            "vgen-staging-release": {
+            "vgen-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -191,7 +191,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-vgen",
+              "outputPath": "dist/qacom-vgen",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -211,7 +211,54 @@
                 }
               ]
             },
-            "gensolutions-prod": {
+            "vgen-qavg-release": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/image/",
+                  "output": "assets/theme/image/"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/app/themes/skins/develop/icons/pwa/",
+                  "output": "assets/icons/pwa/"
+                },
+                {
+                  "glob": "manifest.webmanifest",
+                  "input": "src/app/themes/skins/develop",
+                  "output": "assets"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json",
+              "outputPath": "dist/qavg-vgen",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/app/themes/skins/develop/"
+                ]
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.vgen-staging.ts"
+                }
+              ]
+            },
+            "gensolutions-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -258,7 +305,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-gensolutions",
+              "outputPath": "dist/vg-gensolutions",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -278,7 +325,7 @@
                 }
               ]
             },
-            "gensolutions-staging": {
+            "gensolutions-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -298,7 +345,7 @@
                 }
               ]
             },
-            "gensolutions-staging-release": {
+            "gensolutions-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -325,7 +372,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-gensolutions",
+              "outputPath": "dist/qacom-gensolutions",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -345,7 +392,7 @@
                 }
               ]
             },
-            "dngaming-prod": {
+            "dngaming-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -392,7 +439,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-dngaming",
+              "outputPath": "dist/vg-dngaming",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -412,7 +459,7 @@
                 }
               ]
             },
-            "dngaming-staging": {
+            "dngaming-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -432,7 +479,7 @@
                 }
               ]
             },
-            "dngaming-staging-release": {
+            "dngaming-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -459,7 +506,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-dngaming",
+              "outputPath": "dist/qacom-dngaming",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -479,7 +526,7 @@
                 }
               ]
             },
-            "shawis-prod": {
+            "shawis-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -526,7 +573,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-shawis",
+              "outputPath": "dist/vg-shawis",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -546,7 +593,7 @@
                 }
               ]
             },
-            "shawis-staging": {
+            "shawis-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -566,7 +613,7 @@
                 }
               ]
             },
-            "shawis-staging-release": {
+            "shawis-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -593,7 +640,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-shawis",
+              "outputPath": "dist/qacom-shawis",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -613,7 +660,7 @@
                 }
               ]
             },
-            "oneway-prod": {
+            "oneway-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -660,7 +707,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-oneway",
+              "outputPath": "dist/vg-oneway",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -680,7 +727,7 @@
                 }
               ]
             },
-            "oneway-staging": {
+            "oneway-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -700,7 +747,7 @@
                 }
               ]
             },
-            "oneway-staging-release": {
+            "oneway-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -727,7 +774,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-oneway",
+              "outputPath": "dist/qacom-oneway",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -774,7 +821,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-universalsoft",
+              "outputPath": "dist/vg-universalsoft",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -794,7 +841,7 @@
                 }
               ]
             },
-            "universalsoft-prod": {
+            "universalsoft-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -814,7 +861,7 @@
                 }
               ]
             },
-            "universalsoft-staging": {
+            "universalsoft-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -834,7 +881,7 @@
                 }
               ]
             },
-            "universalsoft-staging-release": {
+            "universalsoft-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -861,7 +908,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-universalsoft",
+              "outputPath": "dist/qacom-universalsoft",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -881,7 +928,7 @@
                 }
               ]
             },
-            "mayabet-prod": {
+            "mayabet-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -928,7 +975,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-mayabet",
+              "outputPath": "dist/vg-mayabet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -948,7 +995,7 @@
                 }
               ]
             },
-            "mayabet-staging": {
+            "mayabet-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -968,7 +1015,7 @@
                 }
               ]
             },
-            "mayabet-staging-release": {
+            "mayabet-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -995,7 +1042,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-mayabet",
+              "outputPath": "dist/qacom-mayabet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1015,7 +1062,7 @@
                 }
               ]
             },
-            "genc01-prod": {
+            "genc01-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1062,7 +1109,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-genc01",
+              "outputPath": "dist/vg-genc01",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1082,7 +1129,7 @@
                 }
               ]
             },
-            "genc01-staging": {
+            "genc01-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1102,7 +1149,7 @@
                 }
               ]
             },
-            "genc01-staging-release": {
+            "genc01-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1129,7 +1176,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-genc01",
+              "outputPath": "dist/qacom-genc01",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1149,7 +1196,7 @@
                 }
               ]
             },
-            "genc02-prod": {
+            "genc02-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1196,7 +1243,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-genc02",
+              "outputPath": "dist/vg-genc02",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1216,7 +1263,7 @@
                 }
               ]
             },
-            "genc02-staging": {
+            "genc02-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1236,7 +1283,7 @@
                 }
               ]
             },
-            "genc02-staging-release": {
+            "genc02-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1263,7 +1310,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-genc02",
+              "outputPath": "dist/qacom-genc02",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1283,7 +1330,7 @@
                 }
               ]
             },
-            "genc03-prod": {
+            "genc03-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1330,7 +1377,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-genc03",
+              "outputPath": "dist/vg-genc03",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1350,7 +1397,7 @@
                 }
               ]
             },
-            "genc03-staging": {
+            "genc03-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1370,7 +1417,7 @@
                 }
               ]
             },
-            "genc03-staging-release": {
+            "genc03-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1397,7 +1444,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-genc03",
+              "outputPath": "dist/qacom-genc03",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1417,7 +1464,7 @@
                 }
               ]
             },
-            "genc04-prod": {
+            "genc04-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1464,7 +1511,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-genc04",
+              "outputPath": "dist/vg-genc04",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1484,7 +1531,7 @@
                 }
               ]
             },
-            "genc04-staging": {
+            "genc04-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1504,7 +1551,7 @@
                 }
               ]
             },
-            "genc04-staging-release": {
+            "genc04-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1531,7 +1578,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-genc04",
+              "outputPath": "dist/qacom-genc04",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1551,7 +1598,7 @@
                 }
               ]
             },
-            "betese-prod": {
+            "betese-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1598,7 +1645,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-betese",
+              "outputPath": "dist/vg-betese",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1618,7 +1665,7 @@
                 }
               ]
             },
-            "betese-staging": {
+            "betese-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1638,7 +1685,7 @@
                 }
               ]
             },
-            "betese-staging-release": {
+            "betese-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1665,7 +1712,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-betese",
+              "outputPath": "dist/qacom-betese",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1685,7 +1732,7 @@
                 }
               ]
             },
-            "betconnection-prod": {
+            "betconnection-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1732,7 +1779,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-betconnection",
+              "outputPath": "dist/vg-betconnection",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1752,7 +1799,7 @@
                 }
               ]
             },
-            "betconnection-staging": {
+            "betconnection-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1772,7 +1819,7 @@
                 }
               ]
             },
-            "betconnection-staging-release": {
+            "betconnection-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1799,7 +1846,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-betconnection",
+              "outputPath": "dist/qacom-betconnection",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1819,7 +1866,7 @@
                 }
               ]
             },
-            "sportrace-prod": {
+            "sportrace-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1866,7 +1913,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-sportrace",
+              "outputPath": "dist/vg-sportrace",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1886,7 +1933,7 @@
                 }
               ]
             },
-            "sportrace-staging": {
+            "sportrace-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1906,7 +1953,7 @@
                 }
               ]
             },
-            "sportrace-staging-release": {
+            "sportrace-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -1933,7 +1980,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-sportrace",
+              "outputPath": "dist/qacom-sportrace",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -1953,7 +2000,7 @@
                 }
               ]
             },
-            "bolivarbet-prod": {
+            "bolivarbet-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2000,7 +2047,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-bolivarbet",
+              "outputPath": "dist/vg-bolivarbet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -2020,7 +2067,7 @@
                 }
               ]
             },
-            "bolivarbet-staging": {
+            "bolivarbet-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2040,7 +2087,7 @@
                 }
               ]
             },
-            "bolivarbet-staging-release": {
+            "bolivarbet-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2067,7 +2114,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-bolivarbet",
+              "outputPath": "dist/qacom-bolivarbet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -2087,7 +2134,7 @@
                 }
               ]
             },
-            "uganbet-prod": {
+            "uganbet-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2134,7 +2181,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-uganbet",
+              "outputPath": "dist/vg-uganbet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -2154,7 +2201,7 @@
                 }
               ]
             },
-            "uganbet-staging": {
+            "uganbet-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2174,7 +2221,7 @@
                 }
               ]
             },
-            "uganbet-staging-release": {
+            "uganbet-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2201,7 +2248,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-uganbet",
+              "outputPath": "dist/qacom-uganbet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -2221,7 +2268,7 @@
                 }
               ]
             },
-            "apuestas-dominicanas-prod": {
+            "apuestas-dominicanas-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2268,7 +2315,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-apuestas-dominicanas",
+              "outputPath": "dist/vg-apuestas-dominicanas",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -2288,7 +2335,7 @@
                 }
               ]
             },
-            "apuestas-dominicanas-staging": {
+            "apuestas-dominicanas-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2308,7 +2355,7 @@
                 }
               ]
             },
-            "apuestas-dominicanas-staging-release": {
+            "apuestas-dominicanas-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2335,7 +2382,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-apuestas-dominicanas",
+              "outputPath": "dist/qacom-apuestas-dominicanas",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -2355,7 +2402,7 @@
                 }
               ]
             },
-            "f2o-prod": {
+            "f2o-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2402,7 +2449,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-f2o",
+              "outputPath": "dist/vg-f2o",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -2422,7 +2469,7 @@
                 }
               ]
             },
-            "f2o-staging": {
+            "f2o-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2442,7 +2489,7 @@
                 }
               ]
             },
-            "f2o-staging-release": {
+            "f2o-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2469,7 +2516,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-f2o",
+              "outputPath": "dist/qacom-f2o",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -2489,7 +2536,7 @@
                 }
               ]
             },
-            "soft-prod": {
+            "soft-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2536,7 +2583,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-soft",
+              "outputPath": "dist/vg-soft",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -2556,7 +2603,7 @@
                 }
               ]
             },
-            "soft-staging": {
+            "soft-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2576,7 +2623,7 @@
                 }
               ]
             },
-            "soft-staging-release": {
+            "soft-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2603,7 +2650,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-soft",
+              "outputPath": "dist/qacom-soft",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -2623,7 +2670,7 @@
                 }
               ]
             },
-            "kyron-prod": {
+            "kyron-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2670,7 +2717,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-kyron",
+              "outputPath": "dist/vg-kyron",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -2690,7 +2737,7 @@
                 }
               ]
             },
-            "kyron-staging": {
+            "kyron-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2710,7 +2757,7 @@
                 }
               ]
             },
-            "kyron-staging-release": {
+            "kyron-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2737,7 +2784,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-kyron",
+              "outputPath": "dist/qacom-kyron",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -2757,7 +2804,7 @@
                 }
               ]
             },
-            "homerun-prod": {
+            "homerun-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2804,7 +2851,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-homerun",
+              "outputPath": "dist/vg-homerun",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -2824,7 +2871,7 @@
                 }
               ]
             },
-            "homerun-staging": {
+            "homerun-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2844,7 +2891,7 @@
                 }
               ]
             },
-            "homerun-staging-release": {
+            "homerun-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2871,7 +2918,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-homerun",
+              "outputPath": "dist/qacom-homerun",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -2891,7 +2938,7 @@
                 }
               ]
             },
-            "betlogik-prod": {
+            "betlogik-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2938,7 +2985,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-betlogik",
+              "outputPath": "dist/vg-betlogik",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -2958,7 +3005,7 @@
                 }
               ]
             },
-            "betlogik-staging": {
+            "betlogik-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -2978,7 +3025,7 @@
                 }
               ]
             },
-            "betlogik-staging-release": {
+            "betlogik-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3005,7 +3052,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-betlogik",
+              "outputPath": "dist/qacom-betlogik",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -3025,7 +3072,7 @@
                 }
               ]
             },
-            "doradobet-prod": {
+            "doradobet-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3072,7 +3119,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-doradobet",
+              "outputPath": "dist/vg-doradobet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -3092,7 +3139,7 @@
                 }
               ]
             },
-            "doradobet-staging": {
+            "doradobet-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3112,7 +3159,7 @@
                 }
               ]
             },
-            "doradobet-staging-release": {
+            "doradobet-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3139,7 +3186,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-doradobet",
+              "outputPath": "dist/qacom-doradobet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -3159,7 +3206,7 @@
                 }
               ]
             },
-            "hbg-peru-prod": {
+            "hbg-peru-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3206,7 +3253,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-hbg-peru",
+              "outputPath": "dist/vg-hbg-peru",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -3226,7 +3273,7 @@
                 }
               ]
             },
-            "hbg-peru-staging": {
+            "hbg-peru-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3246,7 +3293,7 @@
                 }
               ]
             },
-            "hbg-peru-staging-release": {
+            "hbg-peru-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3273,7 +3320,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-hbg-peru",
+              "outputPath": "dist/qacom-hbg-peru",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -3293,7 +3340,7 @@
                 }
               ]
             },
-            "soccerbet-prod": {
+            "soccerbet-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3340,7 +3387,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-soccerbet",
+              "outputPath": "dist/vg-soccerbet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -3360,7 +3407,7 @@
                 }
               ]
             },
-            "soccerbet-staging": {
+            "soccerbet-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3380,7 +3427,7 @@
                 }
               ]
             },
-            "soccerbet-staging-release": {
+            "soccerbet-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3407,7 +3454,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-soccerbet",
+              "outputPath": "dist/qacom-soccerbet",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -3427,7 +3474,7 @@
                 }
               ]
             },
-            "betsafi-prod": {
+            "betsafi-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3474,7 +3521,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-betsafi",
+              "outputPath": "dist/vg-betsafi",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -3494,7 +3541,7 @@
                 }
               ]
             },
-            "betsafi-staging": {
+            "betsafi-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3514,7 +3561,7 @@
                 }
               ]
             },
-            "betsafi-staging-release": {
+            "betsafi-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3541,7 +3588,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-betsafi",
+              "outputPath": "dist/qacom-betsafi",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -3561,7 +3608,7 @@
                 }
               ]
             },
-            "tradabets-prod": {
+            "tradabets-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3608,7 +3655,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-tradabets",
+              "outputPath": "dist/vg-tradabets",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -3628,7 +3675,7 @@
                 }
               ]
             },
-            "tradabets-staging": {
+            "tradabets-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3648,7 +3695,7 @@
                 }
               ]
             },
-            "tradabets-staging-release": {
+            "tradabets-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3675,7 +3722,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-v",
+              "outputPath": "dist/qacom-tradabets",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -3695,7 +3742,7 @@
                 }
               ]
             },
-            "betsplus-prod": {
+            "betsplus-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3742,7 +3789,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-betsplus",
+              "outputPath": "dist/vg-betsplus",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -3762,7 +3809,7 @@
                 }
               ]
             },
-            "betsplus-staging": {
+            "betsplus-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3782,7 +3829,7 @@
                 }
               ]
             },
-            "betsplus-staging-release": {
+            "betsplus-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3809,7 +3856,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-betsplus",
+              "outputPath": "dist/qacom-betsplus",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -3829,7 +3876,7 @@
                 }
               ]
             },
-            "betpro-prod": {
+            "betpro-vg": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3876,7 +3923,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-betpro",
+              "outputPath": "dist/vg-betpro",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -3896,7 +3943,7 @@
                 }
               ]
             },
-            "betpro-staging": {
+            "betpro-qacom": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3916,7 +3963,7 @@
                 }
               ]
             },
-            "betpro-staging-release": {
+            "betpro-qacom-release": {
               "budgets": [
                 {
                   "type": "anyComponentStyle",
@@ -3943,7 +3990,7 @@
               ],
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json",
-              "outputPath": "dist-betpro",
+              "outputPath": "dist/qacom-betpro",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -3975,353 +4022,356 @@
             "production": {
               "browserTarget": "vdesk:build:production"
             },
-            "vgen-prod": {
-              "browserTarget": "vdesk:build:vgen-prod"
+            "vgen-vg": {
+              "browserTarget": "vdesk:build:vgen-vg"
             },
             "vgen-prod-release": {
               "browserTarget": "vdesk:build:vgen-prod-release"
             },
-            "vgen-staging": {
-              "browserTarget": "vdesk:build:vgen-staging"
+            "vgen-qacom": {
+              "browserTarget": "vdesk:build:vgen-qacom"
             },
-            "vgen-staging-release": {
-              "browserTarget": "vdesk:build:vgen-staging-release"
+            "vgen-qacom-release": {
+              "browserTarget": "vdesk:build:vgen-qacom-release"
             },
-            "gensolutions-prod": {
-              "browserTarget": "vdesk:build:gensolutions-prod"
+            "vgen-qavg-release": {
+              "browserTarget": "vdesk:build:vgen-qavg-release"
+            },
+            "gensolutions-vg": {
+              "browserTarget": "vdesk:build:gensolutions-vg"
             },
             "gensolutions-prod-release": {
               "browserTarget": "vdesk:build:gensolutions-prod-release"
             },
-            "gensolutions-staging": {
-              "browserTarget": "vdesk:build:gensolutions-staging"
+            "gensolutions-qacom": {
+              "browserTarget": "vdesk:build:gensolutions-qacom"
             },
-            "gensolutions-staging-release": {
-              "browserTarget": "vdesk:build:gensolutions-staging-release"
+            "gensolutions-qacom-release": {
+              "browserTarget": "vdesk:build:gensolutions-qacom-release"
             },
-            "dngaming-prod": {
-              "browserTarget": "vdesk:build:dngaming-prod"
+            "dngaming-vg": {
+              "browserTarget": "vdesk:build:dngaming-vg"
             },
             "dngaming-prod-release": {
               "browserTarget": "vdesk:build:dngaming-prod-release"
             },
-            "dngaming-staging": {
-              "browserTarget": "vdesk:build:dngaming-staging"
+            "dngaming-qacom": {
+              "browserTarget": "vdesk:build:dngaming-qacom"
             },
-            "dngaming-staging-release": {
-              "browserTarget": "vdesk:build:dngaming-staging-release"
+            "dngaming-qacom-release": {
+              "browserTarget": "vdesk:build:dngaming-qacom-release"
             },
-            "shawis-prod": {
-              "browserTarget": "vdesk:build:shawis-prod"
+            "shawis-vg": {
+              "browserTarget": "vdesk:build:shawis-vg"
             },
             "shawis-prod-release": {
               "browserTarget": "vdesk:build:shawis-prod-release"
             },
-            "shawis-staging": {
-              "browserTarget": "vdesk:build:shawis-staging"
+            "shawis-qacom": {
+              "browserTarget": "vdesk:build:shawis-qacom"
             },
-            "shawis-staging-release": {
-              "browserTarget": "vdesk:build:shawis-staging-release"
+            "shawis-qacom-release": {
+              "browserTarget": "vdesk:build:shawis-qacom-release"
             },
-            "oneway-prod": {
-              "browserTarget": "vdesk:build:oneway-prod"
+            "oneway-vg": {
+              "browserTarget": "vdesk:build:oneway-vg"
             },
             "oneway-prod-release": {
               "browserTarget": "vdesk:build:oneway-prod-release"
             },
-            "oneway-staging": {
-              "browserTarget": "vdesk:build:oneway-staging"
+            "oneway-qacom": {
+              "browserTarget": "vdesk:build:oneway-qacom"
             },
-            "oneway-staging-release": {
-              "browserTarget": "vdesk:build:oneway-staging-release"
+            "oneway-qacom-release": {
+              "browserTarget": "vdesk:build:oneway-qacom-release"
             },
-            "universalsoft-prod": {
-              "browserTarget": "vdesk:build:universalsoft-prod"
+            "universalsoft-vg": {
+              "browserTarget": "vdesk:build:universalsoft-vg"
             },
             "universalsoft-prod-release": {
               "browserTarget": "vdesk:build:universalsoft-prod-release"
             },
-            "universalsoft-staging": {
-              "browserTarget": "vdesk:build:universalsoft-staging"
+            "universalsoft-qacom": {
+              "browserTarget": "vdesk:build:universalsoft-qacom"
             },
-            "universalsoft-staging-release": {
-              "browserTarget": "vdesk:build:universalsoft-staging-release"
+            "universalsoft-qacom-release": {
+              "browserTarget": "vdesk:build:universalsoft-qacom-release"
             },
-            "mayabet-prod": {
-              "browserTarget": "vdesk:build:mayabet-prod"
+            "mayabet-vg": {
+              "browserTarget": "vdesk:build:mayabet-vg"
             },
             "mayabet-prod-release": {
               "browserTarget": "vdesk:build:mayabet-prod-release"
             },
-            "mayabet-staging": {
-              "browserTarget": "vdesk:build:mayabet-staging"
+            "mayabet-qacom": {
+              "browserTarget": "vdesk:build:mayabet-qacom"
             },
-            "mayabet-staging-release": {
-              "browserTarget": "vdesk:build:mayabet-staging-release"
+            "mayabet-qacom-release": {
+              "browserTarget": "vdesk:build:mayabet-qacom-release"
             },
-            "genc01-prod": {
-              "browserTarget": "vdesk:build:genc01-prod"
+            "genc01-vg": {
+              "browserTarget": "vdesk:build:genc01-vg"
             },
             "genc01-prod-release": {
               "browserTarget": "vdesk:build:genc01-prod-release"
             },
-            "genc01-staging": {
-              "browserTarget": "vdesk:build:genc01-staging"
+            "genc01-qacom": {
+              "browserTarget": "vdesk:build:genc01-qacom"
             },
-            "genc01-staging-release": {
-              "browserTarget": "vdesk:build:genc01-staging-release"
+            "genc01-qacom-release": {
+              "browserTarget": "vdesk:build:genc01-qacom-release"
             },
-            "genc02-prod": {
-              "browserTarget": "vdesk:build:genc02-prod"
+            "genc02-vg": {
+              "browserTarget": "vdesk:build:genc02-vg"
             },
             "genc02-prod-release": {
               "browserTarget": "vdesk:build:genc02-prod-release"
             },
-            "genc02-staging": {
-              "browserTarget": "vdesk:build:genc02-staging"
+            "genc02-qacom": {
+              "browserTarget": "vdesk:build:genc02-qacom"
             },
-            "genc02-staging-release": {
-              "browserTarget": "vdesk:build:genc02-staging-release"
+            "genc02-qacom-release": {
+              "browserTarget": "vdesk:build:genc02-qacom-release"
             },
-            "genc03-prod": {
-              "browserTarget": "vdesk:build:genc03-prod"
+            "genc03-vg": {
+              "browserTarget": "vdesk:build:genc03-vg"
             },
             "genc03-prod-release": {
               "browserTarget": "vdesk:build:genc03-prod-release"
             },
-            "genc03-staging": {
-              "browserTarget": "vdesk:build:genc03-staging"
+            "genc03-qacom": {
+              "browserTarget": "vdesk:build:genc03-qacom"
             },
-            "genc03-staging-release": {
-              "browserTarget": "vdesk:build:genc03-staging-release"
+            "genc03-qacom-release": {
+              "browserTarget": "vdesk:build:genc03-qacom-release"
             },
-            "genc04-prod": {
-              "browserTarget": "vdesk:build:genc04-prod"
+            "genc04-vg": {
+              "browserTarget": "vdesk:build:genc04-vg"
             },
             "genc04-prod-release": {
               "browserTarget": "vdesk:build:genc04-prod-release"
             },
-            "genc04-staging": {
-              "browserTarget": "vdesk:build:genc04-staging"
+            "genc04-qacom": {
+              "browserTarget": "vdesk:build:genc04-qacom"
             },
-            "genc04-staging-release": {
-              "browserTarget": "vdesk:build:genc04-staging-release"
+            "genc04-qacom-release": {
+              "browserTarget": "vdesk:build:genc04-qacom-release"
             },
-            "betese-prod": {
-              "browserTarget": "vdesk:build:betese-prod"
+            "betese-vg": {
+              "browserTarget": "vdesk:build:betese-vg"
             },
-            "betese-staging": {
-              "browserTarget": "vdesk:build:betese-staging"
+            "betese-qacom": {
+              "browserTarget": "vdesk:build:betese-qacom"
             },
-            "betconnection-prod": {
-              "browserTarget": "vdesk:build:betconnection-prod"
+            "betconnection-vg": {
+              "browserTarget": "vdesk:build:betconnection-vg"
             },
-            "betconnection-staging": {
-              "browserTarget": "vdesk:build:betconnection-staging"
+            "betconnection-qacom": {
+              "browserTarget": "vdesk:build:betconnection-qacom"
             },
-            "sportrace-prod": {
-              "browserTarget": "vdesk:build:sportrace-prod"
+            "sportrace-vg": {
+              "browserTarget": "vdesk:build:sportrace-vg"
             },
-            "sportrace-staging": {
-              "browserTarget": "vdesk:build:sportrace-staging"
+            "sportrace-qacom": {
+              "browserTarget": "vdesk:build:sportrace-qacom"
             },
-            "bolivarbet-prod": {
-              "browserTarget": "vdesk:build:bolivarbet-prod"
+            "bolivarbet-vg": {
+              "browserTarget": "vdesk:build:bolivarbet-vg"
             },
-            "bolivarbet-staging": {
-              "browserTarget": "vdesk:build:bolivarbet-staging"
+            "bolivarbet-qacom": {
+              "browserTarget": "vdesk:build:bolivarbet-qacom"
             },
-            "uganbet-prod": {
-              "browserTarget": "vdesk:build:uganbet-prod"
+            "uganbet-vg": {
+              "browserTarget": "vdesk:build:uganbet-vg"
             },
-            "uganbet-staging": {
-              "browserTarget": "vdesk:build:uganbet-staging"
+            "uganbet-qacom": {
+              "browserTarget": "vdesk:build:uganbet-qacom"
             },
-            "apuestas-dominicanas-prod": {
-              "browserTarget": "vdesk:build:apuestas-dominicanas-prod"
+            "apuestas-dominicanas-vg": {
+              "browserTarget": "vdesk:build:apuestas-dominicanas-vg"
             },
-            "apuestas-dominicanas-staging": {
-              "browserTarget": "vdesk:build:apuestas-dominicanas-staging"
+            "apuestas-dominicanas-qacom": {
+              "browserTarget": "vdesk:build:apuestas-dominicanas-qacom"
             },
-            "f2o-prod": {
-              "browserTarget": "vdesk:build:f2o-prod"
+            "f2o-vg": {
+              "browserTarget": "vdesk:build:f2o-vg"
             },
-            "f2o-staging": {
-              "browserTarget": "vdesk:build:f2o-staging"
+            "f2o-qacom": {
+              "browserTarget": "vdesk:build:f2o-qacom"
             },
-            "soft-prod": {
-              "browserTarget": "vdesk:build:soft-prod"
+            "soft-vg": {
+              "browserTarget": "vdesk:build:soft-vg"
             },
-            "soft-staging": {
-              "browserTarget": "vdesk:build:soft-staging"
+            "soft-qacom": {
+              "browserTarget": "vdesk:build:soft-qacom"
             },
-            "kyron-prod": {
-              "browserTarget": "vdesk:build:kyron-prod"
+            "kyron-vg": {
+              "browserTarget": "vdesk:build:kyron-vg"
             },
-            "kyron-staging": {
-              "browserTarget": "vdesk:build:kyron-staging"
+            "kyron-qacom": {
+              "browserTarget": "vdesk:build:kyron-qacom"
             },
-            "homerun-prod": {
-              "browserTarget": "vdesk:build:homerun-prod"
+            "homerun-vg": {
+              "browserTarget": "vdesk:build:homerun-vg"
             },
-            "homerun-staging": {
-              "browserTarget": "vdesk:build:homerun-staging"
+            "homerun-qacom": {
+              "browserTarget": "vdesk:build:homerun-qacom"
             },
-            "betlogik-prod": {
-              "browserTarget": "vdesk:build:betlogik-prod"
+            "betlogik-vg": {
+              "browserTarget": "vdesk:build:betlogik-vg"
             },
-            "betlogik-staging": {
-              "browserTarget": "vdesk:build:betlogik-staging"
+            "betlogik-qacom": {
+              "browserTarget": "vdesk:build:betlogik-qacom"
             },
-            "doradobet-prod": {
-              "browserTarget": "vdesk:build:doradobet-prod"
+            "doradobet-vg": {
+              "browserTarget": "vdesk:build:doradobet-vg"
             },
-            "doradobet-staging": {
-              "browserTarget": "vdesk:build:doradobet-staging"
+            "doradobet-qacom": {
+              "browserTarget": "vdesk:build:doradobet-qacom"
             },
             "betese-prod-release": {
               "browserTarget": "vdesk:build:betese-prod-release"
             },
-            "betese-staging-release": {
-              "browserTarget": "vdesk:build:betese-staging-release"
+            "betese-qacom-release": {
+              "browserTarget": "vdesk:build:betese-qacom-release"
             },
             "betconnection-prod-release": {
               "browserTarget": "vdesk:build:betconnection-prod-release"
             },
-            "betconnection-staging-release": {
-              "browserTarget": "vdesk:build:betconnection-staging-release"
+            "betconnection-qacom-release": {
+              "browserTarget": "vdesk:build:betconnection-qacom-release"
             },
             "sportrace-prod-release": {
               "browserTarget": "vdesk:build:sportrace-prod-release"
             },
-            "sportrace-staging-release": {
-              "browserTarget": "vdesk:build:sportrace-staging-release"
+            "sportrace-qacom-release": {
+              "browserTarget": "vdesk:build:sportrace-qacom-release"
             },
             "bolivarbet-prod-release": {
               "browserTarget": "vdesk:build:bolivarbet-prod-release"
             },
-            "bolivarbet-staging-release": {
-              "browserTarget": "vdesk:build:bolivarbet-staging-release"
+            "bolivarbet-qacom-release": {
+              "browserTarget": "vdesk:build:bolivarbet-qacom-release"
             },
             "uganbet-prod-release": {
               "browserTarget": "vdesk:build:uganbet-prod-release"
             },
-            "uganbet-staging-release": {
-              "browserTarget": "vdesk:build:uganbet-staging-release"
+            "uganbet-qacom-release": {
+              "browserTarget": "vdesk:build:uganbet-qacom-release"
             },
             "apuestas-dominicanas-prod-release": {
               "browserTarget": "vdesk:build:apuestas-dominicanas-prod-release"
             },
-            "apuestas-dominicanas-staging-release": {
-              "browserTarget": "vdesk:build:apuestas-dominicanas-staging-release"
+            "apuestas-dominicanas-qacom-release": {
+              "browserTarget": "vdesk:build:apuestas-dominicanas-qacom-release"
             },
             "f2o-prod-release": {
               "browserTarget": "vdesk:build:f2o-prod-release"
             },
-            "f2o-staging-release": {
-              "browserTarget": "vdesk:build:f2o-staging-release"
+            "f2o-qacom-release": {
+              "browserTarget": "vdesk:build:f2o-qacom-release"
             },
             "soft-prod-release": {
               "browserTarget": "vdesk:build:soft-prod-release"
             },
-            "soft-staging-release": {
-              "browserTarget": "vdesk:build:soft-staging-release"
+            "soft-qacom-release": {
+              "browserTarget": "vdesk:build:soft-qacom-release"
             },
             "kyron-prod-release": {
               "browserTarget": "vdesk:build:kyron-prod-release"
             },
-            "kyron-staging-release": {
-              "browserTarget": "vdesk:build:kyron-staging-release"
+            "kyron-qacom-release": {
+              "browserTarget": "vdesk:build:kyron-qacom-release"
             },
             "homerun-prod-release": {
               "browserTarget": "vdesk:build:homerun-prod-release"
             },
-            "homerun-staging-release": {
-              "browserTarget": "vdesk:build:homerun-staging-release"
+            "homerun-qacom-release": {
+              "browserTarget": "vdesk:build:homerun-qacom-release"
             },
             "betlogik-prod-release": {
               "browserTarget": "vdesk:build:betlogik-prod-release"
             },
-            "betlogik-staging-release": {
-              "browserTarget": "vdesk:build:betlogik-staging-release"
+            "betlogik-qacom-release": {
+              "browserTarget": "vdesk:build:betlogik-qacom-release"
             },
             "doradobet-prod-release": {
               "browserTarget": "vdesk:build:doradobet-prod-release"
             },
-            "doradobet-staging-release": {
-              "browserTarget": "vdesk:build:doradobet-staging-release"
+            "doradobet-qacom-release": {
+              "browserTarget": "vdesk:build:doradobet-qacom-release"
             },
-            "hbg-peru-prod": {
-              "browserTarget": "vdesk:build:hbg-peru-prod"
+            "hbg-peru-vg": {
+              "browserTarget": "vdesk:build:hbg-peru-vg"
             },
-            "hbg-peru-staging": {
-              "browserTarget": "vdesk:build:hbg-peru-staging"
+            "hbg-peru-qacom": {
+              "browserTarget": "vdesk:build:hbg-peru-qacom"
             },
             "hbg-peru-prod-release": {
               "browserTarget": "vdesk:build:hbg-peru-prod-release"
             },
-            "hbg-peru-staging-release": {
-              "browserTarget": "vdesk:build:hbg-peru-staging-release"
+            "hbg-peru-qacom-release": {
+              "browserTarget": "vdesk:build:hbg-peru-qacom-release"
             },
-            "soccerbet-prod": {
-              "browserTarget": "vdesk:build:soccerbet-prod"
+            "soccerbet-vg": {
+              "browserTarget": "vdesk:build:soccerbet-vg"
             },
-            "soccerbet-staging": {
-              "browserTarget": "vdesk:build:soccerbet-staging"
+            "soccerbet-qacom": {
+              "browserTarget": "vdesk:build:soccerbet-qacom"
             },
             "soccerbet-prod-release": {
               "browserTarget": "vdesk:build:soccerbet-prod-release"
             },
-            "soccerbet-staging-release": {
-              "browserTarget": "vdesk:build:soccerbet-staging-release"
+            "soccerbet-qacom-release": {
+              "browserTarget": "vdesk:build:soccerbet-qacom-release"
             },
-            "betsafi-prod": {
-              "browserTarget": "vdesk:build:betsafi-prod"
+            "betsafi-vg": {
+              "browserTarget": "vdesk:build:betsafi-vg"
             },
-            "betsafi-staging": {
-              "browserTarget": "vdesk:build:betsafi-staging"
+            "betsafi-qacom": {
+              "browserTarget": "vdesk:build:betsafi-qacom"
             },
             "betsafi-prod-release": {
               "browserTarget": "vdesk:build:betsafi-prod-release"
             },
-            "betsafi-staging-release": {
-              "browserTarget": "vdesk:build:betsafi-staging-release"
+            "betsafi-qacom-release": {
+              "browserTarget": "vdesk:build:betsafi-qacom-release"
             },
-            "tradabets-prod": {
-              "browserTarget": "vdesk:build:tradabets-prod"
+            "tradabets-vg": {
+              "browserTarget": "vdesk:build:tradabets-vg"
             },
-            "tradabets-staging": {
-              "browserTarget": "vdesk:build:tradabets-staging"
+            "tradabets-qacom": {
+              "browserTarget": "vdesk:build:tradabets-qacom"
             },
             "tradabets-prod-release": {
               "browserTarget": "vdesk:build:tradabets-prod-release"
             },
-            "tradabets-staging-release": {
-              "browserTarget": "vdesk:build:tradabets-staging-release"
+            "tradabets-qacom-release": {
+              "browserTarget": "vdesk:build:tradabets-qacom-release"
             },
-            "betsplus-prod": {
-              "browserTarget": "vdesk:build:betsplus-prod"
+            "betsplus-vg": {
+              "browserTarget": "vdesk:build:betsplus-vg"
             },
-            "betsplus-staging": {
-              "browserTarget": "vdesk:build:betsplus-staging"
+            "betsplus-qacom": {
+              "browserTarget": "vdesk:build:betsplus-qacom"
             },
             "betsplus-prod-release": {
               "browserTarget": "vdesk:build:betsplus-prod-release"
             },
-            "betsplus-staging-release": {
-              "browserTarget": "vdesk:build:betsplus-staging-release"
+            "betsplus-qacom-release": {
+              "browserTarget": "vdesk:build:betsplus-qacom-release"
             },
-            "betpro-prod": {
-              "browserTarget": "vdesk:build:betpro-prod"
+            "betpro-vg": {
+              "browserTarget": "vdesk:build:betpro-vg"
             },
-            "betpro-staging": {
-              "browserTarget": "vdesk:build:betpro-staging"
+            "betpro-qacom": {
+              "browserTarget": "vdesk:build:betpro-qacom"
             },
             "betpro-prod-release": {
               "browserTarget": "vdesk:build:betpro-prod-release"
             },
-            "betpro-staging-release": {
-              "browserTarget": "vdesk:build:betpro-staging-release"
+            "betpro-qacom-release": {
+              "browserTarget": "vdesk:build:betpro-qacom-release"
             }
           }
         },
