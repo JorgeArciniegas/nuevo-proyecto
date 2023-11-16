@@ -13,7 +13,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.SPORTRACE,
-  baseApiUrl: 'https://vg-apisportrace.odissea-services.net',
+  baseApiUrl: 'https://vg-apisportrace.vg-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'sportrace',
   faviconPath: 'app/themes/skins/sportrace/image/Logo-header.png',

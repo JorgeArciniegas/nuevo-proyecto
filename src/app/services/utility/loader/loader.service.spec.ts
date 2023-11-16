@@ -27,7 +27,7 @@ describe('LoaderService', () => {
 
   it('should set isLoading true', () => {
     const actived: boolean = true;
-    const operation: string = 'https://vg-apidemo.odissea-services.net/api/account/operators';
+    const operation: string = 'https://vg-apidemo.vg-services.net/api/account/operators';
     const expectedOperationData: OperationData = {
       name: operation,
       isLoading: actived
@@ -41,7 +41,7 @@ describe('LoaderService', () => {
 
   it('should set isLoading false', () => {
     const actived: boolean = false;
-    const operation: string = 'https://vg-apidemo.odissea-services.net/api/account/operators';
+    const operation: string = 'https://vg-apidemo.vg-services.net/api/account/operators';
     const expectedOperationData: OperationData = {
       name: operation,
       isLoading: actived

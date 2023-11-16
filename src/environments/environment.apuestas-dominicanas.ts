@@ -12,7 +12,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.APUESTAS_DOMINICANAS,
-  baseApiUrl: 'https://vg-apiapuestasdominicanas.odissea-services.net',
+  baseApiUrl: 'https://vg-apiapuestasdominicanas.vg-services.net',
   pageTitle: 'Apuestas Dominicanas - VDesk Kiosk',
   theme: 'apuestas-dominicanas',
   faviconPath: 'app/themes/skins/apuestas-dominicanas/image/Logo-header.png',

@@ -12,7 +12,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.DNGAMING,
-  baseApiUrl: 'https://vg-apidngaming.odissea-services.net',
+  baseApiUrl: 'https://vg-apidngaming.vg-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'no-brand',
   faviconPath: '',

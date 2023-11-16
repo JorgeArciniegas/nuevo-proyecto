@@ -12,7 +12,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.UGANBET,
-  baseApiUrl: 'https://vg-apiuganbet.odissea-services.net',
+  baseApiUrl: 'https://vg-apiuganbet.vg-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'no-brand',
   faviconPath: '',

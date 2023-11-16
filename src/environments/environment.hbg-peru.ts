@@ -13,7 +13,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.HBG_PERU,
-  baseApiUrl: 'https://vg-apihbgperu.odissea-services.net',
+  baseApiUrl: 'https://vg-apihbgperu.vg-services.net',
   pageTitle: 'HBG-KIOSK',
   theme: 'hbg-peru',
   faviconPath: 'app/themes/skins/hbg-peru/image/Logo-header.png',

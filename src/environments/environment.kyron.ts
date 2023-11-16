@@ -13,7 +13,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.KYRON,
-  baseApiUrl: 'https://vg-apikyron.odissea-services.net',
+  baseApiUrl: 'https://vg-apikyron.vg-services.net',
   pageTitle: 'Kyron - KIOSK',
   theme: 'kyron',
   faviconPath: 'app/themes/skins/kyron/image/Logo-header.png',

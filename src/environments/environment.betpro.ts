@@ -13,7 +13,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.BETPRO,
-  baseApiUrl: 'https://odcom-apibetpro.odissea-services.net',
+  baseApiUrl: 'https://odcom-apibetpro.vg-services.net',
   pageTitle: 'VDESK-KIOSK',
   theme: 'betpro',
   faviconPath: 'app/themes/skins/betpro/image/Logo-header.png',

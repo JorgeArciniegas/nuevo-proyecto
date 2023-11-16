@@ -12,7 +12,7 @@ export const environment: Environment = {
   bookmakerDetails:
     'Lorem ipsum dolor sit amet,consectetur adipisicing elit, sed doeiusmod tempor incididunt ut labore etdolore magna aliqua.',
   license: LICENSE_TYPE.ONEWAY,
-  baseApiUrl: 'https://vg-apioneway.odissea-services.net',
+  baseApiUrl: 'https://vg-apioneway.vg-services.net',
   pageTitle: 'OneWay - VDesk Kiosk',
   theme: 'oneway',
   faviconPath: 'app/themes/skins/oneway/image/Logo-header.png',
