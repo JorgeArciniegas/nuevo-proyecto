@@ -2,7 +2,7 @@ name: Serverless Prod Deployment
 on:
   push:
     branches:
-      - "main"
+      - "local"
       - "master"
 
 concurrency:
