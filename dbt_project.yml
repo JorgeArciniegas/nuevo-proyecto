@@ -14,16 +14,5 @@ seed-paths:
 test-paths:
   - tests
 
-# Directorio de snapshots (opcional)
-snapshot-paths:
-  - snapshots
-
 # Target profiles
 profile: nuevo_proyecto
-
-# Ruta de análisis (opcional)
-analysis-paths:
-  - analyses
-
-# Variables opcionales
-vars: {}
