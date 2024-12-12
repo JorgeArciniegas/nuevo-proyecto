@@ -1,0 +1,11 @@
+nuevo_proyecto:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      user: tu_usuario
+      password: tu_contraseña
+      dbname: tu_base_de_datos
+      schema: public
+      threads: 4
