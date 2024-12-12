@@ -1,0 +1,29 @@
+name: nuevo_proyecto
+version: "1.0"
+config-version: 2
+
+# Ruta de los modelos SQL
+model-paths:
+  - models
+
+# Directorio de seeds (opcional, datos estáticos)
+seed-paths:
+  - seeds
+
+# Directorio de tests (opcional)
+test-paths:
+  - tests
+
+# Directorio de snapshots (opcional)
+snapshot-paths:
+  - snapshots
+
+# Target profiles
+profile: nuevo_proyecto
+
+# Ruta de análisis (opcional)
+analysis-paths:
+  - analyses
+
+# Variables opcionales
+vars: {}
